@@ -1,0 +1,6 @@
+# generated
+*.elf
+*.o
+*.bin
+*.narc
+

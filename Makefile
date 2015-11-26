@@ -1,14 +1,51 @@
+PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: all clean
+.PHONY: all clean init
+
+unpack_rom     := $(PYTHON) tools/unpack_rom.py
+unpack_narc    := $(PYTHON) tools/unpack_narc.py
+armdisassem    := $(PYTHON) tools/armdisassem.py
+
+
+narc_files := \
+"./baserom/data/battle/tr_ai/tr_ai_seq.narc" \
+"./baserom/data/battle/b_pl_stage/pl_bsdpm.narc" \
+"./baserom/data/battle/b_pl_tower/pl_btdpm.narc" \
+"./baserom/data/battle/b_pl_tower/pl_btdtr.narc" \
+"./baserom/data/battle/b_tower/btdpm.narc" \
+"./baserom/data/battle/b_tower/btdtr.narc" \
+"./baserom/data/fielddata/areadata/area_data.narc" \
+"./baserom/data/fielddata/build_model/build_model.narc" \
+"./baserom/data/fielddata/land_data/land_data.narc" \
+"./baserom/data/fielddata/mapmatrix/map_matrix.narc" \
+"./baserom/data/fielddata/script/scr_seq.narc" \
+"./baserom/data/msgdata/msg.narc" \
+"./baserom/data/msgdata/pl_msg.narc" \
+"./baserom/data/poketool/personal/personal.narc" \
+"./baserom/data/poketool/personal/pms.narc" \
+"./baserom/data/poketool/pokegra/pl_otherpoke.narc" \
+"./baserom/data/poketool/pokegra/pl_pokegra.narc" \
+"./baserom/data/poketool/trainer/trdata.narc" \
+"./baserom/data/poketool/trainer/trpoke.narc" \
+"./baserom/data/poketool/trgra/trbgra.narc" \
+"./baserom/data/poketool/trgra/trfgra.narc"
 
 trainer_files := $(wildcard ./data/poketool/trainer/trdata/*.s)
 
 trainerpoke_files := $(wildcard ./data/poketool/trainer/trpoke/*.s)
 
+
+
 all:
 
 clean:
+
+init:
+	$(unpack_rom) "baserom.nds"
+    
+narc:
+	$(foreach f,$(narc_files),$(unpack_narc) $(f);)
 
 
 $(trainer_files:.s=.bin):
@@ -30,4 +67,7 @@ comp_trainers: $(trainer_files:.s=.bin)
 comp_trainerpoke: $(trainerpoke_files:.s=.bin)
 	rm ./data/poketool/trainer/trpoke/*.o
 	rm ./data/poketool/trainer/trpoke/*.elf
+    
+disassem:
+	$(armdisassem) "./baserom/arm9.bin" 0x02000000 800 800
     

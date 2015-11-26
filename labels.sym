@@ -1,0 +1,36 @@
+02000800 entry_point 
+02000c88 _start 
+02006590 LoadOverlay 
+02006AA4 LoadFromNARC 
+0201d2dc SetPRNGSeed 
+0201d2e8 PRNG 
+0201d318 SetIRNGSeed 
+0203E778 ScriptHandler 
+0203e838 ScriptHandler_LoadHWord 
+0203e850 ScriptHandler_LoadWord 
+0203f6c4 ScriptCmd_Nop 00 
+0203f6c8 ScriptCmd_Nop1 01 
+0203f6cc ScriptCmd_End 02 
+0203f99c ScriptCmd_CallStandard 14 
+0203fb5c ScriptCmd_Setflag 1e 
+0203fb74 ScriptCmd_ClearFlag 1f 
+0203fb8c ScriptCmd_CheckFlag 20 
+0203ffe9 ScriptCmd_Message 2c 
+020401f5 ScriptCmd_WaitButton 31 
+0204c8f0 ScriptCmd_GiveMoney 6f 
+0204c914 ScriptCmd_TakeMoney 70 
+0204c968 ScriptCmd_CheckMoney 71 
+0204c9fc ScriptCmd_ShowMoney 72 
+0204ca4c ScriptCmd_HideMoney 73 
+0204ca64 ScriptCmd_UpdateMoney 74 
+020416c8 ScriptCmd_CheckPokemonParty 93 
+02041708 ScriptCmd_StorePokemonParty 94 
+0204174c ScriptCmd_SetPokemonPartyStored 95 
+0204cffc ScriptCmd_GivePokemon 96 
+0204d154 ScriptCmd_GiveEgg 97 
+0204d1dc ScriptCmd_98 98 
+0204d234 ScriptCmd_CheckMove 99 
+0204d2d8 ScriptCmd_CheckPlaceStored 9a 
+02043c0c ScriptCmd_CheckGender 14d 
+02043c3c ScriptCmd_HealPokemon 14e 
+020e1f6c Division 

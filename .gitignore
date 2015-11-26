@@ -3,4 +3,26 @@
 *.o
 *.bin
 *.narc
+*.pyc
 
+# baserom
+*.nds
+*.map
+*.dat
+*.NSCR
+*.resdat
+*.cldat
+*.NCGR
+*.NCLR
+*.NANR
+*.nsbmd
+*.txt
+*.nsbtx
+*.nsbca
+*.NCER
+*.atr
+*.naix
+*.arc
+*.sdat
+*.rgcn
+*.rlcn

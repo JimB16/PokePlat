@@ -302,6 +302,7 @@ class Disassembler(object):
         
         #disasm.write_overlays_in_files(ARM9Overlay, ARM9OverlaySize)
         
+        
         ARM7ROM = disasm.get_word_from_rom(0x30)
         ARM7ROMSize = disasm.get_word_from_rom(0x3c)
         #disasm.write_section_in_file(ARM7ROM, ARM7ROMSize)
@@ -349,6 +350,7 @@ class Disassembler(object):
         
         disasm.write_overlays_in_files(ARM9Overlay, ARM9OverlaySize, filedir + "/overlay/", "/overlay/")
         
+        disasm.write_section_in_file_wfilename(ARM9ROM, ARM7ROM-ARM9ROM, filedir + "/" + "arm9_full.bin")
         
         
         filename = filedir + "/" + "RomMap.map"

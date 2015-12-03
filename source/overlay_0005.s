@@ -1,6 +1,6 @@
 
 
-.section .iwram3, "ax"
+.section .iwram5, "ax"
 
 
 
@@ -4796,4 +4796,3 @@ Function_5_21f8358: @ 21f8358 :thumb
 
 
 @end 0x2202120
-

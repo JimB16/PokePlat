@@ -4432,8 +4432,25 @@ Function_2002e7c: @ 2002e7c :thumb
 	pop     {r4,pc}
 @ 0x2002e98
 
+.thumb
+Function_2002e98: @ 2002e98 :thumb
+	push    {r4,lr}
+	add     sp, #-0x8
+	mov     r4, r0
+	mov     r0, #0x20
+	str     r0, [sp, #0x0]
+	mov     r3, r1
+	str     r2, [sp, #0x4]
+	mov     r0, #0xe
+	mov     r1, #0x7
+	mov     r2, r4
+	bl      Function_2006e84
+	add     sp, #0x8
+	pop     {r4,pc}
+@ 0x2002eb4
 
-.incbin "./baserom/arm9.bin", 0x2e98, 0x2003b60 - 0x2002e98
+
+.incbin "./baserom/arm9.bin", 0x2eb4, 0x2003b60 - 0x2002eb4
 
 
 .thumb
@@ -8721,6 +8738,7 @@ branch_2006c18: @ 2006c18 :thumb
 
 .word 0x2100498 @ 0x2006c20
 .thumb
+.globl Function_2006c24
 Function_2006c24: @ 2006c24 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
@@ -8782,6 +8800,7 @@ branch_2006ca0: @ 2006ca0 :thumb
 
 .word 0x2100498 @ 0x2006ca4
 .thumb
+.globl Function_2006ca8
 Function_2006ca8: @ 2006ca8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -8792,7 +8811,150 @@ Function_2006ca8: @ 2006ca8 :thumb
 @ 0x2006cb8
 
 
-.incbin "./baserom/arm9.bin", 0x6cb8, 0x2006dc8 - 0x2006cb8
+.thumb
+.globl Function_2006cb8
+Function_2006cb8: @ 2006cb8 :thumb
+	push    {r4-r6,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	add     r0, #0x50
+	ldrh    r0, [r0, #0x0]
+	mov     r4, r1
+	mov     r6, r2
+	cmp     r0, r4
+	bhi     branch_2006cce
+	bl      Function_2022974
+.thumb
+branch_2006cce: @ 2006cce :thumb
+	ldr     r2, [r5, #0x48]
+	lsl     r1, r4, #3
+	add     r2, #0xc
+	add     r1, r2, r1
+	mov     r0, r5
+	mov     r2, #0x0
+	blx     Function_20c81e4
+	mov     r0, r5
+	add     r1, sp, #0x4
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	mov     r0, r5
+	add     r1, sp, #0x0
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	ldr     r2, [r5, #0x4c]
+	ldr     r1, [sp, #0x4]
+	add     r2, #0x8
+	add     r1, r2, r1
+	mov     r0, r5
+	mov     r2, #0x0
+	blx     Function_20c81e4
+	ldr     r2, [sp, #0x0]
+	ldr     r1, [sp, #0x4]
+	mov     r0, r6
+	sub     r1, r2, r1
+	bl      Function_2018144
+	mov     r4, r0
+	beq     branch_2006d20
+	ldr     r3, [sp, #0x0]
+	ldr     r2, [sp, #0x4]
+	mov     r0, r5
+	mov     r1, r4
+	sub     r2, r3, r2
+	blx     Function_20c81d4
+.thumb
+branch_2006d20: @ 2006d20 :thumb
+	mov     r0, r4
+	add     sp, #0x8
+	pop     {r4-r6,pc}
+@ 0x2006d26
+
+
+.align 2, 0
+
+
+.thumb
+Function_2006d28: @ 2006d28 :thumb
+	push    {r4-r6,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	add     r0, #0x50
+	ldrh    r0, [r0, #0x0]
+	mov     r4, r1
+	mov     r6, r2
+	cmp     r0, r4
+	bhi     branch_2006d3e
+	bl      Function_2022974
+.thumb
+branch_2006d3e: @ 2006d3e :thumb
+	ldr     r2, [r5, #0x48]
+	lsl     r1, r4, #3
+	add     r2, #0xc
+	add     r1, r2, r1
+	mov     r0, r5
+	mov     r2, #0x0
+	blx     Function_20c81e4
+	mov     r0, r5
+	add     r1, sp, #0x4
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	mov     r0, r5
+	add     r1, sp, #0x0
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	ldr     r2, [r5, #0x4c]
+	ldr     r1, [sp, #0x4]
+	add     r2, #0x8
+	add     r1, r2, r1
+	mov     r0, r5
+	mov     r2, #0x0
+	blx     Function_20c81e4
+	ldr     r3, [sp, #0x0]
+	ldr     r2, [sp, #0x4]
+	mov     r0, r5
+	mov     r1, r6
+	sub     r2, r3, r2
+	blx     Function_20c81d4
+	add     sp, #0x8
+	pop     {r4-r6,pc}
+@ 0x2006d84
+
+.thumb
+Function_2006d84: @ 2006d84 :thumb
+	push    {r3-r5,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	add     r0, #0x50
+	ldrh    r0, [r0, #0x0]
+	mov     r4, r1
+	cmp     r0, r4
+	bhi     branch_2006d98
+	bl      Function_2022974
+.thumb
+branch_2006d98: @ 2006d98 :thumb
+	ldr     r2, [r5, #0x48]
+	lsl     r1, r4, #3
+	add     r2, #0xc
+	add     r1, r2, r1
+	mov     r0, r5
+	mov     r2, #0x0
+	blx     Function_20c81e4
+	mov     r0, r5
+	add     r1, sp, #0x4
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	mov     r0, r5
+	add     r1, sp, #0x0
+	mov     r2, #0x4
+	blx     Function_20c81d4
+	ldr     r1, [sp, #0x0]
+	ldr     r0, [sp, #0x4]
+	sub     r0, r1, r0
+	add     sp, #0x8
+	pop     {r3-r5,pc}
+@ 0x2006dc6
+
+
+.align 2, 0
 
 
 .thumb
@@ -9079,8 +9241,100 @@ branch_20070e2: @ 20070e2 :thumb
 @ 0x20070e8
 
 
-.incbin "./baserom/arm9.bin", 0x70e8, 0x20072d0 - 0x20070e8
+.incbin "./baserom/arm9.bin", 0x70e8, 0x200723c - 0x20070e8
 
+
+.thumb
+.globl Function_200723c
+Function_200723c: @ 200723c :thumb
+	push    {r3,r4,lr}
+	add     sp, #-0xc
+	ldr     r4, [sp, #0x18]
+	str     r4, [sp, #0x0]
+	add     r4, sp, #0x8
+	str     r4, [sp, #0x4]
+	bl      Function_2007250
+	add     sp, #0xc
+	pop     {r3,r4,pc}
+@ 0x2007250
+
+.thumb
+Function_2007250: @ 2007250 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x8
+	ldr     r5, [sp, #0x24]
+	str     r0, [sp, #0x0]
+	str     r1, [sp, #0x4]
+	mov     r6, r2
+	mov     r7, r3
+	bl      Function_2006d84
+	str     r0, [r5, #0x0]
+	cmp     r6, #0x0
+	bne     branch_200726e
+	ldr     r0, [sp, #0x20]
+	cmp     r0, #0x1
+	bne     branch_200727a
+.thumb
+branch_200726e: @ 200726e :thumb
+	ldr     r1, [r5, #0x0]
+	mov     r0, r7
+	bl      Function_2018184
+	mov     r4, r0
+	b       branch_2007284
+@ 0x200727a
+
+.thumb
+branch_200727a: @ 200727a :thumb
+	ldr     r1, [r5, #0x0]
+	mov     r0, r7
+	bl      Function_2018144
+	mov     r4, r0
+.thumb
+branch_2007284: @ 2007284 :thumb
+	cmp     r4, #0x0
+	beq     branch_20072ca
+	ldr     r0, [sp, #0x0]
+	ldr     r1, [sp, #0x4]
+	mov     r2, r4
+	bl      Function_2006d28
+	cmp     r6, #0x0
+	beq     branch_20072ca
+	ldr     r0, [r4, #0x0]
+	lsr     r0, r0, #8
+	str     r0, [r5, #0x0]
+	ldr     r0, [sp, #0x20]
+	cmp     r0, #0x0
+	bne     branch_20072ac
+	ldr     r1, [r5, #0x0]
+	mov     r0, r7
+	bl      Function_2018144
+	b       branch_20072b4
+@ 0x20072ac
+
+.thumb
+branch_20072ac: @ 20072ac :thumb
+	ldr     r1, [r5, #0x0]
+	mov     r0, r7
+	bl      Function_2018184
+.thumb
+branch_20072b4: @ 20072b4 :thumb
+	mov     r5, r0
+	cmp     r5, #0x0
+	beq     branch_20072c8
+	mov     r0, r4
+	mov     r1, r5
+	blx     Function_20c4f48
+	mov     r0, r4
+	bl      Function_20181c4
+.thumb
+branch_20072c8: @ 20072c8 :thumb
+	mov     r4, r5
+.thumb
+branch_20072ca: @ 20072ca :thumb
+	mov     r0, r4
+	add     sp, #0x8
+	pop     {r3-r7,pc}
+@ 0x20072d0
 
 .thumb
 Function_20072d0: @ 20072d0 :thumb
@@ -9420,7 +9674,210 @@ Function_2007b6c: @ 2007b6c :thumb
 @ 0x2007b96
 
 
-.incbin "./baserom/arm9.bin", 0x7b96, 0x2009328 - 0x2007b96
+.incbin "./baserom/arm9.bin", 0x7b96, 0x20091d8 - 0x2007b96
+
+
+.thumb
+Function_20091d8: @ 20091d8 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x1c
+	mov     r3, r0
+	mov     r0, r1
+	mov     lr, r0
+	mov     r0, #0x0
+	mov     r12, r0
+	ldr     r0, [pc, #0x13c] @ 0x2009324, (=#0x21007a4)
+	str     r1, [sp, #0x0]
+	str     r2, [sp, #0x4]
+	str     r0, [sp, #0x10]
+.thumb
+branch_20091ee: @ 20091ee :thumb
+	ldr     r0, [sp, #0x10]
+	mov     r1, #0x0
+	ldr     r6, [r0, #0x0]
+	ldrb    r0, [r6, #0x0]
+	cmp     r0, #0xff
+	beq     branch_2009266
+	ldr     r0, [sp, #0x0]
+	mov     r2, #0xf
+	and     r0, r2
+	str     r0, [sp, #0xc]
+	sub     r0, #0x8
+	str     r0, [sp, #0xc]
+	ldr     r0, [sp, #0x0]
+	mov     r2, #0xf0
+	and     r0, r2
+	lsr     r7, r0, #4
+	sub     r7, #0x8
+.thumb
+branch_2009210: @ 2009210 :thumb
+	lsl     r0, r1, #1
+	add     r2, r6, r0
+	ldrb    r4, [r6, r0]
+	ldrb    r2, [r2, #0x1]
+	ldr     r0, [sp, #0xc]
+	add     r0, r0, r4
+	add     r2, r7, r2
+	lsl     r0, r0, #24
+	lsl     r2, r2, #24
+	lsr     r0, r0, #24
+	lsr     r4, r2, #24
+	mov     r2, #0x50
+	mul     r2, r4
+	lsr     r5, r0, #1
+	add     r2, r5, r2
+	mov     r4, #0x1
+	tst     r0, r4
+	ldrb    r4, [r3, r2]
+	beq     branch_2009248
+	mov     r0, #0xf0
+	and     r0, r4
+	cmp     r0, #0x10
+	blt     branch_2009258
+	cmp     r0, #0x30
+	bgt     branch_2009258
+	add     r4, #0x50
+	strb    r4, [r3, r2]
+	b       branch_2009258
+@ 0x2009248
+
+.thumb
+branch_2009248: @ 2009248 :thumb
+	mov     r0, #0xf
+	and     r0, r4
+	cmp     r0, #0x1
+	blt     branch_2009258
+	cmp     r0, #0x3
+	bgt     branch_2009258
+	add     r0, r4, #0x5
+	strb    r0, [r3, r2]
+.thumb
+branch_2009258: @ 2009258 :thumb
+	add     r0, r1, #0x1
+	lsl     r0, r0, #24
+	lsr     r1, r0, #24
+	lsl     r0, r1, #1
+	ldrb    r0, [r6, r0]
+	cmp     r0, #0xff
+	bne     branch_2009210
+.thumb
+branch_2009266: @ 2009266 :thumb
+	ldr     r0, [sp, #0x0]
+	lsr     r0, r0, #8
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x10]
+	.hword  0x1d00 @ add r0, r0, #0x4
+	str     r0, [sp, #0x10]
+	mov     r0, r12
+	.hword  0x1c40 @ add r0, r0, #0x1
+	mov     r12, r0
+	cmp     r0, #0x4
+	blt     branch_20091ee
+	mov     r0, lr
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_200931e
+	mov     r0, #0x0
+	str     r0, [sp, #0x8]
+	ldr     r0, [pc, #0x98] @ 0x2009324, (=#0x21007a4)
+	str     r0, [sp, #0x18]
+.thumb
+branch_200928e: @ 200928e :thumb
+	ldr     r0, [sp, #0x18]
+	mov     r4, #0x0
+	ldr     r2, [r0, #0x0]
+	ldrb    r0, [r2, #0x0]
+	cmp     r0, #0xff
+	beq     branch_2009308
+	ldr     r0, [sp, #0x0]
+	mov     r1, #0xf
+	and     r0, r1
+	str     r0, [sp, #0x14]
+	add     r0, #0x48
+	str     r0, [sp, #0x14]
+	ldr     r0, [sp, #0x0]
+	mov     r1, #0xf0
+	and     r0, r1
+	lsr     r7, r0, #4
+	sub     r7, #0x8
+.thumb
+branch_20092b0: @ 20092b0 :thumb
+	lsl     r0, r4, #1
+	add     r5, r2, r0
+	ldrb    r1, [r2, r0]
+	ldrb    r5, [r5, #0x1]
+	ldr     r0, [sp, #0x14]
+	sub     r1, #0xe
+	add     r0, r0, r1
+	add     r5, r7, r5
+	lsl     r0, r0, #24
+	lsl     r5, r5, #24
+	lsr     r1, r0, #24
+	lsr     r6, r5, #24
+	mov     r5, #0x50
+	lsr     r0, r1, #1
+	mul     r5, r6
+	add     r0, r0, r5
+	mov     r5, #0x1
+	tst     r1, r5
+	ldrb    r5, [r3, r0]
+	beq     branch_20092ea
+	mov     r1, #0xf0
+	and     r1, r5
+	cmp     r1, #0x10
+	blt     branch_20092fa
+	cmp     r1, #0x30
+	bgt     branch_20092fa
+	add     r5, #0x50
+	strb    r5, [r3, r0]
+	b       branch_20092fa
+@ 0x20092ea
+
+.thumb
+branch_20092ea: @ 20092ea :thumb
+	mov     r1, #0xf
+	and     r1, r5
+	cmp     r1, #0x1
+	blt     branch_20092fa
+	cmp     r1, #0x3
+	bgt     branch_20092fa
+	add     r1, r5, #0x5
+	strb    r1, [r3, r0]
+.thumb
+branch_20092fa: @ 20092fa :thumb
+	add     r0, r4, #0x1
+	lsl     r0, r0, #24
+	lsr     r4, r0, #24
+	lsl     r0, r4, #1
+	ldrb    r0, [r2, r0]
+	cmp     r0, #0xff
+	bne     branch_20092b0
+.thumb
+branch_2009308: @ 2009308 :thumb
+	ldr     r0, [sp, #0x0]
+	lsr     r0, r0, #8
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x18]
+	.hword  0x1d00 @ add r0, r0, #0x4
+	str     r0, [sp, #0x18]
+	ldr     r0, [sp, #0x8]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [sp, #0x8]
+	cmp     r0, #0x4
+	blt     branch_200928e
+.thumb
+branch_200931e: @ 200931e :thumb
+	add     sp, #0x1c
+	pop     {r4-r7,pc}
+@ 0x2009322
+
+
+.incbin "./baserom/arm9.bin", 0x9322, 0x2009324 - 0x2009322
+
+
+.word 0x21007a4 @ 0x2009324
+
 
 
 .thumb
@@ -9517,10 +9974,602 @@ branch_20093ae: @ 20093ae :thumb
 @ 0x20093b4
 
 
-.incbin "./baserom/arm9.bin", 0x93b4, 0x2009dc8 - 0x20093b4
+.thumb
+.globl Function_20093b4
+Function_20093b4: @ 20093b4 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x18
+	mov     r4, #0x0
+	mov     r5, r0
+	mov     r0, r4
+	str     r0, [sp, #0x8]
+	ldr     r0, [sp, #0x44]
+	mov     r6, r1
+	str     r2, [sp, #0x0]
+	str     r3, [sp, #0x4]
+	str     r4, [sp, #0xc]
+	cmp     r0, #0x0
+	bne     branch_20093d2
+	bl      Function_2022974
+.thumb
+branch_20093d2: @ 20093d2 :thumb
+	ldr     r0, [sp, #0x48]
+	cmp     r0, #0x0
+	bne     branch_20093dc
+	bl      Function_2022974
+.thumb
+branch_20093dc: @ 20093dc :thumb
+	ldr     r0, [sp, #0x50]
+	cmp     r0, #0x0
+	bne     branch_20093e6
+	bl      Function_2022974
+.thumb
+branch_20093e6: @ 20093e6 :thumb
+	ldr     r0, [sp, #0x4c]
+	cmp     r0, #0x0
+	bne     branch_20093f0
+	bl      Function_2022974
+.thumb
+branch_20093f0: @ 20093f0 :thumb
+	cmp     r5, #0x0
+	bne     branch_20093f8
+	bl      Function_2022974
+.thumb
+branch_20093f8: @ 20093f8 :thumb
+	ldr     r0, [sp, #0x44]
+	mov     r1, r6
+	bl      Function_2009dc8
+	mov     r7, r0
+	bne     branch_2009408
+	bl      Function_2022974
+.thumb
+branch_2009408: @ 2009408 :thumb
+	ldr     r0, [sp, #0x48]
+	ldr     r1, [sp, #0x0]
+	bl      Function_2009dc8
+	str     r0, [sp, #0x14]
+	cmp     r0, #0x0
+	bne     branch_200941a
+	bl      Function_2022974
+.thumb
+branch_200941a: @ 200941a :thumb
+	ldr     r0, [sp, #0x4c]
+	ldr     r1, [sp, #0x4]
+	bl      Function_2009dc8
+	str     r0, [sp, #0x10]
+	cmp     r0, #0x0
+	bne     branch_200942c
+	bl      Function_2022974
+.thumb
+branch_200942c: @ 200942c :thumb
+	ldr     r0, [sp, #0x50]
+	cmp     r0, #0x0
+	beq     branch_200944a
+	mov     r2, #0x0
+	ldr     r1, [sp, #0x30]
+	mvn     r2, r2
+	cmp     r1, r2
+	beq     branch_200944a
+	bl      Function_2009dc8
+	str     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	bne     branch_200944a
+	bl      Function_2022974
+.thumb
+branch_200944a: @ 200944a :thumb
+	ldr     r0, [sp, #0x54]
+	cmp     r0, #0x0
+	beq     branch_2009472
+	mov     r2, #0x0
+	ldr     r1, [sp, #0x34]
+	mvn     r2, r2
+	cmp     r1, r2
+	beq     branch_2009460
+	bl      Function_2009dc8
+	mov     r4, r0
+.thumb
+branch_2009460: @ 2009460 :thumb
+	mov     r0, #0x0
+	ldr     r1, [sp, #0x38]
+	mvn     r0, r0
+	cmp     r1, r0
+	beq     branch_2009472
+	ldr     r0, [sp, #0x58]
+	bl      Function_2009dc8
+	str     r0, [sp, #0x8]
+.thumb
+branch_2009472: @ 2009472 :thumb
+	ldr     r0, [sp, #0x3c]
+	cmp     r0, #0x0
+	beq     branch_2009492
+	ldr     r1, [sp, #0x10]
+	mov     r0, r7
+	bl      Function_200a558
+	mov     r6, r0
+	bne     branch_2009488
+	bl      Function_2022974
+.thumb
+branch_2009488: @ 2009488 :thumb
+	mov     r0, r7
+	bl      Function_2009e1c
+	str     r0, [r5, #0x4]
+	b       branch_20094a4
+@ 0x2009492
+
+.thumb
+branch_2009492: @ 2009492 :thumb
+	mov     r0, r7
+	bl      Function_200a534
+	mov     r6, r0
+	bne     branch_20094a0
+	bl      Function_2022974
+.thumb
+branch_20094a0: @ 20094a0 :thumb
+	mov     r0, #0x0
+	str     r0, [r5, #0x4]
+.thumb
+branch_20094a4: @ 20094a4 :thumb
+	ldr     r0, [sp, #0x14]
+	mov     r1, r6
+	bl      Function_200a72c
+	str     r0, [r5, #0x8]
+	ldr     r0, [sp, #0x10]
+	str     r6, [r5, #0x0]
+	bl      Function_2009e4c
+	str     r0, [r5, #0xc]
+	ldr     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	beq     branch_20094c4
+	bl      Function_2009e64
+	b       branch_20094c6
+@ 0x20094c4
+
+.thumb
+branch_20094c4: @ 20094c4 :thumb
+	mov     r0, #0x0
+.thumb
+branch_20094c6: @ 20094c6 :thumb
+	str     r0, [r5, #0x10]
+	cmp     r4, #0x0
+	beq     branch_20094dc
+	mov     r0, r4
+	bl      Function_2009e7c
+	str     r0, [r5, #0x14]
+	ldr     r0, [sp, #0x8]
+	bl      Function_2009e94
+	b       branch_20094e0
+@ 0x20094dc
+
+.thumb
+branch_20094dc: @ 20094dc :thumb
+	mov     r0, #0x0
+	str     r0, [r5, #0x14]
+.thumb
+branch_20094e0: @ 20094e0 :thumb
+	str     r0, [r5, #0x18]
+	ldr     r0, [sp, #0x3c]
+	str     r0, [r5, #0x1c]
+	ldr     r0, [sp, #0x40]
+	add     r5, #0x20
+	strb    r0, [r5, #0x0]
+	add     sp, #0x18
+	pop     {r3-r7,pc}
+@ 0x20094f0
+
+
+.incbin "./baserom/arm9.bin", 0x94f0, 0x20095c4 - 0x20094f0
 
 
 .thumb
+.globl Function_20095c4
+Function_20095c4: @ 20095c4 :thumb
+	push    {r3-r6,lr}
+	add     sp, #-0x1c
+	mov     r4, r1
+	mov     r5, r0
+	ldr     r1, [pc, #0x58] @ 0x2009628, (=#0xfffff000)
+	mov     r0, r4
+	mov     r6, r2
+	bl      Function_202309c
+	mov     r0, #0x0
+	str     r0, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	mov     r0, #0xff
+	lsl     r0, r0, #12
+	str     r0, [sp, #0x8]
+	mov     r0, #0x3
+	lsl     r0, r0, #18
+	str     r0, [sp, #0xc]
+	mov     r0, r4
+	add     r0, #0x98
+	add     r1, sp, #0x0
+	mov     r2, #0x1
+	mov     r3, r4
+	bl      Function_200a8b0
+	mov     r0, #0x0
+	str     r0, [sp, #0x0]
+	mov     r0, #0xff
+	mov     r1, #0x3
+	lsl     r1, r1, #18
+	lsl     r0, r0, #12
+	str     r0, [sp, #0x8]
+	mov     r0, r4
+	str     r1, [sp, #0x4]
+	str     r1, [sp, #0xc]
+	add     r0, #0xe0
+	add     r1, sp, #0x0
+	mov     r2, #0x2
+	mov     r3, r4
+	bl      Function_200a8b0
+	add     r0, sp, #0x10
+	str     r5, [sp, #0x10]
+	str     r4, [sp, #0x14]
+	str     r6, [sp, #0x18]
+	bl      Function_20218bc
+	add     sp, #0x1c
+	pop     {r3-r6,pc}
+@ 0x2009626
+
+
+.incbin "./baserom/arm9.bin", 0x9626, 0x2009628 - 0x2009626
+
+
+.word 0xfffff000 @ 0x2009628
+
+
+.incbin "./baserom/arm9.bin", 0x962c, 0x200964c - 0x200962c
+
+
+.thumb
+.globl Function_200964c
+Function_200964c: @ 200964c :thumb
+	push    {r3,lr}
+	add     sp, #-0x10
+	str     r1, [sp, #0x0]
+	mov     r1, #0xff
+	lsl     r1, r1, #12
+	str     r1, [sp, #0x8]
+	mov     r1, #0x3
+	lsl     r1, r1, #18
+	str     r1, [sp, #0xc]
+	add     r0, #0xe0
+	add     r1, sp, #0x0
+	str     r2, [sp, #0x4]
+	bl      Function_20230e0
+	add     sp, #0x10
+	pop     {r3,pc}
+@ 0x200966c
+
+
+.incbin "./baserom/arm9.bin", 0x966c, 0x2009714 - 0x200966c
+
+
+.thumb
+.globl Function_2009714
+Function_2009714: @ 2009714 :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	mov     r6, r1
+	str     r2, [sp, #0x0]
+	mov     r0, r2
+	mov     r1, #0x14
+	bl      Function_2018144
+	mov     r4, r0
+	ldr     r1, [sp, #0x0]
+	mov     r0, r5
+	bl      Function_202298c
+	str     r0, [r4, #0x0]
+	mov     r0, #0xc
+	mov     r7, r5
+	mul     r7, r0
+	ldr     r0, [sp, #0x0]
+	mov     r1, r7
+	bl      Function_2018144
+	mov     r1, #0x0
+	mov     r2, r7
+	str     r0, [r4, #0x4]
+	blx     Function_20d5124
+	str     r5, [r4, #0x8]
+	mov     r0, #0x0
+	str     r0, [r4, #0xc]
+	str     r6, [r4, #0x10]
+	mov     r0, r4
+	pop     {r3-r7,pc}
+@ 0x2009754
+
+
+.thumb
+.globl Function_2009754
+Function_2009754: @ 2009754 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_200975e
+	bl      Function_2022974
+.thumb
+branch_200975e: @ 200975e :thumb
+	ldr     r0, [r4, #0x0]
+	cmp     r0, #0x0
+	bne     branch_2009768
+	bl      Function_2022974
+.thumb
+branch_2009768: @ 2009768 :thumb
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	bne     branch_2009772
+	bl      Function_2022974
+.thumb
+branch_2009772: @ 2009772 :thumb
+	mov     r0, r4
+	bl      Function_2009d9c
+	ldr     r0, [r4, #0x0]
+	bl      Function_20229d8
+	mov     r0, #0x0
+	str     r0, [r4, #0x0]
+	ldr     r0, [r4, #0x4]
+	bl      Function_20181c4
+	mov     r0, #0x0
+	str     r0, [r4, #0x4]
+	mov     r0, r4
+	bl      Function_20181c4
+	pop     {r4,pc}
+@ 0x2009794
+
+
+.incbin "./baserom/arm9.bin", 0x9794, 0x2009a4c - 0x2009794
+
+
+.thumb
+.globl Function_2009a4c
+Function_2009a4c: @ 2009a4c :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x20
+	mov     r5, r0
+	mov     r7, r1
+	mov     r4, r3
+	str     r2, [sp, #0x1c]
+	cmp     r5, #0x0
+	bne     branch_2009a60
+	bl      Function_2022974
+.thumb
+branch_2009a60: @ 2009a60 :thumb
+	ldr     r0, [r5, #0x10]
+	cmp     r0, #0x0
+	beq     branch_2009a6a
+	bl      Function_2022974
+.thumb
+branch_2009a6a: @ 2009a6a :thumb
+	mov     r0, r5
+	bl      Function_200a0a8
+	mov     r6, r0
+	bne     branch_2009a78
+	bl      Function_2022974
+.thumb
+branch_2009a78: @ 2009a78 :thumb
+	ldr     r0, [sp, #0x38]
+	str     r4, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	ldr     r0, [sp, #0x3c]
+	mov     r1, #0x0
+	str     r0, [sp, #0x8]
+	str     r1, [sp, #0xc]
+	ldr     r0, [sp, #0x40]
+	str     r1, [sp, #0x10]
+	str     r0, [sp, #0x14]
+	str     r1, [sp, #0x18]
+	ldr     r3, [sp, #0x1c]
+	mov     r0, r5
+	mov     r1, r6
+	mov     r2, r7
+	bl      Function_200a288
+	ldr     r0, [r5, #0xc]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r5, #0xc]
+	mov     r0, r6
+	add     sp, #0x20
+	pop     {r3-r7,pc}
+@ 0x2009aa6
+
+
+.incbin "./baserom/arm9.bin", 0x9aa6, 0x2009b04 - 0x2009aa6
+
+
+.thumb
+.globl Function_2009b04
+Function_2009b04: @ 2009b04 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x20
+	mov     r5, r0
+	mov     r7, r1
+	mov     r4, r3
+	str     r2, [sp, #0x1c]
+	cmp     r5, #0x0
+	bne     branch_2009b18
+	bl      Function_2022974
+.thumb
+branch_2009b18: @ 2009b18 :thumb
+	ldr     r0, [r5, #0x10]
+	cmp     r0, #0x1
+	beq     branch_2009b22
+	bl      Function_2022974
+.thumb
+branch_2009b22: @ 2009b22 :thumb
+	mov     r0, r5
+	bl      Function_200a0a8
+	mov     r6, r0
+	bne     branch_2009b30
+	bl      Function_2022974
+.thumb
+branch_2009b30: @ 2009b30 :thumb
+	ldr     r0, [sp, #0x38]
+	str     r4, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	ldr     r0, [sp, #0x3c]
+	ldr     r3, [sp, #0x1c]
+	str     r0, [sp, #0x8]
+	ldr     r0, [sp, #0x40]
+	mov     r1, r6
+	str     r0, [sp, #0xc]
+	mov     r0, #0x1
+	str     r0, [sp, #0x10]
+	ldr     r0, [sp, #0x44]
+	mov     r2, r7
+	str     r0, [sp, #0x14]
+	mov     r0, #0x0
+	str     r0, [sp, #0x18]
+	mov     r0, r5
+	bl      Function_200a288
+	ldr     r0, [r5, #0xc]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r5, #0xc]
+	mov     r0, r6
+	add     sp, #0x20
+	pop     {r3-r7,pc}
+@ 0x2009b62
+
+
+.incbin "./baserom/arm9.bin", 0x9b62, 0x2009bc4 - 0x2009b62
+
+
+.thumb
+.globl Function_2009bc4
+Function_2009bc4: @ 2009bc4 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x20
+	mov     r5, r0
+	mov     r7, r1
+	mov     r4, r3
+	str     r2, [sp, #0x1c]
+	cmp     r5, #0x0
+	bne     branch_2009bd8
+	bl      Function_2022974
+.thumb
+branch_2009bd8: @ 2009bd8 :thumb
+	mov     r0, r5
+	bl      Function_200a0a8
+	mov     r6, r0
+	bne     branch_2009be6
+	bl      Function_2022974
+.thumb
+branch_2009be6: @ 2009be6 :thumb
+	ldr     r0, [sp, #0x38]
+	str     r4, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	mov     r1, #0x0
+	str     r1, [sp, #0x8]
+	ldr     r0, [sp, #0x3c]
+	str     r1, [sp, #0xc]
+	str     r0, [sp, #0x10]
+	ldr     r0, [sp, #0x40]
+	ldr     r3, [sp, #0x1c]
+	str     r0, [sp, #0x14]
+	str     r1, [sp, #0x18]
+	mov     r0, r5
+	mov     r1, r6
+	mov     r2, r7
+	bl      Function_200a288
+	ldr     r0, [r5, #0xc]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r5, #0xc]
+	mov     r0, r6
+	add     sp, #0x20
+	pop     {r3-r7,pc}
+@ 0x2009c14
+
+
+.incbin "./baserom/arm9.bin", 0x9c14, 0x2009d4c - 0x2009c14
+
+
+.thumb
+.globl Function_2009d4c
+Function_2009d4c: @ 2009d4c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2009d56
+	bl      Function_2022974
+.thumb
+branch_2009d56: @ 2009d56 :thumb
+	mov     r0, r4
+	bl      Function_200a1f8
+	ldr     r0, [r4, #0x0]
+	mov     r1, #0x0
+	bl      Function_2022b64
+	pop     {r4,pc}
+@ 0x2009d66
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2009d68
+Function_2009d68: @ 2009d68 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2009d76
+	bl      Function_2022974
+.thumb
+branch_2009d76: @ 2009d76 :thumb
+	ldr     r0, [r5, #0x4]
+	cmp     r0, #0x0
+	bne     branch_2009d80
+	bl      Function_2022974
+.thumb
+branch_2009d80: @ 2009d80 :thumb
+	mov     r0, r4
+	bl      Function_200a1f8
+	ldr     r0, [r5, #0x0]
+	ldr     r1, [r4, #0x0]
+	bl      Function_2022ab0
+	mov     r0, #0x0
+	str     r0, [r4, #0x0]
+	ldr     r0, [r5, #0xc]
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	str     r0, [r5, #0xc]
+	pop     {r3-r5,pc}
+@ 0x2009d9a
+
+
+.align 2, 0
+
+
+.thumb
+Function_2009d9c: @ 2009d9c :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0x8]
+	mov     r6, #0x0
+	cmp     r0, #0x0
+	ble     branch_2009dc4
+	mov     r4, r6
+.thumb
+branch_2009daa: @ 2009daa :thumb
+	ldr     r1, [r5, #0x4]
+	ldr     r0, [r1, r4]
+	cmp     r0, #0x0
+	beq     branch_2009dba
+	mov     r0, r5
+	add     r1, r1, r4
+	bl      Function_2009d68
+.thumb
+branch_2009dba: @ 2009dba :thumb
+	ldr     r0, [r5, #0x8]
+	.hword  0x1c76 @ add r6, r6, #0x1
+	add     r4, #0xc
+	cmp     r6, r0
+	blt     branch_2009daa
+.thumb
+branch_2009dc4: @ 2009dc4 :thumb
+	pop     {r4-r6,pc}
+@ 0x2009dc6
+
+
+.incbin "./baserom/arm9.bin", 0x9dc6, 0x2009dc8 - 0x2009dc6
+
+
+.thumb
+.globl Function_2009dc8
 Function_2009dc8: @ 2009dc8 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
@@ -9578,8 +10627,104 @@ branch_2009e12: @ 2009e12 :thumb
 @ 0x2009e1a
 
 
-.incbin "./baserom/arm9.bin", 0x9e1a, 0x2009eac - 0x2009e1a
+.align 2, 0
 
+
+.thumb
+Function_2009e1c: @ 2009e1c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	beq     branch_2009e2a
+	bl      Function_2022974
+.thumb
+branch_2009e2a: @ 2009e2a :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009e34
+
+.thumb
+Function_2009e34: @ 2009e34 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x1
+	beq     branch_2009e42
+	bl      Function_2022974
+.thumb
+branch_2009e42: @ 2009e42 :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009e4c
+
+.thumb
+Function_2009e4c: @ 2009e4c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x2
+	beq     branch_2009e5a
+	bl      Function_2022974
+.thumb
+branch_2009e5a: @ 2009e5a :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009e64
+
+.thumb
+Function_2009e64: @ 2009e64 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x3
+	beq     branch_2009e72
+	bl      Function_2022974
+.thumb
+branch_2009e72: @ 2009e72 :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009e7c
+
+.thumb
+Function_2009e7c: @ 2009e7c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x4
+	beq     branch_2009e8a
+	bl      Function_2022974
+.thumb
+branch_2009e8a: @ 2009e8a :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009e94
+
+.thumb
+Function_2009e94: @ 2009e94 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x5
+	beq     branch_2009ea2
+	bl      Function_2022974
+.thumb
+branch_2009ea2: @ 2009ea2 :thumb
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2009eac
 
 .thumb
 Function_2009eac: @ 2009eac :thumb
@@ -9594,7 +10739,346 @@ branch_2009eb6: @ 2009eb6 :thumb
 @ 0x2009eba
 
 
-.incbin "./baserom/arm9.bin", 0x9eba, 0x200a534 - 0x2009eba
+.align 2, 0
+
+
+.thumb
+Function_2009ebc: @ 2009ebc :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2009ec6
+	bl      Function_2022974
+.thumb
+branch_2009ec6: @ 2009ec6 :thumb
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	bne     branch_2009ed6
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x4]
+	pop     {r4,pc}
+@ 0x2009ed6
+
+.thumb
+branch_2009ed6: @ 2009ed6 :thumb
+	cmp     r0, #0x1
+	bne     branch_2009ee4
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x4]
+	pop     {r4,pc}
+@ 0x2009ee4
+
+.thumb
+branch_2009ee4: @ 2009ee4 :thumb
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x2009ee8
+
+.thumb
+Function_2009ee8: @ 2009ee8 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2009ef2
+	bl      Function_2022974
+.thumb
+branch_2009ef2: @ 2009ef2 :thumb
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x1
+	bne     branch_2009f02
+	mov     r0, r4
+	bl      Function_200a20c
+	ldr     r0, [r0, #0x8]
+	pop     {r4,pc}
+@ 0x2009f02
+
+.thumb
+branch_2009f02: @ 2009f02 :thumb
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x2009f06
+
+
+.incbin "./baserom/arm9.bin", 0x9f06, 0x200a0a8 - 0x2009f06
+
+
+.thumb
+Function_200a0a8: @ 200a0a8 :thumb
+	push    {r3,r4}
+	ldr     r4, [r0, #0x8]
+	mov     r1, #0x0
+	cmp     r4, #0x0
+	ble     branch_200a0ce
+	ldr     r3, [r0, #0x4]
+	mov     r2, r3
+.thumb
+branch_200a0b6: @ 200a0b6 :thumb
+	ldr     r0, [r2, #0x0]
+	cmp     r0, #0x0
+	bne     branch_200a0c6
+	mov     r0, #0xc
+	mul     r0, r1
+	add     r0, r3, r0
+	pop     {r3,r4}
+	bx      lr
+@ 0x200a0c6
+
+.thumb
+branch_200a0c6: @ 200a0c6 :thumb
+	.hword  0x1c49 @ add r1, r1, #0x1
+	add     r2, #0xc
+	cmp     r1, r4
+	blt     branch_200a0b6
+.thumb
+branch_200a0ce: @ 200a0ce :thumb
+	mov     r0, #0x0
+	pop     {r3,r4}
+	bx      lr
+@ 0x200a0d4
+
+.thumb
+Function_200a0d4: @ 200a0d4 :thumb
+	push    {r3-r7,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x0]
+	mov     r6, r1
+	mov     r7, r2
+	str     r3, [sp, #0x0]
+	ldr     r5, [sp, #0x18]
+	bl      Function_2022b54
+	cmp     r6, #0x5
+	bhi     branch_200a142
+	add     r1, r6, r6
+	add     r1, pc
+	ldrh    r1, [r1, #0x6]
+	lsl     r1, r1, #16
+	asr     r1, r1, #16
+	add     pc, r1
+	lsl     r2, r1, #0
+	lsl     r6, r2, #0
+	lsl     r4, r4, #0
+	lsl     r6, r5, #0
+	lsl     r0, r7, #0
+	lsl     r2, r0, #1
+	mov     r1, r7
+	mov     r2, r5
+	bl      Function_200a144
+	str     r0, [r4, #0x8]
+	pop     {r3-r7,pc}
+@ 0x200a10e
+
+
+.incbin "./baserom/arm9.bin", 0xa10e, 0x200a142 - 0x200a10e
+
+
+.thumb
+branch_200a142: @ 200a142 :thumb
+	pop     {r3-r7,pc}
+@ 0x200a144
+
+.thumb
+Function_200a144: @ 200a144 :thumb
+	push    {r4-r6,lr}
+	mov     r6, r0
+	mov     r5, r1
+	mov     r0, r2
+	mov     r1, #0x8
+	bl      Function_2018144
+	mov     r4, r0
+	mov     r0, r6
+	mov     r1, r4
+	blx     Function_20a7118
+	str     r5, [r4, #0x4]
+	mov     r0, r4
+	pop     {r4-r6,pc}
+@ 0x200a162
+
+
+.incbin "./baserom/arm9.bin", 0xa162, 0x200a1f8 - 0x200a162
+
+
+.thumb
+Function_200a1f8: @ 200a1f8 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	beq     branch_200a206
+	bl      Function_20181c4
+.thumb
+branch_200a206: @ 200a206 :thumb
+	mov     r0, #0x0
+	str     r0, [r4, #0x8]
+	pop     {r4,pc}
+@ 0x200a20c
+
+
+.thumb
+Function_200a20c: @ 200a20c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_200a216
+	bl      Function_2022974
+.thumb
+branch_200a216: @ 200a216 :thumb
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	bne     branch_200a220
+	bl      Function_2022974
+.thumb
+branch_200a220: @ 200a220 :thumb
+	ldr     r0, [r4, #0x8]
+	pop     {r4,pc}
+@ 0x200a224
+
+
+.incbin "./baserom/arm9.bin", 0xa224, 0x200a288 - 0x200a224
+
+
+.thumb
+Function_200a288: @ 200a288 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r0, [sp, #0x28]
+	mov     r4, r1
+	str     r0, [sp, #0x0]
+	mov     r0, r2
+	mov     r1, r3
+	ldr     r2, [sp, #0x10]
+	ldr     r3, [sp, #0x24]
+	bl      Function_200a2dc
+	mov     r1, r0
+	ldr     r0, [r5, #0x0]
+	ldr     r2, [sp, #0x14]
+	bl      Function_2022a1c
+	str     r0, [r4, #0x0]
+	ldr     r1, [sp, #0x20]
+	ldr     r0, [sp, #0x24]
+	str     r1, [r4, #0x4]
+	str     r0, [sp, #0x0]
+	ldr     r2, [sp, #0x18]
+	ldr     r3, [sp, #0x1c]
+	mov     r0, r4
+	bl      Function_200a0d4
+	pop     {r3-r5,pc}
+@ 0x200a2be
+
+
+.incbin "./baserom/arm9.bin", 0xa2be, 0x200a2dc - 0x200a2be
+
+
+.thumb
+Function_200a2dc: @ 200a2dc :thumb
+	push    {r4-r6,lr}
+	mov     r6, r3
+	mov     r5, r2
+	mov     r2, r6
+	bl      Function_2006cb8
+	mov     r4, r0
+	beq     branch_200a322
+	cmp     r5, #0x0
+	beq     branch_200a322
+	ldr     r0, [sp, #0x10]
+	cmp     r0, #0x0
+	bne     branch_200a302
+	ldr     r1, [r4, #0x0]
+	mov     r0, r6
+	lsr     r1, r1, #8
+	bl      Function_2018144
+	b       branch_200a30c
+@ 0x200a302
+
+.thumb
+branch_200a302: @ 200a302 :thumb
+	ldr     r1, [r4, #0x0]
+	mov     r0, r6
+	lsr     r1, r1, #8
+	bl      Function_2018184
+.thumb
+branch_200a30c: @ 200a30c :thumb
+	mov     r5, r0
+	cmp     r5, #0x0
+	beq     branch_200a320
+	mov     r0, r4
+	mov     r1, r5
+	blx     Function_20c4f48
+	mov     r0, r4
+	bl      Function_20181c4
+.thumb
+branch_200a320: @ 200a320 :thumb
+	mov     r4, r5
+.thumb
+branch_200a322: @ 200a322 :thumb
+	mov     r0, r4
+	pop     {r4-r6,pc}
+@ 0x200a326
+
+
+.incbin "./baserom/arm9.bin", 0xa326, 0x200a3dc - 0x200a326
+
+
+.thumb
+.globl Function_200a3dc
+Function_200a3dc: @ 200a3dc :thumb
+	push    {r4,lr}
+	add     sp, #-0x10
+	mov     r4, r0
+	bne     branch_200a3e8
+	bl      Function_2022974
+.thumb
+branch_200a3e8: @ 200a3e8 :thumb
+	mov     r0, r4
+	bl      Function_2009eac
+	cmp     r0, #0x0
+	beq     branch_200a3f6
+	bl      Function_2022974
+.thumb
+branch_200a3f6: @ 200a3f6 :thumb
+	mov     r0, r4
+	bl      Function_2009e1c
+	str     r0, [sp, #0x0]
+	mov     r0, r4
+	bl      Function_2009ebc
+	str     r0, [sp, #0x4]
+	mov     r0, r4
+	bl      Function_2009e08
+	str     r0, [sp, #0x8]
+	mov     r0, #0x1
+	str     r0, [sp, #0xc]
+	add     r0, sp, #0x0
+	bl      Function_201ea24
+	add     sp, #0x10
+	pop     {r4,pc}
+@ 0x200a41c
+
+
+.incbin "./baserom/arm9.bin", 0xa41c, 0x200a4e4 - 0x200a41c
+
+
+.thumb
+.globl Function_200a4e4
+Function_200a4e4: @ 200a4e4 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_200a4ee
+	bl      Function_2022974
+.thumb
+branch_200a4ee: @ 200a4ee :thumb
+	mov     r0, r4
+	bl      Function_2009eac
+	cmp     r0, #0x0
+	beq     branch_200a4fc
+	bl      Function_2022974
+.thumb
+branch_200a4fc: @ 200a4fc :thumb
+	mov     r0, r4
+	bl      Function_2009e08
+	bl      Function_201eb50
+	pop     {r4,pc}
+@ 0x200a508
+
+
+.incbin "./baserom/arm9.bin", 0xa508, 0x200a534 - 0x200a508
 
 
 .thumb
@@ -9619,7 +11103,122 @@ branch_200a54c: @ 200a54c :thumb
 @ 0x200a558
 
 
-.incbin "./baserom/arm9.bin", 0xa558, 0x200a72c - 0x200a558
+.thumb
+Function_200a558: @ 200a558 :thumb
+	push    {r3-r5,lr}
+	mov     r4, r0
+	mov     r5, r1
+	cmp     r4, #0x0
+	bne     branch_200a566
+	bl      Function_2022974
+.thumb
+branch_200a566: @ 200a566 :thumb
+	mov     r0, r4
+	bl      Function_2009eac
+	cmp     r0, #0x0
+	beq     branch_200a574
+	bl      Function_2022974
+.thumb
+branch_200a574: @ 200a574 :thumb
+	cmp     r5, #0x0
+	bne     branch_200a57c
+	bl      Function_2022974
+.thumb
+branch_200a57c: @ 200a57c :thumb
+	mov     r0, r5
+	bl      Function_2009eac
+	cmp     r0, #0x2
+	beq     branch_200a58a
+	bl      Function_2022974
+.thumb
+branch_200a58a: @ 200a58a :thumb
+	mov     r0, r4
+	bl      Function_2009e08
+	mov     r4, r0
+	mov     r0, r5
+	bl      Function_2009e4c
+	mov     r1, r0
+	ldr     r1, [r1, #0xc]
+	mov     r0, r4
+	ldr     r1, [r1, #0x0]
+	bl      Function_201ec00
+	cmp     r0, #0x0
+	bne     branch_200a5b2
+	mov     r0, r4
+	bl      Function_201ebdc
+	bl      Function_201ec84
+.thumb
+branch_200a5b2: @ 200a5b2 :thumb
+	pop     {r3-r5,pc}
+@ 0x200a5b4
+
+
+.incbin "./baserom/arm9.bin", 0xa5b4, 0x200a640 - 0x200a5b4
+
+
+.thumb
+.globl Function_200a640
+Function_200a640: @ 200a640 :thumb
+	push    {r4,lr}
+	add     sp, #-0x10
+	mov     r4, r0
+	bne     branch_200a64c
+	bl      Function_2022974
+.thumb
+branch_200a64c: @ 200a64c :thumb
+	mov     r0, r4
+	bl      Function_2009eac
+	cmp     r0, #0x1
+	beq     branch_200a65a
+	bl      Function_2022974
+.thumb
+branch_200a65a: @ 200a65a :thumb
+	mov     r0, r4
+	bl      Function_2009e34
+	str     r0, [sp, #0x0]
+	mov     r0, r4
+	bl      Function_2009ebc
+	str     r0, [sp, #0x4]
+	mov     r0, r4
+	bl      Function_2009e08
+	str     r0, [sp, #0xc]
+	mov     r0, r4
+	bl      Function_2009ee8
+	str     r0, [sp, #0x8]
+	add     r0, sp, #0x0
+	bl      Function_201f950
+	add     sp, #0x10
+	pop     {r4,pc}
+@ 0x200a684
+
+
+.incbin "./baserom/arm9.bin", 0xa684, 0x200a6dc - 0x200a684
+
+
+.thumb
+.globl Function_200a6dc
+Function_200a6dc: @ 200a6dc :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_200a6e6
+	bl      Function_2022974
+.thumb
+branch_200a6e6: @ 200a6e6 :thumb
+	mov     r0, r4
+	bl      Function_2009eac
+	cmp     r0, #0x1
+	beq     branch_200a6f4
+	bl      Function_2022974
+.thumb
+branch_200a6f4: @ 200a6f4 :thumb
+	mov     r0, r4
+	bl      Function_2009e08
+	bl      Function_201f9f0
+	pop     {r4,pc}
+@ 0x200a700
+
+
+.incbin "./baserom/arm9.bin", 0xa700, 0x200a72c - 0x200a700
 
 
 .thumb
@@ -9683,7 +11282,63 @@ branch_200a870: @ 200a870 :thumb
 .word 0x21bf430 @ 0x200a874
 
 
-.incbin "./baserom/arm9.bin", 0xa878, 0x200a9dc - 0x200a878
+.incbin "./baserom/arm9.bin", 0xa878, 0x200a8b0 - 0x200a878
+
+
+.thumb
+Function_200a8b0: @ 200a8b0 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0xc
+	mov     r6, r0
+	ldr     r0, [pc, #0x44] @ 0x200a8fc, (=#0x21bf430)
+	mov     r7, r1
+	ldr     r0, [r0, #0x0]
+	mov     r5, r2
+	mov     r4, r3
+	cmp     r0, #0x0
+	bne     branch_200a8c8
+	bl      Function_2022974
+.thumb
+branch_200a8c8: @ 200a8c8 :thumb
+	cmp     r5, #0x1
+	bne     branch_200a8e4
+	ldr     r0, [pc, #0x30] @ 0x200a900, (=#0x20230f1)
+	ldr     r2, [pc, #0x34] @ 0x200a904, (=#0x200a94d)
+	str     r0, [sp, #0x0]
+	str     r5, [sp, #0x4]
+	ldr     r3, [pc, #0x30] @ 0x200a908, (=#0x200a991)
+	mov     r0, r6
+	mov     r1, r7
+	str     r4, [sp, #0x8]
+	bl      Function_20230ac
+	add     sp, #0xc
+	pop     {r4-r7,pc}
+@ 0x200a8e4
+
+.thumb
+branch_200a8e4: @ 200a8e4 :thumb
+	ldr     r0, [pc, #0x18] @ 0x200a900, (=#0x20230f1)
+	ldr     r2, [pc, #0x24] @ 0x200a90c, (=#0x200a96d)
+	str     r0, [sp, #0x0]
+	str     r5, [sp, #0x4]
+	ldr     r3, [pc, #0x20] @ 0x200a910, (=#0x200a9b5)
+	mov     r0, r6
+	mov     r1, r7
+	str     r4, [sp, #0x8]
+	bl      Function_20230ac
+	add     sp, #0xc
+	pop     {r4-r7,pc}
+@ 0x200a8fc
+
+.word 0x21bf430 @ 0x200a8fc
+.word 0x20230f1 @ 0x200a900
+.word 0x200a94d @ 0x200a904
+.word 0x200a991 @ 0x200a908
+.word 0x200a96d @ 0x200a90c
+.word 0x200a9b5 @ 0x200a910
+
+
+.incbin "./baserom/arm9.bin", 0xa914, 0x200a9dc - 0x200a914
 
 
 .thumb
@@ -12309,6 +13964,7 @@ Function_200d9e8: @ 200d9e8 :thumb
 
 .word 0x21bf67c @ 0x200da00
 .thumb
+.globl Function_200da04
 Function_200da04: @ 200da04 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
@@ -12366,6 +14022,7 @@ Function_200da3c: @ 200da3c :thumb
 
 .word 0x21bf67c @ 0x200da54
 .thumb
+.globl Function_200da58
 Function_200da58: @ 200da58 :thumb
 	ldr     r3, [pc, #0x0] @ 0x200da5c, (=#0x201cea9)
 	bx      r3
@@ -14382,6 +16039,7 @@ Function_200ef7c: @ 200ef7c :thumb
 
 
 .thumb
+.globl Function_200f174
 Function_200f174: @ 200f174 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x1c
@@ -14536,7 +16194,29 @@ branch_200f2a0: @ 200f2a0 :thumb
 .word 0x21bf5b4 @ 0x200f2a4
 .word 0x21bf474 @ 0x200f2a8
 
-.incbin "./baserom/arm9.bin", 0xf2ac, 0x200f32c - 0x200f2ac
+
+
+.thumb
+.globl Function_200f2ac
+Function_200f2ac: @ 200f2ac :thumb
+	ldr     r0, [pc, #0xc] @ 0x200f2bc, (=#0x21bf5b4)
+	ldrh    r0, [r0, #0xc]
+	cmp     r0, #0x0
+	bne     branch_200f2b8
+	mov     r0, #0x1
+	bx      lr
+@ 0x200f2b8
+
+.thumb
+branch_200f2b8: @ 200f2b8 :thumb
+	mov     r0, #0x0
+	bx      lr
+@ 0x200f2bc
+
+.word 0x21bf5b4 @ 0x200f2bc
+
+
+.incbin "./baserom/arm9.bin", 0xf2c0, 0x200f32c - 0x200f2c0
 
 
 .thumb
@@ -15222,8 +16902,256 @@ branch_2013200: @ 2013200 :thumb
 @ 0x201322a
 
 
-.incbin "./baserom/arm9.bin", 0x1322a, 0x20133d4 - 0x201322a
+.align 2, 0
 
+
+.thumb
+Function_201322c: @ 201322c :thumb
+	push    {r4-r6,lr}
+	mov     r5, r3
+	bl      Function_2006ac0
+	mov     r4, r0
+	bne     branch_201323c
+	bl      Function_2022974
+.thumb
+branch_201323c: @ 201323c :thumb
+	mov     r0, r4
+	mov     r1, r5
+	blx     Function_20a7118
+	mov     r6, r0
+	cmp     r5, #0x0
+	bne     branch_201324e
+	bl      Function_2022974
+.thumb
+branch_201324e: @ 201324e :thumb
+	cmp     r6, #0x0
+	bne     branch_2013256
+	bl      Function_2022974
+.thumb
+branch_2013256: @ 2013256 :thumb
+	mov     r0, r4
+	bl      Function_20181c4
+	pop     {r4-r6,pc}
+@ 0x201325e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2013260: @ 2013260 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x2c
+	ldr     r4, [sp, #0x40]
+	str     r0, [sp, #0x8]
+	add     r6, r0, r2
+	ldrh    r0, [r4, #0x2]
+	str     r1, [sp, #0xc]
+	mov     r5, r3
+	cmp     r0, r6
+	bge     branch_2013278
+	bl      Function_2022974
+.thumb
+branch_2013278: @ 2013278 :thumb
+	ldr     r0, [sp, #0xc]
+	ldrh    r1, [r4, #0x0]
+	add     r0, r0, r5
+	str     r0, [sp, #0x14]
+	cmp     r1, r0
+	bge     branch_2013288
+	bl      Function_2022974
+.thumb
+branch_2013288: @ 2013288 :thumb
+	ldr     r0, [r4, #0x14]
+	str     r0, [sp, #0x20]
+	ldr     r0, [sp, #0x44]
+	str     r0, [sp, #0x1c]
+	ldrh    r0, [r4, #0x2]
+	lsl     r7, r0, #2
+	ldr     r0, [sp, #0xc]
+	mov     r1, r0
+	mul     r1, r7
+	ldr     r0, [sp, #0x8]
+	str     r1, [sp, #0x18]
+	lsl     r1, r0, #2
+	ldr     r0, [sp, #0x18]
+	str     r1, [sp, #0x10]
+	add     r0, r1, r0
+	str     r0, [sp, #0x28]
+	mov     r0, #0x0
+	str     r0, [sp, #0x24]
+	ldr     r1, [sp, #0xc]
+	ldr     r0, [sp, #0x14]
+	cmp     r1, r0
+	bge     branch_20132f2
+.thumb
+branch_20132b4: @ 20132b4 :thumb
+	ldr     r4, [sp, #0x8]
+	mov     r0, r4
+	cmp     r0, r6
+	bge     branch_20132e0
+	ldr     r0, [sp, #0x18]
+	lsl     r1, r0, #3
+	ldr     r0, [sp, #0x10]
+	add     r5, r0, r1
+.thumb
+branch_20132c4: @ 20132c4 :thumb
+	str     r5, [sp, #0x28]
+	mov     r0, #0x4
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x20]
+	ldr     r1, [sp, #0x1c]
+	add     r2, sp, #0x28
+	add     r3, sp, #0x24
+	str     r7, [sp, #0x4]
+	bl      Function_20131ec
+	.hword  0x1c64 @ add r4, r4, #0x1
+	.hword  0x1d2d @ add r5, r5, #0x4
+	cmp     r4, r6
+	blt     branch_20132c4
+.thumb
+branch_20132e0: @ 20132e0 :thumb
+	ldr     r0, [sp, #0x18]
+	add     r0, r0, r7
+	str     r0, [sp, #0x18]
+	ldr     r0, [sp, #0xc]
+	add     r1, r0, #0x1
+	ldr     r0, [sp, #0x14]
+	str     r1, [sp, #0xc]
+	cmp     r1, r0
+	blt     branch_20132b4
+.thumb
+branch_20132f2: @ 20132f2 :thumb
+	add     sp, #0x2c
+	pop     {r4-r7,pc}
+@ 0x20132f6
+
+
+.align 2, 0
+
+
+.thumb
+Function_20132f8: @ 20132f8 :thumb
+	push    {r4,r5}
+	add     sp, #-0x8
+	ldr     r2, [pc, #0x30] @ 0x2013330, (=#0x20e52fc)
+	add     r1, sp, #0x0
+	ldr     r3, [r2, #0x0]
+	ldr     r2, [r2, #0x4]
+	str     r3, [sp, #0x0]
+	str     r2, [sp, #0x4]
+	ldr     r2, [pc, #0x28] @ 0x2013334, (=#0x1ef)
+	mov     r5, #0x0
+	mov     r3, r2
+.thumb
+branch_201330e: @ 201330e :thumb
+	ldr     r4, [r1, #0x0]
+	cmp     r4, r3
+	beq     branch_2013328
+	cmp     r4, r0
+	bne     branch_2013320
+	add     sp, #0x8
+	mov     r0, #0x1
+	pop     {r4,r5}
+	bx      lr
+@ 0x2013320
+
+.thumb
+branch_2013320: @ 2013320 :thumb
+	.hword  0x1c6d @ add r5, r5, #0x1
+	.hword  0x1d09 @ add r1, r1, #0x4
+	cmp     r5, r2
+	blt     branch_201330e
+.thumb
+branch_2013328: @ 2013328 :thumb
+	mov     r0, #0x0
+	add     sp, #0x8
+	pop     {r4,r5}
+	bx      lr
+@ 0x2013330
+
+.word 0x20e52fc @ 0x2013330
+.word 0x1ef @ 0x2013334
+.thumb
+Function_2013338: @ 2013338 :thumb
+	push    {r4,r5,lr}
+	add     sp, #-0xc
+	mov     r4, r3
+	mov     r3, #0x0
+	str     r3, [sp, #0x8]
+	add     r3, sp, #0x8
+	mov     r5, r0
+	bl      Function_201322c
+	ldr     r0, [sp, #0x8]
+	mov     r1, r5
+	ldr     r0, [r0, #0x14]
+	bl      Function_20093a0
+	ldr     r0, [sp, #0x34]
+	bl      Function_20132f8
+	ldr     r1, [sp, #0x30]
+	cmp     r1, #0x2
+	bne     branch_2013370
+	cmp     r0, #0x1
+	bne     branch_2013370
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0x28]
+	ldr     r0, [r0, #0x14]
+	ldr     r2, [sp, #0x2c]
+	bl      Function_20091d8
+.thumb
+branch_2013370: @ 2013370 :thumb
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0x18]
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x24]
+	ldr     r2, [sp, #0x1c]
+	str     r0, [sp, #0x4]
+	ldr     r3, [sp, #0x20]
+	mov     r0, r4
+	bl      Function_2013260
+	add     sp, #0xc
+	pop     {r4,r5,pc}
+@ 0x2013388
+
+.thumb
+Function_2013388: @ 2013388 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x24
+	mov     r7, r1
+	mov     r5, r2
+	ldr     r2, [sp, #0x3c]
+	ldr     r1, [sp, #0x40]
+	mov     r6, r0
+	mul     r1, r2
+	mov     r0, r5
+	lsl     r1, r1, #5
+	str     r3, [sp, #0x20]
+	bl      Function_2018144
+	mov     r4, r0
+	ldr     r0, [sp, #0x38]
+	ldr     r3, [sp, #0x20]
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x3c]
+	mov     r1, r7
+	str     r0, [sp, #0x4]
+	ldr     r0, [sp, #0x40]
+	mov     r2, r5
+	str     r0, [sp, #0x8]
+	ldr     r0, [sp, #0x44]
+	str     r4, [sp, #0xc]
+	str     r0, [sp, #0x10]
+	ldr     r0, [sp, #0x48]
+	str     r0, [sp, #0x14]
+	ldr     r0, [sp, #0x4c]
+	str     r0, [sp, #0x18]
+	ldr     r0, [sp, #0x50]
+	str     r0, [sp, #0x1c]
+	mov     r0, r6
+	bl      Function_2013338
+	mov     r0, r4
+	add     sp, #0x24
+	pop     {r4-r7,pc}
+@ 0x20133d4
 
 .thumb
 Function_20133d4: @ 20133d4 :thumb
@@ -15585,7 +17513,141 @@ branch_201368c: @ 201368c :thumb
 @ 0x20136a2
 
 
-.incbin "./baserom/arm9.bin", 0x136a2, 0x201378c - 0x20136a2
+.incbin "./baserom/arm9.bin", 0x136a2, 0x20136a4 - 0x20136a2
+
+
+.thumb
+Function_20136a4: @ 20136a4 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x8c
+	str     r0, [sp, #0x1c]
+	ldr     r0, [sp, #0xac]
+	mov     r12, r3
+	mov     r5, r2
+	ldr     r6, [sp, #0xa4]
+	ldr     r7, [sp, #0xa8]
+	ldr     r3, [pc, #0x64] @ 0x201371c, (=#0x20e5384)
+	str     r1, [sp, #0x20]
+	str     r0, [sp, #0xac]
+	add     r2, sp, #0x2c
+	mov     r4, #0xc
+.thumb
+branch_20136be: @ 20136be :thumb
+	ldmia   r3!, {r0,r1}
+	stmia   r2!, {r0,r1}
+	.hword  0x1e64 @ sub r4, r4, #0x1
+	bne     branch_20136be
+	mov     r0, #0x0
+	str     r0, [sp, #0x28]
+	ldr     r0, [sp, #0xa0]
+	ldr     r1, [sp, #0x20]
+	str     r0, [sp, #0x0]
+	str     r6, [sp, #0x4]
+	ldr     r0, [sp, #0xb0]
+	str     r7, [sp, #0x8]
+	str     r0, [sp, #0xc]
+	ldr     r0, [sp, #0xb4]
+	mov     r2, r5
+	str     r0, [sp, #0x10]
+	ldr     r0, [sp, #0xb8]
+	mov     r3, r12
+	str     r0, [sp, #0x14]
+	ldr     r0, [sp, #0xbc]
+	str     r0, [sp, #0x18]
+	ldr     r0, [sp, #0x1c]
+	bl      Function_2013388
+	str     r0, [sp, #0x24]
+	mov     r4, #0x0
+	add     r5, sp, #0x2c
+.thumb
+branch_20136f4: @ 20136f4 :thumb
+	ldr     r0, [sp, #0x24]
+	mov     r1, r7
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0xac]
+	mov     r2, r5
+	str     r0, [sp, #0x4]
+	mov     r0, r6
+	add     r3, sp, #0x28
+	bl      Function_2013560
+	.hword  0x1c64 @ add r4, r4, #0x1
+	add     r5, #0x10
+	cmp     r4, #0x6
+	blt     branch_20136f4
+	ldr     r0, [sp, #0x24]
+	bl      Function_20181c4
+	add     sp, #0x8c
+	pop     {r4-r7,pc}
+@ 0x201371a
+
+
+.incbin "./baserom/arm9.bin", 0x1371a, 0x201371c - 0x201371a
+
+
+.word 0x20e5384 @ 0x201371c
+.thumb
+Function_2013720: @ 2013720 :thumb
+	push    {r4,lr}
+	add     sp, #-0x20
+	ldr     r4, [r3, #0x4]
+	str     r4, [sp, #0x0]
+	ldr     r4, [r3, #0x8]
+	str     r4, [sp, #0x4]
+	ldr     r4, [r3, #0xc]
+	str     r4, [sp, #0x8]
+	ldr     r4, [sp, #0x28]
+	str     r4, [sp, #0xc]
+	ldr     r4, [sp, #0x2c]
+	str     r4, [sp, #0x10]
+	ldr     r4, [sp, #0x30]
+	str     r4, [sp, #0x14]
+	ldr     r4, [sp, #0x34]
+	str     r4, [sp, #0x18]
+	ldr     r4, [sp, #0x38]
+	str     r4, [sp, #0x1c]
+	ldr     r3, [r3, #0x0]
+	bl      Function_20136a4
+	add     sp, #0x20
+	pop     {r4,pc}
+@ 0x201374e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2013750
+Function_2013750: @ 2013750 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x24
+	ldr     r4, [pc, #0x30] @ 0x2013788, (=#0x20e5314)
+	mov     r5, r3
+	add     r3, sp, #0x14
+	mov     r7, r0
+	mov     r12, r1
+	mov     r6, r3
+	ldmia   r4!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldmia   r4!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldr     r0, [sp, #0x38]
+	str     r5, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	ldr     r0, [sp, #0x3c]
+	mov     r1, r12
+	str     r0, [sp, #0x8]
+	ldr     r0, [sp, #0x40]
+	mov     r3, r6
+	str     r0, [sp, #0xc]
+	ldr     r0, [sp, #0x44]
+	str     r0, [sp, #0x10]
+	mov     r0, r7
+	bl      Function_2013720
+	add     sp, #0x24
+	pop     {r4-r7,pc}
+@ 0x2013788
+
+.word 0x20e5314 @ 0x2013788
 
 
 .thumb
@@ -16485,7 +18547,454 @@ branch_201707e: @ 201707e :thumb
 
 .word 0x20e565c @ 0x2017088
 
-.incbin "./baserom/arm9.bin", 0x1708c, 0x2017428 - 0x201708c
+
+
+.incbin "./baserom/arm9.bin", 0x1708c, 0x20170d8 - 0x201708c
+
+
+.thumb
+.globl Function_20170d8
+Function_20170d8: @ 20170d8 :thumb
+	push    {r3-r5,lr}
+	mov     r4, #0x0
+	mov     r5, r0
+	mov     r0, r1
+	mov     r1, r2
+	str     r4, [sp, #0x0]
+	mov     r2, r4
+	bl      Function_200723c
+	str     r0, [r5, #0x0]
+	mov     r0, r5
+	bl      Function_20173cc
+	pop     {r3-r5,pc}
+@ 0x20170f4
+
+
+.incbin "./baserom/arm9.bin", 0x170f4, 0x2017110 - 0x20170f4
+
+
+.thumb
+.globl Function_2017110
+Function_2017110: @ 2017110 :thumb
+	push    {r4,lr}
+	add     sp, #-0x8
+	mov     r4, r0
+	ldr     r0, [r4, #0xc]
+	cmp     r0, #0x0
+	beq     branch_2017140
+	add     r1, sp, #0x4
+	add     r2, sp, #0x0
+	blx     Function_20ae9b8
+	ldr     r1, [pc, #0x34] @ 0x201715c, (=#0x2100df0)
+	ldr     r0, [sp, #0x4]
+	ldr     r1, [r1, #0x0]
+	blx     r1
+	ldr     r1, [pc, #0x2c] @ 0x201715c, (=#0x2100df0)
+	ldr     r0, [sp, #0x0]
+	ldr     r1, [r1, #0x0]
+	blx     r1
+	ldr     r0, [r4, #0xc]
+	blx     Function_20aea70
+	ldr     r1, [pc, #0x24] @ 0x2017160, (=#0x2100df8)
+	ldr     r1, [r1, #0x0]
+	blx     r1
+.thumb
+branch_2017140: @ 2017140 :thumb
+	ldr     r0, [r4, #0x0]
+	cmp     r0, #0x0
+	beq     branch_201714a
+	bl      Function_20181c4
+.thumb
+branch_201714a: @ 201714a :thumb
+	mov     r1, #0x10
+	mov     r0, #0x0
+.thumb
+branch_201714e: @ 201714e :thumb
+	strb    r0, [r4, #0x0]
+	.hword  0x1c64 @ add r4, r4, #0x1
+	.hword  0x1e49 @ sub r1, r1, #0x1
+	bne     branch_201714e
+	add     sp, #0x8
+	pop     {r4,pc}
+@ 0x201715a
+
+
+.incbin "./baserom/arm9.bin", 0x1715a, 0x201715c - 0x201715a
+
+
+.word 0x2100df0 @ 0x201715c
+.word 0x2100df8 @ 0x2017160
+
+
+.thumb
+.globl Function_2017164
+Function_2017164: @ 2017164 :thumb
+	push    {r3-r6,lr}
+	add     sp, #-0x4
+	mov     r4, r1
+	mov     r6, #0x0
+	mov     r1, r3
+	mov     r5, r0
+	mov     r0, r2
+	ldr     r3, [sp, #0x18]
+	mov     r2, r6
+	str     r6, [sp, #0x0]
+	bl      Function_200723c
+	mov     r2, r0
+	ldr     r3, [sp, #0x1c]
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20173a0
+	mov     r0, r6
+	str     r0, [r5, #0x10]
+	add     sp, #0x4
+	pop     {r3-r6,pc}
+@ 0x2017190
+
+.thumb
+.globl Function_2017190
+Function_2017190: @ 2017190 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_20173a0
+	mov     r0, #0x1
+	str     r0, [r4, #0x10]
+	pop     {r4,pc}
+@ 0x201719e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_20171a0
+Function_20171a0: @ 20171a0 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x0]
+	cmp     r0, #0x0
+	beq     branch_20171be
+	mov     r0, r1
+	ldr     r1, [r4, #0x8]
+	blx     Function_20b2cd8
+	ldr     r0, [r4, #0x10]
+	cmp     r0, #0x0
+	bne     branch_20171be
+	ldr     r0, [r4, #0x0]
+	bl      Function_20181c4
+.thumb
+branch_20171be: @ 20171be :thumb
+	mov     r1, #0x14
+	mov     r0, #0x0
+.thumb
+branch_20171c2: @ 20171c2 :thumb
+	strb    r0, [r4, #0x0]
+	.hword  0x1c64 @ add r4, r4, #0x1
+	.hword  0x1e49 @ sub r1, r1, #0x1
+	bne     branch_20171c2
+	pop     {r4,pc}
+@ 0x20171cc
+
+
+.incbin "./baserom/arm9.bin", 0x171cc, 0x2017204 - 0x20171cc
+
+
+.thumb
+.globl Function_2017204
+Function_2017204: @ 2017204 :thumb
+	push    {r3,r4}
+	ldr     r2, [r0, #0x8]
+	ldr     r3, [r0, #0xc]
+	ldr     r2, [r2, #0x8]
+	ldrh    r2, [r2, #0x4]
+	lsl     r4, r2, #12
+	mov     r2, #0x0
+	cmp     r1, #0x0
+	ble     branch_2017226
+	add     r1, r3, r1
+	cmp     r1, r4
+	bge     branch_2017220
+	str     r1, [r0, #0xc]
+	b       branch_2017232
+@ 0x2017220
+
+.thumb
+branch_2017220: @ 2017220 :thumb
+	str     r4, [r0, #0xc]
+	mov     r2, #0x1
+	b       branch_2017232
+@ 0x2017226
+
+.thumb
+branch_2017226: @ 2017226 :thumb
+	add     r1, r3, r1
+	bmi     branch_201722e
+	str     r1, [r0, #0xc]
+	b       branch_2017232
+@ 0x201722e
+
+.thumb
+branch_201722e: @ 201722e :thumb
+	str     r2, [r0, #0xc]
+	mov     r2, #0x1
+.thumb
+branch_2017232: @ 2017232 :thumb
+	ldr     r1, [r0, #0xc]
+	ldr     r0, [r0, #0x8]
+	str     r1, [r0, #0x0]
+	mov     r0, r2
+	pop     {r3,r4}
+	bx      lr
+@ 0x201723e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2017240
+Function_2017240: @ 2017240 :thumb
+	str     r1, [r0, #0xc]
+	ldr     r0, [r0, #0x8]
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2017248
+
+
+.incbin "./baserom/arm9.bin", 0x17248, 0x2017258 - 0x2017248
+
+
+.thumb
+.globl Function_2017258
+Function_2017258: @ 2017258 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r1
+	mov     r1, #0x0
+	mov     r2, #0x78
+	mov     r4, r0
+	blx     Function_20d5124
+	ldr     r1, [r5, #0x8]
+	mov     r0, r4
+	blx     Function_20ae608
+	mov     r0, #0x1
+	str     r0, [r4, #0x6c]
+	lsl     r0, r0, #12
+	str     r0, [r4, #0x60]
+	str     r0, [r4, #0x64]
+	str     r0, [r4, #0x68]
+	pop     {r3-r5,pc}
+@ 0x201727c
+
+
+.thumb
+.globl Function_201727c
+Function_201727c: @ 201727c :thumb
+	ldr     r3, [pc, #0x4] @ 0x2017284, (=Function_20ae77c)
+	ldr     r1, [r1, #0x8]
+	bx      r3
+@ 0x2017282
+
+
+.incbin "./baserom/arm9.bin", 0x17282, 0x2017284 - 0x2017282
+
+
+.word Function_20ae77c @ 0x2017284
+
+
+
+.incbin "./baserom/arm9.bin", 0x17288, 0x2017294 - 0x2017288
+
+
+.thumb
+.globl Function_2017294
+Function_2017294: @ 2017294 :thumb
+	push    {r4,lr}
+	add     sp, #-0x48
+	mov     r4, r0
+	ldr     r0, [r4, #0x6c]
+	cmp     r0, #0x0
+	beq     branch_2017328
+	add     r0, sp, #0x24
+	blx     Function_20bb4c8
+	mov     r0, r4
+	add     r0, #0x70
+	ldrh    r0, [r0, #0x0]
+	ldr     r3, [pc, #0x7c] @ 0x201732c, (=#0x20f983c)
+	asr     r0, r0, #4
+	lsl     r2, r0, #1
+	lsl     r1, r2, #1
+	.hword  0x1c52 @ add r2, r2, #0x1
+	lsl     r2, r2, #1
+	ldsh    r1, [r3, r1]
+	ldsh    r2, [r3, r2]
+	add     r0, sp, #0x0
+	bl      Function_20bb5ac
+	add     r1, sp, #0x24
+	add     r0, sp, #0x0
+	mov     r2, r1
+	blx     Function_20bb8ec
+	mov     r0, r4
+	add     r0, #0x74
+	ldrh    r0, [r0, #0x0]
+	ldr     r3, [pc, #0x58] @ 0x201732c, (=#0x20f983c)
+	asr     r0, r0, #4
+	lsl     r2, r0, #1
+	lsl     r1, r2, #1
+	.hword  0x1c52 @ add r2, r2, #0x1
+	lsl     r2, r2, #1
+	ldsh    r1, [r3, r1]
+	ldsh    r2, [r3, r2]
+	add     r0, sp, #0x0
+	bl      Function_20bb5e4
+	add     r1, sp, #0x24
+	add     r0, sp, #0x0
+	mov     r2, r1
+	blx     Function_20bb8ec
+	mov     r0, r4
+	add     r0, #0x72
+	ldrh    r0, [r0, #0x0]
+	ldr     r3, [pc, #0x30] @ 0x201732c, (=#0x20f983c)
+	asr     r0, r0, #4
+	lsl     r2, r0, #1
+	lsl     r1, r2, #1
+	.hword  0x1c52 @ add r2, r2, #0x1
+	lsl     r2, r2, #1
+	ldsh    r1, [r3, r1]
+	ldsh    r2, [r3, r2]
+	add     r0, sp, #0x0
+	bl      Function_20bb5c8
+	add     r1, sp, #0x24
+	add     r0, sp, #0x0
+	mov     r2, r1
+	blx     Function_20bb8ec
+	mov     r1, r4
+	mov     r0, r4
+	add     r4, #0x60
+	add     r1, #0x54
+	add     r2, sp, #0x24
+	mov     r3, r4
+	bl      Function_201ca74
+.thumb
+branch_2017328: @ 2017328 :thumb
+	add     sp, #0x48
+	pop     {r4,pc}
+@ 0x201732c
+
+.word 0x20f983c @ 0x201732c
+
+.incbin "./baserom/arm9.bin", 0x17330, 0x2017348 - 0x2017330
+
+
+.thumb
+.globl Function_2017348
+Function_2017348: @ 2017348 :thumb
+	str     r1, [r0, #0x6c]
+	bx      lr
+@ 0x201734c
+
+
+.incbin "./baserom/arm9.bin", 0x1734c, 0x2017350 - 0x201734c
+
+
+.thumb
+.globl Function_2017350
+Function_2017350: @ 2017350 :thumb
+	str     r1, [r0, #0x54]
+	str     r2, [r0, #0x58]
+	str     r3, [r0, #0x5c]
+	bx      lr
+@ 0x2017358
+
+
+.incbin "./baserom/arm9.bin", 0x17358, 0x20173a0 - 0x2017358
+
+
+.thumb
+Function_20173a0: @ 20173a0 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	mov     r4, r1
+	str     r2, [r5, #0x0]
+	mov     r0, r2
+	mov     r1, #0x0
+	mov     r6, r3
+	blx     Function_20b3c5c
+	str     r0, [r5, #0x4]
+	ldr     r1, [r5, #0x4]
+	ldr     r2, [r4, #0x8]
+	mov     r0, r6
+	blx     Function_20b2cb4
+	str     r0, [r5, #0x8]
+	ldr     r1, [r5, #0x4]
+	ldr     r2, [r4, #0x8]
+	ldr     r3, [r4, #0xc]
+	blx     Function_20ae4f0
+	pop     {r4-r6,pc}
+@ 0x20173cc
+
+
+.thumb
+Function_20173cc: @ 20173cc :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x0]
+	cmp     r0, #0x0
+	bne     branch_20173da
+	bl      Function_2022974
+.thumb
+branch_20173da: @ 20173da :thumb
+	ldr     r0, [r4, #0x0]
+	blx     Function_20b3c0c
+	str     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	beq     branch_2017406
+	mov     r2, r0
+	add     r2, #0x8
+	beq     branch_20173fa
+	ldrb    r1, [r0, #0x9]
+	cmp     r1, #0x0
+	bls     branch_20173fa
+	ldrh    r1, [r0, #0xe]
+	add     r1, r2, r1
+	.hword  0x1d09 @ add r1, r1, #0x4
+	b       branch_20173fc
+@ 0x20173fa
+
+.thumb
+branch_20173fa: @ 20173fa :thumb
+	mov     r1, #0x0
+.thumb
+branch_20173fc: @ 20173fc :thumb
+	cmp     r1, #0x0
+	beq     branch_2017406
+	ldr     r1, [r1, #0x0]
+	add     r0, r0, r1
+	b       branch_2017408
+@ 0x2017406
+
+.thumb
+branch_2017406: @ 2017406 :thumb
+	mov     r0, #0x0
+.thumb
+branch_2017408: @ 2017408 :thumb
+	str     r0, [r4, #0x8]
+	ldr     r0, [r4, #0x0]
+	blx     Function_20b3c1c
+	str     r0, [r4, #0xc]
+	cmp     r0, #0x0
+	beq     branch_2017422
+	mov     r2, #0x1
+	ldr     r0, [pc, #0x8] @ 0x2017424, (=#0x20170f5)
+	mov     r1, r4
+	lsl     r2, r2, #10
+	bl      Function_200da3c
+.thumb
+branch_2017422: @ 2017422 :thumb
+	pop     {r4,pc}
+@ 0x2017424
+
+.word 0x20170f5 @ 0x2017424
+
 
 
 .thumb
@@ -16868,8 +19377,55 @@ Function_20179e4: @ 20179e4 :thumb
 .word 0x7000400 @ 0x2017a38
 .word 0x5000400 @ 0x2017a3c
 
-.incbin "./baserom/arm9.bin", 0x17a40, 0x2017a94 - 0x2017a40
 
+
+.thumb
+Function_2017a40: @ 2017a40 :thumb
+	push    {r4-r6,lr}
+	add     sp, #-0x48
+	mov     r6, r0
+	mov     r4, r1
+	add     r0, sp, #0x0
+	blx     Function_20c7da0
+	add     r0, sp, #0x0
+	mov     r1, r4
+	blx     Function_20c8080
+	cmp     r0, #0x0
+	beq     branch_2017a8c
+	ldr     r1, [sp, #0x28]
+	ldr     r0, [sp, #0x24]
+	sub     r5, r1, r0
+	mov     r0, r6
+	mov     r1, r5
+	bl      Function_2018144
+	mov     r4, r0
+	beq     branch_2017a84
+	add     r0, sp, #0x0
+	mov     r1, r4
+	mov     r2, r5
+	blx     Function_20c81d4
+	cmp     r5, r0
+	beq     branch_2017a84
+	mov     r0, r6
+	mov     r1, r4
+	bl      Function_2018238
+	mov     r4, #0x0
+.thumb
+branch_2017a84: @ 2017a84 :thumb
+	add     r0, sp, #0x0
+	blx     Function_20c80c8
+	b       branch_2017a8e
+@ 0x2017a8c
+
+.thumb
+branch_2017a8c: @ 2017a8c :thumb
+	mov     r4, #0x0
+.thumb
+branch_2017a8e: @ 2017a8e :thumb
+	mov     r0, r4
+	add     sp, #0x48
+	pop     {r4-r6,pc}
+@ 0x2017a94
 
 .thumb
 Function_2017a94: @ 2017a94 :thumb
@@ -17762,7 +20318,11 @@ branch_201817c: @ 201817c :thumb
 @ 0x2018180
 
 .word 0x21bfaf0 @ 0x2018180
+
+
+
 .thumb
+.globl Function_2018184
 Function_2018184: @ 2018184 :thumb
 	push    {r3-r5,lr}
 	ldr     r2, [pc, #0x38] @ 0x20181c0, (=#0x21bfaf0)
@@ -17965,7 +20525,34 @@ branch_20182be: @ 20182be :thumb
 
 .word 0x21bfaf0 @ 0x20182c8
 
-.incbin "./baserom/arm9.bin", 0x182cc, 0x201833c - 0x20182cc
+
+
+.thumb
+.globl Function_20182cc
+Function_20182cc: @ 20182cc :thumb
+	push    {r4,lr}
+	ldr     r4, [pc, #0x1c] @ 0x20182ec, (=#0x21bfaf0)
+	ldrh    r3, [r4, #0x14]
+	cmp     r1, r3
+	bcs     branch_20182e6
+	ldr     r3, [r4, #0x0]
+	ldr     r4, [r4, #0x10]
+	ldrb    r1, [r4, r1]
+	lsl     r1, r1, #2
+	ldr     r1, [r3, r1]
+	blx     Function_20a5a14
+	pop     {r4,pc}
+@ 0x20182e6
+
+.thumb
+branch_20182e6: @ 20182e6 :thumb
+	bl      Function_2022974
+	pop     {r4,pc}
+@ 0x20182ec
+
+.word 0x21bfaf0 @ 0x20182ec
+
+.incbin "./baserom/arm9.bin", 0x182f0, 0x201833c - 0x20182f0
 
 
 .thumb
@@ -18425,6 +21012,7 @@ branch_2019180: @ 2019180 :thumb
 
 
 .thumb
+.globl Function_2019184
 Function_2019184: @ 2019184 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r1
@@ -18565,6 +21153,7 @@ branch_2019442: @ 2019442 :thumb
 @ 0x2019448
 
 .thumb
+.globl Function_2019448
 Function_2019448: @ 2019448 :thumb
 	push    {r3,lr}
 	mov     r2, #0x2c
@@ -18697,10 +21286,30 @@ branch_2019570: @ 2019570 :thumb
 @ 0x2019572
 
 
-.incbin "./baserom/arm9.bin", 0x19572, 0x201958c - 0x2019572
+.align 2, 0
 
 
 .thumb
+.globl Function_2019574
+Function_2019574: @ 2019574 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	mov     r0, r2
+	mov     r2, #0x2c
+	mul     r2, r1
+	add     r1, r4, r2
+	ldr     r1, [r1, #0x8]
+	mov     r2, r3
+	bl      Function_2019410
+	pop     {r4,pc}
+@ 0x201958a
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_201958c
 Function_201958c: @ 201958c :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x4
@@ -18840,6 +21449,7 @@ Function_2019690: @ 2019690 :thumb
 
 
 .thumb
+.globl Function_201972c
 Function_201972c: @ 201972c :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1
@@ -19153,8 +21763,89 @@ branch_2019e28: @ 2019e28 :thumb
 	pop     {r4-r7,pc}
 @ 0x2019e2c
 
+.thumb
+.globl Function_2019e2c
+Function_2019e2c: @ 2019e2c :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x14
+	mov     r5, r0
+	mov     r0, #0x2c
+	mov     r7, r1
+	mul     r7, r0
+	str     r2, [sp, #0x0]
+	add     r0, r5, r7
+	ldr     r4, [r0, #0x8]
+	mov     r6, r3
+	cmp     r4, #0x0
+	beq     branch_2019eb4
+	ldrb    r0, [r0, #0x1d]
+	add     r1, sp, #0x10
+	add     r1, #0x1
+	add     r2, sp, #0x10
+	bl      Function_2018ff4
+	add     r0, sp, #0x18
+	ldrb    r1, [r0, #0x14]
+	add     r1, r6, r1
+	str     r1, [sp, #0x4]
+	cmp     r6, r1
+	bge     branch_2019eb4
+	add     r1, r5, r7
+	str     r1, [sp, #0xc]
+	ldrb    r1, [r0, #0x18]
+	lsl     r1, r1, #12
+	str     r1, [sp, #0x8]
+	ldrb    r1, [r0, #0x10]
+	ldr     r0, [sp, #0x0]
+	add     r7, r0, r1
+.thumb
+branch_2019e6c: @ 2019e6c :thumb
+	add     r0, sp, #0x10
+	ldrb    r0, [r0, #0x0]
+	cmp     r6, r0
+	bcs     branch_2019eb4
+	ldr     r5, [sp, #0x0]
+	mov     r0, r5
+	cmp     r0, r7
+	bge     branch_2019ea8
+.thumb
+branch_2019e7c: @ 2019e7c :thumb
+	add     r0, sp, #0x10
+	ldrb    r0, [r0, #0x1]
+	cmp     r5, r0
+	bcs     branch_2019ea8
+	ldr     r2, [sp, #0xc]
+	mov     r0, r5
+	ldrb    r2, [r2, #0x1d]
+	mov     r1, r6
+	bl      Function_2019774
+	lsl     r0, r0, #1
+	ldrh    r2, [r4, r0]
+	ldr     r1, [pc, #0x20] @ 0x2019eb8, (=#0xfff)
+	and     r2, r1
+	ldr     r1, [sp, #0x8]
+	orr     r1, r2
+	strh    r1, [r4, r0]
+	add     r0, r5, #0x1
+	lsl     r0, r0, #24
+	lsr     r5, r0, #24
+	cmp     r5, r7
+	blt     branch_2019e7c
+.thumb
+branch_2019ea8: @ 2019ea8 :thumb
+	add     r0, r6, #0x1
+	lsl     r0, r0, #24
+	lsr     r6, r0, #24
+	ldr     r0, [sp, #0x4]
+	cmp     r6, r0
+	blt     branch_2019e6c
+.thumb
+branch_2019eb4: @ 2019eb4 :thumb
+	add     sp, #0x14
+	pop     {r4-r7,pc}
+@ 0x2019eb8
 
-.incbin "./baserom/arm9.bin", 0x19e2c, 0x2019ebc - 0x2019e2c
+.word 0xfff @ 0x2019eb8
+
 
 
 .thumb
@@ -19287,7 +21978,65 @@ Function_2019fc0: @ 2019fc0 :thumb
 @ 0x2019fe2
 
 
-.incbin "./baserom/arm9.bin", 0x19fe2, 0x201a1e4 - 0x2019fe2
+.incbin "./baserom/arm9.bin", 0x19fe2, 0x201a008 - 0x2019fe2
+
+
+.thumb
+.globl Function_201a008
+Function_201a008: @ 201a008 :thumb
+	add     sp, #-0x20
+	cmp     r1, #0x7
+	bls     branch_201a010
+	b       branch_201a1bc
+@ 0x201a010
+
+.thumb
+branch_201a010: @ 201a010 :thumb
+	add     r2, r1, r1
+	add     r2, pc
+	ldrh    r2, [r2, #0x6]
+	lsl     r2, r2, #16
+	asr     r2, r2, #16
+	add     pc, r2
+	lsl     r6, r1, #0
+	lsl     r2, r4, #0
+	lsl     r6, r6, #0
+	lsl     r6, r0, #2
+	lsl     r6, r2, #3
+	lsl     r2, r5, #3
+	lsl     r6, r7, #3
+	lsl     r6, r1, #5
+	ldr     r0, [pc, #0x194] @ 0x201a1c4, (=#0x4000008)
+	ldrh    r1, [r0, #0x0]
+	add     r0, sp, #0x0
+	add     sp, #0x20
+	strh    r1, [r0, #0x1e]
+	lsl     r0, r1, #30
+	lsr     r0, r0, #30
+	lsl     r0, r0, #24
+	lsr     r0, r0, #24
+	bx      lr
+@ 0x201a040
+
+
+.incbin "./baserom/arm9.bin", 0x1a040, 0x201a1bc - 0x201a040
+
+
+.thumb
+branch_201a1bc: @ 201a1bc :thumb
+	mov     r0, #0x0
+	add     sp, #0x20
+	bx      lr
+@ 0x201a1c2
+
+
+.incbin "./baserom/arm9.bin", 0x1a1c2, 0x201a1c4 - 0x201a1c2
+
+
+.word 0x4000008 @ 0x201a1c4
+
+
+.incbin "./baserom/arm9.bin", 0x1a1c8, 0x201a1e4 - 0x201a1c8
 
 
 .thumb
@@ -21403,7 +24152,41 @@ branch_201c604: @ 201c604 :thumb
 .word 0x4001030 @ 0x201c638
 
 
-.incbin "./baserom/arm9.bin", 0x1c63c, 0x201ccf0 - 0x201c63c
+.incbin "./baserom/arm9.bin", 0x1c63c, 0x201ca74 - 0x201c63c
+
+
+.thumb
+Function_201ca74: @ 201ca74 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	mov     r0, r1
+	mov     r4, r2
+	mov     r6, r3
+	blx     Function_20af4bc
+	ldr     r1, [pc, #0x24] @ 0x201caa8, (=#0x21c5b48)
+	mov     r0, r4
+	blx     Function_20c4c88
+	ldr     r1, [pc, #0x20] @ 0x201caac, (=#0x21c5b0c)
+	mov     r0, #0xa4
+	ldr     r2, [r1, #0x7c]
+	bic     r2, r0
+	mov     r0, r6
+	str     r2, [r1, #0x7c]
+	blx     Function_20af4ec
+	blx     Function_20af480
+	mov     r0, r5
+	blx     Function_20afefc
+	pop     {r4-r6,pc}
+@ 0x201caa6
+
+
+.incbin "./baserom/arm9.bin", 0x1caa6, 0x201caa8 - 0x201caa6
+
+
+.word 0x21c5b48 @ 0x201caa8
+.word 0x21c5b0c @ 0x201caac
+
+.incbin "./baserom/arm9.bin", 0x1cab0, 0x201ccf0 - 0x201cab0
 
 
 .thumb
@@ -21885,7 +24668,203 @@ branch_201d150: @ 201d150 :thumb
 
 .word 0xfffe @ 0x201d158
 
-.incbin "./baserom/arm9.bin", 0x1d15c, 0x201d2d0 - 0x201d15c
+
+
+.thumb
+Function_201d15c: @ 201d15c :thumb
+	push    {r4,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	cmp     r0, r1
+	bcc     branch_201d16a
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x201d16a
+
+.thumb
+branch_201d16a: @ 201d16a :thumb
+	bl      Function_201d278
+	asr     r0, r0, #4
+	lsl     r1, r0, #2
+	ldr     r0, [pc, #0x58] @ 0x201d1cc, (=#0x20f983c)
+	ldsh    r4, [r0, r1]
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x50] @ 0x201d1d0, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, #0x0
+	blx     Function_20e1108
+	bls     branch_201d1aa
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x3c] @ 0x201d1d0, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, r0
+	ldr     r0, [pc, #0x34] @ 0x201d1d0, (=#0x45800000)
+	blx     Function_20e18b0
+	mov     r1, r0
+	mov     r0, #0x3f
+	lsl     r0, r0, #24
+	blx     Function_20e0b00
+	b       branch_201d1c6
+@ 0x201d1aa
+
+.thumb
+branch_201d1aa: @ 201d1aa :thumb
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x1c] @ 0x201d1d0, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, r0
+	ldr     r0, [pc, #0x14] @ 0x201d1d0, (=#0x45800000)
+	blx     Function_20e18b0
+	mov     r1, #0x3f
+	lsl     r1, r1, #24
+	blx     Function_20e1a9c
+.thumb
+branch_201d1c6: @ 201d1c6 :thumb
+	blx     Function_20e1740
+	pop     {r4,pc}
+@ 0x201d1cc
+
+.word 0x20f983c @ 0x201d1cc
+.word 0x45800000 @ 0x201d1d0
+.thumb
+Function_201d1d4: @ 201d1d4 :thumb
+	push    {r4,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	cmp     r0, r1
+	bcc     branch_201d1e2
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x201d1e2
+
+.thumb
+branch_201d1e2: @ 201d1e2 :thumb
+	bl      Function_201d278
+	asr     r0, r0, #4
+	lsl     r0, r0, #1
+	.hword  0x1c40 @ add r0, r0, #0x1
+	lsl     r1, r0, #1
+	ldr     r0, [pc, #0x58] @ 0x201d248, (=#0x20f983c)
+	ldsh    r4, [r0, r1]
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x50] @ 0x201d24c, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, #0x0
+	blx     Function_20e1108
+	bls     branch_201d226
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x3c] @ 0x201d24c, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, r0
+	ldr     r0, [pc, #0x34] @ 0x201d24c, (=#0x45800000)
+	blx     Function_20e18b0
+	mov     r1, r0
+	mov     r0, #0x3f
+	lsl     r0, r0, #24
+	blx     Function_20e0b00
+	b       branch_201d242
+@ 0x201d226
+
+.thumb
+branch_201d226: @ 201d226 :thumb
+	mov     r0, r4
+	blx     Function_20e17b4
+	ldr     r1, [pc, #0x1c] @ 0x201d24c, (=#0x45800000)
+	blx     Function_20e1304
+	mov     r1, r0
+	ldr     r0, [pc, #0x14] @ 0x201d24c, (=#0x45800000)
+	blx     Function_20e18b0
+	mov     r1, #0x3f
+	lsl     r1, r1, #24
+	blx     Function_20e1a9c
+.thumb
+branch_201d242: @ 201d242 :thumb
+	blx     Function_20e1740
+	pop     {r4,pc}
+@ 0x201d248
+
+.word 0x20f983c @ 0x201d248
+.word 0x45800000 @ 0x201d24c
+
+
+
+.thumb
+.globl Function_201d250
+Function_201d250: @ 201d250 :thumb
+	push    {r3,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	blx     Division
+	lsl     r0, r1, #16
+	lsr     r0, r0, #16
+	bl      Function_201d15c
+	pop     {r3,pc}
+@ 0x201d264
+
+.thumb
+.globl Function_201d264
+Function_201d264: @ 201d264 :thumb
+	push    {r3,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	blx     Division
+	lsl     r0, r1, #16
+	lsr     r0, r0, #16
+	bl      Function_201d1d4
+	pop     {r3,pc}
+@ 0x201d278
+
+
+.thumb
+Function_201d278: @ 201d278 :thumb
+	push    {r3,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	cmp     r0, r1
+	bcc     branch_201d286
+	mov     r0, #0x0
+	pop     {r3,pc}
+@ 0x201d286
+
+.thumb
+branch_201d286: @ 201d286 :thumb
+	lsl     r0, r0, #12
+	ldr     r2, [pc, #0x10] @ 0x201d29c, (=#0xb60b60b)
+	asr     r1, r0, #31
+	mov     r3, #0xb6
+	blx     Function_20e1f1c
+	ldr     r0, [pc, #0xc] @ 0x201d2a0, (=#0x800)
+	adc     r1, r0
+	lsl     r0, r1, #4
+	lsr     r0, r0, #16
+	pop     {r3,pc}
+@ 0x201d29c
+
+.word 0xb60b60b @ 0x201d29c
+.word 0x800 @ 0x201d2a0
+
+
+
+.thumb
+.globl Function_201d2a4
+Function_201d2a4: @ 201d2a4 :thumb
+	push    {r3,lr}
+	mov     r1, #0x5a
+	lsl     r1, r1, #2
+	blx     Division
+	lsl     r0, r1, #16
+	lsr     r0, r0, #16
+	bl      Function_201d278
+	pop     {r3,pc}
+@ 0x201d2b8
+
+
+.incbin "./baserom/arm9.bin", 0x1d2b8, 0x201d2d0 - 0x201d2b8
 
 
 .thumb
@@ -22891,7 +25870,161 @@ branch_201e692: @ 201e692 :thumb
 
 .word 0x21c0710 @ 0x201e698
 
-.incbin "./baserom/arm9.bin", 0x1e69c, 0x201ebdc - 0x201e69c
+
+.incbin "./baserom/arm9.bin", 0x1e69c, 0x201ea24 - 0x201e69c
+
+
+.thumb
+Function_201ea24: @ 201ea24 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0x8]
+	bl      Function_201ead8
+	cmp     r0, #0x1
+	bne     branch_201ea36
+	bl      Function_2022974
+.thumb
+branch_201ea36: @ 201ea36 :thumb
+	bl      Function_201f2d0
+	mov     r4, r0
+	bne     branch_201ea46
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ea46
+
+.thumb
+branch_201ea46: @ 201ea46 :thumb
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_201eef8
+	cmp     r0, #0x0
+	bne     branch_201ea56
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ea56
+
+.thumb
+branch_201ea56: @ 201ea56 :thumb
+	mov     r0, r4
+	bl      Function_201ef68
+	cmp     r0, #0x0
+	bne     branch_201ea6a
+	ldr     r0, [r4, #0xc]
+	bl      Function_201eb50
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ea6a
+
+.thumb
+branch_201ea6a: @ 201ea6a :thumb
+	ldr     r0, [pc, #0xc] @ 0x201ea78, (=#0x21c0760)
+	ldr     r1, [r0, #0x0]
+	ldr     r0, [r1, #0x8]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r1, #0x8]
+	mov     r0, #0x1
+	pop     {r3-r5,pc}
+@ 0x201ea78
+
+.word 0x21c0760 @ 0x201ea78
+
+.incbin "./baserom/arm9.bin", 0x1ea7c, 0x201ead8 - 0x201ea7c
+
+
+.thumb
+Function_201ead8: @ 201ead8 :thumb
+	push    {r3,r4}
+	ldr     r1, [pc, #0x28] @ 0x201eb04, (=#0x21c0760)
+	mov     r2, #0x0
+	ldr     r4, [r1, #0x0]
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x0
+	ble     branch_201eafe
+	ldr     r3, [r4, #0x0]
+.thumb
+branch_201eae8: @ 201eae8 :thumb
+	ldr     r1, [r3, #0xc]
+	cmp     r0, r1
+	bne     branch_201eaf4
+	mov     r0, #0x1
+	pop     {r3,r4}
+	bx      lr
+@ 0x201eaf4
+
+.thumb
+branch_201eaf4: @ 201eaf4 :thumb
+	ldr     r1, [r4, #0x4]
+	.hword  0x1c52 @ add r2, r2, #0x1
+	add     r3, #0x54
+	cmp     r2, r1
+	blt     branch_201eae8
+.thumb
+branch_201eafe: @ 201eafe :thumb
+	mov     r0, #0x0
+	pop     {r3,r4}
+	bx      lr
+@ 0x201eb04
+
+.word 0x21c0760 @ 0x201eb04
+
+.incbin "./baserom/arm9.bin", 0x1eb08, 0x201eb50 - 0x201eb08
+
+
+.thumb
+Function_201eb50: @ 201eb50 :thumb
+	push    {r3-r7,lr}
+	mov     r6, r0
+	mov     r5, #0x1
+	mov     r7, #0x0
+.thumb
+branch_201eb58: @ 201eb58 :thumb
+	mov     r0, r6
+	bl      Function_201f03c
+	mov     r4, r0
+	bne     branch_201eb66
+	bl      Function_2022974
+.thumb
+branch_201eb66: @ 201eb66 :thumb
+	mov     r0, r4
+	add     r0, #0x3c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x4
+	bne     branch_201eb7a
+	mov     r0, r4
+	add     r0, #0x10
+	bl      Function_201ed1c
+	b       branch_201eb7c
+@ 0x201eb7a
+
+.thumb
+branch_201eb7a: @ 201eb7a :thumb
+	mov     r5, r7
+.thumb
+branch_201eb7c: @ 201eb7c :thumb
+	cmp     r5, #0x0
+	bne     branch_201eb58
+	mov     r0, r4
+	add     r0, #0x3c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x0
+	beq     branch_201eb9a
+	mov     r0, r4
+	bl      Function_201f024
+	ldr     r0, [pc, #0x8] @ 0x201eb9c, (=#0x21c0760)
+	ldr     r1, [r0, #0x0]
+	ldr     r0, [r1, #0x8]
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	str     r0, [r1, #0x8]
+.thumb
+branch_201eb9a: @ 201eb9a :thumb
+	pop     {r3-r7,pc}
+@ 0x201eb9c
+
+.word 0x21c0760 @ 0x201eb9c
+
+
+.incbin "./baserom/arm9.bin", 0x1eba0, 0x201ebdc - 0x201eba0
 
 
 .thumb
@@ -22920,7 +26053,493 @@ branch_201ebf8: @ 201ebf8 :thumb
 @ 0x201ebfe
 
 
-.incbin "./baserom/arm9.bin", 0x1ebfe, 0x201f03c - 0x201ebfe
+.align 2, 0
+
+
+.thumb
+Function_201ec00: @ 201ec00 :thumb
+	push    {r3-r5,lr}
+	add     sp, #-0x18
+	mov     r5, r1
+	bl      Function_201f03c
+	mov     r4, r0
+	bne     branch_201ec12
+	bl      Function_2022974
+.thumb
+branch_201ec12: @ 201ec12 :thumb
+	mov     r0, r4
+	add     r0, #0x3c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x0
+	bne     branch_201ec22
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ec22
+
+.thumb
+branch_201ec22: @ 201ec22 :thumb
+	add     r0, sp, #0xc
+	str     r0, [sp, #0x0]
+	add     r0, sp, #0x8
+	str     r0, [sp, #0x4]
+	ldr     r0, [r4, #0x4]
+	add     r1, sp, #0x14
+	add     r2, sp, #0x10
+	mov     r3, r5
+	bl      Function_201f0b0
+	mov     r0, r4
+	add     r0, #0x3c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x3
+	bne     branch_201ec46
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ec46
+
+.thumb
+branch_201ec46: @ 201ec46 :thumb
+	mov     r0, r4
+	mov     r1, #0x3
+	add     r0, #0x3c
+	strb    r1, [r0, #0x0]
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	mov     r0, r4
+	bl      Function_201f15c
+	mov     r0, #0x1
+	str     r0, [r4, #0x48]
+	ldr     r0, [sp, #0xc]
+	str     r0, [r4, #0x4c]
+	ldr     r0, [sp, #0x8]
+	str     r0, [r4, #0x50]
+	mov     r0, r4
+	bl      Function_201f26c
+	ldr     r0, [sp, #0x8]
+	str     r0, [sp, #0x0]
+	ldr     r0, [r4, #0x4]
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	ldr     r3, [sp, #0xc]
+	bl      Function_201f18c
+	add     r4, #0x10
+	mov     r0, r4
+	add     sp, #0x18
+	pop     {r3-r5,pc}
+@ 0x201ec82
+
+
+.align 2, 0
+
+
+.thumb
+Function_201ec84: @ 201ec84 :thumb
+	push    {r3-r5,lr}
+	add     sp, #-0x18
+	bl      Function_201ef1c
+	mov     r4, r0
+	bne     branch_201ec94
+	bl      Function_2022974
+.thumb
+branch_201ec94: @ 201ec94 :thumb
+	bl      Function_201f2d0
+	mov     r5, r0
+	bne     branch_201eca0
+	bl      Function_2022974
+.thumb
+branch_201eca0: @ 201eca0 :thumb
+	mov     r0, r4
+	add     r0, #0x3c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x3
+	beq     branch_201ecb0
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201ecb0
+
+.thumb
+branch_201ecb0: @ 201ecb0 :thumb
+	mov     r3, r5
+	mov     r2, #0xa
+.thumb
+branch_201ecb4: @ 201ecb4 :thumb
+	ldmia   r4!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	.hword  0x1e52 @ sub r2, r2, #0x1
+	bne     branch_201ecb4
+	ldr     r0, [r4, #0x0]
+	mov     r1, #0x4
+	str     r0, [r3, #0x0]
+	mov     r0, r5
+	add     r0, #0x3c
+	strb    r1, [r0, #0x0]
+	ldr     r0, [r5, #0x4]
+	mov     r1, #0x1
+	tst     r1, r0
+	beq     branch_201ecd4
+	ldr     r3, [r5, #0x4c]
+	b       branch_201ecd6
+@ 0x201ecd4
+
+.thumb
+branch_201ecd4: @ 201ecd4 :thumb
+	ldr     r3, [r5, #0x50]
+.thumb
+branch_201ecd6: @ 201ecd6 :thumb
+	add     r1, sp, #0xc
+	str     r1, [sp, #0x0]
+	add     r1, sp, #0x8
+	str     r1, [sp, #0x4]
+	add     r1, sp, #0x14
+	add     r2, sp, #0x10
+	bl      Function_201f0b0
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	mov     r0, r5
+	bl      Function_201f15c
+	mov     r0, #0x1
+	str     r0, [r5, #0x48]
+	ldr     r0, [sp, #0xc]
+	str     r0, [r5, #0x4c]
+	ldr     r0, [sp, #0x8]
+	str     r0, [r5, #0x50]
+	mov     r0, r5
+	bl      Function_201f26c
+	ldr     r0, [sp, #0x8]
+	str     r0, [sp, #0x0]
+	ldr     r0, [r5, #0x4]
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	ldr     r3, [sp, #0xc]
+	bl      Function_201f18c
+	add     r5, #0x10
+	mov     r0, r5
+	add     sp, #0x18
+	pop     {r3-r5,pc}
+@ 0x201ed1a
+
+
+.align 2, 0
+
+
+.thumb
+Function_201ed1c: @ 201ed1c :thumb
+	push    {r4-r6,lr}
+	ldr     r2, [pc, #0x70] @ 0x201ed90, (=#0x21c0760)
+	mov     r1, #0x0
+	ldr     r5, [r2, #0x0]
+	ldr     r4, [r5, #0x4]
+	cmp     r4, #0x0
+	ble     branch_201ed5a
+	ldr     r2, [r5, #0x0]
+	mov     r3, r1
+.thumb
+branch_201ed2e: @ 201ed2e :thumb
+	mov     r6, r2
+	add     r6, #0x3c
+	ldrb    r6, [r6, #0x0]
+	cmp     r6, #0x3
+	beq     branch_201ed44
+	ldr     r6, [r5, #0x0]
+	add     r6, r6, r3
+	add     r6, #0x3c
+	ldrb    r6, [r6, #0x0]
+	cmp     r6, #0x4
+	bne     branch_201ed4e
+.thumb
+branch_201ed44: @ 201ed44 :thumb
+	ldr     r6, [r5, #0x0]
+	add     r6, r6, r3
+	add     r6, #0x10
+	cmp     r6, r0
+	beq     branch_201ed5a
+.thumb
+branch_201ed4e: @ 201ed4e :thumb
+	ldr     r6, [r5, #0x4]
+	.hword  0x1c49 @ add r1, r1, #0x1
+	add     r2, #0x54
+	add     r3, #0x54
+	cmp     r1, r6
+	blt     branch_201ed2e
+.thumb
+branch_201ed5a: @ 201ed5a :thumb
+	cmp     r1, r4
+	bge     branch_201ed8e
+	mov     r0, #0x54
+	mov     r4, r1
+	mul     r4, r0
+	ldr     r0, [r5, #0x0]
+	add     r0, r0, r4
+	bl      Function_201f670
+	ldr     r0, [pc, #0x20] @ 0x201ed90, (=#0x21c0760)
+	ldr     r1, [r0, #0x0]
+	ldr     r2, [r1, #0x0]
+	add     r2, #0x3c
+	ldrb    r1, [r2, r4]
+	cmp     r1, #0x3
+	bne     branch_201ed80
+	mov     r0, #0x2
+	strb    r0, [r2, r4]
+	pop     {r4-r6,pc}
+@ 0x201ed80
+
+.thumb
+branch_201ed80: @ 201ed80 :thumb
+	mov     r1, #0x0
+	strb    r1, [r2, r4]
+	ldr     r0, [r0, #0x0]
+	ldr     r0, [r0, #0x0]
+	add     r0, r0, r4
+	bl      Function_201eed4
+.thumb
+branch_201ed8e: @ 201ed8e :thumb
+	pop     {r4-r6,pc}
+@ 0x201ed90
+
+.word 0x21c0760 @ 0x201ed90
+
+
+.incbin "./baserom/arm9.bin", 0x1ed94, 0x201eed4 - 0x201ed94
+
+
+.thumb
+Function_201eed4: @ 201eed4 :thumb
+	mov     r2, #0x0
+	str     r2, [r0, #0x0]
+	str     r2, [r0, #0x4]
+	strb    r2, [r0, #0x8]
+	.hword  0x1e51 @ sub r1, r2, #0x1
+	str     r1, [r0, #0xc]
+	str     r2, [r0, #0x34]
+	mov     r1, r0
+	str     r2, [r0, #0x38]
+	add     r1, #0x3c
+	strb    r2, [r1, #0x0]
+	str     r2, [r0, #0x40]
+	ldr     r3, [pc, #0x4] @ 0x201eef4, (=#0x20a818c)
+	add     r0, #0x10
+	bx      r3
+@ 0x201eef2
+
+
+.incbin "./baserom/arm9.bin", 0x1eef2, 0x201eef4 - 0x201eef2
+
+
+.word Function_20a818c @ =0x20a818c, 0x201eef4
+
+
+
+.thumb
+Function_201eef8: @ 201eef8 :thumb
+	ldr     r2, [r0, #0x0]
+	str     r2, [r1, #0x0]
+	ldr     r2, [r0, #0x8]
+	str     r2, [r1, #0xc]
+	ldr     r2, [r0, #0x4]
+	str     r2, [r1, #0x4]
+	ldr     r2, [r1, #0x0]
+	ldr     r2, [r2, #0xc]
+	lsr     r2, r2, #8
+	strb    r2, [r1, #0x8]
+	ldr     r0, [r0, #0xc]
+	str     r0, [r1, #0x44]
+	mov     r0, #0x0
+	str     r0, [r1, #0x48]
+	str     r0, [r1, #0x4c]
+	str     r0, [r1, #0x50]
+	mov     r0, #0x1
+	bx      lr
+@ 0x201ef1c
+
+.thumb
+Function_201ef1c: @ 201ef1c :thumb
+	push    {r3-r6}
+	ldr     r2, [pc, #0x44] @ 0x201ef64, (=#0x21c0760)
+	mov     r1, #0x0
+	ldr     r5, [r2, #0x0]
+	ldr     r4, [r5, #0x4]
+	cmp     r4, #0x0
+	ble     branch_201ef4e
+	ldr     r2, [r5, #0x0]
+	mov     r3, r1
+.thumb
+branch_201ef2e: @ 201ef2e :thumb
+	mov     r6, r2
+	add     r6, #0x3c
+	ldrb    r6, [r6, #0x0]
+	cmp     r6, #0x0
+	beq     branch_201ef42
+	ldr     r6, [r5, #0x0]
+	add     r6, r6, r3
+	add     r6, #0x10
+	cmp     r6, r0
+	beq     branch_201ef4e
+.thumb
+branch_201ef42: @ 201ef42 :thumb
+	ldr     r6, [r5, #0x4]
+	.hword  0x1c49 @ add r1, r1, #0x1
+	add     r2, #0x54
+	add     r3, #0x54
+	cmp     r1, r6
+	blt     branch_201ef2e
+.thumb
+branch_201ef4e: @ 201ef4e :thumb
+	cmp     r1, r4
+	blt     branch_201ef58
+	mov     r0, #0x0
+	pop     {r3-r6}
+	bx      lr
+@ 0x201ef58
+
+.thumb
+branch_201ef58: @ 201ef58 :thumb
+	mov     r0, #0x54
+	ldr     r2, [r5, #0x0]
+	mul     r0, r1
+	add     r0, r2, r0
+	pop     {r3-r6}
+	bx      lr
+@ 0x201ef64
+
+.word 0x21c0760 @ 0x201ef64
+
+
+
+.thumb
+Function_201ef68: @ 201ef68 :thumb
+	push    {r3,lr}
+	ldrb    r1, [r0, #0x8]
+	mov     r2, #0x1
+	cmp     r1, #0x0
+	beq     branch_201ef7a
+	mov     r1, #0x2
+	add     r0, #0x3c
+	strb    r1, [r0, #0x0]
+	b       branch_201ef94
+@ 0x201ef7a
+
+.thumb
+branch_201ef7a: @ 201ef7a :thumb
+	mov     r1, r0
+	add     r1, #0x3c
+	strb    r2, [r1, #0x0]
+	ldr     r1, [r0, #0x44]
+	cmp     r1, #0x0
+	bne     branch_201ef8e
+	bl      Function_201ef98
+	mov     r2, r0
+	b       branch_201ef94
+@ 0x201ef8e
+
+.thumb
+branch_201ef8e: @ 201ef8e :thumb
+	bl      Function_201efcc
+	mov     r2, r0
+.thumb
+branch_201ef94: @ 201ef94 :thumb
+	mov     r0, r2
+	pop     {r3,pc}
+@ 0x201ef98
+
+.thumb
+Function_201ef98: @ 201ef98 :thumb
+	push    {r3-r5,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	ldr     r0, [r5, #0x0]
+	ldr     r1, [r5, #0x4]
+	ldr     r0, [r0, #0x10]
+	add     r2, sp, #0x4
+	add     r3, sp, #0x0
+	bl      Function_201f76c
+	mov     r4, r0
+	beq     branch_201efc4
+	ldr     r1, [sp, #0x4]
+	ldr     r2, [sp, #0x0]
+	mov     r0, r5
+	bl      Function_201f09c
+	ldr     r0, [r5, #0x0]
+	ldr     r1, [r5, #0x4]
+	ldr     r0, [r0, #0x10]
+	bl      Function_201f7bc
+.thumb
+branch_201efc4: @ 201efc4 :thumb
+	mov     r0, r4
+	add     sp, #0x8
+	pop     {r3-r5,pc}
+@ 0x201efca
+
+
+.align 2, 0
+
+
+.thumb
+Function_201efcc: @ 201efcc :thumb
+	push    {r4,lr}
+	add     sp, #-0x18
+	mov     r4, r0
+	add     r0, sp, #0xc
+	str     r0, [sp, #0x0]
+	add     r0, sp, #0x8
+	str     r0, [sp, #0x4]
+	ldr     r3, [r4, #0x0]
+	ldr     r0, [r4, #0x4]
+	ldr     r3, [r3, #0x10]
+	add     r1, sp, #0x14
+	add     r2, sp, #0x10
+	bl      Function_201f0b0
+	cmp     r0, #0x0
+	bne     branch_201eff2
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x201eff2
+
+.thumb
+branch_201eff2: @ 201eff2 :thumb
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	mov     r0, r4
+	bl      Function_201f15c
+	mov     r0, #0x1
+	str     r0, [r4, #0x48]
+	ldr     r0, [sp, #0xc]
+	str     r0, [r4, #0x4c]
+	ldr     r0, [sp, #0x8]
+	str     r0, [r4, #0x50]
+	mov     r0, r4
+	bl      Function_201f1f4
+	ldr     r0, [sp, #0x8]
+	str     r0, [sp, #0x0]
+	ldr     r0, [r4, #0x4]
+	ldr     r1, [sp, #0x14]
+	ldr     r2, [sp, #0x10]
+	ldr     r3, [sp, #0xc]
+	bl      Function_201f18c
+	mov     r0, #0x1
+	add     sp, #0x18
+	pop     {r4,pc}
+@ 0x201f024
+
+.thumb
+Function_201f024: @ 201f024 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r1, [r4, #0x48]
+	cmp     r1, #0x0
+	beq     branch_201f032
+	bl      Function_201f670
+.thumb
+branch_201f032: @ 201f032 :thumb
+	mov     r0, r4
+	bl      Function_201eed4
+	pop     {r4,pc}
+@ 0x201f03a
+
+
+.align 2, 0
 
 
 .thumb
@@ -22966,7 +26585,1003 @@ branch_201f068: @ 201f068 :thumb
 
 .word 0x21c0760 @ 0x201f070
 
-.incbin "./baserom/arm9.bin", 0x1f074, 0x201fa58 - 0x201f074
+
+.thumb
+Function_201f074: @ 201f074 :thumb
+	cmp     r1, #0x1
+	bne     branch_201f080
+	mov     r1, #0x1
+	lsl     r1, r1, #26
+	ldr     r2, [r1, #0x0]
+	b       branch_201f084
+@ 0x201f080
+
+.thumb
+branch_201f080: @ 201f080 :thumb
+	ldr     r1, [pc, #0x10] @ 0x201f094, (=#0x4001000)
+	ldr     r2, [r1, #0x0]
+.thumb
+branch_201f084: @ 201f084 :thumb
+	ldr     r1, [pc, #0x10] @ 0x201f098, (=#0x300010)
+	and     r2, r1
+	ldr     r1, [r0, #0x0]
+	str     r2, [r1, #0x8]
+	ldr     r0, [r0, #0x0]
+	ldr     r0, [r0, #0x8]
+	bx      lr
+@ 0x201f092
+
+
+.incbin "./baserom/arm9.bin", 0x1f092, 0x201f094 - 0x201f092
+
+
+.word 0x4001000 @ 0x201f094
+.word 0x300010 @ 0x201f098
+.thumb
+Function_201f09c: @ 201f09c :thumb
+	push    {r3,lr}
+	str     r1, [r0, #0x34]
+	str     r2, [r0, #0x38]
+	ldrb    r1, [r0, #0x8]
+	cmp     r1, #0x0
+	bne     branch_201f0ac
+	bl      Function_201f1f4
+.thumb
+branch_201f0ac: @ 201f0ac :thumb
+	pop     {r3,pc}
+@ 0x201f0ae
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f0b0: @ 201f0b0 :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	ldr     r0, [sp, #0x1c]
+	mov     r6, r2
+	str     r0, [sp, #0x1c]
+	mov     r2, #0x1
+	mov     r0, r5
+	mov     r4, r1
+	str     r3, [sp, #0x0]
+	ldr     r7, [sp, #0x18]
+	tst     r0, r2
+	beq     branch_201f108
+	ldr     r1, [pc, #0x8c] @ 0x201f158, (=#0x21c0760)
+	mov     r0, r3
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f734
+	ldr     r1, [pc, #0x80] @ 0x201f158, (=#0x21c0760)
+	str     r0, [r7, #0x0]
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x74] @ 0x201f158, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x34]
+	bl      Function_201f598
+	mov     r1, #0x0
+	mvn     r1, r1
+	str     r0, [r4, #0x0]
+	cmp     r0, r1
+	bne     branch_201f0fc
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x201f0fc
+
+.thumb
+branch_201f0fc: @ 201f0fc :thumb
+	ldr     r1, [pc, #0x58] @ 0x201f158, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f764
+	str     r0, [r4, #0x0]
+.thumb
+branch_201f108: @ 201f108 :thumb
+	mov     r0, #0x2
+	tst     r0, r5
+	beq     branch_201f152
+	ldr     r1, [pc, #0x48] @ 0x201f158, (=#0x21c0760)
+	ldr     r0, [sp, #0x0]
+	ldr     r1, [r1, #0x0]
+	mov     r2, #0x1
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f734
+	ldr     r1, [sp, #0x1c]
+	str     r0, [r1, #0x0]
+	ldr     r1, [pc, #0x34] @ 0x201f158, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x2c] @ 0x201f158, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x38]
+	bl      Function_201f598
+	mov     r1, #0x0
+	mvn     r1, r1
+	str     r0, [r6, #0x0]
+	cmp     r0, r1
+	bne     branch_201f146
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x201f146
+
+.thumb
+branch_201f146: @ 201f146 :thumb
+	ldr     r1, [pc, #0x10] @ 0x201f158, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f764
+	str     r0, [r6, #0x0]
+.thumb
+branch_201f152: @ 201f152 :thumb
+	mov     r0, #0x1
+	pop     {r3-r7,pc}
+@ 0x201f156
+
+
+.incbin "./baserom/arm9.bin", 0x1f156, 0x201f158 - 0x201f156
+
+
+.word 0x21c0760 @ 0x201f158
+.thumb
+Function_201f15c: @ 201f15c :thumb
+	push    {r3,r4}
+	ldr     r4, [r0, #0x4]
+	mov     r3, #0x1
+	tst     r3, r4
+	beq     branch_201f170
+	ldr     r3, [pc, #0x20] @ 0x201f188, (=#0x21c0760)
+	ldr     r3, [r3, #0x0]
+	ldr     r3, [r3, #0x1c]
+	add     r1, r1, r3
+	str     r1, [r0, #0x34]
+.thumb
+branch_201f170: @ 201f170 :thumb
+	ldr     r3, [r0, #0x4]
+	mov     r1, #0x2
+	tst     r1, r3
+	beq     branch_201f182
+	ldr     r1, [pc, #0xc] @ 0x201f188, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x20]
+	add     r1, r2, r1
+	str     r1, [r0, #0x38]
+.thumb
+branch_201f182: @ 201f182 :thumb
+	pop     {r3,r4}
+	bx      lr
+@ 0x201f186
+
+
+.incbin "./baserom/arm9.bin", 0x1f186, 0x201f188 - 0x201f186
+
+
+.word 0x21c0760 @ 0x201f188
+.thumb
+Function_201f18c: @ 201f18c :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	mov     r0, #0x1
+	mov     r4, r1
+	mov     r6, r2
+	tst     r0, r5
+	beq     branch_201f1c0
+	ldr     r1, [pc, #0x54] @ 0x201f1f0, (=#0x21c0760)
+	mov     r0, r3
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x48] @ 0x201f1f0, (=#0x21c0760)
+	mov     r7, r0
+	ldr     r1, [r1, #0x0]
+	mov     r0, r4
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f754
+	ldr     r2, [pc, #0x38] @ 0x201f1f0, (=#0x21c0760)
+	mov     r1, r7
+	ldr     r2, [r2, #0x0]
+	ldr     r2, [r2, #0x34]
+	bl      Function_201f53c
+.thumb
+branch_201f1c0: @ 201f1c0 :thumb
+	mov     r0, #0x2
+	tst     r0, r5
+	beq     branch_201f1ec
+	ldr     r1, [pc, #0x28] @ 0x201f1f0, (=#0x21c0760)
+	ldr     r0, [sp, #0x18]
+	ldr     r1, [r1, #0x0]
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x1c] @ 0x201f1f0, (=#0x21c0760)
+	mov     r4, r0
+	ldr     r1, [r1, #0x0]
+	mov     r0, r6
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f754
+	ldr     r2, [pc, #0xc] @ 0x201f1f0, (=#0x21c0760)
+	mov     r1, r4
+	ldr     r2, [r2, #0x0]
+	ldr     r2, [r2, #0x38]
+	bl      Function_201f53c
+.thumb
+branch_201f1ec: @ 201f1ec :thumb
+	pop     {r3-r7,pc}
+@ 0x201f1ee
+
+
+.incbin "./baserom/arm9.bin", 0x1f1ee, 0x201f1f0 - 0x201f1ee
+
+
+.word 0x21c0760 @ 0x201f1f0
+.thumb
+Function_201f1f4: @ 201f1f4 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	add     r0, #0x10
+	blx     Function_20a818c
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x3
+	beq     branch_201f20c
+	mov     r0, r4
+	bl      Function_201f220
+	pop     {r4,pc}
+@ 0x201f20c
+
+.thumb
+branch_201f20c: @ 201f20c :thumb
+	mov     r0, r4
+	mov     r1, #0x1
+	bl      Function_201f220
+	mov     r0, r4
+	mov     r1, #0x2
+	bl      Function_201f220
+	pop     {r4,pc}
+@ 0x201f21e
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f220: @ 201f220 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r2, [r5, #0x40]
+	mov     r4, r1
+	cmp     r2, #0x0
+	beq     branch_201f232
+	bl      Function_201f074
+	b       branch_201f234
+@ 0x201f232
+
+.thumb
+branch_201f232: @ 201f232 :thumb
+	mov     r0, r4
+.thumb
+branch_201f234: @ 201f234 :thumb
+	cmp     r4, #0x1
+	bne     branch_201f242
+	mov     r2, #0x1
+	lsl     r2, r2, #26
+	ldr     r1, [r5, #0x34]
+	ldr     r2, [r2, #0x0]
+	b       branch_201f248
+@ 0x201f242
+
+.thumb
+branch_201f242: @ 201f242 :thumb
+	ldr     r2, [pc, #0x24] @ 0x201f268, (=#0x4001000)
+	ldr     r1, [r5, #0x38]
+	ldr     r2, [r2, #0x0]
+.thumb
+branch_201f248: @ 201f248 :thumb
+	cmp     r0, #0x0
+	ldr     r0, [r5, #0x0]
+	bne     branch_201f25a
+	add     r5, #0x10
+	mov     r2, r4
+	mov     r3, r5
+	blx     Function_20a8450
+	pop     {r3-r5,pc}
+@ 0x201f25a
+
+.thumb
+branch_201f25a: @ 201f25a :thumb
+	add     r5, #0x10
+	mov     r2, r4
+	mov     r3, r5
+	blx     Function_20a8224
+	pop     {r3-r5,pc}
+@ 0x201f266
+
+
+.incbin "./baserom/arm9.bin", 0x1f266, 0x201f268 - 0x201f266
+
+
+.word 0x4001000 @ 0x201f268
+
+
+
+.thumb
+Function_201f26c: @ 201f26c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	add     r0, #0x10
+	blx     Function_20a818c
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x3
+	beq     branch_201f284
+	mov     r0, r4
+	bl      Function_201f298
+	pop     {r4,pc}
+@ 0x201f284
+
+.thumb
+branch_201f284: @ 201f284 :thumb
+	mov     r0, r4
+	mov     r1, #0x1
+	bl      Function_201f298
+	mov     r0, r4
+	mov     r1, #0x2
+	bl      Function_201f298
+	pop     {r4,pc}
+@ 0x201f296
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f298: @ 201f298 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r2, [r5, #0x40]
+	mov     r4, r1
+	cmp     r2, #0x0
+	beq     branch_201f2a8
+	bl      Function_201f074
+.thumb
+branch_201f2a8: @ 201f2a8 :thumb
+	cmp     r4, #0x1
+	bne     branch_201f2b6
+	mov     r0, #0x1
+	lsl     r0, r0, #26
+	ldr     r1, [r5, #0x34]
+	ldr     r0, [r0, #0x0]
+	b       branch_201f2bc
+@ 0x201f2b6
+
+.thumb
+branch_201f2b6: @ 201f2b6 :thumb
+	ldr     r0, [pc, #0x14] @ 0x201f2cc, (=#0x4001000)
+	ldr     r1, [r5, #0x38]
+	ldr     r0, [r0, #0x0]
+.thumb
+branch_201f2bc: @ 201f2bc :thumb
+	ldr     r0, [r5, #0x0]
+	add     r5, #0x10
+	mov     r2, r4
+	mov     r3, r5
+	blx     Function_20a867c
+	pop     {r3-r5,pc}
+@ 0x201f2ca
+
+
+.incbin "./baserom/arm9.bin", 0x1f2ca, 0x201f2cc - 0x201f2ca
+
+
+.word 0x4001000 @ 0x201f2cc
+
+
+
+.thumb
+Function_201f2d0: @ 201f2d0 :thumb
+	push    {r3,r4}
+	ldr     r1, [pc, #0x34] @ 0x201f308, (=#0x21c0760)
+	mov     r0, #0x0
+	ldr     r4, [r1, #0x0]
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x0
+	ble     branch_201f300
+	ldr     r1, [r4, #0x0]
+	mov     r3, r1
+.thumb
+branch_201f2e2: @ 201f2e2 :thumb
+	mov     r2, r3
+	add     r2, #0x3c
+	ldrb    r2, [r2, #0x0]
+	cmp     r2, #0x0
+	bne     branch_201f2f6
+	mov     r2, #0x54
+	mul     r2, r0
+	add     r0, r1, r2
+	pop     {r3,r4}
+	bx      lr
+@ 0x201f2f6
+
+.thumb
+branch_201f2f6: @ 201f2f6 :thumb
+	ldr     r2, [r4, #0x4]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	add     r3, #0x54
+	cmp     r0, r2
+	blt     branch_201f2e2
+.thumb
+branch_201f300: @ 201f300 :thumb
+	mov     r0, #0x0
+	pop     {r3,r4}
+	bx      lr
+@ 0x201f306
+
+
+.incbin "./baserom/arm9.bin", 0x1f306, 0x201f308 - 0x201f306
+
+
+.word 0x21c0760 @ 0x201f308
+
+.incbin "./baserom/arm9.bin", 0x1f30c, 0x201f50c - 0x201f30c
+
+
+.thumb
+Function_201f50c: @ 201f50c :thumb
+	ldr     r1, [pc, #0x10] @ 0x201f520, (=#0x21c0760)
+	ldr     r2, [r1, #0x0]
+	ldr     r1, [r2, #0x34]
+	cmp     r0, r1
+	bne     branch_201f51a
+	ldr     r0, [r2, #0x24]
+	bx      lr
+@ 0x201f51a
+
+.thumb
+branch_201f51a: @ 201f51a :thumb
+	ldr     r0, [r2, #0x28]
+	bx      lr
+@ 0x201f51e
+
+
+.incbin "./baserom/arm9.bin", 0x1f51e, 0x201f520 - 0x201f51e
+
+
+.word 0x21c0760 @ 0x201f520
+
+.incbin "./baserom/arm9.bin", 0x1f524, 0x201f53c - 0x201f524
+
+
+.thumb
+Function_201f53c: @ 201f53c :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	mov     r6, r1
+	mov     r4, r2
+	beq     branch_201f592
+	mov     r0, r4
+	bl      Function_201f50c
+	add     r6, r5, r6
+	mov     r7, r0
+	cmp     r5, r6
+	bcs     branch_201f592
+.thumb
+branch_201f556: @ 201f556 :thumb
+	cmp     r5, r7
+	bcs     branch_201f592
+	mov     r0, r5
+	add     r1, sp, #0x4
+	add     r2, sp, #0x0
+	bl      Function_201f80c
+	add     r0, sp, #0x0
+	ldrb    r1, [r0, #0x0]
+	mov     r0, #0x1
+	lsl     r0, r1
+	ldr     r1, [sp, #0x4]
+	ldrb    r1, [r4, r1]
+	tst     r0, r1
+	beq     branch_201f578
+	bl      Function_2022974
+.thumb
+branch_201f578: @ 201f578 :thumb
+	add     r2, sp, #0x0
+	ldrb    r3, [r2, #0x0]
+	ldr     r1, [sp, #0x4]
+	mov     r2, #0x1
+	lsl     r2, r3
+	lsl     r2, r2, #24
+	ldrb    r0, [r4, r1]
+	lsr     r2, r2, #24
+	.hword  0x1c6d @ add r5, r5, #0x1
+	orr     r0, r2
+	strb    r0, [r4, r1]
+	cmp     r5, r6
+	bcc     branch_201f556
+.thumb
+branch_201f592: @ 201f592 :thumb
+	add     sp, #0x8
+	pop     {r3-r7,pc}
+@ 0x201f596
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f598: @ 201f598 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x10
+	mov     r7, r0
+	str     r1, [sp, #0x0]
+	cmp     r1, #0x0
+	beq     branch_201f616
+	mov     r0, r1
+	bl      Function_201f50c
+	mov     r6, #0x0
+	str     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	bls     branch_201f616
+.thumb
+branch_201f5b2: @ 201f5b2 :thumb
+	mov     r0, r6
+	add     r1, sp, #0xc
+	add     r2, sp, #0x8
+	bl      Function_201f80c
+	add     r0, sp, #0x8
+	ldrb    r1, [r0, #0x0]
+	mov     r0, #0x1
+	mov     r4, #0x0
+	lsl     r0, r1
+	lsl     r0, r0, #24
+	lsr     r0, r0, #24
+	b       branch_201f5f4
+@ 0x201f5cc
+
+.thumb
+branch_201f5cc: @ 201f5cc :thumb
+	add     r5, r6, r4
+	mov     r0, r5
+	add     r1, sp, #0xc
+	add     r2, sp, #0x8
+	bl      Function_201f80c
+	add     r0, sp, #0x8
+	ldrb    r1, [r0, #0x0]
+	mov     r0, #0x1
+	lsl     r0, r1
+	lsl     r0, r0, #24
+	ldr     r1, [sp, #0x4]
+	lsr     r0, r0, #24
+	cmp     r5, r1
+	bcc     branch_201f5f2
+	mov     r0, #0x0
+	add     sp, #0x10
+	mvn     r0, r0
+	pop     {r3-r7,pc}
+@ 0x201f5f2
+
+.thumb
+branch_201f5f2: @ 201f5f2 :thumb
+	.hword  0x1c64 @ add r4, r4, #0x1
+.thumb
+branch_201f5f4: @ 201f5f4 :thumb
+	ldr     r2, [sp, #0xc]
+	ldr     r1, [sp, #0x0]
+	ldrb    r1, [r1, r2]
+	tst     r0, r1
+	bne     branch_201f602
+	cmp     r4, r7
+	bls     branch_201f5cc
+.thumb
+branch_201f602: @ 201f602 :thumb
+	cmp     r4, r7
+	bls     branch_201f60c
+	add     sp, #0x10
+	mov     r0, r6
+	pop     {r3-r7,pc}
+@ 0x201f60c
+
+.thumb
+branch_201f60c: @ 201f60c :thumb
+	add     r0, r6, r4
+	add     r6, r0, #0x1
+	ldr     r0, [sp, #0x4]
+	cmp     r6, r0
+	bcc     branch_201f5b2
+.thumb
+branch_201f616: @ 201f616 :thumb
+	mov     r0, #0x0
+	mvn     r0, r0
+	add     sp, #0x10
+	pop     {r3-r7,pc}
+@ 0x201f61e
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f620: @ 201f620 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x8
+	mov     r5, r0
+	mov     r4, r2
+	beq     branch_201f66a
+	add     r6, r5, r1
+	cmp     r5, r6
+	bcs     branch_201f66a
+	add     r7, sp, #0x0
+.thumb
+branch_201f632: @ 201f632 :thumb
+	mov     r0, r5
+	add     r1, sp, #0x4
+	add     r2, sp, #0x0
+	bl      Function_201f80c
+	ldrb    r1, [r7, #0x0]
+	mov     r0, #0x1
+	lsl     r0, r1
+	ldr     r1, [sp, #0x4]
+	ldrb    r1, [r4, r1]
+	tst     r0, r1
+	bne     branch_201f64e
+	bl      Function_2022974
+.thumb
+branch_201f64e: @ 201f64e :thumb
+	ldrb    r0, [r7, #0x0]
+	mov     r1, #0x1
+	ldr     r3, [sp, #0x4]
+	lsl     r1, r0
+	mov     r0, #0xff
+	eor     r0, r1
+	lsl     r0, r0, #24
+	ldrb    r2, [r4, r3]
+	lsr     r0, r0, #24
+	.hword  0x1c6d @ add r5, r5, #0x1
+	and     r0, r2
+	strb    r0, [r4, r3]
+	cmp     r5, r6
+	bcc     branch_201f632
+.thumb
+branch_201f66a: @ 201f66a :thumb
+	add     sp, #0x8
+	pop     {r3-r7,pc}
+@ 0x201f66e
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f670: @ 201f670 :thumb
+	push    {r3-r5,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x4]
+	mov     r1, #0x1
+	tst     r0, r1
+	beq     branch_201f6ae
+	mov     r0, r4
+	add     r0, #0x10
+	blx     Function_20a81b0
+	ldr     r1, [pc, #0x68] @ 0x201f6f0, (=#0x21c0760)
+	ldr     r2, [r1, #0x0]
+	ldr     r1, [r2, #0x1c]
+	sub     r0, r0, r1
+	ldr     r1, [r2, #0x2c]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x5c] @ 0x201f6f0, (=#0x21c0760)
+	mov     r5, r0
+	ldr     r1, [r1, #0x0]
+	ldr     r0, [r4, #0x4c]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f754
+	ldr     r2, [pc, #0x4c] @ 0x201f6f0, (=#0x21c0760)
+	mov     r1, r0
+	ldr     r2, [r2, #0x0]
+	mov     r0, r5
+	ldr     r2, [r2, #0x34]
+	bl      Function_201f620
+.thumb
+branch_201f6ae: @ 201f6ae :thumb
+	ldr     r0, [r4, #0x4]
+	mov     r1, #0x2
+	tst     r0, r1
+	beq     branch_201f6e8
+	mov     r0, r4
+	add     r0, #0x10
+	blx     Function_20a81b0
+	ldr     r1, [pc, #0x30] @ 0x201f6f0, (=#0x21c0760)
+	ldr     r2, [r1, #0x0]
+	ldr     r1, [r2, #0x20]
+	sub     r0, r0, r1
+	ldr     r1, [r2, #0x30]
+	bl      Function_201f754
+	ldr     r1, [pc, #0x20] @ 0x201f6f0, (=#0x21c0760)
+	mov     r5, r0
+	ldr     r1, [r1, #0x0]
+	ldr     r0, [r4, #0x50]
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f754
+	ldr     r2, [pc, #0x14] @ 0x201f6f0, (=#0x21c0760)
+	mov     r1, r0
+	ldr     r2, [r2, #0x0]
+	mov     r0, r5
+	ldr     r2, [r2, #0x38]
+	bl      Function_201f620
+.thumb
+branch_201f6e8: @ 201f6e8 :thumb
+	mov     r0, #0x0
+	str     r0, [r4, #0x48]
+	pop     {r3-r5,pc}
+@ 0x201f6ee
+
+
+.incbin "./baserom/arm9.bin", 0x1f6ee, 0x201f6f0 - 0x201f6ee
+
+
+.word 0x21c0760 @ 0x201f6f0
+
+
+
+.incbin "./baserom/arm9.bin", 0x1f6f4, 0x201f734 - 0x201f6f4
+
+
+.thumb
+Function_201f734: @ 201f734 :thumb
+	push    {r4-r6,lr}
+	mov     r4, r1
+	lsl     r4, r4, #5
+	mov     r1, r4
+	mov     r5, r0
+	mov     r6, r2
+	blx     Division
+	cmp     r1, #0x0
+	beq     branch_201f750
+	sub     r5, r5, r1
+	cmp     r6, #0x1
+	bne     branch_201f750
+	add     r5, r5, r4
+.thumb
+branch_201f750: @ 201f750 :thumb
+	mov     r0, r5
+	pop     {r4-r6,pc}
+@ 0x201f754
+
+.thumb
+Function_201f754: @ 201f754 :thumb
+	asr     r2, r0, #4
+	lsr     r2, r2, #27
+	add     r2, r0, r2
+	ldr     r3, [pc, #0x4] @ 0x201f760, (=#0x20e1f6c)
+	asr     r0, r2, #5
+	bx      r3
+@ 0x201f760
+
+.word Division @ =0x20e1f6c, 0x201f760
+
+
+
+.thumb
+Function_201f764: @ 201f764 :thumb
+	mul     r1, r0
+	lsl     r0, r1, #5
+	bx      lr
+@ 0x201f76a
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f76c: @ 201f76c :thumb
+	push    {r3-r7,lr}
+	mov     r4, r1
+	mov     r5, r0
+	mov     r1, r2
+	mov     r0, #0x1
+	mov     r2, r4
+	mov     r7, r3
+	tst     r2, r0
+	beq     branch_201f796
+	ldr     r2, [pc, #0x38] @ 0x201f7b8, (=#0x21c0760)
+	ldr     r2, [r2, #0x0]
+	ldr     r6, [r2, #0xc]
+	ldr     r2, [r2, #0x1c]
+	add     r3, r6, r5
+	cmp     r3, r2
+	bls     branch_201f794
+	bl      Function_2022974
+	mov     r0, #0x0
+	b       branch_201f796
+@ 0x201f794
+
+.thumb
+branch_201f794: @ 201f794 :thumb
+	str     r6, [r1, #0x0]
+.thumb
+branch_201f796: @ 201f796 :thumb
+	mov     r1, #0x2
+	tst     r1, r4
+	beq     branch_201f7b4
+	ldr     r1, [pc, #0x18] @ 0x201f7b8, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	ldr     r3, [r1, #0x10]
+	ldr     r1, [r1, #0x20]
+	add     r2, r3, r5
+	cmp     r2, r1
+	bls     branch_201f7b2
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x201f7b2
+
+.thumb
+branch_201f7b2: @ 201f7b2 :thumb
+	str     r3, [r7, #0x0]
+.thumb
+branch_201f7b4: @ 201f7b4 :thumb
+	pop     {r3-r7,pc}
+@ 0x201f7b6
+
+
+.incbin "./baserom/arm9.bin", 0x1f7b6, 0x201f7b8 - 0x201f7b6
+
+
+.word 0x21c0760 @ 0x201f7b8
+.thumb
+Function_201f7bc: @ 201f7bc :thumb
+	push    {r3-r5,lr}
+	mov     r4, r1
+	mov     r5, r0
+	mov     r2, #0x1
+	mov     r0, r4
+	tst     r0, r2
+	beq     branch_201f7e4
+	ldr     r0, [pc, #0x3c] @ 0x201f808, (=#0x21c0760)
+	ldr     r3, [r0, #0x0]
+	ldr     r1, [r3, #0xc]
+	add     r1, r1, r5
+	str     r1, [r3, #0xc]
+	ldr     r1, [r0, #0x0]
+	ldr     r0, [r1, #0xc]
+	ldr     r1, [r1, #0x2c]
+	bl      Function_201f734
+	ldr     r1, [pc, #0x28] @ 0x201f808, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	str     r0, [r1, #0xc]
+.thumb
+branch_201f7e4: @ 201f7e4 :thumb
+	mov     r0, #0x2
+	tst     r0, r4
+	beq     branch_201f806
+	ldr     r0, [pc, #0x1c] @ 0x201f808, (=#0x21c0760)
+	ldr     r2, [r0, #0x0]
+	ldr     r1, [r2, #0x10]
+	add     r1, r1, r5
+	str     r1, [r2, #0x10]
+	ldr     r1, [r0, #0x0]
+	mov     r2, #0x1
+	ldr     r0, [r1, #0x10]
+	ldr     r1, [r1, #0x30]
+	bl      Function_201f734
+	ldr     r1, [pc, #0x4] @ 0x201f808, (=#0x21c0760)
+	ldr     r1, [r1, #0x0]
+	str     r0, [r1, #0x10]
+.thumb
+branch_201f806: @ 201f806 :thumb
+	pop     {r3-r5,pc}
+@ 0x201f808
+
+.word 0x21c0760 @ 0x201f808
+
+
+
+.thumb
+Function_201f80c: @ 201f80c :thumb
+	asr     r3, r0, #3
+	str     r3, [r1, #0x0]
+	mov     r1, #0x7
+	and     r0, r1
+	strb    r0, [r2, #0x0]
+	bx      lr
+@ 0x201f818
+
+
+.incbin "./baserom/arm9.bin", 0x1f818, 0x201f950 - 0x201f818
+
+
+.thumb
+Function_201f950: @ 201f950 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	bl      Function_201fc50
+	mov     r4, r0
+	bne     branch_201f964
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201f964
+
+.thumb
+branch_201f964: @ 201f964 :thumb
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_201faec
+	cmp     r0, #0x0
+	bne     branch_201f974
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201f974
+
+.thumb
+branch_201f974: @ 201f974 :thumb
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_201fb94
+	cmp     r0, #0x0
+	bne     branch_201f98a
+	ldr     r0, [r5, #0xc]
+	bl      Function_201f9f0
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201f98a
+
+.thumb
+branch_201f98a: @ 201f98a :thumb
+	mov     r0, #0x1
+	pop     {r3-r5,pc}
+@ 0x201f98e
+
+
+.incbin "./baserom/arm9.bin", 0x1f98e, 0x201f9dc - 0x201f98e
+
+
+.thumb
+Function_201f9dc: @ 201f9dc :thumb
+	push    {r3,lr}
+	bl      Function_201fc18
+	cmp     r0, #0x0
+	beq     branch_201f9ea
+	mov     r0, #0x1
+	pop     {r3,pc}
+@ 0x201f9ea
+
+.thumb
+branch_201f9ea: @ 201f9ea :thumb
+	mov     r0, #0x0
+	pop     {r3,pc}
+@ 0x201f9ee
+
+
+.align 2, 0
+
+
+.thumb
+Function_201f9f0: @ 201f9f0 :thumb
+	push    {r4,lr}
+	bl      Function_201fc18
+	mov     r4, r0
+	bne     branch_201f9fe
+	bl      Function_2022974
+.thumb
+branch_201f9fe: @ 201f9fe :thumb
+	mov     r0, r4
+	add     r0, #0x2c
+	ldrb    r0, [r0, #0x0]
+	cmp     r0, #0x1
+	bne     branch_201fa14
+	mov     r0, r4
+	bl      Function_201fde0
+	mov     r0, r4
+	bl      Function_201fae4
+.thumb
+branch_201fa14: @ 201fa14 :thumb
+	pop     {r4,pc}
+@ 0x201fa16
+
+
+.incbin "./baserom/arm9.bin", 0x1fa16, 0x201fa58 - 0x201fa16
 
 
 .thumb
@@ -23045,7 +27660,132 @@ branch_201fab0: @ 201fab0 :thumb
 @ 0x201fab4
 
 
-.incbin "./baserom/arm9.bin", 0x1fab4, 0x201fc18 - 0x201fab4
+.incbin "./baserom/arm9.bin", 0x1fab4, 0x201fae4 - 0x201fab4
+
+
+.thumb
+Function_201fae4: @ 201fae4 :thumb
+	ldr     r3, [pc, #0x0] @ 0x201fae8, (=#0x201fb21)
+	bx      r3
+@ 0x201fae8
+
+.word 0x201fb21 @ 0x201fae8
+
+
+.thumb
+Function_201faec: @ 201faec :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0x0]
+	mov     r4, r1
+	str     r0, [r4, #0x0]
+	ldr     r0, [r5, #0xc]
+	bl      Function_201f9dc
+	cmp     r0, #0x1
+	bne     branch_201fb08
+	bl      Function_2022974
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x201fb08
+
+.thumb
+branch_201fb08: @ 201fb08 :thumb
+	ldr     r0, [r5, #0xc]
+	mov     r1, r4
+	str     r0, [r4, #0xc]
+	ldr     r0, [r5, #0x4]
+	add     r1, #0x2c
+	str     r0, [r4, #0x4]
+	mov     r0, #0x1
+	strb    r0, [r1, #0x0]
+	ldr     r1, [r5, #0x8]
+	str     r1, [r4, #0x8]
+	pop     {r3-r5,pc}
+@ 0x201fb1e
+
+
+.incbin "./baserom/arm9.bin", 0x1fb1e, 0x201fb94 - 0x201fb1e
+
+
+.thumb
+Function_201fb94: @ 201fb94 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r1
+	ldr     r0, [r5, #0x0]
+	ldr     r0, [r0, #0x4]
+	cmp     r0, #0x0
+	beq     branch_201fba4
+	bl      Function_2022974
+.thumb
+branch_201fba4: @ 201fba4 :thumb
+	ldr     r1, [r5, #0x4]
+	mov     r0, #0x1
+	tst     r0, r1
+	beq     branch_201fbc6
+	ldr     r0, [pc, #0x64] @ 0x201fc14, (=#0x21c0764)
+	ldr     r1, [r5, #0x8]
+	ldr     r0, [r0, #0x0]
+	ldrh    r0, [r0, #0x24]
+	bl      Function_201fd5c
+	mov     r6, r0
+	mov     r0, #0x0
+	mvn     r0, r0
+	cmp     r6, r0
+	bne     branch_201fbc6
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x201fbc6
+
+.thumb
+branch_201fbc6: @ 201fbc6 :thumb
+	ldr     r1, [r5, #0x4]
+	mov     r0, #0x2
+	tst     r0, r1
+	beq     branch_201fbe8
+	ldr     r0, [pc, #0x44] @ 0x201fc14, (=#0x21c0764)
+	ldr     r1, [r5, #0x8]
+	ldr     r0, [r0, #0x0]
+	ldrh    r0, [r0, #0x26]
+	bl      Function_201fd5c
+	mov     r4, r0
+	mov     r0, #0x0
+	mvn     r0, r0
+	cmp     r4, r0
+	bne     branch_201fbe8
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x201fbe8
+
+.thumb
+branch_201fbe8: @ 201fbe8 :thumb
+	ldr     r1, [r5, #0x4]
+	mov     r0, #0x1
+	tst     r0, r1
+	beq     branch_201fbf2
+	str     r6, [r5, #0x24]
+.thumb
+branch_201fbf2: @ 201fbf2 :thumb
+	ldr     r1, [r5, #0x4]
+	mov     r0, #0x2
+	tst     r0, r1
+	beq     branch_201fbfc
+	str     r4, [r5, #0x28]
+.thumb
+branch_201fbfc: @ 201fbfc :thumb
+	ldr     r0, [r5, #0x8]
+	lsl     r1, r0, #5
+	ldr     r0, [r5, #0x0]
+	str     r1, [r0, #0x8]
+	mov     r0, r5
+	bl      Function_201fce4
+	mov     r0, r5
+	bl      Function_201fda4
+	mov     r0, #0x1
+	pop     {r4-r6,pc}
+@ 0x201fc14
+
+.word 0x21c0764 @ 0x201fc14
+
 
 
 .thumb
@@ -23091,7 +27831,275 @@ branch_201fc44: @ 201fc44 :thumb
 
 .word 0x21c0764 @ 0x201fc4c
 
-.incbin "./baserom/arm9.bin", 0x1fc50, 0x201fe94 - 0x201fc50
+
+.thumb
+Function_201fc50: @ 201fc50 :thumb
+	push    {r3,r4}
+	ldr     r1, [pc, #0x34] @ 0x201fc88, (=#0x21c0764)
+	mov     r0, #0x0
+	ldr     r4, [r1, #0x0]
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x0
+	ble     branch_201fc80
+	ldr     r1, [r4, #0x0]
+	mov     r3, r1
+.thumb
+branch_201fc62: @ 201fc62 :thumb
+	mov     r2, r3
+	add     r2, #0x2c
+	ldrb    r2, [r2, #0x0]
+	cmp     r2, #0x0
+	bne     branch_201fc76
+	mov     r2, #0x30
+	mul     r2, r0
+	add     r0, r1, r2
+	pop     {r3,r4}
+	bx      lr
+@ 0x201fc76
+
+.thumb
+branch_201fc76: @ 201fc76 :thumb
+	ldr     r2, [r4, #0x4]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	add     r3, #0x30
+	cmp     r0, r2
+	blt     branch_201fc62
+.thumb
+branch_201fc80: @ 201fc80 :thumb
+	mov     r0, #0x0
+	pop     {r3,r4}
+	bx      lr
+@ 0x201fc86
+
+
+.incbin "./baserom/arm9.bin", 0x1fc86, 0x201fc88 - 0x201fc86
+
+
+.word 0x21c0764 @ 0x201fc88
+
+.incbin "./baserom/arm9.bin", 0x1fc8c, 0x201fce4 - 0x201fc8c
+
+
+.thumb
+Function_201fce4: @ 201fce4 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	add     r0, #0x10
+	blx     Function_20a81d0
+	ldr     r0, [r4, #0x4]
+	mov     r2, #0x1
+	tst     r0, r2
+	beq     branch_201fd02
+	mov     r3, r4
+	ldr     r0, [r4, #0x0]
+	ldr     r1, [r4, #0x24]
+	add     r3, #0x10
+	blx     Function_20a8850
+.thumb
+branch_201fd02: @ 201fd02 :thumb
+	ldr     r0, [r4, #0x4]
+	mov     r2, #0x2
+	tst     r0, r2
+	beq     branch_201fd16
+	ldr     r0, [r4, #0x0]
+	ldr     r1, [r4, #0x28]
+	add     r4, #0x10
+	mov     r3, r4
+	blx     Function_20a8850
+.thumb
+branch_201fd16: @ 201fd16 :thumb
+	pop     {r4,pc}
+@ 0x201fd18
+
+.thumb
+Function_201fd18: @ 201fd18 :thumb
+	push    {r4-r7}
+	mov     r3, #0x0
+	cmp     r1, #0x0
+	ble     branch_201fd36
+	mov     r5, #0x1
+.thumb
+branch_201fd22: @ 201fd22 :thumb
+	ldrh    r7, [r0, #0x0]
+	add     r4, r2, r3
+	mov     r6, r5
+	lsl     r6, r4
+	mov     r4, r7
+	orr     r4, r6
+	.hword  0x1c5b @ add r3, r3, #0x1
+	strh    r4, [r0, #0x0]
+	cmp     r3, r1
+	blt     branch_201fd22
+.thumb
+branch_201fd36: @ 201fd36 :thumb
+	pop     {r4-r7}
+	bx      lr
+@ 0x201fd3a
+
+
+.align 2, 0
+
+
+.thumb
+Function_201fd3c: @ 201fd3c :thumb
+	push    {r4-r7}
+	mov     r4, #0x0
+	cmp     r1, #0x0
+	ble     branch_201fd58
+	mov     r6, #0x1
+.thumb
+branch_201fd46: @ 201fd46 :thumb
+	add     r5, r2, r4
+	mov     r7, r6
+	ldrh    r3, [r0, #0x0]
+	lsl     r7, r5
+	bic     r3, r7
+	.hword  0x1c64 @ add r4, r4, #0x1
+	strh    r3, [r0, #0x0]
+	cmp     r4, r1
+	blt     branch_201fd46
+.thumb
+branch_201fd58: @ 201fd58 :thumb
+	pop     {r4-r7}
+	bx      lr
+@ 0x201fd5c
+
+
+.thumb
+Function_201fd5c: @ 201fd5c :thumb
+	push    {r4-r7}
+	mov     r3, #0x0
+	mov     r6, #0x1
+	mov     r2, r3
+.thumb
+branch_201fd64: @ 201fd64 :thumb
+	mov     r4, r2
+	b       branch_201fd6e
+@ 0x201fd68
+
+.thumb
+branch_201fd68: @ 201fd68 :thumb
+	cmp     r5, #0x10
+	bge     branch_201fd7c
+	.hword  0x1c64 @ add r4, r4, #0x1
+.thumb
+branch_201fd6e: @ 201fd6e :thumb
+	add     r5, r3, r4
+	mov     r7, r6
+	lsl     r7, r5
+	tst     r7, r0
+	bne     branch_201fd7c
+	cmp     r4, r1
+	blt     branch_201fd68
+.thumb
+branch_201fd7c: @ 201fd7c :thumb
+	cmp     r4, r1
+	bge     branch_201fd88
+	add     r3, r3, r4
+	.hword  0x1c5b @ add r3, r3, #0x1
+	cmp     r3, #0x10
+	blt     branch_201fd64
+.thumb
+branch_201fd88: @ 201fd88 :thumb
+	cmp     r3, #0x10
+	blt     branch_201fd94
+	mov     r0, #0x0
+	mvn     r0, r0
+	pop     {r4-r7}
+	bx      lr
+@ 0x201fd94
+
+.thumb
+branch_201fd94: @ 201fd94 :thumb
+	lsl     r0, r3, #5
+	pop     {r4-r7}
+	bx      lr
+@ 0x201fd9a
+
+
+.incbin "./baserom/arm9.bin", 0x1fd9a, 0x201fda4 - 0x201fd9a
+
+
+.thumb
+Function_201fda4: @ 201fda4 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r1, [r4, #0x4]
+	mov     r0, #0x1
+	tst     r0, r1
+	beq     branch_201fdc0
+	ldr     r0, [pc, #0x28] @ 0x201fddc, (=#0x21c0764)
+	ldr     r2, [r4, #0x24]
+	ldr     r0, [r0, #0x0]
+	ldr     r1, [r4, #0x8]
+	add     r0, #0x24
+	lsr     r2, r2, #5
+	bl      Function_201fd18
+.thumb
+branch_201fdc0: @ 201fdc0 :thumb
+	ldr     r1, [r4, #0x4]
+	mov     r0, #0x2
+	tst     r0, r1
+	beq     branch_201fdd8
+	ldr     r0, [pc, #0x10] @ 0x201fddc, (=#0x21c0764)
+	ldr     r2, [r4, #0x28]
+	ldr     r0, [r0, #0x0]
+	ldr     r1, [r4, #0x8]
+	add     r0, #0x26
+	lsr     r2, r2, #5
+	bl      Function_201fd18
+.thumb
+branch_201fdd8: @ 201fdd8 :thumb
+	pop     {r4,pc}
+@ 0x201fdda
+
+
+.incbin "./baserom/arm9.bin", 0x1fdda, 0x201fddc - 0x201fdda
+
+
+.word 0x21c0764 @ 0x201fddc
+
+
+.thumb
+Function_201fde0: @ 201fde0 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	ldr     r1, [r4, #0x4]
+	mov     r0, #0x1
+	tst     r0, r1
+	beq     branch_201fdfc
+	ldr     r0, [pc, #0x28] @ 0x201fe18, (=#0x21c0764)
+	ldr     r2, [r4, #0x24]
+	ldr     r0, [r0, #0x0]
+	ldr     r1, [r4, #0x8]
+	add     r0, #0x24
+	lsr     r2, r2, #5
+	bl      Function_201fd3c
+.thumb
+branch_201fdfc: @ 201fdfc :thumb
+	ldr     r1, [r4, #0x4]
+	mov     r0, #0x2
+	tst     r0, r1
+	beq     branch_201fe14
+	ldr     r0, [pc, #0x10] @ 0x201fe18, (=#0x21c0764)
+	ldr     r2, [r4, #0x28]
+	ldr     r0, [r0, #0x0]
+	ldr     r1, [r4, #0x8]
+	add     r0, #0x26
+	lsr     r2, r2, #5
+	bl      Function_201fd3c
+.thumb
+branch_201fe14: @ 201fe14 :thumb
+	pop     {r4,pc}
+@ 0x201fe16
+
+
+.incbin "./baserom/arm9.bin", 0x1fe16, 0x201fe18 - 0x201fe16
+
+
+.word 0x21c0764 @ 0x201fe18
+
+.incbin "./baserom/arm9.bin", 0x1fe1c, 0x201fe94 - 0x201fe1c
 
 
 .thumb
@@ -23145,6 +28153,7 @@ Function_201ff00: @ 201ff00 :thumb
 
 .word 0x21c0768 @ 0x201ff08
 .thumb
+.globl Function_201ff0c
 Function_201ff0c: @ 201ff0c :thumb
 	cmp     r1, #0x1
 	bne     branch_201ff1a
@@ -23403,7 +28412,184 @@ branch_202132e: @ 202132e :thumb
 @ 0x2021334
 
 
-.incbin "./baserom/arm9.bin", 0x21334, 0x20219f8 - 0x2021334
+.incbin "./baserom/arm9.bin", 0x21334, 0x20218bc - 0x2021334
+
+
+.thumb
+Function_20218bc: @ 20218bc :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	bne     branch_20218c6
+	bl      Function_2022974
+.thumb
+branch_20218c6: @ 20218c6 :thumb
+	ldr     r0, [r5, #0x4]
+	cmp     r0, #0x0
+	bne     branch_20218d0
+	bl      Function_2022974
+.thumb
+branch_20218d0: @ 20218d0 :thumb
+	mov     r1, #0x49
+	ldr     r0, [r5, #0x8]
+	lsl     r1, r1, #2
+	bl      Function_2018144
+	mov     r4, r0
+	bne     branch_20218e2
+	bl      Function_2022974
+.thumb
+branch_20218e2: @ 20218e2 :thumb
+	mov     r0, r4
+	bl      Function_2021a50
+	ldr     r2, [r5, #0x0]
+	ldr     r0, [r5, #0x8]
+	lsl     r1, r2, #6
+	add     r1, r2, r1
+	lsl     r1, r1, #2
+	bl      Function_2018144
+	str     r0, [r4, #0x0]
+	cmp     r0, #0x0
+	bne     branch_2021900
+	bl      Function_2022974
+.thumb
+branch_2021900: @ 2021900 :thumb
+	ldr     r0, [r5, #0x0]
+	str     r0, [r4, #0x4]
+	ldr     r1, [r5, #0x0]
+	ldr     r0, [r5, #0x8]
+	lsl     r1, r1, #2
+	bl      Function_2018144
+	str     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	bne     branch_2021918
+	bl      Function_2022974
+.thumb
+branch_2021918: @ 2021918 :thumb
+	mov     r0, r4
+	bl      Function_2022518
+	mov     r0, r4
+	add     r0, #0x10
+	bl      Function_2021a78
+	mov     r2, r4
+	mov     r1, #0x43
+	lsl     r1, r1, #2
+	add     r2, #0x10
+	str     r2, [r4, r1]
+	add     r0, r1, #0x4
+	str     r2, [r4, r0]
+	ldr     r0, [r5, #0x4]
+	add     r1, #0x8
+	str     r0, [r4, r1]
+	ldr     r0, [r5, #0x8]
+	ldr     r1, [pc, #0x20] @ 0x2021960, (=#0x2100848)
+	bl      Function_2017a40
+	mov     r1, #0x46
+	lsl     r1, r1, #2
+	str     r0, [r4, r1]
+	ldr     r0, [r4, r1]
+	.hword  0x1d09 @ add r1, r1, #0x4
+	add     r1, r4, r1
+	blx     Function_20a6d88
+	mov     r0, #0x12
+	mov     r1, #0x1
+	lsl     r0, r0, #4
+	str     r1, [r4, r0]
+	mov     r0, r4
+	pop     {r3-r5,pc}
+@ 0x202195e
+
+
+.incbin "./baserom/arm9.bin", 0x2195e, 0x2021960 - 0x202195e
+
+
+.word 0x2100848 @ 0x2021960
+
+
+
+.thumb
+.globl Function_2021964
+Function_2021964: @ 2021964 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_202196e
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x202196e
+
+.thumb
+branch_202196e: @ 202196e :thumb
+	ldr     r1, [r4, #0x0]
+	cmp     r1, #0x0
+	bne     branch_2021978
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x2021978
+
+.thumb
+branch_2021978: @ 2021978 :thumb
+	bl      Function_20219c0
+	mov     r0, #0x46
+	lsl     r0, r0, #2
+	ldr     r0, [r4, r0]
+	bl      Function_20181c4
+	ldr     r0, [r4, #0x8]
+	bl      Function_20181c4
+	ldr     r0, [r4, #0x0]
+	bl      Function_20181c4
+	mov     r0, r4
+	bl      Function_2021a50
+	mov     r0, r4
+	bl      Function_20181c4
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x20219a2
+
+
+.incbin "./baserom/arm9.bin", 0x219a2, 0x20219c0 - 0x20219a2
+
+
+.thumb
+.globl Function_20219c0
+Function_20219c0: @ 20219c0 :thumb
+	push    {r4-r6,lr}
+	cmp     r0, #0x0
+	bne     branch_20219ca
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x20219ca
+
+.thumb
+branch_20219ca: @ 20219ca :thumb
+	ldr     r1, [r0, #0x0]
+	cmp     r1, #0x0
+	bne     branch_20219d4
+	mov     r0, #0x1
+	pop     {r4-r6,pc}
+@ 0x20219d4
+
+.thumb
+branch_20219d4: @ 20219d4 :thumb
+	mov     r1, #0x11
+	lsl     r1, r1, #4
+	mov     r4, r0
+	ldr     r1, [r0, r1]
+	add     r4, #0x10
+	cmp     r1, r4
+	beq     branch_20219f4
+	mov     r6, #0x1
+	lsl     r6, r6, #8
+.thumb
+branch_20219e6: @ 20219e6 :thumb
+	ldr     r5, [r1, r6]
+	mov     r0, r1
+	bl      Function_2021bd4
+	mov     r1, r5
+	cmp     r5, r4
+	bne     branch_20219e6
+.thumb
+branch_20219f4: @ 20219f4 :thumb
+	mov     r0, #0x1
+	pop     {r4-r6,pc}
+@ 0x20219f8
 
 
 .thumb
@@ -23462,7 +28648,1092 @@ branch_2021a44: @ 2021a44 :thumb
 .word 0x20e56ec @ 0x2021a4c
 
 
-.incbin "./baserom/arm9.bin", 0x21a50, 0x2022844 - 0x2021a50
+
+.thumb
+Function_2021a50: @ 2021a50 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	mov     r1, #0x0
+	str     r1, [r4, #0x0]
+	str     r1, [r4, #0x4]
+	str     r1, [r4, #0x8]
+	mov     r0, #0x45
+	str     r1, [r4, #0xc]
+	lsl     r0, r0, #2
+	str     r1, [r4, r0]
+	mov     r0, r4
+	add     r0, #0x10
+	bl      Function_2021a78
+	mov     r0, #0x12
+	mov     r1, #0x0
+	lsl     r0, r0, #4
+	str     r1, [r4, r0]
+	pop     {r4,pc}
+@ 0x2021a76
+
+
+.align 2, 0
+
+
+.thumb
+Function_2021a78: @ 2021a78 :thumb
+	push    {r4,lr}
+	mov     r2, #0x41
+	mov     r4, r0
+	mov     r1, #0x0
+	lsl     r2, r2, #2
+	str     r1, [r4, #0x3c]
+	blx     Function_20d5124
+	mov     r0, r4
+	add     r0, #0xb4
+	blx     Function_20a818c
+	mov     r0, r4
+	add     r0, #0xd8
+	blx     Function_20a81d0
+	mov     r0, #0x0
+	str     r0, [r4, #0x30]
+	pop     {r4,pc}
+@ 0x2021a9e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2021aa0: @ 2021aa0 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0x0]
+	bl      Function_2022550
+	mov     r4, r0
+	bne     branch_2021ab2
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x2021ab2
+
+.thumb
+branch_2021ab2: @ 2021ab2 :thumb
+	ldr     r0, [r5, #0x0]
+	mov     r6, r5
+	str     r0, [r4, #0x3c]
+	mov     r0, r4
+	mov     r2, #0x0
+	add     r0, #0xf0
+	add     r6, #0x8
+	strh    r2, [r0, #0x0]
+	ldmia   r6!, {r0,r1}
+	mov     r3, r4
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r6, #0x0]
+	mov     r6, r5
+	str     r0, [r3, #0x0]
+	add     r6, #0x14
+	mov     r3, r4
+	ldmia   r6!, {r0,r1}
+	add     r3, #0x18
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r6, #0x0]
+	str     r0, [r3, #0x0]
+	ldrh    r0, [r5, #0x20]
+	strh    r0, [r4, #0x24]
+	mov     r0, r4
+	ldr     r1, [r5, #0x28]
+	add     r0, #0xf8
+	str     r1, [r0, #0x0]
+	mov     r0, r4
+	ldr     r1, [r5, #0x24]
+	add     r0, #0xf4
+	strh    r1, [r0, #0x0]
+	mov     r0, r4
+	add     r0, #0x26
+	strb    r2, [r0, #0x0]
+	mov     r0, r4
+	add     r0, #0x27
+	strb    r2, [r0, #0x0]
+	str     r2, [r4, #0x2c]
+	mov     r0, r4
+	str     r2, [r4, #0x30]
+	mov     r1, #0x11
+	add     r0, #0x28
+	strb    r1, [r0, #0x0]
+	mov     r0, #0x45
+	ldr     r1, [r5, #0x0]
+	lsl     r0, r0, #2
+	ldr     r0, [r1, r0]
+	mov     r1, r4
+	add     r1, #0x26
+	ldrb    r1, [r1, #0x0]
+	blx     Function_20ac3ac
+	mov     r0, r4
+	add     r0, #0x27
+	ldrb    r2, [r0, #0x0]
+	mov     r0, #0x45
+	ldr     r1, [r5, #0x0]
+	lsl     r0, r0, #2
+	ldr     r0, [r1, r0]
+	mov     r1, #0x1
+	mov     r3, #0x2
+	and     r1, r2
+	and     r2, r3
+	blx     Function_20ac46c
+	mov     r0, r4
+	mov     r2, #0x1
+	add     r0, #0x34
+	strb    r2, [r0, #0x0]
+	mov     r0, r4
+	mov     r1, #0x0
+	add     r0, #0x35
+	strb    r1, [r0, #0x0]
+	lsl     r0, r2, #13
+	str     r0, [r4, #0x38]
+	ldr     r0, [r5, #0x0]
+	ldr     r1, [r5, #0x4]
+	ldr     r3, [r5, #0x2c]
+	mov     r2, r4
+	bl      Function_2022110
+	cmp     r0, #0x0
+	bne     branch_2021b62
+	mov     r0, r4
+	bl      Function_2021bd4
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x2021b62
+
+.thumb
+branch_2021b62: @ 2021b62 :thumb
+	mov     r1, r4
+	add     r1, #0xf8
+	mov     r0, r4
+	ldr     r1, [r1, #0x0]
+	add     r0, #0xd8
+	bl      Function_20222c4
+	mov     r1, r4
+	add     r1, #0x2a
+	strb    r0, [r1, #0x0]
+	mov     r0, r4
+	add     r0, #0x2a
+	ldrb    r1, [r0, #0x0]
+	mov     r0, r4
+	add     r0, #0x29
+	strb    r1, [r0, #0x0]
+	ldr     r0, [r5, #0x0]
+	mov     r1, r4
+	bl      Function_2022464
+	mov     r0, r4
+	pop     {r4-r6,pc}
+@ 0x2021b8e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021b90
+Function_2021b90: @ 2021b90 :thumb
+	push    {r4,lr}
+	add     sp, #-0x30
+	mov     r2, r0
+	ldr     r0, [r2, #0x0]
+	mov     r4, r2
+	str     r0, [sp, #0x0]
+	ldr     r0, [r2, #0x4]
+	add     r4, #0x8
+	str     r0, [sp, #0x4]
+	ldmia   r4!, {r0,r1}
+	add     r3, sp, #0x8
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r4, #0x0]
+	mov     r1, #0x0
+	str     r0, [r3, #0x0]
+	mov     r0, #0x1
+	lsl     r0, r0, #12
+	str     r0, [sp, #0x14]
+	str     r0, [sp, #0x18]
+	str     r0, [sp, #0x1c]
+	add     r0, sp, #0x0
+	strh    r1, [r0, #0x20]
+	ldr     r0, [r2, #0x14]
+	str     r0, [sp, #0x24]
+	ldr     r0, [r2, #0x18]
+	str     r0, [sp, #0x28]
+	ldr     r0, [r2, #0x1c]
+	str     r0, [sp, #0x2c]
+	add     r0, sp, #0x0
+	bl      Function_2021aa0
+	add     sp, #0x30
+	pop     {r4,pc}
+@ 0x2021bd2
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021bd4
+Function_2021bd4: @ 2021bd4 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r1, r5
+	add     r1, #0xec
+	ldr     r1, [r1, #0x0]
+	cmp     r1, #0x0
+	beq     branch_2021c4c
+	mov     r1, r5
+	add     r1, #0xfc
+	ldr     r1, [r1, #0x0]
+	cmp     r1, #0x0
+	beq     branch_2021bf0
+	bl      Function_20224fc
+.thumb
+branch_2021bf0: @ 2021bf0 :thumb
+	mov     r0, r5
+	add     r0, #0xec
+	ldr     r0, [r0, #0x0]
+	cmp     r0, #0x3
+	bne     branch_2021c1a
+	mov     r1, r5
+	add     r1, #0xf8
+	mov     r0, r5
+	mov     r4, r5
+	ldr     r1, [r1, #0x0]
+	add     r0, #0xb4
+	add     r4, #0x40
+	blx     Function_20a81b0
+	mov     r1, #0x0
+	mvn     r1, r1
+	cmp     r0, r1
+	beq     branch_2021c1a
+	ldr     r0, [r4, #0x60]
+	blx     Function_20ab424
+.thumb
+branch_2021c1a: @ 2021c1a :thumb
+	mov     r0, r5
+	add     r0, #0xec
+	ldr     r0, [r0, #0x0]
+	cmp     r0, #0x2
+	bne     branch_2021c3c
+	mov     r4, r5
+	add     r4, #0x40
+	ldr     r0, [r4, #0x74]
+	cmp     r0, #0x0
+	beq     branch_2021c32
+	bl      Function_20181c4
+.thumb
+branch_2021c32: @ 2021c32 :thumb
+	ldr     r0, [r4, #0x78]
+	cmp     r0, #0x0
+	beq     branch_2021c3c
+	bl      Function_20181c4
+.thumb
+branch_2021c3c: @ 2021c3c :thumb
+	mov     r0, r5
+	mov     r1, #0x0
+	add     r0, #0xec
+	str     r1, [r0, #0x0]
+	ldr     r0, [r5, #0x3c]
+	mov     r1, r5
+	bl      Function_202256c
+.thumb
+branch_2021c4c: @ 2021c4c :thumb
+	pop     {r3-r5,pc}
+@ 0x2021c4e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021c50
+Function_2021c50: @ 2021c50 :thumb
+	mov     r2, r1
+	mov     r3, r0
+	ldmia   r2!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r2, #0x0]
+	str     r0, [r3, #0x0]
+	bx      lr
+@ 0x2021c5e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021c60
+Function_2021c60: @ 2021c60 :thumb
+	mov     r3, r1
+	mov     r2, r0
+	ldmia   r3!, {r0,r1}
+	add     r2, #0xc
+	stmia   r2!, {r0,r1}
+	ldr     r0, [r3, #0x0]
+	str     r0, [r2, #0x0]
+	bx      lr
+@ 0x2021c70
+
+.thumb
+.globl Function_2021c70
+Function_2021c70: @ 2021c70 :thumb
+	mov     r3, r1
+	mov     r2, r0
+	ldmia   r3!, {r0,r1}
+	add     r2, #0x18
+	stmia   r2!, {r0,r1}
+	ldr     r0, [r3, #0x0]
+	str     r0, [r2, #0x0]
+	bx      lr
+@ 0x2021c80
+
+
+.incbin "./baserom/arm9.bin", 0x21c80, 0x2021c94 - 0x2021c80
+
+
+.thumb
+.globl Function_2021c94
+Function_2021c94: @ 2021c94 :thumb
+	strh    r1, [r0, #0x24]
+	bx      lr
+@ 0x2021c98
+
+
+.incbin "./baserom/arm9.bin", 0x21c98, 0x2021cac - 0x2021c98
+
+
+.thumb
+.globl Function_2021cac
+Function_2021cac: @ 2021cac :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2021cba
+	bl      Function_2022974
+.thumb
+branch_2021cba: @ 2021cba :thumb
+	cmp     r4, #0x2
+	blt     branch_2021cc2
+	bl      Function_2022974
+.thumb
+branch_2021cc2: @ 2021cc2 :thumb
+	add     r5, #0x34
+	strb    r4, [r5, #0x0]
+	pop     {r3-r5,pc}
+@ 0x2021cc8
+
+.thumb
+.globl Function_2021cc8
+Function_2021cc8: @ 2021cc8 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2021cd6
+	bl      Function_2022974
+.thumb
+branch_2021cd6: @ 2021cd6 :thumb
+	cmp     r4, #0x2
+	blt     branch_2021cde
+	bl      Function_2022974
+.thumb
+branch_2021cde: @ 2021cde :thumb
+	add     r5, #0x35
+	strb    r4, [r5, #0x0]
+	pop     {r3-r5,pc}
+@ 0x2021ce4
+
+.thumb
+.globl Function_2021ce4
+Function_2021ce4: @ 2021ce4 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2021cf2
+	bl      Function_2022974
+.thumb
+branch_2021cf2: @ 2021cf2 :thumb
+	str     r4, [r5, #0x38]
+	pop     {r3-r5,pc}
+@ 0x2021cf6
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021cf8
+Function_2021cf8: @ 2021cf8 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2021d06
+	bl      Function_2022974
+.thumb
+branch_2021d06: @ 2021d06 :thumb
+	add     r5, #0x26
+	strb    r4, [r5, #0x0]
+	pop     {r3-r5,pc}
+@ 0x2021d0c
+
+
+.incbin "./baserom/arm9.bin", 0x21d0c, 0x2021d28 - 0x2021d0c
+
+
+.thumb
+.globl Function_2021d28
+Function_2021d28: @ 2021d28 :thumb
+	bx      lr
+@ 0x2021d2a
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021d2c
+Function_2021d2c: @ 2021d2c :thumb
+	add     r0, #0x18
+	bx      lr
+@ 0x2021d30
+
+
+.incbin "./baserom/arm9.bin", 0x21d30, 0x2021d44 - 0x2021d30
+
+
+.thumb
+Function_2021d44: @ 2021d44 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2021d4e
+	bl      Function_2022974
+.thumb
+branch_2021d4e: @ 2021d4e :thumb
+	mov     r0, r4
+	add     r0, #0xec
+	ldr     r0, [r0, #0x0]
+	cmp     r0, #0x1
+	beq     branch_2021d5c
+	cmp     r0, #0x3
+	bne     branch_2021d62
+.thumb
+branch_2021d5c: @ 2021d5c :thumb
+	ldr     r0, [r4, #0x44]
+	ldrh    r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2021d62
+
+.thumb
+branch_2021d62: @ 2021d62 :thumb
+	add     r4, #0xb0
+	ldr     r0, [r4, #0x0]
+	ldrh    r0, [r0, #0x0]
+	pop     {r4,pc}
+@ 0x2021d6a
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2021d6c
+Function_2021d6c: @ 2021d6c :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	bl      Function_2021d44
+	cmp     r0, r4
+	bhi     branch_2021d7e
+	bl      Function_2022974
+.thumb
+branch_2021d7e: @ 2021d7e :thumb
+	lsl     r0, r4, #16
+	lsr     r1, r0, #16
+	mov     r0, r5
+	add     r0, #0xf0
+	strh    r1, [r0, #0x0]
+	mov     r0, r5
+	add     r0, #0xec
+	ldr     r0, [r0, #0x0]
+	cmp     r0, #0x1
+	beq     branch_2021d96
+	cmp     r0, #0x3
+	bne     branch_2021db2
+.thumb
+branch_2021d96: @ 2021d96 :thumb
+	add     r5, #0x40
+	lsl     r1, r4, #16
+	ldr     r0, [r5, #0x4]
+	lsr     r1, r1, #16
+	blx     Function_20a6ef0
+	mov     r1, r0
+	mov     r0, r5
+	add     r0, #0x8
+	blx     Function_20a8d48
+	mov     r0, #0x1
+	str     r0, [r5, #0x14]
+	pop     {r3-r5,pc}
+@ 0x2021db2
+
+.thumb
+branch_2021db2: @ 2021db2 :thumb
+	add     r5, #0x40
+	ldr     r0, [r5, #0x70]
+	blx     Function_20a6ef0
+	mov     r1, r0
+	mov     r0, r5
+	add     r0, #0x8
+	blx     Function_20a9380
+	mov     r0, #0x1
+	str     r0, [r5, #0x14]
+	pop     {r3-r5,pc}
+@ 0x2021dca
+
+
+.incbin "./baserom/arm9.bin", 0x21dca, 0x2021f58 - 0x2021dca
+
+
+.thumb
+.globl Function_2021f58
+Function_2021f58: @ 2021f58 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r2, r5
+	ldr     r4, [r5, #0x3c]
+	add     r2, #0xf4
+	strh    r1, [r2, #0x0]
+	bl      Function_20224fc
+	mov     r0, r4
+	mov     r1, r5
+	bl      Function_2022464
+	pop     {r3-r5,pc}
+@ 0x2021f72
+
+
+.incbin "./baserom/arm9.bin", 0x21f72, 0x2022110 - 0x2021f72
+
+
+.thumb
+Function_2022110: @ 2022110 :thumb
+	push    {r3-r7,lr}
+	mov     r5, r1
+	str     r0, [sp, #0x0]
+	mov     r4, r2
+	mov     r0, r5
+	mov     r7, r3
+	bl      Function_20221b8
+	mov     r1, r4
+	add     r1, #0xec
+	str     r0, [r1, #0x0]
+	mov     r3, r4
+	ldr     r6, [r5, #0x0]
+	add     r3, #0xb4
+	mov     r2, #0x4
+.thumb
+branch_202212e: @ 202212e :thumb
+	ldmia   r6!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	.hword  0x1e52 @ sub r2, r2, #0x1
+	bne     branch_202212e
+	ldr     r0, [r6, #0x0]
+	mov     r2, r4
+	str     r0, [r3, #0x0]
+	ldr     r3, [r5, #0x8]
+	add     r2, #0xd8
+	ldmia   r3!, {r0,r1}
+	stmia   r2!, {r0,r1}
+	ldmia   r3!, {r0,r1}
+	stmia   r2!, {r0,r1}
+	ldr     r0, [r3, #0x0]
+	mov     r1, r4
+	str     r0, [r2, #0x0]
+	ldr     r0, [r5, #0xc]
+	bl      Function_20221d0
+	ldr     r0, [r5, #0x10]
+	cmp     r0, #0x0
+	beq     branch_2022162
+	mov     r1, r4
+	bl      Function_20221d4
+	b       branch_2022170
+@ 0x2022162
+
+.thumb
+branch_2022162: @ 2022162 :thumb
+	mov     r1, #0x47
+	ldr     r0, [sp, #0x0]
+	lsl     r1, r1, #2
+	ldr     r0, [r0, r1]
+	mov     r1, r4
+	bl      Function_20221d4
+.thumb
+branch_2022170: @ 2022170 :thumb
+	mov     r0, r4
+	add     r0, #0xec
+	ldr     r0, [r0, #0x0]
+	cmp     r0, #0x2
+	bne     branch_2022194
+	ldr     r0, [r5, #0x14]
+	mov     r1, r4
+	bl      Function_20221d8
+	ldr     r0, [r5, #0x18]
+	mov     r1, r4
+	bl      Function_20221e0
+	mov     r0, r4
+	mov     r1, r7
+	bl      Function_2022264
+	b       branch_20221ac
+@ 0x2022194
+
+.thumb
+branch_2022194: @ 2022194 :thumb
+	cmp     r0, #0x3
+	bne     branch_20221a4
+	mov     r0, r5
+	mov     r1, r4
+	mov     r2, r7
+	bl      Function_2022208
+	b       branch_20221ac
+@ 0x20221a4
+
+.thumb
+branch_20221a4: @ 20221a4 :thumb
+	mov     r0, r4
+	mov     r1, r7
+	bl      Function_20221e8
+.thumb
+branch_20221ac: @ 20221ac :thumb
+	add     r5, #0x20
+	ldrb    r0, [r5, #0x0]
+	add     r4, #0xf2
+	strb    r0, [r4, #0x0]
+	mov     r0, #0x1
+	pop     {r3-r7,pc}
+@ 0x20221b8
+
+.thumb
+Function_20221b8: @ 20221b8 :thumb
+	ldr     r1, [r0, #0x14]
+	cmp     r1, #0x0
+	beq     branch_20221c2
+	mov     r0, #0x2
+	bx      lr
+@ 0x20221c2
+
+.thumb
+branch_20221c2: @ 20221c2 :thumb
+	ldr     r0, [r0, #0x1c]
+	cmp     r0, #0x1
+	bne     branch_20221cc
+	mov     r0, #0x3
+	bx      lr
+@ 0x20221cc
+
+.thumb
+branch_20221cc: @ 20221cc :thumb
+	mov     r0, #0x1
+	bx      lr
+@ 0x20221d0
+
+.thumb
+Function_20221d0: @ 20221d0 :thumb
+	str     r0, [r1, #0x40]
+	bx      lr
+@ 0x20221d4
+
+.thumb
+Function_20221d4: @ 20221d4 :thumb
+	str     r0, [r1, #0x44]
+	bx      lr
+@ 0x20221d8
+
+.thumb
+Function_20221d8: @ 20221d8 :thumb
+	add     r1, #0xac
+	str     r0, [r1, #0x0]
+	bx      lr
+@ 0x20221de
+
+
+.align 2, 0
+
+
+.thumb
+Function_20221e0: @ 20221e0 :thumb
+	add     r1, #0xb0
+	str     r0, [r1, #0x0]
+	bx      lr
+@ 0x20221e6
+
+
+.align 2, 0
+
+
+.thumb
+Function_20221e8: @ 20221e8 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r5
+	add     r4, #0x40
+	ldr     r0, [r4, #0x4]
+	mov     r1, #0x0
+	blx     Function_20a6ef0
+	add     r4, #0x8
+	mov     r1, r0
+	ldr     r2, [r5, #0x40]
+	mov     r0, r4
+	blx     Function_20a8c88
+	pop     {r3-r5,pc}
+@ 0x2022206
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022208: @ 2022208 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x1c
+	mov     r6, r1
+	mov     r4, r6
+	add     r4, #0x40
+	mov     r5, r0
+	blx     Function_20ab3cc
+	str     r0, [r4, #0x60]
+	ldr     r0, [r4, #0x4]
+	mov     r1, #0x0
+	ldr     r5, [r5, #0x4]
+	blx     Function_20a6ef0
+	str     r0, [sp, #0x18]
+	mov     r0, r6
+	add     r0, #0xb4
+	mov     r1, #0x1
+	blx     Function_20a81b0
+	mov     r7, r0
+	mov     r0, r6
+	add     r0, #0xb4
+	mov     r1, #0x2
+	blx     Function_20a81b0
+	mov     r1, #0x0
+	mvn     r1, r1
+	str     r1, [sp, #0x0]
+	str     r7, [sp, #0x4]
+	str     r0, [sp, #0x8]
+	ldr     r0, [r5, #0x14]
+	ldr     r1, [sp, #0x18]
+	str     r0, [sp, #0xc]
+	mov     r0, #0x0
+	str     r0, [sp, #0x10]
+	ldr     r0, [r5, #0x10]
+	str     r0, [sp, #0x14]
+	mov     r0, r4
+	ldr     r2, [r6, #0x40]
+	ldr     r3, [r4, #0x60]
+	add     r0, #0x8
+	blx     Function_20a8cc4
+	add     sp, #0x1c
+	pop     {r4-r7,pc}
+@ 0x2022264
+
+.thumb
+Function_2022264: @ 2022264 :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x10
+	mov     r5, r0
+	mov     r4, r5
+	add     r4, #0x40
+	ldr     r0, [r4, #0x70]
+	mov     r7, r1
+	mov     r1, #0x0
+	blx     Function_20a6ef0
+	str     r0, [sp, #0xc]
+	ldr     r0, [r4, #0x6c]
+	blx     Function_20a9438
+	mov     r6, r0
+	mov     r1, #0x28
+	mov     r0, r7
+	mul     r1, r6
+	bl      Function_2018144
+	mov     r1, #0x58
+	str     r0, [r4, #0x74]
+	mov     r0, r7
+	mul     r1, r6
+	bl      Function_2018144
+	str     r0, [r4, #0x78]
+	ldr     r0, [r4, #0x4]
+	mov     r3, r6
+	str     r0, [sp, #0x0]
+	ldr     r0, [r5, #0x40]
+	str     r0, [sp, #0x4]
+	ldr     r0, [r4, #0x6c]
+	str     r0, [sp, #0x8]
+	mov     r0, r4
+	ldr     r1, [r4, #0x74]
+	ldr     r2, [r4, #0x78]
+	add     r0, #0x8
+	blx     Function_20a96c0
+	add     r4, #0x8
+	ldr     r1, [sp, #0xc]
+	mov     r0, r4
+	blx     Function_20a9380
+	add     sp, #0x10
+	pop     {r3-r7,pc}
+@ 0x20222c2
+
+
+.align 2, 0
+
+
+.thumb
+Function_20222c4: @ 20222c4 :thumb
+	push    {r4,lr}
+	ldr     r2, [r0, #0x4]
+	cmp     r2, #0x0
+	beq     branch_20222d2
+	mov     r4, #0x2
+	lsl     r4, r4, #8
+	b       branch_20222de
+@ 0x20222d2
+
+.thumb
+branch_20222d2: @ 20222d2 :thumb
+	ldr     r2, [r0, #0x0]
+	cmp     r2, #0x4
+	bne     branch_20222dc
+	mov     r4, #0x0
+	b       branch_20222de
+@ 0x20222dc
+
+.thumb
+branch_20222dc: @ 20222dc :thumb
+	mov     r4, #0x20
+.thumb
+branch_20222de: @ 20222de :thumb
+	cmp     r4, #0x0
+	beq     branch_20222ee
+	blx     Function_20a81fc
+	mov     r1, r4
+	blx     Function_20e2178
+	pop     {r4,pc}
+@ 0x20222ee
+
+.thumb
+branch_20222ee: @ 20222ee :thumb
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x20222f2
+
+
+.incbin "./baserom/arm9.bin", 0x222f2, 0x2022464 - 0x20222f2
+
+
+.thumb
+Function_2022464: @ 2022464 :thumb
+	push    {r4-r7}
+	mov     r2, #0x11
+	lsl     r2, r2, #4
+	mov     r4, r0
+	ldr     r5, [r0, r2]
+	add     r4, #0x10
+	cmp     r5, r4
+	bne     branch_2022488
+	str     r1, [r0, r2]
+	.hword  0x1f13 @ sub r3, r2, #0x4
+	str     r1, [r0, r3]
+	mov     r0, r1
+	add     r0, #0xfc
+	str     r4, [r0, #0x0]
+	sub     r2, #0x10
+	str     r4, [r1, r2]
+	pop     {r4-r7}
+	bx      lr
+@ 0x2022488
+
+.thumb
+branch_2022488: @ 2022488 :thumb
+	mov     r3, r1
+	add     r3, #0xf4
+	ldrh    r6, [r3, #0x0]
+	.hword  0x1f13 @ sub r3, r2, #0x4
+	ldr     r3, [r0, r3]
+	mov     r7, r3
+	add     r7, #0xf4
+	ldrh    r7, [r7, #0x0]
+	cmp     r7, r6
+	bhi     branch_20224ba
+	mov     r5, r1
+	add     r5, #0xfc
+	str     r3, [r5, #0x0]
+	.hword  0x1f13 @ sub r3, r2, #0x4
+	ldr     r5, [r0, r3]
+	mov     r3, r2
+	sub     r3, #0x10
+	str     r1, [r5, r3]
+	mov     r3, r2
+	sub     r3, #0x10
+	str     r4, [r1, r3]
+	.hword  0x1f12 @ sub r2, r2, #0x4
+	str     r1, [r0, r2]
+	pop     {r4-r7}
+	bx      lr
+@ 0x20224ba
+
+.thumb
+branch_20224ba: @ 20224ba :thumb
+	cmp     r5, r4
+	beq     branch_20224f6
+	mov     r0, r2
+	sub     r0, #0x10
+.thumb
+branch_20224c2: @ 20224c2 :thumb
+	mov     r2, r5
+	add     r2, #0xf4
+	ldrh    r2, [r2, #0x0]
+	cmp     r2, r6
+	bls     branch_20224f0
+	mov     r0, r5
+	add     r0, #0xfc
+	mov     r2, #0x1
+	ldr     r0, [r0, #0x0]
+	lsl     r2, r2, #8
+	str     r1, [r0, r2]
+	mov     r0, r5
+	add     r0, #0xfc
+	ldr     r3, [r0, #0x0]
+	mov     r0, r1
+	add     r0, #0xfc
+	str     r3, [r0, #0x0]
+	mov     r0, r5
+	add     r0, #0xfc
+	str     r1, [r0, #0x0]
+	str     r5, [r1, r2]
+	pop     {r4-r7}
+	bx      lr
+@ 0x20224f0
+
+.thumb
+branch_20224f0: @ 20224f0 :thumb
+	ldr     r5, [r5, r0]
+	cmp     r5, r4
+	bne     branch_20224c2
+.thumb
+branch_20224f6: @ 20224f6 :thumb
+	pop     {r4-r7}
+	bx      lr
+@ 0x20224fa
+
+
+.align 2, 0
+
+
+.thumb
+Function_20224fc: @ 20224fc :thumb
+	mov     r2, #0x1
+	mov     r1, r0
+	lsl     r2, r2, #8
+	add     r1, #0xfc
+	ldr     r3, [r0, r2]
+	ldr     r1, [r1, #0x0]
+	str     r3, [r1, r2]
+	mov     r1, r0
+	add     r1, #0xfc
+	ldr     r0, [r0, r2]
+	ldr     r1, [r1, #0x0]
+	add     r0, #0xfc
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2022518
+
+.thumb
+Function_2022518: @ 2022518 :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0x4]
+	mov     r7, #0x0
+	cmp     r0, #0x0
+	ble     branch_2022548
+	mov     r4, r7
+	mov     r6, r7
+.thumb
+branch_2022528: @ 2022528 :thumb
+	ldr     r0, [r5, #0x0]
+	add     r0, r0, r4
+	bl      Function_2021a78
+	ldr     r0, [r5, #0x0]
+	.hword  0x1c7f @ add r7, r7, #0x1
+	add     r1, r0, r4
+	ldr     r0, [r5, #0x8]
+	str     r1, [r0, r6]
+	mov     r0, #0x41
+	lsl     r0, r0, #2
+	add     r4, r4, r0
+	ldr     r0, [r5, #0x4]
+	.hword  0x1d36 @ add r6, r6, #0x4
+	cmp     r7, r0
+	blt     branch_2022528
+.thumb
+branch_2022548: @ 2022548 :thumb
+	mov     r0, #0x0
+	str     r0, [r5, #0xc]
+	pop     {r3-r7,pc}
+@ 0x202254e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022550: @ 2022550 :thumb
+	ldr     r3, [r0, #0xc]
+	ldr     r1, [r0, #0x4]
+	cmp     r3, r1
+	blt     branch_202255c
+	mov     r0, #0x0
+	bx      lr
+@ 0x202255c
+
+.thumb
+branch_202255c: @ 202255c :thumb
+	ldr     r2, [r0, #0x8]
+	lsl     r1, r3, #2
+	ldr     r2, [r2, r1]
+	add     r1, r3, #0x1
+	str     r1, [r0, #0xc]
+	mov     r0, r2
+	bx      lr
+@ 0x202256a
+
+
+.align 2, 0
+
+
+.thumb
+Function_202256c: @ 202256c :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	ldr     r0, [r5, #0xc]
+	mov     r4, r1
+	cmp     r0, #0x0
+	bgt     branch_202257c
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x202257c
+
+.thumb
+branch_202257c: @ 202257c :thumb
+	mov     r0, r4
+	bl      Function_2021a78
+	ldr     r0, [r5, #0xc]
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	str     r0, [r5, #0xc]
+	ldr     r1, [r5, #0x8]
+	lsl     r0, r0, #2
+	str     r4, [r1, r0]
+	mov     r0, #0x1
+	pop     {r3-r5,pc}
+@ 0x2022592
+
+
+.incbin "./baserom/arm9.bin", 0x22592, 0x2022844 - 0x2022592
 
 
 .thumb
@@ -23538,9 +29809,297 @@ branch_202298a: @ 202298a :thumb
 	pop     {r3,pc}
 @ 0x202298c
 
+.thumb
+Function_202298c: @ 202298c :thumb
+	push    {r3-r7,lr}
+	mov     r4, r1
+	mov     r7, r0
+	mov     r0, r4
+	mov     r1, #0xc
+	bl      Function_2018144
+	mov     r6, r0
+	bne     branch_20229a2
+	bl      Function_2022974
+.thumb
+branch_20229a2: @ 20229a2 :thumb
+	mov     r0, r4
+	lsl     r1, r7, #3
+	bl      Function_2018144
+	str     r0, [r6, #0x0]
+	cmp     r0, #0x0
+	bne     branch_20229b4
+	bl      Function_2022974
+.thumb
+branch_20229b4: @ 20229b4 :thumb
+	mov     r4, #0x0
+	cmp     r7, #0x0
+	ble     branch_20229cc
+	mov     r5, r4
+.thumb
+branch_20229bc: @ 20229bc :thumb
+	ldr     r0, [r6, #0x0]
+	add     r0, r0, r5
+	bl      Function_2022bc0
+	.hword  0x1c64 @ add r4, r4, #0x1
+	add     r5, #0x8
+	cmp     r4, r7
+	blt     branch_20229bc
+.thumb
+branch_20229cc: @ 20229cc :thumb
+	str     r7, [r6, #0x4]
+	mov     r0, #0x0
+	str     r0, [r6, #0x8]
+	mov     r0, r6
+	pop     {r3-r7,pc}
+@ 0x20229d6
 
-.incbin "./baserom/arm9.bin", 0x2298c, 0x2022b80 - 0x202298c
 
+.align 2, 0
+
+
+.thumb
+Function_20229d8: @ 20229d8 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_20229e2
+	bl      Function_2022974
+.thumb
+branch_20229e2: @ 20229e2 :thumb
+	mov     r0, r4
+	bl      Function_2022ae4
+	ldr     r0, [r4, #0x0]
+	bl      Function_20181c4
+	mov     r0, r4
+	bl      Function_20181c4
+	pop     {r4,pc}
+@ 0x20229f6
+
+.align 2, 0
+
+
+.thumb
+Function_20229f8: @ 20229f8 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2022a06
+	bl      Function_2022974
+.thumb
+branch_2022a06: @ 2022a06 :thumb
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_2022b20
+	cmp     r0, #0x0
+	bne     branch_2022a16
+	mov     r0, #0x1
+	pop     {r3-r5,pc}
+@ 0x2022a16
+
+.thumb
+branch_2022a16: @ 2022a16 :thumb
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x2022a1a
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022a1c: @ 2022a1c :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	mov     r7, r1
+	mov     r6, r2
+	cmp     r5, #0x0
+	bne     branch_2022a2c
+	bl      Function_2022974
+.thumb
+branch_2022a2c: @ 2022a2c :thumb
+	mov     r0, r5
+	bl      Function_2022b90
+	mov     r4, r0
+	bne     branch_2022a3a
+	bl      Function_2022974
+.thumb
+branch_2022a3a: @ 2022a3a :thumb
+	mov     r0, r5
+	mov     r1, r6
+	bl      Function_20229f8
+	cmp     r0, #0x1
+	beq     branch_2022a4a
+	bl      Function_2022974
+.thumb
+branch_2022a4a: @ 2022a4a :thumb
+	str     r7, [r4, #0x4]
+	str     r6, [r4, #0x0]
+	ldr     r0, [r5, #0x8]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r5, #0x8]
+	mov     r0, r4
+	pop     {r3-r7,pc}
+@ 0x2022a58
+
+
+.incbin "./baserom/arm9.bin", 0x22a58, 0x2022ab0 - 0x2022a58
+
+
+.thumb
+Function_2022ab0: @ 2022ab0 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2022abe
+	bl      Function_2022974
+.thumb
+branch_2022abe: @ 2022abe :thumb
+	cmp     r4, #0x0
+	bne     branch_2022ac6
+	bl      Function_2022974
+.thumb
+branch_2022ac6: @ 2022ac6 :thumb
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	beq     branch_2022ad4
+	bl      Function_20181c4
+	mov     r0, #0x0
+	str     r0, [r4, #0x4]
+.thumb
+branch_2022ad4: @ 2022ad4 :thumb
+	mov     r0, #0x0
+	mvn     r0, r0
+	str     r0, [r4, #0x0]
+	ldr     r0, [r5, #0x8]
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	str     r0, [r5, #0x8]
+	pop     {r3-r5,pc}
+@ 0x2022ae2
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022ae4: @ 2022ae4 :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	bne     branch_2022aee
+	bl      Function_2022974
+.thumb
+branch_2022aee: @ 2022aee :thumb
+	ldr     r0, [r5, #0x0]
+	cmp     r0, #0x0
+	bne     branch_2022af8
+	bl      Function_2022974
+.thumb
+branch_2022af8: @ 2022af8 :thumb
+	ldr     r0, [r5, #0x4]
+	mov     r6, #0x0
+	cmp     r0, #0x0
+	ble     branch_2022b1e
+	mov     r4, r6
+	.hword  0x1e77 @ sub r7, r6, #0x1
+.thumb
+branch_2022b04: @ 2022b04 :thumb
+	ldr     r1, [r5, #0x0]
+	ldr     r0, [r1, r4]
+	cmp     r0, r7
+	beq     branch_2022b14
+	mov     r0, r5
+	add     r1, r1, r4
+	bl      Function_2022ab0
+.thumb
+branch_2022b14: @ 2022b14 :thumb
+	ldr     r0, [r5, #0x4]
+	.hword  0x1c76 @ add r6, r6, #0x1
+	add     r4, #0x8
+	cmp     r6, r0
+	blt     branch_2022b04
+.thumb
+branch_2022b1e: @ 2022b1e :thumb
+	pop     {r3-r7,pc}
+@ 0x2022b20
+
+
+.thumb
+Function_2022b20: @ 2022b20 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2022b2e
+	bl      Function_2022974
+.thumb
+branch_2022b2e: @ 2022b2e :thumb
+	ldr     r6, [r5, #0x4]
+	mov     r1, #0x0
+	cmp     r6, #0x0
+	ble     branch_2022b4e
+	ldr     r3, [r5, #0x0]
+	mov     r2, r3
+.thumb
+branch_2022b3a: @ 2022b3a :thumb
+	ldr     r0, [r2, #0x0]
+	cmp     r4, r0
+	bne     branch_2022b46
+	lsl     r0, r1, #3
+	add     r0, r3, r0
+	pop     {r4-r6,pc}
+@ 0x2022b46
+
+.thumb
+branch_2022b46: @ 2022b46 :thumb
+	.hword  0x1c49 @ add r1, r1, #0x1
+	add     r2, #0x8
+	cmp     r1, r6
+	blt     branch_2022b3a
+.thumb
+branch_2022b4e: @ 2022b4e :thumb
+	mov     r0, #0x0
+	pop     {r4-r6,pc}
+@ 0x2022b52
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022b54: @ 2022b54 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2022b5e
+	bl      Function_2022974
+.thumb
+branch_2022b5e: @ 2022b5e :thumb
+	ldr     r0, [r4, #0x4]
+	pop     {r4,pc}
+@ 0x2022b62
+
+
+.align 2, 0
+
+
+.thumb
+Function_2022b64: @ 2022b64 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	cmp     r5, #0x0
+	bne     branch_2022b72
+	bl      Function_2022974
+.thumb
+branch_2022b72: @ 2022b72 :thumb
+	ldr     r0, [r5, #0x4]
+	cmp     r0, #0x0
+	beq     branch_2022b7c
+	bl      Function_20181c4
+.thumb
+branch_2022b7c: @ 2022b7c :thumb
+	str     r4, [r5, #0x4]
+	pop     {r3-r5,pc}
+@ 0x2022b80
 
 .thumb
 Function_2022b80: @ 2022b80 :thumb
@@ -23555,7 +30114,123 @@ branch_2022b8a: @ 2022b8a :thumb
 @ 0x2022b8e
 
 
-.incbin "./baserom/arm9.bin", 0x22b8e, 0x20232e0 - 0x2022b8e
+.align 2, 0
+
+
+.thumb
+Function_2022b90: @ 2022b90 :thumb
+	push    {r3-r5,lr}
+	mov     r4, r0
+	bne     branch_2022b9a
+	bl      Function_2022974
+.thumb
+branch_2022b9a: @ 2022b9a :thumb
+	ldr     r5, [r4, #0x4]
+	mov     r2, #0x0
+	cmp     r5, #0x0
+	ble     branch_2022bbc
+	ldr     r4, [r4, #0x0]
+	.hword  0x1e50 @ sub r0, r2, #0x1
+	mov     r3, r4
+.thumb
+branch_2022ba8: @ 2022ba8 :thumb
+	ldr     r1, [r3, #0x0]
+	cmp     r1, r0
+	bne     branch_2022bb4
+	lsl     r0, r2, #3
+	add     r0, r4, r0
+	pop     {r3-r5,pc}
+@ 0x2022bb4
+
+.thumb
+branch_2022bb4: @ 2022bb4 :thumb
+	.hword  0x1c52 @ add r2, r2, #0x1
+	add     r3, #0x8
+	cmp     r2, r5
+	blt     branch_2022ba8
+.thumb
+branch_2022bbc: @ 2022bbc :thumb
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x2022bc0
+
+.thumb
+Function_2022bc0: @ 2022bc0 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2022bca
+	bl      Function_2022974
+.thumb
+branch_2022bca: @ 2022bca :thumb
+	mov     r0, #0x0
+	mvn     r0, r0
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	str     r0, [r4, #0x4]
+	pop     {r4,pc}
+@ 0x2022bd6
+
+
+.incbin "./baserom/arm9.bin", 0x22bd6, 0x202309c - 0x2022bd6
+
+
+.thumb
+Function_202309c: @ 202309c :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	blx     Function_20aa3f4
+	add     r5, #0x80
+	str     r4, [r5, #0x0]
+	pop     {r3-r5,pc}
+@ 0x20230ac
+
+.thumb
+Function_20230ac: @ 20230ac :thumb
+	push    {r3-r7,lr}
+	mov     r5, r0
+	mov     r4, r1
+	mov     r6, r2
+	mov     r7, r3
+	blx     Function_20aa4c0
+	mov     r2, r5
+	ldmia   r4!, {r0,r1}
+	stmia   r2!, {r0,r1}
+	ldmia   r4!, {r0,r1}
+	stmia   r2!, {r0,r1}
+	str     r6, [r5, #0x28]
+	ldr     r0, [sp, #0x18]
+	str     r7, [r5, #0x2c]
+	str     r0, [r5, #0x34]
+	ldr     r0, [sp, #0x1c]
+	str     r0, [r5, #0x14]
+	ldr     r0, [sp, #0x20]
+	cmp     r0, #0x0
+	beq     branch_20230dc
+	mov     r1, r5
+	blx     Function_20aa4b0
+.thumb
+branch_20230dc: @ 20230dc :thumb
+	pop     {r3-r7,pc}
+@ 0x20230de
+
+
+.align 2, 0
+
+
+.thumb
+Function_20230e0: @ 20230e0 :thumb
+	mov     r3, r0
+	mov     r2, r1
+	ldmia   r2!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldmia   r2!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	bx      lr
+@ 0x20230ee
+
+
+.incbin "./baserom/arm9.bin", 0x230ee, 0x20232e0 - 0x20230ee
 
 
 .thumb
@@ -88377,7 +95052,36 @@ branch_205ca42: @ 205ca42 :thumb
 .word 0x20ed7f4 @ 0x205ca44
 .word 0x20ed7f8 @ 0x205ca48
 
-.incbin "./baserom/arm9.bin", 0x5ca4c, 0x205d8f4 - 0x205ca4c
+
+
+.incbin "./baserom/arm9.bin", 0x5ca4c, 0x205d8cc - 0x205ca4c
+
+
+.thumb
+.globl Function_205d8cc
+Function_205d8cc: @ 205d8cc :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	cmp     r1, #0x1
+	bne     branch_205d8d8
+	bl      Function_201d710
+.thumb
+branch_205d8d8: @ 205d8d8 :thumb
+	mov     r1, #0x1a
+	mov     r0, r4
+	lsl     r1, r1, #4
+	mov     r2, #0x4
+	bl      Function_2002e7c
+	mov     r1, #0x6
+	mov     r0, r4
+	lsl     r1, r1, #6
+	mov     r2, #0x4
+	bl      Function_2002e98
+	pop     {r4,pc}
+@ 0x205d8f2
+
+
+.incbin "./baserom/arm9.bin", 0x5d8f2, 0x205d8f4 - 0x205d8f2
 
 
 .thumb
@@ -90024,6 +96728,7 @@ branch_205e726: @ 205e726 :thumb
 
 
 .thumb
+.globl Function_205ea78
 Function_205ea78: @ 205ea78 :thumb
 	push    {r3,lr}
 	bl      Function_205eb3c
@@ -90054,6 +96759,7 @@ Function_205ea94: @ 205ea94 :thumb
 
 
 .thumb
+.globl Function_205eabc
 Function_205eabc: @ 205eabc :thumb
 	push    {r3,lr}
 	bl      Function_205eb3c
@@ -90062,6 +96768,7 @@ Function_205eabc: @ 205eabc :thumb
 @ 0x205eac8
 
 .thumb
+.globl Function_205eac8
 Function_205eac8: @ 205eac8 :thumb
 	push    {r3,lr}
 	bl      Function_205eb3c
@@ -90074,6 +96781,7 @@ Function_205eac8: @ 205eac8 :thumb
 
 
 .thumb
+.globl Function_205eaec
 Function_205eaec: @ 205eaec :thumb
 	push    {r4,lr}
 	mov     r4, r1
@@ -96285,6 +102993,7 @@ Function_2062d4c: @ 2062d4c :thumb
 
 
 .thumb
+.globl Function_2062d64
 Function_2062d64: @ 2062d64 :thumb
 	push    {r3,lr}
 	cmp     r1, #0x1
@@ -96377,7 +103086,7 @@ branch_2062dc4: @ 2062dc4 :thumb
 
 .thumb
 Function_2062dd0: @ 2062dd0 :thumb
-	ldr     r3, [pc, #0x4] @ 0x2062dd8, (=#0x20628bd)
+	ldr     r3, [pc, #0x4] @ 0x2062dd8, (=Function_20628bc+1)
 	mov     r1, #0x40
 	bx      r3
 @ 0x2062dd6
@@ -96387,9 +103096,13 @@ Function_2062dd0: @ 2062dd0 :thumb
 
 
 .word Function_20628bc+1 @ =0x20628bd, 0x2062dd8
+
+
+
 .thumb
+.globl Function_2062ddc
 Function_2062ddc: @ 2062ddc :thumb
-	ldr     r3, [pc, #0x4] @ 0x2062de4, (=#0x20628c5)
+	ldr     r3, [pc, #0x4] @ 0x2062de4, (=Function_20628c4+1)
 	mov     r1, #0x40
 	bx      r3
 @ 0x2062de2
@@ -96399,6 +103112,8 @@ Function_2062ddc: @ 2062ddc :thumb
 
 
 .word Function_20628c4+1 @ =0x20628c5, 0x2062de4
+
+
 
 .incbin "./baserom/arm9.bin", 0x62de8, 0x2062dfc - 0x2062de8
 
@@ -102268,7 +108983,659 @@ Function_2070428: @ 2070428 :thumb
 @ 0x207042e
 
 
-.incbin "./baserom/arm9.bin", 0x7042e, 0x20716d4 - 0x207042e
+.incbin "./baserom/arm9.bin", 0x7042e, 0x20711ec - 0x207042e
+
+
+.thumb
+.globl Function_20711ec
+Function_20711ec: @ 20711ec :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	mov     r6, r1
+	bl      Function_207142c
+	mov     r4, r0
+	mov     r0, r5
+	mov     r1, r6
+	bl      Function_207145c
+	str     r0, [r4, #0xc]
+	str     r6, [r4, #0x0]
+	str     r5, [r4, #0x8]
+	mov     r0, r4
+	pop     {r4-r6,pc}
+@ 0x207120a
+
+
+.align 2, 0
+
+
+.thumb
+Function_207120c: @ 207120c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_2071480
+	mov     r0, r4
+	bl      Function_2071450
+	pop     {r4,pc}
+@ 0x207121c
+
+.thumb
+.globl Function_207121c
+Function_207121c: @ 207121c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_20713a4
+	mov     r0, r4
+	bl      Function_207120c
+	pop     {r4,pc}
+@ 0x207122c
+
+
+.thumb
+Function_207122c: @ 207122c :thumb
+	push    {r3-r7,lr}
+	add     sp, #-0x18
+	str     r0, [sp, #0x0]
+	mov     r7, r1
+	str     r2, [sp, #0x4]
+	str     r3, [sp, #0x8]
+	mov     r4, #0x0
+	bl      Function_20714e8
+	mov     r6, r0
+	ldr     r0, [sp, #0x0]
+	bl      Function_20714ec
+	mov     r5, r0
+.thumb
+branch_2071248: @ 2071248 :thumb
+	mov     r0, r5
+	bl      Function_20714f0
+	cmp     r0, #0x0
+	beq     branch_207125a
+	.hword  0x1c64 @ add r4, r4, #0x1
+	add     r5, #0xe8
+	cmp     r4, r6
+	blt     branch_2071248
+.thumb
+branch_207125a: @ 207125a :thumb
+	cmp     r4, r6
+	blt     branch_2071264
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x2071264
+
+.thumb
+branch_2071264: @ 2071264 :thumb
+	mov     r0, r5
+	bl      Function_20714fc
+	ldr     r1, [sp, #0x8]
+	mov     r0, r5
+	bl      Function_20715b0
+	ldr     r1, [sp, #0x30]
+	mov     r0, r5
+	bl      Function_20715b8
+	ldr     r1, [sp, #0x0]
+	mov     r0, r5
+	bl      Function_20715d0
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_2071292
+	ldr     r1, [sp, #0x4]
+	mov     r0, r5
+	bl      Function_20715d4
+	b       branch_20712a2
+@ 0x2071292
+
+.thumb
+branch_2071292: @ 2071292 :thumb
+	add     r1, sp, #0xc
+	mov     r0, #0x0
+	str     r0, [r1, #0x0]
+	str     r0, [r1, #0x4]
+	str     r0, [r1, #0x8]
+	mov     r0, r5
+	bl      Function_20715d4
+.thumb
+branch_20712a2: @ 20712a2 :thumb
+	ldr     r1, [r7, #0x0]
+	mov     r0, r5
+	bl      Function_207159c
+	ldr     r1, [r7, #0x4]
+	mov     r0, r5
+	bl      Function_2071518
+	ldr     r1, [r7, #0x8]
+	mov     r0, r5
+	bl      Function_207156c
+	ldr     r1, [r7, #0xc]
+	mov     r0, r5
+	bl      Function_2071534
+	ldr     r1, [r7, #0x10]
+	mov     r0, r5
+	bl      Function_2071550
+	ldr     r1, [r7, #0x14]
+	mov     r0, r5
+	bl      Function_2071588
+	ldr     r1, [r7, #0x18]
+	mov     r0, r5
+	bl      Function_2071590
+	ldr     r1, [sp, #0x34]
+	mov     r0, r5
+	bl      Function_2071400
+	mov     r4, r0
+	bne     branch_20712f2
+	mov     r0, r5
+	bl      Function_2071490
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x20712f2
+
+.thumb
+branch_20712f2: @ 20712f2 :thumb
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20715c8
+	mov     r0, r5
+	bl      Function_2071520
+	cmp     r0, #0x0
+	bne     branch_2071316
+	mov     r0, r4
+	bl      Function_200da58
+	mov     r0, r5
+	bl      Function_2071490
+	add     sp, #0x18
+	mov     r0, #0x0
+	pop     {r3-r7,pc}
+@ 0x2071316
+
+.thumb
+branch_2071316: @ 2071316 :thumb
+	mov     r0, r5
+	mov     r1, #0x2
+	bl      Function_2071508
+	ldr     r0, [sp, #0x0]
+	ldr     r0, [r0, #0x4]
+	add     r1, r0, #0x1
+	ldr     r0, [sp, #0x0]
+	str     r1, [r0, #0x4]
+	mov     r0, r5
+	add     sp, #0x18
+	pop     {r3-r7,pc}
+@ 0x207132e
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2071330
+Function_2071330: @ 2071330 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0x24
+	mov     r5, r1
+	mov     r6, r0
+	add     r4, sp, #0x8
+	ldmia   r5!, {r0,r1}
+	mov     r7, r4
+	stmia   r4!, {r0,r1}
+	ldmia   r5!, {r0,r1}
+	stmia   r4!, {r0,r1}
+	ldr     r0, [r5, #0x0]
+	mov     r1, r7
+	str     r0, [r4, #0x0]
+	ldr     r0, [pc, #0x18] @ 0x2071364, (=#0x2071605)
+	str     r0, [sp, #0x1c]
+	ldr     r0, [pc, #0x18] @ 0x2071368, (=#0x2071609)
+	str     r0, [sp, #0x20]
+	ldr     r0, [sp, #0x38]
+	str     r0, [sp, #0x0]
+	ldr     r0, [sp, #0x3c]
+	str     r0, [sp, #0x4]
+	mov     r0, r6
+	bl      Function_207122c
+	add     sp, #0x24
+	pop     {r4-r7,pc}
+@ 0x2071364
+
+.word 0x2071605 @ 0x2071364
+.word 0x2071609 @ 0x2071368
+
+
+
+.thumb
+.globl Function_207136c
+Function_207136c: @ 207136c :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bne     branch_2071376
+	bl      Function_2022974
+.thumb
+branch_2071376: @ 2071376 :thumb
+	mov     r0, r4
+	bl      Function_20714f0
+	cmp     r0, #0x0
+	beq     branch_20713a2
+	mov     r0, r4
+	bl      Function_2071574
+	ldr     r1, [r4, #0x14]
+	ldr     r0, [r1, #0x4]
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	str     r0, [r1, #0x4]
+	mov     r0, r4
+	bl      Function_20715cc
+	cmp     r0, #0x0
+	beq     branch_207139c
+	bl      Function_200da58
+.thumb
+branch_207139c: @ 207139c :thumb
+	mov     r0, r4
+	bl      Function_2071490
+.thumb
+branch_20713a2: @ 20713a2 :thumb
+	pop     {r4,pc}
+@ 0x20713a4
+
+.thumb
+Function_20713a4: @ 20713a4 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	bl      Function_20714e8
+	mov     r4, r0
+	mov     r0, r5
+	bl      Function_20714ec
+	mov     r5, r0
+.thumb
+branch_20713b6: @ 20713b6 :thumb
+	mov     r0, r5
+	bl      Function_20714f0
+	cmp     r0, #0x1
+	bne     branch_20713c6
+	mov     r0, r5
+	bl      Function_207136c
+.thumb
+branch_20713c6: @ 20713c6 :thumb
+	add     r5, #0xe8
+	.hword  0x1e64 @ sub r4, r4, #0x1
+	bne     branch_20713b6
+	pop     {r3-r5,pc}
+@ 0x20713ce
+
+
+.incbin "./baserom/arm9.bin", 0x713ce, 0x2071400 - 0x20713ce
+
+
+.thumb
+Function_2071400: @ 2071400 :thumb
+	push    {r4,lr}
+	mov     r3, r0
+	mov     r2, r1
+	ldr     r0, [pc, #0x14] @ 0x207141c, (=#0x2071421)
+	mov     r1, r3
+	bl      Function_200d9e8
+	mov     r4, r0
+	bne     branch_2071416
+	bl      Function_2022974
+.thumb
+branch_2071416: @ 2071416 :thumb
+	mov     r0, r4
+	pop     {r4,pc}
+@ 0x207141a
+
+
+.incbin "./baserom/arm9.bin", 0x7141a, 0x207141c - 0x207141a
+
+
+.word 0x2071421 @ 0x207141c
+
+.incbin "./baserom/arm9.bin", 0x71420, 0x207142c - 0x2071420
+
+
+.thumb
+Function_207142c: @ 207142c :thumb
+	push    {r4,lr}
+	mov     r1, #0x10
+	bl      Function_2018144
+	mov     r4, r0
+	bne     branch_207143c
+	bl      Function_2022974
+.thumb
+branch_207143c: @ 207143c :thumb
+	mov     r2, r4
+	mov     r1, #0x10
+	mov     r0, #0x0
+.thumb
+branch_2071442: @ 2071442 :thumb
+	strb    r0, [r2, #0x0]
+	.hword  0x1c52 @ add r2, r2, #0x1
+	.hword  0x1e49 @ sub r1, r1, #0x1
+	bne     branch_2071442
+	mov     r0, r4
+	pop     {r4,pc}
+@ 0x207144e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2071450: @ 2071450 :thumb
+	ldr     r3, [pc, #0x4] @ 0x2071458, (=#0x2018239)
+	mov     r1, r0
+	ldr     r0, [r1, #0x8]
+	bx      r3
+@ 0x2071458
+
+.word Function_2018238+1 @ =0x2018239, 0x2071458
+.thumb
+Function_207145c: @ 207145c :thumb
+	push    {r3-r5,lr}
+	mov     r2, #0xe8
+	mov     r5, r1
+	mul     r5, r2
+	mov     r1, r5
+	bl      Function_2018144
+	mov     r4, r0
+	bne     branch_2071472
+	bl      Function_2022974
+.thumb
+branch_2071472: @ 2071472 :thumb
+	mov     r0, r4
+	mov     r1, #0x0
+	mov     r2, r5
+	blx     Function_20d5124
+	mov     r0, r4
+	pop     {r3-r5,pc}
+@ 0x2071480
+
+.thumb
+Function_2071480: @ 2071480 :thumb
+	ldr     r3, [pc, #0x8] @ 0x207148c, (=#0x2018239)
+	mov     r1, r0
+	ldr     r0, [r1, #0x8]
+	ldr     r1, [r1, #0xc]
+	bx      r3
+@ 0x207148a
+
+
+.incbin "./baserom/arm9.bin", 0x7148a, 0x207148c - 0x207148a
+
+
+.word Function_2018238+1 @ =0x2018239, 0x207148c
+
+
+.thumb
+Function_2071490: @ 2071490 :thumb
+	push    {r4,lr}
+	mov     r1, #0x0
+	mov     r2, #0xe8
+	mov     r4, r0
+	blx     Function_20d5124
+	ldr     r1, [pc, #0x30] @ 0x20714d0, (=#0x20715f5)
+	mov     r0, r4
+	bl      Function_2071518
+	ldr     r1, [pc, #0x2c] @ 0x20714d4, (=#0x2071601)
+	mov     r0, r4
+	bl      Function_207156c
+	ldr     r1, [pc, #0x28] @ 0x20714d8, (=#0x20715f9)
+	mov     r0, r4
+	bl      Function_2071534
+	ldr     r1, [pc, #0x24] @ 0x20714dc, (=#0x20715fd)
+	mov     r0, r4
+	bl      Function_2071550
+	ldr     r1, [pc, #0x20] @ 0x20714e0, (=#0x2071605)
+	mov     r0, r4
+	bl      Function_2071588
+	ldr     r1, [pc, #0x1c] @ 0x20714e4, (=#0x2071609)
+	mov     r0, r4
+	bl      Function_2071590
+	pop     {r4,pc}
+@ 0x20714ce
+
+
+.incbin "./baserom/arm9.bin", 0x714ce, 0x20714d0 - 0x20714ce
+
+
+.word 0x20715f5 @ 0x20714d0
+.word 0x2071601 @ 0x20714d4
+.word 0x20715f9 @ 0x20714d8
+.word 0x20715fd @ 0x20714dc
+.word 0x2071605 @ 0x20714e0
+.word 0x2071609 @ 0x20714e4
+.thumb
+Function_20714e8: @ 20714e8 :thumb
+	ldr     r0, [r0, #0x0]
+	bx      lr
+@ 0x20714ec
+
+.thumb
+Function_20714ec: @ 20714ec :thumb
+	ldr     r0, [r0, #0xc]
+	bx      lr
+@ 0x20714f0
+
+.thumb
+Function_20714f0: @ 20714f0 :thumb
+	ldr     r1, [r0, #0x0]
+	mov     r0, #0x1
+	tst     r1, r0
+	bne     branch_20714fa
+	mov     r0, #0x0
+.thumb
+branch_20714fa: @ 20714fa :thumb
+	bx      lr
+@ 0x20714fc
+
+.thumb
+Function_20714fc: @ 20714fc :thumb
+	ldr     r2, [r0, #0x0]
+	mov     r1, #0x1
+	orr     r1, r2
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2071506
+
+
+.align 2, 0
+
+
+.thumb
+Function_2071508: @ 2071508 :thumb
+	ldr     r2, [r0, #0x0]
+	orr     r1, r2
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2071510
+
+
+.incbin "./baserom/arm9.bin", 0x71510, 0x2071518 - 0x2071510
+
+
+.thumb
+Function_2071518: @ 2071518 :thumb
+	add     r0, #0xd0
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x207151e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2071520: @ 2071520 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_2071598
+	mov     r1, r0
+	mov     r0, r4
+	add     r4, #0xd0
+	ldr     r2, [r4, #0x0]
+	blx     r2
+	pop     {r4,pc}
+@ 0x2071534
+
+.thumb
+Function_2071534: @ 2071534 :thumb
+	add     r0, #0xd4
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x207153a
+
+
+.incbin "./baserom/arm9.bin", 0x7153a, 0x2071550 - 0x207153a
+
+
+.thumb
+Function_2071550: @ 2071550 :thumb
+	add     r0, #0xd8
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2071556
+
+
+.incbin "./baserom/arm9.bin", 0x71556, 0x207156c - 0x2071556
+
+
+.thumb
+Function_207156c: @ 207156c :thumb
+	add     r0, #0xdc
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2071572
+
+
+.align 2, 0
+
+
+.thumb
+Function_2071574: @ 2071574 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_2071598
+	mov     r1, r0
+	mov     r0, r4
+	add     r4, #0xdc
+	ldr     r2, [r4, #0x0]
+	blx     r2
+	pop     {r4,pc}
+@ 0x2071588
+
+.thumb
+Function_2071588: @ 2071588 :thumb
+	add     r0, #0xe0
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x207158e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2071590: @ 2071590 :thumb
+	add     r0, #0xe4
+	str     r1, [r0, #0x0]
+	bx      lr
+@ 0x2071596
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2071598
+Function_2071598: @ 2071598 :thumb
+	add     r0, #0x30
+	bx      lr
+@ 0x207159c
+
+.thumb
+Function_207159c: @ 207159c :thumb
+	push    {r4,lr}
+	mov     r4, r1
+	bl      Function_2071598
+	mov     r1, #0x0
+	mov     r2, r4
+	blx     Function_20d5124
+	pop     {r4,pc}
+@ 0x20715ae
+
+
+.align 2, 0
+
+
+.thumb
+Function_20715b0: @ 20715b0 :thumb
+	str     r1, [r0, #0x4]
+	bx      lr
+@ 0x20715b4
+
+
+.incbin "./baserom/arm9.bin", 0x715b4, 0x20715b8 - 0x20715b4
+
+
+.thumb
+Function_20715b8: @ 20715b8 :thumb
+	str     r1, [r0, #0xc]
+	bx      lr
+@ 0x20715bc
+
+.thumb
+.globl Function_20715bc
+Function_20715bc: @ 20715bc :thumb
+	ldr     r0, [r0, #0xc]
+	bx      lr
+@ 0x20715c0
+
+
+.incbin "./baserom/arm9.bin", 0x715c0, 0x20715c8 - 0x20715c0
+
+
+.thumb
+Function_20715c8: @ 20715c8 :thumb
+	str     r1, [r0, #0x10]
+	bx      lr
+@ 0x20715cc
+
+.thumb
+Function_20715cc: @ 20715cc :thumb
+	ldr     r0, [r0, #0x10]
+	bx      lr
+@ 0x20715d0
+
+.thumb
+Function_20715d0: @ 20715d0 :thumb
+	str     r1, [r0, #0x14]
+	bx      lr
+@ 0x20715d4
+
+.thumb
+.globl Function_20715d4
+Function_20715d4: @ 20715d4 :thumb
+	mov     r3, r1
+	mov     r2, r0
+	ldmia   r3!, {r0,r1}
+	add     r2, #0x24
+	stmia   r2!, {r0,r1}
+	ldr     r0, [r3, #0x0]
+	str     r0, [r2, #0x0]
+	bx      lr
+@ 0x20715e4
+
+.thumb
+.globl Function_20715e4
+Function_20715e4: @ 20715e4 :thumb
+	mov     r2, r0
+	add     r2, #0x24
+	mov     r3, r1
+	ldmia   r2!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r2, #0x0]
+	str     r0, [r3, #0x0]
+	bx      lr
+@ 0x20715f4
+
+
+.incbin "./baserom/arm9.bin", 0x715f4, 0x20716d4 - 0x20715f4
 
 
 .thumb
@@ -105948,6 +113315,7 @@ branch_2075e5a: @ 2075e5a :thumb
 
 
 .thumb
+.globl Function_2075ef4
 Function_2075ef4: @ 2075ef4 :thumb
 	push    {r3,lr}
 	mov     r3, #0x0
@@ -107189,7 +114557,7 @@ branch_20765a0: @ 20765a0 :thumb
 
 .thumb
 Function_20765b8: @ 20765b8 :thumb
-	ldr     r3, [pc, #0x4] @ 0x20765c0, (=#0x20765c5)
+	ldr     r3, [pc, #0x4] @ 0x20765c0, (=Function_20765c4+1)
 	mov     r2, #0x1
 	bx      r3
 @ 0x20765be
@@ -107198,9 +114566,729 @@ Function_20765b8: @ 20765b8 :thumb
 .incbin "./baserom/arm9.bin", 0x765be, 0x20765c0 - 0x20765be
 
 
-.word 0x20765c5 @ 0x20765c0
+.word Function_20765c4+1 @ 0x20765c0
 
-.incbin "./baserom/arm9.bin", 0x765c4, 0x2076af8 - 0x20765c4
+
+
+.thumb
+Function_20765c4: @ 20765c4 :thumb
+	push    {r4-r7,lr}
+	add     sp, #-0xc
+	mov     r7, r1
+	str     r2, [sp, #0x4]
+	mov     r1, #0xae
+	mov     r2, #0x0
+	mov     r5, r0
+	bl      Function_2074570
+	lsl     r0, r0, #16
+	lsr     r4, r0, #16
+	mov     r0, r5
+	bl      Function_2075d74
+	mov     r1, #0x0
+	str     r0, [sp, #0x8]
+	mov     r0, r5
+	mov     r2, r1
+	bl      Function_2074570
+	mov     r6, r0
+	ldr     r0, [pc, #0x50] @ 0x2076640, (=#0x1ee)
+	cmp     r4, r0
+	bne     branch_207660c
+	mov     r0, r5
+	mov     r1, #0x5
+	mov     r2, #0x0
+	bl      Function_2074570
+	ldr     r1, [pc, #0x44] @ 0x2076644, (=#0x1ea)
+	cmp     r0, r1
+	bne     branch_2076608
+	mov     r3, #0x1
+	b       branch_207661a
+@ 0x2076608
+
+.thumb
+branch_2076608: @ 2076608 :thumb
+	mov     r3, #0x0
+	b       branch_207661a
+@ 0x207660c
+
+.thumb
+branch_207660c: @ 207660c :thumb
+	mov     r0, r5
+	mov     r1, #0x70
+	mov     r2, #0x0
+	bl      Function_2074570
+	lsl     r0, r0, #24
+	lsr     r3, r0, #24
+.thumb
+branch_207661a: @ 207661a :thumb
+	ldr     r0, [sp, #0x4]
+	str     r6, [sp, #0x0]
+	cmp     r0, #0x1
+	bne     branch_2076630
+	ldr     r1, [sp, #0x8]
+	mov     r0, r4
+	mov     r2, r7
+	bl      Function_20767bc
+	add     sp, #0xc
+	pop     {r4-r7,pc}
+@ 0x2076630
+
+.thumb
+branch_2076630: @ 2076630 :thumb
+	ldr     r1, [sp, #0x8]
+	mov     r0, r4
+	mov     r2, r7
+	bl      Function_2076648
+	add     sp, #0xc
+	pop     {r4-r7,pc}
+@ 0x207663e
+
+
+.incbin "./baserom/arm9.bin", 0x7663e, 0x2076640 - 0x207663e
+
+
+.word 0x1ee @ 0x2076640
+.word 0x1ea @ 0x2076644
+.thumb
+Function_2076648: @ 2076648 :thumb
+	push    {r3-r6,lr}
+	add     sp, #-0x4
+	mov     r6, r1
+	mov     r1, r3
+	mov     r5, r0
+	mov     r4, r2
+	bl      Function_20761e8
+	ldr     r1, [pc, #0x15c] @ 0x20767b8, (=#0x1a5)
+	cmp     r5, r1
+	bgt     branch_20766a4
+	bge     branch_2076732
+	mov     r2, r1
+	sub     r2, #0x46
+	cmp     r5, r2
+	bgt     branch_2076674
+	sub     r1, #0x46
+	cmp     r5, r1
+	bge     branch_2076746
+	cmp     r5, #0xc9
+	beq     branch_207675a
+	b       branch_2076798
+@ 0x2076674
+
+.thumb
+branch_2076674: @ 2076674 :thumb
+	mov     r2, r1
+	sub     r2, #0x23
+	cmp     r5, r2
+	bgt     branch_2076684
+	sub     r1, #0x23
+	cmp     r5, r1
+	beq     branch_2076750
+	b       branch_2076798
+@ 0x2076684
+
+.thumb
+branch_2076684: @ 2076684 :thumb
+	mov     r2, r1
+	sub     r2, #0x8
+	cmp     r5, r2
+	bgt     branch_20766a2
+	mov     r2, r1
+	sub     r2, #0x9
+	cmp     r5, r2
+	blt     branch_20766a2
+	mov     r2, r1
+	sub     r2, #0x9
+	cmp     r5, r2
+	beq     branch_207670a
+	sub     r1, #0x8
+	cmp     r5, r1
+	beq     branch_2076716
+.thumb
+branch_20766a2: @ 20766a2 :thumb
+	b       branch_2076798
+@ 0x20766a4
+
+.thumb
+branch_20766a4: @ 20766a4 :thumb
+	mov     r2, r1
+	add     r2, #0x42
+	cmp     r5, r2
+	bgt     branch_20766d2
+	mov     r2, r1
+	add     r2, #0x42
+	cmp     r5, r2
+	bge     branch_207678c
+	add     r2, r1, #0x2
+	cmp     r5, r2
+	bgt     branch_20766ca
+	add     r2, r1, #0x1
+	cmp     r5, r2
+	blt     branch_2076798
+	beq     branch_2076722
+	.hword  0x1c89 @ add r1, r1, #0x2
+	cmp     r5, r1
+	beq     branch_207672a
+	b       branch_2076798
+@ 0x20766ca
+
+.thumb
+branch_20766ca: @ 20766ca :thumb
+	add     r1, #0x3a
+	cmp     r5, r1
+	beq     branch_2076780
+	b       branch_2076798
+@ 0x20766d2
+
+.thumb
+branch_20766d2: @ 20766d2 :thumb
+	mov     r2, r1
+	add     r2, #0x47
+	cmp     r5, r2
+	bgt     branch_20766e2
+	add     r1, #0x47
+	cmp     r5, r1
+	beq     branch_2076774
+	b       branch_2076798
+@ 0x20766e2
+
+.thumb
+branch_20766e2: @ 20766e2 :thumb
+	mov     r2, r1
+	add     r2, #0x4a
+	cmp     r5, r2
+	bgt     branch_2076798
+	mov     r2, r1
+	add     r2, #0x48
+	cmp     r5, r2
+	blt     branch_2076798
+	mov     r2, r1
+	add     r2, #0x48
+	cmp     r5, r2
+	beq     branch_207673a
+	mov     r2, r1
+	add     r2, #0x49
+	cmp     r5, r2
+	beq     branch_2076766
+	add     r1, #0x4a
+	cmp     r5, r1
+	beq     branch_207676e
+	b       branch_2076798
+@ 0x207670a
+
+.thumb
+branch_207670a: @ 207670a :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x48
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076716
+
+.thumb
+branch_2076716: @ 2076716 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x4e
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076722
+
+.thumb
+branch_2076722: @ 2076722 :thumb
+	add     r4, #0x54
+	mov     r1, #0x79
+	add     r2, r4, r0
+	b       branch_20767aa
+@ 0x207672a
+
+.thumb
+branch_207672a: @ 207672a :thumb
+	add     r4, #0x58
+	mov     r1, #0x79
+	add     r2, r4, r0
+	b       branch_20767aa
+@ 0x2076732
+
+.thumb
+branch_2076732: @ 2076732 :thumb
+	add     r4, #0x5c
+	mov     r1, #0x79
+	add     r2, r4, r0
+	b       branch_20767aa
+@ 0x207673a
+
+.thumb
+branch_207673a: @ 207673a :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x60
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076746
+
+.thumb
+branch_2076746: @ 2076746 :thumb
+	lsl     r2, r4, #1
+	add     r2, #0x40
+	mov     r1, #0x79
+	add     r2, r0, r2
+	b       branch_20767aa
+@ 0x2076750
+
+.thumb
+branch_2076750: @ 2076750 :thumb
+	lsr     r2, r4, #1
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x207675a
+
+.thumb
+branch_207675a: @ 207675a :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x8
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076766
+
+.thumb
+branch_2076766: @ 2076766 :thumb
+	mov     r2, r0
+	mov     r1, #0x79
+	add     r2, #0x84
+	b       branch_20767aa
+@ 0x207676e
+
+.thumb
+branch_207676e: @ 207676e :thumb
+	mov     r1, #0x79
+	mov     r2, #0x84
+	b       branch_20767aa
+@ 0x2076774
+
+.thumb
+branch_2076774: @ 2076774 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x88
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076780
+
+.thumb
+branch_2076780: @ 2076780 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x8c
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x207678c
+
+.thumb
+branch_207678c: @ 207678c :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x98
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_20767aa
+@ 0x2076798
+
+.thumb
+branch_2076798: @ 2076798 :thumb
+	mov     r1, #0x5
+	cmp     r6, #0x1
+	beq     branch_20767a2
+	mov     r2, #0x1
+	b       branch_20767a4
+@ 0x20767a2
+
+.thumb
+branch_20767a2: @ 20767a2 :thumb
+	mov     r2, #0x0
+.thumb
+branch_20767a4: @ 20767a4 :thumb
+	lsl     r0, r5, #2
+	add     r0, r4, r0
+	add     r2, r0, r2
+.thumb
+branch_20767aa: @ 20767aa :thumb
+	add     r0, sp, #0x0
+	bl      LoadFromNARC
+	add     r0, sp, #0x0
+	ldrb    r0, [r0, #0x0]
+	add     sp, #0x4
+	pop     {r3-r6,pc}
+@ 0x20767b8
+
+.word 0x1a5 @ 0x20767b8
+.thumb
+Function_20767bc: @ 20767bc :thumb
+	push    {r3-r6,lr}
+	add     sp, #-0x4
+	mov     r6, r1
+	mov     r1, r3
+	mov     r5, r0
+	mov     r4, r2
+	bl      Function_20761e8
+	ldr     r1, [pc, #0x1a8] @ 0x2076978, (=#0x1a5)
+	cmp     r5, r1
+	bgt     branch_2076818
+	bge     branch_20768a8
+	mov     r2, r1
+	sub     r2, #0x46
+	cmp     r5, r2
+	bgt     branch_20767e8
+	sub     r1, #0x46
+	cmp     r5, r1
+	bge     branch_20768bc
+	cmp     r5, #0xc9
+	beq     branch_20768d0
+	b       branch_2076956
+@ 0x20767e8
+
+.thumb
+branch_20767e8: @ 20767e8 :thumb
+	mov     r2, r1
+	sub     r2, #0x23
+	cmp     r5, r2
+	bgt     branch_20767f8
+	sub     r1, #0x23
+	cmp     r5, r1
+	beq     branch_20768c6
+	b       branch_2076956
+@ 0x20767f8
+
+.thumb
+branch_20767f8: @ 20767f8 :thumb
+	mov     r2, r1
+	sub     r2, #0x8
+	cmp     r5, r2
+	bgt     branch_2076816
+	mov     r2, r1
+	sub     r2, #0x9
+	cmp     r5, r2
+	blt     branch_2076816
+	mov     r2, r1
+	sub     r2, #0x9
+	cmp     r5, r2
+	beq     branch_2076880
+	sub     r1, #0x8
+	cmp     r5, r1
+	beq     branch_207688c
+.thumb
+branch_2076816: @ 2076816 :thumb
+	b       branch_2076956
+@ 0x2076818
+
+.thumb
+branch_2076818: @ 2076818 :thumb
+	mov     r2, r1
+	add     r2, #0x42
+	cmp     r5, r2
+	bgt     branch_2076848
+	mov     r2, r1
+	add     r2, #0x42
+	cmp     r5, r2
+	blt     branch_207682a
+	b       branch_2076932
+@ 0x207682a
+
+.thumb
+branch_207682a: @ 207682a :thumb
+	add     r2, r1, #0x2
+	cmp     r5, r2
+	bgt     branch_2076840
+	add     r2, r1, #0x1
+	cmp     r5, r2
+	blt     branch_207683e
+	beq     branch_2076898
+	.hword  0x1c89 @ add r1, r1, #0x2
+	cmp     r5, r1
+	beq     branch_20768a0
+.thumb
+branch_207683e: @ 207683e :thumb
+	b       branch_2076956
+@ 0x2076840
+
+.thumb
+branch_2076840: @ 2076840 :thumb
+	add     r1, #0x3a
+	cmp     r5, r1
+	beq     branch_207690e
+	b       branch_2076956
+@ 0x2076848
+
+.thumb
+branch_2076848: @ 2076848 :thumb
+	mov     r2, r1
+	add     r2, #0x47
+	cmp     r5, r2
+	bgt     branch_2076858
+	add     r1, #0x47
+	cmp     r5, r1
+	beq     branch_20768ea
+	b       branch_2076956
+@ 0x2076858
+
+.thumb
+branch_2076858: @ 2076858 :thumb
+	mov     r2, r1
+	add     r2, #0x4a
+	cmp     r5, r2
+	bgt     branch_2076956
+	mov     r2, r1
+	add     r2, #0x48
+	cmp     r5, r2
+	blt     branch_2076956
+	mov     r2, r1
+	add     r2, #0x48
+	cmp     r5, r2
+	beq     branch_20768b0
+	mov     r2, r1
+	add     r2, #0x49
+	cmp     r5, r2
+	beq     branch_20768dc
+	add     r1, #0x4a
+	cmp     r5, r1
+	beq     branch_20768e4
+	b       branch_2076956
+@ 0x2076880
+
+.thumb
+branch_2076880: @ 2076880 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x48
+	lsl     r0, r0, #1
+	mov     r1, #0xa8
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x207688c
+
+.thumb
+branch_207688c: @ 207688c :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x4e
+	lsl     r0, r0, #1
+	mov     r1, #0xa8
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x2076898
+
+.thumb
+branch_2076898: @ 2076898 :thumb
+	add     r4, #0x54
+	mov     r1, #0xa8
+	add     r2, r4, r0
+	b       branch_2076968
+@ 0x20768a0
+
+.thumb
+branch_20768a0: @ 20768a0 :thumb
+	add     r4, #0x58
+	mov     r1, #0xa8
+	add     r2, r4, r0
+	b       branch_2076968
+@ 0x20768a8
+
+.thumb
+branch_20768a8: @ 20768a8 :thumb
+	add     r4, #0x5c
+	mov     r1, #0xa8
+	add     r2, r4, r0
+	b       branch_2076968
+@ 0x20768b0
+
+.thumb
+branch_20768b0: @ 20768b0 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x60
+	lsl     r0, r0, #1
+	mov     r1, #0xa8
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x20768bc
+
+.thumb
+branch_20768bc: @ 20768bc :thumb
+	lsl     r2, r4, #1
+	add     r2, #0x40
+	mov     r1, #0xa8
+	add     r2, r0, r2
+	b       branch_2076968
+@ 0x20768c6
+
+.thumb
+branch_20768c6: @ 20768c6 :thumb
+	lsr     r2, r4, #1
+	lsl     r0, r0, #1
+	mov     r1, #0xa8
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x20768d0
+
+.thumb
+branch_20768d0: @ 20768d0 :thumb
+	lsr     r2, r4, #1
+	add     r2, #0x8
+	lsl     r0, r0, #1
+	mov     r1, #0xa8
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x20768dc
+
+.thumb
+branch_20768dc: @ 20768dc :thumb
+	mov     r2, r0
+	mov     r1, #0xa8
+	add     r2, #0x84
+	b       branch_2076968
+@ 0x20768e4
+
+.thumb
+branch_20768e4: @ 20768e4 :thumb
+	mov     r1, #0xa8
+	mov     r2, #0x84
+	b       branch_2076968
+@ 0x20768ea
+
+.thumb
+branch_20768ea: @ 20768ea :thumb
+	cmp     r0, #0x0
+	beq     branch_20768fa
+	lsr     r2, r4, #1
+	add     r2, #0x88
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x20768fa
+
+.thumb
+branch_20768fa: @ 20768fa :thumb
+	mov     r1, #0xa7
+	cmp     r6, #0x1
+	beq     branch_2076904
+	mov     r2, #0x1
+	b       branch_2076906
+@ 0x2076904
+
+.thumb
+branch_2076904: @ 2076904 :thumb
+	mov     r2, #0x0
+.thumb
+branch_2076906: @ 2076906 :thumb
+	lsl     r0, r5, #2
+	add     r0, r4, r0
+	add     r2, r0, r2
+	b       branch_2076968
+@ 0x207690e
+
+.thumb
+branch_207690e: @ 207690e :thumb
+	cmp     r0, #0x0
+	beq     branch_207691e
+	lsr     r2, r4, #1
+	add     r2, #0x8c
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x207691e
+
+.thumb
+branch_207691e: @ 207691e :thumb
+	mov     r1, #0xa7
+	cmp     r6, #0x1
+	beq     branch_2076928
+	mov     r2, #0x1
+	b       branch_207692a
+@ 0x2076928
+
+.thumb
+branch_2076928: @ 2076928 :thumb
+	mov     r2, #0x0
+.thumb
+branch_207692a: @ 207692a :thumb
+	lsl     r0, r5, #2
+	add     r0, r4, r0
+	add     r2, r0, r2
+	b       branch_2076968
+@ 0x2076932
+
+.thumb
+branch_2076932: @ 2076932 :thumb
+	cmp     r0, #0x0
+	beq     branch_2076942
+	lsr     r2, r4, #1
+	add     r2, #0x98
+	lsl     r0, r0, #1
+	mov     r1, #0x79
+	add     r2, r2, r0
+	b       branch_2076968
+@ 0x2076942
+
+.thumb
+branch_2076942: @ 2076942 :thumb
+	mov     r1, #0xa7
+	cmp     r6, #0x1
+	beq     branch_207694c
+	mov     r2, #0x1
+	b       branch_207694e
+@ 0x207694c
+
+.thumb
+branch_207694c: @ 207694c :thumb
+	mov     r2, #0x0
+.thumb
+branch_207694e: @ 207694e :thumb
+	lsl     r0, r5, #2
+	add     r0, r4, r0
+	add     r2, r0, r2
+	b       branch_2076968
+@ 0x2076956
+
+.thumb
+branch_2076956: @ 2076956 :thumb
+	mov     r1, #0xa7
+	cmp     r6, #0x1
+	beq     branch_2076960
+	mov     r2, #0x1
+	b       branch_2076962
+@ 0x2076960
+
+.thumb
+branch_2076960: @ 2076960 :thumb
+	mov     r2, #0x0
+.thumb
+branch_2076962: @ 2076962 :thumb
+	lsl     r0, r5, #2
+	add     r0, r4, r0
+	add     r2, r0, r2
+.thumb
+branch_2076968: @ 2076968 :thumb
+	add     r0, sp, #0x0
+	bl      LoadFromNARC
+	add     r0, sp, #0x0
+	ldrb    r0, [r0, #0x0]
+	add     sp, #0x4
+	pop     {r3-r6,pc}
+@ 0x2076976
+
+
+.incbin "./baserom/arm9.bin", 0x76976, 0x2076978 - 0x2076976
+
+
+.word 0x1a5 @ 0x2076978
+
+.incbin "./baserom/arm9.bin", 0x7697c, 0x2076af8 - 0x207697c
 
 
 .thumb
@@ -119237,7 +127325,34 @@ branch_20a58b4: @ 20a58b4 :arm
 @ 0x20a58e0
 
 
-.incbin "./baserom/arm9.bin", 0xa58e0, 0x20a5f6c - 0x20a58e0
+.incbin "./baserom/arm9.bin", 0xa58e0, 0x20a59ec - 0x20a58e0
+
+
+.arm
+Function_20a59ec: @ 20a59ec :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r2, [r0]
+	ldr     r2, [r2]
+	blx     r2
+	ldmfd   sp!, {r3,pc}
+@ 0x20a5a00
+
+
+.incbin "./baserom/arm9.bin", 0xa5a00, 0x20a5a14 - 0x20a5a00
+
+
+.arm
+Function_20a5a14: @ 20a5a14 :arm
+	ldr     r12,  [pc, #0xc] @ [0x20a5a28] (=#0x20f9560)
+	mov     r3, #0x0
+	str     r12, [r0]
+	stmib   r0, {r1-r3}
+	bx      lr
+@ 0x20a5a28
+
+.word 0x20f9560 @ 0x20a5a28
+
+.incbin "./baserom/arm9.bin", 0xa5a2c, 0x20a5f6c - 0x20a5a2c
 
 
 .arm
@@ -119356,10 +127471,66 @@ branch_20a6380: @ 20a6380 :arm
 .word 0x21c3ac0 @ 0x20a63b8
 
 
-.incbin "./baserom/arm9.bin", 0xa63bc, 0x20a7118 - 0x20a63bc
+.incbin "./baserom/arm9.bin", 0xa63bc, 0x20a6d88 - 0x20a63bc
 
 
 .arm
+Function_20a6d88: @ 20a6d88 :arm
+	ldr     r12,  [pc, #0x0] @ [0x20a6d90] (=#0x20a6d4c)
+	bx      r12
+@ 0x20a6d90
+
+.word 0x20a6d4c @ 0x20a6d90
+
+
+
+.incbin "./baserom/arm9.bin", 0xa6d94, 0x20a6ef0 - 0x20a6d94
+
+
+.arm
+Function_20a6ef0: @ 20a6ef0 :arm
+	ldrh    r2, [r0]
+	cmp     r2, r1
+	ldrhi   r0, [r0, #0x4]
+	addhi   r0, r0, r1, lsl #4
+	movls   r0, #0x0
+	bx      lr
+@ 0x20a6f08
+
+
+.incbin "./baserom/arm9.bin", 0xa6f08, 0x20a6f74 - 0x20a6f08
+
+
+.arm
+Function_20a6f74: @ 20a6f74 :arm
+	ldrh    r2, [r0]
+	cmp     r1, r2
+	movcs   r0, #0x0
+	bxcs    lr
+	ldrh    r2, [r0, #0x2]
+	ldr     r0, [r0, #0x4]
+	tst     r2, #0x1
+	addne   r0, r0, r1, lsl #4
+	addeq   r0, r0, r1, lsl #3
+	bx      lr
+@ 0x20a6f9c
+
+
+.incbin "./baserom/arm9.bin", 0xa6f9c, 0x20a7100 - 0x20a6f9c
+
+
+.arm
+Function_20a7100: @ 20a7100 :arm
+	ldrh    r2, [r0]
+	cmp     r1, r2
+	ldrcc   r0, [r0, #0x4]
+	addcc   r0, r0, r1, lsl #3
+	movcs   r0, #0x0
+	bx      lr
+@ 0x20a7118
+
+.arm
+.globl Function_20a7118
 Function_20a7118: @ 20a7118 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r1
@@ -119414,6 +127585,7 @@ Function_20a71a0: @ 20a71a0 :arm
 @ 0x20a71b0
 
 .arm
+.globl Function_20a71b0
 Function_20a71b0: @ 20a71b0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r1
@@ -119444,8 +127616,25 @@ Function_20a7238: @ 20a7238 :arm
 	bx      lr
 @ 0x20a7248
 
+.arm
+.globl Function_20a7248
+Function_20a7248: @ 20a7248 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r1
+	ldr     r1,  [pc, #0x20] @ [0x20a7278] (=#0x5343524e)
+	bl      Function_20a727c
+	cmp     r0, #0x0
+	moveq   r0, #0x0
+	streq   r0, [r4]
+	ldmeqfd sp!, {r4,pc}
+	add     r0, r0, #0x8
+	str     r0, [r4]
+	mov     r0, #0x1
+	ldmfd   sp!, {r4,pc}
+@ 0x20a7278
 
-.incbin "./baserom/arm9.bin", 0xa7248, 0x20a727c - 0x20a7248
+.word 0x5343524e @ 0x20a7278
+
 
 
 .arm
@@ -119534,7 +127723,333 @@ Function_20a73c0: @ 20a73c0 :arm
 .word 0x4000440 @ 0x20a7484
 
 
-.incbin "./baserom/arm9.bin", 0xa7488, 0x20a7df8 - 0x20a7488
+.incbin "./baserom/arm9.bin", 0xa7488, 0x20a74f0 - 0x20a7488
+
+
+.arm
+Function_20a74f0: @ 20a74f0 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	ldr     r0, [r4, #0x18]
+	cmp     r0, #0x0
+	ldreq   r0, [r4, #0x1c]
+	ldreq   r0, [r0, #0x8]
+	cmp     r0, #0x3
+	cmpne   r0, #0x4
+	bne     branch_20a758c
+	ldr     r0, [r4, #0x8]
+	eor     r0, r0, #0x1
+	str     r0, [r4, #0x8]
+	ldr     r1, [r4, #0x1c]
+	ldr     r2, [r4]
+	ldrh    r0, [r1, #0x2]
+	ldr     r1, [r1, #0xc]
+	add     r0, r1, r0, lsl #3
+	sub     r0, r0, #0x8
+	cmp     r2, r0
+	bhi     branch_20a75d4
+	ldr     r0, [r4, #0x20]
+	cmp     r0, #0x1
+	bne     branch_20a755c
+	ldr     r0, [r4, #0x24]
+	ldr     r1, [r4, #0x10]
+	ldr     r2, [r4, #0x28]
+	blx     r2
+.arm
+branch_20a755c: @ 20a755c :arm
+	ldr     r0, [r4, #0x18]
+	cmp     r0, #0x0
+	ldreq   r0, [r4, #0x1c]
+	ldreq   r0, [r0, #0x8]
+	cmp     r0, #0x2
+	cmpne   r0, #0x4
+	movne   r0, #0x0
+	strne   r0, [r4, #0xc]
+	bne     branch_20a75d4
+	mov     r0, r4
+	bl      Function_20a788c
+	b       branch_20a75d4
+@ 0x20a758c
+
+.arm
+branch_20a758c: @ 20a758c :arm
+	ldr     r0, [r4, #0x20]
+	cmp     r0, #0x1
+	bne     branch_20a75a8
+	ldr     r0, [r4, #0x24]
+	ldr     r1, [r4, #0x10]
+	ldr     r2, [r4, #0x28]
+	blx     r2
+.arm
+branch_20a75a8: @ 20a75a8 :arm
+	ldr     r0, [r4, #0x18]
+	cmp     r0, #0x0
+	ldreq   r0, [r4, #0x1c]
+	ldreq   r0, [r0, #0x8]
+	cmp     r0, #0x2
+	cmpne   r0, #0x4
+	movne   r0, #0x0
+	strne   r0, [r4, #0xc]
+	bne     branch_20a75d4
+	mov     r0, r4
+	bl      Function_20a788c
+.arm
+branch_20a75d4: @ 20a75d4 :arm
+	ldr     r1, [r4, #0x1c]
+	ldr     r2, [r4]
+	ldrh    r0, [r1]
+	ldr     r1, [r1, #0xc]
+	add     r0, r1, r0, lsl #3
+	sub     r0, r0, #0x8
+	cmp     r2, r0
+	strhi   r0, [r4]
+	ldmhifd sp!, {r4,pc}
+	cmp     r2, r1
+	strcc   r1, [r4]
+	ldmfd   sp!, {r4,pc}
+@ 0x20a7604
+
+
+.incbin "./baserom/arm9.bin", 0xa7604, 0x20a763c - 0x20a7604
+
+
+.arm
+Function_20a763c: @ 20a763c :arm
+	ldr     r0, [r0, #0x4]
+	ldr     r0, [r0]
+	bx      lr
+@ 0x20a7648
+
+.arm
+Function_20a7648: @ 20a7648 :arm
+	stmfd   sp!, {r3-r11,lr}
+	mov     r10, r0
+	ldr     r0, [r10, #0xc]
+	mov     r9, #0x0
+	cmp     r0, #0x1
+	movne   r0, r9
+	ldmnefd sp!, {r3-r11,pc}
+	ldr     r0, [r10, #0x14]
+	smull   r2, r1, r0, r1
+	adds    r0, r2, #2, 22 @ #0x800
+	adc     r1, r1, r9
+	mov     r0, r0, lsr #12
+	orr     r0, r0, r1, lsl #20
+	bl      Function_20d4070
+	mov     r4, #0x1
+	ldr     r1, [r10, #0x10]
+	mov     r11, r9
+	add     r0, r1, r0
+	str     r0, [r10, #0x10]
+	mov     r8, r4
+	mov     r7, r9
+	mov     r5, r9
+	mov     r6, r4
+	b       branch_20a77c4
+@ 0x20a76a8
+
+.arm
+branch_20a76a8: @ 20a76a8 :arm
+	ldr     r0, [r10]
+	ldr     r1, [r10, #0x10]
+	ldrh    r0, [r0, #0x4]
+	mov     r9, r8
+	sub     r0, r1, r0, lsl #12
+	str     r0, [r10, #0x10]
+	ldr     r0, [r10, #0x14]
+	cmp     r0, #0x0
+	movgt   r1, r8
+	ldr     r0, [r10, #0x8]
+	movle   r1, r7
+	teq     r1, r0
+	ldr     r0, [r10]
+	addne   r0, r0, #0x8
+	subeq   r0, r0, #0x8
+	str     r0, [r10]
+	ldr     r1, [r10, #0x14]
+	ldr     r0, [r10]
+	cmp     r1, #0x0
+	movgt   r2, r6
+	ldr     r1, [r10, #0x8]
+	movle   r2, r5
+	teq     r2, r1
+	ldr     r1, [r10, #0x1c]
+	ldr     r2, [r1, #0xc]
+	beq     branch_20a7728
+	ldrh    r1, [r1]
+	add     r1, r2, r1, lsl #3
+	cmp     r0, r1
+	movcs   r0, r4
+	movcc   r0, r11
+	b       branch_20a7740
+@ 0x20a7728
+
+.arm
+branch_20a7728: @ 20a7728 :arm
+	ldrh    r1, [r1, #0x2]
+	add     r1, r2, r1, lsl #3
+	sub     r1, r1, #0x8
+	cmp     r0, r1
+	movls   r0, #0x1
+	movhi   r0, #0x0
+.arm
+branch_20a7740: @ 20a7740 :arm
+	cmp     r0, #0x0
+	beq     branch_20a7750
+	mov     r0, r10
+	bl      Function_20a74f0
+.arm
+branch_20a7750: @ 20a7750 :arm
+	ldr     r1, [r10]
+	ldrh    r0, [r1, #0x4]
+	cmp     r0, #0x0
+	strne   r1, [r10, #0x4]
+	ldr     r0, [r10, #0x20]
+	cmp     r0, #0x0
+	beq     branch_20a77c4
+	ldr     r0, [r10, #0x1c]
+	ldr     r2, [r10, #0x20]
+	ldr     r0, [r0, #0xc]
+	cmp     r2, #0x2
+	ldr     r1, [r10]
+	sub     r0, r1, r0
+	mov     r0, r0, lsl #13
+	mov     r1, r0, lsr #16
+	beq     branch_20a779c
+	cmp     r2, #0x3
+	beq     branch_20a77b8
+	b       branch_20a77c4
+@ 0x20a779c
+
+.arm
+branch_20a779c: @ 20a779c :arm
+	ldrh    r0, [r10, #0x2c]
+	cmp     r1, r0
+	bne     branch_20a77c4
+	ldr     r0, [r10, #0x24]
+	ldr     r2, [r10, #0x28]
+	blx     r2
+	b       branch_20a77c4
+@ 0x20a77b8
+
+.arm
+branch_20a77b8: @ 20a77b8 :arm
+	ldr     r0, [r10, #0x24]
+	ldr     r2, [r10, #0x28]
+	blx     r2
+.arm
+branch_20a77c4: @ 20a77c4 :arm
+	ldr     r0, [r10, #0xc]
+	cmp     r0, #0x0
+	beq     branch_20a77e8
+	ldr     r0, [r10]
+	ldr     r1, [r10, #0x10]
+	ldrh    r0, [r0, #0x4]
+	cmp     r1, r0, lsl #12
+	movge   r0, #0x1
+	bge     branch_20a77ec
+.arm
+branch_20a77e8: @ 20a77e8 :arm
+	mov     r0, #0x0
+.arm
+branch_20a77ec: @ 20a77ec :arm
+	cmp     r0, #0x0
+	bne     branch_20a76a8
+	mov     r0, r9
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20a77fc
+
+
+.incbin "./baserom/arm9.bin", 0xa77fc, 0x20a7834 - 0x20a77fc
+
+
+.arm
+Function_20a7834: @ 20a7834 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	add     r0, r4, #0x20
+	bl      Function_20a7874
+	mov     r1, #0x0
+	str     r1, [r4]
+	str     r1, [r4, #0x4]
+	str     r1, [r4, #0x8]
+	mov     r0, #0x1
+	str     r0, [r4, #0xc]
+	str     r1, [r4, #0x10]
+	mov     r0, #1, 20 @ #0x1000
+	str     r0, [r4, #0x14]
+	str     r1, [r4, #0x18]
+	str     r1, [r4, #0x1c]
+	ldmfd   sp!, {r4,pc}
+@ 0x20a7874
+
+.arm
+Function_20a7874: @ 20a7874 :arm
+	mov     r1, #0x0
+	str     r1, [r0]
+	str     r1, [r0, #0x4]
+	str     r1, [r0, #0x8]
+	strh    r1, [r0, #0xc]
+	bx      lr
+@ 0x20a788c
+
+.arm
+Function_20a788c: @ 20a788c :arm
+	ldr     r1, [r0, #0x14]
+	cmp     r1, #0x0
+	movgt   r2, #0x1
+	ldr     r1, [r0, #0x8]
+	movle   r2, #0x0
+	teq     r2, r1
+	ldr     r2, [r0, #0x1c]
+	beq     branch_20a78bc
+	ldrh    r1, [r2, #0x2]
+	ldr     r2, [r2, #0xc]
+	add     r1, r2, r1, lsl #3
+	b       branch_20a78cc
+@ 0x20a78bc
+
+.arm
+branch_20a78bc: @ 20a78bc :arm
+	ldrh    r1, [r2]
+	ldr     r2, [r2, #0xc]
+	add     r1, r2, r1, lsl #3
+	sub     r1, r1, #0x8
+.arm
+branch_20a78cc: @ 20a78cc :arm
+	str     r1, [r0]
+	ldr     r2, [r0]
+	ldr     r12,  [pc, #0xc] @ [0x20a78e8] (=#0x20a7648)
+	mov     r1, #0x0
+	str     r2, [r0, #0x4]
+	str     r1, [r0, #0x10]
+	bx      r12
+@ 0x20a78e8
+
+.word Function_20a7648 @ =0x20a7648, 0x20a78e8
+.arm
+Function_20a78ec: @ 20a78ec :arm
+	ldr     r12,  [pc, #0x4] @ [0x20a78f8] (=#0x20a788c)
+	str     r1, [r0, #0x1c]
+	bx      r12
+@ 0x20a78f8
+
+.word 0x20a788c @ 0x20a78f8
+.arm
+Function_20a78fc: @ 20a78fc :arm
+	ldr     r1, [r0, #0x18]
+	cmp     r1, #0x0
+	ldreq   r0, [r0, #0x1c]
+	ldreq   r1, [r0, #0x8]
+	cmp     r1, #0x2
+	cmpne   r1, #0x4
+	moveq   r0, #0x1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20a7920
+
+
+.incbin "./baserom/arm9.bin", 0xa7920, 0x20a7df8 - 0x20a7920
 
 
 .arm
@@ -119795,8 +128310,27 @@ Function_20a8124: @ 20a8124 :arm
 @ 0x20a813c
 
 
-.incbin "./baserom/arm9.bin", 0xa813c, 0x20a81b0 - 0x20a813c
+.incbin "./baserom/arm9.bin", 0xa813c, 0x20a818c - 0x20a813c
 
+
+.arm
+Function_20a818c: @ 20a818c :arm
+	mov     r2, #0x0
+	mvn     r1, #0x0
+.arm
+branch_20a8194: @ 20a8194 :arm
+	str     r1, [r0, r2, lsl #0x2]
+	add     r2, r2, #0x1
+	cmp     r2, #0x3
+	blt     branch_20a8194
+	bx      lr
+@ 0x20a81a8
+
+.arm
+Function_20a81a8: @ 20a81a8 :arm
+	str     r2, [r0, r1, lsl #0x2]
+	bx      lr
+@ 0x20a81b0
 
 .arm
 Function_20a81b0: @ 20a81b0 :arm
@@ -119805,8 +128339,29 @@ Function_20a81b0: @ 20a81b0 :arm
 @ 0x20a81b8
 
 
-.incbin "./baserom/arm9.bin", 0xa81b8, 0x20a81fc - 0x20a81b8
+.incbin "./baserom/arm9.bin", 0xa81b8, 0x20a81d0 - 0x20a81b8
 
+
+.arm
+Function_20a81d0: @ 20a81d0 :arm
+	mov     r3, #0x0
+	mvn     r2, #0x0
+.arm
+branch_20a81d8: @ 20a81d8 :arm
+	add     r1, r0, r3, lsl #2
+	add     r3, r3, #0x1
+	str     r2, [r1, #0x8]
+	cmp     r3, #0x3
+	blt     branch_20a81d8
+	bx      lr
+@ 0x20a81f0
+
+.arm
+Function_20a81f0: @ 20a81f0 :arm
+	add     r0, r0, r1, lsl #2
+	str     r2, [r0, #0x8]
+	bx      lr
+@ 0x20a81fc
 
 .arm
 Function_20a81fc: @ 20a81fc :arm
@@ -119816,7 +128371,1899 @@ Function_20a81fc: @ 20a81fc :arm
 @ 0x20a8208
 
 
-.incbin "./baserom/arm9.bin", 0xa8208, 0x20af5e0 - 0x20a8208
+.incbin "./baserom/arm9.bin", 0xa8208, 0x20a8224 - 0x20a8208
+
+
+.arm
+Function_20a8224: @ 20a8224 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r7, r0
+	movs    r5, r2
+	mov     r6, r1
+	mov     r4, r3
+	ldr     r0, [r7, #0x8]
+	beq     branch_20a8288
+	cmp     r5, #0x1
+	beq     branch_20a8254
+	cmp     r5, #0x2
+	beq     branch_20a8270
+	b       branch_20a8288
+@ 0x20a8254
+
+.arm
+branch_20a8254: @ 20a8254 :arm
+	mov     r3, #1, 6 @ #0x4000000
+	ldr     r2, [r3]
+	ldr     r1,  [pc, #0x1e4] @ [0x20a8448] (=#0xffcfffef)
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+	b       branch_20a8288
+@ 0x20a8270
+
+.arm
+branch_20a8270: @ 20a8270 :arm
+	ldr     r3,  [pc, #0x1d4] @ [0x20a844c] (=#0x4001000)
+	ldr     r1,  [pc, #0x1cc] @ [0x20a8448] (=#0xffcfffef)
+	ldr     r2, [r3]
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+.arm
+branch_20a8288: @ 20a8288 :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r1, [r7, #0x10]
+	bl      Function_20c2c54
+	cmp     r5, #0x0
+	beq     branch_20a82b0
+	cmp     r5, #0x1
+	beq     branch_20a82cc
+	cmp     r5, #0x2
+	beq     branch_20a82e0
+	b       branch_20a82f0
+@ 0x20a82b0
+
+.arm
+branch_20a82b0: @ 20a82b0 :arm
+	bl      Function_20c0d34
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c0d90
+	bl      Function_20c0ed0
+	b       branch_20a82f0
+@ 0x20a82cc
+
+.arm
+branch_20a82cc: @ 20a82cc :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c02bc
+	b       branch_20a82f0
+@ 0x20a82e0
+
+.arm
+branch_20a82e0: @ 20a82e0 :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c0314
+.arm
+branch_20a82f0: @ 20a82f0 :arm
+	ldr     r0, [r7, #0x8]
+	cmp     r0, #0x0
+	ldrh    r0, [r7, #0x2]
+	bne     branch_20a8408
+	cmp     r0, #0x10
+	bgt     branch_20a833c
+	bge     branch_20a8368
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a8378
+@ 0x20a8318
+
+
+.incbin "./baserom/arm9.bin", 0xa8318, 0x20a833c - 0x20a8318
+
+
+.arm
+branch_20a833c: @ 20a833c :arm
+	cmp     r0, #0x20
+	beq     branch_20a8370
+	b       branch_20a8378
+@ 0x20a8348
+
+
+.incbin "./baserom/arm9.bin", 0xa8348, 0x20a8368 - 0x20a8348
+
+
+.arm
+branch_20a8368: @ 20a8368 :arm
+	mov     r0, #0x4
+	b       branch_20a837c
+@ 0x20a8370
+
+.arm
+branch_20a8370: @ 20a8370 :arm
+	mov     r0, #0x5
+	b       branch_20a837c
+@ 0x20a8378
+
+.arm
+branch_20a8378: @ 20a8378 :arm
+	mov     r0, #0x0
+.arm
+branch_20a837c: @ 20a837c :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	cmp     r0, #0x10
+	bgt     branch_20a83c0
+	bge     branch_20a83ec
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a83fc
+@ 0x20a839c
+
+
+.incbin "./baserom/arm9.bin", 0xa839c, 0x20a83c0 - 0x20a839c
+
+
+.arm
+branch_20a83c0: @ 20a83c0 :arm
+	cmp     r0, #0x20
+	beq     branch_20a83f4
+	b       branch_20a83fc
+@ 0x20a83cc
+
+
+.incbin "./baserom/arm9.bin", 0xa83cc, 0x20a83ec - 0x20a83cc
+
+
+.arm
+branch_20a83ec: @ 20a83ec :arm
+	mov     r0, #0x4
+	b       branch_20a8400
+@ 0x20a83f4
+
+.arm
+branch_20a83f4: @ 20a83f4 :arm
+	mov     r0, #0x5
+	b       branch_20a8400
+@ 0x20a83fc
+
+.arm
+branch_20a83fc: @ 20a83fc :arm
+	mov     r0, #0x0
+.arm
+branch_20a8400: @ 20a8400 :arm
+	str     r0, [r4, #0x10]
+	b       branch_20a8414
+@ 0x20a8408
+
+.arm
+branch_20a8408: @ 20a8408 :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	str     r0, [r4, #0x10]
+.arm
+branch_20a8414: @ 20a8414 :arm
+	ldr     r1, [r7, #0x4]
+	mov     r0, #0x0
+	str     r1, [r4, #0x14]
+	str     r0, [r4, #0x18]
+	mov     r0, #0x1
+	str     r0, [r4, #0x1c]
+	ldr     r3, [r7, #0x8]
+	mov     r0, r4
+	mov     r1, r5
+	mov     r2, r6
+	str     r3, [r4, #0x20]
+	bl      Function_20a81a8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a8448
+
+.word 0xffcfffef @ 0x20a8448
+.word 0x4001000 @ 0x20a844c
+.arm
+Function_20a8450: @ 20a8450 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r7, r0
+	movs    r5, r2
+	mov     r6, r1
+	mov     r4, r3
+	ldr     r0, [r7, #0x8]
+	beq     branch_20a84b4
+	cmp     r5, #0x1
+	beq     branch_20a8480
+	cmp     r5, #0x2
+	beq     branch_20a849c
+	b       branch_20a84b4
+@ 0x20a8480
+
+.arm
+branch_20a8480: @ 20a8480 :arm
+	mov     r3, #1, 6 @ #0x4000000
+	ldr     r2, [r3]
+	ldr     r1,  [pc, #0x1e4] @ [0x20a8674] (=#0xffcfffef)
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+	b       branch_20a84b4
+@ 0x20a849c
+
+.arm
+branch_20a849c: @ 20a849c :arm
+	ldr     r3,  [pc, #0x1d4] @ [0x20a8678] (=#0x4001000)
+	ldr     r1,  [pc, #0x1cc] @ [0x20a8674] (=#0xffcfffef)
+	ldr     r2, [r3]
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+.arm
+branch_20a84b4: @ 20a84b4 :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r1, [r7, #0x10]
+	bl      Function_20c2c54
+	cmp     r5, #0x0
+	beq     branch_20a84dc
+	cmp     r5, #0x1
+	beq     branch_20a84f8
+	cmp     r5, #0x2
+	beq     branch_20a850c
+	b       branch_20a851c
+@ 0x20a84dc
+
+.arm
+branch_20a84dc: @ 20a84dc :arm
+	bl      Function_20c0d34
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c0d90
+	bl      Function_20c0ed0
+	b       branch_20a851c
+@ 0x20a84f8
+
+.arm
+branch_20a84f8: @ 20a84f8 :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c02bc
+	b       branch_20a851c
+@ 0x20a850c
+
+.arm
+branch_20a850c: @ 20a850c :arm
+	ldr     r0, [r7, #0x14]
+	ldr     r2, [r7, #0x10]
+	mov     r1, r6
+	bl      Function_20c0314
+.arm
+branch_20a851c: @ 20a851c :arm
+	ldr     r0, [r7, #0x8]
+	cmp     r0, #0x0
+	ldrh    r0, [r7, #0x2]
+	bne     branch_20a8634
+	cmp     r0, #0x10
+	bgt     branch_20a8568
+	bge     branch_20a8594
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a85a4
+@ 0x20a8544
+
+
+.incbin "./baserom/arm9.bin", 0xa8544, 0x20a8568 - 0x20a8544
+
+
+.arm
+branch_20a8568: @ 20a8568 :arm
+	cmp     r0, #0x20
+	beq     branch_20a859c
+	b       branch_20a85a4
+@ 0x20a8574
+
+
+.incbin "./baserom/arm9.bin", 0xa8574, 0x20a8594 - 0x20a8574
+
+
+.arm
+branch_20a8594: @ 20a8594 :arm
+	mov     r0, #0x4
+	b       branch_20a85a8
+@ 0x20a859c
+
+.arm
+branch_20a859c: @ 20a859c :arm
+	mov     r0, #0x5
+	b       branch_20a85a8
+@ 0x20a85a4
+
+.arm
+branch_20a85a4: @ 20a85a4 :arm
+	mov     r0, #0x0
+.arm
+branch_20a85a8: @ 20a85a8 :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	cmp     r0, #0x10
+	bgt     branch_20a85ec
+	bge     branch_20a8618
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a8628
+@ 0x20a85c8
+
+
+.incbin "./baserom/arm9.bin", 0xa85c8, 0x20a85ec - 0x20a85c8
+
+
+.arm
+branch_20a85ec: @ 20a85ec :arm
+	cmp     r0, #0x20
+	beq     branch_20a8620
+	b       branch_20a8628
+@ 0x20a85f8
+
+
+.incbin "./baserom/arm9.bin", 0xa85f8, 0x20a8618 - 0x20a85f8
+
+
+.arm
+branch_20a8618: @ 20a8618 :arm
+	mov     r0, #0x4
+	b       branch_20a862c
+@ 0x20a8620
+
+.arm
+branch_20a8620: @ 20a8620 :arm
+	mov     r0, #0x5
+	b       branch_20a862c
+@ 0x20a8628
+
+.arm
+branch_20a8628: @ 20a8628 :arm
+	mov     r0, #0x0
+.arm
+branch_20a862c: @ 20a862c :arm
+	str     r0, [r4, #0x10]
+	b       branch_20a8640
+@ 0x20a8634
+
+.arm
+branch_20a8634: @ 20a8634 :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	str     r0, [r4, #0x10]
+.arm
+branch_20a8640: @ 20a8640 :arm
+	ldr     r1, [r7, #0x4]
+	mov     r0, #0x0
+	str     r1, [r4, #0x14]
+	str     r0, [r4, #0x18]
+	mov     r0, #0x1
+	str     r0, [r4, #0x1c]
+	ldr     r3, [r7, #0x8]
+	mov     r0, r4
+	mov     r1, r5
+	mov     r2, r6
+	str     r3, [r4, #0x20]
+	bl      Function_20a81a8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a8674
+
+.word 0xffcfffef @ 0x20a8674
+.word 0x4001000 @ 0x20a8678
+
+
+
+.arm
+Function_20a867c: @ 20a867c :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r7, r0
+	mov     r6, r1
+	ldr     r0, [r7, #0x14]
+	ldr     r1, [r7, #0x10]
+	mov     r5, r2
+	mov     r4, r3
+	bl      Function_20c2c54
+	cmp     r5, #0x0
+	ldr     r0, [r7, #0x8]
+	beq     branch_20a86f0
+	cmp     r5, #0x1
+	beq     branch_20a86bc
+	cmp     r5, #0x2
+	beq     branch_20a86d8
+	b       branch_20a86f0
+@ 0x20a86bc
+
+.arm
+branch_20a86bc: @ 20a86bc :arm
+	mov     r3, #1, 6 @ #0x4000000
+	ldr     r2, [r3]
+	ldr     r1,  [pc, #0x17c] @ [0x20a8848] (=#0xffcfffef)
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+	b       branch_20a86f0
+@ 0x20a86d8
+
+.arm
+branch_20a86d8: @ 20a86d8 :arm
+	ldr     r3,  [pc, #0x16c] @ [0x20a884c] (=#0x4001000)
+	ldr     r1,  [pc, #0x164] @ [0x20a8848] (=#0xffcfffef)
+	ldr     r2, [r3]
+	and     r1, r2, r1
+	orr     r0, r1, r0
+	str     r0, [r3]
+.arm
+branch_20a86f0: @ 20a86f0 :arm
+	ldr     r0, [r7, #0x8]
+	cmp     r0, #0x0
+	ldrh    r0, [r7, #0x2]
+	bne     branch_20a8808
+	cmp     r0, #0x10
+	bgt     branch_20a873c
+	bge     branch_20a8768
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a8778
+@ 0x20a8718
+
+
+.incbin "./baserom/arm9.bin", 0xa8718, 0x20a873c - 0x20a8718
+
+
+.arm
+branch_20a873c: @ 20a873c :arm
+	cmp     r0, #0x20
+	beq     branch_20a8770
+	b       branch_20a8778
+@ 0x20a8748
+
+
+.incbin "./baserom/arm9.bin", 0xa8748, 0x20a8768 - 0x20a8748
+
+
+.arm
+branch_20a8768: @ 20a8768 :arm
+	mov     r0, #0x4
+	b       branch_20a877c
+@ 0x20a8770
+
+.arm
+branch_20a8770: @ 20a8770 :arm
+	mov     r0, #0x5
+	b       branch_20a877c
+@ 0x20a8778
+
+.arm
+branch_20a8778: @ 20a8778 :arm
+	mov     r0, #0x0
+.arm
+branch_20a877c: @ 20a877c :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	cmp     r0, #0x10
+	bgt     branch_20a87c0
+	bge     branch_20a87ec
+	cmp     r0, #0x8
+	addls   pc, pc, r0, lsl #2
+	b       branch_20a87fc
+@ 0x20a879c
+
+
+.incbin "./baserom/arm9.bin", 0xa879c, 0x20a87c0 - 0x20a879c
+
+
+.arm
+branch_20a87c0: @ 20a87c0 :arm
+	cmp     r0, #0x20
+	beq     branch_20a87f4
+	b       branch_20a87fc
+@ 0x20a87cc
+
+
+.incbin "./baserom/arm9.bin", 0xa87cc, 0x20a87ec - 0x20a87cc
+
+
+.arm
+branch_20a87ec: @ 20a87ec :arm
+	mov     r0, #0x4
+	b       branch_20a8800
+@ 0x20a87f4
+
+.arm
+branch_20a87f4: @ 20a87f4 :arm
+	mov     r0, #0x5
+	b       branch_20a8800
+@ 0x20a87fc
+
+.arm
+branch_20a87fc: @ 20a87fc :arm
+	mov     r0, #0x0
+.arm
+branch_20a8800: @ 20a8800 :arm
+	str     r0, [r4, #0x10]
+	b       branch_20a8814
+@ 0x20a8808
+
+.arm
+branch_20a8808: @ 20a8808 :arm
+	str     r0, [r4, #0xc]
+	ldrh    r0, [r7]
+	str     r0, [r4, #0x10]
+.arm
+branch_20a8814: @ 20a8814 :arm
+	ldr     r1, [r7, #0x4]
+	mov     r0, #0x0
+	str     r1, [r4, #0x14]
+	str     r0, [r4, #0x18]
+	mov     r0, #0x1
+	str     r0, [r4, #0x1c]
+	ldr     r3, [r7, #0x8]
+	mov     r0, r4
+	mov     r1, r5
+	mov     r2, r6
+	str     r3, [r4, #0x20]
+	bl      Function_20a81a8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a8848
+
+.word 0xffcfffef @ 0x20a8848
+.word 0x4001000 @ 0x20a884c
+
+
+
+.arm
+Function_20a8850: @ 20a8850 :arm
+	stmfd   sp!, {r3-r9,lr}
+	mov     r9, r0
+	ldr     r4, [r9, #0xc]
+	ldr     r5, [r9, #0x8]
+	mov     r8, r1
+	mov     r7, r2
+	mov     r0, r4
+	mov     r1, r5
+	mov     r6, r3
+	bl      Function_20c2c54
+	cmp     r7, #0x0
+	beq     branch_20a890c
+	cmp     r7, #0x1
+	beq     branch_20a8894
+	cmp     r7, #0x2
+	beq     branch_20a88d0
+	b       branch_20a8924
+@ 0x20a8894
+
+.arm
+branch_20a8894: @ 20a8894 :arm
+	ldr     r0, [r9, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20a88bc
+	bl      Function_20c0ac4
+	mov     r0, r4
+	mov     r1, r8
+	mov     r2, r5
+	bl      Function_20c0b0c
+	bl      Function_20c0b78
+	b       branch_20a8924
+@ 0x20a88bc
+
+.arm
+branch_20a88bc: @ 20a88bc :arm
+	mov     r0, r4
+	mov     r1, r8
+	mov     r2, r5
+	bl      Function_20c0160
+	b       branch_20a8924
+@ 0x20a88d0
+
+.arm
+branch_20a88d0: @ 20a88d0 :arm
+	ldr     r0, [r9, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20a88f8
+	bl      Function_20c0c78
+	mov     r0, r4
+	mov     r1, r8
+	mov     r2, r5
+	bl      Function_20c0c90
+	bl      Function_20c0cf4
+	b       branch_20a8924
+@ 0x20a88f8
+
+.arm
+branch_20a88f8: @ 20a88f8 :arm
+	mov     r0, r4
+	mov     r1, r8
+	mov     r2, r5
+	bl      Function_20c01b8
+	b       branch_20a8924
+@ 0x20a890c
+
+.arm
+branch_20a890c: @ 20a890c :arm
+	bl      Function_20c0f1c
+	mov     r0, r4
+	mov     r1, r8
+	mov     r2, r5
+	bl      Function_20c0f50
+	bl      Function_20c0fbc
+.arm
+branch_20a8924: @ 20a8924 :arm
+	ldr     r1, [r9]
+	mov     r0, r6
+	str     r1, [r6]
+	ldr     r3, [r9, #0x4]
+	mov     r1, r7
+	mov     r2, r8
+	str     r3, [r6, #0x4]
+	bl      Function_20a81f0
+	ldmfd   sp!, {r3-r9,pc}
+@ 0x20a8948
+
+
+.incbin "./baserom/arm9.bin", 0xa8948, 0x20a8aac - 0x20a8948
+
+
+.arm
+Function_20a8aac: @ 20a8aac :arm
+	mov     r2, #0x0
+	mvn     r1, #0x0
+.arm
+branch_20a8ab4: @ 20a8ab4 :arm
+	str     r1, [r0, r2, lsl #0x2]
+	add     r2, r2, #0x1
+	cmp     r2, #0x3
+	blt     branch_20a8ab4
+	bx      lr
+@ 0x20a8ac8
+
+
+.arm
+Function_20a8ac8: @ 20a8ac8 :arm
+	str     r2, [r0, r1, lsl #0x2]
+	bx      lr
+@ 0x20a8ad0
+
+
+.incbin "./baserom/arm9.bin", 0xa8ad0, 0x20a8ad8 - 0x20a8ad0
+
+
+.arm
+Function_20a8ad8: @ 20a8ad8 :arm
+	ldr     r3, [r0]
+	cmp     r3, #0x1
+	bxne    lr
+	ldrh    r3, [r0, #0x12]
+	orr     r3, r3, #0x8
+	strh    r3, [r0, #0x12]
+	strh    r1, [r0, #0xc]
+	strh    r2, [r0, #0xe]
+	bx      lr
+@ 0x20a8afc
+
+.arm
+Function_20a8afc: @ 20a8afc :arm
+	ldr     r2, [r0]
+	cmp     r2, #0x1
+	bxne    lr
+	ldrh    r2, [r0, #0x12]
+	orr     r2, r2, #0x4
+	strh    r2, [r0, #0x12]
+	strh    r1, [r0, #0x10]
+	bx      lr
+@ 0x20a8b1c
+
+.arm
+Function_20a8b1c: @ 20a8b1c :arm
+	ldr     r3, [r0]
+	cmp     r3, #0x1
+	bxne    lr
+	ldrh    r3, [r0, #0x12]
+	orr     r3, r3, #0x2
+	strh    r3, [r0, #0x12]
+	stmib   r0, {r1,r2}
+	bx      lr
+@ 0x20a8b3c
+
+.arm
+Function_20a8b3c: @ 20a8b3c :arm
+	ldr     r12,  [pc, #0x4] @ [0x20a8b48] (=#0x20a8b4c)
+	str     r1, [r0]
+	bx      r12
+@ 0x20a8b48
+
+.word 0x20a8b4c @ 0x20a8b48
+
+.incbin "./baserom/arm9.bin", 0xa8b4c, 0x20a8b74 - 0x20a8b4c
+
+
+.arm
+Function_20a8b74: @ 20a8b74 :arm
+	mov     r2, #0x0
+	str     r2, [r0]
+	str     r1, [r0, #0x4]
+	mov     r1, #0x1
+	str     r1, [r0, #0x8]
+	ldr     r12,  [pc, #0x4] @ [0x20a8b94] (=#0x20a8b3c)
+	add     r0, r0, #0xc
+	bx      r12
+@ 0x20a8b94
+
+.word Function_20a8b3c @ =0x20a8b3c, 0x20a8b94
+.arm
+Function_20a8b98: @ 20a8b98 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r4, r0
+	ldr     r1, [r4, #0x4]
+	ldrh    r1, [r1, #0x4]
+	cmp     r1, #0x0
+	ldmeqfd sp!, {r3-r7,pc}
+	bl      Function_20a763c
+	mov     r0, r4
+	bl      Function_20a763c
+	mov     r5, r0
+	ldr     r6, [r4, #0x34]
+	ldrh    r1, [r5]
+	mov     r0, r6
+	bl      Function_20a6f74
+	str     r0, [r4, #0x30]
+	ldr     r1, [r4, #0x1c]
+	add     r0, r4, #0x3c
+	ldr     r2, [r1, #0x4]
+	mov     r1, #0x1
+	and     r7, r2, #0xff
+	bl      Function_20a8b3c
+	cmp     r7, #0x0
+	beq     branch_20a8c38
+	cmp     r7, #0x2
+	bne     branch_20a8c10
+	ldrsh   r1, [r5, #0x4]
+	ldrsh   r2, [r5, #0x6]
+	add     r0, r4, #0x3c
+	bl      Function_20a8ad8
+	b       branch_20a8c38
+@ 0x20a8c10
+
+.arm
+branch_20a8c10: @ 20a8c10 :arm
+	add     r0, r4, #0x3c
+	ldmib   r5, {r1,r2}
+	bl      Function_20a8b1c
+	ldrh    r1, [r5, #0x2]
+	add     r0, r4, #0x3c
+	bl      Function_20a8afc
+	ldrsh   r1, [r5, #0xc]
+	ldrsh   r2, [r5, #0xe]
+	add     r0, r4, #0x3c
+	bl      Function_20a8ad8
+.arm
+branch_20a8c38: @ 20a8c38 :arm
+	ldr     r2, [r6, #0xc]
+	cmp     r2, #0x0
+	movne   r0, #0x1
+	moveq   r0, #0x0
+	cmp     r0, #0x0
+	ldmeqfd sp!, {r3-r7,pc}
+	ldr     r1, [r4, #0x38]
+	mvn     r0, #0x0
+	cmp     r1, r0
+	movne   r0, #0x1
+	moveq   r0, #0x0
+	cmp     r0, #0x0
+	ldmeqfd sp!, {r3-r7,pc}
+	ldrh    r1, [r5]
+	ldr     r2, [r2, #0x4]
+	ldr     r0, [r4, #0x38]
+	add     r3, r2, r1, lsl #3
+	ldmia   r3, {r1,r2}
+	bl      Function_20ab3a8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a8c88
+
+.arm
+Function_20a8c88: @ 20a8c88 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	str     r2, [r5, #0x34]
+	mvn     r2, #0x0
+	add     r0, r5, #0x3c
+	mov     r1, #0x1
+	str     r2, [r5, #0x38]
+	bl      Function_20a8b3c
+	mov     r0, r5
+	bl      Function_20a7834
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20a8d48
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20a8cc4
+
+.arm
+Function_20a8cc4: @ 20a8cc4 :arm
+	stmfd   sp!, {r3-r7,lr}
+	sub     sp, sp, #0x10
+	mov     r4, r2
+	ldr     r2, [r4, #0xc]
+	mov     r5, r1
+	ldr     r1, [r2]
+	ldr     r2, [sp, #0x34]
+	str     r1, [sp]
+	ldr     r1, [sp, #0x38]
+	str     r2, [sp, #0x4]
+	mov     r6, r3
+	mov     r7, r0
+	ldr     r12, [sp, #0x3c]
+	str     r1, [sp, #0x8]
+	ldr     r1, [sp, #0x28]
+	ldr     r2, [sp, #0x2c]
+	ldr     r3, [sp, #0x30]
+	mov     r0, r6
+	str     r12, [sp, #0xc]
+	bl      Function_20ab17c
+	str     r6, [r7, #0x38]
+	str     r4, [r7, #0x34]
+	add     r0, r7, #0x3c
+	mov     r1, #0x1
+	str     r6, [r7, #0x38]
+	bl      Function_20a8b3c
+	mov     r0, r7
+	bl      Function_20a7834
+	mov     r0, r7
+	mov     r1, r5
+	bl      Function_20a8d48
+	add     sp, sp, #0x10
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a8d48
+
+.arm
+Function_20a8d48: @ 20a8d48 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	bl      Function_20a78ec
+	mov     r0, r4
+	bl      Function_20a8b98
+	ldmfd   sp!, {r4,pc}
+@ 0x20a8d60
+
+.arm
+Function_20a8d60: @ 20a8d60 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	bl      Function_20a7648
+	cmp     r0, #0x0
+	ldmeqfd sp!, {r4,pc}
+	mov     r0, r4
+	bl      Function_20a8b98
+	ldmfd   sp!, {r4,pc}
+@ 0x20a8d80
+
+
+.incbin "./baserom/arm9.bin", 0xa8d80, 0x20a9104 - 0x20a8d80
+
+
+.arm
+Function_20a9104: @ 20a9104 :arm
+	stmfd   sp!, {r3-r11,lr}
+	mov     r10, r1
+	str     r0, [sp]
+	str     r10, [r0]
+	ldr     r0, [r0, #0x8]
+	mov     r9, r2
+	cmp     r0, #0x1
+	bne     branch_20a926c
+	ldrh    r1, [r10, #0x2]
+	ldr     r0, [sp]
+	mov     r4, #0x0
+	ldr     r5, [r0, #0xc]
+	cmp     r1, #0x0
+	bls     branch_20a9164
+	mov     r3, r4
+	mov     r0, #0x5c
+.arm
+branch_20a9144: @ 20a9144 :arm
+	mla     r1, r4, r0, r5
+	str     r3, [r1, #0x58]
+	ldrh    r2, [r10, #0x2]
+	add     r1, r4, #0x1
+	mov     r1, r1, lsl #16
+	cmp     r2, r1, lsr #16
+	mov     r4, r1, lsr #16
+	bhi     branch_20a9144
+.arm
+branch_20a9164: @ 20a9164 :arm
+	ldrh    r0, [r10]
+	mov     r8, #0x0
+	cmp     r0, #0x0
+	ldmlsfd sp!, {r3-r11,pc}
+.arm
+branch_20a9174: @ 20a9174 :arm
+	ldr     r0, [r10, #0x4]
+	mov     r1, #0x5c
+	add     r6, r0, r8, lsl #3
+	ldrh    r0, [r6, #0x6]
+	and     r0, r0, #255, 24 @ #0xff00
+	mov     r0, r0, lsl #8
+	mov     r0, r0, lsr #16
+	mla     r7, r0, r1, r5
+	ldr     r0, [r7, #0x58]
+	cmp     r0, #0x0
+	bne     branch_20a9250
+	ldr     r0, [sp]
+	ldrh    r1, [r6]
+	ldr     r0, [r0, #0x4]
+	bl      Function_20a6ef0
+	mov     r4, r0
+	mov     r0, r7
+	mov     r1, r4
+	bl      Function_20a8d48
+	mov     r0, #0x1
+	str     r0, [r7, #0xc]
+	ldrh    r0, [r6, #0x6]
+	and     r0, r0, #0xf
+	cmp     r0, #0x1
+	bne     branch_20a9248
+	ldrh    r3, [r4]
+	mov     r6, #0x0
+	mov     r1, r6
+	cmp     r3, #0x0
+	bls     branch_20a9208
+	ldr     r2, [r4, #0xc]
+.arm
+branch_20a91f0: @ 20a91f0 :arm
+	add     r0, r2, r1, lsl #3
+	ldrh    r0, [r0, #0x4]
+	add     r1, r1, #0x1
+	cmp     r1, r3
+	add     r6, r6, r0
+	bcc     branch_20a91f0
+.arm
+branch_20a9208: @ 20a9208 :arm
+	mov     r0, r7
+	bl      Function_20a78fc
+	cmp     r0, #0x0
+	beq     branch_20a9234
+	mov     r0, r9
+	mov     r1, r6
+	bl      Function_20e2178
+	mov     r0, r7
+	mov     r1, r1, lsl #12
+	bl      Function_20a8d60
+	b       branch_20a9248
+@ 0x20a9234
+
+.arm
+branch_20a9234: @ 20a9234 :arm
+	cmp     r9, r6
+	movcc   r6, r9
+	mov     r0, r7
+	mov     r1, r6, lsl #12
+	bl      Function_20a8d60
+.arm
+branch_20a9248: @ 20a9248 :arm
+	mov     r0, #0x1
+	str     r0, [r7, #0x58]
+.arm
+branch_20a9250: @ 20a9250 :arm
+	ldrh    r1, [r10]
+	add     r0, r8, #0x1
+	mov     r0, r0, lsl #16
+	cmp     r1, r0, lsr #16
+	mov     r8, r0, lsr #16
+	bhi     branch_20a9174
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20a926c
+
+.arm
+branch_20a926c: @ 20a926c :arm
+	ldr     r0, [sp]
+	ldrh    r1, [r10]
+	ldr     r11, [r0, #0xc]
+	mov     r7, #0x0
+	cmp     r1, #0x0
+	ldmlsfd sp!, {r3-r11,pc}
+.arm
+branch_20a9284: @ 20a9284 :arm
+	mov     r0, #0x28
+	mul     r2, r7, r0
+	ldr     r3, [r10, #0x4]
+	mov     r0, r7, lsl #3
+	ldrh    r1, [r3, r0]
+	ldr     r0, [sp]
+	ldr     r6, [r11, r2]
+	ldr     r0, [r0, #0x4]
+	add     r5, r3, r7, lsl #3
+	bl      Function_20a6ef0
+	mov     r4, r0
+	mov     r0, r6
+	mov     r1, r4
+	bl      Function_20a8d48
+	mov     r0, #0x1
+	str     r0, [r6, #0xc]
+	ldrh    r0, [r5, #0x6]
+	and     r0, r0, #0xf
+	cmp     r0, #0x1
+	bne     branch_20a9344
+	ldrh    r3, [r4]
+	mov     r8, #0x0
+	mov     r1, r8
+	cmp     r3, #0x0
+	bls     branch_20a9304
+	ldr     r2, [r4, #0xc]
+.arm
+branch_20a92ec: @ 20a92ec :arm
+	add     r0, r2, r1, lsl #3
+	ldrh    r0, [r0, #0x4]
+	add     r1, r1, #0x1
+	cmp     r1, r3
+	add     r8, r8, r0
+	bcc     branch_20a92ec
+.arm
+branch_20a9304: @ 20a9304 :arm
+	mov     r0, r6
+	bl      Function_20a78fc
+	cmp     r0, #0x0
+	beq     branch_20a9330
+	mov     r0, r9
+	mov     r1, r8
+	bl      Function_20e2178
+	mov     r0, r6
+	mov     r1, r1, lsl #12
+	bl      Function_20a8d60
+	b       branch_20a9344
+@ 0x20a9330
+
+.arm
+branch_20a9330: @ 20a9330 :arm
+	cmp     r9, r8
+	movcc   r8, r9
+	mov     r0, r6
+	mov     r1, r8, lsl #12
+	bl      Function_20a8d60
+.arm
+branch_20a9344: @ 20a9344 :arm
+	mov     r0, #0x28
+	mla     r3, r7, r0, r11
+	mov     r0, #0x1
+	str     r0, [r3, #0x8]
+	ldrsh   r1, [r5, #0x2]
+	ldrsh   r2, [r5, #0x4]
+	add     r0, r3, #0xc
+	bl      Function_20a8ad8
+	add     r0, r7, #0x1
+	mov     r0, r0, lsl #16
+	ldrh    r1, [r10]
+	mov     r7, r0, lsr #16
+	cmp     r1, r0, lsr #16
+	bhi     branch_20a9284
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20a9380
+
+.arm
+Function_20a9380: @ 20a9380 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r4, r0
+	bl      Function_20a78ec
+	mov     r0, #0x0
+	strh    r0, [r4, #0x30]
+	ldr     r0, [r4, #0x4]
+	ldrh    r0, [r0, #0x4]
+	cmp     r0, #0x0
+	ldmeqfd sp!, {r3-r7,pc}
+	mov     r0, r4
+	bl      Function_20a763c
+	mov     r5, r0
+	ldrh    r1, [r5]
+	ldr     r0, [r4, #0x44]
+	bl      Function_20a7100
+	ldr     r1, [r4, #0x1c]
+	mov     r7, r0
+	ldr     r1, [r1, #0x4]
+	add     r0, r4, #0x48
+	and     r6, r1, #0xff
+	mov     r1, #0x1
+	bl      Function_20a8b3c
+	cmp     r6, #0x0
+	beq     branch_20a9424
+	cmp     r6, #0x2
+	bne     branch_20a93fc
+	ldrsh   r1, [r5, #0x4]
+	ldrsh   r2, [r5, #0x6]
+	add     r0, r4, #0x48
+	bl      Function_20a8ad8
+	b       branch_20a9424
+@ 0x20a93fc
+
+.arm
+branch_20a93fc: @ 20a93fc :arm
+	add     r0, r4, #0x48
+	ldmib   r5, {r1,r2}
+	bl      Function_20a8b1c
+	ldrh    r1, [r5, #0x2]
+	add     r0, r4, #0x48
+	bl      Function_20a8afc
+	ldrsh   r1, [r5, #0xc]
+	ldrsh   r2, [r5, #0xe]
+	add     r0, r4, #0x48
+	bl      Function_20a8ad8
+.arm
+branch_20a9424: @ 20a9424 :arm
+	ldrh    r2, [r4, #0x30]
+	mov     r1, r7
+	add     r0, r4, #0x34
+	bl      Function_20a9104
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20a9438
+
+.arm
+Function_20a9438: @ 20a9438 :arm
+	stmfd   sp!, {r4-r6,lr}
+	mov     r4, r0
+	ldrh    r0, [r4]
+	mov     r5, #0x0
+	mov     r6, r5
+	cmp     r0, #0x0
+	bls     branch_20a9484
+.arm
+branch_20a9454: @ 20a9454 :arm
+	mov     r0, r4
+	mov     r1, r6
+	bl      Function_20a7100
+	ldrh    r0, [r0]
+	ldrh    r1, [r4]
+	cmp     r0, r5
+	movhi   r5, r0
+	add     r0, r6, #0x1
+	mov     r0, r0, lsl #16
+	cmp     r1, r0, lsr #16
+	mov     r6, r0, lsr #16
+	bhi     branch_20a9454
+.arm
+branch_20a9484: @ 20a9484 :arm
+	mov     r0, r5
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20a948c
+
+
+.incbin "./baserom/arm9.bin", 0xa948c, 0x20a96c0 - 0x20a948c
+
+
+.arm
+Function_20a96c0: @ 20a96c0 :arm
+	stmfd   sp!, {r3-r11,lr}
+	mov     r5, #0x0
+	str     r5, [r0, #0x3c]
+	ldr     r7, [sp, #0x28]
+	str     r5, [r0, #0x34]
+	mov     r10, r1
+	str     r7, [r0, #0x38]
+	str     r0, [sp]
+	movs    r8, r3
+	mov     r9, r2
+	str     r10, [r0, #0x40]
+	ldr     r11, [sp, #0x2c]
+	beq     branch_20a9744
+.arm
+branch_20a96f4: @ 20a96f4 :arm
+	mov     r0, #0x28
+	mul     r4, r5, r0
+	mov     r1, #0x1
+	add     r0, r10, r4
+	bl      Function_20a8b74
+	mov     r0, #0x58
+	mla     r6, r5, r0, r9
+	mov     r0, r7
+	mov     r1, #0x0
+	str     r6, [r10, r4]
+	bl      Function_20a6ef0
+	mov     r1, r0
+	mov     r0, r6
+	mov     r2, r11
+	bl      Function_20a8c88
+	add     r0, r5, #0x1
+	mov     r0, r0, lsl #16
+	cmp     r8, r0, lsr #16
+	mov     r5, r0, lsr #16
+	bhi     branch_20a96f4
+.arm
+branch_20a9744: @ 20a9744 :arm
+	ldr     r0, [sp]
+	bl      Function_20a7834
+	ldr     r0, [sp]
+	ldr     r3, [sp, #0x30]
+	ldr     r2, [sp]
+	add     r0, r0, #0x48
+	mov     r1, #0x1
+	str     r3, [r2, #0x44]
+	bl      Function_20a8b3c
+	ldr     r0, [sp]
+	mov     r1, #0x0
+	strh    r1, [r0, #0x30]
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20a9778
+
+
+.incbin "./baserom/arm9.bin", 0xa9778, 0x20aa3f4 - 0x20a9778
+
+
+.arm
+Function_20aa3f4: @ 20aa3f4 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r4, r0
+	bl      Function_20ac354
+	mov     r6, #0x0
+	str     r6, [r4, #0x70]
+	str     r6, [r4, #0x74]
+	str     r6, [r4, #0x78]
+	str     r6, [r4, #0x7c]
+	str     r6, [r4, #0x80]
+	str     r6, [r4, #0x84]
+	strh    r6, [r4, #0x88]
+	strh    r6, [r4, #0x8a]
+	str     r6, [r4, #0x8c]
+	str     r6, [r4, #0x90]
+	strh    r6, [r4, #0x94]
+	ldr     r1,  [pc, #0x64] @ [0x20aa49c] (=#0x21c4ac8)
+	ldr     r2,  [pc, #0x64] @ [0x20aa4a0] (=#0xfffe)
+	ldr     r0,  [pc, #0x64] @ [0x20aa4a4] (=#0x2100ea4)
+	ldr     r7,  [pc, #0x64] @ [0x20aa4a8] (=#0x21c5258)
+	str     r6, [r1, #0xc]
+	strh    r2, [r0]
+	mvn     r5, #0x0
+	mov     r4, #0x10
+.arm
+branch_20aa450: @ 20aa450 :arm
+	mov     r0, r5
+	mov     r2, r4
+	add     r1, r7, #0x10
+	bl      Function_20c4bb8
+	add     r6, r6, #0x1
+	cmp     r6, #0x20
+	add     r7, r7, #0x20
+	blt     branch_20aa450
+	ldr     r3,  [pc, #0x24] @ [0x20aa49c] (=#0x21c4ac8)
+	mov     r0, #0x0
+	strh    r0, [r3]
+	ldr     r1,  [pc, #0x28] @ [0x20aa4ac] (=#0x21c4b58)
+	mov     r2, #1, 24 @ #0x100
+	strh    r0, [r3, #0x2]
+	bl      Function_20c4bb8
+	ldr     r0,  [pc, #0x8] @ [0x20aa49c] (=#0x21c4ac8)
+	mov     r1, #0x0
+	str     r1, [r0, #0x4]
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20aa49c
+
+.word 0x21c4ac8 @ 0x20aa49c
+.word 0xfffe @ 0x20aa4a0
+.word 0x2100ea4 @ 0x20aa4a4
+.word 0x21c5258 @ 0x20aa4a8
+.word 0x21c4b58 @ 0x20aa4ac
+.arm
+Function_20aa4b0: @ 20aa4b0 :arm
+	ldr     r2, [r0, #0x70]
+	str     r2, [r1, #0x30]
+	str     r1, [r0, #0x70]
+	bx      lr
+@ 0x20aa4c0
+
+.arm
+Function_20aa4c0: @ 20aa4c0 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	mov     r1, r4
+	mov     r0, #0x0
+	mov     r2, #0x48
+	bl      Function_20c4af0
+	mov     r0, #0x1
+	str     r0, [r4, #0x10]
+	mov     r0, #0x3
+	ldr     r1,  [pc, #0x20] @ [0x20aa50c] (=#0x20a995c)
+	str     r0, [r4, #0x14]
+	ldr     r0,  [pc, #0x1c] @ [0x20aa510] (=#0x20a9a70)
+	str     r1, [r4, #0x18]
+	ldr     r1,  [pc, #0x18] @ [0x20aa514] (=#0x20a9af4)
+	str     r0, [r4, #0x1c]
+	ldr     r0,  [pc, #0x14] @ [0x20aa518] (=#0x20a9ce0)
+	str     r1, [r4, #0x20]
+	str     r0, [r4, #0x24]
+	ldmfd   sp!, {r4,pc}
+@ 0x20aa50c
+
+.word 0x20a995c @ 0x20aa50c
+.word 0x20a9a70 @ 0x20aa510
+.word 0x20a9af4 @ 0x20aa514
+.word 0x20a9ce0 @ 0x20aa518
+
+
+.incbin "./baserom/arm9.bin", 0xaa51c, 0x20ab164 - 0x20aa51c
+
+
+.arm
+Function_20ab164: @ 20ab164 :arm
+	ldr     r2,  [pc, #0xc] @ [0x20ab178] (=#0x21c5a60)
+	mov     r1, #0x30
+	ldr     r2, [r2, #0x8]
+	mla     r0, r1, r0, r2
+	bx      lr
+@ 0x20ab178
+
+.word 0x21c5a60 @ 0x20ab178
+.arm
+Function_20ab17c: @ 20ab17c :arm
+	stmfd   sp!, {r3-r7,lr}
+	ldr     r12,  [pc, #0x94] @ [0x20ab21c] (=#0x21c5a60)
+	mov     r4, #0x30
+	ldr     r12, [r12, #0x8]
+	mov     r7, r1
+	mla     r4, r0, r4, r12
+	mov     r0, r4
+	mov     r6, r2
+	mov     r5, r3
+	bl      Function_20a8aac
+	mvn     r0, #0x0
+	cmp     r7, r0
+	beq     branch_20ab1c0
+	mov     r0, r4
+	mov     r2, r7
+	mov     r1, #0x0
+	bl      Function_20a8ac8
+.arm
+branch_20ab1c0: @ 20ab1c0 :arm
+	mvn     r0, #0x0
+	cmp     r6, r0
+	beq     branch_20ab1dc
+	mov     r0, r4
+	mov     r2, r6
+	mov     r1, #0x1
+	bl      Function_20a8ac8
+.arm
+branch_20ab1dc: @ 20ab1dc :arm
+	mvn     r0, #0x0
+	cmp     r5, r0
+	beq     branch_20ab1f8
+	mov     r0, r4
+	mov     r2, r5
+	mov     r1, #0x2
+	bl      Function_20a8ac8
+.arm
+branch_20ab1f8: @ 20ab1f8 :arm
+	ldr     r1, [sp, #0x18]
+	ldr     r0, [sp, #0x1c]
+	str     r1, [r4, #0xc]
+	ldr     r1, [sp, #0x20]
+	str     r0, [r4, #0x10]
+	ldr     r0, [sp, #0x24]
+	str     r1, [r4, #0x14]
+	str     r0, [r4, #0x18]
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20ab21c
+
+.word 0x21c5a60 @ 0x20ab21c
+
+.incbin "./baserom/arm9.bin", 0xab220, 0x20ab3a8 - 0x20ab220
+
+
+.arm
+Function_20ab3a8: @ 20ab3a8 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r1
+	mov     r4, r2
+	bl      Function_20ab164
+	mvn     r1, #0x0
+	str     r1, [r0, #0x24]
+	str     r5, [r0, #0x28]
+	str     r4, [r0, #0x2c]
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ab3cc
+
+.arm
+Function_20ab3cc: @ 20ab3cc :arm
+	ldr     r1,  [pc, #0x4c] @ [0x20ab420] (=#0x21c5a60)
+	mov     r0, #0x0
+	ldr     r3, [r1, #0x4]
+	cmp     r3, #0x0
+	bls     branch_20ab418
+	ldr     r12, [r1, #0x8]
+	mov     r2, r12
+.arm
+branch_20ab3e8: @ 20ab3e8 :arm
+	ldr     r1, [r2, #0x1c]
+	cmp     r1, #0x1
+	beq     branch_20ab408
+	mov     r1, #0x30
+	mla     r1, r0, r1, r12
+	mov     r2, #0x1
+	str     r2, [r1, #0x1c]
+	bx      lr
+@ 0x20ab408
+
+.arm
+branch_20ab408: @ 20ab408 :arm
+	add     r0, r0, #0x1
+	cmp     r0, r3
+	add     r2, r2, #0x30
+	bcc     branch_20ab3e8
+.arm
+branch_20ab418: @ 20ab418 :arm
+	mvn     r0, #0x0
+	bx      lr
+@ 0x20ab420
+
+.word 0x21c5a60 @ 0x20ab420
+
+
+
+.arm
+Function_20ab424: @ 20ab424 :arm
+	stmfd   sp!, {r4,lr}
+	ldr     r2,  [pc, #0x3c] @ [0x20ab46c] (=#0x21c5a60)
+	mov     r1, #0x30
+	ldr     r2, [r2, #0x8]
+	mla     r4, r0, r1, r2
+	mov     r0, r4
+	bl      Function_20a8aac
+	mov     r0, #0x0
+	str     r0, [r4, #0xc]
+	str     r0, [r4, #0x10]
+	str     r0, [r4, #0x14]
+	str     r0, [r4, #0x18]
+	str     r0, [r4, #0x1c]
+	str     r0, [r4, #0x20]
+	str     r0, [r4, #0x24]
+	str     r0, [r4, #0x28]
+	str     r0, [r4, #0x2c]
+	ldmfd   sp!, {r4,pc}
+@ 0x20ab46c
+
+.word 0x21c5a60 @ 0x20ab46c
+
+.incbin "./baserom/arm9.bin", 0xab470, 0x20ac354 - 0x20ab470
+
+
+.arm
+Function_20ac354: @ 20ac354 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	mov     r1, r4
+	mov     r0, #0x0
+	mov     r2, #0x70
+	bl      Function_20c4af0
+	mov     r1, #0x0
+	str     r1, [r4]
+	mov     r0, #0x2
+	stmib   r4, {r0,r1}
+	str     r1, [r4, #0xc]
+	str     r1, [r4, #0x24]
+	mov     r0, #0x1
+	str     r0, [r4, #0x30]
+	str     r1, [r4, #0x28]
+	ldmfd   sp!, {r4,pc}
+@ 0x20ac394
+
+
+.incbin "./baserom/arm9.bin", 0xac394, 0x20ac3ac - 0x20ac394
+
+
+.arm
+Function_20ac3ac: @ 20ac3ac :arm
+	str     r1, [r0, #0x4]
+	bx      lr
+@ 0x20ac3b4
+
+
+.incbin "./baserom/arm9.bin", 0xac3b4, 0x20ac46c - 0x20ac3b4
+
+
+.arm
+Function_20ac46c: @ 20ac46c :arm
+	cmp     r1, #0x0
+	ldr     r1, [r0, #0x24]
+	orrne   r1, r1, #0x1
+	biceq   r1, r1, #0x1
+	str     r1, [r0, #0x24]
+	ldr     r1, [r0, #0x24]
+	cmp     r2, #0x0
+	orrne   r1, r1, #0x2
+	biceq   r1, r1, #0x2
+	str     r1, [r0, #0x24]
+	bx      lr
+@ 0x20ac498
+
+
+.incbin "./baserom/arm9.bin", 0xac498, 0x20ae490 - 0x20ac498
+
+
+.arm
+Function_20ae490: @ 20ae490 :arm
+	cmp     r0, #0x0
+	cmpne   r1, #0x0
+	moveq   r0, #0x0
+	bxeq    lr
+	ldrb    r0, [r0]
+	cmp     r0, #0x4a
+	beq     branch_20ae4d4
+	cmp     r0, #0x4d
+	beq     branch_20ae4c0
+	cmp     r0, #0x56
+	beq     branch_20ae4d4
+	b       branch_20ae4e8
+@ 0x20ae4c0
+
+.arm
+branch_20ae4c0: @ 20ae4c0 :arm
+	ldrb    r0, [r1, #0x18]
+	mov     r0, r0, lsl #1
+	add     r0, r0, #0x1c
+	bic     r0, r0, #0x3
+	bx      lr
+@ 0x20ae4d4
+
+.arm
+branch_20ae4d4: @ 20ae4d4 :arm
+	ldrb    r0, [r1, #0x17]
+	mov     r0, r0, lsl #1
+	add     r0, r0, #0x1c
+	bic     r0, r0, #0x3
+	bx      lr
+@ 0x20ae4e8
+
+.arm
+branch_20ae4e8: @ 20ae4e8 :arm
+	mov     r0, #0x0
+	bx      lr
+@ 0x20ae4f0
+
+.arm
+Function_20ae4f0: @ 20ae4f0 :arm
+	stmfd   sp!, {r3-r7,lr}
+	mov     r12, #0x0
+	str     r12, [r0]
+	str     r1, [r0, #0x8]
+	str     r12, [r0, #0x10]
+	mov     r4, #0x7f
+	strb    r4, [r0, #0x18]
+	mov     r4, #1, 20 @ #0x1000
+	str     r4, [r0, #0x4]
+	str     r3, [r0, #0x14]
+	strb    r12, [r0, #0x19]
+	ldr     r3,  [pc, #0x60] @ [0x20ae584] (=#0x2100ec8)
+	str     r12, [r0, #0xc]
+	ldr     r7, [r3]
+	cmp     r7, #0x0
+	ldmlsfd sp!, {r3-r7,pc}
+	ldrb    r6, [r1]
+	ldr     r4,  [pc, #0x4c] @ [0x20ae588] (=#0x2100eec)
+.arm
+branch_20ae538: @ 20ae538 :arm
+	ldrb    r3, [r4, r12, lsl #0x3]
+	mov     r5, r12, lsl #3
+	cmp     r6, r3
+	bne     branch_20ae574
+	add     r3, r4, r5
+	ldrh    lr, [r1, #0x2]
+	ldrh    r3, [r3, #0x2]
+	cmp     lr, r3
+	bne     branch_20ae574
+	ldr     r3,  [pc, #0x28] @ [0x20ae58c] (=#0x2100ef0)
+	ldr     r3, [r3, r5]
+	cmp     r3, #0x0
+	ldmeqfd sp!, {r3-r7,pc}
+	blx     r3
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20ae574
+
+.arm
+branch_20ae574: @ 20ae574 :arm
+	add     r12, r12, #0x1
+	cmp     r12, r7
+	bcc     branch_20ae538
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20ae584
+
+.word 0x2100ec8 @ 0x20ae584
+.word 0x2100eec @ 0x20ae588
+.word 0x2100ef0 @ 0x20ae58c
+
+
+
+.incbin "./baserom/arm9.bin", 0xae590, 0x20ae608 - 0x20ae590
+
+
+.arm
+Function_20ae608: @ 20ae608 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	mov     r1, r5
+	mov     r0, #0x0
+	mov     r2, #0x54
+	bl      Function_20c4b4c
+	ldr     r0,  [pc, #0x24] @ [0x20ae650] (=#0x2100ee8)
+	ldr     r1,  [pc, #0x24] @ [0x20ae654] (=#0x2100ee4)
+	ldr     r2, [r0]
+	ldr     r0,  [pc, #0x20] @ [0x20ae658] (=#0x2100ee0)
+	str     r2, [r5, #0xc]
+	ldr     r1, [r1]
+	str     r1, [r5, #0x14]
+	ldr     r0, [r0]
+	str     r0, [r5, #0x1c]
+	str     r4, [r5, #0x4]
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae650
+
+.word 0x2100ee8 @ 0x20ae650
+.word 0x2100ee4 @ 0x20ae654
+.word 0x2100ee0 @ 0x20ae658
+
+
+.arm
+Function_20ae65c: @ 20ae65c :arm
+	ldr     r12, [r0]
+	cmp     r12, #0x0
+	streq   r1, [r0]
+	bxeq    lr
+	ldr     r2, [r12, #0x10]
+	cmp     r2, #0x0
+	bne     branch_20ae6bc
+	ldrb    r3, [r12, #0x18]
+	ldrb    r2, [r1, #0x18]
+	cmp     r3, r2
+	bls     branch_20ae6b4
+	ldr     r2, [r1, #0x10]
+	mov     r3, r1
+	cmp     r2, #0x0
+	beq     branch_20ae6a8
+.arm
+branch_20ae698: @ 20ae698 :arm
+	ldr     r3, [r3, #0x10]
+	ldr     r2, [r3, #0x10]
+	cmp     r2, #0x0
+	bne     branch_20ae698
+.arm
+branch_20ae6a8: @ 20ae6a8 :arm
+	str     r12, [r3, #0x10]
+	str     r1, [r0]
+	bx      lr
+@ 0x20ae6b4
+
+.arm
+branch_20ae6b4: @ 20ae6b4 :arm
+	str     r1, [r12, #0x10]
+	bx      lr
+@ 0x20ae6bc
+
+.arm
+branch_20ae6bc: @ 20ae6bc :arm
+	beq     branch_20ae70c
+	ldrb    r3, [r1, #0x18]
+.arm
+branch_20ae6c4: @ 20ae6c4 :arm
+	ldrb    r0, [r2, #0x18]
+	cmp     r0, r3
+	bcc     branch_20ae6fc
+	ldr     r0, [r1, #0x10]
+	mov     r3, r1
+	cmp     r0, #0x0
+	beq     branch_20ae6f0
+.arm
+branch_20ae6e0: @ 20ae6e0 :arm
+	ldr     r3, [r3, #0x10]
+	ldr     r0, [r3, #0x10]
+	cmp     r0, #0x0
+	bne     branch_20ae6e0
+.arm
+branch_20ae6f0: @ 20ae6f0 :arm
+	str     r1, [r12, #0x10]
+	str     r2, [r3, #0x10]
+	bx      lr
+@ 0x20ae6fc
+
+.arm
+branch_20ae6fc: @ 20ae6fc :arm
+	mov     r12, r2
+	ldr     r2, [r2, #0x10]
+	cmp     r2, #0x0
+	bne     branch_20ae6c4
+.arm
+branch_20ae70c: @ 20ae70c :arm
+	str     r1, [r12, #0x10]
+	bx      lr
+@ 0x20ae714
+
+.arm
+Function_20ae714: @ 20ae714 :arm
+	stmfd   sp!, {r3-r5,lr}
+	cmp     r1, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+	mov     r3, #0x1
+	mov     r4, #0x0
+.arm
+branch_20ae728: @ 20ae728 :arm
+	ldrb    r2, [r1, #0x19]
+	mov     r5, r4
+	cmp     r2, #0x0
+	ble     branch_20ae76c
+.arm
+branch_20ae738: @ 20ae738 :arm
+	add     r2, r1, r5, lsl #1
+	ldrh    r2, [r2, #0x1a]
+	tst     r2, #1, 24 @ #0x100
+	beq     branch_20ae75c
+	mov     lr, r5, asr #5
+	ldr     r12, [r0, lr, lsl #0x2]
+	and     r2, r5, #0x1f
+	orr     r2, r12, r3, lsl r2
+	str     r2, [r0, lr, lsl #0x2]
+.arm
+branch_20ae75c: @ 20ae75c :arm
+	ldrb    r2, [r1, #0x19]
+	add     r5, r5, #0x1
+	cmp     r5, r2
+	blt     branch_20ae738
+.arm
+branch_20ae76c: @ 20ae76c :arm
+	ldr     r1, [r1, #0x10]
+	cmp     r1, #0x0
+	bne     branch_20ae728
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae77c
+
+.arm
+Function_20ae77c: @ 20ae77c :arm
+	stmfd   sp!, {r3-r5,lr}
+	movs    r4, r1
+	mov     r5, r0
+	ldrne   r0, [r4, #0x8]
+	cmpne   r0, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+	ldrb    r0, [r0]
+	cmp     r0, #0x4a
+	beq     branch_20ae7cc
+	cmp     r0, #0x4d
+	beq     branch_20ae7b4
+	cmp     r0, #0x56
+	beq     branch_20ae7e4
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae7b4
+
+.arm
+branch_20ae7b4: @ 20ae7b4 :arm
+	add     r0, r5, #0x3c
+	bl      Function_20ae714
+	mov     r1, r4
+	add     r0, r5, #0x8
+	bl      Function_20ae65c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae7cc
+
+.arm
+branch_20ae7cc: @ 20ae7cc :arm
+	add     r0, r5, #0x44
+	bl      Function_20ae714
+	mov     r1, r4
+	add     r0, r5, #0x10
+	bl      Function_20ae65c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae7e4
+
+.arm
+branch_20ae7e4: @ 20ae7e4 :arm
+	add     r0, r5, #0x4c
+	bl      Function_20ae714
+	mov     r1, r4
+	add     r0, r5, #0x18
+	bl      Function_20ae65c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ae7fc
+
+
+.incbin "./baserom/arm9.bin", 0xae7fc, 0x20ae9b8 - 0x20ae7fc
+
+
+.arm
+Function_20ae9b8: @ 20ae9b8 :arm
+	cmp     r1, #0x0
+	beq     branch_20ae9dc
+	ldrh    r12, [r0, #0x10]
+	mov     r3, #0x0
+	bic     r12, r12, #0x1
+	strh    r12, [r0, #0x10]
+	ldr     r12, [r0, #0x8]
+	str     r12, [r1]
+	str     r3, [r0, #0x8]
+.arm
+branch_20ae9dc: @ 20ae9dc :arm
+	cmp     r2, #0x0
+	bxeq    lr
+	ldrh    r3, [r0, #0x20]
+	mov     r1, #0x0
+	bic     r3, r3, #0x1
+	strh    r3, [r0, #0x20]
+	ldr     r3, [r0, #0x18]
+	str     r3, [r2]
+	str     r1, [r0, #0x18]
+	bx      lr
+@ 0x20aea04
+
+
+.incbin "./baserom/arm9.bin", 0xaea04, 0x20aea70 - 0x20aea04
+
+
+.arm
+Function_20aea70: @ 20aea70 :arm
+	ldrh    r2, [r0, #0x32]
+	mov     r1, #0x0
+	bic     r2, r2, #0x1
+	strh    r2, [r0, #0x32]
+	ldr     r2, [r0, #0x2c]
+	str     r1, [r0, #0x2c]
+	mov     r0, r2
+	bx      lr
+@ 0x20aea90
+
+
+.incbin "./baserom/arm9.bin", 0xaea90, 0x20af480 - 0x20aea90
+
+
+.arm
+Function_20af480: @ 20af480 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x28] @ [0x20af4b4] (=#0x21c5a8c)
+	ldr     r1,  [pc, #0x28] @ [0x20af4b8] (=#0x21c5a8c)
+	ldr     r0, [r0]
+	add     r1, r1, #0x4
+	mov     r2, #0x3e
+	bl      Function_20b275c
+	ldr     r0,  [pc, #0x10] @ [0x20af4b4] (=#0x21c5a8c)
+	ldr     r1, [r0, #0xfc]
+	bic     r1, r1, #0x1
+	bic     r1, r1, #0x2
+	str     r1, [r0, #0xfc]
+	ldmfd   sp!, {r3,pc}
+@ 0x20af4b4
+
+.word 0x21c5a8c @ 0x20af4b4
+.word 0x21c5a8c @ 0x20af4b8
+.arm
+Function_20af4bc: @ 20af4bc :arm
+	cmp     r0, #0x0
+	bxeq    lr
+	ldr     r3,  [pc, #0x18] @ [0x20af4e4] (=#0x21c5b6c)
+	ldmia   r0, {r0-r2}
+	stmia   r3, {r0-r2}
+	ldr     r0,  [pc, #0x10] @ [0x20af4e8] (=#0x21c5a8c)
+	ldr     r1, [r0, #0xfc]
+	bic     r1, r1, #0xa4
+	str     r1, [r0, #0xfc]
+	bx      lr
+@ 0x20af4e4
+
+.word 0x21c5b6c @ 0x20af4e4
+.word 0x21c5a8c @ 0x20af4e8
+.arm
+Function_20af4ec: @ 20af4ec :arm
+	cmp     r0, #0x0
+	bxeq    lr
+	ldr     r3,  [pc, #0x18] @ [0x20af514] (=#0x21c5b78)
+	ldmia   r0, {r0-r2}
+	stmia   r3, {r0-r2}
+	ldr     r0,  [pc, #0x10] @ [0x20af518] (=#0x21c5a8c)
+	ldr     r1, [r0, #0xfc]
+	bic     r1, r1, #0xa4
+	str     r1, [r0, #0xfc]
+	bx      lr
+@ 0x20af514
+
+.word 0x21c5b78 @ 0x20af514
+.word 0x21c5a8c @ 0x20af518
+
+.incbin "./baserom/arm9.bin", 0xaf51c, 0x20af5e0 - 0x20af51c
 
 
 .arm
@@ -119913,7 +130360,7 @@ branch_20af6dc: @ 20af6dc :arm
 
 
 .arm
-Startpoint_20afcb0: @ 20afcb0 :arm
+Function_20afcb0: @ 20afcb0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r5,  [pc, #0x38] @ [0x20afcf4] (=#0x2101064)
 	mov     r4, r0
@@ -119939,7 +130386,226 @@ Startpoint_20afce4: @ 20afce4 :arm
 
 .word 0x2101064 @ 0x20afcf4
 
-.incbin "./baserom/arm9.bin", 0xafcf8, 0x20affd8 - 0x20afcf8
+.arm
+Function_20afcf8: @ 20afcf8 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	mov     r1, r5
+	mov     r0, #0x0
+	mov     r2, #98, 30 @ #0x188
+	bl      Function_20c4bb8
+	mov     r0, #0x1
+	str     r0, [r5, #0xc4]
+	str     r0, [r5, #0x8]
+	ldr     r0, [r4, #0x30]
+	ldr     r2,  [pc, #0x15c] @ [0x20afe88] (=#0x2100f48)
+	cmp     r0, #0x0
+	ldreq   r1, [r4, #0x4]
+	ldreq   r0, [r1, #0x4]
+	addeq   r0, r1, r0
+	str     r0, [r5]
+	str     r4, [r5, #0x4]
+	ldr     r0, [r4, #0x4]
+	cmp     r0, #0x0
+	addne   r0, r0, #0x40
+	moveq   r0, #0x0
+	str     r0, [r5, #0xd4]
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x0
+	ldrne   r0, [r1, #0x8]
+	cmpne   r0, #0x0
+	addne   r0, r1, r0
+	moveq   r0, #0x0
+	str     r0, [r5, #0xd8]
+	ldr     r1, [r4, #0x4]
+	cmp     r1, #0x0
+	ldrne   r0, [r1, #0xc]
+	cmpne   r0, #0x0
+	addne   r0, r1, r0
+	moveq   r0, #0x0
+	str     r0, [r5, #0xdc]
+	ldr     r0, [r4, #0x4]
+	ldr     r1,  [pc, #0xf4] @ [0x20afe8c] (=#0x2100f3c)
+	ldrb    r3, [r0, #0x15]
+	ldr     r0,  [pc, #0xf0] @ [0x20afe90] (=#0x2100f54)
+	ldr     r2, [r2, r3, lsl #0x2]
+	str     r2, [r5, #0xe8]
+	ldr     r2, [r4, #0x4]
+	ldrb    r2, [r2, #0x15]
+	ldr     r1, [r1, r2, lsl #0x2]
+	str     r1, [r5, #0xec]
+	ldr     r1, [r4, #0x4]
+	ldrb    r1, [r1, #0x16]
+	ldr     r0, [r0, r1, lsl #0x2]
+	str     r0, [r5, #0xf0]
+	ldr     r0, [r4, #0x4]
+	ldr     r0, [r0, #0x1c]
+	str     r0, [r5, #0xe0]
+	ldr     r0, [r4, #0x4]
+	ldr     r0, [r0, #0x20]
+	str     r0, [r5, #0xe4]
+	ldr     r1, [r4, #0x20]
+	cmp     r1, #0x0
+	beq     branch_20afe0c
+	ldrb    r0, [r4, #0x24]
+	cmp     r0, #0x20
+	bcs     branch_20afe0c
+	add     r0, r5, r0, lsl #2
+	str     r1, [r0, #0xc]
+	ldrb    r0, [r4, #0x24]
+	ldrb    r1, [r4, #0x25]
+	add     r0, r5, r0
+	strb    r1, [r0, #0x8c]
+.arm
+branch_20afe0c: @ 20afe0c :arm
+	ldr     r0, [r4]
+	tst     r0, #0x1
+	ldrne   r0, [r5, #0x8]
+	orrne   r0, r0, #0x80
+	strne   r0, [r5, #0x8]
+	ldr     r0, [r4]
+	tst     r0, #0x2
+	ldrne   r0, [r5, #0x8]
+	orrne   r0, r0, #1, 24 @ #0x100
+	strne   r0, [r5, #0x8]
+	ldr     r0, [r4]
+	tst     r0, #0x4
+	ldrne   r0, [r5, #0x8]
+	orrne   r0, r0, #2, 24 @ #0x200
+	strne   r0, [r5, #0x8]
+	ldr     r0, [r4]
+	tst     r0, #0x8
+	ldrne   r0, [r5, #0x8]
+	orrne   r0, r0, #1, 22 @ #0x400
+	strne   r0, [r5, #0x8]
+	ldr     r1, [r4, #0x28]
+	cmp     r1, #0x0
+	beq     branch_20afe70
+	mov     r0, r5
+	blx     r1
+.arm
+branch_20afe70: @ 20afe70 :arm
+	mov     r0, r5
+	bl      Function_20afcb0
+	ldr     r0, [r4]
+	bic     r0, r0, #0x1
+	str     r0, [r4]
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20afe88
+
+.word 0x2100f48 @ 0x20afe88
+.word 0x2100f3c @ 0x20afe8c
+.word 0x2100f54 @ 0x20afe90
+.arm
+Function_20afe94: @ 20afe94 :arm
+	stmfd   sp!, {r3-r5,lr}
+	cmp     r1, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+	mov     r3, #0x1
+	mov     r4, #0x0
+.arm
+branch_20afea8: @ 20afea8 :arm
+	ldrb    r2, [r1, #0x19]
+	mov     r5, r4
+	cmp     r2, #0x0
+	ble     branch_20afeec
+.arm
+branch_20afeb8: @ 20afeb8 :arm
+	add     r2, r1, r5, lsl #1
+	ldrh    r2, [r2, #0x1a]
+	tst     r2, #1, 24 @ #0x100
+	beq     branch_20afedc
+	mov     lr, r5, asr #5
+	ldr     r12, [r0, lr, lsl #0x2]
+	and     r2, r5, #0x1f
+	orr     r2, r12, r3, lsl r2
+	str     r2, [r0, lr, lsl #0x2]
+.arm
+branch_20afedc: @ 20afedc :arm
+	ldrb    r2, [r1, #0x19]
+	add     r5, r5, #0x1
+	cmp     r5, r2
+	blt     branch_20afeb8
+.arm
+branch_20afeec: @ 20afeec :arm
+	ldr     r1, [r1, #0x10]
+	cmp     r1, #0x0
+	bne     branch_20afea8
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20afefc
+
+.arm
+Function_20afefc: @ 20afefc :arm
+	stmfd   sp!, {r4,lr}
+	sub     sp, sp, #98, 30 @ #0x188
+	mov     r4, r0
+	ldr     r0, [r4]
+	and     r0, r0, #0x10
+	cmp     r0, #0x10
+	bne     branch_20aff90
+	add     r1, r4, #0x3c
+	mov     r0, #0x0
+	mov     r2, #0x8
+	bl      Function_20c4b4c
+	add     r1, r4, #0x44
+	mov     r0, #0x0
+	mov     r2, #0x8
+	bl      Function_20c4b4c
+	add     r1, r4, #0x4c
+	mov     r0, #0x0
+	mov     r2, #0x8
+	bl      Function_20c4b4c
+	ldr     r1, [r4, #0x8]
+	cmp     r1, #0x0
+	beq     branch_20aff5c
+	add     r0, r4, #0x3c
+	bl      Function_20afe94
+.arm
+branch_20aff5c: @ 20aff5c :arm
+	ldr     r1, [r4, #0x10]
+	cmp     r1, #0x0
+	beq     branch_20aff70
+	add     r0, r4, #0x44
+	bl      Function_20afe94
+.arm
+branch_20aff70: @ 20aff70 :arm
+	ldr     r1, [r4, #0x18]
+	cmp     r1, #0x0
+	beq     branch_20aff84
+	add     r0, r4, #0x4c
+	bl      Function_20afe94
+.arm
+branch_20aff84: @ 20aff84 :arm
+	ldr     r0, [r4]
+	bic     r0, r0, #0x10
+	str     r0, [r4]
+.arm
+branch_20aff90: @ 20aff90 :arm
+	ldr     r2,  [pc, #0x3c] @ [0x20affd4] (=#0x21c5cf0)
+	ldr     r0, [r2]
+	cmp     r0, #0x0
+	beq     branch_20affb0
+	mov     r1, r4
+	bl      Function_20afcf8
+	add     sp, sp, #98, 30 @ #0x188
+	ldmfd   sp!, {r4,pc}
+@ 0x20affb0
+
+.arm
+branch_20affb0: @ 20affb0 :arm
+	add     r0, sp, #0x0
+	mov     r1, r4
+	str     r0, [r2]
+	bl      Function_20afcf8
+	ldr     r0,  [pc, #0xc] @ [0x20affd4] (=#0x21c5cf0)
+	mov     r1, #0x0
+	str     r1, [r0]
+	add     sp, sp, #98, 30 @ #0x188
+	ldmfd   sp!, {r4,pc}
+@ 0x20affd4
+
+.word 0x21c5cf0 @ 0x20affd4
 
 
 .arm
@@ -122558,7 +133224,33 @@ branch_20b28a8: @ 20b28a8 :arm
 .word 0x4000440 @ 0x20b28c4
 .word 0x4000448 @ 0x20b28c8
 
-.incbin "./baserom/arm9.bin", 0xb28cc, 0x20b3c0c - 0x20b28cc
+
+
+.incbin "./baserom/arm9.bin", 0xb28cc, 0x20b2cb4 - 0x20b28cc
+
+
+.arm
+Function_20b2cb4: @ 20b2cb4 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r4, r0
+	mov     r0, r1
+	mov     r1, r2
+	bl      Function_20ae490
+	mov     r1, r0
+	mov     r0, r4
+	bl      Function_20a59ec
+	ldmfd   sp!, {r4,pc}
+@ 0x20b2cd8
+
+.arm
+Function_20b2cd8: @ 20b2cd8 :arm
+	ldr     r12,  [pc, #0x0] @ [0x20b2ce0] (=#0x20a5a00)
+	bx      r12
+@ 0x20b2ce0
+
+.word 0x20a5a00 @ 0x20b2ce0
+
+.incbin "./baserom/arm9.bin", 0xb2ce4, 0x20b3c0c - 0x20b2ce4
 
 
 .arm
@@ -122569,8 +133261,70 @@ Function_20b3c0c: @ 20b3c0c :arm
 	bx      lr
 @ 0x20b3c1c
 
+.arm
+Function_20b3c1c: @ 20b3c1c :arm
+	ldrh    r2, [r0, #0xc]
+	ldrh    r1, [r0, #0xe]
+	add     r3, r0, r2
+	cmp     r1, #0x1
+	bne     branch_20b3c4c
+	ldr     r2, [r0]
+	ldr     r1,  [pc, #0x1c] @ [0x20b3c58] (=#0x30585442)
+	cmp     r2, r1
+	ldreq   r1, [r3]
+	addeq   r0, r0, r1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20b3c4c
 
-.incbin "./baserom/arm9.bin", 0xb3c1c, 0x20b5f28 - 0x20b3c1c
+.arm
+branch_20b3c4c: @ 20b3c4c :arm
+	ldr     r1, [r3, #0x4]
+	add     r0, r0, r1
+	bx      lr
+@ 0x20b3c58
+
+.word 0x30585442 @ 0x20b3c58
+
+
+
+.arm
+Function_20b3c5c: @ 20b3c5c :arm
+	cmp     r0, #0x0
+	beq     branch_20b3cb0
+	ldrh    r2, [r0, #0xc]
+	ldr     r2, [r0, r2]
+	add     r12, r0, r2
+	adds    r3, r12, #0x8
+	beq     branch_20b3c9c
+	ldrb    r0, [r12, #0x9]
+	cmp     r1, r0
+	bcs     branch_20b3c9c
+	ldrh    r2, [r12, #0xe]
+	ldrh    r0, [r3, r2]
+	add     r2, r3, r2
+	add     r2, r2, #0x4
+	mla     r1, r0, r1, r2
+	b       branch_20b3ca0
+@ 0x20b3c9c
+
+.arm
+branch_20b3c9c: @ 20b3c9c :arm
+	mov     r1, #0x0
+.arm
+branch_20b3ca0: @ 20b3ca0 :arm
+	cmp     r1, #0x0
+	ldrne   r0, [r1]
+	addne   r0, r12, r0
+	bxne    lr
+.arm
+branch_20b3cb0: @ 20b3cb0 :arm
+	mov     r0, #0x0
+	bx      lr
+@ 0x20b3cb8
+
+
+.incbin "./baserom/arm9.bin", 0xb3cb8, 0x20b5f28 - 0x20b3cb8
 
 
 .arm
@@ -128119,9 +138873,18 @@ Function_20bb470: @ 20bb470 :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x20bb4c8
 
-
-.incbin "./baserom/arm9.bin", 0xbb4c8, 0x20bb4ec - 0x20bb4c8
-
+.arm
+Function_20bb4c8: @ 20bb4c8 :arm
+	mov     r2, #1, 20 @ #0x1000
+	str     r2, [r0, #0x20]
+	mov     r3, #0x0
+	stmia   r0!, {r2,r3}
+	mov     r1, #0x0
+	stmia   r0!, {r1,r3}
+	stmia   r0!, {r2,r3}
+	stmia   r0!, {r1,r3}
+	bx      lr
+@ 0x20bb4ec
 
 .arm
 Function_20bb4ec: @ 20bb4ec :arm
@@ -128176,7 +138939,203 @@ Function_20bb4ec: @ 20bb4ec :arm
 @ 0x20bb5ac
 
 
-.incbin "./baserom/arm9.bin", 0xbb5ac, 0x20bbbb0 - 0x20bb5ac
+.thumb
+Function_20bb5ac: @ 20bb5ac :thumb
+	mov     r3, #0x1
+	lsl     r3, r3, #12
+	str     r3, [r0, #0x0]
+	mov     r3, #0x0
+	str     r3, [r0, #0x4]
+	str     r3, [r0, #0x8]
+	str     r3, [r0, #0xc]
+	str     r2, [r0, #0x10]
+	str     r1, [r0, #0x14]
+	str     r3, [r0, #0x18]
+	neg     r1, r1
+	str     r1, [r0, #0x1c]
+	str     r2, [r0, #0x20]
+	bx      lr
+@ 0x20bb5c8
+
+.thumb
+Function_20bb5c8: @ 20bb5c8 :thumb
+	str     r2, [r0, #0x0]
+	str     r2, [r0, #0x20]
+	mov     r3, #0x0
+	str     r3, [r0, #0x4]
+	str     r3, [r0, #0xc]
+	str     r3, [r0, #0x14]
+	str     r3, [r0, #0x1c]
+	neg     r2, r1
+	mov     r3, #0x1
+	lsl     r3, r3, #12
+	str     r1, [r0, #0x18]
+	str     r2, [r0, #0x8]
+	str     r3, [r0, #0x10]
+	bx      lr
+@ 0x20bb5e4
+
+.thumb
+Function_20bb5e4: @ 20bb5e4 :thumb
+	stmia   r0!, {r2}
+	mov     r3, #0x0
+	stmia   r0!, {r1,r3}
+	neg     r1, r1
+	stmia   r0!, {r1,r2}
+	mov     r1, #0x1
+	lsl     r1, r1, #12
+	str     r3, [r0, #0x0]
+	str     r3, [r0, #0x4]
+	str     r3, [r0, #0x8]
+	str     r1, [r0, #0xc]
+	bx      lr
+@ 0x20bb5fc
+
+
+.incbin "./baserom/arm9.bin", 0xbb5fc, 0x20bb8ec - 0x20bb5fc
+
+
+.arm
+Function_20bb8ec: @ 20bb8ec :arm
+	stmfd   sp!, {r3-r11,lr}
+	sub     sp, sp, #0x40
+	mov     r12, r2
+	ldr     r3, [r0, #0x4]
+	ldr     r2, [r1, #0xc]
+	cmp     r12, r1
+	smull   r7, r5, r3, r2
+	ldr     r6, [r0]
+	ldr     r4, [r1]
+	addeq   r10, sp, #0x1c
+	smlal   r7, r5, r6, r4
+	ldr     r2, [r0, #0x8]
+	ldr     r4, [r1, #0x18]
+	movne   r10, r12
+	smlal   r7, r5, r2, r4
+	mov     r4, r7, lsr #12
+	orr     r4, r4, r5, lsl #20
+	str     r4, [r10]
+	ldr     r4, [r1, #0x10]
+	ldr     r5, [r1, #0x4]
+	smull   r8, r7, r3, r4
+	smlal   r8, r7, r6, r5
+	ldr     r4, [r1, #0x1c]
+	smlal   r8, r7, r2, r4
+	mov     r4, r8, lsr #12
+	orr     r4, r4, r7, lsl #20
+	str     r4, [r10, #0x4]
+	ldr     r4, [r1, #0x14]
+	ldr     r5, [r1, #0x8]
+	smull   r8, r7, r3, r4
+	smlal   r8, r7, r6, r5
+	ldr     r3, [r1, #0x20]
+	smlal   r8, r7, r2, r3
+	mov     r2, r8, lsr #12
+	orr     r2, r2, r7, lsl #20
+	str     r2, [r10, #0x8]
+	ldr     r9, [r0, #0x10]
+	ldr     r2, [r0, #0xc]
+	smull   r7, r6, r9, r4
+	smlal   r7, r6, r2, r5
+	ldr     r4, [r0, #0x14]
+	smlal   r7, r6, r4, r3
+	mov     r3, r7, lsr #12
+	orr     r3, r3, r6, lsl #20
+	str     r3, [r10, #0x14]
+	ldr     r3, [r1, #0x10]
+	ldr     r5, [r1, #0x4]
+	smull   r7, r6, r9, r3
+	smlal   r7, r6, r2, r5
+	ldr     r5, [r1, #0x1c]
+	mov     r3, r9, asr #31
+	smlal   r7, r6, r4, r5
+	str     r3, [sp]
+	mov     r3, r7, lsr #12
+	orr     r3, r3, r6, lsl #20
+	str     r3, [r10, #0x10]
+	mov     r3, r2, asr #31
+	str     r3, [sp, #0x4]
+	mov     r3, r4, asr #31
+	ldr     r8, [r1, #0xc]
+	str     r3, [sp, #0x8]
+	mov     r3, r8, asr #31
+	str     r3, [sp, #0x18]
+	ldr     r7, [r1]
+	ldr     r6, [r1, #0x18]
+	mov     r3, r7, asr #31
+	str     r3, [sp, #0xc]
+	umull   r3, r5, r4, r6
+	mov     r11, r6, asr #31
+	str     r3, [sp, #0x10]
+	mla     r5, r4, r11, r5
+	ldr     r3, [sp, #0x8]
+	add     lr, sp, #0x1c
+	mla     r5, r3, r6, r5
+	umull   r3, r4, r2, r7
+	str     r3, [sp, #0x14]
+	ldr     r3, [sp, #0xc]
+	mla     r4, r2, r3, r4
+	ldr     r2, [sp, #0x4]
+	umull   r3, r11, r9, r8
+	mla     r4, r2, r7, r4
+	ldr     r2, [sp, #0x14]
+	adds    r3, r2, r3
+	ldr     r2, [sp, #0x18]
+	mla     r11, r9, r2, r11
+	ldr     r2, [sp]
+	mla     r11, r2, r8, r11
+	adc     r4, r4, r11
+	ldr     r2, [sp, #0x10]
+	ldr     r11, [sp, #0x18]
+	adds    r3, r2, r3
+	adc     r2, r5, r4
+	mov     r3, r3, lsr #12
+	orr     r3, r3, r2, lsl #20
+	str     r3, [r10, #0xc]
+	ldr     r2, [r0, #0x1c]
+	ldr     r5, [r0, #0x18]
+	ldr     r4, [r0, #0x20]
+	umull   r3, r0, r2, r8
+	mla     r0, r2, r11, r0
+	mov     r9, r2, asr #31
+	mla     r0, r9, r8, r0
+	smlal   r3, r0, r5, r7
+	smlal   r3, r0, r4, r6
+	mov     r3, r3, lsr #12
+	orr     r3, r3, r0, lsl #20
+	str     r3, [r10, #0x18]
+	ldr     r0, [r1, #0x10]
+	ldr     r3, [r1, #0x4]
+	smull   r7, r0, r2, r0
+	cmp     r10, lr
+	smlal   r7, r0, r5, r3
+	ldr     r6, [r1, #0x1c]
+	addne   sp, sp, #0x40
+	smlal   r7, r0, r4, r6
+	mov     r3, r7, lsr #12
+	orr     r3, r3, r0, lsl #20
+	str     r3, [r10, #0x1c]
+	ldr     r0, [r1, #0x14]
+	ldr     r6, [r1, #0x20]
+	ldr     r3, [r1, #0x8]
+	smull   r1, r0, r2, r0
+	smlal   r1, r0, r5, r3
+	smlal   r1, r0, r4, r6
+	mov     r1, r1, lsr #12
+	orr     r1, r1, r0, lsl #20
+	str     r1, [r10, #0x20]
+	ldmnefd sp!, {r3-r11,pc}
+	ldmia   lr!, {r0-r3}
+	stmia   r12!, {r0-r3}
+	ldmia   lr!, {r0-r3}
+	stmia   r12!, {r0-r3}
+	ldr     r0, [lr]
+	str     r0, [r12]
+	add     sp, sp, #0x40
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20bbb0c
+
+.incbin "./baserom/arm9.bin", 0xbbb0c, 0x20bbbb0 - 0x20bbb0c
 
 
 .arm
@@ -131413,7 +142372,398 @@ branch_20c0a98: @ 20c0a98 :arm
 .word 0x2101148 @ 0x20c0abc
 .word 0x21ccbbc @ 0x20c0ac0
 
-.incbin "./baserom/arm9.bin", 0xc0ac4, 0x20c12b4 - 0x20c0ac4
+
+
+.arm
+Function_20c0ac4: @ 20c0ac4 :arm
+	stmfd   sp!, {r3,lr}
+	bl      Function_20bece8
+	ldr     r1,  [pc, #0x2c] @ [0x20c0b00] (=#0x21ccbbc)
+	cmp     r0, #0x0
+	str     r0, [r1, #0x8]
+	ldmeqfd sp!, {r3,pc}
+	cmp     r0, #0x20
+	beq     branch_20c0af4
+	cmp     r0, #0x40
+	ldreq   r0,  [pc, #0x14] @ [0x20c0b04] (=#0x6894000)
+	streq   r0, [r1, #0x4]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0af4
+
+.arm
+branch_20c0af4: @ 20c0af4 :arm
+	ldr     r0,  [pc, #0xc] @ [0x20c0b08] (=#0x6890000)
+	str     r0, [r1, #0x4]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0b00
+
+.word 0x21ccbbc @ 0x20c0b00
+.word 0x6894000 @ 0x20c0b04
+.word 0x6890000 @ 0x20c0b08
+.arm
+Function_20c0b0c: @ 20c0b0c :arm
+	stmfd   sp!, {r4-r6,lr}
+	sub     sp, sp, #0x8
+	ldr     r3,  [pc, #0x54] @ [0x20c0b70] (=#0x2101148)
+	ldr     lr,  [pc, #0x54] @ [0x20c0b74] (=#0x21ccbbc)
+	ldr     r4, [r3]
+	mvn     r12, #0x0
+	mov     r6, r0
+	mov     r5, r1
+	mov     r3, r2
+	cmp     r4, r12
+	ldr     lr, [lr, #0x4]
+	beq     branch_20c0b60
+	mov     r12, #0x0
+	str     r12, [sp]
+	mov     r0, r4
+	mov     r1, r6
+	add     r2, lr, r5
+	str     r12, [sp, #0x4]
+	bl      Function_20c44f4
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20c0b60
+
+.arm
+branch_20c0b60: @ 20c0b60 :arm
+	add     r1, lr, r5
+	bl      Function_20c4b68
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20c0b70
+
+.word 0x2101148 @ 0x20c0b70
+.word 0x21ccbbc @ 0x20c0b74
+.arm
+Function_20c0b78: @ 20c0b78 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x30] @ [0x20c0bb4] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0b94
+	bl      Function_20c458c
+.arm
+branch_20c0b94: @ 20c0b94 :arm
+	ldr     r0,  [pc, #0x1c] @ [0x20c0bb8] (=#0x21ccbbc)
+	ldr     r0, [r0, #0x8]
+	bl      Function_20be4e4
+	ldr     r0,  [pc, #0x10] @ [0x20c0bb8] (=#0x21ccbbc)
+	mov     r1, #0x0
+	str     r1, [r0, #0x8]
+	str     r1, [r0, #0x4]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0bb4
+
+.word 0x2101148 @ 0x20c0bb4
+.word 0x21ccbbc @ 0x20c0bb8
+
+.incbin "./baserom/arm9.bin", 0xc0bbc, 0x20c0c78 - 0x20c0bbc
+
+
+.arm
+Function_20c0c78: @ 20c0c78 :arm
+	stmfd   sp!, {r3,lr}
+	bl      Function_20bed98
+	ldr     r1,  [pc, #0x4] @ [0x20c0c8c] (=#0x21ccbbc)
+	str     r0, [r1, #0x18]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0c8c
+
+.word 0x21ccbbc @ 0x20c0c8c
+.arm
+Function_20c0c90: @ 20c0c90 :arm
+	stmfd   sp!, {r4,lr}
+	sub     sp, sp, #0x8
+	ldr     r3,  [pc, #0x50] @ [0x20c0cf0] (=#0x2101148)
+	mvn     r12, #0x0
+	ldr     lr, [r3]
+	mov     r4, r0
+	mov     r3, r2
+	cmp     lr, r12
+	beq     branch_20c0cdc
+	add     r2, r1, #138, 16 @ #0x8a0000
+	mov     r12, #0x0
+	str     r12, [sp]
+	mov     r0, lr
+	mov     r1, r4
+	add     r2, r2, #6, 8 @ #0x6000000
+	str     r12, [sp, #0x4]
+	bl      Function_20c44f4
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4,pc}
+@ 0x20c0cdc
+
+.arm
+branch_20c0cdc: @ 20c0cdc :arm
+	add     r1, r1, #138, 16 @ #0x8a0000
+	add     r1, r1, #6, 8 @ #0x6000000
+	bl      Function_20c4b68
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4,pc}
+@ 0x20c0cf0
+
+.word 0x2101148 @ 0x20c0cf0
+.arm
+Function_20c0cf4: @ 20c0cf4 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x2c] @ [0x20c0d2c] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0d10
+	bl      Function_20c458c
+.arm
+branch_20c0d10: @ 20c0d10 :arm
+	ldr     r0,  [pc, #0x18] @ [0x20c0d30] (=#0x21ccbbc)
+	ldr     r0, [r0, #0x18]
+	bl      Function_20bebe8
+	ldr     r0,  [pc, #0xc] @ [0x20c0d30] (=#0x21ccbbc)
+	mov     r1, #0x0
+	str     r1, [r0, #0x18]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0d2c
+
+.word 0x2101148 @ 0x20c0d2c
+.word 0x21ccbbc @ 0x20c0d30
+
+
+
+.arm
+Function_20c0d34: @ 20c0d34 :arm
+	stmfd   sp!, {r3,lr}
+	bl      Function_20bed0c
+	mov     r1, #0x6
+	mul     lr, r0, r1
+	ldr     r2,  [pc, #0x34] @ [0x20c0d80] (=#0x20fd950)
+	ldr     r1,  [pc, #0x34] @ [0x20c0d84] (=#0x20fd952)
+	ldrh    r12, [r2, lr]
+	ldr     r2,  [pc, #0x30] @ [0x20c0d88] (=#0x20fd954)
+	ldrh    r3, [r1, lr]
+	ldr     r1,  [pc, #0x2c] @ [0x20c0d8c] (=#0x21ccbd8)
+	ldrh    r2, [r2, lr]
+	str     r0, [r1, #0x14]
+	mov     r0, r12, lsl #12
+	str     r0, [r1, #0x4]
+	mov     r0, r3, lsl #12
+	str     r0, [r1, #0x18]
+	mov     r0, r2, lsl #12
+	str     r0, [r1, #0x1c]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0d80
+
+.word 0x20fd950 @ 0x20c0d80
+.word 0x20fd952 @ 0x20c0d84
+.word 0x20fd954 @ 0x20c0d88
+.word 0x21ccbd8 @ 0x20c0d8c
+.arm
+Function_20c0d90: @ 20c0d90 :arm
+	stmfd   sp!, {r3-r7,lr}
+	sub     sp, sp, #0x8
+	ldr     r3,  [pc, #0x128] @ [0x20c0ec8] (=#0x21ccbd8)
+	mov     r7, r0
+	ldr     r4, [r3, #0x18]
+	mov     r12, r1
+	cmp     r4, #0x0
+	ldreq   r0, [r3, #0x4]
+	mov     r6, r2
+	addeq   r2, r0, r12
+	beq     branch_20c0e7c
+	ldr     r2, [r3, #0x1c]
+	add     r0, r12, r6
+	cmp     r0, r2
+	ldrcc   r0, [r3, #0x4]
+	addcc   r2, r0, r12
+	bcc     branch_20c0e7c
+	cmp     r12, r2
+	addcs   r0, r4, r12
+	subcs   r2, r0, r2
+	bcs     branch_20c0e7c
+	ldr     r0,  [pc, #0xe0] @ [0x20c0ecc] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	sub     r5, r2, r12
+	cmp     r0, r1
+	ldr     lr, [r3, #0x4]
+	beq     branch_20c0e1c
+	cmp     r5, #0x30
+	bls     branch_20c0e1c
+	mov     r1, r7
+	mov     r3, r5
+	add     r2, lr, r12
+	bl      Function_20c4354
+	b       branch_20c0e2c
+@ 0x20c0e1c
+
+.arm
+branch_20c0e1c: @ 20c0e1c :arm
+	mov     r0, r7
+	mov     r2, r5
+	add     r1, lr, r12
+	bl      Function_20c4b68
+.arm
+branch_20c0e2c: @ 20c0e2c :arm
+	ldr     r0,  [pc, #0x98] @ [0x20c0ecc] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0e64
+	mov     r12, #0x0
+	str     r12, [sp]
+	mov     r2, r4
+	add     r1, r7, r5
+	sub     r3, r6, r5
+	str     r12, [sp, #0x4]
+	bl      Function_20c44f4
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20c0e64
+
+.arm
+branch_20c0e64: @ 20c0e64 :arm
+	mov     r1, r4
+	add     r0, r7, r5
+	sub     r2, r6, r5
+	bl      Function_20c4b68
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20c0e7c
+
+.arm
+branch_20c0e7c: @ 20c0e7c :arm
+	ldr     r0,  [pc, #0x48] @ [0x20c0ecc] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0eb0
+	mov     r4, #0x0
+	str     r4, [sp]
+	mov     r1, r7
+	mov     r3, r6
+	str     r4, [sp, #0x4]
+	bl      Function_20c44f4
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20c0eb0
+
+.arm
+branch_20c0eb0: @ 20c0eb0 :arm
+	mov     r1, r2
+	mov     r0, r7
+	mov     r2, r6
+	bl      Function_20c4b68
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20c0ec8
+
+.word 0x21ccbd8 @ 0x20c0ec8
+.word 0x2101148 @ 0x20c0ecc
+.arm
+Function_20c0ed0: @ 20c0ed0 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x38] @ [0x20c0f14] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0eec
+	bl      Function_20c458c
+.arm
+branch_20c0eec: @ 20c0eec :arm
+	ldr     r0,  [pc, #0x24] @ [0x20c0f18] (=#0x21ccbd8)
+	ldr     r0, [r0, #0x14]
+	bl      Function_20be590
+	ldr     r0,  [pc, #0x18] @ [0x20c0f18] (=#0x21ccbd8)
+	mov     r1, #0x0
+	str     r1, [r0, #0x1c]
+	str     r1, [r0, #0x18]
+	str     r1, [r0, #0x4]
+	str     r1, [r0, #0x14]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0f14
+
+.word 0x2101148 @ 0x20c0f14
+.word 0x21ccbd8 @ 0x20c0f18
+
+
+
+.arm
+Function_20c0f1c: @ 20c0f1c :arm
+	stmfd   sp!, {r3,lr}
+	bl      Function_20bed20
+	mov     r3, r0, asr #4
+	ldr     r1,  [pc, #0x18] @ [0x20c0f48] (=#0x21ccbd8)
+	ldr     r2,  [pc, #0x18] @ [0x20c0f4c] (=#0x20fd940)
+	mov     r3, r3, lsl #1
+	ldrh    r2, [r2, r3]
+	str     r0, [r1, #0xc]
+	mov     r0, r2, lsl #12
+	str     r0, [r1, #0x8]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0f48
+
+.word 0x21ccbd8 @ 0x20c0f48
+.word 0x20fd940 @ 0x20c0f4c
+.arm
+Function_20c0f50: @ 20c0f50 :arm
+	stmfd   sp!, {r4-r6,lr}
+	sub     sp, sp, #0x8
+	ldr     r3,  [pc, #0x54] @ [0x20c0fb4] (=#0x2101148)
+	ldr     lr,  [pc, #0x54] @ [0x20c0fb8] (=#0x21ccbd8)
+	ldr     r4, [r3]
+	mvn     r12, #0x0
+	mov     r6, r0
+	mov     r5, r1
+	mov     r3, r2
+	cmp     r4, r12
+	ldr     lr, [lr, #0x8]
+	beq     branch_20c0fa4
+	mov     r12, #0x0
+	str     r12, [sp]
+	mov     r0, r4
+	mov     r1, r6
+	add     r2, lr, r5
+	str     r12, [sp, #0x4]
+	bl      Function_20c44f4
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20c0fa4
+
+.arm
+branch_20c0fa4: @ 20c0fa4 :arm
+	add     r1, lr, r5
+	bl      Function_20c4b68
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20c0fb4
+
+.word 0x2101148 @ 0x20c0fb4
+.word 0x21ccbd8 @ 0x20c0fb8
+.arm
+Function_20c0fbc: @ 20c0fbc :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x30] @ [0x20c0ff8] (=#0x2101148)
+	mvn     r1, #0x0
+	ldr     r0, [r0]
+	cmp     r0, r1
+	beq     branch_20c0fd8
+	bl      Function_20c458c
+.arm
+branch_20c0fd8: @ 20c0fd8 :arm
+	ldr     r0,  [pc, #0x1c] @ [0x20c0ffc] (=#0x21ccbd8)
+	ldr     r0, [r0, #0xc]
+	bl      Function_20be768
+	ldr     r0,  [pc, #0x10] @ [0x20c0ffc] (=#0x21ccbd8)
+	mov     r1, #0x0
+	str     r1, [r0, #0xc]
+	str     r1, [r0, #0x8]
+	ldmfd   sp!, {r3,pc}
+@ 0x20c0ff8
+
+.word 0x2101148 @ 0x20c0ff8
+.word 0x21ccbd8 @ 0x20c0ffc
+
+.incbin "./baserom/arm9.bin", 0xc1000, 0x20c12b4 - 0x20c1000
 
 
 .arm
@@ -134027,8 +145377,58 @@ branch_20c4420: @ 20c4420 :arm
 @ 0x20c4430
 
 
-.incbin "./baserom/arm9.bin", 0xc4430, 0x20c458c - 0x20c4430
+.incbin "./baserom/arm9.bin", 0xc4430, 0x20c44f4 - 0x20c4430
 
+
+.arm
+Function_20c44f4: @ 20c44f4 :arm
+	stmfd   sp!, {r4-r8,lr}
+	mov     r5, r3
+	mov     r6, r2
+	mov     r2, r5
+	mov     r3, #0x0
+	mov     r8, r0
+	mov     r7, r1
+	ldr     r4, [sp, #0x18]
+	bl      Function_20c46f4
+	cmp     r5, #0x0
+	bne     branch_20c4534
+	cmp     r4, #0x0
+	ldmeqfd sp!, {r4-r8,pc}
+	ldr     r0, [sp, #0x1c]
+	blx     r4
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c4534
+
+.arm
+branch_20c4534: @ 20c4534 :arm
+	mov     r0, r8
+	bl      Function_20c458c
+	cmp     r4, #0x0
+	beq     branch_20c4570
+	ldr     r2, [sp, #0x1c]
+	mov     r0, r8
+	mov     r1, r4
+	bl      Function_20c1560
+	mov     r3, r5, lsr #2
+	mov     r0, r8
+	mov     r1, r7
+	mov     r2, r6
+	orr     r3, r3, #49, 6 @ #0xc4000000
+	bl      0x1ff8480
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c4570
+
+.arm
+branch_20c4570: @ 20c4570 :arm
+	mov     r3, r5, lsr #2
+	mov     r0, r8
+	mov     r1, r7
+	mov     r2, r6
+	orr     r3, r3, #33, 6 @ #0x84000000
+	bl      0x1ff8480
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c458c
 
 .arm
 Function_20c458c: @ 20c458c :arm
@@ -144941,7 +156341,18 @@ Function_20d32d4: @ 20d32d4 :arm
 @ 0x20d32fc
 
 
-.incbin "./baserom/arm9.bin", 0xd32fc, 0x20d50b8 - 0x20d32fc
+.incbin "./baserom/arm9.bin", 0xd32fc, 0x20d4070 - 0x20d32fc
+
+
+.arm
+Function_20d4070: @ 20d4070 :arm
+	cmp     r0, #0x0
+	rsblt   r0, r0, #0x0
+	bx      lr
+@ 0x20d407c
+
+
+.incbin "./baserom/arm9.bin", 0xd407c, 0x20d50b8 - 0x20d407c
 
 
 .arm
@@ -144954,6 +156365,7 @@ branch_20d50c4: @ 20d50c4 :arm
 	ldrsb   r3, [r1], #0x1
 	subs    r2, r2, #0x1
 	strb    r3, [r12], #0x1
+branch_20d50d0: @ 20d50d0 :thumb
 	bne     branch_20d50c4
 	bx      lr
 @ 0x20d50d8
@@ -145270,7 +156682,304 @@ branch_20e0d14: @ 20e0d14 :arm
 @ 0x20e0d1c
 
 
-.incbin "./baserom/arm9.bin", 0xe0d1c, 0x20e1740 - 0x20e0d1c
+.incbin "./baserom/arm9.bin", 0xe0d1c, 0x20e1108 - 0x20e0d1c
+
+
+.arm
+Function_20e1108: @ 20e1108 :arm
+	mov     r3, #255, 8 @ #0xff000000
+	cmp     r3, r0, lsl #1
+	cmpcs   r3, r1, lsl #1
+	bcc     branch_20e1150
+	cmp     r0, #0x0
+	bicmi   r0, r0, #2, 2 @ #0x80000000
+	rsbmi   r0, r0, #0x0
+	cmp     r1, #0x0
+	bicmi   r1, r1, #2, 2 @ #0x80000000
+	rsbmi   r1, r1, #0x0
+	cmp     r0, r1
+	movgt   r0, #0x1
+	movle   r0, #0x0
+	mrs     r12, CPSR
+	bicle   r12, r12, #2, 4 @ #0x20000000
+	orrgt   r12, r12, #2, 4 @ #0x20000000
+	msr     CPSR_f, r12
+	bx      lr
+@ 0x20e1150
+
+.arm
+branch_20e1150: @ 20e1150 :arm
+	mov     r0, #0x0
+	mrs     r12, CPSR
+	bic     r12, r12, #2, 4 @ #0x20000000
+	msr     CPSR_f, r12
+	bx      lr
+@ 0x20e1164
+
+
+.incbin "./baserom/arm9.bin", 0xe1164, 0x20e1304 - 0x20e1164
+
+
+.arm
+Function_20e1304: @ 20e1304 :arm
+	stmfd   sp!, {lr}
+	mov     r12, #0xff
+	ands    r3, r12, r0, lsr #23
+	cmpne   r3, #0xff
+	beq     branch_20e14d8
+	ands    r12, r12, r1, lsr #23
+	cmpne   r12, #0xff
+	beq     branch_20e1514
+	orr     r1, r1, #2, 10 @ #0x800000
+	orr     r0, r0, #2, 10 @ #0x800000
+	bic     r2, r0, #255, 8 @ #0xff000000
+	bic     lr, r1, #255, 8 @ #0xff000000
+.arm
+branch_20e1334: @ 20e1334 :arm
+	cmp     r2, lr
+	movcc   r2, r2, lsl #1
+	subcc   r3, r3, #0x1
+	teq     r0, r1
+	sub     r0, pc, #0x94
+	ldrb    r1, [r0, lr, lsr #0xf]
+	rsb     lr, lr, #0x0
+	mov     r0, lr, asr #1
+	mul     r0, r1, r0
+	add     r0, r0, #2, 2 @ #0x80000000
+	mov     r0, r0, lsr #6
+	mul     r0, r1, r0
+	mov     r0, r0, lsr #14
+	mul     r1, lr, r0
+	sub     r12, r3, r12
+	mov     r1, r1, lsr #12
+	mul     r1, r0, r1
+	mov     r0, r0, lsl #14
+	add     r0, r0, r1, lsr #15
+	umull   r1, r0, r2, r0
+	mov     r3, r0
+	orrmi   r0, r0, #2, 2 @ #0x80000000
+	adds    r12, r12, #0x7e
+	bmi     branch_20e15dc
+	cmp     r12, #0xfe
+	bge     branch_20e1690
+	add     r0, r0, r12, lsl #23
+	mov     r12, r1, lsr #28
+	cmp     r12, #0x7
+	beq     branch_20e14b8
+	add     r0, r0, r1, lsr #31
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e13b8
+
+
+.incbin "./baserom/arm9.bin", 0xe13b8, 0x20e14b8 - 0x20e13b8
+
+
+.arm
+branch_20e14b8: @ 20e14b8 :arm
+	mov     r1, r3, lsl #1
+	add     r1, r1, #0x1
+	rsb     lr, lr, #0x0
+	mul     r1, lr, r1
+	cmp     r1, r2, lsl #24
+	addmi   r0, r0, #0x1
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e14d8
+
+.arm
+branch_20e14d8: @ 20e14d8 :arm
+	eor     lr, r0, r1
+	and     lr, lr, #2, 2 @ #0x80000000
+	cmp     r3, #0x0
+	beq     branch_20e1530
+	movs    r0, r0, lsl #9
+	bne     branch_20e1678
+	mov     r12, r1, lsr #23
+	mov     r1, r1, lsl #9
+	ands    r12, r12, #0xff
+	beq     branch_20e1668
+	cmp     r12, #0xff
+	blt     branch_20e1668
+	cmp     r1, #0x0
+	beq     branch_20e1684
+	b       branch_20e1660
+@ 0x20e1514
+
+.arm
+branch_20e1514: @ 20e1514 :arm
+	eor     lr, r0, r1
+	and     lr, lr, #2, 2 @ #0x80000000
+	cmp     r12, #0x0
+	beq     branch_20e1594
+.arm
+branch_20e1524: @ 20e1524 :arm
+	movs    r1, r1, lsl #9
+	bne     branch_20e1660
+	b       branch_20e16b0
+@ 0x20e1530
+
+.arm
+branch_20e1530: @ 20e1530 :arm
+	movs    r2, r0, lsl #9
+	beq     branch_20e1564
+	clz     r3, r2
+	movs    r2, r2, lsl r3
+	rsb     r3, r3, #0x0
+	mov     r2, r2, lsr #8
+	ands    r12, r12, r1, lsr #23
+	beq     branch_20e15bc
+	cmp     r12, #0xff
+	beq     branch_20e1524
+	orr     r1, r1, #2, 10 @ #0x800000
+	bic     lr, r1, #255, 8 @ #0xff000000
+	b       branch_20e1334
+@ 0x20e1564
+
+.arm
+branch_20e1564: @ 20e1564 :arm
+	mov     r12, r1, lsr #23
+	mov     r1, r1, lsl #9
+	ands    r12, r12, #0xff
+	beq     branch_20e1588
+	cmp     r12, #0xff
+	blt     branch_20e16b0
+	cmp     r1, #0x0
+	beq     branch_20e16b0
+	b       branch_20e1660
+@ 0x20e1588
+
+.arm
+branch_20e1588: @ 20e1588 :arm
+	cmp     r1, #0x0
+	beq     branch_20e1684
+	b       branch_20e16b0
+@ 0x20e1594
+
+.arm
+branch_20e1594: @ 20e1594 :arm
+	movs    r12, r1, lsl #9
+	beq     branch_20e1668
+	mov     lr, r12
+	clz     r12, lr
+	movs    lr, lr, lsl r12
+	rsb     r12, r12, #0x0
+	mov     lr, lr, lsr #8
+	orr     r0, r0, #2, 10 @ #0x800000
+	bic     r2, r0, #255, 8 @ #0xff000000
+	b       branch_20e1334
+@ 0x20e15bc
+
+.arm
+branch_20e15bc: @ 20e15bc :arm
+	movs    r12, r1, lsl #9
+	beq     branch_20e1668
+	mov     lr, r12
+	clz     r12, lr
+	movs    lr, lr, lsl r12
+	rsb     r12, r12, #0x0
+	mov     lr, lr, lsr #8
+	b       branch_20e1334
+@ 0x20e15dc
+
+.arm
+branch_20e15dc: @ 20e15dc :arm
+	and     r0, r0, #2, 2 @ #0x80000000
+	cmn     r12, #0x18
+	beq     branch_20e1650
+	bmi     branch_20e16a8
+	add     r1, r12, #0x17
+	mov     r2, r2, lsl r1
+	rsb     r12, r12, #0x0
+	mov     r3, r3, lsr r12
+	orr     r0, r0, r3
+	rsb     lr, lr, #0x0
+	mul     r1, lr, r3
+	cmp     r1, r2
+	ldmeqfd sp!, {lr}
+	bxeq    lr
+	add     r1, r1, lr
+	cmp     r1, r2
+	beq     branch_20e1644
+	addmi   r0, r0, #0x1
+	subpl   r1, r1, lr
+	add     r1, lr, r1, lsl #1
+	cmp     r1, r2, lsl #1
+	and     r3, r0, #0x1
+	addmi   r0, r0, #0x1
+	addeq   r0, r0, r3
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1644
+
+.arm
+branch_20e1644: @ 20e1644 :arm
+	add     r0, r0, #0x1
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1650
+
+.arm
+branch_20e1650: @ 20e1650 :arm
+	cmn     r2, lr
+	addne   r0, r0, #0x1
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1660
+
+.arm
+branch_20e1660: @ 20e1660 :arm
+	mov     r0, r1
+	b       branch_20e1678
+@ 0x20e1668
+
+.arm
+branch_20e1668: @ 20e1668 :arm
+	mov     r0, #255, 8 @ #0xff000000
+	orr     r0, lr, r0, lsr #1
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1678
+
+.arm
+branch_20e1678: @ 20e1678 :arm
+	mvn     r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1684
+
+.arm
+branch_20e1684: @ 20e1684 :arm
+	mvn     r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e1690
+
+.arm
+branch_20e1690: @ 20e1690 :arm
+	tst     r0, #2, 2 @ #0x80000000
+	mov     r0, #255, 8 @ #0xff000000
+	movne   r0, r0, asr #1
+	moveq   r0, r0, lsr #1
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e16a8
+
+.arm
+branch_20e16a8: @ 20e16a8 :arm
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e16b0
+
+.arm
+branch_20e16b0: @ 20e16b0 :arm
+	mov     r0, lr
+	ldmfd   sp!, {lr}
+	bx      lr
+@ 0x20e16bc
+
+
+.incbin "./baserom/arm9.bin", 0xe16bc, 0x20e1740 - 0x20e16bc
 
 
 .arm
@@ -145321,7 +157030,199 @@ Function_20e17b4: @ 20e17b4 :arm
 @ 0x20e17fc
 
 
-.incbin "./baserom/arm9.bin", 0xe17fc, 0x20e1a9c - 0x20e17fc
+.incbin "./baserom/arm9.bin", 0xe17fc, 0x20e18b0 - 0x20e17fc
+
+
+.arm
+Function_20e18b0: @ 20e18b0 :arm
+	eor     r2, r0, r1
+	and     r2, r2, #2, 2 @ #0x80000000
+	mov     r12, #0xff
+	ands    r3, r12, r0, lsr #23
+	mov     r0, r0, lsl #8
+	cmpne   r3, #0xff
+	beq     branch_20e192c
+	orr     r0, r0, #2, 2 @ #0x80000000
+	ands    r12, r12, r1, lsr #23
+	mov     r1, r1, lsl #8
+	cmpne   r12, #0xff
+	beq     branch_20e196c
+	orr     r1, r1, #2, 2 @ #0x80000000
+.arm
+branch_20e18e4: @ 20e18e4 :arm
+	add     r12, r3, r12
+	umull   r1, r3, r0, r1
+	movs    r0, r3
+	addpl   r0, r0, r0
+	subpl   r12, r12, #0x1
+	subs    r12, r12, #0x7f
+	bmi     branch_20e19f8
+	cmp     r12, #0xfe
+	bge     branch_20e1a64
+	ands    r3, r0, #0xff
+	orr     r0, r2, r0, lsr #8
+	add     r0, r0, r12, lsl #23
+	tst     r3, #0x80
+	bxeq    lr
+	orrs    r1, r1, r3, lsl #25
+	andeqs  r3, r0, #0x1
+	addne   r0, r0, #0x1
+	bx      lr
+@ 0x20e192c
+
+.arm
+branch_20e192c: @ 20e192c :arm
+	cmp     r3, #0x0
+	beq     branch_20e1980
+	movs    r0, r0, lsl #1
+	bne     branch_20e1a54
+	mov     r12, r1, lsr #23
+	mov     r1, r1, lsl #9
+	ands    r12, r12, #0xff
+	beq     branch_20e1960
+	cmp     r12, #0xff
+	blt     branch_20e1a48
+	cmp     r1, #0x0
+	beq     branch_20e1a48
+	b       branch_20e1a54
+@ 0x20e1960
+
+.arm
+branch_20e1960: @ 20e1960 :arm
+	cmp     r1, #0x0
+	beq     branch_20e1a5c
+	b       branch_20e1a48
+@ 0x20e196c
+
+.arm
+branch_20e196c: @ 20e196c :arm
+	cmp     r12, #0x0
+	beq     branch_20e19dc
+.arm
+branch_20e1974: @ 20e1974 :arm
+	movs    r1, r1, lsl #1
+	bne     branch_20e1a54
+	b       branch_20e1a48
+@ 0x20e1980
+
+.arm
+branch_20e1980: @ 20e1980 :arm
+	movs    r0, r0, lsl #1
+	beq     branch_20e19b8
+	mov     r0, r0, lsr #1
+	clz     r3, r0
+	movs    r0, r0, lsl r3
+	rsb     r3, r3, #0x1
+	mov     r12, r1, lsr #23
+	mov     r1, r1, lsl #8
+	ands    r12, r12, #0xff
+	beq     branch_20e19dc
+	cmp     r12, #0xff
+	beq     branch_20e1974
+	orr     r1, r1, #2, 2 @ #0x80000000
+	b       branch_20e18e4
+@ 0x20e19b8
+
+.arm
+branch_20e19b8: @ 20e19b8 :arm
+	mov     r12, r1, lsr #23
+	mov     r1, r1, lsl #9
+	ands    r12, r12, #0xff
+	beq     branch_20e1a88
+	cmp     r12, #0xff
+	blt     branch_20e1a88
+	cmp     r1, #0x0
+	beq     branch_20e1a5c
+	b       branch_20e1a54
+@ 0x20e19dc
+
+.arm
+branch_20e19dc: @ 20e19dc :arm
+	movs    r1, r1, lsl #1
+	beq     branch_20e1a88
+	mov     r1, r1, lsr #1
+	clz     r12, r1
+	movs    r1, r1, lsl r12
+	rsb     r12, r12, #0x1
+	b       branch_20e18e4
+@ 0x20e19f8
+
+.arm
+branch_20e19f8: @ 20e19f8 :arm
+	cmn     r12, #0x18
+	beq     branch_20e1a40
+	bmi     branch_20e1a80
+	cmp     r1, #0x0
+	orrne   r0, r0, #0x1
+	mov     r3, r0
+	mov     r0, r0, lsr #8
+	rsb     r12, r12, #0x0
+	orr     r0, r2, r0, lsr r12
+	rsb     r12, r12, #0x18
+	movs    r1, r3, lsl r12
+	bxeq    lr
+	tst     r1, #2, 2 @ #0x80000000
+	bxeq    lr
+	movs    r1, r1, lsl #1
+	andeqs  r1, r0, #0x1
+	addne   r0, r0, #0x1
+	bx      lr
+@ 0x20e1a40
+
+.arm
+branch_20e1a40: @ 20e1a40 :arm
+	mov     r0, r0, lsl #1
+	b       branch_20e1a70
+@ 0x20e1a48
+
+.arm
+branch_20e1a48: @ 20e1a48 :arm
+	mov     r0, #255, 8 @ #0xff000000
+	orr     r0, r2, r0, lsr #1
+	bx      lr
+@ 0x20e1a54
+
+.arm
+branch_20e1a54: @ 20e1a54 :arm
+	mvn     r0, #2, 2 @ #0x80000000
+	bx      lr
+@ 0x20e1a5c
+
+.arm
+branch_20e1a5c: @ 20e1a5c :arm
+	mvn     r0, #2, 2 @ #0x80000000
+	bx      lr
+@ 0x20e1a64
+
+.arm
+branch_20e1a64: @ 20e1a64 :arm
+	mov     r0, #255, 8 @ #0xff000000
+	orr     r0, r2, r0, lsr #1
+	bx      lr
+@ 0x20e1a70
+
+.arm
+branch_20e1a70: @ 20e1a70 :arm
+	movs    r1, r0
+	mov     r0, r2
+	addne   r0, r0, #0x1
+	bx      lr
+@ 0x20e1a80
+
+.arm
+branch_20e1a80: @ 20e1a80 :arm
+	mov     r0, r2
+	bx      lr
+@ 0x20e1a88
+
+.arm
+branch_20e1a88: @ 20e1a88 :arm
+	mov     r0, r2
+	bx      lr
+@ 0x20e1a90
+
+
+.incbin "./baserom/arm9.bin", 0xe1a90, 0x20e1a9c - 0x20e1a90
 
 
 .arm

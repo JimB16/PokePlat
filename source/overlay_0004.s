@@ -1,6 +1,6 @@
 
 
-.section .iwram2, "ax"
+.section .iwram4, "ax"
 
 
 .thumb

@@ -75,6 +75,7 @@ asm:
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/arm9_full.s" -o "source/arm9.o"
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/overlay_0004.s" -o "source/overlay_0004.o"
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/overlay_0005.s" -o "source/overlay_0005.o"
-	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/lnkscript" -Map "source/arm9.map" "source/arm9.o" "source/overlay_0004.o" "source/overlay_0005.o" -o "source/arm9.elf"
+	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/overlay_0006.s" -o "source/overlay_0006.o"
+	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/lnkscript" -Map "source/arm9.map" "source/arm9.o" "source/overlay_0004.o" "source/overlay_0005.o" "source/overlay_0006.o" -o "source/arm9.elf"
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary "source/arm9.elf" "source/arm9_own.bin"
     

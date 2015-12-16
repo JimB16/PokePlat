@@ -343,7 +343,12 @@ Unknown_2000ba0:
 .incbin "./baserom/arm9.bin", 0xba0, 0x2000bc4 - 0x2000ba0
 
 Unknown_2000bc4:
-.incbin "./baserom/arm9.bin", 0xbc4, 0x2000c88 - 0x2000bc4
+.ascii "[SDK+NINTENDO:DWC2.2.30008.080630.1906_DWC_2_2_PLUS8]\0\0\0"
+.ascii "[SDK+NINTENDO:BACKUP]\0\0\0"
+.ascii "[SDK+Abiosso:libVCT 1.3.1]\0\0"
+.ascii "[SDK+NINTENDO:WiFi2.1.30003.0709200229]\0"
+.ascii "[SDK+UBIQUITOUS:CPS]\0\0\0\0"
+.ascii "[SDK+UBIQUITOUS:SSL]\0\0\0\0"
 
 
 
@@ -4473,7 +4478,7 @@ Function_2003b60: @ 2003b60 :thumb
 	str     r0, [r1, #0x0]
 	mov     r2, r4
 	add     r2, #0x94
-	ldr     r1, [pc, #0x3c] @ 0x2003bcc, (=#0x20fece0)
+	ldr     r1, [pc, #0x3c] @ 0x2003bcc, (=Unknown_20fece0)
 	ldr     r2, [r2, #0x0]
 	mov     r0, r4
 	mov     r3, #0x0
@@ -4503,9 +4508,12 @@ Function_2003b60: @ 2003b60 :thumb
 
 
 .word 0xbbc00 @ 0x2003bc8
-.word 0x20fece0 @ 0x2003bcc
+.word Unknown_20fece0 @ 0x2003bcc
 .word 0x2101df0 @ 0x2003bd0
 .word 0xbcd4c @ 0x2003bd4
+
+
+
 .thumb
 Function_2003bd8: @ 2003bd8 :thumb
 	push    {r3-r7,lr}
@@ -14002,7 +14010,11 @@ Function_200da20: @ 200da20 :thumb
 
 
 .word 0x21bf67c @ 0x200da38
+
+
+
 .thumb
+.globl Function_200da3c
 Function_200da3c: @ 200da3c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
@@ -20434,7 +20446,11 @@ branch_201822c: @ 201822c :thumb
 
 
 .word 0x21bfaf0 @ 0x2018234
+
+
+
 .thumb
+.globl Function_2018238
 Function_2018238: @ 2018238 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
@@ -24491,6 +24507,7 @@ branch_201cea6: @ 201cea6 :thumb
 
 
 .thumb
+.globl Function_201ced0
 Function_201ced0: @ 201ced0 :thumb
 	ldr     r0, [r0, #0x10]
 	bx      lr
@@ -34103,6 +34120,7 @@ Function_2025d6c: @ 2025d6c :thumb
 
 
 .thumb
+.globl Function_2025e38
 Function_2025e38: @ 2025e38 :thumb
 	push    {r3,lr}
 	mov     r1, #0x1
@@ -34313,7 +34331,35 @@ Function_2025f48: @ 2025f48 :thumb
 @ 0x2025f56
 
 
-.incbin "./baserom/arm9.bin", 0x25f56, 0x2025f74 - 0x2025f56
+.incbin "./baserom/arm9.bin", 0x25f56, 0x2025f58 - 0x2025f56
+
+
+.thumb
+.globl Function_2025f58
+Function_2025f58: @ 2025f58 :thumb
+	ldrb    r3, [r0, #0x1a]
+	mov     r2, #0x0
+	cmp     r3, #0x0
+	beq     branch_2025f6e
+	mov     r0, #0x1
+.thumb
+branch_2025f62: @ 2025f62 :thumb
+	mov     r1, r3
+	tst     r1, r0
+	beq     branch_2025f6a
+	.hword  0x1c52 @ add r2, r2, #0x1
+.thumb
+branch_2025f6a: @ 2025f6a :thumb
+	lsr     r3, r3, #1
+	bne     branch_2025f62
+.thumb
+branch_2025f6e: @ 2025f6e :thumb
+	mov     r0, r2
+	bx      lr
+@ 0x2025f72
+
+
+.incbin "./baserom/arm9.bin", 0x25f72, 0x2025f74 - 0x2025f72
 
 
 .thumb
@@ -36315,6 +36361,7 @@ branch_2026f04: @ 2026f04 :thumb
 
 .word 0x1e2 @ 0x2026f08
 .thumb
+.globl Function_2026f0c
 Function_2026f0c: @ 2026f0c :thumb
 	push    {r3,lr}
 	bl      Function_2026f58
@@ -36852,6 +36899,7 @@ Function_2027508: @ 2027508 :thumb
 
 
 .thumb
+.globl Function_2027520
 Function_2027520: @ 2027520 :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -39501,7 +39549,149 @@ branch_202afaa: @ 202afaa :thumb
 @ 0x202afb4
 
 
-.incbin "./baserom/arm9.bin", 0x2afb4, 0x202b370 - 0x202afb4
+.incbin "./baserom/arm9.bin", 0x2afb4, 0x202b270 - 0x202afb4
+
+
+.thumb
+.globl Function_202b270
+Function_202b270: @ 202b270 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r0
+	mov     r4, r1
+	mov     r0, #0x38
+	mov     r3, #0x79
+	mul     r4, r0
+	mov     r1, r2
+	lsl     r3, r3, #2
+	mul     r1, r0
+	add     r2, r5, r3
+	add     r6, r5, r4
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0xc8] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b298
+	strh    r0, [r2, r1]
+.thumb
+branch_202b298: @ 202b298 :thumb
+	ldr     r3, [pc, #0xc4] @ 0x202b360, (=#0x1e6)
+	add     r6, r5, r4
+	add     r2, r5, r3
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0xb0] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b2b0
+	strh    r0, [r2, r1]
+.thumb
+branch_202b2b0: @ 202b2b0 :thumb
+	mov     r3, #0x7a
+	lsl     r3, r3, #2
+	add     r2, r5, r3
+	add     r6, r5, r4
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0x98] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b2ca
+	strh    r0, [r2, r1]
+.thumb
+branch_202b2ca: @ 202b2ca :thumb
+	mov     r3, #0x1f
+	lsl     r3, r3, #4
+	add     r2, r5, r3
+	add     r6, r5, r4
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0x7c] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b2e4
+	strh    r0, [r2, r1]
+.thumb
+branch_202b2e4: @ 202b2e4 :thumb
+	ldr     r3, [pc, #0x7c] @ 0x202b364, (=#0x1f2)
+	add     r6, r5, r4
+	add     r2, r5, r3
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0x64] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b2fc
+	strh    r0, [r2, r1]
+.thumb
+branch_202b2fc: @ 202b2fc :thumb
+	mov     r3, #0x7d
+	lsl     r3, r3, #2
+	add     r2, r5, r3
+	add     r6, r5, r4
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0x4c] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b316
+	strh    r0, [r2, r1]
+.thumb
+branch_202b316: @ 202b316 :thumb
+	ldr     r3, [pc, #0x50] @ 0x202b368, (=#0x1f6)
+	add     r6, r5, r4
+	add     r2, r5, r3
+	ldrh    r0, [r2, r1]
+	ldrh    r3, [r6, r3]
+	add     r0, r0, r3
+	strh    r0, [r2, r1]
+	ldrh    r3, [r2, r1]
+	ldr     r0, [pc, #0x34] @ 0x202b35c, (=#0x270f)
+	cmp     r3, r0
+	bls     branch_202b32e
+	strh    r0, [r2, r1]
+.thumb
+branch_202b32e: @ 202b32e :thumb
+	mov     r0, #0x7
+	lsl     r0, r0, #6
+	add     r6, r5, r0
+	add     r0, r6, r4
+	add     r1, r6, r1
+	mov     r2, #0x10
+	blx     Function_20c4c14
+	mov     r0, #0x0
+	add     r1, r6, r4
+	mov     r2, #0x38
+	blx     Function_20c4bb8
+	mov     r0, #0x1d
+	ldr     r1, [pc, #0x20] @ 0x202b36c, (=#0xffff)
+	add     r2, r5, r4
+	lsl     r0, r0, #4
+	strh    r1, [r2, r0]
+	strh    r1, [r6, r4]
+	mov     r1, #0x2
+	add     r0, #0x1e
+	strb    r1, [r2, r0]
+	pop     {r4-r6,pc}
+@ 0x202b35c
+
+.word 0x270f @ 0x202b35c
+.word 0x1e6 @ 0x202b360
+.word 0x1f2 @ 0x202b364
+.word 0x1f6 @ 0x202b368
+.word 0xffff @ 0x202b36c
 
 
 .thumb
@@ -42879,6 +43069,7 @@ branch_20305f8: @ 20305f8 :thumb
 
 
 .thumb
+.globl Function_203068c
 Function_203068c: @ 203068c :thumb
 	ldr     r3, [pc, #0x4] @ 0x2030694, (=#0x20245bd)
 	mov     r1, #0x17
@@ -43036,7 +43227,31 @@ branch_2030758: @ 2030758 :thumb
 .word 0x270f @ 0x203075c
 .word 0xffff @ 0x2030760
 
-.incbin "./baserom/arm9.bin", 0x30764, 0x20308a0 - 0x2030764
+
+
+.incbin "./baserom/arm9.bin", 0x30764, 0x20307f0 - 0x2030764
+
+
+.thumb
+.globl Function_20307f0
+Function_20307f0: @ 20307f0 :thumb
+	ldr     r3, [pc, #0xc] @ 0x2030800, (=Function_20c4cf4)
+	add     r0, #0xe0
+	lsl     r1, r1, #6
+	add     r0, r0, r1
+	mov     r1, #0x0
+	mov     r2, #0x40
+	bx      r3
+@ 0x20307fe
+
+
+.incbin "./baserom/arm9.bin", 0x307fe, 0x2030800 - 0x20307fe
+
+
+.word Function_20c4cf4 @ 0x2030800
+
+
+.incbin "./baserom/arm9.bin", 0x30804, 0x20308a0 - 0x2030804
 
 
 .thumb
@@ -44506,6 +44721,7 @@ branch_2032726: @ 2032726 :thumb
 
 
 .thumb
+.globl Function_203272c
 Function_203272c: @ 203272c :thumb
 	cmp     r0, #0x1d
 	beq     branch_2032738
@@ -49946,7 +50162,42 @@ branch_2037e0a: @ 2037e0a :thumb
 .word 0x2038315 @ 0x2037e18
 .word 0x20370ed @ 0x2037e1c
 
-.incbin "./baserom/arm9.bin", 0x37e20, 0x20383e8 - 0x2037e20
+
+
+.incbin "./baserom/arm9.bin", 0x37e20, 0x2037f94 - 0x2037e20
+
+
+.thumb
+.globl Function_2037f94
+Function_2037f94: @ 2037f94 :thumb
+	push    {r3,r4}
+	ldr     r3, [pc, #0x20] @ 0x2037fb8, (=#0x21c07d4)
+	ldr     r4, [r3, #0x0]
+	cmp     r4, #0x0
+	beq     branch_2037fb4
+	mov     r3, r0
+	sub     r3, #0x19
+	cmp     r3, #0x1
+	bls     branch_2037fa8
+	neg     r0, r0
+.thumb
+branch_2037fa8: @ 2037fa8 :thumb
+	str     r0, [r4, #0x34]
+	ldr     r0, [pc, #0xc] @ 0x2037fb8, (=#0x21c07d4)
+	ldr     r3, [r0, #0x0]
+	str     r1, [r3, #0x38]
+	ldr     r0, [r0, #0x0]
+	str     r2, [r0, #0x3c]
+.thumb
+branch_2037fb4: @ 2037fb4 :thumb
+	pop     {r3,r4}
+	bx      lr
+@ 0x2037fb8
+
+.word 0x21c07d4 @ 0x2037fb8
+
+
+.incbin "./baserom/arm9.bin", 0x37fbc, 0x20383e8 - 0x2037fbc
 
 
 .thumb
@@ -50173,7 +50424,11 @@ branch_2038954: @ 2038954 :thumb
 @ 0x2038958
 
 .word 0x21c07d4 @ 0x2038958
+
+
+
 .thumb
+.globl Function_203895c
 Function_203895c: @ 203895c :thumb
 	ldr     r0, [pc, #0x10] @ 0x2038970, (=#0x21c07d4)
 	ldr     r0, [r0, #0x0]
@@ -50425,6 +50680,7 @@ branch_2038ada: @ 2038ada :thumb
 
 
 .thumb
+.globl Function_2038ae0
 Function_2038ae0: @ 2038ae0 :thumb
 	push    {r3,lr}
 	ldr     r1, [pc, #0x18] @ 0x2038afc, (=#0x21c07d4)
@@ -52026,6 +52282,7 @@ Function_203a728: @ 203a728 :thumb
 @ 0x203a72c
 
 .thumb
+.globl Function_203a72c
 Function_203a72c: @ 203a72c :thumb
 	add     r0, #0x50
 	bx      lr
@@ -52076,7 +52333,19 @@ Function_203a754: @ 203a754 :thumb
 @ 0x203a75a
 
 
-.incbin "./baserom/arm9.bin", 0x3a75a, 0x203a764 - 0x203a75a
+.incbin "./baserom/arm9.bin", 0x3a75a, 0x203a75c - 0x203a75a
+
+
+.thumb
+.globl Function_203a75c
+Function_203a75c: @ 203a75c :thumb
+	add     r0, #0x68
+	ldrh    r0, [r0, #0x0]
+	bx      lr
+@ 0x203a762
+
+
+.incbin "./baserom/arm9.bin", 0x3a762, 0x203a764 - 0x203a762
 
 
 .thumb
@@ -52123,6 +52392,7 @@ Function_203a788: @ 203a788 :thumb
 
 
 .thumb
+.globl Function_203a790
 Function_203a790: @ 203a790 :thumb
 	ldr     r3, [pc, #0x4] @ 0x203a798, (=#0x20245bd)
 	mov     r1, #0x6
@@ -52161,7 +52431,60 @@ Function_203a7a8: @ 203a7a8 :thumb
 @ 0x203a7c0
 
 
-.incbin "./baserom/arm9.bin", 0x3a7c0, 0x203a9c8 - 0x203a7c0
+.incbin "./baserom/arm9.bin", 0x3a7c0, 0x203a7d8 - 0x203a7c0
+
+
+.thumb
+Function_203a7d8: @ 203a7d8 :thumb
+	push    {r3,lr}
+	cmp     r0, #0x0
+	ble     branch_203a7e2
+	cmp     r0, #0x14
+	bls     branch_203a7e8
+.thumb
+branch_203a7e2: @ 203a7e2 :thumb
+	bl      Function_2022974
+	mov     r0, #0x1
+.thumb
+branch_203a7e8: @ 203a7e8 :thumb
+	.hword  0x1e40 @ sub r0, r0, #0x1
+	pop     {r3,pc}
+@ 0x203a7ec
+
+
+.incbin "./baserom/arm9.bin", 0x3a7ec, 0x203a7f0 - 0x203a7ec
+
+
+.thumb
+.globl Function_203a7f0
+Function_203a7f0: @ 203a7f0 :thumb
+	push    {r4,lr}
+	mov     r4, r1
+	bl      Function_203a7d8
+	lsl     r1, r0, #4
+	ldr     r0, [pc, #0x1c] @ 0x203a818, (=#0x20e97ba)
+	ldrh    r0, [r0, r1]
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	mvn     r0, r0
+	str     r0, [r4, #0x4]
+	ldr     r0, [pc, #0x14] @ 0x203a81c, (=#0x20e97bc)
+	ldrh    r0, [r0, r1]
+	str     r0, [r4, #0x8]
+	ldr     r0, [pc, #0x10] @ 0x203a820, (=#0x20e97be)
+	ldrh    r0, [r0, r1]
+	str     r0, [r4, #0xc]
+	mov     r0, #0x1
+	str     r0, [r4, #0x10]
+	pop     {r4,pc}
+@ 0x203a818
+
+.word 0x20e97ba @ 0x203a818
+.word 0x20e97bc @ 0x203a81c
+.word 0x20e97be @ 0x203a820
+
+
+.incbin "./baserom/arm9.bin", 0x3a824, 0x203a9c8 - 0x203a824
 
 
 .thumb
@@ -89731,7 +90054,44 @@ Function_2053ab4: @ 2053ab4 :thumb
 
 .word 0x2053b45 @ 0x2053af8
 
-.incbin "./baserom/arm9.bin", 0x53afc, 0x2054708 - 0x2053afc
+
+
+.incbin "./baserom/arm9.bin", 0x53afc, 0x2053cd4 - 0x2053afc
+
+
+.thumb
+.globl Function_2053cd4
+Function_2053cd4: @ 2053cd4 :thumb
+	push    {r4-r6,lr}
+	mov     r6, r0
+	mov     r5, r1
+	mov     r0, #0xb
+	mov     r1, #0x20
+	mov     r4, r2
+	bl      Function_2018184
+	mov     r2, r0
+	mov     r0, #0x0
+	str     r0, [r2, #0x0]
+	str     r4, [r2, #0x4]
+	str     r0, [r2, #0x8]
+	mov     r3, r2
+	ldmia   r5!, {r0,r1}
+	add     r3, #0xc
+	stmia   r3!, {r0,r1}
+	ldmia   r5!, {r0,r1}
+	stmia   r3!, {r0,r1}
+	ldr     r0, [r5, #0x0]
+	ldr     r1, [pc, #0x8] @ 0x2053d08, (=#0x2053d0d)
+	str     r0, [r3, #0x0]
+	mov     r0, r6
+	bl      Function_2050924
+	pop     {r4-r6,pc}
+@ 0x2053d08
+
+.word 0x2053d0d @ 0x2053d08
+
+
+.incbin "./baserom/arm9.bin", 0x53d0c, 0x2054708 - 0x2053d0c
 
 
 .thumb
@@ -96875,6 +97235,7 @@ Function_205eb84: @ 205eb84 :thumb
 
 
 .thumb
+.globl Function_205eb98
 Function_205eb98: @ 205eb98 :thumb
 	ldr     r0, [r0, #0x20]
 	bx      lr
@@ -104835,7 +105196,43 @@ branch_20656a6: @ 20656a6 :thumb
 @ 0x20656aa
 
 
-.incbin "./baserom/arm9.bin", 0x656aa, 0x20656dc - 0x20656aa
+.align 2, 0
+
+
+.thumb
+Function_20656ac: @ 20656ac :thumb
+	push    {r4,lr}
+	mov     r1, #0x10
+	mov     r4, r0
+	bl      Function_20628d8
+	cmp     r0, #0x0
+	bne     branch_20656be
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x20656be
+
+.thumb
+branch_20656be: @ 20656be :thumb
+	mov     r0, r4
+	mov     r1, #0x20
+	bl      Function_20628d8
+	cmp     r0, #0x0
+	bne     branch_20656ce
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x20656ce
+
+.thumb
+branch_20656ce: @ 20656ce :thumb
+	mov     r0, r4
+	mov     r1, #0x30
+	bl      Function_20628c4
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x20656da
+
+
+.incbin "./baserom/arm9.bin", 0x656da, 0x20656dc - 0x20656da
 
 
 .thumb
@@ -104857,6 +105254,7 @@ Function_20656dc: @ 20656dc :thumb
 @ 0x2065700
 
 .thumb
+.globl Function_2065700
 Function_2065700: @ 2065700 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
@@ -104898,7 +105296,46 @@ branch_2065740: @ 2065740 :thumb
 
 .word 0x2065789 @ 0x2065748
 
-.incbin "./baserom/arm9.bin", 0x6574c, 0x2065838 - 0x206574c
+
+.thumb
+.globl Function_206574c
+Function_206574c: @ 206574c :thumb
+	push    {r3,lr}
+	bl      Function_201ced0
+	ldr     r0, [r0, #0x4]
+	pop     {r3,pc}
+@ 0x2065756
+
+
+.align 2, 0
+
+
+.thumb
+.globl Function_2065758
+Function_2065758: @ 2065758 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	bl      Function_201ced0
+	mov     r4, r0
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065684
+	cmp     r0, #0x1
+	beq     branch_2065770
+	bl      Function_2022974
+.thumb
+branch_2065770: @ 2065770 :thumb
+	ldr     r0, [r4, #0xc]
+	bl      Function_20656ac
+	mov     r0, #0x4
+	mov     r1, r4
+	bl      Function_2018238
+	mov     r0, r5
+	bl      Function_200da58
+	pop     {r3-r5,pc}
+@ 0x2065786
+
+
+.incbin "./baserom/arm9.bin", 0x65786, 0x2065838 - 0x2065786
 
 
 .thumb
@@ -105508,7 +105945,11 @@ Function_206a944: @ 206a944 :thumb
 
 .word Function_206a8dc+1 @ =0x206a8dd, 0x206a94c
 .word 0x964 @ 0x206a950
+
+
+
 .thumb
+.globl Function_206a954
 Function_206a954: @ 206a954 :thumb
 	ldr     r3, [pc, #0x4] @ 0x206a95c, (=#0x206a8ed)
 	ldr     r1, [pc, #0x8] @ 0x206a960, (=#0x964)
@@ -106227,7 +106668,11 @@ Function_206af2c: @ 206af2c :thumb
 
 .word Function_206a8f4+1 @ =0x206a8f5, 0x206af34
 .word 0x963 @ 0x206af38
+
+
+
 .thumb
+.globl Function_206af3c
 Function_206af3c: @ 206af3c :thumb
 	push    {r4-r6,lr}
 	mov     r4, r2
@@ -116098,7 +116543,30 @@ Function_2077d28: @ 2077d28 :thumb
 @ 0x2077d3c
 
 
-.incbin "./baserom/arm9.bin", 0x77d3c, 0x2077e64 - 0x2077d3c
+.incbin "./baserom/arm9.bin", 0x77d3c, 0x2077e3c - 0x2077d3c
+
+
+.thumb
+.globl Function_2077e3c
+Function_2077e3c: @ 2077e3c :thumb
+	push    {r3-r5,lr}
+	mov     r5, r0
+	mov     r1, #0x5
+	mov     r2, #0x0
+	bl      Function_2074470
+	mov     r4, r0
+	mov     r0, r5
+	mov     r1, #0x70
+	mov     r2, #0x0
+	bl      Function_2074470
+	mov     r1, r0
+	lsl     r0, r4, #16
+	lsl     r1, r1, #24
+	lsr     r0, r0, #16
+	lsr     r1, r1, #24
+	bl      Function_2005844
+	pop     {r3-r5,pc}
+@ 0x2077e64
 
 
 .thumb
@@ -124664,7 +125132,25 @@ branch_20a2630: @ 20a2630 :arm
 .word 0x20a2734 @ 0x20a264c
 .word 0x20a280c @ 0x20a2650
 
-.incbin "./baserom/arm9.bin", 0xa2654, 0x20a283c - 0x20a2654
+.incbin "./baserom/arm9.bin", 0xa2654, 0x20a2810 - 0x20a2654
+
+
+.arm
+.globl Function_20a2810
+Function_20a2810: @ 20a2810 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r1,  [pc, #0x1c] @ [0x20a2838] (=#0x21c3a48)
+	mov     r2, r0
+	ldr     r0, [r1, #0x8]
+	mov     r1, #3, 24 @ #0x300
+	bl      Function_20a3144
+	cmp     r0, #0x0
+	movne   r0, #0x1
+	moveq   r0, #0x0
+	ldmfd   sp!, {r3,pc}
+@ 0x20a2838
+
+.word 0x21c3a48 @ 0x20a2838
 
 
 .arm
@@ -126267,10 +126753,71 @@ Function_20a453c: @ 20a453c :arm
 @ 0x20a45a4
 
 
-.incbin "./baserom/arm9.bin", 0xa45a4, 0x20a4698 - 0x20a45a4
+.incbin "./baserom/arm9.bin", 0xa45a4, 0x20a45fc - 0x20a45a4
 
 
 .arm
+.globl Function_20a45fc
+Function_20a45fc: @ 20a45fc :arm
+	ldr     r12,  [pc, #0x0] @ [0x20a4604] (=Function_20a4608)
+	bx      r12
+@ 0x20a4604
+
+.word Function_20a4608 @ 0x20a4604
+
+
+
+.arm
+Function_20a4608: @ 20a4608 :arm
+	ldr     r0, [r0, #0x20]
+	and     r0, r0, #0x1
+	cmp     r0, #0x1
+	moveq   r0, #0x1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20a4620
+
+
+.arm
+.globl Function_20a4620
+Function_20a4620: @ 20a4620 :arm
+	ldr     r12,  [pc, #0x0] @ [0x20a4628] (=Function_20a462c)
+	bx      r12
+@ 0x20a4628
+
+.word Function_20a462c @ 0x20a4628
+
+
+
+.arm
+Function_20a462c: @ 20a462c :arm
+	stmfd   sp!, {r4,lr}
+	sub     sp, sp, #1, 22 @ #0x400
+	mov     r4, r0
+	ldr     r1, [r4, #0x20]
+	add     r0, sp, #0x0
+	bic     r2, r1, #0x1
+	ldr     r1,  [pc, #0x20] @ [0x20a466c] (=#0xedb88320)
+	str     r2, [r4, #0x20]
+	bl      Function_20d3230
+	add     r0, sp, #0x0
+	mov     r1, r4
+	mov     r2, #0x3c
+	bl      Function_20d3328
+	str     r0, [r4, #0x3c]
+	add     sp, sp, #1, 22 @ #0x400
+	ldmfd   sp!, {r4,pc}
+@ 0x20a466c
+
+.word 0xedb88320 @ 0x20a466c
+
+
+
+.incbin "./baserom/arm9.bin", 0xa4670, 0x20a4698 - 0x20a4670
+
+
+.arm
+.globl Function_20a4698
 Function_20a4698: @ 20a4698 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r4, r1
@@ -127027,6 +127574,7 @@ branch_20a5434: @ 20a5434 :arm
 @ 0x20a543c
 
 .arm
+.globl Function_20a543c
 Function_20a543c: @ 20a543c :arm
 	ldr     r12,  [pc, #0x0] @ [0x20a5444] (=#0x20a4ef4)
 	bx      r12
@@ -127034,6 +127582,7 @@ Function_20a543c: @ 20a543c :arm
 
 .word 0x20a4ef4 @ 0x20a5444
 .arm
+.globl Function_20a5448
 Function_20a5448: @ 20a5448 :arm
 	stmfd   sp!, {r3,lr}
 	cmp     r1, #0x0
@@ -127058,6 +127607,7 @@ branch_20a546c: @ 20a546c :arm
 
 
 .arm
+.globl Function_20a55d8
 Function_20a55d8: @ 20a55d8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	sub     sp, sp, #0x8
@@ -127093,7 +127643,16 @@ branch_20a5624: @ 20a5624 :arm
 @ 0x20a563c
 
 
-.incbin "./baserom/arm9.bin", 0xa563c, 0x20a5660 - 0x20a563c
+.incbin "./baserom/arm9.bin", 0xa563c, 0x20a5654 - 0x20a563c
+
+
+.arm
+.globl Function_20a5654
+Function_20a5654: @ 20a5654 :arm
+	ldrh    r0, [r0, #-0xe]
+	and     r0, r0, #0xff
+	bx      lr
+@ 0x20a5660
 
 
 .arm
@@ -136404,6 +136963,7 @@ branch_20b8924: @ 20b8924 :arm
 
 
 .arm
+.globl Function_20b8a0c
 Function_20b8a0c: @ 20b8a0c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -136447,6 +137007,7 @@ Function_20b8bd4: @ 20b8bd4 :arm
 @ 0x20b8c28
 
 .arm
+.globl Function_20b8c28
 Function_20b8c28: @ 20b8c28 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [r0, #0x24]
@@ -143010,7 +143571,31 @@ Function_20c1560: @ 20c1560 :arm
 .word 0x21ccc00 @ 0x20c15a0
 .word 0x21ccbfc @ 0x20c15a4
 
-.incbin "./baserom/arm9.bin", 0xc15a8, 0x20c15f0 - 0x20c15a8
+
+
+.arm
+Function_20c15a8: @ 20c15a8 :arm
+	stmfd   sp!, {r4,lr}
+	mov     r3, #0xc
+	mul     r4, r0, r3
+	ldr     r12,  [pc, #0x28] @ [0x20c15e4] (=#0x21ccc28)
+	add     r0, r0, #0x3
+	mov     r3, #0x1
+	mov     r0, r3, lsl r0
+	ldr     r3,  [pc, #0x1c] @ [0x20c15e8] (=#0x21ccc30)
+	str     r1, [r12, r4]
+	str     r2, [r3, r4]
+	bl      Function_20c161c
+	ldr     r0,  [pc, #0x10] @ [0x20c15ec] (=#0x21ccc2c)
+	mov     r1, #0x1
+	str     r1, [r0, r4]
+	ldmfd   sp!, {r4,pc}
+@ 0x20c15e4
+
+.word 0x21ccc28 @ 0x20c15e4
+.word 0x21ccc30 @ 0x20c15e8
+.word 0x21ccc2c @ 0x20c15ec
+
 
 
 .arm
@@ -143334,7 +143919,34 @@ branch_20c1a94: @ 20c1a94 :arm
 
 .word 0x27fffb0 @ 0x20c1aac
 
-.incbin "./baserom/arm9.bin", 0xc1ab0, 0x20c1b24 - 0x20c1ab0
+
+
+.incbin "./baserom/arm9.bin", 0xc1ab0, 0x20c1af0 - 0x20c1ab0
+
+
+.arm
+.globl Function_20c1af0
+Function_20c1af0: @ 20c1af0 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r3,lr}
+	add     r3, sp, #0x10
+	bic     r3, r3, #0x3
+	ldr     r2, [sp, #0x10]
+	add     r3, r3, #0x4
+	bl      Function_20c1b18
+	ldmfd   sp!, {r3,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20c1b18
+
+.arm
+Function_20c1b18: @ 20c1b18 :arm
+	ldr     r12,  [pc, #0x0] @ [0x20c1b20] (=Function_20d3524)
+	bx      r12
+@ 0x20c1b20
+
+.word Function_20d3524 @ 0x20c1b20
+
 
 
 .arm
@@ -143615,6 +144227,7 @@ branch_20c1e50: @ 20c1e50 :arm
 
 
 .arm
+.globl Function_20c1f34
 Function_20c1f34: @ 20c1f34 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r8, r0
@@ -143682,10 +144295,41 @@ Function_20c1f34: @ 20c1f34 :arm
 .word 0x7bf9dd5b @ 0x20c2028
 .word 0x20c2030 @ 0x20c202c
 
-.incbin "./baserom/arm9.bin", 0xc2030, 0x20c2218 - 0x20c2030
+.incbin "./baserom/arm9.bin", 0xc2030, 0x20c21d4 - 0x20c2030
+
 
 
 .arm
+.globl Function_20c21d4
+Function_20c21d4: @ 20c21d4 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	bl      Function_20c3d98
+	ldr     r1, [r5, #0x64]
+	mov     r4, r0
+	cmp     r1, #0x2
+	beq     branch_20c21f8
+	add     r0, r5, #0x9c
+	bl      Function_20c2218
+.arm
+branch_20c21f8: @ 20c21f8 :arm
+	mov     r0, r4
+	bl      Function_20c3dac
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20c2204
+
+.arm
+.globl Function_20c2204
+Function_20c2204: @ 20c2204 :arm
+	ldr     r0, [r0, #0x64]
+	cmp     r0, #0x2
+	moveq   r0, #0x1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20c2218
+
+.arm
+.globl Function_20c2218
 Function_20c2218: @ 20c2218 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -143711,7 +144355,11 @@ branch_20c224c: @ 20c224c :arm
 @ 0x20c2264
 
 .word 0x21ccc5c @ 0x20c2264
+
+
+
 .arm
+.globl Function_20c2268
 Function_20c2268: @ 20c2268 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -143723,7 +144371,6 @@ Function_20c2268: @ 20c2268 :arm
 	beq     branch_20c22b4
 	mov     r5, #0x1
 	mov     r4, #0x0
-.arm
 branch_20c2290: @ 20c2290 :arm
 	mov     r0, r7
 	bl      Function_20c1bb4
@@ -143734,13 +144381,11 @@ branch_20c2290: @ 20c2290 :arm
 	ldr     r0, [r7]
 	cmp     r0, #0x0
 	bne     branch_20c2290
-.arm
 branch_20c22b4: @ 20c22b4 :arm
 	mov     r0, #0x0
 	str     r0, [r7, #0x4]
 	str     r0, [r7]
 	bl      Function_20c1d14
-.arm
 branch_20c22c4: @ 20c22c4 :arm
 	mov     r0, r6
 	bl      Function_20c3dac
@@ -143748,6 +144393,7 @@ branch_20c22c4: @ 20c22c4 :arm
 @ 0x20c22d0
 
 .arm
+.globl Function_20c22d0
 Function_20c22d0: @ 20c22d0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -143782,7 +144428,83 @@ branch_20c2308: @ 20c2308 :arm
 
 .word 0x21ccc5c @ 0x20c231c
 
-.incbin "./baserom/arm9.bin", 0xc2320, 0x20c23f4 - 0x20c2320
+
+
+.arm
+.globl Function_20c2320
+Function_20c2320: @ 20c2320 :arm
+	stmfd   sp!, {r4,lr}
+	bl      Function_20c3d98
+	mov     r4, r0
+	bl      Function_20c1d14
+	mov     r0, r4
+	bl      Function_20c3dac
+	ldmfd   sp!, {r4,pc}
+@ 0x20c233c
+
+.arm
+.globl Function_20c233c
+Function_20c233c: @ 20c233c :arm
+	stmfd   sp!, {r4-r8,lr}
+	ldr     r0,  [pc, #0xa8] @ [0x20c23f0] (=#0x21ccc5c)
+	mov     r4, #0x0
+	mov     r5, r4
+	mov     r6, r4
+	ldr     r8, [r0, #0x28]
+	bl      Function_20c3d98
+	ldr     r1,  [pc, #0x90] @ [0x20c23f0] (=#0x21ccc5c)
+	mov     r7, r0
+	ldr     r1, [r1, #0x2c]
+	mov     r0, r4
+	cmp     r1, #0x0
+	beq     branch_20c239c
+	ldr     r2, [r8, #0x70]
+.arm
+branch_20c2374: @ 20c2374 :arm
+	cmp     r1, r8
+	moveq   r4, r0
+	ldr     r0, [r1, #0x70]
+	cmp     r2, r0
+	moveq   r5, r1
+	mov     r0, r1
+	ldr     r1, [r1, #0x68]
+	addeq   r6, r6, #0x1
+	cmp     r1, #0x0
+	bne     branch_20c2374
+.arm
+branch_20c239c: @ 20c239c :arm
+	cmp     r6, #0x1
+	ble     branch_20c23ac
+	cmp     r5, r8
+	bne     branch_20c23b8
+.arm
+branch_20c23ac: @ 20c23ac :arm
+	mov     r0, r7
+	bl      Function_20c3dac
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c23b8
+
+.arm
+branch_20c23b8: @ 20c23b8 :arm
+	cmp     r4, #0x0
+	ldrne   r0, [r8, #0x68]
+	strne   r0, [r4, #0x68]
+	bne     branch_20c23d4
+	ldr     r1, [r8, #0x68]
+	ldr     r0,  [pc, #0x1c] @ [0x20c23f0] (=#0x21ccc5c)
+	str     r1, [r0, #0x2c]
+.arm
+branch_20c23d4: @ 20c23d4 :arm
+	ldr     r0, [r5, #0x68]
+	str     r0, [r8, #0x68]
+	str     r8, [r5, #0x68]
+	bl      Function_20c1d14
+	mov     r0, r7
+	bl      Function_20c3dac
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c23f0
+
+.word 0x21ccc5c @ 0x20c23f0
 
 
 .arm
@@ -143846,7 +144568,66 @@ branch_20c2484: @ 20c2484 :arm
 .word 0x21ccc5c @ 0x20c2494
 .word 0x21ccc90 @ 0x20c2498
 
-.incbin "./baserom/arm9.bin", 0xc249c, 0x20c256c - 0x20c249c
+
+
+.incbin "./baserom/arm9.bin", 0xc249c, 0x20c24a4 - 0x20c249c
+
+
+.arm
+.globl Function_20c24a4
+Function_20c24a4: @ 20c24a4 :arm
+	stmfd   sp!, {r4,r5,lr}
+	sub     sp, sp, #0x34
+	mov     r4, r0
+	add     r0, sp, #0x8
+	bl      Function_20c3a0c
+	ldr     r0,  [pc, #0x80] @ [0x20c2540] (=#0x21ccc5c)
+	ldr     r0, [r0, #0x8]
+	ldr     r0, [r0]
+	str     r0, [sp, #0x4]
+	bl      Function_20c3d98
+	ldr     r1,  [pc, #0x70] @ [0x20c2544] (=#0x82ea)
+	mov     r2, #0x0
+	umull   r5, r3, r4, r1
+	mla     r3, r4, r2, r3
+	mla     r3, r2, r1, r3
+	mov     r1, r5, lsr #6
+	mov     r4, r0
+	ldr     r5, [sp, #0x4]
+	add     r0, sp, #0x8
+	add     r2, sp, #0x4
+	str     r0, [r5, #0xb0]
+	str     r2, [sp]
+	mov     r2, r3, lsr #6
+	orr     r1, r1, r3, lsl #26
+	ldr     r3,  [pc, #0x3c] @ [0x20c2548] (=#0x20c254c)
+	bl      Function_20c3b48
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20c2530
+	mov     r5, #0x0
+.arm
+branch_20c251c: @ 20c251c :arm
+	mov     r0, r5
+	bl      Function_20c2218
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	bne     branch_20c251c
+.arm
+branch_20c2530: @ 20c2530 :arm
+	mov     r0, r4
+	bl      Function_20c3dac
+	add     sp, sp, #0x34
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20c2540
+
+.word 0x21ccc5c @ 0x20c2540
+.word 0x82ea @ 0x20c2544
+.word 0x20c254c @ 0x20c2548
+
+
+
+.incbin "./baserom/arm9.bin", 0xc254c, 0x20c256c - 0x20c254c
 
 
 .arm
@@ -143874,7 +144655,8 @@ branch_20c259c: @ 20c259c :arm
 @ 0x20c25a4
 
 .arm
-Startpoint_20c25a4: @ 20c25a4 :arm
+.globl Function_20c25a4
+Function_20c25a4: @ 20c25a4 :arm
 	stmfd   sp!, {r4,lr}
 	bl      Function_20c3d98
 	ldr     r2,  [pc, #0x20] @ [0x20c25d4] (=#0x21ccc5c)
@@ -143890,8 +144672,12 @@ Startpoint_20c25a4: @ 20c25a4 :arm
 @ 0x20c25d4
 
 .word 0x21ccc5c @ 0x20c25d4
+
+
+
 .arm
-Startpoint_20c25d8: @ 20c25d8 :arm
+.globl Function_20c25d8
+Function_20c25d8: @ 20c25d8 :arm
 	stmfd   sp!, {r4,lr}
 	bl      Function_20c3d98
 	ldr     r1,  [pc, #0x20] @ [0x20c2608] (=#0x21ccc5c)
@@ -144027,10 +144813,26 @@ Function_20c2730: @ 20c2730 :arm
 .word 0x82000001 @ 0x20c2740
 .word 0x210115c @ 0x20c2744
 
-.incbin "./baserom/arm9.bin", 0xc2748, 0x20c2770 - 0x20c2748
 
 
 .arm
+.globl Function_20c2748
+Function_20c2748: @ 20c2748 :arm
+	mov     r3, #0x0
+	str     r3, [r0, #0x4]
+	str     r3, [r0]
+	str     r3, [r0, #0xc]
+	str     r3, [r0, #0x8]
+	str     r1, [r0, #0x10]
+	str     r2, [r0, #0x14]
+	str     r3, [r0, #0x18]
+	str     r3, [r0, #0x1c]
+	bx      lr
+@ 0x20c2770
+
+
+.arm
+.globl Function_20c2770
 Function_20c2770: @ 20c2770 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
@@ -144080,6 +144882,7 @@ branch_20c27cc: @ 20c27cc :arm
 @ 0x20c2804
 
 .arm
+.globl Function_20c2804
 Function_20c2804: @ 20c2804 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r6, r0
@@ -144190,6 +144993,7 @@ branch_20c2904: @ 20c2904 :arm
 
 
 .arm
+.globl Function_20c29c0
 Function_20c29c0: @ 20c29c0 :arm
 	mov     r1, #0x0
 	str     r1, [r0, #0x4]
@@ -144200,6 +145004,7 @@ Function_20c29c0: @ 20c29c0 :arm
 @ 0x20c29d8
 
 .arm
+.globl Function_20c29d8
 Function_20c29d8: @ 20c29d8 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
@@ -144250,7 +145055,11 @@ branch_20c2a4c: @ 20c2a4c :arm
 @ 0x20c2a58
 
 .word 0x21ccc80 @ 0x20c2a58
+
+
+
 .arm
+.globl Function_20c2a5c
 Function_20c2a5c: @ 20c2a5c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -144280,7 +145089,51 @@ branch_20c2aa8: @ 20c2aa8 :arm
 
 .word 0x21ccc80 @ 0x20c2ab4
 
-.incbin "./baserom/arm9.bin", 0xc2ab8, 0x20c2b68 - 0x20c2ab8
+
+
+.incbin "./baserom/arm9.bin", 0xc2ab8, 0x20c2af4 - 0x20c2ab8
+
+
+.arm
+.globl Function_20c2af4
+Function_20c2af4: @ 20c2af4 :arm
+	stmfd   sp!, {r4-r6,lr}
+	mov     r5, r0
+	bl      Function_20c3d98
+	ldr     r2, [r5, #0x8]
+	ldr     r1,  [pc, #0x58] @ [0x20c2b64] (=#0x21ccc80)
+	mov     r4, r0
+	cmp     r2, #0x0
+	ldr     r0, [r1, #0x4]
+	bne     branch_20c2b38
+	str     r0, [r5, #0x8]
+	ldr     r2, [r5, #0xc]
+	mov     r1, r5
+	add     r2, r2, #0x1
+	str     r2, [r5, #0xc]
+	bl      Function_20c2b68
+	mov     r6, #0x1
+	b       branch_20c2b54
+@ 0x20c2b38
+
+.arm
+branch_20c2b38: @ 20c2b38 :arm
+	cmp     r2, r0
+	movne   r6, #0x0
+	bne     branch_20c2b54
+	ldr     r0, [r5, #0xc]
+	mov     r6, #0x1
+	add     r0, r0, #0x1
+	str     r0, [r5, #0xc]
+.arm
+branch_20c2b54: @ 20c2b54 :arm
+	mov     r0, r4
+	bl      Function_20c3dac
+	mov     r0, r6
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20c2b64
+
+.word 0x21ccc80 @ 0x20c2b64
 
 
 .arm
@@ -144335,6 +145188,7 @@ branch_20c2bf4: @ 20c2bf4 :arm
 @ 0x20c2c1c
 
 .arm
+.globl Function_20c2c1c
 Function_20c2c1c: @ 20c2c1c :arm
 	add     r1, r1, r0
 	bic     r0, r0, #0x1f
@@ -144753,7 +145607,11 @@ Function_20c3774: @ 20c3774 :arm
 @ 0x20c378c
 
 .word 0x21ccfb0 @ 0x20c378c
+
+
+
 .arm
+.globl Function_20c3790
 Function_20c3790: @ 20c3790 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1,  [pc, #0x60] @ [0x20c37fc] (=#0x21ccfb4)
@@ -144787,7 +145645,11 @@ Function_20c3790: @ 20c3790 :arm
 .word 0x21ccfb4 @ 0x20c37fc
 .word 0x4000102 @ 0x20c3800
 .word 0x20c3818 @ 0x20c3804
+
+
+
 .arm
+.globl Function_20c3808
 Function_20c3808: @ 20c3808 :arm
 	ldr     r0,  [pc, #0x4] @ [0x20c3814] (=#0x21ccfb4)
 	ldrh    r0, [r0]
@@ -144800,6 +145662,7 @@ Function_20c3808: @ 20c3808 :arm
 
 
 .arm
+.globl Function_20c3880
 Function_20c3880: @ 20c3880 :arm
 	stmfd   sp!, {lr}
 	sub     sp, sp, #0xc
@@ -144854,7 +145717,275 @@ Function_20c3920: @ 20c3920 :arm
 
 .word 0x4000100 @ 0x20c392c
 
-.incbin "./baserom/arm9.bin", 0xc3930, 0x20c3d3c - 0x20c3930
+
+
+.arm
+Function_20c3930: @ 20c3930 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r4, r0
+	bl      Function_20c3880
+	ldr     r3,  [pc, #0x68] @ [0x20c39ac] (=#0x4000106)
+	mov     r2, #0x0
+	strh    r2, [r3]
+	ldr     r12, [r4, #0xc]
+	ldr     r3, [r4, #0x10]
+	subs    r5, r12, r0
+	sbc     r4, r3, r1
+	ldr     r1,  [pc, #0x50] @ [0x20c39b0] (=#0x20c3c3c)
+	mov     r0, #0x1
+	bl      Function_20c15a8
+	subs    r0, r5, #0x0
+	mov     r3, #0x0
+	sbcs    r0, r4, #0x0
+	ldrlt   r3,  [pc, #0x3c] @ [0x20c39b4] (=#0xfffe)
+	blt     branch_20c3990
+	subs    r0, r5, #1, 16 @ #0x10000
+	sbcs    r0, r4, r3
+	bge     branch_20c3990
+	mvn     r0, r5
+	mov     r0, r0, lsl #16
+	mov     r3, r0, lsr #16
+.arm
+branch_20c3990: @ 20c3990 :arm
+	ldr     r2,  [pc, #0x20] @ [0x20c39b8] (=#0x4000104)
+	mov     r1, #0xc1
+	strh    r3, [r2]
+	mov     r0, #0x10
+	strh    r1, [r2, #0x2]
+	bl      Function_20c161c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20c39ac
+
+.word 0x4000106 @ 0x20c39ac
+.word 0x20c3c3c @ 0x20c39b0
+.word 0xfffe @ 0x20c39b4
+.word 0x4000104 @ 0x20c39b8
+
+
+
+.arm
+.globl Function_20c39bc
+Function_20c39bc: @ 20c39bc :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r1,  [pc, #0x30] @ [0x20c39f8] (=#0x21ccfc4)
+	ldrh    r0, [r1]
+	cmp     r0, #0x0
+	ldmnefd sp!, {r3,pc}
+	mov     r0, #0x1
+	strh    r0, [r1]
+	bl      Function_20c3774
+	ldr     r1,  [pc, #0x14] @ [0x20c39f8] (=#0x21ccfc4)
+	mov     r2, #0x0
+	str     r2, [r1, #0x4]
+	mov     r0, #0x10
+	str     r2, [r1, #0x8]
+	bl      Function_20c164c
+	ldmfd   sp!, {r3,pc}
+@ 0x20c39f8
+
+.word 0x21ccfc4 @ 0x20c39f8
+
+
+
+.arm
+.globl Function_20c39fc
+Function_20c39fc: @ 20c39fc :arm
+	ldr     r0,  [pc, #0x4] @ [0x20c3a08] (=#0x21ccfc4)
+	ldrh    r0, [r0]
+	bx      lr
+@ 0x20c3a08
+
+.word 0x21ccfc4 @ 0x20c3a08
+
+
+.arm
+.globl Function_20c3a0c
+Function_20c3a0c: @ 20c3a0c :arm
+	mov     r1, #0x0
+	str     r1, [r0]
+	str     r1, [r0, #0x8]
+	bx      lr
+@ 0x20c3a1c
+
+.arm
+Function_20c3a1c: @ 20c3a1c :arm
+	stmfd   sp!, {r4-r8,lr}
+	mov     r8, r0
+	ldr     r0, [r8, #0x20]
+	ldr     r3, [r8, #0x1c]
+	cmp     r0, #0x0
+	mov     r7, r1
+	mov     r6, r2
+	cmpeq   r3, #0x0
+	beq     branch_20c3a90
+	bl      Function_20c3880
+	ldr     r6, [r8, #0x28]
+	ldr     r7, [r8, #0x24]
+	cmp     r6, r1
+	cmpeq   r7, r0
+	bcs     branch_20c3a90
+	ldr     r5, [r8, #0x1c]
+	ldr     r4, [r8, #0x20]
+	subs    r0, r0, r7
+	mov     r2, r5
+	mov     r3, r4
+	sbc     r1, r1, r6
+	bl      Function_20e1ed4
+	adds    r2, r0, #0x1
+	adc     r0, r1, #0x0
+	umull   r3, r1, r5, r2
+	mla     r1, r5, r0, r1
+	mla     r1, r4, r2, r1
+	adds    r7, r7, r3
+	adc     r6, r6, r1
+.arm
+branch_20c3a90: @ 20c3a90 :arm
+	str     r7, [r8, #0xc]
+	ldr     r0,  [pc, #0xa8] @ [0x20c3b44] (=#0x21ccfc4)
+	str     r6, [r8, #0x10]
+	ldr     r5, [r0, #0x4]
+	cmp     r5, #0x0
+	beq     branch_20c3b0c
+	mov     r2, #0x0
+	mov     r1, r2
+.arm
+branch_20c3ab0: @ 20c3ab0 :arm
+	ldr     r3, [r5, #0xc]
+	ldr     r0, [r5, #0x10]
+	subs    r4, r7, r3
+	sbc     r3, r6, r0
+	subs    r0, r4, r1
+	sbcs    r0, r3, r2
+	bge     branch_20c3b00
+	ldr     r0, [r5, #0x14]
+	str     r0, [r8, #0x14]
+	str     r8, [r5, #0x14]
+	str     r5, [r8, #0x18]
+	ldr     r0, [r8, #0x14]
+	cmp     r0, #0x0
+	strne   r8, [r0, #0x18]
+	ldmnefd sp!, {r4-r8,pc}
+	ldr     r1,  [pc, #0x50] @ [0x20c3b44] (=#0x21ccfc4)
+	mov     r0, r8
+	str     r8, [r1, #0x4]
+	bl      Function_20c3930
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c3b00
+
+.arm
+branch_20c3b00: @ 20c3b00 :arm
+	ldr     r5, [r5, #0x18]
+	cmp     r5, #0x0
+	bne     branch_20c3ab0
+.arm
+branch_20c3b0c: @ 20c3b0c :arm
+	ldr     r1,  [pc, #0x30] @ [0x20c3b44] (=#0x21ccfc4)
+	mov     r0, #0x0
+	str     r0, [r8, #0x18]
+	ldr     r0, [r1, #0x8]
+	str     r8, [r1, #0x8]
+	str     r0, [r8, #0x14]
+	cmp     r0, #0x0
+	strne   r8, [r0, #0x18]
+	ldmnefd sp!, {r4-r8,pc}
+	str     r8, [r1, #0x8]
+	mov     r0, r8
+	str     r8, [r1, #0x4]
+	bl      Function_20c3930
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20c3b44
+
+.word 0x21ccfc4 @ 0x20c3b44
+
+
+
+.arm
+.globl Function_20c3b48
+Function_20c3b48: @ 20c3b48 :arm
+	stmfd   sp!, {r3-r7,lr}
+	movs    r6, r0
+	mov     r5, r1
+	mov     r4, r2
+	mov     r7, r3
+	beq     branch_20c3b6c
+	ldr     r0, [r6]
+	cmp     r0, #0x0
+	beq     branch_20c3b70
+.arm
+branch_20c3b6c: @ 20c3b6c :arm
+	bl      Function_20c42a8
+.arm
+branch_20c3b70: @ 20c3b70 :arm
+	bl      Function_20c3d98
+	mov     r1, #0x0
+	str     r1, [r6, #0x1c]
+	str     r1, [r6, #0x20]
+	str     r7, [r6]
+	ldr     r1, [sp, #0x18]
+	mov     r7, r0
+	str     r1, [r6, #0x4]
+	bl      Function_20c3880
+	adds    r3, r5, r0
+	adc     r2, r4, r1
+	mov     r0, r6
+	mov     r1, r3
+	bl      Function_20c3a1c
+	mov     r0, r7
+	bl      Function_20c3dac
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20c3bb4
+
+
+.arm
+.globl Function_20c3bb4
+Function_20c3bb4: @ 20c3bb4 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	bl      Function_20c3d98
+	ldr     r1, [r5]
+	mov     r4, r0
+	cmp     r1, #0x0
+	bne     branch_20c3bd8
+	bl      Function_20c3dac
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20c3bd8
+
+.arm
+branch_20c3bd8: @ 20c3bd8 :arm
+	ldr     r0, [r5, #0x18]
+	cmp     r0, #0x0
+	ldrne   r1, [r5, #0x14]
+	strne   r1, [r0, #0x14]
+	bne     branch_20c3bf8
+	ldr     r2, [r5, #0x14]
+	ldr     r1,  [pc, #0x40] @ [0x20c3c38] (=#0x21ccfc4)
+	str     r2, [r1, #0x8]
+.arm
+branch_20c3bf8: @ 20c3bf8 :arm
+	ldr     r1, [r5, #0x14]
+	cmp     r1, #0x0
+	strne   r0, [r1, #0x18]
+	bne     branch_20c3c1c
+	ldr     r1,  [pc, #0x28] @ [0x20c3c38] (=#0x21ccfc4)
+	cmp     r0, #0x0
+	str     r0, [r1, #0x4]
+	beq     branch_20c3c1c
+	bl      Function_20c3930
+.arm
+branch_20c3c1c: @ 20c3c1c :arm
+	mov     r1, #0x0
+	str     r1, [r5]
+	str     r1, [r5, #0x1c]
+	mov     r0, r4
+	str     r1, [r5, #0x20]
+	bl      Function_20c3dac
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20c3c38
+
+.word 0x21ccfc4 @ 0x20c3c38
+
+
+.incbin "./baserom/arm9.bin", 0xc3c3c, 0x20c3d3c - 0x20c3c3c
 
 
 .arm
@@ -144889,6 +146020,7 @@ Function_20c3d84: @ 20c3d84 :arm
 @ 0x20c3d98
 
 .arm
+.globl Function_20c3d98
 Function_20c3d98: @ 20c3d98 :arm
 	mrs     r0, CPSR
 	orr     r1, r0, #0x80
@@ -144898,6 +146030,7 @@ Function_20c3d98: @ 20c3d98 :arm
 @ 0x20c3dac
 
 .arm
+.globl Function_20c3dac
 Function_20c3dac: @ 20c3dac :arm
 	mrs     r1, CPSR
 	bic     r2, r1, #0x80
@@ -144919,6 +146052,7 @@ Function_20c3df0: @ 20c3df0 :arm
 @ 0x20c3dfc
 
 .arm
+.globl Function_20c3dfc
 Function_20c3dfc: @ 20c3dfc :arm
 	mrs     r0, CPSR
 	and     r0, r0, #0x1f
@@ -145037,7 +146171,11 @@ branch_20c3f0c: @ 20c3f0c :arm
 .word 0x10 @ 0x20c3f94
 .word 0x27e3f80 @ 0x20c3f98
 .word 0x800 @ 0x20c3f9c
+
+
+
 .arm
+.globl Function_20c3fa0
 Function_20c3fa0: @ 20c3fa0 :arm
 	ldr     r12,  [pc, #0xc] @ [0x20c3fb4] (=#0x20c4db0)
 	mov     r1, r0
@@ -145049,7 +146187,48 @@ Function_20c3fa0: @ 20c3fa0 :arm
 .word Function_20c4db0 @ =0x20c4db0, 0x20c3fb4
 .word 0x27ffcf4 @ 0x20c3fb8
 
-.incbin "./baserom/arm9.bin", 0xc3fbc, 0x20c4054 - 0x20c3fbc
+
+
+.arm
+.globl Function_20c3fbc
+Function_20c3fbc: @ 20c3fbc :arm
+	stmfd   sp!, {r4,lr}
+	ldr     r12,  [pc, #0x74] @ [0x20c403c] (=#0x27ffc80)
+	mov     r4, r0
+	ldrh    r2, [r12, #0x64]
+	add     r0, r12, #0x6
+	add     r1, r4, #0x4
+	mov     r2, r2, lsl #29
+	mov     r2, r2, lsr #29
+	strb    r2, [r4]
+	ldrb    r3, [r12, #0x2]
+	mov     r2, #0x14
+	mov     r3, r3, lsl #28
+	mov     r3, r3, lsr #28
+	strb    r3, [r4, #0x1]
+	ldrb    r3, [r12, #0x3]
+	strb    r3, [r4, #0x2]
+	ldrb    r3, [r12, #0x4]
+	strb    r3, [r4, #0x3]
+	ldrb    r3, [r12, #0x1a]
+	strh    r3, [r4, #0x1a]
+	ldrb    r3, [r12, #0x50]
+	strh    r3, [r4, #0x52]
+	bl      Function_20c4b18
+	ldr     r0,  [pc, #0x1c] @ [0x20c403c] (=#0x27ffc80)
+	add     r1, r4, #0x1c
+	add     r0, r0, #0x1c
+	mov     r2, #0x34
+	bl      Function_20c4b18
+	mov     r0, #0x0
+	strh    r0, [r4, #0x18]
+	strh    r0, [r4, #0x50]
+	ldmfd   sp!, {r4,pc}
+@ 0x20c403c
+
+.word 0x27ffc80 @ 0x20c403c
+
+.incbin "./baserom/arm9.bin", 0xc4040, 0x20c4054 - 0x20c4040
 
 
 .arm
@@ -145778,6 +146957,7 @@ branch_20c4a38: @ 20c4a38 :arm
 
 
 .arm
+.globl Function_20c4af0
 Function_20c4af0: @ 20c4af0 :arm
 	mov     r3, #0x0
 .arm
@@ -145806,6 +146986,7 @@ branch_20c4b10: @ 20c4b10 :arm
 @ 0x20c4b18
 
 .arm
+.globl Function_20c4b18
 Function_20c4b18: @ 20c4b18 :arm
 	mov     r12, #0x0
 .arm
@@ -145843,9 +147024,9 @@ branch_20c4b44: @ 20c4b44 :arm
 @ 0x20c4b4c
 
 .arm
+.globl Function_20c4b4c
 Function_20c4b4c: @ 20c4b4c :arm
 	add     r12, r1, r2
-.arm
 branch_20c4b50: @ 20c4b50 :arm
 	cmp     r1, r12
 	blt     branch_20c4b5c
@@ -146152,6 +147333,7 @@ branch_20c4d98: @ 20c4d98 :arm
 @ 0x20c4db0
 
 .arm
+.globl Function_20c4db0
 Function_20c4db0: @ 20c4db0 :arm
 	cmp     r2, #0x0
 	beq     branch_20c4dbc
@@ -151262,7 +152444,98 @@ branch_20ca66c: @ 20ca66c :arm
 .word 0x27fff90 @ 0x20ca6a0
 .word 0x20ca968 @ 0x20ca6a4
 
-.incbin "./baserom/arm9.bin", 0xca6a8, 0x20cac0c - 0x20ca6a8
+.incbin "./baserom/arm9.bin", 0xca6a8, 0x20ca8c4 - 0x20ca6a8
+
+
+.arm
+Function_20ca8c4: @ 20ca8c4 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	mov     r4, r1
+	bl      Function_20c3d98
+	ldr     r1,  [pc, #0x40] @ [0x20ca91c] (=#0x21ceccc)
+	ldr     r2, [r1, #0x4]
+	cmp     r2, #0x0
+	beq     branch_20ca8f0
+	bl      Function_20c3dac
+	mov     r0, #0x1
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ca8f0
+
+.arm
+branch_20ca8f0: @ 20ca8f0 :arm
+	mov     r2, #0x1
+	str     r2, [r1, #0x4]
+	bl      Function_20c3dac
+	ldr     r0,  [pc, #0x18] @ [0x20ca91c] (=#0x21ceccc)
+	str     r5, [r0, #0x8]
+	str     r4, [r0, #0xc]
+	bl      Function_20cabbc
+	cmp     r0, #0x0
+	movne   r0, #0x0
+	moveq   r0, #0x3
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20ca91c
+
+.word 0x21ceccc @ 0x20ca91c
+
+
+
+.arm
+.globl Function_20ca920
+Function_20ca920: @ 20ca920 :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r0,  [pc, #0x24] @ [0x20ca950] (=#0x20cabe4)
+	mov     r1, #0x0
+	bl      Function_20ca8c4
+	ldr     r1,  [pc, #0x1c] @ [0x20ca954] (=#0x21ceccc)
+	cmp     r0, #0x0
+	str     r0, [r1, #0x10]
+	bne     branch_20ca944
+	bl      Function_20cabf4
+.arm
+branch_20ca944: @ 20ca944 :arm
+	ldr     r0,  [pc, #0x8] @ [0x20ca954] (=#0x21ceccc)
+	ldr     r0, [r0, #0x10]
+	ldmfd   sp!, {r3,pc}
+@ 0x20ca950
+
+.word 0x20cabe4 @ 0x20ca950
+.word 0x21ceccc @ 0x20ca954
+
+.incbin "./baserom/arm9.bin", 0xca958, 0x20cabbc - 0x20ca958
+
+
+.arm
+Function_20cabbc: @ 20cabbc :arm
+	stmfd   sp!, {r3,lr}
+	ldr     r1,  [pc, #0x18] @ [0x20cabe0] (=#0x3004200)
+	mov     r0, #0x9
+	mov     r2, #0x0
+	bl      Function_20c64cc
+	cmp     r0, #0x0
+	movge   r0, #0x1
+	movlt   r0, #0x0
+	ldmfd   sp!, {r3,pc}
+@ 0x20cabe0
+
+.word 0x3004200 @ 0x20cabe0
+
+.incbin "./baserom/arm9.bin", 0xcabe4, 0x20cabf4 - 0x20cabe4
+
+
+.arm
+Function_20cabf4: @ 20cabf4 :arm
+	ldr     r12,  [pc, #0xc] @ [0x20cac08] (=#0x21cecd0)
+.arm
+branch_20cabf8: @ 20cabf8 :arm
+	ldr     r0, [r12]
+	cmp     r0, #0x1
+	beq     branch_20cabf8
+	bx      lr
+@ 0x20cac08
+
+.word 0x21cecd0 @ 0x20cac08
 
 
 .arm
@@ -153653,7 +154926,184 @@ Function_20cd9cc: @ 20cd9cc :arm
 
 .word 0x21cf680 @ 0x20cd9d8
 
-.incbin "./baserom/arm9.bin", 0xcd9dc, 0x20cdd98 - 0x20cd9dc
+.incbin "./baserom/arm9.bin", 0xcd9dc, 0x20cdb18 - 0x20cd9dc
+
+
+.arm
+.globl Function_20cdb18
+Function_20cdb18: @ 20cdb18 :arm
+	stmfd   sp!, {r3,lr}
+	mov     r2, #15, 24 @ #0xf00
+	bl      Function_20cdb44
+	cmp     r0, #0x0
+	ldmnefd sp!, {r3,pc}
+	ldr     r1,  [pc, #0xc] @ [0x20cdb40] (=#0x21cf6a0)
+	mov     r2, #0x0
+	ldr     r1, [r1, #0x4]
+	strh    r2, [r1, #0x16]
+	ldmfd   sp!, {r3,pc}
+@ 0x20cdb40
+
+.word 0x21cf6a0 @ 0x20cdb40
+.arm
+Function_20cdb44: @ 20cdb44 :arm
+	stmfd   sp!, {r4-r10,lr}
+	mov     r6, r0
+	mov     r4, r1
+	mov     r7, r2
+	bl      Function_20c3d98
+	ldr     r1,  [pc, #0x1b4] @ [0x20cdd14] (=#0x21cf6a0)
+	mov     r5, r0
+	ldrh    r1, [r1]
+	cmp     r1, #0x0
+	beq     branch_20cdb78
+	bl      Function_20c3dac
+	mov     r0, #0x3
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdb78
+
+.arm
+branch_20cdb78: @ 20cdb78 :arm
+	cmp     r6, #0x0
+	bne     branch_20cdb8c
+	bl      Function_20c3dac
+	mov     r0, #0x6
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdb8c
+
+.arm
+branch_20cdb8c: @ 20cdb8c :arm
+	cmp     r4, #0x3
+	bls     branch_20cdba0
+	bl      Function_20c3dac
+	mov     r0, #0x6
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdba0
+
+.arm
+branch_20cdba0: @ 20cdba0 :arm
+	tst     r6, #0x1f
+	beq     branch_20cdbb4
+	bl      Function_20c3dac
+	mov     r0, #0x6
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdbb4
+
+.arm
+branch_20cdbb4: @ 20cdbb4 :arm
+	bl      Function_20c6350
+	mov     r0, #0xa
+	mov     r1, #0x1
+	bl      Function_20c64a8
+	cmp     r0, #0x0
+	bne     branch_20cdbdc
+	mov     r0, r5
+	bl      Function_20c3dac
+	mov     r0, #0x4
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdbdc
+
+.arm
+branch_20cdbdc: @ 20cdbdc :arm
+	mov     r0, r6
+	mov     r1, r7
+	bl      Function_20c2c1c
+	mov     r0, r4
+	mov     r1, r6
+	mov     r3, r7
+	mov     r2, #0x0
+	bl      Function_20c42d4
+	ldr     r0,  [pc, #0x110] @ [0x20cdd14] (=#0x21cf6a0)
+	add     r1, r6, #2, 24 @ #0x200
+	str     r6, [r0, #0x4]
+	str     r1, [r6]
+	ldr     r2, [r0, #0x4]
+	ldr     r1, [r2]
+	add     r1, r1, #3, 24 @ #0x300
+	str     r1, [r2, #0x4]
+	ldr     r2, [r0, #0x4]
+	ldr     r1, [r2, #0x4]
+	add     r1, r1, #2, 22 @ #0x800
+	str     r1, [r2, #0xc]
+	ldr     r1, [r0, #0x4]
+	ldr     r0, [r1, #0xc]
+	add     r0, r0, #1, 24 @ #0x100
+	str     r0, [r1, #0x10]
+	bl      Function_20ce3d8
+	ldr     r1,  [pc, #0xcc] @ [0x20cdd14] (=#0x21cf6a0)
+	mov     r3, #0x0
+	ldr     r0, [r1, #0x4]
+	mov     r2, r3
+	strh    r4, [r0, #0x14]
+	ldr     r0, [r1, #0x4]
+	str     r3, [r0, #0x14c]
+	ldr     r0, [r1, #0x4]
+	add     r0, r0, #1, 24 @ #0x100
+	strh    r3, [r0, #0x50]
+	b       branch_20cdc88
+@ 0x20cdc6c
+
+.arm
+branch_20cdc6c: @ 20cdc6c :arm
+	ldr     r0, [r1, #0x4]
+	add     r0, r0, r3, lsl #2
+	str     r2, [r0, #0xcc]
+	ldr     r0, [r1, #0x4]
+	add     r0, r0, r3, lsl #2
+	str     r2, [r0, #0x10c]
+	add     r3, r3, #0x1
+.arm
+branch_20cdc88: @ 20cdc88 :arm
+	cmp     r3, #0x10
+	blt     branch_20cdc6c
+	ldr     r0,  [pc, #0x80] @ [0x20cdd18] (=#0x21cf6a8)
+	ldr     r1,  [pc, #0x80] @ [0x20cdd1c] (=#0x21cf6c8)
+	mov     r2, #0xa
+	bl      Function_20c2748
+	mov     r6, #0x0
+	mov     r4, #2, 18 @ #0x8000
+	ldr     r10,  [pc, #0x70] @ [0x20cdd20] (=#0x21cf740)
+	mov     r9, #0x2
+	ldr     r8,  [pc, #0x60] @ [0x20cdd18] (=#0x21cf6a8)
+	mov     r7, #0x1
+	b       branch_20cdce4
+@ 0x20cdcbc
+
+.arm
+branch_20cdcbc: @ 20cdcbc :arm
+	mov     r2, r6, lsl #8
+	mov     r1, r9
+	add     r0, r10, r6, lsl #8
+	strh    r4, [r10, r2]
+	bl      Function_20c2c38
+	mov     r0, r8
+	mov     r2, r7
+	add     r1, r10, r6, lsl #8
+	bl      Function_20c2770
+	add     r6, r6, #0x1
+.arm
+branch_20cdce4: @ 20cdce4 :arm
+	cmp     r6, #0xa
+	blt     branch_20cdcbc
+	ldr     r1,  [pc, #0x30] @ [0x20cdd24] (=#0x20ce02c)
+	mov     r0, #0xa
+	bl      Function_20c645c
+	ldr     r1,  [pc, #0x14] @ [0x20cdd14] (=#0x21cf6a0)
+	mov     r2, #0x1
+	mov     r0, r5
+	strh    r2, [r1]
+	bl      Function_20c3dac
+	mov     r0, #0x0
+	ldmfd   sp!, {r4-r10,pc}
+@ 0x20cdd14
+
+.word 0x21cf6a0 @ 0x20cdd14
+.word 0x21cf6a8 @ 0x20cdd18
+.word 0x21cf6c8 @ 0x20cdd1c
+.word 0x21cf740 @ 0x20cdd20
+.word 0x20ce02c @ 0x20cdd24
+
+.incbin "./baserom/arm9.bin", 0xcdd28, 0x20cdd98 - 0x20cdd28
 
 
 .arm
@@ -153744,7 +155194,40 @@ branch_20cde68: @ 20cde68 :arm
 
 .word 0x21cf6a8 @ 0x20cdeb0
 
-.incbin "./baserom/arm9.bin", 0xcdeb4, 0x20cdf24 - 0x20cdeb4
+
+
+.arm
+Function_20cdeb4: @ 20cdeb4 :arm
+	stmfd   sp!, {r4-r6,lr}
+	mov     r6, r0
+	mov     r4, r1
+	bl      Function_20cddb0
+	movs    r5, r0
+	moveq   r0, #0x8
+	ldmeqfd sp!, {r4-r6,pc}
+	mov     r0, r6
+	mov     r1, r5
+	mov     r2, r4
+	bl      Function_20c4db0
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20c2c38
+	mov     r1, r5
+	mov     r0, #0xa
+	mov     r2, #0x0
+	bl      Function_20c64cc
+	mov     r4, r0
+	ldr     r0,  [pc, #0x18] @ [0x20cdf20] (=#0x21cf6a8)
+	mov     r1, r5
+	mov     r2, #0x1
+	bl      Function_20c2770
+	cmp     r4, #0x0
+	movlt   r0, #0x8
+	movge   r0, #0x2
+	ldmfd   sp!, {r4-r6,pc}
+@ 0x20cdf20
+
+.word 0x21cf6a8 @ 0x20cdf20
 
 
 .arm
@@ -153832,7 +155315,24 @@ branch_20ce000: @ 20ce000 :arm
 
 .word 0x21cf6a0 @ 0x20ce028
 
-.incbin "./baserom/arm9.bin", 0xce02c, 0x20ce814 - 0x20ce02c
+
+.incbin "./baserom/arm9.bin", 0xce02c, 0x20ce3d8 - 0x20ce02c
+
+
+.arm
+Function_20ce3d8: @ 20ce3d8 :arm
+	ldr     r1,  [pc, #0x10] @ [0x20ce3f0] (=#0x27fff96)
+	ldrh    r0, [r1]
+	tst     r0, #0x1
+	bicne   r0, r0, #0x1
+	strneh  r0, [r1]
+	bx      lr
+@ 0x20ce3f0
+
+.word 0x27fff96 @ 0x20ce3f0
+
+
+.incbin "./baserom/arm9.bin", 0xce3f4, 0x20ce814 - 0x20ce3f4
 
 
 .arm
@@ -153886,7 +155386,56 @@ branch_20ce89c: @ 20ce89c :arm
 @ 0x20ce8a4
 
 
-.incbin "./baserom/arm9.bin", 0xce8a4, 0x20ced50 - 0x20ce8a4
+.incbin "./baserom/arm9.bin", 0xce8a4, 0x20ce934 - 0x20ce8a4
+
+
+.arm
+.globl Function_20ce934
+Function_20ce934: @ 20ce934 :arm
+	stmfd   sp!, {r3,lr}
+	sub     sp, sp, #0x8
+	add     r0, sp, #0x0
+	bl      Function_20c3fa0
+	mov     r1, #0x0
+	add     r3, sp, #0x0
+	mov     r2, r1
+.arm
+branch_20ce950: @ 20ce950 :arm
+	ldrb    r0, [r3], #0x1
+	add     r1, r1, #0x1
+	cmp     r1, #0x6
+	add     r0, r2, r0
+	mov     r0, r0, lsl #16
+	mov     r2, r0, lsr #16
+	blt     branch_20ce950
+	ldr     r0,  [pc, #0x4c] @ [0x20ce9c0] (=#0x27ffc3c)
+	mov     r1, #0xd
+	ldr     r0, [r0]
+	ldr     r3,  [pc, #0x44] @ [0x20ce9c4] (=#0x66666667)
+	add     r0, r2, r0
+	mov     r0, r0, lsl #16
+	mov     r2, r0, lsr #16
+	mul     r0, r2, r1
+	mov     r0, r0, lsl #16
+	mov     r2, r0, lsr #16
+	mov     r1, r2, lsr #31
+	smull   r2, r12, r3, r2
+	add     r12, r1, r12, asr #2
+	mov     r3, #0xa
+	smull   r1, r2, r3, r12
+	rsb     r12, r1, r0, lsr #16
+	add     r0, r12, #0x1e
+	mov     r0, r0, lsl #16
+	mov     r0, r0, lsr #16
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3,pc}
+@ 0x20ce9c0
+
+.word 0x27ffc3c @ 0x20ce9c0
+.word 0x66666667 @ 0x20ce9c4
+
+
+.incbin "./baserom/arm9.bin", 0xce9c8, 0x20ced50 - 0x20ce9c8
 
 
 .arm
@@ -153908,7 +155457,103 @@ Function_20ced50: @ 20ced50 :arm
 @ 0x20ced88
 
 
-.incbin "./baserom/arm9.bin", 0xced88, 0x20cf64c - 0x20ced88
+.incbin "./baserom/arm9.bin", 0xced88, 0x20cf08c - 0x20ced88
+
+
+
+.arm
+.globl Function_20cf08c
+Function_20cf08c: @ 20cf08c :arm
+	stmfd   sp!, {r4,r5,lr}
+	sub     sp, sp, #0x3c
+	mov     r5, r0
+	mov     r0, #0x3
+	mov     r4, r1
+	mov     r2, r0
+	mov     r1, #0x2
+	mov     r3, #0x5
+	bl      Function_20cdf98
+	cmp     r0, #0x0
+	addne   sp, sp, #0x3c
+	ldmnefd sp!, {r4,r5,pc}
+	cmp     r4, #0x0
+	addeq   sp, sp, #0x3c
+	moveq   r0, #0x6
+	ldmeqfd sp!, {r4,r5,pc}
+	ldr     r0, [r4]
+	cmp     r0, #0x0
+	addeq   sp, sp, #0x3c
+	moveq   r0, #0x6
+	ldmeqfd sp!, {r4,r5,pc}
+	ldrh    r0, [r4, #0x4]
+	cmp     r0, #1, 22 @ #0x400
+	addhi   sp, sp, #0x3c
+	movhi   r0, #0x6
+	ldmhifd sp!, {r4,r5,pc}
+	ldrh    r0, [r4, #0x12]
+	cmp     r0, #0x20
+	addhi   sp, sp, #0x3c
+	movhi   r0, #0x6
+	ldmhifd sp!, {r4,r5,pc}
+	ldrh    r0, [r4, #0x10]
+	cmp     r0, #0x0
+	cmpne   r0, #0x1
+	cmpne   r0, #0x2
+	cmpne   r0, #0x3
+	addne   sp, sp, #0x3c
+	movne   r0, #0x6
+	ldmnefd sp!, {r4,r5,pc}
+	add     r0, r0, #0xfe
+	add     r0, r0, #255, 24 @ #0xff00
+	mov     r0, r0, lsl #16
+	mov     r0, r0, lsr #16
+	cmp     r0, #0x1
+	bhi     branch_20cf154
+	ldrh    r0, [r4, #0x34]
+	cmp     r0, #0x20
+	addhi   sp, sp, #0x3c
+	movhi   r0, #0x6
+	ldmhifd sp!, {r4,r5,pc}
+.arm
+branch_20cf154: @ 20cf154 :arm
+	mov     r1, r5
+	mov     r0, #0x26
+	bl      Function_20cdd98
+	mov     r0, #0x26
+	strh    r0, [sp]
+	ldrh    r2, [r4, #0x6]
+	add     r1, sp, #0xc
+	add     r0, r4, #0xa
+	strh    r2, [sp, #0x2]
+	ldr     r3, [r4]
+	mov     r2, #0x6
+	str     r3, [sp, #0x4]
+	ldrh    r3, [r4, #0x4]
+	strh    r3, [sp, #0x8]
+	ldrh    r3, [r4, #0x8]
+	strh    r3, [sp, #0xa]
+	bl      Function_20c4db0
+	ldrh    r2, [r4, #0x10]
+	add     r1, sp, #0x16
+	add     r0, r4, #0x14
+	strh    r2, [sp, #0x12]
+	ldrh    r3, [r4, #0x34]
+	mov     r2, #0x20
+	strh    r3, [sp, #0x36]
+	ldrh    r3, [r4, #0x12]
+	strh    r3, [sp, #0x14]
+	bl      Function_20c4db0
+	add     r0, sp, #0x0
+	mov     r1, #0x3c
+	bl      Function_20cdeb4
+	cmp     r0, #0x0
+	moveq   r0, #0x2
+	add     sp, sp, #0x3c
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20cf1dc
+
+
+.incbin "./baserom/arm9.bin", 0xcf1dc, 0x20cf64c - 0x20cf1dc
 
 
 .arm
@@ -154026,7 +155671,68 @@ Function_20cf77c: @ 20cf77c :arm
 @ 0x20cf7ec
 
 
-.incbin "./baserom/arm9.bin", 0xcf7ec, 0x20d065c - 0x20cf7ec
+.incbin "./baserom/arm9.bin", 0xcf7ec, 0x20cf88c - 0x20cf7ec
+
+
+.arm
+.globl Function_20cf88c
+Function_20cf88c: @ 20cf88c :arm
+	stmfd   sp!, {r4-r8,lr}
+	sub     sp, sp, #0x10
+	mov     r7, r0
+	mov     r6, r1
+	mov     r5, r2
+	mov     r4, r3
+	bl      Function_20cdf24
+	mov     r8, r0
+	mov     r0, #0x1
+	mov     r1, #0xb
+	bl      Function_20cdf98
+	cmp     r0, #0x0
+	addne   sp, sp, #0x10
+	ldmnefd sp!, {r4-r8,pc}
+	ldr     r0, [r8, #0x4]
+	mov     r1, #0x4
+	add     r0, r0, #0x10
+	bl      Function_20c2c1c
+	ldr     r0, [r8, #0x4]
+	ldr     r0, [r0, #0x10]
+	cmp     r0, #0x0
+	addeq   sp, sp, #0x10
+	moveq   r0, #0x3
+	ldmeqfd sp!, {r4-r8,pc}
+	ldr     r0,  [pc, #0x60] @ [0x20cf954] (=#0x5e4)
+	cmp     r4, r0
+	addhi   sp, sp, #0x10
+	movhi   r0, #0x6
+	ldmhifd sp!, {r4-r8,pc}
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20c2c38
+	mov     r1, r7
+	mov     r0, #0x12
+	bl      Function_20cdd98
+	add     r1, sp, #0x8
+	mov     r0, r6
+	mov     r2, #0x6
+	bl      Function_20c4db0
+	str     r5, [sp]
+	str     r4, [sp, #0x4]
+	ldr     r2, [sp, #0x8]
+	ldr     r3, [sp, #0xc]
+	mov     r0, #0x12
+	mov     r1, #0x4
+	bl      Function_20cde08
+	cmp     r0, #0x0
+	moveq   r0, #0x2
+	add     sp, sp, #0x10
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20cf954
+
+.word 0x5e4 @ 0x20cf954
+
+
+.incbin "./baserom/arm9.bin", 0xcf958, 0x20d065c - 0x20cf958
 
 
 .arm
@@ -154080,7 +155786,40 @@ Function_20d065c: @ 20d065c :arm
 
 .word 0x21d0140 @ 0x20d0710
 
-.incbin "./baserom/arm9.bin", 0xd0714, 0x20d0888 - 0x20d0714
+.incbin "./baserom/arm9.bin", 0xd0714, 0x20d0764 - 0x20d0714
+
+
+.arm
+.globl Function_20d0764
+Function_20d0764: @ 20d0764 :arm
+	stmfd   sp!, {r3-r7,lr}
+	sub     sp, sp, #0x8
+	mov     r7, r0
+	mov     r6, r1
+	mov     r5, r2
+	mov     r4, r3
+	bl      Function_20cdf50
+	cmp     r0, #0x0
+	addne   sp, sp, #0x8
+	ldmnefd sp!, {r3-r7,pc}
+	mov     r1, r7
+	mov     r0, #0x1d
+	bl      Function_20cdd98
+	ldrh    r12, [sp, #0x20]
+	mov     r2, r6
+	mov     r3, r5
+	mov     r0, #0x1d
+	mov     r1, #0x4
+	stmea   sp, {r4,r12}
+	bl      Function_20cde08
+	cmp     r0, #0x0
+	moveq   r0, #0x2
+	add     sp, sp, #0x8
+	ldmfd   sp!, {r3-r7,pc}
+@ 0x20d07c4
+
+
+.incbin "./baserom/arm9.bin", 0xd07c4, 0x20d0888 - 0x20d07c4
 
 
 .arm
@@ -156309,7 +158048,52 @@ branch_20d3228: @ 20d3228 :arm
 @ 0x20d3230
 
 
-.incbin "./baserom/arm9.bin", 0xd3230, 0x20d32ac - 0x20d3230
+.arm
+Function_20d3230: @ 20d3230 :arm
+	stmfd   sp!, {r3,lr}
+	mov     r12, #0x0
+	mov     r2, r12
+.arm
+branch_20d323c: @ 20d323c :arm
+	mov     r3, r12
+	mov     lr, r2
+.arm
+branch_20d3244: @ 20d3244 :arm
+	tst     r3, #0x1
+	eorne   r3, r1, r3, lsr #1
+	add     lr, lr, #0x1
+	moveq   r3, r3, lsr #1
+	cmp     lr, #0x8
+	bcc     branch_20d3244
+	str     r3, [r0, r12, lsl #0x2]
+	add     r12, r12, #0x1
+	cmp     r12, #1, 24 @ #0x100
+	bcc     branch_20d323c
+	ldmfd   sp!, {r3,pc}
+@ 0x20d3270
+
+.arm
+Function_20d3270: @ 20d3270 :arm
+	stmfd   sp!, {r4,lr}
+	cmp     r3, #0x0
+	ldr     lr, [r1]
+	mov     r4, #0x0
+	bls     branch_20d32a4
+.arm
+branch_20d3284: @ 20d3284 :arm
+	ldrb    r12, [r2], #0x1
+	add     r4, r4, #0x1
+	cmp     r4, r3
+	eor     r12, lr, r12
+	and     r12, r12, #0xff
+	ldr     r12, [r0, r12, lsl #0x2]
+	eor     lr, r12, lr, lsr #8
+	bcc     branch_20d3284
+.arm
+branch_20d32a4: @ 20d32a4 :arm
+	str     lr, [r1]
+	ldmfd   sp!, {r4,pc}
+@ 0x20d32ac
 
 
 .arm
@@ -156341,7 +158125,1048 @@ Function_20d32d4: @ 20d32d4 :arm
 @ 0x20d32fc
 
 
-.incbin "./baserom/arm9.bin", 0xd32fc, 0x20d4070 - 0x20d32fc
+.incbin "./baserom/arm9.bin", 0xd32fc, 0x20d3328 - 0x20d32fc
+
+
+.arm
+Function_20d3328: @ 20d3328 :arm
+	stmfd   sp!, {r3,lr}
+	mov     lr, r1
+	mvn     r12, #0x0
+	mov     r3, r2
+	add     r1, sp, #0x0
+	mov     r2, lr
+	str     r12, [sp]
+	bl      Function_20d3270
+	ldr     r0, [sp]
+	mvn     r0, r0
+	ldmfd   sp!, {r3,pc}
+@ 0x20d3354
+
+
+
+.arm
+.globl Function_20d3354
+Function_20d3354: @ 20d3354 :arm
+	stmfd   sp!, {r4,lr}
+	sub     r12, r2, #0x1
+	mov     r4, r1
+	cmp     r12, #0x0
+	mov     lr, #0x0
+	ble     branch_20d3390
+.arm
+branch_20d336c: @ 20d336c :arm
+	ldrsb   r3, [r4]
+	strb    r3, [r0, lr]
+	ldrsb   r3, [r4]
+	cmp     r3, #0x0
+	beq     branch_20d3390
+	add     lr, lr, #0x1
+	cmp     lr, r12
+	add     r4, r4, #0x1
+	blt     branch_20d336c
+.arm
+branch_20d3390: @ 20d3390 :arm
+	sub     r3, r2, #0x1
+	cmp     lr, r3
+	blt     branch_20d33a8
+	cmp     r2, #0x0
+	movne   r2, #0x0
+	strneb  r2, [r0, lr]
+.arm
+branch_20d33a8: @ 20d33a8 :arm
+	mov     r0, r1
+	bl      Function_20d33b4
+	ldmfd   sp!, {r4,pc}
+@ 0x20d33b4
+
+.arm
+Function_20d33b4: @ 20d33b4 :arm
+	ldrsb   r1, [r0]
+	mov     r2, #0x0
+	cmp     r1, #0x0
+	beq     branch_20d33d4
+.arm
+branch_20d33c4: @ 20d33c4 :arm
+	add     r2, r2, #0x1
+	ldrsb   r1, [r0, r2]
+	cmp     r1, #0x0
+	bne     branch_20d33c4
+.arm
+branch_20d33d4: @ 20d33d4 :arm
+	mov     r0, r2
+	bx      lr
+@ 0x20d33dc
+
+
+.incbin "./baserom/arm9.bin", 0xd33dc, 0x20d3448 - 0x20d33dc
+
+
+.arm
+Function_20d3448: @ 20d3448 :arm
+	ldr     r2, [r0]
+	cmp     r2, #0x0
+	beq     branch_20d3468
+	ldr     r2, [r0, #0x4]
+	strb    r1, [r2]
+	ldr     r1, [r0]
+	sub     r1, r1, #0x1
+	str     r1, [r0]
+.arm
+branch_20d3468: @ 20d3468 :arm
+	ldr     r1, [r0, #0x4]
+	add     r1, r1, #0x1
+	str     r1, [r0, #0x4]
+	bx      lr
+@ 0x20d3478
+
+.arm
+Function_20d3478: @ 20d3478 :arm
+	stmfd   sp!, {r3,lr}
+	cmp     r2, #0x0
+	ldmlefd sp!, {r3,pc}
+	ldr     lr, [r0]
+	mov     r12, #0x0
+	cmp     lr, r2
+	movhi   lr, r2
+	cmp     lr, #0x0
+	bls     branch_20d34b0
+.arm
+branch_20d349c: @ 20d349c :arm
+	ldr     r3, [r0, #0x4]
+	strb    r1, [r3, r12]
+	add     r12, r12, #0x1
+	cmp     r12, lr
+	bcc     branch_20d349c
+.arm
+branch_20d34b0: @ 20d34b0 :arm
+	ldr     r1, [r0]
+	sub     r1, r1, lr
+	str     r1, [r0]
+	ldr     r1, [r0, #0x4]
+	add     r1, r1, r2
+	str     r1, [r0, #0x4]
+	ldmfd   sp!, {r3,pc}
+@ 0x20d34cc
+
+.arm
+Function_20d34cc: @ 20d34cc :arm
+	stmfd   sp!, {r4,lr}
+	cmp     r2, #0x0
+	ldmlefd sp!, {r4,pc}
+	ldr     r4, [r0]
+	mov     lr, #0x0
+	cmp     r4, r2
+	movhi   r4, r2
+	cmp     r4, #0x0
+	bls     branch_20d3508
+.arm
+branch_20d34f0: @ 20d34f0 :arm
+	ldrsb   r12, [r1, lr]
+	ldr     r3, [r0, #0x4]
+	strb    r12, [r3, lr]
+	add     lr, lr, #0x1
+	cmp     lr, r4
+	bcc     branch_20d34f0
+.arm
+branch_20d3508: @ 20d3508 :arm
+	ldr     r1, [r0]
+	sub     r1, r1, r4
+	str     r1, [r0]
+	ldr     r1, [r0, #0x4]
+	add     r1, r1, r2
+	str     r1, [r0, #0x4]
+	ldmfd   sp!, {r4,pc}
+@ 0x20d3524
+
+.arm
+.globl Function_20d3524
+Function_20d3524: @ 20d3524 :arm
+	stmfd   sp!, {r3-r11,lr}
+	sub     sp, sp, #0x30
+	mov     r9, r2
+	str     r1, [sp, #0xc]
+	str     r0, [sp, #0x14]
+	str     r0, [sp, #0x10]
+	ldrsb   r0, [r9]
+	str     r1, [sp]
+	mov     r11, r3
+	cmp     r0, #0x0
+	beq     branch_20d3d50
+.arm
+branch_20d3550: @ 20d3550 :arm
+	ldrsb   r1, [r9]
+	and     r0, r1, #0xff
+	eor     r0, r0, #0x20
+	sub     r0, r0, #0xa1
+	cmp     r0, #0x3c
+	bcs     branch_20d358c
+	add     r0, sp, #0xc
+	bl      Function_20d3448
+	ldrsb   r1, [r9, #0x1]!
+	cmp     r1, #0x0
+	beq     branch_20d3d44
+	add     r0, sp, #0xc
+	add     r9, r9, #0x1
+	bl      Function_20d3448
+	b       branch_20d3d44
+@ 0x20d358c
+
+.arm
+branch_20d358c: @ 20d358c :arm
+	cmp     r1, #0x25
+	beq     branch_20d35a4
+	add     r0, sp, #0xc
+	add     r9, r9, #0x1
+	bl      Function_20d3448
+	b       branch_20d3d44
+@ 0x20d35a4
+
+.arm
+branch_20d35a4: @ 20d35a4 :arm
+	mov     r5, #0x0
+	mov     r10, r5
+	mov     r2, r9
+	sub     r6, r5, #0x1
+	mov     r0, #0xa
+	mov     r3, #0x57
+.arm
+branch_20d35bc: @ 20d35bc :arm
+	ldrsb   r4, [r9, #0x1]!
+	cmp     r4, #0x20
+	bgt     branch_20d35d0
+	beq     branch_20d360c
+	b       branch_20d3624
+@ 0x20d35d0
+
+.arm
+branch_20d35d0: @ 20d35d0 :arm
+	cmp     r4, #0x30
+	bgt     branch_20d3624
+	cmp     r4, #0x2b
+	blt     branch_20d3624
+	beq     branch_20d35f8
+	cmp     r4, #0x2d
+	beq     branch_20d3614
+	cmp     r4, #0x30
+	beq     branch_20d361c
+	b       branch_20d3624
+@ 0x20d35f8
+
+.arm
+branch_20d35f8: @ 20d35f8 :arm
+	ldrsb   r1, [r9, #-0x1]
+	cmp     r1, #0x20
+	bne     branch_20d3624
+	orr     r5, r5, #0x2
+	b       branch_20d35bc
+@ 0x20d360c
+
+.arm
+branch_20d360c: @ 20d360c :arm
+	orr     r5, r5, #0x1
+	b       branch_20d35bc
+@ 0x20d3614
+
+.arm
+branch_20d3614: @ 20d3614 :arm
+	orr     r5, r5, #0x8
+	b       branch_20d35bc
+@ 0x20d361c
+
+.arm
+branch_20d361c: @ 20d361c :arm
+	orr     r5, r5, #0x10
+	b       branch_20d35bc
+@ 0x20d3624
+
+.arm
+branch_20d3624: @ 20d3624 :arm
+	cmp     r4, #0x2a
+	bne     branch_20d3648
+	add     r11, r11, #0x4
+	ldr     r10, [r11, #-0x4]
+	add     r9, r9, #0x1
+	cmp     r10, #0x0
+	rsblt   r10, r10, #0x0
+	orrlt   r5, r5, #0x8
+	b       branch_20d3670
+@ 0x20d3648
+
+.arm
+branch_20d3648: @ 20d3648 :arm
+	mov     r1, #0xa
+	b       branch_20d365c
+@ 0x20d3650
+
+.arm
+branch_20d3650: @ 20d3650 :arm
+	ldrsb   r4, [r9], #0x1
+	mla     r4, r10, r1, r4
+	sub     r10, r4, #0x30
+.arm
+branch_20d365c: @ 20d365c :arm
+	ldrsb   r4, [r9]
+	cmp     r4, #0x30
+	blt     branch_20d3670
+	cmp     r4, #0x39
+	ble     branch_20d3650
+.arm
+branch_20d3670: @ 20d3670 :arm
+	ldrsb   r1, [r9]
+	cmp     r1, #0x2e
+	bne     branch_20d36cc
+	ldrsb   r1, [r9, #0x1]!
+	mov     r6, #0x0
+	cmp     r1, #0x2a
+	bne     branch_20d36a4
+	add     r11, r11, #0x4
+	ldr     r6, [r11, #-0x4]
+	add     r9, r9, #0x1
+	cmp     r6, #0x0
+	mvnlt   r6, #0x0
+	b       branch_20d36cc
+@ 0x20d36a4
+
+.arm
+branch_20d36a4: @ 20d36a4 :arm
+	mov     r1, #0xa
+	b       branch_20d36b8
+@ 0x20d36ac
+
+.arm
+branch_20d36ac: @ 20d36ac :arm
+	ldrsb   r4, [r9], #0x1
+	mla     r4, r6, r1, r4
+	sub     r6, r4, #0x30
+.arm
+branch_20d36b8: @ 20d36b8 :arm
+	ldrsb   r4, [r9]
+	cmp     r4, #0x30
+	blt     branch_20d36cc
+	cmp     r4, #0x39
+	ble     branch_20d36ac
+.arm
+branch_20d36cc: @ 20d36cc :arm
+	ldrsb   r1, [r9]
+	cmp     r1, #0x68
+	beq     branch_20d36e4
+	cmp     r1, #0x6c
+	beq     branch_20d36fc
+	b       branch_20d3710
+@ 0x20d36e4
+
+.arm
+branch_20d36e4: @ 20d36e4 :arm
+	ldrsb   r1, [r9, #0x1]!
+	cmp     r1, #0x68
+	orrne   r5, r5, #0x40
+	addeq   r9, r9, #0x1
+	orreq   r5, r5, #1, 24 @ #0x100
+	b       branch_20d3710
+@ 0x20d36fc
+
+.arm
+branch_20d36fc: @ 20d36fc :arm
+	ldrsb   r1, [r9, #0x1]!
+	cmp     r1, #0x6c
+	orrne   r5, r5, #0x20
+	addeq   r9, r9, #0x1
+	orreq   r5, r5, #0x80
+.arm
+branch_20d3710: @ 20d3710 :arm
+	ldrsb   r1, [r9]
+	cmp     r1, #0x69
+	bgt     branch_20d3754
+	cmp     r1, #0x63
+	blt     branch_20d3738
+	beq     branch_20d37c4
+	cmp     r1, #0x64
+	cmpne   r1, #0x69
+	beq     branch_20d397c
+	b       branch_20d3960
+@ 0x20d3738
+
+.arm
+branch_20d3738: @ 20d3738 :arm
+	cmp     r1, #0x25
+	bgt     branch_20d3748
+	beq     branch_20d3944
+	b       branch_20d3960
+@ 0x20d3748
+
+.arm
+branch_20d3748: @ 20d3748 :arm
+	cmp     r1, #0x58
+	beq     branch_20d37b0
+	b       branch_20d3960
+@ 0x20d3754
+
+.arm
+branch_20d3754: @ 20d3754 :arm
+	cmp     r1, #0x6e
+	bgt     branch_20d3764
+	beq     branch_20d38ec
+	b       branch_20d3960
+@ 0x20d3764
+
+.arm
+branch_20d3764: @ 20d3764 :arm
+	sub     r1, r1, #0x6f
+	cmp     r1, #0x9
+	addls   pc, pc, r1, lsl #2
+	b       branch_20d3960
+@ 0x20d3774
+
+
+.incbin "./baserom/arm9.bin", 0xd3774, 0x20d37b0 - 0x20d3774
+
+
+.arm
+branch_20d37b0: @ 20d37b0 :arm
+	mov     r3, #0x37
+	b       branch_20d3974
+@ 0x20d37b8
+
+
+.incbin "./baserom/arm9.bin", 0xd37b8, 0x20d37c4 - 0x20d37b8
+
+
+.arm
+branch_20d37c4: @ 20d37c4 :arm
+	cmp     r6, #0x0
+	bge     branch_20d3960
+	add     r11, r11, #0x4
+	tst     r5, #0x8
+	ldr     r4, [r11, #-0x4]
+	beq     branch_20d3800
+	mov     r1, r4, lsl #24
+	add     r0, sp, #0xc
+	mov     r1, r1, asr #24
+	bl      Function_20d3448
+	add     r0, sp, #0xc
+	sub     r2, r10, #0x1
+	mov     r1, #0x20
+	bl      Function_20d3478
+	b       branch_20d3830
+@ 0x20d3800
+
+.arm
+branch_20d3800: @ 20d3800 :arm
+	tst     r5, #0x10
+	movne   r0, #0x30
+	moveq   r0, #0x20
+	mov     r1, r0, lsl #24
+	add     r0, sp, #0xc
+	mov     r1, r1, asr #24
+	sub     r2, r10, #0x1
+	bl      Function_20d3478
+	mov     r1, r4, lsl #24
+	add     r0, sp, #0xc
+	mov     r1, r1, asr #24
+	bl      Function_20d3448
+.arm
+branch_20d3830: @ 20d3830 :arm
+	add     r9, r9, #0x1
+	b       branch_20d3d44
+@ 0x20d3838
+
+
+.incbin "./baserom/arm9.bin", 0xd3838, 0x20d38ec - 0x20d3838
+
+
+.arm
+branch_20d38ec: @ 20d38ec :arm
+	ldr     r1, [sp, #0x10]
+	ldr     r0, [sp, #0x14]
+	tst     r5, #1, 24 @ #0x100
+	sub     r2, r1, r0
+	bne     branch_20d393c
+	tst     r5, #0x40
+	beq     branch_20d3918
+	add     r11, r11, #0x4
+	ldr     r0, [r11, #-0x4]
+	strh    r2, [r0]
+	b       branch_20d393c
+@ 0x20d3918
+
+.arm
+branch_20d3918: @ 20d3918 :arm
+	add     r11, r11, #0x4
+	tst     r5, #0x80
+	ldreq   r0, [r11, #-0x4]
+	streq   r2, [r0]
+	beq     branch_20d393c
+	ldr     r0, [r11, #-0x4]
+	mov     r1, r2, asr #31
+	str     r2, [r0]
+	str     r1, [r0, #0x4]
+.arm
+branch_20d393c: @ 20d393c :arm
+	add     r9, r9, #0x1
+	b       branch_20d3d44
+@ 0x20d3944
+
+.arm
+branch_20d3944: @ 20d3944 :arm
+	add     r0, r2, #0x1
+	cmp     r0, r9
+	bne     branch_20d3960
+	add     r0, sp, #0xc
+	add     r9, r9, #0x1
+	bl      Function_20d3448
+	b       branch_20d3d44
+@ 0x20d3960
+
+.arm
+branch_20d3960: @ 20d3960 :arm
+	mov     r1, r2
+	add     r0, sp, #0xc
+	sub     r2, r9, r2
+	bl      Function_20d34cc
+	b       branch_20d3d44
+@ 0x20d3974
+
+.arm
+branch_20d3974: @ 20d3974 :arm
+	orr     r5, r5, #1, 20 @ #0x1000
+	mov     r0, #0x10
+.arm
+branch_20d397c: @ 20d397c :arm
+	tst     r5, #0x8
+	bicne   r5, r5, #0x10
+	cmp     r6, #0x0
+	bicge   r5, r5, #0x10
+	movlt   r6, #0x1
+	mov     r4, #0x0
+	tst     r5, #1, 20 @ #0x1000
+	beq     branch_20d3a3c
+	tst     r5, #1, 24 @ #0x100
+	beq     branch_20d39b4
+	add     r11, r11, #0x4
+	ldrb    r7, [r11, #-0x4]
+	mov     r1, #0x0
+	b       branch_20d39ec
+@ 0x20d39b4
+
+.arm
+branch_20d39b4: @ 20d39b4 :arm
+	tst     r5, #0x40
+	beq     branch_20d39cc
+	add     r11, r11, #0x4
+	ldrh    r7, [r11, #-0x4]
+	mov     r1, #0x0
+	b       branch_20d39ec
+@ 0x20d39cc
+
+.arm
+branch_20d39cc: @ 20d39cc :arm
+	tst     r5, #0x80
+	addeq   r11, r11, #0x4
+	ldreq   r7, [r11, #-0x4]
+	moveq   r1, #0x0
+	beq     branch_20d39ec
+	add     r11, r11, #0x8
+	ldr     r7, [r11, #-0x8]
+	ldr     r1, [r11, #-0x4]
+.arm
+branch_20d39ec: @ 20d39ec :arm
+	bic     r5, r5, #0x3
+	tst     r5, #0x4
+	beq     branch_20d3afc
+	cmp     r0, #0x10
+	bne     branch_20d3a24
+	cmp     r1, #0x0
+	cmpeq   r7, #0x0
+	beq     branch_20d3afc
+	add     r4, r3, #0x21
+	mov     r2, #0x30
+	strb    r4, [sp, #0x8]
+	strb    r2, [sp, #0x9]
+	mov     r4, #0x2
+	b       branch_20d3afc
+@ 0x20d3a24
+
+.arm
+branch_20d3a24: @ 20d3a24 :arm
+	cmp     r0, #0x8
+	bne     branch_20d3afc
+	mov     r2, #0x30
+	strb    r2, [sp, #0x8]
+	mov     r4, #0x1
+	b       branch_20d3afc
+@ 0x20d3a3c
+
+.arm
+branch_20d3a3c: @ 20d3a3c :arm
+	tst     r5, #1, 24 @ #0x100
+	beq     branch_20d3a54
+	add     r11, r11, #0x4
+	ldrsb   r7, [r11, #-0x4]
+	mov     r1, r7, asr #31
+	b       branch_20d3a8c
+@ 0x20d3a54
+
+.arm
+branch_20d3a54: @ 20d3a54 :arm
+	tst     r5, #0x40
+	beq     branch_20d3a6c
+	add     r11, r11, #0x4
+	ldrsh   r7, [r11, #-0x4]
+	mov     r1, r7, asr #31
+	b       branch_20d3a8c
+@ 0x20d3a6c
+
+.arm
+branch_20d3a6c: @ 20d3a6c :arm
+	tst     r5, #0x80
+	addeq   r11, r11, #0x4
+	ldreq   r7, [r11, #-0x4]
+	moveq   r1, r7, asr #31
+	beq     branch_20d3a8c
+	add     r11, r11, #0x8
+	ldr     r7, [r11, #-0x8]
+	ldr     r1, [r11, #-0x4]
+.arm
+branch_20d3a8c: @ 20d3a8c :arm
+	mov     r12, #0x0
+	and     r2, r12, #0x0
+	and     r8, r1, #2, 2 @ #0x80000000
+	cmp     r2, #0x0
+	cmpeq   r8, #0x0
+	beq     branch_20d3ac4
+	mvn     r4, r7
+	mov     r2, #0x2d
+	mvn     r1, r1
+	strb    r2, [sp, #0x8]
+	adds    r7, r4, #0x1
+	adc     r1, r1, r12
+	mov     r4, #0x1
+	b       branch_20d3afc
+@ 0x20d3ac4
+
+.arm
+branch_20d3ac4: @ 20d3ac4 :arm
+	cmp     r1, r12
+	cmpeq   r7, r12
+	cmpeq   r6, #0x0
+	beq     branch_20d3afc
+	tst     r5, #0x2
+	beq     branch_20d3aec
+	mov     r2, #0x2b
+	strb    r2, [sp, #0x8]
+	mov     r4, #0x1
+	b       branch_20d3afc
+@ 0x20d3aec
+
+.arm
+branch_20d3aec: @ 20d3aec :arm
+	tst     r5, #0x1
+	movne   r2, #0x20
+	strneb  r2, [sp, #0x8]
+	movne   r4, #0x1
+.arm
+branch_20d3afc: @ 20d3afc :arm
+	cmp     r0, #0x8
+	mov     r8, #0x0
+	beq     branch_20d3b1c
+	cmp     r0, #0xa
+	beq     branch_20d3b68
+	cmp     r0, #0x10
+	beq     branch_20d3c00
+	b       branch_20d3c4c
+@ 0x20d3b1c
+
+.arm
+branch_20d3b1c: @ 20d3b1c :arm
+	cmp     r1, r8
+	cmpeq   r7, r8
+	beq     branch_20d3c4c
+	add     r2, sp, #0x18
+	mov     r0, r8
+	mov     lr, #0x7
+	mov     r12, r8
+.arm
+branch_20d3b38: @ 20d3b38 :arm
+	and     r3, r7, lr
+	add     r3, r3, #0x30
+	strb    r3, [r2, r8]
+	mov     r3, r1, lsr #3
+	cmp     r3, r0
+	mov     r7, r7, lsr #3
+	orr     r7, r7, r1, lsl #29
+	mov     r1, r3
+	cmpeq   r7, r12
+	add     r8, r8, #0x1
+	bne     branch_20d3b38
+	b       branch_20d3c4c
+@ 0x20d3b68
+
+.arm
+branch_20d3b68: @ 20d3b68 :arm
+	mov     r0, r8
+	cmp     r0, r8
+	cmpeq   r1, r8
+	bne     branch_20d3bb4
+	cmp     r7, #0x0
+	beq     branch_20d3c4c
+	ldr     r12,  [pc, #0x214] @ [0x20d3d9c] (=#0xcccccccd)
+	add     r3, sp, #0x18
+	mov     r2, #0xa
+.arm
+branch_20d3b8c: @ 20d3b8c :arm
+	umull   r1, r0, r7, r12
+	movs    r0, r0, lsr #3
+	mul     r1, r0, r2
+	sub     r1, r7, r1
+	mov     r7, r0
+	add     r0, r1, #0x30
+	strb    r0, [r3, r8]
+	add     r8, r8, #0x1
+	bne     branch_20d3b8c
+	b       branch_20d3c4c
+@ 0x20d3bb4
+
+.arm
+branch_20d3bb4: @ 20d3bb4 :arm
+	cmp     r1, r8
+	cmpeq   r7, r8
+	beq     branch_20d3c4c
+.arm
+branch_20d3bc0: @ 20d3bc0 :arm
+	mov     r0, r7
+	mov     r2, #0xa
+	mov     r3, #0x0
+	bl      Function_20e1ed4
+	mov     r2, #0xa
+	umull   r3, r2, r0, r2
+	subs    r2, r7, r3
+	add     r3, r2, #0x30
+	add     r2, sp, #0x18
+	strb    r3, [r2, r8]
+	cmp     r1, #0x0
+	cmpeq   r0, #0x0
+	mov     r7, r0
+	add     r8, r8, #0x1
+	bne     branch_20d3bc0
+	b       branch_20d3c4c
+@ 0x20d3c00
+
+.arm
+branch_20d3c00: @ 20d3c00 :arm
+	cmp     r1, r8
+	cmpeq   r7, r8
+	beq     branch_20d3c4c
+	add     r12, sp, #0x18
+	mov     lr, #0xf
+.arm
+branch_20d3c14: @ 20d3c14 :arm
+	and     r2, r7, lr
+	mov     r7, r7, lsr #4
+	mov     r0, r1, lsr #4
+	orr     r7, r7, r1, lsl #28
+	cmp     r2, #0xa
+	mov     r1, r0
+	addlt   r0, r2, #0x30
+	addge   r0, r2, r3
+	strb    r0, [r12, r8]
+	mov     r0, #0x0
+	cmp     r1, r0
+	cmpeq   r7, r0
+	add     r8, r8, #0x1
+	bne     branch_20d3c14
+.arm
+branch_20d3c4c: @ 20d3c4c :arm
+	cmp     r4, #0x0
+	ble     branch_20d3c74
+	ldrsb   r0, [sp, #0x8]
+	cmp     r0, #0x30
+	bne     branch_20d3c74
+	add     r0, sp, #0x18
+	mov     r1, #0x30
+	strb    r1, [r0, r8]
+	add     r8, r8, #0x1
+	mov     r4, #0x0
+.arm
+branch_20d3c74: @ 20d3c74 :arm
+	tst     r5, #0x10
+	sub     r6, r6, r8
+	beq     branch_20d3c90
+	sub     r0, r10, r8
+	sub     r0, r0, r4
+	cmp     r6, r0
+	movlt   r6, r0
+.arm
+branch_20d3c90: @ 20d3c90 :arm
+	cmp     r6, #0x0
+	subgt   r10, r10, r6
+	add     r0, r4, r8
+	sub     r10, r10, r0
+	ands    r0, r5, #0x8
+	str     r0, [sp, #0x4]
+	bne     branch_20d3cbc
+	add     r0, sp, #0xc
+	mov     r2, r10
+	mov     r1, #0x20
+	bl      Function_20d3478
+.arm
+branch_20d3cbc: @ 20d3cbc :arm
+	cmp     r4, #0x0
+	ble     branch_20d3ce8
+	add     r0, sp, #0x8
+	add     r5, r0, r4
+	add     r7, sp, #0xc
+.arm
+branch_20d3cd0: @ 20d3cd0 :arm
+	ldrsb   r1, [r5, #-0x1]!
+	mov     r0, r7
+	sub     r4, r4, #0x1
+	bl      Function_20d3448
+	cmp     r4, #0x0
+	bgt     branch_20d3cd0
+.arm
+branch_20d3ce8: @ 20d3ce8 :arm
+	add     r0, sp, #0xc
+	mov     r2, r6
+	mov     r1, #0x30
+	bl      Function_20d3478
+	cmp     r8, #0x0
+	ble     branch_20d3d24
+	add     r0, sp, #0x18
+	add     r5, r0, r8
+	add     r4, sp, #0xc
+.arm
+branch_20d3d0c: @ 20d3d0c :arm
+	ldrsb   r1, [r5, #-0x1]!
+	mov     r0, r4
+	sub     r8, r8, #0x1
+	bl      Function_20d3448
+	cmp     r8, #0x0
+	bgt     branch_20d3d0c
+.arm
+branch_20d3d24: @ 20d3d24 :arm
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20d3d40
+	add     r0, sp, #0xc
+	mov     r2, r10
+	mov     r1, #0x20
+	bl      Function_20d3478
+.arm
+branch_20d3d40: @ 20d3d40 :arm
+	add     r9, r9, #0x1
+.arm
+branch_20d3d44: @ 20d3d44 :arm
+	ldrsb   r0, [r9]
+	cmp     r0, #0x0
+	bne     branch_20d3550
+.arm
+branch_20d3d50: @ 20d3d50 :arm
+	ldr     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	beq     branch_20d3d6c
+	ldr     r0, [sp, #0x10]
+	mov     r1, #0x0
+	strb    r1, [r0]
+	b       branch_20d3d88
+@ 0x20d3d6c
+
+.arm
+branch_20d3d6c: @ 20d3d6c :arm
+	ldr     r0, [sp]
+	cmp     r0, #0x0
+	beq     branch_20d3d88
+	ldr     r1, [sp, #0x14]
+	mov     r2, #0x0
+	add     r0, r1, r0
+	strb    r2, [r0, #-0x1]
+.arm
+branch_20d3d88: @ 20d3d88 :arm
+	ldr     r1, [sp, #0x10]
+	ldr     r0, [sp, #0x14]
+	sub     r0, r1, r0
+	add     sp, sp, #0x30
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20d3d9c
+
+.word 0xcccccccd @ 0x20d3d9c
+
+
+
+.arm
+Function_20d3da0: @ 20d3da0 :arm
+	stmfd   sp!, {r3,lr}
+	mov     r0, #0x1
+	bl      Function_20d8a30
+	ldr     r1,  [pc, #0xc] @ [0x20d3dc0] (=#0x21d0810)
+	mov     r0, #0x1
+	str     r0, [r1, #0xc]
+	bl      Function_20d3dc4
+	ldmfd   sp!, {r3,pc}
+@ 0x20d3dc0
+
+.word 0x21d0810 @ 0x20d3dc0
+.arm
+Function_20d3dc4: @ 20d3dc4 :arm
+	stmfd   sp!, {r4,lr}
+	ldr     r1,  [pc, #0x3c] @ [0x20d3e0c] (=#0x21d0810)
+	mov     r4, r0
+	ldr     r0, [r1, #0xc]
+	cmp     r0, #0x0
+	bne     branch_20d3e00
+	bl      Function_20e4058
+	ldr     r0,  [pc, #0x24] @ [0x20d3e0c] (=#0x21d0810)
+	ldr     r0, [r0, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20d3e00
+	blx     r0
+	ldr     r0,  [pc, #0x10] @ [0x20d3e0c] (=#0x21d0810)
+	mov     r1, #0x0
+	str     r1, [r0, #0x4]
+.arm
+branch_20d3e00: @ 20d3e00 :arm
+	mov     r0, r4
+	bl      Function_20d3e10
+	ldmfd   sp!, {r4,pc}
+@ 0x20d3e0c
+
+.word 0x21d0810 @ 0x20d3e0c
+.arm
+Function_20d3e10: @ 20d3e10 :arm
+	stmfd   sp!, {r3-r5,lr}
+	ldr     r0,  [pc, #0x104] @ [0x20d3f20] (=#0x21d0968)
+	bl      Function_20c2af4
+	cmp     r0, #0x0
+	bne     branch_20d3e48
+	ldr     r0,  [pc, #0xf8] @ [0x20d3f24] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xf8] @ [0x20d3f28] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0xf4] @ [0x20d3f2c] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1]
+	str     r2, [r0]
+	b       branch_20d3ea0
+@ 0x20d3e48
+
+.arm
+branch_20d3e48: @ 20d3e48 :arm
+	ldr     r0,  [pc, #0xd4] @ [0x20d3f24] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xd4] @ [0x20d3f28] (=#0x21d0920)
+	ldr     r0, [r0, #0x4]
+	ldr     r1, [r1]
+	ldr     r0, [r0, #0x6c]
+	cmp     r1, r0
+	bne     branch_20d3e78
+	ldr     r0,  [pc, #0xc0] @ [0x20d3f2c] (=#0x21d0944)
+	ldr     r1, [r0]
+	add     r1, r1, #0x1
+	str     r1, [r0]
+	b       branch_20d3ea0
+@ 0x20d3e78
+
+.arm
+branch_20d3e78: @ 20d3e78 :arm
+	ldr     r0,  [pc, #0xa0] @ [0x20d3f20] (=#0x21d0968)
+	bl      Function_20c29d8
+	ldr     r0,  [pc, #0x9c] @ [0x20d3f24] (=#0x21ccc80)
+	ldr     r1,  [pc, #0x9c] @ [0x20d3f28] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0x98] @ [0x20d3f2c] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1]
+	str     r2, [r0]
+.arm
+branch_20d3ea0: @ 20d3ea0 :arm
+	ldr     r4,  [pc, #0x88] @ [0x20d3f30] (=#0x21d0810)
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	ble     branch_20d3ed4
+	ldr     r5,  [pc, #0x7c] @ [0x20d3f34] (=#0x21d0820)
+.arm
+branch_20d3eb4: @ 20d3eb4 :arm
+	ldr     r0, [r4, #0x8]
+	sub     r1, r0, #0x1
+	ldr     r0, [r5, r1, lsl #0x2]
+	str     r1, [r4, #0x8]
+	blx     r0
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	bgt     branch_20d3eb4
+.arm
+branch_20d3ed4: @ 20d3ed4 :arm
+	ldr     r0,  [pc, #0x50] @ [0x20d3f2c] (=#0x21d0944)
+	ldr     r1, [r0]
+	subs    r1, r1, #0x1
+	str     r1, [r0]
+	bne     branch_20d3ef0
+	ldr     r0,  [pc, #0x30] @ [0x20d3f20] (=#0x21d0968)
+	bl      Function_20c2a5c
+.arm
+branch_20d3ef0: @ 20d3ef0 :arm
+	ldr     r0,  [pc, #0x38] @ [0x20d3f30] (=#0x21d0810)
+	ldr     r0, [r0]
+	cmp     r0, #0x0
+	beq     branch_20d3f10
+	blx     r0
+	ldr     r0,  [pc, #0x24] @ [0x20d3f30] (=#0x21d0810)
+	mov     r1, #0x0
+	str     r1, [r0]
+.arm
+branch_20d3f10: @ 20d3f10 :arm
+	mov     r0, #0x0
+	bl      Function_20d497c
+	bl      Function_20e454c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d3f20
+
+.word 0x21d0968 @ 0x20d3f20
+.word 0x21ccc80 @ 0x20d3f24
+.word 0x21d0920 @ 0x20d3f28
+.word 0x21d0944 @ 0x20d3f2c
+.word 0x21d0810 @ 0x20d3f30
+.word 0x21d0820 @ 0x20d3f34
+
+.incbin "./baserom/arm9.bin", 0xd3f38, 0x20d4008 - 0x20d3f38
+
+
+.arm
+Function_20d4008: @ 20d4008 :arm
+	stmfd   sp!, {r3-r9,lr}
+	ldr     r0,  [pc, #0x58] @ [0x20d406c] (=#0x2101490)
+	mov     r4, #0x0
+	mov     r5, #0x1
+	mov     r8, r0
+	mvn     r9, #0x0
+	mov     r7, r4
+	mov     r6, #0x4c
+.arm
+branch_20d4028: @ 20d4028 :arm
+	ldr     r1, [r0, #0x4]
+	mov     r1, r1, lsl #22
+	movs    r1, r1, lsr #29
+	beq     branch_20d4044
+	bl      Function_20d497c
+	cmp     r0, #0x0
+	movne   r4, r9
+.arm
+branch_20d4044: @ 20d4044 :arm
+	cmp     r5, #0x3
+	movge   r0, r7
+	bge     branch_20d405c
+	mul     r0, r5, r6
+	add     r5, r5, #0x1
+	add     r0, r8, r0
+.arm
+branch_20d405c: @ 20d405c :arm
+	cmp     r0, #0x0
+	bne     branch_20d4028
+	mov     r0, r4
+	ldmfd   sp!, {r3-r9,pc}
+@ 0x20d406c
+
+.word 0x2101490 @ 0x20d406c
 
 
 .arm
@@ -156351,16 +159176,190 @@ Function_20d4070: @ 20d4070 :arm
 	bx      lr
 @ 0x20d407c
 
+.arm
+.globl Function_20d407c
+Function_20d407c: @ 20d407c :arm
+	stmfd   sp!, {r3,r4,lr}
+	sub     sp, sp, #0x4
+	mov     r4, r0
+	mov     lr, r1
+	mov     r12, r2
+	str     r3, [sp]
+	ldr     r0,  [pc, #0x18] @ [0x20d40b4] (=#0x2101574)
+	mov     r1, r4
+	mov     r2, lr
+	mov     r3, r12
+	bl      Function_20d7350
+	bl      Function_20d3da0
+	add     sp, sp, #0x4
+	ldmfd   sp!, {r3,r4,pc}
+@ 0x20d40b4
 
-.incbin "./baserom/arm9.bin", 0xd407c, 0x20d50b8 - 0x20d407c
+.word 0x2101574 @ 0x20d40b4
+.arm
+Function_20d40b8: @ 20d40b8 :arm
+	bx      lr
+@ 0x20d40bc
+
+
+.incbin "./baserom/arm9.bin", 0xd40bc, 0x20d40c0 - 0x20d40bc
 
 
 .arm
+Function_20d40c0: @ 20d40c0 :arm
+	ldr     r1, [r0, #0x1c]
+	str     r1, [r0, #0x24]
+	ldr     r3, [r0, #0x20]
+	str     r3, [r0, #0x28]
+	ldr     r2, [r0, #0x18]
+	ldr     r1, [r0, #0x2c]
+	and     r1, r2, r1
+	sub     r1, r3, r1
+	str     r1, [r0, #0x28]
+	ldr     r1, [r0, #0x18]
+	str     r1, [r0, #0x34]
+	bx      lr
+@ 0x20d40f0
+
+
+.incbin "./baserom/arm9.bin", 0xd40f0, 0x20d417c - 0x20d40f0
+
+
+.arm
+Function_20d417c: @ 20d417c :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	ldr     r2, [r5, #0x24]
+	ldr     r0, [r5, #0x1c]
+	mov     r4, r1
+	subs    r0, r2, r0
+	beq     branch_20d41f4
+	str     r0, [r5, #0x28]
+	ldr     r0, [r5, #0x4]
+	mov     r0, r0, lsl #19
+	movs    r0, r0, lsr #31
+	bne     branch_20d41b8
+	ldr     r0, [r5, #0x1c]
+	add     r1, r5, #0x28
+	bl      Function_20d40b8
+.arm
+branch_20d41b8: @ 20d41b8 :arm
+	ldr     r0, [r5]
+	ldr     r1, [r5, #0x1c]
+	ldr     r3, [r5, #0x48]
+	ldr     r12, [r5, #0x40]
+	add     r2, r5, #0x28
+	blx     r12
+	cmp     r4, #0x0
+	ldrne   r1, [r5, #0x28]
+	strne   r1, [r4]
+	cmp     r0, #0x0
+	ldmnefd sp!, {r3-r5,pc}
+	ldr     r1, [r5, #0x18]
+	ldr     r0, [r5, #0x28]
+	add     r0, r1, r0
+	str     r0, [r5, #0x18]
+.arm
+branch_20d41f4: @ 20d41f4 :arm
+	mov     r0, r5
+	bl      Function_20d40c0
+	mov     r0, #0x0
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d4204
+
+
+.incbin "./baserom/arm9.bin", 0xd4204, 0x20d497c - 0x20d4204
+
+
+.arm
+Function_20d497c: @ 20d497c :arm
+	stmfd   sp!, {r4,lr}
+	movs    r4, r0
+	bne     branch_20d4990
+	bl      Function_20d4008
+	ldmfd   sp!, {r4,pc}
+@ 0x20d4990
+
+.arm
+branch_20d4990: @ 20d4990 :arm
+	ldrb    r0, [r4, #0xd]
+	cmp     r0, #0x0
+	bne     branch_20d49ac
+	ldr     r0, [r4, #0x4]
+	mov     r1, r0, lsl #22
+	movs    r1, r1, lsr #29
+	bne     branch_20d49b4
+.arm
+branch_20d49ac: @ 20d49ac :arm
+	mvn     r0, #0x0
+	ldmfd   sp!, {r4,pc}
+@ 0x20d49b4
+
+.arm
+branch_20d49b4: @ 20d49b4 :arm
+	mov     r0, r0, lsl #27
+	mov     r0, r0, lsr #29
+	cmp     r0, #0x1
+	moveq   r0, #0x0
+	ldmeqfd sp!, {r4,pc}
+	ldr     r0, [r4, #0x8]
+	mov     r1, r0, lsl #29
+	mov     r1, r1, lsr #29
+	cmp     r1, #0x3
+	biccs   r0, r0, #0x7
+	orrcs   r0, r0, #0x2
+	strcs   r0, [r4, #0x8]
+	ldr     r0, [r4, #0x8]
+	mov     r0, r0, lsl #29
+	mov     r0, r0, lsr #29
+	cmp     r0, #0x2
+	moveq   r0, #0x0
+	streq   r0, [r4, #0x28]
+	ldr     r0, [r4, #0x8]
+	mov     r1, r0, lsl #29
+	mov     r1, r1, lsr #29
+	cmp     r1, #0x1
+	beq     branch_20d4a20
+	bic     r0, r0, #0x7
+	str     r0, [r4, #0x8]
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,pc}
+@ 0x20d4a20
+
+.arm
+branch_20d4a20: @ 20d4a20 :arm
+	mov     r0, r4
+	mov     r1, #0x0
+	bl      Function_20d417c
+	cmp     r0, #0x0
+	mov     r0, #0x0
+	beq     branch_20d4a4c
+	mov     r1, #0x1
+	strb    r1, [r4, #0xd]
+	str     r0, [r4, #0x28]
+	sub     r0, r0, #0x1
+	ldmfd   sp!, {r4,pc}
+@ 0x20d4a4c
+
+.arm
+branch_20d4a4c: @ 20d4a4c :arm
+	ldr     r1, [r4, #0x8]
+	bic     r1, r1, #0x7
+	str     r1, [r4, #0x8]
+	str     r0, [r4, #0x18]
+	str     r0, [r4, #0x28]
+	ldmfd   sp!, {r4,pc}
+@ 0x20d4a64
+
+.incbin "./baserom/arm9.bin", 0xd4a64, 0x20d50b8 - 0x20d4a64
+
+
+.arm
+.globl Function_20d50b8
 Function_20d50b8: @ 20d50b8 :arm
 	mov     r12, r0
 	cmp     r2, #0x0
 	bxeq    lr
-.arm
 branch_20d50c4: @ 20d50c4 :arm
 	ldrsb   r3, [r1], #0x1
 	subs    r2, r2, #0x1
@@ -156371,7 +159370,37 @@ branch_20d50d0: @ 20d50d0 :thumb
 @ 0x20d50d8
 
 
-.incbin "./baserom/arm9.bin", 0xd50d8, 0x20d5124 - 0x20d50d8
+.arm
+.globl Function_20d50d8
+Function_20d50d8: @ 20d50d8 :arm
+	cmp     r1, r0
+	bcc     branch_20d5100
+	mov     r12, r0
+	cmp     r2, #0x0
+	bxeq    lr
+.arm
+branch_20d50ec: @ 20d50ec :arm
+	ldrsb   r3, [r1], #0x1
+	subs    r2, r2, #0x1
+	strb    r3, [r12], #0x1
+	bne     branch_20d50ec
+	bx      lr
+@ 0x20d5100
+
+.arm
+branch_20d5100: @ 20d5100 :arm
+	cmp     r2, #0x0
+	add     r3, r1, r2
+	add     r12, r0, r2
+	bxeq    lr
+.arm
+branch_20d5110: @ 20d5110 :arm
+	ldrsb   r1, [r3, #-0x1]!
+	subs    r2, r2, #0x1
+	strb    r1, [r12, #-0x1]!
+	bne     branch_20d5110
+	bx      lr
+@ 0x20d5124
 
 
 .arm
@@ -156389,6 +159418,7 @@ Function_20d5124: @ 20d5124 :arm
 
 
 .arm
+.globl Function_20d5190
 Function_20d5190: @ 20d5190 :arm
 	cmp     r2, #0x0
 	beq     branch_20d51c8
@@ -156483,7 +159513,4289 @@ branch_20d5270: @ 20d5270 :arm
 @ 0x20d5280
 
 
-.incbin "./baserom/arm9.bin", 0xd5280, 0x20e0b00 - 0x20d5280
+.arm
+Function_20d5280: @ 20d5280 :arm
+	stmfd   sp!, {r4-r8,lr}
+	sub     sp, sp, #0x10
+	ldrsb   r3, [r0, #0x1]
+	mov     r4, #0x0
+	mov     r5, #0x1
+	mov     lr, r2
+	strb    r5, [sp]
+	strb    r4, [sp, #0x1]
+	strb    r4, [sp, #0x2]
+	strb    r4, [sp, #0x3]
+	strb    r4, [sp, #0x4]
+	str     r4, [sp, #0x8]
+	str     r4, [sp, #0xc]
+	cmp     r3, #0x25
+	add     r12, r0, #0x1
+	bne     branch_20d52dc
+	add     r0, sp, #0x0
+	strb    r3, [sp, #0x5]
+	ldmia   r0, {r0-r3}
+	stmia   lr, {r0-r3}
+	add     sp, sp, #0x10
+	add     r0, r12, #0x1
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20d52dc
+
+.arm
+branch_20d52dc: @ 20d52dc :arm
+	mov     r2, #0x2
+	mov     r0, r4
+	mov     r5, r2
+	mov     r6, r4
+	mov     r7, #0x1
+.arm
+branch_20d52f0: @ 20d52f0 :arm
+	mov     r8, r7
+	cmp     r3, #0x2b
+	bgt     branch_20d5320
+	bge     branch_20d5348
+	cmp     r3, #0x23
+	bgt     branch_20d5378
+	cmp     r3, #0x20
+	blt     branch_20d5378
+	beq     branch_20d5350
+	cmp     r3, #0x23
+	beq     branch_20d5360
+	b       branch_20d5378
+@ 0x20d5320
+
+.arm
+branch_20d5320: @ 20d5320 :arm
+	cmp     r3, #0x30
+	bgt     branch_20d5378
+	cmp     r3, #0x2d
+	blt     branch_20d5378
+	beq     branch_20d5340
+	cmp     r3, #0x30
+	beq     branch_20d5368
+	b       branch_20d5378
+@ 0x20d5340
+
+.arm
+branch_20d5340: @ 20d5340 :arm
+	strb    r6, [sp]
+	b       branch_20d537c
+@ 0x20d5348
+
+.arm
+branch_20d5348: @ 20d5348 :arm
+	strb    r7, [sp, #0x1]
+	b       branch_20d537c
+@ 0x20d5350
+
+.arm
+branch_20d5350: @ 20d5350 :arm
+	ldrb    r4, [sp, #0x1]
+	cmp     r4, #0x1
+	strneb  r5, [sp, #0x1]
+	b       branch_20d537c
+@ 0x20d5360
+
+.arm
+branch_20d5360: @ 20d5360 :arm
+	strb    r7, [sp, #0x3]
+	b       branch_20d537c
+@ 0x20d5368
+
+.arm
+branch_20d5368: @ 20d5368 :arm
+	ldrb    r4, [sp]
+	cmp     r4, #0x0
+	strneb  r2, [sp]
+	b       branch_20d537c
+@ 0x20d5378
+
+.arm
+branch_20d5378: @ 20d5378 :arm
+	mov     r8, r0
+.arm
+branch_20d537c: @ 20d537c :arm
+	cmp     r8, #0x0
+	ldrnesb r3, [r12, #0x1]!
+	bne     branch_20d52f0
+	cmp     r3, #0x2a
+	bne     branch_20d53c4
+	ldr     r0, [r1]
+	add     r0, r0, #0x4
+	str     r0, [r1]
+	ldr     r0, [r0, #-0x4]
+	str     r0, [sp, #0x8]
+	cmp     r0, #0x0
+	bge     branch_20d53bc
+	rsb     r0, r0, #0x0
+	mov     r2, #0x0
+	strb    r2, [sp]
+	str     r0, [sp, #0x8]
+.arm
+branch_20d53bc: @ 20d53bc :arm
+	ldrsb   r3, [r12, #0x1]!
+	b       branch_20d5414
+@ 0x20d53c4
+
+.arm
+branch_20d53c4: @ 20d53c4 :arm
+	ldr     r4,  [pc, #0x43c] @ [0x20d5808] (=#0x20fe864)
+	mov     r5, #0x0
+	mov     r0, #0xa
+	b       branch_20d53e8
+@ 0x20d53d4
+
+.arm
+branch_20d53d4: @ 20d53d4 :arm
+	ldr     r2, [sp, #0x8]
+	sub     r3, r3, #0x30
+	mla     r6, r2, r0, r3
+	ldrsb   r3, [r12, #0x1]!
+	str     r6, [sp, #0x8]
+.arm
+branch_20d53e8: @ 20d53e8 :arm
+	cmp     r3, #0x0
+	blt     branch_20d53f8
+	cmp     r3, #0x80
+	blt     branch_20d5400
+.arm
+branch_20d53f8: @ 20d53f8 :arm
+	mov     r2, r5
+	b       branch_20d540c
+@ 0x20d5400
+
+.arm
+branch_20d5400: @ 20d5400 :arm
+	mov     r2, r3, lsl #1
+	ldrh    r2, [r4, r2]
+	and     r2, r2, #0x8
+.arm
+branch_20d540c: @ 20d540c :arm
+	cmp     r2, #0x0
+	bne     branch_20d53d4
+.arm
+branch_20d5414: @ 20d5414 :arm
+	ldr     r2, [sp, #0x8]
+	ldr     r0,  [pc, #0x3ec] @ [0x20d580c] (=#0x1fd)
+	cmp     r2, r0
+	ble     branch_20d5444
+	mov     r1, #0xff
+	add     r0, sp, #0x0
+	strb    r1, [sp, #0x5]
+	ldmia   r0, {r0-r3}
+	stmia   lr, {r0-r3}
+	add     sp, sp, #0x10
+	add     r0, r12, #0x1
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20d5444
+
+.arm
+branch_20d5444: @ 20d5444 :arm
+	cmp     r3, #0x2e
+	bne     branch_20d54d8
+	ldrsb   r3, [r12, #0x1]!
+	mov     r0, #0x1
+	strb    r0, [sp, #0x2]
+	cmp     r3, #0x2a
+	bne     branch_20d5488
+	ldr     r0, [r1]
+	add     r0, r0, #0x4
+	str     r0, [r1]
+	ldr     r0, [r0, #-0x4]
+	ldrsb   r3, [r12, #0x1]!
+	str     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	movlt   r0, #0x0
+	strltb  r0, [sp, #0x2]
+	b       branch_20d54d8
+@ 0x20d5488
+
+.arm
+branch_20d5488: @ 20d5488 :arm
+	ldr     r2,  [pc, #0x378] @ [0x20d5808] (=#0x20fe864)
+	mov     r4, #0x0
+	mov     r0, #0xa
+	b       branch_20d54ac
+@ 0x20d5498
+
+.arm
+branch_20d5498: @ 20d5498 :arm
+	ldr     r1, [sp, #0xc]
+	sub     r3, r3, #0x30
+	mla     r5, r1, r0, r3
+	ldrsb   r3, [r12, #0x1]!
+	str     r5, [sp, #0xc]
+.arm
+branch_20d54ac: @ 20d54ac :arm
+	cmp     r3, #0x0
+	blt     branch_20d54bc
+	cmp     r3, #0x80
+	blt     branch_20d54c4
+.arm
+branch_20d54bc: @ 20d54bc :arm
+	mov     r1, r4
+	b       branch_20d54d0
+@ 0x20d54c4
+
+.arm
+branch_20d54c4: @ 20d54c4 :arm
+	mov     r1, r3, lsl #1
+	ldrh    r1, [r2, r1]
+	and     r1, r1, #0x8
+.arm
+branch_20d54d0: @ 20d54d0 :arm
+	cmp     r1, #0x0
+	bne     branch_20d5498
+.arm
+branch_20d54d8: @ 20d54d8 :arm
+	cmp     r3, #0x6c
+	mov     r0, #0x1
+	bgt     branch_20d5510
+	cmp     r3, #0x68
+	blt     branch_20d5504
+	beq     branch_20d552c
+	cmp     r3, #0x6a
+	beq     branch_20d5578
+	cmp     r3, #0x6c
+	beq     branch_20d5548
+	b       branch_20d559c
+@ 0x20d5504
+
+.arm
+branch_20d5504: @ 20d5504 :arm
+	cmp     r3, #0x4c
+	beq     branch_20d556c
+	b       branch_20d559c
+@ 0x20d5510
+
+.arm
+branch_20d5510: @ 20d5510 :arm
+	cmp     r3, #0x74
+	bgt     branch_20d5520
+	beq     branch_20d5584
+	b       branch_20d559c
+@ 0x20d5520
+
+.arm
+branch_20d5520: @ 20d5520 :arm
+	cmp     r3, #0x7a
+	beq     branch_20d5590
+	b       branch_20d559c
+@ 0x20d552c
+
+.arm
+branch_20d552c: @ 20d552c :arm
+	ldrsb   r1, [r12, #0x1]
+	mov     r2, #0x2
+	strb    r2, [sp, #0x4]
+	cmp     r1, #0x68
+	streqb  r0, [sp, #0x4]
+	ldreqsb r3, [r12, #0x1]!
+	b       branch_20d55a0
+@ 0x20d5548
+
+.arm
+branch_20d5548: @ 20d5548 :arm
+	ldrsb   r1, [r12, #0x1]
+	mov     r2, #0x3
+	strb    r2, [sp, #0x4]
+	cmp     r1, #0x6c
+	bne     branch_20d55a0
+	mov     r1, #0x4
+	strb    r1, [sp, #0x4]
+	ldrsb   r3, [r12, #0x1]!
+	b       branch_20d55a0
+@ 0x20d556c
+
+.arm
+branch_20d556c: @ 20d556c :arm
+	mov     r1, #0x9
+	strb    r1, [sp, #0x4]
+	b       branch_20d55a0
+@ 0x20d5578
+
+.arm
+branch_20d5578: @ 20d5578 :arm
+	mov     r1, #0x6
+	strb    r1, [sp, #0x4]
+	b       branch_20d55a0
+@ 0x20d5584
+
+.arm
+branch_20d5584: @ 20d5584 :arm
+	mov     r1, #0x8
+	strb    r1, [sp, #0x4]
+	b       branch_20d55a0
+@ 0x20d5590
+
+.arm
+branch_20d5590: @ 20d5590 :arm
+	mov     r1, #0x7
+	strb    r1, [sp, #0x4]
+	b       branch_20d55a0
+@ 0x20d559c
+
+.arm
+branch_20d559c: @ 20d559c :arm
+	mov     r0, #0x0
+.arm
+branch_20d55a0: @ 20d55a0 :arm
+	cmp     r0, #0x0
+	ldrnesb r3, [r12, #0x1]!
+	strb    r3, [sp, #0x5]
+	cmp     r3, #0x61
+	bgt     branch_20d55f4
+	bge     branch_20d56dc
+	cmp     r3, #0x47
+	bgt     branch_20d55e8
+	subs    r0, r3, #0x41
+	addpl   pc, pc, r0, lsl #2
+	b       branch_20d57e8
+@ 0x20d55cc
+
+
+.incbin "./baserom/arm9.bin", 0xd55cc, 0x20d55e8 - 0x20d55cc
+
+
+.arm
+branch_20d55e8: @ 20d55e8 :arm
+	cmp     r3, #0x58
+	beq     branch_20d5668
+	b       branch_20d57e8
+@ 0x20d55f4
+
+.arm
+branch_20d55f4: @ 20d55f4 :arm
+	cmp     r3, #0x63
+	bgt     branch_20d5604
+	beq     branch_20d5784
+	b       branch_20d57e8
+@ 0x20d5604
+
+.arm
+branch_20d5604: @ 20d5604 :arm
+	sub     r0, r3, #0x64
+	cmp     r0, #0x14
+	addls   pc, pc, r0, lsl #2
+	b       branch_20d57e8
+@ 0x20d5614
+
+
+.incbin "./baserom/arm9.bin", 0xd5614, 0x20d5668 - 0x20d5614
+
+
+.arm
+branch_20d5668: @ 20d5668 :arm
+	ldrb    r0, [sp, #0x4]
+	cmp     r0, #0x9
+	moveq   r0, #0xff
+	streqb  r0, [sp, #0x5]
+	beq     branch_20d57f0
+	ldrb    r0, [sp, #0x2]
+	cmp     r0, #0x0
+	moveq   r0, #0x1
+	streq   r0, [sp, #0xc]
+	beq     branch_20d57f0
+	ldrb    r0, [sp]
+	cmp     r0, #0x2
+	moveq   r0, #0x1
+	streqb  r0, [sp]
+	b       branch_20d57f0
+@ 0x20d56a4
+
+
+.incbin "./baserom/arm9.bin", 0xd56a4, 0x20d56dc - 0x20d56a4
+
+
+.arm
+branch_20d56dc: @ 20d56dc :arm
+	ldrb    r0, [sp, #0x2]
+	cmp     r0, #0x0
+	moveq   r0, #0xd
+	streq   r0, [sp, #0xc]
+	ldrb    r0, [sp, #0x4]
+	cmp     r0, #0x2
+	cmpne   r0, #0x6
+	cmpne   r0, #0x7
+	cmpne   r0, #0x8
+	cmpne   r0, #0x4
+	cmpne   r0, #0x1
+	moveq   r0, #0xff
+	streqb  r0, [sp, #0x5]
+	b       branch_20d57f0
+@ 0x20d5714
+
+
+.incbin "./baserom/arm9.bin", 0xd5714, 0x20d5784 - 0x20d5714
+
+
+.arm
+branch_20d5784: @ 20d5784 :arm
+	ldrb    r1, [sp, #0x4]
+	cmp     r1, #0x3
+	moveq   r0, #0x5
+	streqb  r0, [sp, #0x4]
+	beq     branch_20d57f0
+	ldrb    r0, [sp, #0x2]
+	cmp     r0, #0x0
+	cmpeq   r1, #0x0
+	movne   r0, #0xff
+	strneb  r0, [sp, #0x5]
+	b       branch_20d57f0
+@ 0x20d57b0
+
+
+.incbin "./baserom/arm9.bin", 0xd57b0, 0x20d57e8 - 0x20d57b0
+
+
+.arm
+branch_20d57e8: @ 20d57e8 :arm
+	mov     r0, #0xff
+	strb    r0, [sp, #0x5]
+.arm
+branch_20d57f0: @ 20d57f0 :arm
+	add     r0, sp, #0x0
+	ldmia   r0, {r0-r3}
+	stmia   lr, {r0-r3}
+	add     r0, r12, #0x1
+	add     sp, sp, #0x10
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20d5808
+
+.word 0x20fe864 @ 0x20d5808
+.word 0x1fd @ 0x20d580c
+.arm
+Function_20d5810: @ 20d5810 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r3-r11,lr}
+	sub     sp, sp, #0x10
+	movs    r10, r0
+	mov     r0, #0x0
+	mov     r5, r1
+	str     r0, [sp, #0xc]
+	ldr     r7, [sp, #0x4c]
+	mov     r6, r0
+	strb    r0, [r5, #-0x1]!
+	ldrb    r0, [sp, #0x43]
+	str     r1, [sp]
+	ldrb    r8, [sp, #0x45]
+	str     r0, [sp, #0x4]
+	ldr     r0, [sp, #0x48]
+	ldrb    r11, [sp, #0x41]
+	str     r0, [sp, #0x8]
+	cmpeq   r7, #0x0
+	bne     branch_20d5884
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20d5870
+	cmp     r8, #0x6f
+	beq     branch_20d5884
+.arm
+branch_20d5870: @ 20d5870 :arm
+	add     sp, sp, #0x10
+	mov     r0, r5
+	ldmfd   sp!, {r3-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5884
+
+.arm
+branch_20d5884: @ 20d5884 :arm
+	cmp     r8, #0x69
+	bgt     branch_20d58ac
+	bge     branch_20d58e0
+	cmp     r8, #0x58
+	bgt     branch_20d58a0
+	beq     branch_20d590c
+	b       branch_20d5914
+@ 0x20d58a0
+
+.arm
+branch_20d58a0: @ 20d58a0 :arm
+	cmp     r8, #0x64
+	beq     branch_20d58e0
+	b       branch_20d5914
+@ 0x20d58ac
+
+.arm
+branch_20d58ac: @ 20d58ac :arm
+	cmp     r8, #0x6f
+	bgt     branch_20d58c0
+	moveq   r4, #0x8
+	moveq   r11, #0x0
+	b       branch_20d5914
+@ 0x20d58c0
+
+.arm
+branch_20d58c0: @ 20d58c0 :arm
+	cmp     r8, #0x78
+	bgt     branch_20d5914
+	cmp     r8, #0x75
+	blt     branch_20d5914
+	beq     branch_20d5900
+	cmp     r8, #0x78
+	beq     branch_20d590c
+	b       branch_20d5914
+@ 0x20d58e0
+
+.arm
+branch_20d58e0: @ 20d58e0 :arm
+	cmp     r10, #0x0
+	mov     r4, #0xa
+	bge     branch_20d5914
+	mov     r0, #0x1
+	cmp     r10, #2, 2 @ #0x80000000
+	rsbne   r10, r10, #0x0
+	str     r0, [sp, #0xc]
+	b       branch_20d5914
+@ 0x20d5900
+
+.arm
+branch_20d5900: @ 20d5900 :arm
+	mov     r4, #0xa
+	mov     r11, #0x0
+	b       branch_20d5914
+@ 0x20d590c
+
+.arm
+branch_20d590c: @ 20d590c :arm
+	mov     r4, #0x10
+	mov     r11, #0x0
+.arm
+branch_20d5914: @ 20d5914 :arm
+	mov     r0, r10
+	mov     r1, r4
+	bl      Function_20e2178
+	mov     r9, r1
+	mov     r0, r10
+	mov     r1, r4
+	bl      Function_20e2178
+	cmp     r9, #0xa
+	mov     r10, r0
+	addlt   r9, r9, #0x30
+	blt     branch_20d594c
+	cmp     r8, #0x78
+	addeq   r9, r9, #0x57
+	addne   r9, r9, #0x37
+.arm
+branch_20d594c: @ 20d594c :arm
+	cmp     r10, #0x0
+	strb    r9, [r5, #-0x1]!
+	add     r6, r6, #0x1
+	bne     branch_20d5914
+	cmp     r4, #0x8
+	bne     branch_20d5980
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	ldrnesb r0, [r5]
+	cmpne   r0, #0x30
+	movne   r0, #0x30
+	strneb  r0, [r5, #-0x1]!
+	addne   r6, r6, #0x1
+.arm
+branch_20d5980: @ 20d5980 :arm
+	ldrb    r0, [sp, #0x40]
+	cmp     r0, #0x2
+	bne     branch_20d59b4
+	ldr     r0, [sp, #0xc]
+	ldr     r7, [sp, #0x8]
+	cmp     r0, #0x0
+	cmpeq   r11, #0x0
+	subne   r7, r7, #0x1
+	cmp     r4, #0x10
+	bne     branch_20d59b4
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	subne   r7, r7, #0x2
+.arm
+branch_20d59b4: @ 20d59b4 :arm
+	ldr     r0, [sp]
+	sub     r1, r0, r5
+	ldr     r0,  [pc, #0x94] @ [0x20d5a58] (=#0x1fd)
+	add     r1, r7, r1
+	cmp     r1, r0
+	addgt   sp, sp, #0x10
+	movgt   r0, #0x0
+	ldmgtfd sp!, {r3-r11,lr}
+	addgt   sp, sp, #0x10
+	bxgt    lr
+	cmp     r6, r7
+	bge     branch_20d59f8
+	mov     r0, #0x30
+.arm
+branch_20d59e8: @ 20d59e8 :arm
+	add     r6, r6, #0x1
+	cmp     r6, r7
+	strb    r0, [r5, #-0x1]!
+	blt     branch_20d59e8
+.arm
+branch_20d59f8: @ 20d59f8 :arm
+	cmp     r4, #0x10
+	bne     branch_20d5a14
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	movne   r0, #0x30
+	strneb  r8, [r5, #-0x1]
+	strneb  r0, [r5, #-0x2]!
+.arm
+branch_20d5a14: @ 20d5a14 :arm
+	ldr     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	movne   r0, #0x2d
+	strneb  r0, [r5, #-0x1]!
+	bne     branch_20d5a44
+	cmp     r11, #0x1
+	moveq   r0, #0x2b
+	streqb  r0, [r5, #-0x1]!
+	beq     branch_20d5a44
+	cmp     r11, #0x2
+	moveq   r0, #0x20
+	streqb  r0, [r5, #-0x1]!
+.arm
+branch_20d5a44: @ 20d5a44 :arm
+	mov     r0, r5
+	add     sp, sp, #0x10
+	ldmfd   sp!, {r3-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5a58
+
+.word 0x1fd @ 0x20d5a58
+.arm
+Function_20d5a5c: @ 20d5a5c :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r4-r11,lr}
+	sub     sp, sp, #0x1c
+	mov     r9, r1
+	mov     r1, #0x0
+	mov     r10, r0
+	mov     r8, r2
+	mov     r0, r1
+	strb    r0, [r8, #-0x1]!
+	ldr     r0, [sp, #0x58]
+	cmp     r9, #0x0
+	str     r0, [sp, #0x14]
+	ldrb    r0, [sp, #0x4f]
+	cmpeq   r10, #0x0
+	str     r2, [sp]
+	str     r0, [sp, #0x4]
+	ldrb    r0, [sp, #0x51]
+	str     r1, [sp, #0x18]
+	mov     r11, r1
+	str     r0, [sp, #0x8]
+	ldr     r0, [sp, #0x54]
+	str     r0, [sp, #0xc]
+	ldrb    r0, [sp, #0x4d]
+	str     r0, [sp, #0x10]
+	ldreq   r0, [sp, #0x14]
+	cmpeq   r0, #0x0
+	bne     branch_20d5af4
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20d5ae0
+	ldr     r0, [sp, #0x8]
+	cmp     r0, #0x6f
+	beq     branch_20d5af4
+.arm
+branch_20d5ae0: @ 20d5ae0 :arm
+	add     sp, sp, #0x1c
+	mov     r0, r8
+	ldmfd   sp!, {r4-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5af4
+
+.arm
+branch_20d5af4: @ 20d5af4 :arm
+	ldr     r0, [sp, #0x8]
+	cmp     r0, #0x69
+	bgt     branch_20d5b20
+	bge     branch_20d5b50
+	cmp     r0, #0x58
+	bgt     branch_20d5b14
+	beq     branch_20d5ba4
+	b       branch_20d5bb0
+@ 0x20d5b14
+
+.arm
+branch_20d5b14: @ 20d5b14 :arm
+	cmp     r0, #0x64
+	beq     branch_20d5b50
+	b       branch_20d5bb0
+@ 0x20d5b20
+
+.arm
+branch_20d5b20: @ 20d5b20 :arm
+	cmp     r0, #0x6f
+	bgt     branch_20d5b30
+	beq     branch_20d5b84
+	b       branch_20d5bb0
+@ 0x20d5b30
+
+.arm
+branch_20d5b30: @ 20d5b30 :arm
+	cmp     r0, #0x78
+	bgt     branch_20d5bb0
+	cmp     r0, #0x75
+	blt     branch_20d5bb0
+	beq     branch_20d5b94
+	cmp     r0, #0x78
+	beq     branch_20d5ba4
+	b       branch_20d5bb0
+@ 0x20d5b50
+
+.arm
+branch_20d5b50: @ 20d5b50 :arm
+	subs    r0, r10, #0x0
+	sbcs    r0, r9, #0x0
+	mov     r7, #0xa
+	mov     r6, #0x0
+	bge     branch_20d5bb0
+	cmp     r9, #2, 2 @ #0x80000000
+	cmpeq   r10, r6
+	beq     branch_20d5b78
+	rsbs    r10, r10, #0x0
+	rsc     r9, r9, #0x0
+.arm
+branch_20d5b78: @ 20d5b78 :arm
+	mov     r0, #0x1
+	str     r0, [sp, #0x18]
+	b       branch_20d5bb0
+@ 0x20d5b84
+
+.arm
+branch_20d5b84: @ 20d5b84 :arm
+	mov     r6, #0x0
+	str     r6, [sp, #0x10]
+	mov     r7, #0x8
+	b       branch_20d5bb0
+@ 0x20d5b94
+
+.arm
+branch_20d5b94: @ 20d5b94 :arm
+	mov     r6, #0x0
+	str     r6, [sp, #0x10]
+	mov     r7, #0xa
+	b       branch_20d5bb0
+@ 0x20d5ba4
+
+.arm
+branch_20d5ba4: @ 20d5ba4 :arm
+	mov     r6, #0x0
+	str     r6, [sp, #0x10]
+	mov     r7, #0x10
+.arm
+branch_20d5bb0: @ 20d5bb0 :arm
+	mov     r4, #0x0
+.arm
+branch_20d5bb4: @ 20d5bb4 :arm
+	mov     r0, r10
+	mov     r1, r9
+	mov     r2, r7
+	mov     r3, r6
+	bl      Function_20e1ee0
+	mov     r5, r0
+	mov     r0, r10
+	mov     r1, r9
+	mov     r2, r7
+	mov     r3, r6
+	bl      Function_20e1ed4
+	mov     r10, r0
+	cmp     r5, #0xa
+	mov     r9, r1
+	addlt   r0, r5, #0x30
+	blt     branch_20d5c04
+	ldr     r0, [sp, #0x8]
+	cmp     r0, #0x78
+	addeq   r0, r5, #0x57
+	addne   r0, r5, #0x37
+.arm
+branch_20d5c04: @ 20d5c04 :arm
+	strb    r0, [r8, #-0x1]!
+	mov     r0, #0x0
+	cmp     r9, r0
+	cmpeq   r10, r4
+	add     r11, r11, #0x1
+	bne     branch_20d5bb4
+	cmp     r6, #0x0
+	cmpeq   r7, #0x8
+	bne     branch_20d5c44
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	ldrnesb r0, [r8]
+	cmpne   r0, #0x30
+	movne   r0, #0x30
+	strneb  r0, [r8, #-0x1]!
+	addne   r11, r11, #0x1
+.arm
+branch_20d5c44: @ 20d5c44 :arm
+	ldrb    r0, [sp, #0x4c]
+	cmp     r0, #0x2
+	bne     branch_20d5c94
+	ldr     r0, [sp, #0xc]
+	str     r0, [sp, #0x14]
+	ldr     r0, [sp, #0x18]
+	cmp     r0, #0x0
+	ldreq   r0, [sp, #0x10]
+	cmpeq   r0, #0x0
+	ldrne   r0, [sp, #0x14]
+	subne   r0, r0, #0x1
+	strne   r0, [sp, #0x14]
+	cmp     r6, #0x0
+	cmpeq   r7, #0x10
+	bne     branch_20d5c94
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	ldrne   r0, [sp, #0x14]
+	subne   r0, r0, #0x2
+	strne   r0, [sp, #0x14]
+.arm
+branch_20d5c94: @ 20d5c94 :arm
+	ldr     r0, [sp]
+	ldr     r1,  [pc, #0xb4] @ [0x20d5d54] (=#0x1fd)
+	sub     r2, r0, r8
+	ldr     r0, [sp, #0x14]
+	add     r0, r0, r2
+	cmp     r0, r1
+	addgt   sp, sp, #0x1c
+	movgt   r0, #0x0
+	ldmgtfd sp!, {r4-r11,lr}
+	addgt   sp, sp, #0x10
+	bxgt    lr
+	ldr     r0, [sp, #0x14]
+	cmp     r11, r0
+	bge     branch_20d5ce4
+	mov     r1, #0x30
+.arm
+branch_20d5cd0: @ 20d5cd0 :arm
+	ldr     r0, [sp, #0x14]
+	add     r11, r11, #0x1
+	cmp     r11, r0
+	strb    r1, [r8, #-0x1]!
+	blt     branch_20d5cd0
+.arm
+branch_20d5ce4: @ 20d5ce4 :arm
+	cmp     r6, #0x0
+	cmpeq   r7, #0x10
+	bne     branch_20d5d0c
+	ldr     r0, [sp, #0x4]
+	cmp     r0, #0x0
+	beq     branch_20d5d0c
+	ldr     r0, [sp, #0x8]
+	mov     r1, #0x30
+	strb    r0, [r8, #-0x1]
+	strb    r1, [r8, #-0x2]!
+.arm
+branch_20d5d0c: @ 20d5d0c :arm
+	ldr     r0, [sp, #0x18]
+	cmp     r0, #0x0
+	movne   r0, #0x2d
+	strneb  r0, [r8, #-0x1]!
+	bne     branch_20d5d40
+	ldr     r0, [sp, #0x10]
+	cmp     r0, #0x1
+	moveq   r0, #0x2b
+	streqb  r0, [r8, #-0x1]!
+	beq     branch_20d5d40
+	cmp     r0, #0x2
+	moveq   r0, #0x20
+	streqb  r0, [r8, #-0x1]!
+.arm
+branch_20d5d40: @ 20d5d40 :arm
+	mov     r0, r8
+	add     sp, sp, #0x1c
+	ldmfd   sp!, {r4-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5d54
+
+.word 0x1fd @ 0x20d5d54
+.arm
+Function_20d5d58: @ 20d5d58 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r3-r10,lr}
+	sub     sp, sp, #0x44
+	ldr     r7, [sp, #0x80]
+	ldr     r0,  [pc, #0x498] @ [0x20d6208] (=#0x1fd)
+	mov     r8, r2
+	cmp     r7, r0
+	ldrb    r6, [sp, #0x79]
+	ldrb    r5, [sp, #0x77]
+	ldrb    r4, [sp, #0x75]
+	ldr     r1, [sp, #0x68]
+	ldr     r2, [sp, #0x6c]
+	addgt   sp, sp, #0x44
+	movgt   r0, #0x0
+	ldmgtfd sp!, {r3-r10,lr}
+	addgt   sp, sp, #0x10
+	bxgt    lr
+	mov     r10, #0x0
+	mov     r9, #0x20
+	add     r0, sp, #0x8
+	add     r3, sp, #0xc
+	strb    r10, [sp, #0x8]
+	strh    r9, [sp, #0xa]
+	bl      Function_20df108
+	ldr     r0, [sp, #0x68]
+	ldr     r1, [sp, #0x6c]
+	bl      Function_20de084
+	mov     r2, r0
+	mov     r0, r10
+	mov     r3, r1
+	mov     r1, r0
+	bl      Function_20e0f94
+	bne     branch_20d5e24
+	ldr     r3,  [pc, #0x428] @ [0x20d620c] (=#0x21017d8)
+	sub     r0, r8, #0x6
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	add     sp, sp, #0x44
+	strb    r2, [r8, #-0x6]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldrb    r2, [r3, #0x4]
+	ldrb    r1, [r3, #0x5]
+	strb    r2, [r0, #0x4]
+	strb    r1, [r0, #0x5]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5e24
+
+.arm
+branch_20d5e24: @ 20d5e24 :arm
+	ldrb    r0, [sp, #0x11]
+	cmp     r0, #0x49
+	bne     branch_20d5f34
+	ldrsb   r0, [sp, #0xc]
+	cmp     r0, #0x0
+	beq     branch_20d5ec0
+	cmp     r6, #0x41
+	sub     r0, r8, #0x5
+	bne     branch_20d5e84
+	ldr     r3,  [pc, #0x3c0] @ [0x20d6210] (=#0x21017e0)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldrb    r1, [r3, #0x4]
+	strb    r1, [r0, #0x4]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5e84
+
+.arm
+branch_20d5e84: @ 20d5e84 :arm
+	ldr     r3,  [pc, #0x388] @ [0x20d6214] (=#0x21017e8)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldrb    r1, [r3, #0x4]
+	strb    r1, [r0, #0x4]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5ec0
+
+.arm
+branch_20d5ec0: @ 20d5ec0 :arm
+	cmp     r6, #0x41
+	sub     r0, r8, #0x4
+	bne     branch_20d5f00
+	ldr     r3,  [pc, #0x344] @ [0x20d6218] (=#0x21017f0)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5f00
+
+.arm
+branch_20d5f00: @ 20d5f00 :arm
+	ldr     r3,  [pc, #0x314] @ [0x20d621c] (=#0x21017f4)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5f34
+
+.arm
+branch_20d5f34: @ 20d5f34 :arm
+	cmp     r0, #0x4e
+	bne     branch_20d6040
+	ldrsb   r0, [sp, #0xc]
+	cmp     r0, #0x0
+	beq     branch_20d5fcc
+	cmp     r6, #0x41
+	sub     r0, r8, #0x5
+	bne     branch_20d5f90
+	ldr     r3,  [pc, #0x2c4] @ [0x20d6220] (=#0x21017f8)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldrb    r1, [r3, #0x4]
+	strb    r1, [r0, #0x4]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5f90
+
+.arm
+branch_20d5f90: @ 20d5f90 :arm
+	ldr     r3,  [pc, #0x28c] @ [0x20d6224] (=#0x2101800)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldrb    r1, [r3, #0x4]
+	strb    r1, [r0, #0x4]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d5fcc
+
+.arm
+branch_20d5fcc: @ 20d5fcc :arm
+	cmp     r6, #0x41
+	sub     r0, r8, #0x4
+	bne     branch_20d600c
+	ldr     r3,  [pc, #0x248] @ [0x20d6228] (=#0x2101808)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d600c
+
+.arm
+branch_20d600c: @ 20d600c :arm
+	ldr     r3,  [pc, #0x218] @ [0x20d622c] (=#0x210180c)
+	add     sp, sp, #0x44
+	ldrb    r2, [r3]
+	ldrb    r1, [r3, #0x1]
+	strb    r2, [r0]
+	strb    r1, [r0, #0x1]
+	ldrb    r2, [r3, #0x2]
+	ldrb    r1, [r3, #0x3]
+	strb    r2, [r0, #0x2]
+	strb    r1, [r0, #0x3]
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d6040
+
+.arm
+branch_20d6040: @ 20d6040 :arm
+	mov     r3, r10
+	mov     r1, #0x1
+	mov     r0, #0x64
+	add     r9, sp, #0x68
+	strb    r1, [sp, #0x34]
+	strb    r1, [sp, #0x35]
+	strb    r3, [sp, #0x36]
+	strb    r3, [sp, #0x37]
+	strb    r3, [sp, #0x38]
+	str     r3, [sp, #0x3c]
+	str     r1, [sp, #0x40]
+	strb    r0, [sp, #0x39]
+.arm
+branch_20d6070: @ 20d6070 :arm
+	rsb     r1, r3, #0x7
+	ldrsb   r2, [r9, r3]
+	ldrsb   r0, [r9, r1]
+	strb    r0, [r9, r3]
+	add     r3, r3, #0x1
+	strb    r2, [r9, r1]
+	cmp     r3, #0x4
+	blt     branch_20d6070
+	ldrb    r0, [sp, #0x69]
+	ldrb    r1, [sp, #0x68]
+	ldr     r9,  [pc, #0x190] @ [0x20d6230] (=#0x7ff)
+	mov     r0, r0, lsl #17
+	orr     r1, r0, r1, lsl #25
+	add     r0, sp, #0x34
+	and     lr, r9, r1, lsr #21
+	sub     r12, sp, #0x8
+	ldmia   r0, {r0-r3}
+	stmia   r12, {r0-r3}
+	rsb     r0, r9, #1, 22 @ #0x400
+	mov     r1, r8
+	add     r0, lr, r0
+	ldmia   r12, {r2,r3}
+	bl      Function_20d5810
+	cmp     r6, #0x61
+	moveq   r1, #0x70
+	movne   r1, #0x50
+	strb    r1, [r0, #-0x1]!
+	mov     r1, r7, lsl #2
+	mov     lr, r7
+	cmp     r7, #0x1
+	add     r8, r1, #0xb
+	add     r12, sp, #0x68
+	blt     branch_20d6180
+	mov     r9, #0x30
+.arm
+branch_20d60f8: @ 20d60f8 :arm
+	cmp     r8, #0x40
+	bge     branch_20d6168
+	ldrb    r1, [r12, r8, asr #0x3]
+	and     r2, r8, #0x7
+	rsb     r3, r2, #0x7
+	mov     r2, r1, asr r3
+	sub     r10, r8, #0x4
+	bic     r1, r8, #0x7
+	bic     r10, r10, #0x7
+	cmp     r1, r10
+	add     r10, r12, r8, asr #3
+	and     r1, r2, #0xff
+	beq     branch_20d613c
+	ldrb    r2, [r10, #-0x1]
+	mov     r2, r2, lsl #8
+	orr     r1, r1, r2, asr r3
+	and     r1, r1, #0xff
+.arm
+branch_20d613c: @ 20d613c :arm
+	and     r1, r1, #0xf
+	cmp     r1, #0xa
+	addcc   r1, r1, #0x30
+	andcc   r1, r1, #0xff
+	bcc     branch_20d616c
+	cmp     r6, #0x61
+	addeq   r1, r1, #0x57
+	andeq   r1, r1, #0xff
+	addne   r1, r1, #0x37
+	andne   r1, r1, #0xff
+	b       branch_20d616c
+@ 0x20d6168
+
+.arm
+branch_20d6168: @ 20d6168 :arm
+	mov     r1, r9
+.arm
+branch_20d616c: @ 20d616c :arm
+	sub     lr, lr, #0x1
+	cmp     lr, #0x1
+	strb    r1, [r0, #-0x1]!
+	sub     r8, r8, #0x4
+	bge     branch_20d60f8
+.arm
+branch_20d6180: @ 20d6180 :arm
+	cmp     r7, #0x0
+	cmpeq   r5, #0x0
+	movne   r1, #0x2e
+	strneb  r1, [r0, #-0x1]!
+	mov     r1, #0x31
+	strb    r1, [r0, #-0x1]
+	cmp     r6, #0x61
+	moveq   r1, #0x78
+	movne   r1, #0x58
+	strb    r1, [r0, #-0x2]!
+	mov     r1, #0x30
+	strb    r1, [r0, #-0x1]!
+	ldrsb   r1, [sp, #0xc]
+	cmp     r1, #0x0
+	movne   r1, #0x2d
+	strneb  r1, [r0, #-0x1]!
+	addne   sp, sp, #0x44
+	ldmnefd sp!, {r3-r10,lr}
+	addne   sp, sp, #0x10
+	bxne    lr
+	cmp     r4, #0x1
+	moveq   r1, #0x2b
+	streqb  r1, [r0, #-0x1]!
+	addeq   sp, sp, #0x44
+	ldmeqfd sp!, {r3-r10,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+	cmp     r4, #0x2
+	moveq   r1, #0x20
+	streqb  r1, [r0, #-0x1]!
+	add     sp, sp, #0x44
+	ldmfd   sp!, {r3-r10,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d6208
+
+.word 0x1fd @ 0x20d6208
+.word 0x21017d8 @ 0x20d620c
+.word 0x21017e0 @ 0x20d6210
+.word 0x21017e8 @ 0x20d6214
+.word 0x21017f0 @ 0x20d6218
+.word 0x21017f4 @ 0x20d621c
+.word 0x21017f8 @ 0x20d6220
+.word 0x2101800 @ 0x20d6224
+.word 0x2101808 @ 0x20d6228
+.word 0x210180c @ 0x20d622c
+.word 0x7ff @ 0x20d6230
+
+.incbin "./baserom/arm9.bin", 0xd6234, 0x20d6abc - 0x20d6234
+
+
+.arm
+Function_20d6abc: @ 20d6abc :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r4-r11,lr}
+	sub     sp, sp, #139, 30 @ #0x22c
+	mov     r3, #0x20
+	mov     r11, r2
+	strb    r3, [sp, #0x19]
+	ldrsb   r2, [r11]
+	mov     r9, r0
+	mov     r8, r1
+	cmp     r2, #0x0
+	mov     r10, #0x0
+	beq     branch_20d72c4
+.arm
+branch_20d6aec: @ 20d6aec :arm
+	mov     r0, r11
+	mov     r1, #0x25
+	bl      Function_20d8e5c
+	str     r0, [sp, #0xc]
+	cmp     r0, #0x0
+	bne     branch_20d6b40
+	mov     r0, r11
+	bl      Function_20d8b60
+	movs    r2, r0
+	add     r10, r10, r2
+	beq     branch_20d72c4
+	mov     r0, r8
+	mov     r1, r11
+	blx     r9
+	cmp     r0, #0x0
+	bne     branch_20d72c4
+	add     sp, sp, #139, 30 @ #0x22c
+	mvn     r0, #0x0
+	ldmfd   sp!, {r4-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d6b40
+
+.arm
+branch_20d6b40: @ 20d6b40 :arm
+	subs    r2, r0, r11
+	add     r10, r10, r2
+	beq     branch_20d6b70
+	mov     r0, r8
+	mov     r1, r11
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+.arm
+branch_20d6b70: @ 20d6b70 :arm
+	ldr     r0, [sp, #0xc]
+	add     r1, sp, #151, 30 @ #0x25c
+	add     r2, sp, #0x1c
+	bl      Function_20d5280
+	ldrb    r1, [sp, #0x21]
+	mov     r11, r0
+	cmp     r1, #0x61
+	bgt     branch_20d6bdc
+	bge     branch_20d6f40
+	cmp     r1, #0x47
+	bgt     branch_20d6bd0
+	subs    r0, r1, #0x41
+	addpl   pc, pc, r0, lsl #2
+	b       branch_20d6bc4
+@ 0x20d6ba8
+
+
+.incbin "./baserom/arm9.bin", 0xd6ba8, 0x20d6bc4 - 0x20d6ba8
+
+
+.arm
+branch_20d6bc4: @ 20d6bc4 :arm
+	cmp     r1, #0x25
+	beq     branch_20d7114
+	b       branch_20d7128
+@ 0x20d6bd0
+
+.arm
+branch_20d6bd0: @ 20d6bd0 :arm
+	cmp     r1, #0x58
+	beq     branch_20d6d9c
+	b       branch_20d7128
+@ 0x20d6bdc
+
+.arm
+branch_20d6bdc: @ 20d6bdc :arm
+	cmp     r1, #0x75
+	bgt     branch_20d6c44
+	subs    r0, r1, #0x64
+	addpl   pc, pc, r0, lsl #2
+	b       branch_20d6c38
+@ 0x20d6bf0
+
+
+.incbin "./baserom/arm9.bin", 0xd6bf0, 0x20d6c38 - 0x20d6bf0
+
+
+.arm
+branch_20d6c38: @ 20d6c38 :arm
+	cmp     r1, #0x63
+	beq     branch_20d70f4
+	b       branch_20d7128
+@ 0x20d6c44
+
+.arm
+branch_20d6c44: @ 20d6c44 :arm
+	cmp     r1, #0x78
+	bgt     branch_20d6c54
+	beq     branch_20d6d9c
+	b       branch_20d7128
+@ 0x20d6c54
+
+.arm
+branch_20d6c54: @ 20d6c54 :arm
+	cmp     r1, #0xff
+	b       branch_20d7128
+@ 0x20d6c5c
+
+
+.incbin "./baserom/arm9.bin", 0xd6c5c, 0x20d6d9c - 0x20d6c5c
+
+
+.arm
+branch_20d6d9c: @ 20d6d9c :arm
+	ldrb    r0, [sp, #0x20]
+	cmp     r0, #0x3
+	bne     branch_20d6dbc
+	ldr     r1, [sp, #0x25c]
+	add     r1, r1, #0x4
+	str     r1, [sp, #0x25c]
+	ldr     r5, [r1, #-0x4]
+	b       branch_20d6e54
+@ 0x20d6dbc
+
+.arm
+branch_20d6dbc: @ 20d6dbc :arm
+	cmp     r0, #0x4
+	bne     branch_20d6de4
+	ldr     r1, [sp, #0x25c]
+	add     r2, r1, #0x8
+	str     r2, [sp, #0x25c]
+	ldr     r1, [r2, #-0x8]
+	str     r1, [sp, #0x10]
+	ldr     r1, [r2, #-0x4]
+	str     r1, [sp, #0x14]
+	b       branch_20d6e54
+@ 0x20d6de4
+
+.arm
+branch_20d6de4: @ 20d6de4 :arm
+	cmp     r0, #0x6
+	bne     branch_20d6e0c
+	ldr     r1, [sp, #0x25c]
+	add     r2, r1, #0x8
+	str     r2, [sp, #0x25c]
+	ldr     r1, [r2, #-0x8]
+	str     r1, [sp, #0x10]
+	ldr     r1, [r2, #-0x4]
+	str     r1, [sp, #0x14]
+	b       branch_20d6e54
+@ 0x20d6e0c
+
+.arm
+branch_20d6e0c: @ 20d6e0c :arm
+	cmp     r0, #0x7
+	bne     branch_20d6e28
+	ldr     r1, [sp, #0x25c]
+	add     r1, r1, #0x4
+	str     r1, [sp, #0x25c]
+	ldr     r5, [r1, #-0x4]
+	b       branch_20d6e54
+@ 0x20d6e28
+
+.arm
+branch_20d6e28: @ 20d6e28 :arm
+	cmp     r0, #0x8
+	bne     branch_20d6e44
+	ldr     r1, [sp, #0x25c]
+	add     r1, r1, #0x4
+	str     r1, [sp, #0x25c]
+	ldr     r5, [r1, #-0x4]
+	b       branch_20d6e54
+@ 0x20d6e44
+
+.arm
+branch_20d6e44: @ 20d6e44 :arm
+	ldr     r1, [sp, #0x25c]
+	add     r1, r1, #0x4
+	str     r1, [sp, #0x25c]
+	ldr     r5, [r1, #-0x4]
+.arm
+branch_20d6e54: @ 20d6e54 :arm
+	cmp     r0, #0x2
+	moveq   r1, r5, lsl #16
+	moveq   r5, r1, lsr #16
+	cmp     r0, #0x1
+	andeq   r5, r5, #0xff
+	cmp     r0, #0x4
+	cmpne   r0, #0x6
+	add     r0, sp, #0x1c
+	bne     branch_20d6ea4
+	sub     r4, sp, #0x4
+	ldmia   r0, {r0-r3}
+	stmia   r4, {r0-r3}
+	ldr     r3, [r4]
+	ldr     r0, [sp, #0x10]
+	ldr     r1, [sp, #0x14]
+	add     r2, sp, #139, 30 @ #0x22c
+	bl      Function_20d5a5c
+	movs    r7, r0
+	beq     branch_20d7128
+	b       branch_20d6ec8
+@ 0x20d6ea4
+
+.arm
+branch_20d6ea4: @ 20d6ea4 :arm
+	sub     r4, sp, #0x8
+	ldmia   r0, {r0-r3}
+	stmia   r4, {r0-r3}
+	add     r1, sp, #139, 30 @ #0x22c
+	mov     r0, r5
+	ldmia   r4, {r2,r3}
+	bl      Function_20d5810
+	movs    r7, r0
+	beq     branch_20d7128
+.arm
+branch_20d6ec8: @ 20d6ec8 :arm
+	add     r0, sp, #2, 24 @ #0x200
+	add     r0, r0, #0x2b
+	sub     r6, r0, r7
+	b       branch_20d7174
+@ 0x20d6ed8
+
+
+.incbin "./baserom/arm9.bin", 0xd6ed8, 0x20d6f40 - 0x20d6ed8
+
+
+.arm
+branch_20d6f40: @ 20d6f40 :arm
+	ldrb    r0, [sp, #0x20]
+	cmp     r0, #0x9
+	ldrne   r0, [sp, #0x25c]
+	addne   r0, r0, #0x8
+	strne   r0, [sp, #0x25c]
+	bne     branch_20d6f64
+	ldr     r0, [sp, #0x25c]
+	add     r0, r0, #0x8
+	str     r0, [sp, #0x25c]
+.arm
+branch_20d6f64: @ 20d6f64 :arm
+	ldr     r7, [r0, #-0x8]
+	ldr     r6, [r0, #-0x4]
+	add     r0, sp, #0x1c
+	sub     r4, sp, #0x4
+	ldmia   r0, {r0-r3}
+	stmia   r4, {r0-r3}
+	ldr     r3, [r4]
+	mov     r0, r7
+	mov     r1, r6
+	add     r2, sp, #139, 30 @ #0x22c
+	bl      Function_20d5d58
+	movs    r7, r0
+	beq     branch_20d7128
+	add     r0, sp, #2, 24 @ #0x200
+	add     r0, r0, #0x2b
+	sub     r6, r0, r7
+	b       branch_20d7174
+@ 0x20d6fa8
+
+
+.incbin "./baserom/arm9.bin", 0xd6fa8, 0x20d70f4 - 0x20d6fa8
+
+
+.arm
+branch_20d70f4: @ 20d70f4 :arm
+	ldr     r0, [sp, #0x25c]
+	add     r7, sp, #0x2c
+	add     r0, r0, #0x4
+	str     r0, [sp, #0x25c]
+	ldr     r0, [r0, #-0x4]
+	mov     r6, #0x1
+	strb    r0, [sp, #0x2c]
+	b       branch_20d7174
+@ 0x20d7114
+
+.arm
+branch_20d7114: @ 20d7114 :arm
+	mov     r0, #0x25
+	strb    r0, [sp, #0x2c]
+	add     r7, sp, #0x2c
+	mov     r6, #0x1
+	b       branch_20d7174
+@ 0x20d7128
+
+.arm
+branch_20d7128: @ 20d7128 :arm
+	ldr     r0, [sp, #0xc]
+	bl      Function_20d8b60
+	movs    r4, r0
+	beq     branch_20d7160
+	ldr     r1, [sp, #0xc]
+	mov     r0, r8
+	mov     r2, r4
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+.arm
+branch_20d7160: @ 20d7160 :arm
+	add     sp, sp, #139, 30 @ #0x22c
+	add     r0, r10, r4
+	ldmfd   sp!, {r4-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d7174
+
+.arm
+branch_20d7174: @ 20d7174 :arm
+	ldrb    r0, [sp, #0x1c]
+	mov     r4, r6
+	cmp     r0, #0x0
+	beq     branch_20d7228
+	cmp     r0, #0x2
+	moveq   r0, #0x30
+	movne   r0, #0x20
+	strb    r0, [sp, #0x19]
+	ldrsb   r0, [r7]
+	cmp     r0, #0x2b
+	cmpne   r0, #0x2d
+	cmpne   r0, #0x20
+	bne     branch_20d71e4
+	ldrsb   r0, [sp, #0x19]
+	cmp     r0, #0x30
+	bne     branch_20d71e4
+	mov     r0, r8
+	mov     r1, r7
+	mov     r2, #0x1
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+	add     r7, r7, #0x1
+	sub     r6, r6, #0x1
+.arm
+branch_20d71e4: @ 20d71e4 :arm
+	ldr     r0, [sp, #0x24]
+	cmp     r4, r0
+	bge     branch_20d7228
+.arm
+branch_20d71f0: @ 20d71f0 :arm
+	mov     r0, r8
+	add     r1, sp, #0x19
+	mov     r2, #0x1
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+	ldr     r0, [sp, #0x24]
+	add     r4, r4, #0x1
+	cmp     r4, r0
+	blt     branch_20d71f0
+.arm
+branch_20d7228: @ 20d7228 :arm
+	cmp     r6, #0x0
+	beq     branch_20d7258
+	mov     r0, r8
+	mov     r1, r7
+	mov     r2, r6
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+.arm
+branch_20d7258: @ 20d7258 :arm
+	ldrb    r0, [sp, #0x1c]
+	cmp     r0, #0x0
+	bne     branch_20d72b4
+	ldr     r0, [sp, #0x24]
+	cmp     r4, r0
+	bge     branch_20d72b4
+	mov     r6, #0x20
+	add     r7, sp, #0x18
+.arm
+branch_20d7278: @ 20d7278 :arm
+	mov     r0, r8
+	mov     r1, r7
+	mov     r2, #0x1
+	strb    r6, [sp, #0x18]
+	blx     r9
+	cmp     r0, #0x0
+	addeq   sp, sp, #139, 30 @ #0x22c
+	mvneq   r0, #0x0
+	ldmeqfd sp!, {r4-r11,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+	ldr     r0, [sp, #0x24]
+	add     r4, r4, #0x1
+	cmp     r4, r0
+	blt     branch_20d7278
+.arm
+branch_20d72b4: @ 20d72b4 :arm
+	add     r10, r10, r4
+	ldrsb   r0, [r11]
+	cmp     r0, #0x0
+	bne     branch_20d6aec
+.arm
+branch_20d72c4: @ 20d72c4 :arm
+	mov     r0, r10
+	add     sp, sp, #139, 30 @ #0x22c
+	ldmfd   sp!, {r4-r11,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d72d8
+
+
+.incbin "./baserom/arm9.bin", 0xd72d8, 0x20d7350 - 0x20d72d8
+
+
+.arm
+Function_20d7350: @ 20d7350 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r4,lr}
+	ldr     r0,  [pc, #0xf0] @ [0x20d7450] (=#0x21014dc)
+	mvn     r1, #0x0
+	bl      Function_20dae20
+	cmp     r0, #0x0
+	mvnge   r0, #0x0
+	ldmgefd sp!, {r4,lr}
+	addge   sp, sp, #0x10
+	bxge    lr
+	ldr     r0,  [pc, #0xd4] @ [0x20d7454] (=#0x21d09b0)
+	bl      Function_20c2af4
+	cmp     r0, #0x0
+	bne     branch_20d73ac
+	ldr     r0,  [pc, #0xc8] @ [0x20d7458] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xc8] @ [0x20d745c] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0xc4] @ [0x20d7460] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1, #0xc]
+	str     r2, [r0, #0xc]
+	b       branch_20d7404
+@ 0x20d73ac
+
+.arm
+branch_20d73ac: @ 20d73ac :arm
+	ldr     r0,  [pc, #0xa4] @ [0x20d7458] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xa4] @ [0x20d745c] (=#0x21d0920)
+	ldr     r0, [r0, #0x4]
+	ldr     r1, [r1, #0xc]
+	ldr     r0, [r0, #0x6c]
+	cmp     r1, r0
+	bne     branch_20d73dc
+	ldr     r0,  [pc, #0x90] @ [0x20d7460] (=#0x21d0944)
+	ldr     r1, [r0, #0xc]
+	add     r1, r1, #0x1
+	str     r1, [r0, #0xc]
+	b       branch_20d7404
+@ 0x20d73dc
+
+.arm
+branch_20d73dc: @ 20d73dc :arm
+	ldr     r0,  [pc, #0x70] @ [0x20d7454] (=#0x21d09b0)
+	bl      Function_20c29d8
+	ldr     r0,  [pc, #0x6c] @ [0x20d7458] (=#0x21ccc80)
+	ldr     r1,  [pc, #0x6c] @ [0x20d745c] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0x68] @ [0x20d7460] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1, #0xc]
+	str     r2, [r0, #0xc]
+.arm
+branch_20d7404: @ 20d7404 :arm
+	add     r0, sp, #0x8
+	bic     r3, r0, #0x3
+	ldr     r2, [sp, #0x8]
+	ldr     r0,  [pc, #0x4c] @ [0x20d7464] (=#0x20d72e0)
+	ldr     r1,  [pc, #0x34] @ [0x20d7450] (=#0x21014dc)
+	add     r3, r3, #0x4
+	bl      Function_20d6abc
+	ldr     r1,  [pc, #0x38] @ [0x20d7460] (=#0x21d0944)
+	mov     r4, r0
+	ldr     r0, [r1, #0xc]
+	subs    r0, r0, #0x1
+	str     r0, [r1, #0xc]
+	bne     branch_20d7440
+	ldr     r0,  [pc, #0x14] @ [0x20d7454] (=#0x21d09b0)
+	bl      Function_20c2a5c
+.arm
+branch_20d7440: @ 20d7440 :arm
+	mov     r0, r4
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d7450
+
+.word 0x21014dc @ 0x20d7450
+.word 0x21d09b0 @ 0x20d7454
+.word 0x21ccc80 @ 0x20d7458
+.word 0x21d0920 @ 0x20d745c
+.word 0x21d0944 @ 0x20d7460
+.word 0x20d72e0 @ 0x20d7464
+
+
+.arm
+Function_20d7468: @ 20d7468 :arm
+	stmfd   sp!, {r4,r5,lr}
+	sub     sp, sp, #0xc
+	mov     r5, r0
+	mov     r4, r1
+	mov     r12, #0x0
+	ldr     r0,  [pc, #0x48] @ [0x20d74cc] (=#0x20d730c)
+	add     r1, sp, #0x0
+	str     r5, [sp]
+	str     r4, [sp, #0x4]
+	str     r12, [sp, #0x8]
+	bl      Function_20d6abc
+	cmp     r5, #0x0
+	addeq   sp, sp, #0xc
+	ldmeqfd sp!, {r4,r5,pc}
+	cmp     r0, r4
+	movcc   r1, #0x0
+	addcc   sp, sp, #0xc
+	strccb  r1, [r5, r0]
+	ldmccfd sp!, {r4,r5,pc}
+	cmp     r4, #0x0
+	addne   r1, r5, r4
+	movne   r2, #0x0
+	strneb  r2, [r1, #-0x1]
+	add     sp, sp, #0xc
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20d74cc
+
+.word 0x20d730c @ 0x20d74cc
+
+
+
+.incbin "./baserom/arm9.bin", 0xd74d0, 0x20d7510 - 0x20d74d0
+
+
+.arm
+.globl Function_20d7510
+Function_20d7510: @ 20d7510 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r3,lr}
+	add     r1, sp, #0xc
+	bic     r1, r1, #0x3
+	add     r3, r1, #0x4
+	ldr     r2, [sp, #0xc]
+	mvn     r1, #0x0
+	bl      Function_20d7468
+	ldmfd   sp!, {r3,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20d753c
+
+
+.incbin "./baserom/arm9.bin", 0xd753c, 0x20d76a0 - 0x20d753c
+
+
+.arm
+.globl Function_20d76a0
+Function_20d76a0: @ 20d76a0 :arm
+	ldr     r2,  [pc, #0x20] @ [0x20d76c8] (=#0x2101818)
+	ldr     r0,  [pc, #0x20] @ [0x20d76cc] (=#0x41c64e6d)
+	ldr     r3, [r2]
+	ldr     r1,  [pc, #0x1c] @ [0x20d76d0] (=#0x7fff)
+	mul     r0, r3, r0
+	add     r0, r0, #0x39
+	add     r0, r0, #3, 20 @ #0x3000
+	str     r0, [r2]
+	and     r0, r1, r0, lsr #16
+	bx      lr
+@ 0x20d76c8
+
+.word 0x2101818 @ 0x20d76c8
+.word 0x41c64e6d @ 0x20d76cc
+.word 0x7fff @ 0x20d76d0
+
+
+
+.arm
+.globl Function_20d76d4
+Function_20d76d4: @ 20d76d4 :arm
+	ldr     r1,  [pc, #0x4] @ [0x20d76e0] (=#0x2101818)
+	str     r0, [r1]
+	bx      lr
+@ 0x20d76e0
+
+.word 0x2101818 @ 0x20d76e0
+
+.incbin "./baserom/arm9.bin", 0xd76e4, 0x20d8a30 - 0x20d76e4
+
+
+.arm
+Function_20d8a30: @ 20d8a30 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r5, r0
+	cmp     r5, #0x1
+	blt     branch_20d8a48
+	cmp     r5, #0x7
+	ble     branch_20d8a50
+.arm
+branch_20d8a48: @ 20d8a48 :arm
+	mvn     r0, #0x0
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d8a50
+
+.arm
+branch_20d8a50: @ 20d8a50 :arm
+	ldr     r0,  [pc, #0xf4] @ [0x20d8b4c] (=#0x21d0a10)
+	bl      Function_20c2af4
+	cmp     r0, #0x0
+	bne     branch_20d8a84
+	ldr     r0,  [pc, #0xe8] @ [0x20d8b50] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xe8] @ [0x20d8b54] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0xe4] @ [0x20d8b58] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1, #0x1c]
+	str     r2, [r0, #0x1c]
+	b       branch_20d8adc
+@ 0x20d8a84
+
+.arm
+branch_20d8a84: @ 20d8a84 :arm
+	ldr     r0,  [pc, #0xc4] @ [0x20d8b50] (=#0x21ccc80)
+	ldr     r1,  [pc, #0xc4] @ [0x20d8b54] (=#0x21d0920)
+	ldr     r0, [r0, #0x4]
+	ldr     r1, [r1, #0x1c]
+	ldr     r0, [r0, #0x6c]
+	cmp     r1, r0
+	bne     branch_20d8ab4
+	ldr     r0,  [pc, #0xb0] @ [0x20d8b58] (=#0x21d0944)
+	ldr     r1, [r0, #0x1c]
+	add     r1, r1, #0x1
+	str     r1, [r0, #0x1c]
+	b       branch_20d8adc
+@ 0x20d8ab4
+
+.arm
+branch_20d8ab4: @ 20d8ab4 :arm
+	ldr     r0,  [pc, #0x90] @ [0x20d8b4c] (=#0x21d0a10)
+	bl      Function_20c29d8
+	ldr     r0,  [pc, #0x8c] @ [0x20d8b50] (=#0x21ccc80)
+	ldr     r1,  [pc, #0x8c] @ [0x20d8b54] (=#0x21d0920)
+	ldr     r2, [r0, #0x4]
+	ldr     r0,  [pc, #0x88] @ [0x20d8b58] (=#0x21d0944)
+	ldr     r3, [r2, #0x6c]
+	mov     r2, #0x1
+	str     r3, [r1, #0x1c]
+	str     r2, [r0, #0x1c]
+.arm
+branch_20d8adc: @ 20d8adc :arm
+	ldr     r1,  [pc, #0x78] @ [0x20d8b5c] (=#0x21d0d44)
+	sub     r2, r5, #0x1
+	ldr     r4, [r1, r2, lsl #0x2]
+	cmp     r4, #0x1
+	movne   r0, #0x0
+	strne   r0, [r1, r2, lsl #0x2]
+	ldr     r0,  [pc, #0x5c] @ [0x20d8b58] (=#0x21d0944)
+	ldr     r1, [r0, #0x1c]
+	subs    r1, r1, #0x1
+	str     r1, [r0, #0x1c]
+	bne     branch_20d8b10
+	ldr     r0,  [pc, #0x3c] @ [0x20d8b4c] (=#0x21d0a10)
+	bl      Function_20c2a5c
+.arm
+branch_20d8b10: @ 20d8b10 :arm
+	cmp     r4, #0x1
+	beq     branch_20d8b24
+	cmp     r4, #0x0
+	cmpeq   r5, #0x1
+	bne     branch_20d8b2c
+.arm
+branch_20d8b24: @ 20d8b24 :arm
+	mov     r0, #0x0
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d8b2c
+
+.arm
+branch_20d8b2c: @ 20d8b2c :arm
+	cmp     r4, #0x0
+	bne     branch_20d8b3c
+	mov     r0, #0x0
+	bl      Function_20d3dc4
+.arm
+branch_20d8b3c: @ 20d8b3c :arm
+	mov     r0, r5
+	blx     r4
+	mov     r0, #0x0
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d8b4c
+
+.word 0x21d0a10 @ 0x20d8b4c
+.word 0x21ccc80 @ 0x20d8b50
+.word 0x21d0920 @ 0x20d8b54
+.word 0x21d0944 @ 0x20d8b58
+.word 0x21d0d44 @ 0x20d8b5c
+
+
+.arm
+.globl Function_20d8b60
+Function_20d8b60: @ 20d8b60 :arm
+	mvn     r2, #0x0
+.arm
+branch_20d8b64: @ 20d8b64 :arm
+	ldrsb   r1, [r0], #0x1
+	add     r2, r2, #0x1
+	cmp     r1, #0x0
+	bne     branch_20d8b64
+	mov     r0, r2
+	bx      lr
+@ 0x20d8b7c
+
+.arm
+.globl Function_20d8b7c
+Function_20d8b7c: @ 20d8b7c :arm
+	stmfd   sp!, {r3-r5,lr}
+	and     r4, r1, #0x3
+	and     r3, r0, #0x3
+	mov     r2, r0
+	cmp     r3, r4
+	bne     branch_20d8c18
+	cmp     r4, #0x0
+	beq     branch_20d8bd4
+	ldrb    r3, [r1]
+	strb    r3, [r0]
+	cmp     r3, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+	rsbs    r4, r4, #0x3
+	beq     branch_20d8bcc
+.arm
+branch_20d8bb4: @ 20d8bb4 :arm
+	ldrb    r3, [r1, #0x1]!
+	cmp     r3, #0x0
+	strb    r3, [r2, #0x1]!
+	ldmeqfd sp!, {r3-r5,pc}
+	subs    r4, r4, #0x1
+	bne     branch_20d8bb4
+.arm
+branch_20d8bcc: @ 20d8bcc :arm
+	add     r2, r2, #0x1
+	add     r1, r1, #0x1
+.arm
+branch_20d8bd4: @ 20d8bd4 :arm
+	ldr     r5, [r1]
+	ldr     r3,  [pc, #0x5c] @ [0x20d8c3c] (=#0xfefefeff)
+	mvn     r4, r5
+	add     lr, r5, r3
+	ldr     r12,  [pc, #0x54] @ [0x20d8c40] (=#0x80808080)
+	and     r4, lr, r4
+	tst     r4, r12
+	bne     branch_20d8c18
+	sub     r2, r2, #0x4
+.arm
+branch_20d8bf8: @ 20d8bf8 :arm
+	str     r5, [r2, #0x4]!
+	ldr     r5, [r1, #0x4]!
+	add     r4, r5, r3
+	mvn     lr, r5
+	and     lr, r4, lr
+	tst     lr, r12
+	beq     branch_20d8bf8
+	add     r2, r2, #0x4
+.arm
+branch_20d8c18: @ 20d8c18 :arm
+	ldrb    r3, [r1]
+	strb    r3, [r2]
+	cmp     r3, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+.arm
+branch_20d8c28: @ 20d8c28 :arm
+	ldrb    r3, [r1, #0x1]!
+	cmp     r3, #0x0
+	strb    r3, [r2, #0x1]!
+	bne     branch_20d8c28
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20d8c3c
+
+.word 0xfefefeff @ 0x20d8c3c
+.word 0x80808080 @ 0x20d8c40
+
+
+
+.arm
+.globl Function_20d8c44
+Function_20d8c44: @ 20d8c44 :arm
+	stmfd   sp!, {r3,lr}
+	mov     lr, r0
+	cmp     r2, #0x0
+	ldmeqfd sp!, {r3,pc}
+.arm
+branch_20d8c54: @ 20d8c54 :arm
+	ldrsb   r3, [r1], #0x1
+	mov     r12, lr
+	strb    r3, [lr], #0x1
+	ldrsb   r3, [r12]
+	cmp     r3, #0x0
+	bne     branch_20d8c88
+	subs    r2, r2, #0x1
+	ldmeqfd sp!, {r3,pc}
+	mov     r1, #0x0
+.arm
+branch_20d8c78: @ 20d8c78 :arm
+	strb    r1, [lr], #0x1
+	subs    r2, r2, #0x1
+	bne     branch_20d8c78
+	ldmfd   sp!, {r3,pc}
+@ 0x20d8c88
+
+.arm
+branch_20d8c88: @ 20d8c88 :arm
+	subs    r2, r2, #0x1
+	bne     branch_20d8c54
+	ldmfd   sp!, {r3,pc}
+@ 0x20d8c94
+
+
+.incbin "./baserom/arm9.bin", 0xd8c94, 0x20d8d14 - 0x20d8c94
+
+
+.arm
+.globl Function_20d8d14
+Function_20d8d14: @ 20d8d14 :arm
+	stmfd   sp!, {r4,lr}
+	ldrb    r2, [r0]
+	ldrb    r3, [r1]
+	subs    r3, r2, r3
+	movne   r0, r3
+	ldmnefd sp!, {r4,pc}
+	and     r4, r0, #0x3
+	and     r3, r1, #0x3
+	cmp     r3, r4
+	bne     branch_20d8df0
+	cmp     r4, #0x0
+	beq     branch_20d8d88
+	cmp     r2, #0x0
+	moveq   r0, #0x0
+	ldmeqfd sp!, {r4,pc}
+	rsbs    r4, r4, #0x3
+	beq     branch_20d8d80
+.arm
+branch_20d8d58: @ 20d8d58 :arm
+	ldrb    r3, [r0, #0x1]!
+	ldrb    r2, [r1, #0x1]!
+	subs    r2, r3, r2
+	movne   r0, r2
+	ldmnefd sp!, {r4,pc}
+	cmp     r3, #0x0
+	moveq   r0, #0x0
+	ldmeqfd sp!, {r4,pc}
+	subs    r4, r4, #0x1
+	bne     branch_20d8d58
+.arm
+branch_20d8d80: @ 20d8d80 :arm
+	add     r0, r0, #0x1
+	add     r1, r1, #0x1
+.arm
+branch_20d8d88: @ 20d8d88 :arm
+	ldr     r2, [r0]
+	ldr     r3,  [pc, #0x8c] @ [0x20d8e20] (=#0xfefefeff)
+	mvn     r4, r2
+	add     lr, r2, r3
+	ldr     r12,  [pc, #0x84] @ [0x20d8e24] (=#0x80808080)
+	and     r4, lr, r4
+	tst     r4, r12
+	ldr     r4, [r1]
+	bne     branch_20d8ddc
+	cmp     r2, r4
+	bne     branch_20d8dd0
+.arm
+branch_20d8db4: @ 20d8db4 :arm
+	ldr     r2, [r0, #0x4]!
+	ldr     r4, [r1, #0x4]!
+	add     lr, r2, r3
+	tst     lr, r12
+	bne     branch_20d8ddc
+	cmp     r2, r4
+	beq     branch_20d8db4
+.arm
+branch_20d8dd0: @ 20d8dd0 :arm
+	sub     r0, r0, #0x1
+	sub     r1, r1, #0x1
+	b       branch_20d8df0
+@ 0x20d8ddc
+
+.arm
+branch_20d8ddc: @ 20d8ddc :arm
+	ldrb    r2, [r0]
+	ldrb    r3, [r1]
+	subs    r3, r2, r3
+	movne   r0, r3
+	ldmnefd sp!, {r4,pc}
+.arm
+branch_20d8df0: @ 20d8df0 :arm
+	cmp     r2, #0x0
+	moveq   r0, #0x0
+	ldmeqfd sp!, {r4,pc}
+.arm
+branch_20d8dfc: @ 20d8dfc :arm
+	ldrb    r3, [r0, #0x1]!
+	ldrb    r2, [r1, #0x1]!
+	subs    r2, r3, r2
+	movne   r0, r2
+	ldmnefd sp!, {r4,pc}
+	cmp     r3, #0x0
+	bne     branch_20d8dfc
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,pc}
+@ 0x20d8e20
+
+.word 0xfefefeff @ 0x20d8e20
+.word 0x80808080 @ 0x20d8e24
+
+
+
+.arm
+.globl Function_20d8e28
+Function_20d8e28: @ 20d8e28 :arm
+	cmp     r2, #0x0
+	beq     branch_20d8e54
+branch_20d8e30: @ 20d8e30 :arm
+	ldrb    r12, [r1], #0x1
+	ldrb    r3, [r0], #0x1
+	cmp     r3, r12
+	subne   r0, r3, r12
+	bxne    lr
+	cmp     r3, #0x0
+	beq     branch_20d8e54
+	subs    r2, r2, #0x1
+	bne     branch_20d8e30
+branch_20d8e54: @ 20d8e54 :arm
+	mov     r0, #0x0
+	bx      lr
+@ 0x20d8e5c
+
+
+.arm
+Function_20d8e5c: @ 20d8e5c :arm
+	ldrsb   r2, [r0], #0x1
+	mov     r1, r1, lsl #24
+	mov     r1, r1, asr #24
+	cmp     r2, #0x0
+	beq     branch_20d8e88
+.arm
+branch_20d8e70: @ 20d8e70 :arm
+	cmp     r2, r1
+	subeq   r0, r0, #0x1
+	bxeq    lr
+	ldrsb   r2, [r0], #0x1
+	cmp     r2, #0x0
+	bne     branch_20d8e70
+.arm
+branch_20d8e88: @ 20d8e88 :arm
+	cmp     r1, #0x0
+	movne   r0, #0x0
+	subeq   r0, r0, #0x1
+	bx      lr
+@ 0x20d8e98
+
+
+.incbin "./baserom/arm9.bin", 0xd8e98, 0x20d90b0 - 0x20d8e98
+
+
+.arm
+.globl Function_20d90b0
+Function_20d90b0: @ 20d90b0 :arm
+	stmfd   sp!, {r4,lr}
+	cmp     r1, #0x0
+	ldrneb  r2, [r1]
+	cmpne   r2, #0x0
+	ldmeqfd sp!, {r4,pc}
+	ldrb    r3, [r0]
+	add     r4, r0, #0x1
+	cmp     r3, #0x0
+	beq     branch_20d9114
+.arm
+branch_20d90d4: @ 20d90d4 :arm
+	cmp     r3, r2
+	bne     branch_20d9108
+	mov     lr, r4
+	add     r12, r1, #0x1
+.arm
+branch_20d90e4: @ 20d90e4 :arm
+	ldrb    r3, [r12], #0x1
+	ldrb    r0, [lr], #0x1
+	cmp     r0, r3
+	bne     branch_20d90fc
+	cmp     r0, #0x0
+	bne     branch_20d90e4
+.arm
+branch_20d90fc: @ 20d90fc :arm
+	cmp     r3, #0x0
+	subeq   r0, r4, #0x1
+	ldmeqfd sp!, {r4,pc}
+.arm
+branch_20d9108: @ 20d9108 :arm
+	ldrb    r3, [r4], #0x1
+	cmp     r3, #0x0
+	bne     branch_20d90d4
+.arm
+branch_20d9114: @ 20d9114 :arm
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,pc}
+@ 0x20d911c
+
+
+.incbin "./baserom/arm9.bin", 0xd911c, 0x20dae20 - 0x20d911c
+
+
+.arm
+Function_20dae20: @ 20dae20 :arm
+	cmp     r0, #0x0
+	beq     branch_20dae38
+	ldr     r3, [r0, #0x4]
+	mov     r2, r3, lsl #22
+	movs    r2, r2, lsr #29
+	bne     branch_20dae40
+.arm
+branch_20dae38: @ 20dae38 :arm
+	mov     r0, #0x0
+	bx      lr
+@ 0x20dae40
+
+.arm
+branch_20dae40: @ 20dae40 :arm
+	mov     r2, r3, lsl #20
+	movs    r2, r2, lsr #30
+	beq     branch_20dae60
+	cmp     r2, #0x1
+	beq     branch_20dae88
+	cmp     r2, #0x2
+	moveq   r1, #0x1
+	b       branch_20dae8c
+@ 0x20dae60
+
+.arm
+branch_20dae60: @ 20dae60 :arm
+	cmp     r1, #0x0
+	ble     branch_20dae78
+	bic     r2, r3, #3, 22 @ #0xc00
+	orr     r2, r2, #2, 22 @ #0x800
+	str     r2, [r0, #0x4]
+	b       branch_20dae8c
+@ 0x20dae78
+
+.arm
+branch_20dae78: @ 20dae78 :arm
+	biclt   r2, r3, #3, 22 @ #0xc00
+	orrlt   r2, r2, #1, 22 @ #0x400
+	strlt   r2, [r0, #0x4]
+	b       branch_20dae8c
+@ 0x20dae88
+
+.arm
+branch_20dae88: @ 20dae88 :arm
+	mvn     r1, #0x0
+.arm
+branch_20dae8c: @ 20dae8c :arm
+	mov     r0, r1
+	bx      lr
+@ 0x20dae94
+
+
+.incbin "./baserom/arm9.bin", 0xdae94, 0x20de05c - 0x20dae94
+
+
+.arm
+Function_20de05c: @ 20de05c :arm
+	stmfd   sp!, {r0-r3}
+	ldr     r1, [sp, #0x4]
+	ldr     r0, [sp, #0xc]
+	bic     r1, r1, #2, 2 @ #0x80000000
+	and     r0, r0, #2, 2 @ #0x80000000
+	orr     r1, r1, r0
+	ldr     r0, [sp]
+	str     r1, [sp, #0x4]
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de084
+
+.arm
+Function_20de084: @ 20de084 :arm
+	stmfd   sp!, {r0-r3}
+	add     r2, sp, #0x0
+	ldr     r1, [r2, #0x4]
+	ldr     r0, [sp]
+	bic     r1, r1, #2, 2 @ #0x80000000
+	str     r1, [r2, #0x4]
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de0a4
+
+.arm
+Function_20de0a4: @ 20de0a4 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r4,lr}
+	ldr     r1, [sp, #0xc]
+	ldr     r0,  [pc, #0x98] @ [0x20de150] (=#0x7ff00000)
+	mov     r4, r2
+	bic     r3, r1, #2, 2 @ #0x80000000
+	mov     r2, #0x0
+	str     r2, [r4]
+	cmp     r3, r0
+	ldr     r0, [sp, #0x8]
+	bge     branch_20de0d8
+	orrs    r0, r3, r0
+	bne     branch_20de0ec
+.arm
+branch_20de0d8: @ 20de0d8 :arm
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de0ec
+
+.arm
+branch_20de0ec: @ 20de0ec :arm
+	cmp     r3, #1, 12 @ #0x100000
+	bge     branch_20de118
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	ldr     r3,  [pc, #0x50] @ [0x20de154] (=#0x43500000)
+	bl      Function_20e0234
+	mvn     r2, #0x35
+	str     r0, [sp, #0x8]
+	str     r1, [sp, #0xc]
+	str     r2, [r4]
+	bic     r3, r1, #2, 2 @ #0x80000000
+.arm
+branch_20de118: @ 20de118 :arm
+	ldr     r2,  [pc, #0x38] @ [0x20de158] (=#0x800fffff)
+	ldr     r0,  [pc, #0x38] @ [0x20de15c] (=#0xfffffc02)
+	and     r1, r1, r2
+	orr     r1, r1, #254, 12 @ #0xfe00000
+	orr     r1, r1, #3, 4 @ #0x30000000
+	ldr     r2, [r4]
+	add     r0, r0, r3, asr #20
+	add     r2, r2, r0
+	ldr     r0, [sp, #0x8]
+	str     r2, [r4]
+	str     r1, [sp, #0xc]
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de150
+
+.word 0x7ff00000 @ 0x20de150
+.word 0x43500000 @ 0x20de154
+.word 0x800fffff @ 0x20de158
+.word 0xfffffc02 @ 0x20de15c
+.arm
+Function_20de160: @ 20de160 :arm
+	stmfd   sp!, {r0-r3}
+	stmfd   sp!, {r4,lr}
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	mov     r4, r2
+	bl      Function_20df87c
+	cmp     r0, #0x2
+	ble     branch_20de198
+	mov     r0, #0x0
+	ldr     r2, [sp, #0x8]
+	ldr     r3, [sp, #0xc]
+	mov     r1, r0
+	bl      Function_20e0f94
+	bne     branch_20de1ac
+.arm
+branch_20de198: @ 20de198 :arm
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de1ac
+
+.arm
+branch_20de1ac: @ 20de1ac :arm
+	ldr     r3, [sp, #0xc]
+	ldr     r0,  [pc, #0x1c8] @ [0x20de380] (=#0x7ff00000)
+	ldr     r1, [sp, #0x8]
+	and     r0, r3, r0
+	movs    r12, r0, asr #20
+	bne     branch_20de238
+	bic     r0, r3, #2, 2 @ #0x80000000
+	orrs    r0, r1, r0
+	ldreq   r0, [sp, #0x8]
+	ldreq   r1, [sp, #0xc]
+	ldmeqfd sp!, {r4,lr}
+	addeq   sp, sp, #0x10
+	bxeq    lr
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	ldr     r3,  [pc, #0x194] @ [0x20de384] (=#0x43500000)
+	mov     r2, #0x0
+	bl      Function_20e0234
+	mov     r3, r1
+	ldr     r1,  [pc, #0x180] @ [0x20de380] (=#0x7ff00000)
+	ldr     r12,  [pc, #0x184] @ [0x20de388] (=#0xffff3cb0)
+	and     r1, r3, r1
+	mov     r2, r0
+	mov     r0, r1, asr #20
+	str     r2, [sp, #0x8]
+	str     r3, [sp, #0xc]
+	cmp     r4, r12
+	sub     r12, r0, #0x36
+	bge     branch_20de238
+	ldr     r0,  [pc, #0x164] @ [0x20de38c] (=#0xc2f8f359)
+	ldr     r1,  [pc, #0x164] @ [0x20de390] (=#0x1a56e1f)
+	bl      Function_20e0234
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de238
+
+.arm
+branch_20de238: @ 20de238 :arm
+	ldr     r0,  [pc, #0x154] @ [0x20de394] (=#0x7ff)
+	cmp     r12, r0
+	bne     branch_20de264
+	ldr     r0, [sp, #0x8]
+	ldr     r1, [sp, #0xc]
+	mov     r2, r0
+	mov     r3, r1
+	bl      Function_20dfc6c
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de264
+
+.arm
+branch_20de264: @ 20de264 :arm
+	add     r2, r12, r4
+	sub     r0, r0, #0x1
+	cmp     r2, r0
+	ble     branch_20de2a8
+	ldr     r2, [sp, #0x8]
+	ldr     r3, [sp, #0xc]
+	ldr     r0,  [pc, #0x114] @ [0x20de398] (=#0x8800759c)
+	ldr     r1,  [pc, #0x114] @ [0x20de39c] (=#0x7e37e43c)
+	bl      Function_20de05c
+	mov     r2, r0
+	mov     r3, r1
+	ldr     r0,  [pc, #0x100] @ [0x20de398] (=#0x8800759c)
+	ldr     r1,  [pc, #0x100] @ [0x20de39c] (=#0x7e37e43c)
+	bl      Function_20e0234
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de2a8
+
+.arm
+branch_20de2a8: @ 20de2a8 :arm
+	cmp     r2, #0x0
+	ble     branch_20de2d0
+	ldr     r1,  [pc, #0xe8] @ [0x20de3a0] (=#0x800fffff)
+	ldr     r0, [sp, #0x8]
+	and     r1, r3, r1
+	orr     r1, r1, r2, lsl #20
+	str     r1, [sp, #0xc]
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de2d0
+
+.arm
+branch_20de2d0: @ 20de2d0 :arm
+	mvn     r0, #0x35
+	cmp     r2, r0
+	bgt     branch_20de350
+	ldr     r0,  [pc, #0xc0] @ [0x20de3a4] (=#0xc350)
+	cmp     r4, r0
+	ble     branch_20de31c
+	ldr     r2, [sp, #0x8]
+	ldr     r3, [sp, #0xc]
+	ldr     r0,  [pc, #0xa0] @ [0x20de398] (=#0x8800759c)
+	ldr     r1,  [pc, #0xa0] @ [0x20de39c] (=#0x7e37e43c)
+	bl      Function_20de05c
+	mov     r2, r0
+	mov     r3, r1
+	ldr     r0,  [pc, #0x8c] @ [0x20de398] (=#0x8800759c)
+	ldr     r1,  [pc, #0x8c] @ [0x20de39c] (=#0x7e37e43c)
+	bl      Function_20e0234
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de31c
+
+.arm
+branch_20de31c: @ 20de31c :arm
+	ldr     r2, [sp, #0x8]
+	ldr     r3, [sp, #0xc]
+	ldr     r0,  [pc, #0x60] @ [0x20de38c] (=#0xc2f8f359)
+	ldr     r1,  [pc, #0x60] @ [0x20de390] (=#0x1a56e1f)
+	bl      Function_20de05c
+	mov     r2, r0
+	mov     r3, r1
+	ldr     r0,  [pc, #0x4c] @ [0x20de38c] (=#0xc2f8f359)
+	ldr     r1,  [pc, #0x4c] @ [0x20de390] (=#0x1a56e1f)
+	bl      Function_20e0234
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de350
+
+.arm
+branch_20de350: @ 20de350 :arm
+	ldr     r0,  [pc, #0x48] @ [0x20de3a0] (=#0x800fffff)
+	add     r1, r2, #0x36
+	and     r0, r3, r0
+	orr     r3, r0, r1, lsl #20
+	ldr     r2, [sp, #0x8]
+	ldr     r1,  [pc, #0x3c] @ [0x20de3a8] (=#0x3c900000)
+	mov     r0, #0x0
+	str     r3, [sp, #0xc]
+	bl      Function_20e0234
+	ldmfd   sp!, {r4,lr}
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20de380
+
+.word 0x7ff00000 @ 0x20de380
+.word 0x43500000 @ 0x20de384
+.word 0xffff3cb0 @ 0x20de388
+.word 0xc2f8f359 @ 0x20de38c
+.word 0x1a56e1f @ 0x20de390
+.word 0x7ff @ 0x20de394
+.word 0x8800759c @ 0x20de398
+.word 0x7e37e43c @ 0x20de39c
+.word 0x800fffff @ 0x20de3a0
+.word 0xc350 @ 0x20de3a4
+.word 0x3c900000 @ 0x20de3a8
+
+.incbin "./baserom/arm9.bin", 0xde3ac, 0x20de3b8 - 0x20de3ac
+
+
+.arm
+Function_20de3b8: @ 20de3b8 :arm
+	add     r3, r0, #0x5
+	ldrb    r2, [r3, r1]
+	add     r12, r3, r1
+	cmp     r2, #0x5
+	movhi   r0, #0x1
+	bxhi    lr
+	mvncc   r0, #0x0
+	bxcc    lr
+	ldrb    r2, [r0, #0x4]
+	add     r12, r12, #0x1
+	add     r3, r3, r2
+	cmp     r12, r3
+	bcs     branch_20de408
+.arm
+branch_20de3ec: @ 20de3ec :arm
+	ldrb    r2, [r12]
+	cmp     r2, #0x0
+	movne   r0, #0x1
+	bxne    lr
+	add     r12, r12, #0x1
+	cmp     r12, r3
+	bcc     branch_20de3ec
+.arm
+branch_20de408: @ 20de408 :arm
+	sub     r1, r1, #0x1
+	add     r0, r0, r1
+	ldrb    r0, [r0, #0x5]
+	tst     r0, #0x1
+	movne   r0, #0x1
+	mvneq   r0, #0x0
+	bx      lr
+@ 0x20de424
+
+.arm
+Function_20de424: @ 20de424 :arm
+	add     r3, r0, #0x5
+	add     r1, r3, r1
+	sub     r12, r1, #0x1
+	mov     r1, #0x0
+.arm
+branch_20de434: @ 20de434 :arm
+	ldrb    r2, [r12]
+	cmp     r2, #0x9
+	addcc   r0, r2, #0x1
+	strccb  r0, [r12]
+	bxcc    lr
+	cmp     r12, r3
+	bne     branch_20de468
+	mov     r1, #0x1
+	strb    r1, [r12]
+	ldrsh   r1, [r0, #0x2]
+	add     r1, r1, #0x1
+	strh    r1, [r0, #0x2]
+	bx      lr
+@ 0x20de468
+
+.arm
+branch_20de468: @ 20de468 :arm
+	strb    r1, [r12], #-0x1
+	b       branch_20de434
+@ 0x20de470
+
+
+.incbin "./baserom/arm9.bin", 0xde470, 0x20de474 - 0x20de470
+
+
+.arm
+Function_20de474: @ 20de474 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r4, r1
+	mov     r5, r0
+	cmp     r4, #0x0
+	ldmlefd sp!, {r3-r5,pc}
+	ldrb    r2, [r5, #0x4]
+	cmp     r4, r2
+	ldmgefd sp!, {r3-r5,pc}
+	bl      Function_20de3b8
+	strb    r4, [r5, #0x4]
+	cmp     r0, #0x0
+	ldmltfd sp!, {r3-r5,pc}
+	mov     r0, r5
+	mov     r1, r4
+	bl      Function_20de424
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20de4b4
+
+.arm
+Function_20de4b4: @ 20de4b4 :arm
+	stmfd   sp!, {r3-r11,lr}
+	mov     r10, r0
+	mov     r0, #0x0
+	mov     r8, r2
+	strb    r0, [r10]
+	mov     r9, r1
+	cmp     r8, #0x0
+	strb    r0, [r10, #0x4]
+	cmpeq   r9, #0x0
+	beq     branch_20de540
+	mov     r6, #0xa
+	mov     r11, r0
+	mov     r5, r0
+	mov     r4, r0
+.arm
+branch_20de4ec: @ 20de4ec :arm
+	ldrb    r1, [r10, #0x4]
+	mov     r0, r9
+	mov     r2, r6
+	add     r3, r1, #0x1
+	mov     r7, r1
+	strb    r3, [r10, #0x4]
+	mov     r1, r8
+	mov     r3, r11
+	bl      Function_20e1ee0
+	add     r1, r10, r7
+	strb    r0, [r1, #0x5]
+	mov     r0, r9
+	mov     r1, r8
+	mov     r2, #0xa
+	mov     r3, #0x0
+	bl      Function_20e1ed4
+	mov     r8, r1
+	mov     r9, r0
+	cmp     r8, r5
+	cmpeq   r9, r4
+	bne     branch_20de4ec
+.arm
+branch_20de540: @ 20de540 :arm
+	ldrb    r0, [r10, #0x4]
+	add     r2, r10, #0x5
+	add     r0, r2, r0
+	sub     r3, r0, #0x1
+	cmp     r2, r3
+	bcs     branch_20de570
+.arm
+branch_20de558: @ 20de558 :arm
+	ldrb    r0, [r3]
+	ldrb    r1, [r2]
+	strb    r0, [r2], #0x1
+	strb    r1, [r3], #-0x1
+	cmp     r2, r3
+	bcc     branch_20de558
+.arm
+branch_20de570: @ 20de570 :arm
+	ldrb    r0, [r10, #0x4]
+	sub     r0, r0, #0x1
+	strh    r0, [r10, #0x2]
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20de580
+
+.arm
+Function_20de580: @ 20de580 :arm
+	stmfd   sp!, {r3-r11,lr}
+	sub     sp, sp, #0x40
+	ldrb    r6, [r1, #0x4]
+	ldrb    r5, [r2, #0x4]
+	mov     r4, #0x0
+	add     r3, sp, #0x0
+	add     r5, r6, r5
+	sub     r5, r5, #0x1
+	add     r3, r3, r5
+	add     r6, r3, #0x1
+	mov     r7, r6
+	strb    r4, [r0]
+	cmp     r5, #0x0
+	ble     branch_20de648
+	add     lr, r1, #0x5
+	add     r11, r2, #0x5
+.arm
+branch_20de5c0: @ 20de5c0 :arm
+	ldrb    r3, [r2, #0x4]
+	sub     r10, r3, #0x1
+	sub     r3, r5, r10
+	subs    r9, r3, #0x1
+	ldrb    r3, [r1, #0x4]
+	movmi   r9, #0x0
+	submi   r10, r5, #0x1
+	add     r8, r10, #0x1
+	sub     r3, r3, r9
+	cmp     r8, r3
+	movgt   r8, r3
+	add     r10, r11, r10
+	add     r9, lr, r9
+	cmp     r8, #0x0
+	ble     branch_20de614
+.arm
+branch_20de5fc: @ 20de5fc :arm
+	ldrb    r12, [r9], #0x1
+	ldrb    r3, [r10], #-0x1
+	sub     r8, r8, #0x1
+	cmp     r8, #0x0
+	mla     r4, r12, r3, r4
+	bgt     branch_20de5fc
+.arm
+branch_20de614: @ 20de614 :arm
+	ldr     r3,  [pc, #0xe4] @ [0x20de700] (=#0xcccccccd)
+	sub     r5, r5, #0x1
+	umull   r8, r9, r4, r3
+	mov     r9, r9, lsr #3
+	cmp     r5, #0x0
+	mov     r10, #0xa
+	umull   r8, r9, r10, r9
+	sub     r9, r4, r8
+	strb    r9, [r6, #-0x1]!
+	mov     r8, r4
+	umull   r3, r4, r8, r3
+	mov     r4, r4, lsr #3
+	bgt     branch_20de5c0
+.arm
+branch_20de648: @ 20de648 :arm
+	ldrsh   r3, [r1, #0x2]
+	ldrsh   r1, [r2, #0x2]
+	cmp     r4, #0x0
+	add     r1, r3, r1
+	strh    r1, [r0, #0x2]
+	beq     branch_20de670
+	strb    r4, [r6, #-0x1]!
+	ldrsh   r1, [r0, #0x2]
+	add     r1, r1, #0x1
+	strh    r1, [r0, #0x2]
+.arm
+branch_20de670: @ 20de670 :arm
+	mov     r3, #0x0
+	b       branch_20de688
+@ 0x20de678
+
+.arm
+branch_20de678: @ 20de678 :arm
+	ldrb    r2, [r6], #0x1
+	add     r1, r0, r3
+	add     r3, r3, #0x1
+	strb    r2, [r1, #0x5]
+.arm
+branch_20de688: @ 20de688 :arm
+	cmp     r3, #0x20
+	bge     branch_20de698
+	cmp     r6, r7
+	bcc     branch_20de678
+.arm
+branch_20de698: @ 20de698 :arm
+	cmp     r6, r7
+	addcs   sp, sp, #0x40
+	strb    r3, [r0, #0x4]
+	ldmcsfd sp!, {r3-r11,pc}
+	ldrb    r1, [r6]
+	cmp     r1, #0x5
+	addcc   sp, sp, #0x40
+	ldmccfd sp!, {r3-r11,pc}
+	bne     branch_20de6f0
+	add     r2, r6, #0x1
+	cmp     r2, r7
+	bcs     branch_20de6e0
+.arm
+branch_20de6c8: @ 20de6c8 :arm
+	ldrb    r1, [r2]
+	cmp     r1, #0x0
+	bne     branch_20de6f0
+	add     r2, r2, #0x1
+	cmp     r2, r7
+	bcc     branch_20de6c8
+.arm
+branch_20de6e0: @ 20de6e0 :arm
+	ldrb    r1, [r6, #-0x1]
+	tst     r1, #0x1
+	addeq   sp, sp, #0x40
+	ldmeqfd sp!, {r3-r11,pc}
+.arm
+branch_20de6f0: @ 20de6f0 :arm
+	ldrb    r1, [r0, #0x4]
+	bl      Function_20de424
+	add     sp, sp, #0x40
+	ldmfd   sp!, {r3-r11,pc}
+@ 0x20de700
+
+.word 0xcccccccd @ 0x20de700
+.arm
+Function_20de704: @ 20de704 :arm
+	stmfd   sp!, {r3,lr}
+	strh    r2, [r0, #0x2]
+	mov     r12, #0x0
+	strb    r12, [r0]
+	b       branch_20de72c
+@ 0x20de718
+
+.arm
+branch_20de718: @ 20de718 :arm
+	ldrsb   r3, [r1], #0x1
+	add     r2, r0, r12
+	add     r12, r12, #0x1
+	sub     r3, r3, #0x30
+	strb    r3, [r2, #0x5]
+.arm
+branch_20de72c: @ 20de72c :arm
+	cmp     r12, #0x20
+	bge     branch_20de740
+	ldrsb   r2, [r1]
+	cmp     r2, #0x0
+	bne     branch_20de718
+.arm
+branch_20de740: @ 20de740 :arm
+	strb    r12, [r0, #0x4]
+	ldrsb   r2, [r1]
+	cmp     r2, #0x0
+	ldmeqfd sp!, {r3,pc}
+	cmp     r2, #0x5
+	ldmltfd sp!, {r3,pc}
+	bgt     branch_20de794
+	ldrsb   r2, [r1, #0x1]
+	add     r1, r1, #0x1
+	cmp     r2, #0x0
+	beq     branch_20de780
+.arm
+branch_20de76c: @ 20de76c :arm
+	cmp     r2, #0x30
+	bne     branch_20de794
+	ldrsb   r2, [r1, #0x1]!
+	cmp     r2, #0x0
+	bne     branch_20de76c
+.arm
+branch_20de780: @ 20de780 :arm
+	sub     r1, r12, #0x1
+	add     r1, r0, r1
+	ldrb    r1, [r1, #0x5]
+	tst     r1, #0x1
+	ldmeqfd sp!, {r3,pc}
+.arm
+branch_20de794: @ 20de794 :arm
+	ldrb    r1, [r0, #0x4]
+	bl      Function_20de424
+	ldmfd   sp!, {r3,pc}
+@ 0x20de7a0
+
+.arm
+Function_20de7a0: @ 20de7a0 :arm
+	stmfd   sp!, {r4,r5,lr}
+	sub     sp, sp, #0x4c
+	mov     r4, r1
+	mvn     r2, #0x34
+	mov     r5, r0
+	cmp     r4, r2
+	bgt     branch_20de7d0
+	bge     branch_20de89c
+	sub     r0, r2, #0xb
+	cmp     r4, r0
+	beq     branch_20de884
+	b       branch_20dea2c
+@ 0x20de7d0
+
+.arm
+branch_20de7d0: @ 20de7d0 :arm
+	add     r1, r4, #0x20
+	cmp     r1, #0x28
+	addls   pc, pc, r1, lsl #2
+	b       branch_20dea2c
+@ 0x20de7e0
+
+
+.incbin "./baserom/arm9.bin", 0xde7e0, 0x20de884 - 0x20de7e0
+
+
+.arm
+branch_20de884: @ 20de884 :arm
+	ldr     r1,  [pc, #0x244] @ [0x20dead0] (=#0x21018cc)
+	mov     r0, r5
+	mvn     r2, #0x13
+	bl      Function_20de704
+	add     sp, sp, #0x4c
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20de89c
+
+.arm
+branch_20de89c: @ 20de89c :arm
+	ldr     r1,  [pc, #0x230] @ [0x20dead4] (=#0x21018fc)
+	add     r2, r2, #0x25
+	bl      Function_20de704
+	add     sp, sp, #0x4c
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20de8b0
+
+
+.incbin "./baserom/arm9.bin", 0xde8b0, 0x20dea2c - 0x20de8b0
+
+
+.arm
+branch_20dea2c: @ 20dea2c :arm
+	and     r0, r4, #2, 2 @ #0x80000000
+	add     r1, r4, r0, lsr #31
+	add     r0, sp, #0x26
+	mov     r1, r1, asr #1
+	bl      Function_20de7a0
+	add     r1, sp, #0x26
+	mov     r0, r5
+	mov     r2, r1
+	bl      Function_20de580
+	tst     r4, #0x1
+	addeq   sp, sp, #0x4c
+	ldmeqfd sp!, {r4,r5,pc}
+	add     r3, sp, #0x0
+	mov     r12, r5
+	mov     r2, #0x9
+.arm
+branch_20dea68: @ 20dea68 :arm
+	ldrh    r1, [r12]
+	ldrh    r0, [r12, #0x2]
+	add     r12, r12, #0x4
+	subs    r2, r2, #0x1
+	strh    r1, [r3]
+	strh    r0, [r3, #0x2]
+	add     r3, r3, #0x4
+	bne     branch_20dea68
+	ldrh    r0, [r12]
+	cmp     r4, #0x0
+	strh    r0, [r3]
+	add     r0, sp, #0x26
+	ble     branch_20deaac
+	ldr     r1,  [pc, #0x60] @ [0x20deb04] (=#0x2101980)
+	mov     r2, #0x0
+	bl      Function_20de704
+	b       branch_20deab8
+@ 0x20deaac
+
+.arm
+branch_20deaac: @ 20deaac :arm
+	ldr     r1,  [pc, #0x48] @ [0x20deafc] (=#0x2101978)
+	mvn     r2, #0x0
+	bl      Function_20de704
+.arm
+branch_20deab8: @ 20deab8 :arm
+	add     r1, sp, #0x0
+	add     r2, sp, #0x26
+	mov     r0, r5
+	bl      Function_20de580
+	add     sp, sp, #0x4c
+	ldmfd   sp!, {r4,r5,pc}
+@ 0x20dead0
+
+.word 0x21018cc @ 0x20dead0
+.word 0x21018fc @ 0x20dead4
+
+.incbin "./baserom/arm9.bin", 0xdead8, 0x20deafc - 0x20dead8
+
+
+.word 0x2101978 @ 0x20deafc
+
+.incbin "./baserom/arm9.bin", 0xdeb00, 0x20deb04 - 0x20deb00
+
+
+.word 0x2101980 @ 0x20deb04
+
+.incbin "./baserom/arm9.bin", 0xdeb08, 0x20def88 - 0x20deb08
+
+
+.arm
+Function_20def88: @ 20def88 :arm
+	stmfd   sp!, {r4-r8,lr}
+	sub     sp, sp, #0x58
+	mov     r8, r1
+	mov     r6, r2
+	mov     r7, r0
+	mov     r0, r8
+	mov     r1, r6
+	bl      Function_20df868
+	cmp     r0, #0x0
+	movne   r1, #0x1
+	moveq   r1, #0x0
+	mov     r4, r1, lsl #24
+	mov     r0, #0x0
+	mov     r1, r0
+	mov     r2, r8
+	mov     r3, r6
+	mov     r5, r4, asr #24
+	bl      Function_20e0f94
+	bne     branch_20deff4
+	strb    r5, [r7]
+	mov     r1, #0x0
+	strh    r1, [r7, #0x2]
+	mov     r0, #0x1
+	strb    r0, [r7, #0x4]
+	add     sp, sp, #0x58
+	strb    r1, [r7, #0x5]
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20deff4
+
+.arm
+branch_20deff4: @ 20deff4 :arm
+	mov     r0, r8
+	mov     r1, r6
+	bl      Function_20df87c
+	cmp     r0, #0x2
+	bgt     branch_20df040
+	strb    r5, [r7]
+	mov     r2, #0x0
+	strh    r2, [r7, #0x2]
+	mov     r2, #0x1
+	mov     r0, r8
+	mov     r1, r6
+	strb    r2, [r7, #0x4]
+	bl      Function_20df87c
+	cmp     r0, #0x1
+	moveq   r0, #0x4e
+	movne   r0, #0x49
+	add     sp, sp, #0x58
+	strb    r0, [r7, #0x5]
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20df040
+
+.arm
+branch_20df040: @ 20df040 :arm
+	cmp     r5, #0x0
+	beq     branch_20df064
+	mov     r0, #0x0
+	mov     r1, r0
+	mov     r2, r8
+	mov     r3, r6
+	bl      Function_20e074c
+	mov     r8, r0
+	mov     r6, r1
+.arm
+branch_20df064: @ 20df064 :arm
+	add     r2, sp, #0x8
+	mov     r0, r8
+	mov     r1, r6
+	bl      Function_20de0a4
+	mov     r4, r0
+	mov     r6, r1
+	orr     r12, r4, #0x0
+	rsbs    r2, r12, #0x0
+	orr     r3, r6, #1, 12 @ #0x100000
+	rsc     r1, r3, #0x0
+	mov     r0, #0x0
+	and     r3, r3, r1
+	sub     r1, r0, #0x1
+	and     r12, r12, r2
+	mov     r2, r1
+	adds    r0, r12, r1
+	adc     r1, r3, r2
+	str     r4, [sp]
+	str     r6, [sp, #0x4]
+	bl      Function_20df7d4
+	rsb     r8, r0, #0x35
+	ldr     r1, [sp, #0x8]
+	add     r0, sp, #0xc
+	sub     r1, r1, r8
+	bl      Function_20de7a0
+	mov     r0, r4
+	mov     r1, r6
+	mov     r2, r8
+	bl      Function_20de160
+	bl      Function_20e012c
+	mov     r2, r1
+	mov     r1, r0
+	add     r0, sp, #0x32
+	bl      Function_20de4b4
+	mov     r0, r7
+	add     r1, sp, #0x32
+	add     r2, sp, #0xc
+	bl      Function_20de580
+	strb    r5, [r7]
+	add     sp, sp, #0x58
+	ldmfd   sp!, {r4-r8,pc}
+@ 0x20df108
+
+.arm
+Function_20df108: @ 20df108 :arm
+	stmfd   sp!, {r3-r5,lr}
+	mov     r4, r3
+	ldrsh   r5, [r0, #0x2]
+	mov     r0, r4
+	bl      Function_20def88
+	ldrb    r0, [r4, #0x5]
+	cmp     r0, #0x9
+	ldmhifd sp!, {r3-r5,pc}
+	cmp     r5, #0x20
+	movgt   r5, #0x20
+	mov     r0, r4
+	mov     r1, r5
+	bl      Function_20de474
+	ldrb    r0, [r4, #0x4]
+	cmp     r0, r5
+	bge     branch_20df16c
+	mov     r1, #0x0
+.arm
+branch_20df14c: @ 20df14c :arm
+	ldrb    r2, [r4, #0x4]
+	add     r0, r4, r0
+	add     r2, r2, #0x1
+	strb    r2, [r4, #0x4]
+	strb    r1, [r0, #0x5]
+	ldrb    r0, [r4, #0x4]
+	cmp     r0, r5
+	blt     branch_20df14c
+.arm
+branch_20df16c: @ 20df16c :arm
+	ldrsh   r1, [r4, #0x2]
+	sub     r0, r0, #0x1
+	mov     r2, #0x0
+	sub     r0, r1, r0
+	strh    r0, [r4, #0x2]
+	ldrb    r0, [r4, #0x4]
+	cmp     r0, #0x0
+	ldmlefd sp!, {r3-r5,pc}
+.arm
+branch_20df18c: @ 20df18c :arm
+	add     r1, r4, r2
+	ldrb    r0, [r1, #0x5]
+	add     r2, r2, #0x1
+	add     r0, r0, #0x30
+	strb    r0, [r1, #0x5]
+	ldrb    r0, [r4, #0x4]
+	cmp     r2, r0
+	blt     branch_20df18c
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20df1b0
+
+
+.incbin "./baserom/arm9.bin", 0xdf1b0, 0x20df7d4 - 0x20df1b0
+
+
+.arm
+Function_20df7d4: @ 20df7d4 :arm
+	mov     r3, r0, lsr #1
+	ldr     r2,  [pc, #0x7c] @ [0x20df85c] (=#0x55555555)
+	orr     r3, r3, r1, lsl #31
+	and     r3, r3, r2
+	subs    r12, r0, r3
+	and     r2, r2, r1, lsr #1
+	ldr     r0,  [pc, #0x6c] @ [0x20df860] (=#0x33333333)
+	sbc     r3, r1, r2
+	mov     r1, r12, lsr #2
+	orr     r1, r1, r3, lsl #30
+	and     r2, r12, r0
+	and     r1, r1, r0
+	adds    r2, r2, r1
+	and     r1, r3, r0
+	and     r0, r0, r3, lsr #2
+	adc     r1, r1, r0
+	mov     r0, r2, lsr #4
+	orr     r0, r0, r1, lsl #28
+	adds    r2, r2, r0
+	ldr     r0,  [pc, #0x3c] @ [0x20df864] (=#0xf0f0f0f)
+	adc     r1, r1, r1, lsr #4
+	and     r3, r2, r0
+	and     r2, r1, r0
+	mov     r0, r3, lsr #8
+	orr     r0, r0, r2, lsl #24
+	adds    r1, r3, r0
+	adc     r2, r2, r2, lsr #8
+	mov     r0, r1, lsr #16
+	orr     r0, r0, r2, lsl #16
+	adds    r1, r1, r0
+	adc     r0, r2, r2, lsr #16
+	adds    r0, r1, r0
+	and     r0, r0, #0xff
+	bx      lr
+@ 0x20df85c
+
+.word 0x55555555 @ 0x20df85c
+.word 0x33333333 @ 0x20df860
+.word 0xf0f0f0f @ 0x20df864
+.arm
+Function_20df868: @ 20df868 :arm
+	stmfd   sp!, {r0-r3}
+	ldr     r0, [sp, #0x4]
+	and     r0, r0, #2, 2 @ #0x80000000
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20df87c
+
+.arm
+Function_20df87c: @ 20df87c :arm
+	stmfd   sp!, {r0-r3}
+	ldr     r2, [sp, #0x4]
+	ldr     r0,  [pc, #0x58] @ [0x20df8e4] (=#0x7ff00000)
+	ands    r1, r2, r0
+	beq     branch_20df8b8
+	cmp     r1, r0
+	bne     branch_20df8d8
+	ldr     r0,  [pc, #0x48] @ [0x20df8e8] (=#0xfffff)
+	tst     r2, r0
+	ldreq   r0, [sp]
+	add     sp, sp, #0x10
+	cmpeq   r0, #0x0
+	movne   r0, #0x1
+	moveq   r0, #0x2
+	bx      lr
+@ 0x20df8b8
+
+.arm
+branch_20df8b8: @ 20df8b8 :arm
+	ldr     r0,  [pc, #0x28] @ [0x20df8e8] (=#0xfffff)
+	tst     r2, r0
+	ldreq   r0, [sp]
+	add     sp, sp, #0x10
+	cmpeq   r0, #0x0
+	movne   r0, #0x5
+	moveq   r0, #0x3
+	bx      lr
+@ 0x20df8d8
+
+.arm
+branch_20df8d8: @ 20df8d8 :arm
+	mov     r0, #0x4
+	add     sp, sp, #0x10
+	bx      lr
+@ 0x20df8e4
+
+.word 0x7ff00000 @ 0x20df8e4
+.word 0xfffff @ 0x20df8e8
+
+.incbin "./baserom/arm9.bin", 0xdf8ec, 0x20dfc6c - 0x20df8ec
+
+
+.arm
+Function_20dfc6c: @ 20dfc6c :arm
+	stmfd   sp!, {r4,lr}
+	eors    r12, r1, r3
+	eormi   r3, r3, #2, 2 @ #0x80000000
+	bmi     branch_20e075c
+.arm
+branch_20dfc7c: @ 20dfc7c :arm
+	subs    r12, r0, r2
+	sbcs    lr, r1, r3
+	bcs     branch_20dfc98
+	adds    r2, r2, r12
+	adc     r3, r3, lr
+	subs    r0, r0, r12
+	sbc     r1, r1, lr
+.arm
+branch_20dfc98: @ 20dfc98 :arm
+	mov     lr, #2, 2 @ #0x80000000
+	mov     r12, r1, lsr #20
+	orr     r1, lr, r1, lsl #11
+	orr     r1, r1, r0, lsr #21
+	mov     r0, r0, lsl #11
+	movs    r4, r12, lsl #21
+	cmnne   r4, #2, 12 @ #0x200000
+	beq     branch_20dfd94
+	mov     r4, r3, lsr #20
+	orr     r3, lr, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    lr, r4, lsl #21
+	beq     branch_20dfddc
+.arm
+branch_20dfcd0: @ 20dfcd0 :arm
+	subs    r4, r12, r4
+	beq     branch_20dfd28
+	cmp     r4, #0x20
+	ble     branch_20dfd0c
+	cmp     r4, #0x38
+	movge   r4, #0x3f
+	sub     r4, r4, #0x20
+	rsb     lr, r4, #0x20
+	orrs    lr, r2, r3, lsl lr
+	mov     r2, r3, lsr r4
+	orrne   r2, r2, #0x1
+	adds    r0, r0, r2
+	adcs    r1, r1, #0x0
+	bcc     branch_20dfd50
+	b       branch_20dfd34
+@ 0x20dfd0c
+
+.arm
+branch_20dfd0c: @ 20dfd0c :arm
+	rsb     lr, r4, #0x20
+	movs    lr, r2, lsl lr
+	rsb     lr, r4, #0x20
+	mov     r2, r2, lsr r4
+	orr     r2, r2, r3, lsl lr
+	mov     r3, r3, lsr r4
+	orrne   r2, r2, #0x1
+.arm
+branch_20dfd28: @ 20dfd28 :arm
+	adds    r0, r0, r2
+	adcs    r1, r1, r3
+	bcc     branch_20dfd50
+.arm
+branch_20dfd34: @ 20dfd34 :arm
+	add     r12, r12, #0x1
+	and     r4, r0, #0x1
+	movs    r1, r1, rrx
+	orr     r0, r4, r0, rrx
+	mov     lr, r12, lsl #21
+	cmn     lr, #2, 12 @ #0x200000
+	beq     branch_20dff60
+.arm
+branch_20dfd50: @ 20dfd50 :arm
+	movs    r2, r0, lsl #21
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	mov     r1, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	tst     r2, #2, 2 @ #0x80000000
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	movs    r2, r2, lsl #1
+	andeqs  r2, r0, #0x1
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	adds    r0, r0, #0x1
+	adc     r1, r1, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dfd94
+
+.arm
+branch_20dfd94: @ 20dfd94 :arm
+	cmp     r12, #2, 22 @ #0x800
+	movge   lr, #2, 2 @ #0x80000000
+	movlt   lr, #0x0
+	bics    r12, r12, #2, 22 @ #0x800
+	beq     branch_20dfe00
+	orrs    r4, r0, r1, lsl #1
+	bne     branch_20dff3c
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r4, r4, lsl #21
+	beq     branch_20dff28
+	cmn     r4, #2, 12 @ #0x200000
+	bne     branch_20dff28
+	orrs    r4, r2, r3, lsl #1
+	beq     branch_20dff28
+	b       branch_20dff3c
+@ 0x20dfddc
+
+.arm
+branch_20dfddc: @ 20dfddc :arm
+	cmp     r4, #2, 22 @ #0x800
+	movge   lr, #2, 2 @ #0x80000000
+	movlt   lr, #0x0
+	bic     r12, r12, #2, 22 @ #0x800
+	bics    r4, r4, #2, 22 @ #0x800
+	beq     branch_20dfe6c
+	orrs    r4, r2, r3, lsl #1
+	bne     branch_20dff3c
+	b       branch_20dff28
+@ 0x20dfe00
+
+.arm
+branch_20dfe00: @ 20dfe00 :arm
+	orrs    r4, r0, r1, lsl #1
+	beq     branch_20dfe40
+	mov     r12, #0x1
+	bic     r1, r1, #2, 2 @ #0x80000000
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r4, r4, lsl #21
+	cmnne   r4, #2, 12 @ #0x200000
+	mov     r4, r4, lsr #21
+	orr     r4, r4, lr, lsr #20
+	beq     branch_20dfddc
+	orr     r3, r3, #2, 2 @ #0x80000000
+	orr     r12, r12, lr, lsr #20
+	b       branch_20dfcd0
+@ 0x20dfe40
+
+.arm
+branch_20dfe40: @ 20dfe40 :arm
+	mov     r12, r3, lsr #20
+	mov     r1, r3, lsl #11
+	orr     r1, r1, r2, lsr #21
+	mov     r0, r2, lsl #11
+	movs    r4, r12, lsl #21
+	beq     branch_20dfef4
+	cmn     r4, #2, 12 @ #0x200000
+	bne     branch_20dfef4
+	orrs    r4, r0, r1, lsl #1
+	beq     branch_20dff28
+	b       branch_20dff40
+@ 0x20dfe6c
+
+.arm
+branch_20dfe6c: @ 20dfe6c :arm
+	orrs    r4, r2, r3, lsl #1
+	beq     branch_20dff04
+	mov     r4, #0x1
+	bic     r3, r3, #2, 2 @ #0x80000000
+	cmp     r1, #0x0
+	bpl     branch_20dfe90
+	orr     r12, r12, lr, lsr #20
+	orr     r4, r4, lr, lsr #20
+	b       branch_20dfcd0
+@ 0x20dfe90
+
+.arm
+branch_20dfe90: @ 20dfe90 :arm
+	adds    r0, r0, r2
+	adcs    r1, r1, r3
+	bcc     branch_20dfeb0
+	add     r12, r12, #0x1
+	and     r4, r0, #0x1
+	movs    r1, r1, rrx
+	mov     r0, r0, rrx
+	orr     r0, r0, r4
+.arm
+branch_20dfeb0: @ 20dfeb0 :arm
+	cmp     r1, #0x0
+	subges  r12, r12, #0x1
+	movs    r2, r0, lsl #21
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	orr     r1, lr, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	tst     r2, #2, 2 @ #0x80000000
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	movs    r2, r2, lsl #1
+	andeqs  r2, r0, #0x1
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+.arm
+branch_20dfef4: @ 20dfef4 :arm
+	mov     r1, r3
+	mov     r0, r2
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dff04
+
+.arm
+branch_20dff04: @ 20dff04 :arm
+	cmp     r1, #0x0
+	subges  r12, r12, #0x1
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	orr     r1, lr, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dff28
+
+.arm
+branch_20dff28: @ 20dff28 :arm
+	ldr     r1,  [pc, #0x50] @ [0x20dff80] (=#0x7ff00000)
+	orr     r1, lr, r1
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dff3c
+
+.arm
+branch_20dff3c: @ 20dff3c :arm
+	mov     r1, r3
+.arm
+branch_20dff40: @ 20dff40 :arm
+	mvn     r0, #0x0
+	bic     r1, r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dff50
+
+
+.incbin "./baserom/arm9.bin", 0xdff50, 0x20dff60 - 0x20dff50
+
+
+.arm
+branch_20dff60: @ 20dff60 :arm
+	cmp     r12, #2, 22 @ #0x800
+	movge   lr, #2, 2 @ #0x80000000
+	movlt   lr, #0x0
+	ldr     r1,  [pc, #0xc] @ [0x20dff80] (=#0x7ff00000)
+	orr     r1, lr, r1
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20dff80
+
+.word 0x7ff00000 @ 0x20dff80
+
+.incbin "./baserom/arm9.bin", 0xdff84, 0x20e012c - 0x20dff84
+
+
+.arm
+Function_20e012c: @ 20e012c :arm
+	tst     r1, #2, 2 @ #0x80000000
+	bne     branch_20e0190
+	ldr     r2,  [pc, #0x78] @ [0x20e01b4] (=#0x43e)
+	subs    r2, r2, r1, lsr #20
+	blt     branch_20e01a8
+	cmp     r2, #0x40
+	bge     branch_20e0184
+	mov     r12, r1, lsl #11
+	orr     r12, r12, #2, 2 @ #0x80000000
+	orr     r12, r12, r0, lsr #21
+	cmp     r2, #0x20
+	ble     branch_20e016c
+	sub     r2, r2, #0x20
+	mov     r1, #0x0
+	mov     r0, r12, lsr r2
+	bx      lr
+@ 0x20e016c
+
+.arm
+branch_20e016c: @ 20e016c :arm
+	mov     r3, r0, lsl #11
+	mov     r1, r12, lsr r2
+	mov     r0, r3, lsr r2
+	rsb     r2, r2, #0x20
+	orr     r0, r0, r12, lsl r2
+	bx      lr
+@ 0x20e0184
+
+.arm
+branch_20e0184: @ 20e0184 :arm
+	mov     r1, #0x0
+	mov     r0, #0x0
+	bx      lr
+@ 0x20e0190
+
+.arm
+branch_20e0190: @ 20e0190 :arm
+	cmn     r1, #1, 12 @ #0x100000
+	cmpeq   r0, #0x0
+	bhi     branch_20e01a8
+	mov     r1, #0x0
+	mov     r0, #0x0
+	bx      lr
+@ 0x20e01a8
+
+.arm
+branch_20e01a8: @ 20e01a8 :arm
+	mvn     r1, #0x0
+	mvn     r0, #0x0
+	bx      lr
+@ 0x20e01b4
+
+.word 0x43e @ 0x20e01b4
+
+.incbin "./baserom/arm9.bin", 0xe01b8, 0x20e0234 - 0x20e01b8
+
+
+.arm
+Function_20e0234: @ 20e0234 :arm
+	stmfd   sp!, {r4-r7,lr}
+	eor     lr, r1, r3
+	and     lr, lr, #2, 2 @ #0x80000000
+	mov     r12, r1, lsr #20
+	mov     r1, r1, lsl #11
+	orr     r1, r1, r0, lsr #21
+	mov     r0, r0, lsl #11
+	movs    r6, r12, lsl #21
+	cmnne   r6, #2, 12 @ #0x200000
+	beq     branch_20e033c
+	orr     r1, r1, #2, 2 @ #0x80000000
+	bic     r12, r12, #2, 22 @ #0x800
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r5, r4, lsl #21
+	cmnne   r5, #2, 12 @ #0x200000
+	beq     branch_20e0384
+	orr     r3, r3, #2, 2 @ #0x80000000
+	bic     r4, r4, #2, 22 @ #0x800
+.arm
+branch_20e0288: @ 20e0288 :arm
+	add     r12, r4, r12
+	umull   r5, r4, r0, r2
+	umull   r7, r6, r0, r3
+	adds    r4, r7, r4
+	adc     r6, r6, #0x0
+	umull   r7, r0, r1, r2
+	adds    r4, r7, r4
+	adcs    r0, r0, r6
+	umull   r7, r2, r1, r3
+	adc     r1, r2, #0x0
+	adds    r0, r0, r7
+	adc     r1, r1, #0x0
+	orrs    r4, r4, r5
+	orrne   r0, r0, #0x1
+	cmp     r1, #0x0
+	blt     branch_20e02d4
+	sub     r12, r12, #0x1
+	adds    r0, r0, r0
+	adc     r1, r1, r1
+.arm
+branch_20e02d4: @ 20e02d4 :arm
+	add     r12, r12, #0x2
+	subs    r12, r12, #1, 22 @ #0x400
+	bmi     branch_20e0470
+	beq     branch_20e0470
+	mov     r6, r12, lsl #20
+	cmn     r6, #1, 12 @ #0x100000
+	bmi     branch_20e0570
+	movs    r2, r0, lsl #21
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	orr     r1, lr, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	tst     r2, #2, 2 @ #0x80000000
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	movs    r2, r2, lsl #1
+	andeqs  r2, r0, #0x1
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	adds    r0, r0, #0x1
+	adc     r1, r1, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e033c
+
+.arm
+branch_20e033c: @ 20e033c :arm
+	bics    r12, r12, #2, 22 @ #0x800
+	beq     branch_20e0398
+	orrs    r6, r0, r1, lsl #1
+	bne     branch_20e0524
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r5, r4, lsl #21
+	beq     branch_20e0378
+	cmn     r5, #2, 12 @ #0x200000
+	bne     branch_20e0510
+	orrs    r5, r2, r3, lsl #1
+	beq     branch_20e0510
+	b       branch_20e0524
+@ 0x20e0378
+
+.arm
+branch_20e0378: @ 20e0378 :arm
+	orrs    r5, r3, r2
+	beq     branch_20e0538
+	b       branch_20e0510
+@ 0x20e0384
+
+.arm
+branch_20e0384: @ 20e0384 :arm
+	bics    r4, r4, #2, 22 @ #0x800
+	beq     branch_20e042c
+	orrs    r6, r2, r3, lsl #1
+	bne     branch_20e0524
+	b       branch_20e0510
+@ 0x20e0398
+
+.arm
+branch_20e0398: @ 20e0398 :arm
+	orrs    r6, r0, r1, lsl #1
+	beq     branch_20e0400
+	mov     r12, #0x1
+	cmp     r1, #0x0
+	bne     branch_20e03bc
+	sub     r12, r12, #0x20
+	movs    r1, r0
+	mov     r0, #0x0
+	bmi     branch_20e03d8
+.arm
+branch_20e03bc: @ 20e03bc :arm
+	clz     r6, r1
+	movs    r1, r1, lsl r6
+	rsb     r6, r6, #0x20
+	orr     r1, r1, r0, lsr r6
+	rsb     r6, r6, #0x20
+	mov     r0, r0, lsl r6
+	sub     r12, r12, r6
+.arm
+branch_20e03d8: @ 20e03d8 :arm
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r5, r4, lsl #21
+	cmnne   r5, #2, 12 @ #0x200000
+	beq     branch_20e0384
+	orr     r3, r3, #2, 2 @ #0x80000000
+	bic     r4, r4, #2, 22 @ #0x800
+	b       branch_20e0288
+@ 0x20e0400
+
+.arm
+branch_20e0400: @ 20e0400 :arm
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r5, r4, lsl #21
+	beq     branch_20e0584
+	cmn     r5, #2, 12 @ #0x200000
+	bne     branch_20e0584
+	orrs    r6, r2, r3, lsl #1
+	beq     branch_20e0538
+	b       branch_20e0524
+@ 0x20e042c
+
+.arm
+branch_20e042c: @ 20e042c :arm
+	orrs    r5, r2, r3, lsl #1
+	beq     branch_20e0584
+	mov     r4, #0x1
+	cmp     r3, #0x0
+	bne     branch_20e0450
+	sub     r4, r4, #0x20
+	movs    r3, r2
+	mov     r2, #0x0
+	bmi     branch_20e0288
+.arm
+branch_20e0450: @ 20e0450 :arm
+	clz     r6, r3
+	movs    r3, r3, lsl r6
+	rsb     r6, r6, #0x20
+	orr     r3, r3, r2, lsr r6
+	rsb     r6, r6, #0x20
+	mov     r2, r2, lsl r6
+	sub     r4, r4, r6
+	b       branch_20e0288
+@ 0x20e0470
+
+.arm
+branch_20e0470: @ 20e0470 :arm
+	cmn     r12, #0x34
+	beq     branch_20e0508
+	bmi     branch_20e0560
+	mov     r2, r1
+	mov     r3, r0
+	add     r4, r12, #0x34
+	cmp     r4, #0x20
+	movge   r2, r3
+	movge   r3, #0x0
+	subge   r4, r4, #0x20
+	rsb     r5, r4, #0x20
+	mov     r2, r2, lsl r4
+	orr     r2, r2, r3, lsr r5
+	movs    r3, r3, lsl r4
+	orrne   r2, r2, #0x1
+	rsb     r12, r12, #0xc
+	cmp     r12, #0x20
+	movge   r0, r1
+	movge   r1, #0x0
+	subge   r12, r12, #0x20
+	rsb     r4, r12, #0x20
+	mov     r0, r0, lsr r12
+	orr     r0, r0, r1, lsl r4
+	orr     r1, lr, r1, lsr r12
+	cmp     r2, #0x0
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	tst     r2, #2, 2 @ #0x80000000
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	movs    r2, r2, lsl #1
+	andeqs  r2, r0, #0x1
+	ldmeqfd sp!, {r4-r7,lr}
+	bxeq    lr
+	adds    r0, r0, #0x1
+	adc     r1, r1, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0508
+
+.arm
+branch_20e0508: @ 20e0508 :arm
+	orr     r0, r0, r1, lsl #1
+	b       branch_20e0548
+@ 0x20e0510
+
+.arm
+branch_20e0510: @ 20e0510 :arm
+	ldr     r1,  [pc, #0x7c] @ [0x20e0594] (=#0x7ff00000)
+	orr     r1, lr, r1
+	mov     r0, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0524
+
+.arm
+branch_20e0524: @ 20e0524 :arm
+	mov     r1, r3
+	mvn     r0, #0x0
+	bic     r1, r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0538
+
+.arm
+branch_20e0538: @ 20e0538 :arm
+	mvn     r0, #0x0
+	bic     r1, r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0548
+
+.arm
+branch_20e0548: @ 20e0548 :arm
+	movs    r2, r0
+	mov     r1, lr
+	mov     r0, #0x0
+	addne   r0, r0, #0x1
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0560
+
+.arm
+branch_20e0560: @ 20e0560 :arm
+	mov     r1, lr
+	mov     r0, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0570
+
+.arm
+branch_20e0570: @ 20e0570 :arm
+	ldr     r1,  [pc, #0x1c] @ [0x20e0594] (=#0x7ff00000)
+	orr     r1, lr, r1
+	mov     r0, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0584
+
+.arm
+branch_20e0584: @ 20e0584 :arm
+	mov     r1, lr
+	mov     r0, #0x0
+	ldmfd   sp!, {r4-r7,lr}
+	bx      lr
+@ 0x20e0594
+
+.word 0x7ff00000 @ 0x20e0594
+
+.incbin "./baserom/arm9.bin", 0xe0598, 0x20e074c - 0x20e0598
+
+
+.arm
+Function_20e074c: @ 20e074c :arm
+	stmfd   sp!, {r4,lr}
+	eors    r12, r1, r3
+	eormi   r3, r3, #2, 2 @ #0x80000000
+	bmi     branch_20dfc7c
+.arm
+branch_20e075c: @ 20e075c :arm
+	subs    r12, r0, r2
+	sbcs    lr, r1, r3
+	bcs     branch_20e077c
+	eor     lr, lr, #2, 2 @ #0x80000000
+	adds    r2, r2, r12
+	adc     r3, r3, lr
+	subs    r0, r0, r12
+	sbc     r1, r1, lr
+.arm
+branch_20e077c: @ 20e077c :arm
+	mov     lr, #2, 2 @ #0x80000000
+	mov     r12, r1, lsr #20
+	orr     r1, lr, r1, lsl #11
+	orr     r1, r1, r0, lsr #21
+	mov     r0, r0, lsl #11
+	movs    r4, r12, lsl #21
+	cmnne   r4, #2, 12 @ #0x200000
+	beq     branch_20e0980
+	mov     r4, r3, lsr #20
+	orr     r3, lr, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    lr, r4, lsl #21
+	beq     branch_20e09c8
+.arm
+branch_20e07b4: @ 20e07b4 :arm
+	subs    r4, r12, r4
+	beq     branch_20e085c
+	cmp     r4, #0x20
+	ble     branch_20e07f0
+	cmp     r4, #0x38
+	movge   r4, #0x3f
+	sub     r4, r4, #0x20
+	rsb     lr, r4, #0x20
+	orrs    lr, r2, r3, lsl lr
+	mov     r2, r3, lsr r4
+	orrne   r2, r2, #0x1
+	subs    r0, r0, r2
+	sbcs    r1, r1, #0x0
+	bmi     branch_20e0818
+	b       branch_20e0908
+@ 0x20e07f0
+
+.arm
+branch_20e07f0: @ 20e07f0 :arm
+	rsb     lr, r4, #0x20
+	movs    lr, r2, lsl lr
+	rsb     lr, r4, #0x20
+	mov     r2, r2, lsr r4
+	orr     r2, r2, r3, lsl lr
+	mov     r3, r3, lsr r4
+	orrne   r2, r2, #0x1
+	subs    r0, r0, r2
+	sbcs    r1, r1, r3
+	bpl     branch_20e0908
+.arm
+branch_20e0818: @ 20e0818 :arm
+	movs    r2, r0, lsl #21
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	mov     r1, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	tst     r2, #2, 2 @ #0x80000000
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	movs    r2, r2, lsl #1
+	andeqs  r2, r0, #0x1
+	ldmeqfd sp!, {r4,lr}
+	bxeq    lr
+	adds    r0, r0, #0x1
+	adc     r1, r1, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e085c
+
+.arm
+branch_20e085c: @ 20e085c :arm
+	subs    r0, r0, r2
+	sbc     r1, r1, r3
+	orrs    lr, r1, r0
+	beq     branch_20e0aec
+	mov     lr, r12, lsl #20
+	and     lr, lr, #2, 2 @ #0x80000000
+	bic     r12, r12, #2, 22 @ #0x800
+	cmp     r1, #0x0
+	bmi     branch_20e08e4
+	bne     branch_20e0894
+	sub     r12, r12, #0x20
+	movs    r1, r0
+	mov     r0, #0x0
+	bmi     branch_20e08b0
+.arm
+branch_20e0894: @ 20e0894 :arm
+	clz     r4, r1
+	movs    r1, r1, lsl r4
+	rsb     r4, r4, #0x20
+	orr     r1, r1, r0, lsr r4
+	rsb     r4, r4, #0x20
+	mov     r0, r0, lsl r4
+	sub     r12, r12, r4
+.arm
+branch_20e08b0: @ 20e08b0 :arm
+	cmp     r12, #0x0
+	bgt     branch_20e08ec
+	rsb     r12, r12, #0xc
+	cmp     r12, #0x20
+	movge   r0, r1
+	movge   r1, #0x0
+	subge   r12, r12, #0x20
+	rsb     r4, r12, #0x20
+	mov     r0, r0, lsr r12
+	orr     r0, r0, r1, lsl r4
+	orr     r1, lr, r1, lsr r12
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e08e4
+
+.arm
+branch_20e08e4: @ 20e08e4 :arm
+	cmp     r1, #0x0
+	subges  r12, r12, #0x1
+.arm
+branch_20e08ec: @ 20e08ec :arm
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	orr     r1, lr, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0908
+
+.arm
+branch_20e0908: @ 20e0908 :arm
+	mov     lr, r12, lsl #20
+	and     lr, lr, #2, 2 @ #0x80000000
+	bic     r12, r12, #2, 22 @ #0x800
+	cmp     r1, #0x0
+	bne     branch_20e092c
+	sub     r12, r12, #0x20
+	movs    r1, r0
+	mov     r0, #0x0
+	bmi     branch_20e0948
+.arm
+branch_20e092c: @ 20e092c :arm
+	clz     r4, r1
+	movs    r1, r1, lsl r4
+	rsb     r4, r4, #0x20
+	orr     r1, r1, r0, lsr r4
+	rsb     r4, r4, #0x20
+	mov     r0, r0, lsl r4
+	sub     r12, r12, r4
+.arm
+branch_20e0948: @ 20e0948 :arm
+	cmp     r12, #0x0
+	orrgt   r12, r12, lr, lsr #20
+	bgt     branch_20e0818
+	rsb     r12, r12, #0xc
+	cmp     r12, #0x20
+	movge   r0, r1
+	movge   r1, #0x0
+	subge   r12, r12, #0x20
+	rsb     r4, r12, #0x20
+	mov     r0, r0, lsr r12
+	orr     r0, r0, r1, lsl r4
+	orr     r1, lr, r1, lsr r12
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0980
+
+.arm
+branch_20e0980: @ 20e0980 :arm
+	cmp     r12, #2, 22 @ #0x800
+	movge   lr, #2, 2 @ #0x80000000
+	movlt   lr, #0x0
+	bics    r12, r12, #2, 22 @ #0x800
+	beq     branch_20e09ec
+	orrs    r4, r0, r1, lsl #1
+	bne     branch_20e0ac8
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r4, r4, lsl #21
+	beq     branch_20e0ab4
+	cmn     r4, #2, 12 @ #0x200000
+	bne     branch_20e0ab4
+	orrs    r4, r2, r3, lsl #1
+	beq     branch_20e0adc
+	b       branch_20e0ac8
+@ 0x20e09c8
+
+.arm
+branch_20e09c8: @ 20e09c8 :arm
+	cmp     r4, #2, 22 @ #0x800
+	movge   lr, #2, 2 @ #0x80000000
+	movlt   lr, #0x0
+	bic     r12, r12, #2, 22 @ #0x800
+	bics    r4, r4, #2, 22 @ #0x800
+	beq     branch_20e0a64
+	orrs    r4, r2, r3, lsl #1
+	bne     branch_20e0ac8
+	b       branch_20e0ab4
+@ 0x20e09ec
+
+.arm
+branch_20e09ec: @ 20e09ec :arm
+	orrs    r4, r0, r1, lsl #1
+	beq     branch_20e0a2c
+	mov     r12, #0x1
+	bic     r1, r1, #2, 2 @ #0x80000000
+	mov     r4, r3, lsr #20
+	mov     r3, r3, lsl #11
+	orr     r3, r3, r2, lsr #21
+	mov     r2, r2, lsl #11
+	movs    r4, r4, lsl #21
+	cmnne   r4, #2, 12 @ #0x200000
+	mov     r4, r4, lsr #21
+	orr     r4, r4, lr, lsr #20
+	beq     branch_20e09c8
+	orr     r3, r3, #2, 2 @ #0x80000000
+	orr     r12, r12, lr, lsr #20
+	b       branch_20e07b4
+@ 0x20e0a2c
+
+.arm
+branch_20e0a2c: @ 20e0a2c :arm
+	mov     r12, r3, lsr #20
+	mov     r1, r3, lsl #11
+	orr     r1, r1, r2, lsr #21
+	mov     r0, r2, lsl #11
+	movs    r4, r12, lsl #21
+	beq     branch_20e0a58
+	cmn     r4, #2, 12 @ #0x200000
+	bne     branch_20e0a80
+	orrs    r4, r0, r1, lsl #1
+	bne     branch_20e0acc
+	b       branch_20e0ab4
+@ 0x20e0a58
+
+.arm
+branch_20e0a58: @ 20e0a58 :arm
+	orrs    r4, r0, r1, lsl #1
+	beq     branch_20e0aec
+	b       branch_20e0a80
+@ 0x20e0a64
+
+.arm
+branch_20e0a64: @ 20e0a64 :arm
+	orrs    r4, r2, r3, lsl #1
+	beq     branch_20e0a90
+	mov     r4, #0x1
+	bic     r3, r3, #2, 2 @ #0x80000000
+	orr     r12, r12, lr, lsr #20
+	orr     r4, r4, lr, lsr #20
+	b       branch_20e07b4
+@ 0x20e0a80
+
+.arm
+branch_20e0a80: @ 20e0a80 :arm
+	mov     r1, r3
+	mov     r0, r2
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0a90
+
+.arm
+branch_20e0a90: @ 20e0a90 :arm
+	cmp     r1, #0x0
+	subges  r12, r12, #0x1
+	mov     r0, r0, lsr #11
+	orr     r0, r0, r1, lsl #21
+	add     r1, r1, r1
+	orr     r1, lr, r1, lsr #12
+	orr     r1, r1, r12, lsl #20
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0ab4
+
+.arm
+branch_20e0ab4: @ 20e0ab4 :arm
+	ldr     r1,  [pc, #0x40] @ [0x20e0afc] (=#0x7ff00000)
+	orr     r1, lr, r1
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0ac8
+
+.arm
+branch_20e0ac8: @ 20e0ac8 :arm
+	mov     r1, r3
+.arm
+branch_20e0acc: @ 20e0acc :arm
+	mvn     r0, #0x0
+	bic     r1, r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0adc
+
+.arm
+branch_20e0adc: @ 20e0adc :arm
+	mvn     r0, #0x0
+	bic     r1, r0, #2, 2 @ #0x80000000
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0aec
+
+.arm
+branch_20e0aec: @ 20e0aec :arm
+	mov     r1, #0x0
+	mov     r0, #0x0
+	ldmfd   sp!, {r4,lr}
+	bx      lr
+@ 0x20e0afc
+
+.word 0x7ff00000 @ 0x20e0afc
 
 
 .arm
@@ -156682,7 +163994,66 @@ branch_20e0d14: @ 20e0d14 :arm
 @ 0x20e0d1c
 
 
-.incbin "./baserom/arm9.bin", 0xe0d1c, 0x20e1108 - 0x20e0d1c
+.incbin "./baserom/arm9.bin", 0xe0d1c, 0x20e0f94 - 0x20e0d1c
+
+
+.arm
+Function_20e0f94: @ 20e0f94 :arm
+	mov     r12, #2, 12 @ #0x200000
+	cmn     r12, r1, lsl #1
+	bcs     branch_20e0ffc
+	cmn     r12, r3, lsl #1
+	bcs     branch_20e1010
+.arm
+branch_20e0fa8: @ 20e0fa8 :arm
+	orrs    r12, r3, r1
+	bmi     branch_20e0fd8
+	cmp     r1, r3
+	cmpeq   r0, r2
+	moveq   r0, #0x1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20e0fc4
+
+.arm
+branch_20e0fc4: @ 20e0fc4 :arm
+	mov     r0, #0x0
+	mrs     r12, CPSR
+	bic     r12, r12, #1, 2 @ #0x40000000
+	msr     CPSR_f, r12
+	bx      lr
+@ 0x20e0fd8
+
+.arm
+branch_20e0fd8: @ 20e0fd8 :arm
+	orr     r12, r0, r12, lsl #1
+	orrs    r12, r12, r2
+	moveq   r0, #0x1
+	bxeq    lr
+	cmp     r3, r1
+	cmpeq   r2, r0
+	moveq   r0, #0x1
+	movne   r0, #0x0
+	bx      lr
+@ 0x20e0ffc
+
+.arm
+branch_20e0ffc: @ 20e0ffc :arm
+	bne     branch_20e0fc4
+	cmp     r0, #0x0
+	bhi     branch_20e0fc4
+	cmn     r12, r3, lsl #1
+	bcc     branch_20e0fa8
+.arm
+branch_20e1010: @ 20e1010 :arm
+	bne     branch_20e0fc4
+	cmp     r2, #0x0
+	bhi     branch_20e0fc4
+	b       branch_20e0fa8
+@ 0x20e1020
+
+
+.incbin "./baserom/arm9.bin", 0xe1020, 0x20e1108 - 0x20e1020
 
 
 .arm
@@ -157632,6 +165003,7 @@ branch_20e1ec0: @ 20e1ec0 :arm
 @ 0x20e1ed4
 
 .arm
+.globl Function_20e1ed4
 Function_20e1ed4: @ 20e1ed4 :arm
 	stmfd   sp!, {r4-r7,r11,r12,lr}
 	mov     r4, #0x0
@@ -157639,9 +165011,10 @@ Function_20e1ed4: @ 20e1ed4 :arm
 @ 0x20e1ee0
 
 
-.incbin "./baserom/arm9.bin", 0xe1ee0, 0x20e1ee8 - 0x20e1ee0
-
-
+.arm
+Function_20e1ee0: @ 20e1ee0 :arm
+	stmfd   sp!, {r4-r7,r11,r12,lr}
+	mov     r4, #0x1
 .arm
 branch_20e1ee8: @ 20e1ee8 :arm
 	orrs    r5, r3, r2
@@ -157818,10 +165191,10 @@ branch_20e2164: @ 20e2164 :arm
 @ 0x20e2178
 
 .arm
+.globl Function_20e2178
 Function_20e2178: @ 20e2178 :arm
 	cmp     r1, #0x0
 	bxeq    lr
-.arm
 Function_20e2180: @ 20e2180 :arm
 	cmp     r0, r1
 	movcc   r1, r0
@@ -157980,7 +165353,44 @@ branch_20e4040: @ 20e4040 :arm
 .word 0x20feccc @ 0x20e4054
 
 
-.incbin "./baserom/arm9.bin", 0xe4058, 0x20e4c40 - 0x20e4058
+
+.arm
+Function_20e4058: @ 20e4058 :arm
+	stmfd   sp!, {r3-r5,lr}
+	ldr     r4,  [pc, #0x34] @ [0x20e4098] (=#0x21d0d68)
+	ldr     r2, [r4]
+	cmp     r2, #0x0
+	ldmeqfd sp!, {r3-r5,pc}
+	mvn     r5, #0x0
+.arm
+branch_20e4070: @ 20e4070 :arm
+	ldr     r0, [r2]
+	mov     r1, r5
+	str     r0, [r4]
+	ldr     r0, [r2, #0x8]
+	ldr     r2, [r2, #0x4]
+	blx     r2
+	ldr     r2, [r4]
+	cmp     r2, #0x0
+	bne     branch_20e4070
+	ldmfd   sp!, {r3-r5,pc}
+@ 0x20e4098
+
+.word 0x21d0d68 @ 0x20e4098
+
+.incbin "./baserom/arm9.bin", 0xe409c, 0x20e454c - 0x20e409c
+
+
+.arm
+Function_20e454c: @ 20e454c :arm
+	ldr     r12,  [pc, #0x0] @ [0x20e4554] (=#0x20e28e4)
+	bx      r12
+@ 0x20e4554
+
+.word 0x20e28e4 @ 0x20e4554
+@ 0x20e4558
+
+.incbin "./baserom/arm9.bin", 0xe4558, 0x20e4c40 - 0x20e4558
 
 
 Unknown_20e4c40:
@@ -158830,12 +166240,280 @@ Unknown_20e4c40:
 
 .incbin "./baserom/arm9.bin", 0xeb978, 0x20fe55c - 0x20eb978
 
-.incbin "./baserom/arm9.bin", 0xfe55c, 0x20ff320 - 0x20fe55c
+.incbin "./baserom/arm9.bin", 0xfe55c, 0x20fece0 - 0x20fe55c
 
 
-.incbin "./baserom/arm9.bin", 0xff320, 0x2100f3c - 0x20ff320
+Unknown_20fece0:
+/*.ascii "data/sound/pl_sound_data.sdat\0\0\0"*/
+.asciz "data/sound/pl_sound_data.sdat"
+.align 2, 0
+.ascii "arc/tv.narc\0"
+.ascii "arc/ppark.narc\0\0"
+.ascii "data/slot.narc\0\0"
+.ascii "arc/manene.narc\0"
+.ascii "data/guru2.narc\0"
+.ascii "graphic/box.narc\0\0\0\0"
+.ascii "data/namein.narc\0\0\0\0"
+.ascii "data/ug_trap.narc\0\0\0"
+.ascii "graphic/pmsi.narc\0\0\0"
+.ascii "wazaeffect/we.arc\0\0\0"
+.ascii "data/ug_anim.narc\0\0\0"
+.ascii "arc/bm_anime.narc\0\0\0"
+.ascii "arc/ship_demo.narc\0\0"
+.ascii "data/ug_parts.narc\0\0"
+.ascii "arc/email_gra.narc\0\0"
+.ascii "data/tradelist.narc\0"
+.ascii "graphic/oekaki.narc\0"
+.ascii "data/fldtanime.narc\0"
+.ascii "msgdata/pl_msg.narc\0"
+.ascii "graphic/record.narc\0"
+.ascii "data/arealight.narc\0"
+.ascii "data/ug_fossil.narc\0"
+.ascii "graphic/mysign.narc\0"
+.ascii "graphic/bucket.narc\0"
+.ascii "arc/encdata_ex.narc\0"
+.ascii "graphic/btower.narc\0"
+.ascii "arc/codein_gra.narc\0"
+.ascii "graphic/ending.narc\0"
+.ascii "graphic/fontoam.narc\0\0\0\0"
+.ascii "graphic/poketch.narc\0\0\0\0"
+.ascii "graphic/mystery.narc\0\0\0\0"
+.ascii "graphic/opening.narc\0\0\0\0"
+.ascii "graphic/poruact.narc\0\0\0\0"
+.ascii "graphic/ranking.narc\0\0\0\0"
+.ascii "graphic/pl_font.narc\0\0\0\0"
+.ascii "data/tw_arc_etc.narc\0\0\0\0"
+.ascii "graphic/mail_gra.narc\0\0\0"
+.ascii "graphic/poru_gra.narc\0\0\0"
+.ascii "graphic/porudemo.narc\0\0\0"
+.ascii "graphic/ntag_gra.narc\0\0\0"
+.ascii "data/weather_sys.narc\0\0\0"
+.ascii "data/field_cutin.narc\0\0\0"
+.ascii "demo/intro/intro.narc\0\0\0"
+.ascii "graphic/tmap_gra.narc\0\0\0"
+.ascii "graphic/nutmixer.narc\0\0\0"
+.ascii "arc/area_win_gra.narc\0\0\0"
+.ascii "data/demo_climax.narc\0\0\0"
+.ascii "graphic/shop_gra.narc\0\0\0"
+.ascii "graphic/menu_gra.narc\0\0\0"
+.ascii "arc/ship_demo_pl.narc\0\0\0"
+.ascii "data/wifip2pmatch.narc\0\0"
+.ascii "data/underg_radar.narc\0\0"
+.ascii "arc/bm_anime_list.narc\0\0"
+.ascii "graphic/dendou_pc.narc\0\0"
+.ascii "graphic/unionroom.narc\0\0"
+.ascii "wazaeffect/we_sub.narc\0\0"
+.ascii "graphic/imageclip.narc\0\0"
+.ascii "graphic/library_tv.narc\0"
+.ascii "graphic/fld_comact.narc\0"
+.ascii "graphic/lobby_news.narc\0"
+.ascii "poketool/shinzukan.narc\0"
+.ascii "graphic/wifi_lobby.narc\0"
+.ascii "graphic/pl_bag_gra.narc\0"
+.ascii "graphic/worldtrade.narc\0"
+.ascii "graphic/f_note_gra.narc\0"
+.ascii "graphic/pl_pst_gra.narc\0"
+.ascii "data/mmodel/fldeff.narc\0"
+.ascii "demo/title/op_demo.narc\0"
+.ascii "data/mmodel/mmodel.narc\0"
+.ascii "data/ugroundeffect.narc\0"
+.ascii "graphic/config_gra.narc\0"
+Unknown_20ff320:
+.ascii "graphic/demo_trade.narc\0"
+.ascii "graphic/worldtimer.narc\0"
+.ascii "graphic/wifi2dchar.narc\0"
+.ascii "arc/demo_tengan_gra.narc\0\0\0\0"
+.ascii "graphic/pl_wifinote.narc\0\0\0\0"
+.ascii "graphic/pl_winframe.narc\0\0\0\0"
+.ascii "graphic/dendou_demo.narc\0\0\0\0"
+.ascii "demo/intro/intro_tv.narc\0\0\0\0"
+.ascii "battle/skill/be_seq.narc\0\0\0\0"
+.ascii "graphic/field_board.narc\0\0\0\0"
+.ascii "battle/b_tower/btdtr.narc\0\0\0"
+.ascii "battle/b_tower/btdpm.narc\0\0\0"
+.ascii "demo/title/titledemo.narc\0\0\0"
+.ascii "debug/cb_edit/d_test.narc\0\0\0"
+.ascii "graphic/hiden_effect.narc\0\0\0"
+.ascii "graphic/pl_plist_gra.narc\0\0\0"
+.ascii "poketool/trmsg/trtbl.narc\0\0\0"
+.ascii "battle/skill/sub_seq.narc\0\0\0"
+.ascii "graphic/trainer_case.narc\0\0\0"
+.ascii "poketool/trgra/trbgra.narc\0\0"
+.ascii "graphic/ev_pokeselect.narc\0\0"
+.ascii "pokeanime/pl_poke_anm.narc\0\0"
+.ascii "battle/skill/waza_seq.narc\0\0"
+.ascii "poketool/personal/evo.narc\0\0"
+.ascii "graphic/wifi_unionobj.narc\0\0"
+.ascii "poketool/pl_pokezukan.narc\0\0"
+.ascii "poketool/trgra/trfgra.narc\0\0"
+.ascii "graphic/waza_oshie_gra.narc\0"
+.ascii "battle/tr_ai/tr_ai_seq.narc\0"
+.ascii "demo/egg/data/egg_data.narc\0"
+.ascii "demo/syoujyou/syoujyou.narc\0"
+.ascii "poketool/trmsg/trtblofs.narc\0\0\0\0"
+.ascii "graphic/touch_subwindow.narc\0\0\0\0"
+.ascii "poketool/pokegra/height.narc\0\0\0\0"
+.ascii "poketool/personal/wotbl.narc\0\0\0\0"
+.ascii "graphic/footprint_board.narc\0\0\0\0"
+.ascii "poketool/trainer/trdata.narc\0\0\0\0"
+.ascii "poketool/trainer/trpoke.narc\0\0\0\0"
+.ascii "resource/eng/zukan/zukan.narc\0\0\0"
+.ascii "poketool/pokegra/pokegra.narc\0\0\0"
+.ascii "battle/graphic/b_bag_gra.narc\0\0\0"
+.ascii "msgdata/scenario/scr_msg.narc\0\0\0"
+.ascii "fielddata/script/scr_seq.narc\0\0\0"
+.ascii "graphic/wifi_lobby_other.narc\0\0\0"
+.ascii "contest/data/contest_data.narc\0\0"
+.ascii "battle/graphic/pl_batt_bg.narc\0\0"
+.ascii "frontier/script/fr_script.narc\0\0"
+.ascii "poketool/waza/pl_waza_tbl.narc\0\0"
+.ascii "poketool/pokegra/height_o.narc\0\0"
+.ascii "data/ugeffect_obj_graphic.narc\0\0"
+.ascii "particledata/particledata.narc\0\0"
+.ascii "poketool/pokefoot/pokefoot.narc\0"
+.ascii "fielddata/tornworld/tw_arc.narc\0"
+.ascii "poketool/pokegra/otherpoke.narc\0"
+.ascii "poketool/pokegra/poke_yofs.narc\0"
+.ascii "poketool/pokegra/dp_height.narc\0"
+.ascii "battle/graphic/vs_demo_gra.narc\0"
+.ascii "battle/graphic/pl_batt_obj.narc\0"
+.ascii "contest/graphic/contest_bg.narc\0"
+.ascii "battle/b_pl_tower/pl_btdtr.narc\0"
+.ascii "battle/b_pl_tower/pl_btdpm.narc\0"
+.ascii "battle/b_pl_stage/pl_bsdpm.narc\0"
+.ascii "itemtool/itemdata/item_icon.narc\0\0\0\0"
+.ascii "graphic/field_encounteffect.narc\0\0\0\0"
+.ascii "poketool/pokeanm/pl_pokeanm.narc\0\0\0\0"
+.ascii "poketool/pokegra/pl_pokegra.narc\0\0\0\0"
+.ascii "contest/graphic/contest_obj.narc\0\0\0\0"
+.ascii "itemtool/itemdata/nuts_data.narc\0\0\0\0"
+.ascii "poketool/pokegra/dp_height_o.narc\0\0\0"
+.ascii "poketool/pokegra/poke_shadow.narc\0\0\0"
+.ascii "resource/eng/scratch/scratch.narc\0\0\0"
+.ascii "poketool/personal/pl_growtbl.narc\0\0\0"
+.ascii "fielddata/areadata/area_data.narc\0\0\0"
+.ascii "graphic/unionobj2d_onlyfront.narc\0\0\0"
+.ascii "battle/graphic/pl_b_plist_gra.narc\0\0"
+.ascii "poketool/personal/pl_personal.narc\0\0"
+.ascii "poketool/icongra/pl_poke_icon.narc\0\0"
+.ascii "wazaeffect/effectclact/wechar.narc\0\0"
+.ascii "wazaeffect/effectclact/wepltt.narc\0\0"
+.ascii "wazaeffect/effectclact/wecell.narc\0\0"
+.ascii "poketool/pokegra/pl_otherpoke.narc\0\0"
+.ascii "fielddata/land_data/land_data.narc\0\0"
+.ascii "itemtool/itemdata/pl_item_data.narc\0"
+.ascii "fielddata/eventdata/zone_event.narc\0"
+.ascii "fielddata/mapmatrix/map_matrix.narc\0"
+.ascii "fielddata/tornworld/tw_arc_attr.narc\0\0\0\0"
+.ascii "poketool/poke_edit/pl_poke_data.narc\0\0\0\0"
+.ascii "application/bucket/ballslow_data.narc\0\0\0"
+.ascii "fielddata/encountdata/p_enc_data.narc\0\0\0"
+.ascii "poketool/pokegra/poke_shadow_ofx.narc\0\0\0"
+.ascii "wazaeffect/effectclact/wecellanm.narc\0\0\0"
+.ascii "fielddata/encountdata/d_enc_data.narc\0\0\0"
+.ascii "fielddata/mm_list/move_model_list.narc\0\0"
+.ascii "fielddata/pokemon_trade/fld_trade.narc\0\0"
+.ascii "fielddata/build_model/build_model.narc\0\0"
+.ascii "fielddata/encountdata/pl_enc_data.narc\0\0"
+.ascii "application/wifi_earth/wifi_earth.narc\0\0"
+.ascii "wazaeffect/pt_debug/debug_particle.narc\0"
+.ascii "resource/eng/batt_rec/batt_rec_gra.narc\0"
+.ascii "wazaeffect/effectdata/ball_particle.narc\0\0\0\0"
+.ascii "particledata/pl_etc/pl_etc_particle.narc\0\0\0\0"
+.ascii "wazaeffect/effectdata/waza_particle.narc\0\0\0\0"
+.ascii "application/custom_ball/data/cb_data.narc\0\0\0"
+.ascii "resource/eng/pms_aikotoba/pms_aikotoba.narc\0"
+.ascii "application/wifi_earth/wifi_earth_place.narc\0\0\0\0"
+.ascii "application/balloon/graphic/balloon_gra.narc\0\0\0\0"
+.ascii "application/custom_ball/edit/pl_cb_data.narc\0\0\0\0"
+.ascii "demo/egg/data/particle/egg_demo_particle.narc\0\0\0"
+.ascii "application/zukanlist/zkn_data/zukan_data.narc\0\0"
+.ascii "resource/eng/frontier_graphic/frontier_bg.narc\0\0"
+.ascii "application/wifi_lobby/map_conv/wflby_map.narc\0\0"
+.ascii "resource/eng/frontier_graphic/frontier_obj.narc\0"
+.ascii "particledata/pl_pokelist/pokelist_particle.narc\0"
+.ascii "particledata/pl_frontier/frontier_particle.narc\0"
+.ascii "fielddata/areadata/area_map_tex/map_tex_set.narc\0\0\0\0"
+.ascii "resource/eng/wifi_lobby_minigame/wlmngm_tool.narc\0\0\0"
+.ascii "application/zukanlist/zkn_data/zukan_enc_pearl.narc\0"
+.ascii "fielddata/areadata/area_build_model/area_build.narc\0"
+.ascii "demo/shinka/data/particle/shinka_demo_particle.narc\0"
+.ascii "application/zukanlist/zkn_data/zukan_data_gira.narc\0"
+.ascii "application/zukanlist/zkn_data/zukan_enc_diamond.narc\0\0\0"
+.ascii "fielddata/areadata/area_build_model/areabm_texset.narc\0\0"
+.ascii "application/zukanlist/zkn_data/zukan_enc_platinum.narc\0\0"
+.ascii "fielddata/areadata/area_move_model/move_model_list.narc\0"
 
 
+.incbin "./baserom/arm9.bin", 0x100498, 0x2100848 - 0x2100498
+
+
+
+Unknown_2100848:
+.asciz "data/clact_default.NANR"
+.align 2, 0
+
+
+.incbin "./baserom/arm9.bin", 0x100860, 0x2100a4c - 0x2100860
+
+
+
+Unknown_2100a4c:
+.asciz "data/pl_wm.NCLR"
+.align 2, 0
+.asciz "data/pl_wifi.NCGR"
+.align 2, 0
+.asciz "data/pl_wm.NCGR"
+.align 2, 0
+
+
+.incbin "./baserom/arm9.bin", 0x100a80, 0x2100b90 - 0x2100a80
+
+
+Unknown_2100b90:
+.ascii "data/tmap_flags.dat\0"
+
+
+.incbin "./baserom/arm9.bin", 0x100ba4, 0x2100bb0 - 0x2100ba4
+
+
+
+Unknown_2100bb0:
+.asciz "poketool/personal/pms.narc"
+.align 2, 0
+.asciz "data/plist_h.cldat"
+.align 2, 0
+.asciz "data/plist_pal.resdat"
+.align 2, 0
+.asciz "data/plist_chr.resdat"
+.align 2, 0
+.asciz "data/plist_cell.resdat"
+.align 2, 0
+.asciz "data/plist_canm.resdat"
+.align 2, 0
+
+
+.incbin "./baserom/arm9.bin", 0x100c40, 0x2100d0c - 0x2100c40
+
+
+Unknown_100d0c:
+.asciz "data/pst_h.cldat"
+.align 2, 0
+.asciz "data/pst_pal.resdat"
+.align 2, 0
+.asciz "data/pst_chr.resdat"
+.align 2, 0
+.asciz "data/pst_cell.resdat"
+.align 2, 0
+.asciz "data/pst_canm.resdat"
+.align 2, 0
+
+
+.incbin "./baserom/arm9.bin", 0x100d78, 0x2100f3c - 0x2100d78
+
+
+
+Unknown_2100f3c:
 .word Function_20b5f28 @ =0x20b5f28, 0x2100f3c
 .word Function_20b5fe4 @ =0x20b5fe4, 0x2100f40
 .word Function_20b67dc @ =0x20b67dc, 0x2100f44
@@ -158895,7 +166573,74 @@ Unknown_20e4c40:
 .word Function_20b77f0 @ =0x20b77f0, 0x2101140
 
 Unknown_2101144:
-.incbin "./baserom/arm9.bin", 0x101144, 0x2101d20 - 0x2101144
+.incbin "./baserom/arm9.bin", 0x101144, 0x2101574 - 0x2101144
+
+
+Unknown_2101574:
+.ascii "Assertion (%s) failed in \"%s\", function \"%s\", line %d"
+
+
+.incbin "./baserom/arm9.bin", 0x1015a9, 0x21015c0 - 0x21015a9
+
+
+Unknown_21015c0:
+.asciz "%T"
+.align 2, 0
+
+Unknown_21015c4:
+.asciz "AM|PM"
+.align 2, 0
+
+Unknown_21015cc:
+
+
+.incbin "./baserom/arm9.bin", 0x1015cc, 0x21015e0 - 0x21015cc
+
+
+Unknown_21015e0:
+.word 0x02101604, 0x021015c4, 0x021016e8, 0x021016dc
+.word 0x021016c4, 0x021015c0, 0x021016f8, 0x02101750
+.word 0x021015bc
+
+
+.incbin "./baserom/arm9.bin", 0x101604, 0x21016c4 - 0x2101604
+
+
+Unknown_21016c4:
+.asciz "%m/%d/%y"
+.align 2, 0
+
+.word 0x021015e4, 0x021015d4, 0x021015cc
+
+.asciz "%I:%M:%S %p"
+.align 2, 0
+.asciz "%a %b %e %T %Y"
+.align 2, 0
+.asciz "Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday"
+.align 2, 0
+.asciz "Jan|January|Feb|February|Mar|March|Apr|April|May|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December"
+.align 2, 0
+.asciz "0x0p0"
+.align 2, 0
+.asciz "-INF"
+.align 2, 0
+.asciz "-inf"
+.align 2, 0
+.asciz "INF"
+.align 2, 0
+.asciz "inf"
+.align 2, 0
+.asciz "-NAN"
+.align 2, 0
+.asciz "-nan"
+.align 2, 0
+.asciz "NAN"
+.align 2, 0
+.asciz "nan"
+.align 2, 0
+
+
+.incbin "./baserom/arm9.bin", 0x101810, 0x2101d20 - 0x2101810
 
 
 Unknown_2101d20:
@@ -158930,9 +166675,5 @@ Unknown_2101d20:
 .incbin "./baserom/arm9.bin", 0x1023d8, 0x2102404 - 0x21023d8
 
 
-@end 0x2102403
-/*
-.section text2
-    bl 0x2000020
-*/
+@end 0x2102404
 

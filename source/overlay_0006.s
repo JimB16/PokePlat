@@ -44,7 +44,7 @@ branch_223e196: @ 223e196 :thumb
 
 .thumb
 Function_223e234: @ 223e234 :thumb
-	ldr     r3, [pc, #0x8] @ 0x223e240, (=#0x200da3d)
+	ldr     r3, [pc, #0x8] @ 0x223e240, (=Function_200da3c+1)
 	mov     r2, #0x1
 	mov     r1, r0
 	ldr     r0, [pc, #0x8] @ 0x223e244, (=#0x223e25d)
@@ -52,7 +52,7 @@ Function_223e234: @ 223e234 :thumb
 	bx      r3
 @ 0x223e240
 
-.word 0x200da3d @ 0x223e240
+.word Function_200da3c+1 @ 0x223e240
 .word 0x223e25d @ 0x223e244
 
 .incbin "./baserom/overlay/overlay_0006.bin", 0x108, 0x2243258 - 0x223e248
@@ -448,7 +448,7 @@ branch_224350e: @ 224350e :thumb
 	blt     branch_22434d2
 .thumb
 branch_2243516: @ 2243516 :thumb
-	bl      0x2022974
+	bl      Function_2022974
 	add     sp, #0x14
 	pop     {r4-r7,pc}
 @ 0x224351e
@@ -489,7 +489,7 @@ branch_2243546: @ 2243546 :thumb
 	blt     branch_2243534
 .thumb
 branch_224354e: @ 224354e :thumb
-	bl      0x2022974
+	bl      Function_2022974
 	pop     {r4-r6,pc}
 @ 0x2243554
 
@@ -870,7 +870,7 @@ branch_224375a: @ 224375a :thumb
 	bl      Function_2021b90
 	mov     r4, r0
 	bne     branch_22437c2
-	bl      0x2022974
+	bl      Function_2022974
 .thumb
 branch_22437c2: @ 22437c2 :thumb
 	mov     r0, r4
@@ -945,6 +945,9 @@ Function_22437dc: @ 22437dc :thumb
 
 
 .word 0x224918c @ 0x2243844
+
+
+
 .thumb
 Function_2243848: @ 2243848 :thumb
 	push    {r3,r4,lr}
@@ -1011,6 +1014,9 @@ Function_2243888: @ 2243888 :thumb
 
 
 .word 0x224925c @ 0x22438b8
+
+
+
 .thumb
 Function_22438bc: @ 22438bc :thumb
 	push    {r3,lr}
@@ -1075,7 +1081,7 @@ branch_224390a: @ 224390a :thumb
 
 .thumb
 Function_2243914: @ 2243914 :thumb
-	ldr     r3, [pc, #0x4] @ 0x224391c, (=#0x2021bd5)
+	ldr     r3, [pc, #0x4] @ 0x224391c, (=Function_2021bd4+1)
 	ldr     r0, [r1, #0x68]
 	bx      r3
 @ 0x224391a
@@ -1084,7 +1090,10 @@ Function_2243914: @ 2243914 :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0x57da, 0x224391c - 0x224391a
 
 
-.word 0x2021bd5 @ 0x224391c
+.word Function_2021bd4+1 @ 0x224391c
+
+
+
 .thumb
 Function_2243920: @ 2243920 :thumb
 	push    {r3-r5,lr}
@@ -1273,6 +1282,9 @@ Function_2243950: @ 2243950 :thumb
 .word 0x15e000 @ 0x2243aac
 .word 0xfff88000 @ 0x2243ab0
 .word 0x22491c8 @ 0x2243ab4
+
+
+
 .thumb
 Function_2243ab8: @ 2243ab8 :thumb
 	push    {r3-r6,lr}
@@ -1696,6 +1708,9 @@ branch_2243d12: @ 2243d12 :thumb
 .word 0x2249174 @ 0x2243db4
 .word 0x2249180 @ 0x2243db8
 .word 0x13b000 @ 0x2243dbc
+
+
+
 .thumb
 Function_2243dc0: @ 2243dc0 :thumb
 	push    {r4,r5,lr}
@@ -1843,6 +1858,9 @@ branch_2243ec0: @ 2243ec0 :thumb
 
 
 .word 0x13b @ 0x2243ec8
+
+
+
 .thumb
 Function_2243ecc: @ 2243ecc :thumb
 	push    {r4,lr}
@@ -1933,6 +1951,9 @@ Function_2243f2c: @ 2243f2c :thumb
 
 
 .word 0x7fff @ 0x2243f4c
+
+
+
 .thumb
 Function_2243f50: @ 2243f50 :thumb
 	push    {lr}
@@ -1953,6 +1974,9 @@ Function_2243f50: @ 2243f50 :thumb
 @ 0x2243f70
 
 .word 0x7fff @ 0x2243f70
+
+
+
 .thumb
 Function_2243f74: @ 2243f74 :thumb
 	push    {r4,lr}
@@ -1965,7 +1989,93 @@ Function_2243f74: @ 2243f74 :thumb
 @ 0x2243f86
 
 
-.incbin "./baserom/overlay/overlay_0006.bin", 0x5e46, 0x2244038 - 0x2243f86
+.incbin "./baserom/overlay/overlay_0006.bin", 0x5e46, 0x2243f88 - 0x2243f86
+
+
+.thumb
+Function_2243f88: @ 2243f88 :thumb
+	push    {r4-r6,lr}
+	mov     r5, r1
+	mov     r4, r2
+	mov     r6, r3
+	bl      Function_2243fdc
+	mov     r1, r0
+	str     r4, [r1, #0x5c]
+	str     r6, [r1, #0xc]
+	str     r5, [r1, #0x20]
+	cmp     r5, #0x0
+	bne     branch_2243faa
+	ldr     r0, [pc, #0x10] @ 0x2243fb4, (=#0x2244005)
+	mov     r2, #0x85
+	bl      Function_200d9e8
+	pop     {r4-r6,pc}
+@ 0x2243faa
+
+.thumb
+branch_2243faa: @ 2243faa :thumb
+	ldr     r0, [pc, #0xc] @ 0x2243fb8, (=#0x22443b9)
+	mov     r2, #0x85
+	bl      Function_200d9e8
+	pop     {r4-r6,pc}
+@ 0x2243fb4
+
+.word 0x2244005 @ 0x2243fb4
+.word 0x22443b9 @ 0x2243fb8
+
+
+
+.thumb
+Function_2243fbc: @ 2243fbc :thumb
+	push    {r3,lr}
+	bl      Function_201ced0
+	ldr     r0, [r0, #0x4]
+	pop     {r3,pc}
+@ 0x2243fc6
+
+
+.align 2, 0
+
+
+.thumb
+Function_2243fc8: @ 2243fc8 :thumb
+	push    {r4,lr}
+	mov     r4, r0
+	bl      Function_201ced0
+	bl      Function_2243ffc
+	mov     r0, r4
+	bl      Function_200da58
+	pop     {r4,pc}
+@ 0x2243fdc
+
+.thumb
+Function_2243fdc: @ 2243fdc :thumb
+	push    {r3-r5,lr}
+	mov     r1, #0x87
+	mov     r5, r0
+	mov     r0, #0x4
+	lsl     r1, r1, #2
+	bl      Function_2018184
+	mov     r2, #0x87
+	mov     r1, #0x0
+	lsl     r2, r2, #2
+	mov     r4, r0
+	blx 0x20d5126
+	str     r5, [r4, #0x60]
+	mov     r0, r4
+	pop     {r3-r5,pc}
+@ 0x2243ffc
+
+.thumb
+Function_2243ffc: @ 2243ffc :thumb
+	ldr     r3, [pc, #0x0] @ 0x2244000, (=Function_20181c4+1)
+	bx      r3
+@ 0x2244000
+
+.word Function_20181c4+1 @ 0x2244000
+
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x5ec4, 0x2244038 - 0x2244004
 
 
 .thumb
@@ -2040,6 +2150,9 @@ branch_2244066: @ 2244066 :thumb
 
 .word 0x2249120 @ 0x22440b8
 .word 0x22491e0 @ 0x22440bc
+
+
+
 .thumb
 Function_22440c0: @ 22440c0 :thumb
 	push    {r4,lr}
@@ -2070,6 +2183,9 @@ Function_22440c0: @ 22440c0 :thumb
 @ 0x22440f4
 
 .word 0xfffc0000 @ 0x22440f4
+
+
+
 .thumb
 Function_22440f8: @ 22440f8 :thumb
 	push    {r3,r4,lr}
@@ -2207,6 +2323,9 @@ branch_22441d4: @ 22441d4 :thumb
 @ 0x22441d8
 
 .word 0xfffc0000 @ 0x22441d8
+
+
+
 .thumb
 Function_22441dc: @ 22441dc :thumb
 	push    {r3,r4,lr}
@@ -2270,7 +2389,7 @@ Function_2244228: @ 2244228 :thumb
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
 	ldr     r0, [r4, #0x5c]
-	bl      0x2077e3c
+	bl      Function_2077e3c
 .thumb
 branch_224424c: @ 224424c :thumb
 	mov     r0, #0x7a
@@ -2303,6 +2422,9 @@ branch_224424c: @ 224424c :thumb
 
 
 .word 0xffffe000 @ 0x2244280
+
+
+
 .thumb
 Function_2244284: @ 2244284 :thumb
 	ldr     r1, [r0, #0x8]
@@ -2381,6 +2503,9 @@ branch_22442f8: @ 22442f8 :thumb
 
 .word 0xfffc0000 @ 0x2244300
 .word 0xfffd8000 @ 0x2244304
+
+
+
 .thumb
 Function_2244308: @ 2244308 :thumb
 	push    {r3,r4,lr}
@@ -2554,6 +2679,9 @@ branch_2244402: @ 2244402 :thumb
 
 .word 0x22491d4 @ 0x2244454
 .word 0x224912c @ 0x2244458
+
+
+
 .thumb
 Function_224445c: @ 224445c :thumb
 	push    {r4,lr}
@@ -2715,6 +2843,9 @@ branch_2244528: @ 2244528 :thumb
 
 
 .word 0x649 @ 0x2244544
+
+
+
 .thumb
 Function_2244548: @ 2244548 :thumb
 	push    {r3,r4,lr}
@@ -2885,7 +3016,7 @@ Function_224464c: @ 224464c :thumb
 	ldr     r0, [pc, #0x10] @ 0x2244670, (=#0x22446b9)
 	mov     r1, r4
 	mov     r2, #0x80
-	bl      0x200da04
+	bl      Function_200da04
 	mov     r1, #0x85
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -3548,7 +3679,7 @@ branch_2244ca2: @ 2244ca2 :thumb
 	bl      Function_2021b90
 	mov     r4, r0
 	bne     branch_2244cce
-	bl      0x2022974
+	bl      Function_2022974
 .thumb
 branch_2244cce: @ 2244cce :thumb
 	mov     r0, r4
@@ -4434,7 +4565,7 @@ Function_2245480: @ 2245480 :thumb
 	ldr     r0, [r5, #0x60]
 	cmp     r0, #0x0
 	beq     branch_224549a
-	bl      0x207136c
+	bl      Function_207136c
 .thumb
 branch_224549a: @ 224549a :thumb
 	ldr     r0, [r5, #0x64]
@@ -5665,7 +5796,614 @@ branch_2246032: @ 2246032 :thumb
 @ 0x2246034
 
 
-.incbin "./baserom/overlay/overlay_0006.bin", 0x7ef4, 0x22480bc - 0x2246034
+.incbin "./baserom/overlay/overlay_0006.bin", 0x7ef4, 0x2246a30 - 0x2246034
+
+
+.thumb
+Function_2246a30: @ 2246a30 :thumb
+	mov     r0, #0x1
+	bx      lr
+@ 0x2246a34
+
+.thumb
+Function_2246a34: @ 2246a34 :thumb
+	mov     r0, #0x0
+	bx      lr
+@ 0x2246a38
+
+.thumb
+Function_2246a38: @ 2246a38 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, #0x7
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246a4a
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246a4c: @ 2246a4c :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, r1
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246a5e
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246a60: @ 2246a60 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, #0x9
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246a72
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246a74: @ 2246a74 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, #0xa
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246a86
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246a88: @ 2246a88 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, #0xb
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246a9a
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246a9c: @ 2246a9c :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	mov     r1, #0x2
+	mov     r2, #0x11
+	bl      Function_206af3c
+	pop     {r3,pc}
+@ 0x2246aae
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246ab0: @ 2246ab0 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_2025e38
+	bl      Function_2025f58
+	cmp     r0, #0x5
+	blt     branch_2246ac4
+	mov     r0, #0x1
+	pop     {r3,pc}
+@ 0x2246ac4
+
+.thumb
+branch_2246ac4: @ 2246ac4 :thumb
+	mov     r0, #0x0
+	pop     {r3,pc}
+@ 0x2246ac8
+
+.thumb
+Function_2246ac8: @ 2246ac8 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_2027560
+	bl      Function_2026f0c
+	pop     {r3,pc}
+@ 0x2246ad6
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246ad8: @ 2246ad8 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_2027560
+	bl      Function_2027520
+	pop     {r3,pc}
+@ 0x2246ae6
+
+
+.align 2, 0
+
+
+.thumb
+Function_2246ae8: @ 2246ae8 :thumb
+	push    {r3,lr}
+	ldr     r0, [r0, #0xc]
+	bl      Function_20507e4
+	bl      Function_206a954
+	pop     {r3,pc}
+@ 0x2246af6
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x89b6, 0x224715c - 0x2246af6
+
+
+.thumb
+Function_224715c: @ 224715c :thumb
+	push    {r4,lr}
+	mov     r0, r1
+	mov     r1, #0x4
+	mov     r4, r2
+	bl      0x21f0eb0 @ Function_5_21f0eb0
+	ldr     r2, [pc, #0x44] @ 0x22471b0, (=#0xfff6a000)
+	str     r0, [r4, #0x14]
+	mov     r1, #0x1
+	mov     r3, #0xf
+	bl      0x21f0f10 @ Function_5_21f0f10
+	ldr     r0, [r4, #0x18]
+	ldr     r1, [pc, #0x3c] @ 0x22471b4, (=#0x2249608)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x0
+	beq     branch_2247194
+	cmp     r0, #0x1
+	beq     branch_224719c
+	cmp     r0, #0x2
+	beq     branch_22471a4
+	b       branch_22471aa
+@ 0x2247194
+
+.thumb
+branch_2247194: @ 2247194 :thumb
+	ldr     r0, [pc, #0x20] @ 0x22471b8, (=#0x603)
+	bl      Function_2005748
+	b       branch_22471aa
+@ 0x224719c
+
+.thumb
+branch_224719c: @ 224719c :thumb
+	ldr     r0, [pc, #0x18] @ 0x22471b8, (=#0x603)
+	bl      Function_2005748
+	b       branch_22471aa
+@ 0x22471a4
+
+.thumb
+branch_22471a4: @ 22471a4 :thumb
+	ldr     r0, [pc, #0x14] @ 0x22471bc, (=#0x64e)
+	bl      Function_2005748
+.thumb
+branch_22471aa: @ 22471aa :thumb
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x22471ae
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x906e, 0x22471b0 - 0x22471ae
+
+
+.word 0xfff6a000 @ 0x22471b0
+.word 0x2249608 @ 0x22471b4
+.word 0x603 @ 0x22471b8
+.word 0x64e @ 0x22471bc
+.thumb
+Function_22471c0: @ 22471c0 :thumb
+	push    {r3,r4,lr}
+	add     sp, #-0xc
+	mov     r4, r2
+	ldr     r0, [r4, #0xc]
+	bl      Function_206574c
+	cmp     r0, #0x0
+	bne     branch_22471d6
+	add     sp, #0xc
+	mov     r0, #0x0
+	pop     {r3,r4,pc}
+@ 0x22471d6
+
+.thumb
+branch_22471d6: @ 22471d6 :thumb
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	ldr     r0, [r4, #0x18]
+	ldr     r1, [pc, #0x5c] @ 0x224723c, (=#0x22495dc)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+	ldr     r0, [r4, #0x4]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x4]
+	cmp     r0, #0x8
+	bge     branch_22471f6
+	add     sp, #0xc
+	mov     r0, #0x0
+	pop     {r3,r4,pc}
+@ 0x22471f6
+
+.thumb
+branch_22471f6: @ 22471f6 :thumb
+	ldr     r0, [r4, #0x8]
+	cmp     r0, #0x2
+	bne     branch_2247216
+	mov     r0, #0x6
+	str     r0, [sp, #0x0]
+	mov     r0, #0x1
+	str     r0, [sp, #0x4]
+	mov     r0, #0x4
+	str     r0, [sp, #0x8]
+	mov     r0, #0x0
+	mov     r1, r0
+	mov     r2, r0
+	mov     r3, r0
+	bl      Function_200f174
+	b       branch_224722e
+@ 0x2247216
+
+.thumb
+branch_2247216: @ 2247216 :thumb
+	mov     r0, #0x6
+	str     r0, [sp, #0x0]
+	mov     r0, #0x1
+	str     r0, [sp, #0x4]
+	mov     r0, #0x4
+	str     r0, [sp, #0x8]
+	mov     r0, #0x0
+	ldr     r3, [pc, #0x18] @ 0x2247240, (=#0x7fff)
+	mov     r1, r0
+	mov     r2, r0
+	bl      Function_200f174
+.thumb
+branch_224722e: @ 224722e :thumb
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	add     sp, #0xc
+	pop     {r3,r4,pc}
+@ 0x224723a
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x90fa, 0x224723c - 0x224723a
+
+
+.word 0x22495dc @ 0x224723c
+.word 0x7fff @ 0x2247240
+.thumb
+Function_2247244: @ 2247244 :thumb
+	push    {r4,lr}
+	mov     r4, r2
+	ldr     r0, [r4, #0xc]
+	bl      Function_206574c
+	cmp     r0, #0x1
+	bne     branch_2247262
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	ldr     r0, [r4, #0x18]
+	ldr     r1, [pc, #0x28] @ 0x2247284, (=#0x22495dc)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+.thumb
+branch_2247262: @ 2247262 :thumb
+	bl      Function_200f2ac
+	cmp     r0, #0x0
+	bne     branch_224726e
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224726e
+
+.thumb
+branch_224726e: @ 224726e :thumb
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	ldr     r0, [r4, #0x14]
+	bl      0x21f0efc @ Function_5_21f0efc
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x2247284
+
+.word 0x22495dc @ 0x2247284
+.thumb
+Function_2247288: @ 2247288 :thumb
+	push    {r4,r5,lr}
+	add     sp, #-0x14
+	mov     r5, r0
+	ldr     r0, [r1, #0xc]
+	mov     r4, r2
+	bl      Function_203a790
+	ldr     r1, [r4, #0x8]
+	cmp     r1, #0x2
+	bne     branch_22472b2
+	bl      Function_203a75c
+	add     r1, sp, #0x0
+	bl      Function_203a7f0
+	ldr     r2, [r4, #0x8]
+	mov     r0, r5
+	add     r1, sp, #0x0
+	bl      Function_2053cd4
+	b       branch_22472c0
+@ 0x22472b2
+
+.thumb
+branch_22472b2: @ 22472b2 :thumb
+	bl      Function_203a72c
+	mov     r1, r0
+	ldr     r2, [r4, #0x8]
+	mov     r0, r5
+	bl      Function_2053cd4
+.thumb
+branch_22472c0: @ 22472c0 :thumb
+	mov     r0, #0x2
+	add     sp, #0x14
+	pop     {r4,r5,pc}
+@ 0x22472c6
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x9186, 0x2247354 - 0x22472c6
+
+
+.thumb
+Function_2247354: @ 2247354 :thumb
+	push    {r4,r5,lr}
+	add     sp, #-0xc
+	mov     r4, r2
+	ldr     r0, [r4, #0x8]
+	mov     r5, r1
+	cmp     r0, #0x2
+	bne     branch_224737a
+	mov     r0, #0x6
+	str     r0, [sp, #0x0]
+	mov     r1, #0x1
+	str     r1, [sp, #0x4]
+	mov     r0, #0x4
+	str     r0, [sp, #0x8]
+	mov     r0, #0x0
+	mov     r2, r1
+	mov     r3, r0
+	bl      Function_200f174
+	b       branch_2247390
+@ 0x224737a
+
+.thumb
+branch_224737a: @ 224737a :thumb
+	mov     r0, #0x6
+	str     r0, [sp, #0x0]
+	mov     r1, #0x1
+	str     r1, [sp, #0x4]
+	mov     r0, #0x4
+	str     r0, [sp, #0x8]
+	ldr     r3, [pc, #0x34] @ 0x22473bc, (=#0x7fff)
+	mov     r0, #0x0
+	mov     r2, r1
+	bl      Function_200f174
+.thumb
+branch_2247390: @ 2247390 :thumb
+	mov     r0, r5
+	mov     r1, #0x4
+	bl      0x21f0eb0 @ Function_5_21f0eb0
+	mov     r1, #0x1
+	ldr     r2, [pc, #0x24] @ 0x22473c0, (=#0xfff6a000)
+	str     r0, [r4, #0x14]
+	mov     r3, r1
+	bl      0x21f0f10 @ Function_5_21f0f10
+	ldr     r0, [r4, #0x18]
+	ldr     r1, [pc, #0x1c] @ 0x22473c4, (=#0x22495dc)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	add     sp, #0xc
+	pop     {r4,r5,pc}
+@ 0x22473ba
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x927a, 0x22473bc - 0x22473ba
+
+
+.word 0x7fff @ 0x22473bc
+.word 0xfff6a000 @ 0x22473c0
+.word 0x22495dc @ 0x22473c4
+.thumb
+Function_22473c8: @ 22473c8 :thumb
+	push    {r4,lr}
+	mov     r4, r2
+	ldr     r0, [r4, #0xc]
+	bl      Function_206574c
+	cmp     r0, #0x1
+	bne     branch_22473e6
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	ldr     r0, [r4, #0x18]
+	ldr     r1, [pc, #0x28] @ 0x2247408, (=#0x22495dc)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+.thumb
+branch_22473e6: @ 22473e6 :thumb
+	bl      Function_200f2ac
+	cmp     r0, #0x0
+	bne     branch_22473f2
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x22473f2
+
+.thumb
+branch_22473f2: @ 22473f2 :thumb
+	ldr     r0, [r4, #0x14]
+	mov     r1, #0x2
+	mov     r2, #0x0
+	mov     r3, #0x3c
+	bl      0x21f0f10 @ Function_5_21f0f10
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x2247408
+
+.word 0x22495dc @ 0x2247408
+.thumb
+Function_224740c: @ 224740c :thumb
+	push    {r4,lr}
+	mov     r4, r2
+	ldr     r0, [r4, #0xc]
+	bl      Function_206574c
+	cmp     r0, #0x0
+	bne     branch_224741e
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224741e
+
+.thumb
+branch_224741e: @ 224741e :thumb
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	ldr     r0, [r4, #0x4]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x4]
+	cmp     r0, #0x4
+	ldr     r0, [r4, #0x18]
+	bge     branch_224743c
+	ldr     r1, [pc, #0x1c] @ 0x2247450, (=#0x22495dc)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224743c
+
+.thumb
+branch_224743c: @ 224743c :thumb
+	ldr     r1, [pc, #0x14] @ 0x2247454, (=#0x224966c)
+	bl      Function_2065700
+	str     r0, [r4, #0xc]
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224744e
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x930e, 0x2247450 - 0x224744e
+
+
+.word 0x22495dc @ 0x2247450
+.word 0x224966c @ 0x2247454
+.thumb
+Function_2247458: @ 2247458 :thumb
+	push    {r4,lr}
+	mov     r4, r2
+	ldr     r0, [r4, #0xc]
+	bl      Function_206574c
+	cmp     r0, #0x0
+	bne     branch_224746a
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224746a
+
+.thumb
+branch_224746a: @ 224746a :thumb
+	ldr     r0, [r4, #0x14]
+	bl      0x21f0ef0 @ Function_5_21f0ef0
+	cmp     r0, #0x0
+	bne     branch_2247478
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x2247478
+
+.thumb
+branch_2247478: @ 2247478 :thumb
+	ldr     r0, [r4, #0x14]
+	bl      0x21f0efc @ Function_5_21f0efc
+	ldr     r0, [r4, #0xc]
+	bl      Function_2065758
+	mov     r0, #0x2
+	pop     {r4,pc}
+@ 0x2247488
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x9348, 0x22474e8 - 0x2247488
+
+
+.thumb
+Function_22474e8: @ 22474e8 :thumb
+	push    {r3-r5,lr}
+	mov     r5, r1
+	ldr     r0, [r5, #0x3c]
+	mov     r4, r2
+	bl      Function_205eb98
+	mov     r3, r0
+	ldr     r2, [r4, #0x20]
+	mov     r0, r5
+	mov     r1, #0x0
+	bl      Function_2243f88
+	str     r0, [r4, #0x10]
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x0
+	pop     {r3-r5,pc}
+@ 0x224750c
+
+.thumb
+Function_224750c: @ 224750c :thumb
+	push    {r4,lr}
+	mov     r4, r2
+	ldr     r0, [r4, #0x10]
+	bl      Function_2243fbc
+	cmp     r0, #0x0
+	bne     branch_224751e
+	mov     r0, #0x0
+	pop     {r4,pc}
+@ 0x224751e
+
+.thumb
+branch_224751e: @ 224751e :thumb
+	ldr     r0, [r4, #0x10]
+	bl      Function_2243fc8
+	ldr     r0, [r4, #0x0]
+	.hword  0x1c40 @ add r0, r0, #0x1
+	str     r0, [r4, #0x0]
+	mov     r0, #0x1
+	pop     {r4,pc}
+@ 0x224752e
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0x93ee, 0x22480bc - 0x224752e
 
 
 .thumb
@@ -6130,7 +6868,7 @@ branch_224868e: @ 224868e :thumb
 	add     r0, #0xc8
 	str     r1, [r0, #0x0]
 	ldr     r0, [sp, #0x0]
-	bl      0x2017348
+	bl      Function_2017348
 .thumb
 branch_22486b2: @ 22486b2 :thumb
 	pop     {r3-r7,pc}
@@ -6162,7 +6900,7 @@ branch_22486d6: @ 22486d6 :thumb
 	bl      Function_2017190
 	mov     r0, r7
 	mov     r1, r4
-	bl      0x201727c
+	bl      Function_201727c
 	.hword  0x1c76 @ add r6, r6, #0x1
 	.hword  0x1d2d @ add r5, r5, #0x4
 	add     r4, #0x14
@@ -6499,6 +7237,7 @@ branch_224891c: @ 224891c :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0xa7ec, 0x22491ec - 0x224892c
 
 
+Unknown_22491ec:
 .word Function_2245840+1 @ =0x2245841, 0x22491ec
 .word Function_22459b0+1 @ =0x22459b1, 0x22491f0
 .word Function_2245a0c+1 @ =0x2245a0d, 0x22491f4
@@ -6507,6 +7246,7 @@ branch_224891c: @ 224891c :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0xb0bc, 0x224924c - 0x22491fc
 
 
+Unknown_224924c:
 .word Function_22454b0+1 @ =0x22454b1, 0x224924c
 .word Function_22454dc+1 @ =0x22454dd, 0x2249250
 .word Function_22454e8+1 @ =0x22454e9, 0x2249254
@@ -6515,6 +7255,7 @@ branch_224891c: @ 224891c :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0xb11c, 0x2249260 - 0x224925c
 
 
+Unknown_2249260:
 .word Function_22438c8+1 @ =0x22438c9, 0x2249260
 .word Function_2243914+1 @ =0x2243915, 0x2249264
 .word Function_2243920+1 @ =0x2243921, 0x2249268
@@ -6537,6 +7278,7 @@ branch_224891c: @ 224891c :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0xb168, 0x22492d8 - 0x22492a8
 
 
+Unknown_22492d8:
 .word Function_2244038+1 @ =0x2244039, 0x22492d8
 .word Function_2244050+1 @ =0x2244051, 0x22492dc
 .word Function_22440c0+1 @ =0x22440c1, 0x22492e0
@@ -6575,9 +7317,28 @@ branch_224891c: @ 224891c :thumb
 .word Function_224439c+1 @ =0x224439d, 0x2249364
 .word Function_22443b0+1 @ =0x22443b1, 0x2249368
 
-.incbin "./baserom/overlay/overlay_0006.bin", 0xb22c, 0x224980c - 0x224936c
+.incbin "./baserom/overlay/overlay_0006.bin", 0xb22c, 0x22494b0 - 0x224936c
 
 
+Unknown_22494b0:
+.word Function_2246a30+1 @ =0x2246a31, 0x22494b0
+.word Function_2246a4c+1 @ =0x2246a4d, 0x22494b4
+.word Function_2246a38+1 @ =0x2246a39, 0x22494b8
+.word Function_2246a60+1 @ =0x2246a61, 0x22494bc
+.word Function_2246a74+1 @ =0x2246a75, 0x22494c0
+.word Function_2246a88+1 @ =0x2246a89, 0x22494c4
+.word Function_2246a9c+1 @ =0x2246a9d, 0x22494c8
+.word Function_2246ab0+1 @ =0x2246ab1, 0x22494cc
+.word Function_2246ac8+1 @ =0x2246ac9, 0x22494d0
+.word Function_2246ad8+1 @ =0x2246ad9, 0x22494d4
+.word Function_2246ae8+1 @ =0x2246ae9, 0x22494d8
+.word Function_2246a34+1 @ =0x2246a35, 0x22494dc
+
+
+.incbin "./baserom/overlay/overlay_0006.bin", 0xb3a0, 0x224980c - 0x22494e0
+
+
+Unknown_224980c:
 .word Function_224825c+1 @ =0x224825d, 0x224980c
 .word Function_22482bc+1 @ =0x22482bd, 0x2249810
 .word Function_22482cc+1 @ =0x22482cd, 0x2249814
@@ -6586,6 +7347,7 @@ branch_224891c: @ 224891c :thumb
 .incbin "./baserom/overlay/overlay_0006.bin", 0xb6dc, 0x2249824 - 0x224981c
 
 
+Unknown_2249824:
 .word Function_22487f8+1 @ =0x22487f9, 0x2249824
 .word Function_224889c+1 @ =0x224889d, 0x2249828
 .word Function_22488d8+1 @ =0x22488d9, 0x224982c
@@ -6602,8 +7364,8 @@ branch_224891c: @ 224891c :thumb
 @ 0x2249858
 
 
-.incbin "./baserom/overlay/overlay_0006.bin", 0xb718, 0x224993f - 0x2249858
+.incbin "./baserom/overlay/overlay_0006.bin", 0xb718, 0x2249940 - 0x2249858
 
 
-@end 0x224993f
+@end 0x2249940
 

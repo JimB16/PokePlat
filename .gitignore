@@ -4,6 +4,7 @@
 *.bin
 *.narc
 *.pyc
+*.png
 
 # baserom
 *.nds

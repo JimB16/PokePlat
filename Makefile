@@ -1,11 +1,12 @@
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: all clean init
+.PHONY: all clean init pics
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/unpack_narc.py
 armdisassem    := $(PYTHON) tools/armdisassem.py
+conv_pics      := $(PYTHON) tools/conv_pics.py
 
 
 narc_files := \
@@ -36,6 +37,9 @@ trainer_files := $(wildcard ./data/poketool/trainer/trdata/*.s)
 trainerpoke_files := $(wildcard ./data/poketool/trainer/trpoke/*.s)
 
 
+all_pokemon_rgcn := $(wildcard ./baserom/data/poketool/pokegra/pl_pokegra_narc/*.rgcn)
+
+
 
 all:
 
@@ -43,9 +47,18 @@ clean:
 
 init:
 	$(unpack_rom) "baserom.nds"
-    
+
 narc:
 	$(foreach f,$(narc_files),$(unpack_narc) $(f);)
+
+pics:
+	$(foreach f,$(all_pokemon_rgcn), \
+		$(eval X = $(f)) \
+		$(eval Y = $(subst _00000003.rgcn,_00000004.rlcn,$(f))) \
+		$(eval Y = $(subst _00000000.rgcn,_00000004.rlcn,$(Y))) \
+		$(eval Y = $(subst _00000001.rgcn,_00000004.rlcn,$(Y))) \
+		$(eval Y = $(subst _00000002.rgcn,_00000004.rlcn,$(Y))) \
+	$(conv_pics) "$(X)" "$(Y)" "$(basename $(X)).png";)
 
 
 $(trainer_files:.s=.bin):
@@ -67,10 +80,10 @@ comp_trainers: $(trainer_files:.s=.bin)
 comp_trainerpoke: $(trainerpoke_files:.s=.bin)
 	rm ./data/poketool/trainer/trpoke/*.o
 	rm ./data/poketool/trainer/trpoke/*.elf
-    
+
 disassem:
 	$(armdisassem) "./baserom/arm9.bin" 0x02000000 800 800
-    
+
 asm:
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/arm9_full.s" -o "source/arm9.o"
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/overlay_0004.s" -o "source/overlay_0004.o"
@@ -78,4 +91,3 @@ asm:
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork "source/overlay_0006.s" -o "source/overlay_0006.o"
 	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/lnkscript" -Map "source/arm9.map" "source/arm9.o" "source/overlay_0004.o" "source/overlay_0005.o" "source/overlay_0006.o" -o "source/arm9.elf"
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary "source/arm9.elf" "source/arm9_own.bin"
-    

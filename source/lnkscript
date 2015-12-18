@@ -53,21 +53,28 @@ MEMORY {
 
 	rom	: ORIGIN = 0x02000000, LENGTH = 32M
 	iwram	: ORIGIN = 0x021d0d80, LENGTH = 8M
+	iwram_221fc20 : ORIGIN = 0x0221fc20, LENGTH = 8M
 	iwram_223e140 : ORIGIN = 0x0223e140, LENGTH = 8M
 	iwram_2249960 : ORIGIN = 0x02249960, LENGTH = 8M
 	iwram_2253ce0 : ORIGIN = 0x02253ce0, LENGTH = 8M
 	ewram	: ORIGIN = 0x02000000, LENGTH = 8M
+	ewram2	: ORIGIN = 0x01ff8000, LENGTH = 8M
 }
 
 __text_start	=	ORIGIN(rom);
 __eheap_end	=	ORIGIN(ewram) + LENGTH(ewram);
 __iwram_start	=	ORIGIN(iwram);
 __iwram_top	=	ORIGIN(iwram) + LENGTH(iwram);;
+__iwram_221fc20_start	=	ORIGIN(iwram_221fc20);
+__iwram_221fc20_top	=	ORIGIN(iwram_221fc20) + LENGTH(iwram_221fc20);;
 __iwram_223e140_start	=	ORIGIN(iwram_223e140);
 __iwram_223e140_top	=	ORIGIN(iwram_223e140) + LENGTH(iwram_223e140);;
+__iwram_2249960_start	=	ORIGIN(iwram_2249960);
+__iwram_2249960_top	=	ORIGIN(iwram_2249960) + LENGTH(iwram_2249960);;
 __sp_irq	=	__iwram_top - 0x060;
 __sp_usr	=	__sp_irq - 0x0a0;
 __irq_flags	=	0x03007ff8;
+__irg_handler = 0x01ff8000;
 
 SECTIONS
 {
@@ -95,7 +102,7 @@ SECTIONS
 		. = ALIGN(4);  /* REQUIRED. LD is flaky without it. */
 	} >rom = 0xff
 
-	__text_end = .;
+	__text_end = .;    
 	.fini           :
 	{
 		KEEP (*(.fini))
@@ -116,56 +123,55 @@ SECTIONS
 	__exidx_start = .;
 	.ARM.exidx   : { *(.ARM.exidx* .gnu.linkonce.armexidx.*) } >rom
 	__exidx_end = .;
-
-	.ctors :
+    
+    
+    	__ewram_start = ORIGIN(ewram);
+        __ewram_lma = __ewram_start;
+	.ewram __ewram_start : AT (__ewram_lma)
 	{
-		/*	gcc uses crtbegin.o to find the start of the constructors, so
-			we make sure it is first.  Because this is a wildcard, it
-			doesn't matter if the user does not actually link against
-			crtbegin.o; the linker won't look for a file to match a
-			wildcard.  The wildcard also means that it doesn't matter which
-			directory crtbegin.o is in.  */
-		KEEP (*crtbegin.o(.ctors))
-		KEEP (*(EXCLUDE_FILE (*crtend.o) .ctors))
-		KEEP (*(SORT(.ctors.*)))
-		KEEP (*(.ctors))
-		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
-	} >rom = 0
+		*(.ewram)
+		/*. = ALIGN(4);   REQUIRED. LD is flaky without it. */
+		__ewram_end = ABSOLUTE(.);
+	}>ewram = 0xff
 
-	.dtors :
+	__ewram2_start = 0x2101d20; /*__ewram_lma + SIZEOF(.ewram);*/
+	.ewram2 __irg_handler : AT (__ewram2_start)
 	{
-		KEEP (*crtbegin.o(.dtors))
-		KEEP (*(EXCLUDE_FILE (*crtend.o) .dtors))
-		KEEP (*(SORT(.dtors.*)))
-		KEEP (*(.dtors))
-		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
-	} >rom = 0
+		*(.ewram2)
+		/*. = ALIGN(4);   REQUIRED. LD is flaky without it. */
+		__ewram2_end = ABSOLUTE(.);
+	}>ewram2 = 0xff
 
-
-	.eh_frame :
+	__ewram3_start = __ewram2_start + SIZEOF(.ewram2);
+	.ewram3 __ewram3_start : AT (__ewram3_start)
 	{
-		KEEP (*(.eh_frame))
-		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
-	} >rom = 0
-
-	.gcc_except_table :
+		*(.ewram3)
+		__ewram3_end = ABSOLUTE(.);
+	}>ewram = 0xff
+    
+/*	__ewram3f_start = __ewram3_start + SIZEOF(.ewram3);
+	.fill0 __ewram3f_start : AT (__ewram3f_start)
 	{
-		*(.gcc_except_table)
-		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
-	} >rom = 0
+		FILL(0xFF);
+		. = . + ((((__ewram3f_start) + 0x200 - 1) & ~(0x200 - 1)) - (__ewram3f_start)) - 1;
+	    BYTE(0xFF);
+	} > ewram = 0xff*/
+    
+	/*__pad_lma = __ewram_lma + SIZEOF(.ewram);*/
+	__pad_lma = __ewram3_start + SIZEOF(.ewram3);
+
+	.sbss ALIGN(4)(NOLOAD):
+ 	{
+		__sbss_start__ = ABSOLUTE(.);
+ 		*(.sbss)
+ 		. = ALIGN(4);
+		__sbss_end__  = ABSOLUTE(.);
+		__end__ = ABSOLUTE(.);
+		__eheap_start = ABSOLUTE(.);
+ 	} AT>ewram
+    
 
 	__iwram_lma = .;
-
-	.iwram __iwram_start : AT (__iwram_lma)
-	{
-		__iwram_start__ = ABSOLUTE(.) ;
-		*(.iwram)
-		*iwram.*(.text)
-		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
-		__iwram_end__ = ABSOLUTE(.) ;
-	} >iwram = 0xff
-
-	__data_lma = __iwram_lma + SIZEOF(.iwram);
 
 	.bss ALIGN(4) (NOLOAD) :
 	{
@@ -178,7 +184,33 @@ SECTIONS
 		. = ALIGN(4);    /* REQUIRED. LD is flaky without it. */
 		__bss_end__ = ABSOLUTE(.);
 
-	} AT>iwram
+	}
+
+	.bss2 (0x27e0000) (NOLOAD) :
+	{
+		__bss2_start = ABSOLUTE(.);
+		__bss2_start__ = ABSOLUTE(.);
+/*		*(.dynbss)
+		*(.gnu.linkonce.b*)*/
+		*(.bss2*)
+/*		*(COMMON)*/
+		. = ALIGN(4);    /* REQUIRED. LD is flaky without it. */
+		__bss2_end__ = ABSOLUTE(.);
+
+	}
+
+	.iwram __iwram_start : AT (__iwram_lma)
+	{
+		__iwram_start__ = ABSOLUTE(.) ;
+		*(.iwram)
+		*iwram.*(.text)
+		. = ALIGN(4);   /* REQUIRED. LD is flaky without it. */
+		__iwram_end__ = ABSOLUTE(.) ;
+	} >iwram = 0xff
+
+	__data_lma = __iwram_lma + SIZEOF(.iwram);
+
+
 
 	.data ALIGN(4) : AT (__data_lma)
 	{
@@ -268,13 +300,79 @@ SECTIONS
 	.iwram6 __iwram_223e140_start : AT (__iwram_overlay_lma + SIZEOF (.iwram4) + SIZEOF (.fill4) + SIZEOF (.iwram5) + SIZEOF (.fill5)) { *(.iwram6) . = ALIGN(4); } > iwram_223e140 = 0xff
 	__load_start_iwram6 = LOADADDR (.iwram6);
 	__load_stop_iwram6 = LOADADDR (.iwram6) + SIZEOF (.iwram6);
-	.fill6 :
+/*	.fill6 :
 	{
 		FILL(0xFF);
         offset = MAX(0x200, -1);
 		. = . + 0;
 	    BYTE(0xFF);
-	} > iwram_223e140 = 0xff
+	} > iwram_223e140 = 0xff*/
+    
+    temp7 = __iwram_overlay_lma + SIZEOF (.iwram4) + SIZEOF (.fill4) + SIZEOF (.iwram5) + SIZEOF (.fill5) + SIZEOF (.iwram6);
+	.iwram7 __iwram_2249960_start : AT (temp7) { *(.iwram7) . = ALIGN(4); } > iwram_2249960 = 0xff
+	__load_start_iwram7 = LOADADDR (.iwram7);
+	__load_stop_iwram7 = LOADADDR (.iwram7) + SIZEOF (.iwram7);
+	.fill7 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram7) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram7)) - 1;
+	    BYTE(0xFF);
+	} > iwram_2249960 = 0xff
+    
+    temp8 = temp7 + SIZEOF (.iwram7) + SIZEOF (.fill7);
+	.iwram8 __iwram_2249960_start : AT (temp8) { *(.iwram8) . = ALIGN(4); } > iwram_2249960 = 0xff
+	__load_start_iwram8 = LOADADDR (.iwram8);
+	__load_stop_iwram8 = LOADADDR (.iwram8) + SIZEOF (.iwram8);
+	.fill8 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram8) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram8)) - 1;
+	    BYTE(0xFF);
+	} > iwram_2249960 = 0xff
+    
+    temp9 = temp8 + SIZEOF (.iwram8) + SIZEOF (.fill8);
+	.iwram9 __iwram_2249960_start : AT (temp9) { *(.iwram9) . = ALIGN(4); } > iwram_2249960 = 0xff
+	__load_start_iwram9 = LOADADDR (.iwram9);
+	__load_stop_iwram9 = LOADADDR (.iwram9) + SIZEOF (.iwram9);
+	.fill9 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram9) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram9)) - 1;
+	    BYTE(0xFF);
+	} > iwram_2249960 = 0xff
+    
+    temp10 = temp9 + SIZEOF (.iwram9) + SIZEOF (.fill9);
+	.iwram10 __iwram_2249960_start : AT (temp10) { *(.iwram10) . = ALIGN(4); } > iwram_2249960 = 0xff
+	__load_start_iwram10 = LOADADDR (.iwram10);
+	__load_stop_iwram10 = LOADADDR (.iwram10) + SIZEOF (.iwram10);
+	.fill10 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram10) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram10)) - 1;
+	    BYTE(0xFF);
+	} > iwram_2249960 = 0xff
+    
+    temp11 = temp10 + SIZEOF (.iwram10) + SIZEOF (.fill10);
+	.iwram11 __iwram_2249960_start : AT (temp11) { *(.iwram11) . = ALIGN(4); } > iwram_2249960 = 0xff
+	__load_start_iwram11 = LOADADDR (.iwram11);
+	__load_stop_iwram11 = LOADADDR (.iwram11) + SIZEOF (.iwram11);
+	.fill11 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram11) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram11)) - 1;
+	    BYTE(0xFF);
+	} > iwram_2249960 = 0xff
+    
+    temp12 = temp11 + SIZEOF (.iwram11) + SIZEOF (.fill11);
+	.iwram12 __iwram_221fc20_start : AT (temp12) { *(.iwram12) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	__load_start_iwram12 = LOADADDR (.iwram12);
+	__load_stop_iwram12 = LOADADDR (.iwram12) + SIZEOF (.iwram12);
+	.fill12 :
+	{
+		FILL(0xFF);
+		. = . + ((((__load_stop_iwram12) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram12)) - 1;
+	    BYTE(0xFF);
+	} > iwram_221fc20 = 0xff
     
     
 	. = __iwram_overlay_lma + MAX (SIZEOF (.iwram4), SIZEOF (.iwram5));
@@ -315,25 +413,7 @@ SECTIONS
 
 	__iheap_start = . ;
 
-	__ewram_start = ORIGIN(ewram);
-	.ewram __ewram_start : AT (__ewram_lma)
-	{
-		*(.ewram)
-		. = ALIGN(4);  /* REQUIRED. LD is flaky without it. */
-		__ewram_end = ABSOLUTE(.);
-	}>ewram = 0xff
 
-	__pad_lma = __ewram_lma + SIZEOF(.ewram);
-
-	.sbss ALIGN(4)(NOLOAD):
- 	{
-		__sbss_start__ = ABSOLUTE(.);
- 		*(.sbss)
- 		. = ALIGN(4);
-		__sbss_end__  = ABSOLUTE(.);
-		__end__ = ABSOLUTE(.);
-		__eheap_start = ABSOLUTE(.);
- 	} AT>ewram
 
 	/* EZF Advance strips trailing 0xff bytes, add a pad section so nothing important is removed */
 /*	.pad ALIGN(4) : AT (__pad_lma)

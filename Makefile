@@ -9,7 +9,7 @@ armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 
 
-SRCS = source/arm9_full.s source/overlay_0004.s source/overlay_0005.s source/overlay_0006.s
+SRCS = source/arm9_full.s source/overlay_0004.s source/overlay_0005.s source/overlay_0006.s source/overlay_0007.s source/overlay_0012.s
 OBJS = $(SRCS:.s=.o)
 
 
@@ -95,5 +95,5 @@ disassem:
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork $< -o $@
 
 asm: $(OBJS)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/lnkscript" -Map "source/arm9.map" "source/arm9_full.o" "source/overlay_0004.o" "source/overlay_0005.o" "source/overlay_0006.o" -o "source/arm9.elf"
+	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/lnkscript" -Map "source/arm9.map" $(OBJS) -o "source/arm9.elf"
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary "source/arm9.elf" "source/arm9_own.bin"

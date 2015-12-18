@@ -9,8 +9,8 @@ armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 
 
-SRCS = source/arm9_full.s source/overlay_0004.s source/overlay_0005.s source/overlay_0006.s source/overlay_0007.s source/overlay_0012.s
-OBJS = $(SRCS:.s=.o)
+SRCS = arm9_full.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s
+OBJS = $(addprefix build/, $(SRCS:.s=.o))
 
 
 narc_files := \
@@ -27,6 +27,7 @@ narc_files := \
 "./baserom/data/fielddata/script/scr_seq.narc" \
 "./baserom/data/msgdata/msg.narc" \
 "./baserom/data/msgdata/pl_msg.narc" \
+"./baserom/data/poketool/icongra/pl_poke_icon.narc" \
 "./baserom/data/poketool/personal/personal.narc" \
 "./baserom/data/poketool/personal/pms.narc" \
 "./baserom/data/poketool/pokegra/pl_otherpoke.narc" \
@@ -44,12 +45,18 @@ trainerpoke_files := $(wildcard ./data/poketool/trainer/trpoke/*.s)
 all_pokemon_rgcn := $(wildcard ./baserom/data/poketool/pokegra/pl_pokegra_narc/*.rgcn)
 all_pokemon_png := $(all_pokemon_rgcn:.rgcn=.png)
 #all_pokemon_png := $(foreach f,$(all_pokemon_rgcn),$(subst .rgcn,.png,$(f)))
+all_trainer_rgcn := $(wildcard ./baserom/data/poketool/trgra/trfgra_narc/*.rgcn)
+all_trainer_png := $(all_trainer_rgcn:.rgcn=.png)
+all_icons_rgcn := $(wildcard ./baserom/data/poketool/icongra/pl_poke_icon_narc/*.rgcn)
+all_icons_png := $(all_icons_rgcn:.rgcn=.png)
 
 
 all:
 
 clean:
-	rm -rf baserom
+	rm build/*
+#	rm -rf baserom
+    
 
 init:
 	$(unpack_rom) "baserom.nds"
@@ -57,15 +64,31 @@ init:
 narc:
 	$(foreach f,$(narc_files),$(unpack_narc) $(f);)
 
-baserom/data/poketool/pokegra/pl_pokegra_narc/%.png:
-	$(eval X = $(subst .png,.rgcn,$(@)))
+baserom/data/poketool/pokegra/pl_pokegra_narc/%.png: baserom/data/poketool/pokegra/pl_pokegra_narc/%.rgcn
 	$(eval Y = $(subst _00000003.png,_00000004.rlcn,$(@)))
 	$(eval Y = $(subst _00000000.png,_00000004.rlcn,$(Y)))
 	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
 	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
-	$(conv_pics) "$(X)" "$(Y)" "$(@)" -e forwards
+	$(conv_pics) "$<" "$(Y)" "$@" -e forwards
 
 pics: $(all_pokemon_png)
+
+baserom/data/poketool/icongra/pl_poke_icon_narc/%.png: baserom/data/poketool/icongra/pl_poke_icon_narc/%.rgcn
+	$(conv_pics) "$<" "./baserom/data/poketool/icongra/pl_poke_icon_narc/data_00000000.rlcn" "$@" -w 4 -h 8
+
+baserom/data/poketool/trgra/trfgra_narc/%_00000000.png: baserom/data/poketool/trgra/trfgra_narc/%_00000000.rgcn
+	$(eval Y = $(subst _00000000.png,_00000001.rlcn,$(@)))
+#	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
+#	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
+	$(conv_pics) "$<" "$(Y)" "$@" -w 20 -h 16
+
+baserom/data/poketool/trgra/trfgra_narc/%_00000004.png: baserom/data/poketool/trgra/trfgra_narc/%_00000004.rgcn
+	$(eval Y = $(subst _00000004.png,_00000001.rlcn,$(@)))
+#	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
+#	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
+	$(conv_pics) "$<" "$(Y)" "$@" -e forwards
+
+pics2: $(all_icons_png) $(all_trainer_png)
 
 
 $(trainer_files:.s=.bin):
@@ -91,7 +114,8 @@ comp_trainerpoke: $(trainerpoke_files:.s=.bin)
 disassem:
 	$(armdisassem) "./baserom/arm9.bin" 0x02000000 800 800
 
-%.o: %.s
+$(OBJS): build/%.o: source/%.s
+	$(MKDIR_P) build/
 	$(DEVKITARM)/bin/arm-none-eabi-as -march=armv5te -mthumb-interwork $< -o $@
 
 asm: $(OBJS)

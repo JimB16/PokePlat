@@ -274,39 +274,41 @@ class Disassembler(object):
         output += "NrOfFiles: " + str(NrOfFiles)
         output += "\nFNTChunkSize: " + str(BTNFChunkSize)
         
-        pokegra = 0
-        if filename.find("pl_pokegra.narc") != -1:
-            pokegra = 1
-        
         i = 0
         while i < NrOfFiles:
             #disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), "./" + folder + "/data_" + "{:08x}".format(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8) + ".bin")
             FileType = chr(disasm.get_byte_from_rom(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8)) + chr(disasm.get_byte_from_rom(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8+1)) + chr(disasm.get_byte_from_rom(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8+2)) + chr(disasm.get_byte_from_rom(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8+3))
             #print("FileType: " + FileType)
             
+            filename_temp = "./" + folder + "/data_" + "{:08}".format(i)
+            if filename.find("pl_pokegra.narc") != -1:
+                PokeNr = i / 6
+                PokeOffset = i % 6
+                filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
+            elif filename.find("trfgra.narc") != -1:
+                PokeNr = i / 5
+                PokeOffset = i % 5
+                filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
+            elif filename.find("trbgra.narc") != -1:
+                PokeNr = i / 5
+                PokeOffset = i % 5
+                filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
             
             if FileType == "RGCN":
-                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".rgcn"
-                if pokegra == 1:
-                    PokeNr = i / 6
-                    PokeOffset = i % 6
-                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset) + ".rgcn"
+                filename_temp += ".rgcn"
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             elif FileType == "RLCN":
-                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".rlcn"
-                if pokegra == 1:
-                    PokeNr = i / 6
-                    PokeOffset = i % 6
-                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset) + ".rlcn"
+                filename_temp += ".rlcn"
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             elif FileType == "RNAN":
-                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".rnan"
+                filename_temp += ".rnan"
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             elif FileType == "RECN":
-                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".recn"
+                filename_temp += ".recn"
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             else:
-                disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), "./" + folder + "/data_" + "{:08}".format(i) + ".bin")
+                filename_temp += ".bin"
+                disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             i += 1
             #disasm.write_section_in_file_wfilename(addr, size, filename)
         

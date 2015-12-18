@@ -13,52 +13,90 @@ from filehandler import FileHandler
 input_file = FileHandler()
 palette_file = FileHandler()
 
-def conv_pic(outfilename):
+
+ENCRYPTION_NONE = 0
+ENCRYPTION_REVERSE = 1
+ENCRYPTION_FORWARDS = 2
+
+def conv_pic(outfilename, encryption=ENCRYPTION_NONE, width=1, height=1):
+    FORMAT_16BIT = 3
+    FORMAT_256BIT = 4
+    ENCRYPT_MULT = 0x41c64e6d
+    ENCRYPT_CARRY = 0x6073
+    TYPE_TILE = 0
+    TYPE_LINEAR = 1
+    TYPE_LINEAR2 = 256
+    
+    # RGCN-Header
+    # PPRE/ntr/g2d/ncgr.py
     RGCN_MagicID = chr(input_file.ReadByte(0)) + chr(input_file.ReadByte(1)) + chr(input_file.ReadByte(2)) + chr(input_file.ReadByte(3))
-    RGCN_Constant = input_file.ReadWord(4)
-    if (RGCN_MagicID != "RGCN"):# | (RGCN_Constant != 0x100feff):
+    RGCN_Endian = input_file.ReadHWord(4)
+    RGCN_Version = input_file.ReadHWord(6)
+    RGCN_Size_ = input_file.ReadWord(8)
+    RGCN_HeaderSize = input_file.ReadHWord(0xC)
+    RGCN_NumBlocks = input_file.ReadHWord(0xE)
+    if (RGCN_MagicID != "RGCN"):
         print(RGCN_MagicID + " " + hex(RGCN_Constant))
         return
     
+    # RAHC-Header
+    # PPRE/ntr/g2d/ncgr.py
     RAHC_MagicID = chr(input_file.ReadByte(0x10)) + chr(input_file.ReadByte(0x11)) + chr(input_file.ReadByte(0x12)) + chr(input_file.ReadByte(0x13))
     if (RAHC_MagicID != "RAHC"):
         return
-    RAHC_HeaderSize = input_file.ReadByte(0x14)
-    RAHC_SectionSize = input_file.ReadWord(0x14)
-    RAHC_TileCount = input_file.ReadHWord(0x18)
-    RAHC_TileSize = input_file.ReadHWord(0x1A)
-    RAHC_TileBitDepth = input_file.ReadWord(0x1C)
-    RAHC_TileDataSize = input_file.ReadWord(0x28)
-    RAHC_Unknown = input_file.ReadWord(0x2C)
+    RAHC_Size_ = input_file.ReadByte(0x14)
+    RAHC_Height = input_file.ReadHWord(0x18)
+    RAHC_Width = input_file.ReadHWord(0x1A)
+    RAHC_Format = input_file.ReadWord(0x1C)
+    RAHC_Depth = input_file.ReadWord(0x20)
+    RAHC_Type = input_file.ReadWord(0x24)
+    RAHC_DataSize = input_file.ReadWord(0x28)
+    RAHC_Offset = input_file.ReadWord(0x2C)
     
-    print("RGCN-Test")
-    print("TileCount: " + str(RAHC_TileCount))
-    print("TileSize: " + str(RAHC_TileSize))
-    print("TileBitDepth: " + str(RAHC_TileBitDepth))
-    print("TileDataSize: " + str(RAHC_TileDataSize))
+    if RAHC_Width != 0xffff:
+        width = RAHC_Width
+    
+    print("RGCN-Data:")
+    print("Height: " + str(RAHC_Height))
+    print("Width: " + str(RAHC_Width))
+    print("Format: " + str(RAHC_Format))
+    print("Depth: " + str(RAHC_Depth))
+    print("Type: " + str(RAHC_Type))
+    print("DataSize: " + str(RAHC_DataSize))
+    if encryption == ENCRYPTION_NONE:
+        print("Encryption: none")
+    elif encryption == ENCRYPTION_REVERSE:
+        print("Encryption: reverse")
+    elif encryption == ENCRYPTION_FORWARDS:
+        print("Encryption: forwards")
     
     data = []
     i = 0
-    while i < RAHC_TileDataSize:
+    while i < RAHC_DataSize:
         data.append(input_file.ReadHWord(0x30+i))
         i += 2
     
-    ENCRYPT_MULT = 0x41c64e6d
-    ENCRYPT_CARRY = 0x6073
     
-    enc_data = array.array('H', data)
-    #if encryption == NCGR.ENCRYPTION_REVERSE:
-    #    enc_data = enc_data[::-1]
     dec_data = array.array('H')
-#    for val in enc_data:
-#        dec_data.append(val)
-    key = enc_data[0]
-    print(hex(key))
-    for val in enc_data:
-        dec_data.append(val ^ (key & 0xFFFF))
-        key *= ENCRYPT_MULT
-        key += ENCRYPT_CARRY
-    #data = dec_data.tostring()
+    if encryption != ENCRYPTION_NONE:
+        enc_data = array.array('H', data)
+        #if encryption == NCGR.ENCRYPTION_REVERSE:
+        #    enc_data = enc_data[::-1]
+        #for val in enc_data:
+        #    dec_data.append(val)
+        key = enc_data[0]
+        print(hex(key))
+        for val in enc_data:
+            dec_data.append(val ^ (key & 0xFFFF))
+            key *= ENCRYPT_MULT
+            key += ENCRYPT_CARRY
+        #data = dec_data.tostring()
+    else:
+        enc_data = array.array('H', data)
+        for val in enc_data:
+            dec_data.append(val)
+    
+    
     
     #data = [[0 for j in range(9)] for i in range(9)]
     data = []
@@ -74,12 +112,28 @@ def conv_pic(outfilename):
         data_line.append(c)
         data_line.append(d)
         i += 4
-        if(i % 160) == 0:
-#        if(i % 16) == 0:
+        if (RAHC_Type == TYPE_LINEAR or RAHC_Type == TYPE_LINEAR2) and ((i % (width*8)) == 0):
+            data.append(data_line)
+            data_line = []
+        elif (RAHC_Type != TYPE_LINEAR) and ((i % 8) == 0):
             data.append(data_line)
             data_line = []
     
-    print("len: " + str(len(data)))
+    #print("len: " + str(len(data)))
+    
+    
+    if RAHC_Type != TYPE_LINEAR:
+        data_temp = data
+        data = []
+        data_line = []
+        for l in range(height):
+            for k in range(8):
+                for j in range(width):
+                    for i in range(8):
+                        data_line.append(data_temp[l*4*8+j*8+k][i])
+                data.append(data_line)
+                data_line = []
+    
     
     #Tiles = []
     bmp = [[0 for j in range(9)] for i in range(9)]
@@ -162,15 +216,42 @@ def conv_pic(outfilename):
     #            data.append([0])
                 #data_line = []
             
+    
+    # RLCN-Header
+    # PPRE/ntr/g2d/nclr.py
+    RLCN_MagicID = chr(palette_file.ReadByte(0x0)) + chr(palette_file.ReadByte(0x1)) + chr(palette_file.ReadByte(0x2)) + chr(palette_file.ReadByte(0x3))
+    if (RLCN_MagicID != "RLCN"):
+        print("Expected RLCN, got " + RLCN_MagicID)
+        return
+    RLCN_Endian = palette_file.ReadHWord(0x4)
+    RLCN_Version = palette_file.ReadHWord(0x6)
+    RLCN_Size_ = palette_file.ReadWord(0x8)
+    RLCN_HeaderSize = palette_file.ReadHWord(0xc)
+    RLCN_NumBlocks = palette_file.ReadHWord(0xe)
+    
+    # PLTT-Header
+    # PPRE/ntr/g2d/nclr.py
+    PLTT_MagicID = chr(palette_file.ReadByte(0x10)) + chr(palette_file.ReadByte(0x11)) + chr(palette_file.ReadByte(0x12)) + chr(palette_file.ReadByte(0x13))
+    if (PLTT_MagicID != "TTLP"):
+        print("Expected TTLP, got " + PLTT_MagicID)
+        return
+    PLTT_Size_ = palette_file.ReadWord(0x4)
+    PLTT_Format = palette_file.ReadWord(0x8)
+    PLTT_Extended = palette_file.ReadWord(0xc)
+    PLTT_Datasize = palette_file.ReadWord(0x10)
+    PLTT_Offset = palette_file.ReadWord(0x14)
+    
+    print("RLCN-Data:")
+    print("Format: " + str(PLTT_Format))
+    print("Extended: " + str(PLTT_Extended))
+    
     palette=[]
     i = 0
     while i < 16:
-        #col = (palette_file.ReadByte(0x28+i*2)) | (palette_file.ReadByte(0x28+i*2+1)<<16)
         col = (palette_file.ReadHWord(0x28+i*2))
         colr = col&0x1f
         colg = (col>>5)&0x1f
         colb = (col>>10)&0x1f
-        #palette.append((i*16, i*16, i*16))
         palette.append((colr*8, colg*8, colb*8))
         i += 1
     
@@ -189,21 +270,44 @@ if __name__ == "__main__":
     filename = sys.argv[1]
     palfilename = sys.argv[2]
     outfilename = sys.argv[3]
+    
+    encryption = ENCRYPTION_NONE
+    width = 1
+    height = 1
+    i = 4
+    while i < len(sys.argv):
+        if sys.argv[i] == "-e":
+            if sys.argv[i+1] == "reverse":
+                encryption = ENCRYPTION_REVERSE
+            elif sys.argv[i+1] == "forwards":
+                encryption = ENCRYPTION_FORWARDS
+            i += 2
+        elif sys.argv[i] == "-w":
+            width = sys.argv[i+1]
+            width = int(width, 10)
+            i += 2
+        elif sys.argv[i] == "-h":
+            height = sys.argv[i+1]
+            height = int(height, 10)
+            i += 2
+        else:
+            i += 1
+    
     #base_address = sys.argv[2]
     #base_address = int(base_address, 16)
     #word = sys.argv[3]
     #word = int(word, 16)
     
-    s = [[0,0,0,0], [0,0,0,0], [0,1,1,0], [0,1,1,0]]
-    f = open('png.png', 'wb')
-    palette=[(0x55,0x55,0x55), (0xff,0x99,0x99)]
-    w = png.Writer(len(s[0]), len(s), palette=palette, bitdepth=1)
-    w.write(f, s)
-    f.close()
+    #s = [[0,0,0,0], [0,0,0,0], [0,1,1,0], [0,1,1,0]]
+    #f = open('png.png', 'wb')
+    #palette=[(0x55,0x55,0x55), (0xff,0x99,0x99)]
+    #w = png.Writer(len(s[0]), len(s), palette=palette, bitdepth=1)
+    #w.write(f, s)
+    #f.close()
     
     input_file.init(os.path.join(conf.path, filename), 0)
     
     palette_file.init(os.path.join(conf.path, palfilename), 0)
     
-    conv_pic(outfilename)
+    conv_pic(outfilename, encryption, width, height)
     

@@ -299,6 +299,12 @@ class Disassembler(object):
                     PokeOffset = i % 6
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset) + ".rlcn"
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
+            elif FileType == "RNAN":
+                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".rnan"
+                disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
+            elif FileType == "RECN":
+                filename_temp = "./" + folder + "/data_" + "{:08}".format(i) + ".recn"
+                disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), filename_temp)
             else:
                 disasm.write_section_in_file_wfilename(disasm.get_word_from_rom(FATStart+8*i) + IMGStart+8, disasm.get_word_from_rom(FATStart+8*i+4)-disasm.get_word_from_rom(FATStart+8*i), "./" + folder + "/data_" + "{:08}".format(i) + ".bin")
             i += 1

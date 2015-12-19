@@ -1,8 +1,6 @@
 
-.include "source/macros_asm.s"
 
-
-.include "source/arm9.s"
+@.include "source/arm9.s"
 .align 9, 0xff
 
 @.incbin "./baserom/y9.bin"

@@ -9,8 +9,10 @@ armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 
 
-SRCS = arm9_full.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s
+SRCS = arm9.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s overlay_0013.s overlay_0021.s overlay_0022.s
 OBJS = $(addprefix build/, $(SRCS:.s=.o))
+#SRCS = arm9_full.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s
+#OBJS = $(addprefix build/, $(SRCS:.s=.o))
 
 
 narc_files := \
@@ -78,30 +80,26 @@ baserom/data/poketool/icongra/pl_poke_icon_narc/%.png: baserom/data/poketool/ico
 
 baserom/data/poketool/trgra/trfgra_narc/%_00000000.png: baserom/data/poketool/trgra/trfgra_narc/%_00000000.rgcn
 	$(eval Y = $(subst _00000000.png,_00000001.rlcn,$(@)))
-#	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
-#	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
 	$(conv_pics) "$<" "$(Y)" "$@" -w 20 -h 16
 
 baserom/data/poketool/trgra/trfgra_narc/%_00000004.png: baserom/data/poketool/trgra/trfgra_narc/%_00000004.rgcn
 	$(eval Y = $(subst _00000004.png,_00000001.rlcn,$(@)))
-#	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
-#	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
 	$(conv_pics) "$<" "$(Y)" "$@" -e forwards
 
 pics2: $(all_icons_png) $(all_trainer_png)
 
 
-$(trainer_files:.s=.bin):
-	${MKDIR_P} build/$(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
+#$(trainer_files:.s=.bin):
+#	${MKDIR_P} build/$(dir $@)
+#	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
+#	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
+#	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
 
-$(trainerpoke_files:.s=.bin):
-	${MKDIR_P} build/$(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
+#$(trainerpoke_files:.s=.bin):
+#	${MKDIR_P} build/$(dir $@)
+#	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
+#	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
+#	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
 
 comp_trainers: $(trainer_files:.s=.bin)
 	rm ./data/poketool/trainer/trdata/*.o

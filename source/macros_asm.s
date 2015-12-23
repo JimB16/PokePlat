@@ -79,3 +79,9 @@
 .hword  \Matrix, \Scripts, \LevelScripts, \Texts, \MusicDay, \MusicNight, \WildPkmn, \Events
 .byte   \Name, \NameFrame, \Weather, \Camera, \NameStyle, \Flags
 .endm
+
+
+.macro	asciz_align str
+.asciz	"\str"
+.align 2, 0
+.endm

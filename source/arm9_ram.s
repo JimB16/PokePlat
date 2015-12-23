@@ -3,6 +3,14 @@
 
 @ 0x02103e00
 
+.org 0x21beb80 - 0x02103e00
+
+RAM_21beb80:
+
+.org 0x21beba0 - 0x02103e00
+
+RAM_21beba0:
+
 .org 0x21bf370 - 0x02103e00
 
 RAM_21bf370:
@@ -18,6 +26,10 @@ RAM_21bf3f0:
 .org 0x21bf67c - 0x02103e00
 
 RAM_21bf67c:
+
+.org 0x21bf6bc - 0x02103e00
+
+RAM_21bf6bc:
 
 .org 0x21bf6dc - 0x02103e00
 
@@ -55,6 +67,10 @@ RAM_21c07d4:
 RAM_21c07d8:
     .word 0
 RAM_21c07dc:
+
+.org 0x21c07f4 - 0x02103e00
+
+RAM_21c07f4:
 
 .org 0x21c3a34 - 0x02103e00
 

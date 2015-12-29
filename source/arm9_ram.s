@@ -72,6 +72,10 @@ RAM_21c07dc:
 
 RAM_21c07f4:
 
+.org 0x21c0848 - 0x02103e00
+
+RAM_21c0848:
+
 .org 0x21c3a34 - 0x02103e00
 
 RAM_21c3a34:
@@ -101,9 +105,26 @@ RAM_21ccc80:
     .word 0
 RAM_21ccc84:
 
+.org 0x21cec90 - 0x02103e00
+
+RAM_21cec90:
+
 .org 0x21cee20 - 0x02103e00
 
 RAM_21cee20:
+
+
+.org 0x27e0000 - 0x02103e00
+
+RAM_27e0000:
+.zero 4*24 @ 24 JumpAdresses, 1 for every IRQs
+
+RAM_27e0060:
+.zero 4*8
+
+RAM_27e0080:
+
+
 
 
 @ todo: 0x2014c79 0x206c121

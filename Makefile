@@ -1,7 +1,7 @@
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: all clean init pics
+.PHONY: asm all clean init pics
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/unpack_narc.py
@@ -9,7 +9,7 @@ armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 
 
-SRCS = arm9.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s overlay_0013.s overlay_0021.s overlay_0022.s
+SRCS = arm9.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s overlay_0013.s overlay_0014.s overlay_0015.s overlay_0016.s overlay_0017.s overlay_0018.s overlay_0021.s overlay_0022.s
 OBJS = $(addprefix build/, $(SRCS:.s=.o))
 #SRCS = arm9_full.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0012.s
 #OBJS = $(addprefix build/, $(SRCS:.s=.o))

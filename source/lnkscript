@@ -53,7 +53,9 @@ MEMORY {
 
 	rom	: ORIGIN = 0x02000000, LENGTH = 32M
 	iwram	: ORIGIN = 0x021d0d80, LENGTH = 8M
+	iwram_221f800 : ORIGIN = 0x0221f800, LENGTH = 8M
 	iwram_221fc20 : ORIGIN = 0x0221fc20, LENGTH = 8M
+	iwram_223b140 : ORIGIN = 0x0223b140, LENGTH = 8M
 	iwram_223e140 : ORIGIN = 0x0223e140, LENGTH = 8M
 	iwram_2249960 : ORIGIN = 0x02249960, LENGTH = 8M
 	iwram_2253ce0 : ORIGIN = 0x02253ce0, LENGTH = 8M
@@ -65,8 +67,12 @@ __text_start	=	ORIGIN(rom);
 __eheap_end	=	ORIGIN(ewram) + LENGTH(ewram);
 __iwram_start	=	ORIGIN(iwram);
 __iwram_top	=	ORIGIN(iwram) + LENGTH(iwram);;
+__iwram_221f800_start	=	ORIGIN(iwram_221f800);
+__iwram_221f800_top	=	ORIGIN(iwram_221f800) + LENGTH(iwram_221f800);;
 __iwram_221fc20_start	=	ORIGIN(iwram_221fc20);
 __iwram_221fc20_top	=	ORIGIN(iwram_221fc20) + LENGTH(iwram_221fc20);;
+__iwram_223b140_start	=	ORIGIN(iwram_223b140);
+__iwram_223b140_top	=	ORIGIN(iwram_223b140) + LENGTH(iwram_223b140);;
 __iwram_223e140_start	=	ORIGIN(iwram_223e140);
 __iwram_223e140_top	=	ORIGIN(iwram_223e140) + LENGTH(iwram_223e140);;
 __iwram_2249960_start	=	ORIGIN(iwram_2249960);
@@ -391,7 +397,7 @@ SECTIONS
 	} > iwram_221fc20 = 0xff
     
     temp15 = temp14 + SIZEOF (.iwram14) + SIZEOF (.fill14);
-	.iwram15 __iwram_221fc20_start : AT (temp15) { *(.iwram15) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram15 __iwram_start : AT (temp15) { *(.iwram15) . = ALIGN(4); } > iwram = 0xff
 	__load_start_iwram15 = LOADADDR (.iwram15);
 	__load_stop_iwram15 = LOADADDR (.iwram15) + SIZEOF (.iwram15);
 	.fill15 :
@@ -399,10 +405,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram15) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram15)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram = 0xff
     
     temp16 = temp15 + SIZEOF (.iwram15) + SIZEOF (.fill15);
-	.iwram16 __iwram_221fc20_start : AT (temp16) { *(.iwram16) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram16 __iwram_223b140_start : AT (temp16) { *(.iwram16) . = ALIGN(4); } > iwram_223b140 = 0xff
 	__load_start_iwram16 = LOADADDR (.iwram16);
 	__load_stop_iwram16 = LOADADDR (.iwram16) + SIZEOF (.iwram16);
 	.fill16 :
@@ -410,10 +416,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram16) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram16)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_223b140 = 0xff
     
     temp17 = temp16 + SIZEOF (.iwram16) + SIZEOF (.fill16);
-	.iwram17 __iwram_221fc20_start : AT (temp17) { *(.iwram17) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram17 __iwram_223b140_start : AT (temp17) { *(.iwram17) . = ALIGN(4); } > iwram_223b140 = 0xff
 	__load_start_iwram17 = LOADADDR (.iwram17);
 	__load_stop_iwram17 = LOADADDR (.iwram17) + SIZEOF (.iwram17);
 	.fill17 :
@@ -421,10 +427,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram17) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram17)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_223b140 = 0xff
     
     temp18 = temp17 + SIZEOF (.iwram17) + SIZEOF (.fill17);
-	.iwram18 __iwram_221fc20_start : AT (temp18) { *(.iwram18) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram18 __iwram_221f800_start : AT (temp18) { *(.iwram18) . = ALIGN(4); } > iwram_221f800 = 0xff
 	__load_start_iwram18 = LOADADDR (.iwram18);
 	__load_stop_iwram18 = LOADADDR (.iwram18) + SIZEOF (.iwram18);
 	.fill18 :
@@ -432,7 +438,7 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram18) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram18)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_221f800 = 0xff
     
     temp19 = temp18 + SIZEOF (.iwram18) + SIZEOF (.fill18);
 	.iwram19 __iwram_221fc20_start : AT (temp19) { *(.iwram19) . = ALIGN(4); } > iwram_221fc20 = 0xff

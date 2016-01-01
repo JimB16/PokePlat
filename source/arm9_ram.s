@@ -84,6 +84,10 @@ RAM_21c3a34:
 
 RAM_21c3a3c:
 
+.org 0x21c5a60 - 0x02103e00
+
+RAM_21c5a60:
+
 .org 0x21ccb9e - 0x02103e00
 
 RAM_21ccb9e:

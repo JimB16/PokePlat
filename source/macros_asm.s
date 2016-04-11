@@ -77,7 +77,34 @@
 .equ POWER_ALL,             POWER_ALL_2D | POWER_3D_CORE | POWER_MATRIX	@ power everything.
 
 @ nds/arm9/background.h
+.equ BGCTRL,                0x04000008
+.equ REG_BG0CNT,            0x04000008
+.equ REG_BG1CNT,            0x0400000A
+.equ REG_BG2CNT,            0x0400000C
+.equ REG_BG3CNT,            0x0400000E
+
+.equ REG_BGOFFSETS,         0x04000010
+.equ REG_BG0HOFS,           0x04000010
+.equ REG_BG0VOFS,           0x04000012
+.equ REG_BG1HOFS,           0x04000014
+.equ REG_BG1VOFS,           0x04000016
+.equ REG_BG2HOFS,           0x04000018
+.equ REG_BG2VOFS,           0x0400001A
+.equ REG_BG3HOFS,           0x0400001C
+.equ REG_BG3VOFS,           0x0400001E
 .equ REG_BG2PA,             0x04000020
+.equ REG_BG2PB,             0x04000022
+.equ REG_BG2PC,             0x04000024
+.equ REG_BG2PD,             0x04000026
+.equ REG_BG2X,              0x04000028
+.equ REG_BG2Y,              0x0400002C
+.equ REG_BG3PA,             0x04000030
+.equ REG_BG3PB,             0x04000032
+.equ REG_BG3PC,             0x04000034
+.equ REG_BG3PD,             0x04000036
+.equ REG_BG3X,              0x04000038
+.equ REG_BG3Y,              0x0400003C
+
 .equ REG_BG2PD_SUB,         0x04001026
 
 @ nds/arm9/math.h
@@ -188,6 +215,14 @@
 .equ MATRIX_READ_VECTOR,    0x04000680
 .equ POINT_RESULT,          0x04000620
 .equ VECTOR_RESULT,         0x04000630
+
+
+.equ REG_BLDCNT,            0x04000050
+.equ REG_BLDY,              0x04000054
+.equ REG_BLDALPHA,          0x04000052
+.equ REG_BLDCNT_SUB,        0x04001050
+.equ REG_BLDALPHA_SUB,      0x04001052
+.equ REG_BLDY_SUB,          0x04001054
 
 
 

@@ -12,6 +12,7 @@ Instructions to set up the repository will be described in [**INSTALL.md**](INST
 Following things work partly:
 * Extract the different parts and files of the rom
 * Compilable main arm9-binary (with some of the overlays)
+  * Some functionsnames that I identfied can be found in the Wiki of this repo
 * Export and import scripts (map-scripts)
 * Export Pokemon sprites (front- and back-pics)
 * Export text

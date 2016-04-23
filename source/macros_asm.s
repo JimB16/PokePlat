@@ -251,3 +251,19 @@
 .asciz	"\str"
 .align 2, 0
 .endm
+
+
+@ event_constants
+.equ SPRITE_LUCAS, 0
+.equ SPRITE_BOY, 1
+.equ SPRITE_GIRL, 2
+.equ SPRITE_SIGNPOST, 91
+.equ SPRITE_POSTBOX, 92
+.equ SPRITE_GUIDEPOST, 94
+.equ SPRITE_BARRY, 148
+
+.equ Orient_Up,          0
+.equ Orient_Down,        1
+.equ Orient_Left,        2
+.equ Orient_Right,       3
+

@@ -19,12 +19,26 @@ x = address where the jump goes to
 .equ StdFunc_PkmnMarket, 0x7e3
 
 
+.macro	Nop0
+.hword  0x0
+.endm
+
+.macro	Nop1
+.hword  0x1
+.endm
+
 .macro	End
 .hword  0x2
 .endm
 
 .macro	Return2 a, b
 .hword  0x3, \a, \b
+.endm
+
+.macro	Cmd_a a, b
+.hword  0xa
+.byte   \a, \b
+@.word   \a, \b
 .endm
 
 .macro	If var=0, nr=0
@@ -37,6 +51,13 @@ x = address where the jump goes to
 
 .macro	Jump adr
 .hword  0x16
+.word   \adr - 1f
+1:
+.endm
+
+
+.macro	Call adr
+.hword  0x1a
 .word   \adr - 1f
 1:
 .endm
@@ -103,6 +124,12 @@ x = address where the jump goes to
 .hword \c, \d
 .endm
 
+.macro	ColorMsgBox a, b
+.hword  0x37
+.byte \a
+.hword \b
+.endm
+
 .macro	TypeMessageBox a
 .hword  0x38
 .byte \a
@@ -112,12 +139,33 @@ x = address where the jump goes to
 .hword  0x39
 .endm
 
+.macro	CallTextMsgBox a, b
+.hword  0x3a
+.byte \a
+.hword \b
+.endm
+
 .macro	StoreMenuStatus a
 .hword  0x3b, \a
 .endm
 
 .macro	YesNoBox nr=0
 .hword  0x3e, \nr
+.endm
+
+.macro	Multi a, b, c, d, e
+.hword  0x40
+.byte   \a, \b, \c, \d
+.hword  \e
+.endm
+
+.macro	Cmd_42 a, b
+.hword  0x42
+.byte   \a, \b
+.endm
+
+.macro	CloseMulti
+.hword  0x43
 .endm
 
 .macro	PlayFanfare	nr=0
@@ -134,6 +182,10 @@ x = address where the jump goes to
 
 .macro	WaitCry
 .hword  0x4d
+.endm
+
+.macro	PlaySound a
+.hword  0x50, \a
 .endm
 
 .macro	ApplyMovement a, adr
@@ -154,6 +206,10 @@ x = address where the jump goes to
 .hword  0x61
 .endm
 
+.macro	Lock a
+.hword  0x62, \a
+.endm
+
 .macro	AddPeople a
 .hword  0x64, \a
 .endm
@@ -168,6 +224,19 @@ x = address where the jump goes to
 
 .macro	CheckSpritePosition a, b
 .hword  0x69, \a, \b
+.endm
+
+.macro	ContinueFollow a, b
+.hword  0x6c, \a
+.byte   \b
+.endm
+
+.macro	FollowHero a, b
+.hword  0x6d, \a, \b
+.endm
+
+.macro	CheckStoreItem a, b, c
+.hword  0x7d, \a, \b, \c
 .endm
 
 .macro	CheckItem a, b, c
@@ -186,16 +255,28 @@ x = address where the jump goes to
 .hword  0xa2
 .endm
 
-.macro	SinnohMaps
+.macro	OpenSinnohMaps
 .hword  0xaa
 .endm
 
+.macro	ChooseStarter
+.hword  0xb4
+.endm
+
+.macro	BattleStarter
+.hword  0xb5
+.endm
+
 .macro	FadeScreen a, b, c, d
-.hword  0xbc, \a, \b, \c, \c
+.hword  0xbc, \a, \b, \c, \d
 .endm
 
 .macro	ResetScreen
 .hword  0xbd
+.endm
+
+.macro	Warp a, b, c, d, e
+.hword  0xbe, \a, \b, \c, \d, \e
 .endm
 
 .macro SetVarHero a
@@ -208,21 +289,64 @@ x = address where the jump goes to
 .byte \a
 .endm
 
+.macro SetVarAlter a
+.hword  0xcf
+.byte \a
+.endm
+
 .macro	SetVariableNumber a, b
 .hword  0xd5
 .byte   \a
 .hword  \b
 .endm
 
+.macro	SetVarPokeNick a, b
+.hword  0xd6
+.byte   \a
+.hword  \b
+.endm
+
+.macro	SetVarStrHero a
+.hword  0xdb
+.byte \a
+.endm
+
+.macro	SetVarStrRival a
+.hword  0xdc
+.byte \a
+.endm
+
 .macro	StoreStarter a
 .hword  0xde, \a
+.endm
+
+.macro	CheckTrainerLost a
+.hword  0xec, \a
+.endm
+
+.macro	WarpMapElevator a, b, c, d, e
+.hword  0x11b, \a, \b, \c, \d, \e
+.endm
+
+.macro	CheckFloor a
+.hword  0x11c, \a
+.endm
+
+.macro	StartLift a, b, c, d
+.hword  0x11d
+.byte   \a, \b
+.hword  \c, \d
+.endm
+
+.macro	StarterBattle a, b
+.hword  0x125, \a, \b
 .endm
 
 .macro	StorePoketchApp a, b
 .hword  0x134, \a, \b
 .endm
 
-.macro	Cmd_135 nr=0
+.macro	FriendBT nr
 .hword  0x135, \nr
 .endm
 
@@ -246,8 +370,28 @@ x = address where the jump goes to
 .hword  0x14d, \a
 .endm
 
+.macro	HealPokemon
+.hword  0x14e
+.endm
+
+.macro	Cmd_151
+.hword  0x151
+.endm
+
 .macro	DisableBadge a
 .hword  0x15d, \a
+.endm
+
+.macro	StartFollow
+.hword  0x161
+.endm
+
+.macro	StopFollow
+.hword  0x162
+.endm
+
+.macro	Cmd_164
+.hword  0x164
 .endm
 
 .macro	PrepareDoorAnimation a, b, c, d, e
@@ -285,16 +429,68 @@ x = address where the jump goes to
 .byte   \a
 .endm
 
+.macro	ChangeOwMovement a, b
+.hword  0x188, \a, \b
+.endm
+
+.macro	ShowRecordList a
+.hword  0x1b5, \a
+.endm
+
 .macro	CheckIdPlayer a, b
 .hword  0x1b7, \a, \b
+.endm
+
+.macro	CheckFacePosition a
+.hword  0x1bd, \a
+.endm
+
+.macro	CheckSinPokedex a
+.hword  0x1e8, \a
+.endm
+
+.macro	CheckNatPokedex a
+.hword  0x1e9, \a
 .endm
 
 .macro	WarpLastElevator
 .hword  0x204
 .endm
 
+.macro	CheckNatPokedexStatus a, b
+.hword  0x22d
+.byte   \a
+.hword  \b
+.endm
+
 .macro	CheckStatusPhraseBox a, b
 .hword  0x238, \a, \b
+.endm
+
+.macro	StoreElevatorDirection a, b
+.hword  0x23c, \a, \b
+.endm
+
+.macro	StorePhraseBox2W a, b, c, d
+.hword  0x244, \a, \b, \c, \d
+.endm
+
+.macro	CheckPhraseBoxImput2 a, b, c, d, e
+.hword  0x249, \a, \b, \c, \d, \e
+.endm
+
+.macro	CheckLotoNumber a
+.hword  0x24e, \a
+.endm
+
+.macro	CompareLotoNumber a, b, c, d
+.hword  0x24f, \a, \b, \c, \d
+.endm
+
+.macro	SetvarIdPokeBoxes a, b
+.hword  0x251
+.byte   \a
+.hword  \b
 .endm
 
 .macro	CheckAccessories a, b
@@ -303,8 +499,27 @@ x = address where the jump goes to
 .hword  \b
 .endm
 
+.macro	SetvarIdNumber a, b, c, d
+.hword  0x280
+.byte   \a
+.hword  \b
+.byte   \c, \d
+.endm
+
+.macro	SetvarUnk a
+.hword  0x282, \a
+.endm
+
 .macro	CheckRuinManiac a
 .hword  0x284, \a
+.endm
+
+.macro	ComparePhraseBoxImput a, b, c, d, e
+.hword  0x2aa, \a, \b, \c, \d, \e
+.endm
+
+.macro	ActMisteryGift
+.hword  0x2ac
 .endm
 
 .macro	Cmd_2BB
@@ -315,6 +530,11 @@ x = address where the jump goes to
 .hword  0x343
 .byte   \a
 .hword  \b
+.endm
+
+.macro	Cmd_347 a, b
+.hword  0x347
+.byte   \a, \b
 .endm
 
 
@@ -399,23 +619,27 @@ x = address where the jump goes to
 .hword  0x27, \a
 .endm
 
-.macro	move_3e a
+.macro	Move_3e a
 .hword  0x3e, \a
 .endm
 
-.macro	move_3f a
+.macro	Move_3f a
 .hword  0x3f, \a
+.endm
+
+.macro	Move_41 a
+.hword  0x41, \a
 .endm
 
 .macro	WaitDisappear a
 .hword  0x45, \a
 .endm
 
-.macro	move_47 a
+.macro	Move_47 a
 .hword  0x47, \a
 .endm
 
-.macro	move_48 a
+.macro	Move_48 a
 .hword  0x48, \a
 .endm
 

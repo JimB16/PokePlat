@@ -1,4 +1,0 @@
-.include "macros_asm.s"
-
-trainerpoke 0, 0, 47, 0, 82, 0, 0
-trainerpoke 0, 0, 47, 0, 82, 0, 0

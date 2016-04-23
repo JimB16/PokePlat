@@ -1,0 +1,4 @@
+.include "source/macros_asm.s"
+
+trainerpoke 0, 0, 36, 0, SWINUB, 0, 0
+trainerpoke 0, 0, 38, 0, SNEASEL, 0, 0

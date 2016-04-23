@@ -9,7 +9,7 @@ The baserom that is disassembled and that is needed to compile a playable rom is
 To work with this repository you need DevKitARM, Python and the baserom.
 Instructions to set up the repository will be described in [**INSTALL.md**](INSTALL.md).
 
-Following things work, but are incomplete:
+## Following things work, but are incomplete:
 * Extract the different parts and files of the rom
 * Build a playable rom out of the extracted files
 * Export and import scripts (map-scripts) [data/fielddata/script/scr_seq.narc]
@@ -22,7 +22,14 @@ Following things work, but are incomplete:
   * tools/export_event.py
   * event-files are compilable with gas
 
-Following things I'm working on:
+## Following things I'm working on:
 * Compilable main arm9-binary (with some of the overlays)
   * Some functionsnames that I identfied can be found in the Wiki of this repo
 * Export Pokemon sprites (front- and back-pics)
+
+
+## Chat about this and other Pokemon disassemblies:
+
+* irc: **irc.freenode.net** [**#pret**][irc]
+
+[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

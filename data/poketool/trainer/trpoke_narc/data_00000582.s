@@ -1,5 +1,6 @@
 .include "source/macros_asm.s"
 
+@ ?, ?, Level, ?, Pkmn, ?, ?
 trainerpoke 50, 0, 58, 0, LUXRAY, 179, 1
 trainerpoke 242, 0, 86, 0, ZIGZAGOON, 0, 0
 trainerpoke 50, 0, 59, 0, URSARING, 103, 1

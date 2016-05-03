@@ -22,6 +22,7 @@ if __name__ == "__main__":
     
     output_trainers = ""
     output_trainers += ".include \"source/macros_asm.s\"\n\n"
+    output_trainers += "@ Flag, Class, Battletype, #Pkmn, item1, item2, item3, item4, ai, Battletype2, ?, ?, ?\n"
     
     flag = input_file.ReadByte(0)
     class_ = input_file.ReadByte(1)

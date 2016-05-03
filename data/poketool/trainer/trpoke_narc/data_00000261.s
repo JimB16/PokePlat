@@ -1,5 +1,6 @@
 .include "source/macros_asm.s"
 
+@ ?, ?, Level, ?, Pkmn, ?, ?
 trainerpoke 250, 0, 49, 0, YANMEGA, 0, 0
 trainerpoke 147, 1, 149, 1, RELICANTH, 104, 0
 trainerpoke 0, 0, 250, 0, VENOMOTH, 212, 0

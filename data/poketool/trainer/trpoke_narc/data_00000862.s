@@ -1,5 +1,6 @@
 .include "source/macros_asm.s"
 
+@ ?, ?, Level, ?, Pkmn, ?, ?
 trainerpoke 200, 0, 61, 0, SHUCKLE, 0, 0
 trainerpoke 156, 0, 92, 0, BELLOSSOM, 201, 0
 trainerpoke 0, 0, 200, 0, POLIWRATH, 197, 0

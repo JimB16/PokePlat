@@ -1,6 +1,5 @@
 .include "source/macros_asm.s"
 
-trainerpoke 0, 0, 10, 0, WURMPLE, 33, 0
-trainerpoke 81, 0, 40, 0, MISSINGNO, 0, 0
-trainerpoke 0, 0, 11, 0, KRICKETOT, 117, 0
-trainerpoke 0, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, ?, Level, ?, Pkmn, ?, ?
+trainerpoke2 0, 0, 10, 0, WURMPLE, Tackle, String_Shot, Poison_Sting, No_Move, 0, 0
+trainerpoke2 0, 0, 11, 0, KRICKETOT, Bide, No_Move, No_Move, No_Move, 0, 0

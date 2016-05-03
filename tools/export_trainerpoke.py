@@ -63,12 +63,15 @@ if __name__ == "__main__":
     while i < len(sys.argv):
         if sys.argv[i] == "-bt":
             format = 1
+        elif sys.argv[i] == "-t2":
+            format = 2
         i += 1
     
     input_file.init(os.path.join(conf.path, filename), 0)
 
     output_trainers = ""
     output_trainers += ".include \"source/macros_asm.s\"\n\n"
+    output_trainers += "@ ?, ?, Level, ?, Pkmn, ?, ?\n"
     
     if format == 0: # normal trainer pkmn
         i = 0
@@ -94,6 +97,23 @@ if __name__ == "__main__":
         unknown3 = input_file.ReadByte(14)
         
         output_trainers += "btpoke " + str(GetPokemonName(species)) + ", " + str(GetMoveName(move1)) + ", " + str(GetMoveName(move2)) + ", " + str(GetMoveName(move3)) + ", " + str(GetMoveName(move4)) + ", " + str(GetEVSpread(evs)) + ", " + str(GetItemName(item)) + ", " + str(unknown3) + "\n"
+    elif format == 2: # unnormal trainer pkmn
+        i = 0
+        while i < (input_file.GetFileSize()/16):
+            unknown1 = input_file.ReadByte(0+i*16)
+            unknown2 = input_file.ReadByte(1+i*16)
+            level = input_file.ReadByte(2+i*16)
+            unknown3 = input_file.ReadByte(3+i*16)
+            species = input_file.ReadHWord(4+i*16)
+            move1 = input_file.ReadHWord(6+i*16)
+            move2 = input_file.ReadHWord(8+i*16)
+            move3 = input_file.ReadHWord(10+i*16)
+            move4 = input_file.ReadHWord(12+i*16)
+            unknown4 = input_file.ReadByte(14+i*16)
+            unknown5 = input_file.ReadByte(15+i*16)
+        
+            output_trainers += "trainerpoke2 " + str(unknown1) + ", " + str(unknown2) + ", " + str(level) + ", " + str(unknown3) + ", " + str(GetPokemonName(species)) + ", " + str(GetMoveName(move1)) + ", " + str(GetMoveName(move2)) + ", " + str(GetMoveName(move3)) + ", " + str(GetMoveName(move4)) + ", " + str(unknown4) + ", " + str(unknown5) + "\n"
+            i += 1
     
     if not os.path.exists(os.path.dirname(output_folder)):
         os.makedirs(os.path.dirname(output_folder))

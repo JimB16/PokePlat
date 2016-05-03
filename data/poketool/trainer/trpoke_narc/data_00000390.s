@@ -1,5 +1,6 @@
 .include "source/macros_asm.s"
 
+@ ?, ?, Level, ?, Pkmn, ?, ?
 trainerpoke 50, 0, 54, 0, GASTRODON, 74, 1
 trainerpoke 105, 0, 92, 0, KECLEON, 0, 0
 trainerpoke 50, 0, 54, 0, BEEDRILL, 142, 1

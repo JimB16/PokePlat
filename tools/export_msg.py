@@ -357,10 +357,10 @@ class Disassembler(object):
             offsets.append(disasm.get_word_from_rom(4+8*i) ^ key)
             sizes.append(disasm.get_word_from_rom(4+4+8*i) ^ key)
             i += 1
-        print("offsets: ")
-        print(offsets)
-        print("sizes: ")
-        print(sizes)
+        #print("offsets: ")
+        #print(offsets)
+        #print("sizes: ")
+        #print(sizes)
         
         i = 0
         while i < num:

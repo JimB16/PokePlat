@@ -27,9 +27,15 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
   * Some functionsnames that I identfied can be found in the Wiki of this repo
 * Export Pokemon sprites (front- and back-pics)
 
+## Credits
+The interpretation- and converting-scripts of all data-files (graphics, text, scripts, ...) are mainly reimplementations of the following editors:
+* [**PPRE (Project Pokemon ROM Editor)**][PPRE]
+* [**SDSME (Spiky's DS Map Editor)**][SDSME]
 
 ## Chat about this and other Pokemon disassemblies:
 
 * irc: **irc.freenode.net** [**#pret**][irc]
 
+[PPRE]: https://github.com/projectpokemon/PPRE
+[SDSME]: https://github.com/MarcRiera/SDSME
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

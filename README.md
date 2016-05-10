@@ -24,8 +24,25 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
 
 ## Following things I'm working on:
 * Compilable main arm9-binary (with some of the overlays)
-  * Some functionsnames that I identfied can be found in the Wiki of this repo
+  * source/arm9.s
+    * code is mostly disassembled
+    * contains the GraphicEngine, the ScriptHandler and Interrupt Handler
+  * source/overlay_0014.s
+    * code is completely disassembled
+    * data is mostly the AIScript which has to be interpreted
+    * contains the AIHandler for Battles
+  * source/overlay_0016.s
+    * code is mostly disassembled
+    * contains the main functions that handle a Pkmn- or Trainer-Battle
+  * Some function-names that I identified can be found in the Wiki of this repo
 * Export Pokemon sprites (front- and back-pics)
+
+## Help wanted:
+* [**INSTALL.md**](INSTALL.md) is still untested. It would be great if somebody can set-up this repo on their own machine with only the help of this file, but since this repo is changed a lot at the moment it would be nice to get some feedback about the things that don't work.
+* My main priority is to disassemble the code, but meanwhile I'm trying to interpret the code and give the labels better names. I think some of the interpretation work can already be done by other people that are interested. The following is a ToDo-List of possible targets:
+  * source/overlay_0014.s
+    * "AIHandler: @ 2220078"
+      * I identified the AIHandler that interprets the AIScript at "Tr_Ai_22248a4:", which is almost the same data as in the file "data/battle/tr_ai/tr_ai_seq.narc". Now the functions at "Jumptable_222eeac:" need to be identified.
 
 ## Credits
 The interpretation- and converting-scripts of all data-files (graphics, text, scripts, ...) are mainly reimplementations of the following editors:

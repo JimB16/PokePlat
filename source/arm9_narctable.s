@@ -154,7 +154,9 @@ Height_String: @ 0x020ff6b8
 .asciz "poketool/pokegra/height.narc"
 .align 2, 0
 
+Wotbl_String: @ 0x020ff6d8
 .ascii "poketool/personal/wotbl.narc\0\0\0\0"
+
 .ascii "graphic/footprint_board.narc\0\0\0\0"
 .ascii "poketool/trainer/trdata.narc\0\0\0\0"
 .ascii "poketool/trainer/trpoke.narc\0\0\0\0"
@@ -284,7 +286,7 @@ NARCStringPointer: @ 0x2100498
 .word BeSeq_String @ 0x1e
 .word 0x020fed60 @ 0x1f
 .word 0x020ffd4c @ 0x20
-.word 0x020ff6d8 @ 0x21
+.word Wotbl_String @ 0x21
 .word Evo_String @ 0x22
 .word 0x020fef18 @ 0x23
 .word FieldBoard_String @ 0x24

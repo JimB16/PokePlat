@@ -320,6 +320,14 @@ x = address where the jump goes to
 .hword  0xde, \a
 .endm
 
+.macro	TrainerBattle a, b
+.hword  0xe5, \a, \b
+.endm
+
+.macro	EndtrainerBattle a, b
+.hword  0xe6, \a, \b
+.endm
+
 .macro	CheckTrainerLost a
 .hword  0xec, \a
 .endm
@@ -445,6 +453,10 @@ x = address where the jump goes to
 .hword  0x1bd, \a
 .endm
 
+.macro	CheckPokeParty a, b
+.hword  0x1c0, \a, \b
+.endm
+
 .macro	CheckSinPokedex a
 .hword  0x1e8, \a
 .endm
@@ -524,6 +536,10 @@ x = address where the jump goes to
 
 .macro	Cmd_2BB
 .hword  0x2bb
+.endm
+
+.macro	Cmd_31c a, b
+.hword  0x31c, \a, \b
 .endm
 
 .macro	Cmd_343 a, b

@@ -3,6 +3,111 @@
 .include "source/pokemon_constants.s"
 
 
+.equ NrOfPkmn, 493 @ 0x1ed
+.equ NrOfMoves, 467 @ 0x1d3
+.equ NrSinPokedexEntries, 210 @ 0xd2
+.equ NrNatPokedexEntries, 482 @ 0x1e2 doesn't need Mew, Lugia, Ho-Oh, Celebi, Jirachi, Deoxys, Phione, Manaphy, Darkrai, Shaymin and Arceus
+
+
+@ Constants for ReadPkmnData- and WritePkmnData-functions (arm9.s)
+@ https://projectpokemon.org/wiki/Pokemon_NDS_Structure
+@ http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_structure_in_Generation_IV
+.equ PKMNDATA_PERSONALITYVALUE,  0x0
+.equ PKMNDATA_CHECKSUM,  0x4
+.equ PKMNDATA_SPECIES,  0x5
+.equ PKMNDATA_ITEM,  0x6
+.equ PKMNDATA_OTID,  0x7
+.equ PKMNDATA_EXPPTS,  0x8
+.equ PKMNDATA_FRIENDSHIP,  0x9
+.equ PKMNDATA_ABILITY,  0xa
+.equ PKMNDATA_MARKINGS,  0xb
+.equ PKMNDATA_COUNTRYOFORIGIN,  0xc
+.equ PKMNDATA_EVHP,  0xd
+.equ PKMNDATA_EVATK,  0xe
+.equ PKMNDATA_EVDEF,  0xf
+.equ PKMNDATA_EVSPE,  0x10
+.equ PKMNDATA_EVSPA,  0x11
+.equ PKMNDATA_EVSPD,  0x12
+.equ PKMNDATA_COOLCONTEST,  0x13
+.equ PKMNDATA_BEAUTYCONTEST,  0x14
+.equ PKMNDATA_CUTECONTEST,  0x15
+.equ PKMNDATA_SMARTCONTEST,  0x16
+.equ PKMNDATA_TOUGHCONTEST,  0x17
+.equ PKMNDATA_SHEENCONTEST,  0x18
+.equ PKMNDATA_MOVE1,  0x36
+.equ PKMNDATA_MOVE2,  0x37
+.equ PKMNDATA_MOVE3,  0x38
+.equ PKMNDATA_MOVE4,  0x39
+.equ PKMNDATA_MOVEPP1,  0x3a
+.equ PKMNDATA_MOVEPP2,  0x3b
+.equ PKMNDATA_MOVEPP3,  0x3c
+.equ PKMNDATA_MOVEPP4,  0x3d
+.equ PKMNDATA_MOVEPPUPS1,  0x3e
+.equ PKMNDATA_MOVEPPUPS2,  0x3f
+.equ PKMNDATA_MOVEPPUPS3,  0x40
+.equ PKMNDATA_MOVEPPUPS4,  0x41
+.equ PKMNDATA_IVHP,  0x46
+.equ PKMNDATA_IVATK, 0x47
+.equ PKMNDATA_IVDEF, 0x48
+.equ PKMNDATA_IVSPE, 0x49
+.equ PKMNDATA_IVSPA, 0x4a
+.equ PKMNDATA_IVSPD, 0x4b
+.equ PKMNDATA_ISNICKNAMED, 0x4c
+.equ PKMNDATA_EGG, 0x4d
+.equ PKMNDATA_COOLRIBBONHOENN, 0x4e
+.equ PKMNDATA_COOLRIBBONHOENNSUPER, 0x4f
+.equ PKMNDATA_COOLRIBBONHOENNHYPER, 0x50
+.equ PKMNDATA_COOLRIBBONHOENNMASTER, 0x51
+.equ PKMNDATA_FATEFULENCOUNTERED, 0x6e
+.equ PKMNDATA_GENDER, 0x6f
+.equ PKMNDATA_ALTERNATEFORM, 0x70
+.equ PKMNDATA_NICKNAME, 0x75
+.equ PKMNDATA_ORIGINGAME, 0x7a
+.equ PKMNDATA_POKERUS,  0x9a
+.equ PKMNDATA_POKEBALL,  0x9b
+.equ PKMNDATA_METATLEVEL,  0x9c
+.equ PKMNDATA_FEMALEOTGENDER,  0x9d
+.equ PKMNDATA_ENCOUNTERTYPE,  0x9e
+.equ PKMNDATA_STATUSEFFECT,  0xa0
+.equ PKMNDATA_LEVEL,  0xa1
+.equ PKMNDATA_CAPSULEINDEXSEALS,  0xa2
+.equ PKMNDATA_CURHP,  0xa3
+.equ PKMNDATA_MAXHP,  0xa4
+.equ PKMNDATA_ATK,  0xa5
+.equ PKMNDATA_DEF,  0xa6
+.equ PKMNDATA_SPE,  0xa7
+.equ PKMNDATA_SPA,  0xa8
+.equ PKMNDATA_SPD,  0xa9
+.equ PKMNDATA_SEALCOORDINATES,  0xab
+@ a0, ac
+@ ? = 0xae
+
+
+@ nds/card.h
+.equ CARD_COMMAND,          0x040001A8
+.equ REG_ROMCTRL,           0x040001A4
+.equ REG_AUXSPICNT,         0x040001A0
+.equ REG_AUXSPICNTH,        0x040001A1
+.equ REG_AUXSPIDATA,        0x040001A2
+.equ CARD_DATA_RD,          0x04100010
+.equ CARD_1B0,              0x040001B0
+.equ CARD_1B4,              0x040001B4
+.equ CARD_1B8,              0x040001B8
+.equ CARD_1BA,              0x040001BA
+
+@ Card commands
+.equ CARD_CMD_DUMMY,          0x9F
+.equ CARD_CMD_HEADER_READ,    0x00
+.equ CARD_CMD_HEADER_CHIPID,  0x90
+.equ CARD_CMD_ACTIVATE_BF,    0x3C  @ Go into blowfish (KEY1) encryption mode
+.equ CARD_CMD_ACTIVATE_SEC,   0x40  @ Go into hardware (KEY2) encryption mode
+.equ CARD_CMD_SECURE_CHIPID,  0x10
+.equ CARD_CMD_SECURE_READ,    0x20
+.equ CARD_CMD_DISABLE_SEC,    0x60  @ Leave hardware (KEY2) encryption mode
+.equ CARD_CMD_DATA_MODE,      0xA0
+.equ CARD_CMD_DATA_READ,      0xB7
+.equ CARD_CMD_DATA_CHIPID,    0xB8
+
 @ nds/dma.h
 .equ DMA0_SRC,              0x040000B0
 .equ DMA0_DEST,             0x040000B4

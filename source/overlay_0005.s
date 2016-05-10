@@ -1027,7 +1027,7 @@ branch_21f657a: @ 21f657a :thumb
 	bl      Function_21f6768
 	ldr     r0, [sp, #0x1c]
 	ldr     r1, [pc, #0x1c] @ 0x21f65d0, (=#0x21f65d5)
-	bl      Function_203e764
+	bl      ScriptHandler_AddFunction
 	ldr     r0, [sp, #0x20]
 	bl      Function_200b190
 	mov     r0, #0x1
@@ -1613,32 +1613,32 @@ Function_5_21f6b3c: @ 21f6b3c :thumb
 	mov     r5, r0
 	mov     r1, #0x46
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x8]
 	mov     r0, r5
 	mov     r1, #0x47
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0xc]
 	mov     r0, r5
 	mov     r1, #0x48
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x10]
 	mov     r0, r5
 	mov     r1, #0x49
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x14]
 	mov     r0, r5
 	mov     r1, #0x4a
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x18]
 	mov     r0, r5
 	mov     r1, #0x4b
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r2, #0x0
 	str     r0, [sp, #0x1c]
 	strh    r2, [r4, #0x0]
@@ -1733,7 +1733,7 @@ Function_5_21f6c60: @ 21f6c60 :thumb
 	ldr     r0, [r0, #0xc]
 	bl      Function_207a268
 	mov     r7, r0
-	bl      Function_207a0f8
+	bl      GetNrOfPkmnInParty
 	mov     r6, r0
 	mov     r4, #0x0
 	ldr     r0, [sp, #0x0]
@@ -1748,7 +1748,7 @@ branch_21f6c9e: @ 21f6c9e :thumb
 	bl      Function_207a0fc
 	mov     r1, #0x6
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [r5, #0x0]
 	cmp     r0, #0x70
 	bne     branch_21f6cba
@@ -1802,7 +1802,7 @@ branch_21f6cf8: @ 21f6cf8 :thumb
 	bl      Function_207a0fc
 	mov     r1, #0x6
 	add     r2, sp, #0xc
-	bl      Function_2074b30
+	bl      SetPkmnData
 .thumb
 branch_21f6d0e: @ 21f6d0e :thumb
 	.hword  0x1c6d @ add r5, r5, #0x1
@@ -1822,13 +1822,13 @@ branch_21f6d1c: @ 21f6d1c :thumb
 	mov     r1, #0x70
 	mov     r2, #0x0
 	mov     r4, r0
-	bl      Function_2074470
+	bl      GetPkmnData
 	cmp     r0, #0x0
 	ble     branch_21f6d6e
 	mov     r0, r4
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	ldr     r1, [pc, #0x3c] @ 0x21f6d7c, (=#0x1df)
 	cmp     r0, r1
 	beq     branch_21f6d5a
@@ -1921,7 +1921,7 @@ Function_5_21f6d80: @ 21f6d80 :thumb
 .thumb
 branch_21f6dc8: @ 21f6dc8 :thumb
 	mov     r1, #0x6
-	bl      Function_2074470
+	bl      GetPkmnData
 	cmp     r0, #0x70
 	bne     branch_21f6dfc
 	ldr     r0, [r5, #0xc]
@@ -1945,19 +1945,19 @@ branch_21f6dee: @ 21f6dee :thumb
 	mov     r0, r4
 	mov     r1, #0x6
 	add     r2, sp, #0x0
-	bl      Function_2074b30
+	bl      SetPkmnData
 .thumb
 branch_21f6dfc: @ 21f6dfc :thumb
 	mov     r0, r4
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	cmp     r0, #0x0
 	ble     branch_21f6e46
 	mov     r0, r4
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	ldr     r2, [pc, #0x34] @ 0x21f6e4c, (=#0x1df)
 	cmp     r0, r2
 	beq     branch_21f6e32
@@ -2036,7 +2036,7 @@ Function_5_21f6e50: @ 21f6e50 :thumb
 	bl      Function_207a0fc
 	mov     r1, #0x70
 	add     r2, sp, #0x0
-	bl      Function_2074b30
+	bl      SetPkmnData
 	mov     r0, #0x0
 	add     sp, #0x4
 	pop     {r3-r6,pc}
@@ -2071,7 +2071,7 @@ Function_5_21f6e9c: @ 21f6e9c :thumb
 	mov     r7, #0x0
 	bl      Function_207a268
 	str     r0, [sp, #0x4]
-	bl      Function_207a0f8
+	bl      GetNrOfPkmnInParty
 	mov     r5, r7
 	str     r0, [sp, #0x8]
 	cmp     r0, #0x0
@@ -2084,17 +2084,17 @@ branch_21f6ee6: @ 21f6ee6 :thumb
 	mov     r4, r0
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0xc]
 	mov     r0, r4
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x10]
 	mov     r0, r4
 	mov     r1, #0x4c
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	ldr     r2, [sp, #0xc]
 	ldr     r1, [pc, #0x2c] @ 0x21f6f40, (=#0x1df)
 	cmp     r2, r1
@@ -2221,13 +2221,13 @@ Function_5_21f6fc0: @ 21f6fc0 :thumb
 	mov     r1, #0x5
 	mov     r2, #0x0
 	mov     r6, r0
-	bl      Function_2074470
+	bl      GetPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 	mov     r0, r6
 	mov     r1, #0x4c
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	cmp     r0, #0x0
 	bne     branch_21f70ae
 	ldr     r0, [pc, #0xa8] @ 0x21f70c4, (=#0x10a)
@@ -2363,32 +2363,32 @@ Function_21f70cc: @ 21f70cc :thumb
 	mov     r6, r0
 	mov     r1, #0x46
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x10]
 	mov     r0, r6
 	mov     r1, #0x47
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0xc]
 	mov     r0, r6
 	mov     r1, #0x48
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x8]
 	mov     r0, r6
 	mov     r1, #0x49
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x4]
 	mov     r0, r6
 	mov     r1, #0x4a
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x0]
 	mov     r0, r6
 	mov     r1, #0x4b
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r7, r0
 	cmp     r5, #0x0
 	beq     branch_21f7168
@@ -2492,17 +2492,17 @@ Function_5_21f71b8: @ 21f71b8 :thumb
 	mov     r0, r5
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r6, r0
 	mov     r0, r5
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, #0x4c
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r3, r0
 	mov     r0, r4
 	mov     r1, r6
@@ -2596,7 +2596,7 @@ Function_5_21f7270: @ 21f7270 :thumb
 	bl      Function_207a0fc
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
@@ -3680,12 +3680,12 @@ Function_21f7a74: @ 21f7a74 :thumb
 	mov     r6, r0
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r4, r0
 	mov     r0, r6
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      Function_2074470
+	bl      GetPkmnData
 	lsl     r1, r4, #16
 	lsr     r2, r1, #16
 	ldr     r1, [pc, #0xc4] @ 0x21f7b58, (=#0x1df)
@@ -3864,7 +3864,7 @@ Function_21f7b60: @ 21f7b60 :thumb
 	mov     r1, #0x5
 	mov     r2, #0x0
 	str     r0, [sp, #0x0]
-	bl      Function_2074470
+	bl      GetPkmnData
 	mov     r5, #0x0
 	add     r4, sp, #0xc
 	mov     r6, r5
@@ -3874,7 +3874,7 @@ branch_21f7b76: @ 21f7b76 :thumb
 	ldr     r0, [sp, #0x0]
 	add     r1, #0x36
 	mov     r2, r6
-	bl      Function_2074470
+	bl      GetPkmnData
 	strh    r0, [r4, #0x0]
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1ca4 @ add r4, r4, #0x2
@@ -4051,7 +4051,7 @@ branch_21f7cbc: @ 21f7cbc :thumb
 	ldr     r0, [sp, #0x2c]
 	add     r1, #0x36
 	mov     r2, r6
-	bl      Function_2074470
+	bl      GetPkmnData
 	strh    r0, [r4, #0x0]
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1ca4 @ add r4, r4, #0x2
@@ -4192,7 +4192,7 @@ branch_21f7d88: @ 21f7d88 :thumb
 	bl      Function_21f7f34
 	ldr     r0, [sp, #0x14]
 	ldr     r1, [pc, #0x20] @ 0x21f7de4, (=#0x21f7de9)
-	bl      Function_203e764
+	bl      ScriptHandler_AddFunction
 	ldr     r0, [sp, #0x28]
 	bl      Function_200b190
 	mov     r0, #0x1

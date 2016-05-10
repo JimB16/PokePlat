@@ -4178,7 +4178,7 @@ branch_22450b8: @ 22450b8 :thumb
 	mov     r1, #0x0
 	mov     r0, r6
 	mov     r2, r1
-	bl      Function_2074470
+	bl      GetPkmnData
 	str     r0, [sp, #0x0]
 	mov     r0, #0x0
 	str     r0, [sp, #0x4]

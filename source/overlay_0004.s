@@ -17311,7 +17311,7 @@ branch_2206a80: @ 2206a80 :arm
 	b       branch_2206ab4
 
 branch_2206a9c: @ 2206a9c :arm
-	bl      Get_CPUOperatingMode
+	bl      GetCPUOperatingMode
 	cmp     r0, #0x12
 	addeq   sp, sp, #0xc
 	mvneq   r0, #0x1b
@@ -18541,7 +18541,7 @@ Function_2208088: @ 2208088 :arm
 	and     r0, r0, #0x3
 	cmp     r0, #0x1
 	bne     branch_22080d8
-	bl      Get_CPUOperatingMode
+	bl      GetCPUOperatingMode
 	cmp     r0, #0x12
 	beq     branch_22080d8
 	mov     r0, #0xa

@@ -721,6 +721,45 @@ class SingleHWordParam():
         return value
 		
 		
+class SingleHWordDecimalParam():
+    size = 2
+    should_be_decimal = True
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		#fin.seek(self.address)
+		self.byte = fin.readUInt16() #ord(rom[self.address])
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        if not self.should_be_decimal:
+            return hex(self.byte)
+        else:
+            return str(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
 class SingleWordParam():
     size = 4
     should_be_decimal = False
@@ -952,7 +991,7 @@ music_commands = {
     0x93: ["CheckPokemonParty", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x94: ["StorePokemonParty", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x95: ["SetPokemonPartyStored", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x96: ["GivePokemon", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x96: ["GivePokemon", ["PkmnID", SingleHWordParam], ["Level", SingleHWordParam], ["Item", SingleHWordParam], ["ReturnValue", SingleHWordParam]],
     0x97: ["GiveEgg", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x98: ["Cmd_98", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x99: ["CheckMove", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1513,7 +1552,7 @@ music_commands = {
     0x2c6: ["SpinTradeUnion", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2c7: ["CheckVersionGame", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2c8: ["ShowBArcadeRecors", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
-    0x2c9: ["EternaGymAnm", ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleByteParam]],
+    0x2c9: ["EternaGymAnm"],
     0x2ca: ["FlorarClckAnm"],
     0x2cb: ["CheckPokeParty2", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2cc: ["CheckPokeCastle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1551,10 +1590,12 @@ music_commands = {
     
     0x2f2: ["Cmd_2f2"],
     0x2f3: ["Cmd_2f3", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
+    0x2f4: ["Cmd_2f4", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     
     0x2f7: ["Cmd_2f7", ["unknown", SingleHWordParam]],
     
     0x2fb: ["Cmd_2fb"],
+    
     0x2fc: ["Cmd_2fc", ["unknown", SingleHWordParam]],
     0x2fd: ["Cmd_2fd", ["unknown", SingleHWordParam]],
     0x2fe: ["Cmd_2fe", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1568,8 +1609,10 @@ music_commands = {
     0x306: ["Cmd_306", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x307: ["Cmd_307", ["unknown", SingleHWordParam]],
     0x308: ["Cmd_308", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    
+    0x309: ["Cmd_309"],
     0x30a: ["Cmd_30a", ["unknown", SingleHWordParam]],
+    
+    0x30c: ["Cmd_30c"],
     
     0x30e: ["Cmd_30e", ["unknown", SingleHWordParam]],
     0x30f: ["Cmd_30f", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1610,6 +1653,7 @@ music_commands = {
     0x332: ["Cmd_332"],
     0x333: ["Cmd_333", ["unknown", SingleHWordParam]],
     0x334: ["Cmd_334", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x335: ["Cmd_335", ["unknown", SingleHWordParam], ["unknown", SingleWordParam]],
     
     0x337: ["Cmd_337", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x338: ["Cmd_338"],
@@ -1904,8 +1948,9 @@ class Channel:
 		self.labels = list(set(self.labels))
 		for address, asm, last_address in self.labels:
 			if (
-				address >= self.address
-				and (address, asm, last_address) not in self.used_labels
+				#address >= self.address
+				#and (address, asm, last_address) not in self.used_labels
+				(address, asm, last_address) not in self.used_labels
 			):
 
 				self.used_labels += [(address, asm, last_address)]

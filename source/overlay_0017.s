@@ -54,7 +54,7 @@ Function_223b140: @ 223b140 :thumb
 	ldr     r2, [pc, #0x270] @ 0x223b410, (=#0x1658)
 	mov     r1, #0x0
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, #0x15
 	bl      Function_223f140
 	str     r0, [r4, #0x8]
@@ -347,25 +347,25 @@ branch_223b738: @ 223b738 :thumb
 	mov     r0, #0x0
 	lsl     r1, r1, #24
 	lsl     r2, r2, #18
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	mov     r1, #0x62
 	mov     r2, #0x2
 	mov     r0, #0x0
 	lsl     r1, r1, #20
 	lsl     r2, r2, #16
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	mov     r1, #0x19
 	mov     r2, #0x1
 	mov     r0, #0x0
 	lsl     r1, r1, #22
 	lsl     r2, r2, #18
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	mov     r1, #0x66
 	mov     r2, #0x2
 	mov     r0, #0x0
 	lsl     r1, r1, #20
 	lsl     r2, r2, #16
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	ldr     r5, [pc, #0xcc] @ 0x223b84c, (=#0x2252d8c)
 	add     r3, sp, #0x0
 	mov     r2, r3
@@ -903,7 +903,7 @@ Function_223bba8: @ 223bba8 :thumb
 	mov     r2, #0x20
 	lsl     r6, r0, #5
 	add     r0, r4, r6
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	ldr     r1, [r5, #0x0]
 	ldr     r0, [pc, #0x6c] @ 0x223bcd8, (=#0x123)
 	mov     r2, #0x20
@@ -913,7 +913,7 @@ Function_223bba8: @ 223bba8 :thumb
 	ldr     r1, [sp, #0x10]
 	lsl     r0, r0, #5
 	add     r0, r4, r0
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	ldr     r2, [r5, #0x0]
 	ldr     r1, [pc, #0x54] @ 0x223bcd8, (=#0x123)
 	mov     r0, r7
@@ -923,11 +923,11 @@ Function_223bba8: @ 223bba8 :thumb
 	mov     r2, #0x20
 	lsl     r1, r1, #5
 	add     r1, r4, r1
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	ldr     r0, [sp, #0x10]
 	add     r1, r4, r6
 	mov     r2, #0x20
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	ldr     r2, [r5, #0x0]
 	ldr     r1, [pc, #0x34] @ 0x223bcd8, (=#0x123)
 	mov     r0, r7
@@ -938,12 +938,12 @@ Function_223bba8: @ 223bba8 :thumb
 	ldr     r1, [sp, #0x14]
 	add     r1, r1, r2
 	mov     r2, #0x20
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	ldr     r1, [sp, #0x14]
 	ldr     r0, [sp, #0x10]
 	add     r1, r1, r6
 	mov     r2, #0x20
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	mov     r0, r7
 	bl      Function_20181c4
 	ldr     r0, [sp, #0x10]
@@ -2233,7 +2233,7 @@ branch_223ebd4: @ 223ebd4 :thumb
 .thumb
 branch_223ebf2: @ 223ebf2 :thumb
 	ldr     r0, [r5, #0x0]
-	bl      Function_2094e98
+	bl      Call_PRNG
 	str     r0, [r4, r7]
 	.hword  0x1c76 @ add r6, r6, #0x1
 	.hword  0x1d24 @ add r4, r4, #0x4
@@ -3388,7 +3388,7 @@ Function_223f7e4: @ 223f7e4 :thumb
 	mov     r1, #0x0
 	lsl     r2, r2, #4
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r1, #0x0
 	mov     r0, #0x2e
 	mvn     r1, r1
@@ -3504,7 +3504,7 @@ branch_223f8be: @ 223f8be :thumb
 	ldr     r0, [sp, #0x10]
 	mov     r2, r7
 	add     r0, #0xc
-	blx     Function_20c4b68
+	blx     MI_CpuCopy32
 	mov     r0, r6
 	bl      Function_20181c4
 	.hword  0x1c6d @ add r5, r5, #0x1
@@ -3547,7 +3547,7 @@ branch_223f90a: @ 223f90a :thumb
 	add     r1, r4, r1
 	ldr     r1, [r1, #0x34]
 	mov     r2, r7
-	blx     Function_20c4b18
+	blx     MIi_CpuCopy16
 	.hword  0x1c6d @ add r5, r5, #0x1
 .thumb
 branch_223f948: @ 223f948 :thumb
@@ -5173,7 +5173,7 @@ branch_2240dc6: @ 2240dc6 :thumb
 	ldr     r0, [pc, #0x9c] @ 0x2240e64, (=#0x225323c)
 	add     r1, sp, #0x18
 	mov     r2, #0x4
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 	mov     r1, #0x2
 	mov     r0, r6
 	mov     r2, r1
@@ -5387,7 +5387,7 @@ branch_2240f18: @ 2240f18 :thumb
 	ldr     r0, [pc, #0xa4] @ 0x2240fc0, (=#0x2253240)
 	add     r1, sp, #0x8
 	mov     r2, #0x6
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 	mov     r0, r4
 	mov     r1, #0x3
 	mov     r2, #0x2
@@ -6238,7 +6238,7 @@ branch_22416ac: @ 22416ac :thumb
 	ldr     r1, [r6, #0x0]
 	mov     r0, #0x0
 	lsl     r2, r2, #6
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	add     sp, #0x24
 	pop     {r4-r7,pc}
 @ 0x22416de
@@ -6872,7 +6872,7 @@ Function_22426e8: @ 22426e8 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x10
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r5, [r4, #0x0]
 	mov     r2, #0xfa
 	strb    r6, [r4, #0xd]
@@ -7350,7 +7350,7 @@ Function_2243cf4: @ 2243cf4 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x10
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x18] @ 0x2243d2c, (=#0x7530)
@@ -7404,7 +7404,7 @@ Function_2243dcc: @ 2243dcc :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x38] @ 0x2243e24, (=#0x7530)
@@ -7473,7 +7473,7 @@ Function_2243f10: @ 2243f10 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r2, r4
@@ -7536,7 +7536,7 @@ Function_22440e0: @ 22440e0 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	strh    r0, [r4, #0x4]
@@ -7599,7 +7599,7 @@ Function_2244240: @ 2244240 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	ldr     r2, [pc, #0x44] @ 0x22442a4, (=#0x7530)
@@ -7673,7 +7673,7 @@ Function_22443f8: @ 22443f8 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -7792,7 +7792,7 @@ Function_2244970: @ 2244970 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x14
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r2, #0x64
@@ -7900,7 +7900,7 @@ Function_2244c08: @ 2244c08 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -7971,7 +7971,7 @@ Function_2244d38: @ 2244d38 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -8042,7 +8042,7 @@ Function_2244fd4: @ 2244fd4 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -8113,7 +8113,7 @@ Function_224513c: @ 224513c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -8184,7 +8184,7 @@ Function_2245528: @ 2245528 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -8255,7 +8255,7 @@ Function_2245690: @ 2245690 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r3, r4
@@ -8322,7 +8322,7 @@ Function_2245974: @ 2245974 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	mov     r3, r4
@@ -8393,7 +8393,7 @@ Function_2245b60: @ 2245b60 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r3, r4
@@ -8466,7 +8466,7 @@ Function_2245c60: @ 2245c60 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x2245c9c, (=#0x7530)
@@ -8573,7 +8573,7 @@ Function_2245e14: @ 2245e14 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x20
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x50] @ 0x2245e84, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -9532,7 +9532,7 @@ branch_2246ac0: @ 2246ac0 :thumb
 .thumb
 branch_2246adc: @ 2246adc :thumb
 	ldr     r0, [r5, #0x0]
-	bl      Function_2094e98
+	bl      Call_PRNG
 	mov     r1, #0x4
 	sub     r1, r1, r4
 	blx     Division
@@ -11092,7 +11092,7 @@ Function_2247b00: @ 2247b00 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	strh    r0, [r4, #0x4]
@@ -11144,7 +11144,7 @@ branch_2247b60: @ 2247b60 :thumb
 	add     r0, sp, #0x14
 	mov     r1, #0x0
 	mov     r2, #0x10
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, #0x16
 	str     r0, [sp, #0x20]
 	mov     r1, #0x80
@@ -11199,7 +11199,7 @@ branch_2247b60: @ 2247b60 :thumb
 	mov     r2, r1
 	add     r0, #0x8
 	sub     r2, #0x11
-	blx     Function_20bf578
+	blx     G2x_SetBlendBrightness_
 	mov     r2, #0x1
 	lsl     r2, r2, #26
 	ldr     r1, [r2, #0x0]
@@ -11281,7 +11281,7 @@ Function_2247d7c: @ 2247d7c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x20] @ 0x2247dc0, (=#0x7530)
@@ -11341,7 +11341,7 @@ Function_2247e8c: @ 2247e8c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x24] @ 0x2247ed4, (=#0x7530)
@@ -11383,7 +11383,7 @@ Function_2247edc: @ 2247edc :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x24] @ 0x2247f24, (=#0x7530)
@@ -11425,7 +11425,7 @@ Function_2247f2c: @ 2247f2c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x1c
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x38] @ 0x2247f84, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -11495,7 +11495,7 @@ Function_224814c: @ 224814c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x20] @ 0x2248190, (=#0x7530)
@@ -11554,7 +11554,7 @@ Function_224826c: @ 224826c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x22482a8, (=#0x7530)
@@ -11610,7 +11610,7 @@ Function_2248420: @ 2248420 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x224845c, (=#0x7530)
@@ -11667,7 +11667,7 @@ Function_22485fc: @ 22485fc :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x20] @ 0x2248640, (=#0x7530)
@@ -11727,7 +11727,7 @@ Function_22486f8: @ 22486f8 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x20] @ 0x224873c, (=#0x7530)
@@ -11787,7 +11787,7 @@ Function_22487fc: @ 22487fc :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x58
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x38] @ 0x2248858, (=#0x7530)
@@ -11859,7 +11859,7 @@ Function_2248d3c: @ 2248d3c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x1c
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x40] @ 0x2248d9c, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -11933,7 +11933,7 @@ Function_2248e6c: @ 2248e6c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x18
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x30] @ 0x2248ebc, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -11995,7 +11995,7 @@ Function_2248fd0: @ 2248fd0 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x1c
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x224900c, (=#0x7530)
@@ -12052,7 +12052,7 @@ Function_2249260: @ 2249260 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x14
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	strh    r0, [r4, #0x4]
@@ -12219,7 +12219,7 @@ Function_224d034: @ 224d034 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x224d070, (=#0x7530)
@@ -12275,7 +12275,7 @@ Function_224d1e8: @ 224d1e8 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x28] @ 0x224d230, (=#0x7530)
@@ -12338,7 +12338,7 @@ Function_224d3d8: @ 224d3d8 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x14
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x224d414, (=#0x7530)
@@ -12455,7 +12455,7 @@ Function_224d558: @ 224d558 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r3, r4
@@ -12604,7 +12604,7 @@ Function_224d668: @ 224d668 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x14
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r5, [r4, #0x4]
 	ldr     r0, [pc, #0x10] @ 0x224d694, (=#0x224d6cd)
 	ldr     r2, [pc, #0x10] @ 0x224d698, (=#0x7594)
@@ -12693,7 +12693,7 @@ Function_224df9c: @ 224df9c :thumb
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	mov     r3, r4
 	str     r0, [r4, #0x0]
@@ -12758,7 +12758,7 @@ Function_224e450: @ 224e450 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x50
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	mov     r3, r4
 	str     r0, [r4, #0x0]
@@ -12823,7 +12823,7 @@ Function_224e52c: @ 224e52c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x50
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	mov     r3, r4
 	str     r0, [r4, #0x0]
@@ -12888,7 +12888,7 @@ Function_224e65c: @ 224e65c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x20
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x44] @ 0x224e6c0, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -13043,7 +13043,7 @@ Function_224e814: @ 224e814 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x54
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	mov     r3, r4
 	str     r0, [r4, #0x0]
@@ -13088,7 +13088,7 @@ Function_224e930: @ 224e930 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x3c
 	mov     r7, r3
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, r5
 	add     r0, #0x37
 	strb    r4, [r0, #0x0]
@@ -13269,7 +13269,7 @@ Function_224f18c: @ 224f18c :thumb
 	mov     r4, r1
 	mov     r1, #0x0
 	mov     r5, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [r4, #0x0]
 	str     r0, [r5, #0x0]
 	ldrh    r0, [r4, #0x4]
@@ -13341,7 +13341,7 @@ branch_224f216: @ 224f216 :thumb
 	add     r0, #0x10
 	mov     r1, #0x0
 	lsl     r2, r2, #8
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	add     r0, sp, #0x8
 	strb    r6, [r0, #0x4]
 	strh    r7, [r0, #0x2]
@@ -13356,12 +13356,12 @@ branch_224f216: @ 224f216 :thumb
 	add     r0, sp, #0x8
 	add     r1, #0x10
 	mov     r2, #0x8
-	blx     Function_20c4b68
+	blx     MI_CpuCopy32
 	mov     r1, r5
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [sp, #0x4]
 	add     r1, #0x18
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 	ldr     r0, [pc, #0x14] @ 0x224f268, (=#0xa15)
 	mov     r1, #0x0
 	strb    r1, [r5, r0]
@@ -13401,7 +13401,7 @@ branch_224f288: @ 224f288 :thumb
 	add     r0, #0x10
 	mov     r1, #0x0
 	lsl     r2, r2, #8
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldrh    r2, [r4, #0x0]
 	add     r1, sp, #0x4
 	add     r0, sp, #0x4
@@ -13420,14 +13420,14 @@ branch_224f288: @ 224f288 :thumb
 	mov     r1, r5
 	add     r1, #0x10
 	mov     r2, #0x8
-	blx     Function_20c4b68
+	blx     MI_CpuCopy32
 	cmp     r6, #0x0
 	beq     branch_224f2ce
 	mov     r1, r5
 	ldr     r2, [sp, #0x0]
 	mov     r0, r6
 	add     r1, #0x18
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 .thumb
 branch_224f2ce: @ 224f2ce :thumb
 	mov     r0, #0xa1
@@ -15000,7 +15000,7 @@ branch_2251c92: @ 2251c92 :thumb
 	stmia   r4!, {r0}
 	ldr     r0, [sp, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      Function_2094e98
+	bl      Call_PRNG
 	stmia   r5!, {r0}
 	ldr     r0, [sp, #0x4]
 	.hword  0x1c7f @ add r7, r7, #0x1
@@ -15250,7 +15250,7 @@ Function_2251e68: @ 2251e68 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x2251ea4, (=#0x7530)
@@ -15306,7 +15306,7 @@ Function_225201c: @ 225201c :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x2252058, (=#0x7530)
@@ -15393,7 +15393,7 @@ Function_2252224: @ 2252224 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x20
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [pc, #0x40] @ 0x2252284, (=#0x7530)
 	str     r0, [r4, #0x0]
@@ -15478,7 +15478,7 @@ branch_2252368: @ 2252368 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x14
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r6, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	mov     r2, #0xfa
@@ -15531,7 +15531,7 @@ Function_2252528: @ 2252528 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x18
 	mov     r4, r0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [sp, #0x0]
 	mov     r2, #0x0
 	str     r0, [r4, #0x0]
@@ -15599,7 +15599,7 @@ Function_2252620: @ 2252620 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x18
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x20] @ 0x2252664, (=#0x7530)
@@ -15659,7 +15659,7 @@ Function_22527ac: @ 22527ac :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x24
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r5, [r4, #0x0]
 	ldrh    r0, [r6, #0x0]
 	strh    r0, [r4, #0x4]
@@ -15783,7 +15783,7 @@ Function_2252984: @ 2252984 :thumb
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x14
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	str     r7, [r4, #0x0]
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [pc, #0x1c] @ 0x22529c0, (=#0x7530)
@@ -15951,7 +15951,7 @@ branch_2252b5a: @ 2252b5a :thumb
 	mov     r1, #0x0
 	mov     r2, #0x18
 	str     r0, [sp, #0x0]
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r5, [sp, #0x0]
 	mov     r4, #0x0
 .thumb

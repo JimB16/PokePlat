@@ -23,7 +23,7 @@ branch_21d0d98: @ 21d0d98 :thumb
 	ldr     r2, [pc, #0x1a4] @ 0x21d0f48, (=#0x1108)
 	mov     r6, r0
 	mov     r1, #0x0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r2, r6
 	add     r2, #0x1f
 	mov     r0, #0x1f
@@ -410,7 +410,7 @@ branch_21d1076: @ 21d1076 :thumb
 	ldr     r2, [pc, #0x54] @ 0x21d10fc, (=#0x29e7)
 	blx     Function_21d8c08
 	add     r0, sp, #0x14
-	blx     Function_20c3fbc
+	blx     OS_GetOwnerInfo
 	mov     r1, #0x0
 	ldr     r2, [pc, #0x4c] @ 0x21d1100, (=#0x21d1651)
 	add     r0, sp, #0x18
@@ -565,7 +565,7 @@ branch_21d11ce: @ 21d11ce :thumb
 	ldr     r0, [pc, #0xb4] @ 0x21d128c, (=#0xfc4)
 	add     r0, r1, r0
 	mov     r1, #0x0
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [pc, #0x9c] @ 0x21d127c, (=#0x221a400)
 	ldr     r2, [pc, #0xa4] @ 0x21d1288, (=#0x2215e94)
 	ldr     r1, [r0, #0x0]
@@ -843,7 +843,7 @@ Startpoint_21d1744: @ 21d1744 :thumb
 	lsl     r2, r2, #8
 	ldr     r0, [r0, r2]
 	add     r2, #0x80
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 	ldr     r0, [pc, #0x28] @ 0x21d1798, (=#0x221a400)
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x28] @ 0x21d179c, (=#0xf78)
@@ -877,7 +877,7 @@ Startpoint_21d17a0: @ 21d17a0 :thumb
 .thumb
 Function_21d17a4: @ 21d17a4 :thumb
 	ldr     r0, [pc, #0xc] @ 0x21d17b4, (=#0x221a400)
-	ldr     r3, [pc, #0x10] @ 0x21d17b8, (=#Function_20c4cf4)
+	ldr     r3, [pc, #0x10] @ 0x21d17b8, (=#MI_CpuFill8)
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x10] @ 0x21d17bc, (=#0x10ac)
 	mov     r2, #0x20
@@ -887,7 +887,7 @@ Function_21d17a4: @ 21d17a4 :thumb
 @ 0x21d17b4
 
 .word 0x221a400 @ 0x21d17b4
-.word Function_20c4cf4 @ 0x21d17b8
+.word MI_CpuFill8 @ 0x21d17b8
 .word 0x10ac @ 0x21d17bc
 
 
@@ -1189,7 +1189,7 @@ branch_21d19ae: @ 21d19ae :thumb
 	add     r0, r4, #0x4
 	mov     r1, r5
 	mov     r2, r6
-	blx     Function_20c4db0
+	blx     MI_CpuCopy8
 	blx     Function_21d9968
 	cmp     r0, #0x0
 	bne     branch_21d19ea
@@ -1313,7 +1313,7 @@ Function_21d1aa0: @ 21d1aa0 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1
 	mov     r6, r2
-	blx     Function_20c3d98
+	blx     OS_DisableInterrupts
 	mov     r7, r0
 	ldr     r0, [pc, #0x48] @ 0x21d1af8, (=#0x221a400)
 	mov     r2, r6
@@ -1343,7 +1343,7 @@ branch_21d1ada: @ 21d1ada :thumb
 	mov     r0, #0x1
 	bl      Function_2038ae0
 	mov     r0, r7
-	blx     Function_20c3dac
+	blx     OS_RestoreInterrupts
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x21d1aee
@@ -1351,7 +1351,7 @@ branch_21d1ada: @ 21d1ada :thumb
 .thumb
 branch_21d1aee: @ 21d1aee :thumb
 	mov     r0, r7
-	blx     Function_20c3dac
+	blx     OS_RestoreInterrupts
 	mov     r0, r4
 	pop     {r3-r7,pc}
 @ 0x21d1af8
@@ -1359,12 +1359,15 @@ branch_21d1aee: @ 21d1aee :thumb
 .word 0x221a400 @ 0x21d1af8
 .word 0xf94 @ 0x21d1afc
 .word 0xf98 @ 0x21d1b00
+
+
+
 .thumb
 Function_21d1b04: @ 21d1b04 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	beq     branch_21d1b4e
-	blx     Function_20c3d98
+	blx     OS_DisableInterrupts
 	mov     r4, r0
 	mov     r0, r5
 	blx     Function_20a5654
@@ -1401,7 +1404,7 @@ branch_21d1b3a: @ 21d1b3a :thumb
 .thumb
 branch_21d1b48: @ 21d1b48 :thumb
 	mov     r0, r4
-	blx     Function_20c3dac
+	blx     OS_RestoreInterrupts
 .thumb
 branch_21d1b4e: @ 21d1b4e :thumb
 	pop     {r3-r5,pc}
@@ -1764,7 +1767,7 @@ Function_21d2f08: @ 21d2f08 :thumb
 	beq     branch_21d2f64
 	ldr     r0, [pc, #0x58] @ 0x21d2f6c, (=#0x198c)
 	ldr     r4, [r1, r0]
-	blx     Function_20ca920
+	blx     MIC_StopAutoSampling
 	ldr     r0, [pc, #0x4c] @ 0x21d2f68, (=#0x221a404)
 	ldr     r1, [r0, #0x4]
 	ldr     r0, [pc, #0x50] @ 0x21d2f70, (=#0x19f8)
@@ -1836,7 +1839,7 @@ Function_21d3220: @ 21d3220 :arm
 	ldmeqfd sp!, {r3,pc}
 	add     r0, r0, #246, 30 @ #0x3d8
 	add     r0, r0, #1, 20 @ #0x1000
-	bl      Function_20c29d8
+	bl      OS_LockMutex
 	ldr     r1,  [pc, #0x60] @ [0x21d32a8] (=#0x221a414)
 	mov     r2, #0x1
 	ldr     r0, [r1, #0x8]
@@ -1845,7 +1848,7 @@ Function_21d3220: @ 21d3220 :arm
 	ldr     r0, [r1, #0x8]
 	add     r0, r0, #246, 30 @ #0x3d8
 	add     r0, r0, #1, 20 @ #0x1000
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	ldr     r0,  [pc, #0x3c] @ [0x21d32a8] (=#0x221a414)
 	ldr     r0, [r0, #0x8]
 	add     r0, r0, #1, 20 @ #0x1000
@@ -1910,13 +1913,13 @@ Function_21d46e8: @ 21d46e8 :arm
 	ldmnefd sp!, {r4,pc}
 	add     r0, r4, #254, 30 @ #0x3f8
 	add     r0, r0, #0x1800
-	bl      Function_20c29d8
+	bl      OS_LockMutex
 	add     r0, r4, #254, 30 @ #0x3f8
 	add     r1, r4, #0x1000
 	mov     r2, #0x1
 	add     r0, r0, #0x1800
 	str     r2, [r1, #0xc10]
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	add     r0, r4, #0x1000
 	ldr     r0, [r0, #0xba4]
 	cmp     r0, #0x0
@@ -1977,7 +1980,7 @@ branch_21d4cc0: @ 21d4cc0 :arm
 	ldr     r2,  [pc, #0x14] @ [0x21d4cdc] (=#0x1c14)
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x21d4cd4
 
@@ -2005,7 +2008,7 @@ branch_21d509c: @ 21d509c :arm
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x10
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldmfd   sp!, {r4,pc}
 @ 0x21d50b0
 
@@ -2370,7 +2373,7 @@ Function_21d78c8: @ 21d78c8 :arm
 	ldmnefd sp!, {r4-r6,pc}
 	mov     r1, #0x0
 	mov     r2, #0x64
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	strh    r6, [r4, #0x8]
 	mov     r0, #0x1
 	strh    r0, [r4, #0xa]
@@ -2438,7 +2441,7 @@ Function_21d797c: @ 21d797c :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x0
 	mov     r2, #0xc
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0x64] @ [0x21d7a20] (=#0x221a4dc)
 	ldr     r3,  [pc, #0x64] @ [0x21d7a24] (=#0x21d7780)
 	ldr     lr, [r0, #0x4]
@@ -2692,7 +2695,7 @@ Function_21d7db0: @ 21d7db0 :arm
 .arm
 branch_21d7de8: @ 21d7de8 :arm
 	mov     r0, r4
-	bl      Function_20c24a4
+	bl      OS_Sleep
 	bl      Function_21e5fa0
 	cmp     r0, #0x0
 	beq     branch_21d7de8
@@ -2790,8 +2793,8 @@ Function_21d8abc: @ 21d8abc :arm
 	cmpeq   r1, r0
 	bne     branch_21d8b80
 	add     r0, sp, #0x0
-	bl      Function_20c3fa0
-	bl      Function_20c3880
+	bl      OS_GetMacAddress
+	bl      OS_GetTick
 	mov     r2, r1, lsl #24
 	ldr     r12, [sp]
 	ldr     r3, [sp, #0x4]
@@ -3000,7 +3003,7 @@ branch_21d8e0c: @ 21d8e0c :arm
 	ldr     r1,  [pc, #0x6c] @ [0x21d8e80] (=#0x221b1b0)
 	mov     r0, r4
 	mov     r2, r5
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [sp, #0x20]
 	ldr     r1,  [pc, #0x58] @ [0x21d8e80] (=#0x221b1b0)
 	mov     r2, #0x0
@@ -3017,7 +3020,7 @@ branch_21d8e48: @ 21d8e48 :arm
 	ldr     r0, [sp, #0x20]
 	ldr     r1,  [pc, #0x30] @ [0x21d8e84] (=#0x221b2b0)
 	mov     r2, r4
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0,  [pc, #0x24] @ [0x21d8e84] (=#0x221b2b0)
 	mov     r1, #0x0
 	strb    r1, [r0, r4]
@@ -3132,7 +3135,7 @@ branch_21d9284: @ 21d9284 :arm
 	mov     r0, #0x0
 	add     r1, r1, #0x2e
 	mov     r2, #0x34
-	bl      Function_20c4af0
+	bl      MIi_CpuClear16
 	mov     r0, r4
 	bl      Function_21d8bdc
 	cmp     r0, #0x19
@@ -3148,7 +3151,7 @@ branch_21d92d8: @ 21d92d8 :arm
 	ldr     r1, [r1]
 	mov     r2, r5, lsl #1
 	add     r1, r1, #0x2e
-	bl      Function_20c4b18
+	bl      MIi_CpuCopy16
 .arm
 branch_21d92f0: @ 21d92f0 :arm
 	ldr     r0,  [pc, #0x4c] @ [0x21d9344] (=#0x221a504)
@@ -3518,11 +3521,11 @@ Function_21d9bd4: @ 21d9bd4 :arm
 	ldr     r1,  [pc, #0x1c] @ [0x21d9bfc] (=#0x221a50c)
 	mov     r0, #0x0
 	mov     r2, #0x80
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	ldr     r1,  [pc, #0x10] @ [0x21d9c00] (=#0x221a58c)
 	mov     r0, #0x0
 	mov     r2, #1, 24 @ #0x100
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	ldmfd   sp!, {r3,pc}
 @ 0x21d9bfc
 
@@ -3614,7 +3617,7 @@ Function_21da6c8: @ 21da6c8 :arm
 	mov     r2, #10, 26 @ #0x280
 	mov     r4, r3
 	str     r0, [r12, #0x4]
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0x54] @ [0x21da748] (=#0x221a68c)
 	mov     r2, #0x0
 	ldr     r1, [r0, #0x4]
@@ -4207,12 +4210,12 @@ branch_21dca48: @ 21dca48 :arm
 	str     r3, [r0, #0x8]
 	ldr     r0, [r1]
 	str     r3, [r0, #0xc]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x58] @ [0x21dcaf4] (=#0x221a6a8)
 	ldr     r2, [r2]
 	str     r0, [r2, #0x10]
 	str     r1, [r2, #0x14]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x44] @ [0x21dcaf4] (=#0x221a6a8)
 	ldr     r2, [r2]
 	str     r0, [r2, #0x18]
@@ -4305,7 +4308,7 @@ Function_21dcaf8: @ 21dcaf8 :arm
 	add     r0, r0, #193, 30 @ #0x304
 	mov     r1, #0x0
 	mov     r2, #0x40
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	bl      Function_21e4a34
 	mov     r1, #0x0
 	str     r1, [r0, #0x344]
@@ -4509,7 +4512,7 @@ branch_21dce50: @ 21dce50 :arm
 branch_21dceb0: @ 21dceb0 :arm
 	mov     r0, r7
 	mov     r2, r4
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0,  [pc, #0x124] @ [0x21dcfe8] (=#0x221a6a8)
 	mov     r1, #0x0
 	ldr     r0, [r0, #0x8]
@@ -4715,7 +4718,7 @@ Function_21deaf0: @ 21deaf0 :arm
 	ldr     r0,  [pc, #0x80] @ [0x21deb90] (=#0x221ae00)
 	mov     r1, #0x0
 	mov     r2, #0x20
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	mov     r5, #0x0
 	bl      Function_21e4a34
 	ldrb    r0, [r0, #0xe]
@@ -4828,7 +4831,7 @@ Function_21decf4: @ 21decf4 :arm
 	add     r1, r0, #243, 30 @ #0x3cc
 	mov     r0, #0x0
 	mov     r2, #0x98
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	cmp     r4, #0x2
 	bne     branch_21dee60
 	bl      Function_21e4a34
@@ -4913,42 +4916,42 @@ branch_21dee60: @ 21dee60 :arm
 	add     r1, r0, #0x24
 	mov     r0, #0x0
 	mov     r2, #0x80
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	bl      Function_21e4a34
 	add     r1, r0, #0xa4
 	mov     r0, #0x0
 	mov     r2, #0x40
-	bl      Function_20c4af0
+	bl      MIi_CpuClear16
 	bl      Function_21e4a34
 	add     r1, r0, #0xf4
 	mov     r0, #0x0
 	mov     r2, #0x80
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	bl      Function_21e4a34
 	add     r1, r0, #101, 30 @ #0x194
 	mov     r0, #0x0
 	mov     r2, #0xc
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	bl      Function_21e4a34
 	add     r1, r0, #33, 28 @ #0x210
 	mov     r0, #0x0
 	mov     r2, #0x80
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	bl      Function_21e4a34
 	add     r1, r0, #41, 28 @ #0x290
 	mov     r0, #0x0
 	mov     r2, #0x40
-	bl      Function_20c4af0
+	bl      MIi_CpuClear16
 	bl      Function_21e4a34
 	add     r0, r0, #45, 28 @ #0x2d0
 	mov     r1, #0x0
 	mov     r2, #0x20
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	bl      Function_21e4a34
 	add     r1, r0, #210, 30 @ #0x348
 	mov     r0, #0x0
 	mov     r2, #0x84
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	cmp     r4, #0x1
 	bne     branch_21df00c
 	bl      Function_21e4a34
@@ -5191,7 +5194,7 @@ branch_21df380: @ 21df380 :arm
 	bne     branch_21df3a8
 	bl      Function_21e4a34
 	mov     r4, r0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x2c] @ [0x21df3c8] (=#0xefb5f7)
 	adds    r0, r0, r2
 	str     r0, [r4, #0x174]
@@ -5230,7 +5233,7 @@ Function_21df3cc: @ 21df3cc :arm
 	ldr     r3,  [pc, #0x20] @ [0x21df430] (=#0x221754c)
 	mov     r1, #1, 24 @ #0x100
 	str     r12, [sp, #0x20]
-	bl      Function_20c1af0
+	bl      OS_SNPrintf
 	add     sp, sp, #0x24
 	ldmfd   sp!, {pc}
 @ 0x21df420
@@ -5310,7 +5313,7 @@ branch_21e2fdc: @ 21e2fdc :arm
 	ldr     r1,  [pc, #0xc] @ [0x21e3000] (=#0x221a6c8)
 	ldr     r2,  [pc, #0xc] @ [0x21e3004] (=#0x738)
 	mov     r0, #0x0
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x21e3000
 
@@ -5336,14 +5339,14 @@ Function_21e32b4: @ 21e32b4 :arm
 	str     r2, [r0, #0xc]
 	ldr     r0, [r1]
 	strb    r2, [r0, #0x2]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x28] @ [0x21e3320] (=#0x221a6a8)
 	cmp     r4, #0x0
 	ldr     r2, [r2]
 	str     r0, [r2, #0x18]
 	str     r1, [r2, #0x1c]
 	ldmnefd sp!, {r4,pc}
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0xc] @ [0x21e3320] (=#0x221a6a8)
 	ldr     r2, [r2]
 	str     r0, [r2, #0x10]
@@ -5727,7 +5730,7 @@ Function_21e4e60: @ 21e4e60 :arm
 	mul     r4, r0, r2
 	add     r0, r3, r4
 	str     r1, [r0, #0x2c]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x14] @ [0x21e4ea8] (=#0x221ae20)
 	ldr     r2, [r2]
 	add     r2, r2, r4
@@ -5745,7 +5748,7 @@ Function_21e4eac: @ 21e4eac :arm
 	ldr     r2,  [pc, #0x24] @ [0x21e4ee0] (=#0x614)
 	mov     r1, #0x0
 	str     r0, [r3]
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0x10] @ [0x21e4edc] (=#0x221ae20)
 	ldr     r1,  [pc, #0x14] @ [0x21e4ee4] (=#0x5b9)
 	ldr     r0, [r0]
@@ -5841,7 +5844,7 @@ Function_21e5c34: @ 21e5c34 :arm
 	mov     r0, #0x0
 	mov     r2, #0x24
 	str     r1, [r3, #0xc]
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	ldr     r0,  [pc, #0x168] @ [0x21e5dd4] (=#0x221ae2c)
 	ldr     r1, [r4]
 	ldr     r3, [r0, #0xc]
@@ -5875,22 +5878,22 @@ Function_21e5c34: @ 21e5c34 :arm
 	str     r0, [r1, #0x8]
 	ldr     r1, [r1, #0x10]
 	mov     r0, #0x0
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	mov     r0, #0x0
 	ldr     r1, [pc, #0xdc] @ [0x21e5dd4] (=#0x221ae2c)
 	mov     r2, #35, 24 @ #0x2300
 	ldr     r1, [r1]
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	mov     r0, #0x0
 	ldr     r1, [pc, #0xc8] @ [0x21e5dd4] (=#0x221ae2c)
 	mov     r2, #0x58
 	ldr     r1, [r1, #0x4]
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	mov     r0, #0x0
 	ldr     r1, [pc, #0xb4] @ [0x21e5dd4] (=#0x221ae2c)
 	mov     r2, #0xc
 	ldr     r1, [r1, #0x8]
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	ldr     r1, [pc, #0xa4] @ [0x21e5dd4] (=#0x221ae2c)
 	ldrb    r2, [r4, #0x8]
 	ldr     r0, [r1, #0x10]
@@ -5960,13 +5963,13 @@ Function_21e5ddc: @ 21e5ddc :arm
 branch_21e5dfc: @ 21e5dfc :arm
 	cmp     r5, #0x7
 	bcs     branch_21e5e24
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r4, r0
 	bl      Function_21e78e0
 	mov     r5, r0
 	bl      Function_21e6344
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	b       branch_21e5e70
 @ 0x21e5e24
 
@@ -6347,7 +6350,7 @@ branch_21e6418: @ 21e6418 :arm
 	movs    r4, r0
 	beq     branch_21e6450
 	mov     r1, #0x20
-	bl      Function_20c2c1c
+	bl      DC_InvalidateRange
 	ldr     r1,  [pc, #0x58] @ [0x21e649c] (=#0x221ae2c)
 	mov     r0, r4
 	ldr     r1, [r1, #0xc]
@@ -6371,7 +6374,7 @@ branch_21e6474: @ 21e6474 :arm
 	add     r0, r3, #0x18
 	mov     r1, #0x0
 	mov     r2, #0xa
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldmfd   sp!, {r4,pc}
 @ 0x21e6488
 
@@ -6559,7 +6562,7 @@ Function_21e6bd4: @ 21e6bd4 :arm
 	add     r0, r1, #3, 22 @ #0xc00
 	mov     r1, #0x0
 	mov     r2, #0x52
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r2, r5, #0xb8
 	ldrb    r1, [r5, #0xd0d]
 	mov     r0, r5
@@ -6719,7 +6722,7 @@ branch_21e6ddc: @ 21e6ddc :arm
 	bne     branch_21e6e00
 	mov     r0, #0x0
 	strb    r0, [r7, #0xd15]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r7, #0xcb0]
 	str     r1, [r7, #0xcb4]
 	mov     r0, #0xa
@@ -7176,7 +7179,7 @@ branch_21e742c: @ 21e742c :arm
 	add     r1, r4, #3, 24 @ #0x300
 	mov     r0, #0x0
 	mov     r2, #81, 30 @ #0x144
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	mov     r0, r4
 	bl      Function_21e74dc
 	strb    r0, [r4, #0xd10]
@@ -7198,7 +7201,7 @@ branch_21e7464: @ 21e7464 :arm
 	add     r1, r4, #3, 24 @ #0x300
 	mov     r0, #0x0
 	mov     r2, #81, 30 @ #0x144
-	bl      Function_20c4b4c
+	bl      MIi_CpuClear32
 	mov     r1, #0x0
 	mov     r0, r4
 	strb    r1, [r4, #0xd0f]
@@ -7252,7 +7255,7 @@ Function_21e74dc: @ 21e74dc :arm
 	ldr     r0,  [pc, #0x24] @ [0x21e7538] (=#0x22158a0)
 	add     r1, r4, #0x4
 	mov     r2, #0x8
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r1, #0x8
 	strb    r1, [r4, #0x3]
 	add     r0, r5, #0x1
@@ -7282,7 +7285,7 @@ Function_21e753c: @ 21e753c :arm
 	ldr     r0,  [pc, #0xa8] @ [0x21e761c] (=#0x221760c)
 	add     r1, r5, #0x4
 	mov     r2, #0x8
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r1, #0x8
 	add     r0, r4, #0x1
 	strb    r1, [r5, #0x3]
@@ -7300,7 +7303,7 @@ branch_21e7598: @ 21e7598 :arm
 	ldr     r0,  [pc, #0x6c] @ [0x21e7620] (=#0x2215898)
 	add     r1, r5, #0x4
 	mov     r2, #0x8
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r1, #0x8
 	add     r0, r4, #0x1
 	strb    r1, [r5, #0x3]
@@ -7318,7 +7321,7 @@ branch_21e75d8: @ 21e75d8 :arm
 	ldr     r0,  [pc, #0x30] @ [0x21e7624] (=#0x22158a8)
 	add     r1, r5, #0x4
 	mov     r2, #0xb
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r1, #0xb
 	add     r0, r4, #0x1
 	strb    r1, [r5, #0x3]
@@ -7645,7 +7648,7 @@ Function_21e7a40: @ 21e7a40 :arm
 
 .arm
 branch_21e7a70: @ 21e7a70 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	add     r0, r4, #13, 24 @ #0xd00
@@ -7659,7 +7662,7 @@ branch_21e7a70: @ 21e7a70 :arm
 
 .arm
 branch_21e7a98: @ 21e7a98 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	ldrb    r2, [r4, #0xd0f]
@@ -7682,7 +7685,7 @@ branch_21e7a98: @ 21e7a98 :arm
 
 .arm
 branch_21e7ae4: @ 21e7ae4 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	ldrb    r3, [r4, #0xd0f]
@@ -7703,12 +7706,12 @@ branch_21e7ae4: @ 21e7ae4 :arm
 Function_21e7b20: @ 21e7b20 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	mov     r0, #0x0
 	strb    r0, [r4, #0xd11]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	add     r0, r4, #13, 24 @ #0xd00
@@ -7727,7 +7730,7 @@ Function_21e7b20: @ 21e7b20 :arm
 Function_21e7b70: @ 21e7b70 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r3, [r4, #0xcb0]
 	ldr     r2, [r4, #0xcb4]
 	subs    r3, r0, r3
@@ -7756,7 +7759,7 @@ Function_21e7b70: @ 21e7b70 :arm
 
 .arm
 branch_21e7bdc: @ 21e7bdc :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	add     r0, r4, #0xd00
@@ -7800,7 +7803,7 @@ Function_21e7c14: @ 21e7c14 :arm
 Function_21e7c5c: @ 21e7c5c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r3, [r4, #0xcb0]
 	ldr     r2, [r4, #0xcb4]
 	subs    r3, r0, r3
@@ -7861,7 +7864,7 @@ branch_21e7d10: @ 21e7d10 :arm
 
 .arm
 branch_21e7d30: @ 21e7d30 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	ldrb    r2, [r4, #0xd0f]
@@ -7890,7 +7893,7 @@ branch_21e7d78: @ 21e7d78 :arm
 Function_21e7d84: @ 21e7d84 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r3, [r4, #0xcb0]
 	ldr     r2, [r4, #0xcb4]
 	subs    r3, r0, r3
@@ -7952,7 +7955,7 @@ branch_21e7e3c: @ 21e7e3c :arm
 
 .arm
 branch_21e7e64: @ 21e7e64 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	str     r0, [r4, #0xcb0]
 	str     r1, [r4, #0xcb4]
 	ldrb    r3, [r4, #0xd0f]
@@ -8336,7 +8339,7 @@ Function_21e8654: @ 21e8654 :arm
 	add     r0, sp, #0x8
 	mov     r1, r4
 	mov     r2, #0xa
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	add     sp, sp, #0x18
 	ldmfd   sp!, {r4,pc}
 @ 0x21e869c
@@ -8632,7 +8635,7 @@ Function_21e91b4: @ 21e91b4 :arm
 	mov     r1, #0x0
 	mov     r2, #0x790
 	str     r0, [r3]
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r1,  [pc, #0x14] @ [0x21e9210] (=#0x221ae44)
 	mov     r2, #0x0
 	ldr     r3, [r1]
@@ -9746,7 +9749,7 @@ Function_21ea840: @ 21ea840 :arm
 	bl      Function_20d407c
 .arm
 branch_21ea864: @ 21ea864 :arm
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r1, r1, lsl #6
 	orr     r1, r1, r0, lsr #26
 	ldr     r2,  [pc, #0x1c] @ [0x21ea894] (=#0x82ea)
@@ -9766,11 +9769,11 @@ branch_21ea864: @ 21ea864 :arm
 
 .arm
 Function_21ea898: @ 21ea898 :arm
-	ldr     r12,  [pc, #0x0] @ [0x21ea8a0] (=Function_20c24a4)
+	ldr     r12,  [pc, #0x0] @ [0x21ea8a0] (=OS_Sleep)
 	bx      r12
 @ 0x21ea8a0
 
-.word Function_20c24a4 @ 0x21ea8a0
+.word OS_Sleep @ 0x21ea8a0
 
 
 
@@ -14821,7 +14824,7 @@ branch_2203288: @ 2203288 :arm
 	sub     r1, r0, r2
 	add     r0, r9, #0xc
 	str     r1, [sp]
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [r5, #0x34]
 	sub     r1, r8, #0xc
 	strb    r0, [r4, #0x11]
@@ -14869,7 +14872,7 @@ branch_220330c: @ 220330c :arm
 Function_2203544: @ 2203544 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r4, r0
 	mov     r0, r6
 	bl      Function_22036b4
@@ -14891,7 +14894,7 @@ branch_2203584: @ 2203584 :arm
 	mov     r2, #0x0
 	mov     r0, r4
 	str     r2, [r1, r6, lsl #0x2]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x220359c
 
@@ -14902,7 +14905,7 @@ branch_2203584: @ 2203584 :arm
 .arm
 Function_22035a0: @ 22035a0 :arm
 	stmfd   sp!, {r3-r5,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x54] @ [0x2203604] (=#0x221c698)
 	mov     r4, r0
 	ldr     r5, [r1]
@@ -14930,7 +14933,7 @@ branch_22035e8: @ 22035e8 :arm
 	cmp     r2, #0x3
 	blt     branch_22035e8
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x2203604
 
@@ -14940,7 +14943,7 @@ branch_22035e8: @ 22035e8 :arm
 Function_220360c: @ 220360c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x6c] @ [0x220368c] (=#0x221c698)
 	ldr     r2, [r1]
 	cmp     r2, #0x0
@@ -14971,7 +14974,7 @@ branch_2203664: @ 2203664 :arm
 	ldr     r1, [r3, r2, lsl #0x2]
 	add     r1, r1, #0x1
 	str     r1, [r3, r2, lsl #0x2]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldrb    r1, [r4, #0x11]
 	ldr     r0,  [pc, #0x8] @ [0x2203690] (=#0x221c6a0)
 	ldr     r0, [r0, r1, lsl #0x2]
@@ -14990,7 +14993,7 @@ Function_22036b4: @ 22036b4 :arm
 	ldr     r1,  [pc, #0x40] @ [0x2203700] (=#0x221c698)
 	mov     r5, r0
 	ldr     r4, [r1]
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	cmp     r4, #0x0
 	beq     branch_22036f4
 .arm
@@ -14998,7 +15001,7 @@ branch_22036d0: @ 22036d0 :arm
 	ldrb    r1, [r4, #0x11]
 	cmp     r1, r5
 	bne     branch_22036e8
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r4
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x22036e8
@@ -15010,7 +15013,7 @@ branch_22036e8: @ 22036e8 :arm
 	bne     branch_22036d0
 .arm
 branch_22036f4: @ 22036f4 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x2203700
@@ -15020,7 +15023,7 @@ branch_22036f4: @ 22036f4 :arm
 Function_2203704: @ 2203704 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r2, [r4, #0x4]
 	cmp     r2, #0x0
 	ldrne   r1, [r4, #0x8]
@@ -15052,7 +15055,7 @@ branch_2203768: @ 2203768 :arm
 	ldr     r1, [r3, r2, lsl #0x2]
 	sub     r1, r1, #0x1
 	str     r1, [r3, r2, lsl #0x2]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldrb    r1, [r4, #0x11]
 	ldr     r0,  [pc, #0x8] @ [0x2203794] (=#0x221c6a0)
 	ldr     r0, [r0, r1, lsl #0x2]
@@ -15069,7 +15072,7 @@ branch_2203768: @ 2203768 :arm
 Function_2203930: @ 2203930 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r7,  [pc, #0x50] @ [0x2203994] (=#0x221c6ac)
 	mov     r4, r0
 	ldr     r0, [r7, r5, lsl #0x2]
@@ -15094,7 +15097,7 @@ branch_2203974: @ 2203974 :arm
 	mov     r0, r4
 	str     r3, [r2, r5, lsl #0x2]
 	str     r3, [r1, r5, lsl #0x2]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2203994
 
@@ -15104,7 +15107,7 @@ branch_2203974: @ 2203974 :arm
 .arm
 Function_22039a0: @ 22039a0 :arm
 	stmfd   sp!, {r4-r10,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r6, #0x0
 	mov     r5, r0
 	mov     r10, r6
@@ -15140,7 +15143,7 @@ branch_2203a00: @ 2203a00 :arm
 	cmp     r6, #0x3
 	blt     branch_22039c8
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4-r10,pc}
 @ 0x2203a14
 
@@ -15383,7 +15386,7 @@ branch_2203f64: @ 2203f64 :arm
 	str     r1, [r6, #0x46c]
 	adc     r0, r0, #0x0
 	str     r0, [r6, #0x470]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r12, [r6, #0x46c]
 	ldr     r2,  [pc, #0x1b0] @ [0x2204148] (=#0x8b18)
 	ldr     lr, [r6, #0x470]
@@ -16423,7 +16426,7 @@ branch_2204f40: @ 2204f40 :arm
 	bne     branch_2204f68
 	mov     r0, #0x1
 	bl      Function_22048dc
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldr     r2,  [pc, #0x28] @ [0x2204f88] (=#0x221c6d0)
 	str     r0, [r2, #0x8]
 	str     r1, [r2, #0xc]
@@ -16600,14 +16603,14 @@ Function_22051f0: @ 22051f0 :arm
 Function_2205208: @ 2205208 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, #0x0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x1c] @ [0x2205238] (=#0x221c724)
 	ldr     r3, [r1]
 	cmp     r3, #0x0
 	ldrne   r2, [r3]
 	movne   r4, r3
 	strne   r2, [r1]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r4
 	ldmfd   sp!, {r4,pc}
 @ 0x2205238
@@ -16617,7 +16620,7 @@ Function_2205208: @ 2205208 :arm
 Function_220523c: @ 220523c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x1c] @ [0x220526c] (=#0x221c724)
 	mov     r2, #0x0
 	ldr     r3, [r1]
@@ -16625,7 +16628,7 @@ Function_220523c: @ 220523c :arm
 	str     r4, [r1]
 	str     r2, [r4, #0x4]
 	str     r2, [r4, #0x8]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4,pc}
 @ 0x220526c
 
@@ -16721,7 +16724,7 @@ Function_2205ba0: @ 2205ba0 :arm
 	mov     r0, #0x0
 	str     r0, [r4]
 	str     r0, [r4, #0x4]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	ldrb    r2, [r6, #0x4]
 	and     r3, r2, #0xf0
 	cmp     r3, #0x40
@@ -16774,7 +16777,7 @@ Function_2205fcc: @ 2205fcc :arm
 	mov     r2, r0
 	ldr     r0,  [pc, #0x14] @ [0x2205ff0] (=#0x221dc34)
 	add     r1, sp, #0x0
-	bl      Function_20c2804
+	bl      OS_ReceiveMessage
 	cmp     r0, #0x0
 	ldrne   r0, [sp]
 	moveq   r0, #0x0
@@ -16809,7 +16812,7 @@ Function_2206034: @ 2206034 :arm
 	ldmeqfd sp!, {r3,pc}
 	ldr     r0,  [pc, #0x8] @ [0x2206050] (=#0x221dc34)
 	mov     r2, #0x0
-	bl      Function_20c2770
+	bl      OS_SendMessage
 	ldmfd   sp!, {r3,pc}
 @ 0x2206050
 
@@ -16843,7 +16846,7 @@ branch_2206088: @ 2206088 :arm
 .arm
 branch_220608c: @ 220608c :arm
 	mov     r1, r5
-	bl      Function_20c2770
+	bl      OS_SendMessage
 	movs    r4, r0
 	bne     branch_22060a4
 	mov     r0, r5
@@ -16878,7 +16881,7 @@ Function_22060cc: @ 22060cc :arm
 	add     r0, sp, #0x8
 	add     r1, sp, #0x0
 	mov     r2, #0x1
-	bl      Function_20c2748
+	bl      OS_InitMessageQueue
 	add     r2, sp, #0x8
 	mov     r0, r5
 	mov     r1, r4
@@ -16887,7 +16890,7 @@ Function_22060cc: @ 22060cc :arm
 	add     r0, sp, #0x8
 	add     r1, sp, #0x4
 	mov     r2, #0x1
-	bl      Function_20c2804
+	bl      OS_ReceiveMessage
 	b       branch_2206130
 @ 0x2206120
 
@@ -16963,7 +16966,7 @@ Function_22062d4: @ 22062d4 :arm
 	mov     r7, r0
 	bl      Function_220633c
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x48] @ [0x2206338] (=#0x221a134)
 	mov     r6, r0
 	ldr     r1, [r1]
@@ -16974,7 +16977,7 @@ Function_22062d4: @ 22062d4 :arm
 	beq     branch_2206328
 	mov     r2, r4
 	mov     r1, #0x0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	mov     r0, r5
 	mov     r1, r7
 	bl      Function_22063e4
@@ -16983,7 +16986,7 @@ Function_22062d4: @ 22062d4 :arm
 .arm
 branch_2206328: @ 2206328 :arm
 	mov     r0, r6
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r5
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2206338
@@ -17145,9 +17148,9 @@ Function_2206508: @ 2206508 :arm
 	ldrb    r2, [r5, #0x3]
 	mov     r0, r6
 	mov     r1, r7
-	bl      Function_20c2748
+	bl      OS_InitMessageQueue
 	add     r0, r6, #0xe0
-	bl      Function_20c29c0
+	bl      OS_InitMutex
 	ldrh    r2, [r5]
 	add     r0, r6, #0x20
 	ldr     r1,  [pc, #0x28] @ [0x2206578] (=#0x2206174)
@@ -17156,9 +17159,9 @@ Function_2206508: @ 2206508 :arm
 	mov     r2, r6
 	add     r3, r7, r4
 	str     r12, [sp, #0x4]
-	bl      Function_20c1f34
+	bl      OS_CreateThread
 	add     r0, r6, #0x20
-	bl      Function_20c22d0
+	bl      OS_WakeupThreadDirect
 	add     r0, r7, r4
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r3-r7,pc}
@@ -17311,7 +17314,7 @@ branch_2206a80: @ 2206a80 :arm
 	b       branch_2206ab4
 
 branch_2206a9c: @ 2206a9c :arm
-	bl      GetCPUOperatingMode
+	bl      OS_GetProcMode
 	cmp     r0, #0x12
 	addeq   sp, sp, #0xc
 	mvneq   r0, #0x1b
@@ -17356,7 +17359,7 @@ branch_2206b1c: @ 2206b1c :arm
 	tst     r5, #0x1
 	add     r0, r4, #0xe0
 	bne     branch_2206b44
-	bl      Function_20c2af4
+	bl      OS_TryLockMutex
 	cmp     r0, #0x0
 	bne     branch_2206b48
 	add     sp, sp, #0xc
@@ -17364,7 +17367,7 @@ branch_2206b1c: @ 2206b1c :arm
 	ldmfd   sp!, {r4-r9,pc}
 
 branch_2206b44: @ 2206b44 :arm
-	bl      Function_20c29d8
+	bl      OS_LockMutex
 branch_2206b48: @ 2206b48 :arm
 	ldr     r0, [sp, #0x28]
 	ldr     r12, [sp, #0x2c]
@@ -17377,7 +17380,7 @@ branch_2206b48: @ 2206b48 :arm
 	bl      Function_2206b84
 	mov     r5, r0
 	add     r0, r4, #0xe0
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	mov     r0, r5
 	add     sp, sp, #0xc
 	ldmfd   sp!, {r4-r9,pc}
@@ -17477,7 +17480,7 @@ Function_2206c94: @ 2206c94 :arm
 	mov     r8, r1
 	mov     r7, r2
 	mov     r6, r3
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	add     r1, sp, #0x8
 	mov     r4, r0
 	str     r1, [sp]
@@ -17503,7 +17506,7 @@ Function_2206c94: @ 2206c94 :arm
 	mov     r1, r8
 	mov     r2, r7
 	movne   r5, r7
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r1, [r9, #0x64]
 	ldrsb   r0, [r1, #0xfe]
 	cmp     r0, #0x0
@@ -17543,7 +17546,7 @@ branch_2206d78: @ 2206d78 :arm
 .arm
 branch_2206d88: @ 2206d88 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r5
 	add     sp, sp, #0x10
 	ldmfd   sp!, {r3-r9,pc}
@@ -17654,7 +17657,7 @@ Function_2207044: @ 2207044 :arm
 	ldr     r0, [r6, #0x104]
 	str     r2, [sp, #0x4]
 	mov     r11, r3
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r7, [r6, #0x104]
 	str     r0, [sp, #0x8]
 	cmp     r7, #0x0
@@ -17669,7 +17672,7 @@ branch_2207088: @ 2207088 :arm
 	mvneq   r8, #0x5
 	beq     branch_22070e0
 	add     r0, r6, #67, 30 @ #0x10c
-	bl      Function_20c2218
+	bl      OS_SleepThread
 	mov     r0, r10
 	bl      Function_22082cc
 	cmp     r0, #0x0
@@ -17706,7 +17709,7 @@ branch_22070e0: @ 22070e0 :arm
 	ldr     r1, [sp]
 	ldr     r2, [sp, #0x4]
 	add     r0, r7, #0xc
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	cmp     r11, #0x0
 	ldrneh  r0, [r7, #0x6]
 	ldr     r1, [sp, #0x30]
@@ -17736,7 +17739,7 @@ branch_22070e0: @ 22070e0 :arm
 .arm
 branch_2207170: @ 2207170 :arm
 	ldr     r0, [sp, #0x8]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r8
 	add     sp, sp, #0xc
 	ldmfd   sp!, {r4-r11,pc}
@@ -17804,7 +17807,7 @@ branch_2207330: @ 2207330 :arm
 .arm
 branch_220734c: @ 220734c :arm
 	add     r0, r4, #0xe0
-	bl      Function_20c2af4
+	bl      OS_TryLockMutex
 	cmp     r0, #0x0
 	addeq   sp, sp, #0x8
 	mvneq   r0, #0x5
@@ -17816,7 +17819,7 @@ branch_220734c: @ 220734c :arm
 .arm
 branch_220736c: @ 220736c :arm
 	add     r0, r4, #0xe0
-	bl      Function_20c29d8
+	bl      OS_LockMutex
 	mov     r12, #0x1
 .arm
 branch_2207378: @ 2207378 :arm
@@ -17830,7 +17833,7 @@ branch_2207378: @ 2207378 :arm
 	bl      Function_22073b0
 	mov     r5, r0
 	add     r0, r4, #0xe0
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	mov     r0, r5
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r4-r8,pc}
@@ -17931,7 +17934,7 @@ Function_22074b4: @ 22074b4 :arm
 	mov     r7, r3
 	ldr     r4, [r10, #0x68]
 	movgt   r8, r9
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1, [sp, #0x28]
 	mov     r11, r0
 	and     r6, r1, #0x1
@@ -17956,14 +17959,14 @@ branch_2207510: @ 2207510 :arm
 	moveq   r5, #0x0
 	beq     branch_2207528
 	add     r0, r4, #65, 30 @ #0x104
-	bl      Function_20c2218
+	bl      OS_SleepThread
 	b       branch_22074e4
 @ 0x2207528
 
 .arm
 branch_2207528: @ 2207528 :arm
 	mov     r0, r11
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r5
 	ldmfd   sp!, {r3-r11,pc}
 @ 0x2207538
@@ -18031,13 +18034,13 @@ branch_22075e4: @ 22075e4 :arm
 	ldr     r1, [r5, #0x18]
 	mov     r2, r7
 	add     r0, r6, r0
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 .arm
 branch_2207610: @ 2207610 :arm
 	ldr     r1, [r5, #0x10]
 	ldr     r2, [r5, #0x14]
 	mov     r0, r6
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	add     r0, r4, #1, 24 @ #0x100
 	ldrh    r6, [r0]
 	strh    r7, [r5, #0x20]
@@ -18236,7 +18239,7 @@ branch_2207c30: @ 2207c30 :arm
 	str     r1, [r0, #0x104]
 	ldr     r0, [r4, #0x64]
 	add     r0, r0, #67, 30 @ #0x10c
-	bl      Function_20c2268
+	bl      OS_WakeupThread
 	ldr     r0, [r4, #0x64]
 	bl      Function_2207cb4
 	b       branch_2207c78
@@ -18250,7 +18253,7 @@ branch_2207c68: @ 2207c68 :arm
 	bl      Function_2207cb4
 .arm
 branch_2207c78: @ 2207c78 :arm
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r5, r0
 	mov     r0, r4
 	bl      Function_2208254
@@ -18262,7 +18265,7 @@ branch_2207c78: @ 2207c78 :arm
 	ldr     r1, [r1, #0x1c]
 	blx     r1
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2207cb0
 
@@ -18274,13 +18277,13 @@ Function_2207cb4: @ 2207cb4 :arm
 	ldmeqfd sp!, {r3-r9,pc}
 	add     r0, r9, #0x20
 	bl      Function_20c21d4
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r8, r0
-	bl      Function_20c25a4
+	bl      OS_DisableScheduler
 	add     r1, sp, #0x0
 	mov     r0, r9
 	mov     r2, #0x0
-	bl      Function_20c2804
+	bl      OS_ReceiveMessage
 	cmp     r0, #0x0
 	beq     branch_2207d40
 	mov     r6, #0x0
@@ -18297,7 +18300,7 @@ branch_2207cfc: @ 2207cfc :arm
 	beq     branch_2207d20
 	mov     r1, r7
 	mov     r2, r6
-	bl      Function_20c2770
+	bl      OS_SendMessage
 .arm
 branch_2207d20: @ 2207d20 :arm
 	ldr     r0, [sp]
@@ -18307,22 +18310,22 @@ branch_2207d28: @ 2207d28 :arm
 	mov     r0, r9
 	mov     r1, r5
 	mov     r2, r4
-	bl      Function_20c2804
+	bl      OS_ReceiveMessage
 	cmp     r0, #0x0
 	bne     branch_2207cfc
 .arm
 branch_2207d40: @ 2207d40 :arm
-	bl      Function_20c25d8
-	bl      Function_20c2320
+	bl      OS_EnableScheduler
+	bl      OS_RescheduleThread
 	mov     r0, r8
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x2207d54
 
 .arm
 Function_2207d54: @ 2207d54 :arm
 	stmfd   sp!, {r3-r5,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r4,  [pc, #0x28] @ [0x2207d8c] (=#0x221dc60)
 	mov     r5, r0
 	ldr     r0, [r4]
@@ -18337,7 +18340,7 @@ branch_2207d70: @ 2207d70 :arm
 .arm
 branch_2207d80: @ 2207d80 :arm
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x2207d8c
 
@@ -18353,7 +18356,7 @@ Function_2207e34: @ 2207e34 :arm
 	ldr     r5,  [pc, #0x90] @ [0x2207ed4] (=#0x221dc5c)
 .arm
 branch_2207e40: @ 2207e40 :arm
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r6, [r5]
 	cmp     r6, #0x0
 	beq     branch_2207e74
@@ -18372,7 +18375,7 @@ branch_2207e68: @ 2207e68 :arm
 	bne     branch_2207e54
 .arm
 branch_2207e74: @ 2207e74 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	cmp     r6, #0x0
 	beq     branch_2207e8c
 	mov     r0, r6
@@ -18474,7 +18477,7 @@ Function_2207f58: @ 2207f58 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x0
 	mov     r2, #0x64
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, r4, #218, 30 @ #0x368
 	add     r2, r0, #2, 22 @ #0x800
 	ldr     r3,  [pc, #0x4c] @ [0x2208000] (=#0xb68)
@@ -18506,7 +18509,7 @@ Function_2207f58: @ 2207f58 :arm
 Function_2208008: @ 2208008 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x34] @ [0x2208050] (=#0x221de50)
 	mov     r5, r0
 	ldmia   r1, {r6,r7}
@@ -18519,7 +18522,7 @@ Function_2208008: @ 2208008 :arm
 	mov     r4, r0
 	mov     r0, r5
 	stmia   r1, {r6,r7}
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r4
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2208050
@@ -18541,11 +18544,11 @@ Function_2208088: @ 2208088 :arm
 	and     r0, r0, #0x3
 	cmp     r0, #0x1
 	bne     branch_22080d8
-	bl      GetCPUOperatingMode
+	bl      OS_GetProcMode
 	cmp     r0, #0x12
 	beq     branch_22080d8
 	mov     r0, #0xa
-	bl      Function_20c24a4
+	bl      OS_Sleep
 	b       branch_22080d8
 @ 0x22080c8
 
@@ -18588,7 +18591,7 @@ Function_22080f0: @ 22080f0 :arm
 	beq     branch_2208160
 .arm
 branch_2208130: @ 2208130 :arm
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r6, r0
 	mov     r0, r5
 	bl      Function_22081c0
@@ -18599,7 +18602,7 @@ branch_2208130: @ 2208130 :arm
 	cmp     r0, #0x0
 	mov     r0, r6
 	orrgt   r4, r4, #0x8
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 .arm
 branch_2208160: @ 2208160 :arm
 	ldrsb   r0, [r5, #0x73]
@@ -18946,7 +18949,7 @@ Function_220854c: @ 220854c :arm
 	ldr     r0,  [pc, #0x88] @ [0x22085f4] (=#0x221dcec)
 	ldr     r2,  [pc, #0x88] @ [0x22085f8] (=#0x101)
 	mov     r1, #0x0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0x78] @ [0x22085f4] (=#0x221dcec)
 	ldr     r2,  [pc, #0x78] @ [0x22085f8] (=#0x101)
 	mov     r1, r5
@@ -19057,7 +19060,7 @@ Function_2208a74: @ 2208a74 :arm
 	mov     r0, r1
 	add     r1, sp, #0x10
 	mov     r2, #0x4
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [sp, #0x10]
 	add     r1, sp, #0xc
 	bl      Function_2208af8
@@ -19071,7 +19074,7 @@ Function_2208a74: @ 2208a74 :arm
 	ldrb    r3, [sp, #0xc]
 	str     r3, [sp, #0x8]
 	ldrb    r3, [sp, #0xf]
-	bl      Function_20c1af0
+	bl      OS_SNPrintf
 	mov     r0, r4
 	add     sp, sp, #0x14
 	ldmfd   sp!, {r3,r4,pc}
@@ -19136,7 +19139,7 @@ branch_2208b80: @ 2208b80 :arm
 .arm
 branch_2208ba4: @ 2208ba4 :arm
 	mov     r0, #0x1
-	bl      Function_20c24a4
+	bl      OS_Sleep
 	ldr     r0,  [pc, #0x14] @ [0x2208bc8] (=#0x20b)
 	subs    r9, r9, r0
 	mov     r0, #0x0
@@ -19168,7 +19171,7 @@ Function_2208df0: @ 2208df0 :arm
 
 .arm
 branch_2208e0c: @ 2208e0c :arm
-	bl      Function_20c24a4
+	bl      OS_Sleep
 	ldmfd   sp!, {r3,pc}
 @ 0x2208e14
 
@@ -19180,7 +19183,7 @@ branch_2208e0c: @ 2208e0c :arm
 .arm
 Function_2209060: @ 2209060 :arm
 	stmfd   sp!, {r3-r5,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r4, r0
 	ldr     r0,  [pc, #0x34] @ [0x22090a8] (=#0x221df98)
 	bl      Function_20c2204
@@ -19192,11 +19195,11 @@ Function_2209060: @ 2209060 :arm
 	ldr     r0,  [pc, #0x18] @ [0x22090a8] (=#0x221df98)
 	mov     r2, #0x1
 	str     r2, [r1, #0x44]
-	bl      Function_20c22d0
+	bl      OS_WakeupThreadDirect
 .arm
 branch_2209098: @ 2209098 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r5
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x22090a8
@@ -19373,7 +19376,7 @@ Function_22093dc: @ 22093dc :arm
 	add     r1, r7, #0x6
 	mov     r2, #0x6
 	mov     r4, r3
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r0, r7
 	mov     r3, r5
 	add     r1, r7, #0x6
@@ -19492,7 +19495,7 @@ branch_2209578: @ 2209578 :arm
 	ldr     r1, [r12, #0x28]
 	add     r1, r3, r1
 	add     r1, r1, #0x2
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r1,  [pc, #0x74] @ [0x2209620] (=#0x221ddf0)
 	mov     r0, r7
 	ldr     r3, [r1, #0x58]
@@ -19500,7 +19503,7 @@ branch_2209578: @ 2209578 :arm
 	mov     r2, #0x6
 	add     r1, r3, r1
 	add     r1, r1, #0x8
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r1,  [pc, #0x54] @ [0x2209620] (=#0x221ddf0)
 	add     r0, r6, #0x6
 	ldr     r3, [r1, #0x58]
@@ -19508,7 +19511,7 @@ branch_2209578: @ 2209578 :arm
 	sub     r2, r5, #0x6
 	add     r1, r3, r1
 	add     r1, r1, #0xe
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [sp, #0x18]
 	cmp     r0, #0x0
 	ldrne   r2, [sp, #0x1c]
@@ -19520,7 +19523,7 @@ branch_2209578: @ 2209578 :arm
 	add     r1, r3, r1
 	add     r1, r1, #0x8
 	add     r1, r1, r5
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 .arm
 branch_2209614: @ 2209614 :arm
 	ldr     r0,  [pc, #0x4] @ [0x2209620] (=#0x221ddf0)
@@ -19539,7 +19542,7 @@ branch_2209614: @ 2209614 :arm
 Function_2209788: @ 2209788 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0xa4] @ [0x2209840] (=#0x7f000001)
 	mov     r4, r0
 	cmp     r5, r1
@@ -19572,7 +19575,7 @@ branch_22097e8: @ 22097e8 :arm
 	ldr     r0, [r1]
 	cmp     r5, r0
 	bne     branch_2209820
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r2, #0xc
 	mul     r3, r6, r2
 	ldr     r2,  [pc, #0x48] @ [0x2209850] (=#0x221de70)
@@ -19594,7 +19597,7 @@ branch_2209820: @ 2209820 :arm
 .arm
 branch_2209830: @ 2209830 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r7
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2209840
@@ -19616,15 +19619,15 @@ Function_2209858: @ 2209858 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x0
 	mov     r2, #0x2a
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, sp, #0x0
 	mov     r1, #0xff
 	mov     r2, #0x6
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0xb8] @ [0x2209944] (=#0x221e2d8)
 	add     r1, sp, #0x6
 	mov     r2, #0x6
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r0, #0x1
 	ldr     r1,  [pc, #0xa8] @ [0x2209948] (=#0x608)
 	strb    r0, [sp, #0xf]
@@ -19637,7 +19640,7 @@ Function_2209858: @ 2209858 :arm
 	ldr     r0,  [pc, #0x84] @ [0x2209944] (=#0x221e2d8)
 	add     r1, sp, #0x16
 	mov     r2, #0x6
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0,  [pc, #0x80] @ [0x2209950] (=#0x221ddf0)
 	mov     r1, r4, lsr #16
 	ldr     r3, [r0, #0x50]
@@ -19695,7 +19698,7 @@ branch_2209978: @ 2209978 :arm
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r9,pc}
 	mov     r0, r5
-	bl      Function_20c24a4
+	bl      OS_Sleep
 	mov     r0, r9
 	bl      Function_2209788
 	cmp     r0, #0x0
@@ -19746,7 +19749,7 @@ branch_2209b5c: @ 2209b5c :arm
 	ldmeqfd sp!, {r4-r8,pc}
 	sub     r1, r8, #0xe
 	mov     r2, #0x6
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	b       branch_2209ba4
 @ 0x2209b74
 
@@ -19769,7 +19772,7 @@ branch_2209ba4: @ 2209ba4 :arm
 	ldr     r0,  [pc, #0x20] @ [0x2209bcc] (=#0x221e2d8)
 	sub     r1, r8, #0x8
 	mov     r2, #0x6
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r2, r6
 	mov     r3, r5
 	sub     r0, r8, #0xe
@@ -19841,8 +19844,8 @@ branch_2209ca4: @ 2209ca4 :arm
 	ldr     r0,  [pc, #0x44] @ [0x2209cf0] (=#0x221a19c)
 	sub     r1, r8, #0x1c
 	mov     r2, #0x8
-	bl      Function_20c4db0
-	bl      Function_20c3d98
+	bl      MI_CpuCopy8
+	bl      OS_DisableInterrupts
 	mov     r4, r0
 	ldr     r0,  [pc, #0x30] @ [0x2209cf4] (=#0x221e2d8)
 	str     r6, [sp]
@@ -19852,7 +19855,7 @@ branch_2209ca4: @ 2209ca4 :arm
 	add     r3, r7, #0x1c
 	bl      Function_2209438
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x2209ce8
@@ -20480,7 +20483,7 @@ Function_220c100: @ 220c100 :arm
 	stmfd   sp!, {r3-r9,lr}
 	mov     r8, r1
 	mov     r9, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r6, [r8, #0x44]
 	mov     r7, r0
 	cmp     r6, #0x0
@@ -20491,14 +20494,14 @@ Function_220c100: @ 220c100 :arm
 branch_220c128: @ 220c128 :arm
 	mov     r0, r4
 	str     r5, [r8, #0x4]
-	bl      Function_20c2218
+	bl      OS_SleepThread
 	ldr     r6, [r8, #0x44]
 	cmp     r6, #0x0
 	beq     branch_220c128
 .arm
 branch_220c140: @ 220c140 :arm
 	mov     r0, r7
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	str     r6, [r9]
 	ldr     r0, [r8, #0x40]
 	ldmfd   sp!, {r3-r9,pc}
@@ -20514,7 +20517,7 @@ Function_220c154: @ 220c154 :arm
 	ldreqb  r0, [r4, #0x8]
 	cmpeq   r0, #0x4
 	bne     branch_220c1b4
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r8, r0
 	mov     r7, #0x2
 	mov     r6, #0x0
@@ -20523,7 +20526,7 @@ Function_220c154: @ 220c154 :arm
 branch_220c188: @ 220c188 :arm
 	mov     r0, r6
 	str     r7, [r4, #0x4]
-	bl      Function_20c2218
+	bl      OS_SleepThread
 branch_220c194: @ 220c194 :arm
 	ldr     r0, [r4, #0x44]
 	cmp     r0, #0x0
@@ -20531,7 +20534,7 @@ branch_220c194: @ 220c194 :arm
 	cmpeq   r0, #0x4
 	beq     branch_220c188
 	mov     r0, r8
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	b       branch_220c1b8
 
 branch_220c1b4: @ 220c1b4 :arm
@@ -20591,7 +20594,7 @@ Function_220c234: @ 220c234 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r4, r1
 	mov     r7, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r2, [r4, #0x44]
 	ldr     r1, [r4, #0x3c]
 	mov     r5, r0
@@ -20614,7 +20617,7 @@ branch_220c264: @ 220c264 :arm
 .arm
 branch_220c288: @ 220c288 :arm
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldrb    r0, [r4, #0x8]
 	cmp     r0, #0xa
 	cmpne   r0, #0xb
@@ -20748,7 +20751,7 @@ Function_220c3fc: @ 220c3fc :arm
 	str     r3, [sp, #0x8]
 	mov     r6, r4
 	str     r0, [r8, #0x34]
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r0, r0, lsr #16
 	orr     r0, r0, r1, lsl #16
 	str     r0, [sp, #0xc]
@@ -20765,7 +20768,7 @@ branch_220c440: @ 220c440 :arm
 	mov     r2, r9
 	str     r6, [sp, #0x4]
 	bl      Function_220c3c0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r5, r0, lsr #16
 	ldr     r4,  [pc, #0x190] @ [0x220c600] (=#0x221ddf0)
 	orr     r5, r5, r1, lsl #16
@@ -20783,7 +20786,7 @@ branch_220c470: @ 220c470 :arm
 	ldr     r0, [r8, #0x30]
 	cmp     r1, r0
 	beq     branch_220c4c8
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r0, r0, lsr #16
 	orr     r0, r0, r1, lsl #16
 	sub     r0, r0, r5
@@ -20806,7 +20809,7 @@ branch_220c4c8: @ 220c4c8 :arm
 	add     r0, r0, r5
 	str     r0, [sp, #0x10]
 	beq     branch_220c504
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r0, r0, lsr #16
 	orr     r0, r0, r1, lsl #16
 	str     r0, [sp, #0xc]
@@ -20822,7 +20825,7 @@ branch_220c504: @ 220c504 :arm
 	bne     branch_220c588
 	cmp     r6, #0x0
 	bne     branch_220c58c
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r7, r0, lsr #16
 	orr     r7, r7, r1, lsl #16
 	ldr     r4,  [pc, #0xc0] @ [0x220c600] (=#0x221ddf0)
@@ -20841,7 +20844,7 @@ branch_220c550: @ 220c550 :arm
 	blx     r0
 	cmp     r0, #0x0
 	beq     branch_220c578
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r0, r0, lsr #16
 	orr     r0, r0, r1, lsl #16
 	sub     r0, r0, r7
@@ -20881,7 +20884,7 @@ branch_220c5b4: @ 220c5b4 :arm
 	ldrb    r0, [r8, #0x8]
 	cmp     r0, #0x4
 	bne     branch_220c5f4
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r2, r0, lsr #16
 	ldr     r0, [sp, #0xc]
 	orr     r2, r2, r1, lsl #16
@@ -21176,7 +21179,7 @@ branch_220d5c4: @ 220d5c4 :arm
 	strb    r3, [r2, #0x4]
 	bl      Function_220c6d8
 	mov     r4, #0x0
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r5, r0, lsr #16
 	orr     r5, r5, r1, lsl #16
 	b       branch_220d75c
@@ -21272,7 +21275,7 @@ branch_220d724: @ 220d724 :arm
 	bhi     branch_220d754
 	mov     r1, r11
 	add     r0, r0, #0xa
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r4, #0x1
 	b       branch_220d754
 @ 0x220d744
@@ -21296,7 +21299,7 @@ branch_220d75c: @ 220d75c :arm
 	beq     branch_220d790
 	cmp     r4, #0x0
 	bne     branch_220d790
-	bl      Function_20c3880
+	bl      OS_GetTick
 	mov     r0, r0, lsr #16
 	orr     r0, r0, r1, lsl #16
 	sub     r0, r0, r5
@@ -21631,7 +21634,7 @@ Function_220eab0: @ 220eab0 :arm
 	add     r0, r6, r4
 	add     r1, r7, #0x34
 	mov     r2, #0x20
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	b       branch_220eb68
 @ 0x220eb48
 
@@ -21639,12 +21642,12 @@ Function_220eab0: @ 220eab0 :arm
 branch_220eb48: @ 220eb48 :arm
 	add     r0, r7, #0x34
 	rsb     r2, r5, #0x20
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r1, r7, #0x54
 	mov     r2, r5
 	add     r0, r6, r4
 	sub     r1, r1, r5
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 .arm
 branch_220eb68: @ 220eb68 :arm
 	mov     r0, #0x1
@@ -21717,7 +21720,7 @@ branch_220f44c: @ 220f44c :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x36
 	mov     r2, #0x30
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r1, sp, #0x0
 	add     r0, r7, #255, 30 @ #0x3fc
 	mov     r2, #0x30
@@ -21746,7 +21749,7 @@ branch_220f44c: @ 220f44c :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x5c
 	mov     r2, #0x30
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, r7, #255, 30 @ #0x3fc
 	add     r1, sp, #0x0
 	mov     r2, #0x30
@@ -21777,7 +21780,7 @@ branch_220f52c: @ 220f52c :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x36
 	mov     r2, #0x28
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r1, sp, #0x0
 	add     r0, r7, #210, 30 @ #0x348
 	mov     r2, #0x28
@@ -21806,7 +21809,7 @@ branch_220f52c: @ 220f52c :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x5c
 	mov     r2, #0x28
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, r7, #210, 30 @ #0x348
 	add     r1, sp, #0x0
 	mov     r2, #0x28
@@ -21865,7 +21868,7 @@ branch_220f674: @ 220f674 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x36
 	mov     r2, #0x30
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r1, sp, #0x0
 	add     r0, r5, #255, 30 @ #0x3fc
 	mov     r2, #0x30
@@ -21894,7 +21897,7 @@ branch_220f674: @ 220f674 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x5c
 	mov     r2, #0x30
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, r5, #255, 30 @ #0x3fc
 	add     r1, sp, #0x0
 	mov     r2, #0x30
@@ -21921,7 +21924,7 @@ branch_220f744: @ 220f744 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x36
 	mov     r2, #0x28
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r1, sp, #0x0
 	add     r0, r5, #210, 30 @ #0x348
 	mov     r2, #0x28
@@ -21950,7 +21953,7 @@ branch_220f744: @ 220f744 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0x5c
 	mov     r2, #0x28
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	add     r0, r5, #210, 30 @ #0x348
 	add     r1, sp, #0x0
 	mov     r2, #0x28
@@ -21999,7 +22002,7 @@ branch_220f854: @ 220f854 :arm
 	strhi   r6, [sp]
 	ldr     r2, [sp]
 	mov     r1, r7
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [sp]
 	mov     r1, r5
 	bl      Function_220c234
@@ -22397,7 +22400,7 @@ branch_2210ac0: @ 2210ac0 :arm
 	ldr     r2, [sp]
 	add     r1, r3, r1
 	movcc   r6, #0x0
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0, [sp]
 	mov     r1, r5
 	bl      Function_220c234
@@ -22507,14 +22510,14 @@ branch_2210c08: @ 2210c08 :arm
 	add     r1, r4, #0x5
 	mov     r2, r7
 	sub     r11, r6, r7
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	add     r1, r4, #0x5
 	mov     r0, r8
 	add     r1, r1, r7
 	mov     r2, r11
 	add     r10, r10, r7
 	sub     r9, r9, r7
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r0, #0x17
 	strb    r0, [r4]
 	mov     r0, #0x3
@@ -22564,27 +22567,27 @@ branch_2210cf0: @ 2210cf0 :arm
 
 .arm
 Function_2210eec: @ 2210eec :arm
-	ldr     r12,  [pc, #0xc] @ [0x2210f00] (=Function_20c4db0)
+	ldr     r12,  [pc, #0xc] @ [0x2210f00] (=MI_CpuCopy8)
 	mov     r3, r0
 	mov     r0, r1
 	mov     r1, r3
 	bx      r12
 @ 0x2210f00
 
-.word Function_20c4db0 @ 0x2210f00
+.word MI_CpuCopy8 @ 0x2210f00
 
 
 
 .arm
 Function_2210f04: @ 2210f04 :arm
-	ldr     r12,  [pc, #0xc] @ [0x2210f18] (=Function_20c4db0)
+	ldr     r12,  [pc, #0xc] @ [0x2210f18] (=MI_CpuCopy8)
 	mov     r3, r0
 	mov     r0, r1
 	mov     r1, r3
 	bx      r12
 @ 0x2210f18
 
-.word Function_20c4db0 @ 0x2210f18
+.word MI_CpuCopy8 @ 0x2210f18
 
 
 
@@ -22869,7 +22872,7 @@ Function_2211338: @ 2211338 :arm
 	mov     r1, #0x0
 	mov     r2, #0x58
 	mov     r4, r0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r1,  [pc, #0x1c] @ [0x2211370] (=#0x67452301)
 	ldr     r0,  [pc, #0x1c] @ [0x2211374] (=#0xefcdab89)
 	str     r1, [r4]
@@ -22910,7 +22913,7 @@ Function_2211380: @ 2211380 :arm
 	mov     r0, r7
 	mov     r2, r5
 	add     r1, r1, r4
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r0, r8
 	add     r1, r8, #0x18
 	mov     r4, #0x0
@@ -22939,7 +22942,7 @@ branch_2211420: @ 2211420 :arm
 	add     r0, r7, r5
 	add     r1, r1, r4
 	sub     r2, r6, r5
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x2211438
 
@@ -23477,7 +23480,7 @@ Function_2211bf8: @ 2211bf8 :arm
 	mov     r1, #0x0
 	mov     r2, #0x5c
 	mov     r4, r0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	ldr     r0,  [pc, #0x24] @ [0x2211c38] (=#0x67452301)
 	ldr     r1,  [pc, #0x24] @ [0x2211c3c] (=#0xefcdab89)
 	str     r0, [r4]
@@ -23521,7 +23524,7 @@ Function_2211c4c: @ 2211c4c :arm
 	mov     r0, r7
 	mov     r2, r5
 	add     r1, r1, r4
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r0, r8
 	add     r1, r8, #0x1c
 	mov     r4, #0x0
@@ -23550,7 +23553,7 @@ branch_2211cec: @ 2211cec :arm
 	add     r0, r7, r5
 	add     r1, r1, r4
 	sub     r2, r6, r5
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x2211d04
 
@@ -23632,13 +23635,13 @@ Function_2212cc8: @ 2212cc8 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
 	mov     r5, r1
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r2,  [pc, #0xfc] @ [0x2212ddc] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r1, [r2]
 	cmp     r1, #0x0
 	beq     branch_2212cf8
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212cf8
@@ -23647,21 +23650,21 @@ Function_2212cc8: @ 2212cc8 :arm
 branch_2212cf8: @ 2212cf8 :arm
 	cmp     r6, #0x0
 	bne     branch_2212d0c
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 
 branch_2212d0c: @ 2212d0c :arm
 	tst     r6, #0x1f
 	beq     branch_2212d20
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 
 branch_2212d20: @ 2212d20 :arm
 	cmp     r5, #35, 24 @ #0x2300
 	bcs     branch_2212d34
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x6
 	ldmfd   sp!, {r4-r6,pc}
 
@@ -23694,7 +23697,7 @@ branch_2212d34: @ 2212d34 :arm
 	bl      Function_20c3808
 	cmp     r0, #0x0
 	bne     branch_2212da8
-	bl      Function_20c3790
+	bl      OS_InitTick
 branch_2212da8: @ 2212da8 :arm
 	bl      Function_20c39fc
 	cmp     r0, #0x0
@@ -23705,9 +23708,9 @@ branch_2212db8: @ 2212db8 :arm
 	ldr     r0, [r0]
 	add     r0, r0, #179, 30 @ #0x2cc
 	add     r0, r0, #2, 20 @ #0x2000
-	bl      Function_20c3a0c
+	bl      OS_CreateAlarm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212ddc
@@ -23722,13 +23725,13 @@ Function_2212e38: @ 2212e38 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
 	mov     r5, r1
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x1e0] @ [0x2213030] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r1, [r1]
 	cmp     r1, #0x0
 	bne     branch_2212e68
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212e68
@@ -23756,21 +23759,21 @@ branch_2212e8c: @ 2212e8c :arm
 
 .arm
 branch_2212e9c: @ 2212e9c :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x2
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212ea8
 
 .arm
 branch_2212ea8: @ 2212ea8 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212eb4
 
 .arm
 branch_2212eb4: @ 2212eb4 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212ec0
@@ -23783,7 +23786,7 @@ branch_2212ec0: @ 2212ec0 :arm
 	ldr     r1, [r1, #0x26c]
 	mov     r1, r1, lsl #16
 	mov     r1, r1, lsr #16
-	bl      Function_20cdb18
+	bl      WM_Init
 	cmp     r0, #0x6
 	addls   pc, pc, r0, lsl #2
 	b       branch_2212f2c
@@ -23798,7 +23801,7 @@ branch_2212f2c: @ 2212f2c :arm
 	mov     r0, #0xb
 	bl      Function_2213d74
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x7
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x2212f44
@@ -23834,13 +23837,13 @@ Function_221314c: @ 221314c :arm
 	mov     r7, r0
 	mov     r6, r1
 	mov     r5, r2
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x154] @ [0x22132bc] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r1, [r1]
 	cmp     r1, #0x0
 	bne     branch_2213180
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213180
@@ -23865,7 +23868,7 @@ branch_22131a4: @ 22131a4 :arm
 	mov     r2, r5
 	bl      Function_2213a94
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x2
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22131c4
@@ -23877,14 +23880,14 @@ branch_22131c4: @ 22131c4 :arm
 	mov     r2, r5
 	bl      Function_2213a94
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22131e4
 
 .arm
 branch_22131e4: @ 22131e4 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22131f0
@@ -23901,7 +23904,7 @@ branch_22131f0: @ 22131f0 :arm
 	add     r0, r0, #2, 20 @ #0x2000
 	ldrh    r1, [r1, #0x8c]
 	ldr     r0, [r0, #0x288]
-	bl      Function_20c2c1c
+	bl      DC_InvalidateRange
 	ldr     r2,  [pc, #0x98] @ [0x22132bc] (=#0x221f7ac)
 	ldr     r0,  [pc, #0x98] @ [0x22132c0] (=#0x2214254)
 	ldr     r1, [r2]
@@ -23912,7 +23915,7 @@ branch_22131f0: @ 22131f0 :arm
 	ldr     r1, [r2]
 	add     r1, r1, #162, 30 @ #0x288
 	add     r1, r1, #2, 20 @ #0x2000
-	bl      Function_20cf08c
+	bl      WM_StartScanEx
 	cmp     r0, #0x2
 	beq     branch_2213264
 	cmp     r0, #0x3
@@ -23937,7 +23940,7 @@ branch_2213264: @ 2213264 :arm
 .arm
 branch_2213284: @ 2213284 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x4
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213294
@@ -23947,13 +23950,13 @@ branch_2213294: @ 2213294 :arm
 	mov     r0, #0xb
 	bl      Function_2213d74
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x7
 	ldmfd   sp!, {r3-r7,pc}
 
 branch_22132ac: @ 22132ac :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x3
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22132bc
@@ -23966,13 +23969,13 @@ branch_22132ac: @ 22132ac :arm
 .arm
 Function_22132c4: @ 22132c4 :arm
 	stmfd   sp!, {r4,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x90] @ [0x2213364] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r1, [r1]
 	cmp     r1, #0x0
 	bne     branch_22132ec
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4,pc}
 
@@ -23998,23 +24001,23 @@ branch_2213310: @ 2213310 :arm
 	b       branch_2213354
 
 branch_2213330: @ 2213330 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x2
 	ldmfd   sp!, {r4,pc}
 
 branch_221333c: @ 221333c :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r4,pc}
 
 branch_2213348: @ 2213348 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r4,pc}
 
 branch_2213354: @ 2213354 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x3
 	ldmfd   sp!, {r4,pc}
 @ 0x2213364
@@ -24029,13 +24032,13 @@ Function_2213368: @ 2213368 :arm
 	mov     r7, r0
 	mov     r6, r1
 	mov     r5, r2
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r2,  [pc, #0x1dc] @ [0x2213560] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r12, [r2]
 	cmp     r12, #0x0
 	bne     branch_221339c
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 
@@ -24053,7 +24056,7 @@ branch_221339c: @ 221339c :arm
 branch_22133c0: @ 22133c0 :arm
 	cmp     r7, #0x0
 	bne     branch_22133d4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22133d4
@@ -24063,7 +24066,7 @@ branch_22133d4: @ 22133d4 :arm
 	ldrh    r3, [r7, #0x3c]
 	cmp     r3, #0x0
 	beq     branch_22133ec
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22133ec
@@ -24078,7 +24081,7 @@ branch_22133ec: @ 22133ec :arm
 	cmpcc   r0, #0x4
 	bcc     branch_2213418
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213418
@@ -24098,7 +24101,7 @@ branch_2213418: @ 2213418 :arm
 	bne     branch_2213454
 	add     r0, r1, #34, 24 @ #0x2200
 	mov     r1, #0x0
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 	b       branch_2213474
 @ 0x2213454
 
@@ -24106,7 +24109,7 @@ branch_2213418: @ 2213418 :arm
 branch_2213454: @ 2213454 :arm
 	add     r0, r6, #0x2
 	add     r1, r1, #34, 24 @ #0x2200
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	b       branch_2213474
 @ 0x2213464
 
@@ -24115,7 +24118,7 @@ branch_2213464: @ 2213464 :arm
 	add     r0, r12, #34, 24 @ #0x2200
 	mov     r1, #0x0
 	mov     r2, #0x52
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 .arm
 branch_2213474: @ 2213474 :arm
 	ldr     r1,  [pc, #0xe4] @ [0x2213560] (=#0x221f7ac)
@@ -24123,7 +24126,7 @@ branch_2213474: @ 2213474 :arm
 	ldr     r1, [r1]
 	mov     r2, #0xc0
 	add     r1, r1, #133, 26 @ #0x2140
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r1,  [pc, #0xcc] @ [0x2213560] (=#0x221f7ac)
 	mov     r0, r5
 	ldr     r1, [r1]
@@ -24137,21 +24140,21 @@ branch_2213474: @ 2213474 :arm
 
 .arm
 branch_22134b0: @ 22134b0 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x2
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22134bc
 
 .arm
 branch_22134bc: @ 22134bc :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22134c8
 
 .arm
 branch_22134c8: @ 22134c8 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x22134d4
@@ -24163,7 +24166,7 @@ branch_22134d4: @ 22134d4 :arm
 	mov     r3, r1
 	mov     r2, #0x50
 	str     r1, [sp]
-	bl      Function_20d0764
+	bl      WM_SetLifeTime
 	cmp     r0, #0x2
 	beq     branch_2213508
 	cmp     r0, #0x3
@@ -24188,7 +24191,7 @@ branch_2213508: @ 2213508 :arm
 .arm
 branch_2213528: @ 2213528 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x4
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213538
@@ -24198,7 +24201,7 @@ branch_2213538: @ 2213538 :arm
 	mov     r0, #0xb
 	bl      Function_2213d74
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x7
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213550
@@ -24206,7 +24209,7 @@ branch_2213538: @ 2213538 :arm
 .arm
 branch_2213550: @ 2213550 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x3
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x2213560
@@ -24221,14 +24224,14 @@ branch_2213550: @ 2213550 :arm
 .arm
 Function_2213898: @ 2213898 :arm
 	stmfd   sp!, {r4,lr}
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x1c] @ [0x22138c4] (=#0x221f7ac)
 	mov     r4, #0x0
 	ldr     r1, [r1]
 	cmp     r1, #0x0
 	addne   r1, r1, #2, 20 @ #0x2000
 	ldrne   r4, [r1, #0x260]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r4
 	ldmfd   sp!, {r4,pc}
 @ 0x22138c4
@@ -24238,7 +24241,7 @@ Function_2213898: @ 2213898 :arm
 Function_22138c8: @ 22138c8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x80] @ [0x221395c] (=#0x221f7ac)
 	mov     r2, #0x0
 	ldr     r3, [r1]
@@ -24246,7 +24249,7 @@ Function_22138c8: @ 22138c8 :arm
 	cmp     r3, #0x0
 	ldr     r4, [r1, #0x264]
 	bne     branch_22138fc
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x22138fc
@@ -24276,7 +24279,7 @@ branch_221391c: @ 221391c :arm
 	orr     r2, r5, r1
 	add     r1, r3, #0x2000
 	str     r2, [r1, #0x264]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mov     r0, r4
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x221395c
@@ -24361,7 +24364,7 @@ branch_2213a1c: @ 2213a1c :arm
 	add     r2, r0, #2, 20 @ #0x2000
 	ldr     r0, [r2, #0x270]
 	ldr     r2, [r2, #0x274]
-	bl      Function_20c4cf4
+	bl      MI_CpuFill8
 .arm
 branch_2213a68: @ 2213a68 :arm
 	ldr     r0,  [pc, #0x20] @ [0x2213a90] (=#0x221f7ac)
@@ -24409,7 +24412,7 @@ Function_2213a94: @ 2213a94 :arm
 	ldrh    r0, [r0, #0x68]
 	cmp     r0, #0x0
 	bne     branch_2213b08
-	bl      Function_20ce934
+	bl      WM_GetDispersionScanPeriod
 .arm
 branch_2213b08: @ 2213b08 :arm
 	ldr     r2, [pc, #0x110] @ [0x2213c20] (=#0x221f7ac)
@@ -24433,7 +24436,7 @@ branch_2213b08: @ 2213b08 :arm
 	ldr     r1, [r1]
 	add     r1, r1, #0x92
 	add     r1, r1, #34, 24 @ #0x2200
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	b       branch_2213b7c
 @ 0x2213b64
 
@@ -24444,7 +24447,7 @@ branch_2213b64: @ 2213b64 :arm
 	ldr     r1, [r1]
 	add     r1, r1, #0x92
 	add     r1, r1, #34, 24 @ #0x2200
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 .arm
 branch_2213b7c: @ 2213b7c :arm
 	cmp     r4, #0x0
@@ -24457,7 +24460,7 @@ branch_2213b7c: @ 2213b7c :arm
 	ldr     r1, [r1]
 	add     r1, r1, #167, 30 @ #0x29c
 	add     r1, r1, #2, 20 @ #0x2000
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r0,  [pc, #0x70] @ [0x2213c20] (=#0x221f7ac)
 	mov     r1, #0x0
 	ldr     r0, [r0]
@@ -24471,7 +24474,7 @@ branch_2213bc0: @ 2213bc0 :arm
 	ldr     r1, [r1]
 	add     r1, r1, #167, 30 @ #0x29c
 	add     r1, r1, #2, 20 @ #0x2000
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	mov     r1, #0x0
 branch_2213bdc: @ 2213bdc :arm
 	ldrb    r0, [r4]
@@ -24562,7 +24565,7 @@ branch_2213ca4: @ 2213ca4 :arm
 Function_2213d74: @ 2213d74 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x78] @ [0x2213e00] (=#0x221f7ac)
 	mov     r4, r0
 	ldr     r1, [r1]
@@ -24593,11 +24596,11 @@ branch_2213db0: @ 2213db0 :arm
 	add     r0, r0, #179, 30 @ #0x2cc
 	ldr     r3,  [pc, #0x18] @ [0x2213e08] (=#0x2213e80)
 	add     r0, r0, #2, 20 @ #0x2000
-	bl      Function_20c3b48
+	bl      OS_SetAlarm
 .arm
 branch_2213df4: @ 2213df4 :arm
 	mov     r0, r4
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x2213e00
 
@@ -24622,7 +24625,7 @@ Function_22152b4: @ 22152b4 :arm
 	str     r2, [r1, #0x8]
 	ldr     r0,  [pc, #0xc] @ [0x22152f0] (=#0x221f7bc)
 	str     r2, [r1, #0x4]
-	bl      Function_20c29c0
+	bl      OS_InitMutex
 	ldmfd   sp!, {r3,pc}
 @ 0x22152ec
 
@@ -24640,7 +24643,7 @@ Function_22153dc: @ 22153dc :arm
 	mov     r4, r7
 	bl      Function_2213964
 	mov     r6, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	cmp     r6, #0x0
 	beq     branch_2215428
 	add     r1, r6, #2, 20 @ #0x2000
@@ -24655,7 +24658,7 @@ Function_22153dc: @ 22153dc :arm
 	add     r7, r1, #2, 20 @ #0x2000
 .arm
 branch_2215428: @ 2215428 :arm
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	cmp     r5, #0x0
 	strneh  r4, [r5]
 	mov     r0, r7
@@ -24666,10 +24669,10 @@ branch_2215428: @ 2215428 :arm
 Function_221543c: @ 221543c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	ldr     r1,  [pc, #0x8] @ [0x2215458] (=#0x221f7b0)
 	str     r4, [r1, #0x28]
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4,pc}
 @ 0x2215458
 
@@ -24681,13 +24684,13 @@ Function_221545c: @ 221545c :arm
 	mov     r9, r1
 	mov     r8, r2
 	mov     r6, r3
-	bl      Function_20c3d98
+	bl      OS_DisableInterrupts
 	mov     r5, r0
 	bl      Function_2213964
 	cmp     r0, #0x0
 	bne     branch_2215494
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mvn     r0, #0x0
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x2215494
@@ -24695,14 +24698,14 @@ Function_221545c: @ 221545c :arm
 .arm
 branch_2215494: @ 2215494 :arm
 	ldr     r0,  [pc, #0x138] @ [0x22155d4] (=#0x221f7bc)
-	bl      Function_20c29d8
+	bl      OS_LockMutex
 	bl      Function_2213964
 	movs    r7, r0
 	bne     branch_22154c0
 	ldr     r0,  [pc, #0x124] @ [0x22155d4] (=#0x221f7bc)
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mvn     r0, #0x0
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x22154c0
@@ -24719,9 +24722,9 @@ branch_22154c0: @ 22154c0 :arm
 .arm
 branch_22154dc: @ 22154dc :arm
 	ldr     r0,  [pc, #0xf0] @ [0x22155d4] (=#0x221f7bc)
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mvn     r0, #0x3
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x22154f4
@@ -24731,14 +24734,14 @@ branch_22154f4: @ 22154f4 :arm
 	mov     r0, r9
 	mov     r2, r8
 	add     r1, r7, #15, 24 @ #0xf00
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 	ldr     r2, [sp, #0x20]
 	cmp     r2, #0x0
 	ble     branch_2215520
 	add     r1, r7, #15, 24 @ #0xf00
 	mov     r0, r6
 	add     r1, r1, r8
-	bl      Function_20c4db0
+	bl      MI_CpuCopy8
 .arm
 branch_2215520: @ 2215520 :arm
 	ldr     r1, [sp, #0x20]
@@ -24748,7 +24751,7 @@ branch_2215520: @ 2215520 :arm
 	mov     r1, r4
 	add     r2, r7, #15, 24 @ #0xf00
 	mov     r3, r3, lsr #16
-	bl      Function_20cf88c
+	bl      WM_SetDCFData
 	cmp     r0, #0x8
 	addls   pc, pc, r0, lsl #2
 	b       branch_2215570
@@ -24761,9 +24764,9 @@ branch_2215520: @ 2215520 :arm
 .arm
 branch_2215570: @ 2215570 :arm
 	ldr     r0,  [pc, #0x5c] @ [0x22155d4] (=#0x221f7bc)
-	bl      Function_20c2a5c
+	bl      OS_UnlockMutex
 	mov     r0, r5
-	bl      Function_20c3dac
+	bl      OS_RestoreInterrupts
 	mvn     r0, #0x4
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x2215588

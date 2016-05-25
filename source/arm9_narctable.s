@@ -20,6 +20,8 @@ Unknown_20fece0:
 .ascii "data/tradelist.narc\0"
 .ascii "graphic/oekaki.narc\0"
 .ascii "data/fldtanime.narc\0"
+
+PlMsg_String: @ 0x020fee50
 .ascii "msgdata/pl_msg.narc\0"
 .ascii "graphic/record.narc\0"
 .ascii "data/arealight.narc\0"
@@ -279,7 +281,7 @@ NARCStringPointer: @ 0x2100498
 .word 0x020ffcbc @ 0x17
 .word 0x020ffe5c @ 0x18
 .word 0x020ff1b8 @ 0x19
-.word 0x020fee50 @ 0x1a
+.word PlMsg_String @ 0x1a
 .word 0x020ff9b8 @ 0x1b
 .word 0x020ff140 @ 0x1c
 .word 0x0210001c @ 0x1d

@@ -3403,7 +3403,7 @@ branch_22212ee: @ 22212ee :thumb
 	mov     r2, #0x19
 	mov     r1, #0x0
 	lsl     r2, r2, #8
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, #0x2
 	mov     r1, #0x0
 	bl      Function_2019120
@@ -3550,7 +3550,7 @@ Function_2221424: @ 2221424 :thumb
 	mov     r2, #0x19
 	mov     r1, #0x0
 	lsl     r2, r2, #8
-	blx     Function_20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, r4
 	mov     r1, #0x4
 	bl      Function_2221238
@@ -4703,7 +4703,7 @@ branch_2221ccc: @ 2221ccc :thumb
 	str     r0, [sp, #0x0]
 	ldrb    r3, [r5, #0xa]
 	ldr     r0, [pc, #0x64] @ 0x2221d48, (=#0x4000050)
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	mov     r0, r5
 	bl      Function_2221b64
 	ldrb    r0, [r5, #0x5]
@@ -4827,7 +4827,7 @@ branch_2221d5e: @ 2221d5e :thumb
 	str     r0, [sp, #0x0]
 	ldrb    r3, [r4, #0x9]
 	ldr     r0, [pc, #0x188] @ 0x2221f3c, (=#0x4000050)
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	mov     r0, r4
 	bl      Function_2221b64
 	ldrb    r0, [r4, #0x5]
@@ -6823,7 +6823,7 @@ Function_2222cac: @ 2222cac :thumb
 	mov     r1, #0x1
 	mov     r2, #0x2
 	lsr     r3, r3, #16
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	pop     {r3,pc}
 @ 0x2222cd6
 
@@ -11549,13 +11549,13 @@ branch_222599a: @ 222599a :thumb
 .align 2, 0
 .thumb
 Function_22259a0: @ 22259a0 :thumb
-	ldr     r3, [pc, #0x4] @ 0x22259a8, (=#Function_20bcfd0)
+	ldr     r3, [pc, #0x4] @ 0x22259a8, (=#FX_Div)
 	sub     r0, r1, r0
 	lsl     r1, r2, #12
 	bx      r3
 @ 0x22259a8
 
-.word Function_20bcfd0 @ 0x22259a8
+.word FX_Div @ 0x22259a8
 
 
 
@@ -11564,7 +11564,7 @@ Function_22259ac: @ 22259ac :thumb
 	push    {r3,lr}
 	sub     r0, r1, r0
 	mov     r1, r2
-	blx     Function_20bcfd0
+	blx     FX_Div
 	add     r1, sp, #0x0
 	str     r0, [sp, #0x0]
 	blx     Function_20bdbcc
@@ -12517,7 +12517,7 @@ Function_2225fd4: @ 2225fd4 :thumb
 	lsr     r0, r0, #12
 	orr     r0, r1
 	lsl     r1, r2, #9
-	blx     Function_20bcfd0
+	blx     FX_Div
 	sub     r0, r4, r0
 	add     r1, sp, #0x0
 	blx     Function_20bdbcc
@@ -13363,13 +13363,13 @@ branch_2226580: @ 2226580 :thumb
 	mov     r0, r6
 	add     r1, #0x20
 	lsl     r2, r2, #8
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	mov     r2, #0x32
 	lsl     r2, r2, #4
 	add     r1, r4, r2
 	mov     r0, r6
 	sub     r2, #0x20
-	blx     Function_20c4b4c
+	blx     MIi_CpuClear32
 	ldr     r2, [pc, #0x14] @ 0x22265b8, (=#0x2226529)
 	ldr     r3, [pc, #0x14] @ 0x22265bc, (=#0x222653d)
 	mov     r0, r4
@@ -30709,12 +30709,12 @@ Function_2230194: @ 2230194 :thumb
 	lsr     r0, r0, #16
 	orr     r0, r2
 	mov     r2, #0x3
-	ldr     r3, [pc, #0x4] @ 0x22301b0, (=#Function_20c4b4c)
+	ldr     r3, [pc, #0x4] @ 0x22301b0, (=#MIi_CpuClear32)
 	lsl     r2, r2, #8
 	bx      r3
 @ 0x22301b0
 
-.word Function_20c4b4c @ 0x22301b0
+.word MIi_CpuClear32 @ 0x22301b0
 
 
 
@@ -32873,7 +32873,7 @@ branch_2231708: @ 2231708 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x3f
 	mov     r3, #0x1f
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	ldr     r0, [r4, #0x0]
 	ldr     r1, [pc, #0x10] @ 0x223175c, (=#0x2231609)
 	mov     r2, r4
@@ -33210,7 +33210,7 @@ branch_2231c4c: @ 2231c4c :thumb
 	mov     r1, #0x0
 	mov     r2, #0x3f
 	mov     r3, #0x1f
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	ldr     r0, [r6, #0x0]
 	ldr     r1, [pc, #0xc] @ 0x2231cd0, (=#0x2231a39)
 	mov     r2, r6
@@ -38508,7 +38508,7 @@ branch_223579a: @ 223579a :thumb
 	mov     r1, #0x0
 	mov     r3, r5
 	str     r4, [sp, #0x0]
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	pop     {r3-r5,pc}
 @ 0x22357b6
 
@@ -38539,7 +38539,7 @@ branch_22357d6: @ 22357d6 :thumb
 	mov     r1, #0x0
 	mov     r2, r5
 	mov     r3, r4
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	pop     {r3-r5,pc}
 @ 0x22357e6
 
@@ -38583,7 +38583,7 @@ branch_2235808: @ 2235808 :thumb
 	mov     r2, r7
 	mov     r3, r5
 	str     r4, [sp, #0x0]
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	pop     {r3-r7,pc}
 @ 0x2235834
 

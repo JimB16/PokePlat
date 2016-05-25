@@ -4,7 +4,7 @@
 
 
 .thumb
-Startpoint_223e140: @ 223e140 :thumb
+Function_223e140: @ 223e140 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r1, [r4, #0x38]
@@ -5821,7 +5821,7 @@ Function_2246a34: @ 2246a34 :thumb
 Function_2246a38: @ 2246a38 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, #0x7
 	bl      Function_206af3c
@@ -5836,7 +5836,7 @@ Function_2246a38: @ 2246a38 :thumb
 Function_2246a4c: @ 2246a4c :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, r1
 	bl      Function_206af3c
@@ -5851,7 +5851,7 @@ Function_2246a4c: @ 2246a4c :thumb
 Function_2246a60: @ 2246a60 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, #0x9
 	bl      Function_206af3c
@@ -5866,7 +5866,7 @@ Function_2246a60: @ 2246a60 :thumb
 Function_2246a74: @ 2246a74 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, #0xa
 	bl      Function_206af3c
@@ -5881,7 +5881,7 @@ Function_2246a74: @ 2246a74 :thumb
 Function_2246a88: @ 2246a88 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, #0xb
 	bl      Function_206af3c
@@ -5896,7 +5896,7 @@ Function_2246a88: @ 2246a88 :thumb
 Function_2246a9c: @ 2246a9c :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	mov     r1, #0x2
 	mov     r2, #0x11
 	bl      Function_206af3c
@@ -5911,7 +5911,7 @@ Function_2246a9c: @ 2246a9c :thumb
 Function_2246ab0: @ 2246ab0 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_2025e38
+	bl      LoadTrainerDataAdress
 	bl      Function_2025f58
 	cmp     r0, #0x5
 	blt     branch_2246ac4
@@ -5955,7 +5955,7 @@ Function_2246ad8: @ 2246ad8 :thumb
 Function_2246ae8: @ 2246ae8 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_20507e4
+	bl      LoadFlagAdress
 	bl      Function_206a954
 	pop     {r3,pc}
 @ 0x2246af6

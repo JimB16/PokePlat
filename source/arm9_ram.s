@@ -49,8 +49,34 @@ RAM_21bfb10:
 RAM_21bfb18:
     .word 0
 
-.org 0x21c07b0 - 0x02103e00
+.org 0x21c0744 - 0x02103e00
 
+RAM_21c0744:
+    .word 0, 0, 0, 0, 0, 0, 0
+RAM_21c0760:
+    .word 0
+RAM_21c0764:
+    .word 0
+RAM_21c0768:
+    .word 0, 0
+RAM_21c0770:
+    .word 0
+RAM_21c0774:
+    .word 0, 0
+RAM_21c077c:
+    .word 0, 0, 0
+RAM_21c0788:
+    .word 0, 0, 0
+RAM_21c0794:
+    .word 0, 0
+RAM_21c079c:
+    .word 0
+RAM_21c07a0:
+    .word 0
+RAM_21c07a4:
+    .word 0
+RAM_21c07a8:
+    .word 0, 0
 RAM_21c07b0:
     .word 0
 RAM_21c07b4:
@@ -67,14 +93,20 @@ RAM_21c07d4:
 RAM_21c07d8:
     .word 0
 RAM_21c07dc:
-
-.org 0x21c07f4 - 0x02103e00
-
+    .word 0
+RAM_21c07e0:
+    .word 0, 0, 0, 0
+RAM_21c07f0:
+    .word 0
 RAM_21c07f4:
+    .word 0, 0
+RAM_21c07fc:
+
 
 .org 0x21c0848 - 0x02103e00
 
 RAM_21c0848:
+
 
 .org 0x21c3a34 - 0x02103e00
 
@@ -93,47 +125,110 @@ RAM_21c5a60:
 RAM_21ccb9e:
     .hword 0
 
+
 .org 0x21ccba0 - 0x02103e00
 
 RAM_21ccba0:
     .hword 0, 0, 0, 0, 0, 0, 0, 0
     .hword 0, 0, 0, 0, 0
 
-.org 0x21ccc5c - 0x02103e00
 
+.org 0x21ccc58 - 0x02103e00
+
+RAM_21ccc58:
+    .word 0
 RAM_21ccc5c:
+
 
 .org 0x21ccc80 - 0x02103e00
 
 RAM_21ccc80:
     .word 0
 RAM_21ccc84:
+    .word 0, 0, 0
+RAM_21ccc90:
+
+
+.org 0x21cec08 - 0x02103e00
+
+RAM_21cec08:
+    .word 0
+RAM_21cec0c:
+    .word 0, 0, 0
+RAM_21cec18:
+    .word 0
+RAM_21cec1c:
+    .word 0, 0
+RAM_21cec24:
+    .word 0, 0
+RAM_21cec2c:
+    .word 0, 0
+RAM_21cec34:
+
 
 .org 0x21cec90 - 0x02103e00
 
 RAM_21cec90:
+
 
 .org 0x21cee20 - 0x02103e00
 
 RAM_21cee20:
 
 
+.org 0x21d0d68 - 0x02103e00
+
+RAM_21d0d68:
+
+
 .org 0x27e0000 - 0x02103e00
 
 RAM_27e0000:
-.zero 4*24 @ 24 JumpAdresses, 1 for every IRQs
+    .zero 4*24 @ 24 JumpAdresses, 1 for every IRQs
 
 RAM_27e0060:
-.zero 4*8
+    .zero 4*8
 
 RAM_27e0080:
 
 
+.org 0x27fff80 - 0x02103e00
+
+RAM_27fff80:
+    .word 0, 0, 0, 0
+RAM_27fff90:
+    .word 0
+RAM_27fff94:
+    .hword 0
+RAM_27fff96:
+    .hword 0
+RAM_27fff98:
+    .hword 0
+    .byte 0
+RAM_27fff9b:
+    .byte 0
+RAM_27fff9c:
+    .word 0
+RAM_27fffa0:
+    .word 0, 0
+RAM_27fffa8:
+    .hword 0
+RAM_27fffaa:
+    .hword 0
+    .word 0
+RAM_27fffb0:
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
+RAM_27fffe0:
+    .word 0, 0
+RAM_27fffe8:
+    .word 0, 0
+RAM_27ffff0:
 
 
-@ todo: 0x2014c79 0x206c121
 
-@.equ RAM_21c07d4,              0x21c07d4 @ .word
+
 /*
 0x21c07c4 +1 .byte
 0x21c07c4 +4 .word
@@ -153,19 +248,7 @@ RAM_27e0080:
 .equ Unknown_2101d38,              0x2101d38 @ .word
 .equ Unknown_21023e0,              0x21023e0 @ .word
 .equ Unknown_021023f8,             0x021023f8 @ .word
-.equ Function_21d2205, 0x21d2205
-.equ Function_21d3a69, 0x21d3a69
-.equ Function_21d3b25, 0x21d3b25
-.equ Function_21d3b51, 0x21d3b51
-.equ Function_21d3be5, 0x21d3be5
-.equ Function_21d3bed, 0x21d3bed
-.equ Function_21d5141, 0x21d5141
-/*.equ IRQHandler, 0x1ff8000
-.equ Function_1ff81e4, 0x1ff81e4
-.equ Function_1ff8480, 0x1ff8480
-.equ Function_1ff84c0, 0x1ff84c0
-.equ Function_1ff8554, 0x1ff8554
-*/
+
 .section .bss2
 
 @ 0x027e0000

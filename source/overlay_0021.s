@@ -2491,7 +2491,7 @@ Function_21d1eec: @ 21d1eec :thumb
 Function_21d1f10: @ 21d1f10 :thumb
 	push    {r3,lr}
 	blx     Function_20b28cc
-	blx     Function_20bfb4c
+	blx     G3X_InitMtxStack
 	ldr     r0, [pc, #0x54] @ 0x21d1f70, (=#0x4000060)
 	ldr     r2, [pc, #0x54] @ 0x21d1f74, (=#0xffffcffd)
 	ldrh    r1, [r0, #0x0]
@@ -2518,7 +2518,7 @@ Function_21d1f10: @ 21d1f10 :thumb
 	mov     r1, r0
 	mov     r3, #0x3f
 	str     r0, [sp, #0x0]
-	blx     Function_20bfd58
+	blx     G3X_SetClearColor
 	ldr     r1, [pc, #0x28] @ 0x21d1f7c, (=#0x4000540)
 	mov     r0, #0x2
 	str     r0, [r1, #0x0]
@@ -3296,7 +3296,7 @@ Function_21d2484: @ 21d2484 :thumb
 	orr     r0, r1
 	ldr     r1, [r4, #0x1c]
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r1, r0, #12
 	ldr     r0, [r4, #0x14]
 	add     r0, r1, r0
@@ -3325,7 +3325,7 @@ Function_21d24b8: @ 21d24b8 :thumb
 	orr     r0, r1
 	ldr     r1, [r4, #0x1c]
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r1, r0, #12
 	ldr     r0, [r4, #0xc]
 	add     r0, r1, r0
@@ -3587,7 +3587,7 @@ Function_21d2664: @ 21d2664 :thumb
 	orr     r0, r1
 	ldr     r1, [r5, #0x1c]
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	mov     r4, r0
 	ldr     r0, [r5, #0x14]
 	ldr     r2, [r5, #0x18]
@@ -3606,7 +3606,7 @@ Function_21d2664: @ 21d2664 :thumb
 	orr     r0, r1
 	ldr     r1, [r5, #0x1c]
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	ldr     r1, [r5, #0x8]
 	asr     r2, r4, #12
 	add     r1, r2, r1
@@ -3662,7 +3662,7 @@ Function_21d26e8: @ 21d26e8 :thumb
 	beq     branch_21d271e
 	mov     r0, r4
 	mov     r1, r5
-	blx     Function_20c4f48
+	blx     MI_UncompressLZ8
 	mov     r0, r4
 	bl      Function_20181c4
 branch_21d271e: @ 21d271e :thumb
@@ -3739,7 +3739,7 @@ branch_21d2792: @ 21d2792 :thumb
 	ldr     r0, [sp, #0x0]
 	mov     r1, r4
 	ldr     r0, [r0, #0xc]
-	blx     Function_20c2c54
+	blx     DC_FlushRange
 	ldr     r0, [sp, #0x0]
 	mov     r2, r4
 	ldr     r3, [pc, #0x10] @ 0x21d27b4, (=#0x21e9ca4)
@@ -4935,7 +4935,7 @@ branch_21d309c: @ 21d309c :thumb
 	lsr     r0, r5, #12
 	orr     r0, r2
 	lsl     r1, r1, #6
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r3, r0, #12
 	ldr     r0, [r4, #0x2c]
 	add     r0, r0, r3
@@ -5205,7 +5205,7 @@ branch_21d327c: @ 21d327c :thumb
 	ldr     r1, [pc, #0x70] @ 0x21d330c, (=#0x174c)
 	str     r0, [r5, r1]
 	ldr     r0, [r4, #0x4]
-	bl      Function_2025f30
+	bl      GetGender
 	ldr     r1, [pc, #0x68] @ 0x21d3310, (=#0x1750)
 	str     r0, [r5, r1]
 	ldr     r0, [r4, #0x4]
@@ -12264,7 +12264,7 @@ branch_21d5e0c: @ 21d5e0c :thumb
 	mov     r1, #0x1
 	mov     r2, #0x8
 	mov     r3, #0x0
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	mov     r0, #0x1
 	pop     {r3-r7,pc}
 @ 0x21d5e20
@@ -12866,14 +12866,14 @@ Function_21d61f4: @ 21d61f4 :thumb
 	ldr     r0, [r0, #0xc]
 	lsl     r1, r1, #8
 	str     r0, [sp, #0x8]
-	blx     Function_20c2c54
+	blx     DC_FlushRange
 	ldr     r0, [sp, #0x8]
 	mov     r2, #0x1e
 	add     r0, #0x20
 	mov     r1, #0x20
 	lsl     r2, r2, #4
 	str     r0, [sp, #0x8]
-	blx     Function_20c00b4
+	blx     GX_LoadBGPltt
 	ldr     r0, [sp, #0xc]
 	bl      Function_20181c4
 	mov     r0, r7
@@ -14084,7 +14084,7 @@ Function_21d6b94: @ 21d6b94 :thumb
 	mov     r0, #0x36
 	lsl     r0, r0, #12
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	str     r0, [r4, #0x78]
 	pop     {r4,pc}
 @ 0x21d6bae
@@ -14148,7 +14148,7 @@ Function_21d6bf8: @ 21d6bf8 :thumb
 	lsr     r0, r0, #12
 	orr     r0, r1
 	lsl     r1, r4, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	add     r0, r0, r5
 	pop     {r3-r5,pc}
 @ 0x21d6c24
@@ -14576,7 +14576,7 @@ Function_21d6f20: @ 21d6f20 :thumb
 	orr     r0, r1
 	mov     r1, #0xa
 	lsl     r1, r1, #18
-	blx     Function_20bcfd0
+	blx     FX_Div
 	mov     r5, r0
 	mov     r0, r4
 	bl      Function_21d2170
@@ -14620,7 +14620,7 @@ Function_21d6f74: @ 21d6f74 :thumb
 	lsr     r0, r0, #12
 	orr     r0, r2
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r1, r0, #12
 	mov     r0, #0x10
 	sub     r0, r0, r1
@@ -28732,7 +28732,7 @@ branch_21dc842: @ 21dc842 :thumb
 	ldr     r0, [pc, #0x5c] @ 0x21dc8ac, (=#0x4001050)
 	mov     r1, #0x0
 	mov     r2, #0x4
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	mov     r0, #0x13
 	lsl     r0, r0, #4
 	ldr     r1, [r4, r0]
@@ -31457,7 +31457,7 @@ Function_21ddbcc: @ 21ddbcc :thumb
 	mov     r1, #0xa
 	mov     r2, #0x8
 	mov     r3, #0x0
-	blx     Function_20bf55c
+	blx     G2x_SetBlendAlpha_
 	mov     r0, #0x2
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -31560,7 +31560,7 @@ branch_21ddc76: @ 21ddc76 :thumb
 	lsr     r0, r4, #12
 	orr     r0, r2
 	lsl     r1, r1, #5
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r1, r0, #12
 	mov     r0, #0x1
 	lsl     r0, r0, #12
@@ -34479,12 +34479,12 @@ Function_21df098: @ 21df098 :thumb
 	ldr     r1, [sp, #0x30]
 	mov     r0, r7
 	mov     r2, #0x6
-	bl      Function_20759cc
+	bl      GetPkmnBaseData2
 	mov     r6, r0
 	ldr     r1, [sp, #0x30]
 	mov     r0, r7
 	mov     r2, #0x7
-	bl      Function_20759cc
+	bl      GetPkmnBaseData2
 	mov     r7, r0
 	mov     r0, r6
 	bl      Function_21df180
@@ -37264,7 +37264,7 @@ Function_21e02f0: @ 21e02f0 :thumb
 	mov     r4, r1
 	mov     r1, #0x12
 	mov     r5, r0
-	bl      Function_20759f0
+	bl      GetPkmnBaseData1
 	cmp     r0, #0x0
 	bne     branch_21e0304
 	mov     r0, #0x1
@@ -47804,7 +47804,7 @@ branch_21e4908: @ 21e4908 :thumb
 	lsr     r0, r0, #12
 	orr     r0, r1
 	ldr     r1, [sp, #0x10]
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r1, r0, #12
 	ldr     r0, [sp, #0xc]
 	ldr     r2, [sp, #0x1c]
@@ -47865,7 +47865,7 @@ branch_21e4970: @ 21e4970 :thumb
 	orr     r0, r1
 	mov     r1, #0x7f
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r5, r0, #12
 branch_21e499a: @ 21e499a :thumb
 	ldr     r1, [r4, #0x0]
@@ -50521,7 +50521,7 @@ Function_21e5be4: @ 21e5be4 :thumb
 	orr     r0, r1
 	mov     r1, #0x9
 	lsl     r1, r1, #16
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r0, r0, #12
 	str     r0, [r4, #0x44]
 	pop     {r4,pc}
@@ -50550,7 +50550,7 @@ Function_21e5c18: @ 21e5c18 :thumb
 	orr     r0, r1
 	mov     r1, #0x12
 	lsl     r1, r1, #14
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r0, r0, #12
 	str     r0, [r4, #0x40]
 	pop     {r4,pc}
@@ -52369,7 +52369,7 @@ Function_21e688c: @ 21e688c :thumb
 	mov     r0, #0x1
 	lsl     r0, r0, #20
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
 	mov     r0, r4
@@ -52391,7 +52391,7 @@ Function_21e68b0: @ 21e68b0 :thumb
 	mov     r0, #0x1
 	lsl     r0, r0, #20
 	lsl     r1, r1, #12
-	blx     Function_20bcfd0
+	blx     FX_Div
 	asr     r2, r0, #31
 	lsl     r3, r2, #20
 	lsr     r1, r0, #12
@@ -57877,7 +57877,7 @@ Function_21e8e0c: @ 21e8e0c :thumb
 	mov     r2, r1
 	ldr     r0, [pc, #0x168] @ 0x21e9008, (=#0x4000050)
 	sub     r2, #0x4f
-	blx     Function_20bf578
+	blx     G2x_SetBlendBrightness_
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [r4, #0xc]
 	bl      Function_21e91b0
@@ -58854,11 +58854,11 @@ Function_21e95f8: @ 21e95f8 :thumb
 	mov     r1, #0x6
 	str     r2, [sp, #0x0]
 	str     r3, [sp, #0x4]
-	bl      Function_20759f0
+	bl      GetPkmnBaseData1
 	mov     r4, r0
 	ldr     r0, [sp, #0x60]
 	mov     r1, #0x7
-	bl      Function_20759f0
+	bl      GetPkmnBaseData1
 	mov     r6, r0
 	mov     r0, r4
 	bl      Function_21df180
@@ -59556,12 +59556,12 @@ Function_21e9ae8: @ 21e9ae8 :thumb
 	ldr     r0, [r5, r4]
 	mov     r1, #0x20
 	ldr     r0, [r0, #0xc]
-	blx     Function_20c2c54
+	blx     DC_FlushRange
 	ldr     r0, [r5, r4]
 	mov     r1, #0x0
 	ldr     r0, [r0, #0xc]
 	mov     r2, #0x20
-	blx     Function_20c00b4
+	blx     GX_LoadBGPltt
 	pop     {r3-r5,pc}
 @ 0x21e9b08
 

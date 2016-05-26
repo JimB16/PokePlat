@@ -68,8 +68,10 @@ Script_branch_bf: @ bf
 	ApplyMovement 0xff, Movement_810
 	WaitMovement
 	Jump Script_branch_16f
-	End
-@ eb
+@ e9
+
+.byte 0x2 @ 0xe9
+.byte 0x0 @ 0xea
 
 Script_branch_eb: @ eb
 	ApplyMovement 0x2, Movement_680
@@ -81,8 +83,10 @@ Script_branch_eb: @ eb
 	ApplyMovement 0xff, Movement_824
 	WaitMovement
 	Jump Script_branch_16f
-	End
-@ 117
+@ 115
+
+.byte 0x2 @ 0x115
+.byte 0x0 @ 0x116
 
 Script_branch_117: @ 117
 	ApplyMovement 0x2, Movement_690
@@ -94,8 +98,10 @@ Script_branch_117: @ 117
 	ApplyMovement 0xff, Movement_838
 	WaitMovement
 	Jump Script_branch_16f
-	End
-@ 143
+@ 141
+
+.byte 0x2 @ 0x141
+.byte 0x0 @ 0x142
 
 Script_branch_143: @ 143
 	ApplyMovement 0x2, Movement_698
@@ -107,8 +113,10 @@ Script_branch_143: @ 143
 	ApplyMovement 0xff, Movement_84c
 	WaitMovement
 	Jump Script_branch_16f
-	End
-@ 16f
+@ 16d
+
+.byte 0x2 @ 0x16d
+.byte 0x0 @ 0x16e
 
 Script_branch_16f: @ 16f
 	SetVariableRival 0x0
@@ -190,8 +198,10 @@ Script_branch_298: @ 298
 	Message 0xe
 	Message 0xf
 	Jump Script_branch_2b3
-	End
-@ 2b3
+@ 2b1
+
+.byte 0x2 @ 0x2b1
+.byte 0x0 @ 0x2b2
 
 Script_branch_2b3: @ 2b3
 	ApplyMovement 0x2, Movement_768
@@ -216,8 +226,10 @@ Script_branch_2fd: @ 2fd
 	SetVariableRival 0x0
 	Message 0x12
 	Jump Script_branch_2b3
-	End
-@ 30b
+@ 309
+
+.byte 0x2 @ 0x309
+.byte 0x0 @ 0x30a
 
 Script_branch_30b: @ 30b
 	Message 0x13
@@ -241,8 +253,10 @@ Script_branch_30b: @ 30b
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_36e
 	Jump Script_branch_3a6
-	End
-@ 36e
+@ 36c
+
+.byte 0x2 @ 0x36c
+.byte 0x0 @ 0x36d
 
 Script_branch_36e: @ 36e
 	Message 0x16
@@ -258,8 +272,10 @@ Script_branch_36e: @ 36e
 	WaitMovement
 	Message 0x1c
 	Jump Script_branch_3de
-	End
-@ 3a6
+@ 3a4
+
+.byte 0x2 @ 0x3a4
+.byte 0x0 @ 0x3a5
 
 Script_branch_3a6: @ 3a6
 	Message 0x18
@@ -275,8 +291,10 @@ Script_branch_3a6: @ 3a6
 	WaitMovement
 	Message 0x1d
 	Jump Script_branch_3de
-	End
-@ 3de
+@ 3dc
+
+.byte 0x2 @ 0x3dc
+.byte 0x0 @ 0x3dd
 
 Script_branch_3de: @ 3de
 	Message 0x1e
@@ -335,8 +353,10 @@ Script_13: @ 42e
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_4ca
 	Jump Script_branch_4ee
-	End
-@ 4ca
+@ 4c8
+
+.byte 0x2 @ 0x4c8
+.byte 0x0 @ 0x4c9
 
 Script_branch_4ca: @ 4ca
 	Message 0x27
@@ -347,8 +367,10 @@ Script_branch_4ca: @ 4ca
 	Message 0x28
 	CloseMsgOnKeyPress
 	Jump Script_branch_512
-	End
-@ 4ee
+@ 4ec
+
+.byte 0x2 @ 0x4ec
+.byte 0x0 @ 0x4ed
 
 Script_branch_4ee: @ 4ee
 	Message 0x29
@@ -359,8 +381,10 @@ Script_branch_4ee: @ 4ee
 	Message 0x2a
 	CloseMsgOnKeyPress
 	Jump Script_branch_512
-	End
-@ 512
+@ 510
+
+.byte 0x2 @ 0x510
+.byte 0x0 @ 0x511
 
 Script_branch_512: @ 512
 	ApplyMovement 0xff, Movement_8b0
@@ -376,8 +400,10 @@ Script_branch_512: @ 512
 	ApplyMovement 0xff, Movement_8bc
 	WaitMovement
 	Jump Script_branch_554
-	End
-@ 554
+@ 552
+
+.byte 0x2 @ 0x552
+.byte 0x0 @ 0x553
 
 Script_branch_554: @ 554
 	SetVarHero 0x1
@@ -402,8 +428,10 @@ Script_branch_57a: @ 57a
 	If 0x800c, 0x186
 	CompareLastResultJump 0x1, Script_branch_5c5
 	Jump Script_branch_5b1
-	End
-@ 5b1
+@ 5af
+
+.byte 0x2 @ 0x5af
+.byte 0x0 @ 0x5b0
 
 Script_branch_5b1: @ 5b1
 	StarterBattle 0x352, 0x16
@@ -423,8 +451,10 @@ Script_branch_5c5: @ 5c5
 	SetVarHero 0x1
 	Message 0x30
 	Jump Script_branch_618
-	End
-@ 5f5
+@ 5f3
+
+.byte 0x2 @ 0x5f3
+.byte 0x0 @ 0x5f4
 
 Script_branch_5f5: @ 5f5
 	CallEnd
@@ -435,8 +465,10 @@ Script_branch_5f5: @ 5f5
 	SetVarHero 0x1
 	Message 0x31
 	Jump Script_branch_618
-	End
-@ 618
+@ 616
+
+.byte 0x2 @ 0x616
+.byte 0x0 @ 0x617
 
 Script_branch_618: @ 618
 	CloseMsgOnKeyPress
@@ -457,8 +489,10 @@ Script_branch_656: @ 656
 	SetVariableRival 0x0
 	Message 0x2d
 	Jump Script_branch_554
-	End
-@ 664
+@ 662
+
+.byte 0x2 @ 0x662
+.byte 0x0 @ 0x663
 
 Movement_664: @ 664
 	MoveDownVeryFast 0x1
@@ -534,9 +568,14 @@ Movement_708: @ 708
 	EndMovement 0x0
 @ 714
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0x714, 0x71c - 0x714
-
+.byte 0xf @ 0x714
+.byte 0x0 @ 0x715
+.byte 0x1 @ 0x716
+.byte 0x0 @ 0x717
+.byte 0xfe @ 0x718
+.byte 0x0 @ 0x719
+.byte 0x0 @ 0x71a
+.byte 0x0 @ 0x71b
 
 Movement_71c: @ 71c
 	WalkLeftFast 0x3
@@ -609,9 +648,18 @@ Movement_788: @ 788
 	EndMovement 0x0
 @ 79c
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0x79c, 0x7a8 - 0x79c
-
+.byte 0x3f @ 0x79c
+.byte 0x0 @ 0x79d
+.byte 0x1 @ 0x79e
+.byte 0x0 @ 0x79f
+.byte 0x27 @ 0x7a0
+.byte 0x0 @ 0x7a1
+.byte 0x1 @ 0x7a2
+.byte 0x0 @ 0x7a3
+.byte 0xfe @ 0x7a4
+.byte 0x0 @ 0x7a5
+.byte 0x0 @ 0x7a6
+.byte 0x0 @ 0x7a7
 
 Movement_7a8: @ 7a8
 	MoveDownFast 0x1
@@ -780,8 +828,10 @@ Script_14: @ 8e8
 	If 0x800c, 0x3
 	CompareLastResultJump 0x1, Script_branch_903
 	Jump Script_branch_935
-	End
-@ 903
+@ 901
+
+.byte 0x2 @ 0x901
+.byte 0x0 @ 0x902
 
 Script_branch_903: @ 903
 	ApplyMovement 0xff, Movement_9d0
@@ -792,8 +842,10 @@ Script_branch_903: @ 903
 	ApplyMovement 0x2, Movement_998
 	WaitMovement
 	Jump Script_branch_97c
-	End
-@ 935
+@ 933
+
+.byte 0x2 @ 0x933
+.byte 0x0 @ 0x934
 
 Script_branch_935: @ 935
 	ApplyMovement 0xff, Movement_9d8
@@ -804,8 +856,10 @@ Script_branch_935: @ 935
 	ApplyMovement 0x2, Movement_9a4
 	WaitMovement
 	Jump Script_branch_97c
-	End
-@ 967
+@ 965
+
+.byte 0x2 @ 0x965
+.byte 0x0 @ 0x966
 
 Function_967: @ 967
 	SetVariableRival 0x0
@@ -830,9 +884,9 @@ Function_986: @ 986
 	Return
 @ 995
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0x995, 0x998 - 0x995
-
+.byte 0x0 @ 0x995
+.byte 0x0 @ 0x996
+.byte 0x0 @ 0x997
 
 Movement_998: @ 998
 	WalkLeftFast 0x1
@@ -904,15 +958,17 @@ Script_branch_a3b: @ a3b
 	ApplyMovement 0x2, Movement_a68
 	WaitMovement
 	Jump Script_branch_a5b
+@ a5b
+
 Script_branch_a5b: @ a5b
 	Call Function_986
 	ReleaseAll
 	End
 @ a65
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xa65, 0xa68 - 0xa65
-
+.byte 0x0 @ 0xa65
+.byte 0x0 @ 0xa66
+.byte 0x0 @ 0xa67
 
 Movement_a68: @ a68
 	WalkUpFast 0x1
@@ -946,31 +1002,37 @@ Script_4: @ a8c
 	If 0x800c, 0x3
 	CompareLastResultJump 0x1, Script_branch_ab9
 	Jump Script_branch_acb
-	End
-@ ab9
+@ ab7
+
+.byte 0x2 @ 0xab7
+.byte 0x0 @ 0xab8
 
 Script_branch_ab9: @ ab9
 	ApplyMovement 0xff, Movement_aec
 	WaitMovement
 	Jump Script_branch_add
-	End
-@ acb
+@ ac9
+
+.byte 0x2 @ 0xac9
+.byte 0x0 @ 0xaca
 
 Script_branch_acb: @ acb
 	ApplyMovement 0xff, Movement_af4
 	WaitMovement
 	Jump Script_branch_add
-	End
-@ add
+@ adb
+
+.byte 0x2 @ 0xadb
+.byte 0x0 @ 0xadc
 
 Script_branch_add: @ add
 	ReleaseAll
 	End
 @ ae1
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xae1, 0xae4 - 0xae1
-
+.byte 0x0 @ 0xae1
+.byte 0x0 @ 0xae2
+.byte 0x0 @ 0xae3
 
 Movement_ae4: @ ae4
 	MoveDownFast 0x1
@@ -987,9 +1049,46 @@ Movement_af4: @ af4
 	EndMovement 0x0
 @ afc
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xafc, 0xb24 - 0xafc
-
+.byte 0xc @ 0xafc
+.byte 0x0 @ 0xafd
+.byte 0x1 @ 0xafe
+.byte 0x0 @ 0xaff
+.byte 0xfe @ 0xb00
+.byte 0x0 @ 0xb01
+.byte 0x0 @ 0xb02
+.byte 0x0 @ 0xb03
+.byte 0xc @ 0xb04
+.byte 0x0 @ 0xb05
+.byte 0x1 @ 0xb06
+.byte 0x0 @ 0xb07
+.byte 0xfe @ 0xb08
+.byte 0x0 @ 0xb09
+.byte 0x0 @ 0xb0a
+.byte 0x0 @ 0xb0b
+.byte 0xe @ 0xb0c
+.byte 0x0 @ 0xb0d
+.byte 0x1 @ 0xb0e
+.byte 0x0 @ 0xb0f
+.byte 0xfe @ 0xb10
+.byte 0x0 @ 0xb11
+.byte 0x0 @ 0xb12
+.byte 0x0 @ 0xb13
+.byte 0xe @ 0xb14
+.byte 0x0 @ 0xb15
+.byte 0x1 @ 0xb16
+.byte 0x0 @ 0xb17
+.byte 0xfe @ 0xb18
+.byte 0x0 @ 0xb19
+.byte 0x0 @ 0xb1a
+.byte 0x0 @ 0xb1b
+.byte 0xe @ 0xb1c
+.byte 0x0 @ 0xb1d
+.byte 0x1 @ 0xb1e
+.byte 0x0 @ 0xb1f
+.byte 0xfe @ 0xb20
+.byte 0x0 @ 0xb21
+.byte 0x0 @ 0xb22
+.byte 0x0 @ 0xb23
 
 Script_5: @ b24
 	LockAll
@@ -1014,8 +1113,10 @@ Script_branch_b55: @ b55
 	ApplyMovement 0x6, Movement_d80
 	WaitMovement
 	Jump Script_branch_bf5
-	End
-@ b89
+@ b87
+
+.byte 0x2 @ 0xb87
+.byte 0x0 @ 0xb88
 
 Script_branch_b89: @ b89
 	ApplyMovement 0xfe, Movement_dbc
@@ -1028,6 +1129,8 @@ Script_branch_b89: @ b89
 	ApplyMovement 0x6, Movement_d80
 	WaitMovement
 	Jump Script_branch_bf5
+@ bbb
+
 Script_branch_bbb: @ bbb
 	ApplyMovement 0xff, Movement_ddc
 	ApplyMovement 0xfe, Movement_dcc
@@ -1040,6 +1143,8 @@ Script_branch_bbb: @ bbb
 	ApplyMovement 0x6, Movement_d80
 	WaitMovement
 	Jump Script_branch_bf5
+@ bf5
+
 Script_branch_bf5: @ bf5
 	SetVarAlter 0x0
 	SetVarStrHero 0x1
@@ -1062,25 +1167,37 @@ Script_branch_c3e: @ c3e
 	ApplyMovement 0x6, Movement_d94
 	WaitMovement
 	Jump Script_branch_c86
+@ c56
+
 Script_branch_c56: @ c56
 	ApplyMovement 0x5, Movement_d78
 	ApplyMovement 0x6, Movement_da0
 	WaitMovement
 	Jump Script_branch_c86
+@ c6e
+
 Script_branch_c6e: @ c6e
 	ApplyMovement 0x5, Movement_d78
 	ApplyMovement 0x6, Movement_da0
 	WaitMovement
 	Jump Script_branch_c86
+@ c86
+
 Script_branch_c86: @ c86
 	CheckGender 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_c9d
 	Jump Script_branch_ca3
+@ c9d
+
 Script_branch_c9d: @ c9d
 	Jump Script_branch_ca9
+@ ca3
+
 Script_branch_ca3: @ ca3
 	Jump Script_branch_ca9
+@ ca9
+
 Script_branch_ca9: @ ca9
 	CloseMsgOnKeyPress
 	If 0x8005, 0x355
@@ -1098,6 +1215,8 @@ Script_branch_ce1: @ ce1
 	ApplyMovement 0x6, Movement_db4
 	WaitMovement
 	Jump Script_branch_cf1
+@ cf1
+
 Script_branch_cf1: @ cf1
 	RemovePeople 0x6
 	RemovePeople 0x5
@@ -1118,9 +1237,8 @@ Script_branch_cf1: @ cf1
 	End
 @ d46
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xd46, 0xd48 - 0xd46
-
+.byte 0x0 @ 0xd46
+.byte 0x0 @ 0xd47
 
 Movement_d48: @ d48
 	MoveLeftFast 0x1
@@ -1157,9 +1275,14 @@ Movement_d80: @ d80
 	EndMovement 0x0
 @ d8c
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xd8c, 0xd94 - 0xd8c
-
+.byte 0x22 @ 0xd8c
+.byte 0x0 @ 0xd8d
+.byte 0x1 @ 0xd8e
+.byte 0x0 @ 0xd8f
+.byte 0xfe @ 0xd90
+.byte 0x0 @ 0xd91
+.byte 0x0 @ 0xd92
+.byte 0x0 @ 0xd93
 
 Movement_d94: @ d94
 	Move_3f 0x3
@@ -1233,6 +1356,8 @@ Script_12: @ e1a
 	CompareLastResultJump 0x1, Script_branch_e3e
 	Message 0x3a
 	Jump Script_branch_e36
+@ e36
+
 Script_branch_e36: @ e36
 	WaitButton
 	CloseMsgOnKeyPress
@@ -1243,6 +1368,8 @@ Script_branch_e36: @ e36
 Script_branch_e3e: @ e3e
 	Message 0x3b
 	Jump Script_branch_e36
+@ e47
+
 Script_10: @ e47
 	PlayFanfare 0x5dc
 	LockAll
@@ -1312,29 +1439,37 @@ Script_branch_f07: @ f07
 	ApplyMovement 0x2, Movement_670
 	WaitMovement
 	Jump Script_branch_f4f
-	End
-@ f19
+@ f17
+
+.byte 0x2 @ 0xf17
+.byte 0x0 @ 0xf18
 
 Script_branch_f19: @ f19
 	ApplyMovement 0x2, Movement_680
 	WaitMovement
 	Jump Script_branch_f4f
-	End
-@ f2b
+@ f29
+
+.byte 0x2 @ 0xf29
+.byte 0x0 @ 0xf2a
 
 Script_branch_f2b: @ f2b
 	ApplyMovement 0x2, Movement_690
 	WaitMovement
 	Jump Script_branch_f4f
-	End
-@ f3d
+@ f3b
+
+.byte 0x2 @ 0xf3b
+.byte 0x0 @ 0xf3c
 
 Script_branch_f3d: @ f3d
 	ApplyMovement 0x2, Movement_698
 	WaitMovement
 	Jump Script_branch_f4f
-	End
-@ f4f
+@ f4d
+
+.byte 0x2 @ 0xf4d
+.byte 0x0 @ 0xf4e
 
 Script_branch_f4f: @ f4f
 	SetVariableRival 0x0
@@ -1378,8 +1513,8 @@ Script_8: @ fa4
 	End
 @ fb9
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000427.bin", 0xfb9, 0xfbc - 0xfb9
-
+.byte 0x0 @ 0xfb9
+.byte 0x0 @ 0xfba
+.byte 0x0 @ 0xfbb
 
 @ end_0xfbc

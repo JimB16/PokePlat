@@ -1,0 +1,22 @@
+.include "source/macros_asm.s"
+
+
+Script: @ 0
+	script Script_1
+	.hword 0xfd13
+@ 6
+
+Script_1: @ 6
+	CallMessageBox 0x0, 0x2, 0x0, 0x800c
+	TypeMessageBox 0x3
+	NoMapMessageBox
+	StoreMenuStatus 0x800c
+	CallStandard 0x7d0
+	End
+@ 1d
+
+.byte 0x0 @ 0x1d
+.byte 0x0 @ 0x1e
+.byte 0x0 @ 0x1f
+
+@ end_0x20

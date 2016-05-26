@@ -61,9 +61,8 @@ Script_branch_80: @ 80
 	End
 @ 8e
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000436.bin", 0x8e, 0x90 - 0x8e
-
+.byte 0x0 @ 0x8e
+.byte 0x0 @ 0x8f
 
 Movement_90: @ 90
 	Exclamation 0x1
@@ -90,7 +89,7 @@ Script_5: @ b0
 	CheckFlag 0x12b
 	CompareLastResultJump 0x1, Script_branch_e5
 	SetVar 0x8004, 0x60
-	CheckAccessories 0x0, 0x8004
+	CheckAccessories3 0x0, 0x8004
 	Message 0x3
 	SetVar 0x8005, 0x1
 	CallStandard 0x7df

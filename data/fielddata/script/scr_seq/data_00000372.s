@@ -52,8 +52,10 @@ Script_branch_9e: @ 9e
 	SetOwPosition 0x2, 0x5, 0x0, 0x5, 0x3
 	SetOwPosition 0x3, 0x5, 0x0, 0x6, 0x3
 	Jump Script_branch_8e
-	End
-@ be
+@ bc
+
+.byte 0x2 @ 0xbc
+.byte 0x0 @ 0xbd
 
 Function_be: @ be
 	Message 0x2
@@ -103,8 +105,10 @@ Script_3: @ 156
 	If 0x800c, 0x3
 	CompareLastResultJump 0x1, Script_branch_39e
 	Jump Script_branch_2b0
-	End
-@ 181
+@ 17f
+
+.byte 0x2 @ 0x17f
+.byte 0x0 @ 0x180
 
 Script_4: @ 181
 	LockAll
@@ -112,8 +116,10 @@ Script_4: @ 181
 	Call Function_48d
 	Call Function_4a1
 	Jump Script_branch_2e8
-	End
-@ 19d
+@ 19b
+
+.byte 0x2 @ 0x19b
+.byte 0x0 @ 0x19c
 
 Function_19d: @ 19d
 	CallBTowerFunctions 0x28, 0x0, 0x0
@@ -157,15 +163,19 @@ Script_branch_22f: @ 22f
 	CallBTowerFunctions 0x25, 0x0, 0x0
 	SetVar 0x4000, 0x0
 	Jump Script_branch_cb
-	End
-@ 245
+@ 243
+
+.byte 0x2 @ 0x243
+.byte 0x0 @ 0x244
 
 Script_branch_245: @ 245
 	CallBTowerFunctions 0x26, 0x0, 0x0
 	SetVar 0x4000, 0x1
 	Jump Script_branch_cb
-	End
-@ 25b
+@ 259
+
+.byte 0x2 @ 0x259
+.byte 0x0 @ 0x25a
 
 Script_branch_25b: @ 25b
 	SetVar 0x40d8, 0x2
@@ -186,8 +196,10 @@ Script_branch_25b: @ 25b
 
 Script_branch_296: @ 296
 	Jump Script_branch_22f
-	End
-@ 29e
+@ 29c
+
+.byte 0x2 @ 0x29c
+.byte 0x0 @ 0x29d
 
 Function_29e: @ 29e
 	CallBTowerFunctions 0x22, 0x0, 0x800c
@@ -224,14 +236,18 @@ Script_branch_2e8: @ 2e8
 	If 0x8008, 0x2
 	CompareLastResultJump 0x1, Script_branch_380
 	Jump Script_branch_354
-	End
-@ 354
+@ 352
+
+.byte 0x2 @ 0x352
+.byte 0x0 @ 0x353
 
 Script_branch_354: @ 354
 	Call Function_589
 	Jump Script_branch_2b0
-	End
-@ 362
+@ 360
+
+.byte 0x2 @ 0x360
+.byte 0x0 @ 0x361
 
 Script_branch_362: @ 362
 	Message 0x4
@@ -240,8 +256,10 @@ Script_branch_362: @ 362
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_25b
 	Jump Script_branch_2e8
-	End
-@ 380
+@ 37e
+
+.byte 0x2 @ 0x37e
+.byte 0x0 @ 0x37f
 
 Script_branch_380: @ 380
 	Message 0x5
@@ -250,8 +268,10 @@ Script_branch_380: @ 380
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_296
 	Jump Script_branch_2e8
-	End
-@ 39e
+@ 39c
+
+.byte 0x2 @ 0x39c
+.byte 0x0 @ 0x39d
 
 Script_branch_39e: @ 39e
 	Call Function_1df
@@ -288,8 +308,10 @@ Script_branch_418: @ 418
 	CompareLastResultJump 0x1, Script_branch_474
 	Call Function_589
 	Jump Script_branch_39e
-	End
-@ 452
+@ 450
+
+.byte 0x2 @ 0x450
+.byte 0x0 @ 0x451
 
 Script_branch_452: @ 452
 	Message 0x5
@@ -298,8 +320,10 @@ Script_branch_452: @ 452
 	CompareLastResultJump 0x1, Script_branch_3d6
 	SetVar 0x4000, 0x1
 	Jump Script_branch_418
-	End
-@ 474
+@ 472
+
+.byte 0x2 @ 0x472
+.byte 0x0 @ 0x473
 
 Script_branch_474: @ 474
 	Message 0xb
@@ -308,8 +332,10 @@ Script_branch_474: @ 474
 	FriendBT 0x7
 	CloseMsgOnKeyPress
 	Jump Script_branch_296
-	End
-@ 48d
+@ 48b
+
+.byte 0x2 @ 0x48b
+.byte 0x0 @ 0x48c
 
 Function_48d: @ 48d
 	ApplyMovement 0x2, Movement_5b0
@@ -392,9 +418,9 @@ Function_589: @ 589
 	Return
 @ 5ad
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000372.bin", 0x5ad, 0x5b0 - 0x5ad
-
+.byte 0x0 @ 0x5ad
+.byte 0x0 @ 0x5ae
+.byte 0x0 @ 0x5af
 
 Movement_5b0: @ 5b0
 	WalkUpFast 0x1

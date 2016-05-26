@@ -1,0 +1,68 @@
+.include "source/macros_asm.s"
+
+
+Script: @ 0
+	script Script_1
+	.hword 0xfd13
+@ 6
+
+Script_1: @ 6
+	LockAll
+	ApplyMovement 0xff, Movement_b8
+	WaitMovement
+	CheckFloor 0x40ce
+	CopyVar 0x8008, 0x40ce
+	If 0x8008, 0x1
+	CompareLastResultJump 0x1, Script_branch_38
+	If 0x8008, 0x0
+	CompareLastResultJump 0x1, Script_branch_6a
+	End
+@ 38
+
+Script_branch_38: @ 38
+	SetVar 0x8004, 0x0
+	Call Function_9c
+	FadeScreen 0x6, 0x1, 0x0, 0x0
+	ResetScreen
+	Warp 0xa4, 0x0, 0x6, 0xa, 0x1
+	FadeScreen 0x6, 0x1, 0x1, 0x0
+	ResetScreen
+	End
+@ 6a
+
+Script_branch_6a: @ 6a
+	SetVar 0x8004, 0x1
+	Call Function_9c
+	FadeScreen 0x6, 0x1, 0x0, 0x0
+	ResetScreen
+	Warp 0x96, 0x0, 0x376, 0x317, 0x1
+	FadeScreen 0x6, 0x1, 0x1, 0x0
+	ResetScreen
+	End
+@ 9c
+
+Function_9c: @ 9c
+	WaitFanfare 0x5dc
+	StoreElevatorDirection 0x8004, 0x4
+	ApplyMovement 0xff, Movement_c4
+	WaitMovement
+	PlayFanfare 0x603
+	Return
+@ b6
+
+.byte 0x0 @ 0xb6
+.byte 0x0 @ 0xb7
+
+Movement_b8: @ b8
+	WalkUpFast 0x2
+	MoveDownFast 0x1
+	EndMovement 0x0
+@ c4
+
+Movement_c4: @ c4
+	WalkDownFast 0x2
+	MoveDownFast 0x1
+	EndMovement 0x0
+@ d0
+
+@ end_0xd0

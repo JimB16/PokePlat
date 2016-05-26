@@ -17,8 +17,8 @@ Script_1: @ 6
 	End
 @ 19
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000070.bin", 0x19, 0x1c - 0x19
-
+.byte 0x0 @ 0x19
+.byte 0x0 @ 0x1a
+.byte 0x0 @ 0x1b
 
 @ end_0x1c

@@ -80,8 +80,10 @@ Script_5: @ 7d
 	If 0x800c, 0x46
 	CompareLastResultJump 0x4, Script_branch_10a
 	Jump Script_branch_115
-	End
-@ d9
+@ d7
+
+.byte 0x2 @ 0xd7
+.byte 0x0 @ 0xd8
 
 Script_branch_d9: @ d9
 	Message 0x4

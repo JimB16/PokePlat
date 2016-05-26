@@ -13,6 +13,8 @@ Script_1: @ 6
 	If 0x4095, 0x1
 	CompareLastResultJump 0x4, Script_branch_2f
 	Jump Script_branch_21
+@ 21
+
 Script_branch_21: @ 21
 	SetVariableRival 0x0
 	Message 0x0
@@ -30,8 +32,7 @@ Script_branch_2f: @ 2f
 	End
 @ 3a
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00001057.bin", 0x3a, 0x3c - 0x3a
-
+.byte 0x0 @ 0x3a
+.byte 0x0 @ 0x3b
 
 @ end_0x3c

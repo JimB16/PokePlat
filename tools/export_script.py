@@ -122,7 +122,7 @@ class Label:
         return name
 
 
-def insert_asm_incbins(asms):
+def insert_asm_incbins(asms, fin):
 	"""
 	Insert baserom incbins between address gaps in asm lists.
 	"""
@@ -135,7 +135,7 @@ def insert_asm_incbins(asms):
 			#if i == 0:
 			#	next_address -= input_file.GetBaseAddress()
 			if last_address < next_address:
-				new_asms += [generate_incbin_asm(last_address, next_address)]
+				new_asms += [generate_incbin_asm2(last_address, next_address, fin)]
 	return new_asms
 
 def generate_incbin_asm(start_address, end_address):
@@ -147,27 +147,39 @@ def generate_incbin_asm(start_address, end_address):
 	if start_address == 0:
 		incbin = (
 			start_address,
-			#'\n.incbin "' + filename + baserom/arm9.bin", 0x%x, 0x%x - 0x%x\n\n' % (
 			'\n.incbin "' + filename + '", 0x%x, 0x%x - 0x%x\n\n' % (
 				start_address, end_address, start_address
 			),
 			end_address
 		)
-	#elif (end_address-start_address) == 2 and (start_address & 1) == 0:
-	#	incbin = (
-	#		start_address,
-	#		'\n.align 2, 0\n',
-	#		end_address
-	#	)
 	else:
 		incbin = (
 			start_address,
-			#'\n.incbin "baserom/arm9.bin", 0x%x, 0x%x - 0x%x\n\n' % (
 			'\n.incbin "' + filename + '", 0x%x, 0x%x - 0x%x\n\n' % (
 				start_address, end_address, start_address
 			),
 			end_address
 		)
+	return incbin
+
+def generate_incbin_asm2(start_address, end_address, fin):
+	"""
+	Return baserom incbin text for an address range.
+
+	Format: 'INCBIN "baserom/arm9.bin", {start}, {end} - {start}'
+	"""
+    # .readUInt32()
+	address = start_address
+	text = ""
+	fin.seek(address)
+	while address < end_address:
+		text += ".byte " + hex(fin.readUInt8()) + " @ " + hex(address) + "\n"
+		address += 1
+	incbin = (
+		start_address,
+		text,
+		end_address
+	)
 	return incbin
 
 
@@ -257,7 +269,6 @@ class MultiByteParam():
 
 class PointerLabelParam(MultiByteParam):
     # default size is 4 bytes
-    default_size = 4
     size = 4
     force = False
     debug = False
@@ -270,10 +281,12 @@ class PointerLabelParam(MultiByteParam):
         MultiByteParam.__init__(self, fin, *args, **kwargs)
 
     def parse(self, fin):
-        #fin.seek(self.address+2)
-        self.parsed_address = fin.readUInt32()
+        self.parsed_address = fin.readInt32()
+        #if self.parsed_address < 0:
+        #    print('self.parsed_address: ' + str(self.parsed_address))
         self.parsed_address += fin.tell()
-        self.parsed_address &= 0xffffffff
+        #print('self.parsed_address: ' + hex(self.parsed_address))
+        #self.parsed_address &= 0xffffffff
         MultiByteParam.parse(self, fin, self.parsed_address)
         label_address = self.parsed_address
         self.base_label = 'Script'
@@ -584,7 +597,7 @@ class Command:
         first = True
         # start reading the bytes after the command byte
         if not self.override_byte_check:
-            current_address = self.address+1
+            current_address = self.address+2
         else:
             current_address = self.address
         #output = self.macro_name + ", ".join([param.to_asm() for (key, param) in self.params.items()])
@@ -600,6 +613,7 @@ class Command:
             # now add the asm-compatible param string
             output += param.to_asm()
             current_address += param.size
+        self.last_address = current_address
         #for param_type in self.param_types:
         #    name = param_type["name"]
         #    klass = param_type["klass"]
@@ -619,13 +633,15 @@ class Command:
         # id, size (inclusive), param_types
         #param_type = {"name": each[1], "class": each[0]}
         if not self.override_byte_check:
-            current_address = self.address+1
+            current_address = self.address+2
         else:
             current_address = self.address
         fin.seek(self.address)
         byte = fin.readUInt16() #ord(rom[self.address])
         if not self.override_byte_check and (not byte == self.id):
             raise Exception("byte ("+hex(byte)+") != self.id ("+hex(self.id)+")")
+        if(byte == 0x235):
+            print(hex(byte) + ":")
         i = 0
         for (key, param_type) in self.param_types.items():
             name = param_type["name"]
@@ -637,8 +653,10 @@ class Command:
             self.params[i] = obj
             # increment our counters
             current_address += obj.size
+            if(byte == 0x235):
+                print(hex(obj.size))
             i += 1
-        self.last_address = current_address
+        #self.last_address = current_address
         return True
 
 
@@ -754,6 +772,195 @@ class SingleHWordDecimalParam():
             return hex(self.byte)
         else:
             return str(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
+class FurnitureHWordParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+    bytes = []
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+		print("self.byte: " + hex(self.byte))
+		# 0 = 1, 1 = 3, 2 = 0, 3 = 3, 4 = 2, 5 = 3, 6 = 1
+		if (self.byte == 0) or (self.byte == 6):
+			self.bytes = [fin.readUInt16()]
+		elif (self.byte == 4):
+			self.bytes = [fin.readUInt16()]
+			self.bytes += [fin.readUInt16()]
+		elif (self.byte == 1) or (self.byte == 3) or (self.byte == 5):
+			self.bytes = [fin.readUInt16()]
+			self.bytes += [fin.readUInt16()]
+			self.bytes += [fin.readUInt16()]
+		self.size += 2*len(self.bytes)
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        out = hex(self.byte)
+        for b in self.bytes:
+            out += ", " + hex(b)
+        return out
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
+class Cmd23eHWordParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+    bytes = []
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+		print("self.byte: " + hex(self.byte))
+		# 0 = 0, 1 = 1, 2 = 1, 3 = 1, 4 = 0, 5 = 2, 6 = 2, 7 = 0, 8 = 0
+		if (self.byte == 1) or (self.byte == 2) or (self.byte == 3):
+			self.bytes = [fin.readUInt16()]
+		elif (self.byte == 5) or (self.byte == 6):
+			self.bytes = [fin.readUInt16()]
+			self.bytes += [fin.readUInt16()]
+		self.size += 2*len(self.bytes)
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        out = hex(self.byte)
+        for b in self.bytes:
+            out += ", " + hex(b)
+        return out
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
+class Cmd21dHWordParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+    bytes = []
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+		print("self.byte: " + hex(self.byte))
+		# 0 = 2, 1 = 2, 2 = 2, 3 = 2, 4 = 1, 5 = 1, 6 = 0
+		if (self.byte == 4) or (self.byte == 5):
+			self.bytes = [fin.readUInt16()]
+		elif (self.byte == 0) or (self.byte == 1) or (self.byte == 2) or (self.byte == 3):
+			self.bytes = [fin.readUInt16()]
+			self.bytes += [fin.readUInt16()]
+		self.size += 2*len(self.bytes)
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        out = hex(self.byte)
+        for b in self.bytes:
+            out += ", " + hex(b)
+        return out
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
+class Cmd1cfHWordParam():
+    size = 1
+    should_be_decimal = False
+    byte_type = "db"
+    bytes = []
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt8()
+		print("self.byte: " + hex(self.byte))
+		# 0 = 2, 1 = 2, 2 = 2, 3 = 2, 4 = 1, 5 = 1, 6 = 0
+		if (self.byte == 2):
+			self.bytes = [fin.readUInt16()]
+		self.size += 2*len(self.bytes)
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        out = hex(self.byte)
+        for b in self.bytes:
+            out += ", " + hex(b)
+        return out
 
     @staticmethod
     def from_asm(value):
@@ -1004,7 +1211,7 @@ music_commands = {
     0xa0: ["Cmd_a0"],
     0xa1: ["CallEnd"],
     0xa2: ["Cmd_A2"],
-    0xa3: ["Wfc"],
+    0xa3: ["Wfc_"],
     0xa4: ["Cmd_a4", ["unknown", SingleHWordParam]],
     0xa5: ["Interview"],
     0xa6: ["DressPokemon", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1024,7 +1231,7 @@ music_commands = {
     0xb4: ["ChooseStarter"],
     0xb5: ["BattleStarter"],
     0xb6: ["BattleId", ["unknown", SingleHWordParam]],
-    0xb7: ["SetvarBattle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0xb7: ["SetVarBattle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0xb8: ["CheckBattleType", ["unknown", SingleHWordParam]],
     0xb9: ["SetVarBattle2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0xba: ["ChoosePlayerName", ["unknown", SingleHWordParam]],
@@ -1085,8 +1292,8 @@ music_commands = {
     0xf1: ["Cmd_f1", ["unknown", SingleWordParam]],
     0xf2: ["ChsFriend", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0xf3: ["WireBattleWait", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0xf4: ["Cmd_df", ["unknown", SingleHWordParam]],
-    0xf5: ["Cmd_df", ["unknown", SingleHWordParam]],
+    0xf4: ["Cmd_f4", ["unknown", SingleHWordParam]],
+    0xf5: ["Cmd_f5", ["unknown", SingleHWordParam]],
     0xf6: ["Cmd_f6"],
     0xf7: ["Pokecontest"],
     0xf8: ["StartOvation", ["unknown", SingleHWordParam]],
@@ -1107,7 +1314,7 @@ music_commands = {
     0x107: ["Cmd_107", ["unknown", SingleHWordParam]],
     0x108: ["StorePeopleIdContest", ["unknown", SingleHWordParam]],
     0x109: ["Cmd_109", ["unknown", SingleHWordParam]],
-    0x10a: ["SetvatHiroEntry", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x10a: ["SetvatHiroEntry2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x10b: ["ActPeopleContest", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x10c: ["Cmd_10c", ["unknown", SingleHWordParam]],
     0x10d: ["Cmd_10d", ["unknown", SingleHWordParam]],
@@ -1218,7 +1425,9 @@ music_commands = {
     0x176: ["SunishoreGymFunction2", ["unknown", SingleByteParam]],
     0x177: ["CheckPartyNumber", ["unknown", SingleHWordParam]],
     0x178: ["OpenBerryPouch", ["unknown", SingleByteParam]],
-    
+    0x179: ["Cmd_179", ["unknown", SingleHWordParam]],
+    0x17a: ["Cmd_17a", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x17b: ["Cmd_17b", ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x17c: ["SetNaturePokemon", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x17d: ["Cmd_17d", ["unknown", SingleHWordParam]],
     0x17e: ["Cmd_17e", ["unknown", SingleHWordParam]],
@@ -1302,7 +1511,7 @@ music_commands = {
     0x1cc: ["Cmd_1cc"],
     0x1cd: ["DeActivateLeader", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1ce: ["Cmd_1ce"],
-    0x1cf: ["HmFunctions", ["unknown", SingleByteParam]],
+    0x1cf: ["HmFunctions", ["unknown", Cmd1cfHWordParam]],
     0x1d0: ["FlashDuration", ["unknown", SingleByteParam]],
     0x1d1: ["DefogDuration", ["unknown", SingleByteParam]],
     0x1d2: ["GiveAccessories", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1380,7 +1589,7 @@ music_commands = {
     0x21a: ["CheckSPoke", ["unknown", SingleHWordParam]],
     0x21b: ["Cmd_21b"],
     0x21c: ["ActSwarmPoke", ["unknown", SingleByteParam]],
-    0x21d: ["Cmd_21d", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x21d: ["Cmd_21d", ["unknown", Cmd21dHWordParam]],
     0x21e: ["Cmd_21e"],
     0x21f: ["CheckMoveRemember", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x220: ["Cmd_220"],
@@ -1404,16 +1613,16 @@ music_commands = {
     0x232: ["SetvarRibbon", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x233: ["CheckHappyRibbon", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x234: ["CheckPokemart", ["unknown", SingleHWordParam]],
-    0x235: ["CheckFurniture", ["unknown", SingleHWordParam]],
+    0x235: ["CheckFurniture", ["unknown", FurnitureHWordParam]],
     0x236: ["Cmd_236", ["unknown", SingleHWordParam]],
-    0x237: ["CheckPhraseBoxImput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x237: ["CheckPhraseBoxInput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x238: ["CheckStatusPhraseBox", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x239: ["Deciderules", ["unknown", SingleHWordParam]],
     0x23a: ["CheckFootStep", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x23b: ["HealpcAnm", ["unknown", SingleHWordParam]],
     0x23c: ["StoreElevatorDirection", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x23d: ["ShipAnm", ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x23e: ["Cmd_23e", ["unknown", SingleHWordParam]],
+    0x23e: ["Cmd_23e", ["unknown", Cmd23eHWordParam]],
     0x23f: ["Cmd_23f"],
     0x240: ["Cmd_240"],
     0x241: ["Cmd_241"],
@@ -1448,7 +1657,7 @@ music_commands = {
     0x25e: ["GalactAnm"],
     0x25f: ["GalactAnm2"],
     0x260: ["MainEvent", ["unknown", SingleHWordParam]],
-    0x261: ["CheckAccessories", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
+    0x261: ["CheckAccessories3", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x262: ["ActDeoxisFormChange", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x263: ["ChangeFormDeoxis", ["unknown", SingleHWordParam]],
     0x264: ["CheckCoombeEvent", ["unknown", SingleHWordParam]],
@@ -1471,7 +1680,7 @@ music_commands = {
     0x275: ["CheckRecordCasino", ["unknown", SingleHWordParam]],
     0x276: ["CheckCoinsCasino", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x277: ["SrtRandomNum", ["unknown", SingleHWordParam]],
-    0x278: ["CheckPokeLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x278: ["CheckPokeLevel2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x279: ["Cmd_279", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x27a: ["LgCstlView"],
     0x27b: ["Cmd_27b"],
@@ -1488,7 +1697,7 @@ music_commands = {
     0x286: ["CheckUgPeopleNum", ["unknown", SingleHWordParam]],
     0x287: ["CheckUgFossilNum", ["unknown", SingleHWordParam]],
     0x288: ["CheckUgTrapsNum", ["unknown", SingleHWordParam]],
-    0x289: ["CheckPoffinItem", ["unknown", SingleHWordParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
+    0x289: ["CheckPoffinItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x28a: ["CheckPoffinCaseStatus", ["unknown", SingleHWordParam]],
     0x28b: ["UnkFunct2", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x28c: ["Pokepartypic", ["unknown", SingleHWordParam]],
@@ -1520,7 +1729,7 @@ music_commands = {
     0x2a6: ["ChsPrizeCasino", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a7: ["CheckPlate", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a8: ["TakeCoinsCasino", ["unknown", SingleHWordParam]],
-    0x2a9: ["CheckCoinsCasino", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x2a9: ["CheckCoinsCasino2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2aa: ["ComparePhraseBoxImput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2ab: ["StoreSealNum", ["unknown", SingleHWordParam]],
     0x2ac: ["ActMisteryGift"],
@@ -1549,12 +1758,12 @@ music_commands = {
     0x2c3: ["Cmd_2c3", ["unknown", SingleByteParam]],
     0x2c4: ["ShowBTowerSome", ["unknown", SingleByteParam]],
     0x2c5: ["DeleteSavesBFactory", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x2c6: ["SpinTradeUnion", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
-    0x2c7: ["CheckVersionGame", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
-    0x2c8: ["ShowBArcadeRecors", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
+    0x2c6: ["SpinTradeUnion"],
+    0x2c7: ["CheckVersionGame", ["unknown", SingleHWordParam]],
+    0x2c8: ["ShowBArcadeRecors", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2c9: ["EternaGymAnm"],
     0x2ca: ["FlorarClckAnm"],
-    0x2cb: ["CheckPokeParty2", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
+    0x2cb: ["CheckPokeParty2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2cc: ["CheckPokeCastle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2cd: ["ActTeamGalacticEvents", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2ce: ["Cmd_2ce", ["unknown", SingleByteParam]],
@@ -1565,12 +1774,14 @@ music_commands = {
     0x2d3: ["Cmd_2d3", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2d4: ["Cmd_2d4", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2d5: ["Cmd_2d5", ["unknown", SingleHWordParam]],
-    
+    0x2d6: ["Cmd_2d6"],
+    0x2d7: ["Cmd_2d7", ["unknown", SingleHWordParam]],
     0x2d8: ["Cmd_2d8", ["unknown", SingleByteParam]],
     0x2d9: ["Cmd_2d9", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2da: ["Cmd_2da", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2db: ["Cmd_2db", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2dc: ["Cmd_2dc", ["unknown", SingleHWordParam]],
+    0x2dd: ["Cmd_2dd", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2de: ["Cmd_2de", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2df: ["Cmd_2df", ["unknown", SingleHWordParam]],
     0x2e0: ["Cmd_2e0", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1585,19 +1796,24 @@ music_commands = {
     0x2e9: ["Cmd_2e9", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2ea: ["Cmd_2ea", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2eb: ["Cmd_2eb", ["unknown", SingleHWordParam]],
-    
+    0x2ec: ["Cmd_2ec", ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x2ed: ["Cmd_2ed"],
     0x2ee: ["Cmd_2ee", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     
+    0x2f0: ["Cmd_2f0"],
+
     0x2f2: ["Cmd_2f2"],
     0x2f3: ["Cmd_2f3", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2f4: ["Cmd_2f4", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    
+    0x2f5: ["Cmd_2f5", ["unknown", SingleByteParam], ["unknown", SingleWordParam], ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
+    0x2f6: ["Cmd_2f6", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2f7: ["Cmd_2f7", ["unknown", SingleHWordParam]],
-    
+    0x2f8: ["Cmd_2f8"],
+    0x2f9: ["Cmd_2f9", ["unknown", SingleHWordParam]],
+    0x2fa: ["Cmd_2fa", ["unknown", SingleHWordParam]],
     0x2fb: ["Cmd_2fb"],
-    
     0x2fc: ["Cmd_2fc", ["unknown", SingleHWordParam]],
-    0x2fd: ["Cmd_2fd", ["unknown", SingleHWordParam]],
+    0x2fd: ["Cmd_2fd", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x2fe: ["Cmd_2fe", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2ff: ["Cmd_2ff", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x300: ["Cmd_300"],
@@ -1611,9 +1827,9 @@ music_commands = {
     0x308: ["Cmd_308", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x309: ["Cmd_309"],
     0x30a: ["Cmd_30a", ["unknown", SingleHWordParam]],
-    
+    0x30b: ["Cmd_30b"],
     0x30c: ["Cmd_30c"],
-    
+    0x30d: ["Cmd_30d", ["unknown", SingleHWordParam]],
     0x30e: ["Cmd_30e", ["unknown", SingleHWordParam]],
     0x30f: ["Cmd_30f", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x310: ["Cmd_310"],
@@ -1654,7 +1870,7 @@ music_commands = {
     0x333: ["Cmd_333", ["unknown", SingleHWordParam]],
     0x334: ["Cmd_334", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x335: ["Cmd_335", ["unknown", SingleHWordParam], ["unknown", SingleWordParam]],
-    
+    0x336: ["Cmd_336", ["unknown", SingleHWordParam]],
     0x337: ["Cmd_337", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x338: ["Cmd_338"],
     0x339: ["Cmd_339"],
@@ -1665,7 +1881,7 @@ music_commands = {
     0x33e: ["Cmd_33e", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x33f: ["Cmd_33f", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x340: ["Cmd_340", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
-    0x341: ["Cmd_341", ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x341: ["Cmd_341", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x342: ["Cmd_342", ["unknown", SingleByteParam]],
     0x343: ["Cmd_343", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x344: ["Cmd_344", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
@@ -1676,8 +1892,9 @@ music_commands = {
 
 music_command_enders = [
 	"End",
-    #"Jump",
+    "Jump",
     "Return",
+    #"Cmd_2f5",
 ]
 
 def create_music_command_classes(debug=False):
@@ -1812,6 +2029,12 @@ movement_commands = {
     0x5f: ["PauseJumpRightTwo", ["unknown", SingleHWordParam]],
     0x60: ["Move_60", ["unknown", SingleHWordParam]],
     
+    0x64: ["Move_64", ["unknown", SingleHWordParam]],
+    0x65: ["Move_65", ["unknown", SingleHWordParam]],
+    0x66: ["Move_66", ["unknown", SingleHWordParam]],
+    
+    0x68: ["Move_68", ["unknown", SingleHWordParam]],
+    
     0x6a: ["Move_6a", ["unknown", SingleHWordParam]],
     0x6b: ["Move_6b", ["unknown", SingleHWordParam]],
     
@@ -1819,7 +2042,7 @@ movement_commands = {
     0x76: ["Move_76", ["unknown", SingleHWordParam]],
     0x77: ["Move_77", ["unknown", SingleHWordParam]],
     
-    0x99: ["Move_77", ["unknown", SingleHWordParam]],
+    0x99: ["Move_99", ["unknown", SingleHWordParam]],
     
     0xfe: ["EndMovement", ["unknown", SingleHWordParam]],
 }
@@ -1899,6 +2122,7 @@ class Channel:
 
 			asm = class_.to_asm()
 
+			adress_offset = 0
 			# label any jumps or calls
 			for key, param in class_.param_types.items():
 				if (param['class'] == PointerLabelParam):
@@ -1932,10 +2156,26 @@ class Channel:
 						'$%x' % (label_address),
 						label
 					)
+				elif (param['class'] == FurnitureHWordParam):
+					print("FurnitureHWordParam.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 2
+				elif (param['class'] == Cmd23eHWordParam):
+					print("Cmd23eHWordParam.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 2
+				elif (param['class'] == Cmd21dHWordParam):
+					print("Cmd21dHWordParam.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 2
+				elif (param['class'] == Cmd1cfHWordParam):
+					print("Cmd1cfHWordParam.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 1
 
-			self.output += [(self.address, '\t' + asm, self.address + class_.size)]
-			self.address += class_.size
 
+			self.output += [(self.address, '\t' + asm, self.address + class_.size + adress_offset)]
+			self.address += class_.size + adress_offset
+
+			if(cmd == 0x235):
+				print(hex(cmd) + ": " + hex(class_.size))
+            
 			done = class_.end
 			# infinite loops are enders
 			if class_.macro_name == 'loopchannel':
@@ -2212,12 +2452,12 @@ class Sound:
 		self.asms += asms
 
 
-	def to_asm(self, labels=[]):
+	def to_asm(self, fin, labels=[]):
 		"""insert outside labels here"""
 		asms = self.asms
 
 		# Incbin trailing commands that didnt get picked up
-		asms = insert_asm_incbins(asms)
+		asms = insert_asm_incbins(asms, fin)
 
 		for label in self.labels + labels:
 			if self.start_address <= label[0] < self.last_address:
@@ -2260,7 +2500,7 @@ def dump_sounds(fin, origin, names, base_label='Sound_'):
 				sound.asms += [(size, '@ end_' + hex(size), size)]
 				#sound.asms += [(next_address, 'end', next_address)]
 
-		output = sound.to_asm(labels) + '\n'
+		output = sound.to_asm(fin, labels) + '\n'
 		#filename = name.lower() + '.asm'
 		#filename = '.s'
 		outputs += [('.s', output)]
@@ -2362,13 +2602,57 @@ class PkmnScript(object):
     
         return (output, offset)
 
+        
+def get_script_macros():
+    output = "test\n"
+    
+    for (byte, cmd) in music_commands.items():
+        cmd_name = cmd[0].replace(" ", "_")
+        
+        output += ".macro " + cmd_name + "\n"
+        output += ".hword " + hex(byte) + "\n"
+        
+        params = {
+            "id": byte,
+            "size": 2,
+            "end": cmd[0] in music_command_enders,
+            "macro_name": cmd[0]
+        }
+        params["param_types"] = {}
+        if len(cmd) > 1:
+            param_types = cmd[1:]
+            for (i, each) in enumerate(param_types):
+                thing = {"name": each[0], "class": each[1]}
+                params["param_types"][i] = thing
+                params["size"] += thing["class"].size
+                if thing["class"].size == 1:
+                    output += ".byte"
+                elif thing["class"].size == 2:
+                    output += ".hword"
+                elif thing["class"].size == 4:
+                    output += ".word"
+                output += " " + "@ " + each[0] + "\n"
+        klass_name = cmd_name+"Command"
+        klass = classobj(klass_name, (Command,), params)
+        globals()[klass_name] = klass
+        
+        output += ".endm\n\n"
+
+    with open("script_macros_AUTO.s", 'w') as out:
+        out.write(output)
+
+
 if __name__ == "__main__":
     conf = configuration.Config()
     script = PkmnScript(conf)
     
     filename = sys.argv[1]
-    output_folder = sys.argv[2]
-    if not os.path.exists(os.path.dirname(output_folder)):
-        os.makedirs(os.path.dirname(output_folder))
+    
+    if filename == "-d":
+        get_script_macros()
+    else:
+        output_folder = sys.argv[2]
+        if not os.path.exists(os.path.dirname(output_folder)):
+            os.makedirs(os.path.dirname(output_folder))
 
-    script.extract_scripts(filename, output_folder)[0]
+        script.extract_scripts(filename, output_folder)[0]

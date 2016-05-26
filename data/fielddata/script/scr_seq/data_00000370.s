@@ -100,9 +100,7 @@ Function_14f: @ 14f
 	Return
 @ 173
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000370.bin", 0x173, 0x174 - 0x173
-
+.byte 0x0 @ 0x173
 
 Movement_174: @ 174
 	WalkDownFast 0x3

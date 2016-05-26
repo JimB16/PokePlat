@@ -55,8 +55,7 @@ Script_4: @ 5b
 	End
 @ 6e
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000072.bin", 0x6e, 0x70 - 0x6e
-
+.byte 0x0 @ 0x6e
+.byte 0x0 @ 0x6f
 
 @ end_0x70

@@ -34,6 +34,8 @@ Script_2: @ 21
 	CallStandard 0x7fc
 	SetFlag 0xc5
 	Jump Script_branch_66
+@ 66
+
 Script_branch_66: @ 66
 	Message 0x2
 	WaitButton
@@ -58,8 +60,7 @@ Script_3: @ 7b
 	End
 @ 92
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000431.bin", 0x92, 0x94 - 0x92
-
+.byte 0x0 @ 0x92
+.byte 0x0 @ 0x93
 
 @ end_0x94

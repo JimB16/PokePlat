@@ -87,8 +87,8 @@ Script_5: @ ce
 	End
 @ e5
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000435.bin", 0xe5, 0xe8 - 0xe5
-
+.byte 0x0 @ 0xe5
+.byte 0x0 @ 0xe6
+.byte 0x0 @ 0xe7
 
 @ end_0xe8

@@ -48,8 +48,6 @@ Script_branch_59: @ 59
 	End
 @ 5f
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000000.bin", 0x5f, 0x60 - 0x5f
-
+.byte 0x0 @ 0x5f
 
 @ end_0x60

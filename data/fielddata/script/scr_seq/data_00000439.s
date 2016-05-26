@@ -80,8 +80,7 @@ Script_branch_c0: @ c0
 	End
 @ ca
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000439.bin", 0xca, 0xcc - 0xca
-
+.byte 0x0 @ 0xca
+.byte 0x0 @ 0xcb
 
 @ end_0xcc

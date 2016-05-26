@@ -37,9 +37,8 @@ Script_4: @ 2c
 	End
 @ 5e
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000432.bin", 0x5e, 0x60 - 0x5e
-
+.byte 0x0 @ 0x5e
+.byte 0x0 @ 0x5f
 
 Movement_60: @ 60
 	MoveDownFast 0x1
@@ -179,26 +178,36 @@ Script_branch_1a8: @ 1a8
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
+@ 1c2
+
 Script_branch_1c2: @ 1c2
 	ApplyMovement 0x12, Movement_24c
 	WaitMovement
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
+@ 1dc
+
 Script_branch_1dc: @ 1dc
 	Jump Script_branch_216
+@ 1e2
+
 Script_branch_1e2: @ 1e2
 	ApplyMovement 0x12, Movement_25c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
+@ 1fc
+
 Script_branch_1fc: @ 1fc
 	ApplyMovement 0x12, Movement_26c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
+@ 216
+
 Script_branch_216: @ 216
 	Call Function_14d
 	Message 0x0
@@ -208,9 +217,7 @@ Script_branch_216: @ 216
 	End
 @ 227
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000432.bin", 0x227, 0x228 - 0x227
-
+.byte 0x0 @ 0x227
 
 Movement_228: @ 228
 	MoveDownFast 0x1
@@ -279,8 +286,6 @@ Script_10: @ 2ae
 	End
 @ 2c3
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000432.bin", 0x2c3, 0x2c4 - 0x2c3
-
+.byte 0x0 @ 0x2c3
 
 @ end_0x2c4

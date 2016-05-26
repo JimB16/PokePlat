@@ -44,8 +44,10 @@ Script_2: @ 4e
 	ApplyMovement 0xff, Movement_174
 	WaitMovement
 	Jump Script_branch_9c
-	End
-@ 8e
+@ 8c
+
+.byte 0x2 @ 0x8c
+.byte 0x0 @ 0x8d
 
 Function_8e: @ 8e
 	ClearFlag 0x1cc
@@ -59,6 +61,8 @@ Script_branch_9c: @ 9c
 	If 0x800c, 0x0
 	CompareLastResultJump 0x1, Script_branch_b3
 	Jump Script_branch_f1
+@ b3
+
 Script_branch_b3: @ b3
 	SetVarHero 0x0
 	Message 0x0
@@ -73,6 +77,8 @@ Script_branch_b3: @ b3
 	Call Function_145
 	Message 0x3
 	Jump Script_branch_156
+@ f1
+
 Script_branch_f1: @ f1
 	SetVarHero 0x0
 	Message 0x4
@@ -87,6 +93,8 @@ Script_branch_f1: @ f1
 	Call Function_145
 	Message 0x7
 	Jump Script_branch_156
+@ 12f
+
 Function_12f: @ 12f
 	SetFlag 0x97f
 	SetVar 0x8004, 0x1bb
@@ -118,9 +126,30 @@ Movement_174: @ 174
 	EndMovement 0x0
 @ 17c
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000438.bin", 0x17c, 0x194 - 0x17c
-
+.byte 0x3f @ 0x17c
+.byte 0x0 @ 0x17d
+.byte 0x8 @ 0x17e
+.byte 0x0 @ 0x17f
+.byte 0x22 @ 0x180
+.byte 0x0 @ 0x181
+.byte 0x1 @ 0x182
+.byte 0x0 @ 0x183
+.byte 0xfe @ 0x184
+.byte 0x0 @ 0x185
+.byte 0x0 @ 0x186
+.byte 0x0 @ 0x187
+.byte 0x3f @ 0x188
+.byte 0x0 @ 0x189
+.byte 0x1 @ 0x18a
+.byte 0x0 @ 0x18b
+.byte 0x20 @ 0x18c
+.byte 0x0 @ 0x18d
+.byte 0x1 @ 0x18e
+.byte 0x0 @ 0x18f
+.byte 0xfe @ 0x190
+.byte 0x0 @ 0x191
+.byte 0x0 @ 0x192
+.byte 0x0 @ 0x193
 
 Movement_194: @ 194
 	WalkRightFast 0x3
@@ -197,8 +226,6 @@ Script_7: @ 21a
 	End
 @ 22f
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000438.bin", 0x22f, 0x230 - 0x22f
-
+.byte 0x0 @ 0x22f
 
 @ end_0x230

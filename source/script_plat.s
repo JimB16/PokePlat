@@ -268,6 +268,11 @@ x = address where the jump goes to
 .hword  0x49, \nr
 .endm
 
+.macro	MultiRow a
+.hword  0x48
+.byte   \a
+.endm
+
 .macro	PlayFanfare2	nr=0
 .hword  0x4a, \nr
 .endm
@@ -651,6 +656,10 @@ x = address where the jump goes to
 .hword  0xb1
 .endm
 
+.macro	StoreWfcStatus a, b
+.hword  0xb2, \a, \b
+.endm
+
 .macro	StartWfc a
 .hword  0xb3, \a
 .endm
@@ -806,6 +815,17 @@ x = address where the jump goes to
 .hword  0xd7
 .byte   \a
 .hword  \b
+.endm
+
+.macro	SetVarTrainer a, b
+.hword  0xd8
+.byte   \a
+.hword  \b
+.endm
+
+.macro	SetVarWiFiSprite a
+.hword  0xd9
+.byte   \a
 .endm
 
 .macro	SetVarPokeStored a, b, c, d
@@ -1281,6 +1301,18 @@ x = address where the jump goes to
 .hword  0x154
 .endm
 
+.macro	StoreWiFiSprite a, b
+.hword  0x155, \a, \b
+.endm
+
+.macro	ActWiFiSprite a
+.hword  0x156, \a
+.endm
+
+.macro	Cmd_157 a
+.hword  0x157, \a
+.endm
+
 .macro	ActivatePokedex
 .hword  0x158
 .endm
@@ -1681,12 +1713,30 @@ x = address where the jump goes to
 .hword  0x1c5
 .endm
 
+.macro	StorePokeDelete a
+.hword  0x1c6, \a
+.endm
+
+.macro	StoreMoveDelete a
+.hword  0x1c7, \a
+.endm
+
 .macro	CheckMoveNumDelete a, b
 .hword  0x1c8, \a, \b
 .endm
 
+.macro	StoreDeleteMove a, b
+.hword  0x1c9, \a, \b
+.endm
+
 .macro	CheckDeleteMove a, b, c
 .hword  0x1ca, \a, \b, \c
+.endm
+
+.macro	SetvarMoveDelete a, b, c
+.hword  0x1cb
+.byte   \a
+.hword  \b, \c
 .endm
 
 .macro	Cmd_1cc
@@ -2558,6 +2608,10 @@ x = address where the jump goes to
 .hword  0x29a, \a, \b
 .endm
 
+.macro	Cmd_29c a, b
+.hword  0x29c, \a, \b
+.endm
+
 .macro	ChoiceMulti a, b
 .hword  0x29d
 .hword  \a, \b
@@ -2952,6 +3006,10 @@ x = address where the jump goes to
 .hword  0x2ff, \a, \b
 .endm
 
+.macro	Cmd_300
+.hword  0x300
+.endm
+
 .macro	Cmd_302 a, b, c, d, e
 .hword  0x302, \a, \b, \c, \d, \e
 .endm
@@ -3000,8 +3058,16 @@ x = address where the jump goes to
 .hword  0x30d, \a
 .endm
 
+.macro	Cmd_30e a
+.hword  0x30e, \a
+.endm
+
 .macro	Cmd_30f a, b
 .hword  0x30f, \a, \b
+.endm
+
+.macro	Cmd_310
+.hword  0x310
 .endm
 
 .macro	Cmd_311 a
@@ -3022,6 +3088,10 @@ x = address where the jump goes to
 
 .macro	Cmd_315 a
 .hword  0x315, \a
+.endm
+
+.macro	Cmd_316
+.hword  0x316
 .endm
 
 .macro	Cmd_317 a, b, c
@@ -3214,6 +3284,12 @@ x = address where the jump goes to
 
 .macro	Cmd_343 a, b
 .hword  0x343
+.byte   \a
+.hword  \b
+.endm
+
+.macro	Cmd_344 a, b
+.hword  0x344
 .byte   \a
 .hword  \b
 .endm

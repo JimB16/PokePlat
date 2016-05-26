@@ -85,20 +85,26 @@ Script_2: @ e8
 Script_branch_119: @ 119
 	ChangeOwPosition 0x7, 0xad, 0x314
 	Jump Script_branch_149
-	End
-@ 129
+@ 127
+
+.byte 0x2 @ 0x127
+.byte 0x0 @ 0x128
 
 Script_branch_129: @ 129
 	ChangeOwPosition 0x7, 0xae, 0x314
 	Jump Script_branch_149
-	End
-@ 139
+@ 137
+
+.byte 0x2 @ 0x137
+.byte 0x0 @ 0x138
 
 Script_branch_139: @ 139
 	ChangeOwPosition 0x7, 0xaf, 0x314
 	Jump Script_branch_149
-	End
-@ 149
+@ 147
+
+.byte 0x2 @ 0x147
+.byte 0x0 @ 0x148
 
 Script_branch_149: @ 149
 	ClearFlag 0x17a
@@ -151,8 +157,10 @@ Script_branch_18d: @ 18d
 	Message 0x19
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-	End
-@ 21a
+@ 218
+
+.byte 0x2 @ 0x218
+.byte 0x0 @ 0x219
 
 Script_branch_21a: @ 21a
 	Message 0x1
@@ -198,8 +206,10 @@ Script_branch_224: @ 224
 	Message 0x1c
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-	End
-@ 2b1
+@ 2af
+
+.byte 0x2 @ 0x2af
+.byte 0x0 @ 0x2b0
 
 Script_branch_2b1: @ 2b1
 	Message 0x5
@@ -331,9 +341,7 @@ Function_42f: @ 42f
 	Return
 @ 43b
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x43b, 0x43c - 0x43b
-
+.byte 0x0 @ 0x43b
 
 Movement_43c: @ 43c
 	WalkDownFast 0x4
@@ -542,8 +550,10 @@ Script_branch_601: @ 601
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 62a
+@ 628
+
+.byte 0x2 @ 0x628
+.byte 0x0 @ 0x629
 
 Script_branch_62a: @ 62a
 	ApplyMovement 0x1a, Movement_690
@@ -554,8 +564,10 @@ Script_branch_62a: @ 62a
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 653
+@ 651
+
+.byte 0x2 @ 0x651
+.byte 0x0 @ 0x652
 
 Script_branch_653: @ 653
 	ApplyMovement 0x1a, Movement_6a0
@@ -566,8 +578,10 @@ Script_branch_653: @ 653
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 67c
+@ 67a
+
+.byte 0x2 @ 0x67a
+.byte 0x0 @ 0x67b
 
 Script_branch_67c: @ 67c
 	ReleaseAll
@@ -646,32 +660,40 @@ Script_branch_73e: @ 73e
 	ApplyMovement 0x1f, Movement_8b4
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 758
+@ 756
+
+.byte 0x2 @ 0x756
+.byte 0x0 @ 0x757
 
 Script_branch_758: @ 758
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8cc
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 772
+@ 770
+
+.byte 0x2 @ 0x770
+.byte 0x0 @ 0x771
 
 Script_branch_772: @ 772
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8e4
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 78c
+@ 78a
+
+.byte 0x2 @ 0x78a
+.byte 0x0 @ 0x78b
 
 Script_branch_78c: @ 78c
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8fc
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 7a6
+@ 7a4
+
+.byte 0x2 @ 0x7a4
+.byte 0x0 @ 0x7a5
 
 Script_branch_7a6: @ 7a6
 	Call Function_7fc
@@ -733,38 +755,45 @@ Script_branch_846: @ 846
 	ApplyMovement 0x1f, Movement_924
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 858
+@ 856
+
+.byte 0x2 @ 0x856
+.byte 0x0 @ 0x857
 
 Script_branch_858: @ 858
 	ApplyMovement 0x1f, Movement_930
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 86a
+@ 868
+
+.byte 0x2 @ 0x868
+.byte 0x0 @ 0x869
 
 Script_branch_86a: @ 86a
 	ApplyMovement 0x1f, Movement_93c
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 87c
+@ 87a
+
+.byte 0x2 @ 0x87a
+.byte 0x0 @ 0x87b
 
 Script_branch_87c: @ 87c
 	ApplyMovement 0x1f, Movement_948
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 88e
+@ 88c
+
+.byte 0x2 @ 0x88c
+.byte 0x0 @ 0x88d
 
 Script_branch_88e: @ 88e
 	ReleaseAll
 	End
 @ 892
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x892, 0x894 - 0x892
-
+.byte 0x0 @ 0x892
+.byte 0x0 @ 0x893
 
 Movement_894: @ 894
 	Move_3f 0x5
@@ -896,9 +925,9 @@ Script_branch_9bd: @ 9bd
 	Return
 @ 9d1
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x9d1, 0x9d4 - 0x9d1
-
+.byte 0x0 @ 0x9d1
+.byte 0x0 @ 0x9d2
+.byte 0x0 @ 0x9d3
 
 Movement_9d4: @ 9d4
 	SeeDown 0x1
@@ -926,24 +955,30 @@ Script_branch_a1c: @ a1c
 	ApplyMovement 0xff, Movement_dd0
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a36
+@ a34
+
+.byte 0x2 @ 0xa34
+.byte 0x0 @ 0xa35
 
 Script_branch_a36: @ a36
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_de4
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a50
+@ a4e
+
+.byte 0x2 @ 0xa4e
+.byte 0x0 @ 0xa4f
 
 Script_branch_a50: @ a50
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_df8
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a6a
+@ a68
+
+.byte 0x2 @ 0xa68
+.byte 0x0 @ 0xa69
 
 Script_branch_a6a: @ a6a
 	SetVarHero 0x0
@@ -978,16 +1013,20 @@ Script_branch_adc: @ adc
 	SetVarHero 0x1
 	Message 0x47
 	Jump Script_branch_afe
-	End
-@ aed
+@ aeb
+
+.byte 0x2 @ 0xaeb
+.byte 0x0 @ 0xaec
 
 Script_branch_aed: @ aed
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x48
 	Jump Script_branch_afe
-	End
-@ afe
+@ afc
+
+.byte 0x2 @ 0xafc
+.byte 0x0 @ 0xafd
 
 Script_branch_afe: @ afe
 	CloseMsgOnKeyPress
@@ -1068,16 +1107,20 @@ Script_branch_c30: @ c30
 	SetVarHero 0x1
 	Message 0x4b
 	Jump Script_branch_c52
-	End
-@ c41
+@ c3f
+
+.byte 0x2 @ 0xc3f
+.byte 0x0 @ 0xc40
 
 Script_branch_c41: @ c41
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x4c
 	Jump Script_branch_c52
-	End
-@ c52
+@ c50
+
+.byte 0x2 @ 0xc50
+.byte 0x0 @ 0xc51
 
 Script_branch_c52: @ c52
 	SetVarHero 0x0
@@ -1088,8 +1131,10 @@ Script_branch_c52: @ c52
 	ApplyMovement 0xff, Movement_e08
 	WaitMovement
 	Jump Script_branch_c7c
-	End
-@ c7c
+@ c7a
+
+.byte 0x2 @ 0xc7a
+.byte 0x0 @ 0xc7b
 
 Script_branch_c7c: @ c7c
 	RemovePeople 0x7
@@ -1176,9 +1221,9 @@ Script_branch_db7: @ db7
 	End
 @ dbd
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0xdbd, 0xdc0 - 0xdbd
-
+.byte 0x0 @ 0xdbd
+.byte 0x0 @ 0xdbe
+.byte 0x0 @ 0xdbf
 
 Movement_dc0: @ dc0
 	WalkUpFast 0x8
@@ -1221,9 +1266,46 @@ Movement_e08: @ e08
 	EndMovement 0x0
 @ e1c
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0xe1c, 0xe44 - 0xe1c
-
+.byte 0x3f @ 0xe1c
+.byte 0x0 @ 0xe1d
+.byte 0x1 @ 0xe1e
+.byte 0x0 @ 0xe1f
+.byte 0x23 @ 0xe20
+.byte 0x0 @ 0xe21
+.byte 0x1 @ 0xe22
+.byte 0x0 @ 0xe23
+.byte 0x3f @ 0xe24
+.byte 0x0 @ 0xe25
+.byte 0x1 @ 0xe26
+.byte 0x0 @ 0xe27
+.byte 0x21 @ 0xe28
+.byte 0x0 @ 0xe29
+.byte 0x1 @ 0xe2a
+.byte 0x0 @ 0xe2b
+.byte 0xfe @ 0xe2c
+.byte 0x0 @ 0xe2d
+.byte 0x0 @ 0xe2e
+.byte 0x0 @ 0xe2f
+.byte 0x3f @ 0xe30
+.byte 0x0 @ 0xe31
+.byte 0x1 @ 0xe32
+.byte 0x0 @ 0xe33
+.byte 0x22 @ 0xe34
+.byte 0x0 @ 0xe35
+.byte 0x1 @ 0xe36
+.byte 0x0 @ 0xe37
+.byte 0x3f @ 0xe38
+.byte 0x0 @ 0xe39
+.byte 0x1 @ 0xe3a
+.byte 0x0 @ 0xe3b
+.byte 0x21 @ 0xe3c
+.byte 0x0 @ 0xe3d
+.byte 0x1 @ 0xe3e
+.byte 0x0 @ 0xe3f
+.byte 0xfe @ 0xe40
+.byte 0x0 @ 0xe41
+.byte 0x0 @ 0xe42
+.byte 0x0 @ 0xe43
 
 Movement_e44: @ e44
 	MoveDownFast 0x1
@@ -1252,9 +1334,38 @@ Movement_e68: @ e68
 	EndMovement 0x0
 @ e74
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0xe74, 0xe94 - 0xe74
-
+.byte 0xf @ 0xe74
+.byte 0x0 @ 0xe75
+.byte 0x1 @ 0xe76
+.byte 0x0 @ 0xe77
+.byte 0xd @ 0xe78
+.byte 0x0 @ 0xe79
+.byte 0x9 @ 0xe7a
+.byte 0x0 @ 0xe7b
+.byte 0xfe @ 0xe7c
+.byte 0x0 @ 0xe7d
+.byte 0x0 @ 0xe7e
+.byte 0x0 @ 0xe7f
+.byte 0xe @ 0xe80
+.byte 0x0 @ 0xe81
+.byte 0x1 @ 0xe82
+.byte 0x0 @ 0xe83
+.byte 0x23 @ 0xe84
+.byte 0x0 @ 0xe85
+.byte 0x1 @ 0xe86
+.byte 0x0 @ 0xe87
+.byte 0xf @ 0xe88
+.byte 0x0 @ 0xe89
+.byte 0x1 @ 0xe8a
+.byte 0x0 @ 0xe8b
+.byte 0xd @ 0xe8c
+.byte 0x0 @ 0xe8d
+.byte 0x9 @ 0xe8e
+.byte 0x0 @ 0xe8f
+.byte 0xfe @ 0xe90
+.byte 0x0 @ 0xe91
+.byte 0x0 @ 0xe92
+.byte 0x0 @ 0xe93
 
 Movement_e94: @ e94
 	MoveRightFast 0x1
@@ -1302,9 +1413,30 @@ Movement_ed8: @ ed8
 	EndMovement 0x0
 @ ee0
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0xee0, 0xef8 - 0xee0
-
+.byte 0xd @ 0xee0
+.byte 0x0 @ 0xee1
+.byte 0x9 @ 0xee2
+.byte 0x0 @ 0xee3
+.byte 0xfe @ 0xee4
+.byte 0x0 @ 0xee5
+.byte 0x0 @ 0xee6
+.byte 0x0 @ 0xee7
+.byte 0x22 @ 0xee8
+.byte 0x0 @ 0xee9
+.byte 0x1 @ 0xeea
+.byte 0x0 @ 0xeeb
+.byte 0xe @ 0xeec
+.byte 0x0 @ 0xeed
+.byte 0x1 @ 0xeee
+.byte 0x0 @ 0xeef
+.byte 0xd @ 0xef0
+.byte 0x0 @ 0xef1
+.byte 0x9 @ 0xef2
+.byte 0x0 @ 0xef3
+.byte 0xfe @ 0xef4
+.byte 0x0 @ 0xef5
+.byte 0x0 @ 0xef6
+.byte 0x0 @ 0xef7
 
 Movement_ef8: @ ef8
 	MoveDownFast 0x1
@@ -1316,9 +1448,46 @@ Movement_f00: @ f00
 	EndMovement 0x0
 @ f08
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0xf08, 0xf30 - 0xf08
-
+.byte 0x22 @ 0xf08
+.byte 0x0 @ 0xf09
+.byte 0x1 @ 0xf0a
+.byte 0x0 @ 0xf0b
+.byte 0xfe @ 0xf0c
+.byte 0x0 @ 0xf0d
+.byte 0x0 @ 0xf0e
+.byte 0x0 @ 0xf0f
+.byte 0x22 @ 0xf10
+.byte 0x0 @ 0xf11
+.byte 0x1 @ 0xf12
+.byte 0x0 @ 0xf13
+.byte 0xfe @ 0xf14
+.byte 0x0 @ 0xf15
+.byte 0x0 @ 0xf16
+.byte 0x0 @ 0xf17
+.byte 0x22 @ 0xf18
+.byte 0x0 @ 0xf19
+.byte 0x1 @ 0xf1a
+.byte 0x0 @ 0xf1b
+.byte 0xfe @ 0xf1c
+.byte 0x0 @ 0xf1d
+.byte 0x0 @ 0xf1e
+.byte 0x0 @ 0xf1f
+.byte 0x22 @ 0xf20
+.byte 0x0 @ 0xf21
+.byte 0x1 @ 0xf22
+.byte 0x0 @ 0xf23
+.byte 0xfe @ 0xf24
+.byte 0x0 @ 0xf25
+.byte 0x0 @ 0xf26
+.byte 0x0 @ 0xf27
+.byte 0x22 @ 0xf28
+.byte 0x0 @ 0xf29
+.byte 0x1 @ 0xf2a
+.byte 0x0 @ 0xf2b
+.byte 0xfe @ 0xf2c
+.byte 0x0 @ 0xf2d
+.byte 0x0 @ 0xf2e
+.byte 0x0 @ 0xf2f
 
 Movement_f30: @ f30
 	WalkLeftFast 0x1
@@ -1547,9 +1716,7 @@ Script_branch_1163: @ 1163
 	Return
 @ 116f
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x116f, 0x1170 - 0x116f
-
+.byte 0x0 @ 0x116f
 
 Movement_1170: @ 1170
 	SeeUp 0x1
@@ -1659,16 +1826,20 @@ Script_branch_12a1: @ 12a1
 	ApplyMovement 0xff, Movement_1314
 	WaitMovement
 	Jump Script_branch_12d5
-	End
-@ 12bb
+@ 12b9
+
+.byte 0x2 @ 0x12b9
+.byte 0x0 @ 0x12ba
 
 Script_branch_12bb: @ 12bb
 	ApplyMovement 0x17, Movement_12f0
 	ApplyMovement 0xff, Movement_1304
 	WaitMovement
 	Jump Script_branch_12d5
-	End
-@ 12d5
+@ 12d3
+
+.byte 0x2 @ 0x12d3
+.byte 0x0 @ 0x12d4
 
 Script_branch_12d5: @ 12d5
 	RemovePeople 0x17
@@ -1680,9 +1851,9 @@ Script_branch_12d5: @ 12d5
 	End
 @ 12ed
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x12ed, 0x12f0 - 0x12ed
-
+.byte 0x0 @ 0x12ed
+.byte 0x0 @ 0x12ee
+.byte 0x0 @ 0x12ef
 
 Movement_12f0: @ 12f0
 	WalkLeftFast 0x1
@@ -1904,9 +2075,7 @@ Script_28: @ 14cf
 	End
 @ 1537
 
-
-.incbin "./baserom/data/fielddata/script/scr_seq_narc/data_00000002.bin", 0x1537, 0x1538 - 0x1537
-
+.byte 0x0 @ 0x1537
 
 Movement_1538: @ 1538
 	WalkRight 0x2

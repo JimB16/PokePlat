@@ -489,7 +489,10 @@ class AParam():
             add_value(adr)
         
             LoadedWord = input_file.ReadWord(adr)
-            output += " [pc, #" + hex(self.word & 0xfff) + "]" + " @ " + "[" + hex(adr) + "]" + " (=#" + hex(LoadedWord) + ")"
+            output += "[pc, #"
+            if not (self.word&(1<<23)):
+                output += "-"
+            output += hex(self.word & 0xfff) + "]" + " @ " + "[" + hex(adr) + "]" + " (=#" + hex(LoadedWord) + ")"
         else:
             reg = (self.word>>16)&0xf
             output += "[" + RegisterStrings[reg]
@@ -664,6 +667,32 @@ class QParam():
     def to_asm(self):
         output = hex(self.word&0xffffff)
         return output
+        
+class XParam():
+    word = 0
+
+    def __init__(self, word, *args, **kwargs):
+        self.word = word
+
+    def to_asm(self):
+        if (self.word&(1<<5)):
+            output = "t"
+        else:
+            output = "b"
+        return output
+        
+class YParam():
+    word = 0
+
+    def __init__(self, word, *args, **kwargs):
+        self.word = word
+
+    def to_asm(self):
+        if (self.word&(1<<6)):
+            output = "t"
+        else:
+            output = "b"
+        return output
 
 
 # https://github.com/x3ro/VisualBoyAdvance/blob/master/src/armdis.cpp
@@ -685,6 +714,12 @@ armOpcodes = [
 [0x0fe000f0, 0x00200090, "mla%c%s%_ %r4, %r0, %r2, %r3"],
 [0x0fa000f0, 0x00800090, "%umull%c%s%_ %r3, %r4, %r0, %r2"],
 [0x0fa000f0, 0x00a00090, "%umlal%c%s%_ %r3, %r4, %r0, %r2"],
+
+[0x0ff00090, 0x01000080, "smla%x%y%c%_ %r4, %r0, %r2, %r3"], # ARM9
+[0x0ff000b0, 0x01200080, "smlaw%y%c%_ %r4, %r0, %r2, %r3"], # ARM9
+[0x0ff000b0, 0x012000a0, "smulw%y%c%_ %r4, %r0, %r2"], # ARM9
+[0x0ff00090, 0x01400080, "smlal%x%y%c%_ %r3, %r4, %r0, %r2"], # ARM9
+[0x0ff00090, 0x01600080, "smul%x%y%c%_ %r4, %r0, %r2"], # ARM9
 # Load/Store instructions
 [0x0fb00ff0, 0x01000090, "swp%c%b%_ %r3, %r0, [%r4]"],
 [0x0fb000f0, 0x01000090, "[ ??? ]"],
@@ -833,6 +868,14 @@ class ARMInstruction():
                         para = 0
                     elif (c[s] == 'q') & (para == 1):
                         function = QParam(self.word, self.offset)
+                        output += function.to_asm()
+                        para = 0
+                    elif (c[s] == 'x') & (para == 1):
+                        function = XParam(self.word, self.offset)
+                        output += function.to_asm()
+                        para = 0
+                    elif (c[s] == 'y') & (para == 1):
+                        function = YParam(self.word, self.offset)
                         output += function.to_asm()
                         para = 0
                     else:
@@ -1447,8 +1490,6 @@ class ThumbInstruction():
 
 
 class Channel:
-	CONST_ARM = 0
-	CONST_THUMB = 1
 	used_labels = []
     
 	def __init__(self, address, NrOfInstr=1, instr_set="arm", label=None, used_labels=[]):
@@ -1584,8 +1625,6 @@ class Code:
 			if label_ == None:
 				add_label(self.address[i], 'Function_%x' % (self.address[i]))
 				self.channels = Channel(self.address[i], MaximumInstrMain, instr_set=self.instr_set[i], label='Function_%x' % (self.address[i]), used_labels=self.used_labels)
-				#add_label(self.address[i], 'Startpoint_%x' % (self.address[i]))
-				#self.channels = Channel(self.address[i], MaximumInstrMain, instr_set=self.instr_set[i], label='Startpoint_%x' % (self.address[i]), used_labels=self.used_labels)
 			else:
 				self.channels = Channel(self.address[i], MaximumInstrMain, instr_set=self.instr_set[i], label=label_, used_labels=self.used_labels)
 			self.output += self.channels.output
@@ -1713,13 +1752,17 @@ if __name__ == "__main__":
     filename_startpoints = sys.argv[6]
     filename_jumptables = sys.argv[7]
     filename_addjumps = sys.argv[8]
+    filename_addjumps_arm = sys.argv[9]
         
     input_file.init(filename, base_address)
     
     with open(filename_labels) as f:
         content = f.readlines()
     for line in content:
-        add_label(int(line.split(" ")[0], 16), line.split(" ")[1])
+        line = line.strip('\n\r')
+        l = line.split(" ")
+        if((len(l) == 2) or (len(l) == 3)):
+            add_label(int(l[0], 16), l[1])
     
     start_offset = []
     instr_set = []
@@ -1775,6 +1818,19 @@ if __name__ == "__main__":
                     start_offset += [function_adr]
                     add_label(function_adr, 'branch_%x' % (function_adr))
                 start_adr += 2
+    
+    with open(filename_addjumps_arm) as f:
+        content = f.readlines()
+    for line in content:
+        if line.find(" ") != -1:
+            start_adr = int(line.split(" ")[0], 16)
+            end_adr = int(line.split(" ")[1], 16)
+            base_adr = start_adr
+            print("base_adr: " + hex(base_adr))
+            while start_adr < end_adr:
+                instr_set += ["arm"]
+                start_offset += [start_adr]
+                start_adr += 4
         
     
 

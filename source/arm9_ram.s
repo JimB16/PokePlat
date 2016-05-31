@@ -181,6 +181,71 @@ RAM_21cee20:
 RAM_21d0d68:
 
 
+
+
+.org 0x22c29c8 - 0x02103e00
+
+RAM_22c29c8: @ BattleData
+
+
+
+
+.org 0x22c5708 - 0x02103e00
+
+RAM_22c5708: @ PlayerBattleData +0x2d40
+PlayerBattleData: @ 0x22c5708 +0x2d40
+PlayerBattleData_Species:
+    .hword 0
+PlayerBattleData_ATK:
+    .hword 0
+PlayerBattleData_DEF:
+    .hword 0
+PlayerBattleData_SPE:
+    .hword 0
+PlayerBattleData_SPA:
+    .hword 0
+PlayerBattleData_SPD:
+    .hword 0
+PlayerBattleData_Move1:
+    .hword 0
+PlayerBattleData_Move2:
+    .hword 0
+PlayerBattleData_Move3:
+    .hword 0
+PlayerBattleData_Move4:
+    .hword 0
+    .word 0
+/*
++ 0x0 Player Species
++ 0x2 2d42 ATK
++ 0x4 2d44 DEF
++ 0x6 2d46 SPE
++ 0x8 2d48 SPA
++ 0xa 2d4a SPD
++ 0xc (22c5714) 2d4c Move1
++ 0xe (22c5716) Move2
++ 0x10 (22c5718) Move3
++ 0x12 (22c571a) Move4
++ 0x18 (22c5720) 2d58 Level Atk (8 Bytes) val: 0-6-12
+2d67 ability
++ 0x2c (22c5734) 2d6c Move1 PP
++ 0x2d Move2 PP
++ 0x2e Move3 PP
++ 0x2f Move4 PP
++ 0x30 2d70 Move1 PPUps
++ 0x34 2d74 Level
++ 0x35 2d75 Friendship
++ 0x4c (22c5754) 2d8c CurHP
++ 0x50 (22c5758) MaxHP
++ 0x64 2da4 ExpPts
++ 0x6c (22c5774) 2dac
++ 0x70 (22c5778) 2db0 StatusEffect?
++ 0x78 (22c5780) 2db8 HoldItem
+*/
+
+
+
+
 .org 0x27e0000 - 0x02103e00
 
 RAM_27e0000:

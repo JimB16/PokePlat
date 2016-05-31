@@ -2386,7 +2386,7 @@ branch_2220c26: @ 2220c26 :thumb
 	bne     branch_2220c36
 	mov     r0, #0xd7
 	mov     r1, #0x2
-	lsl     r0, r0, #2
+	lsl     r0, r0, #2          @ =0x35c
 	add     sp, #0x38
 	str     r1, [r6, r0]
 	pop     {r3-r7,pc}
@@ -4684,7 +4684,6 @@ branch_2221ba0: @ 2221ba0 :thumb
 	bne     branch_2221bbc
 	mov     r0, r4
 	bl      AIHandler_AddToPointer
-.thumb
 branch_2221bbc: @ 2221bbc :thumb
 	pop     {r3-r5,pc}
 @ 0x2221bbe
@@ -4706,7 +4705,7 @@ AICmd_3d: @ 2221bcc :thumb
 	bl      AIHandler_AddToPointer
 
 	mov     r1, #0xd9
-	lsl     r1, r1, #2
+	lsl     r1, r1, #2          @ =0x364
 	ldrb    r2, [r4, r1]
 	mov     r0, #0xb
 	orr     r0, r2

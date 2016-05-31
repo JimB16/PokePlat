@@ -38,6 +38,8 @@ PlMsg_String: @ 0x020fee50
 .ascii "graphic/opening.narc\0\0\0\0"
 .ascii "graphic/poruact.narc\0\0\0\0"
 .ascii "graphic/ranking.narc\0\0\0\0"
+
+PlFont_String: @ 0x20fefa8
 .ascii "graphic/pl_font.narc\0\0\0\0"
 .ascii "data/tw_arc_etc.narc\0\0\0\0"
 .ascii "graphic/mail_gra.narc\0\0\0"
@@ -197,6 +199,8 @@ PlWazaTbl_String: @ 0x020ff878
 .ascii "poketool/pokegra/dp_height_o.narc\0\0\0"
 .ascii "poketool/pokegra/poke_shadow.narc\0\0\0"
 .ascii "resource/eng/scratch/scratch.narc\0\0\0"
+
+PlGrowTbl_String: @ 0x020ffb9c
 .ascii "poketool/personal/pl_growtbl.narc\0\0\0"
 .ascii "fielddata/areadata/area_data.narc\0\0\0"
 .ascii "graphic/unionobj2d_onlyfront.narc\0\0\0"
@@ -258,7 +262,7 @@ NARCStringPointer: @ 0x2100498
 .word WazaSeq_String @ 0x0
 .word SubSeq_String @ 0x1
 .word PlPersonal_String @ 0x2
-.word 0x020ffb9c @ 0x3
+.word PlGrowTbl_String @ 0x3
 .word 0x020ffac4 @ 0x4
 .word Height_String @ 0x5
 .word Trbgra_String @ 0x6
@@ -269,7 +273,7 @@ NARCStringPointer: @ 0x2100498
 .word 0x020ff7b8 @ 0xb
 .word 0x020fef30 @ 0xc
 .word 0x020ff248 @ 0xd
-.word 0x020fefa8 @ 0xe
+.word PlFont_String @ 0xe
 .word 0x020ffd28 @ 0xf
 .word 0x020ffa58 @ 0x10
 .word 0x020ff080 @ 0x11

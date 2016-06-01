@@ -1,0 +1,7 @@
+num: 5
+seed: 0xeef3
+Boy...\nI sure am thirsty...
+                                                     
+\v0103\x0000\x0000, long time, no see!\rOh? You look puzzled.\nYou're wondering who I am.\rI'm Professor Rowan's assistant\nand \v0103\x0001\x0000's father.\rThe professor asked that I upgrade\nyour Pokédex, you see.\rSo I'd chosen this spot on a hunch\nthat you'd pass through.\r\v0103\x0000\x0000, may I have your\nPokédex for a moment?\r
+\v0103\x0000\x0000, long time, no see!\rOh? You look puzzled.\nYou're wondering who I am.\rI'm Professor Rowan's assistant\nand \v0103\x0001\x0000's father.\rThe professor asked that I upgrade\nyour Pokédex, you see.\rSo I'd chosen this spot on a hunch\nthat you'd pass through.\r\v0103\x0000\x0000, may I have your\nPokédex for a moment?\r
+Let's see... Was I supposed to put\nin the software here...?\rKa-chunk.\nKa-chunk!\rAll done!\nI've upgraded your Pokédex!\rI should explain how it's been\nupgraded, shouldn't I?\rIt can now display images of male\nand female Pokémon.\rOK, I'll leave you to carry on with\nyour project for the professor...\r...May I also ask you to keep an\neye on Team Galactic?\rThe professor is concerned about\nwhat happened in Jubilife City...\rIt's probably nothing to worry over!\nI'll be on my way now.\r

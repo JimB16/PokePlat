@@ -1,0 +1,26 @@
+num: 24
+seed: 0xe427
+\v0103\x0000\x0000 examined the ancient\ncave painting.\rMysterious designs cover a whole\nsection of the wall.\rThere are three strange things\nforming a triangle.\rIn the middle of them, a shining\nsphere?\rWhat is this all about?\r
+The cave painting's meaning seems\nto be this...\rThere existed beings...\rBeings so powerful, they were\nconsidered deities at the time.\rThere were three Pokémon with power\nto match either being.\rThe three kept balance with either\nbeing, as if they formed a pyramid.\rIt's an ancient legend of Sinnoh\nthat is still told in Celestic Town.\r
+???: I would like to know more about\nthat legend, if you will.\r
+Elder: Who might you be...?\r
+My name is Cyrus.\rI want to put an end to pointless\nstrife and hostility.\rI am seeking the power to create the\nideal world.\rThus, I want you to answer.\rThe world today can't change because\nthe three Pokémon keep it in balance.\rIs that what you are saying?\r
+Elder: I wouldn't know.\nI do know the world is in balance.\rI'm quite satisfied with the world the\nway it is.\rI'm not interested in your question.\r
+Cyrus: ...Plead ignorance, will you?\nWhat a pointless attitude.\rYou fail to appreciate that the world\nis incomplete.\rI will change the world.\rAs the first step, I will destroy this\ncave painting that you've protected\fall these years.\rA new legend of a new world should\ntake its place.\rAm I wrong?\nIf you feel that way, challenge me.\r
+Cyrus: Well? Am I wrong?\nIf you feel that way, challenge me.\r
+Cyrus: ...I know you, Trainer.\nWe've met at Mt. Coronet.\rWhy would you want to protect this\nincomplete world?\rAs the boss of Team Galactic, I will\nshow you the error of your ways.\r
+Cyrus: ...You chose to be a coward.\nHow sensible of you.\rStand aside and watch as I change\nthe world.
+Cyrus: ...You chose to be a coward.\nHow sensible of you.\rStand aside and watch as I change\nthe world.\r
+Cyrus: ...Remarkable.\rBut, Elder, your attitude told me what\nI needed to know.\rIf the beings of time and space are\nbrought together, they can't be\fstopped...\r
+That cave painting isn't protected\nsimply because it's old.\rWe've preserved it because we value\nthe memories that it represents.\rIt is a legacy of people and Pokémon\nbeyond measure.\rA man who fails to understand that...\nWhat world could he dream of?
+Such a strange, strange man.\nSpouting such nonsense.\rThe time and space of Sinnoh are\nfilled with the memories and thoughts\fof countless people and Pokémon.\rThis is a wonderful world.\nWhat need is there to change it?\rOh, yes. I found something useful.\nYou should take this.\rIt belonged to my granddaughter,\nbut she doesn't use it anymore.\r
+If a Pokémon learns Surf, it can\ncarry you across water and the sea.\rYou've been a great help.\nThat's my thanks for it.\r
+\v0103\x0000\x0000 examined the ancient\ncave painting.\rMysterious designs cover a whole\nsection of the wall.\rThere are three strange things forming\na triangle.\rIn the middle of them, a shining\nsphere...
+Cynthia: This cave painting...\nIt's always been described this way.\rThe light in the center represents\neither DIALGA or PALKIA appearing\fat the Spear Pillar.\rThe three lights around it were thought\nto be UXIE, MESPRIT, and AZELF.\r
+May I continue?
+Cynthia: But, then, I realized that\nthere may be another way of\finterpreting this.\rCould this triangle of lights actually\nrepresent a different trio?\rCould they be DIALGA, PALKIA, and\nGIRATINA instead?\rAnd the large light at their center.\nDoes it represent something else?\rCould it be what created this world of\nours?\rMay I continue for a little bit longer?
+Cynthia: Thank you for listening to\nmy theory.\rDo you know of the ancient Plates they\nfind all over Sinnoh?\rOne of them had this engraved on it.\r“Two beings of time and space set\nfree from the Original One.”\rI think this quote, too, points to the\npresence of another Pokémon.\rA Pokémon even more powerful than\nDIALGA or PALKIA.\rDoes that sound plausible to you?\r
+I'm not quite sure how GIRATINA fits\ninto this scheme of things, but...\rIt's said that in the Distortion World,\nneither time nor space were stable.\rI think that tells us something about\nGIRATINA, the only Pokémon there.\rIt must have been as powerful as\nDIALGA and PALKIA, the rulers of time\fand space.\rIn some way, though, GIRATINA has to\nhave a power opposite of theirs.\r
+I'm sorry this is so long.\nMay I say one last bit?
+A long time ago, I wonder what sort of\nperson painted this?\rDIALGA's Roar of Time...\nPALKIA's Spacial Rend...\rTo the people back then, those Pokémon\nreally must have appeared to rule\fover time and space.\rSeeing them must have shaken the\npeople to their very core.\rThis painting represents those feelings\nof awe, wonder, and everything else.\rIt passed that memory to countless\npeople, eventually becoming a myth...\rThat's what I believe as a researcher\nof myths.\rI think I let myself get carried away\nand talked for far too long.\rI'm sorry, and thank you.\nLet's meet again.\r
+I'm so sorry.\nI let myself get carried away...\r

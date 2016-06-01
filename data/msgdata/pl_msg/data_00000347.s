@@ -1,0 +1,24 @@
+num: 22
+seed: 0x3d9b
+Ratio
+Height
+LEFT: Shrink\nRIGHT: Enlarge\nUP: Move upward\nDOWN: Move downward\nA: Change\nB: Cancel\nL: Next Pokémon\nR: Previous Pokémon\nSELECT: Switch gender
+Player (Girl)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+C
+D
+E
+F
+Player (Boy)
+In progress

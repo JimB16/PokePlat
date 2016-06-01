@@ -30,11 +30,6 @@ def addRomSection(name, address, size):
     return None
 
 
-# New versions of json don't have read anymore.
-if not hasattr(json, "read"):
-    json.read = json.loads
-
-spacing = "\t"
 
 def asm_label(address):
     """
@@ -410,7 +405,7 @@ class Disassembler(object):
                     text += "\\v"
                     n += 1
                     #text += hex(temp_binarystrings[n])
-                    text += "%0.4x" % temp_binarystrings[n] #int("affe", 16)
+                    text += "%0.4x" % temp_binarystrings[n]
                     n += 1
                     nr = temp_binarystrings[n]
                     n += 1

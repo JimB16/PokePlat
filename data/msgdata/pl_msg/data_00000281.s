@@ -1,0 +1,6 @@
+num: 4
+seed: 0xe45f
+The TV has an oddly malevolent feel...\nIt's as if it is staring...
+Inside the TV...\nThere appears to be a Pokémon?...\rThe Pokémon appears as if it will come\nout. Want to thump the TV?
+\v0103\x0000\x0000 thumped the TV set!\r
+ROTOM disappeared into the TV set...

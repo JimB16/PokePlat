@@ -1,0 +1,3 @@
+num: 1
+seed: 0xe423
+The Pokémon flew off somewhere...\rThere is something sparkling where\nthe Pokémon once was...

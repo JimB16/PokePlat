@@ -1,0 +1,5 @@
+num: 3
+seed: 0x697b
+You don't have three Coins.\nYou cannot play right now.
+You have 50,000 Coins now.\nYou cannot hold any more.
+You have no Coins.\nYou cannot play now.

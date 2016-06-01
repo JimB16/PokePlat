@@ -1,0 +1,5 @@
+num: 3
+seed: 0x843a
+There's a wrecked stone pillar up\nahead.\rI wonder what it is?\nIt's got me very curious.
+\v0103\x0000\x0000: Ta-daah!\nKept me waiting again, \v0103\x0001\x0000!\rLet's see how much tougher you and\nI have gotten, right here and now!\rHey, you're a Trainer now. You're\nexpected to be ready for a battle.\rNo whining! No waiting!\nLet's get the show started!\r
+\v0103\x0000\x0000: Waaah!\rIt goes to show my surefire winning\nstrategy doesn't work.\rSay, hey, \v0103\x0001\x0000.\nRemember what I told you before?\rMake sure all your attacks hit!\nAvoid every enemy attack!\rI thought that was a wicked strategy,\nbut it doesn't work worth beans.\rI guess I have to grind it out and\ntoughen up the team a bit at a time.\rAnyway! I'm off to Solaceon Town!\nSee ya, \v0103\x0001\x0000!\rYou'll be shocked by my growth the\nnext time we meet!\r

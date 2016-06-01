@@ -1,0 +1,17 @@
+num: 15
+seed: 0xca9c
+Move Pokémon
+Move Items
+Compare Pokémon
+Get Pokétch
+Vocabulary system 1
+Vocabulary system 2
+Vocabulary system (sentence)
+Current full
+Box full
+All words & phrases
+Trade demo
+Hall of Fame demo
+Hall of Fame (PC)
+ENDING
+ABCDEFGHIJKLMNOPQRS\nTUVWXYZ!?

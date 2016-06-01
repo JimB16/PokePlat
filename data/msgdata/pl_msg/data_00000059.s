@@ -1,0 +1,16 @@
+num: 14
+seed: 0x740f
+The books on the third floor are\neasy to read.\rThe ones down here are all too tough\nfor me to understand...
+That tremor...\nIt was wicked!\rI scrambled to find the book\n“Disaster Strikes Survival Guide!”
+The ceiling-high bookshelves are\ncrammed with books.
+The shelves are lined with books\nworn from being read by many people.
+Please refrain from bringing food\nor beverages into the library.
+Well, hello!\nWe meet again!\rAfter we parted, I went from Oreburgh\nto Hearthome, Celestic, then Eterna.\rYes, the town and cities surrounding\nthe foot of Mt. Coronet.\rWhy my fascination with Mt. Coronet,\nyou may ask?\rWell, Mt. Coronet happens to be called\n“The origin of Sinnoh.”\rI learned many things on my journey.\nWould you like to hear about them?
+Whoa, now let's not be hasty!\nI really want to share this with you!
+The way I see it, our world began when\nthe spirit within people was born.\rWhen that spirit came to be, there\nfollowed awareness about the world.\rWithin that newborn spirit, time and\nspace were intertwined as one.\rPeople and Pokémon, too, were but the\nsame presence.\rAs I understand it, people and Pokémon\nshared the spirit and awareness.\rThey should have understood and\naccepted each other then.\r
+Because they shared the same spirit,\npeople and Pokémon intermingled.\rPeople took the place of Pokémon,\nand the opposite also held true.\rThat interpretation could give us an\nidea about how our world came to be.\rA Pokémon is said to have shaped\nthis world...\rCould that Pokémon be the physical form\nof the original spirit?\rHmm... The spirit came to be, and from\nit, time and space were born...\rThat seems to point to legendary\nDIALGA, the Pokémon of time, and\fPALKIA, the Pokémon of space...\rAnd they lead back to ARCEUS, the\nPokémon that made them arise.\rIsn't this interesting?\nWould you like to hear some more?
+Whoa, please don't tease me!\nI really want to share this with you!
+Oh, there were also Plates, weren't\nthere?\rOne Plate read, “Three beings were\nborn to bind time and space.”\rThose three beings I read to mean\nthe three Pokémon of the lakes.\fIt's about UXIE, MESPRIT, and AZELF.\rThe myth describes how they gave\nspirit to the world, shaping it.\rBut it all starts with ARCEUS, the\nfirst. It is known as the Original One.\r
+Oh, by the way, I wrote down the words\nengraved on those Plates.\rI summarized them in a book and\ndonated it to this library.\rThere it is in that bookshelf.\nI'd be pleased if you'd read it.\r
+I have to say I'm glad I came out to\nSinnoh.\rI suppose I'd better be off in search\nof new myths in faraway lands.\rIt would be nice if our paths were to\ncross again.\r
+”Sinnoh's Beginning as Told on Plates.”\rThis is a collection of engravings from\nancient Plates found in Sinnoh.\r“The Original One breathed alone before\nthe universe came.”\r“When the universe was created,\nits shards became this Plate.”\r“The power of defeated giants\ninfuses this Plate.”\r“Two beings of time and space set\nfree from the Original One.”\r“Three beings were born to bind\ntime and space.”\r“Two make matter, and three make\nspirit, shaping the world.”\r“The powers of Plates are shared\namong Pokémon.”\r“The rightful bearer of a Plate\ndraws from the Plate it holds.”\r\v0103\x0000\x0000 returned the book to its\nplace.

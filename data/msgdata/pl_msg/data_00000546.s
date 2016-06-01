@@ -1,0 +1,14 @@
+num: 12
+seed: 0xaba7
+BGM
+ME
+SE
+PV
+Sound Test
+A PLAY
+B STOP
+X END
+Y INIT
+PLAYER
+KEY
+TMP

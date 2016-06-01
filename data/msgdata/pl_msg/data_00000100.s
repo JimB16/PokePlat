@@ -1,0 +1,4 @@
+num: 2
+seed: 0x9406
+I've had this TM Recycle for such\na long time now.\rIt's not anything that I have much\nuse for these days.\rI do hope you'll put it to good\nuse, young Trainer.
+Folks like me have a long history\nwe can look back on.\rYoung people like you have only the\nfuture to look forward to.

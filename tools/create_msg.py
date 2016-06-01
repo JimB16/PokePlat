@@ -15,7 +15,6 @@ import codecs
 
 import configuration
 
-spacing = "\t"
 
 def words(fileobj):
     for line in fileobj:
@@ -23,8 +22,6 @@ def words(fileobj):
             yield word
 
 def decryptOffsetSize(seed, text):
-    #print("test:")
-    #print(text[8])
     ret = array.array('I')
     
     num = len(text)
@@ -50,14 +47,14 @@ def decryptMsg(seed, text):
     num = len(text)
     ret = array.array('H')
         
-    print("Msg:")
+    #print("Msg:")
     i = 0
     while i < num:
         key = (0x91BD3*(i+1))&0xFFFF
         
         for c in text[i]:
             c2 = c ^ key
-            print(hex(c) + " -> " + hex(c2))
+            #print(hex(c) + " -> " + hex(c2))
             key = (key+0x493D)&0xFFFF
             ret.append(c2)
         i += 1
@@ -69,6 +66,20 @@ def parseMsg(text):
     line = []
     
     SYMBOLS = {}
+
+    
+    with open("tools/lists/poketext.tbl") as f:
+        content = f.readlines()
+
+    for l in content:
+        l = l.decode('utf-8')
+        l2 = []
+        l2 = [l[0:4]]
+        l2 += [l[5:-2]]
+        if len(l2[1]) == 1:
+            print(l2[1])
+            SYMBOLS[ord(l2[1])] = int(l2[0].encode('ascii','ignore'), 16)
+    """
     SYMBOLS[ord(u'0')] = 0x121
     SYMBOLS[ord(u'1')] = 0x122
     SYMBOLS[ord(u'2')] = 0x123
@@ -144,10 +155,11 @@ def parseMsg(text):
     SYMBOLS[ord(u":")] = 0x1c4
     SYMBOLS[ord(u"%")] = 0x1d2
     SYMBOLS[ord(u' ')] = 0x1de
+    """
     # It's true that wild Pokémon do attack\npeople sometimes...\rBut, Pokémon also open their hearts\nto you, so you can become friends.
-    print("SYMBOLS")
-    print(ord(u'é'))
-    print(SYMBOLS)
+    #print("SYMBOLS")
+    #print(ord(u'é'))
+    #print(SYMBOLS)
     
     s = 0
     #text = text.decode('utf8')
@@ -187,7 +199,6 @@ def parseMsg(text):
                 s += 1
         elif text[s] == "\n":
             line.append(0xffff)
-            #line.append(0xe000)
             ret.append(line)
             line = []
             s += 1
@@ -195,8 +206,6 @@ def parseMsg(text):
             nr = SYMBOLS.get(ord(text[s]))
             #print(text[s])
             #if(ord(text[s]) == ord(u'é')):
-            #    print("GOT IT?")
-            #    line.append(0x188)
             if nr == None:
                 line.append(0x0)
             else:
@@ -208,6 +217,7 @@ def parseMsg(text):
     ret.append(line)
 
     return ret
+
 
 if __name__ == "__main__":
     conf = configuration.Config()
@@ -232,13 +242,13 @@ if __name__ == "__main__":
             words = line.split()
             if(words[0] == u"num:" or num == 0):
                 print("num_: " + words[1])
-                c = array.array("h")
-                c.append(int(words[1]))
+                c = array.array("H")
+                c.append(int(words[1], 0))
                 num = int(words[1], 0)
                 c.tofile(out)
             elif(words[0] == u"seed:"):
                 print("seed_: " + words[1])
-                c = array.array("h")
+                c = array.array("H")
                 c.append(int(words[1], 0))
                 seed = int(words[1], 0)
                 c.tofile(out)
@@ -246,9 +256,9 @@ if __name__ == "__main__":
                 text += line
             print(words[0])
     text.encode('utf8')
-    print(text)
+    #print(text)
     parsedtext = parseMsg(text)
-    print(parsedtext)
+    #print(parsedtext)
 
     #a = array.array('L')
     #for c in decryptOffsetSize(num, seed, parsedtext):

@@ -1,0 +1,10 @@
+num: 8
+seed: 0x82e
+Oreburgh Gym
+Eterna Gym
+Pastoria Gym
+Veilstone Gym
+Hearthome Gym
+Snowpoint Gym
+Canalave Gym
+Sunyshore Gym

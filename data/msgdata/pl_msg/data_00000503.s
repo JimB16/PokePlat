@@ -1,0 +1,5 @@
+num: 3
+seed: 0x2eeb
+                                  
+Are you going to take Route 214?\nYou're serious, aren't you?\rIt's too badly chewed up, and\nthere's nothing to see there.\rWell, I guess there is that Ruin\nManiac guy you could check out.\rThat guy's been digging his way\nthrough the bedrock all by himself.
+That Ruin Maniac! It takes effort and\ndedication to do what he did!

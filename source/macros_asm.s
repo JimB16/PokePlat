@@ -199,6 +199,30 @@
 .equ REG_KEYCNT,            0x04000132
 
 @ nds/interrupts.h
+.equ IRQ_VBLANK,            1<<0		/*!< vertical blank interrupt mask */
+.equ IRQ_HBLANK,            1<<1		/*!< horizontal blank interrupt mask */
+.equ IRQ_VCOUNT,            1<<2		/*!< vcount match interrupt mask */
+.equ IRQ_TIMER0,            1<<3		/*!< timer 0 interrupt mask */
+.equ IRQ_TIMER1,            1<<4		/*!< timer 1 interrupt mask */
+.equ IRQ_TIMER2,            1<<5		/*!< timer 2 interrupt mask */
+.equ IRQ_TIMER3,            1<<6		/*!< timer 3 interrupt mask */
+.equ IRQ_NETWORK,           1<<7		/*!< serial interrupt mask */
+.equ IRQ_DMA0,              1<<8		/*!< DMA 0 interrupt mask */
+.equ IRQ_DMA1,              1<<9		/*!< DMA 1 interrupt mask */
+.equ IRQ_DMA2,              1<<10	/*!< DMA 2 interrupt mask */
+.equ IRQ_DMA3,              1<<11	/*!< DMA 3 interrupt mask */
+.equ IRQ_KEYS,              1<<12	/*!< Keypad interrupt mask */
+.equ IRQ_CART,              1<<13	/*!< GBA cartridge interrupt mask */
+.equ IRQ_IPC_SYNC,          1<<16	/*!< IPC sync interrupt mask */
+.equ IRQ_FIFO_EMPTY,        1<<17	/*!< Send FIFO empty interrupt mask */
+.equ IRQ_FIFO_NOT_EMPTY,    1<<18	/*!< Receive FIFO not empty interrupt mask */
+.equ IRQ_CARD,              1<<19	/*!< interrupt mask DS Card Slot*/
+.equ IRQ_CARD_LINE,         1<<20	/*!< interrupt mask */
+.equ IRQ_GEOMETRY_FIFO,     1<<21	/*!< geometry FIFO interrupt mask */
+.equ IRQ_LID,               1<<22	/*!< interrupt mask DS hinge*/
+.equ IRQ_SPI,               1<<23	/*!< SPI interrupt mask */
+.equ IRQ_WIFI,              1<<24	/*!< WIFI interrupt mask (ARM7)*/
+@	IRQ_ALL				=	(~0)		/*!< 'mask' for all interrupt */
 .equ REG_IME,               0x04000208
 .equ IME_DISABLE,           0 /*!< Disable all interrupts. */
 .equ IME_ENABLE,            1 /*!< Enable all interrupts not masked out in REG_IE */
@@ -308,11 +332,102 @@
 .equ REG_SQRT_RESULT,       0x040002B4
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ nds/arm9/sprite.h
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Sprite control defines
+
+@ Attribute 0 consists of 8 bits of Y plus the following flags:
+.equ ATTR0_NORMAL,          (0<<8)
+.equ ATTR0_ROTSCALE,        (1<<8)
+.equ ATTR0_DISABLED,        (2<<8)
+.equ ATTR0_ROTSCALE_DOUBLE, (3<<8)
+
+.equ ATTR0_TYPE_NORMAL,     (0<<10)
+.equ ATTR0_TYPE_BLENDED,    (1<<10)
+.equ ATTR0_TYPE_WINDOWED,   (2<<10)
+.equ ATTR0_BMP,             (3<<10)
+
+.equ ATTR0_MOSAIC,          (1<<12)
+
+.equ ATTR0_COLOR_16,        (0<<13) //16 color in tile mode...16 bit in bitmap mode
+.equ ATTR0_COLOR_256,       (1<<13)
+
+.equ ATTR0_SQUARE,          (0<<14)
+.equ ATTR0_WIDE,            (1<<14)
+.equ ATTR0_TALL,            (2<<14)
+
+@.equ OBJ_Y(m)			((m)&0x00ff)
+
+@ Atribute 1 consists of 9 bits of X plus the following flags:
+@.equ ATTR1_ROTDATA(n)      ((n)<<9)  // note: overlaps with flip flags
+.equ ATTR1_FLIP_X,          (1<<12)
+.equ ATTR1_FLIP_Y,          (1<<13)
+.equ ATTR1_SIZE_8,          (0<<14)
+.equ ATTR1_SIZE_16,         (1<<14)
+.equ ATTR1_SIZE_32,         (2<<14)
+.equ ATTR1_SIZE_64,         (3<<14)
+
+@.equ OBJ_X(m)			((m)&0x01ff)
+
+@ Atribute 2 consists of the following:
+@.equ ATTR2_PRIORITY(n)     ((n)<<10)
+@.equ ATTR2_PALETTE(n)      ((n)<<12)
+@.equ ATTR2_ALPHA(n)		  ((n)<<12)
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ nds/arm9/video.h
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.equ BG_PALETTE,            0x05000000 @ background palette memory
+.equ BG_PALETTE_SUB,        0x05000400 @ background palette memory (sub engine)
+
+.equ SPRITE_PALETTE,        0x05000200 @ sprite palette memory
+.equ SPRITE_PALETTE_SUB,    0x05000600 @ sprite palette memory (sub engine)
+
+.equ OAM,                   0x07000000 @ pointer to Object Attribute Memory
+.equ OAM_SUB,               0x07000400 @ pointer to Object Attribute Memory (Sub engine)
+
 .equ REG_DISPCNT,           0x04000000
 .equ REG_DISPCNT_SUB,       0x04001000
+
+.equ ENABLE_3D,             (1<<3)
+.equ DISPLAY_ENABLE_SHIFT,  8
+.equ DISPLAY_BG0_ACTIVE,    (1 << 8)
+.equ DISPLAY_BG1_ACTIVE,    (1 << 9)
+.equ DISPLAY_BG2_ACTIVE,    (1 << 10)
+.equ DISPLAY_BG3_ACTIVE,    (1 << 11)
+.equ DISPLAY_SPR_ACTIVE,    (1 << 12)
+.equ DISPLAY_WIN0_ON,       (1 << 13)
+.equ DISPLAY_WIN1_ON,       (1 << 14)
+.equ DISPLAY_SPR_WIN_ON,    (1 << 15)
+
+.equ MODE_0_2D,             0x10000 @ 4 2D backgrounds
+.equ MODE_1_2D,             0x10001 @ 4 2D backgrounds
+.equ MODE_2_2D,             0x10002 @ 4 2D backgrounds
+.equ MODE_3_2D,             0x10003 @ 4 2D backgrounds
+.equ MODE_4_2D,             0x10004 @ 4 2D backgrounds
+.equ MODE_5_2D ,            0x10005 @ 4 2D backgrounds
+.equ MODE_6_2D,             0x10006 @ 4 2D backgrounds
+.equ MODE_0_3D,             (0x10000 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_1_3D,             (0x10001 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_2_3D,             (0x10002 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_3_3D,             (0x10003 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_4_3D,             (0x10004 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_5_3D,             (0x10005 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+.equ MODE_6_3D,             (0x10006 | DISPLAY_BG0_ACTIVE | ENABLE_3D) @ 3 2D backgrounds 1 3D background (Main engine only)
+
+.equ MODE_FIFO,             (3<<16) @ video display from main memory
+
+.equ MODE_FB0,              (0x00020000) @ video display directly from VRAM_A in LCD mode
+.equ MODE_FB1,              (0x00060000) @ video display directly from VRAM_B in LCD mode
+.equ MODE_FB2,              (0x000A0000) @ video display directly from VRAM_C in LCD mode
+.equ MODE_FB3,              (0x000E0000) @ video display directly from VRAM_D in LCD mode
+
 .equ REG_MASTER_BRIGHT,     0x0400006C
 .equ REG_MASTER_BRIGHT_SUB, 0x0400106C
+.equ VRAM_CR,               0x04000240
 .equ VRAM_A_CR,             0x04000240
 .equ VRAM_B_CR,             0x04000241
 .equ VRAM_C_CR,             0x04000242
@@ -325,11 +440,13 @@
 .equ VRAM_H_CR,             0x04000248
 .equ VRAM_I_CR,             0x04000249
 
+.equ VRAM_ENABLE,           (1<<7)
+
 @ 3D core control
 .equ GFX_CONTROL,           0x04000060
 .equ GFX_FIFO,              0x04000400
 .equ GFX_STATUS,            0x04000600
-.equ GFX_BUSY,              (1<<27)
+.equ GFX_BUSY,              (1<<27) @ 0x8000000
 .equ GFX_COLOR,             0x04000480
 .equ GFX_VERTEX10,          0x04000490
 .equ GFX_VERTEX_XY,         0x04000494

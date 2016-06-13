@@ -11362,50 +11362,11 @@ branch_2224890: @ 2224890 :thumb
 
 
 
-.macro	AI_13 a adr
-.word   0x13, \a
-.word   (\adr - 1f)>>2
-1:
-.endm
-
-.macro	AI_17 a adr
-.word   0x17, \a
-.word   (\adr - 1f)>>2
-1:
-.endm
-
-.macro	AI_1e a
-.word   0x1e, \a
-.endm
-
-.macro	AI_20 a
-.word   0x20, \a
-.endm
-
-.macro	AI_If35cEq_ a b
-.word   0x22, \a, \b
-.endm
-
-.macro	AI_29 a
-.word   0x29, \a
-.endm
-
-.macro	AI_Jump adr
-.word   0x4c
-.word   (\adr - 1f)>>2
-1:
-.endm
+@ Tr_Ai_22248a4
+.include "source/overlay_0014_AI.s" @ 0x4c84 - 0xf240
 
 
-.globl Tr_Ai_22248a4
-Tr_Ai_22248a4: @ 0x4c84
-@.word 0x20, 0x20a3, 0x9f2, 0x20e2, 0x213d, 0x2130, 0x2163
-.incbin "./baserom/overlay/overlay_0014.bin", 0x4c84, 0x222492c - 0x22248a4
 
-/*@ StartAdr: 0x222492C = 4d0c
-@.incbin "./baserom/overlay/overlay_0014.bin", (0x4d0c + 4*16), 0x222ee60 - (0x222492c + 4*16)
-.incbin "./baserom/overlay/overlay_0014.bin", (0x4d0c + 0xd4), 0x222ee60 - (0x222492c + 0xd4)*/
-.incbin "./baserom/overlay/overlay_0014.bin", 0x4d0c, 0x222ee60 - 0x222492c
 
 
 Unknown_222ee60:

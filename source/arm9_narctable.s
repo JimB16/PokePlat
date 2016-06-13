@@ -167,7 +167,11 @@ Wotbl_String: @ 0x020ff6d8
 .ascii "resource/eng/zukan/zukan.narc\0\0\0"
 .ascii "poketool/pokegra/pokegra.narc\0\0\0"
 .ascii "battle/graphic/b_bag_gra.narc\0\0\0"
+
+ScrMsg_String: @ 0x020ff7b8
 .ascii "msgdata/scenario/scr_msg.narc\0\0\0"
+
+ScrSeq_String: @ 0x020ff7d8
 .ascii "fielddata/script/scr_seq.narc\0\0\0"
 .ascii "graphic/wifi_lobby_other.narc\0\0\0"
 .ascii "contest/data/contest_data.narc\0\0"
@@ -269,8 +273,8 @@ NARCStringPointer: @ 0x2100498
 .word 0x020ff838 @ 0x7
 .word 0x020fed9c @ 0x8
 .word PlWazaTbl_String @ 0x9
-.word 0x020ff7d8 @ 0xa
-.word 0x020ff7b8 @ 0xb
+.word ScrSeq_String @ 0xa
+.word ScrMsg_String @ 0xb
 .word 0x020fef30 @ 0xc
 .word 0x020ff248 @ 0xd
 .word PlFont_String @ 0xe

@@ -42,12 +42,34 @@ RAM_21bf6dc:
 @ branch_201786a: calculate offset
 RAM_21bfaf0:
 
+.equ RAM_21bfaf0_0,         0x0
+.equ RAM_21bfaf0_4,         0x4
+.equ RAM_21bfaf0_8,         0x8
+.equ RAM_21bfaf0_c,         0xc
+.equ RAM_21bfaf0_10,        0x10
+.equ RAM_21bfaf0_14,        0x14
+.equ RAM_21bfaf0_16,        0x16
+.equ RAM_21bfaf0_18,        0x18
+.equ RAM_21bfaf0_1a,        0x1a
+
+
 .org 0x21bfb10 - 0x02103e00
 
 RAM_21bfb10:
     .word 0, 0
 RAM_21bfb18:
     .word 0
+
+
+.org 0x21c04d8 - 0x02103e00
+
+RAM_21c04d8:
+
+
+.org 0x21c0500 - 0x02103e00
+
+RAM_21c0500:
+
 
 .org 0x21c0744 - 0x02103e00
 
@@ -128,25 +150,160 @@ RAM_21ccb9e:
 
 .org 0x21ccba0 - 0x02103e00
 
-RAM_21ccba0:
-    .hword 0, 0, 0, 0, 0, 0, 0, 0
-    .hword 0, 0, 0, 0, 0
+RAM_21ccba0: @ BankForLCDC
+    .hword 0
+RAM_21ccba2: @ BankForBG
+    .hword 0
+RAM_21ccba4: @ BankForOBJ
+    .hword 0
+RAM_21ccba6: @ BankForARM7
+    .hword 0
+RAM_21ccba8: @ BankForTex
+    .hword 0
+RAM_21ccbaa: @ BankForTexPltt
+    .hword 0
+RAM_21ccbac: @ BankForClearImage
+    .hword 0
+RAM_21ccbae: @ BankForBGExtPltt
+    .hword 0
+RAM_21ccbb0: @ BankForOBJExtPltt
+    .hword 0
+RAM_21ccbb2: @ BankForSubBG
+    .hword 0
+RAM_21ccbb4: @ BankForSubOBJ
+    .hword 0
+RAM_21ccbb6: @ BankForSubBGExtPltt
+    .hword 0
+RAM_21ccbb8: @ BankForSubOBJExtPltt
+    .hword 0
+
+
+.org 0x21ccbd8 - 0x02103e00
+
+RAM_21ccbd8:
+
+
+.org 0x21ccbf8 - 0x02103e00
+
+RAM_21ccbf8:
+    .word 0
+RAM_21ccbfc:
+    .word 0
+RAM_21ccc00:
+    .word 0
+
+
+.org 0x21ccc28 - 0x02103e00
+
+RAM_21ccc28:
+    .word 0
+RAM_21ccc2c:
+    .word 0
+RAM_21ccc30:
+    .word 0
 
 
 .org 0x21ccc58 - 0x02103e00
 
 RAM_21ccc58:
     .word 0
-RAM_21ccc5c:
 
-
-.org 0x21ccc80 - 0x02103e00
-
+ThreadLinkedList:               @ 0x21ccc5c ThreadLinkedList
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
+    .word 0                     @ 0x20 ThreadID
 RAM_21ccc80:
-    .word 0
+    .hword 0, 0                 @ 0x24
 RAM_21ccc84:
-    .word 0, 0, 0
+    .word 0                     @ 0x28
+    .word 0                     @ 0x2c FirstNode
+    .word 0                     @ 0x30
+.equ ThreadLinkedList_0,                0x0
+.equ ThreadLinkedList_Scheduler,        0x4
+.equ ThreadLinkedList_8,                0x8
+.equ ThreadLinkedList_c,                0xc
+.equ ThreadLinkedList_1c,               0x1c
+.equ ThreadLinkedList_ID,               0x20
+.equ ThreadLinkedList_24,               0x24
+.equ ThreadLinkedList_26,               0x26
+.equ ThreadLinkedList_28,               0x28
+.equ ThreadLinkedList_FirstNode,        0x2c
+.equ ThreadLinkedList_30,               0x30
+
+.equ Thread_0,              0x0
+.equ Thread_4,              0x4
+.equ Thread_8,              0x8
+.equ Thread_c,              0xc
+.equ Thread_10,             0x10
+.equ Thread_14,             0x14
+.equ Thread_18,             0x18
+.equ Thread_1c,             0x1c
+.equ Thread_20,             0x20
+.equ Thread_24,             0x24
+.equ Thread_28,             0x28
+.equ Thread_2c,             0x2c
+.equ Thread_30,             0x30
+.equ Thread_34,             0x34
+.equ Thread_38,             0x38
+.equ Thread_3c,             0x3c
+.equ Thread_40,             0x40
+.equ Thread_44,             0x44
+.equ Thread_Active,         0x64 @ 0: NotActive 1: Active 2: ?
+.equ Thread_Next,           0x68
+.equ Thread_ID,             0x6c
+.equ Thread_Priority,       0x70
+.equ Thread_74,             0x74
+.equ Thread_78,             0x78
+.equ Thread_7c,             0x7c
+.equ Thread_80,             0x80
+.equ Thread_84,             0x84
+.equ Thread_88,             0x88
+.equ Thread_8c,             0x8c
+.equ Thread_90,             0x90
+.equ Thread_94,             0x94
+.equ Thread_98,             0x98
+.equ Thread_9c,             0x9c
+.equ Thread_a0,             0xa0
+.equ Thread_a4,             0xa4
+.equ Thread_b0,             0xb0
+.equ Thread_Destructor,     0xb4
+
+
+.org 0x21ccc90 - 0x02103e00
+
 RAM_21ccc90:
+
+
+.org 0x21ccd50 - 0x02103e00
+
+RAM_21ccd50:
+
+
+.org 0x21cced8 - 0x02103e00
+
+RAM_21cced8:
+
+
+.org 0x21ccfb0 - 0x02103e00
+
+RAM_21ccfb0:
+
+
+.org 0x21cd000 - 0x02103e00
+
+RAM_21cd000:
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
+
+
+.org 0x21cd040 - 0x02103e00
+
+RAM_21cd040:
+
+
+.org 0x21ceb20 - 0x02103e00
+
+RAM_21ceb20:
 
 
 .org 0x21cec08 - 0x02103e00
@@ -169,6 +326,11 @@ RAM_21cec34:
 .org 0x21cec90 - 0x02103e00
 
 RAM_21cec90:
+
+
+.org 0x21cecac - 0x02103e00
+
+RAM_21cecac:
 
 
 .org 0x21cee20 - 0x02103e00
@@ -255,6 +417,11 @@ RAM_27e0060:
     .zero 4*8
 
 RAM_27e0080:
+
+
+.org 0x27e3ff8 - 0x02103e00
+
+RAM_27e3ff8:
 
 
 .org 0x27fff80 - 0x02103e00

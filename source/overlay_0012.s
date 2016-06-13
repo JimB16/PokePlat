@@ -665,7 +665,7 @@ branch_222008e: @ 222008e :thumb
 	str     r0, [r4, #0x4]
 	ldr     r1, [sp, #0x0]
 	ldr     r2, [r4, #0x0]
-	bl      Function_2006ac0
+	bl      LoadFromNARC_2
 	str     r0, [r4, #0x14]
 	cmp     r0, #0x0
 	bne     branch_22200ae
@@ -8606,7 +8606,7 @@ Function_22237f0: @ 22237f0 :thumb
 	mov     r0, #0x1d
 	mov     r1, r6
 	mov     r2, r5
-	bl      Function_20144c4
+	bl      Call2_LoadFromNARC_2
 	mov     r1, r0
 
 	mov     r0, r4
@@ -8631,7 +8631,7 @@ Function_2223818: @ 2223818 :thumb
 	mov     r0, r6
 	mov     r1, r7
 	mov     r2, r5
-	bl      Function_20144c4
+	bl      Call2_LoadFromNARC_2
 	mov     r1, r0
 	ldr     r3, [sp, #0x0]
 	mov     r0, r4

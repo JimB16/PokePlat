@@ -3748,16 +3748,14 @@ branch_21d2792: @ 21d2792 :thumb
 	ldr     r3, [r3, r4]
 	mov     r1, r6
 	blx     r3
-.thumb
 branch_21d27ac: @ 21d27ac :thumb
 	mov     r0, r7
 	bl      Function_20181c4
-.thumb
 branch_21d27b2: @ 21d27b2 :thumb
 	pop     {r3-r7,pc}
 @ 0x21d27b4
 
-.word 0x21e9ca4 @ 0x21d27b4
+.word Unknown_21e9ca4 @ 0x21d27b4
 
 
 
@@ -3987,12 +3985,12 @@ Function_21d2830: @ 21d2830 :thumb
 	pop     {r4-r6,pc}
 @ 0x21d2984
 
-.word 0x21e9c6c @ 0x21d2984
-.word 0x21e9c50 @ 0x21d2988
-.word 0x21e9c34 @ 0x21d298c
-.word 0x21e9c18 @ 0x21d2990
-.word 0x21e9bfc @ 0x21d2994
-.word 0x21e9c88 @ 0x21d2998
+.word Unknown_21e9c6c @ 0x21d2984
+.word Unknown_21e9c50 @ 0x21d2988
+.word Unknown_21e9c34 @ 0x21d298c
+.word Unknown_21e9c18 @ 0x21d2990
+.word Unknown_21e9bfc @ 0x21d2994
+.word Unknown_21e9c88 @ 0x21d2998
 
 
 
@@ -4138,7 +4136,7 @@ branch_21d2a74: @ 21d2a74 :thumb
 .word 0x2100df4 @ 0x21d2aa4
 .word 0x7fff0000 @ 0x21d2aa8
 .word 0xffff0000 @ 0x21d2aac
-.word 0x21e9bec @ 0x21d2ab0
+.word Unknown_21e9bec @ 0x21d2ab0
 
 
 
@@ -11047,7 +11045,7 @@ Function_21d5608: @ 21d5608 :thumb
 @ 0x21d5612
 
 .align 2
-.word 0x21e9cc4 @ 0x21d5614
+.word Unknown_21e9cc4 @ 0x21d5614
 .word Function_20986e8+1 @ 0x21d5618
 
 
@@ -11093,7 +11091,7 @@ branch_21d5642: @ 21d5642 :thumb
 @ 0x21d5666
 
 .align 2
-.word 0x21e9ccc @ 0x21d5668
+.word Unknown_21e9ccc @ 0x21d5668
 
 
 
@@ -11140,12 +11138,12 @@ branch_21d56a6: @ 21d56a6 :thumb
 	pop     {r4-r6,pc}
 @ 0x21d56b2
 
-
 .align 2
-
-
 .word 0x2c7 @ 0x21d56b4
-.word 0x21e9ce4 @ 0x21d56b8
+.word Unknown_21e9ce4 @ 0x21d56b8
+
+
+
 .thumb
 Function_21d56bc: @ 21d56bc :thumb
 	push    {r4-r6,lr}
@@ -11205,7 +11203,7 @@ branch_21d570e: @ 21d570e :thumb
 
 .align 2
 .word 0x2c2 @ 0x21d571c
-.word 0x21e9cfc @ 0x21d5720
+.word Unknown_21e9cfc @ 0x21d5720
 
 
 
@@ -58213,9 +58211,9 @@ Function_21e90b0: @ 21e90b0 :thumb
 	pop     {r4,r5,pc}
 @ 0x21e9188
 
-.word 0x21e9f30 @ 0x21e9188
-.word 0x21e9f14 @ 0x21e918c
-.word 0x21e9f4c @ 0x21e9190
+.word Unknown_21e9f30 @ 0x21e9188
+.word Unknown_21e9f14 @ 0x21e918c
+.word Unknown_21e9f4c @ 0x21e9190
 
 
 
@@ -59425,7 +59423,7 @@ Function_21e9a0c: @ 21e9a0c :thumb
 	pop     {r3-r5,pc}
 @ 0x21e9a30
 
-.word 0x21e9f04 @ 0x21e9a30
+.word Unknown_21e9f04 @ 0x21e9a30
 .word 0x200010 @ 0x21e9a34
 
 
@@ -59634,8 +59632,56 @@ Jumptable_21e9b9c:
 @ 0x21e9bc4
 
 
-Unknown_21e9bc4:
-.incbin "./baserom/overlay/overlay_0021.bin", 0x18e44, 0x21e9d14 - 0x21e9bc4
+Unknown_21e9bc4: @ 0x21e9bc4
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18e44, 0x21e9bec - 0x21e9bc4
+
+
+Unknown_21e9bec: @ 0x21e9bec
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18e6c, 0x21e9bfc - 0x21e9bec
+
+
+Unknown_21e9bfc: @ 0x21e9bfc
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18e7c, 0x21e9c18 - 0x21e9bfc
+
+
+Unknown_21e9c18: @ 0x21e9c18
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18e98, 0x21e9c34 - 0x21e9c18
+
+
+Unknown_21e9c34: @ 0x21e9c34
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18eb4, 0x21e9c50 - 0x21e9c34
+
+
+Unknown_21e9c50: @ 0x21e9c50
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18ed0, 0x21e9c6c - 0x21e9c50
+
+
+Unknown_21e9c6c: @ 0x21e9c6c
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18eec, 0x21e9c88 - 0x21e9c6c
+
+
+Unknown_21e9c88: @ 0x21e9c88
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f08, 0x21e9ca4 - 0x21e9c88
+
+
+Unknown_21e9ca4: @ 0x21e9ca4
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f24, 0x21e9cc4 - 0x21e9ca4
+
+
+Unknown_21e9cc4: @ 0x21e9cc4
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f44, 0x21e9ccc - 0x21e9cc4
+
+
+Unknown_21e9ccc: @ 0x21e9ccc
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f4c, 0x21e9ce4 - 0x21e9ccc
+
+
+Unknown_21e9ce4: @ 0x21e9ce4
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f64, 0x21e9cfc - 0x21e9ce4
+
+
+Unknown_21e9cfc: @ 0x21e9cfc
+.incbin "./baserom/overlay/overlay_0021.bin", 0x18f7c, 0x21e9d14 - 0x21e9cfc
 
 
 Unknown_21e9d14:
@@ -59659,7 +59705,23 @@ Unknown_21e9d98:
 
 
 Unknown_21e9db0:
-.incbin "./baserom/overlay/overlay_0021.bin", 0x19030, 0x21e9f7f - 0x21e9db0
+.incbin "./baserom/overlay/overlay_0021.bin", 0x19030, 0x21e9f04 - 0x21e9db0
+
+
+Unknown_21e9f04: @ 0x21e9f04
+.incbin "./baserom/overlay/overlay_0021.bin", 0x19184, 0x21e9f14 - 0x21e9f04
+
+
+Unknown_21e9f14: @ 0x21e9f14
+.incbin "./baserom/overlay/overlay_0021.bin", 0x19194, 0x21e9f30 - 0x21e9f14
+
+
+Unknown_21e9f30: @ 0x21e9f30
+.incbin "./baserom/overlay/overlay_0021.bin", 0x191b0, 0x21e9f4c - 0x21e9f30
+
+
+Unknown_21e9f4c: @ 0x21e9f4c
+.incbin "./baserom/overlay/overlay_0021.bin", 0x191cc, 0x21e9f7f - 0x21e9f4c
 
 
 @end 0x21e9f7f

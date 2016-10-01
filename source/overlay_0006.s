@@ -6421,13 +6421,13 @@ Function_22480bc: @ 22480bc :thumb
 	add     r1, sp, #0x0
 	bl      Function_205eaec
 	mov     r0, r6
-	bl      Function_205eabc
+	bl      GetSpritePositionX
 	mov     r5, r0
 	mov     r0, r6
-	bl      Function_205eac8
+	bl      GetSpritePositionY
 	mov     r4, r0
 	mov     r0, r6
-	bl      Function_205ea78
+	bl      GetSpriteFaceDirection
 	cmp     r0, #0x3
 	bhi     branch_2248108
 	add     r0, r0, r0
@@ -7222,13 +7222,15 @@ branch_224890e: @ 224890e :thumb
 @ 0x2248910
 
 .word 0xd0c @ 0x2248910
+
+
+
 .thumb
 Function_2248914: @ 2248914 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r2
 	mov     r4, #0x0
 	add     r5, #0x10
-.thumb
 branch_224891c: @ 224891c :thumb
 	mov     r0, r5
 	bl      Function_2017294

@@ -228,10 +228,10 @@ Function_223b140: @ 223b140 :thumb
 	bl      Function_2006ca8
 	mov     r0, r6
 	bl      Function_2006ca8
+
 	ldr     r7, [pc, #0xc8] @ 0x223b428, (=#0x123)
 	mov     r6, #0x0
 	add     r5, sp, #0xc
-.thumb
 branch_223b364: @ 223b364 :thumb
 	ldr     r1, [r4, #0x0]
 	mov     r2, #0x0
@@ -239,13 +239,14 @@ branch_223b364: @ 223b364 :thumb
 	lsl     r0, r0, #2
 	ldr     r0, [r1, r0]
 	mov     r1, r6
-	add     r1, #0x36
+	add     r1, #PKMNDATA_MOVE1
 	bl      GetPkmnData
 	strh    r0, [r5, #0x0]
 	.hword  0x1c76 @ add r6, r6, #0x1
 	.hword  0x1cad @ add r5, r5, #0x2
 	cmp     r6, #0x4
 	blt     branch_223b364
+
 	ldr     r0, [pc, #0x90] @ 0x223b414, (=#0x81c)
 	add     r1, sp, #0xc
 	ldr     r0, [r4, r0]
@@ -691,7 +692,6 @@ Function_223ba10: @ 223ba10 :thumb
 	ldr     r7, [pc, #0x4c] @ 0x223bac8, (=#0x80f6)
 	ldr     r6, [pc, #0x4c] @ 0x223bacc, (=#0x123)
 	mov     r4, #0x0
-.thumb
 branch_223ba80: @ 223ba80 :thumb
 	ldr     r1, [r5, #0x0]
 	mov     r2, #0x0
@@ -699,20 +699,17 @@ branch_223ba80: @ 223ba80 :thumb
 	lsl     r0, r0, #2
 	ldr     r0, [r1, r0]
 	mov     r1, r4
-	add     r1, #0x36
+	add     r1, #PKMNDATA_MOVE1
 	bl      GetPkmnData
 	cmp     r0, #0x0
 	beq     branch_223baa0
-	mov     r1, #0xb
-	bl      Function_20790c4
+	mov     r1, #MOVEDATA_CONTESTTYPE
+	bl      LoadMoveData
 	mov     r3, r0
 	b       branch_223baa2
-@ 0x223baa0
 
-.thumb
 branch_223baa0: @ 223baa0 :thumb
 	mov     r3, #0x0
-.thumb
 branch_223baa2: @ 223baa2 :thumb
 	add     r0, r4, r7
 	str     r0, [sp, #0x0]
@@ -3250,10 +3247,9 @@ Function_223f374: @ 223f374 :thumb
 	str     r0, [sp, #0x10]
 	mov     r0, r4
 	str     r0, [sp, #0x4]
-.thumb
 branch_223f384: @ 223f384 :thumb
 	ldr     r0, [r4, #0x0]
-	mov     r1, #0x6
+	mov     r1, #PKMNDATA_ITEM
 	mov     r2, #0x0
 	bl      GetPkmnData
 	mov     r6, #0x64
@@ -3265,9 +3261,7 @@ branch_223f384: @ 223f384 :thumb
 	cmp     r0, #0x4
 	bls     branch_223f3a0
 	b       branch_223f512
-@ 0x223f3a0
 
-.thumb
 branch_223f3a0: @ 223f3a0 :thumb
 	add     r0, r0, r0
 	add     r0, pc
@@ -3281,17 +3275,17 @@ branch_223f3a0: @ 223f3a0 :thumb
 	lsl     r2, r3, #3
 	lsl     r0, r4, #4
 	ldr     r0, [r4, #0x0]
-	mov     r1, #0x13
+	mov     r1, #PKMNDATA_COOLCONTEST
 	mov     r2, #0x0
 	bl      GetPkmnData
 	str     r0, [sp, #0xc]
 	ldr     r0, [r4, #0x0]
-	mov     r1, #0x17
+	mov     r1, #PKMNDATA_TOUGHCONTEST
 	mov     r2, #0x0
 	bl      GetPkmnData
 	str     r0, [sp, #0x8]
 	ldr     r0, [r4, #0x0]
-	mov     r1, #0x14
+	mov     r1, #PKMNDATA_BEAUTYCONTEST
 	mov     r2, #0x0
 	bl      GetPkmnData
 	mov     r7, r0
@@ -3331,12 +3325,10 @@ branch_223f512: @ 223f512 :thumb
 	bl      Function_2022974
 	add     sp, #0x14
 	pop     {r4-r7,pc}
-@ 0x223f51a
 
-.thumb
 branch_223f51a: @ 223f51a :thumb
 	ldr     r0, [r4, #0x0]
-	mov     r1, #0x18
+	mov     r1, #PKMNDATA_SHEENCONTEST
 	mov     r2, #0x0
 	bl      GetPkmnData
 	ldr     r1, [sp, #0x8]
@@ -3771,7 +3763,7 @@ branch_223fcd6: @ 223fcd6 :thumb
 	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	mov     r1, r4
-	add     r1, #0x36
+	add     r1, #PKMNDATA_MOVE1
 	bl      GetPkmnData
 	lsl     r1, r4, #1
 	add     r2, sp, #0x3c
@@ -4820,21 +4812,21 @@ branch_2240aa4: @ 2240aa4 :thumb
 	beq     branch_2240aca
 	ldr     r1, [sp, #0x20]
 	add     r4, r6, r1
-	mov     r1, #0xa
-	bl      Function_20790c4
+	mov     r1, #MOVEDATA_CONTESTEFFECT
+	bl      LoadMoveData
+
 	mov     r1, #0x4b
 	lsl     r1, r1, #2
 	strb    r0, [r4, r1]
+
 	ldrh    r0, [r7, #0x0]
-	mov     r1, #0xb
-	bl      Function_20790c4
+	mov     r1, #MOVEDATA_CONTESTTYPE
+	bl      LoadMoveData
 	mov     r1, #0x13
 	lsl     r1, r1, #4
 	strb    r0, [r4, r1]
 	b       branch_2240ada
-@ 0x2240aca
 
-.thumb
 branch_2240aca: @ 2240aca :thumb
 	ldr     r0, [sp, #0x20]
 	mov     r1, #0x0
@@ -5094,13 +5086,12 @@ branch_2240d2a: @ 2240d2a :thumb
 	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	mov     r1, r4
-	add     r1, #0x36
+	add     r1, #PKMNDATA_MOVE1
 	bl      GetPkmnData
 	lsl     r2, r4, #1
 	add     r1, sp, #0x10
 	strh    r0, [r1, r2]
 	.hword  0x1c64 @ add r4, r4, #0x1
-.thumb
 branch_2240d48: @ 2240d48 :thumb
 	cmp     r4, #0x4
 	blt     branch_2240d2a
@@ -6175,13 +6166,13 @@ branch_224160a: @ 224160a :thumb
 	mov     r2, #0x1
 	bl      Function_2007dec
 	ldr     r0, [r6, #0x0]
-	mov     r1, #0x5
+	mov     r1, #PKMNDATA_SPECIES
 	ldr     r0, [r0, r4]
 	mov     r2, #0x0
 	bl      GetPkmnData
 	str     r0, [sp, #0x20]
 	ldr     r0, [r6, #0x0]
-	mov     r1, #0x70
+	mov     r1, #PKMNDATA_ALTERNATEFORM
 	ldr     r0, [r0, r4]
 	mov     r2, #0x0
 	bl      GetPkmnData
@@ -7196,8 +7187,8 @@ Function_2243af0: @ 2243af0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	mov     r0, r1
-	mov     r1, #0xb
-	bl      Function_20790c4
+	mov     r1, #MOVEDATA_CONTESTTYPE
+	bl      LoadMoveData
 	lsl     r1, r4, #2
 	add     r2, r4, r1
 	ldr     r1, [pc, #0x4] @ 0x2243b08, (=#0x22539c8)

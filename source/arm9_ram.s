@@ -1,41 +1,131 @@
 
 .section .bss
 
-@ 0x02103e00
+@ 0x02000000
 
-.org 0x21beb80 - 0x02103e00
+.org 0x2101d0c - 0x02000000
+
+RAM_2101d0c:
+    .word 0, 0
+RAM_2101d14:
+
+.org 0x2101d44 - 0x02000000
+
+RAM_2101d44:
+    .word 0
+RAM_2101d48:
+    .word 0
+RAM_2101d4c:
+
+.org 0x2101df0 - 0x02000000
+
+RAM_2101df0:
+    .word 0, 0
+RAM_2101df8:
+
+
+.org 0x21beb80 - 0x02000000
 
 RAM_21beb80:
 
-.org 0x21beba0 - 0x02103e00
+.org 0x21beba0 - 0x02000000
 
 RAM_21beba0:
 
-.org 0x21bf370 - 0x02103e00
+.org 0x21bf370 - 0x02000000
 
 RAM_21bf370:
 
-.org 0x21bf3b0 - 0x02103e00
+.org 0x21bf3b0 - 0x02000000
 
 RAM_21bf3b0:
 
-.org 0x21bf3f0 - 0x02103e00
+.org 0x21bf3f0 - 0x02000000
 
 RAM_21bf3f0:
 
-.org 0x21bf67c - 0x02103e00
 
+.org 0x21bf430 - 0x02000000
+
+RAM_21bf430:
+    .word 0
+RAM_21bf434:
+
+
+.org 0x21bf454 - 0x02000000
+
+RAM_21bf454:
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
+RAM_21bf474:
+    .word 0
+RAM_21bf478:
+    .word 0
+RAM_21bf47c:
+    .word 0, 0, 0
+RAM_21bf488:
+
+
+.org 0x21bf4b8 - 0x02000000
+
+RAM_21bf4b8:
+
+
+.org 0x21bf4e8 - 0x02000000
+
+RAM_21bf4e8:
+
+
+.org 0x21bf500 - 0x02000000
+
+RAM_21bf500:
+
+
+.org 0x21bf5b4 - 0x02000000
+
+RAM_21bf5b4:
+
+
+.org 0x21bf5c8 - 0x02000000
+
+RAM_21bf5c8:
+    .word 0, 0, 0, 0
+RAM_21bf5d8:
+    .word 0, 0, 0, 0
+RAM_21bf5e8:
+
+
+.org 0x21bf610 - 0x02000000
+
+RAM_21bf610:
+    .word 0, 0
+RAM_21bf618:
+
+
+.org 0x21bf658 - 0x02000000
+
+RAM_21bf658:
+
+
+.org 0x21bf678 - 0x02000000
+
+RAM_21bf678:
+    .word 0
 RAM_21bf67c:
 
-.org 0x21bf6bc - 0x02103e00
+
+.org 0x21bf6bc - 0x02000000
 
 RAM_21bf6bc:
 
-.org 0x21bf6dc - 0x02103e00
+.org 0x21bf6dc - 0x02000000
 
 RAM_21bf6dc:
 
-.org 0x21bfaf0 - 0x02103e00
+.org 0x21bfae8 - 0x02000000
+
+RAM_21bfae8:
+    .word 0, 0
 
 @ init at branch_2017eaa:
 @ 27ffda0 init with Function_20c304c
@@ -53,25 +143,40 @@ RAM_21bfaf0:
 .equ RAM_21bfaf0_1a,        0x1a
 
 
-.org 0x21bfb10 - 0x02103e00
+.org 0x21bfb0c - 0x02000000
 
+RAM_21bfb0c:
+    .word 0
 RAM_21bfb10:
     .word 0, 0
 RAM_21bfb18:
     .word 0
+RAM_21bfb1c:
+    .word 0
 
 
-.org 0x21c04d8 - 0x02103e00
+.org 0x21c04d8 - 0x02000000
 
 RAM_21c04d8:
+    .word 0, 0
+RAM_21c04e0:
 
 
-.org 0x21c0500 - 0x02103e00
+.org 0x21c0500 - 0x02000000
 
 RAM_21c0500:
 
 
-.org 0x21c0744 - 0x02103e00
+.org 0x21c0700 - 0x02000000
+
+RAM_21c0700:
+    .word 0
+RAM_21c0704:
+    .word 0, 0, 0
+RAM_21c0710:
+
+
+.org 0x21c0744 - 0x02000000
 
 RAM_21c0744:
     .word 0, 0, 0, 0, 0, 0, 0
@@ -125,30 +230,62 @@ RAM_21c07f4:
 RAM_21c07fc:
 
 
-.org 0x21c0848 - 0x02103e00
+.org 0x21c0848 - 0x02000000
 
 RAM_21c0848:
+    .word 0
+RAM_21c084c:
+    .word 0
+RAM_21c0850:
+    .word 0, 0, 0
+RAM_21c085c:
 
 
-.org 0x21c3a34 - 0x02103e00
+.org 0x21c3a34 - 0x02000000
 
 RAM_21c3a34:
-
-.org 0x21c3a3c - 0x02103e00
-
+    .word 0
+RAM_21c3a38:
+    .word 0
 RAM_21c3a3c:
+    .word 0, 0, 0
+RAM_21c3a48:
+    .word 0, 0, 0
+RAM_21c3a54:
 
-.org 0x21c5a60 - 0x02103e00
+
+.org 0x21c3aa0 - 0x02000000
+
+RAM_21c3aa0:
+    .word 0
+RAM_21c3aa4:
+    .word 0, 0, 0
+RAM_21c3ab0:
+    .word 0
+RAM_21c3ab4:
+    .word 0, 0, 0
+RAM_21c3ac0:
+    .word 0, 0, 0, 0, 0
+RAM_21c3ad4:
+    .word 0
+RAM_21c3ad8:
+    .word 0
+RAM_21c3adc:
+    .word 0, 0, 0, 0, 0
+RAM_21c3af0:
+    .word 0
+RAM_21c3af4:
+
+
+.org 0x21c5a60 - 0x02000000
 
 RAM_21c5a60:
 
-.org 0x21ccb9e - 0x02103e00
+
+.org 0x21ccb9e - 0x02000000
 
 RAM_21ccb9e:
     .hword 0
-
-
-.org 0x21ccba0 - 0x02103e00
 
 RAM_21ccba0: @ BankForLCDC
     .hword 0
@@ -178,12 +315,12 @@ RAM_21ccbb8: @ BankForSubOBJExtPltt
     .hword 0
 
 
-.org 0x21ccbd8 - 0x02103e00
+.org 0x21ccbd8 - 0x02000000
 
 RAM_21ccbd8:
 
 
-.org 0x21ccbf8 - 0x02103e00
+.org 0x21ccbf8 - 0x02000000
 
 RAM_21ccbf8:
     .word 0
@@ -193,7 +330,7 @@ RAM_21ccc00:
     .word 0
 
 
-.org 0x21ccc28 - 0x02103e00
+.org 0x21ccc28 - 0x02000000
 
 RAM_21ccc28:
     .word 0
@@ -203,7 +340,7 @@ RAM_21ccc30:
     .word 0
 
 
-.org 0x21ccc58 - 0x02103e00
+.org 0x21ccc58 - 0x02000000
 
 RAM_21ccc58:
     .word 0
@@ -269,44 +406,44 @@ RAM_21ccc84:
 .equ Thread_Destructor,     0xb4
 
 
-.org 0x21ccc90 - 0x02103e00
+.org 0x21ccc90 - 0x02000000
 
 RAM_21ccc90:
 
 
-.org 0x21ccd50 - 0x02103e00
+.org 0x21ccd50 - 0x02000000
 
 RAM_21ccd50:
 
 
-.org 0x21cced8 - 0x02103e00
+.org 0x21cced8 - 0x02000000
 
 RAM_21cced8:
 
 
-.org 0x21ccfb0 - 0x02103e00
+.org 0x21ccfb0 - 0x02000000
 
 RAM_21ccfb0:
 
 
-.org 0x21cd000 - 0x02103e00
+.org 0x21cd000 - 0x02000000
 
 RAM_21cd000:
     .word 0, 0, 0, 0
     .word 0, 0, 0, 0
 
 
-.org 0x21cd040 - 0x02103e00
+.org 0x21cd040 - 0x02000000
 
 RAM_21cd040:
 
 
-.org 0x21ceb20 - 0x02103e00
+.org 0x21ceb20 - 0x02000000
 
 RAM_21ceb20:
 
 
-.org 0x21cec08 - 0x02103e00
+.org 0x21cec08 - 0x02000000
 
 RAM_21cec08:
     .word 0
@@ -323,36 +460,47 @@ RAM_21cec2c:
 RAM_21cec34:
 
 
-.org 0x21cec90 - 0x02103e00
+.org 0x21cec90 - 0x02000000
 
 RAM_21cec90:
 
 
-.org 0x21cecac - 0x02103e00
+.org 0x21cecac - 0x02000000
 
 RAM_21cecac:
 
 
-.org 0x21cee20 - 0x02103e00
+.org 0x21cee20 - 0x02000000
 
 RAM_21cee20:
 
 
-.org 0x21d0d68 - 0x02103e00
+.org 0x21d0d68 - 0x02000000
 
 RAM_21d0d68:
 
 
 
 
-.org 0x22c29c8 - 0x02103e00
+.org 0x22c29c8 - 0x02000000
 
 RAM_22c29c8: @ BattleData
+/*
++ 0x150 Round Nr
++ 0x355 Current Move (0-3)
++ 0x356 Current Move ID
++ 0x358 Move1 Score
++ 0x359 Move2 Score
++ 0x35a Move3 Score
++ 0x35b Move4 Score
+
++ 0x2134
++ 0x2138
+*/
 
 
 
-
-.org 0x22c5708 - 0x02103e00
+.org 0x22c5708 - 0x02000000
 
 RAM_22c5708: @ PlayerBattleData +0x2d40
 PlayerBattleData: @ 0x22c5708 +0x2d40
@@ -403,12 +551,26 @@ PlayerBattleData_Move4:
 + 0x6c (22c5774) 2dac
 + 0x70 (22c5778) 2db0 StatusEffect?
 + 0x78 (22c5780) 2db8 HoldItem
++ 0x80 (22c5788) 2dc0
 */
 
 
+/*****************
+ScriptHandler
+*****************/
+.equ ScriptHandler_0,               0x0
+.equ ScriptHandler_1,               0x1     @ 0 = No Active Script, 1 = Normal Script Active, 2 = Execute Function in ScriptHandler_4
+.equ ScriptHandler_4,               0x4
+.equ ScriptHandler_Pointer,         0x8
+.equ ScriptHandler_c,               0xc     @ 0x14 * 4 Bytes
+.equ ScriptHandler_PtrToJumpTable,  0x5c    @ =JumpTable_Scripthandler (initialised in Function_203e724)
+.equ ScriptHandler_NrOfCmds,        0x60    @ =Nr of ScriptCmds (initialised in Function_203e724)
+.equ ScriptHandler_64,              0x64
+.equ ScriptHandler_74,              0x74
 
 
-.org 0x27e0000 - 0x02103e00
+
+.org 0x27e0000 - 0x02000000
 
 RAM_27e0000:
     .zero 4*24 @ 24 JumpAdresses, 1 for every IRQs
@@ -419,12 +581,12 @@ RAM_27e0060:
 RAM_27e0080:
 
 
-.org 0x27e3ff8 - 0x02103e00
+.org 0x27e3ff8 - 0x02000000
 
 RAM_27e3ff8:
 
 
-.org 0x27fff80 - 0x02103e00
+.org 0x27fff80 - 0x02000000
 
 RAM_27fff80:
     .word 0, 0, 0, 0

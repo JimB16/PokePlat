@@ -14,7 +14,9 @@ x = address where the jump goes to
 .endm
 
 
+.equ LESSER,			0x0
 .equ EQUAL,				0x1
+.equ GREATER,			0x2
 
 .equ StdFunc_PkmnMarket, 0x7e3
 
@@ -121,11 +123,11 @@ x = address where the jump goes to
 .hword  0x25, \a
 .endm
 
-.macro	SetValue a, b
+.macro	ScriptCmd_AddValue a, b
 .hword  0x26, \a, \b
 .endm
 
-.macro	CopyValue a, b
+.macro	ScriptCmd_SubValue a, b
 .hword  0x27, \a, \b
 .endm
 
@@ -1617,7 +1619,7 @@ x = address where the jump goes to
 .hword  0x1ab, \a, \b
 .endm
 
-.macro	EggAnm
+.macro	EggAnimation
 .hword  0x1ac
 .endm
 
@@ -1693,19 +1695,19 @@ x = address where the jump goes to
 .hword  0x1c0, \a, \b
 .endm
 
-.macro	CopyPokeHeight a, b
+.macro	CopyPokemonHeight a, b
 .hword  0x1c1, \a, \b
 .endm
 
-.macro	SetvarPokeHeight a
+.macro	SetVariablePokemonHeight a
 .hword  0x1c2, \a
 .endm
 
-.macro	ComparePokeHeight a, b, c
+.macro	ComparePokemonHeight a, b, c
 .hword  0x1c3, \a, \b, \c
 .endm
 
-.macro	CheckPokeHeight a, b, c
+.macro	CheckPokemonHeight a, b, c
 .hword  0x1c4, \a, \b, \c
 .endm
 
@@ -1785,7 +1787,7 @@ x = address where the jump goes to
 .hword  0x1d6, \a, \b
 .endm
 
-.macro	Berrypoffin a
+.macro	BerryPoffin a
 .hword  0x1d7, \a
 .endm
 
@@ -1793,7 +1795,7 @@ x = address where the jump goes to
 .hword  0x1d8, \a
 .endm
 
-.macro	BattleRmResult a, b
+.macro	BattleRoomResult a, b
 .hword  0x1d9, \a, \b
 .endm
 
@@ -1845,19 +1847,19 @@ x = address where the jump goes to
 .hword  0x1e5, \a
 .endm
 
-.macro	CheckSinPokedex a
+.macro	CheckSinnohPokedex a
 .hword  0x1e8, \a
 .endm
 
-.macro	CheckNatPokedex a
+.macro	CheckNationalPokedex a
 .hword  0x1e9, \a
 .endm
 
-.macro	ShowSinSheet
+.macro	ShowSinnohSheet
 .hword  0x1ea
 .endm
 
-.macro	ShowNatSheet
+.macro	ShowNationalSheet
 .hword  0x1eb
 .endm
 
@@ -1897,7 +1899,7 @@ x = address where the jump goes to
 .hword  0x1f5, \a, \b, \c
 .endm
 
-.macro	CheckPokeLevel a, b
+.macro	CheckPokemonLevel a, b
 .hword  0x1f6, \a, \b
 .endm
 
@@ -1954,7 +1956,7 @@ x = address where the jump goes to
 .hword  0x205
 .endm
 
-.macro	Gmbynocule
+.macro	GreatMarshBynocule
 .hword  0x206
 .endm
 
@@ -1962,11 +1964,11 @@ x = address where the jump goes to
 .hword  0x207, \a
 .endm
 
-.macro	Pokepic a, b
+.macro	PokemonPicture a, b
 .hword  0x208, \a, \b
 .endm
 
-.macro	Hidepic
+.macro	HidePicture
 .hword  0x209
 .endm
 
@@ -2100,11 +2102,11 @@ x = address where the jump goes to
 .hword  0x223, \a
 .endm
 
-.macro	CopyMoveRemember a, b
+.macro	TeachMove a, b
 .hword  0x224, \a, \b
 .endm
 
-.macro	StoreMoveRemember a
+.macro	CheckTeachMove a
 .hword  0x225, \a
 .endm
 
@@ -2113,11 +2115,11 @@ x = address where the jump goes to
 .byte   \a
 .endm
 
-.macro	CheckPokeTrade a
+.macro	CheckPokemonTrade a
 .hword  0x228, \a
 .endm
 
-.macro	TradeChsPoke a
+.macro	TradeChosenPokemon a
 .hword  0x229, \a
 .endm
 
@@ -2201,7 +2203,7 @@ x = address where the jump goes to
 .hword  0x238, \a, \b
 .endm
 
-.macro	Deciderules a
+.macro	DecideRules a
 .hword  0x239, \a
 .endm
 
@@ -2209,7 +2211,7 @@ x = address where the jump goes to
 .hword  0x23a, \a, \b, \c
 .endm
 
-.macro	HealpcAnm a
+.macro	HealPokemonAnimation a
 .hword  0x23b, \a
 .endm
 
@@ -2217,7 +2219,7 @@ x = address where the jump goes to
 .hword  0x23c, \a, \b
 .endm
 
-.macro	ShipAnm a, b, c, d, e
+.macro	ShipAnimation a, b, c, d, e
 .hword  0x23d
 .byte   \a, \b
 .hword  \c, \d, \e
@@ -2268,7 +2270,7 @@ x = address where the jump goes to
 .hword  0x248, \a, \b, \c
 .endm
 
-.macro	CheckPhraseBoxImput2 a, b, c, d, e
+.macro	CheckPhraseBoxInput2 a, b, c, d, e
 .hword  0x249, \a, \b, \c, \d, \e
 .endm
 
@@ -2276,26 +2278,26 @@ x = address where the jump goes to
 .hword  0x24a, \a
 .endm
 
-.macro	PrpPcAnm a
+.macro	PreparePcAnimation a
 .hword  0x24b
 .byte   \a
 .endm
 
-.macro	PcOpnAnm a
+.macro	OpenPcAnimation a
 .hword  0x24c
 .byte   \a
 .endm
 
-.macro	PcClsAnm a
+.macro	ClosePcAnimation a
 .hword  0x24d
 .byte   \a
 .endm
 
-.macro	CheckLotoNumber a
+.macro	CheckLottoNumber a
 .hword  0x24e, \a
 .endm
 
-.macro	CompareLotoNumber a, b, c, d
+.macro	CompareLottoNumber a, b, c, d
 .hword  0x24f, \a, \b, \c, \d
 .endm
 
@@ -2337,7 +2339,7 @@ x = address where the jump goes to
 .hword  0x258
 .endm
 
-.macro	ElevLgAnm
+.macro	ElevLgAnimation
 .hword  0x259
 .endm
 
@@ -2419,7 +2421,7 @@ x = address where the jump goes to
 .hword  0x26c, \a
 .endm
 
-.macro	Unownmsgbox a
+.macro	UnownMessageBox a
 .hword  0x26d, \a
 .endm
 
@@ -2436,7 +2438,7 @@ x = address where the jump goes to
 .byte   \b
 .endm
 
-.macro	Thanknameins a
+.macro	ThankNameInsert a
 .hword  0x271, \a
 .endm
 
@@ -2476,7 +2478,7 @@ x = address where the jump goes to
 .hword  0x279, \a, \b
 .endm
 
-.macro	LgCstlView
+.macro	LeagueCastleView
 .hword  0x27a
 .endm
 
@@ -2553,7 +2555,7 @@ x = address where the jump goes to
 .hword  \b
 .endm
 
-.macro	Pokepartypic a
+.macro	PokemonPartyPicture a
 .hword  0x28c, \a
 .endm
 
@@ -2587,16 +2589,16 @@ x = address where the jump goes to
 .hword  0x293, \a
 .endm
 
-.macro	ShowBPntsbox a, b
+.macro	ShowBattlePointsBox a, b
 .hword  0x294
 .byte   \a, \b
 .endm
 
-.macro	HideBPointsbox
+.macro	HideBattlePointsBox
 .hword  0x295
 .endm
 
-.macro	UpdateBPointsbox
+.macro	UpdateBattlePointsBox
 .hword  0x296
 .endm
 
@@ -2617,18 +2619,22 @@ x = address where the jump goes to
 .hword  \a, \b
 .endm
 
-.macro	HmEffect a, b
+.macro	HMEffect a, b
 .hword  0x29e
 .hword  \a, \b
 .endm
 
-.macro	CmrBmpEffect a
+.macro	CameraBumpEffect a
 .hword  0x29f
 .hword  \a
 .endm
 
 .macro	DoubleBattle a, b, c
 .hword  0x2a0, \a, \b, \c
+.endm
+
+.macro	ApplyMovement2 a, b, c
+.hword  0x2a1, \a, \b, \c
 .endm
 
 .macro	Cmd_2a2 a
@@ -2643,7 +2649,7 @@ x = address where the jump goes to
 .hword  0x2a4, \a
 .endm
 
-.macro	TradeChosenPoke
+.macro	ChooseTradePokemon
 .hword  0x2a5
 .endm
 
@@ -2663,7 +2669,7 @@ x = address where the jump goes to
 .hword  0x2a9, \a, \b
 .endm
 
-.macro	ComparePhraseBoxImput a, b, c, d, e
+.macro	ComparePhraseBoxInput a, b, c, d, e
 .hword  0x2aa, \a, \b, \c, \d, \e
 .endm
 
@@ -2671,7 +2677,7 @@ x = address where the jump goes to
 .hword  0x2ab, \a
 .endm
 
-.macro	ActMisteryGift
+.macro	ActivateMysteryGift
 .hword  0x2ac
 .endm
 
@@ -2744,7 +2750,7 @@ x = address where the jump goes to
 .hword  0x2be, \a
 .endm
 
-.macro	Bikeride
+.macro	BikeRide
 .hword  0x2bf
 .endm
 
@@ -2752,11 +2758,11 @@ x = address where the jump goes to
 .hword  0x2c0, \a
 .endm
 
-.macro	ShowSavebox
+.macro	ShowSaveBox
 .hword  0x2c1
 .endm
 
-.macro	HideSavebox
+.macro	HideSaveBox
 .hword  0x2c2
 .endm
 
@@ -2790,7 +2796,7 @@ x = address where the jump goes to
 .hword  0x2c9
 .endm
 
-.macro	FlorarClckAnm
+.macro	FloralClockAnimation
 .hword  0x2ca
 .endm
 
@@ -3164,7 +3170,7 @@ x = address where the jump goes to
 .hword  0x327, \a
 .endm
 
-.macro	Cmd_328 a
+.macro	PortalEffect a
 .hword  0x328, \a
 .endm
 
@@ -3305,7 +3311,7 @@ x = address where the jump goes to
 .byte   \a
 .endm
 
-.macro	Cmd_347 a, b
+.macro	DisplayFloor a, b
 .hword  0x347
 .byte   \a, \b
 .endm

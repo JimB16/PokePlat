@@ -35,14 +35,14 @@ Script: @ 0
 
 Script_1: @ 72
 	If 0x4077, 0x0
-	CompareLastResultCall 0x1, Script_branch_ac
+	CompareLastResultCall EQUAL, Script_branch_ac
 	If 0x4077, 0x3
 	CompareLastResultCall 0x4, Script_branch_c2
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_e0
+	CompareLastResultJump EQUAL, Script_branch_e0
 	End
 @ ac
 
@@ -74,37 +74,31 @@ Script_2: @ e8
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xad
-	CompareLastResultJump 0x1, Script_branch_119
+	CompareLastResultJump EQUAL, Script_branch_119
 	If 0x8004, 0xae
-	CompareLastResultJump 0x1, Script_branch_129
+	CompareLastResultJump EQUAL, Script_branch_129
 	If 0x8004, 0xaf
-	CompareLastResultJump 0x1, Script_branch_139
+	CompareLastResultJump EQUAL, Script_branch_139
 	End
 @ 119
 
 Script_branch_119: @ 119
 	ChangeOwPosition 0x7, 0xad, 0x314
 	Jump Script_branch_149
-@ 127
-
-.byte 0x2 @ 0x127
-.byte 0x0 @ 0x128
+	End
+@ 129
 
 Script_branch_129: @ 129
 	ChangeOwPosition 0x7, 0xae, 0x314
 	Jump Script_branch_149
-@ 137
-
-.byte 0x2 @ 0x137
-.byte 0x0 @ 0x138
+	End
+@ 139
 
 Script_branch_139: @ 139
 	ChangeOwPosition 0x7, 0xaf, 0x314
 	Jump Script_branch_149
-@ 147
-
-.byte 0x2 @ 0x147
-.byte 0x0 @ 0x148
+	End
+@ 149
 
 Script_branch_149: @ 149
 	ClearFlag 0x17a
@@ -117,9 +111,9 @@ Script_branch_149: @ 149
 	CallStandard 0x7f8
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_18d
+	CompareLastResultJump EQUAL, Script_branch_18d
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_224
+	CompareLastResultJump EQUAL, Script_branch_224
 	End
 @ 18d
 
@@ -157,10 +151,8 @@ Script_branch_18d: @ 18d
 	Message 0x19
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-@ 218
-
-.byte 0x2 @ 0x218
-.byte 0x0 @ 0x219
+	End
+@ 21a
 
 Script_branch_21a: @ 21a
 	Message 0x1
@@ -206,10 +198,8 @@ Script_branch_224: @ 224
 	Message 0x1c
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-@ 2af
-
-.byte 0x2 @ 0x2af
-.byte 0x0 @ 0x2b0
+	End
+@ 2b1
 
 Script_branch_2b1: @ 2b1
 	Message 0x5
@@ -235,11 +225,11 @@ Function_2db: @ 2db
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xad
-	CompareLastResultJump 0x1, Script_branch_30c
+	CompareLastResultJump EQUAL, Script_branch_30c
 	If 0x8004, 0xae
-	CompareLastResultJump 0x1, Script_branch_320
+	CompareLastResultJump EQUAL, Script_branch_320
 	If 0x8004, 0xaf
-	CompareLastResultJump 0x1, Script_branch_334
+	CompareLastResultJump EQUAL, Script_branch_334
 	End
 @ 30c
 
@@ -291,9 +281,9 @@ Function_390: @ 390
 	Message 0x11
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3b6
+	CompareLastResultJump EQUAL, Script_branch_3b6
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3bb
+	CompareLastResultJump EQUAL, Script_branch_3bb
 	End
 @ 3b6
 
@@ -502,7 +492,7 @@ Script_12: @ 58c
 	FacePlayer
 	CheckBadge 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_5b2
+	CompareLastResultJump EQUAL, Script_branch_5b2
 	Message 0x1d
 	WaitButton
 	CloseMsgOnKeyPress
@@ -533,11 +523,11 @@ Script_19: @ 5d0
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x30b
-	CompareLastResultJump 0x1, Script_branch_601
+	CompareLastResultJump EQUAL, Script_branch_601
 	If 0x8005, 0x30c
-	CompareLastResultJump 0x1, Script_branch_62a
+	CompareLastResultJump EQUAL, Script_branch_62a
 	If 0x8005, 0x30d
-	CompareLastResultJump 0x1, Script_branch_653
+	CompareLastResultJump EQUAL, Script_branch_653
 	End
 @ 601
 
@@ -550,10 +540,8 @@ Script_branch_601: @ 601
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-@ 628
-
-.byte 0x2 @ 0x628
-.byte 0x0 @ 0x629
+	End
+@ 62a
 
 Script_branch_62a: @ 62a
 	ApplyMovement 0x1a, Movement_690
@@ -564,10 +552,8 @@ Script_branch_62a: @ 62a
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-@ 651
-
-.byte 0x2 @ 0x651
-.byte 0x0 @ 0x652
+	End
+@ 653
 
 Script_branch_653: @ 653
 	ApplyMovement 0x1a, Movement_6a0
@@ -578,10 +564,8 @@ Script_branch_653: @ 653
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-@ 67a
-
-.byte 0x2 @ 0x67a
-.byte 0x0 @ 0x67b
+	End
+@ 67c
 
 Script_branch_67c: @ 67c
 	ReleaseAll
@@ -645,13 +629,13 @@ Script_3: @ 700
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2f5
-	CompareLastResultJump 0x1, Script_branch_73e
+	CompareLastResultJump EQUAL, Script_branch_73e
 	If 0x8005, 0x2f6
-	CompareLastResultJump 0x1, Script_branch_758
+	CompareLastResultJump EQUAL, Script_branch_758
 	If 0x8005, 0x2f7
-	CompareLastResultJump 0x1, Script_branch_772
+	CompareLastResultJump EQUAL, Script_branch_772
 	If 0x8005, 0x2f8
-	CompareLastResultJump 0x1, Script_branch_78c
+	CompareLastResultJump EQUAL, Script_branch_78c
 	End
 @ 73e
 
@@ -660,40 +644,32 @@ Script_branch_73e: @ 73e
 	ApplyMovement 0x1f, Movement_8b4
 	WaitMovement
 	Jump Script_branch_7a6
-@ 756
-
-.byte 0x2 @ 0x756
-.byte 0x0 @ 0x757
+	End
+@ 758
 
 Script_branch_758: @ 758
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8cc
 	WaitMovement
 	Jump Script_branch_7a6
-@ 770
-
-.byte 0x2 @ 0x770
-.byte 0x0 @ 0x771
+	End
+@ 772
 
 Script_branch_772: @ 772
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8e4
 	WaitMovement
 	Jump Script_branch_7a6
-@ 78a
-
-.byte 0x2 @ 0x78a
-.byte 0x0 @ 0x78b
+	End
+@ 78c
 
 Script_branch_78c: @ 78c
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8fc
 	WaitMovement
 	Jump Script_branch_7a6
-@ 7a4
-
-.byte 0x2 @ 0x7a4
-.byte 0x0 @ 0x7a5
+	End
+@ 7a6
 
 Script_branch_7a6: @ 7a6
 	Call Function_7fc
@@ -703,21 +679,21 @@ Script_branch_7a6: @ 7a6
 	WaitMovement
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2f5
-	CompareLastResultJump 0x1, Script_branch_846
+	CompareLastResultJump EQUAL, Script_branch_846
 	If 0x8005, 0x2f6
-	CompareLastResultJump 0x1, Script_branch_858
+	CompareLastResultJump EQUAL, Script_branch_858
 	If 0x8005, 0x2f7
-	CompareLastResultJump 0x1, Script_branch_86a
+	CompareLastResultJump EQUAL, Script_branch_86a
 	If 0x8005, 0x2f8
-	CompareLastResultJump 0x1, Script_branch_87c
+	CompareLastResultJump EQUAL, Script_branch_87c
 	End
 @ 7fc
 
 Function_7fc: @ 7fc
 	CheckFlag 0xf1
-	CompareLastResultJump 0x0, Script_branch_817
+	CompareLastResultJump LESSER, Script_branch_817
 	CheckFlag 0xf3
-	CompareLastResultJump 0x0, Script_branch_81c
+	CompareLastResultJump LESSER, Script_branch_81c
 	Message 0x23
 	Return
 @ 817
@@ -734,9 +710,9 @@ Script_branch_81c: @ 81c
 
 Function_821: @ 821
 	CheckFlag 0xf1
-	CompareLastResultJump 0x0, Script_branch_83c
+	CompareLastResultJump LESSER, Script_branch_83c
 	CheckFlag 0xf3
-	CompareLastResultJump 0x0, Script_branch_841
+	CompareLastResultJump LESSER, Script_branch_841
 	Message 0x23
 	Return
 @ 83c
@@ -755,37 +731,29 @@ Script_branch_846: @ 846
 	ApplyMovement 0x1f, Movement_924
 	WaitMovement
 	Jump Script_branch_88e
-@ 856
-
-.byte 0x2 @ 0x856
-.byte 0x0 @ 0x857
+	End
+@ 858
 
 Script_branch_858: @ 858
 	ApplyMovement 0x1f, Movement_930
 	WaitMovement
 	Jump Script_branch_88e
-@ 868
-
-.byte 0x2 @ 0x868
-.byte 0x0 @ 0x869
+	End
+@ 86a
 
 Script_branch_86a: @ 86a
 	ApplyMovement 0x1f, Movement_93c
 	WaitMovement
 	Jump Script_branch_88e
-@ 87a
-
-.byte 0x2 @ 0x87a
-.byte 0x0 @ 0x87b
+	End
+@ 87c
 
 Script_branch_87c: @ 87c
 	ApplyMovement 0x1f, Movement_948
 	WaitMovement
 	Jump Script_branch_88e
-@ 88c
-
-.byte 0x2 @ 0x88c
-.byte 0x0 @ 0x88d
+	End
+@ 88e
 
 Script_branch_88e: @ 88e
 	ReleaseAll
@@ -884,7 +852,7 @@ Script_5: @ 954
 	LockAll
 	FacePlayer
 	CheckFlag 0xf3
-	CompareLastResultJump 0x1, Script_branch_97f
+	CompareLastResultJump EQUAL, Script_branch_97f
 	Call Function_821
 	Cmd_30
 	CloseMsgOnKeyPress
@@ -907,7 +875,7 @@ Script_branch_97f: @ 97f
 Function_994: @ 994
 	CheckItem 0x1b5, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_9bd
+	CompareLastResultJump EQUAL, Script_branch_9bd
 	Message 0x24
 	CloseMsgOnKeyPress
 	ApplyMovement 0x1f, Movement_1558
@@ -942,11 +910,11 @@ Script_4: @ 9dc
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8000, 0x8001
 	If 0x8000, 0xad
-	CompareLastResultJump 0x1, Script_branch_a1c
+	CompareLastResultJump EQUAL, Script_branch_a1c
 	If 0x8000, 0xae
-	CompareLastResultJump 0x1, Script_branch_a36
+	CompareLastResultJump EQUAL, Script_branch_a36
 	If 0x8000, 0xaf
-	CompareLastResultJump 0x1, Script_branch_a50
+	CompareLastResultJump EQUAL, Script_branch_a50
 	End
 @ a1c
 
@@ -955,30 +923,24 @@ Script_branch_a1c: @ a1c
 	ApplyMovement 0xff, Movement_dd0
 	WaitMovement
 	Jump Script_branch_a6a
-@ a34
-
-.byte 0x2 @ 0xa34
-.byte 0x0 @ 0xa35
+	End
+@ a36
 
 Script_branch_a36: @ a36
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_de4
 	WaitMovement
 	Jump Script_branch_a6a
-@ a4e
-
-.byte 0x2 @ 0xa4e
-.byte 0x0 @ 0xa4f
+	End
+@ a50
 
 Script_branch_a50: @ a50
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_df8
 	WaitMovement
 	Jump Script_branch_a6a
-@ a68
-
-.byte 0x2 @ 0xa68
-.byte 0x0 @ 0xa69
+	End
+@ a6a
 
 Script_branch_a6a: @ a6a
 	SetVarHero 0x0
@@ -1002,9 +964,9 @@ Script_branch_a6a: @ a6a
 	WaitMovement
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_adc
+	CompareLastResultJump EQUAL, Script_branch_adc
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_aed
+	CompareLastResultJump EQUAL, Script_branch_aed
 	End
 @ adc
 
@@ -1013,20 +975,16 @@ Script_branch_adc: @ adc
 	SetVarHero 0x1
 	Message 0x47
 	Jump Script_branch_afe
-@ aeb
-
-.byte 0x2 @ 0xaeb
-.byte 0x0 @ 0xaec
+	End
+@ aed
 
 Script_branch_aed: @ aed
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x48
 	Jump Script_branch_afe
-@ afc
-
-.byte 0x2 @ 0xafc
-.byte 0x0 @ 0xafd
+	End
+@ afe
 
 Script_branch_afe: @ afe
 	CloseMsgOnKeyPress
@@ -1039,7 +997,7 @@ Script_branch_afe: @ afe
 	DoubleBattle 0x8004, 0x19e, 0x19f
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_db7
+	CompareLastResultJump EQUAL, Script_branch_db7
 	ApplyMovement 0x12, Movement_eb4
 	WaitMovement
 	Message 0x49
@@ -1059,18 +1017,18 @@ Script_branch_afe: @ afe
 	WaitMovement
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_c30
+	CompareLastResultJump EQUAL, Script_branch_c30
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c41
+	CompareLastResultJump EQUAL, Script_branch_c41
 	End
 @ baa
 
 Function_baa: @ baa
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_bca
+	CompareLastResultJump EQUAL, Script_branch_bca
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_bfc
+	CompareLastResultJump EQUAL, Script_branch_bfc
 	End
 @ bca
 
@@ -1078,10 +1036,10 @@ Script_branch_bca: @ bca
 	StoreStarter 0x800c
 	SetVar 0x8004, 0x268
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_c2e
+	CompareLastResultJump EQUAL, Script_branch_c2e
 	SetVar 0x8004, 0x269
 	If 0x800c, 0x189
-	CompareLastResultJump 0x1, Script_branch_c2e
+	CompareLastResultJump EQUAL, Script_branch_c2e
 	SetVar 0x8004, 0x26a
 	Return
 @ bfc
@@ -1090,10 +1048,10 @@ Script_branch_bfc: @ bfc
 	StoreStarter 0x800c
 	SetVar 0x8004, 0x265
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_c2e
+	CompareLastResultJump EQUAL, Script_branch_c2e
 	SetVar 0x8004, 0x266
 	If 0x800c, 0x189
-	CompareLastResultJump 0x1, Script_branch_c2e
+	CompareLastResultJump EQUAL, Script_branch_c2e
 	SetVar 0x8004, 0x267
 	Return
 @ c2e
@@ -1107,20 +1065,16 @@ Script_branch_c30: @ c30
 	SetVarHero 0x1
 	Message 0x4b
 	Jump Script_branch_c52
-@ c3f
-
-.byte 0x2 @ 0xc3f
-.byte 0x0 @ 0xc40
+	End
+@ c41
 
 Script_branch_c41: @ c41
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x4c
 	Jump Script_branch_c52
-@ c50
-
-.byte 0x2 @ 0xc50
-.byte 0x0 @ 0xc51
+	End
+@ c52
 
 Script_branch_c52: @ c52
 	SetVarHero 0x0
@@ -1131,10 +1085,8 @@ Script_branch_c52: @ c52
 	ApplyMovement 0xff, Movement_e08
 	WaitMovement
 	Jump Script_branch_c7c
-@ c7a
-
-.byte 0x2 @ 0xc7a
-.byte 0x0 @ 0xc7b
+	End
+@ c7c
 
 Script_branch_c7c: @ c7c
 	RemovePeople 0x7
@@ -1190,7 +1142,7 @@ Function_cf0: @ cf0
 Function_d58: @ d58
 	CheckIdPlayer 0x800c, 0x6
 	SetVar 0x8004, 0x0
-	SetValue 0x8004, 0x800c
+	ScriptCmd_AddValue 0x8004, 0x800c
 	GiveAccessories 0x8004, 0x1
 	Return
 @ d72
@@ -1198,7 +1150,7 @@ Function_d58: @ d58
 Function_d72: @ d72
 	CheckIdPlayer 0x800c, 0x6
 	SetVar 0x8004, 0x12
-	SetValue 0x8004, 0x800c
+	ScriptCmd_AddValue 0x8004, 0x800c
 	GiveAccessories 0x8004, 0x1
 	Return
 @ d8c
@@ -1207,10 +1159,10 @@ Function_d8c: @ d8c
 Script_branch_d8c: @ d8c
 	CheckIdPlayer 0x800c, 0x8
 	If2 0x4001, 0x800c
-	CompareLastResultJump 0x1, Function_d8c
+	CompareLastResultJump EQUAL, Function_d8c
 	CopyVar 0x4001, 0x800c
 	SetVar 0x8004, 0x1
-	SetValue 0x8004, 0x800c
+	ScriptCmd_AddValue 0x8004, 0x800c
 	GiveAccessories2 0x8004
 	Return
 @ db7
@@ -1508,9 +1460,9 @@ Script_6: @ f3c
 	CloseMulti4
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_f97
+	CompareLastResultJump EQUAL, Script_branch_f97
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_fa2
+	CompareLastResultJump EQUAL, Script_branch_fa2
 	Message 0x53
 	WaitButton
 	CloseMsgOnKeyPress
@@ -1574,9 +1526,9 @@ Script_11: @ fe6
 	Message 0x58
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1011
+	CompareLastResultJump EQUAL, Script_branch_1011
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_101c
+	CompareLastResultJump EQUAL, Script_branch_101c
 	End
 @ 1011
 
@@ -1668,15 +1620,15 @@ Script_17: @ 10c4
 	WaitMovement
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xac
-	CompareLastResultCall 0x1, Script_branch_1133
+	CompareLastResultCall EQUAL, Script_branch_1133
 	If 0x8004, 0xad
-	CompareLastResultCall 0x1, Script_branch_113f
+	CompareLastResultCall EQUAL, Script_branch_113f
 	If 0x8004, 0xae
-	CompareLastResultCall 0x1, Script_branch_114b
+	CompareLastResultCall EQUAL, Script_branch_114b
 	If 0x8004, 0xaf
-	CompareLastResultCall 0x1, Script_branch_1157
+	CompareLastResultCall EQUAL, Script_branch_1157
 	If 0x8004, 0xb0
-	CompareLastResultCall 0x1, Script_branch_1163
+	CompareLastResultCall EQUAL, Script_branch_1163
 	Message 0x27
 	SetVar 0x40e7, 0x2
 	Message 0x28
@@ -1769,7 +1721,7 @@ Script_18: @ 11cc
 	SetVar 0x8004, 0x0
 	Call Function_11f8
 	If 0x8004, 0x3
-	CompareLastResultJump 0x1, Script_branch_1223
+	CompareLastResultJump EQUAL, Script_branch_1223
 	Message 0x29
 	WaitButton
 	CloseMsgOnKeyPress
@@ -1779,16 +1731,16 @@ Script_18: @ 11cc
 
 Function_11f8: @ 11f8
 	CheckFlag 0xed
-	CompareLastResultCall 0x1, Script_branch_121b
+	CompareLastResultCall EQUAL, Script_branch_121b
 	CheckFlag 0xee
-	CompareLastResultCall 0x1, Script_branch_121b
+	CompareLastResultCall EQUAL, Script_branch_121b
 	CheckFlag 0xef
-	CompareLastResultCall 0x1, Script_branch_121b
+	CompareLastResultCall EQUAL, Script_branch_121b
 	Return
 @ 121b
 
 Script_branch_121b: @ 121b
-	SetValue 0x8004, 0x1
+	ScriptCmd_AddValue 0x8004, 0x1
 	Return
 @ 1223
 
@@ -1811,13 +1763,13 @@ Script_branch_1223: @ 1223
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_12a1
+	CompareLastResultJump EQUAL, Script_branch_12a1
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_12bb
+	CompareLastResultJump EQUAL, Script_branch_12bb
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_12a1
+	CompareLastResultJump EQUAL, Script_branch_12a1
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_12a1
+	CompareLastResultJump EQUAL, Script_branch_12a1
 	End
 @ 12a1
 
@@ -1826,20 +1778,16 @@ Script_branch_12a1: @ 12a1
 	ApplyMovement 0xff, Movement_1314
 	WaitMovement
 	Jump Script_branch_12d5
-@ 12b9
-
-.byte 0x2 @ 0x12b9
-.byte 0x0 @ 0x12ba
+	End
+@ 12bb
 
 Script_branch_12bb: @ 12bb
 	ApplyMovement 0x17, Movement_12f0
 	ApplyMovement 0xff, Movement_1304
 	WaitMovement
 	Jump Script_branch_12d5
-@ 12d3
-
-.byte 0x2 @ 0x12d3
-.byte 0x0 @ 0x12d4
+	End
+@ 12d5
 
 Script_branch_12d5: @ 12d5
 	RemovePeople 0x17
@@ -1884,13 +1832,13 @@ Script_14: @ 1320
 	LockAll
 	FacePlayer
 	CheckFlag 0xed
-	CompareLastResultJump 0x1, Script_branch_138c
+	CompareLastResultJump EQUAL, Script_branch_138c
 	Message 0x2d
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1356
+	CompareLastResultJump EQUAL, Script_branch_1356
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_137d
+	CompareLastResultJump EQUAL, Script_branch_137d
 	End
 @ 1356
 
@@ -1930,13 +1878,13 @@ Script_15: @ 1397
 	LockAll
 	FacePlayer
 	CheckFlag 0xee
-	CompareLastResultJump 0x1, Script_branch_1403
+	CompareLastResultJump EQUAL, Script_branch_1403
 	Message 0x33
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_13cd
+	CompareLastResultJump EQUAL, Script_branch_13cd
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_13f4
+	CompareLastResultJump EQUAL, Script_branch_13f4
 	End
 @ 13cd
 
@@ -1976,15 +1924,15 @@ Script_16: @ 140e
 	LockAll
 	FacePlayer
 	If 0x40e7, 0x2
-	CompareLastResultJump 0x0, Script_branch_149e
+	CompareLastResultJump LESSER, Script_branch_149e
 	CheckFlag 0xef
-	CompareLastResultJump 0x1, Script_branch_1493
+	CompareLastResultJump EQUAL, Script_branch_1493
 	Message 0x39
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1451
+	CompareLastResultJump EQUAL, Script_branch_1451
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1484
+	CompareLastResultJump EQUAL, Script_branch_1484
 	End
 @ 1451
 

@@ -17,27 +17,23 @@ Script_1: @ 16
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_41
+	CompareLastResultJump EQUAL, Script_branch_41
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4c
+	CompareLastResultJump EQUAL, Script_branch_4c
 	End
 @ 41
 
 Script_branch_41: @ 41
 	Message 0x1
 	Jump Script_branch_57
-@ 4a
-
-.byte 0x2 @ 0x4a
-.byte 0x0 @ 0x4b
+	End
+@ 4c
 
 Script_branch_4c: @ 4c
 	Message 0x2
 	Jump Script_branch_57
-@ 55
-
-.byte 0x2 @ 0x55
-.byte 0x0 @ 0x56
+	End
+@ 57
 
 Script_branch_57: @ 57
 	WaitButton

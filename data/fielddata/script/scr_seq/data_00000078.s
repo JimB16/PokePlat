@@ -15,7 +15,7 @@ Script_1: @ 16
 	LockAll
 	FacePlayer
 	CheckFlag 0x82
-	CompareLastResultJump 0x1, Script_branch_52
+	CompareLastResultJump EQUAL, Script_branch_52
 	Message 0x0
 	SetVar 0x8004, 0x1c2
 	SetVar 0x8005, 0x1
@@ -24,10 +24,8 @@ Script_1: @ 16
 	SetVar 0x4114, 0x1
 	ActBike 0x9
 	Jump Script_branch_52
-@ 50
-
-.byte 0x2 @ 0x50
-.byte 0x0 @ 0x51
+	End
+@ 52
 
 Script_branch_52: @ 52
 	Message 0x1
@@ -56,7 +54,7 @@ Script_3: @ 7c
 	LockAll
 	FacePlayer
 	CheckFlag 0x81
-	CompareLastResultJump 0x1, Script_branch_9a
+	CompareLastResultJump EQUAL, Script_branch_9a
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress

@@ -12,7 +12,7 @@ Script: @ 0
 Script_1: @ 12
 	SetFlag 0x9d7
 	CheckFlag 0xe4
-	CompareLastResultJump 0x0, Script_branch_23
+	CompareLastResultJump LESSER, Script_branch_23
 	End
 @ 23
 
@@ -30,9 +30,9 @@ Script_2: @ 2b
 	CompareLastResultJump 0x4, Script_branch_95
 	SetVarHero 0x0
 	CheckFlag 0xe0
-	CompareLastResultCall 0x0, Script_branch_8b
+	CompareLastResultCall LESSER, Script_branch_8b
 	CheckFlag 0xe0
-	CompareLastResultCall 0x1, Script_branch_90
+	CompareLastResultCall EQUAL, Script_branch_90
 	SetVarHero 0x0
 	Soundfr 0x481
 	Message 0x1
@@ -63,17 +63,13 @@ Script_branch_95: @ 95
 	If 0x40e2, 0x2
 	CompareLastResultJump 0x4, Script_branch_c4
 	If 0x40e2, 0x1
-	CompareLastResultJump 0x1, Script_branch_bb
+	CompareLastResultJump EQUAL, Script_branch_bb
 	SetVarHero 0x0
 	Message 0x9
 	Jump Script_branch_d2
-@ bb
-
 Script_branch_bb: @ bb
 	Message 0xa
 	Jump Script_branch_d2
-@ c4
-
 Script_branch_c4: @ c4
 	SetVarHero 0x0
 	Message 0xb
@@ -84,7 +80,7 @@ Script_branch_c4: @ c4
 @ d2
 
 Script_branch_d2: @ d2
-	SetValue 0x40e2, 0x1
+	ScriptCmd_AddValue 0x40e2, 0x1
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll
@@ -101,48 +97,36 @@ Script_4: @ e2
 	FollowHero 0x4, 0x10
 	CheckFacePosition 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_103
+	CompareLastResultJump EQUAL, Script_branch_103
 	Jump Script_branch_11b
-@ 103
-
 Script_branch_103: @ 103
 	ApplyMovement 0xff, Movement_194
 	ApplyMovement 0x4, Movement_1d8
 	WaitMovement
 	Jump Script_branch_133
-@ 11b
-
 Script_branch_11b: @ 11b
 	ApplyMovement 0xff, Movement_19c
 	ApplyMovement 0x4, Movement_1e4
 	WaitMovement
 	Jump Script_branch_133
-@ 133
-
 Script_branch_133: @ 133
 	SetVarHero 0x0
 	Message 0x5
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x800c
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_152
+	CompareLastResultJump EQUAL, Script_branch_152
 	Jump Script_branch_16a
-@ 152
-
 Script_branch_152: @ 152
 	ApplyMovement 0xff, Movement_1a4
 	ApplyMovement 0x4, Movement_1f0
 	WaitMovement
 	Jump Script_branch_182
-@ 16a
-
 Script_branch_16a: @ 16a
 	ApplyMovement 0xff, Movement_1b0
 	ApplyMovement 0x4, Movement_200
 	WaitMovement
 	Jump Script_branch_182
-@ 182
-
 Script_branch_182: @ 182
 	RemovePeople 0x4
 	SetFlag 0xe4

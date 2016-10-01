@@ -13,7 +13,7 @@ Script_1: @ a
 	FacePlayer
 	StorePoketchApp 0xb, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3a
+	CompareLastResultJump EQUAL, Script_branch_3a
 	Message 0x0
 	SetVar 0x8004, 0xb
 	CallStandard 0x7d9

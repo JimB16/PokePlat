@@ -11,15 +11,15 @@ Script_1: @ 6
 	CheckIdPlayer 0x8000, 0x5
 	CopyVar 0x8008, 0x8000
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_71
+	CompareLastResultJump EQUAL, Script_branch_71
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_8b
+	CompareLastResultJump EQUAL, Script_branch_8b
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_a5
+	CompareLastResultJump EQUAL, Script_branch_a5
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_bf
+	CompareLastResultJump EQUAL, Script_branch_bf
 	End
 @ 57
 
@@ -28,50 +28,40 @@ Script_branch_57: @ 57
 	ApplyMovement 0x0, Movement_1f0
 	WaitMovement
 	Jump Script_branch_d9
-@ 6f
-
-.byte 0x2 @ 0x6f
-.byte 0x0 @ 0x70
+	End
+@ 71
 
 Script_branch_71: @ 71
 	ApplyMovement 0xff, Movement_154
 	ApplyMovement 0x0, Movement_200
 	WaitMovement
 	Jump Script_branch_d9
-@ 89
-
-.byte 0x2 @ 0x89
-.byte 0x0 @ 0x8a
+	End
+@ 8b
 
 Script_branch_8b: @ 8b
 	ApplyMovement 0xff, Movement_160
 	ApplyMovement 0x0, Movement_210
 	WaitMovement
 	Jump Script_branch_d9
-@ a3
-
-.byte 0x2 @ 0xa3
-.byte 0x0 @ 0xa4
+	End
+@ a5
 
 Script_branch_a5: @ a5
 	ApplyMovement 0xff, Movement_16c
 	ApplyMovement 0x0, Movement_220
 	WaitMovement
 	Jump Script_branch_d9
-@ bd
-
-.byte 0x2 @ 0xbd
-.byte 0x0 @ 0xbe
+	End
+@ bf
 
 Script_branch_bf: @ bf
 	ApplyMovement 0xff, Movement_178
 	ApplyMovement 0x0, Movement_230
 	WaitMovement
 	Jump Script_branch_d9
-@ d7
-
-.byte 0x2 @ 0xd7
-.byte 0x0 @ 0xd8
+	End
+@ d9
 
 Script_branch_d9: @ d9
 	Message 0x0

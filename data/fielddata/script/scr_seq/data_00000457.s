@@ -16,15 +16,15 @@ Script: @ 0
 Script_7: @ 22
 	CheckTime 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x2
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x3
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	If 0x4000, 0x4
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	End
 @ 69
 

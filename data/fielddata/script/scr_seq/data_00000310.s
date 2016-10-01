@@ -12,15 +12,15 @@ Script_1: @ e
 	SetFlag 0x9d5
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	CheckItem 0x1c4, 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	UnkFunct2 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	CheckFlag 0x123
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	ClearFlag 0x251
 	End
 @ 5c
@@ -32,7 +32,7 @@ Script_branch_5c: @ 5c
 
 Script_2: @ 62
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_6f
+	CompareLastResultJump EQUAL, Script_branch_6f
 	End
 @ 6f
 
@@ -55,10 +55,10 @@ Script_3: @ 7d
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d7
+	CompareLastResultJump EQUAL, Script_branch_d7
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c8
+	CompareLastResultJump EQUAL, Script_branch_c8
 	SetFlag 0x123
 	ReleaseAll
 	End

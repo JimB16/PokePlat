@@ -14,12 +14,10 @@ Script_1: @ 12
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_31
+	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_3e
-@ 2f
-
-.byte 0x2 @ 0x2f
-.byte 0x0 @ 0x30
+	End
+@ 31
 
 Script_branch_31: @ 31
 	Message 0x2
@@ -42,17 +40,15 @@ Script_3: @ 4c
 	SetVarHero 0x0
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_86
+	CompareLastResultCall EQUAL, Script_branch_86
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_8b
+	CompareLastResultCall EQUAL, Script_branch_8b
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_90
+	CompareLastResultJump EQUAL, Script_branch_90
 	Jump Script_branch_9d
-@ 84
-
-.byte 0x2 @ 0x84
-.byte 0x0 @ 0x85
+	End
+@ 86
 
 Script_branch_86: @ 86
 	Message 0x12
@@ -91,29 +87,25 @@ Script_2: @ ab
 Function_b5: @ b5
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d6
+	CompareLastResultJump EQUAL, Script_branch_d6
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_df
+	CompareLastResultJump EQUAL, Script_branch_df
 	End
 @ d6
 
 Script_branch_d6: @ d6
 	Message 0x2b
 	Jump Function_e8
-@ df
-
 Script_branch_df: @ df
 	Message 0x2c
 	Jump Script_branch_126
-@ e8
-
 Function_e8: @ e8
 Script_branch_e8: @ e8
 	CheckFlag 0x9ba
-	CompareLastResultJump 0x0, Script_branch_104
-	CheckSinPokedex 0x800c
+	CompareLastResultJump LESSER, Script_branch_104
+	CheckSinnohPokedex 0x800c
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_120
+	CompareLastResultCall EQUAL, Script_branch_120
 Script_branch_104: @ 104
 	StoreSinPokemonSeen 0x8004
 	SetVariableNumber 0x0, 0x8004

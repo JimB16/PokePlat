@@ -13,7 +13,7 @@ Script: @ 0
 
 Script_6: @ 1a
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_27
+	CompareLastResultJump EQUAL, Script_branch_27
 	End
 @ 27
 
@@ -31,13 +31,13 @@ Script_1: @ 39
 	FacePlayer
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_7b
+	CompareLastResultJump EQUAL, Script_branch_7b
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_8b
+	CompareLastResultJump EQUAL, Script_branch_8b
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_9b
+	CompareLastResultJump EQUAL, Script_branch_9b
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_ab
+	CompareLastResultJump EQUAL, Script_branch_ab
 	End
 @ 7b
 
@@ -45,30 +45,22 @@ Script_branch_7b: @ 7b
 	ApplyMovement 0x0, Movement_1b8
 	WaitMovement
 	Jump Script_branch_bb
-@ 8b
-
 Script_branch_8b: @ 8b
 	ApplyMovement 0x0, Movement_1dc
 	WaitMovement
 	Jump Script_branch_bb
-@ 9b
-
 Script_branch_9b: @ 9b
 	ApplyMovement 0x0, Movement_200
 	WaitMovement
 	Jump Script_branch_bb
-@ ab
-
 Script_branch_ab: @ ab
 	ApplyMovement 0x0, Movement_224
 	WaitMovement
 	Jump Script_branch_bb
-@ bb
-
 Script_branch_bb: @ bb
 	CheckBadge 0x4, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1a0
+	CompareLastResultJump EQUAL, Script_branch_1a0
 	DeActivateLeader 0x9, 0x5b, 0x0, 0x0, 0x0
 	Message 0x0
 	CloseMsgOnKeyPress
@@ -77,7 +69,7 @@ Script_branch_bb: @ bb
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_248
+	CompareLastResultJump EQUAL, Script_branch_248
 	Message 0x1
 	SetVarHero 0x0
 	Message 0x2
@@ -99,15 +91,13 @@ Script_branch_bb: @ bb
 	ClearFlag 0x207
 	Message 0x3
 	Jump Script_branch_158
-@ 158
-
 Script_2: @ 158
 Script_branch_158: @ 158
 	SetVar 0x8004, 0x188
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_196
+	CompareLastResultJump EQUAL, Script_branch_196
 	CallStandard 0x7fc
 	SetFlag 0x7d
 	SetVarItem 0x0, 0x8004
@@ -130,7 +120,7 @@ Script_branch_196: @ 196
 Script_4: @ 1a0
 Script_branch_1a0: @ 1a0
 	CheckFlag 0x7d
-	CompareLastResultJump 0x0, Script_branch_158
+	CompareLastResultJump LESSER, Script_branch_158
 	Message 0x5
 	WaitButton
 	CloseMsgOnKeyPress

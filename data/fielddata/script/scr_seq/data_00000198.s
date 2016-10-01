@@ -14,7 +14,7 @@ Script_1: @ 6
 	WaitMovement
 	CheckFirstTimeChampion 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_111
+	CompareLastResultCall EQUAL, Script_branch_111
 	If 0x800c, 0x0
 	CompareLastResultCall 0x5, Script_branch_119
 	CloseMsgOnKeyPress
@@ -24,9 +24,9 @@ Script_1: @ 6
 	Return2 0xf, 0x800c
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_74
+	CompareLastResultJump EQUAL, Script_branch_74
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	End
 @ 74
 
@@ -34,14 +34,10 @@ Script_branch_74: @ 74
 	SetVarHero 0x0
 	Message 0x4
 	Jump Script_branch_8c
-@ 80
-
 Script_branch_80: @ 80
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_8c
-@ 8c
-
 Script_branch_8c: @ 8c
 	CloseMsgOnKeyPress
 	ApplyMovement 0xff, Movement_12c
@@ -53,9 +49,9 @@ Script_branch_8c: @ 8c
 	SetFlag 0x982
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_10a
+	CompareLastResultCall EQUAL, Script_branch_10a
 	If 0x40f4, 0x0
-	CompareLastResultCall 0x1, Script_branch_102
+	CompareLastResultCall EQUAL, Script_branch_102
 	CheckPartyNumber 0x800c
 	CheckElevLgAnm 0x800c
 	FadeScreen 0x6, 0x3, 0x0, 0x0
@@ -141,34 +137,34 @@ Function_174: @ 174
 	ClearFlag 0x1d1
 	ClearFlag 0x98b
 	CheckFlag 0xd0
-	CompareLastResultCall 0x0, Script_branch_23c
+	CompareLastResultCall LESSER, Script_branch_23c
 	CheckFlag 0xd1
-	CompareLastResultCall 0x0, Script_branch_244
+	CompareLastResultCall LESSER, Script_branch_244
 	CheckFlag 0x120
-	CompareLastResultCall 0x0, Script_branch_24c
+	CompareLastResultCall LESSER, Script_branch_24c
 	CheckFlag 0x11b
-	CompareLastResultCall 0x0, Script_branch_263
+	CompareLastResultCall LESSER, Script_branch_263
 	CheckFlag 0x126
-	CompareLastResultCall 0x0, Script_branch_27b
+	CompareLastResultCall LESSER, Script_branch_27b
 	CheckFlag 0x127
-	CompareLastResultCall 0x0, Script_branch_281
+	CompareLastResultCall LESSER, Script_branch_281
 	CheckFlag 0x121
-	CompareLastResultCall 0x0, Script_branch_287
+	CompareLastResultCall LESSER, Script_branch_287
 	If 0x4059, 0x2
-	CompareLastResultCall 0x1, Script_branch_28d
+	CompareLastResultCall EQUAL, Script_branch_28d
 	If 0x4058, 0x2
-	CompareLastResultCall 0x1, Script_branch_299
+	CompareLastResultCall EQUAL, Script_branch_299
 	If 0x405e, 0x2
-	CompareLastResultCall 0x1, Script_branch_2a5
+	CompareLastResultCall EQUAL, Script_branch_2a5
 	If 0x405f, 0x2
-	CompareLastResultCall 0x1, Script_branch_2ad
+	CompareLastResultCall EQUAL, Script_branch_2ad
 	If 0x4060, 0x2
-	CompareLastResultCall 0x1, Script_branch_2b5
+	CompareLastResultCall EQUAL, Script_branch_2b5
 	If 0x410f, 0x0
-	CompareLastResultCall 0x1, Script_branch_234
+	CompareLastResultCall EQUAL, Script_branch_234
 	ClearFlag 0x177
 	CheckFlag 0xb9
-	CompareLastResultCall 0x0, Script_branch_2bd
+	CompareLastResultCall LESSER, Script_branch_2bd
 	ClearFlag 0x186
 	ClearFlag 0x124
 	SetFlag 0x2a0
@@ -192,7 +188,7 @@ Script_branch_244: @ 244
 
 Script_branch_24c: @ 24c
 	CheckFlag 0x125
-	CompareLastResultJump 0x0, Script_branch_261
+	CompareLastResultJump LESSER, Script_branch_261
 	ClearFlag 0x1dd
 	SetVar 0x409e, 0x1
 Script_branch_261: @ 261
@@ -202,7 +198,7 @@ Script_branch_261: @ 261
 Script_branch_263: @ 263
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_279
+	CompareLastResultJump EQUAL, Script_branch_279
 	ClearFlag 0x243
 Script_branch_279: @ 279
 	Return

@@ -10,7 +10,7 @@ Script: @ 0
 
 Script_3: @ e
 	CheckFlag 0x121
-	CompareLastResultCall 0x1, Script_branch_1b
+	CompareLastResultCall EQUAL, Script_branch_1b
 	End
 @ 1b
 
@@ -21,7 +21,7 @@ Script_branch_1b: @ 1b
 
 Script_1: @ 21
 	LockAll
-	Cmd_328 0x0
+	PortalEffect 0x0
 	DarkraiFunction 0x10a, 0x2fa, 0x2ca
 	Message 0x0
 	CloseMsgOnKeyPress
@@ -83,18 +83,14 @@ Script_2: @ c0
 	CompareLastResultJump 0x4, Script_branch_e0
 	Message 0x3
 	Jump Script_branch_eb
-@ de
-
-.byte 0x2 @ 0xde
-.byte 0x0 @ 0xdf
+	End
+@ e0
 
 Script_branch_e0: @ e0
 	Message 0x4
 	Jump Script_branch_eb
-@ e9
-
-.byte 0x2 @ 0xe9
-.byte 0x0 @ 0xea
+	End
+@ eb
 
 Script_branch_eb: @ eb
 	WaitButton

@@ -17,13 +17,13 @@ Script: @ 0
 Script_1: @ 26
 	ElevIrAnm
 	CheckFlag 0xe5
-	CompareLastResultJump 0x0, Script_branch_35
+	CompareLastResultJump LESSER, Script_branch_35
 	End
 @ 35
 
 Script_branch_35: @ 35
 	If 0x4092, 0x2
-	CompareLastResultJump 0x1, Script_branch_4a
+	CompareLastResultJump EQUAL, Script_branch_4a
 	SetVar 0x4092, 0x0
 	End
 @ 4a
@@ -45,14 +45,14 @@ Script_3: @ 64
 	RideBike 0x0
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_d1
+	CompareLastResultCall EQUAL, Script_branch_d1
 	If 0x8005, 0x3
-	CompareLastResultCall 0x1, Script_branch_dd
+	CompareLastResultCall EQUAL, Script_branch_dd
 	SetVarHero 0x0
 	CheckFlag 0xe1
-	CompareLastResultCall 0x0, Script_branch_e9
+	CompareLastResultCall LESSER, Script_branch_e9
 	CheckFlag 0xe1
-	CompareLastResultCall 0x1, Script_branch_ee
+	CompareLastResultCall EQUAL, Script_branch_ee
 	SetVarHero 0x0
 	Soundfr 0x481
 	Message 0x1
@@ -103,9 +103,9 @@ Script_4: @ f3
 	FollowHero 0x4, 0x10
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_13e
+	CompareLastResultCall EQUAL, Script_branch_13e
 	If 0x8005, 0x3
-	CompareLastResultCall 0x1, Script_branch_14a
+	CompareLastResultCall EQUAL, Script_branch_14a
 	ReleaseAll
 	End
 @ 13e
@@ -180,9 +180,9 @@ Script_9: @ 1aa
 	FollowHero 0x4, 0x10
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x28
-	CompareLastResultCall 0x1, Script_branch_291
+	CompareLastResultCall EQUAL, Script_branch_291
 	If 0x8005, 0x29
-	CompareLastResultCall 0x1, Script_branch_2a5
+	CompareLastResultCall EQUAL, Script_branch_2a5
 	Message 0x5
 	CloseMsgOnKeyPress
 	ApplyMovement 0x5, Movement_384
@@ -203,7 +203,7 @@ Script_9: @ 1aa
 	StopFollow
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_37d
+	CompareLastResultJump EQUAL, Script_branch_37d
 	ApplyMovement 0x5, Movement_394
 	WaitMovement
 	Message 0x9
@@ -220,9 +220,9 @@ Script_9: @ 1aa
 	ResetScreen
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x28
-	CompareLastResultCall 0x1, Script_branch_2d1
+	CompareLastResultCall EQUAL, Script_branch_2d1
 	If 0x8005, 0x29
-	CompareLastResultCall 0x1, Script_branch_2e5
+	CompareLastResultCall EQUAL, Script_branch_2e5
 	Call Function_2f9
 	Cmd_2b6 0x4, 0x1
 	ReleaseAll
@@ -287,16 +287,16 @@ Script_branch_2f9: @ 2f9
 	Message 0xb
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_31c
+	CompareLastResultJump EQUAL, Script_branch_31c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_366
+	CompareLastResultJump EQUAL, Script_branch_366
 	End
 @ 31c
 
 Script_branch_31c: @ 31c
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_353
+	CompareLastResultJump EQUAL, Script_branch_353
 	Soundfr 0x486
 	Cmd_4f
 	Message 0xc
@@ -322,10 +322,8 @@ Script_branch_353: @ 353
 Script_branch_366: @ 366
 	Message 0xe
 	Jump Function_2f9
-@ 36f
-
-.byte 0x2 @ 0x36f
-.byte 0x0 @ 0x370
+	End
+@ 371
 
 Function_371: @ 371
 	SetFlag 0xe5
@@ -505,48 +503,40 @@ Script_8: @ 468
 	LockAll
 	FacePlayer
 	CheckFlag 0xe2
-	CompareLastResultJump 0x1, Script_branch_504
+	CompareLastResultJump EQUAL, Script_branch_504
 	If 0x4092, 0x2
-	CompareLastResultJump 0x1, Script_branch_513
+	CompareLastResultJump EQUAL, Script_branch_513
 	If 0x40e3, 0x4
 	CompareLastResultJump 0x4, Script_branch_4eb
 	If 0x40e3, 0x3
-	CompareLastResultJump 0x1, Script_branch_4e0
+	CompareLastResultJump EQUAL, Script_branch_4e0
 	If 0x40e3, 0x2
-	CompareLastResultJump 0x1, Script_branch_4d5
+	CompareLastResultJump EQUAL, Script_branch_4d5
 	If 0x40e3, 0x1
-	CompareLastResultJump 0x1, Script_branch_4ca
+	CompareLastResultJump EQUAL, Script_branch_4ca
 	SetVarHero 0x0
 	Message 0x12
 	Jump Script_branch_4f6
-@ 4c8
-
-.byte 0x2 @ 0x4c8
-.byte 0x0 @ 0x4c9
+	End
+@ 4ca
 
 Script_branch_4ca: @ 4ca
 	Message 0x13
 	Jump Script_branch_4f6
-@ 4d3
-
-.byte 0x2 @ 0x4d3
-.byte 0x0 @ 0x4d4
+	End
+@ 4d5
 
 Script_branch_4d5: @ 4d5
 	Message 0x14
 	Jump Script_branch_4f6
-@ 4de
-
-.byte 0x2 @ 0x4de
-.byte 0x0 @ 0x4df
+	End
+@ 4e0
 
 Script_branch_4e0: @ 4e0
 	Message 0x15
 	Jump Script_branch_4f6
-@ 4e9
-
-.byte 0x2 @ 0x4e9
-.byte 0x0 @ 0x4ea
+	End
+@ 4eb
 
 Script_branch_4eb: @ 4eb
 	Message 0x16
@@ -557,7 +547,7 @@ Script_branch_4eb: @ 4eb
 @ 4f6
 
 Script_branch_4f6: @ 4f6
-	SetValue 0x40e3, 0x1
+	ScriptCmd_AddValue 0x40e3, 0x1
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll

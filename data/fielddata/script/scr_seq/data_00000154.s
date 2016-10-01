@@ -13,11 +13,11 @@ Script_1: @ e
 	LockAll
 	FacePlayer
 	CheckFlag 0xaac
-	CompareLastResultJump 0x1, Script_branch_d5
+	CompareLastResultJump EQUAL, Script_branch_d5
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_eb
+	CompareLastResultJump EQUAL, Script_branch_eb
 	Message 0x1
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -28,10 +28,10 @@ Script_1: @ e
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x4000, 0xff
-	CompareLastResultJump 0x1, Script_branch_eb
+	CompareLastResultJump EQUAL, Script_branch_eb
 	CheckPokeEgg 0x4000, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_e0
+	CompareLastResultJump EQUAL, Script_branch_e0
 	Message 0x3
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -46,13 +46,11 @@ Script_1: @ e
 	StoreHappyStatus 0x3, 0x4000
 	CheckMassage 0x8004
 	If 0x8004, 0xffff
-	CompareLastResultJump 0x1, Script_branch_f6
+	CompareLastResultJump EQUAL, Script_branch_f6
 	Message 0x7
 	SetVar 0x8005, 0x1
 	CallStandard 0x7ff
 	Jump Script_branch_f6
-@ d5
-
 Script_branch_d5: @ d5
 	Message 0x8
 	WaitButton

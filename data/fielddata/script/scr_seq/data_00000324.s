@@ -23,19 +23,17 @@ Script_2: @ 14
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3e
+	CompareLastResultJump EQUAL, Script_branch_3e
 	Jump Script_branch_71
-@ 3e
-
 Script_branch_3e: @ 3e
 	Message 0x4
 	CloseMsgOnKeyPress
 	Call Function_7c
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_96
+	CompareLastResultCall EQUAL, Script_branch_96
 	If 0x8004, 0x2
-	CompareLastResultCall 0x1, Script_branch_b0
-	ShipAnm 0x0, 0x2, 0x21, 0x2c, 0x2ee
+	CompareLastResultCall EQUAL, Script_branch_b0
+	ShipAnimation 0x0, 0x2, 0x21, 0x2c, 0x2ee
 	ReleaseAll
 	End
 @ 71
@@ -113,28 +111,22 @@ Script_3: @ fc
 	CallStandard 0x7fc
 	CheckBadge 0x5, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_140
+	CompareLastResultJump EQUAL, Script_branch_140
 	Jump Script_branch_135
-@ 133
-
-.byte 0x2 @ 0x133
-.byte 0x0 @ 0x134
+	End
+@ 135
 
 Script_branch_135: @ 135
 	Message 0x1
 	Jump Script_branch_14b
-@ 13e
-
-.byte 0x2 @ 0x13e
-.byte 0x0 @ 0x13f
+	End
+@ 140
 
 Script_branch_140: @ 140
 	Message 0x2
 	Jump Script_branch_14b
-@ 149
-
-.byte 0x2 @ 0x149
-.byte 0x0 @ 0x14a
+	End
+@ 14b
 
 Script_branch_14b: @ 14b
 	CloseMsgOnKeyPress

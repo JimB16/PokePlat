@@ -22,21 +22,17 @@ Script_1: @ 1c
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_43
+	CompareLastResultJump EQUAL, Script_branch_43
 	Message 0x1
 	Jump Script_branch_4e
-@ 41
-
-.byte 0x2 @ 0x41
-.byte 0x0 @ 0x42
+	End
+@ 43
 
 Script_branch_43: @ 43
 	Message 0x2
 	Jump Script_branch_4e
-@ 4c
-
-.byte 0x2 @ 0x4c
-.byte 0x0 @ 0x4d
+	End
+@ 4e
 
 Script_branch_4e: @ 4e
 	WaitButton
@@ -50,32 +46,26 @@ Script_2: @ 56
 	LockAll
 	FacePlayer
 	CheckFlag 0x964
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	CheckFlag 0x9b8
-	CompareLastResultJump 0x1, Script_branch_8e
+	CompareLastResultJump EQUAL, Script_branch_8e
 	Message 0x3
 	Jump Script_branch_99
-@ 7d
-
-.byte 0x2 @ 0x7d
-.byte 0x0 @ 0x7e
+	End
+@ 7f
 
 Script_branch_7f: @ 7f
 	SetFlag 0x145
 	Message 0x5
 	Jump Script_branch_99
-@ 8c
-
-.byte 0x2 @ 0x8c
-.byte 0x0 @ 0x8d
+	End
+@ 8e
 
 Script_branch_8e: @ 8e
 	Message 0x4
 	Jump Script_branch_99
-@ 97
-
-.byte 0x2 @ 0x97
-.byte 0x0 @ 0x98
+	End
+@ 99
 
 Script_branch_99: @ 99
 	WaitButton

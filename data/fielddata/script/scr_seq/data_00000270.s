@@ -11,7 +11,7 @@ Script: @ 0
 
 Script_4: @ 12
 	CheckFlag 0xe6
-	CompareLastResultJump 0x0, Script_branch_1f
+	CompareLastResultJump LESSER, Script_branch_1f
 	End
 @ 1f
 
@@ -27,17 +27,17 @@ Script_1: @ 27
 	WaitMovement
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x37
-	CompareLastResultJump 0x1, Script_branch_8c
+	CompareLastResultJump EQUAL, Script_branch_8c
 	If 0x8005, 0x38
-	CompareLastResultJump 0x1, Script_branch_9c
+	CompareLastResultJump EQUAL, Script_branch_9c
 	If 0x8005, 0x39
-	CompareLastResultJump 0x1, Script_branch_ac
+	CompareLastResultJump EQUAL, Script_branch_ac
 	If 0x8005, 0x3a
-	CompareLastResultJump 0x1, Script_branch_bc
+	CompareLastResultJump EQUAL, Script_branch_bc
 	If 0x8005, 0x3b
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	If 0x8005, 0x3c
-	CompareLastResultJump 0x1, Script_branch_dc
+	CompareLastResultJump EQUAL, Script_branch_dc
 	End
 @ 8c
 
@@ -45,44 +45,32 @@ Script_branch_8c: @ 8c
 	ApplyMovement 0x1c, Movement_14c
 	WaitMovement
 	Jump Script_branch_ec
-@ 9c
-
 Script_branch_9c: @ 9c
 	ApplyMovement 0x1c, Movement_158
 	WaitMovement
 	Jump Script_branch_ec
-@ ac
-
 Script_branch_ac: @ ac
 	ApplyMovement 0x1c, Movement_164
 	WaitMovement
 	Jump Script_branch_ec
-@ bc
-
 Script_branch_bc: @ bc
 	ApplyMovement 0x1c, Movement_170
 	WaitMovement
 	Jump Script_branch_ec
-@ cc
-
 Script_branch_cc: @ cc
 	ApplyMovement 0x1c, Movement_178
 	WaitMovement
 	Jump Script_branch_ec
-@ dc
-
 Script_branch_dc: @ dc
 	ApplyMovement 0x1c, Movement_184
 	WaitMovement
 	Jump Script_branch_ec
-@ ec
-
 Script_branch_ec: @ ec
 	SetVarHero 0x0
 	CheckFlag 0xdf
-	CompareLastResultCall 0x0, Script_branch_134
+	CompareLastResultCall LESSER, Script_branch_134
 	CheckFlag 0xdf
-	CompareLastResultCall 0x1, Script_branch_139
+	CompareLastResultCall EQUAL, Script_branch_139
 	SetVarHero 0x0
 	Soundfr 0x481
 	Message 0x1
@@ -165,17 +153,17 @@ Script_2: @ 190
 	FollowHero 0x1c, 0xe
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x37
-	CompareLastResultJump 0x1, Script_branch_20d
+	CompareLastResultJump EQUAL, Script_branch_20d
 	If 0x8005, 0x38
-	CompareLastResultJump 0x1, Script_branch_21d
+	CompareLastResultJump EQUAL, Script_branch_21d
 	If 0x8005, 0x39
-	CompareLastResultJump 0x1, Script_branch_22d
+	CompareLastResultJump EQUAL, Script_branch_22d
 	If 0x8005, 0x3a
-	CompareLastResultJump 0x1, Script_branch_23d
+	CompareLastResultJump EQUAL, Script_branch_23d
 	If 0x8005, 0x3b
-	CompareLastResultJump 0x1, Script_branch_24d
+	CompareLastResultJump EQUAL, Script_branch_24d
 	If 0x8005, 0x3c
-	CompareLastResultJump 0x1, Script_branch_25d
+	CompareLastResultJump EQUAL, Script_branch_25d
 	End
 @ 20d
 
@@ -183,38 +171,26 @@ Script_branch_20d: @ 20d
 	ApplyMovement 0x1c, Movement_284
 	WaitMovement
 	Jump Script_branch_26d
-@ 21d
-
 Script_branch_21d: @ 21d
 	ApplyMovement 0x1c, Movement_294
 	WaitMovement
 	Jump Script_branch_26d
-@ 22d
-
 Script_branch_22d: @ 22d
 	ApplyMovement 0x1c, Movement_2a4
 	WaitMovement
 	Jump Script_branch_26d
-@ 23d
-
 Script_branch_23d: @ 23d
 	ApplyMovement 0x1c, Movement_2b4
 	WaitMovement
 	Jump Script_branch_26d
-@ 24d
-
 Script_branch_24d: @ 24d
 	ApplyMovement 0x1c, Movement_2bc
 	WaitMovement
 	Jump Script_branch_26d
-@ 25d
-
 Script_branch_25d: @ 25d
 	ApplyMovement 0x1c, Movement_2cc
 	WaitMovement
 	Jump Script_branch_26d
-@ 26d
-
 Script_branch_26d: @ 26d
 	ReleaseAll
 	End
@@ -294,13 +270,13 @@ Script_3: @ 2e4
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x33
-	CompareLastResultJump 0x1, Script_branch_341
+	CompareLastResultJump EQUAL, Script_branch_341
 	If 0x8004, 0x34
-	CompareLastResultJump 0x1, Script_branch_359
+	CompareLastResultJump EQUAL, Script_branch_359
 	If 0x8004, 0x35
-	CompareLastResultJump 0x1, Script_branch_371
+	CompareLastResultJump EQUAL, Script_branch_371
 	If 0x8004, 0x36
-	CompareLastResultJump 0x1, Script_branch_389
+	CompareLastResultJump EQUAL, Script_branch_389
 	End
 @ 341
 
@@ -309,29 +285,21 @@ Script_branch_341: @ 341
 	ApplyMovement 0x1c, Movement_3ec
 	WaitMovement
 	Jump Script_branch_3a1
-@ 359
-
 Script_branch_359: @ 359
 	ApplyMovement 0xff, Movement_3c0
 	ApplyMovement 0x1c, Movement_400
 	WaitMovement
 	Jump Script_branch_3a1
-@ 371
-
 Script_branch_371: @ 371
 	ApplyMovement 0xff, Movement_3c0
 	ApplyMovement 0x1c, Movement_414
 	WaitMovement
 	Jump Script_branch_3a1
-@ 389
-
 Script_branch_389: @ 389
 	ApplyMovement 0xff, Movement_3d0
 	ApplyMovement 0x1c, Movement_428
 	WaitMovement
 	Jump Script_branch_3a1
-@ 3a1
-
 Script_branch_3a1: @ 3a1
 	RemovePeople 0x1c
 	SetFlag 0xe6

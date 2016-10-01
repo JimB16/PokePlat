@@ -38,7 +38,7 @@ Script_1: @ 22
 Script_branch_88: @ 88
 	SetvarMtCoronet 0x6, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_88
+	CompareLastResultJump EQUAL, Script_branch_88
 	RemovePeople 0x1
 	ApplyMovement 0xf1, Movement_178
 	WaitMovement
@@ -53,18 +53,16 @@ Script_branch_88: @ 88
 	Message 0x5
 	SetFlag 0x29e
 	Jump Script_branch_da
-@ d8
-
-.byte 0x2 @ 0xd8
-.byte 0x0 @ 0xd9
+	End
+@ da
 
 Script_branch_da: @ da
 	Message 0x6
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fd
+	CompareLastResultJump EQUAL, Script_branch_fd
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_130
+	CompareLastResultJump EQUAL, Script_branch_130
 	End
 @ fd
 
@@ -75,7 +73,7 @@ Script_branch_fd: @ fd
 	ResetScreen
 	Cmd_320
 	CallEnd
-	Cmd_328 0x1
+	PortalEffect 0x1
 	Warp 0x23d, 0x0, 0x37, 0x28, 0x1
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
@@ -135,9 +133,9 @@ Script_2: @ 184
 	Message 0x6
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fd
+	CompareLastResultJump EQUAL, Script_branch_fd
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1af
+	CompareLastResultJump EQUAL, Script_branch_1af
 	End
 @ 1af
 

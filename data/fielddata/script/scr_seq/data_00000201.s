@@ -32,7 +32,7 @@ Script: @ 0
 
 Script_15: @ 66
 	If 0x4081, 0x1
-	CompareLastResultJump 0x1, Script_branch_82
+	CompareLastResultJump EQUAL, Script_branch_82
 	If 0x409e, 0x1
 	CompareLastResultJump 0x4, Script_branch_98
 	End
@@ -130,10 +130,10 @@ Script_1: @ d8
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2ee
+	CompareLastResultJump EQUAL, Script_branch_2ee
 	Call Function_14e
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_306
+	CompareLastResultJump EQUAL, Script_branch_306
 	Call Function_198
 	ReleaseAll
 	End
@@ -232,7 +232,7 @@ Function_198: @ 198
 	RemovePeople 0x8
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_2e0
+	CompareLastResultCall EQUAL, Script_branch_2e0
 	SetVar 0x4081, 0x2
 	Return
 @ 2e0
@@ -265,10 +265,10 @@ Function_30c: @ 30c
 	StoreStarter 0x800c
 	SetVar 0x8004, 0x39d
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_33e
+	CompareLastResultJump EQUAL, Script_branch_33e
 	SetVar 0x8004, 0x39c
 	If 0x800c, 0x183
-	CompareLastResultJump 0x1, Script_branch_33e
+	CompareLastResultJump EQUAL, Script_branch_33e
 	SetVar 0x8004, 0x39b
 	Return
 @ 33e
@@ -565,11 +565,11 @@ Script_8: @ 521
 	FacePlayer
 	SetVarItem 0x0, 0x1bf
 	CheckFlag 0x6b
-	CompareLastResultJump 0x1, Script_branch_57a
+	CompareLastResultJump EQUAL, Script_branch_57a
 	Message 0x2a
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_56f
+	CompareLastResultJump EQUAL, Script_branch_56f
 	Message 0x2b
 	SetVar 0x8004, 0x1bf
 	SetVar 0x8005, 0x1
@@ -634,9 +634,9 @@ Script_12: @ 5ca
 	Message 0x26
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_606
+	CompareLastResultJump EQUAL, Script_branch_606
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_5fb
+	CompareLastResultJump EQUAL, Script_branch_5fb
 	End
 @ 5fb
 
@@ -653,12 +653,12 @@ Script_branch_606: @ 606
 	CloseMsgOnKeyPress
 	Call Function_646
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_660
+	CompareLastResultCall EQUAL, Script_branch_660
 	If 0x8004, 0x3
-	CompareLastResultCall 0x1, Script_branch_67a
+	CompareLastResultCall EQUAL, Script_branch_67a
 	If 0x8004, 0x2
-	CompareLastResultCall 0x1, Script_branch_694
-	ShipAnm 0x1, 0x0, 0xa5, 0x164, 0xf6
+	CompareLastResultCall EQUAL, Script_branch_694
+	ShipAnimation 0x1, 0x0, 0xa5, 0x164, 0xf6
 	ReleaseAll
 	End
 @ 646
@@ -741,21 +741,21 @@ Script_14: @ 6f0
 	WaitMovement
 	CheckFacePosition 0x8004
 	If 0x8004, 0x3
-	CompareLastResultCall 0x1, Script_branch_76e
+	CompareLastResultCall EQUAL, Script_branch_76e
 	If 0x8004, 0x2
-	CompareLastResultCall 0x1, Script_branch_77a
+	CompareLastResultCall EQUAL, Script_branch_77a
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_786
+	CompareLastResultCall EQUAL, Script_branch_786
 	If 0x8004, 0x0
-	CompareLastResultCall 0x1, Script_branch_792
+	CompareLastResultCall EQUAL, Script_branch_792
 	SetVariableRival 0x0
 	Message 0x4
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2ee
+	CompareLastResultJump EQUAL, Script_branch_2ee
 	Call Function_14e
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_306
+	CompareLastResultJump EQUAL, Script_branch_306
 	Call Function_198
 	ReleaseAll
 	End

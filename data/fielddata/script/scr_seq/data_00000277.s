@@ -23,12 +23,12 @@ Script_2: @ 24
 	TrainerBattle 0x128, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6e
+	CompareLastResultJump EQUAL, Script_branch_6e
 	Call Function_ee
 	TrainerBattle 0x129, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6e
+	CompareLastResultJump EQUAL, Script_branch_6e
 	Call Function_10e
 	SetFlag 0x989
 	ReleaseAll
@@ -129,9 +129,9 @@ Function_10e: @ 10e
 	AddPeople 0x3
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xc
-	CompareLastResultCall 0x1, Script_branch_1ba
+	CompareLastResultCall EQUAL, Script_branch_1ba
 	If 0x8004, 0xd
-	CompareLastResultCall 0x1, Script_branch_1c6
+	CompareLastResultCall EQUAL, Script_branch_1c6
 	RemovePeople 0x3
 	Message 0x7
 	SetVar 0x8004, 0x1b6
@@ -143,12 +143,10 @@ Function_10e: @ 10e
 	SetVar 0x8005, 0xa
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ad
+	CompareLastResultJump EQUAL, Script_branch_1ad
 	CallStandard 0x7fc
 	Message 0x9
 	Jump Script_branch_1b0
-@ 1ad
-
 Script_branch_1ad: @ 1ad
 	Message 0xc
 Script_branch_1b0: @ 1b0
@@ -189,10 +187,8 @@ Script_5: @ 1da
 	Message 0xa
 	ShowMoney 0x14, 0x2
 	Jump Script_branch_1f3
-@ 1f1
-
-.byte 0x2 @ 0x1f1
-.byte 0x0 @ 0x1f2
+	End
+@ 1f3
 
 Script_branch_1f3: @ 1f3
 	Multi2 0x1e, 0xb, 0x0, 0x1, 0x800c
@@ -203,46 +199,40 @@ Script_branch_1f3: @ 1f3
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_241
+	CompareLastResultJump EQUAL, Script_branch_241
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_26a
+	CompareLastResultJump EQUAL, Script_branch_26a
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_2c8
+	CompareLastResultJump EQUAL, Script_branch_2c8
 	Jump Script_branch_2c8
-@ 23f
-
-.byte 0x2 @ 0x23f
-.byte 0x0 @ 0x240
+	End
+@ 241
 
 Script_branch_241: @ 241
 	CheckMoney 0x800c, 0x64
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2e2
+	CompareLastResultJump EQUAL, Script_branch_2e2
 	SetVar 0x8005, 0x1
 	SetVar 0x8006, 0x64
 	Jump Script_branch_293
-@ 268
-
-.byte 0x2 @ 0x268
-.byte 0x0 @ 0x269
+	End
+@ 26a
 
 Script_branch_26a: @ 26a
 	CheckMoney 0x800c, 0x3e8
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2e2
+	CompareLastResultJump EQUAL, Script_branch_2e2
 	SetVar 0x8005, 0xa
 	SetVar 0x8006, 0x3e8
 	Jump Script_branch_293
-@ 291
-
-.byte 0x2 @ 0x291
-.byte 0x0 @ 0x292
+	End
+@ 293
 
 Script_branch_293: @ 293
 	SetVar 0x8004, 0x5e
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2d5
+	CompareLastResultJump EQUAL, Script_branch_2d5
 	TakeMoneyDCare 0x8006
 	UpdateMoney
 	PlayFanfare 0x644

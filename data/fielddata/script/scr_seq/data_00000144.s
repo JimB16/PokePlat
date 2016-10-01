@@ -18,17 +18,15 @@ Script_1: @ 1e
 	FacePlayer
 	CheckFirstTimeVShop 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_5f
+	CompareLastResultJump EQUAL, Script_branch_5f
 	Message 0x0
 	Multi 0x1, 0x1, 0x0, 0x1, 0x800c
 	Cmd_42 0xe5, 0x1
 	Cmd_42 0xe4, 0x0
 	CloseMulti
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	Jump Script_branch_b7
-@ 5f
-
 Script_branch_5f: @ 5f
 	SetVarHero 0x0
 	Message 0x1
@@ -40,14 +38,12 @@ Script_branch_5f: @ 5f
 	CompareLastResultJump 0x5, Script_branch_b7
 	RandomTextStored 0x800c, 0x4
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_cd
+	CompareLastResultJump EQUAL, Script_branch_cd
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	Jump Script_branch_e3
-@ b7
-
 Script_branch_b7: @ b7
 	Message 0x2
 	WaitButton

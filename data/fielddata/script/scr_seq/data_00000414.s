@@ -11,9 +11,9 @@ Script: @ 0
 
 Script_1: @ 12
 	CheckFlag 0x13e
-	CompareLastResultJump 0x0, Script_branch_2a
+	CompareLastResultJump LESSER, Script_branch_2a
 	CheckFlag 0x13e
-	CompareLastResultJump 0x1, Script_branch_3c
+	CompareLastResultJump EQUAL, Script_branch_3c
 	End
 @ 2a
 
@@ -31,9 +31,9 @@ Script_branch_3c: @ 3c
 
 Script_2: @ 4e
 	CheckFlag 0x13e
-	CompareLastResultJump 0x0, Script_branch_2a
+	CompareLastResultJump LESSER, Script_branch_2a
 	CheckFlag 0x13e
-	CompareLastResultJump 0x1, Script_branch_3c
+	CompareLastResultJump EQUAL, Script_branch_3c
 	End
 @ 66
 
@@ -47,17 +47,17 @@ Script_3: @ 66
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x50
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x8004, 0x51
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x8004, 0x52
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x8004, 0x53
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x8004, 0x54
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x8004, 0x55
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	End
 @ d8
 
@@ -66,8 +66,6 @@ Script_branch_d8: @ d8
 	ApplyMovement 0xf2, Movement_12c
 	WaitMovement
 	Jump Script_branch_f0
-@ f0
-
 Script_branch_f0: @ f0
 	SetVar 0x4082, 0x1
 	ReleaseAll

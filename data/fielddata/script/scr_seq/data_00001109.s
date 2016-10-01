@@ -15,7 +15,7 @@ Script: @ 0
 
 Script_8: @ 22
 	CheckFlag 0xfa
-	CompareLastResultJump 0x1, Script_branch_2f
+	CompareLastResultJump EQUAL, Script_branch_2f
 	End
 @ 2f
 
@@ -30,7 +30,7 @@ Script_7: @ 3f
 	Return2 0x14, 0x800c
 	CheckRibbonNumber 0x8004
 	If 0x8004, 0xa
-	CompareLastResultJump 0x0, Script_branch_78
+	CompareLastResultJump LESSER, Script_branch_78
 	SetVar 0x40a7, 0x1
 	SetFlag 0xfa
 	SetVarHero 0x0
@@ -86,25 +86,23 @@ Script_2: @ d6
 	SetVarPoke 0x2, 0x8000
 	CheckRibbon 0x800c, 0x8000, 0x44
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_244
+	CompareLastResultJump EQUAL, Script_branch_244
 	CheckRibbon 0x800c, 0x8000, 0x43
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1e7
+	CompareLastResultJump EQUAL, Script_branch_1e7
 	CheckRibbon 0x800c, 0x8000, 0x42
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_18a
+	CompareLastResultJump EQUAL, Script_branch_18a
 	Jump Script_branch_12f
-@ 12f
-
 Script_branch_12f: @ 12f
 	ShowMoney 0x14, 0x2
 	Message 0x3
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_25c
+	CompareLastResultJump EQUAL, Script_branch_25c
 	CheckMoney 0x800c, 0x2710
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_24f
+	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_334 0x23, 0x2710
 	TakeMoney 0x2710
 	UpdateMoney
@@ -125,10 +123,10 @@ Script_branch_18a: @ 18a
 	Message 0x4
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_25c
+	CompareLastResultJump EQUAL, Script_branch_25c
 	CheckMoney 0x800c, 0x186a0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_24f
+	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_335 0x23, 0x186a0
 	TakeMoney 0x186a0
 	UpdateMoney
@@ -149,10 +147,10 @@ Script_branch_1e7: @ 1e7
 	Message 0x5
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_25c
+	CompareLastResultJump EQUAL, Script_branch_25c
 	CheckMoney 0x800c, 0xf423f
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_24f
+	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_335 0x23, 0xf423f
 	TakeMoney 0xf423f
 	UpdateMoney
@@ -211,9 +209,9 @@ Script_4: @ 27c
 	FacePlayer
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2a4
+	CompareLastResultJump EQUAL, Script_branch_2a4
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2af
+	CompareLastResultJump EQUAL, Script_branch_2af
 	End
 @ 2a4
 

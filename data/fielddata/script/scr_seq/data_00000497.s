@@ -127,30 +127,30 @@ Script_4: @ 178
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x0, 0x8004
 	SetVar 0x8005, 0x0
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_68a
+	CompareLastResultCall EQUAL, Script_branch_68a
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_698
+	CompareLastResultCall EQUAL, Script_branch_698
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6a6
+	CompareLastResultCall EQUAL, Script_branch_6a6
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6b4
+	CompareLastResultCall EQUAL, Script_branch_6b4
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End
@@ -168,30 +168,30 @@ Script_5: @ 242
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x0, 0x8004
 	SetVar 0x8005, 0x0
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_68a
+	CompareLastResultCall EQUAL, Script_branch_68a
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_698
+	CompareLastResultCall EQUAL, Script_branch_698
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6a6
+	CompareLastResultCall EQUAL, Script_branch_6a6
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6b4
+	CompareLastResultCall EQUAL, Script_branch_6b4
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End
@@ -209,30 +209,30 @@ Script_6: @ 30c
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x1, 0x8004
 	SetVar 0x8005, 0x1
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_66e
+	CompareLastResultCall EQUAL, Script_branch_66e
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_67c
+	CompareLastResultCall EQUAL, Script_branch_67c
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6a6
+	CompareLastResultCall EQUAL, Script_branch_6a6
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6b4
+	CompareLastResultCall EQUAL, Script_branch_6b4
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End
@@ -250,30 +250,30 @@ Script_7: @ 3d6
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x1, 0x8004
 	SetVar 0x8005, 0x1
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_66e
+	CompareLastResultCall EQUAL, Script_branch_66e
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_67c
+	CompareLastResultCall EQUAL, Script_branch_67c
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6a6
+	CompareLastResultCall EQUAL, Script_branch_6a6
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6b4
+	CompareLastResultCall EQUAL, Script_branch_6b4
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End
@@ -291,30 +291,30 @@ Script_8: @ 4a0
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x2, 0x8004
 	SetVar 0x8005, 0x2
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6d0
+	CompareLastResultCall EQUAL, Script_branch_6d0
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6dc
+	CompareLastResultCall EQUAL, Script_branch_6dc
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_66e
+	CompareLastResultCall EQUAL, Script_branch_66e
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_67c
+	CompareLastResultCall EQUAL, Script_branch_67c
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_68a
+	CompareLastResultCall EQUAL, Script_branch_68a
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_698
+	CompareLastResultCall EQUAL, Script_branch_698
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End
@@ -332,30 +332,30 @@ Script_9: @ 56a
 	CloseMulti
 	CloseMsgOnKeyPress
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	If 0x800c, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_6c2
+	CompareLastResultJump EQUAL, Script_branch_6c2
 	SetvarQuickTrainCoordinates 0x2, 0x8004
 	SetVar 0x8005, 0x2
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_634
+	CompareLastResultCall EQUAL, Script_branch_634
 	MoveTrainAnm 0x0
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_6f4
+	CompareLastResultCall EQUAL, Script_branch_6f4
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_6e8
+	CompareLastResultCall EQUAL, Script_branch_6e8
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_66e
+	CompareLastResultCall EQUAL, Script_branch_66e
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_67c
+	CompareLastResultCall EQUAL, Script_branch_67c
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_68a
+	CompareLastResultCall EQUAL, Script_branch_68a
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_698
+	CompareLastResultCall EQUAL, Script_branch_698
 	MoveTrainAnm 0x1
 	ReleaseAll
 	End

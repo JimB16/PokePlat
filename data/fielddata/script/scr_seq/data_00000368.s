@@ -15,19 +15,19 @@ Script_1: @ 12
 	CallBTowerFunctions 0x2b, 0x0, 0x400a
 	Call Function_8e
 	If 0x400a, 0x2
-	CompareLastResultCall 0x1, Script_branch_9e
+	CompareLastResultCall EQUAL, Script_branch_9e
 	If 0x400a, 0x3
-	CompareLastResultCall 0x1, Script_branch_9e
+	CompareLastResultCall EQUAL, Script_branch_9e
 	If 0x400a, 0x0
-	CompareLastResultCall 0x1, Function_8e
+	CompareLastResultCall EQUAL, Function_8e
 	If 0x400a, 0x1
-	CompareLastResultCall 0x1, Function_8e
+	CompareLastResultCall EQUAL, Function_8e
 	If 0x400a, 0x4
-	CompareLastResultCall 0x1, Script_branch_96
+	CompareLastResultCall EQUAL, Script_branch_96
 	If 0x400a, 0x5
-	CompareLastResultCall 0x1, Script_branch_96
+	CompareLastResultCall EQUAL, Script_branch_96
 	If 0x400a, 0x6
-	CompareLastResultCall 0x1, Script_branch_96
+	CompareLastResultCall EQUAL, Script_branch_96
 	End
 @ 8a
 
@@ -57,9 +57,9 @@ Script_branch_a6: @ a6
 	ResetScreen
 	CallBTowerFunctions 0x2b, 0x0, 0x800c
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_1f8
+	CompareLastResultJump EQUAL, Script_branch_1f8
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_1f8
+	CompareLastResultJump EQUAL, Script_branch_1f8
 	PreWfc
 	ShowBTowerSome 0x5
 	CallEnd
@@ -99,30 +99,24 @@ Script_2: @ 146
 	SetVar 0x4000, 0x0
 	Call Function_132
 	Jump Script_branch_a6
-@ 15a
-
-.byte 0x2 @ 0x15a
-.byte 0x0 @ 0x15b
+	End
+@ 15c
 
 Script_3: @ 15c
 	LockAll
 	SetVar 0x4000, 0x0
 	Call Function_132
 	Jump Script_branch_e9
-@ 170
-
-.byte 0x2 @ 0x170
-.byte 0x0 @ 0x171
+	End
+@ 172
 
 Script_4: @ 172
 	LockAll
 	SetVar 0x4000, 0x1
 	Call Function_132
 	Jump Script_branch_10a
-@ 186
-
-.byte 0x2 @ 0x186
-.byte 0x0 @ 0x187
+	End
+@ 188
 
 Function_188: @ 188
 	ApplyMovement 0xff, Movement_1bc

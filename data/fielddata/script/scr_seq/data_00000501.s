@@ -14,11 +14,11 @@ Script_1: @ a
 	ActDcareFunction
 	StorePDCareNum 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4a
+	CompareLastResultJump EQUAL, Script_branch_4a
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_be
+	CompareLastResultJump EQUAL, Script_branch_be
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_cb
+	CompareLastResultJump EQUAL, Script_branch_cb
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -30,11 +30,11 @@ Script_branch_4a: @ 4a
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_83
+	CompareLastResultJump EQUAL, Script_branch_83
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_83
+	CompareLastResultJump EQUAL, Script_branch_83
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress
@@ -84,13 +84,13 @@ Script_branch_cb: @ cb
 	Message 0x9
 	StorePokeDCareLove 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_110
+	CompareLastResultCall EQUAL, Script_branch_110
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_115
+	CompareLastResultCall EQUAL, Script_branch_115
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_11a
+	CompareLastResultCall EQUAL, Script_branch_11a
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_11f
+	CompareLastResultCall EQUAL, Script_branch_11f
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll
@@ -124,15 +124,15 @@ Script_2: @ 124
 	ShowMoney 0x14, 0x2
 	StorePDCareNum 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2e2
+	CompareLastResultJump EQUAL, Script_branch_2e2
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_309
+	CompareLastResultJump EQUAL, Script_branch_309
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_4a0
+	CompareLastResultJump EQUAL, Script_branch_4a0
 	Message 0xf
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_17e
+	CompareLastResultJump EQUAL, Script_branch_17e
 	Message 0x14
 	WaitButton
 	CloseMsgOnKeyPress
@@ -144,10 +144,10 @@ Script_2: @ 124
 Script_branch_17e: @ 17e
 	CheckPartyNumberUnion 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2bb
+	CompareLastResultJump EQUAL, Script_branch_2bb
 	CheckPokePartyNumDCare 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_2d5
+	CompareLastResultJump EQUAL, Script_branch_2d5
 	Message 0x10
 	CloseMsgOnKeyPress
 	HideMoney
@@ -158,44 +158,38 @@ Script_branch_1b9: @ 1b9
 	ChoosePokeDCare 0x800c
 	StorePokeDCare 0x8000, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1de
+	CompareLastResultJump EQUAL, Script_branch_1de
 	ShowPokeInfo 0x8000
 	StorePokeMove 0x800c
 	Jump Script_branch_1b9
-@ 1de
-
 Script_branch_1de: @ 1de
 	CallEnd
 	ShowMoney 0x14, 0x2
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x8000, 0xff
-	CompareLastResultJump 0x1, Script_branch_292
+	CompareLastResultJump EQUAL, Script_branch_292
 	Cmd_31e 0x8000, 0x800c
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_4ef
+	CompareLastResultJump EQUAL, Script_branch_4ef
 	CheckPokeEgg 0x8000, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_285
+	CompareLastResultJump EQUAL, Script_branch_285
 	CheckPokePartyHealth 0x800c, 0x8000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2c8
+	CompareLastResultJump EQUAL, Script_branch_2c8
 	SetVarPokeChosenDCare 0x0, 0x8000, 0x8001
 	GivePokeDCare 0x8000
 	SetFlag 0xfe
 	StorePDCareNum 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_25f
+	CompareLastResultJump EQUAL, Script_branch_25f
 	Jump Script_branch_270
-@ 25f
-
 Script_branch_25f: @ 25f
 	PlayCry 0x8001, 0x0
 	Message 0x11
 	WaitCry
 	Jump Script_branch_29f
-@ 270
-
 Script_branch_270: @ 270
 	PlayCry 0x8001, 0x0
 	Message 0x24
@@ -229,12 +223,10 @@ Script_branch_29f: @ 29f
 	Message 0x12
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_17e
+	CompareLastResultJump EQUAL, Script_branch_17e
 	Jump Script_branch_292
-@ 2b9
-
-.byte 0x2 @ 0x2b9
-.byte 0x0 @ 0x2ba
+	End
+@ 2bb
 
 Script_branch_2bb: @ 2bb
 	Message 0x1f
@@ -291,22 +283,20 @@ Script_branch_309: @ 309
 	Message 0x12
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_17e
+	CompareLastResultJump EQUAL, Script_branch_17e
 	Message 0x20
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_346
+	CompareLastResultJump EQUAL, Script_branch_346
 	Jump Script_branch_292
-@ 346
-
 Script_branch_346: @ 346
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_45e
+	CompareLastResultJump EQUAL, Script_branch_45e
 	StorePDCareNum 0x800c
 	SetVar 0x8001, 0x0
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_3be
+	CompareLastResultJump EQUAL, Script_branch_3be
 	Multi 0x1, 0x1, 0x0, 0x1, 0x8001
 	SetVarDataDayCare 0x0, 0x1, 0x2, 0x0
 	Cmd_42 0x86, 0x0
@@ -316,25 +306,21 @@ Script_branch_346: @ 346
 	CloseMulti
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_3be
+	CompareLastResultJump EQUAL, Script_branch_3be
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_3be
+	CompareLastResultJump EQUAL, Script_branch_3be
 	Jump Script_branch_292
-@ 3be
-
 Script_branch_3be: @ 3be
 	SetVarPokeAndMoneyDCare 0x8004, 0x8001
 	Message 0x1c
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3de
+	CompareLastResultJump EQUAL, Script_branch_3de
 	Jump Script_branch_292
-@ 3de
-
 Script_branch_3de: @ 3de
 	CheckMoneyDCare 0x800c, 0x8004
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3fe
+	CompareLastResultJump EQUAL, Script_branch_3fe
 	Message 0x15
 	WaitButton
 	CloseMsgOnKeyPress
@@ -358,18 +344,14 @@ Script_branch_3fe: @ 3fe
 	WaitCry
 	StorePDCareNum 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_444
+	CompareLastResultJump EQUAL, Script_branch_444
 	Jump Script_branch_292
-@ 444
-
 Script_branch_444: @ 444
 	Message 0x16
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_346
+	CompareLastResultJump EQUAL, Script_branch_346
 	Jump Script_branch_292
-@ 45e
-
 Script_branch_45e: @ 45e
 	Message 0x1a
 	WaitButton
@@ -406,7 +388,7 @@ Script_branch_4a0: @ 4a0
 	Message 0x20
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_346
+	CompareLastResultJump EQUAL, Script_branch_346
 	Message 0x17
 	WaitButton
 	CloseMsgOnKeyPress

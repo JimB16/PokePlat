@@ -10,23 +10,21 @@ Script_1: @ 6
 	LockAll
 	Return2 0x1, 0x800c
 	CopyVar 0x8005, 0x8000
-	Pokepartypic 0x8000
+	PokemonPartyPicture 0x8000
 	CheckSayingLearned 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_31
+	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_54
-@ 2f
-
-.byte 0x2 @ 0x2f
-.byte 0x0 @ 0x30
+	End
+@ 31
 
 Script_branch_31: @ 31
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_54
+	CompareLastResultJump EQUAL, Script_branch_54
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b2
+	CompareLastResultJump EQUAL, Script_branch_b2
 	End
 @ 54
 
@@ -39,7 +37,7 @@ Script_branch_54: @ 54
 	StoreSayingLearned 0xa
 	Return2 0xa, 0x800c
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_ba
+	CompareLastResultJump EQUAL, Script_branch_ba
 	ActMicrophone
 	Return2 0x1, 0x800c
 	DeactMicrophone
@@ -51,13 +49,11 @@ Script_branch_54: @ 54
 	PlayCry 0x1b9, 0x0
 	WaitCry
 	Jump Script_branch_b2
-@ b0
-
-.byte 0x2 @ 0xb0
-.byte 0x0 @ 0xb1
+	End
+@ b2
 
 Script_branch_b2: @ b2
-	Hidepic
+	HidePicture
 	CloseMsgOnKeyPress
 	ReleaseAll
 	End
@@ -69,9 +65,9 @@ Script_branch_ba: @ ba
 	Message 0x4
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_54
+	CompareLastResultJump EQUAL, Script_branch_54
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b2
+	CompareLastResultJump EQUAL, Script_branch_b2
 	End
 @ e5
 

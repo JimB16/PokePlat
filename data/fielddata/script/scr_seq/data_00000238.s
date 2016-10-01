@@ -12,9 +12,9 @@ Script: @ 0
 Script_3: @ 12
 	UnkFunct2 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	CheckFlag 0x11e
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	ClearFlag 0x24e
 	End
 @ 35
@@ -26,7 +26,7 @@ Script_branch_35: @ 35
 
 Script_1: @ 3b
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_48
+	CompareLastResultJump EQUAL, Script_branch_48
 	End
 @ 48
 
@@ -54,12 +54,12 @@ Script_4: @ 56
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_df
+	CompareLastResultJump EQUAL, Script_branch_df
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	If 0x4056, 0x0
-	CompareLastResultCall 0x1, Script_branch_c8
+	CompareLastResultCall EQUAL, Script_branch_c8
 	SetFlag 0x11e
 	ReleaseAll
 	End
@@ -106,11 +106,11 @@ Function_104: @ 104
 	CheckSpritePosition 0x8004, 0x8005
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x1e
-	CompareLastResultJump 0x1, Script_branch_139
+	CompareLastResultJump EQUAL, Script_branch_139
 	If 0x8008, 0x1f
-	CompareLastResultJump 0x1, Script_branch_14b
+	CompareLastResultJump EQUAL, Script_branch_14b
 	If 0x8008, 0x20
-	CompareLastResultJump 0x1, Script_branch_15d
+	CompareLastResultJump EQUAL, Script_branch_15d
 Script_branch_137: @ 137
 	Return
 @ 139
@@ -119,28 +119,22 @@ Script_branch_139: @ 139
 	ApplyMovement 0xff, Movement_17c
 	WaitMovement
 	Jump Script_branch_137
-@ 149
-
-.byte 0x2 @ 0x149
-.byte 0x0 @ 0x14a
+	End
+@ 14b
 
 Script_branch_14b: @ 14b
 	ApplyMovement 0xff, Movement_18c
 	WaitMovement
 	Jump Script_branch_137
-@ 15b
-
-.byte 0x2 @ 0x15b
-.byte 0x0 @ 0x15c
+	End
+@ 15d
 
 Script_branch_15d: @ 15d
 	ApplyMovement 0xff, Movement_194
 	WaitMovement
 	Jump Script_branch_137
-@ 16d
-
-.byte 0x2 @ 0x16d
-.byte 0x0 @ 0x16e
+	End
+@ 16f
 
 Function_16f: @ 16f
 	ApplyMovement 0xff, Movement_1a4

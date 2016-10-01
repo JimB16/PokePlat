@@ -11,13 +11,13 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x13b
-	CompareLastResultJump 0x1, Script_branch_59
+	CompareLastResultJump EQUAL, Script_branch_59
 	Message 0x0
 	SetVar 0x8004, 0xf7
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4f
+	CompareLastResultJump EQUAL, Script_branch_4f
 	SetFlag 0x13b
 	SetFlag 0x25f
 	CallStandard 0x7e0

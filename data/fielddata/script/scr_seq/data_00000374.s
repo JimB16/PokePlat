@@ -47,7 +47,7 @@ Script_38: @ 9a
 	SetFlag 0x2cb
 	CheckStatusPhraseBox 0x13, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_d5
+	CompareLastResultJump EQUAL, Script_branch_d5
 	Cmd_329 0x4001, 0x4002, 0x4003, 0x4004
 	ChangeOwPosition 0x1d, 0x4001, 0x4002
 	ReleaseOw 0x1d, 0x4003

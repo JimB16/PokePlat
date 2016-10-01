@@ -10,26 +10,22 @@ Script_1: @ 6
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	ShowBPntsbox 0x15, 0x1
+	ShowBattlePointsBox 0x15, 0x1
 	CheckFlag 0x72
-	CompareLastResultJump 0x1, Script_branch_31
+	CompareLastResultJump EQUAL, Script_branch_31
 	SetFlag 0x72
 	SetVariableNumber 0x0, 0x1
 	Message 0xf
 	Jump Script_branch_41
-@ 2f
-
-.byte 0x2 @ 0x2f
-.byte 0x0 @ 0x30
+	End
+@ 31
 
 Script_branch_31: @ 31
 	SetVariableNumber 0x0, 0x1
 	Message 0x0
 	Jump Script_branch_41
-@ 3f
-
-.byte 0x2 @ 0x3f
-.byte 0x0 @ 0x40
+	End
+@ 41
 
 Script_branch_41: @ 41
 	Message 0x1
@@ -41,30 +37,28 @@ Script_branch_41: @ 41
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_85
+	CompareLastResultJump EQUAL, Script_branch_85
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_15d
+	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_152
-@ 83
-
-.byte 0x2 @ 0x83
-.byte 0x0 @ 0x84
+	End
+@ 85
 
 Script_branch_85: @ 85
 	SetVariableNumber 0x2, 0x1
 	Message 0x7
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_152
+	CompareLastResultJump EQUAL, Script_branch_152
 	CheckBPoints 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_147
+	CompareLastResultJump EQUAL, Script_branch_147
 	TakeBPoints 0x1
-	UpdateBPointsbox
+	UpdateBattlePointsBox
 	Message 0xa
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
-	HideBPointsbox
+	HideBattlePointsBox
 	CloseMsgOnKeyPress
 	Cmd_2e2
 	Cmd_2e4 0x0, 0x4000, 0x4001
@@ -77,7 +71,7 @@ Script_branch_85: @ 85
 	SetVar 0x8000, 0x0
 	Call Function_17a
 	If 0x8000, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ab
+	CompareLastResultJump EQUAL, Script_branch_1ab
 	SetVariableNumber 0x0, 0x8000
 	Message 0xb
 	If 0x4001, 0x0
@@ -88,39 +82,31 @@ Script_branch_85: @ 85
 	CompareLastResultCall 0x5, Script_branch_24a
 	Message 0x5
 	Jump Script_branch_172
-@ 145
-
-.byte 0x2 @ 0x145
-.byte 0x0 @ 0x146
+	End
+@ 147
 
 Script_branch_147: @ 147
 	Message 0xe
 	Jump Script_branch_168
-@ 150
-
-.byte 0x2 @ 0x150
-.byte 0x0 @ 0x151
+	End
+@ 152
 
 Script_branch_152: @ 152
 	Message 0x5
 	Jump Script_branch_168
-@ 15b
-
-.byte 0x2 @ 0x15b
-.byte 0x0 @ 0x15c
+	End
+@ 15d
 
 Script_branch_15d: @ 15d
 	Message 0x6
 	Jump Script_branch_41
-@ 166
-
-.byte 0x2 @ 0x166
-.byte 0x0 @ 0x167
+	End
+@ 168
 
 Script_branch_168: @ 168
 	WaitButton
 	CloseMsgOnKeyPress
-	HideBPointsbox
+	HideBattlePointsBox
 	ReleaseAll
 	End
 @ 172
@@ -143,32 +129,28 @@ Function_17a: @ 17a
 @ 1a3
 
 Script_branch_1a3: @ 1a3
-	SetValue 0x8000, 0x1
+	ScriptCmd_AddValue 0x8000, 0x1
 	Return
 @ 1ab
 
 Script_branch_1ab: @ 1ab
 	Message 0x5
 	Jump Script_branch_172
-@ 1b4
-
-.byte 0x2 @ 0x1b4
-.byte 0x0 @ 0x1b5
+	End
+@ 1b6
 
 Script_branch_1b6: @ 1b6
 	If 0x4001, 0x1
-	CompareLastResultJump 0x2, Script_branch_1ce
+	CompareLastResultJump GREATER, Script_branch_1ce
 	SetVarItem 0x0, 0x4000
 	Jump Script_branch_1d3
-@ 1ce
-
 Script_branch_1ce: @ 1ce
 	Cmd_33d 0x0, 0x4000
 Script_branch_1d3: @ 1d3
 	SetVariableNumber 0x1, 0x4001
 	CheckStoreItem 0x4000, 0x4001, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_294
+	CompareLastResultJump EQUAL, Script_branch_294
 	Soundfr 0x486
 	Message 0xd
 	TakeItem 0x4000, 0x4001, 0x800c
@@ -178,18 +160,16 @@ Script_branch_1d3: @ 1d3
 
 Script_branch_200: @ 200
 	If 0x4003, 0x1
-	CompareLastResultJump 0x2, Script_branch_218
+	CompareLastResultJump GREATER, Script_branch_218
 	SetVarItem 0x0, 0x4002
 	Jump Script_branch_21d
-@ 218
-
 Script_branch_218: @ 218
 	Cmd_33d 0x0, 0x4002
 Script_branch_21d: @ 21d
 	SetVariableNumber 0x1, 0x4003
 	CheckStoreItem 0x4002, 0x4003, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_294
+	CompareLastResultJump EQUAL, Script_branch_294
 	Soundfr 0x486
 	Message 0xd
 	TakeItem 0x4002, 0x4003, 0x800c
@@ -199,18 +179,16 @@ Script_branch_21d: @ 21d
 
 Script_branch_24a: @ 24a
 	If 0x4005, 0x1
-	CompareLastResultJump 0x2, Script_branch_262
+	CompareLastResultJump GREATER, Script_branch_262
 	SetVarItem 0x0, 0x4004
 	Jump Script_branch_267
-@ 262
-
 Script_branch_262: @ 262
 	Cmd_33d 0x0, 0x4004
 Script_branch_267: @ 267
 	SetVariableNumber 0x1, 0x4005
 	CheckStoreItem 0x4004, 0x4005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_294
+	CompareLastResultJump EQUAL, Script_branch_294
 	Soundfr 0x486
 	Message 0xd
 	TakeItem 0x4004, 0x4005, 0x800c

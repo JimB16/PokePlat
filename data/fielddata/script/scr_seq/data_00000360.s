@@ -24,25 +24,25 @@ Script_1: @ 6
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xe
-	CompareLastResultCall 0x1, Script_branch_136
+	CompareLastResultCall EQUAL, Script_branch_136
 	If 0x8004, 0xf
-	CompareLastResultCall 0x1, Script_branch_154
+	CompareLastResultCall EQUAL, Script_branch_154
 	ZoomCam
 	Message 0x2
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xe
-	CompareLastResultCall 0x1, Script_branch_168
+	CompareLastResultCall EQUAL, Script_branch_168
 	If 0x8004, 0xf
-	CompareLastResultCall 0x1, Script_branch_174
+	CompareLastResultCall EQUAL, Script_branch_174
 	PlayFanfare 0x603
 	RemovePeople 0x1
 	WaitFanfare 0x603
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0xe
-	CompareLastResultCall 0x1, Script_branch_180
+	CompareLastResultCall EQUAL, Script_branch_180
 	If 0x8004, 0xf
-	CompareLastResultCall 0x1, Script_branch_18c
+	CompareLastResultCall EQUAL, Script_branch_18c
 	ApplyMovement 0x2, Movement_1cc
 	WaitMovement
 	SetVariableRival 0x0

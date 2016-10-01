@@ -15,9 +15,9 @@ Script: @ 0
 Script_1: @ 1e
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_3e
+	CompareLastResultJump EQUAL, Script_branch_3e
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_46
+	CompareLastResultJump EQUAL, Script_branch_46
 	End
 @ 3e
 
@@ -33,7 +33,7 @@ Script_branch_46: @ 46
 
 Script_2: @ 4e
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_5b
+	CompareLastResultJump EQUAL, Script_branch_5b
 	End
 @ 5b
 
@@ -117,10 +117,8 @@ Script_3: @ 6f
 	RemovePeople 0x5
 	PlayFanfare 0x603
 	Jump Script_branch_1a1
-@ 19f
-
-.byte 0x2 @ 0x19f
-.byte 0x0 @ 0x1a0
+	End
+@ 1a1
 
 Script_branch_1a1: @ 1a1
 	SetVar 0x4086, 0x4
@@ -649,7 +647,7 @@ Script_4: @ 418
 	LockAll
 	FacePlayer
 	CheckFlag 0xb8
-	CompareLastResultJump 0x1, Script_branch_43d
+	CompareLastResultJump EQUAL, Script_branch_43d
 	SetFlag 0xb8
 	SetVarHero 0x0
 	Message 0x8
@@ -674,22 +672,16 @@ Script_5: @ 44b
 	FacePlayer
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_46a
+	CompareLastResultJump EQUAL, Script_branch_46a
 	Jump Script_branch_476
-@ 46a
-
 Script_branch_46a: @ 46a
 	SetVarHero 0x0
 	Message 0xa
 	Jump Script_branch_482
-@ 476
-
 Script_branch_476: @ 476
 	SetVarHero 0x0
 	Message 0xb
 	Jump Script_branch_482
-@ 482
-
 Script_branch_482: @ 482
 	WaitButton
 	CloseMsgOnKeyPress

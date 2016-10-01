@@ -17,15 +17,15 @@ Script: @ 0
 Script_8: @ 26
 	CheckTime 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_6d
+	CompareLastResultJump EQUAL, Script_branch_6d
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	If 0x4000, 0x2
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	If 0x4000, 0x3
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	If 0x4000, 0x4
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	End
 @ 6d
 
@@ -60,14 +60,14 @@ Script_2: @ a4
 	PlayFanfare 0x5dc
 	LockAll
 	If 0x408a, 0x1
-	CompareLastResultJump 0x1, Script_branch_102
+	CompareLastResultJump EQUAL, Script_branch_102
 	CheckItem 0x6f, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1bc
+	CompareLastResultJump EQUAL, Script_branch_1bc
 	Message 0x2
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_e6
+	CompareLastResultJump EQUAL, Script_branch_e6
 	CloseMsgOnKeyPress
 	ReleaseAll
 	End
@@ -97,8 +97,6 @@ Script_branch_102: @ 102
 	If 0x800c, 0x8
 	CompareLastResultJump 0x4, Script_branch_190
 	Jump Script_branch_185
-@ 14d
-
 Script_branch_14d: @ 14d
 	WaitFanfare 0x5dc
 	PlayCry 0x1ba, 0x0
@@ -108,7 +106,7 @@ Script_branch_14d: @ 14d
 	WildBattle 0x1ba, 0x19
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_17f
+	CompareLastResultJump EQUAL, Script_branch_17f
 	SetVar 0x408a, 0x0
 	Cmd_26f
 	End
@@ -176,13 +174,13 @@ Script_5: @ 1c7
 	Cmd_33c 0x0, 0x8004
 	Cmd_346 0x0
 	CheckFlag 0xa2
-	CompareLastResultJump 0x1, Script_branch_20b
+	CompareLastResultJump EQUAL, Script_branch_20b
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_254
+	CompareLastResultJump EQUAL, Script_branch_254
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_249
+	CompareLastResultJump EQUAL, Script_branch_249
 	End
 @ 20b
 
@@ -191,9 +189,9 @@ Script_branch_20b: @ 20b
 	Message 0xc
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_233
+	CompareLastResultJump EQUAL, Script_branch_233
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_23e
+	CompareLastResultJump EQUAL, Script_branch_23e
 	End
 @ 233
 
@@ -228,8 +226,6 @@ Script_branch_254: @ 254
 	CallStandard 0x7fc
 	SetFlag 0xa2
 	Jump Script_branch_20b
-@ 270
-
 Script_3: @ 270
 	CallMessageBox 0x12, 0x1, 0x0, 0x800c
 	TypeMessageBox 0x3

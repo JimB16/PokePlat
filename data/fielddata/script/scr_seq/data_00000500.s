@@ -16,200 +16,168 @@ Script_1: @ 1a
 	LockAll
 	SetVar 0x8000, 0x1
 	Jump Script_branch_2e
-@ 2c
-
-.byte 0x2 @ 0x2c
-.byte 0x0 @ 0x2d
+	End
+@ 2e
 
 Script_branch_2e: @ 2e
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_2e
-@ 66
-
-.byte 0x2 @ 0x66
-.byte 0x0 @ 0x67
+	End
+@ 68
 
 Script_2: @ 68
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x1
 	Jump Script_branch_7c
-@ 7a
-
-.byte 0x2 @ 0x7a
-.byte 0x0 @ 0x7b
+	End
+@ 7c
 
 Script_branch_7c: @ 7c
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_7c
-@ b4
-
-.byte 0x2 @ 0xb4
-.byte 0x0 @ 0xb5
+	End
+@ b6
 
 Script_3: @ b6
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x2
 	Jump Script_branch_ca
-@ c8
-
-.byte 0x2 @ 0xc8
-.byte 0x0 @ 0xc9
+	End
+@ ca
 
 Script_branch_ca: @ ca
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_ca
-@ 102
-
-.byte 0x2 @ 0x102
-.byte 0x0 @ 0x103
+	End
+@ 104
 
 Script_4: @ 104
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x5
 	Jump Script_branch_118
-@ 116
-
-.byte 0x2 @ 0x116
-.byte 0x0 @ 0x117
+	End
+@ 118
 
 Script_branch_118: @ 118
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	CheckPokeCastle 0x1, 0x8001, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_174
+	CompareLastResultJump EQUAL, Script_branch_174
 	CheckPokeCastle 0x2, 0x8001, 0x800c
 	SetVarPokeStored 0x0, 0x800c, 0x0, 0x0
 	Message 0x7
 	Jump Script_branch_17f
-@ 172
-
-.byte 0x2 @ 0x172
-.byte 0x0 @ 0x173
+	End
+@ 174
 
 Script_branch_174: @ 174
 	Message 0x6
 	Jump Script_branch_17f
-@ 17d
-
-.byte 0x2 @ 0x17d
-.byte 0x0 @ 0x17e
+	End
+@ 17f
 
 Script_branch_17f: @ 17f
 	SetVar 0x8002, 0x0
 	SetVar 0x8004, 0x0
 	SetVar 0x8005, 0x0
 	Jump Script_branch_199
-@ 197
-
-.byte 0x2 @ 0x197
-.byte 0x0 @ 0x198
+	End
+@ 199
 
 Script_branch_199: @ 199
 	Call Function_2bd
 	If 0x8002, 0x9
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	If 0x8002, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	SetVar 0x8003, 0x0
 	SetVar 0x8006, 0x0
 	SetVar 0x8007, 0x0
 	Jump Script_branch_1d3
-@ 1d1
-
-.byte 0x2 @ 0x1d1
-.byte 0x0 @ 0x1d2
+	End
+@ 1d3
 
 Script_branch_1d3: @ 1d3
 	Cmd_2de 0x8001, 0x8002, 0x8003, 0x8006, 0x8007
 	If 0x8003, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_199
+	CompareLastResultJump EQUAL, Script_branch_199
 	Call Function_32b
 	Message 0x6
 	Jump Script_branch_1d3
-@ 1fb
-
-.byte 0x2 @ 0x1fb
-.byte 0x0 @ 0x1fc
+	End
+@ 1fd
 
 Script_5: @ 1fd
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x4
 	Jump Script_branch_211
-@ 20f
-
-.byte 0x2 @ 0x20f
-.byte 0x0 @ 0x210
+	End
+@ 211
 
 Script_branch_211: @ 211
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_211
-@ 249
-
-.byte 0x2 @ 0x249
-.byte 0x0 @ 0x24a
+	End
+@ 24b
 
 Script_6: @ 24b
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x6
 	Jump Script_branch_25f
-@ 25d
-
-.byte 0x2 @ 0x25d
-.byte 0x0 @ 0x25e
+	End
+@ 25f
 
 Script_branch_25f: @ 25f
 	Call Function_299
 	Call Function_29e
 	CopyVar 0x8008, 0x8001
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	If 0x8008, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_31d
+	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_25f
-@ 297
-
-.byte 0x2 @ 0x297
-.byte 0x0 @ 0x298
+	End
+@ 299
 
 Function_299: @ 299
 	Message 0x0
@@ -246,10 +214,8 @@ Function_2bd: @ 2bd
 Script_branch_31d: @ 31d
 	CloseMsgOnKeyPress
 	Jump Script_branch_327
-@ 325
-
-.byte 0x2 @ 0x325
-.byte 0x0 @ 0x326
+	End
+@ 327
 
 Script_branch_327: @ 327
 	ReleaseAll

@@ -12,22 +12,20 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0x7b
-	CompareLastResultJump 0x0, Script_branch_67
+	CompareLastResultJump LESSER, Script_branch_67
 	CheckFlag 0xa1
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	Message 0x0
 	SetVar 0x8004, 0xf7
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cf
+	CompareLastResultJump EQUAL, Script_branch_cf
 	CallStandard 0x7fc
 	SetFlag 0xa1
 	Jump Script_branch_5c
-@ 5a
-
-.byte 0x2 @ 0x5a
-.byte 0x0 @ 0x5b
+	End
+@ 5c
 
 Script_branch_5c: @ 5c
 	Message 0x1
@@ -50,22 +48,20 @@ Script_2: @ 72
 	LockAll
 	FacePlayer
 	CheckFlag 0x7b
-	CompareLastResultJump 0x0, Script_branch_d9
+	CompareLastResultJump LESSER, Script_branch_d9
 	CheckFlag 0x116
-	CompareLastResultJump 0x1, Script_branch_c4
+	CompareLastResultJump EQUAL, Script_branch_c4
 	Message 0x3
 	SetVar 0x8004, 0xe0
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cf
+	CompareLastResultJump EQUAL, Script_branch_cf
 	CallStandard 0x7fc
 	SetFlag 0x116
 	Jump Script_branch_c4
-@ c2
-
-.byte 0x2 @ 0xc2
-.byte 0x0 @ 0xc3
+	End
+@ c4
 
 Script_branch_c4: @ c4
 	Message 0x4

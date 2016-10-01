@@ -9,10 +9,10 @@ Script: @ 0
 
 Script_1: @ a
 	CheckFlag 0x11d
-	CompareLastResultJump 0x1, Script_branch_29
+	CompareLastResultJump EQUAL, Script_branch_29
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultCall 0x1, Script_branch_2f
+	CompareLastResultCall EQUAL, Script_branch_2f
 	End
 @ 29
 
@@ -35,20 +35,20 @@ Script_2: @ 35
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_a8
+	CompareLastResultJump EQUAL, Script_branch_a8
 	CallStandard 0x7fc
 	SetFlag 0x11d
 	Message 0x1
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x8004
 	If 0x8004, 0x2
-	CompareLastResultJump 0x1, Script_branch_b2
+	CompareLastResultJump EQUAL, Script_branch_b2
 	If 0x8004, 0x3
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_b2
+	CompareLastResultJump EQUAL, Script_branch_b2
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	End
 @ a8
 

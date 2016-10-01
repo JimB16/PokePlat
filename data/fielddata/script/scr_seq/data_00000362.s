@@ -12,7 +12,7 @@ Script_1: @ a
 	ShayminAnm 0x1, 0x1
 	ClearFlag 0x279
 	CheckFlag 0x158
-	CompareLastResultCall 0x0, Script_branch_24
+	CompareLastResultCall LESSER, Script_branch_24
 	End
 @ 24
 
@@ -32,21 +32,19 @@ Script_2: @ 37
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_5d
+	CompareLastResultJump EQUAL, Script_branch_5d
 	Jump Script_branch_9d
-@ 5d
-
 Script_branch_5d: @ 5d
 	Message 0x1
 	CloseMsgOnKeyPress
 	Call Function_a8
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_c2
+	CompareLastResultCall EQUAL, Script_branch_c2
 	If 0x8004, 0x2
-	CompareLastResultCall 0x1, Script_branch_dc
+	CompareLastResultCall EQUAL, Script_branch_dc
 	If 0x8004, 0x0
-	CompareLastResultCall 0x1, Script_branch_f6
-	ShipAnm 0x0, 0x2, 0x21, 0x2c, 0x2ee
+	CompareLastResultCall EQUAL, Script_branch_f6
+	ShipAnimation 0x0, 0x2, 0x21, 0x2c, 0x2ee
 	ReleaseAll
 	End
 @ 9d

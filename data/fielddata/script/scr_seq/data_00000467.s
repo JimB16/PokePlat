@@ -11,16 +11,16 @@ Script_2: @ a
 	CheckIdPlayer 0x4032, 0x4
 	CheckStatusPhraseBox 0xf, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_62
+	CompareLastResultJump EQUAL, Script_branch_62
 	CheckStatusPhraseBox 0x10, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_62
+	CompareLastResultJump EQUAL, Script_branch_62
 	CheckStatusPhraseBox 0x11, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_62
+	CompareLastResultJump EQUAL, Script_branch_62
 	CheckStatusPhraseBox 0x12, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_62
+	CompareLastResultJump EQUAL, Script_branch_62
 	ClearFlag 0x2c2
 	End
 @ 62

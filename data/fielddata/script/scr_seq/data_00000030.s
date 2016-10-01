@@ -146,10 +146,8 @@ Script_13: @ 105
 	LockAll
 	SetVar 0x8005, 0x2
 	Jump Script_branch_119
-@ 117
-
-.byte 0x2 @ 0x117
-.byte 0x0 @ 0x118
+	End
+@ 119
 
 Script_branch_119: @ 119
 	Message 0xb
@@ -161,14 +159,12 @@ Script_branch_119: @ 119
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_163
+	CompareLastResultJump EQUAL, Script_branch_163
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_184
+	CompareLastResultJump EQUAL, Script_branch_184
 	Jump Script_branch_15d
-@ 15b
-
-.byte 0x2 @ 0x15b
-.byte 0x0 @ 0x15c
+	End
+@ 15d
 
 Script_branch_15d: @ 15d
 	CloseMsgOnKeyPress
@@ -180,7 +176,7 @@ Script_branch_163: @ 163
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_15d
+	CompareLastResultJump EQUAL, Script_branch_15d
 	CloseMsgOnKeyPress
 	CallStandard 0x802
 	ReleaseAll
@@ -190,10 +186,9 @@ Script_branch_163: @ 163
 Script_branch_184: @ 184
 	Message 0xc
 	Jump Script_branch_119
-@ 18d
+	End
+@ 18f
 
-.byte 0x2 @ 0x18d
-.byte 0x0 @ 0x18e
 .byte 0x0 @ 0x18f
 
 @ end_0x190

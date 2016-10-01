@@ -13,22 +13,18 @@ Script_1: @ 6
 	CheckFloor 0x40ce
 	CopyVar 0x8008, 0x40ce
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_34
+	CompareLastResultJump EQUAL, Script_branch_34
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_3e
+	CompareLastResultJump EQUAL, Script_branch_3e
 	End
 @ 34
 
 Script_branch_34: @ 34
-	Cmd_347 0x0, 0x2
+	DisplayFloor 0x0, 0x2
 	Jump Script_branch_48
-@ 3e
-
 Script_branch_3e: @ 3e
-	Cmd_347 0x0, 0x1
+	DisplayFloor 0x0, 0x1
 	Jump Script_branch_48
-@ 48
-
 Script_branch_48: @ 48
 	StartLift 0x14, 0x1, 0x40ce, 0x40ce
 	Message 0x0
@@ -39,42 +35,36 @@ Script_branch_48: @ 48
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_8f
+	CompareLastResultJump EQUAL, Script_branch_8f
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_ca
+	CompareLastResultJump EQUAL, Script_branch_ca
 	Jump Script_branch_152
-@ 8f
-
 Script_branch_8f: @ 8f
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0x1ce, 0x0, 0x12, 0x2, 0x1
 	If 0x40ce, 0x0
-	CompareLastResultJump 0x1, Script_branch_164
+	CompareLastResultJump EQUAL, Script_branch_164
 	SetVar 0x8004, 0x0
 	Call Function_105
 	SetVar 0x40ce, 0x0
 	Jump Script_branch_147
-@ ca
-
 Script_branch_ca: @ ca
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0x1cd, 0x1, 0x12, 0x2, 0x1
 	If 0x40ce, 0x1
-	CompareLastResultJump 0x1, Script_branch_164
+	CompareLastResultJump EQUAL, Script_branch_164
 	SetVar 0x8004, 0x1
 	Call Function_105
 	SetVar 0x40ce, 0x1
 	Jump Script_branch_147
-@ 105
-
 Function_105: @ 105
 	SetVar 0x40ce, 0xffff
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_13d
+	CompareLastResultCall EQUAL, Script_branch_13d
 	If 0x8004, 0x0
-	CompareLastResultCall 0x1, Script_branch_142
+	CompareLastResultCall EQUAL, Script_branch_142
 	CloseMsgOnKeyPress
 	ApplyMovement 0x0, Movement_17c
 	WaitMovement

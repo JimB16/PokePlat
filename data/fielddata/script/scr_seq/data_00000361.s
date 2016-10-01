@@ -15,7 +15,7 @@ Script_1: @ e
 
 Script_2: @ 14
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_21
+	CompareLastResultJump EQUAL, Script_branch_21
 	End
 @ 21
 
@@ -38,10 +38,10 @@ Script_3: @ 2f
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_85
+	CompareLastResultJump EQUAL, Script_branch_85
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_7a
+	CompareLastResultJump EQUAL, Script_branch_7a
 	SetFlag 0x127
 	ReleaseAll
 	End

@@ -12,7 +12,7 @@ Script_1: @ e
 	SetFlag 0x183
 	SetFlag 0x184
 	CheckFlag 0x97f
-	CompareLastResultJump 0x0, Script_branch_29
+	CompareLastResultJump LESSER, Script_branch_29
 	Call Function_2b
 	End
 @ 29
@@ -24,150 +24,150 @@ Script_branch_29: @ 29
 Function_2b: @ 2b
 	CheckPokemart 0x4000
 	If 0x4000, 0x0
-	CompareLastResultCall 0x1, Script_branch_8c
+	CompareLastResultCall EQUAL, Script_branch_8c
 	If 0x4000, 0x1
-	CompareLastResultCall 0x1, Script_branch_ed
+	CompareLastResultCall EQUAL, Script_branch_ed
 	If 0x4000, 0x2
-	CompareLastResultCall 0x1, Script_branch_14e
+	CompareLastResultCall EQUAL, Script_branch_14e
 	If 0x4000, 0x3
-	CompareLastResultCall 0x1, Script_branch_1af
+	CompareLastResultCall EQUAL, Script_branch_1af
 	If 0x4000, 0x4
-	CompareLastResultCall 0x1, Script_branch_203
+	CompareLastResultCall EQUAL, Script_branch_203
 	If 0x4000, 0x5
-	CompareLastResultCall 0x1, Script_branch_264
+	CompareLastResultCall EQUAL, Script_branch_264
 	If 0x4000, 0x6
-	CompareLastResultCall 0x1, Script_branch_2c5
+	CompareLastResultCall EQUAL, Script_branch_2c5
 	Return
 @ 8c
 
 Script_branch_8c: @ 8c
 	CheckEffectHm 0x4001
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ ed
 
 Script_branch_ed: @ ed
 	CheckEffectHm 0x4001
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 14e
 
 Script_branch_14e: @ 14e
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 1af
 
 Script_branch_1af: @ 1af
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 203
 
 Script_branch_203: @ 203
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 264
 
 Script_branch_264: @ 264
 	CheckEffectHm 0x4001
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 2c5
 
 Script_branch_2c5: @ 2c5
 	CheckEffectHm 0x4001
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_326
+	CompareLastResultCall EQUAL, Script_branch_326
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_332
+	CompareLastResultCall EQUAL, Script_branch_332
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_348
+	CompareLastResultCall EQUAL, Script_branch_348
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_35e
+	CompareLastResultCall EQUAL, Script_branch_35e
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_36a
+	CompareLastResultCall EQUAL, Script_branch_36a
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_380
+	CompareLastResultCall EQUAL, Script_branch_380
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	Return
 @ 326
 
@@ -226,24 +226,22 @@ Script_2: @ 398
 	SetVar 0x8004, 0x0
 	SetVar 0x8006, 0x0
 	If 0x402a, 0x23
-	CompareLastResultCall 0x1, Script_branch_1331
+	CompareLastResultCall EQUAL, Script_branch_1331
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_133e
+	CompareLastResultCall EQUAL, Script_branch_133e
 	If 0x402a, 0x2b
-	CompareLastResultCall 0x1, Script_branch_13a3
+	CompareLastResultCall EQUAL, Script_branch_13a3
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_13b0
+	CompareLastResultCall EQUAL, Script_branch_13b0
 	If 0x402a, 0x47
-	CompareLastResultCall 0x1, Script_branch_13dd
+	CompareLastResultCall EQUAL, Script_branch_13dd
 	If 0x402a, 0xa
-	CompareLastResultCall 0x1, Script_branch_13ea
+	CompareLastResultCall EQUAL, Script_branch_13ea
 	If 0x8006, 0x1
-	CompareLastResultJump 0x1, Script_branch_6a8
+	CompareLastResultJump EQUAL, Script_branch_6a8
 	Jump Script_branch_486
-@ 40d
-
-.byte 0x2 @ 0x40d
-.byte 0x0 @ 0x40e
+	End
+@ 40f
 
 Script_3: @ 40f
 	PlayFanfare 0x5dc
@@ -252,103 +250,93 @@ Script_3: @ 40f
 	SetVar 0x8004, 0x1
 	SetVar 0x8006, 0x0
 	If 0x402b, 0x23
-	CompareLastResultCall 0x1, Script_branch_1331
+	CompareLastResultCall EQUAL, Script_branch_1331
 	If 0x402b, 0x17
-	CompareLastResultCall 0x1, Script_branch_1378
+	CompareLastResultCall EQUAL, Script_branch_1378
 	If 0x402b, 0x2b
-	CompareLastResultCall 0x1, Script_branch_13a3
+	CompareLastResultCall EQUAL, Script_branch_13a3
 	If 0x402b, 0x16
-	CompareLastResultCall 0x1, Script_branch_13b0
+	CompareLastResultCall EQUAL, Script_branch_13b0
 	If 0x402b, 0x47
-	CompareLastResultCall 0x1, Script_branch_13dd
+	CompareLastResultCall EQUAL, Script_branch_13dd
 	If 0x402b, 0xa
-	CompareLastResultCall 0x1, Script_branch_13ea
+	CompareLastResultCall EQUAL, Script_branch_13ea
 	If 0x8006, 0x1
-	CompareLastResultJump 0x1, Script_branch_6a8
+	CompareLastResultJump EQUAL, Script_branch_6a8
 	Jump Script_branch_486
-@ 484
-
-.byte 0x2 @ 0x484
-.byte 0x0 @ 0x485
+	End
+@ 486
 
 Script_branch_486: @ 486
 	SetVar 0x8000, 0x1
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_5b9
+	CompareLastResultCall EQUAL, Script_branch_5b9
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_5b9
+	CompareLastResultCall EQUAL, Script_branch_5b9
 	If 0x8000, 0x0
-	CompareLastResultJump 0x1, Script_branch_590
+	CompareLastResultJump EQUAL, Script_branch_590
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_51a
+	CompareLastResultJump EQUAL, Script_branch_51a
 	If 0x402a, 0x23
-	CompareLastResultCall 0x1, Script_branch_828
+	CompareLastResultCall EQUAL, Script_branch_828
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_864
+	CompareLastResultCall EQUAL, Script_branch_864
 	If 0x402a, 0x2b
-	CompareLastResultCall 0x1, Script_branch_8f6
+	CompareLastResultCall EQUAL, Script_branch_8f6
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_932
+	CompareLastResultCall EQUAL, Script_branch_932
 	If 0x402a, 0x47
-	CompareLastResultCall 0x1, Script_branch_986
+	CompareLastResultCall EQUAL, Script_branch_986
 	If 0x402a, 0xa
-	CompareLastResultCall 0x1, Script_branch_9c2
+	CompareLastResultCall EQUAL, Script_branch_9c2
 	Jump Script_branch_570
-@ 518
-
-.byte 0x2 @ 0x518
-.byte 0x0 @ 0x519
+	End
+@ 51a
 
 Script_branch_51a: @ 51a
 	If 0x402b, 0x23
-	CompareLastResultCall 0x1, Script_branch_828
+	CompareLastResultCall EQUAL, Script_branch_828
 	If 0x402b, 0x17
-	CompareLastResultCall 0x1, Script_branch_8a0
+	CompareLastResultCall EQUAL, Script_branch_8a0
 	If 0x402b, 0x2b
-	CompareLastResultCall 0x1, Script_branch_8f6
+	CompareLastResultCall EQUAL, Script_branch_8f6
 	If 0x402b, 0x16
-	CompareLastResultCall 0x1, Script_branch_95c
+	CompareLastResultCall EQUAL, Script_branch_95c
 	If 0x402b, 0x47
-	CompareLastResultCall 0x1, Script_branch_986
+	CompareLastResultCall EQUAL, Script_branch_986
 	If 0x402b, 0xa
-	CompareLastResultCall 0x1, Script_branch_9c2
+	CompareLastResultCall EQUAL, Script_branch_9c2
 	Jump Script_branch_570
-@ 56e
-
-.byte 0x2 @ 0x56e
-.byte 0x0 @ 0x56f
+	End
+@ 570
 
 Script_branch_570: @ 570
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_5ce
+	CompareLastResultJump EQUAL, Script_branch_5ce
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_761
+	CompareLastResultJump EQUAL, Script_branch_761
 	End
 @ 590
 
 Script_branch_590: @ 590
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_5ab
+	CompareLastResultJump EQUAL, Script_branch_5ab
 	Call Function_100c
 	Jump Script_branch_81a
-@ 5a9
-
-.byte 0x2 @ 0x5a9
-.byte 0x0 @ 0x5aa
+	End
+@ 5ab
 
 Script_branch_5ab: @ 5ab
 	Call Function_1036
 	Jump Script_branch_81a
-@ 5b7
-
-.byte 0x2 @ 0x5b7
-.byte 0x0 @ 0x5b8
+	End
+@ 5b9
 
 Script_branch_5b9: @ 5b9
 	If 0x402a, 0x16
-	CompareLastResultJump 0x1, Script_branch_5c8
+	CompareLastResultJump EQUAL, Script_branch_5c8
 	Return
 @ 5c8
 
@@ -359,135 +347,121 @@ Script_branch_5c8: @ 5c8
 
 Script_branch_5ce: @ 5ce
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_631
+	CompareLastResultJump EQUAL, Script_branch_631
 	If 0x402a, 0x23
-	CompareLastResultCall 0x1, Script_branch_9fe
+	CompareLastResultCall EQUAL, Script_branch_9fe
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_a40
+	CompareLastResultCall EQUAL, Script_branch_a40
 	If 0x402a, 0x2b
-	CompareLastResultCall 0x1, Script_branch_af6
+	CompareLastResultCall EQUAL, Script_branch_af6
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_b38
+	CompareLastResultCall EQUAL, Script_branch_b38
 	If 0x402a, 0x47
-	CompareLastResultCall 0x1, Script_branch_ba4
+	CompareLastResultCall EQUAL, Script_branch_ba4
 	If 0x402a, 0xa
-	CompareLastResultCall 0x1, Script_branch_be6
+	CompareLastResultCall EQUAL, Script_branch_be6
 	Jump Script_branch_687
-@ 62f
-
-.byte 0x2 @ 0x62f
-.byte 0x0 @ 0x630
+	End
+@ 631
 
 Script_branch_631: @ 631
 	If 0x402b, 0x23
-	CompareLastResultCall 0x1, Script_branch_9fe
+	CompareLastResultCall EQUAL, Script_branch_9fe
 	If 0x402b, 0x17
-	CompareLastResultCall 0x1, Script_branch_a8e
+	CompareLastResultCall EQUAL, Script_branch_a8e
 	If 0x402b, 0x2b
-	CompareLastResultCall 0x1, Script_branch_af6
+	CompareLastResultCall EQUAL, Script_branch_af6
 	If 0x402b, 0x16
-	CompareLastResultCall 0x1, Script_branch_b6e
+	CompareLastResultCall EQUAL, Script_branch_b6e
 	If 0x402b, 0x47
-	CompareLastResultCall 0x1, Script_branch_ba4
+	CompareLastResultCall EQUAL, Script_branch_ba4
 	If 0x402b, 0xa
-	CompareLastResultCall 0x1, Script_branch_be6
+	CompareLastResultCall EQUAL, Script_branch_be6
 	Jump Script_branch_687
-@ 685
-
-.byte 0x2 @ 0x685
-.byte 0x0 @ 0x686
+	End
+@ 687
 
 Script_branch_687: @ 687
 	CloseMsgOnKeyPress
 	TrainerBattle 0x8005, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_822
+	CompareLastResultJump EQUAL, Script_branch_822
 	Jump Script_branch_6a8
-@ 6a6
-
-.byte 0x2 @ 0x6a6
-.byte 0x0 @ 0x6a7
+	End
+@ 6a8
 
 Script_branch_6a8: @ 6a8
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_70b
+	CompareLastResultJump EQUAL, Script_branch_70b
 	If 0x402a, 0x23
-	CompareLastResultCall 0x1, Script_branch_dfe
+	CompareLastResultCall EQUAL, Script_branch_dfe
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_e3e
+	CompareLastResultCall EQUAL, Script_branch_e3e
 	If 0x402a, 0x2b
-	CompareLastResultCall 0x1, Script_branch_ee8
+	CompareLastResultCall EQUAL, Script_branch_ee8
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_f28
+	CompareLastResultCall EQUAL, Script_branch_f28
 	If 0x402a, 0x47
-	CompareLastResultCall 0x1, Script_branch_f8c
+	CompareLastResultCall EQUAL, Script_branch_f8c
 	If 0x402a, 0xa
-	CompareLastResultCall 0x1, Script_branch_fcc
+	CompareLastResultCall EQUAL, Script_branch_fcc
 	Jump Script_branch_81a
-@ 709
-
-.byte 0x2 @ 0x709
-.byte 0x0 @ 0x70a
+	End
+@ 70b
 
 Script_branch_70b: @ 70b
 	If 0x402b, 0x23
-	CompareLastResultCall 0x1, Script_branch_dfe
+	CompareLastResultCall EQUAL, Script_branch_dfe
 	If 0x402b, 0x17
-	CompareLastResultCall 0x1, Script_branch_e86
+	CompareLastResultCall EQUAL, Script_branch_e86
 	If 0x402b, 0x2b
-	CompareLastResultCall 0x1, Script_branch_ee8
+	CompareLastResultCall EQUAL, Script_branch_ee8
 	If 0x402b, 0x16
-	CompareLastResultCall 0x1, Script_branch_f5a
+	CompareLastResultCall EQUAL, Script_branch_f5a
 	If 0x402b, 0x47
-	CompareLastResultCall 0x1, Script_branch_f8c
+	CompareLastResultCall EQUAL, Script_branch_f8c
 	If 0x402b, 0xa
-	CompareLastResultCall 0x1, Script_branch_fcc
+	CompareLastResultCall EQUAL, Script_branch_fcc
 	Jump Script_branch_81a
-@ 75f
-
-.byte 0x2 @ 0x75f
-.byte 0x0 @ 0x760
+	End
+@ 761
 
 Script_branch_761: @ 761
 	If 0x8004, 0x1
-	CompareLastResultJump 0x1, Script_branch_7c4
+	CompareLastResultJump EQUAL, Script_branch_7c4
 	If 0x402a, 0x23
-	CompareLastResultCall 0x1, Script_branch_c28
+	CompareLastResultCall EQUAL, Script_branch_c28
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_c64
+	CompareLastResultCall EQUAL, Script_branch_c64
 	If 0x402a, 0x2b
-	CompareLastResultCall 0x1, Script_branch_cf6
+	CompareLastResultCall EQUAL, Script_branch_cf6
 	If 0x402a, 0x16
-	CompareLastResultCall 0x1, Script_branch_d32
+	CompareLastResultCall EQUAL, Script_branch_d32
 	If 0x402a, 0x47
-	CompareLastResultCall 0x1, Script_branch_d86
+	CompareLastResultCall EQUAL, Script_branch_d86
 	If 0x402a, 0xa
-	CompareLastResultCall 0x1, Script_branch_dc2
+	CompareLastResultCall EQUAL, Script_branch_dc2
 	Jump Script_branch_81a
-@ 7c2
-
-.byte 0x2 @ 0x7c2
-.byte 0x0 @ 0x7c3
+	End
+@ 7c4
 
 Script_branch_7c4: @ 7c4
 	If 0x402b, 0x23
-	CompareLastResultCall 0x1, Script_branch_c28
+	CompareLastResultCall EQUAL, Script_branch_c28
 	If 0x402b, 0x17
-	CompareLastResultCall 0x1, Script_branch_ca0
+	CompareLastResultCall EQUAL, Script_branch_ca0
 	If 0x402b, 0x2b
-	CompareLastResultCall 0x1, Script_branch_cf6
+	CompareLastResultCall EQUAL, Script_branch_cf6
 	If 0x402b, 0x16
-	CompareLastResultCall 0x1, Script_branch_d5c
+	CompareLastResultCall EQUAL, Script_branch_d5c
 	If 0x402b, 0x47
-	CompareLastResultCall 0x1, Script_branch_d86
+	CompareLastResultCall EQUAL, Script_branch_d86
 	If 0x402b, 0xa
-	CompareLastResultCall 0x1, Script_branch_dc2
+	CompareLastResultCall EQUAL, Script_branch_dc2
 	Jump Script_branch_81a
-@ 818
-
-.byte 0x2 @ 0x818
-.byte 0x0 @ 0x819
+	End
+@ 81a
 
 Script_branch_81a: @ 81a
 	WaitButton
@@ -505,11 +479,11 @@ Script_branch_822: @ 822
 Script_branch_828: @ 828
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_855
+	CompareLastResultCall EQUAL, Script_branch_855
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_85a
+	CompareLastResultCall EQUAL, Script_branch_85a
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_85f
+	CompareLastResultCall EQUAL, Script_branch_85f
 	Return
 @ 855
 
@@ -531,11 +505,11 @@ Script_branch_85f: @ 85f
 Script_branch_864: @ 864
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_891
+	CompareLastResultCall EQUAL, Script_branch_891
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_896
+	CompareLastResultCall EQUAL, Script_branch_896
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_89b
+	CompareLastResultCall EQUAL, Script_branch_89b
 	Return
 @ 891
 
@@ -557,15 +531,15 @@ Script_branch_89b: @ 89b
 Script_branch_8a0: @ 8a0
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_8e7
+	CompareLastResultCall EQUAL, Script_branch_8e7
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_8ec
+	CompareLastResultCall EQUAL, Script_branch_8ec
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_8f1
+	CompareLastResultCall EQUAL, Script_branch_8f1
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_97c
+	CompareLastResultCall EQUAL, Script_branch_97c
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_981
+	CompareLastResultCall EQUAL, Script_branch_981
 	Return
 @ 8e7
 
@@ -587,11 +561,11 @@ Script_branch_8f1: @ 8f1
 Script_branch_8f6: @ 8f6
 	CheckEffectHm 0x4001
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_923
+	CompareLastResultCall EQUAL, Script_branch_923
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_928
+	CompareLastResultCall EQUAL, Script_branch_928
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_92d
+	CompareLastResultCall EQUAL, Script_branch_92d
 	Return
 @ 923
 
@@ -613,9 +587,9 @@ Script_branch_92d: @ 92d
 Script_branch_932: @ 932
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_952
+	CompareLastResultCall EQUAL, Script_branch_952
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_957
+	CompareLastResultCall EQUAL, Script_branch_957
 	Return
 @ 952
 
@@ -632,9 +606,9 @@ Script_branch_957: @ 957
 Script_branch_95c: @ 95c
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_97c
+	CompareLastResultCall EQUAL, Script_branch_97c
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_981
+	CompareLastResultCall EQUAL, Script_branch_981
 	Return
 @ 97c
 
@@ -651,11 +625,11 @@ Script_branch_981: @ 981
 Script_branch_986: @ 986
 	CheckEffectHm 0x4001
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_9b3
+	CompareLastResultCall EQUAL, Script_branch_9b3
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_9b8
+	CompareLastResultCall EQUAL, Script_branch_9b8
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_9bd
+	CompareLastResultCall EQUAL, Script_branch_9bd
 	Return
 @ 9b3
 
@@ -677,11 +651,11 @@ Script_branch_9bd: @ 9bd
 Script_branch_9c2: @ 9c2
 	CheckEffectHm 0x4001
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_9ef
+	CompareLastResultCall EQUAL, Script_branch_9ef
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_9f4
+	CompareLastResultCall EQUAL, Script_branch_9f4
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_9f9
+	CompareLastResultCall EQUAL, Script_branch_9f9
 	Return
 @ 9ef
 
@@ -704,11 +678,11 @@ Script_branch_9fe: @ 9fe
 	Call Function_1060
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_a31
+	CompareLastResultCall EQUAL, Script_branch_a31
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_a36
+	CompareLastResultCall EQUAL, Script_branch_a36
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_a3b
+	CompareLastResultCall EQUAL, Script_branch_a3b
 	Return
 @ a31
 
@@ -730,11 +704,11 @@ Script_branch_a3b: @ a3b
 Script_branch_a40: @ a40
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_a6d
+	CompareLastResultCall EQUAL, Script_branch_a6d
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_a78
+	CompareLastResultCall EQUAL, Script_branch_a78
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_a83
+	CompareLastResultCall EQUAL, Script_branch_a83
 	Return
 @ a6d
 
@@ -759,15 +733,15 @@ Script_branch_a83: @ a83
 Script_branch_a8e: @ a8e
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_ad5
+	CompareLastResultCall EQUAL, Script_branch_ad5
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_ae0
+	CompareLastResultCall EQUAL, Script_branch_ae0
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_aeb
+	CompareLastResultCall EQUAL, Script_branch_aeb
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_b8e
+	CompareLastResultCall EQUAL, Script_branch_b8e
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_b99
+	CompareLastResultCall EQUAL, Script_branch_b99
 	Return
 @ ad5
 
@@ -793,11 +767,11 @@ Script_branch_af6: @ af6
 	Call Function_1195
 	CheckEffectHm 0x4001
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_b29
+	CompareLastResultCall EQUAL, Script_branch_b29
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_b2e
+	CompareLastResultCall EQUAL, Script_branch_b2e
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_b33
+	CompareLastResultCall EQUAL, Script_branch_b33
 	Return
 @ b29
 
@@ -819,9 +793,9 @@ Script_branch_b33: @ b33
 Script_branch_b38: @ b38
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_b58
+	CompareLastResultCall EQUAL, Script_branch_b58
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_b63
+	CompareLastResultCall EQUAL, Script_branch_b63
 	Return
 @ b58
 
@@ -840,9 +814,9 @@ Script_branch_b63: @ b63
 Script_branch_b6e: @ b6e
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_b8e
+	CompareLastResultCall EQUAL, Script_branch_b8e
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_b99
+	CompareLastResultCall EQUAL, Script_branch_b99
 	Return
 @ b8e
 
@@ -862,11 +836,11 @@ Script_branch_ba4: @ ba4
 	Call Function_1263
 	CheckEffectHm 0x4001
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_bd7
+	CompareLastResultCall EQUAL, Script_branch_bd7
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_bdc
+	CompareLastResultCall EQUAL, Script_branch_bdc
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_be1
+	CompareLastResultCall EQUAL, Script_branch_be1
 	Return
 @ bd7
 
@@ -889,11 +863,11 @@ Script_branch_be6: @ be6
 	Call Function_12ca
 	CheckEffectHm 0x4001
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_c19
+	CompareLastResultCall EQUAL, Script_branch_c19
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_c1e
+	CompareLastResultCall EQUAL, Script_branch_c1e
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_c23
+	CompareLastResultCall EQUAL, Script_branch_c23
 	Return
 @ c19
 
@@ -915,11 +889,11 @@ Script_branch_c23: @ c23
 Script_branch_c28: @ c28
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_c55
+	CompareLastResultCall EQUAL, Script_branch_c55
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_c5a
+	CompareLastResultCall EQUAL, Script_branch_c5a
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_c5f
+	CompareLastResultCall EQUAL, Script_branch_c5f
 	Return
 @ c55
 
@@ -941,11 +915,11 @@ Script_branch_c5f: @ c5f
 Script_branch_c64: @ c64
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_c91
+	CompareLastResultCall EQUAL, Script_branch_c91
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_c96
+	CompareLastResultCall EQUAL, Script_branch_c96
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_c9b
+	CompareLastResultCall EQUAL, Script_branch_c9b
 	Return
 @ c91
 
@@ -967,15 +941,15 @@ Script_branch_c9b: @ c9b
 Script_branch_ca0: @ ca0
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_ce7
+	CompareLastResultCall EQUAL, Script_branch_ce7
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_cec
+	CompareLastResultCall EQUAL, Script_branch_cec
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_cf1
+	CompareLastResultCall EQUAL, Script_branch_cf1
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_d7c
+	CompareLastResultCall EQUAL, Script_branch_d7c
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_d81
+	CompareLastResultCall EQUAL, Script_branch_d81
 	Return
 @ ce7
 
@@ -997,11 +971,11 @@ Script_branch_cf1: @ cf1
 Script_branch_cf6: @ cf6
 	CheckEffectHm 0x4001
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_d23
+	CompareLastResultCall EQUAL, Script_branch_d23
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_d28
+	CompareLastResultCall EQUAL, Script_branch_d28
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_d2d
+	CompareLastResultCall EQUAL, Script_branch_d2d
 	Return
 @ d23
 
@@ -1023,9 +997,9 @@ Script_branch_d2d: @ d2d
 Script_branch_d32: @ d32
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_d52
+	CompareLastResultCall EQUAL, Script_branch_d52
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_d57
+	CompareLastResultCall EQUAL, Script_branch_d57
 	Return
 @ d52
 
@@ -1042,9 +1016,9 @@ Script_branch_d57: @ d57
 Script_branch_d5c: @ d5c
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_d7c
+	CompareLastResultCall EQUAL, Script_branch_d7c
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_d81
+	CompareLastResultCall EQUAL, Script_branch_d81
 	Return
 @ d7c
 
@@ -1061,11 +1035,11 @@ Script_branch_d81: @ d81
 Script_branch_d86: @ d86
 	CheckEffectHm 0x4001
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_db3
+	CompareLastResultCall EQUAL, Script_branch_db3
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_db8
+	CompareLastResultCall EQUAL, Script_branch_db8
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_dbd
+	CompareLastResultCall EQUAL, Script_branch_dbd
 	Return
 @ db3
 
@@ -1087,11 +1061,11 @@ Script_branch_dbd: @ dbd
 Script_branch_dc2: @ dc2
 	CheckEffectHm 0x4001
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_def
+	CompareLastResultCall EQUAL, Script_branch_def
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_df4
+	CompareLastResultCall EQUAL, Script_branch_df4
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_df9
+	CompareLastResultCall EQUAL, Script_branch_df9
 	Return
 @ def
 
@@ -1114,11 +1088,11 @@ Script_branch_dfe: @ dfe
 	SetFlag 0xabc
 	CheckEffectHm 0x4001
 	If 0x4001, 0x30
-	CompareLastResultCall 0x1, Script_branch_e2f
+	CompareLastResultCall EQUAL, Script_branch_e2f
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_e34
+	CompareLastResultCall EQUAL, Script_branch_e34
 	If 0x4001, 0xa8
-	CompareLastResultCall 0x1, Script_branch_e39
+	CompareLastResultCall EQUAL, Script_branch_e39
 	Return
 @ e2f
 
@@ -1140,11 +1114,11 @@ Script_branch_e39: @ e39
 Script_branch_e3e: @ e3e
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_e6b
+	CompareLastResultCall EQUAL, Script_branch_e6b
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_e74
+	CompareLastResultCall EQUAL, Script_branch_e74
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_e7d
+	CompareLastResultCall EQUAL, Script_branch_e7d
 	Return
 @ e6b
 
@@ -1169,15 +1143,15 @@ Script_branch_e7d: @ e7d
 Script_branch_e86: @ e86
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultCall 0x1, Script_branch_ecd
+	CompareLastResultCall EQUAL, Script_branch_ecd
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_ed6
+	CompareLastResultCall EQUAL, Script_branch_ed6
 	If 0x4001, 0xbd
-	CompareLastResultCall 0x1, Script_branch_edf
+	CompareLastResultCall EQUAL, Script_branch_edf
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_f7a
+	CompareLastResultCall EQUAL, Script_branch_f7a
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_f83
+	CompareLastResultCall EQUAL, Script_branch_f83
 	Return
 @ ecd
 
@@ -1203,11 +1177,11 @@ Script_branch_ee8: @ ee8
 	SetFlag 0xabf
 	CheckEffectHm 0x4001
 	If 0x4001, 0x65
-	CompareLastResultCall 0x1, Script_branch_f19
+	CompareLastResultCall EQUAL, Script_branch_f19
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_f1e
+	CompareLastResultCall EQUAL, Script_branch_f1e
 	If 0x4001, 0x1bb
-	CompareLastResultCall 0x1, Script_branch_f23
+	CompareLastResultCall EQUAL, Script_branch_f23
 	Return
 @ f19
 
@@ -1229,9 +1203,9 @@ Script_branch_f23: @ f23
 Script_branch_f28: @ f28
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_f48
+	CompareLastResultCall EQUAL, Script_branch_f48
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_f51
+	CompareLastResultCall EQUAL, Script_branch_f51
 	Return
 @ f48
 
@@ -1250,9 +1224,9 @@ Script_branch_f51: @ f51
 Script_branch_f5a: @ f5a
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_f7a
+	CompareLastResultCall EQUAL, Script_branch_f7a
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_f83
+	CompareLastResultCall EQUAL, Script_branch_f83
 	Return
 @ f7a
 
@@ -1272,11 +1246,11 @@ Script_branch_f8c: @ f8c
 	SetFlag 0xac1
 	CheckEffectHm 0x4001
 	If 0x4001, 0x1ac
-	CompareLastResultCall 0x1, Script_branch_fbd
+	CompareLastResultCall EQUAL, Script_branch_fbd
 	If 0x4001, 0x1b3
-	CompareLastResultCall 0x1, Script_branch_fc2
+	CompareLastResultCall EQUAL, Script_branch_fc2
 	If 0x4001, 0x1cb
-	CompareLastResultCall 0x1, Script_branch_fc7
+	CompareLastResultCall EQUAL, Script_branch_fc7
 	Return
 @ fbd
 
@@ -1299,11 +1273,11 @@ Script_branch_fcc: @ fcc
 	SetFlag 0xac2
 	CheckEffectHm 0x4001
 	If 0x4001, 0x24
-	CompareLastResultCall 0x1, Script_branch_ffd
+	CompareLastResultCall EQUAL, Script_branch_ffd
 	If 0x4001, 0x7b
-	CompareLastResultCall 0x1, Script_branch_1002
+	CompareLastResultCall EQUAL, Script_branch_1002
 	If 0x4001, 0x97
-	CompareLastResultCall 0x1, Script_branch_1007
+	CompareLastResultCall EQUAL, Script_branch_1007
 	Return
 @ ffd
 
@@ -1325,9 +1299,9 @@ Script_branch_1007: @ 1007
 Function_100c: @ 100c
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_102c
+	CompareLastResultCall EQUAL, Script_branch_102c
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_1031
+	CompareLastResultCall EQUAL, Script_branch_1031
 	Return
 @ 102c
 
@@ -1344,9 +1318,9 @@ Script_branch_1031: @ 1031
 Function_1036: @ 1036
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultCall 0x1, Script_branch_1056
+	CompareLastResultCall EQUAL, Script_branch_1056
 	If 0x4001, 0x86
-	CompareLastResultCall 0x1, Script_branch_105b
+	CompareLastResultCall EQUAL, Script_branch_105b
 	Return
 @ 1056
 
@@ -1363,15 +1337,15 @@ Script_branch_105b: @ 105b
 Function_1060: @ 1060
 	SetVar 0x8005, 0x173
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_109f
+	CompareLastResultCall EQUAL, Script_branch_109f
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_10a7
+	CompareLastResultCall EQUAL, Script_branch_10a7
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_10af
+	CompareLastResultCall EQUAL, Script_branch_10af
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_10b7
+	CompareLastResultCall EQUAL, Script_branch_10b7
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_10bf
+	CompareLastResultCall EQUAL, Script_branch_10bf
 	Return
 @ 109f
 
@@ -1403,15 +1377,15 @@ Script_branch_10bf: @ 10bf
 Function_10c7: @ 10c7
 	SetVar 0x8005, 0x172
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_1106
+	CompareLastResultCall EQUAL, Script_branch_1106
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_110e
+	CompareLastResultCall EQUAL, Script_branch_110e
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_1116
+	CompareLastResultCall EQUAL, Script_branch_1116
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_111e
+	CompareLastResultCall EQUAL, Script_branch_111e
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_1126
+	CompareLastResultCall EQUAL, Script_branch_1126
 	Return
 @ 1106
 
@@ -1443,15 +1417,15 @@ Script_branch_1126: @ 1126
 Function_112e: @ 112e
 	SetVar 0x8005, 0x171
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_116d
+	CompareLastResultCall EQUAL, Script_branch_116d
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_1175
+	CompareLastResultCall EQUAL, Script_branch_1175
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_117d
+	CompareLastResultCall EQUAL, Script_branch_117d
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_1185
+	CompareLastResultCall EQUAL, Script_branch_1185
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_118d
+	CompareLastResultCall EQUAL, Script_branch_118d
 	Return
 @ 116d
 
@@ -1483,15 +1457,15 @@ Script_branch_118d: @ 118d
 Function_1195: @ 1195
 	SetVar 0x8005, 0x1cc
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_11d4
+	CompareLastResultCall EQUAL, Script_branch_11d4
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_11dc
+	CompareLastResultCall EQUAL, Script_branch_11dc
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_11e4
+	CompareLastResultCall EQUAL, Script_branch_11e4
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_11ec
+	CompareLastResultCall EQUAL, Script_branch_11ec
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_11f4
+	CompareLastResultCall EQUAL, Script_branch_11f4
 	Return
 @ 11d4
 
@@ -1523,15 +1497,15 @@ Script_branch_11f4: @ 11f4
 Function_11fc: @ 11fc
 	SetVar 0x8005, 0x170
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_123b
+	CompareLastResultCall EQUAL, Script_branch_123b
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_1243
+	CompareLastResultCall EQUAL, Script_branch_1243
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_124b
+	CompareLastResultCall EQUAL, Script_branch_124b
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_1253
+	CompareLastResultCall EQUAL, Script_branch_1253
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_125b
+	CompareLastResultCall EQUAL, Script_branch_125b
 	Return
 @ 123b
 
@@ -1563,15 +1537,15 @@ Script_branch_125b: @ 125b
 Function_1263: @ 1263
 	SetVar 0x8005, 0x1d1
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_12a2
+	CompareLastResultCall EQUAL, Script_branch_12a2
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_12aa
+	CompareLastResultCall EQUAL, Script_branch_12aa
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_12b2
+	CompareLastResultCall EQUAL, Script_branch_12b2
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_12ba
+	CompareLastResultCall EQUAL, Script_branch_12ba
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_12c2
+	CompareLastResultCall EQUAL, Script_branch_12c2
 	Return
 @ 12a2
 
@@ -1603,15 +1577,15 @@ Script_branch_12c2: @ 12c2
 Function_12ca: @ 12ca
 	SetVar 0x8005, 0x1af
 	CheckFlag 0x97f
-	CompareLastResultCall 0x1, Script_branch_1309
+	CompareLastResultCall EQUAL, Script_branch_1309
 	CheckFlag 0x980
-	CompareLastResultCall 0x1, Script_branch_1311
+	CompareLastResultCall EQUAL, Script_branch_1311
 	CheckFlag 0x981
-	CompareLastResultCall 0x1, Script_branch_1319
+	CompareLastResultCall EQUAL, Script_branch_1319
 	CheckFlag 0x982
-	CompareLastResultCall 0x1, Script_branch_1321
+	CompareLastResultCall EQUAL, Script_branch_1321
 	CheckFlag 0x983
-	CompareLastResultCall 0x1, Script_branch_1329
+	CompareLastResultCall EQUAL, Script_branch_1329
 	Return
 @ 1309
 
@@ -1642,68 +1616,68 @@ Script_branch_1329: @ 1329
 
 Script_branch_1331: @ 1331
 	CheckFlag 0xabc
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 133e
 
 Script_branch_133e: @ 133e
 	CheckEffectHm 0x4001
 	If 0x4001, 0x6
-	CompareLastResultJump 0x1, Script_branch_136b
+	CompareLastResultJump EQUAL, Script_branch_136b
 	If 0x4001, 0x65
-	CompareLastResultJump 0x1, Script_branch_136b
+	CompareLastResultJump EQUAL, Script_branch_136b
 	If 0x4001, 0xbd
-	CompareLastResultJump 0x1, Script_branch_136b
+	CompareLastResultJump EQUAL, Script_branch_136b
 	Return
 @ 136b
 
 Script_branch_136b: @ 136b
 	CheckFlag 0xabd
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 1378
 
 Script_branch_1378: @ 1378
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultJump 0x1, Script_branch_13b0
+	CompareLastResultJump EQUAL, Script_branch_13b0
 	If 0x4001, 0x86
-	CompareLastResultJump 0x1, Script_branch_13b0
+	CompareLastResultJump EQUAL, Script_branch_13b0
 	CheckFlag 0xabe
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 13a3
 
 Script_branch_13a3: @ 13a3
 	CheckFlag 0xabf
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 13b0
 
 Script_branch_13b0: @ 13b0
 	CheckEffectHm 0x4001
 	If 0x4001, 0x45
-	CompareLastResultJump 0x1, Script_branch_13d0
+	CompareLastResultJump EQUAL, Script_branch_13d0
 	If 0x4001, 0x86
-	CompareLastResultJump 0x1, Script_branch_13d0
+	CompareLastResultJump EQUAL, Script_branch_13d0
 	Return
 @ 13d0
 
 Script_branch_13d0: @ 13d0
 	CheckFlag 0xac0
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 13dd
 
 Script_branch_13dd: @ 13dd
 	CheckFlag 0xac1
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 13ea
 
 Script_branch_13ea: @ 13ea
 	CheckFlag 0xac2
-	CompareLastResultJump 0x1, Script_branch_13f7
+	CompareLastResultJump EQUAL, Script_branch_13f7
 	Return
 @ 13f7
 

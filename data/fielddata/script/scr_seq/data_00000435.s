@@ -17,34 +17,34 @@ Script_1: @ 16
 
 Script_2: @ 1c
 	CheckFlag 0x994
-	CompareLastResultCall 0x1, Script_branch_9f
+	CompareLastResultCall EQUAL, Script_branch_9f
 	Cmd_200 0x4000
 	If 0x4000, 0x50
-	CompareLastResultJump 0x1, Script_branch_47
+	CompareLastResultJump EQUAL, Script_branch_47
 	If 0x4000, 0x15f
-	CompareLastResultJump 0x1, Script_branch_47
+	CompareLastResultJump EQUAL, Script_branch_47
 	End
 @ 47
 
 Script_branch_47: @ 47
 	CheckFlag 0x3
-	CompareLastResultJump 0x1, Script_branch_9d
+	CompareLastResultJump EQUAL, Script_branch_9d
 	CheckSpritePosition 0x4000, 0x4001
 	If 0x4000, 0x12b
-	CompareLastResultJump 0x0, Script_branch_9d
+	CompareLastResultJump LESSER, Script_branch_9d
 	If 0x4000, 0x132
-	CompareLastResultJump 0x2, Script_branch_9d
+	CompareLastResultJump GREATER, Script_branch_9d
 	If 0x4001, 0x240
-	CompareLastResultJump 0x1, Script_branch_8e
+	CompareLastResultJump EQUAL, Script_branch_8e
 	If 0x4001, 0x2a9
-	CompareLastResultJump 0x1, Script_branch_8e
+	CompareLastResultJump EQUAL, Script_branch_8e
 	End
 @ 8e
 
 Script_branch_8e: @ 8e
 	SetFlag 0x3
 	SetFlag 0x994
-	Bikeride
+	BikeRide
 	RideBike2 0x1
 	End
 @ 9d

@@ -11,15 +11,15 @@ Script: @ 0
 Script_1: @ e
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_58
+	CompareLastResultJump EQUAL, Script_branch_58
 	CheckItem 0x1c6, 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_58
+	CompareLastResultJump EQUAL, Script_branch_58
 	UnkFunct2 0x0, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_58
+	CompareLastResultJump EQUAL, Script_branch_58
 	CheckFlag 0x158
-	CompareLastResultJump 0x1, Script_branch_58
+	CompareLastResultJump EQUAL, Script_branch_58
 	ClearFlag 0x240
 	End
 @ 58
@@ -31,7 +31,7 @@ Script_branch_58: @ 58
 
 Script_2: @ 5e
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	End
 @ 6b
 
@@ -53,15 +53,15 @@ Script_3: @ 79
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_14c
+	CompareLastResultJump EQUAL, Script_branch_14c
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	SetFlag 0x158
 Script_branch_bc: @ bc
 	SetFlag 0x241
 	If 0x40f8, 0x2
-	CompareLastResultJump 0x1, Script_branch_e3
+	CompareLastResultJump EQUAL, Script_branch_e3
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress
@@ -73,8 +73,6 @@ Script_branch_d8: @ d8
 	Message 0x1
 	CloseMsgOnKeyPress
 	Jump Script_branch_bc
-@ e3
-
 Script_branch_e3: @ e3
 	Message 0x2
 	CloseMsgOnKeyPress

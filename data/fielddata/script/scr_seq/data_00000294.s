@@ -13,7 +13,7 @@ Script_1: @ 6
 @ 14
 
 Function_14: @ 14
-	SetValue 0x410c, 0x1
+	ScriptCmd_AddValue 0x410c, 0x1
 	Return
 @ 1c
 

@@ -10,7 +10,7 @@ Script: @ 0
 Script_1: @ a
 	Cmd_292 0xa, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_22
+	CompareLastResultJump EQUAL, Script_branch_22
 	SetFlag 0x27b
 	End
 @ 22

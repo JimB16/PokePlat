@@ -29,14 +29,12 @@ Script_3: @ 25
 	CheckIdPlayer 0x800c, 0x4
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_f0
+	CompareLastResultJump EQUAL, Script_branch_f0
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_10a
+	CompareLastResultJump EQUAL, Script_branch_10a
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_124
+	CompareLastResultJump EQUAL, Script_branch_124
 	Jump Script_branch_d6
-@ 66
-
 Script_branch_66: @ 66
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
@@ -88,40 +86,33 @@ Script_branch_d6: @ d6
 	ApplyMovement 0xff, Movement_188
 	WaitMovement
 	Jump Script_branch_66
-@ ee
-
-.byte 0x2 @ 0xee
-.byte 0x0 @ 0xef
+	End
+@ f0
 
 Script_branch_f0: @ f0
 	ApplyMovement 0x0, Movement_19c
 	ApplyMovement 0xff, Movement_1ac
 	WaitMovement
 	Jump Script_branch_66
-@ 108
-
-.byte 0x2 @ 0x108
-.byte 0x0 @ 0x109
+	End
+@ 10a
 
 Script_branch_10a: @ 10a
 	ApplyMovement 0x0, Movement_1c0
 	ApplyMovement 0xff, Movement_1d0
 	WaitMovement
 	Jump Script_branch_66
-@ 122
-
-.byte 0x2 @ 0x122
-.byte 0x0 @ 0x123
+	End
+@ 124
 
 Script_branch_124: @ 124
 	ApplyMovement 0x0, Movement_1e4
 	ApplyMovement 0xff, Movement_1f4
 	WaitMovement
 	Jump Script_branch_66
-@ 13c
+	End
+@ 13e
 
-.byte 0x2 @ 0x13c
-.byte 0x0 @ 0x13d
 .byte 0x0 @ 0x13e
 .byte 0x0 @ 0x13f
 

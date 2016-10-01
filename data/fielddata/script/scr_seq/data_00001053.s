@@ -11,18 +11,18 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x90
-	CompareLastResultJump 0x1, Script_branch_b0
+	CompareLastResultJump EQUAL, Script_branch_b0
 	If 0x4095, 0x1
 	CompareLastResultJump 0x4, Script_branch_82
 	CheckFlag 0x6e
-	CompareLastResultJump 0x1, Script_branch_90
+	CompareLastResultJump EQUAL, Script_branch_90
 	CheckFlag 0xea
-	CompareLastResultJump 0x1, Script_branch_9e
+	CompareLastResultJump EQUAL, Script_branch_9e
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_5c
+	CompareLastResultJump EQUAL, Script_branch_5c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	End
 @ 5c
 
@@ -31,15 +31,11 @@ Script_branch_5c: @ 5c
 	SetVariableRival 0x1
 	Message 0x0
 	Jump Script_branch_7a
-@ 6b
-
 Script_branch_6b: @ 6b
 	SetVarHero 0x0
 	SetVariableRival 0x1
 	Message 0x1
 	Jump Script_branch_7a
-@ 7a
-
 Script_branch_7a: @ 7a
 	WaitButton
 	CloseMsgOnKeyPress

@@ -32,7 +32,7 @@ Script_3: @ 35
 	LockAll
 	FacePlayer
 	CheckFlag 0x81
-	CompareLastResultJump 0x1, Script_branch_53
+	CompareLastResultJump EQUAL, Script_branch_53
 	Message 0x1
 	WaitButton
 	CloseMsgOnKeyPress
@@ -67,10 +67,10 @@ Script_5: @ 7d
 	LockAll
 	FacePlayer
 	If 0x4002, 0x1
-	CompareLastResultJump 0x1, Script_branch_f4
+	CompareLastResultJump EQUAL, Script_branch_f4
 	StorePoketchApp 0x5, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d9
+	CompareLastResultJump EQUAL, Script_branch_d9
 	CheckFirstPokeParty 0x8000
 	SetVarPoke 0x0, 0x8000
 	Message 0x6
@@ -80,10 +80,8 @@ Script_5: @ 7d
 	If 0x800c, 0x46
 	CompareLastResultJump 0x4, Script_branch_10a
 	Jump Script_branch_115
-@ d7
-
-.byte 0x2 @ 0xd7
-.byte 0x0 @ 0xd8
+	End
+@ d9
 
 Script_branch_d9: @ d9
 	Message 0x4

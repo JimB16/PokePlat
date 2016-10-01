@@ -39,8 +39,6 @@ Script_2: @ 45
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_71
 	Jump Script_branch_66
-@ 66
-
 Script_branch_66: @ 66
 	Message 0x2
 	WaitButton

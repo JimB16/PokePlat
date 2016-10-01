@@ -45,9 +45,9 @@ Script_4: @ 4d
 	AddPeople 0xf
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x12e
-	CompareLastResultCall 0x1, Script_branch_ca
+	CompareLastResultCall EQUAL, Script_branch_ca
 	If 0x8004, 0x12f
-	CompareLastResultCall 0x1, Script_branch_d6
+	CompareLastResultCall EQUAL, Script_branch_d6
 	SetVarHero 0x0
 	Message 0x0
 	CloseMsgOnKeyPress
@@ -59,9 +59,9 @@ Script_4: @ 4d
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x12e
-	CompareLastResultCall 0x1, Script_branch_e2
+	CompareLastResultCall EQUAL, Script_branch_e2
 	If 0x8004, 0x12f
-	CompareLastResultCall 0x1, Script_branch_f6
+	CompareLastResultCall EQUAL, Script_branch_f6
 	RemovePeople 0xf
 	SetVar 0x40a8, 0x1
 	SetFlag 0x298

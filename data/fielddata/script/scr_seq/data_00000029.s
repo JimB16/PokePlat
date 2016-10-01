@@ -147,10 +147,8 @@ Script_13: @ 109
 	LockAll
 	SetVar 0x8005, 0x6
 	Jump Script_branch_11d
-@ 11b
-
-.byte 0x2 @ 0x11b
-.byte 0x0 @ 0x11c
+	End
+@ 11d
 
 Script_branch_11d: @ 11d
 	Message 0xd
@@ -162,14 +160,12 @@ Script_branch_11d: @ 11d
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_167
+	CompareLastResultJump EQUAL, Script_branch_167
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_188
+	CompareLastResultJump EQUAL, Script_branch_188
 	Jump Script_branch_161
-@ 15f
-
-.byte 0x2 @ 0x15f
-.byte 0x0 @ 0x160
+	End
+@ 161
 
 Script_branch_161: @ 161
 	CloseMsgOnKeyPress
@@ -181,7 +177,7 @@ Script_branch_167: @ 167
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_161
+	CompareLastResultJump EQUAL, Script_branch_161
 	CloseMsgOnKeyPress
 	CallStandard 0x802
 	ReleaseAll
@@ -191,20 +187,16 @@ Script_branch_167: @ 167
 Script_branch_188: @ 188
 	Message 0xe
 	Jump Script_branch_11d
-@ 191
-
-.byte 0x2 @ 0x191
-.byte 0x0 @ 0x192
+	End
+@ 193
 
 Script_14: @ 193
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8005, 0x5
 	Jump Script_branch_1a7
-@ 1a5
-
-.byte 0x2 @ 0x1a5
-.byte 0x0 @ 0x1a6
+	End
+@ 1a7
 
 Script_branch_1a7: @ 1a7
 	Message 0xb
@@ -216,14 +208,12 @@ Script_branch_1a7: @ 1a7
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_1f1
+	CompareLastResultJump EQUAL, Script_branch_1f1
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_212
+	CompareLastResultJump EQUAL, Script_branch_212
 	Jump Script_branch_1eb
-@ 1e9
-
-.byte 0x2 @ 0x1e9
-.byte 0x0 @ 0x1ea
+	End
+@ 1eb
 
 Script_branch_1eb: @ 1eb
 	CloseMsgOnKeyPress
@@ -235,7 +225,7 @@ Script_branch_1f1: @ 1f1
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1eb
+	CompareLastResultJump EQUAL, Script_branch_1eb
 	CloseMsgOnKeyPress
 	CallStandard 0x802
 	ReleaseAll
@@ -245,10 +235,9 @@ Script_branch_1f1: @ 1f1
 Script_branch_212: @ 212
 	Message 0xc
 	Jump Script_branch_1a7
-@ 21b
+	End
+@ 21d
 
-.byte 0x2 @ 0x21b
-.byte 0x0 @ 0x21c
 .byte 0x0 @ 0x21d
 .byte 0x0 @ 0x21e
 .byte 0x0 @ 0x21f

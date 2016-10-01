@@ -13,8 +13,6 @@ Script_1: @ 6
 	If 0x4095, 0x1
 	CompareLastResultJump 0x4, Script_branch_2f
 	Jump Script_branch_21
-@ 21
-
 Script_branch_21: @ 21
 	SetVariableRival 0x0
 	Message 0x0

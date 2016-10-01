@@ -20,9 +20,9 @@ Script_1: @ 22
 
 Script_2: @ 26
 	If 0x4055, 0x7
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	CheckFlag 0x9ad
-	CompareLastResultJump 0x1, Script_branch_51
+	CompareLastResultJump EQUAL, Script_branch_51
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer

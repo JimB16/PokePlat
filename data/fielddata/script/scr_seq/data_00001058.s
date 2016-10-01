@@ -12,7 +12,7 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0x90
-	CompareLastResultJump 0x1, Script_branch_28
+	CompareLastResultJump EQUAL, Script_branch_28
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -34,7 +34,7 @@ Script_2: @ 33
 	FacePlayer
 	SetVarHero 0x0
 	CheckFlag 0x90
-	CompareLastResultJump 0x1, Script_branch_54
+	CompareLastResultJump EQUAL, Script_branch_54
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress

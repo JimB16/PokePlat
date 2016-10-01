@@ -20,30 +20,26 @@ Script_2: @ 15
 	CheckFacePosition 0x8004
 	CheckItem 0x1c5, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_52
+	CompareLastResultJump EQUAL, Script_branch_52
 	Message 0x1
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_5d
+	CompareLastResultJump EQUAL, Script_branch_5d
 	Jump Script_branch_98
-@ 52
-
 Script_branch_52: @ 52
 	Message 0x0
 	CloseMsgOnKeyPress
 	Jump Script_branch_5d
-@ 5d
-
 Script_branch_5d: @ 5d
 	Call Function_a3
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_bd
+	CompareLastResultCall EQUAL, Script_branch_bd
 	If 0x8004, 0x3
-	CompareLastResultCall 0x1, Script_branch_d7
+	CompareLastResultCall EQUAL, Script_branch_d7
 	If 0x8004, 0x0
-	CompareLastResultCall 0x1, Script_branch_f1
-	ShipAnm 0x0, 0x2, 0x21, 0x2c, 0x2ee
+	CompareLastResultCall EQUAL, Script_branch_f1
+	ShipAnimation 0x0, 0x2, 0x21, 0x2c, 0x2ee
 	ReleaseAll
 	End
 @ 98

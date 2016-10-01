@@ -20,11 +20,9 @@ Script_2: @ e
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3b
+	CompareLastResultJump EQUAL, Script_branch_3b
 	Message 0x1
 	Jump Script_branch_3e
-@ 3b
-
 Script_branch_3b: @ 3b
 	Message 0x2
 Script_branch_3e: @ 3e

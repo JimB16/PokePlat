@@ -14,31 +14,27 @@ Script_1: @ e
 	FacePlayer
 	CheckBadge 0x4, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_6a
+	CompareLastResultJump EQUAL, Script_branch_6a
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4c
+	CompareLastResultJump EQUAL, Script_branch_4c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	End
 @ 4c
 
 Script_branch_4c: @ 4c
 	Message 0x2
 	Jump Script_branch_62
-@ 55
-
-.byte 0x2 @ 0x55
-.byte 0x0 @ 0x56
+	End
+@ 57
 
 Script_branch_57: @ 57
 	Message 0x3
 	Jump Script_branch_62
-@ 60
-
-.byte 0x2 @ 0x60
-.byte 0x0 @ 0x61
+	End
+@ 62
 
 Script_branch_62: @ 62
 	WaitButton
@@ -51,17 +47,15 @@ Script_branch_6a: @ 6a
 	SetVarHero 0x0
 	Message 0x4
 	Jump Script_branch_62
-@ 76
-
-.byte 0x2 @ 0x76
-.byte 0x0 @ 0x77
+	End
+@ 78
 
 Script_2: @ 78
 	PlayFanfare 0x5dc
 	LockAll
 	CheckBadge 0x4, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a2
+	CompareLastResultJump EQUAL, Script_branch_a2
 	SetVariableRival 0x0
 	SetVariableRival 0x1
 	Message 0x5

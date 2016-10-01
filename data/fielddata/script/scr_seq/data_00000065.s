@@ -37,115 +37,109 @@ Script_2: @ 55
 	LockAll
 	FacePlayer
 	CheckFlag 0x1
-	CompareLastResultJump 0x1, Script_branch_3d8
+	CompareLastResultJump EQUAL, Script_branch_3d8
 	Message 0x1
 	CheckFlag 0x79
-	CompareLastResultJump 0x0, Script_branch_4b6
+	CompareLastResultJump LESSER, Script_branch_4b6
 	If 0x40b4, 0x0
 	CompareLastResultJump 0x5, Script_branch_3f2
 	CheckActFossil 0x8000
 	If 0x8000, 0x0
-	CompareLastResultJump 0x1, Script_branch_4ab
+	CompareLastResultJump EQUAL, Script_branch_4ab
 	Message 0x2
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3e7
+	CompareLastResultJump EQUAL, Script_branch_3e7
 	If 0x8000, 0x1
-	CompareLastResultJump 0x1, Script_branch_3bc
+	CompareLastResultJump EQUAL, Script_branch_3bc
 	SetVar 0x8001, 0x0
 	CheckItem 0x67, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x65, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x66, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x63, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x64, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x68, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	CheckItem 0x69, 0x1, 0x800c
-	SetValue 0x8001, 0x800c
+	ScriptCmd_AddValue 0x8001, 0x800c
 	If 0x8001, 0x1
-	CompareLastResultJump 0x1, Script_branch_3bc
+	CompareLastResultJump EQUAL, Script_branch_3bc
 	SetVar 0x8004, 0x0
 	SetVar 0x8005, 0x0
 	Multi 0x1, 0x1, 0x0, 0x1, 0x8003
 Script_branch_13e: @ 13e
 	If 0x8005, 0x0
-	CompareLastResultCall 0x1, Script_branch_2dc
+	CompareLastResultCall EQUAL, Script_branch_2dc
 	If 0x8005, 0x1
-	CompareLastResultCall 0x1, Script_branch_2ec
+	CompareLastResultCall EQUAL, Script_branch_2ec
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_2fc
+	CompareLastResultCall EQUAL, Script_branch_2fc
 	If 0x8005, 0x3
-	CompareLastResultCall 0x1, Script_branch_30c
+	CompareLastResultCall EQUAL, Script_branch_30c
 	If 0x8005, 0x4
-	CompareLastResultCall 0x1, Script_branch_31c
+	CompareLastResultCall EQUAL, Script_branch_31c
 	If 0x8005, 0x5
-	CompareLastResultCall 0x1, Script_branch_32c
+	CompareLastResultCall EQUAL, Script_branch_32c
 	If 0x8005, 0x6
-	CompareLastResultCall 0x1, Script_branch_33c
+	CompareLastResultCall EQUAL, Script_branch_33c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_219
+	CompareLastResultJump EQUAL, Script_branch_219
 	If 0x8004, 0x0
-	CompareLastResultCall 0x1, Script_branch_34c
+	CompareLastResultCall EQUAL, Script_branch_34c
 	If 0x8004, 0x1
-	CompareLastResultCall 0x1, Script_branch_354
+	CompareLastResultCall EQUAL, Script_branch_354
 	If 0x8004, 0x2
-	CompareLastResultCall 0x1, Script_branch_35c
+	CompareLastResultCall EQUAL, Script_branch_35c
 	If 0x8004, 0x3
-	CompareLastResultCall 0x1, Script_branch_364
+	CompareLastResultCall EQUAL, Script_branch_364
 	If 0x8004, 0x4
-	CompareLastResultCall 0x1, Script_branch_36c
+	CompareLastResultCall EQUAL, Script_branch_36c
 	If 0x8004, 0x5
-	CompareLastResultCall 0x1, Script_branch_374
+	CompareLastResultCall EQUAL, Script_branch_374
 	If 0x8004, 0x6
-	CompareLastResultCall 0x1, Script_branch_37c
+	CompareLastResultCall EQUAL, Script_branch_37c
 	CopyVar 0x8006, 0x8005
-	SetValue 0x8006, 0x9c
+	ScriptCmd_AddValue 0x8006, 0x9c
 	ChoiceMulti 0x8006, 0x8004
 	Jump Script_branch_225
-@ 219
-
 Script_branch_219: @ 219
-	SetValue 0x8005, 0x1
+	ScriptCmd_AddValue 0x8005, 0x1
 	Jump Script_branch_13e
-@ 225
-
 Script_branch_225: @ 225
-	SetValue 0x8004, 0x1
-	SetValue 0x8005, 0x1
+	ScriptCmd_AddValue 0x8004, 0x1
+	ScriptCmd_AddValue 0x8005, 0x1
 	If2 0x8004, 0x8001
 	CompareLastResultJump 0x5, Script_branch_13e
 	ChoiceMulti 0x2c, 0x8004
 	CloseMulti
 	If 0x8003, 0xff
-	CompareLastResultJump 0x1, Script_branch_3e7
+	CompareLastResultJump EQUAL, Script_branch_3e7
 	If2 0x8003, 0x4000
-	CompareLastResultJump 0x1, Script_branch_3e7
+	CompareLastResultJump EQUAL, Script_branch_3e7
 	If 0x8003, 0x0
-	CompareLastResultCall 0x1, Script_branch_384
+	CompareLastResultCall EQUAL, Script_branch_384
 	If 0x8003, 0x1
-	CompareLastResultCall 0x1, Script_branch_38c
+	CompareLastResultCall EQUAL, Script_branch_38c
 	If 0x8003, 0x2
-	CompareLastResultCall 0x1, Script_branch_394
+	CompareLastResultCall EQUAL, Script_branch_394
 	If 0x8003, 0x3
-	CompareLastResultCall 0x1, Script_branch_39c
+	CompareLastResultCall EQUAL, Script_branch_39c
 	If 0x8003, 0x4
-	CompareLastResultCall 0x1, Script_branch_3a4
+	CompareLastResultCall EQUAL, Script_branch_3a4
 	If 0x8003, 0x5
-	CompareLastResultCall 0x1, Script_branch_3ac
+	CompareLastResultCall EQUAL, Script_branch_3ac
 	If 0x8003, 0x6
-	CompareLastResultCall 0x1, Script_branch_3b4
+	CompareLastResultCall EQUAL, Script_branch_3b4
 	CheckItemChosen 0x40b4, 0x8002
 	If 0x40b4, 0x0
-	CompareLastResultJump 0x1, Script_branch_3e7
+	CompareLastResultJump EQUAL, Script_branch_3e7
 	GiveItem 0x8002, 0x1, 0x800c
 	Jump Script_branch_3d8
-@ 2dc
-
 Script_branch_2dc: @ 2dc
 	SetVar 0x4000, 0x67
 	CheckItem 0x4000, 0x1, 0x800c
@@ -263,8 +257,6 @@ Script_branch_3bc: @ 3bc
 	CheckItemChosen 0x40b4, 0x8002
 	GiveItem 0x8002, 0x1, 0x800c
 	Jump Script_branch_3d8
-@ 3d8
-
 Script_branch_3d8: @ 3d8
 	SetFlag 0x1
 	Message 0x6
@@ -287,7 +279,7 @@ Script_branch_3f2: @ 3f2
 	Message 0x7
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_4a0
+	CompareLastResultJump EQUAL, Script_branch_4a0
 	SetVarPokeStored 0x1, 0x40b4, 0x0, 0x0
 	SetVarHero 0x0
 	Soundfr 0x486
@@ -299,16 +291,16 @@ Script_branch_3f2: @ 3f2
 	Message 0x9
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_459
+	CompareLastResultJump EQUAL, Script_branch_459
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_49a
+	CompareLastResultJump EQUAL, Script_branch_49a
 	End
 @ 459
 
 Script_branch_459: @ 459
 	CloseMsgOnKeyPress
 	CheckPartyNumber 0x4000
-	CopyValue 0x4000, 0x1
+	ScriptCmd_SubValue 0x4000, 0x1
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	ChoosePokeNick 0x4000, 0x800c

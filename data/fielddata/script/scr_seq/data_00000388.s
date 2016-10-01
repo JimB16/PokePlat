@@ -62,17 +62,15 @@ Script_5: @ 96
 	TrainerBattle 0x194, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ce
+	CompareLastResultJump EQUAL, Script_branch_1ce
 	SetVar 0x4055, 0xa
 	Message 0x6
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x56
-	CompareLastResultJump 0x1, Script_branch_e6
+	CompareLastResultJump EQUAL, Script_branch_e6
 	ApplyMovement 0xff, Movement_210
 	Jump Script_branch_ee
-@ e6
-
 Script_branch_e6: @ e6
 	ApplyMovement 0xff, Movement_248
 Script_branch_ee: @ ee
@@ -84,11 +82,9 @@ Script_branch_ee: @ ee
 	WaitMovement
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x4a
-	CompareLastResultJump 0x1, Script_branch_12f
+	CompareLastResultJump EQUAL, Script_branch_12f
 	ApplyMovement 0xff, Movement_254
 	Jump Script_branch_13f
-@ 12f
-
 Script_branch_12f: @ 12f
 	ApplyMovement 0x80, Movement_2e8
 	ApplyMovement 0xff, Movement_264
@@ -97,12 +93,10 @@ Script_branch_13f: @ 13f
 	WaitMovement
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x4a
-	CompareLastResultJump 0x1, Script_branch_16d
+	CompareLastResultJump EQUAL, Script_branch_16d
 	ApplyMovement 0x80, Movement_2f8
 	ApplyMovement 0xff, Movement_274
 	Jump Script_branch_17d
-@ 16d
-
 Script_branch_16d: @ 16d
 	ApplyMovement 0x80, Movement_300
 	ApplyMovement 0xff, Movement_280
@@ -118,11 +112,9 @@ Script_branch_17d: @ 17d
 	ApplyMovement 0x80, Movement_2c8
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x4a
-	CompareLastResultJump 0x1, Script_branch_1bb
+	CompareLastResultJump EQUAL, Script_branch_1bb
 	ApplyMovement 0xff, Movement_220
 	Jump Script_branch_1c3
-@ 1bb
-
 Script_branch_1bb: @ 1bb
 	ApplyMovement 0xff, Movement_234
 Script_branch_1c3: @ 1c3

@@ -16,7 +16,7 @@ Script_4: @ 12
 	If 0x4000, 0xa
 	CompareLastResultJump 0x4, Script_branch_51
 	If 0x4000, 0xa
-	CompareLastResultJump 0x0, Script_branch_63
+	CompareLastResultJump LESSER, Script_branch_63
 	End
 @ 3f
 
@@ -45,7 +45,7 @@ Script_3: @ 75
 	If 0x4000, 0xa
 	CompareLastResultJump 0x4, Script_branch_51
 	If 0x4000, 0xa
-	CompareLastResultJump 0x0, Script_branch_63
+	CompareLastResultJump LESSER, Script_branch_63
 	End
 @ a2
 

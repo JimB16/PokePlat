@@ -12,7 +12,7 @@ Script: @ 0
 Script_4: @ 12
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_2c
+	CompareLastResultJump EQUAL, Script_branch_2c
 	SetFlag 0x27f
 	SetFlag 0x280
 Script_branch_2c: @ 2c

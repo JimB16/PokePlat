@@ -16,7 +16,7 @@ Script: @ 0
 
 Script_1: @ 26
 	If 0x406b, 0x118
-	CompareLastResultJump 0x0, Script_branch_35
+	CompareLastResultJump LESSER, Script_branch_35
 	End
 @ 35
 
@@ -30,27 +30,25 @@ Script_2: @ 3d
 	LockAll
 	FacePlayer
 	If 0x406b, 0x122
-	CompareLastResultJump 0x1, Script_branch_ed
+	CompareLastResultJump EQUAL, Script_branch_ed
 	If 0x406b, 0x118
-	CompareLastResultJump 0x1, Script_branch_f8
+	CompareLastResultJump EQUAL, Script_branch_f8
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_10f
+	CompareLastResultJump LESSER, Script_branch_10f
 	Cmd_32b 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_11a
+	CompareLastResultJump EQUAL, Script_branch_11a
 	If 0x406b, 0x10e
-	CompareLastResultJump 0x1, Script_branch_ae
+	CompareLastResultJump EQUAL, Script_branch_ae
 	If 0x406b, 0x104
-	CompareLastResultJump 0x0, Script_branch_11a
+	CompareLastResultJump LESSER, Script_branch_11a
 	WaitFanfare 0x5dc
-	CmrBmpEffect 0x1
+	CameraBumpEffect 0x1
 	SetVar 0x406b, 0x10e
 	Message 0x1
 	Jump Script_branch_125
-@ ac
-
-.byte 0x2 @ 0xac
-.byte 0x0 @ 0xad
+	End
+@ ae
 
 Script_branch_ae: @ ae
 	PlayCry 0x179, 0x0
@@ -60,10 +58,10 @@ Script_branch_ae: @ ae
 	WildBattle2 0x179, 0x1e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_109
+	CompareLastResultJump EQUAL, Script_branch_109
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_f8
+	CompareLastResultJump EQUAL, Script_branch_f8
 	SetVar 0x406b, 0x122
 	ReleaseAll
 	End
@@ -72,19 +70,15 @@ Script_branch_ae: @ ae
 Script_branch_ed: @ ed
 	Message 0x3
 	Jump Script_branch_125
-@ f6
-
-.byte 0x2 @ 0xf6
-.byte 0x0 @ 0xf7
+	End
+@ f8
 
 Script_branch_f8: @ f8
 	SetVar 0x406b, 0x118
 	Message 0x3
 	Jump Script_branch_125
-@ 107
-
-.byte 0x2 @ 0x107
-.byte 0x0 @ 0x108
+	End
+@ 109
 
 Script_branch_109: @ 109
 	LostGoPc
@@ -95,18 +89,14 @@ Script_branch_109: @ 109
 Script_branch_10f: @ 10f
 	Message 0x4
 	Jump Script_branch_125
-@ 118
-
-.byte 0x2 @ 0x118
-.byte 0x0 @ 0x119
+	End
+@ 11a
 
 Script_branch_11a: @ 11a
 	Message 0x0
 	Jump Script_branch_125
-@ 123
-
-.byte 0x2 @ 0x123
-.byte 0x0 @ 0x124
+	End
+@ 125
 
 Script_branch_125: @ 125
 	WaitButton
@@ -120,70 +110,56 @@ Script_3: @ 12d
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 146
-
-.byte 0x2 @ 0x146
-.byte 0x0 @ 0x147
+	End
+@ 148
 
 Script_4: @ 148
 	SetVar 0x4002, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 161
-
-.byte 0x2 @ 0x161
-.byte 0x0 @ 0x162
+	End
+@ 163
 
 Script_5: @ 163
 	SetVar 0x4003, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 17c
-
-.byte 0x2 @ 0x17c
-.byte 0x0 @ 0x17d
+	End
+@ 17e
 
 Script_6: @ 17e
 	SetVar 0x4004, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 197
-
-.byte 0x2 @ 0x197
-.byte 0x0 @ 0x198
+	End
+@ 199
 
 Script_7: @ 199
 	SetVar 0x4005, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 1b2
-
-.byte 0x2 @ 0x1b2
-.byte 0x0 @ 0x1b3
+	End
+@ 1b4
 
 Script_8: @ 1b4
 	SetVar 0x4006, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 1cd
-
-.byte 0x2 @ 0x1cd
-.byte 0x0 @ 0x1ce
+	End
+@ 1cf
 
 Script_9: @ 1cf
 	SetVar 0x4007, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-@ 1e8
-
-.byte 0x2 @ 0x1e8
-.byte 0x0 @ 0x1e9
+	End
+@ 1ea
 
 Script_branch_1ea: @ 1ea
 	LockAll
@@ -201,9 +177,9 @@ Script_branch_20d: @ 20d
 
 Script_branch_20f: @ 20f
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_20d
+	CompareLastResultJump LESSER, Script_branch_20d
 	WaitFanfare 0x5dc
-	CmrBmpEffect 0x1
+	CameraBumpEffect 0x1
 	SetVar 0x406b, 0x10e
 	Message 0x1
 	WaitButton

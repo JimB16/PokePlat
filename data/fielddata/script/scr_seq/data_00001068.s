@@ -156,10 +156,10 @@ Script_11: @ 141
 	FacePlayer
 	Cmd_31c 0x800c, 0x1ec
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_19d
+	CompareLastResultJump EQUAL, Script_branch_19d
 	CheckPokeParty 0x800c, 0x1ec
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_19d
+	CompareLastResultJump EQUAL, Script_branch_19d
 	CheckItem 0x1d2, 0x1, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_1a8
@@ -175,18 +175,14 @@ Script_11: @ 141
 Script_branch_19d: @ 19d
 	Message 0xb
 	Jump Script_branch_1b3
-@ 1a6
-
-.byte 0x2 @ 0x1a6
-.byte 0x0 @ 0x1a7
+	End
+@ 1a8
 
 Script_branch_1a8: @ 1a8
 	Message 0xa
 	Jump Script_branch_1b3
-@ 1b1
-
-.byte 0x2 @ 0x1b1
-.byte 0x0 @ 0x1b2
+	End
+@ 1b3
 
 Script_branch_1b3: @ 1b3
 	WaitButton

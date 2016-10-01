@@ -32,10 +32,8 @@ Script_3: @ 2b
 	ShowMoney 0x14, 0x2
 	Message 0x1
 	Jump Script_branch_44
-@ 42
-
-.byte 0x2 @ 0x42
-.byte 0x0 @ 0x43
+	End
+@ 44
 
 Script_branch_44: @ 44
 	Multi2 0x1e, 0xb, 0x0, 0x1, 0x800c
@@ -46,55 +44,49 @@ Script_branch_44: @ 44
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_92
+	CompareLastResultJump EQUAL, Script_branch_92
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_bb
+	CompareLastResultJump EQUAL, Script_branch_bb
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_15d
+	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_15d
-@ 90
-
-.byte 0x2 @ 0x90
-.byte 0x0 @ 0x91
+	End
+@ 92
 
 Script_branch_92: @ 92
 	CheckMoney 0x800c, 0x1f4
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	SetVar 0x8005, 0x1
 	SetVar 0x8006, 0x1f4
 	Jump Script_branch_e4
-@ b9
-
-.byte 0x2 @ 0xb9
-.byte 0x0 @ 0xba
+	End
+@ bb
 
 Script_branch_bb: @ bb
 	CheckMoney 0x800c, 0x1770
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	SetVar 0x8005, 0xc
 	SetVar 0x8006, 0x1770
 	Jump Script_branch_e4
-@ e2
-
-.byte 0x2 @ 0xe2
-.byte 0x0 @ 0xe3
+	End
+@ e4
 
 Script_branch_e4: @ e4
 	SetVar 0x8004, 0x21
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_143
+	CompareLastResultJump EQUAL, Script_branch_143
 	Cmd_334 0x23, 0x8006
 	TakeMoneyDCare 0x8006
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644
 	If 0x8006, 0x1f4
-	CompareLastResultCall 0x1, Script_branch_139
+	CompareLastResultCall EQUAL, Script_branch_139
 	If 0x8006, 0x1770
-	CompareLastResultCall 0x1, Script_branch_13e
+	CompareLastResultCall EQUAL, Script_branch_13e
 	CallStandard 0x7e0
 	CloseMsgOnKeyPress
 	HideMoney
@@ -144,7 +136,7 @@ Script_4: @ 16a
 	LockAll
 	FacePlayer
 	CheckFlag 0x107
-	CompareLastResultJump 0x1, Script_branch_188
+	CompareLastResultJump EQUAL, Script_branch_188
 	Message 0xa
 	WaitButton
 	CloseMsgOnKeyPress

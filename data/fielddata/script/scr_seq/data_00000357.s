@@ -12,9 +12,9 @@ Script: @ 0
 Script_1: @ 12
 	SetFlag 0x9e1
 	CheckFlag 0x15e
-	CompareLastResultJump 0x0, Script_branch_2e
+	CompareLastResultJump LESSER, Script_branch_2e
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_38
+	CompareLastResultJump EQUAL, Script_branch_38
 	End
 @ 2e
 
@@ -31,11 +31,11 @@ Script_branch_38: @ 38
 Script_2: @ 42
 	SetFlag 0x9e1
 	CheckFlag 0x8e
-	CompareLastResultCall 0x1, Script_branch_69
+	CompareLastResultCall EQUAL, Script_branch_69
 	CheckFlag 0x15e
-	CompareLastResultJump 0x0, Script_branch_2e
+	CompareLastResultJump LESSER, Script_branch_2e
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_38
+	CompareLastResultJump EQUAL, Script_branch_38
 	End
 @ 69
 
@@ -58,10 +58,10 @@ Script_3: @ 77
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cd
+	CompareLastResultJump EQUAL, Script_branch_cd
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	SetFlag 0x126
 	ReleaseAll
 	End
@@ -95,7 +95,7 @@ Script_4: @ d3
 	TrainerBattle 0x198, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_144
+	CompareLastResultJump EQUAL, Script_branch_144
 	Message 0x2
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0

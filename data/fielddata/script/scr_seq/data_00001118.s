@@ -33,40 +33,36 @@ Script_4: @ 2a
 	StoreYourDecisionUnion 0x800c
 	CopyVar 0x8004, 0x800c
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_497
+	CompareLastResultJump EQUAL, Script_branch_497
 	SetUnionFunctionId 0x0
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_4ad
+	CompareLastResultJump EQUAL, Script_branch_4ad
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_53a
+	CompareLastResultJump EQUAL, Script_branch_53a
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_5af
+	CompareLastResultJump EQUAL, Script_branch_5af
 	CheckOtherDecisionUnion2 0x8004, 0x800c
 	StoreYourDecisionUnion 0x800c
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_497
+	CompareLastResultJump EQUAL, Script_branch_497
 	Message 0xc7
 	StoreOtherDecisionUnion 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_7ba
+	CompareLastResultJump EQUAL, Script_branch_7ba
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	Jump Script_branch_ba
-@ b8
-
-.byte 0x2 @ 0xb8
-.byte 0x0 @ 0xb9
+	End
+@ ba
 
 Script_branch_ba: @ ba
 	FriendBT 0x64
 	SetVarUnionMessage 0x2, 0x800c
 	Cmd_2c0 0x800c
 	Jump Script_branch_ea
-@ ce
-
-.byte 0x2 @ 0xce
-.byte 0x0 @ 0xcf
+	End
+@ d0
 
 Script_branch_d0: @ d0
 	FriendBT 0x64
@@ -74,10 +70,8 @@ Script_branch_d0: @ d0
 	SetVarUnionMessage 0x16, 0x800c
 	Message3 0x800c
 	Jump Script_branch_ea
-@ e8
-
-.byte 0x2 @ 0xe8
-.byte 0x0 @ 0xe9
+	End
+@ ea
 
 Script_branch_ea: @ ea
 	Multi 0x1f, 0x3, 0x0, 0x1, 0x800c
@@ -92,36 +86,34 @@ Script_branch_ea: @ ea
 	CloseMultiUnion
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_182
+	CompareLastResultJump EQUAL, Script_branch_182
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_334
+	CompareLastResultJump EQUAL, Script_branch_334
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_274
+	CompareLastResultJump EQUAL, Script_branch_274
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_1eb
+	CompareLastResultJump EQUAL, Script_branch_1eb
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_394
+	CompareLastResultJump EQUAL, Script_branch_394
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_3f4
+	CompareLastResultJump EQUAL, Script_branch_3f4
 	If 0x8008, 0x7
-	CompareLastResultJump 0x1, Script_branch_792
+	CompareLastResultJump EQUAL, Script_branch_792
 	CheckOtherDecisionUnion 0x0, 0x7
 	Jump Script_branch_776
-@ 180
-
-.byte 0x2 @ 0x180
-.byte 0x0 @ 0x181
+	End
+@ 182
 
 Script_branch_182: @ 182
 	CheckOtherDecisionUnion 0x0, 0x1
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_19f
+	CompareLastResultJump EQUAL, Script_branch_19f
 	Message3 0x800c
 Script_branch_19f: @ 19f
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_6a0
+	CompareLastResultJump EQUAL, Script_branch_6a0
 	OpenUnionFunction2 0x5
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
@@ -135,24 +127,22 @@ Script_branch_19f: @ 19f
 	Call Function_bb2
 	Message2 0x10
 	Jump Script_branch_d0
-@ 1e9
-
-.byte 0x2 @ 0x1e9
-.byte 0x0 @ 0x1ea
+	End
+@ 1eb
 
 Script_branch_1eb: @ 1eb
 	CheckPartyNumberUnion 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x0, Script_branch_262
+	CompareLastResultJump LESSER, Script_branch_262
 	CheckOtherDecisionUnion 0x0, 0x3
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_219
+	CompareLastResultJump EQUAL, Script_branch_219
 	Message3 0x800c
 Script_branch_219: @ 219
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_6e8
+	CompareLastResultJump EQUAL, Script_branch_6e8
 	OpenUnionFunction2 0x7
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
@@ -165,33 +155,29 @@ Script_branch_219: @ 219
 	CallEnd
 	Call Function_bb2
 	Jump Script_branch_d0
-@ 260
-
-.byte 0x2 @ 0x260
-.byte 0x0 @ 0x261
+	End
+@ 262
 
 Script_branch_262: @ 262
 	SetVarUnionMessage 0x14, 0x800c
 	Message3 0x800c
 	Jump Script_branch_d0
-@ 272
-
-.byte 0x2 @ 0x272
-.byte 0x0 @ 0x273
+	End
+@ 274
 
 Script_branch_274: @ 274
-	CheckPokeLevel 0x800c, 0x1e
+	CheckPokemonLevel 0x800c, 0x1e
 	If 0x800c, 0x2
-	CompareLastResultJump 0x0, Script_branch_322
+	CompareLastResultJump LESSER, Script_branch_322
 	CheckOtherDecisionUnion 0x0, 0x2
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2a4
+	CompareLastResultJump EQUAL, Script_branch_2a4
 	Message3 0x800c
 Script_branch_2a4: @ 2a4
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_6d0
+	CompareLastResultJump EQUAL, Script_branch_6d0
 	OpenUnionFunction2 0x6
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
@@ -209,36 +195,32 @@ Script_branch_2a4: @ 2a4
 	CloseMsgOnKeyPress
 	CheckBattleUnion 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b63
+	CompareLastResultJump EQUAL, Script_branch_b63
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_b63
+	CompareLastResultJump EQUAL, Script_branch_b63
 	Cmd_f6
 	Call Function_bb2
 	Jump Script_branch_d0
-@ 320
-
-.byte 0x2 @ 0x320
-.byte 0x0 @ 0x321
+	End
+@ 322
 
 Script_branch_322: @ 322
 	SetVarUnionMessage 0x13, 0x800c
 	Message3 0x800c
 	Jump Script_branch_d0
-@ 332
-
-.byte 0x2 @ 0x332
-.byte 0x0 @ 0x333
+	End
+@ 334
 
 Script_branch_334: @ 334
 	CheckOtherDecisionUnion 0x0, 0x4
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_351
+	CompareLastResultJump EQUAL, Script_branch_351
 	Message3 0x800c
 Script_branch_351: @ 351
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_6b8
+	CompareLastResultJump EQUAL, Script_branch_6b8
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
 	SetSaveData 0x1e
@@ -250,21 +232,19 @@ Script_branch_351: @ 351
 	CallEnd
 	Call Function_bb2
 	Jump Script_branch_476
-@ 392
-
-.byte 0x2 @ 0x392
-.byte 0x0 @ 0x393
+	End
+@ 394
 
 Script_branch_394: @ 394
 	CheckOtherDecisionUnion 0x0, 0x5
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3b1
+	CompareLastResultJump EQUAL, Script_branch_3b1
 	Message3 0x800c
 Script_branch_3b1: @ 3b1
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_718
+	CompareLastResultJump EQUAL, Script_branch_718
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
 	SetSaveData 0x1e
@@ -276,27 +256,25 @@ Script_branch_3b1: @ 3b1
 	CallEnd
 	Call Function_bb2
 	Jump Script_branch_476
-@ 3f2
-
-.byte 0x2 @ 0x3f2
-.byte 0x0 @ 0x3f3
+	End
+@ 3f4
 
 Script_branch_3f4: @ 3f4
 	CheckEggUnion 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_741
+	CompareLastResultJump EQUAL, Script_branch_741
 	CheckVersionGame 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_753
+	CompareLastResultJump EQUAL, Script_branch_753
 	CheckOtherDecisionUnion 0x0, 0x6
 	SetVarUnionMessage 0x9, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_433
+	CompareLastResultJump EQUAL, Script_branch_433
 	Message3 0x800c
 Script_branch_433: @ 433
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_75e
+	CompareLastResultJump EQUAL, Script_branch_75e
 	SetVarUnionMessage 0x1, 0x800c
 	Message3 0x800c
 	SetSaveData 0x1e
@@ -308,10 +286,8 @@ Script_branch_433: @ 433
 	CallEnd
 	Call Function_bb2
 	Jump Script_branch_476
-@ 474
-
-.byte 0x2 @ 0x474
-.byte 0x0 @ 0x475
+	End
+@ 476
 
 Script_branch_476: @ 476
 	ReleaseAll
@@ -357,13 +333,13 @@ Script_branch_4ad: @ 4ad
 	Message3 0x800c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_522
+	CompareLastResultJump EQUAL, Script_branch_522
 	CheckOtherDecisionUnion2 0x8004, 0x800c
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	StoreOtherDecisionUnion 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	SetVarUnionMessage 0xd, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
@@ -374,10 +350,8 @@ Script_branch_4ad: @ 4ad
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	Jump Script_branch_476
-@ 520
-
-.byte 0x2 @ 0x520
-.byte 0x0 @ 0x521
+	End
+@ 522
 
 Script_branch_522: @ 522
 	SetVarUnionMessage 0x10, 0x800c
@@ -395,13 +369,13 @@ Script_branch_53a: @ 53a
 	Message3 0x800c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_646
+	CompareLastResultJump EQUAL, Script_branch_646
 	CheckOtherDecisionUnion2 0x8004, 0x800c
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	StoreOtherDecisionUnion 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	SetVarUnionMessage 0xe, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
@@ -412,10 +386,8 @@ Script_branch_53a: @ 53a
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	Jump Script_branch_476
-@ 5ad
-
-.byte 0x2 @ 0x5ad
-.byte 0x0 @ 0x5ae
+	End
+@ 5af
 
 Script_branch_5af: @ 5af
 	StartUnion
@@ -423,19 +395,19 @@ Script_branch_5af: @ 5af
 	Message3 0x800c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_65e
+	CompareLastResultJump EQUAL, Script_branch_65e
 	CheckEggUnion 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_68a
+	CompareLastResultJump EQUAL, Script_branch_68a
 	StorePokeNumParty 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_674
+	CompareLastResultJump EQUAL, Script_branch_674
 	CheckOtherDecisionUnion2 0x8004, 0x800c
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	StoreOtherDecisionUnion 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_486
+	CompareLastResultJump EQUAL, Script_branch_486
 	SetVarUnionMessage 0xf, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
@@ -446,10 +418,8 @@ Script_branch_5af: @ 5af
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	Jump Script_branch_476
-@ 644
-
-.byte 0x2 @ 0x644
-.byte 0x0 @ 0x645
+	End
+@ 646
 
 Script_branch_646: @ 646
 	SetVarUnionMessage 0x11, 0x800c
@@ -493,40 +463,33 @@ Script_branch_6a0: @ 6a0
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 6b6
-
-.byte 0x2 @ 0x6b6
-.byte 0x0 @ 0x6b7
+	End
+@ 6b8
 
 Script_branch_6b8: @ 6b8
 	SetVarUnionMessage 0x4, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 6ce
-
-.byte 0x2 @ 0x6ce
-.byte 0x0 @ 0x6cf
+	End
+@ 6d0
 
 Script_branch_6d0: @ 6d0
 	SetVarUnionMessage 0x5, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 6e6
-
-.byte 0x2 @ 0x6e6
-.byte 0x0 @ 0x6e7
+	End
+@ 6e8
 
 Script_branch_6e8: @ 6e8
 	SetVarUnionMessage 0x6, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 6fe
+	End
+@ 700
 
-.byte 0x2 @ 0x6fe
-.byte 0x0 @ 0x6ff
 .byte 0x3f @ 0x700
 .byte 0x1 @ 0x701
 .byte 0x7 @ 0x702
@@ -557,46 +520,36 @@ Script_branch_718: @ 718
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 72e
-
-.byte 0x2 @ 0x72e
-.byte 0x0 @ 0x72f
+	End
+@ 730
 
 Script_branch_730: @ 730
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x24
 	Jump Script_branch_b9a
-@ 73f
-
-.byte 0x2 @ 0x73f
-.byte 0x0 @ 0x740
+	End
+@ 741
 
 Script_branch_741: @ 741
 	SetVarUnionMessage 0x15, 0x800c
 	Message3 0x800c
 	Jump Script_branch_d0
-@ 751
-
-.byte 0x2 @ 0x751
-.byte 0x0 @ 0x752
+	End
+@ 753
 
 Script_branch_753: @ 753
 	Message 0xda
 	Jump Script_branch_d0
-@ 75c
-
-.byte 0x2 @ 0x75c
-.byte 0x0 @ 0x75d
+	End
+@ 75e
 
 Script_branch_75e: @ 75e
 	SetVarUnionMessage 0x8, 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
 	Jump Script_branch_7ae
-@ 774
-
-.byte 0x2 @ 0x774
-.byte 0x0 @ 0x775
+	End
+@ 776
 
 Script_branch_776: @ 776
 	SetVarUnionMessage 0x17, 0x800c
@@ -636,10 +589,8 @@ Script_branch_7ba: @ 7ba
 	Cmd_2c0 0x7
 	SetSaveData 0x1e
 	Jump Script_branch_7d4
-@ 7d2
-
-.byte 0x2 @ 0x7d2
-.byte 0x0 @ 0x7d3
+	End
+@ 7d4
 
 Script_branch_7d4: @ 7d4
 	Message 0x9
@@ -648,21 +599,21 @@ Script_branch_7d4: @ 7d4
 	StoreOtherDecisionUnion2 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_853
+	CompareLastResultJump EQUAL, Script_branch_853
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_aed
+	CompareLastResultJump EQUAL, Script_branch_aed
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_95c
+	CompareLastResultJump EQUAL, Script_branch_95c
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_8c7
+	CompareLastResultJump EQUAL, Script_branch_8c7
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_a28
+	CompareLastResultJump EQUAL, Script_branch_a28
 	If 0x8008, 0x6
-	CompareLastResultJump 0x1, Script_branch_a82
+	CompareLastResultJump EQUAL, Script_branch_a82
 	If 0x8008, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	If 0x8008, 0x8
-	CompareLastResultJump 0x1, Script_branch_b89
+	CompareLastResultJump EQUAL, Script_branch_b89
 	End
 @ 853
 
@@ -670,12 +621,12 @@ Script_branch_853: @ 853
 	Message 0xb
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_8b6
+	CompareLastResultJump EQUAL, Script_branch_8b6
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b58
+	CompareLastResultJump EQUAL, Script_branch_b58
 	Cmd_2af 0x800c
 	Message3 0x800c
 	Return2 0x1e, 0x800c
@@ -688,33 +639,29 @@ Script_branch_853: @ 853
 	CallEnd
 	Call Function_bb2
 	Jump Script_branch_7d4
-@ 8b4
-
-.byte 0x2 @ 0x8b4
-.byte 0x0 @ 0x8b5
+	End
+@ 8b6
 
 Script_branch_8b6: @ 8b6
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x11
 	Jump Script_branch_b9a
-@ 8c5
-
-.byte 0x2 @ 0x8c5
-.byte 0x0 @ 0x8c6
+	End
+@ 8c7
 
 Script_branch_8c7: @ 8c7
 	Message 0x1a
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_93a
+	CompareLastResultJump EQUAL, Script_branch_93a
 	CheckPartyNumberUnion 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x0, Script_branch_94b
+	CompareLastResultJump LESSER, Script_branch_94b
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	Message 0x1b
 	Return2 0x1e, 0x800c
 	FriendBT 0x3
@@ -727,42 +674,36 @@ Script_branch_8c7: @ 8c7
 	OpenUnionFunction2 0xb
 	Call Function_bb2
 	Jump Script_branch_7d4
-@ 938
-
-.byte 0x2 @ 0x938
-.byte 0x0 @ 0x939
+	End
+@ 93a
 
 Script_branch_93a: @ 93a
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x14
 	Jump Script_branch_b9a
-@ 949
-
-.byte 0x2 @ 0x949
-.byte 0x0 @ 0x94a
+	End
+@ 94b
 
 Script_branch_94b: @ 94b
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x1d
 	Jump Script_branch_b9a
-@ 95a
-
-.byte 0x2 @ 0x95a
-.byte 0x0 @ 0x95b
+	End
+@ 95c
 
 Script_branch_95c: @ 95c
 	Message 0x15
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a06
-	CheckPokeLevel 0x800c, 0x1e
+	CompareLastResultJump EQUAL, Script_branch_a06
+	CheckPokemonLevel 0x800c, 0x1e
 	If 0x800c, 0x2
-	CompareLastResultJump 0x0, Script_branch_a17
+	CompareLastResultJump LESSER, Script_branch_a17
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	Message 0x16
 	Return2 0x1e, 0x800c
 	FriendBT 0x2
@@ -779,46 +720,40 @@ Script_branch_95c: @ 95c
 	CloseMsgOnKeyPress
 	CheckBattleUnion 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b63
+	CompareLastResultJump EQUAL, Script_branch_b63
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_b63
+	CompareLastResultJump EQUAL, Script_branch_b63
 	Cmd_f6
 	OpenUnionFunction2 0xb
 	Call Function_bb2
 	Jump Script_branch_7d4
-@ a04
-
-.byte 0x2 @ 0xa04
-.byte 0x0 @ 0xa05
+	End
+@ a06
 
 Script_branch_a06: @ a06
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x17
 	Jump Script_branch_b9a
-@ a15
-
-.byte 0x2 @ 0xa15
-.byte 0x0 @ 0xa16
+	End
+@ a17
 
 Script_branch_a17: @ a17
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x18
 	Jump Script_branch_b9a
-@ a26
-
-.byte 0x2 @ 0xa26
-.byte 0x0 @ 0xa27
+	End
+@ a28
 
 Script_branch_a28: @ a28
 	Message 0x1e
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a06
+	CompareLastResultJump EQUAL, Script_branch_a06
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	Message 0x1f
 	Return2 0x1e, 0x800c
 	FriendBT 0x5
@@ -837,15 +772,15 @@ Script_branch_a82: @ a82
 	Message 0x21
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a06
+	CompareLastResultJump EQUAL, Script_branch_a06
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	CheckEggUnion 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_730
+	CompareLastResultJump EQUAL, Script_branch_730
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	Message 0x22
 	Return2 0x1e, 0x800c
 	FriendBT 0x6
@@ -864,12 +799,12 @@ Script_branch_aed: @ aed
 	Message 0x12
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b47
+	CompareLastResultJump EQUAL, Script_branch_b47
 	CheckOtherDecisionUnion 0x1, 0x0
 	CloseMsgOnKeyPress
 	StoreYourDecisionUnion2 0x800c
 	If 0x800c, 0x7
-	CompareLastResultJump 0x1, Script_branch_b78
+	CompareLastResultJump EQUAL, Script_branch_b78
 	Message 0x13
 	Return2 0x1e, 0x800c
 	FriendBT 0x4
@@ -888,46 +823,36 @@ Script_branch_b47: @ b47
 	CheckOtherDecisionUnion 0x1, 0x1
 	Message 0x1c
 	Jump Script_branch_b9a
-@ b56
-
-.byte 0x2 @ 0xb56
-.byte 0x0 @ 0xb57
+	End
+@ b58
 
 Script_branch_b58: @ b58
 	Message 0x23
 	Jump Script_branch_b9a
-@ b61
-
-.byte 0x2 @ 0xb61
-.byte 0x0 @ 0xb62
+	End
+@ b63
 
 Script_branch_b63: @ b63
 	OpenUnionFunction2 0xb
 	Message 0x19
 	Return2 0x1e, 0x800c
 	Jump Script_branch_b9a
-@ b76
-
-.byte 0x2 @ 0xb76
-.byte 0x0 @ 0xb77
+	End
+@ b78
 
 Script_branch_b78: @ b78
 	Message 0x8
 	Return2 0x1e, 0x800c
 	Jump Script_branch_b9a
-@ b87
-
-.byte 0x2 @ 0xb87
-.byte 0x0 @ 0xb88
+	End
+@ b89
 
 Script_branch_b89: @ b89
 	Message 0xa
 	Return2 0x1e, 0x800c
 	Jump Script_branch_b9a
-@ b98
-
-.byte 0x2 @ 0xb98
-.byte 0x0 @ 0xb99
+	End
+@ b9a
 
 Script_branch_b9a: @ b9a
 	FriendBT 0x65
@@ -972,27 +897,23 @@ Script_7: @ bd3
 	LockAll
 	FacePlayer
 	Jump Script_branch_497
-@ be1
-
-.byte 0x2 @ 0xbe1
-.byte 0x0 @ 0xbe2
+	End
+@ be3
 
 Script_8: @ be3
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
 	Jump Script_branch_bf3
-@ bf1
-
-.byte 0x2 @ 0xbf1
-.byte 0x0 @ 0xbf2
+	End
+@ bf3
 
 Script_branch_bf3: @ bf3
 	StartUnion
 	CheckFlag 0xbb
-	CompareLastResultCall 0x1, Script_branch_c50
+	CompareLastResultCall EQUAL, Script_branch_c50
 	CheckFlag 0xbb
-	CompareLastResultCall 0x0, Script_branch_c55
+	CompareLastResultCall LESSER, Script_branch_c55
 	SetFlag 0xbb
 	Multi 0x1f, 0xb, 0x0, 0x1, 0x800c
 	Cmd_33a 0x1
@@ -1002,14 +923,12 @@ Script_branch_bf3: @ bf3
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_c72
+	CompareLastResultJump EQUAL, Script_branch_c72
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_c5a
+	CompareLastResultJump EQUAL, Script_branch_c5a
 	Jump Script_branch_c6a
-@ c4e
-
-.byte 0x2 @ 0xc4e
-.byte 0x0 @ 0xc4f
+	End
+@ c50
 
 Script_branch_c50: @ c50
 	Message 0x9e
@@ -1025,10 +944,8 @@ Script_branch_c5a: @ c5a
 	Cmd_138 0x800c
 	Message3 0x800c
 	Jump Script_branch_bf3
-@ c68
-
-.byte 0x2 @ 0xc68
-.byte 0x0 @ 0xc69
+	End
+@ c6a
 
 Script_branch_c6a: @ c6a
 	LinkClosed
@@ -1051,70 +968,57 @@ Script_branch_c72: @ c72
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_cfa
+	CompareLastResultJump EQUAL, Script_branch_cfa
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_d05
+	CompareLastResultJump EQUAL, Script_branch_d05
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_d10
+	CompareLastResultJump EQUAL, Script_branch_d10
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_d1b
+	CompareLastResultJump EQUAL, Script_branch_d1b
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_d26
+	CompareLastResultJump EQUAL, Script_branch_d26
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_d31
+	CompareLastResultJump EQUAL, Script_branch_d31
 	Jump Script_branch_bf3
-@ cf8
-
-.byte 0x2 @ 0xcf8
-.byte 0x0 @ 0xcf9
+	End
+@ cfa
 
 Script_branch_cfa: @ cfa
 	Message 0xa0
 	Jump Script_branch_c72
-@ d03
-
-.byte 0x2 @ 0xd03
-.byte 0x0 @ 0xd04
+	End
+@ d05
 
 Script_branch_d05: @ d05
 	Message 0xa1
 	Jump Script_branch_c72
-@ d0e
-
-.byte 0x2 @ 0xd0e
-.byte 0x0 @ 0xd0f
+	End
+@ d10
 
 Script_branch_d10: @ d10
 	Message 0xa2
 	Jump Script_branch_c72
-@ d19
-
-.byte 0x2 @ 0xd19
-.byte 0x0 @ 0xd1a
+	End
+@ d1b
 
 Script_branch_d1b: @ d1b
 	Message 0xa4
 	Jump Script_branch_c72
-@ d24
-
-.byte 0x2 @ 0xd24
-.byte 0x0 @ 0xd25
+	End
+@ d26
 
 Script_branch_d26: @ d26
 	Message 0xa5
 	Jump Script_branch_c72
-@ d2f
-
-.byte 0x2 @ 0xd2f
-.byte 0x0 @ 0xd30
+	End
+@ d31
 
 Script_branch_d31: @ d31
 	Message 0xa3
 	Jump Script_branch_c72
-@ d3a
+	End
+@ d3c
 
-.byte 0x2 @ 0xd3a
-.byte 0x0 @ 0xd3b
 .byte 0x16 @ 0xd3c
 .byte 0x0 @ 0xd3d
 .byte 0xb1 @ 0xd3e

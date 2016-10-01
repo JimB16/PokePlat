@@ -15,7 +15,7 @@ Script_1: @ 16
 	LockAll
 	FacePlayer
 	CheckFlag 0xa8
-	CompareLastResultJump 0x1, Script_branch_34
+	CompareLastResultJump EQUAL, Script_branch_34
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -35,7 +35,7 @@ Script_2: @ 3f
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xa8
-	CompareLastResultJump 0x1, Script_branch_68
+	CompareLastResultJump EQUAL, Script_branch_68
 	Message 0x2
 	FacePlayer
 	Message 0x3
@@ -91,20 +91,18 @@ Script_5: @ a2
 	Message 0x7
 	CheckIdPlayer 0x8000, 0x5
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_fc
+	CompareLastResultCall EQUAL, Script_branch_fc
 	If 0x8000, 0x1
-	CompareLastResultCall 0x1, Script_branch_101
+	CompareLastResultCall EQUAL, Script_branch_101
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_106
+	CompareLastResultCall EQUAL, Script_branch_106
 	If 0x8000, 0x3
-	CompareLastResultCall 0x1, Script_branch_10b
+	CompareLastResultCall EQUAL, Script_branch_10b
 	If 0x8000, 0x4
-	CompareLastResultCall 0x1, Script_branch_110
+	CompareLastResultCall EQUAL, Script_branch_110
 	Jump Script_branch_115
-@ fa
-
-.byte 0x2 @ 0xfa
-.byte 0x0 @ 0xfb
+	End
+@ fc
 
 Script_branch_fc: @ fc
 	Message 0x9
@@ -136,11 +134,11 @@ Script_branch_115: @ 115
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x8000
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_155
+	CompareLastResultCall EQUAL, Script_branch_155
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_169
+	CompareLastResultCall EQUAL, Script_branch_169
 	If 0x8000, 0x3
-	CompareLastResultCall 0x1, Script_branch_175
+	CompareLastResultCall EQUAL, Script_branch_175
 	PlayFanfare 0x603
 	RemovePeople 0x2
 	WaitFanfare 0x603

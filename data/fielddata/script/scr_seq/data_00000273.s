@@ -84,7 +84,7 @@ Script_4: @ b9
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d9
+	CompareLastResultJump EQUAL, Script_branch_d9
 	ReleaseAll
 	End
 @ d9
@@ -102,7 +102,7 @@ Script_5: @ e9
 	Call Function_170
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_114
+	CompareLastResultJump EQUAL, Script_branch_114
 	SetVar 0x40f3, 0x2
 	ReleaseAll
 	Call Function_1c0
@@ -131,7 +131,7 @@ Script_6: @ 12c
 	Call Function_170
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_159
+	CompareLastResultJump EQUAL, Script_branch_159
 	SetVar 0x40f3, 0x2
 	ReleaseAll
 	Call Function_1c0
@@ -156,10 +156,10 @@ Function_170: @ 170
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1b5
+	CompareLastResultJump EQUAL, Script_branch_1b5
 	CheckGender 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1a5
+	CompareLastResultJump EQUAL, Script_branch_1a5
 	SetVarHero 0x0
 	Message 0x2
 	WaitButton

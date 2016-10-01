@@ -12,9 +12,9 @@ Script: @ 0
 Script_4: @ 12
 	Cmd_32b 0x4004
 	If 0x4004, 0x0
-	CompareLastResultJump 0x1, Script_branch_61
+	CompareLastResultJump EQUAL, Script_branch_61
 	If 0x4004, 0x1
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	End
 @ 32
 
@@ -24,9 +24,9 @@ Script_1: @ 32
 	CompareLastResultCall 0x5, Script_branch_79
 	Cmd_32b 0x4004
 	If 0x4004, 0x0
-	CompareLastResultJump 0x1, Script_branch_61
+	CompareLastResultJump EQUAL, Script_branch_61
 	If 0x4004, 0x1
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	End
 @ 61
 

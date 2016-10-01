@@ -12,7 +12,7 @@ Script: @ 0
 
 Script_1: @ 16
 	If 0x40d9, 0x0
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	SetFlag 0x1cb
 	CallBTowerFunctions 0x37, 0x0, 0x4000
 	CopyVar 0x4020, 0x4000
@@ -23,7 +23,7 @@ Script_branch_35: @ 35
 Script_5: @ 37
 	RemovePeople2 0xff
 	If 0x40d9, 0x3
-	CompareLastResultJump 0x1, Script_branch_4a
+	CompareLastResultJump EQUAL, Script_branch_4a
 	End
 @ 4a
 
@@ -56,9 +56,9 @@ Script_branch_7d: @ 7d
 	CallBTowerFunctions 0x2b, 0x0, 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_d9
+	CompareLastResultJump EQUAL, Script_branch_d9
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_d9
+	CompareLastResultJump EQUAL, Script_branch_d9
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	Warp 0x146, 0x0, 0xb, 0x6, 0x0
@@ -83,27 +83,23 @@ Script_2: @ 101
 	SetVar 0x40d9, 0x3
 	CallBTowerFunctions 0x64, 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_7d
+	CompareLastResultJump EQUAL, Script_branch_7d
 	Call Function_43c
 	Jump Script_branch_201
-@ 12a
-
-.byte 0x2 @ 0x12a
-.byte 0x0 @ 0x12b
+	End
+@ 12c
 
 Script_3: @ 12c
 	LockAll
 	SetVar 0x40d9, 0x3
 	CallBTowerFunctions 0x64, 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_7d
+	CompareLastResultJump EQUAL, Script_branch_7d
 	Call Function_43c
 	Call Function_448
 	Jump Script_branch_2f7
-@ 15b
-
-.byte 0x2 @ 0x15b
-.byte 0x0 @ 0x15c
+	End
+@ 15d
 
 Function_15d: @ 15d
 	CallBTowerFunctions 0x28, 0x0, 0x0
@@ -121,18 +117,14 @@ Function_15d: @ 15d
 Script_branch_18c: @ 18c
 	CallBTowerFunctions 0x25, 0x0, 0x0
 	Jump Script_branch_7d
-@ 19a
-
-.byte 0x2 @ 0x19a
-.byte 0x0 @ 0x19b
+	End
+@ 19c
 
 Script_branch_19c: @ 19c
 	CallBTowerFunctions 0x26, 0x0, 0x0
 	Jump Script_branch_7d
-@ 1aa
-
-.byte 0x2 @ 0x1aa
-.byte 0x0 @ 0x1ab
+	End
+@ 1ac
 
 Script_branch_1ac: @ 1ac
 	SetVar 0x40d8, 0x2
@@ -153,10 +145,8 @@ Script_branch_1ac: @ 1ac
 
 Script_branch_1e7: @ 1e7
 	Jump Script_branch_18c
-@ 1ed
-
-.byte 0x2 @ 0x1ed
-.byte 0x0 @ 0x1ee
+	End
+@ 1ef
 
 Function_1ef: @ 1ef
 	CallBTowerFunctions 0x22, 0x0, 0x800c
@@ -167,18 +157,16 @@ Function_1ef: @ 1ef
 Script_branch_201: @ 201
 	Call Function_15d
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_18c
+	CompareLastResultJump EQUAL, Script_branch_18c
 	Call Function_1ef
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_19c
+	CompareLastResultJump EQUAL, Script_branch_19c
 	Call Function_492
 	Call Function_4a6
 	Call Function_70
 	Jump Script_branch_2f7
-@ 23f
-
-.byte 0x2 @ 0x23f
-.byte 0x0 @ 0x240
+	End
+@ 241
 
 Script_branch_241: @ 241
 	CallBTowerFunctions 0x21, 0x0, 0x8004
@@ -193,48 +181,40 @@ Script_branch_241: @ 241
 	CloseMsgOnKeyPress
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_2ad
+	CompareLastResultJump EQUAL, Script_branch_2ad
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_2bb
+	CompareLastResultJump EQUAL, Script_branch_2bb
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_2d9
+	CompareLastResultJump EQUAL, Script_branch_2d9
 	Jump Script_branch_2ad
-@ 2ab
-
-.byte 0x2 @ 0x2ab
-.byte 0x0 @ 0x2ac
+	End
+@ 2ad
 
 Script_branch_2ad: @ 2ad
 	Call Function_4ba
 	Jump Script_branch_201
-@ 2b9
-
-.byte 0x2 @ 0x2b9
-.byte 0x0 @ 0x2ba
+	End
+@ 2bb
 
 Script_branch_2bb: @ 2bb
 	Message 0x2
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ac
+	CompareLastResultJump EQUAL, Script_branch_1ac
 	Jump Script_branch_241
-@ 2d7
-
-.byte 0x2 @ 0x2d7
-.byte 0x0 @ 0x2d8
+	End
+@ 2d9
 
 Script_branch_2d9: @ 2d9
 	Message 0x3
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1e7
+	CompareLastResultJump EQUAL, Script_branch_1e7
 	Jump Script_branch_241
-@ 2f5
-
-.byte 0x2 @ 0x2f5
-.byte 0x0 @ 0x2f6
+	End
+@ 2f7
 
 Script_branch_2f7: @ 2f7
 	CallBTowerFunctions 0x2b, 0x0, 0x800c
@@ -242,14 +222,12 @@ Script_branch_2f7: @ 2f7
 	CompareLastResultJump 0x5, Script_branch_241
 	CallBTowerFunctions 0x24, 0x0, 0x800c
 	If 0x800c, 0x14
-	CompareLastResultJump 0x1, Script_branch_336
+	CompareLastResultJump EQUAL, Script_branch_336
 	If 0x800c, 0x30
-	CompareLastResultJump 0x1, Script_branch_336
+	CompareLastResultJump EQUAL, Script_branch_336
 	Jump Script_branch_241
-@ 334
-
-.byte 0x2 @ 0x334
-.byte 0x0 @ 0x335
+	End
+@ 336
 
 Script_branch_336: @ 336
 	Message 0xe
@@ -262,16 +240,14 @@ Script_branch_336: @ 336
 	CloseMsgOnKeyPress
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_395
+	CompareLastResultJump EQUAL, Script_branch_395
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_2bb
+	CompareLastResultJump EQUAL, Script_branch_2bb
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_2d9
+	CompareLastResultJump EQUAL, Script_branch_2d9
 	Jump Script_branch_395
-@ 393
-
-.byte 0x2 @ 0x393
-.byte 0x0 @ 0x394
+	End
+@ 395
 
 Script_branch_395: @ 395
 	Call Function_4ba
@@ -279,7 +255,7 @@ Script_branch_395: @ 395
 	Call Function_4ce
 	CallBTowerFunctions 0x24, 0x0, 0x800c
 	If 0x800c, 0x30
-	CompareLastResultJump 0x1, Script_branch_41e
+	CompareLastResultJump EQUAL, Script_branch_41e
 	SetVarHero 0x0
 	SetVariableRival 0x1
 	Message 0xf
@@ -290,37 +266,31 @@ Script_branch_3c7: @ 3c7
 	CheckTrainerLost 0x800c
 	CopyVar 0x8004, 0x800c
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_18c
+	CompareLastResultJump EQUAL, Script_branch_18c
 	CallBTowerFunctions 0x24, 0x0, 0x800c
 	If 0x800c, 0x30
-	CompareLastResultJump 0x1, Script_branch_429
+	CompareLastResultJump EQUAL, Script_branch_429
 	Message 0x11
 	CallBTowerFunctions 0x2c, 0x1, 0x0
 Script_branch_40e: @ 40e
 	CloseMsgOnKeyPress
 	Call Function_1ef
 	Jump Script_branch_19c
-@ 41c
-
-.byte 0x2 @ 0x41c
-.byte 0x0 @ 0x41d
+	End
+@ 41e
 
 Script_branch_41e: @ 41e
 	Message 0x10
 	Jump Script_branch_3c7
-@ 427
-
-.byte 0x2 @ 0x427
-.byte 0x0 @ 0x428
+	End
+@ 429
 
 Script_branch_429: @ 429
 	Message 0x12
 	CallBTowerFunctions 0x2c, 0x2, 0x0
 	Jump Script_branch_40e
-@ 43a
-
-.byte 0x2 @ 0x43a
-.byte 0x0 @ 0x43b
+	End
+@ 43c
 
 Function_43c: @ 43c
 	ApplyMovement 0x2, Movement_504

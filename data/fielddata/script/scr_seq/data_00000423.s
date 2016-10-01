@@ -22,10 +22,8 @@ Script_1: @ 1a
 	SetVar 0x8005, 0x1
 	CallStandard 0x7fc
 	Jump Script_branch_46
-@ 44
-
-.byte 0x2 @ 0x44
-.byte 0x0 @ 0x45
+	End
+@ 46
 
 Script_branch_46: @ 46
 	Message 0x2
@@ -36,14 +34,12 @@ Script_branch_46: @ 46
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_86
+	CompareLastResultJump EQUAL, Script_branch_86
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	Jump Script_branch_c6
-@ 84
-
-.byte 0x2 @ 0x84
-.byte 0x0 @ 0x85
+	End
+@ 86
 
 Script_branch_86: @ 86
 	Message 0x3
@@ -54,14 +50,12 @@ Script_branch_86: @ 86
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_86
+	CompareLastResultJump EQUAL, Script_branch_86
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	Jump Script_branch_c6
-@ c4
-
-.byte 0x2 @ 0xc4
-.byte 0x0 @ 0xc5
+	End
+@ c6
 
 Script_branch_c6: @ c6
 	SetVar 0x40d4, 0x1
@@ -91,12 +85,10 @@ Script_2: @ f4
 	Message 0x5
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_123
+	CompareLastResultJump EQUAL, Script_branch_123
 	Jump Script_branch_118
-@ 116
-
-.byte 0x2 @ 0x116
-.byte 0x0 @ 0x117
+	End
+@ 118
 
 Script_branch_118: @ 118
 	Message 0x4
@@ -115,14 +107,12 @@ Script_branch_123: @ 123
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_163
+	CompareLastResultJump EQUAL, Script_branch_163
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	Jump Script_branch_118
-@ 161
-
-.byte 0x2 @ 0x161
-.byte 0x0 @ 0x162
+	End
+@ 163
 
 Script_branch_163: @ 163
 	Message 0x3
@@ -133,14 +123,12 @@ Script_branch_163: @ 163
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_163
+	CompareLastResultJump EQUAL, Script_branch_163
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	Jump Script_branch_118
-@ 1a1
-
-.byte 0x2 @ 0x1a1
-.byte 0x0 @ 0x1a2
+	End
+@ 1a3
 
 Script_3: @ 1a3
 	PlayFanfare 0x5dc
@@ -148,12 +136,10 @@ Script_3: @ 1a3
 	FacePlayer
 	StorePokeNumParty 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_430
+	CompareLastResultJump EQUAL, Script_branch_430
 	Jump Script_branch_1c4
-@ 1c2
-
-.byte 0x2 @ 0x1c2
-.byte 0x0 @ 0x1c3
+	End
+@ 1c4
 
 Script_branch_1c4: @ 1c4
 	Message 0x7
@@ -165,53 +151,43 @@ Script_branch_1c4: @ 1c4
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_213
+	CompareLastResultJump EQUAL, Script_branch_213
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_208
+	CompareLastResultJump EQUAL, Script_branch_208
 	Jump Script_branch_26c
-@ 206
-
-.byte 0x2 @ 0x206
-.byte 0x0 @ 0x207
+	End
+@ 208
 
 Script_branch_208: @ 208
 	Message 0xd
 	Jump Script_branch_1c4
-@ 211
-
-.byte 0x2 @ 0x211
-.byte 0x0 @ 0x212
+	End
+@ 213
 
 Script_branch_213: @ 213
 	StoreActOtherFriendCode 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_22c
+	CompareLastResultJump EQUAL, Script_branch_22c
 	Jump Script_branch_277
-@ 22a
-
-.byte 0x2 @ 0x22a
-.byte 0x0 @ 0x22b
+	End
+@ 22c
 
 Script_branch_22c: @ 22c
 	StoreActHeroFriendCode 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_261
+	CompareLastResultJump EQUAL, Script_branch_261
 	Jump Script_branch_245
-@ 243
-
-.byte 0x2 @ 0x243
-.byte 0x0 @ 0x244
+	End
+@ 245
 
 Script_branch_245: @ 245
 	Message 0xb
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_277
+	CompareLastResultJump EQUAL, Script_branch_277
 	Jump Script_branch_26c
-@ 25f
-
-.byte 0x2 @ 0x25f
-.byte 0x0 @ 0x260
+	End
+@ 261
 
 Script_branch_261: @ 261
 	Message 0xc
@@ -232,17 +208,15 @@ Script_branch_26c: @ 26c
 Script_branch_277: @ 277
 	Cmd_31d 0x800c
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_2a9
+	CompareLastResultJump EQUAL, Script_branch_2a9
 	HealPokemon
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2af
+	CompareLastResultJump EQUAL, Script_branch_2af
 	Jump Script_branch_26c
-@ 2a7
-
-.byte 0x2 @ 0x2a7
-.byte 0x0 @ 0x2a8
+	End
+@ 2a9
 
 Script_branch_2a9: @ 2a9
 	CallStandard 0x809
@@ -256,10 +230,8 @@ Script_branch_2af: @ 2af
 	ApplyMovement 0xff, Movement_3b8
 	WaitMovement
 	Jump Script_branch_2cc
-@ 2ca
-
-.byte 0x2 @ 0x2ca
-.byte 0x0 @ 0x2cb
+	End
+@ 2cc
 
 Script_branch_2cc: @ 2cc
 	PrepareDoorAnimation 0x0, 0x0, 0x9, 0x5, 0x4d
@@ -275,10 +247,8 @@ Script_branch_2cc: @ 2cc
 	WaitMovement
 	Call Function_328
 	Jump Script_branch_333
-@ 31e
-
-.byte 0x2 @ 0x31e
-.byte 0x0 @ 0x31f
+	End
+@ 320
 
 Function_320: @ 320
 	OpenDoor 0x4d
@@ -299,11 +269,9 @@ Script_branch_333: @ 333
 	PreWfc
 	StoreActOtherFriendCode 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_35a
+	CompareLastResultJump EQUAL, Script_branch_35a
 	Wfc_
 	Jump Script_branch_35c
-@ 35a
-
 Script_branch_35a: @ 35a
 	Wfc_
 Script_branch_35c: @ 35c
@@ -420,23 +388,19 @@ Script_5: @ 48e
 	FacePlayer
 	Cmd_323 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4bc
+	CompareLastResultJump EQUAL, Script_branch_4bc
 	CheckEffectHm 0x405c
 	CopyVar 0x405d, 0x800d
 	Message 0x11
 	Jump Script_branch_4c7
-@ 4ba
-
-.byte 0x2 @ 0x4ba
-.byte 0x0 @ 0x4bb
+	End
+@ 4bc
 
 Script_branch_4bc: @ 4bc
 	Message 0x19
 	Jump Script_branch_513
-@ 4c5
-
-.byte 0x2 @ 0x4c5
-.byte 0x0 @ 0x4c6
+	End
+@ 4c7
 
 Script_branch_4c7: @ 4c7
 	Multi2 0x1f, 0xb, 0x0, 0x1, 0x800c
@@ -447,22 +411,18 @@ Script_branch_4c7: @ 4c7
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_526
+	CompareLastResultJump EQUAL, Script_branch_526
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_51b
+	CompareLastResultJump EQUAL, Script_branch_51b
 	Jump Script_branch_508
-@ 506
-
-.byte 0x2 @ 0x506
-.byte 0x0 @ 0x507
+	End
+@ 508
 
 Script_branch_508: @ 508
 	Message 0x14
 	Jump Script_branch_513
-@ 511
-
-.byte 0x2 @ 0x511
-.byte 0x0 @ 0x512
+	End
+@ 513
 
 Script_branch_513: @ 513
 	WaitButton
@@ -474,17 +434,15 @@ Script_branch_513: @ 513
 Script_branch_51b: @ 51b
 	Message 0x15
 	Jump Script_branch_4c7
-@ 524
-
-.byte 0x2 @ 0x524
-.byte 0x0 @ 0x525
+	End
+@ 526
 
 Script_branch_526: @ 526
 	HealPokemon
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_508
+	CompareLastResultJump EQUAL, Script_branch_508
 	Message 0x13
 	CloseMsgOnKeyPress
 	ApplyMovement 0xff, Movement_3b8

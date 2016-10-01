@@ -20,9 +20,9 @@ Script: @ 0
 Script_1: @ 32
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_52
+	CompareLastResultJump EQUAL, Script_branch_52
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_5a
+	CompareLastResultJump EQUAL, Script_branch_5a
 	End
 @ 52
 
@@ -79,30 +79,24 @@ Script_2: @ 62
 	Message 0x8
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_116
+	CompareLastResultJump EQUAL, Script_branch_116
 	Jump Script_branch_124
-@ 114
-
-.byte 0x2 @ 0x114
-.byte 0x0 @ 0x115
+	End
+@ 116
 
 Script_branch_116: @ 116
 	SetVarHero 0x0
 	Message 0x9
 	Jump Script_branch_132
-@ 122
-
-.byte 0x2 @ 0x122
-.byte 0x0 @ 0x123
+	End
+@ 124
 
 Script_branch_124: @ 124
 	SetVarHero 0x0
 	Message 0xa
 	Jump Script_branch_132
-@ 130
-
-.byte 0x2 @ 0x130
-.byte 0x0 @ 0x131
+	End
+@ 132
 
 Script_branch_132: @ 132
 	Message 0xb
@@ -112,32 +106,26 @@ Script_branch_132: @ 132
 	WaitMovement
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_162
+	CompareLastResultJump EQUAL, Script_branch_162
 	Jump Script_branch_173
-@ 160
-
-.byte 0x2 @ 0x160
-.byte 0x0 @ 0x161
+	End
+@ 162
 
 Script_branch_162: @ 162
 	Message 0xc
 	SetVarAlter 0x0
 	Message 0xd
 	Jump Script_branch_184
-@ 171
-
-.byte 0x2 @ 0x171
-.byte 0x0 @ 0x172
+	End
+@ 173
 
 Script_branch_173: @ 173
 	Message 0xe
 	SetVarAlter 0x0
 	Message 0xf
 	Jump Script_branch_184
-@ 182
-
-.byte 0x2 @ 0x182
-.byte 0x0 @ 0x183
+	End
+@ 184
 
 Script_branch_184: @ 184
 	CloseMsgOnKeyPress
@@ -157,7 +145,7 @@ Script_branch_184: @ 184
 	Message 0x12
 	WaitFanfare 0x5dc
 	Message2 0x13
-	CmrBmpEffect 0x1
+	CameraBumpEffect 0x1
 	Message 0x14
 	SetVariableRival 0x0
 	Message 0x15
@@ -367,7 +355,7 @@ Script_3: @ 3e8
 	LockAll
 	FacePlayer
 	CheckFlag 0xa8
-	CompareLastResultJump 0x1, Script_branch_406
+	CompareLastResultJump EQUAL, Script_branch_406
 	Message 0x1a
 	WaitButton
 	CloseMsgOnKeyPress
@@ -388,7 +376,7 @@ Script_4: @ 411
 	LockAll
 	FacePlayer
 	CheckFlag 0xa8
-	CompareLastResultJump 0x1, Script_branch_42f
+	CompareLastResultJump EQUAL, Script_branch_42f
 	Message 0x1c
 	WaitButton
 	CloseMsgOnKeyPress
@@ -410,9 +398,9 @@ Script_5: @ 43a
 	Message 0x1e
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_471
+	CompareLastResultJump EQUAL, Script_branch_471
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_463
+	CompareLastResultJump EQUAL, Script_branch_463
 	End
 @ 463
 
@@ -439,9 +427,9 @@ Script_6: @ 47c
 	Message 0x21
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4b3
+	CompareLastResultJump EQUAL, Script_branch_4b3
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4a5
+	CompareLastResultJump EQUAL, Script_branch_4a5
 	End
 @ 4a5
 
@@ -468,9 +456,9 @@ Script_7: @ 4be
 	Message 0x24
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4f5
+	CompareLastResultJump EQUAL, Script_branch_4f5
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4e7
+	CompareLastResultJump EQUAL, Script_branch_4e7
 	End
 @ 4e7
 
@@ -497,9 +485,9 @@ Script_8: @ 500
 	Message 0x27
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_537
+	CompareLastResultJump EQUAL, Script_branch_537
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_529
+	CompareLastResultJump EQUAL, Script_branch_529
 	End
 @ 529
 
@@ -516,11 +504,11 @@ Script_branch_537: @ 537
 	Message 0x29
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_529
+	CompareLastResultJump EQUAL, Script_branch_529
 	Message 0x2a
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_529
+	CompareLastResultJump EQUAL, Script_branch_529
 	Message 0x2b
 	WaitButton
 	CloseMsgOnKeyPress
@@ -534,9 +522,9 @@ Script_9: @ 56a
 	Message 0x2c
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_5a1
+	CompareLastResultJump EQUAL, Script_branch_5a1
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_593
+	CompareLastResultJump EQUAL, Script_branch_593
 	End
 @ 593
 
@@ -553,11 +541,11 @@ Script_branch_5a1: @ 5a1
 	Message 0x2e
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_593
+	CompareLastResultJump EQUAL, Script_branch_593
 	Message 0x2f
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_593
+	CompareLastResultJump EQUAL, Script_branch_593
 	Message 0x30
 	WaitButton
 	CloseMsgOnKeyPress
@@ -571,9 +559,9 @@ Script_10: @ 5d4
 	Message 0x31
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_60b
+	CompareLastResultJump EQUAL, Script_branch_60b
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_5fd
+	CompareLastResultJump EQUAL, Script_branch_5fd
 	End
 @ 5fd
 
@@ -606,16 +594,14 @@ Script_11: @ 616
 	ChoiceMulti 0x106, 0x3
 	CloseMulti
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_673
+	CompareLastResultJump EQUAL, Script_branch_673
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_67e
+	CompareLastResultJump EQUAL, Script_branch_67e
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_689
+	CompareLastResultJump EQUAL, Script_branch_689
 	Jump Script_branch_694
-@ 671
-
-.byte 0x2 @ 0x671
-.byte 0x0 @ 0x672
+	End
+@ 673
 
 Script_branch_673: @ 673
 	Message 0x37

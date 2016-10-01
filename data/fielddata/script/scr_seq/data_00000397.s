@@ -62,10 +62,8 @@ Script_7: @ 8c
 	FacePlayer
 	SetVar 0x8005, 0x0
 	Jump Script_branch_b8
-@ a0
-
-.byte 0x2 @ 0xa0
-.byte 0x0 @ 0xa1
+	End
+@ a2
 
 Script_8: @ a2
 	PlayFanfare 0x5dc
@@ -73,65 +71,55 @@ Script_8: @ a2
 	FacePlayer
 	SetVar 0x8005, 0x1
 	Jump Script_branch_b8
-@ b6
-
-.byte 0x2 @ 0xb6
-.byte 0x0 @ 0xb7
+	End
+@ b8
 
 Script_branch_b8: @ b8
 	If 0x8005, 0x0
-	CompareLastResultCall 0x1, Script_branch_254
+	CompareLastResultCall EQUAL, Script_branch_254
 	If 0x8005, 0x1
-	CompareLastResultCall 0x1, Script_branch_259
+	CompareLastResultCall EQUAL, Script_branch_259
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_25b
+	CompareLastResultCall EQUAL, Script_branch_25b
 	Jump Script_branch_e7
-@ e5
-
-.byte 0x2 @ 0xe5
-.byte 0x0 @ 0xe6
+	End
+@ e7
 
 Script_branch_e7: @ e7
 	If 0x8005, 0x0
-	CompareLastResultCall 0x1, Script_branch_260
+	CompareLastResultCall EQUAL, Script_branch_260
 	If 0x8005, 0x1
-	CompareLastResultCall 0x1, Script_branch_265
+	CompareLastResultCall EQUAL, Script_branch_265
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_267
+	CompareLastResultCall EQUAL, Script_branch_267
 	Multi 0x1, 0x1, 0x0, 0x1, 0x800c
 	Cmd_42 0xe, 0x0
 	Cmd_42 0xf, 0x1
 	Cmd_42 0x10, 0x2
 	CloseMulti
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_188
+	CompareLastResultJump EQUAL, Script_branch_188
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_146
+	CompareLastResultJump EQUAL, Script_branch_146
 	Jump Script_branch_175
-@ 144
-
-.byte 0x2 @ 0x144
-.byte 0x0 @ 0x145
+	End
+@ 146
 
 Script_branch_146: @ 146
 	If 0x8005, 0x0
-	CompareLastResultCall 0x1, Script_branch_26c
+	CompareLastResultCall EQUAL, Script_branch_26c
 	If 0x8005, 0x1
-	CompareLastResultCall 0x1, Script_branch_271
+	CompareLastResultCall EQUAL, Script_branch_271
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_273
+	CompareLastResultCall EQUAL, Script_branch_273
 	Jump Script_branch_e7
-@ 173
-
-.byte 0x2 @ 0x173
-.byte 0x0 @ 0x174
+	End
+@ 175
 
 Script_branch_175: @ 175
 	Jump Script_branch_17d
-@ 17b
-
-.byte 0x2 @ 0x17b
-.byte 0x0 @ 0x17c
+	End
+@ 17d
 
 Script_branch_17d: @ 17d
 	Message 0x6
@@ -149,63 +137,53 @@ Script_branch_188: @ 188
 	Cmd_42 0x13, 0x2
 	CloseMulti
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1c3
+	CompareLastResultJump EQUAL, Script_branch_1c3
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1d1
+	CompareLastResultJump EQUAL, Script_branch_1d1
 	Jump Script_branch_175
-@ 1c1
-
-.byte 0x2 @ 0x1c1
-.byte 0x0 @ 0x1c2
+	End
+@ 1c3
 
 Script_branch_1c3: @ 1c3
 	SetVar 0x8006, 0x0
 	Jump Script_branch_1df
-@ 1cf
-
-.byte 0x2 @ 0x1cf
-.byte 0x0 @ 0x1d0
+	End
+@ 1d1
 
 Script_branch_1d1: @ 1d1
 	SetVar 0x8006, 0x1
 	Jump Script_branch_1df
-@ 1dd
-
-.byte 0x2 @ 0x1dd
-.byte 0x0 @ 0x1de
+	End
+@ 1df
 
 Script_branch_1df: @ 1df
 	Message 0x8
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_175
+	CompareLastResultJump EQUAL, Script_branch_175
 	Jump Script_branch_1fb
-@ 1f9
-
-.byte 0x2 @ 0x1f9
-.byte 0x0 @ 0x1fa
+	End
+@ 1fb
 
 Script_branch_1fb: @ 1fb
 	SetVar 0x4000, 0x0
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_175
+	CompareLastResultJump EQUAL, Script_branch_175
 	Jump Script_branch_220
-@ 21e
-
-.byte 0x2 @ 0x21e
-.byte 0x0 @ 0x21f
+	End
+@ 220
 
 Script_branch_220: @ 220
 	Message 0x9
 	CloseMsgOnKeyPress
 	If 0x8005, 0x0
-	CompareLastResultCall 0x1, Script_branch_24e
+	CompareLastResultCall EQUAL, Script_branch_24e
 	If 0x8005, 0x1
-	CompareLastResultCall 0x1, Script_branch_250
+	CompareLastResultCall EQUAL, Script_branch_250
 	If 0x8005, 0x2
-	CompareLastResultCall 0x1, Script_branch_252
+	CompareLastResultCall EQUAL, Script_branch_252
 	End
 @ 24e
 

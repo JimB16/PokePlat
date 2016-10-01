@@ -45,27 +45,23 @@ Script_3: @ 47
 	FacePlayer
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6f
+	CompareLastResultJump EQUAL, Script_branch_6f
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_7a
+	CompareLastResultJump EQUAL, Script_branch_7a
 	End
 @ 6f
 
 Script_branch_6f: @ 6f
 	Message 0x3
 	Jump Script_branch_85
-@ 78
-
-.byte 0x2 @ 0x78
-.byte 0x0 @ 0x79
+	End
+@ 7a
 
 Script_branch_7a: @ 7a
 	Message 0x4
 	Jump Script_branch_85
-@ 83
-
-.byte 0x2 @ 0x83
-.byte 0x0 @ 0x84
+	End
+@ 85
 
 Script_branch_85: @ 85
 	WaitButton

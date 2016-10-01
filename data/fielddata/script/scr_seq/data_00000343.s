@@ -25,7 +25,7 @@ Script_2: @ 21
 	FacePlayer
 	CheckItem 0x1b8, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_49
+	CompareLastResultJump EQUAL, Script_branch_49
 	Message 0x1
 	WaitButton
 	CloseMsgOnKeyPress
@@ -37,9 +37,9 @@ Script_branch_49: @ 49
 	Message 0x2
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6c
+	CompareLastResultJump EQUAL, Script_branch_6c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a0
+	CompareLastResultJump EQUAL, Script_branch_a0
 	End
 @ 6c
 

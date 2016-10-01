@@ -26,7 +26,7 @@ Script_branch_35: @ 35
 
 Script_1: @ 3b
 	CheckFlag 0x10b
-	CompareLastResultCall 0x1, Script_branch_48
+	CompareLastResultCall EQUAL, Script_branch_48
 	End
 @ 48
 
@@ -50,7 +50,7 @@ Script_3: @ 61
 	LockAll
 	CheckBike 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_91
+	CompareLastResultJump EQUAL, Script_branch_91
 	ApplyMovement 0x1, Movement_a0
 	WaitMovement
 	Message 0x1
@@ -93,36 +93,30 @@ Script_5: @ c0
 	LockAll
 	FacePlayer
 	CheckFlag 0x10b
-	CompareLastResultJump 0x1, Script_branch_154
+	CompareLastResultJump EQUAL, Script_branch_154
 	SetVarHero 0x0
 	SetVarAlter 0x1
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_f0
+	CompareLastResultJump EQUAL, Script_branch_f0
 	Jump Script_branch_f9
-@ f0
-
 Script_branch_f0: @ f0
 	Message 0x3
 	Jump Script_branch_102
-@ f9
-
 Script_branch_f9: @ f9
 	Message 0x4
 	Jump Script_branch_102
-@ 102
-
 Script_branch_102: @ 102
 	StoreTotPokemonSeen 0x8004
 	SetVariableNumber 0x1, 0x8004
 	If 0x8004, 0x23
-	CompareLastResultJump 0x0, Script_branch_15f
+	CompareLastResultJump LESSER, Script_branch_15f
 	Message 0x5
 	SetVar 0x8004, 0xd8
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_14a
+	CompareLastResultJump EQUAL, Script_branch_14a
 	SetFlag 0x10b
 	CallStandard 0x7e0
 	CloseMsgOnKeyPress

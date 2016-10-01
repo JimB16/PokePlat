@@ -22,7 +22,7 @@ Function_1c: @ 1c
 
 Script_2: @ 2a
 	CheckFlag 0x121
-	CompareLastResultJump 0x1, Script_branch_46
+	CompareLastResultJump EQUAL, Script_branch_46
 	PlayFanfare 0x5dc
 	LockAll
 	Message 0x0

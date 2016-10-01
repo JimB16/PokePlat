@@ -65,13 +65,13 @@ Script_6: @ 85
 	CallStandard 0x7fa
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2f5
-	CompareLastResultJump 0x1, Script_branch_d1
+	CompareLastResultJump EQUAL, Script_branch_d1
 	If 0x8005, 0x2f6
-	CompareLastResultJump 0x1, Script_branch_e1
+	CompareLastResultJump EQUAL, Script_branch_e1
 	If 0x8005, 0x2f7
-	CompareLastResultJump 0x1, Script_branch_f1
+	CompareLastResultJump EQUAL, Script_branch_f1
 	If 0x8005, 0x2f8
-	CompareLastResultJump 0x1, Script_branch_101
+	CompareLastResultJump EQUAL, Script_branch_101
 	End
 @ d1
 
@@ -79,26 +79,18 @@ Script_branch_d1: @ d1
 	ApplyMovement 0x5, Movement_230
 	WaitMovement
 	Jump Script_branch_111
-@ e1
-
 Script_branch_e1: @ e1
 	ApplyMovement 0x5, Movement_238
 	WaitMovement
 	Jump Script_branch_111
-@ f1
-
 Script_branch_f1: @ f1
 	ApplyMovement 0x5, Movement_248
 	WaitMovement
 	Jump Script_branch_111
-@ 101
-
 Script_branch_101: @ 101
 	ApplyMovement 0x5, Movement_258
 	WaitMovement
 	Jump Script_branch_111
-@ 111
-
 Script_branch_111: @ 111
 	SetVariableRival 0x0
 	SetVarHero 0x1
@@ -106,43 +98,35 @@ Script_branch_111: @ 111
 	CloseMsgOnKeyPress
 	StoreStarter 0x800c
 	If 0x800c, 0x183
-	CompareLastResultJump 0x1, Script_branch_14c
+	CompareLastResultJump EQUAL, Script_branch_14c
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_158
+	CompareLastResultJump EQUAL, Script_branch_158
 	Jump Script_branch_140
-@ 140
-
 Script_branch_140: @ 140
 	TrainerBattle 0xf7, 0x0
 	Jump Script_branch_164
-@ 14c
-
 Script_branch_14c: @ 14c
 	TrainerBattle 0xf8, 0x0
 	Jump Script_branch_164
-@ 158
-
 Script_branch_158: @ 158
 	TrainerBattle 0xf9, 0x0
 	Jump Script_branch_164
-@ 164
-
 Script_branch_164: @ 164
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_207
+	CompareLastResultJump EQUAL, Script_branch_207
 	SetVariableRival 0x0
 	Message 0x1
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x2f5
-	CompareLastResultJump 0x1, Script_branch_1b9
+	CompareLastResultJump EQUAL, Script_branch_1b9
 	If 0x8005, 0x2f6
-	CompareLastResultJump 0x1, Script_branch_1c9
+	CompareLastResultJump EQUAL, Script_branch_1c9
 	If 0x8005, 0x2f7
-	CompareLastResultJump 0x1, Script_branch_1d9
+	CompareLastResultJump EQUAL, Script_branch_1d9
 	If 0x8005, 0x2f8
-	CompareLastResultJump 0x1, Script_branch_1e9
+	CompareLastResultJump EQUAL, Script_branch_1e9
 	End
 @ 1b9
 
@@ -150,26 +134,18 @@ Script_branch_1b9: @ 1b9
 	ApplyMovement 0x5, Movement_210
 	WaitMovement
 	Jump Script_branch_1f9
-@ 1c9
-
 Script_branch_1c9: @ 1c9
 	ApplyMovement 0x5, Movement_218
 	WaitMovement
 	Jump Script_branch_1f9
-@ 1d9
-
 Script_branch_1d9: @ 1d9
 	ApplyMovement 0x5, Movement_220
 	WaitMovement
 	Jump Script_branch_1f9
-@ 1e9
-
 Script_branch_1e9: @ 1e9
 	ApplyMovement 0x5, Movement_228
 	WaitMovement
 	Jump Script_branch_1f9
-@ 1f9
-
 Script_branch_1f9: @ 1f9
 	RemovePeople 0x5
 	SetVar 0x4088, 0x1

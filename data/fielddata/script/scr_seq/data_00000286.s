@@ -25,15 +25,15 @@ Script_branch_31: @ 31
 
 Function_37: @ 37
 	CheckFlag 0x120
-	CompareLastResultJump 0x1, Script_branch_83
+	CompareLastResultJump EQUAL, Script_branch_83
 	Cmd_166 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_83
+	CompareLastResultJump EQUAL, Script_branch_83
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_83
+	CompareLastResultJump EQUAL, Script_branch_83
 	CheckFlag 0x125
-	CompareLastResultJump 0x0, Script_branch_83
+	CompareLastResultJump LESSER, Script_branch_83
 	If 0x409e, 0x1
 	CompareLastResultJump 0x5, Script_branch_83
 	ClearFlag 0x1dd
@@ -47,7 +47,7 @@ Script_branch_83: @ 83
 
 Script_2: @ 89
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_96
+	CompareLastResultJump EQUAL, Script_branch_96
 	End
 @ 96
 
@@ -118,7 +118,7 @@ Script_4: @ e6
 	PlayFanfare 0x5dc
 	WaitFanfare 0x5dc
 	CheckFlag 0xd7
-	CompareLastResultCall 0x0, Script_branch_174
+	CompareLastResultCall LESSER, Script_branch_174
 	SetVar 0x409e, 0x2
 	PlayCry 0x1e5, 0x0
 	Message 0xf
@@ -128,18 +128,16 @@ Script_4: @ e6
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_168
+	CompareLastResultJump EQUAL, Script_branch_168
 	CheckTrainerStatus2 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_17a
+	CompareLastResultCall EQUAL, Script_branch_17a
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_15d
+	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_155
-@ 153
-
-.byte 0x2 @ 0x153
-.byte 0x0 @ 0x154
+	End
+@ 155
 
 Script_branch_155: @ 155
 	SetFlag 0x120
@@ -207,7 +205,7 @@ Script_5: @ 19c
 	CloseMsgOnKeyPress
 	WaitFanfare 0x5dc
 	PlayFanfare 0x65c
-	CmrBmpEffect 0x0
+	CameraBumpEffect 0x0
 	PlayFanfare2 0x65c
 	ApplyMovement 0x2, Movement_3a4
 	ApplyMovement 0xff, Movement_388

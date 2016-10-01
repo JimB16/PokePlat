@@ -25,7 +25,7 @@ Script: @ 0
 Script_15: @ 46
 	CheckStatusPhraseBox 0x13, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_5f
+	CompareLastResultJump EQUAL, Script_branch_5f
 	ClearFlag 0x2c3
 	End
 @ 5f
@@ -42,10 +42,8 @@ Script_1: @ 65
 	SetVar 0x4003, 0x0
 	SetVar 0x4004, 0x0
 	Jump Script_branch_9d
-@ 7f
-
-.byte 0x2 @ 0x7f
-.byte 0x0 @ 0x80
+	End
+@ 81
 
 Script_6: @ 81
 	PlayFanfare 0x5dc
@@ -54,62 +52,52 @@ Script_6: @ 81
 	SetVar 0x4003, 0x0
 	SetVar 0x4004, 0x1
 	Jump Script_branch_9d
-@ 9b
-
-.byte 0x2 @ 0x9b
-.byte 0x0 @ 0x9c
+	End
+@ 9d
 
 Script_branch_9d: @ 9d
 	Cmd_313 0x0
 	If 0x4004, 0x0
-	CompareLastResultCall 0x1, Script_branch_678
+	CompareLastResultCall EQUAL, Script_branch_678
 	If 0x4004, 0x1
-	CompareLastResultCall 0x1, Script_branch_67d
+	CompareLastResultCall EQUAL, Script_branch_67d
 	Jump Script_branch_c3
-@ c1
-
-.byte 0x2 @ 0xc1
-.byte 0x0 @ 0xc2
+	End
+@ c3
 
 Script_branch_c3: @ c3
 	If 0x4004, 0x0
-	CompareLastResultCall 0x1, Script_branch_682
+	CompareLastResultCall EQUAL, Script_branch_682
 	If 0x4004, 0x1
-	CompareLastResultCall 0x1, Script_branch_69a
+	CompareLastResultCall EQUAL, Script_branch_69a
 	Cmd_42 0x29, 0x2
 	Cmd_42 0x2a, 0x3
 	CloseMulti
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_15e
+	CompareLastResultJump EQUAL, Script_branch_15e
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_18b
+	CompareLastResultJump EQUAL, Script_branch_18b
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_123
+	CompareLastResultJump EQUAL, Script_branch_123
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_1b8
+	CompareLastResultJump EQUAL, Script_branch_1b8
 	Jump Script_branch_145
-@ 121
-
-.byte 0x2 @ 0x121
-.byte 0x0 @ 0x122
+	End
+@ 123
 
 Script_branch_123: @ 123
 	If 0x4004, 0x0
-	CompareLastResultCall 0x1, Script_branch_6ae
+	CompareLastResultCall EQUAL, Script_branch_6ae
 	If 0x4004, 0x1
-	CompareLastResultCall 0x1, Script_branch_6b3
+	CompareLastResultCall EQUAL, Script_branch_6b3
 	Jump Script_branch_c3
-@ 143
-
-.byte 0x2 @ 0x143
-.byte 0x0 @ 0x144
+	End
+@ 145
 
 Script_branch_145: @ 145
 	Jump Script_branch_14d
-@ 14b
-
-.byte 0x2 @ 0x14b
-.byte 0x0 @ 0x14c
+	End
+@ 14d
 
 Script_branch_14d: @ 14d
 	SetVar 0x40bf, 0x0
@@ -126,12 +114,10 @@ Script_branch_15e: @ 15e
 	SetVariableNumber 0x0, 0x3
 	SetVariableNumber 0x1, 0x3
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1e5
+	CompareLastResultJump EQUAL, Script_branch_1e5
 	Jump Script_branch_20b
-@ 189
-
-.byte 0x2 @ 0x189
-.byte 0x0 @ 0x18a
+	End
+@ 18b
 
 Script_branch_18b: @ 18b
 	SetVar 0x40be, 0x1
@@ -139,12 +125,10 @@ Script_branch_18b: @ 18b
 	SetVariableNumber 0x0, 0x3
 	SetVariableNumber 0x1, 0x3
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1e5
+	CompareLastResultJump EQUAL, Script_branch_1e5
 	Jump Script_branch_20b
-@ 1b6
-
-.byte 0x2 @ 0x1b6
-.byte 0x0 @ 0x1b7
+	End
+@ 1b8
 
 Script_branch_1b8: @ 1b8
 	SetVar 0x40be, 0x2
@@ -152,30 +136,24 @@ Script_branch_1b8: @ 1b8
 	SetVariableNumber 0x0, 0x2
 	SetVariableNumber 0x1, 0x2
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1f8
+	CompareLastResultJump EQUAL, Script_branch_1f8
 	Jump Script_branch_20b
-@ 1e3
-
-.byte 0x2 @ 0x1e3
-.byte 0x0 @ 0x1e4
+	End
+@ 1e5
 
 Script_branch_1e5: @ 1e5
 	Message 0x8
 	BCastleFunctReturn 0x9, 0x3, 0x0, 0x0
 	Jump Script_branch_145
-@ 1f6
-
-.byte 0x2 @ 0x1f6
-.byte 0x0 @ 0x1f7
+	End
+@ 1f8
 
 Script_branch_1f8: @ 1f8
 	Message 0x8
 	BCastleFunctReturn 0x9, 0x2, 0x0, 0x0
 	Jump Script_branch_145
-@ 209
-
-.byte 0x2 @ 0x209
-.byte 0x0 @ 0x20a
+	End
+@ 20b
 
 Script_branch_20b: @ 20b
 	Message 0x7
@@ -188,50 +166,44 @@ Script_branch_20b: @ 20b
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x4002, 0xff
-	CompareLastResultJump 0x1, Script_branch_145
+	CompareLastResultJump EQUAL, Script_branch_145
 	Cmd_31e 0x4002, 0x800c
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_5e1
+	CompareLastResultJump EQUAL, Script_branch_5e1
 	Cmd_31e 0x4005, 0x800c
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_5e1
+	CompareLastResultJump EQUAL, Script_branch_5e1
 	Cmd_31e 0x4006, 0x800c
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_5e1
+	CompareLastResultJump EQUAL, Script_branch_5e1
 	CheckPokeEgg 0x4002, 0x4001
 	If 0x4001, 0x0
-	CompareLastResultJump 0x1, Script_branch_145
+	CompareLastResultJump EQUAL, Script_branch_145
 	Jump Script_branch_29b
-@ 299
-
-.byte 0x2 @ 0x299
-.byte 0x0 @ 0x29a
+	End
+@ 29b
 
 Script_branch_29b: @ 29b
 	Jump Script_branch_2a3
-@ 2a1
-
-.byte 0x2 @ 0x2a1
-.byte 0x0 @ 0x2a2
+	End
+@ 2a3
 
 Script_branch_2a3: @ 2a3
 	If 0x40be, 0x0
-	CompareLastResultCall 0x1, Script_branch_448
+	CompareLastResultCall EQUAL, Script_branch_448
 	If 0x40be, 0x1
-	CompareLastResultCall 0x1, Script_branch_448
+	CompareLastResultCall EQUAL, Script_branch_448
 	SetVar 0x4000, 0x0
 	HealPokemon
 	CallStandard 0x7d6
 	CopyVar 0x800c, 0x4000
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_145
+	CompareLastResultJump EQUAL, Script_branch_145
 	If 0x40be, 0x2
-	CompareLastResultJump 0x1, Script_branch_2f1
+	CompareLastResultJump EQUAL, Script_branch_2f1
 	Jump Script_branch_4a9
-@ 2ef
-
-.byte 0x2 @ 0x2ef
-.byte 0x0 @ 0x2f0
+	End
+@ 2f1
 
 Script_branch_2f1: @ 2f1
 	Message 0x2b
@@ -243,78 +215,64 @@ Script_branch_2f1: @ 2f1
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_335
+	CompareLastResultJump EQUAL, Script_branch_335
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_389
+	CompareLastResultJump EQUAL, Script_branch_389
 	Jump Script_branch_145
-@ 333
-
-.byte 0x2 @ 0x333
-.byte 0x0 @ 0x334
+	End
+@ 335
 
 Script_branch_335: @ 335
 	Message 0x2c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2f1
+	CompareLastResultJump EQUAL, Script_branch_2f1
 	CloseMsgOnKeyPress
 	ChsFriend 0x20, 0x0, 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_377
+	CompareLastResultJump EQUAL, Script_branch_377
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_37f
+	CompareLastResultJump EQUAL, Script_branch_37f
 	Jump Script_branch_3dd
-@ 375
-
-.byte 0x2 @ 0x375
-.byte 0x0 @ 0x376
+	End
+@ 377
 
 Script_branch_377: @ 377
 	Jump Script_branch_2f1
-@ 37d
-
-.byte 0x2 @ 0x37d
-.byte 0x0 @ 0x37e
+	End
+@ 37f
 
 Script_branch_37f: @ 37f
 	DeleteEntry
 	Jump Script_branch_2f1
-@ 387
-
-.byte 0x2 @ 0x387
-.byte 0x0 @ 0x388
+	End
+@ 389
 
 Script_branch_389: @ 389
 	Message 0x2c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2f1
+	CompareLastResultJump EQUAL, Script_branch_2f1
 	CloseMsgOnKeyPress
 	WireBattleWait 0x20, 0x0, 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3cb
+	CompareLastResultJump EQUAL, Script_branch_3cb
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_3d3
+	CompareLastResultJump EQUAL, Script_branch_3d3
 	Jump Script_branch_3dd
-@ 3c9
-
-.byte 0x2 @ 0x3c9
-.byte 0x0 @ 0x3ca
+	End
+@ 3cb
 
 Script_branch_3cb: @ 3cb
 	Jump Script_branch_2f1
-@ 3d1
-
-.byte 0x2 @ 0x3d1
-.byte 0x0 @ 0x3d2
+	End
+@ 3d3
 
 Script_branch_3d3: @ 3d3
 	DeleteEntry
 	Jump Script_branch_2f1
-@ 3db
-
-.byte 0x2 @ 0x3db
-.byte 0x0 @ 0x3dc
+	End
+@ 3dd
 
 Script_branch_3dd: @ 3dd
 	FriendBT2
@@ -324,22 +282,20 @@ Script_branch_3dd: @ 3dd
 	Cmd_2da 0x8000, 0x8001, 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_450
+	CompareLastResultJump EQUAL, Script_branch_450
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_466
+	CompareLastResultJump EQUAL, Script_branch_466
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_47c
+	CompareLastResultJump EQUAL, Script_branch_47c
 	FriendBT2
 	FriendBT 0x9c
 	Message 0x2d
 	If 0x40be, 0x2
-	CompareLastResultCall 0x1, Script_branch_448
+	CompareLastResultCall EQUAL, Script_branch_448
 	Call Function_6df
 	Jump Script_branch_4a9
-@ 446
-
-.byte 0x2 @ 0x446
-.byte 0x0 @ 0x447
+	End
+@ 448
 
 Function_448: @ 448
 Script_branch_448: @ 448
@@ -352,20 +308,16 @@ Script_branch_450: @ 450
 	SetVarPoke 0x0, 0x4002
 	Message 0x1d
 	Jump Script_branch_497
-@ 464
-
-.byte 0x2 @ 0x464
-.byte 0x0 @ 0x465
+	End
+@ 466
 
 Script_branch_466: @ 466
 	Call Function_49f
 	SetVarPoke 0x0, 0x4005
 	Message 0x1d
 	Jump Script_branch_497
-@ 47a
-
-.byte 0x2 @ 0x47a
-.byte 0x0 @ 0x47b
+	End
+@ 47c
 
 Script_branch_47c: @ 47c
 	Call Function_49f
@@ -373,17 +325,13 @@ Script_branch_47c: @ 47c
 	SetVarPoke 0x1, 0x4005
 	Message 0x1e
 	Jump Script_branch_497
-@ 495
-
-.byte 0x2 @ 0x495
-.byte 0x0 @ 0x496
+	End
+@ 497
 
 Script_branch_497: @ 497
 	Jump Script_branch_145
-@ 49d
-
-.byte 0x2 @ 0x49d
-.byte 0x0 @ 0x49e
+	End
+@ 49f
 
 Function_49f: @ 49f
 	FriendBT2
@@ -394,33 +342,31 @@ Function_49f: @ 49f
 
 Script_branch_4a9: @ 4a9
 	If 0x40be, 0x0
-	CompareLastResultCall 0x1, Script_branch_549
+	CompareLastResultCall EQUAL, Script_branch_549
 	If 0x40be, 0x1
-	CompareLastResultCall 0x1, Script_branch_564
+	CompareLastResultCall EQUAL, Script_branch_564
 	If 0x40be, 0x2
-	CompareLastResultCall 0x1, Script_branch_57f
+	CompareLastResultCall EQUAL, Script_branch_57f
 	PlayFanfare 0x603
 	Jump Script_branch_4dc
-@ 4da
-
-.byte 0x2 @ 0x4da
-.byte 0x0 @ 0x4db
+	End
+@ 4dc
 
 Script_branch_4dc: @ 4dc
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	If 0x40be, 0x0
-	CompareLastResultCall 0x1, Script_branch_5a5
+	CompareLastResultCall EQUAL, Script_branch_5a5
 	If 0x40be, 0x1
-	CompareLastResultCall 0x1, Script_branch_5b9
+	CompareLastResultCall EQUAL, Script_branch_5b9
 	If 0x40be, 0x2
-	CompareLastResultCall 0x1, Script_branch_5cd
+	CompareLastResultCall EQUAL, Script_branch_5cd
 	RandomEvent 0x3a
 	DeActivateLeader 0x28, 0x0, 0x0, 0x0, 0x0
 	PreWfc
 	ShowBTowerSome 0xf
 	If 0x40be, 0x2
-	CompareLastResultCall 0x1, Script_branch_545
+	CompareLastResultCall EQUAL, Script_branch_545
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
@@ -599,10 +545,8 @@ Script_2: @ 6b8
 	Call Script_branch_448
 	Call Function_6df
 	Jump Script_branch_4a9
-@ 6dd
-
-.byte 0x2 @ 0x6dd
-.byte 0x0 @ 0x6de
+	End
+@ 6df
 
 Function_6df: @ 6df
 	ShowClockSave
@@ -617,25 +561,21 @@ Script_3: @ 6f1
 	Message 0x22
 	Cmd_2dc 0x40be
 	Jump Script_branch_145
-@ 6fe
-
-.byte 0x2 @ 0x6fe
-.byte 0x0 @ 0x6ff
+	End
+@ 700
 
 Script_4: @ 700
 	If 0x40be, 0x0
-	CompareLastResultCall 0x1, Script_branch_73c
+	CompareLastResultCall EQUAL, Script_branch_73c
 	If 0x40be, 0x1
-	CompareLastResultCall 0x1, Script_branch_73c
+	CompareLastResultCall EQUAL, Script_branch_73c
 	If 0x4053, 0x1
-	CompareLastResultCall 0x1, Script_branch_742
+	CompareLastResultCall EQUAL, Script_branch_742
 	If 0x4053, 0x3
-	CompareLastResultCall 0x1, Script_branch_759
+	CompareLastResultCall EQUAL, Script_branch_759
 	Jump Script_branch_145
-@ 73a
-
-.byte 0x2 @ 0x73a
-.byte 0x0 @ 0x73b
+	End
+@ 73c
 
 Script_branch_73c: @ 73c
 	Cmd_30a 0x29
@@ -665,10 +605,9 @@ Script_branch_759: @ 759
 
 Script_5: @ 774
 	Jump Script_branch_145
-@ 77a
+	End
+@ 77c
 
-.byte 0x2 @ 0x77a
-.byte 0x0 @ 0x77b
 .byte 0xc @ 0x77c
 .byte 0x0 @ 0x77d
 .byte 0x2 @ 0x77e

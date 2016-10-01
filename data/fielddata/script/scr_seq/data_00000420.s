@@ -11,9 +11,9 @@ Script: @ 0
 
 Script_2: @ 12
 	CheckFlag 0xba
-	CompareLastResultJump 0x0, Script_branch_2a
+	CompareLastResultJump LESSER, Script_branch_2a
 	CheckFlag 0xba
-	CompareLastResultJump 0x1, Script_branch_3c
+	CompareLastResultJump EQUAL, Script_branch_3c
 	End
 @ 2a
 
@@ -32,11 +32,11 @@ Script_branch_3c: @ 3c
 Script_1: @ 4e
 	CheckBadge 0x6, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultCall 0x1, Script_branch_79
+	CompareLastResultCall EQUAL, Script_branch_79
 	CheckFlag 0xba
-	CompareLastResultJump 0x0, Script_branch_2a
+	CompareLastResultJump LESSER, Script_branch_2a
 	CheckFlag 0xba
-	CompareLastResultJump 0x1, Script_branch_3c
+	CompareLastResultJump EQUAL, Script_branch_3c
 	End
 @ 79
 

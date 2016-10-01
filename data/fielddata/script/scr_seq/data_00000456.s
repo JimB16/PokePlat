@@ -15,14 +15,12 @@ Script: @ 0
 Script_1: @ 1e
 	CheckTime2 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_4f
+	CompareLastResultJump EQUAL, Script_branch_4f
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_4f
+	CompareLastResultJump EQUAL, Script_branch_4f
 	If 0x4000, 0x5
 	CompareLastResultJump 0x3, Script_branch_5b
 	Jump Script_branch_4f
-@ 4f
-
 Script_branch_4f: @ 4f
 	ClearFlag 0x28b
 	SetVar 0x4116, 0x0
@@ -40,15 +38,13 @@ Script_2: @ 67
 	LockAll
 	FacePlayer
 	CheckFlag 0xaa2
-	CompareLastResultJump 0x1, Script_branch_155
+	CompareLastResultJump EQUAL, Script_branch_155
 	If 0x400b, 0x1
-	CompareLastResultJump 0x1, Script_branch_155
+	CompareLastResultJump EQUAL, Script_branch_155
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_aa
+	CompareLastResultJump EQUAL, Script_branch_aa
 	Jump Script_branch_9f
-@ 9f
-
 Script_branch_9f: @ 9f
 	Message 0x0
 	WaitButton
@@ -61,9 +57,9 @@ Script_branch_aa: @ aa
 	Message 0x3
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_cd
+	CompareLastResultJump EQUAL, Script_branch_cd
 	End
 @ cd
 
@@ -79,9 +75,9 @@ Script_branch_d8: @ d8
 	Message 0x5
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fb
+	CompareLastResultJump EQUAL, Script_branch_fb
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_cd
+	CompareLastResultJump EQUAL, Script_branch_cd
 	End
 @ fb
 
@@ -106,8 +102,6 @@ Script_branch_fb: @ fb
 	Call Function_16c
 	SetFlag 0xaa2
 	Jump Script_branch_155
-@ 155
-
 Script_branch_155: @ 155
 	StoreTrophyPokemon 0x8000
 	SetVarPokeStored 0x0, 0x8000, 0x0, 0x0
@@ -120,14 +114,12 @@ Script_branch_155: @ 155
 
 Function_16c: @ 16c
 	If 0x8001, 0x4
-	CompareLastResultJump 0x1, Script_branch_199
+	CompareLastResultJump EQUAL, Script_branch_199
 	If 0x8001, 0x6
-	CompareLastResultJump 0x1, Script_branch_1a5
+	CompareLastResultJump EQUAL, Script_branch_1a5
 	If 0x8002, 0x6
-	CompareLastResultJump 0x1, Script_branch_1b1
+	CompareLastResultJump EQUAL, Script_branch_1b1
 	Jump Script_branch_1bd
-@ 199
-
 Script_branch_199: @ 199
 	ApplyMovement 0x1, Movement_204
 	WaitMovement
@@ -208,18 +200,14 @@ Script_3: @ 224
 	FacePlayer
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_244
+	CompareLastResultJump EQUAL, Script_branch_244
 	Jump Script_branch_270
-@ 244
-
 Script_branch_244: @ 244
 	CheckFlag 0x164
-	CompareLastResultJump 0x1, Script_branch_270
+	CompareLastResultJump EQUAL, Script_branch_270
 	Jump Script_branch_257
-@ 255
-
-.byte 0x2 @ 0x255
-.byte 0x0 @ 0x256
+	End
+@ 257
 
 Script_branch_257: @ 257
 	Message 0xf
@@ -234,15 +222,15 @@ Script_branch_257: @ 257
 
 Script_branch_270: @ 270
 	CheckFlag 0xaa2
-	CompareLastResultJump 0x1, Script_branch_304
+	CompareLastResultJump EQUAL, Script_branch_304
 	Cmd_166 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2c8
+	CompareLastResultJump EQUAL, Script_branch_2c8
 	CheckIdPlayer 0x800c, 0x2
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_2be
+	CompareLastResultCall EQUAL, Script_branch_2be
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_2c3
+	CompareLastResultCall EQUAL, Script_branch_2c3
 	WaitButton
 	CloseMsgOnKeyPress
 	ApplyMovement 0x2, Movement_1cc
@@ -264,9 +252,9 @@ Script_branch_2c3: @ 2c3
 Script_branch_2c8: @ 2c8
 	CheckIdPlayer 0x800c, 0x2
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_2fa
+	CompareLastResultCall EQUAL, Script_branch_2fa
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_2ff
+	CompareLastResultCall EQUAL, Script_branch_2ff
 	WaitButton
 	CloseMsgOnKeyPress
 	ApplyMovement 0x2, Movement_1cc
@@ -360,46 +348,40 @@ Script_7: @ 399
 	Message 0x13
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3c2
+	CompareLastResultJump EQUAL, Script_branch_3c2
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_408
+	CompareLastResultJump EQUAL, Script_branch_408
 	End
 @ 3c2
 
 Script_branch_3c2: @ 3c2
 	Message 0x14
 	CheckFlag 0xfb
-	CompareLastResultJump 0x1, Script_branch_408
+	CompareLastResultJump EQUAL, Script_branch_408
 	Cmd_337 0x1ea, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_3fc
-	Pokepic 0x1ea, 0x0
+	CompareLastResultJump EQUAL, Script_branch_3fc
+	PokemonPicture 0x1ea, 0x0
 	Cmd_30
-	Hidepic
+	HidePicture
 	SetFlag 0xfb
 	Message 0x15
 	Jump Script_branch_416
-@ 3fa
-
-.byte 0x2 @ 0x3fa
-.byte 0x0 @ 0x3fb
+	End
+@ 3fc
 
 Script_branch_3fc: @ 3fc
 	SetFlag 0xfb
 	Jump Script_branch_408
-@ 406
-
-.byte 0x2 @ 0x406
-.byte 0x0 @ 0x407
+	End
+@ 408
 
 Script_branch_408: @ 408
 	SetVarHero 0x0
 	Message 0x16
 	Jump Script_branch_416
-@ 414
-
-.byte 0x2 @ 0x414
-.byte 0x0 @ 0x415
+	End
+@ 416
 
 Script_branch_416: @ 416
 	WaitButton

@@ -19,9 +19,9 @@ Script_1: @ 22
 	Call Function_62
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_52
+	CompareLastResultJump EQUAL, Script_branch_52
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_5a
+	CompareLastResultJump EQUAL, Script_branch_5a
 	End
 @ 52
 
@@ -38,24 +38,22 @@ Script_branch_5a: @ 5a
 Function_62: @ 62
 	Cmd_166 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	CheckItem 0x1c7, 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	UnkFunct2 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	CheckFlag 0x11e
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	SetVar 0x4118, 0x1
 	Jump Script_branch_c5
-@ c3
-
-.byte 0x2 @ 0xc3
-.byte 0x0 @ 0xc4
+	End
+@ c5
 
 Script_branch_c5: @ c5
 	Return
@@ -64,13 +62,13 @@ Script_branch_c5: @ c5
 Function_c7: @ c7
 	StoreFurniture 0x4098
 	If 0x4098, 0x0
-	CompareLastResultJump 0x1, Script_branch_101
+	CompareLastResultJump EQUAL, Script_branch_101
 	If 0x4098, 0x1
-	CompareLastResultJump 0x1, Script_branch_101
+	CompareLastResultJump EQUAL, Script_branch_101
 	If 0x4098, 0x2
-	CompareLastResultJump 0x1, Script_branch_101
+	CompareLastResultJump EQUAL, Script_branch_101
 	If 0x4098, 0x3
-	CompareLastResultJump 0x1, Script_branch_101
+	CompareLastResultJump EQUAL, Script_branch_101
 	Return
 @ 101
 
@@ -87,9 +85,9 @@ Function_109: @ 109
 	StoreMtCoronet 0x800c
 	CopyVar 0x8004, 0x8005
 	If 0x800c, 0xa
-	CompareLastResultJump 0x1, Script_branch_133
+	CompareLastResultJump EQUAL, Script_branch_133
 	If 0x800c, 0xc
-	CompareLastResultJump 0x1, Script_branch_133
+	CompareLastResultJump EQUAL, Script_branch_133
 	CopyVar 0x8004, 0x8006
 Script_branch_133: @ 133
 	Return
@@ -136,10 +134,8 @@ Script_3: @ 154
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_1a6
 	Jump Script_branch_181
-@ 17f
-
-.byte 0x2 @ 0x17f
-.byte 0x0 @ 0x180
+	End
+@ 181
 
 Script_branch_181: @ 181
 	Message 0x1
@@ -156,7 +152,7 @@ Script_branch_181: @ 181
 Script_branch_1a6: @ 1a6
 	Call Function_1ca
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1db
+	CompareLastResultJump EQUAL, Script_branch_1db
 	SetVar 0x4098, 0x1
 	Message 0x2
 	WaitButton
@@ -259,7 +255,7 @@ Script_5: @ 249
 	DoubleBattle 0x8004, 0x210, 0x197
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2d0
+	CompareLastResultJump EQUAL, Script_branch_2d0
 	Call Function_456
 	SetVariableRival 0x0
 	SetVarHero 0x1
@@ -276,10 +272,8 @@ Script_5: @ 249
 	RemovePeople 0x5
 	SetVar 0x4098, 0x2
 	Jump Script_branch_508
-@ 2ce
-
-.byte 0x2 @ 0x2ce
-.byte 0x0 @ 0x2cf
+	End
+@ 2d0
 
 Script_branch_2d0: @ 2d0
 	SetVar 0x4098, 0x1
@@ -293,11 +287,11 @@ Function_2dc: @ 2dc
 	CheckSpritePosition 0x8004, 0x8005
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x1e
-	CompareLastResultJump 0x1, Script_branch_315
+	CompareLastResultJump EQUAL, Script_branch_315
 	If 0x8008, 0x1f
-	CompareLastResultJump 0x1, Script_branch_333
+	CompareLastResultJump EQUAL, Script_branch_333
 	If 0x8008, 0x20
-	CompareLastResultJump 0x1, Script_branch_351
+	CompareLastResultJump EQUAL, Script_branch_351
 	Return
 @ 315
 
@@ -332,11 +326,11 @@ Function_36f: @ 36f
 	CheckSpritePosition 0x8004, 0x8005
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x1e
-	CompareLastResultJump 0x1, Script_branch_3a4
+	CompareLastResultJump EQUAL, Script_branch_3a4
 	If 0x8008, 0x1f
-	CompareLastResultJump 0x1, Script_branch_3be
+	CompareLastResultJump EQUAL, Script_branch_3be
 	If 0x8008, 0x20
-	CompareLastResultJump 0x1, Script_branch_3d8
+	CompareLastResultJump EQUAL, Script_branch_3d8
 	Return
 @ 3a4
 
@@ -401,10 +395,10 @@ Function_424: @ 424
 	StoreStarter 0x800c
 	SetVar 0x8004, 0x26c
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_454
+	CompareLastResultJump EQUAL, Script_branch_454
 	SetVar 0x8004, 0x26b
 	If 0x800c, 0x183
-	CompareLastResultJump 0x1, Script_branch_454
+	CompareLastResultJump EQUAL, Script_branch_454
 	SetVar 0x8004, 0x25f
 Script_branch_454: @ 454
 	Return
@@ -414,11 +408,11 @@ Function_456: @ 456
 	CheckSpritePosition 0x8004, 0x8005
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x1e
-	CompareLastResultJump 0x1, Script_branch_48b
+	CompareLastResultJump EQUAL, Script_branch_48b
 	If 0x8008, 0x1f
-	CompareLastResultJump 0x1, Script_branch_499
+	CompareLastResultJump EQUAL, Script_branch_499
 	If 0x8008, 0x20
-	CompareLastResultJump 0x1, Script_branch_4a7
+	CompareLastResultJump EQUAL, Script_branch_4a7
 	Return
 @ 48b
 
@@ -536,15 +530,13 @@ Script_branch_508: @ 508
 	PlaySound 0x478
 	Cmd_5d
 	Jump Script_branch_567
-@ 565
-
-.byte 0x2 @ 0x565
-.byte 0x0 @ 0x566
+	End
+@ 567
 
 Script_branch_567: @ 567
 	SetvarMtCoronet 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_567
+	CompareLastResultJump EQUAL, Script_branch_567
 	Cmd_2fb
 	SetFlag 0x1c8
 	SetFlag 0x1c9
@@ -572,15 +564,15 @@ Function_5c0: @ 5c0
 	CheckSpritePosition 0x8004, 0x8005
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x1d
-	CompareLastResultJump 0x1, Script_branch_60f
+	CompareLastResultJump EQUAL, Script_branch_60f
 	If 0x8008, 0x1e
-	CompareLastResultJump 0x1, Script_branch_619
+	CompareLastResultJump EQUAL, Script_branch_619
 	If 0x8008, 0x1f
-	CompareLastResultJump 0x1, Script_branch_623
+	CompareLastResultJump EQUAL, Script_branch_623
 	If 0x8008, 0x20
-	CompareLastResultJump 0x1, Script_branch_62d
+	CompareLastResultJump EQUAL, Script_branch_62d
 	If 0x8008, 0x21
-	CompareLastResultJump 0x1, Script_branch_637
+	CompareLastResultJump EQUAL, Script_branch_637
 	Return
 @ 60f
 

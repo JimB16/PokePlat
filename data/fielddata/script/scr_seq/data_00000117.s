@@ -11,39 +11,33 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x131
-	CompareLastResultJump 0x1, Script_branch_105
+	CompareLastResultJump EQUAL, Script_branch_105
 	CheckFlag 0x97e
-	CompareLastResultJump 0x1, Script_branch_33
+	CompareLastResultJump EQUAL, Script_branch_33
 	SetFlag 0x97e
 	Message 0x0
 	Jump Script_branch_3e
-@ 31
-
-.byte 0x2 @ 0x31
-.byte 0x0 @ 0x32
+	End
+@ 33
 
 Script_branch_33: @ 33
 	Message 0x1
 	Jump Script_branch_3e
-@ 3c
-
-.byte 0x2 @ 0x3c
-.byte 0x0 @ 0x3d
+	End
+@ 3e
 
 Script_branch_3e: @ 3e
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	Jump Script_branch_fa
-@ 55
-
-.byte 0x2 @ 0x55
-.byte 0x0 @ 0x56
+	End
+@ 57
 
 Script_branch_57: @ 57
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_ef
+	CompareLastResultJump EQUAL, Script_branch_ef
 	Message 0x2
 	Soundfr 0x486
 	SetVarHero 0x0
@@ -54,16 +48,16 @@ Script_branch_57: @ 57
 	Message 0x4
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_a8
+	CompareLastResultJump EQUAL, Script_branch_a8
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_e9
+	CompareLastResultJump EQUAL, Script_branch_e9
 	End
 @ a8
 
 Script_branch_a8: @ a8
 	CloseMsgOnKeyPress
 	CheckPartyNumber 0x4000
-	CopyValue 0x4000, 0x1
+	ScriptCmd_SubValue 0x4000, 0x1
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	ChoosePokeNick 0x4000, 0x800c
@@ -105,7 +99,7 @@ Script_branch_fa: @ fa
 Script_branch_105: @ 105
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_122
+	CompareLastResultJump EQUAL, Script_branch_122
 	Message 0x7
 	WaitButton
 	CloseMsgOnKeyPress

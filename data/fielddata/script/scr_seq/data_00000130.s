@@ -18,7 +18,7 @@ Script_1: @ 16
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3e
+	CompareLastResultJump EQUAL, Script_branch_3e
 	HideMoney
 	ReleaseAll
 	End
@@ -27,13 +27,13 @@ Script_1: @ 16
 Script_branch_3e: @ 3e
 	CheckMoney 0x800c, 0x64
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	TakeMoney 0x64
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644
 	HideMoney
-	Gmbynocule
+	GreatMarshBynocule
 	ReleaseAll
 	End
 @ 6b

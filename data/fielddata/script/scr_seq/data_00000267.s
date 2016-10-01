@@ -10,10 +10,10 @@ Script: @ 0
 Script_1: @ a
 	SetFlag 0x9ca
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_2f
+	CompareLastResultJump LESSER, Script_branch_2f
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_2f
+	CompareLastResultJump EQUAL, Script_branch_2f
 	SetFlag 0x27e
 Script_branch_2f: @ 2f
 	End
@@ -24,21 +24,17 @@ Script_2: @ 31
 	LockAll
 	FacePlayer
 	CheckFlag 0x964
-	CompareLastResultJump 0x1, Script_branch_4f
+	CompareLastResultJump EQUAL, Script_branch_4f
 	Message 0x0
 	Jump Script_branch_5a
-@ 4d
-
-.byte 0x2 @ 0x4d
-.byte 0x0 @ 0x4e
+	End
+@ 4f
 
 Script_branch_4f: @ 4f
 	Message 0x1
 	Jump Script_branch_5a
-@ 58
-
-.byte 0x2 @ 0x58
-.byte 0x0 @ 0x59
+	End
+@ 5a
 
 Script_branch_5a: @ 5a
 	WaitButton

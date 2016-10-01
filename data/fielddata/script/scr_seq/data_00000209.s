@@ -51,10 +51,8 @@ Script_4: @ 57
 	FacePlayer
 	Message 0x3
 	Jump Script_branch_6a
-@ 68
-
-.byte 0x2 @ 0x68
-.byte 0x0 @ 0x69
+	End
+@ 6a
 
 Script_branch_6a: @ 6a
 	Message 0x4
@@ -71,90 +69,72 @@ Script_branch_6a: @ 6a
 	CloseMulti4
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_135
+	CompareLastResultJump EQUAL, Script_branch_135
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_140
+	CompareLastResultJump EQUAL, Script_branch_140
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_14b
+	CompareLastResultJump EQUAL, Script_branch_14b
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_156
+	CompareLastResultJump EQUAL, Script_branch_156
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_161
+	CompareLastResultJump EQUAL, Script_branch_161
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_16c
+	CompareLastResultJump EQUAL, Script_branch_16c
 	If 0x8008, 0x6
-	CompareLastResultJump 0x1, Script_branch_177
+	CompareLastResultJump EQUAL, Script_branch_177
 	If 0x8008, 0x7
-	CompareLastResultJump 0x1, Script_branch_182
+	CompareLastResultJump EQUAL, Script_branch_182
 	Jump Script_branch_18d
-@ 133
-
-.byte 0x2 @ 0x133
-.byte 0x0 @ 0x134
+	End
+@ 135
 
 Script_branch_135: @ 135
 	Message 0x6
 	Jump Script_branch_6a
-@ 13e
-
-.byte 0x2 @ 0x13e
-.byte 0x0 @ 0x13f
+	End
+@ 140
 
 Script_branch_140: @ 140
 	Message 0x7
 	Jump Script_branch_6a
-@ 149
-
-.byte 0x2 @ 0x149
-.byte 0x0 @ 0x14a
+	End
+@ 14b
 
 Script_branch_14b: @ 14b
 	Message 0x8
 	Jump Script_branch_6a
-@ 154
-
-.byte 0x2 @ 0x154
-.byte 0x0 @ 0x155
+	End
+@ 156
 
 Script_branch_156: @ 156
 	Message 0x9
 	Jump Script_branch_6a
-@ 15f
-
-.byte 0x2 @ 0x15f
-.byte 0x0 @ 0x160
+	End
+@ 161
 
 Script_branch_161: @ 161
 	Message 0xa
 	Jump Script_branch_6a
-@ 16a
-
-.byte 0x2 @ 0x16a
-.byte 0x0 @ 0x16b
+	End
+@ 16c
 
 Script_branch_16c: @ 16c
 	Message 0xb
 	Jump Script_branch_6a
-@ 175
-
-.byte 0x2 @ 0x175
-.byte 0x0 @ 0x176
+	End
+@ 177
 
 Script_branch_177: @ 177
 	Message 0xc
 	Jump Script_branch_6a
-@ 180
-
-.byte 0x2 @ 0x180
-.byte 0x0 @ 0x181
+	End
+@ 182
 
 Script_branch_182: @ 182
 	Message 0xd
 	Jump Script_branch_6a
-@ 18b
-
-.byte 0x2 @ 0x18b
-.byte 0x0 @ 0x18c
+	End
+@ 18d
 
 Script_branch_18d: @ 18d
 	Message 0x5

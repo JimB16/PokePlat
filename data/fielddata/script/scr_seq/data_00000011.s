@@ -44,26 +44,22 @@ Script_4: @ 3f
 	If 0x40f2, 0x0
 	CompareLastResultJump 0x5, Script_branch_257
 	CheckFlag 0xab3
-	CompareLastResultJump 0x1, Script_branch_a0
+	CompareLastResultJump EQUAL, Script_branch_a0
 	CheckFlag 0xaa9
-	CompareLastResultJump 0x1, Script_branch_84
+	CompareLastResultJump EQUAL, Script_branch_84
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_b6
+	CompareLastResultJump EQUAL, Script_branch_b6
 	Jump Script_branch_ab
-@ 84
-
 Script_branch_84: @ 84
 	Message 0x12
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_b6
+	CompareLastResultJump EQUAL, Script_branch_b6
 	Jump Script_branch_ab
-@ 9e
-
-.byte 0x2 @ 0x9e
-.byte 0x0 @ 0x9f
+	End
+@ a0
 
 Script_branch_a0: @ a0
 	Message 0x2
@@ -84,17 +80,15 @@ Script_branch_ab: @ ab
 Script_branch_b6: @ b6
 	SetFlag 0xaa9
 	Message 0x4
-	CheckLotoNumber 0x8000
+	CheckLottoNumber 0x8000
 	SetvarIdNumber 0x0, 0x8000, 0x2, 0x5
 	Message 0x5
-	CompareLotoNumber 0x8001, 0x8002, 0x8003, 0x8000
+	CompareLottoNumber 0x8001, 0x8002, 0x8003, 0x8000
 	If 0x8002, 0x0
-	CompareLastResultJump 0x1, Script_branch_f5
+	CompareLastResultJump EQUAL, Script_branch_f5
 	If 0x8003, 0x0
-	CompareLastResultJump 0x1, Script_branch_100
+	CompareLastResultJump EQUAL, Script_branch_100
 	Jump Script_branch_10e
-@ f5
-
 Script_branch_f5: @ f5
 	Message 0x8
 	WaitButton
@@ -107,110 +101,84 @@ Script_branch_100: @ 100
 	SetVarPokeNick 0x0, 0x8001
 	Message 0x6
 	Jump Script_branch_11c
-@ 10e
-
 Script_branch_10e: @ 10e
 	SetvarIdPokeBoxes 0x0, 0x8001
 	Message 0x7
 	Jump Script_branch_11c
-@ 11c
-
 Script_branch_11c: @ 11c
 	CopyVar 0x8008, 0x8002
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_165
+	CompareLastResultJump EQUAL, Script_branch_165
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_170
+	CompareLastResultJump EQUAL, Script_branch_170
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_179
+	CompareLastResultJump EQUAL, Script_branch_179
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_182
+	CompareLastResultJump EQUAL, Script_branch_182
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_18b
+	CompareLastResultJump EQUAL, Script_branch_18b
 	End
 @ 165
 
 Script_branch_165: @ 165
 	Message 0x9
 	Jump Script_branch_194
-@ 16e
-
-.byte 0x2 @ 0x16e
-.byte 0x0 @ 0x16f
+	End
+@ 170
 
 Script_branch_170: @ 170
 	Message 0xb
 	Jump Script_branch_194
-@ 179
-
 Script_branch_179: @ 179
 	Message 0xc
 	Jump Script_branch_194
-@ 182
-
 Script_branch_182: @ 182
 	Message 0xd
 	Jump Script_branch_194
-@ 18b
-
 Script_branch_18b: @ 18b
 	Message 0xe
 	Jump Script_branch_194
-@ 194
-
 Script_branch_194: @ 194
 	CopyVar 0x8008, 0x8002
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_1dd
+	CompareLastResultJump EQUAL, Script_branch_1dd
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_1eb
+	CompareLastResultJump EQUAL, Script_branch_1eb
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_1f7
+	CompareLastResultJump EQUAL, Script_branch_1f7
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_203
+	CompareLastResultJump EQUAL, Script_branch_203
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_20f
+	CompareLastResultJump EQUAL, Script_branch_20f
 	End
 @ 1dd
 
 Script_branch_1dd: @ 1dd
 	SetVar 0x8003, 0x2
 	Jump Script_branch_21b
-@ 1e9
-
-.byte 0x2 @ 0x1e9
-.byte 0x0 @ 0x1ea
+	End
+@ 1eb
 
 Script_branch_1eb: @ 1eb
 	SetVar 0x8003, 0x33
 	Jump Script_branch_21b
-@ 1f7
-
 Script_branch_1f7: @ 1f7
 	SetVar 0x8003, 0xd8
 	Jump Script_branch_21b
-@ 203
-
 Script_branch_203: @ 203
 	SetVar 0x8003, 0x1d
 	Jump Script_branch_21b
-@ 20f
-
 Script_branch_20f: @ 20f
 	SetVar 0x8003, 0x1
 	Jump Script_branch_21b
-@ 21b
-
 Script_branch_21b: @ 21b
 	CopyVar 0x8004, 0x8003
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_246
+	CompareLastResultJump EQUAL, Script_branch_246
 	CallStandard 0x7fc
 	Jump Script_branch_269
-@ 246
-
 Script_branch_246: @ 246
 	CopyVar 0x40f2, 0x8002
 	Message 0xf
@@ -225,8 +193,6 @@ Script_branch_257: @ 257
 	Message 0x10
 	CopyVar 0x8002, 0x40f2
 	Jump Script_branch_194
-@ 269
-
 Script_branch_269: @ 269
 	SetVar 0x40f2, 0x0
 	SetFlag 0xab3

@@ -43,11 +43,11 @@ Script_2: @ 36
 	WaitMovement
 	CallStandard 0x807
 	If 0x8005, 0x18
-	CompareLastResultCall 0x1, Script_branch_109
+	CompareLastResultCall EQUAL, Script_branch_109
 	If 0x8005, 0x19
-	CompareLastResultCall 0x1, Script_branch_11d
+	CompareLastResultCall EQUAL, Script_branch_11d
 	If 0x8005, 0x1a
-	CompareLastResultCall 0x1, Script_branch_131
+	CompareLastResultCall EQUAL, Script_branch_131
 	Message 0x0
 	ApplyMovement 0x5, Movement_184
 	WaitMovement
@@ -59,7 +59,7 @@ Script_2: @ 36
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_f2
+	CompareLastResultJump EQUAL, Script_branch_f2
 	CallStandard 0x7fc
 	Call Function_e5
 	CallStandard 0x808
@@ -162,7 +162,7 @@ Script_3: @ 1a0
 	LockAll
 	FacePlayer
 	CheckFlag 0x160
-	CompareLastResultJump 0x0, Script_branch_1be
+	CompareLastResultJump LESSER, Script_branch_1be
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress
@@ -176,7 +176,7 @@ Script_branch_1be: @ 1be
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1f0
+	CompareLastResultJump EQUAL, Script_branch_1f0
 	CallStandard 0x7fc
 	Call Function_e5
 	ReleaseAll

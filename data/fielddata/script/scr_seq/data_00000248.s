@@ -12,59 +12,49 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0xab4
-	CompareLastResultJump 0x1, Script_branch_bc
+	CompareLastResultJump EQUAL, Script_branch_bc
 	Message 0x0
 	CheckIdPlayer 0x8004, 0x4
 	CopyVar 0x8008, 0x8004
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_5b
+	CompareLastResultJump EQUAL, Script_branch_5b
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_77
+	CompareLastResultJump EQUAL, Script_branch_77
 	Jump Script_branch_85
-@ 59
-
-.byte 0x2 @ 0x59
-.byte 0x0 @ 0x5a
+	End
+@ 5b
 
 Script_branch_5b: @ 5b
 	SetVar 0x8004, 0x48
 	Jump Script_branch_93
-@ 67
-
-.byte 0x2 @ 0x67
-.byte 0x0 @ 0x68
+	End
+@ 69
 
 Script_branch_69: @ 69
 	SetVar 0x8004, 0x49
 	Jump Script_branch_93
-@ 75
-
-.byte 0x2 @ 0x75
-.byte 0x0 @ 0x76
+	End
+@ 77
 
 Script_branch_77: @ 77
 	SetVar 0x8004, 0x4a
 	Jump Script_branch_93
-@ 83
-
-.byte 0x2 @ 0x83
-.byte 0x0 @ 0x84
+	End
+@ 85
 
 Script_branch_85: @ 85
 	SetVar 0x8004, 0x4b
 	Jump Script_branch_93
-@ 91
-
-.byte 0x2 @ 0x91
-.byte 0x0 @ 0x92
+	End
+@ 93
 
 Script_branch_93: @ 93
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_c7
+	CompareLastResultJump EQUAL, Script_branch_c7
 	SetFlag 0xab4
 	CallStandard 0x7e0
 	CloseMsgOnKeyPress

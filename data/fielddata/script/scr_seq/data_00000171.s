@@ -37,7 +37,7 @@ Script_3: @ 38
 	SetVarHero 0x0
 	Message 0x3
 	CloseMsgOnKeyPress
-	LgCstlView
+	LeagueCastleView
 	ReleaseAll
 	End
 @ 4c
@@ -53,11 +53,11 @@ Script_4: @ 4c
 	Return2 0xf, 0x800c
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_92
+	CompareLastResultJump EQUAL, Script_branch_92
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_aa
+	CompareLastResultJump EQUAL, Script_branch_aa
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	End
 @ 92
 
@@ -66,21 +66,15 @@ Script_branch_92: @ 92
 	ApplyMovement 0xff, Movement_13c
 	WaitMovement
 	Jump Script_branch_d2
-@ aa
-
 Script_branch_aa: @ aa
 	ApplyMovement 0x2, Movement_118
 	ApplyMovement 0xff, Movement_148
 	WaitMovement
 	Jump Script_branch_d2
-@ c2
-
 Script_branch_c2: @ c2
 	ApplyMovement 0x2, Movement_118
 	WaitMovement
 	Jump Script_branch_d2
-@ d2
-
 Script_branch_d2: @ d2
 	PrepareDoorAnimation 0x0, 0x0, 0x6, 0x9, 0x4d
 	OpenDoor 0x4d

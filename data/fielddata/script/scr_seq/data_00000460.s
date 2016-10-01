@@ -25,21 +25,17 @@ Script_2: @ 1d
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_44
+	CompareLastResultJump EQUAL, Script_branch_44
 	Message 0x2
 	Jump Script_branch_4f
-@ 42
-
-.byte 0x2 @ 0x42
-.byte 0x0 @ 0x43
+	End
+@ 44
 
 Script_branch_44: @ 44
 	Message 0x3
 	Jump Script_branch_4f
-@ 4d
-
-.byte 0x2 @ 0x4d
-.byte 0x0 @ 0x4e
+	End
+@ 4f
 
 Script_branch_4f: @ 4f
 	WaitButton

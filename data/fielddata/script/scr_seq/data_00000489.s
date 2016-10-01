@@ -13,7 +13,7 @@ Script_1: @ 12
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x2e3
-	CompareLastResultCall 0x1, Script_branch_e7
+	CompareLastResultCall EQUAL, Script_branch_e7
 	ApplyMovement 0x4, Movement_188
 	ApplyMovement 0x3, Movement_154
 	ApplyMovement 0xff, Movement_100
@@ -242,29 +242,25 @@ Script_3: @ 1f6
 	ApplyMovement 0xff, Movement_26c
 	WaitMovement
 	Jump Script_branch_212
-@ 210
-
-.byte 0x2 @ 0x210
-.byte 0x0 @ 0x211
+	End
+@ 212
 
 Script_branch_212: @ 212
 	SetVarHero 0x0
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_243
+	CompareLastResultJump EQUAL, Script_branch_243
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_238
+	CompareLastResultJump EQUAL, Script_branch_238
 	End
 @ 238
 
 Script_branch_238: @ 238
 	Message 0x3
 	Jump Script_branch_212
-@ 241
-
-.byte 0x2 @ 0x241
-.byte 0x0 @ 0x242
+	End
+@ 243
 
 Script_branch_243: @ 243
 	ApplyMovement 0xb, Movement_290

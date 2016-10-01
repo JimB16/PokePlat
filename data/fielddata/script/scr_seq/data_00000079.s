@@ -120,12 +120,12 @@ Movement_110: @ 110
 Script_6: @ 134
 	CheckItem 0x1d3, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1aa
+	CompareLastResultJump EQUAL, Script_branch_1aa
 	UnkFunct2 0x3, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1aa
+	CompareLastResultJump EQUAL, Script_branch_1aa
 	CheckFlag 0x81
-	CompareLastResultJump 0x0, Script_branch_1aa
+	CompareLastResultJump LESSER, Script_branch_1aa
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer

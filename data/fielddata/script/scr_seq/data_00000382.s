@@ -17,10 +17,10 @@ Script_2: @ 12
 	PlayFanfare 0x5dc
 	LockAll
 	If 0x4055, 0x5
-	CompareLastResultJump 0x1, Script_branch_84
+	CompareLastResultJump EQUAL, Script_branch_84
 	Cmd_317 0x8004, 0x8005, 0x8006
 	If 0x8005, 0xe8
-	CompareLastResultJump 0x1, Script_branch_59
+	CompareLastResultJump EQUAL, Script_branch_59
 	ApplyMovement 0x80, Movement_dc
 	WaitMovement
 	Message 0x0
@@ -28,8 +28,6 @@ Script_2: @ 12
 	ApplyMovement 0x80, Movement_e4
 	WaitMovement
 	Jump Script_branch_7a
-@ 59
-
 Script_branch_59: @ 59
 	ApplyMovement 0x80, Movement_f0
 	WaitMovement
@@ -48,20 +46,16 @@ Script_3: @ 84
 Script_branch_84: @ 84
 	Cmd_317 0x8004, 0x8005, 0x8006
 	If 0x8005, 0xe7
-	CompareLastResultJump 0x1, Script_branch_b6
+	CompareLastResultJump EQUAL, Script_branch_b6
 	If 0x8005, 0xe8
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	ApplyMovement 0x80, Movement_104
 	WaitMovement
 	Jump Script_branch_d0
-@ b6
-
 Script_branch_b6: @ b6
 	ApplyMovement 0x80, Movement_10c
 	WaitMovement
 	Jump Script_branch_d0
-@ c6
-
 Script_branch_c6: @ c6
 	ApplyMovement 0x80, Movement_114
 	WaitMovement

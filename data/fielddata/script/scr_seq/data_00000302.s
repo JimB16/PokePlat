@@ -7,7 +7,7 @@ Script: @ 0
 @ 6
 
 Script_1: @ 6
-	SetValue 0x410c, 0x1
+	ScriptCmd_AddValue 0x410c, 0x1
 	CheckTurnBack 0x410b, 0x410c
 	End
 @ 14

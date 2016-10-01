@@ -14,7 +14,7 @@ Script: @ 0
 Script_5: @ 1a
 	SetFlag 0x2c9
 	If 0x4056, 0x2
-	CompareLastResultCall 0x1, Script_branch_2d
+	CompareLastResultCall EQUAL, Script_branch_2d
 	End
 @ 2d
 
@@ -28,7 +28,7 @@ Script_1: @ 33
 	LockAll
 	FacePlayer
 	CheckFlag 0xa8
-	CompareLastResultJump 0x1, Script_branch_51
+	CompareLastResultJump EQUAL, Script_branch_51
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -51,10 +51,8 @@ Script_2: @ 5c
 	CompareLastResultJump 0x4, Script_branch_82
 	Message 0x2
 	Jump Script_branch_7a
-@ 78
-
-.byte 0x2 @ 0x78
-.byte 0x0 @ 0x79
+	End
+@ 7a
 
 Script_branch_7a: @ 7a
 	WaitButton
@@ -67,10 +65,8 @@ Script_branch_82: @ 82
 	SetVarHero 0x0
 	Message 0xd
 	Jump Script_branch_7a
-@ 8e
-
-.byte 0x2 @ 0x8e
-.byte 0x0 @ 0x8f
+	End
+@ 90
 
 Script_3: @ 90
 	PlayFanfare 0x5dc
@@ -99,9 +95,9 @@ Script_6: @ b2
 	Message 0x5
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_104
+	CompareLastResultJump EQUAL, Script_branch_104
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_e1
+	CompareLastResultJump EQUAL, Script_branch_e1
 	End
 @ e1
 
@@ -109,9 +105,9 @@ Script_branch_e1: @ e1
 	Message 0x6
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_104
+	CompareLastResultJump EQUAL, Script_branch_104
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_e1
+	CompareLastResultJump EQUAL, Script_branch_e1
 	End
 @ 104
 
@@ -123,9 +119,9 @@ Script_branch_104: @ 104
 	Message 0x8
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_159
+	CompareLastResultJump EQUAL, Script_branch_159
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_136
+	CompareLastResultJump EQUAL, Script_branch_136
 	End
 @ 136
 
@@ -133,9 +129,9 @@ Script_branch_136: @ 136
 	Message 0x9
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_159
+	CompareLastResultJump EQUAL, Script_branch_159
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_136
+	CompareLastResultJump EQUAL, Script_branch_136
 	End
 @ 159
 

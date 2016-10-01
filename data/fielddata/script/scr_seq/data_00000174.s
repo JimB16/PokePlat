@@ -36,7 +36,7 @@ Script_3: @ 47
 	CloseMsgOnKeyPress
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_88
+	CompareLastResultJump EQUAL, Script_branch_88
 	Jump Script_branch_72
 @ 70
 
@@ -53,7 +53,7 @@ Script_branch_72: @ 72
 
 Script_branch_88: @ 88
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_72
+	CompareLastResultJump LESSER, Script_branch_72
 	Jump Script_branch_111
 @ 99
 
@@ -82,7 +82,7 @@ Script_2: @ b4
 	FacePlayer
 	CheckNatPokedexStatus 0x2, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_df
+	CompareLastResultJump EQUAL, Script_branch_df
 	Jump Script_branch_d4
 @ d4
 
@@ -96,9 +96,9 @@ Script_branch_d4: @ d4
 
 Script_branch_df: @ df
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_d4
+	CompareLastResultJump LESSER, Script_branch_d4
 	If 0x407f, 0x0
-	CompareLastResultJump 0x1, Script_branch_102
+	CompareLastResultJump EQUAL, Script_branch_102
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress
@@ -256,13 +256,13 @@ Script_12: @ 22a
 	LockAll
 	FacePlayer
 	CheckFlag 0x964
-	CompareLastResultJump 0x0, Script_branch_260
+	CompareLastResultJump LESSER, Script_branch_260
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_276
+	CompareLastResultJump EQUAL, Script_branch_276
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_26b
+	CompareLastResultJump EQUAL, Script_branch_26b
 	End
 @ 260
 
@@ -284,12 +284,12 @@ Script_branch_26b: @ 26b
 
 Script_branch_276: @ 276
 	CheckFlag 0x157
-	CompareLastResultCall 0x0, Script_branch_2a0
+	CompareLastResultCall LESSER, Script_branch_2a0
 	Message 0xb
 	CloseMsgOnKeyPress
 	Call Function_35c
 	Call Function_376
-	ShipAnm 0x2, 0x3, 0xbc, 0x26f, 0x1b2
+	ShipAnimation 0x2, 0x3, 0xbc, 0x26f, 0x1b2
 	ReleaseAll
 	End
 @ 2a0

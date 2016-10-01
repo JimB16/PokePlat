@@ -12,24 +12,24 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0xb1
-	CompareLastResultJump 0x1, Script_branch_ac
+	CompareLastResultJump EQUAL, Script_branch_ac
 	StoreLeagueTrainer 0x106
 	Message 0x0
 	CloseMsgOnKeyPress
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_7a
+	CompareLastResultCall LESSER, Script_branch_7a
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_82
+	CompareLastResultCall EQUAL, Script_branch_82
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_a6
+	CompareLastResultJump EQUAL, Script_branch_a6
 	SetFlag 0xb1
 	PlayFanfare 0x61a
 	RemovePeople 0x2
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_8a
+	CompareLastResultCall LESSER, Script_branch_8a
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_98
+	CompareLastResultCall EQUAL, Script_branch_98
 	Message 0x1
 	WaitButton
 	CloseMsgOnKeyPress

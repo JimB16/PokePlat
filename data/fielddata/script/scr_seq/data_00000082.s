@@ -25,7 +25,7 @@ Script_2: @ 22
 	TrainerBattle 0x196, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_135
+	CompareLastResultJump EQUAL, Script_branch_135
 	Message 0x1
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -36,11 +36,11 @@ Script_2: @ 22
 	Return2 0xf, 0x800c
 	CheckFacePosition 0x8004
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_a4
+	CompareLastResultJump EQUAL, Script_branch_a4
 	If 0x8004, 0x2
-	CompareLastResultJump 0x1, Script_branch_be
+	CompareLastResultJump EQUAL, Script_branch_be
 	If 0x8004, 0x3
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	End
 @ a4
 
@@ -49,28 +49,22 @@ Script_branch_a4: @ a4
 	ApplyMovement 0xff, Movement_174
 	WaitMovement
 	Jump Script_branch_e2
-@ bc
-
-.byte 0x2 @ 0xbc
-.byte 0x0 @ 0xbd
+	End
+@ be
 
 Script_branch_be: @ be
 	ApplyMovement 0x2, Movement_15c
 	WaitMovement
 	Jump Script_branch_e2
-@ ce
-
-.byte 0x2 @ 0xce
-.byte 0x0 @ 0xcf
+	End
+@ d0
 
 Script_branch_d0: @ d0
 	ApplyMovement 0x2, Movement_168
 	WaitMovement
 	Jump Script_branch_e2
-@ e0
-
-.byte 0x2 @ 0xe0
-.byte 0x0 @ 0xe1
+	End
+@ e2
 
 Script_branch_e2: @ e2
 	Message 0x4
@@ -206,7 +200,7 @@ Script_5: @ 1d6
 	LockAll
 	FacePlayer
 	CheckFlag 0x81
-	CompareLastResultJump 0x1, Script_branch_1f4
+	CompareLastResultJump EQUAL, Script_branch_1f4
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress

@@ -17,21 +17,19 @@ Script: @ 0
 
 Script_8: @ 2a
 	Jump Script_branch_32
-@ 30
-
-.byte 0x2 @ 0x30
-.byte 0x0 @ 0x31
+	End
+@ 32
 
 Script_branch_32: @ 32
 	CheckIdPlayer 0x40c2, 0x3
 	CheckFlag 0xd6
-	CompareLastResultJump 0x0, Script_branch_52
+	CompareLastResultJump LESSER, Script_branch_52
 	End
 @ 45
 
 Script_9: @ 45
 	CheckFlag 0xd6
-	CompareLastResultJump 0x0, Script_branch_52
+	CompareLastResultJump LESSER, Script_branch_52
 	End
 @ 52
 
@@ -78,7 +76,7 @@ Script_4: @ 95
 	LockAll
 	FacePlayer
 	CheckFlag 0xd7
-	CompareLastResultJump 0x1, Script_branch_b3
+	CompareLastResultJump EQUAL, Script_branch_b3
 	Message 0xa
 	WaitButton
 	CloseMsgOnKeyPress
@@ -154,45 +152,37 @@ Script_10: @ 141
 	FacePlayer
 	CheckPokemart 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_1be
+	CompareLastResultJump EQUAL, Script_branch_1be
 	If 0x4000, 0x6
-	CompareLastResultJump 0x1, Script_branch_1be
+	CompareLastResultJump EQUAL, Script_branch_1be
 	SetVariableRival 0x0
 	SetVarHero 0x1
 	CopyVar 0x8008, 0x40c2
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_195
+	CompareLastResultJump EQUAL, Script_branch_195
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_1a0
+	CompareLastResultJump EQUAL, Script_branch_1a0
 	Jump Script_branch_1ab
-@ 193
-
-.byte 0x2 @ 0x193
-.byte 0x0 @ 0x194
+	End
+@ 195
 
 Script_branch_195: @ 195
 	Message 0x4
 	Jump Script_branch_1b6
-@ 19e
-
-.byte 0x2 @ 0x19e
-.byte 0x0 @ 0x19f
+	End
+@ 1a0
 
 Script_branch_1a0: @ 1a0
 	Message 0x5
 	Jump Script_branch_1b6
-@ 1a9
-
-.byte 0x2 @ 0x1a9
-.byte 0x0 @ 0x1aa
+	End
+@ 1ab
 
 Script_branch_1ab: @ 1ab
 	Message 0x6
 	Jump Script_branch_1b6
-@ 1b4
-
-.byte 0x2 @ 0x1b4
-.byte 0x0 @ 0x1b5
+	End
+@ 1b6
 
 Script_branch_1b6: @ 1b6
 	WaitButton
@@ -203,26 +193,24 @@ Script_branch_1b6: @ 1b6
 
 Script_branch_1be: @ 1be
 	CheckFlag 0xab2
-	CompareLastResultJump 0x1, Script_branch_2cb
+	CompareLastResultJump EQUAL, Script_branch_2cb
 	SetVariableRival 0x0
 	SetVarHero 0x1
 	Message 0x2
 	CloseMsgOnKeyPress
 	StoreStarter 0x800c
 	If 0x800c, 0x183
-	CompareLastResultJump 0x1, Script_branch_236
+	CompareLastResultJump EQUAL, Script_branch_236
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_272
+	CompareLastResultJump EQUAL, Script_branch_272
 	Jump Script_branch_1fa
-@ 1f8
-
-.byte 0x2 @ 0x1f8
-.byte 0x0 @ 0x1f9
+	End
+@ 1fa
 
 Script_branch_1fa: @ 1fa
 	CheckFirstTimeChampion 0x800c
 	If 0x800c, 0x14
-	CompareLastResultJump 0x0, Script_branch_21a
+	CompareLastResultJump LESSER, Script_branch_21a
 	If 0x800c, 0x14
 	CompareLastResultJump 0x4, Script_branch_228
 	End
@@ -231,23 +219,19 @@ Script_branch_1fa: @ 1fa
 Script_branch_21a: @ 21a
 	TrainerBattle 0x345, 0x0
 	Jump Script_branch_2ae
-@ 226
-
-.byte 0x2 @ 0x226
-.byte 0x0 @ 0x227
+	End
+@ 228
 
 Script_branch_228: @ 228
 	TrainerBattle 0x367, 0x0
 	Jump Script_branch_2ae
-@ 234
-
-.byte 0x2 @ 0x234
-.byte 0x0 @ 0x235
+	End
+@ 236
 
 Script_branch_236: @ 236
 	CheckFirstTimeChampion 0x800c
 	If 0x800c, 0x14
-	CompareLastResultJump 0x0, Script_branch_256
+	CompareLastResultJump LESSER, Script_branch_256
 	If 0x800c, 0x14
 	CompareLastResultJump 0x4, Script_branch_264
 	End
@@ -256,23 +240,19 @@ Script_branch_236: @ 236
 Script_branch_256: @ 256
 	TrainerBattle 0x346, 0x0
 	Jump Script_branch_2ae
-@ 262
-
-.byte 0x2 @ 0x262
-.byte 0x0 @ 0x263
+	End
+@ 264
 
 Script_branch_264: @ 264
 	TrainerBattle 0x368, 0x0
 	Jump Script_branch_2ae
-@ 270
-
-.byte 0x2 @ 0x270
-.byte 0x0 @ 0x271
+	End
+@ 272
 
 Script_branch_272: @ 272
 	CheckFirstTimeChampion 0x800c
 	If 0x800c, 0x14
-	CompareLastResultJump 0x0, Script_branch_292
+	CompareLastResultJump LESSER, Script_branch_292
 	If 0x800c, 0x14
 	CompareLastResultJump 0x4, Script_branch_2a0
 	End
@@ -281,29 +261,23 @@ Script_branch_272: @ 272
 Script_branch_292: @ 292
 	TrainerBattle 0x347, 0x0
 	Jump Script_branch_2ae
-@ 29e
-
-.byte 0x2 @ 0x29e
-.byte 0x0 @ 0x29f
+	End
+@ 2a0
 
 Script_branch_2a0: @ 2a0
 	TrainerBattle 0x369, 0x0
 	Jump Script_branch_2ae
-@ 2ac
-
-.byte 0x2 @ 0x2ac
-.byte 0x0 @ 0x2ad
+	End
+@ 2ae
 
 Script_branch_2ae: @ 2ae
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2dc
+	CompareLastResultJump EQUAL, Script_branch_2dc
 	SetFlag 0xab2
 	Jump Script_branch_2cb
-@ 2c9
-
-.byte 0x2 @ 0x2c9
-.byte 0x0 @ 0x2ca
+	End
+@ 2cb
 
 Script_branch_2cb: @ 2cb
 	SetVariableRival 0x0

@@ -23,7 +23,7 @@ Script_2: @ 22
 	FacePlayer
 	CheckBadge 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_48
+	CompareLastResultJump EQUAL, Script_branch_48
 	Message 0xd
 	WaitButton
 	CloseMsgOnKeyPress
@@ -45,7 +45,7 @@ Script_3: @ 56
 	LockAll
 	CheckBadge 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	SetVariableRival 0x0
 	SetVariableRival 0x1
 	Message 0xf
@@ -72,14 +72,14 @@ Script_4: @ 94
 	FacePlayer
 	CheckBadge 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_161
+	CompareLastResultJump EQUAL, Script_branch_161
 	DeActivateLeader 0x9, 0x43, 0x0, 0x0, 0x0
 	Message 0x0
 	CloseMsgOnKeyPress
 	TrainerBattle 0x13b, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1c3
+	CompareLastResultJump EQUAL, Script_branch_1c3
 	Message 0x1
 	SetVarHero 0x0
 	Message 0x2
@@ -95,17 +95,15 @@ Script_4: @ 94
 	DeActivateLeader 0xa, 0x43, 0x13b, 0x0, 0x0
 	Message 0x3
 	Jump Script_branch_177
-@ 117
-
-.byte 0x2 @ 0x117
-.byte 0x0 @ 0x118
+	End
+@ 119
 
 Script_branch_119: @ 119
 	SetVar 0x8004, 0x19d
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_157
+	CompareLastResultJump EQUAL, Script_branch_157
 	CallStandard 0x7fc
 	SetFlag 0x74
 	SetVarItem 0x0, 0x8004
@@ -126,7 +124,7 @@ Script_branch_157: @ 157
 
 Script_branch_161: @ 161
 	CheckFlag 0x74
-	CompareLastResultJump 0x0, Script_branch_119
+	CompareLastResultJump LESSER, Script_branch_119
 	Message 0x5
 	WaitButton
 	CloseMsgOnKeyPress
@@ -139,7 +137,7 @@ Script_branch_177: @ 177
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1b7
+	CompareLastResultJump EQUAL, Script_branch_1b7
 	CallStandard 0x7fc
 	SetFlag 0x74
 	SetVarItem 0x0, 0x8004
@@ -148,7 +146,7 @@ Script_branch_177: @ 177
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll
-	FlorarClckAnm
+	FloralClockAnimation
 	End
 @ 1b7
 
@@ -156,7 +154,7 @@ Script_branch_1b7: @ 1b7
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress
 	ReleaseAll
-	FlorarClckAnm
+	FloralClockAnimation
 	End
 @ 1c3
 
@@ -178,13 +176,13 @@ Script_5: @ 1c9
 	TrainerBattle 0x144, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1c3
+	CompareLastResultJump EQUAL, Script_branch_1c3
 	Message 0x7
 	WaitButton
 	SetVar 0x40ae, 0x1
 	CloseMsgOnKeyPress
 	ReleaseAll
-	FlorarClckAnm
+	FloralClockAnimation
 	End
 @ 211
 
@@ -210,13 +208,13 @@ Script_6: @ 21c
 	TrainerBattle 0x103, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1c3
+	CompareLastResultJump EQUAL, Script_branch_1c3
 	Message 0x9
 	WaitButton
 	SetVar 0x40ae, 0x2
 	CloseMsgOnKeyPress
 	ReleaseAll
-	FlorarClckAnm
+	FloralClockAnimation
 	End
 @ 270
 
@@ -242,13 +240,13 @@ Script_7: @ 27b
 	TrainerBattle 0x104, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1c3
+	CompareLastResultJump EQUAL, Script_branch_1c3
 	Message 0xb
 	WaitButton
 	SetVar 0x40ae, 0x3
 	CloseMsgOnKeyPress
 	ReleaseAll
-	FlorarClckAnm
+	FloralClockAnimation
 	End
 @ 2cf
 
@@ -263,13 +261,13 @@ Script_branch_2cf: @ 2cf
 Function_2da: @ 2da
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_314
+	CompareLastResultCall EQUAL, Script_branch_314
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_322
+	CompareLastResultCall EQUAL, Script_branch_322
 	If 0x800c, 0x2
-	CompareLastResultCall 0x1, Script_branch_330
+	CompareLastResultCall EQUAL, Script_branch_330
 	If 0x800c, 0x3
-	CompareLastResultCall 0x1, Script_branch_33e
+	CompareLastResultCall EQUAL, Script_branch_33e
 	Return
 @ 314
 

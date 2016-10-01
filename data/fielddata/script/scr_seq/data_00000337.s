@@ -10,16 +10,16 @@ Script_1: @ 6
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x149
-	CompareLastResultJump 0x1, Script_branch_9c
+	CompareLastResultJump EQUAL, Script_branch_9c
 	CheckFlag 0xab0
-	CompareLastResultJump 0x1, Script_branch_9c
+	CompareLastResultJump EQUAL, Script_branch_9c
 	CheckTime 0x800c
 	If 0x800c, 0x3
-	CompareLastResultJump 0x0, Script_branch_9c
+	CompareLastResultJump LESSER, Script_branch_9c
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_96
+	CompareLastResultJump EQUAL, Script_branch_96
 	SetVarHero 0x0
 	Message 0x2
 	CloseMsgOnKeyPress
@@ -29,10 +29,10 @@ Script_1: @ 6
 	WildBattle 0x1df, 0x14
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_a7
+	CompareLastResultJump EQUAL, Script_branch_a7
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_8b
+	CompareLastResultJump EQUAL, Script_branch_8b
 	SetFlag 0x149
 	ReleaseAll
 	End

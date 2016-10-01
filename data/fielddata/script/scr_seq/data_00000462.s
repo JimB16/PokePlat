@@ -48,7 +48,7 @@ Script_4: @ 5f
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xfd
-	CompareLastResultJump 0x1, Script_branch_81
+	CompareLastResultJump EQUAL, Script_branch_81
 	SetFlag 0xfd
 	FacePlayer
 	Message 0x3

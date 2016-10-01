@@ -11,40 +11,40 @@ Script: @ 0
 Script_1: @ e
 	SetFlag 0x241
 	CheckFlag 0x158
-	CompareLastResultJump 0x0, Script_branch_1f
+	CompareLastResultJump LESSER, Script_branch_1f
 	End
 @ 1f
 
 Script_branch_1f: @ 1f
 	CheckFlag 0x964
-	CompareLastResultJump 0x1, Script_branch_2c
+	CompareLastResultJump EQUAL, Script_branch_2c
 	End
 @ 2c
 
 Script_branch_2c: @ 2c
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_40
+	CompareLastResultJump EQUAL, Script_branch_40
 	End
 @ 40
 
 Script_branch_40: @ 40
 	CheckItem 0x1c6, 0x1, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	End
 @ 57
 
 Script_branch_57: @ 57
 	UnkFunct2 0x0, 0x4000
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_6b
+	CompareLastResultJump EQUAL, Script_branch_6b
 	End
 @ 6b
 
 Script_branch_6b: @ 6b
 	CheckFlag 0x12c
-	CompareLastResultJump 0x1, Script_branch_78
+	CompareLastResultJump EQUAL, Script_branch_78
 	End
 @ 78
 
@@ -128,7 +128,7 @@ Script_3: @ 160
 
 Function_184: @ 184
 	CheckFlag 0x158
-	CompareLastResultJump 0x1, Script_branch_197
+	CompareLastResultJump EQUAL, Script_branch_197
 	SetVar 0x40f8, 0x0
 	Return
 @ 197

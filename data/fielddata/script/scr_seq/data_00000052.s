@@ -14,14 +14,14 @@ Script_1: @ e
 	FacePlayer
 	CheckBadge 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_103
+	CompareLastResultJump EQUAL, Script_branch_103
 	DeActivateLeader 0x9, 0x2f, 0x0, 0x0, 0x0
 	Message 0x0
 	CloseMsgOnKeyPress
 	TrainerBattle 0xf6, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_119
+	CompareLastResultJump EQUAL, Script_branch_119
 	Message 0x1
 	SetVarHero 0x0
 	Message 0x2
@@ -45,17 +45,15 @@ Script_1: @ e
 	SetFlag 0x198
 	Message 0x3
 	Jump Script_branch_bb
-@ b9
-
-.byte 0x2 @ 0xb9
-.byte 0x0 @ 0xba
+	End
+@ bb
 
 Script_branch_bb: @ bb
 	SetVar 0x8004, 0x193
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_f9
+	CompareLastResultJump EQUAL, Script_branch_f9
 	CallStandard 0x7fc
 	SetFlag 0x75
 	SetVarItem 0x0, 0x8004
@@ -76,7 +74,7 @@ Script_branch_f9: @ f9
 
 Script_branch_103: @ 103
 	CheckFlag 0x75
-	CompareLastResultJump 0x0, Script_branch_bb
+	CompareLastResultJump LESSER, Script_branch_bb
 	Message 0x5
 	WaitButton
 	CloseMsgOnKeyPress
@@ -96,7 +94,7 @@ Script_2: @ 11f
 	FacePlayer
 	CheckBadge 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_145
+	CompareLastResultJump EQUAL, Script_branch_145
 	Message 0x6
 	WaitButton
 	CloseMsgOnKeyPress
@@ -118,7 +116,7 @@ Script_3: @ 153
 	LockAll
 	CheckBadge 0x0, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_17d
+	CompareLastResultJump EQUAL, Script_branch_17d
 	SetVariableRival 0x0
 	SetVariableRival 0x1
 	Message 0x8

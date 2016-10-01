@@ -13,9 +13,9 @@ Script_1: @ 6
 	CheckFloor 0x40ce
 	CopyVar 0x8008, 0x40ce
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_38
+	CompareLastResultJump EQUAL, Script_branch_38
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_6a
+	CompareLastResultJump EQUAL, Script_branch_6a
 	End
 @ 38
 

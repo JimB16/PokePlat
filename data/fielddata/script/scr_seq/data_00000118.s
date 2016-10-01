@@ -14,7 +14,7 @@ Script: @ 0
 Script_6: @ 1a
 	CheckStatusPhraseBox 0xb, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultCall 0x1, Script_branch_4f
+	CompareLastResultCall EQUAL, Script_branch_4f
 	End
 @ 2f
 
@@ -23,7 +23,7 @@ Script_5: @ 2f
 	If 0x4000, 0x0
 	CompareLastResultJump 0x5, Script_branch_55
 	CheckFlag 0x217
-	CompareLastResultCall 0x0, Script_branch_4f
+	CompareLastResultCall LESSER, Script_branch_4f
 	End
 @ 4f
 
@@ -34,7 +34,7 @@ Script_branch_4f: @ 4f
 
 Script_branch_55: @ 55
 	CheckFlag 0x217
-	CompareLastResultJump 0x1, Script_branch_66
+	CompareLastResultJump EQUAL, Script_branch_66
 	ClearFlag 0x217
 	End
 @ 66

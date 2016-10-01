@@ -14,9 +14,9 @@ Script_1: @ 6
 	Message 0x0
 	CloseMsgOnKeyPress
 	If 0x8005, 0xc
-	CompareLastResultCall 0x1, Script_branch_1ad
+	CompareLastResultCall EQUAL, Script_branch_1ad
 	If 0x8005, 0xd
-	CompareLastResultCall 0x1, Script_branch_1c1
+	CompareLastResultCall EQUAL, Script_branch_1c1
 	LockCam 0x8004, 0x8005
 	FadeScreen 0x6, 0x3, 0x0, 0x0
 	ApplyMovement 0xf1, Movement_1f8

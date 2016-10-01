@@ -18,7 +18,7 @@ Script_2: @ 10
 	FacePlayer
 	CheckPokeParty 0x800c, 0xdf
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cf
+	CompareLastResultJump EQUAL, Script_branch_cf
 	Message 0x1
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -29,24 +29,24 @@ Script_2: @ 10
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x8002, 0xff
-	CompareLastResultJump 0x1, Script_branch_11e
+	CompareLastResultJump EQUAL, Script_branch_11e
 	CheckPokeEgg 0x8002, 0x8001
 	If 0x8001, 0xdf
 	CompareLastResultJump 0x5, Script_branch_108
-	CopyPokeHeight 0x800c, 0x8002
+	CopyPokemonHeight 0x800c, 0x8002
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_ed
+	CompareLastResultJump EQUAL, Script_branch_ed
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_da
-	ComparePokeHeight 0x0, 0x1, 0x8002
+	CompareLastResultJump EQUAL, Script_branch_da
+	ComparePokemonHeight 0x0, 0x1, 0x8002
 	Message 0x2
 	SetVar 0x8004, 0x6
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_113
+	CompareLastResultJump EQUAL, Script_branch_113
 	CallStandard 0x7fc
-	SetvarPokeHeight 0x8002
+	SetVariablePokemonHeight 0x8002
 	Message 0x3
 	WaitButton
 	CloseMsgOnKeyPress
@@ -63,7 +63,7 @@ Script_branch_cf: @ cf
 @ da
 
 Script_branch_da: @ da
-	CheckPokeHeight 0x0, 0x1, 0xdf
+	CheckPokemonHeight 0x0, 0x1, 0xdf
 	Message 0x4
 	WaitButton
 	CloseMsgOnKeyPress
@@ -72,8 +72,8 @@ Script_branch_da: @ da
 @ ed
 
 Script_branch_ed: @ ed
-	ComparePokeHeight 0x0, 0x1, 0x8002
-	CheckPokeHeight 0x2, 0x3, 0xdf
+	ComparePokemonHeight 0x0, 0x1, 0x8002
+	CheckPokemonHeight 0x2, 0x3, 0xdf
 	Message 0x5
 	WaitButton
 	CloseMsgOnKeyPress

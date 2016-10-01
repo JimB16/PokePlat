@@ -66,10 +66,8 @@ Script_4: @ 7a
 	Message 0x4
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_9c
+	CompareLastResultJump EQUAL, Script_branch_9c
 	Jump Script_branch_15b
-@ 9c
-
 Script_branch_9c: @ 9c
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
@@ -79,7 +77,7 @@ Script_branch_9c: @ 9c
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_15b
+	CompareLastResultJump EQUAL, Script_branch_15b
 	Message 0x5
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
@@ -89,22 +87,18 @@ Script_branch_9c: @ 9c
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_15b
-	CheckPhraseBoxImput2 0x800c, 0x8000, 0x8001, 0x8002, 0x8003
+	CompareLastResultJump EQUAL, Script_branch_15b
+	CheckPhraseBoxInput2 0x800c, 0x8000, 0x8001, 0x8002, 0x8003
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_131
+	CompareLastResultJump EQUAL, Script_branch_131
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_131
+	CompareLastResultJump EQUAL, Script_branch_131
 	Jump Script_branch_166
-@ 131
-
 Script_branch_131: @ 131
-	ComparePhraseBoxImput 0x800c, 0x8000, 0x8001, 0x8002, 0x8003
+	ComparePhraseBoxInput 0x800c, 0x8000, 0x8001, 0x8002, 0x8003
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	Jump Script_branch_171
-@ 150
-
 Script_branch_150: @ 150
 	Message 0x6
 	WaitButton
@@ -132,7 +126,7 @@ Script_branch_166: @ 166
 Script_branch_171: @ 171
 	Message 0x9
 	WaitButton
-	ActMisteryGift
+	ActivateMysteryGift
 	CloseMsgOnKeyPress
 	ReleaseAll
 	End

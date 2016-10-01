@@ -19,17 +19,15 @@ Script_1: @ 22
 	FacePlayer
 	CheckFirstTimeVShop 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_63
+	CompareLastResultJump EQUAL, Script_branch_63
 	Message 0x0
 	Multi 0x1, 0x1, 0x0, 0x1, 0x800c
 	Cmd_42 0xe5, 0x1
 	Cmd_42 0xe4, 0x0
 	CloseMulti
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	Jump Script_branch_bb
-@ 63
-
 Script_branch_63: @ 63
 	SetVarHero 0x0
 	Message 0x1
@@ -41,14 +39,12 @@ Script_branch_63: @ 63
 	CompareLastResultJump 0x5, Script_branch_bb
 	CheckIdPlayer 0x800c, 0x4
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_d1
+	CompareLastResultJump EQUAL, Script_branch_d1
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_dc
+	CompareLastResultJump EQUAL, Script_branch_dc
 	Jump Script_branch_e7
-@ bb
-
 Script_branch_bb: @ bb
 	Message 0x2
 	WaitButton
@@ -128,11 +124,11 @@ Script_5: @ 12b
 	FacePlayer
 	StorePoketchApp 0xa, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_16f
+	CompareLastResultJump EQUAL, Script_branch_16f
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_17a
+	CompareLastResultJump EQUAL, Script_branch_17a
 	Message 0xb
 	SetVar 0x8004, 0xa
 	CallStandard 0x7d9

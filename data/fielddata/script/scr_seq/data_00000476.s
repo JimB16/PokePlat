@@ -14,28 +14,22 @@ Script_2: @ a
 	SetVarAlter 0x1
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_31
+	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_3c
-@ 2f
-
-.byte 0x2 @ 0x2f
-.byte 0x0 @ 0x30
+	End
+@ 31
 
 Script_branch_31: @ 31
 	Message 0x2
 	Jump Script_branch_47
-@ 3a
-
-.byte 0x2 @ 0x3a
-.byte 0x0 @ 0x3b
+	End
+@ 3c
 
 Script_branch_3c: @ 3c
 	Message 0x3
 	Jump Script_branch_47
-@ 45
-
-.byte 0x2 @ 0x45
-.byte 0x0 @ 0x46
+	End
+@ 47
 
 Script_branch_47: @ 47
 	Message 0x4
@@ -53,18 +47,16 @@ Script_branch_47: @ 47
 Function_6a: @ 6a
 	CheckSpritePosition 0x8005, 0x8006
 	If 0x8006, 0x5
-	CompareLastResultJump 0x1, Script_branch_ac
+	CompareLastResultJump EQUAL, Script_branch_ac
 	If 0x8006, 0x6
-	CompareLastResultJump 0x1, Script_branch_b8
+	CompareLastResultJump EQUAL, Script_branch_b8
 	If 0x8006, 0x7
-	CompareLastResultJump 0x1, Script_branch_c4
+	CompareLastResultJump EQUAL, Script_branch_c4
 	If 0x8006, 0x8
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	Jump Script_branch_dc
-@ aa
-
-.byte 0x2 @ 0xaa
-.byte 0x0 @ 0xab
+	End
+@ ac
 
 Script_branch_ac: @ ac
 	ApplyMovement 0x1, Movement_168
@@ -99,18 +91,16 @@ Script_branch_dc: @ dc
 Function_e8: @ e8
 	CheckSpritePosition 0x8005, 0x8006
 	If 0x8006, 0x5
-	CompareLastResultJump 0x1, Script_branch_12a
+	CompareLastResultJump EQUAL, Script_branch_12a
 	If 0x8006, 0x6
-	CompareLastResultJump 0x1, Script_branch_136
+	CompareLastResultJump EQUAL, Script_branch_136
 	If 0x8006, 0x7
-	CompareLastResultJump 0x1, Script_branch_142
+	CompareLastResultJump EQUAL, Script_branch_142
 	If 0x8006, 0x8
-	CompareLastResultJump 0x1, Script_branch_14e
+	CompareLastResultJump EQUAL, Script_branch_14e
 	Jump Script_branch_15a
-@ 128
-
-.byte 0x2 @ 0x128
-.byte 0x0 @ 0x129
+	End
+@ 12a
 
 Script_branch_12a: @ 12a
 	ApplyMovement 0x1, Movement_1c4

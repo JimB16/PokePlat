@@ -13,7 +13,7 @@ Script: @ 0
 
 Script_6: @ 1a
 	If 0x4094, 0x2
-	CompareLastResultJump 0x0, Script_branch_29
+	CompareLastResultJump LESSER, Script_branch_29
 	End
 @ 29
 
@@ -26,9 +26,9 @@ Script_1: @ 31
 	LockAll
 	RideBike 0x0
 	CheckFlag 0xdd
-	CompareLastResultCall 0x0, Script_branch_7d
+	CompareLastResultCall LESSER, Script_branch_7d
 	CheckFlag 0xdd
-	CompareLastResultCall 0x1, Script_branch_b7
+	CompareLastResultCall EQUAL, Script_branch_b7
 	SetVarHero 0x0
 	Soundfr 0x481
 	Message 0x1
@@ -151,32 +151,26 @@ Script_3: @ 154
 	FollowHero 0xe, 0xf
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_177
+	CompareLastResultJump EQUAL, Script_branch_177
 	Jump Script_branch_191
-@ 175
-
-.byte 0x2 @ 0x175
-.byte 0x0 @ 0x176
+	End
+@ 177
 
 Script_branch_177: @ 177
 	ApplyMovement 0xe, Movement_1f0
 	ApplyMovement 0xff, Movement_1e4
 	WaitMovement
 	Jump Script_branch_1ab
-@ 18f
-
-.byte 0x2 @ 0x18f
-.byte 0x0 @ 0x190
+	End
+@ 191
 
 Script_branch_191: @ 191
 	ApplyMovement 0xe, Movement_1fc
 	ApplyMovement 0xff, Movement_1e4
 	WaitMovement
 	Jump Script_branch_1ab
-@ 1a9
-
-.byte 0x2 @ 0x1a9
-.byte 0x0 @ 0x1aa
+	End
+@ 1ab
 
 Script_branch_1ab: @ 1ab
 	ApplyMovement 0xe, Movement_204

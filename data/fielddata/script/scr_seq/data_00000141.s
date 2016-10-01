@@ -30,69 +30,45 @@ Script: @ 0
 Script_1: @ 5a
 	SetVar 0x8004, 0x0
 	Jump Script_branch_ea
-@ 66
-
 Script_2: @ 66
 	SetVar 0x8004, 0x1
 	Jump Script_branch_ea
-@ 72
-
 Script_3: @ 72
 	SetVar 0x8004, 0x2
 	Jump Script_branch_ea
-@ 7e
-
 Script_4: @ 7e
 	SetVar 0x8004, 0x3
 	Jump Script_branch_ea
-@ 8a
-
 Script_5: @ 8a
 	SetVar 0x8004, 0x4
 	Jump Script_branch_ea
-@ 96
-
 Script_6: @ 96
 	SetVar 0x8004, 0x5
 	Jump Script_branch_ea
-@ a2
-
 Script_7: @ a2
 	SetVar 0x8004, 0x6
 	Jump Script_branch_ea
-@ ae
-
 Script_8: @ ae
 	SetVar 0x8004, 0x7
 	Jump Script_branch_ea
-@ ba
-
 Script_9: @ ba
 	SetVar 0x8004, 0x8
 	Jump Script_branch_ea
-@ c6
-
 Script_10: @ c6
 	SetVar 0x8004, 0x9
 	Jump Script_branch_ea
-@ d2
-
 Script_11: @ d2
 	SetVar 0x8004, 0xa
 	Jump Script_branch_ea
-@ de
-
 Script_12: @ de
 	SetVar 0x8004, 0xb
 	Jump Script_branch_ea
-@ ea
-
 Script_branch_ea: @ ea
 	PlayFanfare 0x5dc
 	LockAll
 	CheckItem 0x1bc, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_133
+	CompareLastResultJump EQUAL, Script_branch_133
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	DeActivateLeader 0x10, 0x0, 0x0, 0x0, 0x0
@@ -119,19 +95,17 @@ Script_13: @ 13e
 	Message 0x0
 	CheckItem 0x1bc, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_18d
+	CompareLastResultJump EQUAL, Script_branch_18d
 	CheckFlag 0x130
-	CompareLastResultJump 0x1, Script_branch_198
+	CompareLastResultJump EQUAL, Script_branch_198
 	CheckFlag 0x165
-	CompareLastResultJump 0x1, Script_branch_2ca
+	CompareLastResultJump EQUAL, Script_branch_2ca
 	CheckRecordCasino 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_198
+	CompareLastResultJump EQUAL, Script_branch_198
 	Jump Script_branch_2ca
-@ 18b
-
-.byte 0x2 @ 0x18b
-.byte 0x0 @ 0x18c
+	End
+@ 18d
 
 Script_branch_18d: @ 18d
 	Message 0x1
@@ -153,20 +127,18 @@ Script_branch_1a4: @ 1a4
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_1e3
+	CompareLastResultJump EQUAL, Script_branch_1e3
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_240
+	CompareLastResultJump EQUAL, Script_branch_240
 	Jump Script_branch_2bb
-@ 1e3
-
 Script_branch_1e3: @ 1e3
 	CheckMoney 0x800c, 0x3e8
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_29d
+	CompareLastResultJump EQUAL, Script_branch_29d
 	CheckCoinsCasino 0x800c, 0x32
 	Nop0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2ac
+	CompareLastResultJump EQUAL, Script_branch_2ac
 	PlayFanfare 0x644
 	Cmd_334 0x23, 0x3e8
 	TakeMoney 0x3e8
@@ -179,16 +151,14 @@ Script_branch_1e3: @ 1e3
 	Message 0x3
 	Return2 0x1e, 0x800c
 	Jump Script_branch_1a4
-@ 240
-
 Script_branch_240: @ 240
 	CheckMoney 0x800c, 0x2710
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_29d
+	CompareLastResultJump EQUAL, Script_branch_29d
 	CheckCoinsCasino 0x800c, 0x1f4
 	Nop0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2ac
+	CompareLastResultJump EQUAL, Script_branch_2ac
 	PlayFanfare 0x644
 	Cmd_334 0x23, 0x2710
 	TakeMoney 0x2710
@@ -201,8 +171,6 @@ Script_branch_240: @ 240
 	Message 0x3
 	Return2 0x1e, 0x800c
 	Jump Script_branch_1a4
-@ 29d
-
 Script_branch_29d: @ 29d
 	Message 0x4
 	WaitButton
@@ -238,30 +206,24 @@ Script_branch_2ca: @ 2ca
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_327
+	CompareLastResultJump EQUAL, Script_branch_327
 	Jump Script_branch_2f3
-@ 2f1
-
-.byte 0x2 @ 0x2f1
-.byte 0x0 @ 0x2f2
+	End
+@ 2f3
 
 Script_branch_2f3: @ 2f3
 	CheckFlag 0x165
-	CompareLastResultJump 0x1, Script_branch_309
+	CompareLastResultJump EQUAL, Script_branch_309
 	Message 0x7
 	Jump Script_branch_314
-@ 307
-
-.byte 0x2 @ 0x307
-.byte 0x0 @ 0x308
+	End
+@ 309
 
 Script_branch_309: @ 309
 	Message 0xa
 	Jump Script_branch_314
-@ 312
-
-.byte 0x2 @ 0x312
-.byte 0x0 @ 0x313
+	End
+@ 314
 
 Script_branch_314: @ 314
 	CallStandard 0x7fc
@@ -276,10 +238,8 @@ Script_branch_314: @ 314
 Script_branch_327: @ 327
 	SetFlag 0x165
 	Jump Script_branch_198
-@ 331
-
-.byte 0x2 @ 0x331
-.byte 0x0 @ 0x332
+	End
+@ 333
 
 Script_14: @ 333
 	PlayFanfare 0x5dc
@@ -298,13 +258,13 @@ Script_15: @ 346
 	FacePlayer
 	CheckItem 0x1bc, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3a1
+	CompareLastResultJump EQUAL, Script_branch_3a1
 	CheckFlag 0x12e
-	CompareLastResultJump 0x1, Script_branch_3ac
+	CompareLastResultJump EQUAL, Script_branch_3ac
 	CheckCoinsCasino 0x800c, 0x14
 	Nop0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3ac
+	CompareLastResultJump EQUAL, Script_branch_3ac
 	SetFlag 0x12e
 	SetVarHero 0x0
 	Message 0xe
@@ -339,13 +299,13 @@ Script_16: @ 3b7
 	FacePlayer
 	CheckItem 0x1bc, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_412
+	CompareLastResultJump EQUAL, Script_branch_412
 	CheckFlag 0x12f
-	CompareLastResultJump 0x1, Script_branch_41d
+	CompareLastResultJump EQUAL, Script_branch_41d
 	CheckCoinsCasino 0x800c, 0x32
 	Nop0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_41d
+	CompareLastResultJump EQUAL, Script_branch_41d
 	SetFlag 0x12f
 	SetVarHero 0x0
 	Message 0x11
@@ -420,7 +380,7 @@ Script_20: @ 461
 
 Script_21: @ 474
 	If 0x4040, 0x3e7
-	CompareLastResultJump 0x2, Script_branch_497
+	CompareLastResultJump GREATER, Script_branch_497
 	SetVariableNumber 0x0, 0x4040
 	PlayFanfare 0x5dc
 	LockAll
@@ -447,21 +407,17 @@ Script_22: @ 4ad
 	LockAll
 	FacePlayer
 	CheckFlag 0xd6
-	CompareLastResultJump 0x1, Script_branch_4cb
+	CompareLastResultJump EQUAL, Script_branch_4cb
 	Message 0x17
 	Jump Script_branch_4d6
-@ 4c9
-
-.byte 0x2 @ 0x4c9
-.byte 0x0 @ 0x4ca
+	End
+@ 4cb
 
 Script_branch_4cb: @ 4cb
 	Message 0x18
 	Jump Script_branch_4d6
-@ 4d4
-
-.byte 0x2 @ 0x4d4
-.byte 0x0 @ 0x4d5
+	End
+@ 4d6
 
 Script_branch_4d6: @ 4d6
 	WaitButton

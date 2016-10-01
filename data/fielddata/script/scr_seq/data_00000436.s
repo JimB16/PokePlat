@@ -43,7 +43,7 @@ Script_3: @ 50
 	LockAll
 	CheckBike 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	ApplyMovement 0x0, Movement_90
 	WaitMovement
 	Message 0x1
@@ -87,7 +87,7 @@ Script_5: @ b0
 	LockAll
 	FacePlayer
 	CheckFlag 0x12b
-	CompareLastResultJump 0x1, Script_branch_e5
+	CompareLastResultJump EQUAL, Script_branch_e5
 	SetVar 0x8004, 0x60
 	CheckAccessories3 0x0, 0x8004
 	Message 0x3

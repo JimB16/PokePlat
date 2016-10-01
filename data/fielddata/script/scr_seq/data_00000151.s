@@ -12,19 +12,19 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0xbc
-	CompareLastResultJump 0x1, Script_branch_ef
+	CompareLastResultJump EQUAL, Script_branch_ef
 	Message 0x0
 	Message 0x1
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_5f
+	CompareLastResultJump EQUAL, Script_branch_5f
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6f
+	CompareLastResultJump EQUAL, Script_branch_6f
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_7f
+	CompareLastResultJump EQUAL, Script_branch_7f
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_8f
+	CompareLastResultJump EQUAL, Script_branch_8f
 	End
 @ 5f
 
@@ -32,26 +32,18 @@ Script_branch_5f: @ 5f
 	ApplyMovement 0x0, Movement_144
 	WaitMovement
 	Jump Script_branch_9f
-@ 6f
-
 Script_branch_6f: @ 6f
 	ApplyMovement 0x0, Movement_168
 	WaitMovement
 	Jump Script_branch_9f
-@ 7f
-
 Script_branch_7f: @ 7f
 	ApplyMovement 0x0, Movement_fc
 	WaitMovement
 	Jump Script_branch_9f
-@ 8f
-
 Script_branch_8f: @ 8f
 	ApplyMovement 0x0, Movement_120
 	WaitMovement
 	Jump Script_branch_9f
-@ 9f
-
 Script_branch_9f: @ 9f
 	Message 0x2
 	Multi 0x1, 0x1, 0x0, 0x0, 0x8000
@@ -60,7 +52,7 @@ Script_branch_9f: @ 9f
 	CloseMulti
 	CheckIdPlayer 0x800c, 0x2
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_e4
+	CompareLastResultJump EQUAL, Script_branch_e4
 	Message 0x4
 	SetVar 0x8004, 0x1bc
 	SetVar 0x8005, 0x1

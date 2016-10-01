@@ -14,15 +14,15 @@ Script_1: @ e
 	FacePlayer
 	CheckFirstPokeParty 0x8000
 	CheckFlag 0x140
-	CompareLastResultJump 0x0, Script_branch_5c
+	CompareLastResultJump LESSER, Script_branch_5c
 	CheckFlag 0x141
-	CompareLastResultJump 0x0, Script_branch_5c
+	CompareLastResultJump LESSER, Script_branch_5c
 	CheckFlag 0x142
-	CompareLastResultJump 0x0, Script_branch_5c
+	CompareLastResultJump LESSER, Script_branch_5c
 	CheckFlag 0x143
-	CompareLastResultJump 0x0, Script_branch_5c
+	CompareLastResultJump LESSER, Script_branch_5c
 	CheckFlag 0x144
-	CompareLastResultJump 0x0, Script_branch_5c
+	CompareLastResultJump LESSER, Script_branch_5c
 	Message 0xa
 	WaitButton
 	CloseMsgOnKeyPress
@@ -35,19 +35,19 @@ Script_branch_5c: @ 5c
 	Message 0x1
 	Call Function_21c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_d7
+	CompareLastResultJump EQUAL, Script_branch_d7
 	Call Function_24c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	Call Function_27c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_159
+	CompareLastResultJump EQUAL, Script_branch_159
 	Call Function_2ac
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_19a
+	CompareLastResultJump EQUAL, Script_branch_19a
 	Call Function_2dc
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1db
+	CompareLastResultJump EQUAL, Script_branch_1db
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress
@@ -68,7 +68,7 @@ Script_branch_d7: @ d7
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetVarPoke 0x0, 0x8000
 	SetVarItem 0x1, 0x104
 	Message 0x4
@@ -86,7 +86,7 @@ Script_branch_118: @ 118
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetVarPoke 0x0, 0x8000
 	SetVarItem 0x1, 0x105
 	Message 0x4
@@ -104,7 +104,7 @@ Script_branch_159: @ 159
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetVarPoke 0x0, 0x8000
 	SetVarItem 0x1, 0x106
 	Message 0x4
@@ -122,7 +122,7 @@ Script_branch_19a: @ 19a
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetVarPoke 0x0, 0x8000
 	SetVarItem 0x1, 0x107
 	Message 0x4
@@ -140,7 +140,7 @@ Script_branch_1db: @ 1db
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetVarPoke 0x0, 0x8000
 	SetVarItem 0x1, 0x108
 	Message 0x4
@@ -155,10 +155,10 @@ Script_branch_1db: @ 1db
 
 Function_21c: @ 21c
 	CheckFlag 0x140
-	CompareLastResultJump 0x1, Script_branch_244
+	CompareLastResultJump EQUAL, Script_branch_244
 	Cmd_281 0x8000, 0x0, 0x800c
 	If 0x800c, 0xc8
-	CompareLastResultJump 0x0, Script_branch_244
+	CompareLastResultJump LESSER, Script_branch_244
 	SetVar 0x800c, 0x1
 	Return
 @ 244
@@ -170,10 +170,10 @@ Script_branch_244: @ 244
 
 Function_24c: @ 24c
 	CheckFlag 0x141
-	CompareLastResultJump 0x1, Script_branch_274
+	CompareLastResultJump EQUAL, Script_branch_274
 	Cmd_281 0x8000, 0x1, 0x800c
 	If 0x800c, 0xc8
-	CompareLastResultJump 0x0, Script_branch_274
+	CompareLastResultJump LESSER, Script_branch_274
 	SetVar 0x800c, 0x1
 	Return
 @ 274
@@ -185,10 +185,10 @@ Script_branch_274: @ 274
 
 Function_27c: @ 27c
 	CheckFlag 0x142
-	CompareLastResultJump 0x1, Script_branch_2a4
+	CompareLastResultJump EQUAL, Script_branch_2a4
 	Cmd_281 0x8000, 0x2, 0x800c
 	If 0x800c, 0xc8
-	CompareLastResultJump 0x0, Script_branch_2a4
+	CompareLastResultJump LESSER, Script_branch_2a4
 	SetVar 0x800c, 0x1
 	Return
 @ 2a4
@@ -200,10 +200,10 @@ Script_branch_2a4: @ 2a4
 
 Function_2ac: @ 2ac
 	CheckFlag 0x143
-	CompareLastResultJump 0x1, Script_branch_2d4
+	CompareLastResultJump EQUAL, Script_branch_2d4
 	Cmd_281 0x8000, 0x3, 0x800c
 	If 0x800c, 0xc8
-	CompareLastResultJump 0x0, Script_branch_2d4
+	CompareLastResultJump LESSER, Script_branch_2d4
 	SetVar 0x800c, 0x1
 	Return
 @ 2d4
@@ -215,10 +215,10 @@ Script_branch_2d4: @ 2d4
 
 Function_2dc: @ 2dc
 	CheckFlag 0x144
-	CompareLastResultJump 0x1, Script_branch_304
+	CompareLastResultJump EQUAL, Script_branch_304
 	Cmd_281 0x8000, 0x4, 0x800c
 	If 0x800c, 0xc8
-	CompareLastResultJump 0x0, Script_branch_304
+	CompareLastResultJump LESSER, Script_branch_304
 	SetVar 0x800c, 0x1
 	Return
 @ 304

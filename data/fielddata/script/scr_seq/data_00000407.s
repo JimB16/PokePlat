@@ -11,7 +11,7 @@ Script_1: @ a
 	Cmd_23e 0x0
 	Cmd_23e 0x1, 0x40ed
 	If 0x40ed, 0x0
-	CompareLastResultJump 0x1, Script_branch_2b
+	CompareLastResultJump EQUAL, Script_branch_2b
 	ClearFlag 0x20a
 	Cmd_23e 0x7
 	End
@@ -30,38 +30,30 @@ Script_2: @ 35
 	FacePlayer
 	Cmd_23e 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_ee
+	CompareLastResultJump EQUAL, Script_branch_ee
 	CheckTime 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_7e
+	CompareLastResultJump EQUAL, Script_branch_7e
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_8a
+	CompareLastResultJump EQUAL, Script_branch_8a
 	Jump Script_branch_96
-@ 7e
-
 Script_branch_7e: @ 7e
 	SetVarHero 0x0
 	Message 0x0
 	Jump Script_branch_a2
-@ 8a
-
 Script_branch_8a: @ 8a
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_a2
-@ 96
-
 Script_branch_96: @ 96
 	SetVarHero 0x0
 	Message 0x2
 	Jump Script_branch_a2
-@ a2
-
 Script_branch_a2: @ a2
 	Cmd_23e 0x3, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d8
+	CompareLastResultJump EQUAL, Script_branch_d8
 	Soundfr 0x486
 	Cmd_23e 0x5, 0x8005, 0x8006
 	CopyFurniture 0x8005, 0x8006
@@ -70,21 +62,15 @@ Script_branch_a2: @ a2
 	WaitButton
 	Cmd_23e 0x4
 	Jump Script_branch_103
-@ d8
-
 Script_branch_d8: @ d8
 	Cmd_23e 0x6, 0x8005, 0x8006
 	CopyFurniture 0x8005, 0x8006
 	WaitButton
 	Jump Script_branch_f9
-@ ee
-
 Script_branch_ee: @ ee
 	Message 0x3
 	WaitButton
 	Jump Script_branch_f9
-@ f9
-
 Script_branch_f9: @ f9
 	CloseMsgOnKeyPress
 	ReleaseAll

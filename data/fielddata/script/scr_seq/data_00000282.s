@@ -15,13 +15,13 @@ Script_2: @ c
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	Pokepic 0x1e8, 0x1
+	PokemonPicture 0x1e8, 0x1
 	Cmd_30
-	Hidepic
+	HidePicture
 	PlayCry 0x1e8, 0x0
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultCall 0x1, Script_branch_7e
+	CompareLastResultCall EQUAL, Script_branch_7e
 	Release 0x0
 	CresseliaAnm 0x0, 0x6, 0x8
 	Lock 0x0
@@ -29,7 +29,7 @@ Script_2: @ c
 	RemovePeople 0x0
 	ActSwarmPoke 0x1
 	If 0x4058, 0x3
-	CompareLastResultJump 0x1, Script_branch_74
+	CompareLastResultJump EQUAL, Script_branch_74
 	ClearFlag 0x452
 	AddPeople 0x1
 	SetFlag 0x11f

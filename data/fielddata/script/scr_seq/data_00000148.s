@@ -87,7 +87,7 @@ Script_7: @ a4
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xb9
-	CompareLastResultJump 0x1, Script_branch_d0
+	CompareLastResultJump EQUAL, Script_branch_d0
 	SetFlag 0xb9
 	SetFlag 0x185
 	Message 0x0
@@ -95,20 +95,16 @@ Script_7: @ a4
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_e0
-@ ce
-
-.byte 0x2 @ 0xce
-.byte 0x0 @ 0xcf
+	End
+@ d0
 
 Script_branch_d0: @ d0
 	FacePlayer
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_e0
-@ de
-
-.byte 0x2 @ 0xde
-.byte 0x0 @ 0xdf
+	End
+@ e0
 
 Script_branch_e0: @ e0
 	WaitButton
@@ -142,46 +138,40 @@ Script_8: @ fe
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_18f
+	CompareLastResultJump EQUAL, Script_branch_18f
 	Jump Script_branch_215
-@ 14e
-
-.byte 0x2 @ 0x14e
-.byte 0x0 @ 0x14f
+	End
+@ 150
 
 Script_branch_150: @ 150
 	SetVar 0x8004, 0x1
 	SetVar 0x8005, 0xc8
 	CheckStoreItem 0x2a, 0x8004, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ff
+	CompareLastResultJump EQUAL, Script_branch_1ff
 	CheckMoneyDCare 0x800c, 0xc8
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_20a
+	CompareLastResultJump EQUAL, Script_branch_20a
 	Message 0x9
 	Jump Script_branch_1ce
-@ 18d
-
-.byte 0x2 @ 0x18d
-.byte 0x0 @ 0x18e
+	End
+@ 18f
 
 Script_branch_18f: @ 18f
 	SetVar 0x8004, 0xa
 	SetVar 0x8005, 0x7d0
 	CheckStoreItem 0x2a, 0x8004, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1ff
+	CompareLastResultJump EQUAL, Script_branch_1ff
 	CheckMoneyDCare 0x800c, 0x7d0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_20a
+	CompareLastResultJump EQUAL, Script_branch_20a
 	Message 0xa
 	Jump Script_branch_1ce
-@ 1cc
-
-.byte 0x2 @ 0x1cc
-.byte 0x0 @ 0x1cd
+	End
+@ 1ce
 
 Script_branch_1ce: @ 1ce
 	TakeItem 0x2a, 0x8004, 0x800c
@@ -191,36 +181,28 @@ Script_branch_1ce: @ 1ce
 	UpdateMoney
 	WaitFanfare 0x644
 	If 0x4042, 0x2710
-	CompareLastResultCall 0x0, Script_branch_700
+	CompareLastResultCall LESSER, Script_branch_700
 	Jump Script_branch_220
-@ 1fd
-
-.byte 0x2 @ 0x1fd
-.byte 0x0 @ 0x1fe
+	End
+@ 1ff
 
 Script_branch_1ff: @ 1ff
 	Message 0xb
 	Jump Script_branch_220
-@ 208
-
-.byte 0x2 @ 0x208
-.byte 0x0 @ 0x209
+	End
+@ 20a
 
 Script_branch_20a: @ 20a
 	Message 0xc
 	Jump Script_branch_220
-@ 213
-
-.byte 0x2 @ 0x213
-.byte 0x0 @ 0x214
+	End
+@ 215
 
 Script_branch_215: @ 215
 	Message 0xd
 	Jump Script_branch_220
-@ 21e
-
-.byte 0x2 @ 0x21e
-.byte 0x0 @ 0x21f
+	End
+@ 220
 
 Script_branch_220: @ 220
 	WaitButton
@@ -238,51 +220,47 @@ Script_9: @ 22a
 	Message 0x11
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_25b
+	CompareLastResultJump EQUAL, Script_branch_25b
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_306
+	CompareLastResultJump EQUAL, Script_branch_306
 	End
 @ 25b
 
 Script_branch_25b: @ 25b
 	CheckItem 0x1c1, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_537
+	CompareLastResultJump EQUAL, Script_branch_537
 	Call Function_697
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_31b
+	CompareLastResultJump EQUAL, Script_branch_31b
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_344
+	CompareLastResultJump EQUAL, Script_branch_344
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_36d
+	CompareLastResultJump EQUAL, Script_branch_36d
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_396
+	CompareLastResultJump EQUAL, Script_branch_396
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_3bf
+	CompareLastResultJump EQUAL, Script_branch_3bf
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_3e8
+	CompareLastResultJump EQUAL, Script_branch_3e8
 	If 0x8008, 0x6
-	CompareLastResultJump 0x1, Script_branch_411
+	CompareLastResultJump EQUAL, Script_branch_411
 	If 0x8008, 0x7
-	CompareLastResultJump 0x1, Script_branch_43a
+	CompareLastResultJump EQUAL, Script_branch_43a
 	If 0x8008, 0x8
-	CompareLastResultJump 0x1, Script_branch_463
+	CompareLastResultJump EQUAL, Script_branch_463
 	If 0x8008, 0x9
-	CompareLastResultJump 0x1, Script_branch_48c
+	CompareLastResultJump EQUAL, Script_branch_48c
 	Jump Script_branch_306
-@ 304
-
-.byte 0x2 @ 0x304
-.byte 0x0 @ 0x305
+	End
+@ 306
 
 Script_branch_306: @ 306
 	Message 0x17
 	Jump Script_branch_311
-@ 30f
-
-.byte 0x2 @ 0x30f
-.byte 0x0 @ 0x310
+	End
+@ 311
 
 Script_branch_311: @ 311
 	WaitButton
@@ -295,181 +273,150 @@ Script_branch_311: @ 311
 Script_branch_31b: @ 31b
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_557
 	Jump Script_branch_4b5
-@ 342
-
-.byte 0x2 @ 0x342
-.byte 0x0 @ 0x343
+	End
+@ 344
 
 Script_branch_344: @ 344
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_577
 	Jump Script_branch_4b5
-@ 36b
-
-.byte 0x2 @ 0x36b
-.byte 0x0 @ 0x36c
+	End
+@ 36d
 
 Script_branch_36d: @ 36d
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_597
 	Jump Script_branch_4b5
-@ 394
-
-.byte 0x2 @ 0x394
-.byte 0x0 @ 0x395
+	End
+@ 396
 
 Script_branch_396: @ 396
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_5b7
 	Jump Script_branch_4b5
-@ 3bd
-
-.byte 0x2 @ 0x3bd
-.byte 0x0 @ 0x3be
+	End
+@ 3bf
 
 Script_branch_3bf: @ 3bf
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_5d7
 	Jump Script_branch_4b5
-@ 3e6
-
-.byte 0x2 @ 0x3e6
-.byte 0x0 @ 0x3e7
+	End
+@ 3e8
 
 Script_branch_3e8: @ 3e8
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_5f7
 	Jump Script_branch_4b5
-@ 40f
-
-.byte 0x2 @ 0x40f
-.byte 0x0 @ 0x410
+	End
+@ 411
 
 Script_branch_411: @ 411
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_617
 	Jump Script_branch_4b5
-@ 438
-
-.byte 0x2 @ 0x438
-.byte 0x0 @ 0x439
+	End
+@ 43a
 
 Script_branch_43a: @ 43a
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_637
 	Jump Script_branch_4b5
-@ 461
-
-.byte 0x2 @ 0x461
-.byte 0x0 @ 0x462
+	End
+@ 463
 
 Script_branch_463: @ 463
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_657
 	Jump Script_branch_4b5
-@ 48a
-
-.byte 0x2 @ 0x48a
-.byte 0x0 @ 0x48b
+	End
+@ 48c
 
 Script_branch_48c: @ 48c
 	CheckMoney 0x800c, 0x1900
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_52c
+	CompareLastResultJump EQUAL, Script_branch_52c
 	SetVar 0x8005, 0x1
 	Call Function_677
 	Jump Script_branch_4b5
-@ 4b3
-
-.byte 0x2 @ 0x4b3
-.byte 0x0 @ 0x4b4
+	End
+@ 4b5
 
 Script_branch_4b5: @ 4b5
 	Cmd_307 0x800c
 	If2 0x800c, 0x8005
-	CompareLastResultJump 0x0, Script_branch_521
+	CompareLastResultJump LESSER, Script_branch_521
 	Jump Script_branch_4ce
-@ 4cc
-
-.byte 0x2 @ 0x4cc
-.byte 0x0 @ 0x4cd
+	End
+@ 4ce
 
 Script_branch_4ce: @ 4ce
 	If 0x8005, 0x0
-	CompareLastResultJump 0x1, Script_branch_503
+	CompareLastResultJump EQUAL, Script_branch_503
 	CheckPoffinItem 0x800c, 0x8007, 0x8000, 0x8001, 0x8002, 0x8003, 0x14
 	Cmd_334 0x23, 0x1900
 	TakeMoneyDCare 0x1900
-	CopyValue 0x8005, 0x1
+	ScriptCmd_SubValue 0x8005, 0x1
 	Jump Script_branch_4ce
-@ 501
-
-.byte 0x2 @ 0x501
-.byte 0x0 @ 0x502
+	End
+@ 503
 
 Script_branch_503: @ 503
 	PlayFanfare 0x644
 	UpdateMoney
 	If 0x4042, 0x2710
-	CompareLastResultCall 0x0, Script_branch_700
+	CompareLastResultCall LESSER, Script_branch_700
 	Message 0x14
 	Jump Script_branch_54d
-@ 51f
-
-.byte 0x2 @ 0x51f
-.byte 0x0 @ 0x520
+	End
+@ 521
 
 Script_branch_521: @ 521
 	Message 0x16
 	Jump Script_branch_54d
-@ 52a
-
-.byte 0x2 @ 0x52a
-.byte 0x0 @ 0x52b
+	End
+@ 52c
 
 Script_branch_52c: @ 52c
 	Message 0x15
 	Jump Script_branch_54d
-@ 535
-
-.byte 0x2 @ 0x535
-.byte 0x0 @ 0x536
+	End
+@ 537
 
 Script_branch_537: @ 537
 	Message 0x18
 	Jump Script_branch_54d
-@ 540
+	End
+@ 542
 
-.byte 0x2 @ 0x540
-.byte 0x0 @ 0x541
 .byte 0x2c @ 0x542
 .byte 0x0 @ 0x543
 .byte 0x17 @ 0x544
@@ -603,7 +550,7 @@ Script_10: @ 6fe
 @ 700
 
 Script_branch_700: @ 700
-	SetValue 0x4042, 0x1
+	ScriptCmd_AddValue 0x4042, 0x1
 	Return
 @ 708
 

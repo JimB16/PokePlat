@@ -10,10 +10,10 @@ Script: @ 0
 
 Script_1: @ e
 	If 0x40dd, 0x0
-	CompareLastResultJump 0x1, Script_branch_48
+	CompareLastResultJump EQUAL, Script_branch_48
 	StorePokeColosseumLost 0x4000
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_4a
+	CompareLastResultJump EQUAL, Script_branch_4a
 	CallBTowerFunctions 0x37, 0x0, 0x4000
 	CopyVar 0x4020, 0x4000
 	CallBTowerFunctions 0x37, 0x1, 0x4000

@@ -13,7 +13,7 @@ Script_1: @ 12
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xc6
-	CompareLastResultJump 0x1, Script_branch_66
+	CompareLastResultJump EQUAL, Script_branch_66
 	Message 0x0
 	CloseMsgOnKeyPress
 	FacePlayer
@@ -24,12 +24,10 @@ Script_1: @ 12
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	CallStandard 0x7fc
 	SetFlag 0xc6
 	Jump Script_branch_66
-@ 66
-
 Script_branch_66: @ 66
 	FacePlayer
 	Message 0x2

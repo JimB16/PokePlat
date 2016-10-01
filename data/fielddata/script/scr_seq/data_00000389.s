@@ -20,7 +20,7 @@ Script_1: @ 22
 
 Script_2: @ 26
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_33
+	CompareLastResultJump EQUAL, Script_branch_33
 	End
 @ 33
 
@@ -37,7 +37,7 @@ Script_3: @ 41
 	Message 0xd
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_61
+	CompareLastResultJump EQUAL, Script_branch_61
 	CloseMsgOnKeyPress
 	ReleaseAll
 	End
@@ -80,15 +80,15 @@ Script_5: @ c4
 	CheckTrainerLost 0x800c
 	Cmd_314 0x800c
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_204
+	CompareLastResultJump EQUAL, Script_branch_204
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_204
+	CompareLastResultJump EQUAL, Script_branch_204
 	If 0x800c, 0x5
-	CompareLastResultJump 0x1, Script_branch_14e
+	CompareLastResultJump EQUAL, Script_branch_14e
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_14e
+	CompareLastResultJump EQUAL, Script_branch_14e
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_16e
+	CompareLastResultJump EQUAL, Script_branch_16e
 	Cmd_311 0x82
 	Cmd_311 0x81
 	ApplyMovement 0x81, Movement_250
@@ -97,8 +97,6 @@ Script_5: @ c4
 	CloseMsgOnKeyPress
 	Message 0x4
 	Jump Script_branch_194
-@ 14e
-
 Script_branch_14e: @ 14e
 	Cmd_311 0x82
 	Cmd_311 0x81
@@ -108,8 +106,6 @@ Script_branch_14e: @ 14e
 	CloseMsgOnKeyPress
 	Message 0x6
 	Jump Script_branch_194
-@ 16e
-
 Script_branch_16e: @ 16e
 	SetFlag 0x121
 	SetFlag 0x250

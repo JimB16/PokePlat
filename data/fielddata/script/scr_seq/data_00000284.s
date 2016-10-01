@@ -24,7 +24,7 @@ Script_2: @ 14
 	TrainerBattle 0x39e, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	Message 0x1
 	CloseMsgOnKeyPress
 	ApplyMovement 0x0, Movement_168
@@ -38,7 +38,7 @@ Script_2: @ 14
 	TrainerBattle 0x39f, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_150
+	CompareLastResultJump EQUAL, Script_branch_150
 	Message 0x3
 	CloseMsgOnKeyPress
 	Return2 0xf, 0x800c

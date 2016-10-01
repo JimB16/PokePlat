@@ -132,7 +132,7 @@ Script_5: @ 11e
 	LockAll
 	FacePlayer
 	CheckFlag 0x91
-	CompareLastResultJump 0x1, Script_branch_142
+	CompareLastResultJump EQUAL, Script_branch_142
 	Call Function_14d
 	Message 0x0
 	WaitButton
@@ -160,15 +160,15 @@ Script_6: @ 15d
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x293
-	CompareLastResultJump 0x1, Script_branch_1a8
+	CompareLastResultJump EQUAL, Script_branch_1a8
 	If 0x8005, 0x294
-	CompareLastResultJump 0x1, Script_branch_1c2
+	CompareLastResultJump EQUAL, Script_branch_1c2
 	If 0x8005, 0x295
-	CompareLastResultJump 0x1, Script_branch_1dc
+	CompareLastResultJump EQUAL, Script_branch_1dc
 	If 0x8005, 0x296
-	CompareLastResultJump 0x1, Script_branch_1e2
+	CompareLastResultJump EQUAL, Script_branch_1e2
 	If 0x8005, 0x297
-	CompareLastResultJump 0x1, Script_branch_1fc
+	CompareLastResultJump EQUAL, Script_branch_1fc
 	End
 @ 1a8
 
@@ -178,36 +178,26 @@ Script_branch_1a8: @ 1a8
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
-@ 1c2
-
 Script_branch_1c2: @ 1c2
 	ApplyMovement 0x12, Movement_24c
 	WaitMovement
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
-@ 1dc
-
 Script_branch_1dc: @ 1dc
 	Jump Script_branch_216
-@ 1e2
-
 Script_branch_1e2: @ 1e2
 	ApplyMovement 0x12, Movement_25c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
-@ 1fc
-
 Script_branch_1fc: @ 1fc
 	ApplyMovement 0x12, Movement_26c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
-@ 216
-
 Script_branch_216: @ 216
 	Call Function_14d
 	Message 0x0

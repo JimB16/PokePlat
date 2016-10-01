@@ -9,7 +9,7 @@ Script: @ 0
 Script_1: @ 6
 	PlayFanfare 0x5dc
 	LockAll
-	Unownmsgbox 0x0
+	UnownMessageBox 0x0
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll

@@ -10,7 +10,7 @@ Script: @ 0
 Script_2: @ a
 	CheckStatusPhraseBox 0xa, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_23
+	CompareLastResultJump EQUAL, Script_branch_23
 	ClearFlag 0x216
 	End
 @ 23

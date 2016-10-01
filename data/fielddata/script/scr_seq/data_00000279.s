@@ -19,7 +19,7 @@ Script_2: @ 14
 	FacePlayer
 	CheckBadge 0x0, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3a
+	CompareLastResultJump EQUAL, Script_branch_3a
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress
@@ -29,15 +29,13 @@ Script_2: @ 14
 
 Script_branch_3a: @ 3a
 	CheckFlag 0x93
-	CompareLastResultJump 0x1, Script_branch_64
+	CompareLastResultJump EQUAL, Script_branch_64
 	Message 0x0
 	SetVar 0x8004, 0x1a9
 	SetVar 0x8005, 0x1
 	CallStandard 0x7fc
 	Call Function_6f
 	Jump Script_branch_64
-@ 64
-
 Script_branch_64: @ 64
 	Message 0x1
 	WaitButton

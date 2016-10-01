@@ -16,15 +16,15 @@ Script: @ 0
 Script_8: @ 22
 	CheckTime 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x2
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	If 0x4000, 0x3
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	If 0x4000, 0x4
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	End
 @ 69
 
@@ -45,18 +45,16 @@ Script_2: @ 7d
 	LockAll
 	FacePlayer
 	CheckFlag 0xce
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	Message 0x0
 	SetVar 0x8004, 0x17f
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cd
+	CompareLastResultJump EQUAL, Script_branch_cd
 	CallStandard 0x7fc
 	SetFlag 0xce
 	Jump Script_branch_c2
-@ c2
-
 Script_branch_c2: @ c2
 	Message 0x1
 	WaitButton

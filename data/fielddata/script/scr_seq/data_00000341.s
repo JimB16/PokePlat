@@ -23,7 +23,7 @@ Script_2: @ 28
 	LockAll
 	FacePlayer
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_46
+	CompareLastResultJump EQUAL, Script_branch_46
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -44,7 +44,7 @@ Script_3: @ 51
 	LockAll
 	FacePlayer
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_6f
+	CompareLastResultJump EQUAL, Script_branch_6f
 	Message 0x4
 	WaitButton
 	CloseMsgOnKeyPress
@@ -65,7 +65,7 @@ Script_4: @ 7a
 	LockAll
 	FacePlayer
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_98
+	CompareLastResultJump EQUAL, Script_branch_98
 	Message 0x6
 	WaitButton
 	CloseMsgOnKeyPress
@@ -86,7 +86,7 @@ Script_5: @ a3
 	LockAll
 	FacePlayer
 	CheckFlag 0x15e
-	CompareLastResultJump 0x1, Script_branch_c1
+	CompareLastResultJump EQUAL, Script_branch_c1
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress
@@ -119,7 +119,7 @@ Script_6: @ df
 	FacePlayer
 	CheckItem 0x1b8, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_107
+	CompareLastResultJump EQUAL, Script_branch_107
 	Message 0x9
 	WaitButton
 	CloseMsgOnKeyPress
@@ -131,9 +131,9 @@ Script_branch_107: @ 107
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_12a
+	CompareLastResultJump EQUAL, Script_branch_12a
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_15e
+	CompareLastResultJump EQUAL, Script_branch_15e
 	End
 @ 12a
 

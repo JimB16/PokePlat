@@ -11,7 +11,7 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0xa9
-	CompareLastResultJump 0x1, Script_branch_2b
+	CompareLastResultJump EQUAL, Script_branch_2b
 	SetFlag 0xa9
 	SetVariableRival 0x0
 	Message 0x0

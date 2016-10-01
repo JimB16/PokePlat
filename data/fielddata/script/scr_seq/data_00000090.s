@@ -11,14 +11,14 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x98
-	CompareLastResultJump 0x1, Script_branch_113
+	CompareLastResultJump EQUAL, Script_branch_113
 	Call Function_119
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_106
+	CompareLastResultJump EQUAL, Script_branch_106
 	CheckFlag 0x99
-	CompareLastResultJump 0x1, Script_branch_b3
+	CompareLastResultJump EQUAL, Script_branch_b3
 	CheckFlag 0x119
-	CompareLastResultJump 0x1, Script_branch_8b
+	CompareLastResultJump EQUAL, Script_branch_8b
 	SetVarHero 0x0
 	Message 0x0
 	CloseMsgOnKeyPress
@@ -29,15 +29,13 @@ Script_1: @ 6
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_91
+	CompareLastResultJump EQUAL, Script_branch_91
 	CallStandard 0x7fc
 	SetFlag 0x119
 	Message 0x2
 	Jump Script_branch_9b
-@ 89
-
-.byte 0x2 @ 0x89
-.byte 0x0 @ 0x8a
+	End
+@ 8b
 
 Script_branch_8b: @ 8b
 	CallStandard 0x26e0
@@ -58,24 +56,20 @@ Script_branch_9b: @ 9b
 	SetFlag 0x99
 	Message 0x3
 	Jump Script_branch_150
-@ b1
-
-.byte 0x2 @ 0xb1
-.byte 0x0 @ 0xb2
+	End
+@ b3
 
 Script_branch_b3: @ b3
 	If 0x405e, 0x3
-	CompareLastResultCall 0x1, Script_branch_e5
+	CompareLastResultCall EQUAL, Script_branch_e5
 	If 0x405f, 0x3
-	CompareLastResultCall 0x1, Script_branch_f0
+	CompareLastResultCall EQUAL, Script_branch_f0
 	If 0x4060, 0x3
-	CompareLastResultCall 0x1, Script_branch_fb
+	CompareLastResultCall EQUAL, Script_branch_fb
 	Message 0x4
 	Jump Script_branch_150
-@ e3
-
-.byte 0x2 @ 0xe3
-.byte 0x0 @ 0xe4
+	End
+@ e5
 
 Script_branch_e5: @ e5
 	SetVar 0x405e, 0x0

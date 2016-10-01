@@ -35,16 +35,16 @@ Script_3: @ 34
 	LockAll
 	FacePlayer
 	CheckFlag 0xc1
-	CompareLastResultJump 0x1, Script_branch_a1
+	CompareLastResultJump EQUAL, Script_branch_a1
 	CheckPokeParty 0x800c, 0x4a
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_96
+	CompareLastResultJump EQUAL, Script_branch_96
 	Message 0x3
 	SetVar 0x8004, 0xe
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_8c
+	CompareLastResultJump EQUAL, Script_branch_8c
 	SetFlag 0xc1
 	CallStandard 0x7e0
 	CloseMsgOnKeyPress

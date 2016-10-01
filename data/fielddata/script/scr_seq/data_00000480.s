@@ -12,9 +12,9 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0x137
-	CompareLastResultJump 0x1, Script_branch_114
+	CompareLastResultJump EQUAL, Script_branch_114
 	CheckFlag 0xaae
-	CompareLastResultJump 0x1, Script_branch_16f
+	CompareLastResultJump EQUAL, Script_branch_16f
 	SrtRandomNum 0x8000
 	SetVariableNumber 0x0, 0x8000
 	CheckPartyNumber 0x8002
@@ -22,38 +22,34 @@ Script_1: @ a
 Script_branch_3b: @ 3b
 	CheckPokeLevel2 0x8001, 0x8003
 	If2 0x8000, 0x8001
-	CompareLastResultJump 0x1, Script_branch_6d
-	SetValue 0x8003, 0x1
-	CopyValue 0x8002, 0x1
+	CompareLastResultJump EQUAL, Script_branch_6d
+	ScriptCmd_AddValue 0x8003, 0x1
+	ScriptCmd_SubValue 0x8002, 0x1
 	If 0x8002, 0x0
 	CompareLastResultJump 0x5, Script_branch_3b
 	Jump Script_branch_164
-@ 6d
-
 Script_branch_6d: @ 6d
 	If 0x4108, 0x0
-	CompareLastResultCall 0x1, Script_branch_ed
+	CompareLastResultCall EQUAL, Script_branch_ed
 	If 0x4108, 0x1
-	CompareLastResultCall 0x1, Script_branch_f5
+	CompareLastResultCall EQUAL, Script_branch_f5
 	If 0x4108, 0x2
-	CompareLastResultCall 0x1, Script_branch_fd
+	CompareLastResultCall EQUAL, Script_branch_fd
 	SetVarPoke 0x1, 0x8003
 	SetVarItem 0x2, 0x8004
 	Message 0x1
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_105
+	CompareLastResultJump EQUAL, Script_branch_105
 	Jump Script_branch_c2
-@ c2
-
 Script_branch_c2: @ c2
 	CallStandard 0x7e0
 	ClearFlag 0x137
 	SetFlag 0xaae
-	SetValue 0x4108, 0x1
+	ScriptCmd_AddValue 0x4108, 0x1
 	If 0x4108, 0x3
-	CompareLastResultJump 0x0, Script_branch_e7
+	CompareLastResultJump LESSER, Script_branch_e7
 	SetVar 0x4108, 0x0
 Script_branch_e7: @ e7
 	CloseMsgOnKeyPress
@@ -87,20 +83,18 @@ Script_branch_105: @ 105
 
 Script_branch_114: @ 114
 	If 0x4108, 0x0
-	CompareLastResultCall 0x1, Script_branch_ed
+	CompareLastResultCall EQUAL, Script_branch_ed
 	If 0x4108, 0x1
-	CompareLastResultCall 0x1, Script_branch_f5
+	CompareLastResultCall EQUAL, Script_branch_f5
 	If 0x4108, 0x2
-	CompareLastResultCall 0x1, Script_branch_fd
+	CompareLastResultCall EQUAL, Script_branch_fd
 	SetVarItem 0x2, 0x8004
 	Message 0x3
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_105
+	CompareLastResultJump EQUAL, Script_branch_105
 	Jump Script_branch_c2
-@ 164
-
 Script_branch_164: @ 164
 	Message 0x0
 	WaitButton

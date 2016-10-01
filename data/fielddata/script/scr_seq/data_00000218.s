@@ -19,7 +19,7 @@ Script_4: @ 18
 	LockAll
 	FacePlayer
 	CheckFlag 0x12a
-	CompareLastResultJump 0x1, Script_branch_4d
+	CompareLastResultJump EQUAL, Script_branch_4d
 	SetVar 0x8004, 0x5f
 	CheckAccessories3 0x0, 0x8004
 	Message 0x0

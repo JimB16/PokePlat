@@ -29,9 +29,9 @@ Script_4: @ 38
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6e
+	CompareLastResultJump EQUAL, Script_branch_6e
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_63
+	CompareLastResultJump EQUAL, Script_branch_63
 	End
 @ 63
 
@@ -49,16 +49,16 @@ Script_branch_6e: @ 6e
 	TrainerBattle 0x1a0, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_191
+	CompareLastResultJump EQUAL, Script_branch_191
 	Message 0x4
 	CloseMsgOnKeyPress
 	CheckFacePosition 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_bc
+	CompareLastResultJump EQUAL, Script_branch_bc
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_ec
+	CompareLastResultJump EQUAL, Script_branch_ec
 	If 0x800c, 0x3
-	CompareLastResultJump 0x1, Script_branch_114
+	CompareLastResultJump EQUAL, Script_branch_114
 	End
 @ bc
 
@@ -71,8 +71,6 @@ Script_branch_bc: @ bc
 	ApplyMovement 0xff, Movement_204
 	WaitMovement
 	Jump Script_branch_166
-@ ec
-
 Script_branch_ec: @ ec
 	ApplyMovement 0x2, Movement_198
 	ApplyMovement 0xff, Movement_1f0
@@ -81,8 +79,6 @@ Script_branch_ec: @ ec
 	ApplyMovement 0x3, Movement_1c0
 	WaitMovement
 	Jump Script_branch_166
-@ 114
-
 Script_branch_114: @ 114
 	ApplyMovement 0x2, Movement_1a4
 	ApplyMovement 0xff, Movement_1fc
@@ -91,8 +87,6 @@ Script_branch_114: @ 114
 	ApplyMovement 0x3, Movement_1d0
 	WaitMovement
 	Jump Script_branch_166
-@ 13c
-
 Function_13c: @ 13c
 	RemovePeople 0x2
 	RemovePeople 0x3
@@ -249,7 +243,7 @@ Script_2: @ 26c
 	LockAll
 	FacePlayer
 	CheckFlag 0xa6
-	CompareLastResultJump 0x1, Script_branch_289
+	CompareLastResultJump EQUAL, Script_branch_289
 	Call Function_24a
 	ReleaseAll
 	End

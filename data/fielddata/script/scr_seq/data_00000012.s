@@ -12,7 +12,7 @@ Script: @ 0
 Script_4: @ 12
 	CheckStatusPhraseBox 0x9, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_2b
+	CompareLastResultJump EQUAL, Script_branch_2b
 	ClearFlag 0x215
 	End
 @ 2b
@@ -38,14 +38,14 @@ Script_2: @ 44
 	LockAll
 	FacePlayer
 	CheckFlag 0x13d
-	CompareLastResultJump 0x1, Script_branch_a4
+	CompareLastResultJump EQUAL, Script_branch_a4
 	StoreStarter 0x800c
 	If 0x800c, 0x183
-	CompareLastResultCall 0x1, Script_branch_b4
+	CompareLastResultCall EQUAL, Script_branch_b4
 	If 0x800c, 0x186
-	CompareLastResultCall 0x1, Script_branch_bc
+	CompareLastResultCall EQUAL, Script_branch_bc
 	If 0x800c, 0x189
-	CompareLastResultCall 0x1, Script_branch_c4
+	CompareLastResultCall EQUAL, Script_branch_c4
 	CopyVar 0x410a, 0x8004
 	Cmd_343 0x0, 0x8004
 	Message 0x1

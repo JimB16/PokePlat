@@ -23,16 +23,14 @@ Script_1: @ 6
 Script_branch_2c: @ 2c
 	StorePoketchApp 0x12, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_125
+	CompareLastResultJump EQUAL, Script_branch_125
 	StorePoketchApp 0x11, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_a7
+	CompareLastResultJump EQUAL, Script_branch_a7
 	StorePoketchApp 0x10, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_89
+	CompareLastResultJump EQUAL, Script_branch_89
 	Jump Script_branch_6b
-@ 6b
-
 Script_branch_6b: @ 6b
 	CheckPokeNature 0x8000, 0xc
 	If 0x8000, 0xff

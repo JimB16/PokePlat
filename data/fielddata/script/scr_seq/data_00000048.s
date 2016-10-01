@@ -10,9 +10,9 @@ Script: @ 0
 
 Script_1: @ e
 	If 0x4106, 0x0
-	CompareLastResultJump 0x1, Script_branch_37
+	CompareLastResultJump EQUAL, Script_branch_37
 	If 0x4106, 0x3
-	CompareLastResultCall 0x1, Script_branch_73
+	CompareLastResultCall EQUAL, Script_branch_73
 	If 0x4106, 0x1
 	CompareLastResultCall 0x4, Script_branch_7b
 Script_branch_35: @ 35
@@ -21,13 +21,13 @@ Script_branch_35: @ 35
 
 Script_branch_37: @ 37
 	CheckFlag 0x12c
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	Cmd_166 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	SetVar 0x4106, 0x1
 	Call Script_branch_7b
 	End
@@ -58,11 +58,11 @@ Script_branch_7b: @ 7b
 Script_3: @ a5
 	CopyVar 0x8008, 0x4106
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_e5
+	CompareLastResultJump EQUAL, Script_branch_e5
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_e5
+	CompareLastResultJump EQUAL, Script_branch_e5
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_f8
+	CompareLastResultJump EQUAL, Script_branch_f8
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
@@ -97,11 +97,11 @@ Script_branch_f8: @ f8
 
 Script_2: @ 10b
 	If 0x4106, 0x1
-	CompareLastResultJump 0x1, Script_branch_158
+	CompareLastResultJump EQUAL, Script_branch_158
 	If 0x4106, 0x2
-	CompareLastResultJump 0x1, Script_branch_158
+	CompareLastResultJump EQUAL, Script_branch_158
 	If 0x4106, 0x3
-	CompareLastResultJump 0x1, Script_branch_145
+	CompareLastResultJump EQUAL, Script_branch_145
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
@@ -125,12 +125,12 @@ Script_branch_145: @ 145
 
 Script_branch_158: @ 158
 	CheckFlag 0x133
-	CompareLastResultJump 0x0, Script_branch_1ea
+	CompareLastResultJump LESSER, Script_branch_1ea
 	CheckFlag 0x11f
-	CompareLastResultJump 0x0, Script_branch_1d9
+	CompareLastResultJump LESSER, Script_branch_1d9
 	CheckItem 0x1c5, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1d9
+	CompareLastResultJump EQUAL, Script_branch_1d9
 	PlayFanfare 0x5dc
 	LockAll
 	SetFlag 0x12c
@@ -169,10 +169,8 @@ Script_branch_1ea: @ 1ea
 	SetFlag 0x133
 	SetVar 0x4106, 0x2
 	Jump Script_branch_1d9
-@ 1fa
-
-.byte 0x2 @ 0x1fa
-.byte 0x0 @ 0x1fb
+	End
+@ 1fc
 
 Function_1fc: @ 1fc
 	PlayFanfare 0x603

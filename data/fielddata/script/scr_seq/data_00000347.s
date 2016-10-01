@@ -22,7 +22,7 @@ Script: @ 0
 
 Script_1: @ 3e
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_4b
+	CompareLastResultJump EQUAL, Script_branch_4b
 	End
 @ 4b
 
@@ -41,15 +41,15 @@ Script_3: @ 59
 	LockAll
 	FacePlayer
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_109
+	CompareLastResultJump EQUAL, Script_branch_109
 	CheckFlag 0xad
-	CompareLastResultJump 0x1, Script_branch_114
+	CompareLastResultJump EQUAL, Script_branch_114
 	Message 0x0
 	CloseMsgOnKeyPress
 	TrainerBattle 0x199, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_11f
+	CompareLastResultJump EQUAL, Script_branch_11f
 	SetFlag 0xad
 	SetVar 0x410d, 0x1
 	Message 0x1
@@ -57,11 +57,11 @@ Script_3: @ 59
 	CheckFacePosition 0x8004
 	CopyVar 0x4002, 0x8004
 	If 0x8004, 0x0
-	CompareLastResultJump 0x1, Script_branch_d5
+	CompareLastResultJump EQUAL, Script_branch_d5
 	If 0x8004, 0x2
-	CompareLastResultJump 0x1, Script_branch_e5
+	CompareLastResultJump EQUAL, Script_branch_e5
 	If 0x8004, 0x3
-	CompareLastResultJump 0x1, Script_branch_f5
+	CompareLastResultJump EQUAL, Script_branch_f5
 	End
 @ d5
 
@@ -69,20 +69,14 @@ Script_branch_d5: @ d5
 	ApplyMovement 0x0, Movement_128
 	WaitMovement
 	Jump Script_branch_105
-@ e5
-
 Script_branch_e5: @ e5
 	ApplyMovement 0x0, Movement_134
 	WaitMovement
 	Jump Script_branch_105
-@ f5
-
 Script_branch_f5: @ f5
 	ApplyMovement 0x0, Movement_140
 	WaitMovement
 	Jump Script_branch_105
-@ 105
-
 Script_branch_105: @ 105
 	ReleaseAll
 	End
@@ -136,7 +130,7 @@ Script_4: @ 14c
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_168
+	CompareLastResultJump EQUAL, Script_branch_168
 	Message 0xd
 	WaitButton
 	CloseMsgOnKeyPress
@@ -156,7 +150,7 @@ Script_5: @ 173
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_18f
+	CompareLastResultJump EQUAL, Script_branch_18f
 	Message 0xe
 	WaitButton
 	CloseMsgOnKeyPress
@@ -176,7 +170,7 @@ Script_6: @ 19a
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_1b6
+	CompareLastResultJump EQUAL, Script_branch_1b6
 	Message 0xf
 	WaitButton
 	CloseMsgOnKeyPress
@@ -208,13 +202,13 @@ Script_10: @ 1c7
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x97d
-	CompareLastResultJump 0x1, Script_branch_347
+	CompareLastResultJump EQUAL, Script_branch_347
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1fb
+	CompareLastResultJump EQUAL, Script_branch_1fb
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_341
+	CompareLastResultJump EQUAL, Script_branch_341
 	End
 @ 1fb
 
@@ -242,11 +236,11 @@ Script_branch_1fb: @ 1fb
 	RemovePeople 0x1
 	RemovePeople 0x3
 	If 0x4002, 0x0
-	CompareLastResultJump 0x1, Script_branch_2c0
+	CompareLastResultJump EQUAL, Script_branch_2c0
 	If 0x4002, 0x2
-	CompareLastResultJump 0x1, Script_branch_2da
+	CompareLastResultJump EQUAL, Script_branch_2da
 	If 0x4002, 0x3
-	CompareLastResultJump 0x1, Script_branch_2f4
+	CompareLastResultJump EQUAL, Script_branch_2f4
 	End
 @ 296
 
@@ -268,30 +262,24 @@ Script_branch_2c0: @ 2c0
 	ApplyMovement 0xff, Movement_384
 	WaitMovement
 	Jump Script_branch_30e
-@ 2d8
-
-.byte 0x2 @ 0x2d8
-.byte 0x0 @ 0x2d9
+	End
+@ 2da
 
 Script_branch_2da: @ 2da
 	ApplyMovement 0x0, Movement_360
 	ApplyMovement 0xff, Movement_38c
 	WaitMovement
 	Jump Script_branch_30e
-@ 2f2
-
-.byte 0x2 @ 0x2f2
-.byte 0x0 @ 0x2f3
+	End
+@ 2f4
 
 Script_branch_2f4: @ 2f4
 	ApplyMovement 0x0, Movement_354
 	ApplyMovement 0xff, Movement_384
 	WaitMovement
 	Jump Script_branch_30e
-@ 30c
-
-.byte 0x2 @ 0x30c
-.byte 0x0 @ 0x30d
+	End
+@ 30e
 
 Script_branch_30e: @ 30e
 	Message 0x3
@@ -423,7 +411,7 @@ Script_15: @ 3fd
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xad
-	CompareLastResultJump 0x1, Script_branch_450
+	CompareLastResultJump EQUAL, Script_branch_450
 	ApplyMovement 0x4, Movement_470
 	WaitMovement
 	Message 0x5

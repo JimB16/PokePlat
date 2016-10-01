@@ -27,129 +27,89 @@ Script: @ 0
 Script_1: @ 4e
 	SetVar 0x8000, 0x1
 	Jump Script_branch_159
-@ 5a
-
 Script_2: @ 5a
 	SetVar 0x8000, 0x2
 	Jump Script_branch_159
-@ 66
-
 Script_3: @ 66
 	SetVar 0x8000, 0x3
 	Jump Script_branch_159
-@ 72
-
 Script_4: @ 72
 	SetVar 0x8000, 0x4
 	Jump Script_branch_159
-@ 7e
-
 Script_5: @ 7e
 	SetVar 0x8000, 0x5
 	Jump Script_branch_159
-@ 8a
-
 Script_6: @ 8a
 	SetVar 0x8000, 0x6
 	Jump Script_branch_159
-@ 96
-
 Script_7: @ 96
 	SetVar 0x8000, 0x7
 	Jump Script_branch_159
-@ a2
-
 Script_8: @ a2
 	SetVar 0x8000, 0x8
 	Jump Script_branch_159
-@ ae
-
 Script_9: @ ae
 	SetVar 0x8000, 0x9
 	Jump Script_branch_159
-@ ba
-
 Script_10: @ ba
 	SetVar 0x8000, 0xa
 	Jump Script_branch_159
-@ c6
-
 Script_11: @ c6
 	SetVar 0x8000, 0xb
 	Jump Script_branch_159
-@ d2
-
 Script_12: @ d2
 	SetVar 0x8000, 0xc
 	Jump Script_branch_159
-@ de
-
 Script_13: @ de
 	SetVar 0x8000, 0xd
 	Jump Script_branch_159
-@ ea
-
 Script_14: @ ea
 	SetVar 0x8000, 0xe
 	Jump Script_branch_159
-@ f6
-
 Script_15: @ f6
 	If 0x4032, 0x1
-	CompareLastResultJump 0x1, Script_branch_129
+	CompareLastResultJump EQUAL, Script_branch_129
 	If 0x4032, 0x2
-	CompareLastResultJump 0x1, Script_branch_135
+	CompareLastResultJump EQUAL, Script_branch_135
 	If 0x4032, 0x3
-	CompareLastResultJump 0x1, Script_branch_141
+	CompareLastResultJump EQUAL, Script_branch_141
 	SetVar 0x8000, 0xf
 	Jump Script_branch_159
-@ 129
-
 Script_16: @ 129
 Script_branch_129: @ 129
 	SetVar 0x8000, 0x10
 	Jump Script_branch_159
-@ 135
-
 Script_17: @ 135
 Script_branch_135: @ 135
 	SetVar 0x8000, 0x11
 	Jump Script_branch_159
-@ 141
-
 Script_18: @ 141
 Script_branch_141: @ 141
 	SetVar 0x8000, 0x12
 	Jump Script_branch_159
-@ 14d
-
 Script_19: @ 14d
 	SetVar 0x8000, 0x13
 	Jump Script_branch_159
-@ 159
-
 Script_branch_159: @ 159
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
 	CheckStatusPhraseBox 0x8000, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2a1
+	CompareLastResultJump EQUAL, Script_branch_2a1
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_190
+	CompareLastResultJump EQUAL, Script_branch_190
 	Jump Script_branch_2ae
-@ 18e
-
-.byte 0x2 @ 0x18e
-.byte 0x0 @ 0x18f
+	End
+@ 190
 
 Script_branch_190: @ 190
 	CheckPhraseBoxInput 0x0, 0x8000, 0x8004, 0x8005
 	CopyFurniture 0x8004, 0x8005
 	If 0x8000, 0xa
-	CompareLastResultJump 0x1, Script_branch_1f0
+	CompareLastResultJump EQUAL, Script_branch_1f0
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	CloseMsgOnKeyPress
@@ -158,13 +118,11 @@ Script_branch_190: @ 190
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2ae
+	CompareLastResultJump EQUAL, Script_branch_2ae
 	CheckPhraseBoxInput 0x1, 0x8000, 0x8004, 0x8005
 	Jump Script_branch_2a1
-@ 1ee
-
-.byte 0x2 @ 0x1ee
-.byte 0x0 @ 0x1ef
+	End
+@ 1f0
 
 Script_branch_1f0: @ 1f0
 	Multi4 0x1, 0x1, 0x0, 0x1, 0x8004
@@ -187,31 +145,25 @@ Script_branch_1f0: @ 1f0
 	TxtMsgScrpMulti 0x26, 0xff, 0x11
 	CloseMulti4
 	If 0x8004, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_2ae
+	CompareLastResultJump EQUAL, Script_branch_2ae
 	CheckPhraseBoxInput 0x1, 0x8000, 0x8004, 0x8005
 	Jump Script_branch_2a1
-@ 29f
-
-.byte 0x2 @ 0x29f
-.byte 0x0 @ 0x2a0
+	End
+@ 2a1
 
 Script_branch_2a1: @ 2a1
 	Message 0x2
 	WaitButton
 	Jump Script_branch_2bb
-@ 2ac
-
-.byte 0x2 @ 0x2ac
-.byte 0x0 @ 0x2ad
+	End
+@ 2ae
 
 Script_branch_2ae: @ 2ae
 	Message 0x1
 	WaitButton
 	Jump Script_branch_2bb
-@ 2b9
-
-.byte 0x2 @ 0x2b9
-.byte 0x0 @ 0x2ba
+	End
+@ 2bb
 
 Script_branch_2bb: @ 2bb
 	CloseMsgOnKeyPress

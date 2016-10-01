@@ -21,13 +21,13 @@ Script_1: @ 32
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x17
-	CompareLastResultCall 0x1, Script_branch_1a8
+	CompareLastResultCall EQUAL, Script_branch_1a8
 	If 0x8004, 0x18
-	CompareLastResultCall 0x1, Script_branch_1ba
+	CompareLastResultCall EQUAL, Script_branch_1ba
 	If 0x8004, 0x19
-	CompareLastResultCall 0x1, Script_branch_1cc
+	CompareLastResultCall EQUAL, Script_branch_1cc
 	If 0x8004, 0x1a
-	CompareLastResultCall 0x1, Script_branch_1de
+	CompareLastResultCall EQUAL, Script_branch_1de
 	ClearFlag 0x276
 	AddPeople 0xb
 	Lock 0xb
@@ -52,13 +52,13 @@ Script_1: @ 32
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x17
-	CompareLastResultCall 0x1, Script_branch_1f0
+	CompareLastResultCall EQUAL, Script_branch_1f0
 	If 0x8004, 0x18
-	CompareLastResultCall 0x1, Script_branch_204
+	CompareLastResultCall EQUAL, Script_branch_204
 	If 0x8004, 0x19
-	CompareLastResultCall 0x1, Script_branch_218
+	CompareLastResultCall EQUAL, Script_branch_218
 	If 0x8004, 0x1a
-	CompareLastResultCall 0x1, Script_branch_22c
+	CompareLastResultCall EQUAL, Script_branch_22c
 	RemovePeople 0xb
 	ClearFlag 0x277
 	AddPeople 0xc
@@ -73,19 +73,19 @@ Script_1: @ 32
 	CloseMsgOnKeyPress
 	Return2 0x1e, 0x800c
 	If 0x409e, 0x1
-	CompareLastResultCall 0x0, Script_branch_19e
+	CompareLastResultCall LESSER, Script_branch_19e
 	If 0x409e, 0x1
 	CompareLastResultCall 0x4, Script_branch_1a3
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x17
-	CompareLastResultCall 0x1, Script_branch_240
+	CompareLastResultCall EQUAL, Script_branch_240
 	If 0x8004, 0x18
-	CompareLastResultCall 0x1, Script_branch_254
+	CompareLastResultCall EQUAL, Script_branch_254
 	If 0x8004, 0x19
-	CompareLastResultCall 0x1, Script_branch_268
+	CompareLastResultCall EQUAL, Script_branch_268
 	If 0x8004, 0x1a
-	CompareLastResultCall 0x1, Script_branch_27c
+	CompareLastResultCall EQUAL, Script_branch_27c
 	RemovePeople 0xc
 	SetVar 0x410e, 0x1
 	ReleaseAll

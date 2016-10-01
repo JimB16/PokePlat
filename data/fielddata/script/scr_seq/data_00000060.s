@@ -13,32 +13,30 @@ Script_1: @ e
 	LockAll
 	FacePlayer
 	CheckFlag 0x85
-	CompareLastResultJump 0x1, Script_branch_b7
+	CompareLastResultJump EQUAL, Script_branch_b7
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_3b
+	CompareLastResultJump EQUAL, Script_branch_3b
 	Jump Script_branch_ac
-@ 3b
-
 Script_branch_3b: @ 3b
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
-	TradeChosenPoke
+	ChooseTradePokemon
 	StorePokeMenu2 0x800c
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x800c, 0xff
-	CompareLastResultJump 0x1, Script_branch_ac
+	CompareLastResultJump EQUAL, Script_branch_ac
 	SetTradeId 0x0
 	CopyVar 0x8004, 0x800c
 	CheckPokeEgg 0x8004, 0x8005
-	CheckPokeTrade 0x800c
+	CheckPokemonTrade 0x800c
 	If2 0x8005, 0x800c
 	CompareLastResultJump 0x5, Script_branch_9f
-	TradeChsPoke 0x8004
+	TradeChosenPokemon 0x8004
 	StopTrade
 	SetFlag 0x85
 	Message 0x1

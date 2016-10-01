@@ -25,73 +25,65 @@ Script_2: @ 1d
 	CallStandard 0x7fa
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x5
-	CompareLastResultCall 0x1, Script_branch_14e
+	CompareLastResultCall EQUAL, Script_branch_14e
 	If 0x8005, 0x6
-	CompareLastResultCall 0x1, Script_branch_15a
+	CompareLastResultCall EQUAL, Script_branch_15a
 	If 0x8005, 0x7
-	CompareLastResultCall 0x1, Script_branch_166
+	CompareLastResultCall EQUAL, Script_branch_166
 	If 0x8005, 0x8
-	CompareLastResultCall 0x1, Script_branch_172
+	CompareLastResultCall EQUAL, Script_branch_172
 	If 0x8005, 0x9
-	CompareLastResultCall 0x1, Script_branch_17e
+	CompareLastResultCall EQUAL, Script_branch_17e
 	SetVariableRival 0x0
 	SetVarHero 0x1
 	Message 0x1
 	CloseMsgOnKeyPress
 	StoreStarter 0x800c
 	If 0x800c, 0x183
-	CompareLastResultJump 0x1, Script_branch_b3
+	CompareLastResultJump EQUAL, Script_branch_b3
 	If 0x800c, 0x186
-	CompareLastResultJump 0x1, Script_branch_c1
+	CompareLastResultJump EQUAL, Script_branch_c1
 	Jump Script_branch_a5
-@ a3
-
-.byte 0x2 @ 0xa3
-.byte 0x0 @ 0xa4
+	End
+@ a5
 
 Script_branch_a5: @ a5
 	TrainerBattle 0x1d6, 0x0
 	Jump Script_branch_cf
-@ b1
-
-.byte 0x2 @ 0xb1
-.byte 0x0 @ 0xb2
+	End
+@ b3
 
 Script_branch_b3: @ b3
 	TrainerBattle 0x1d7, 0x0
 	Jump Script_branch_cf
-@ bf
-
-.byte 0x2 @ 0xbf
-.byte 0x0 @ 0xc0
+	End
+@ c1
 
 Script_branch_c1: @ c1
 	TrainerBattle 0x1d8, 0x0
 	Jump Script_branch_cf
-@ cd
-
-.byte 0x2 @ 0xcd
-.byte 0x0 @ 0xce
+	End
+@ cf
 
 Script_branch_cf: @ cf
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_148
+	CompareLastResultJump EQUAL, Script_branch_148
 	SetVariableRival 0x0
 	SetVarHero 0x1
 	Message 0x2
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x5
-	CompareLastResultCall 0x1, Script_branch_18a
+	CompareLastResultCall EQUAL, Script_branch_18a
 	If 0x8005, 0x6
-	CompareLastResultCall 0x1, Script_branch_196
+	CompareLastResultCall EQUAL, Script_branch_196
 	If 0x8005, 0x7
-	CompareLastResultCall 0x1, Script_branch_1a2
+	CompareLastResultCall EQUAL, Script_branch_1a2
 	If 0x8005, 0x8
-	CompareLastResultCall 0x1, Script_branch_1ae
+	CompareLastResultCall EQUAL, Script_branch_1ae
 	If 0x8005, 0x9
-	CompareLastResultCall 0x1, Script_branch_1ba
+	CompareLastResultCall EQUAL, Script_branch_1ba
 	PlayFanfare 0x603
 	RemovePeople 0x1
 	WaitFanfare 0x603

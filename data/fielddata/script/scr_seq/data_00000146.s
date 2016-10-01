@@ -38,20 +38,18 @@ Script_3: @ 40
 	LockAll
 	FacePlayer
 	CheckFlag 0x105
-	CompareLastResultJump 0x1, Script_branch_87
+	CompareLastResultJump EQUAL, Script_branch_87
 	Message 0x2
 	SetVar 0x8004, 0x120
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_92
+	CompareLastResultJump EQUAL, Script_branch_92
 	CallStandard 0x7fc
 	SetFlag 0x105
 	Jump Script_branch_87
-@ 85
-
-.byte 0x2 @ 0x85
-.byte 0x0 @ 0x86
+	End
+@ 87
 
 Script_branch_87: @ 87
 	Message 0x3
@@ -95,8 +93,6 @@ Script_6: @ c0
 	Message 0x6
 	ShowMoney 0x14, 0x2
 	Jump Script_branch_d5
-@ d5
-
 Script_branch_d5: @ d5
 	Multi 0x1, 0x1, 0x0, 0x1, 0x8000
 	Cmd_42 0xdb, 0x0
@@ -106,30 +102,22 @@ Script_branch_d5: @ d5
 	CloseMulti
 	CopyVar 0x8008, 0x8000
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_125
+	CompareLastResultJump EQUAL, Script_branch_125
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_131
+	CompareLastResultJump EQUAL, Script_branch_131
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_13d
+	CompareLastResultJump EQUAL, Script_branch_13d
 	Message 0xa
 	Jump Script_branch_28c
-@ 125
-
 Script_branch_125: @ 125
 	SetVar 0x8001, 0x1e
 	Jump Script_branch_191
-@ 131
-
 Script_branch_131: @ 131
 	SetVar 0x8001, 0x1f
 	Jump Script_branch_191
-@ 13d
-
 Script_branch_13d: @ 13d
 	SetVar 0x8001, 0x20
 	Jump Script_branch_191
-@ 149
-
 Script_branch_149: @ 149
 	CheckMoney 0x800c, 0xc8
 	Return
@@ -165,22 +153,22 @@ Script_branch_183: @ 183
 
 Script_branch_191: @ 191
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_149
+	CompareLastResultCall EQUAL, Script_branch_149
 	If 0x8000, 0x1
-	CompareLastResultCall 0x1, Script_branch_153
+	CompareLastResultCall EQUAL, Script_branch_153
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_15d
+	CompareLastResultCall EQUAL, Script_branch_15d
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_277
+	CompareLastResultJump EQUAL, Script_branch_277
 	CheckStoreItem 0x8001, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_280
+	CompareLastResultJump EQUAL, Script_branch_280
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_167
+	CompareLastResultCall EQUAL, Script_branch_167
 	If 0x8000, 0x1
-	CompareLastResultCall 0x1, Script_branch_175
+	CompareLastResultCall EQUAL, Script_branch_175
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_183
+	CompareLastResultCall EQUAL, Script_branch_183
 	UpdateMoney
 	SetVarItem 0x0, 0x8001
 	PlayFanfare 0x617
@@ -194,7 +182,7 @@ Script_branch_191: @ 191
 	CompareLastResultJump 0x5, Script_branch_26e
 	CheckStoreItem 0x8001, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_280
+	CompareLastResultJump EQUAL, Script_branch_280
 	PlayFanfare 0x617
 	SetVarItem 0x0, 0x8001
 	Message 0x8
@@ -202,18 +190,12 @@ Script_branch_191: @ 191
 	SetVar 0x8005, 0x1
 	CallStandard 0x7fc
 	Jump Script_branch_26e
-@ 26e
-
 Script_branch_26e: @ 26e
 	Message 0x6
 	Jump Script_branch_d5
-@ 277
-
 Script_branch_277: @ 277
 	Message 0x9
 	Jump Script_branch_28c
-@ 280
-
 Script_branch_280: @ 280
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress

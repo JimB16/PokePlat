@@ -579,9 +579,9 @@ Script_9: @ 472
 	CopyVar 0x8006, 0x8002
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4b0
+	CompareLastResultJump EQUAL, Script_branch_4b0
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_64f
+	CompareLastResultJump EQUAL, Script_branch_64f
 	End
 @ 4ac
 
@@ -596,9 +596,9 @@ Script_branch_4b0: @ 4b0
 	TakeItem 0x8004, 0x8005, 0x800c
 	StoreItemTaken 0x8004, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_624
+	CompareLastResultJump EQUAL, Script_branch_624
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_63c
+	CompareLastResultJump EQUAL, Script_branch_63c
 	End
 @ 4e2
 
@@ -606,27 +606,27 @@ Script_branch_4e2: @ 4e2
 	Cmd_4f
 	CheckPlate 0x8004, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultCall 0x1, Script_branch_667
+	CompareLastResultCall EQUAL, Script_branch_667
 	SetVarHero 0x0
 	SetVarItem 0x1, 0x8004
 	StoreItemType 0x8004, 0x800c
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x7
-	CompareLastResultJump 0x1, Script_branch_588
+	CompareLastResultJump EQUAL, Script_branch_588
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_575
+	CompareLastResultJump EQUAL, Script_branch_575
 	If 0x8008, 0x4
-	CompareLastResultJump 0x1, Script_branch_5d4
+	CompareLastResultJump EQUAL, Script_branch_5d4
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_5c1
+	CompareLastResultJump EQUAL, Script_branch_5c1
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_5e7
+	CompareLastResultJump EQUAL, Script_branch_5e7
 	If 0x8008, 0x6
-	CompareLastResultJump 0x1, Script_branch_5fa
+	CompareLastResultJump EQUAL, Script_branch_5fa
 	If 0x8008, 0x5
-	CompareLastResultJump 0x1, Script_branch_5ae
+	CompareLastResultJump EQUAL, Script_branch_5ae
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_59b
+	CompareLastResultJump EQUAL, Script_branch_59b
 	End
 @ 575
 
@@ -634,73 +634,57 @@ Script_branch_575: @ 575
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 586
-
-.byte 0x2 @ 0x586
-.byte 0x0 @ 0x587
+	End
+@ 588
 
 Script_branch_588: @ 588
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 599
-
-.byte 0x2 @ 0x599
-.byte 0x0 @ 0x59a
+	End
+@ 59b
 
 Script_branch_59b: @ 59b
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 5ac
-
-.byte 0x2 @ 0x5ac
-.byte 0x0 @ 0x5ad
+	End
+@ 5ae
 
 Script_branch_5ae: @ 5ae
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 5bf
-
-.byte 0x2 @ 0x5bf
-.byte 0x0 @ 0x5c0
+	End
+@ 5c1
 
 Script_branch_5c1: @ 5c1
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 5d2
-
-.byte 0x2 @ 0x5d2
-.byte 0x0 @ 0x5d3
+	End
+@ 5d4
 
 Script_branch_5d4: @ 5d4
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 5e5
-
-.byte 0x2 @ 0x5e5
-.byte 0x0 @ 0x5e6
+	End
+@ 5e7
 
 Script_branch_5e7: @ 5e7
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 5f8
-
-.byte 0x2 @ 0x5f8
-.byte 0x0 @ 0x5f9
+	End
+@ 5fa
 
 Script_branch_5fa: @ 5fa
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-@ 60b
-
-.byte 0x2 @ 0x60b
-.byte 0x0 @ 0x60c
+	End
+@ 60d
 
 Script_branch_60d: @ 60d
 	Cmd_22 0x8006
@@ -708,10 +692,8 @@ Script_branch_60d: @ 60d
 	WaitButton
 	SetVar 0x800c, 0x1
 	Jump Script_branch_4ac
-@ 622
-
-.byte 0x2 @ 0x622
-.byte 0x0 @ 0x623
+	End
+@ 624
 
 Script_branch_624: @ 624
 	SetVarHero 0x0
@@ -719,20 +701,16 @@ Script_branch_624: @ 624
 	SetVarAtkItem 0x2, 0x8004
 	Message 0x6
 	Jump Script_branch_4e2
-@ 63a
-
-.byte 0x2 @ 0x63a
-.byte 0x0 @ 0x63b
+	End
+@ 63c
 
 Script_branch_63c: @ 63c
 	SetVarHero 0x0
 	Cmd_33c 0x1, 0x8004
 	Message 0x3
 	Jump Script_branch_4e2
-@ 64d
-
-.byte 0x2 @ 0x64d
-.byte 0x0 @ 0x64e
+	End
+@ 64f
 
 Script_branch_64f: @ 64f
 	SetVarItem 0x0, 0x8004
@@ -740,10 +718,8 @@ Script_branch_64f: @ 64f
 	WaitButton
 	SetVar 0x800c, 0x0
 	Jump Script_branch_4ac
-@ 665
-
-.byte 0x2 @ 0x665
-.byte 0x0 @ 0x666
+	End
+@ 667
 
 Script_branch_667: @ 667
 	CallStandard 0x7f6

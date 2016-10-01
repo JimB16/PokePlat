@@ -27,21 +27,21 @@ Script_14: @ 3e
 	SetFlag 0x2b2
 	SetFlag 0x2b5
 	If 0x404e, 0xff
-	CompareLastResultJump 0x1, Script_branch_ba
+	CompareLastResultJump EQUAL, Script_branch_ba
 	If 0x40c8, 0x0
-	CompareLastResultJump 0x1, Script_branch_ba
+	CompareLastResultJump EQUAL, Script_branch_ba
 	CheckFlag 0x9ab
-	CompareLastResultJump 0x1, Script_branch_ba
+	CompareLastResultJump EQUAL, Script_branch_ba
 	If 0x404e, 0x2
-	CompareLastResultCall 0x1, Script_branch_bc
+	CompareLastResultCall EQUAL, Script_branch_bc
 	If 0x404e, 0x4
-	CompareLastResultCall 0x1, Script_branch_c2
+	CompareLastResultCall EQUAL, Script_branch_c2
 	If 0x404e, 0x5
-	CompareLastResultCall 0x1, Script_branch_c8
+	CompareLastResultCall EQUAL, Script_branch_c8
 	If 0x404e, 0x7
-	CompareLastResultCall 0x1, Script_branch_ce
+	CompareLastResultCall EQUAL, Script_branch_ce
 	If 0x404e, 0x9
-	CompareLastResultCall 0x1, Script_branch_d4
+	CompareLastResultCall EQUAL, Script_branch_d4
 	End
 @ ba
 
@@ -101,9 +101,9 @@ Script_3: @ 100
 	LockAll
 	FacePlayer
 	CheckFlag 0xfa
-	CompareLastResultCall 0x0, Script_branch_126
+	CompareLastResultCall LESSER, Script_branch_126
 	CheckFlag 0xfa
-	CompareLastResultCall 0x1, Script_branch_12b
+	CompareLastResultCall EQUAL, Script_branch_12b
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll
@@ -164,24 +164,24 @@ Script_8: @ 184
 	LockAll
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x1d8
-	CompareLastResultCall 0x1, Script_branch_266
+	CompareLastResultCall EQUAL, Script_branch_266
 	If 0x8005, 0x1d9
-	CompareLastResultCall 0x1, Script_branch_272
+	CompareLastResultCall EQUAL, Script_branch_272
 	If 0x8005, 0x1da
-	CompareLastResultCall 0x1, Script_branch_274
+	CompareLastResultCall EQUAL, Script_branch_274
 	Message 0x6
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2bc
+	CompareLastResultJump EQUAL, Script_branch_2bc
 	Cmd_30c
 	Message 0x7
 	CloseMsgOnKeyPress
 	If 0x8005, 0x1d8
-	CompareLastResultCall 0x1, Script_branch_280
+	CompareLastResultCall EQUAL, Script_branch_280
 	If 0x8005, 0x1d9
-	CompareLastResultCall 0x1, Script_branch_294
+	CompareLastResultCall EQUAL, Script_branch_294
 	If 0x8005, 0x1da
-	CompareLastResultCall 0x1, Script_branch_2a8
+	CompareLastResultCall EQUAL, Script_branch_2a8
 	Message 0x9
 	CloseMsgOnKeyPress
 	ApplyMovement 0xd, Movement_388
@@ -248,11 +248,11 @@ Script_branch_2bc: @ 2bc
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x1d8
-	CompareLastResultCall 0x1, Script_branch_2f2
+	CompareLastResultCall EQUAL, Script_branch_2f2
 	If 0x8005, 0x1d9
-	CompareLastResultCall 0x1, Script_branch_306
+	CompareLastResultCall EQUAL, Script_branch_306
 	If 0x8005, 0x1da
-	CompareLastResultCall 0x1, Script_branch_312
+	CompareLastResultCall EQUAL, Script_branch_312
 	ReleaseAll
 	End
 @ 2f2
@@ -372,7 +372,7 @@ Script_9: @ 3d4
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_429
+	CompareLastResultJump EQUAL, Script_branch_429
 	Message 0xb
 	CloseMsgOnKeyPress
 	SetFlag 0x2aa
@@ -389,10 +389,8 @@ Script_9: @ 3d4
 Script_branch_429: @ 429
 	Message 0xc
 	Jump Script_branch_434
-@ 432
-
-.byte 0x2 @ 0x432
-.byte 0x0 @ 0x433
+	End
+@ 434
 
 Script_branch_434: @ 434
 	WaitButton
@@ -408,7 +406,7 @@ Script_10: @ 43c
 	Message 0xd
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_491
+	CompareLastResultJump EQUAL, Script_branch_491
 	Message 0xe
 	CloseMsgOnKeyPress
 	SetFlag 0x2ad
@@ -425,10 +423,8 @@ Script_10: @ 43c
 Script_branch_491: @ 491
 	Message 0xf
 	Jump Script_branch_434
-@ 49a
-
-.byte 0x2 @ 0x49a
-.byte 0x0 @ 0x49b
+	End
+@ 49c
 
 Script_11: @ 49c
 	PlayFanfare 0x5dc
@@ -437,7 +433,7 @@ Script_11: @ 49c
 	Message 0x10
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_4f1
+	CompareLastResultJump EQUAL, Script_branch_4f1
 	Message 0x11
 	CloseMsgOnKeyPress
 	SetFlag 0x2af
@@ -454,10 +450,8 @@ Script_11: @ 49c
 Script_branch_4f1: @ 4f1
 	Message 0x12
 	Jump Script_branch_434
-@ 4fa
-
-.byte 0x2 @ 0x4fa
-.byte 0x0 @ 0x4fb
+	End
+@ 4fc
 
 Script_12: @ 4fc
 	PlayFanfare 0x5dc
@@ -466,7 +460,7 @@ Script_12: @ 4fc
 	Message 0x13
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_551
+	CompareLastResultJump EQUAL, Script_branch_551
 	Message 0x14
 	CloseMsgOnKeyPress
 	SetFlag 0x2b2
@@ -483,10 +477,8 @@ Script_12: @ 4fc
 Script_branch_551: @ 551
 	Message 0x15
 	Jump Script_branch_434
-@ 55a
-
-.byte 0x2 @ 0x55a
-.byte 0x0 @ 0x55b
+	End
+@ 55c
 
 Script_13: @ 55c
 	PlayFanfare 0x5dc
@@ -495,7 +487,7 @@ Script_13: @ 55c
 	Message 0x16
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_5b1
+	CompareLastResultJump EQUAL, Script_branch_5b1
 	Message 0x17
 	CloseMsgOnKeyPress
 	SetFlag 0x2b5
@@ -512,10 +504,8 @@ Script_13: @ 55c
 Script_branch_5b1: @ 5b1
 	Message 0x18
 	Jump Script_branch_434
-@ 5ba
-
-.byte 0x2 @ 0x5ba
-.byte 0x0 @ 0x5bb
+	End
+@ 5bc
 
 Script_15: @ 5bc
 	CallMessageBox 0x1b, 0x2, 0x0, 0x800c

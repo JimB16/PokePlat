@@ -1868,26 +1868,24 @@ Script_9: @ e86
 	StartBattleAnalysis 0x8004
 	CheckFollowBattle 0x8001, 0x800d
 	If 0x8001, 0x33
-	CompareLastResultCall 0x1, Script_branch_fe7
+	CompareLastResultCall EQUAL, Script_branch_fe7
 	If 0x8001, 0x34
-	CompareLastResultCall 0x1, Script_branch_fe7
+	CompareLastResultCall EQUAL, Script_branch_fe7
 	If 0x8001, 0x35
-	CompareLastResultCall 0x1, Script_branch_fe7
+	CompareLastResultCall EQUAL, Script_branch_fe7
 	If 0x8001, 0x36
-	CompareLastResultCall 0x1, Script_branch_fe7
+	CompareLastResultCall EQUAL, Script_branch_fe7
 	ClearTrainerId 0x8004
-	CompareLastResultJump 0x1, Script_branch_f40
+	CompareLastResultJump EQUAL, Script_branch_f40
 	CheckTrainerStatus 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump 0x5, Script_branch_f01
 	StorePokePartyDefeated 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fcb
+	CompareLastResultJump EQUAL, Script_branch_fcb
 	Jump Script_branch_f01
-@ eff
-
-.byte 0x2 @ 0xeff
-.byte 0x0 @ 0xf00
+	End
+@ f01
 
 Script_branch_f01: @ f01
 	StoreLeagueTrainer 0x8004
@@ -1895,10 +1893,8 @@ Script_branch_f01: @ f01
 	TrainerBattleStored 0x8000, 0x8001, 0x8002
 	EndtrainerBattle 0x8004, 0x8000
 	Jump Script_branch_f1d
-@ f1b
-
-.byte 0x2 @ 0xf1b
-.byte 0x0 @ 0xf1c
+	End
+@ f1d
 
 Script_branch_f1d: @ f1d
 	CloseMsgOnKeyPress
@@ -1906,7 +1902,7 @@ Script_branch_f1d: @ f1d
 	TrainerBattle 0x8004, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fc5
+	CompareLastResultJump EQUAL, Script_branch_fc5
 	SetTrainerId 0x8004
 	ReleaseAll
 	End
@@ -1917,10 +1913,8 @@ Script_branch_f40: @ f40
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_f73
 	Jump Script_branch_f5b
-@ f59
-
-.byte 0x2 @ 0xf59
-.byte 0x0 @ 0xf5a
+	End
+@ f5b
 
 Script_branch_f5b: @ f5b
 	Cmd_33
@@ -1939,12 +1933,10 @@ Script_branch_f73: @ f73
 	CompareLastResultJump 0x5, Script_branch_fa3
 	StorePokePartyDefeated 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fcb
+	CompareLastResultJump EQUAL, Script_branch_fcb
 	Jump Script_branch_fa3
-@ fa1
-
-.byte 0x2 @ 0xfa1
-.byte 0x0 @ 0xfa2
+	End
+@ fa3
 
 Script_branch_fa3: @ fa3
 	StoreLeagueTrainer 0x8004
@@ -1953,10 +1945,8 @@ Script_branch_fa3: @ fa3
 	EndtrainerBattle 0x8004, 0x8000
 	CopyVar 0x8004, 0x8007
 	Jump Script_branch_f1d
-@ fc3
-
-.byte 0x2 @ 0xfc3
-.byte 0x0 @ 0xfc4
+	End
+@ fc5
 
 Script_branch_fc5: @ fc5
 	LostGoPc
@@ -1980,13 +1970,13 @@ Script_branch_fe7: @ fe7
 	WaitMovement
 	CheckFacePosition 0x8000
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_102b
+	CompareLastResultCall EQUAL, Script_branch_102b
 	If 0x8000, 0x1
-	CompareLastResultCall 0x1, Script_branch_1033
+	CompareLastResultCall EQUAL, Script_branch_1033
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_103b
+	CompareLastResultCall EQUAL, Script_branch_103b
 	If 0x8000, 0x3
-	CompareLastResultCall 0x1, Script_branch_1043
+	CompareLastResultCall EQUAL, Script_branch_1043
 	Return
 @ 102b
 
@@ -2021,11 +2011,11 @@ Script_929: @ 1054
 	LockAll
 	CheckBattleType 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1083
+	CompareLastResultJump EQUAL, Script_branch_1083
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_10f3
+	CompareLastResultJump EQUAL, Script_branch_10f3
 	If 0x800c, 0x2
-	CompareLastResultJump 0x1, Script_branch_11a0
+	CompareLastResultJump EQUAL, Script_branch_11a0
 	End
 @ 1083
 
@@ -2043,7 +2033,7 @@ Script_branch_1083: @ 1083
 	TrainerBattle 0x8004, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fc5
+	CompareLastResultJump EQUAL, Script_branch_fc5
 	SetVarBattle2 0x0, 0x800c
 	CopyVar 0x8004, 0x800c
 	SetTrainerId 0x8004
@@ -2055,7 +2045,7 @@ Function_10de: @ 10de
 Script_branch_10de: @ 10de
 	SetVarBattle 0x0, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Function_10de
+	CompareLastResultJump EQUAL, Function_10de
 	Return
 @ 10f3
 
@@ -2079,7 +2069,7 @@ Script_branch_10f3: @ 10f3
 	TrainerBattle 0x8004, 0x8005
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fc5
+	CompareLastResultJump EQUAL, Script_branch_fc5
 	SetVarBattle2 0x0, 0x800c
 	CopyVar 0x8004, 0x800c
 	SetTrainerId 0x8004
@@ -2094,10 +2084,10 @@ Function_1178: @ 1178
 Script_branch_1178: @ 1178
 	SetVarBattle 0x0, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Function_1178
+	CompareLastResultJump EQUAL, Function_1178
 	SetVarBattle 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Function_1178
+	CompareLastResultJump EQUAL, Function_1178
 	Return
 @ 11a0
 
@@ -2125,7 +2115,7 @@ Script_branch_11a0: @ 11a0
 	TrainerBattle 0x8004, 0x8005
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_fc5
+	CompareLastResultJump EQUAL, Script_branch_fc5
 	SetVarBattle2 0x0, 0x800c
 	CopyVar 0x8004, 0x800c
 	SetTrainerId 0x8004
@@ -2140,7 +2130,7 @@ Function_123b: @ 123b
 Script_branch_123b: @ 123b
 	SetVarBattle 0x0, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Function_123b
+	CompareLastResultJump EQUAL, Function_123b
 	Return
 @ 1250
 
@@ -2148,7 +2138,7 @@ Function_1250: @ 1250
 Script_branch_1250: @ 1250
 	SetVarBattle 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Function_1250
+	CompareLastResultJump EQUAL, Function_1250
 	Return
 @ 1265
 

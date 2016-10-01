@@ -26,9 +26,9 @@ Script_2: @ 21
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4c
+	CompareLastResultJump EQUAL, Script_branch_4c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_232
+	CompareLastResultJump EQUAL, Script_branch_232
 	End
 @ 4c
 
@@ -43,31 +43,29 @@ Script_branch_4c: @ 4c
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x8000, 0xff
-	CompareLastResultJump 0x1, Script_branch_232
+	CompareLastResultJump EQUAL, Script_branch_232
 	CheckPokeEgg 0x8000, 0x8001
 	If 0x8001, 0x0
-	CompareLastResultJump 0x1, Script_branch_227
+	CompareLastResultJump EQUAL, Script_branch_227
 	Cmd_2e5 0x8000, 0x1, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_23d
+	CompareLastResultJump EQUAL, Script_branch_23d
 	SetVarPokeNick 0x0, 0x8000
 	Message 0x5
 	Cmd_2e6 0x8000, 0x1, 0x800c
 	CopyVar 0x8003, 0x800c
 	If 0x8003, 0xfffe
-	CompareLastResultJump 0x1, Script_branch_232
+	CompareLastResultJump EQUAL, Script_branch_232
 	Cmd_2ea 0x8003, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_248
+	CompareLastResultJump EQUAL, Script_branch_248
 	CheckMoveNumDelete 0x800c, 0x8000
 	CopyVar 0x8002, 0x800c
 	If 0x800c, 0x4
-	CompareLastResultJump 0x1, Script_branch_fd
+	CompareLastResultJump EQUAL, Script_branch_fd
 	Jump Script_branch_1f2
-@ fb
-
-.byte 0x2 @ 0xfb
-.byte 0x0 @ 0xfc
+	End
+@ fd
 
 Script_branch_fd: @ fd
 	SetVarPokeNick 0x0, 0x8000
@@ -75,7 +73,7 @@ Script_branch_fd: @ fd
 	Message 0x9
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1b7
+	CompareLastResultJump EQUAL, Script_branch_1b7
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	CloseMsgOnKeyPress
@@ -85,13 +83,13 @@ Script_branch_fd: @ fd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x8002, 0x4
-	CompareLastResultJump 0x1, Script_branch_1b7
+	CompareLastResultJump EQUAL, Script_branch_1b7
 	CheckDeleteMove 0x800c, 0x8000, 0x8002
 	SetVarAtk 0x1, 0x800c
 	Message 0xc
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1b7
+	CompareLastResultJump EQUAL, Script_branch_1b7
 	SetVarPokeNick 0x0, 0x8000
 	CheckDeleteMove 0x800c, 0x8000, 0x8002
 	SetVarAtk 0x1, 0x800c
@@ -107,10 +105,8 @@ Script_branch_fd: @ fd
 	Cmd_4f
 	Return2 0x10, 0x800c
 	Jump Script_branch_213
-@ 1b5
-
-.byte 0x2 @ 0x1b5
-.byte 0x0 @ 0x1b6
+	End
+@ 1b7
 
 Script_branch_1b7: @ 1b7
 	SetVarPokeNick 0x0, 0x8000
@@ -118,22 +114,18 @@ Script_branch_1b7: @ 1b7
 	Message 0xa
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1dd
+	CompareLastResultJump EQUAL, Script_branch_1dd
 	Jump Script_branch_fd
-@ 1db
-
-.byte 0x2 @ 0x1db
-.byte 0x0 @ 0x1dc
+	End
+@ 1dd
 
 Script_branch_1dd: @ 1dd
 	SetVarPokeNick 0x0, 0x8000
 	SetVarAtk 0x1, 0x8003
 	Message 0xb
 	Jump Script_branch_232
-@ 1f0
-
-.byte 0x2 @ 0x1f0
-.byte 0x0 @ 0x1f1
+	End
+@ 1f2
 
 Script_branch_1f2: @ 1f2
 	SetVarPokeNick 0x0, 0x8000
@@ -143,19 +135,15 @@ Script_branch_1f2: @ 1f2
 	Cmd_4f
 	Return2 0x10, 0x800c
 	Jump Script_branch_213
-@ 211
-
-.byte 0x2 @ 0x211
-.byte 0x0 @ 0x212
+	End
+@ 213
 
 Script_branch_213: @ 213
 	Cmd_2eb 0x8003
 	Cmd_2e9 0x8000, 0x8002, 0x8003
 	Jump Script_branch_232
-@ 225
-
-.byte 0x2 @ 0x225
-.byte 0x0 @ 0x226
+	End
+@ 227
 
 Script_branch_227: @ 227
 	Message 0x10

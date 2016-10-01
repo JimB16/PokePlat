@@ -17,24 +17,24 @@ Script_2: @ e
 	WaitMovement
 	StoreLeagueTrainer 0x10b
 	CheckFlag 0x964
-	CompareLastResultCall 0x0, Script_branch_eb
+	CompareLastResultCall LESSER, Script_branch_eb
 	CheckFlag 0x964
-	CompareLastResultCall 0x1, Script_branch_f0
+	CompareLastResultCall EQUAL, Script_branch_f0
 	CloseMsgOnKeyPress
 	SetFlag 0x98b
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_f5
+	CompareLastResultCall LESSER, Script_branch_f5
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_fd
+	CompareLastResultCall EQUAL, Script_branch_fd
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_121
+	CompareLastResultJump EQUAL, Script_branch_121
 	Message 0x1
 	SetFlag 0xb4
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_105
+	CompareLastResultCall LESSER, Script_branch_105
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_113
+	CompareLastResultCall EQUAL, Script_branch_113
 	Message 0x2
 	CloseMsgOnKeyPress
 	ApplyMovement 0x0, Movement_144

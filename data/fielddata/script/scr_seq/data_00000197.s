@@ -42,9 +42,9 @@ Script_2: @ a
 	Message 0x4
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_b1
+	CompareLastResultJump EQUAL, Script_branch_b1
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_bd
+	CompareLastResultJump EQUAL, Script_branch_bd
 	End
 @ b1
 
@@ -52,14 +52,10 @@ Script_branch_b1: @ b1
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_c9
-@ bd
-
 Script_branch_bd: @ bd
 	SetVarHero 0x0
 	Message 0x6
 	Jump Script_branch_c9
-@ c9
-
 Script_branch_c9: @ c9
 	Message 0x7
 	CloseMsgOnKeyPress

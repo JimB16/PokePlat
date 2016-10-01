@@ -12,31 +12,31 @@ Script_1: @ a
 	LockAll
 	FacePlayer
 	CheckFlag 0xb2
-	CompareLastResultJump 0x1, Script_branch_d2
+	CompareLastResultJump EQUAL, Script_branch_d2
 	StoreLeagueTrainer 0x107
 	CheckFlag 0x964
-	CompareLastResultCall 0x0, Script_branch_f0
+	CompareLastResultCall LESSER, Script_branch_f0
 	CheckFlag 0x964
-	CompareLastResultCall 0x1, Script_branch_104
+	CompareLastResultCall EQUAL, Script_branch_104
 	CloseMsgOnKeyPress
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_a0
+	CompareLastResultCall LESSER, Script_branch_a0
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_a8
+	CompareLastResultCall EQUAL, Script_branch_a8
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_cc
+	CompareLastResultJump EQUAL, Script_branch_cc
 	SetFlag 0xb2
 	PlayFanfare 0x61a
 	RemovePeople 0x1
 	CheckFlag 0xd6
-	CompareLastResultCall 0x0, Script_branch_b0
+	CompareLastResultCall LESSER, Script_branch_b0
 	CheckFlag 0xd6
-	CompareLastResultCall 0x1, Script_branch_be
+	CompareLastResultCall EQUAL, Script_branch_be
 	CheckFlag 0x964
-	CompareLastResultCall 0x0, Script_branch_109
+	CompareLastResultCall LESSER, Script_branch_109
 	CheckFlag 0x964
-	CompareLastResultCall 0x1, Script_branch_10e
+	CompareLastResultCall EQUAL, Script_branch_10e
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll
@@ -71,9 +71,9 @@ Script_branch_cc: @ cc
 
 Script_branch_d2: @ d2
 	CheckFlag 0x964
-	CompareLastResultCall 0x0, Script_branch_113
+	CompareLastResultCall LESSER, Script_branch_113
 	CheckFlag 0x964
-	CompareLastResultCall 0x1, Script_branch_118
+	CompareLastResultCall EQUAL, Script_branch_118
 	WaitButton
 	CloseMsgOnKeyPress
 	ReleaseAll

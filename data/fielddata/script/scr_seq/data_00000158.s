@@ -26,7 +26,7 @@ Script_3: @ 22
 	FacePlayer
 	CheckBadge 0x7, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_48
+	CompareLastResultJump EQUAL, Script_branch_48
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -48,7 +48,7 @@ Script_4: @ 56
 	LockAll
 	CheckBadge 0x7, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_7a
+	CompareLastResultJump EQUAL, Script_branch_7a
 	Message 0x2
 	WaitButton
 	CloseMsgOnKeyPress

@@ -14,16 +14,16 @@ Script: @ 0
 
 Script_1: @ 1e
 	CheckFlag 0xba
-	CompareLastResultCall 0x1, Script_branch_9d
+	CompareLastResultCall EQUAL, Script_branch_9d
 	CheckFlag 0xba
-	CompareLastResultCall 0x0, Script_branch_87
+	CompareLastResultCall LESSER, Script_branch_87
 	If 0x4097, 0x0
-	CompareLastResultCall 0x1, Script_branch_71
+	CompareLastResultCall EQUAL, Script_branch_71
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_61
+	CompareLastResultJump EQUAL, Script_branch_61
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_69
+	CompareLastResultJump EQUAL, Script_branch_69
 	End
 @ 61
 
@@ -72,37 +72,31 @@ Script_3: @ cb
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0xba
-	CompareLastResultJump 0x1, Script_branch_128
+	CompareLastResultJump EQUAL, Script_branch_128
 	ApplyMovement 0x5, Movement_1c8
 	WaitMovement
 	Message 0x2
 	FacePlayer
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_104
+	CompareLastResultJump EQUAL, Script_branch_104
 	Jump Script_branch_112
-@ 102
-
-.byte 0x2 @ 0x102
-.byte 0x0 @ 0x103
+	End
+@ 104
 
 Script_branch_104: @ 104
 	SetVarHero 0x0
 	Message 0x3
 	Jump Script_branch_120
-@ 110
-
-.byte 0x2 @ 0x110
-.byte 0x0 @ 0x111
+	End
+@ 112
 
 Script_branch_112: @ 112
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_120
-@ 11e
-
-.byte 0x2 @ 0x11e
-.byte 0x0 @ 0x11f
+	End
+@ 120
 
 Script_branch_120: @ 120
 	WaitButton
@@ -127,33 +121,27 @@ Script_4: @ 13b
 	LockAll
 	FacePlayer
 	CheckFlag 0xba
-	CompareLastResultJump 0x1, Script_branch_18b
+	CompareLastResultJump EQUAL, Script_branch_18b
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_167
+	CompareLastResultJump EQUAL, Script_branch_167
 	Jump Script_branch_175
-@ 165
-
-.byte 0x2 @ 0x165
-.byte 0x0 @ 0x166
+	End
+@ 167
 
 Script_branch_167: @ 167
 	SetVarHero 0x0
 	Message 0x7
 	Jump Script_branch_183
-@ 173
-
-.byte 0x2 @ 0x173
-.byte 0x0 @ 0x174
+	End
+@ 175
 
 Script_branch_175: @ 175
 	SetVarHero 0x0
 	Message 0x8
 	Jump Script_branch_183
-@ 181
-
-.byte 0x2 @ 0x181
-.byte 0x0 @ 0x182
+	End
+@ 183
 
 Script_branch_183: @ 183
 	WaitButton
@@ -165,30 +153,24 @@ Script_branch_183: @ 183
 Script_branch_18b: @ 18b
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1a4
+	CompareLastResultJump EQUAL, Script_branch_1a4
 	Jump Script_branch_1b2
-@ 1a2
-
-.byte 0x2 @ 0x1a2
-.byte 0x0 @ 0x1a3
+	End
+@ 1a4
 
 Script_branch_1a4: @ 1a4
 	SetVarHero 0x0
 	Message 0xf
 	Jump Script_branch_1c0
-@ 1b0
-
-.byte 0x2 @ 0x1b0
-.byte 0x0 @ 0x1b1
+	End
+@ 1b2
 
 Script_branch_1b2: @ 1b2
 	SetVarHero 0x0
 	Message 0x10
 	Jump Script_branch_1c0
-@ 1be
-
-.byte 0x2 @ 0x1be
-.byte 0x0 @ 0x1bf
+	End
+@ 1c0
 
 Script_branch_1c0: @ 1c0
 	WaitButton
@@ -208,30 +190,24 @@ Script_5: @ 1d0
 	WaitMovement
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1f5
+	CompareLastResultJump EQUAL, Script_branch_1f5
 	Jump Script_branch_203
-@ 1f3
-
-.byte 0x2 @ 0x1f3
-.byte 0x0 @ 0x1f4
+	End
+@ 1f5
 
 Script_branch_1f5: @ 1f5
 	SetVarHero 0x0
 	Message 0x0
 	Jump Script_branch_211
-@ 201
-
-.byte 0x2 @ 0x201
-.byte 0x0 @ 0x202
+	End
+@ 203
 
 Script_branch_203: @ 203
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_211
-@ 20f
-
-.byte 0x2 @ 0x20f
-.byte 0x0 @ 0x210
+	End
+@ 211
 
 Script_branch_211: @ 211
 	SetVar 0x4097, 0x1
@@ -261,7 +237,7 @@ Script_6: @ 230
 	TrainerBattle 0x195, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2db
+	CompareLastResultJump EQUAL, Script_branch_2db
 	Message 0xa
 	Message 0xb
 	Message 0xc

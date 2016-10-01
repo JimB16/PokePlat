@@ -13,47 +13,39 @@ Script_1: @ 6
 	CheckFloor 0x40ce
 	CopyVar 0x8008, 0x40ce
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_4e
+	CompareLastResultJump EQUAL, Script_branch_4e
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_5a
+	CompareLastResultJump EQUAL, Script_branch_5a
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_66
+	CompareLastResultJump EQUAL, Script_branch_66
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_72
+	CompareLastResultJump EQUAL, Script_branch_72
 	End
 @ 4e
 
 Script_branch_4e: @ 4e
-	Cmd_347 0x0, 0x4
+	DisplayFloor 0x0, 0x4
 	Jump Script_branch_7e
-@ 58
-
-.byte 0x2 @ 0x58
-.byte 0x0 @ 0x59
+	End
+@ 5a
 
 Script_branch_5a: @ 5a
-	Cmd_347 0x0, 0x3
+	DisplayFloor 0x0, 0x3
 	Jump Script_branch_7e
-@ 64
-
-.byte 0x2 @ 0x64
-.byte 0x0 @ 0x65
+	End
+@ 66
 
 Script_branch_66: @ 66
-	Cmd_347 0x0, 0x2
+	DisplayFloor 0x0, 0x2
 	Jump Script_branch_7e
-@ 70
-
-.byte 0x2 @ 0x70
-.byte 0x0 @ 0x71
+	End
+@ 72
 
 Script_branch_72: @ 72
-	Cmd_347 0x0, 0x1
+	DisplayFloor 0x0, 0x1
 	Jump Script_branch_7e
-@ 7c
-
-.byte 0x2 @ 0x7c
-.byte 0x0 @ 0x7d
+	End
+@ 7e
 
 Script_branch_7e: @ 7e
 	StartLift 0x14, 0x1, 0x40ce, 0x40ce
@@ -67,90 +59,80 @@ Script_branch_7e: @ 7e
 	CloseMulti
 	CopyVar 0x8008, 0x800c
 	If 0x8008, 0x0
-	CompareLastResultJump 0x1, Script_branch_1dc
+	CompareLastResultJump EQUAL, Script_branch_1dc
 	If 0x8008, 0x1
-	CompareLastResultJump 0x1, Script_branch_18b
+	CompareLastResultJump EQUAL, Script_branch_18b
 	If 0x8008, 0x2
-	CompareLastResultJump 0x1, Script_branch_13a
+	CompareLastResultJump EQUAL, Script_branch_13a
 	If 0x8008, 0x3
-	CompareLastResultJump 0x1, Script_branch_e9
+	CompareLastResultJump EQUAL, Script_branch_e9
 	Jump Script_branch_283
-@ e7
-
-.byte 0x2 @ 0xe7
-.byte 0x0 @ 0xe8
+	End
+@ e9
 
 Script_branch_e9: @ e9
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0xb, 0x2, 0x12, 0x2, 0x1
 	If 0x40ce, 0x3
-	CompareLastResultJump 0x1, Script_branch_26c
+	CompareLastResultJump EQUAL, Script_branch_26c
 	If 0x40ce, 0x3
-	CompareLastResultCall 0x2, Script_branch_22d
+	CompareLastResultCall GREATER, Script_branch_22d
 	If 0x40ce, 0x3
-	CompareLastResultCall 0x0, Script_branch_238
+	CompareLastResultCall LESSER, Script_branch_238
 	Call Function_243
 	SetVar 0x40ce, 0x3
 	Jump Script_branch_261
-@ 138
-
-.byte 0x2 @ 0x138
-.byte 0x0 @ 0x139
+	End
+@ 13a
 
 Script_branch_13a: @ 13a
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0xc, 0x3, 0x12, 0x2, 0x1
 	If 0x40ce, 0x2
-	CompareLastResultJump 0x1, Script_branch_26c
+	CompareLastResultJump EQUAL, Script_branch_26c
 	If 0x40ce, 0x2
-	CompareLastResultCall 0x2, Script_branch_22d
+	CompareLastResultCall GREATER, Script_branch_22d
 	If 0x40ce, 0x2
-	CompareLastResultCall 0x0, Script_branch_238
+	CompareLastResultCall LESSER, Script_branch_238
 	Call Function_243
 	SetVar 0x40ce, 0x2
 	Jump Script_branch_261
-@ 189
-
-.byte 0x2 @ 0x189
-.byte 0x0 @ 0x18a
+	End
+@ 18b
 
 Script_branch_18b: @ 18b
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0xd, 0x4, 0x12, 0x2, 0x1
 	If 0x40ce, 0x1
-	CompareLastResultJump 0x1, Script_branch_26c
+	CompareLastResultJump EQUAL, Script_branch_26c
 	If 0x40ce, 0x1
-	CompareLastResultCall 0x2, Script_branch_22d
+	CompareLastResultCall GREATER, Script_branch_22d
 	If 0x40ce, 0x1
-	CompareLastResultCall 0x0, Script_branch_238
+	CompareLastResultCall LESSER, Script_branch_238
 	Call Function_243
 	SetVar 0x40ce, 0x1
 	Jump Script_branch_261
-@ 1da
-
-.byte 0x2 @ 0x1da
-.byte 0x0 @ 0x1db
+	End
+@ 1dc
 
 Script_branch_1dc: @ 1dc
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
 	WarpMapElevator 0xe, 0x1, 0x12, 0x2, 0x1
 	If 0x40ce, 0x0
-	CompareLastResultJump 0x1, Script_branch_26c
+	CompareLastResultJump EQUAL, Script_branch_26c
 	If 0x40ce, 0x0
-	CompareLastResultCall 0x2, Script_branch_22d
+	CompareLastResultCall GREATER, Script_branch_22d
 	If 0x40ce, 0x0
-	CompareLastResultCall 0x0, Script_branch_238
+	CompareLastResultCall LESSER, Script_branch_238
 	Call Function_243
 	SetVar 0x40ce, 0x0
 	Jump Script_branch_261
-@ 22b
-
-.byte 0x2 @ 0x22b
-.byte 0x0 @ 0x22c
+	End
+@ 22d
 
 Script_branch_22d: @ 22d
 	Message 0x2

@@ -18,7 +18,7 @@ Script_2: @ e
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2e
+	CompareLastResultJump EQUAL, Script_branch_2e
 	CloseMsgOnKeyPress
 	ReleaseAll
 	End
@@ -29,7 +29,7 @@ Script_branch_2e: @ 2e
 	Message 0x1
 	CloseMsgOnKeyPress
 	PlayFanfare 0x5d2
-	Cmd_328 0x0
+	PortalEffect 0x0
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
 	Warp 0x10e, 0x0, 0xb, 0xf, 0x1

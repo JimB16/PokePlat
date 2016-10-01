@@ -11,7 +11,7 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x107
-	CompareLastResultJump 0x1, Script_branch_24
+	CompareLastResultJump EQUAL, Script_branch_24
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress

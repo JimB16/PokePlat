@@ -13,9 +13,9 @@ Script: @ 0
 Script_5: @ 16
 	CheckStatusPhraseBox 0x6, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_3c
+	CompareLastResultJump EQUAL, Script_branch_3c
 	If 0x4077, 0x2
-	CompareLastResultJump 0x0, Script_branch_3c
+	CompareLastResultJump LESSER, Script_branch_3c
 	ClearFlag 0x212
 	End
 @ 3c
@@ -32,53 +32,43 @@ Script_1: @ 42
 	Message 0x0
 	DisableBadge 0x8000
 	If 0x8000, 0x0
-	CompareLastResultJump 0x1, Script_branch_181
+	CompareLastResultJump EQUAL, Script_branch_181
 	StorePoketchApp 0x2, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_c5
+	CompareLastResultJump EQUAL, Script_branch_c5
 	StorePoketchApp 0xc, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_dc
+	CompareLastResultJump EQUAL, Script_branch_dc
 	StorePoketchApp 0xd, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_f3
+	CompareLastResultJump EQUAL, Script_branch_f3
 	StorePoketchApp 0xf, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_10a
+	CompareLastResultJump EQUAL, Script_branch_10a
 	CheckItem 0x1af, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1b8
+	CompareLastResultJump EQUAL, Script_branch_1b8
 	Jump Script_branch_1ad
-@ c5
-
 Script_branch_c5: @ c5
 	DisableBadge 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump 0x4, Script_branch_121
 	Jump Script_branch_181
-@ dc
-
 Script_branch_dc: @ dc
 	DisableBadge 0x800c
 	If 0x800c, 0x3
 	CompareLastResultJump 0x4, Script_branch_139
 	Jump Script_branch_18c
-@ f3
-
 Script_branch_f3: @ f3
 	DisableBadge 0x800c
 	If 0x800c, 0x5
 	CompareLastResultJump 0x4, Script_branch_151
 	Jump Script_branch_197
-@ 10a
-
 Script_branch_10a: @ 10a
 	DisableBadge 0x800c
 	If 0x800c, 0x7
 	CompareLastResultJump 0x4, Script_branch_169
 	Jump Script_branch_1a2
-@ 121
-
 Script_branch_121: @ 121
 	Message 0x2
 	SetVar 0x8004, 0x2

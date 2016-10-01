@@ -13,7 +13,7 @@ Script_1: @ e
 	ElevIrAnm
 	CheckElevPosition 0x4001
 	If 0x4001, 0x0
-	CompareLastResultJump 0x1, Script_branch_29
+	CompareLastResultJump EQUAL, Script_branch_29
 	End
 @ 29
 

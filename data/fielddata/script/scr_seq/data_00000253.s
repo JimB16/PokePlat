@@ -11,12 +11,12 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0xd2
-	CompareLastResultJump 0x1, Script_branch_c7
+	CompareLastResultJump EQUAL, Script_branch_c7
 	CheckFlag 0xe8
-	CompareLastResultJump 0x1, Script_branch_4f
+	CompareLastResultJump EQUAL, Script_branch_4f
 	CheckItem 0x1a8, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_44
+	CompareLastResultJump EQUAL, Script_branch_44
 	Message 0x0
 	WaitButton
 	CloseMsgOnKeyPress
@@ -27,10 +27,8 @@ Script_1: @ 6
 Script_branch_44: @ 44
 	Message 0x1
 	Jump Script_branch_4f
-@ 4d
-
-.byte 0x2 @ 0x4d
-.byte 0x0 @ 0x4e
+	End
+@ 4f
 
 Script_branch_4f: @ 4f
 	ApplyMovement 0x0, Movement_d4
@@ -38,9 +36,9 @@ Script_branch_4f: @ 4f
 	Message 0x2
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_7c
+	CompareLastResultJump EQUAL, Script_branch_7c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_b8
+	CompareLastResultJump EQUAL, Script_branch_b8
 	End
 @ 7c
 
@@ -50,7 +48,7 @@ Script_branch_7c: @ 7c
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_ae
+	CompareLastResultJump EQUAL, Script_branch_ae
 	SetFlag 0xd2
 	CallStandard 0x7e0
 	CloseMsgOnKeyPress

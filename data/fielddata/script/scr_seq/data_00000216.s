@@ -19,21 +19,19 @@ Script_7: @ 22
 
 Script_1: @ 24
 	If 0x40cf, 0x2
-	CompareLastResultCall 0x1, Script_branch_82
+	CompareLastResultCall EQUAL, Script_branch_82
 	CheckFlag 0x10f
-	CompareLastResultCall 0x1, Script_branch_bb
+	CompareLastResultCall EQUAL, Script_branch_bb
 	CheckFlag 0x10f
-	CompareLastResultCall 0x0, Script_branch_c5
+	CompareLastResultCall LESSER, Script_branch_c5
 	If 0x4089, 0x2
-	CompareLastResultJump 0x0, Script_branch_7c
+	CompareLastResultJump LESSER, Script_branch_7c
 	CheckFlag 0xaa8
-	CompareLastResultJump 0x1, Script_branch_7c
+	CompareLastResultJump EQUAL, Script_branch_7c
 	CheckPokemart 0x4000
 	If 0x4000, 0x5
 	CompareLastResultJump 0x5, Script_branch_7c
 	Jump Script_branch_76
-@ 76
-
 Script_branch_76: @ 76
 	ClearFlag 0x20b
 	End
@@ -51,11 +49,11 @@ Script_branch_82: @ 82
 
 Script_2: @ 8a
 	CheckFlag 0x10f
-	CompareLastResultCall 0x1, Script_branch_bb
+	CompareLastResultCall EQUAL, Script_branch_bb
 	CheckFlag 0x10f
-	CompareLastResultCall 0x0, Script_branch_c5
+	CompareLastResultCall LESSER, Script_branch_c5
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_ad
+	CompareLastResultJump EQUAL, Script_branch_ad
 	End
 @ ad
 
@@ -86,7 +84,7 @@ Script_3: @ cf
 	TrainerBattle 0x34b, 0x0
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_133
+	CompareLastResultJump EQUAL, Script_branch_133
 	Message 0x1
 	CloseMsgOnKeyPress
 	ApplyMovement 0x0, Movement_13c
@@ -131,7 +129,7 @@ Script_4: @ 150
 	PlayFanfare 0x5dc
 	LockAll
 	CheckFlag 0x9f
-	CompareLastResultJump 0x1, Script_branch_16c
+	CompareLastResultJump EQUAL, Script_branch_16c
 	Message 0x5
 	WaitButton
 	CloseMsgOnKeyPress
@@ -144,7 +142,7 @@ Script_branch_16c: @ 16c
 	Message 0x6
 	YesNoBox 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_1a2
+	CompareLastResultJump EQUAL, Script_branch_1a2
 	SetFlag 0x10f
 	Call Script_branch_bb
 	SetTilePassable 0x0, 0xf3, 0x28e
@@ -183,7 +181,7 @@ Script_6: @ 1bf
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1fb
+	CompareLastResultJump EQUAL, Script_branch_1fb
 	SetFlag 0xaa8
 	ReleaseAll
 	End

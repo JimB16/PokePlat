@@ -50,7 +50,7 @@ Script_2: @ 62
 	FacePlayer
 	CheckBadge 0x4, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_88
+	CompareLastResultJump EQUAL, Script_branch_88
 	Message 0x4
 	WaitButton
 	CloseMsgOnKeyPress
@@ -105,10 +105,10 @@ Script_6: @ cc
 	FacePlayer
 	StorePoketchApp 0x9, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_118
+	CompareLastResultJump EQUAL, Script_branch_118
 	StoreSinPokemonSeen 0x800c
 	If 0x800c, 0x32
-	CompareLastResultJump 0x0, Script_branch_10d
+	CompareLastResultJump LESSER, Script_branch_10d
 	Message 0xa
 	SetVar 0x8004, 0x9
 	CallStandard 0x7d9

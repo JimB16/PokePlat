@@ -93,14 +93,14 @@ Script_8: @ a9
 	LockAll
 	FacePlayer
 	CheckFlag 0x129
-	CompareLastResultJump 0x1, Script_branch_109
+	CompareLastResultJump EQUAL, Script_branch_109
 	StoreStarter 0x800c
 	If 0x800c, 0x183
-	CompareLastResultCall 0x1, Script_branch_119
+	CompareLastResultCall EQUAL, Script_branch_119
 	If 0x800c, 0x186
-	CompareLastResultCall 0x1, Script_branch_121
+	CompareLastResultCall EQUAL, Script_branch_121
 	If 0x800c, 0x189
-	CompareLastResultCall 0x1, Script_branch_129
+	CompareLastResultCall EQUAL, Script_branch_129
 	CopyVar 0x4107, 0x8004
 	Cmd_343 0x0, 0x8004
 	Message 0x3

@@ -11,18 +11,16 @@ Script_1: @ 6
 	LockAll
 	FacePlayer
 	CheckFlag 0x1
-	CompareLastResultJump 0x1, Script_branch_d3
-	CheckSinPokedex 0x800c
+	CompareLastResultJump EQUAL, Script_branch_d3
+	CheckSinnohPokedex 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_4c
+	CompareLastResultJump EQUAL, Script_branch_4c
 	CheckFlag 0xab
-	CompareLastResultJump 0x0, Script_branch_57
-	CheckNatPokedex 0x800c
+	CompareLastResultJump LESSER, Script_branch_57
+	CheckNationalPokedex 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	Jump Script_branch_95
-@ 4c
-
 Script_branch_4c: @ 4c
 	Message 0x0
 	WaitButton
@@ -33,7 +31,7 @@ Script_branch_4c: @ 4c
 
 Script_branch_57: @ 57
 	CheckFlag 0xab
-	CompareLastResultCall 0x0, Script_branch_de
+	CompareLastResultCall LESSER, Script_branch_de
 	SetFlag 0xab
 	SetFlag 0x1
 	Message 0x1
@@ -42,7 +40,7 @@ Script_branch_57: @ 57
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
-	ShowSinSheet
+	ShowSinnohSheet
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
@@ -52,7 +50,7 @@ Script_branch_57: @ 57
 
 Script_branch_95: @ 95
 	CheckFlag 0xac
-	CompareLastResultCall 0x0, Script_branch_e4
+	CompareLastResultCall LESSER, Script_branch_e4
 	SetFlag 0xac
 	SetFlag 0x1
 	Message 0x2
@@ -61,7 +59,7 @@ Script_branch_95: @ 95
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
-	ShowNatSheet
+	ShowNationalSheet
 	CallEnd
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen

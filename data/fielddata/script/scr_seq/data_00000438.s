@@ -15,9 +15,9 @@ Script: @ 0
 Script_1: @ 1e
 	CheckGender 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_3e
+	CompareLastResultJump EQUAL, Script_branch_3e
 	If 0x4000, 0x1
-	CompareLastResultJump 0x1, Script_branch_46
+	CompareLastResultJump EQUAL, Script_branch_46
 	End
 @ 3e
 
@@ -44,10 +44,8 @@ Script_2: @ 4e
 	ApplyMovement 0xff, Movement_174
 	WaitMovement
 	Jump Script_branch_9c
-@ 8c
-
-.byte 0x2 @ 0x8c
-.byte 0x0 @ 0x8d
+	End
+@ 8e
 
 Function_8e: @ 8e
 	ClearFlag 0x1cc
@@ -59,10 +57,8 @@ Function_8e: @ 8e
 Script_branch_9c: @ 9c
 	CheckGender 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_b3
+	CompareLastResultJump EQUAL, Script_branch_b3
 	Jump Script_branch_f1
-@ b3
-
 Script_branch_b3: @ b3
 	SetVarHero 0x0
 	Message 0x0
@@ -77,8 +73,6 @@ Script_branch_b3: @ b3
 	Call Function_145
 	Message 0x3
 	Jump Script_branch_156
-@ f1
-
 Script_branch_f1: @ f1
 	SetVarHero 0x0
 	Message 0x4
@@ -93,8 +87,6 @@ Script_branch_f1: @ f1
 	Call Function_145
 	Message 0x7
 	Jump Script_branch_156
-@ 12f
-
 Function_12f: @ 12f
 	SetFlag 0x97f
 	SetVar 0x8004, 0x1bb
@@ -183,7 +175,7 @@ Script_4: @ 1c3
 	LockAll
 	FacePlayer
 	CheckFlag 0x82
-	CompareLastResultJump 0x1, Script_branch_1e1
+	CompareLastResultJump EQUAL, Script_branch_1e1
 	Message 0x9
 	WaitButton
 	CloseMsgOnKeyPress

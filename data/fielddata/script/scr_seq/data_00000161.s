@@ -32,7 +32,7 @@ Script_3: @ 31
 	FacePlayer
 	CheckBadge 0x7, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_57
+	CompareLastResultJump EQUAL, Script_branch_57
 	Message 0x1
 	WaitButton
 	CloseMsgOnKeyPress

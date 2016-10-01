@@ -14,8 +14,8 @@ Script_1: @ a
 @ 18
 
 Function_18: @ 18
-	SetValue 0x410b, 0x1
-	SetValue 0x410c, 0x1
+	ScriptCmd_AddValue 0x410b, 0x1
+	ScriptCmd_AddValue 0x410c, 0x1
 	Return
 @ 26
 

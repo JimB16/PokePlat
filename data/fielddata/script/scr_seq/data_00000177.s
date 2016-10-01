@@ -58,16 +58,16 @@ Script_5: @ 67
 	FacePlayer
 	CheckBadge 0x6, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_ec
+	CompareLastResultJump EQUAL, Script_branch_ec
 	CheckFacePosition 0x8000
 	If 0x8000, 0x0
-	CompareLastResultCall 0x1, Script_branch_c8
+	CompareLastResultCall EQUAL, Script_branch_c8
 	If 0x8000, 0x1
-	CompareLastResultCall 0x1, Script_branch_c8
+	CompareLastResultCall EQUAL, Script_branch_c8
 	If 0x8000, 0x2
-	CompareLastResultCall 0x1, Script_branch_d4
+	CompareLastResultCall EQUAL, Script_branch_d4
 	If 0x8000, 0x3
-	CompareLastResultCall 0x1, Script_branch_e0
+	CompareLastResultCall EQUAL, Script_branch_e0
 	SetVarHero 0x0
 	Message 0x0
 	WaitButton

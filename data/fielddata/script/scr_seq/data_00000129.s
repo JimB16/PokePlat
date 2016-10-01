@@ -26,14 +26,14 @@ Script_2: @ 22
 	WaitMovement
 	CheckSpritePosition 0x4000, 0x4001
 	If 0x4000, 0x5
-	CompareLastResultCall 0x1, Script_branch_17d
+	CompareLastResultCall EQUAL, Script_branch_17d
 	ShowMoney 0x14, 0x2
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_6a
+	CompareLastResultJump EQUAL, Script_branch_6a
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_156
+	CompareLastResultJump EQUAL, Script_branch_156
 	End
 @ 6a
 
@@ -43,12 +43,12 @@ Script_branch_6a: @ 6a
 	CompareLastResultJump 0x5, Script_branch_8c
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
-	CompareLastResultJump 0x1, Script_branch_168
+	CompareLastResultJump EQUAL, Script_branch_168
 Script_branch_8c: @ 8c
 	Message 0x1
 	CheckMoney 0x800c, 0x1f4
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_141
+	CompareLastResultJump EQUAL, Script_branch_141
 	PlayFanfare 0x644
 	TakeMoney 0x1f4
 	UpdateMoney
@@ -60,9 +60,9 @@ Script_branch_8c: @ 8c
 	HideMoney
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x4
-	CompareLastResultJump 0x1, Script_branch_e2
+	CompareLastResultJump EQUAL, Script_branch_e2
 	If 0x8004, 0x5
-	CompareLastResultJump 0x1, Script_branch_f2
+	CompareLastResultJump EQUAL, Script_branch_f2
 	End
 @ e2
 
@@ -70,14 +70,10 @@ Script_branch_e2: @ e2
 	ApplyMovement 0xff, Movement_19c
 	WaitMovement
 	Jump Script_branch_102
-@ f2
-
 Script_branch_f2: @ f2
 	ApplyMovement 0xff, Movement_1b4
 	WaitMovement
 	Jump Script_branch_102
-@ 102
-
 Script_branch_102: @ 102
 	SetVar 0x40da, 0x1
 	GreatMarshFunction 0x0
@@ -166,9 +162,9 @@ Script_3: @ 1cc
 	Message 0x9
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_1f1
+	CompareLastResultJump EQUAL, Script_branch_1f1
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_24e
+	CompareLastResultJump EQUAL, Script_branch_24e
 	End
 @ 1f1
 
@@ -188,7 +184,7 @@ Script_branch_1f1: @ 1f1
 
 Script_branch_21e: @ 21e
 	CheckFlag 0xa3
-	CompareLastResultJump 0x1, Script_branch_24a
+	CompareLastResultJump EQUAL, Script_branch_24a
 	ApplyMovement 0x2, Movement_334
 	WaitMovement
 	Message 0x12
@@ -248,9 +244,9 @@ Script_5: @ 2bf
 	Message 0xc
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_2ea
+	CompareLastResultJump EQUAL, Script_branch_2ea
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_2f5
+	CompareLastResultJump EQUAL, Script_branch_2f5
 	End
 @ 2ea
 
@@ -275,21 +271,17 @@ Script_6: @ 300
 	LockAll
 	FacePlayer
 	CheckFlag 0xa3
-	CompareLastResultJump 0x1, Script_branch_31e
+	CompareLastResultJump EQUAL, Script_branch_31e
 	Message 0xf
 	Jump Script_branch_329
-@ 31c
-
-.byte 0x2 @ 0x31c
-.byte 0x0 @ 0x31d
+	End
+@ 31e
 
 Script_branch_31e: @ 31e
 	Message 0x13
 	Jump Script_branch_329
-@ 327
-
-.byte 0x2 @ 0x327
-.byte 0x0 @ 0x328
+	End
+@ 329
 
 Script_branch_329: @ 329
 	WaitButton

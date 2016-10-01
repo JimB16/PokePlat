@@ -42,7 +42,7 @@ Script_4: @ 44
 	LockAll
 	FacePlayer
 	CheckFlag 0xaa1
-	CompareLastResultJump 0x1, Script_branch_c0
+	CompareLastResultJump EQUAL, Script_branch_c0
 	Message 0x2
 	CheckFirstPokeParty 0x8000
 	StoreHappyPoke 0x800c, 0x8000
@@ -51,20 +51,16 @@ Script_4: @ 44
 	If 0x800c, 0x32
 	CompareLastResultJump 0x4, Script_branch_cb
 	Jump Script_branch_d6
-@ 84
-
 Script_branch_84: @ 84
 	Message 0x3
 	SetVar 0x8004, 0x3
 	SetVar 0x8005, 0x1
 	CheckStoreItem 0x8004, 0x8005, 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_b6
+	CompareLastResultJump EQUAL, Script_branch_b6
 	CallStandard 0x7fc
 	SetFlag 0xaa1
 	Jump Script_branch_c0
-@ b6
-
 Script_branch_b6: @ b6
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress

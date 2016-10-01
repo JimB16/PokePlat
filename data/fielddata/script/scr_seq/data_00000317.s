@@ -9,7 +9,7 @@ Script: @ 0
 
 Script_1: @ a
 	CheckFlag 0x8e
-	CompareLastResultJump 0x1, Script_branch_17
+	CompareLastResultJump EQUAL, Script_branch_17
 	End
 @ 17
 
@@ -25,10 +25,10 @@ Script_2: @ 25
 	PlayFanfare 0x5dc
 	WaitFanfare 0x5dc
 	CheckFlag 0x11a
-	CompareLastResultJump 0x1, Script_branch_81
+	CompareLastResultJump EQUAL, Script_branch_81
 	CheckRegi 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_73
+	CompareLastResultJump EQUAL, Script_branch_73
 	SetFlag 0x11a
 	SetVarHero 0x0
 	Message 0x1
@@ -37,10 +37,8 @@ Script_2: @ 25
 	RegigigasAnm 0x0, 0x8, 0x5a, 0x3, 0x0
 	Lock 0x0
 	Jump Script_branch_81
-@ 71
-
-.byte 0x2 @ 0x71
-.byte 0x0 @ 0x72
+	End
+@ 73
 
 Script_branch_73: @ 73
 	SetVarHero 0x0
@@ -61,10 +59,10 @@ Script_branch_81: @ 81
 	ClearFlag 0x8e
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_d1
+	CompareLastResultJump EQUAL, Script_branch_d1
 	CheckWildBattle2 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c6
+	CompareLastResultJump EQUAL, Script_branch_c6
 	SetFlag 0x11b
 	ReleaseAll
 	End

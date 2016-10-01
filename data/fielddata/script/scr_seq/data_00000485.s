@@ -13,21 +13,21 @@ Script: @ 0
 
 Script_1: @ 1a
 	If 0x4057, 0x1
-	CompareLastResultCall 0x1, Script_branch_aa
+	CompareLastResultCall EQUAL, Script_branch_aa
 	CheckFlag 0x12d
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	Cmd_166 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	CheckNatPokedexStatus 0x2, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	CheckItem 0x1c4, 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	UnkFunct2 0x1, 0x4000
 	If 0x4000, 0x0
-	CompareLastResultJump 0x1, Script_branch_80
+	CompareLastResultJump EQUAL, Script_branch_80
 	ClearFlag 0x252
 Script_branch_80: @ 80
 	End
@@ -35,9 +35,9 @@ Script_branch_80: @ 80
 
 Script_2: @ 82
 	CheckFlag 0x12d
-	CompareLastResultJump 0x1, Script_branch_9a
+	CompareLastResultJump EQUAL, Script_branch_9a
 	If 0x408d, 0x1
-	CompareLastResultCall 0x1, Script_branch_9c
+	CompareLastResultCall EQUAL, Script_branch_9c
 Script_branch_9a: @ 9a
 	End
 @ 9c
@@ -65,7 +65,7 @@ Script_3: @ b8
 	LockAll
 	FacePlayer
 	CheckFlag 0x12d
-	CompareLastResultJump 0x1, Script_branch_d6
+	CompareLastResultJump EQUAL, Script_branch_d6
 	Message 0x7
 	WaitButton
 	CloseMsgOnKeyPress
@@ -84,7 +84,7 @@ Script_branch_d6: @ d6
 
 Script_4: @ e4
 	CheckFlag 0x12d
-	CompareLastResultJump 0x1, Script_branch_22d
+	CompareLastResultJump EQUAL, Script_branch_22d
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
@@ -92,7 +92,7 @@ Script_4: @ e4
 	SetVarHero 0x0
 	CheckGender 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_219
+	CompareLastResultJump EQUAL, Script_branch_219
 	Message 0x0
 Script_branch_114: @ 114
 	CloseMsgOnKeyPress
@@ -103,18 +103,18 @@ Script_branch_114: @ 114
 Script_branch_124: @ 124
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
-	Thanknameins 0x800c
+	ThankNameInsert 0x800c
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_222
+	CompareLastResultJump EQUAL, Script_branch_222
 	SetVarHero 0x0
 	SetvarShaymin 0x1
 	Message 0x3
 	YesNoBox 0x800c
 	CloseMsgOnKeyPress
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_124
+	CompareLastResultJump EQUAL, Script_branch_124
 	Call Function_29a
 	Return2 0xf, 0x800c
 	SwitchMusic 0x0, 0xa
@@ -130,7 +130,7 @@ Script_branch_124: @ 124
 	If 0x4057, 0x2
 	CompareLastResultCall 0x5, Script_branch_1f0
 	If 0x4057, 0x2
-	CompareLastResultCall 0x1, Script_branch_1f5
+	CompareLastResultCall EQUAL, Script_branch_1f5
 	WaitButton
 	CloseMsgOnKeyPress
 	Cmd_333 0x7f
@@ -163,14 +163,10 @@ Script_branch_1f5: @ 1f5
 Script_branch_219: @ 219
 	Message 0x1
 	Jump Script_branch_114
-@ 222
-
 Script_branch_222: @ 222
 	Message 0x6
 	CloseMsgOnKeyPress
 	Jump Script_branch_124
-@ 22d
-
 Script_branch_22d: @ 22d
 	PlayFanfare 0x5dc
 	LockAll
@@ -186,9 +182,9 @@ Function_240: @ 240
 	CheckSpritePosition 0x8000, 0x8001
 	CopyVar 0x8008, 0x8000
 	If 0x8008, 0x38d
-	CompareLastResultJump 0x1, Script_branch_272
+	CompareLastResultJump EQUAL, Script_branch_272
 	If 0x8008, 0x38e
-	CompareLastResultJump 0x1, Script_branch_286
+	CompareLastResultJump EQUAL, Script_branch_286
 	ApplyMovement 0xff, Movement_328
 	WaitMovement
 	Return
@@ -228,7 +224,7 @@ Function_2b8: @ 2b8
 	PlayCry 0x1ec, 0x0
 	WaitCry
 	If 0x4057, 0x2
-	CompareLastResultCall 0x1, Script_branch_2ae
+	CompareLastResultCall EQUAL, Script_branch_2ae
 	ApplyMovement 0x3, Movement_38c
 	ApplyMovement 0x10, Movement_3b0
 	ApplyMovement 0xff, Movement_39c
@@ -379,11 +375,11 @@ Script_5: @ 458
 	ClearFlag 0x2ca
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x1f0
-	CompareLastResultJump 0x1, Script_branch_48d
+	CompareLastResultJump EQUAL, Script_branch_48d
 	If 0x8005, 0x1f1
-	CompareLastResultJump 0x1, Script_branch_4af
+	CompareLastResultJump EQUAL, Script_branch_4af
 	If 0x8005, 0x1f2
-	CompareLastResultJump 0x1, Script_branch_4d1
+	CompareLastResultJump EQUAL, Script_branch_4d1
 	End
 @ 48d
 
@@ -394,10 +390,8 @@ Script_branch_48d: @ 48d
 	ApplyMovement 0x15, Movement_598
 	WaitMovement
 	Jump Script_branch_4f3
-@ 4ad
-
-.byte 0x2 @ 0x4ad
-.byte 0x0 @ 0x4ae
+	End
+@ 4af
 
 Script_branch_4af: @ 4af
 	ChangeOwPosition 0x15, 0x386, 0x1f9
@@ -406,10 +400,8 @@ Script_branch_4af: @ 4af
 	ApplyMovement 0x15, Movement_5a4
 	WaitMovement
 	Jump Script_branch_4f3
-@ 4cf
-
-.byte 0x2 @ 0x4cf
-.byte 0x0 @ 0x4d0
+	End
+@ 4d1
 
 Script_branch_4d1: @ 4d1
 	ChangeOwPosition 0x15, 0x386, 0x1fa
@@ -418,10 +410,8 @@ Script_branch_4d1: @ 4d1
 	ApplyMovement 0x15, Movement_5b0
 	WaitMovement
 	Jump Script_branch_4f3
-@ 4f1
-
-.byte 0x2 @ 0x4f1
-.byte 0x0 @ 0x4f2
+	End
+@ 4f3
 
 Script_branch_4f3: @ 4f3
 	ApplyMovement 0xff, Movement_628
@@ -430,11 +420,11 @@ Script_branch_4f3: @ 4f3
 	CloseMsgOnKeyPress
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8005, 0x1f0
-	CompareLastResultJump 0x1, Script_branch_531
+	CompareLastResultJump EQUAL, Script_branch_531
 	If 0x8005, 0x1f1
-	CompareLastResultJump 0x1, Script_branch_54b
+	CompareLastResultJump EQUAL, Script_branch_54b
 	If 0x8005, 0x1f2
-	CompareLastResultJump 0x1, Script_branch_565
+	CompareLastResultJump EQUAL, Script_branch_565
 	End
 @ 531
 
@@ -443,30 +433,24 @@ Script_branch_531: @ 531
 	ApplyMovement 0xff, Movement_630
 	WaitMovement
 	Jump Script_branch_57f
-@ 549
-
-.byte 0x2 @ 0x549
-.byte 0x0 @ 0x54a
+	End
+@ 54b
 
 Script_branch_54b: @ 54b
 	ApplyMovement 0x15, Movement_5cc
 	ApplyMovement 0xff, Movement_644
 	WaitMovement
 	Jump Script_branch_57f
-@ 563
-
-.byte 0x2 @ 0x563
-.byte 0x0 @ 0x564
+	End
+@ 565
 
 Script_branch_565: @ 565
 	ApplyMovement 0x15, Movement_5dc
 	ApplyMovement 0xff, Movement_658
 	WaitMovement
 	Jump Script_branch_57f
-@ 57d
-
-.byte 0x2 @ 0x57d
-.byte 0x0 @ 0x57e
+	End
+@ 57f
 
 Script_branch_57f: @ 57f
 	SetVar 0x4057, 0x2
@@ -530,7 +514,7 @@ Script_6: @ 5f4
 	LockAll
 	FacePlayer
 	CheckFlag 0x12d
-	CompareLastResultJump 0x1, Script_branch_61c
+	CompareLastResultJump EQUAL, Script_branch_61c
 	Message 0xa
 	WaitButton
 	CloseMsgOnKeyPress

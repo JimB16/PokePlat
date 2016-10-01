@@ -12,7 +12,7 @@ Script: @ 0
 
 Script_4: @ 16
 	If 0x411f, 0x2
-	CompareLastResultCall 0x0, Script_branch_25
+	CompareLastResultCall LESSER, Script_branch_25
 	End
 @ 25
 
@@ -29,7 +29,7 @@ Script_1: @ 3b
 	FacePlayer
 	CheckItem 0x1cf, 0x1, 0x800c
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_63
+	CompareLastResultJump EQUAL, Script_branch_63
 	Message 0x7
 	WaitButton
 	CloseMsgOnKeyPress
@@ -41,9 +41,9 @@ Script_branch_63: @ 63
 	Message 0x8
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_86
+	CompareLastResultJump EQUAL, Script_branch_86
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_c2
+	CompareLastResultJump EQUAL, Script_branch_c2
 	End
 @ 86
 
@@ -162,9 +162,9 @@ Script_5: @ 197
 	AddPeople 0x4
 	CheckSpritePosition 0x8004, 0x8005
 	If 0x8004, 0x8
-	CompareLastResultCall 0x1, Script_branch_25a
+	CompareLastResultCall EQUAL, Script_branch_25a
 	If 0x8004, 0x9
-	CompareLastResultCall 0x1, Script_branch_26e
+	CompareLastResultCall EQUAL, Script_branch_26e
 	Message 0x4
 	CloseMsgOnKeyPress
 	ApplyMovement 0x4, Movement_308
@@ -180,15 +180,15 @@ Script_5: @ 197
 	RemovePeople 0x2
 	RemovePeople 0x3
 	If 0x8004, 0x8
-	CompareLastResultCall 0x1, Script_branch_282
+	CompareLastResultCall EQUAL, Script_branch_282
 	If 0x8004, 0x9
-	CompareLastResultCall 0x1, Script_branch_28e
+	CompareLastResultCall EQUAL, Script_branch_28e
 	Message 0x6
 	CloseMsgOnKeyPress
 	If 0x8004, 0x8
-	CompareLastResultCall 0x1, Script_branch_29a
+	CompareLastResultCall EQUAL, Script_branch_29a
 	If 0x8004, 0x9
-	CompareLastResultCall 0x1, Script_branch_2ae
+	CompareLastResultCall EQUAL, Script_branch_2ae
 	RemovePeople 0x4
 	SetFlag 0x28a
 	SetVar 0x411f, 0x4

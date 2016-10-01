@@ -14,9 +14,9 @@ Script_1: @ a
 	Message 0x0
 	YesNoBox 0x800c
 	If 0x800c, 0x0
-	CompareLastResultJump 0x1, Script_branch_35
+	CompareLastResultJump EQUAL, Script_branch_35
 	If 0x800c, 0x1
-	CompareLastResultJump 0x1, Script_branch_62
+	CompareLastResultJump EQUAL, Script_branch_62
 	End
 @ 35
 

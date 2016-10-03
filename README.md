@@ -26,7 +26,11 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
 * Compilable main arm9-binary (with some of the overlays)
   * [**source/arm9.s**](source/arm9.s)
     * code is mostly disassembled
-    * contains the GraphicEngine, the ScriptHandler and IRQHandler (InterruptRequest)
+    * contains the GraphicEngine, the ScriptHandler
+    * [**source/arm9_irqhandler.s**](source/arm9_irqhandler.s)
+      * contains the IRQHandler (InterruptRequest)
+    * [**source/arm9_narctable.s**](source/arm9_narctable.s)
+      * contains the filelist that is used to load files with the filesystem
   * [**source/overlay_0005.s**](source/overlay_0005.s)
     * contains the rest of the Script-functions that are listed in arm9.s
   * [**source/overlay_0012.s**](source/overlay_0012.s)
@@ -36,15 +40,23 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
       * /data/wazaeffect/we_sub.narc
   * [**source/overlay_0014.s**](source/overlay_0014.s)
     * code is completely disassembled
-    * data is mostly the AIScript which has to be interpreted
     * contains the AIHandler for Battles
       * At 'Jumptable_222eeac' are the AIScript-functions listed
+    * [**source/overlay_0014_AI.s**](source/overlay_0014_AI.s)
+      * the actual AIScript which is partly interpreted
+    * [**source/script_AI.s**](source/script_AI.s)
+      * the raw structure of all cmds is known
   * [**source/overlay_0016.s**](source/overlay_0016.s)
     * code is mostly disassembled
     * contains the main functions that handle a Pkmn- or Trainer-Battle
     * At 'Jumptable_226e72c' are the functions for interpreting:
       * '/data/battle/skill/be_seq.narc' (move logic, i.e. decides if a move can be used)
   * Some function-names that I identified can be found in the Wiki of this repo
+* Compilable game-scripts
+  * [**data/fielddata/script/scr_seq/**](data/fielddata/script/scr_seq/)
+    * disassembled 99% of the scripts (only missing some cmds and bytes that are just filler)
+  * [**source/script_plat.s**](source/script_plat.s)
+    * the raw structure of all cmds is known (cmd nr and number of parameters and their length)
 * Export Pokemon sprites (front- and back-pics)
 
 ## Help wanted:

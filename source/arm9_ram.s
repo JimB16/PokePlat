@@ -1,7 +1,7 @@
 
 .section .bss
 
-@ 0x02000000
+@ 0x02000000 - 
 
 .org 0x2101d0c - 0x02000000
 
@@ -155,6 +155,16 @@ RAM_21bfb1c:
     .word 0
 
 
+.org 0x21c0110 - 0x02000000
+
+RAM_21c0110:
+
+
+.org 0x21c0490 - 0x02000000
+
+RAM_21c0490:
+
+
 .org 0x21c04d8 - 0x02000000
 
 RAM_21c04d8:
@@ -241,6 +251,20 @@ RAM_21c0850:
 RAM_21c085c:
 
 
+.org 0x21c089c - 0x02000000
+
+RAM_21c089c:
+    .word 0
+RAM_21c08a0:
+
+
+.org 0x21c0a30 - 0x02000000
+
+RAM_21c0a30:
+    .word 0
+RAM_21c0a34:
+
+
 .org 0x21c3a34 - 0x02000000
 
 RAM_21c3a34:
@@ -252,9 +276,23 @@ RAM_21c3a3c:
 RAM_21c3a48:
     .word 0, 0, 0
 RAM_21c3a54:
+    .word 0
+    .byte 0
+RAM_21c3a59:
+    .byte 0
+RAM_21c3a5a:
+    .byte 0, 0
+    .hword 0
+RAM_21c3a5e:
+    .hword 0
+RAM_21c3a60:
 
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
 
-.org 0x21c3aa0 - 0x02000000
+RAM_21c3a80:
+    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0
 
 RAM_21c3aa0:
     .word 0
@@ -276,10 +314,201 @@ RAM_21c3af0:
     .word 0
 RAM_21c3af4:
 
+    .word 0, 0, 0
+    .word 0
+
+RAM_21c3b04:
+    .hword 0
+    .hword 0
+RAM_21c3b08:
+    .zero 0x100
+
+
+.org 0x21c3c08 - 0x02000000
+
+RAM_21c3c08:
+    .zero 0x400
+
+
+.org 0x21c4008 - 0x02000000
+
+RAM_21c4008:
+    .zero 0x40
+RAM_21c4048:
+    .zero 0x100
+RAM_21c4148:
+    .zero 0x400
+RAM_21c4548:
+    .zero 0x40
+RAM_21c4588:
+    .zero 0x100
+RAM_21c4688:
+    .zero 0x400
+RAM_21c4a88:
+    .zero 0x40
+RAM_21c4ac8:
+    .word 0, 0, 0, 0
+RAM_21c4ad8:
+
+    .zero 0x80
+
+
+.org 0x21c4b58 - 0x02000000
+
+RAM_21c4b58:
+    .zero 4
+RAM_21c4b5c:
+    .zero 0x100-4
+RAM_21c4c58:
+    .zero 0x10
+RAM_21c4c68:
+    .zero 0x4
+RAM_21c4c6c:
+    .zero 0x300-0x10-0x4
+RAM_21c4f58:
+    .zero 0x300
+RAM_21c5258:
+    .zero 0x370
+RAM_21c55c8:
+    .zero 0x90
+RAM_21c5658:
+    .zero 0x4
+RAM_21c565c:
+
 
 .org 0x21c5a60 - 0x02000000
 
 RAM_21c5a60:
+    .zero 0xc
+RAM_21c5a6c:
+    .zero 0x1c
+RAM_21c5a88:
+    .zero 0x4
+RAM_21c5a8c:
+    .zero 0x8
+RAM_21c5a94:
+    .zero 0x44
+RAM_21c5ad8:
+    .zero 0x34
+RAM_21c5b0c:
+    .zero 0x28
+RAM_21c5b34:
+    .zero 0x14
+RAM_21c5b48:
+    .zero 0x24
+RAM_21c5b6c:
+    .zero 0xc
+RAM_21c5b78:
+    .zero 0x14
+RAM_21c5b8c:
+    .zero 0x30
+RAM_21c5bbc:
+    .zero 0x30
+RAM_21c5bec:
+    .zero 0xe0
+RAM_21c5ccc:
+    .zero 0xc
+RAM_21c5cd8:
+    .zero 0xc
+RAM_21c5ce4:
+    .zero 0xc
+RAM_21c5cf0:
+    .zero 0x4
+RAM_21c5cf4:
+
+
+.org 0x21c6af4 - 0x02000000
+
+RAM_21c6af4:
+    .word 0
+RAM_21c6af8:
+    .word 0
+RAM_21c6afc:
+    .word 0
+RAM_21c6b00:
+    .word 0
+RAM_21c6b04:
+    .word 0
+RAM_21c6b08:
+
+
+.org 0x21c70f4 - 0x02000000
+
+RAM_21c70f4:
+    .zero 0x40
+RAM_21c7134:
+
+
+.org 0x21c89f4 - 0x02000000
+
+RAM_21c89f4:
+    .zero 0x4
+RAM_21c89f8:
+    .zero 0x8
+RAM_21c8a00:
+    .zero 0x10
+RAM_21c8a10:
+    .zero 0xc
+RAM_21c8a1c:
+
+
+.org 0x21cae00 - 0x02000000
+
+RAM_21cae00:
+    .zero 0xc
+RAM_21cae0c:
+    .zero 0x140
+RAM_21caf4c:
+    .zero 0xc
+RAM_21caf58:
+    .zero 0xc
+RAM_21caf64:
+    .zero 0x440
+RAM_21cb3a4:
+    .zero 0x8
+RAM_21cb3ac:
+    .zero 0x10
+RAM_21cb3bc:
+    .zero 0x4
+RAM_21cb3c0:
+    .zero 0x4
+RAM_21cb3c4:
+
+
+.org 0x21cb824 - 0x02000000
+
+RAM_21cb824:
+    .zero 0x4
+RAM_21cb828:
+    .zero 0xc
+RAM_21cb834:
+    .zero 0x40
+RAM_21cb874:
+    .zero 0x80
+RAM_21cb8f4:
+    .zero 0x8
+RAM_21cb8fc:
+    .zero 0x40
+RAM_21cb93c:
+    .zero 0x54
+RAM_21cb990:
+    .zero 0x560
+RAM_21cbef0:
+    .zero 0x4
+RAM_21cbef4:
+    .zero 0x3c
+RAM_21cbf30:
+    .zero 0xc
+RAM_21cbf3c:
+
+
+.org 0x21cc5a8 - 0x02000000
+
+RAM_21cc5a8:
+    .zero 0x18
+RAM_21cc5c0:
+    .zero 0xc
+RAM_21cc5cc:
 
 
 .org 0x21ccb9e - 0x02000000
@@ -313,14 +542,14 @@ RAM_21ccbb6: @ BankForSubBGExtPltt
     .hword 0
 RAM_21ccbb8: @ BankForSubOBJExtPltt
     .hword 0
+    .hword 0
+RAM_21ccbbc:
 
-
-.org 0x21ccbd8 - 0x02000000
+    .zero 0x1c
 
 RAM_21ccbd8:
 
-
-.org 0x21ccbf8 - 0x02000000
+    .zero 0x20
 
 RAM_21ccbf8:
     .word 0
@@ -329,8 +558,7 @@ RAM_21ccbfc:
 RAM_21ccc00:
     .word 0
 
-
-.org 0x21ccc28 - 0x02000000
+    .zero 0x24
 
 RAM_21ccc28:
     .word 0
@@ -346,7 +574,9 @@ RAM_21ccc58:
     .word 0
 
 ThreadLinkedList:               @ 0x21ccc5c ThreadLinkedList
-    .word 0, 0, 0, 0
+    .word 0, 0, 0
+RAM_21ccc68:
+    .word 0
     .word 0, 0, 0, 0
     .word 0                     @ 0x20 ThreadID
 RAM_21ccc80:
@@ -419,28 +649,82 @@ RAM_21ccd50:
 .org 0x21cced8 - 0x02000000
 
 RAM_21cced8:
+    .zero 0x8
+RAM_21ccee0:
+    .zero 0x24
+RAM_21ccf04:
+    .zero 0x4
+RAM_21ccf08:
+    .zero 0x4
+RAM_21ccf0c:
+    .zero 0x24
+RAM_21ccf30:
 
 
 .org 0x21ccfb0 - 0x02000000
 
 RAM_21ccfb0:
+    .zero 0x4
+RAM_21ccfb4:
+    .zero 0x8
+RAM_21ccfbc:
+    .zero 0x8
+RAM_21ccfc4:
+    .zero 0xc
+RAM_21ccfd0:
+    .zero 0x14
+RAM_21ccfe4:
+    .zero 0x4
+RAM_21ccfe8:
+    .zero 0x4
+RAM_21ccfec:
 
-
-.org 0x21cd000 - 0x02000000
+    .zero 0x14
 
 RAM_21cd000:
     .word 0, 0, 0, 0
     .word 0, 0, 0, 0
 
+RAM_21cd020:
+    .word 0
+RAM_21cd024:
 
-.org 0x21cd040 - 0x02000000
+    .zero 0x1c
 
 RAM_21cd040:
 
+    .zero 0x24
 
-.org 0x21ceb20 - 0x02000000
+RAM_21cd064:
+
+    .zero 0x3c
+
+RAM_21cd0a0:
+
+
+.org 0x21cd320 - 0x02000000
+
+RAM_21cd320:
+
+
+.org 0x21ce040 - 0x02000000
+
+RAM_21ce040:
+
+
+.org 0x21ceb08 - 0x02000000
+
+RAM_21ceb08:
+    .zero 0x18
 
 RAM_21ceb20:
+    .zero 0x60
+
+RAM_21ceb80:
+    .zero 0x4
+RAM_21ceb84:
+    .zero 0x4
+RAM_21ceb88:
 
 
 .org 0x21cec08 - 0x02000000
@@ -458,27 +742,140 @@ RAM_21cec24:
 RAM_21cec2c:
     .word 0, 0
 RAM_21cec34:
-
-
-.org 0x21cec90 - 0x02000000
+    .zero 0x5c
 
 RAM_21cec90:
-
-
-.org 0x21cecac - 0x02000000
+    .zero 0x1c
 
 RAM_21cecac:
-
-
-.org 0x21cee20 - 0x02000000
+    .zero 0x20
+RAM_21ceccc:
+    .zero 0x4
+RAM_21cecd0:
+    .zero 0x1c
+RAM_21cecec:
+    .zero 0xc
+RAM_21cecf8:
+    .zero 0xc
+RAM_21ced04:
+    .zero 0x4
+RAM_21ced08:
+    .zero 0x10
+RAM_21ced18:
+    .zero 0x18
+RAM_21ced30:
+    .zero 0x4
+RAM_21ced34:
+    .zero 0x24
+RAM_21ced58:
+    .zero 0xc
+RAM_21ced64:
+    .zero 0x3c
+RAM_21ceda0:
+    .zero 0x20
+RAM_21cedc0:
+    .zero 0x60
 
 RAM_21cee20:
 
 
-.org 0x21d0d68 - 0x02000000
+.org 0x21cf440 - 0x02000000
 
+RAM_21cf440:
+    .zero 0x20
+RAM_21cf460:
+    .zero 0x220
+RAM_21cf680:
+    .zero 0x20
+RAM_21cf6a0:
+    .zero 0x8
+RAM_21cf6a8:
+    .zero 0x20
+RAM_21cf6c8:
+    .zero 0x28
+RAM_21cf6f0:
+    .zero 0x14
+RAM_21cf704:
+    .zero 0x10
+RAM_21cf714:
+    .zero 0x2c
+RAM_21cf740:
+
+
+.org 0x21d0140 - 0x02000000
+
+RAM_21d0140:
+    .zero 0x80
+RAM_21d01c0:
+    .zero 0x4
+RAM_21d01c4:
+    .zero 0x1c
+RAM_21d01e0:
+    .zero 0x20
+RAM_21d0200:
+    .zero 0x4
+RAM_21d0204:
+    .zero 0xc0-4
+RAM_21d02c0:
+    .zero 0xe8
+RAM_21d03a8:
+    .zero 0x4
+RAM_21d03ac:
+    .zero 0x4
+RAM_21d03b0:
+    .zero 0x4
+RAM_21d03b4:
+    .zero 0x4
+RAM_21d03b8:
+    .zero 0x4
+RAM_21d03bc:
+    .zero 0x4
+RAM_21d03c0:
+    .zero 0x4
+RAM_21d03c4:
+    .zero 0x4
+RAM_21d03c8:
+    .zero 0x14
+RAM_21d03dc:
+    .zero 0x4
+RAM_21d03e0:
+    .zero 0x8
+RAM_21d03e8:
+    .zero 0x4
+RAM_21d03ec:
+
+
+.org 0x21d0810 - 0x02000000
+
+RAM_21d0810:
+    .zero 0x10
+RAM_21d0820:
+    .zero 0x100
+RAM_21d0920:
+    .zero 0x24
+RAM_21d0944:
+    .zero 0x24
+RAM_21d0968:
+    .zero 0x48
+RAM_21d09b0:
+    .zero 0x60
+RAM_21d0a10:
+    .zero 0x30
+RAM_21d0a40:
+    .zero 0x100
+RAM_21d0b40:
+    .zero 0x100
+RAM_21d0c40:
+    .zero 0x100
+RAM_21d0d40:
+    .zero 0x4
+RAM_21d0d44:
+    .zero 0x20
+RAM_21d0d64:
+    .zero 0x4
 RAM_21d0d68:
-
+    .zero 0x18
+RAM_21d0d80:
 
 
 
@@ -581,9 +978,57 @@ RAM_27e0060:
 RAM_27e0080:
 
 
-.org 0x27e3ff8 - 0x02000000
+.org 0x27e3000 - 0x02000000
+
+RAM_27e3000:
+    .zero 0xf80
+RAM_27e3f80:
+    .zero 0x78
 
 RAM_27e3ff8:
+
+
+.org 0x27ff000 - 0x02000000
+
+RAM_27ff000:
+    .zero 0xc
+RAM_27ff00c:
+    .zero 0x680-0xc
+RAM_27ff680:
+    .zero 0x400
+RAM_27ffa80:
+    .zero 0x180
+RAM_27ffc00:
+    .zero 0x10
+RAM_27ffc10:
+    .zero 0x10
+RAM_27ffc20:
+    .zero 0xc
+RAM_27ffc2c:
+    .zero 0x4
+RAM_27ffc30:
+    .zero 0xc
+RAM_27ffc3c:
+    .zero 0x4
+RAM_27ffc40:
+    .zero 0x40
+RAM_27ffc80:
+    .zero 0x74
+RAM_27ffcf4:
+    .zero 0x6
+RAM_27ffcfa:
+    .zero 0xa2
+RAM_27ffd9c:
+    .zero 0x4c
+RAM_27ffde8:
+    .zero 0x2
+RAM_27ffdea:
+    .zero 0x2
+RAM_27ffdec:
+    .zero 0x14
+RAM_27ffe00:
+    .zero 0x50
+RAM_27ffe50:
 
 
 .org 0x27fff80 - 0x02000000
@@ -641,7 +1086,7 @@ RAM_27ffff0:
 .equ Unknown_2101d20,              0x2101d20 @ .word
 .equ Unknown_2101d38,              0x2101d38 @ .word
 .equ Unknown_21023e0,              0x21023e0 @ .word
-.equ Unknown_021023f8,             0x021023f8 @ .word
+.equ Unknown_21023f8,             0x021023f8 @ .word
 
 .section .bss2
 

@@ -288,6 +288,23 @@
 .equ POWER_ALL_2D,          POWER_LCD | POWER_2D_A | POWER_2D_B @ power just 2D hardware.
 .equ POWER_ALL,             POWER_ALL_2D | POWER_3D_CORE | POWER_MATRIX	@ power everything.
 
+@ nds/timers.h
+.equ TIMER0_CR,             0x04000102
+.equ TIMER1_CR,             0x04000106
+.equ TIMER2_CR,             0x0400010A
+.equ TIMER3_CR,             0x0400010E
+.equ TIMER0_DATA,           0x04000100
+.equ TIMER1_DATA,           0x04000104
+.equ TIMER2_DATA,           0x04000108
+.equ TIMER3_DATA,           0x0400010C
+.equ TIMER_ENABLE,          (1<<7) @    Enables the timer.
+.equ TIMER_IRQ_REQ,         (1<<6) @    Causes the timer to request an Interupt on overflow.
+.equ TIMER_CASCADE,         (1<<2) @    When set will cause the timer to count when the timer below overflows (unavailable for timer 0).
+.equ TIMER_DIV_1,           (0) @   Causes the timer to count at 33.514 Mhz.
+.equ TIMER_DIV_64,          (1) @   Causes the timer to count at (33.514 / 64) Mhz.
+.equ TIMER_DIV_256,         (2) @   Causes the timer to count at (33.514 / 256) Mhz.
+.equ TIMER_DIV_1024,        (3) @   Causes the timer to count at (33.514 / 1024) Mhz.
+
 @ nds/arm9/background.h
 .equ BGCTRL,                0x04000008
 .equ REG_BG0CNT,            0x04000008
@@ -318,6 +335,55 @@
 .equ REG_BG3Y,              0x0400003C
 
 .equ REG_BG2PD_SUB,         0x04001026
+
+.equ BACKGROUND_SUB,        0x04001008
+
+.equ BG_OFFSET_SUB,         0x04001010 @ Overlay for sub screen background scroll registers.  Setting the properties of this struct directly sets background registers.
+
+.macro	BG_MAP_RAM_SUB base @ A macro which returns a u16* pointer to background map ram (Sub Engine)
+.word   (((\base)*0x800) + 0x06200000)
+.endm
+.macro	BG_TILE_RAM_SUB base @ A macro which returns a u16* pointer to background tile ram (Sub Engine)
+.word   (((\base)*0x4000) + 0x06200000)
+.endm
+.macro	BG_BMP_RAM_SUB base @ A macro which returns a u16* pointer to background graphics ram (Sub Engine)
+.word   (((\base)*0x4000) + 0x06200000)
+.endm
+
+
+.equ BGCTRL_SUB,		    0x4001008 @ Access to all Sub screen background control registers via: BGCTRL[x]
+.equ REG_BG0CNT_SUB,		0x4001008 @ Background 0 Control register (sub engine)
+.equ REG_BG1CNT_SUB,		0x400100A @ Background 1 Control register (sub engine)
+.equ REG_BG2CNT_SUB,		0x400100C @ Background 2 Control register (sub engine)
+.equ REG_BG3CNT_SUB,		0x400100E @ Background 3 Control register (sub engine)
+
+
+.equ REG_BGOFFSETS_SUB,     0x4001010
+.equ REG_BG0HOFS_SUB,		0x4001010 @ Background 0 horizontal scroll register (sub engine)
+.equ REG_BG0VOFS_SUB,		0x4001012 @ Background 0 vertical scroll register (sub engine)
+.equ REG_BG1HOFS_SUB,		0x4001014 @ Background 1 horizontal scroll register (sub engine)
+.equ REG_BG1VOFS_SUB,		0x4001016 @ Background 1 vertical scroll register (sub engine)
+.equ REG_BG2HOFS_SUB,		0x4001018 @ Background 2 horizontal scroll register (sub engine)
+.equ REG_BG2VOFS_SUB,		0x400101A @ Background 2 vertical scroll register (sub engine)
+.equ REG_BG3HOFS_SUB,		0x400101C @ Background 3 horizontal scroll register (sub engine)
+.equ REG_BG3VOFS_SUB,		0x400101E @ Background 3 vertical scroll register (sub engine)
+
+.equ REG_BG2PA_SUB,		    0x4001020 @ Background 2 Affine transform (sub engine)
+.equ REG_BG2PB_SUB,		    0x4001022 @ Background 2 Affine transform (sub engine)
+.equ REG_BG2PC_SUB,		    0x4001024 @ Background 2 Affine transform (sub engine)
+.equ REG_BG2PD_SUB,		    0x4001026 @ Background 2 Affine transform (sub engine)
+
+.equ REG_BG2X_SUB,		    0x4001028 @ Background 2 Screen Offset (sub engine)
+.equ REG_BG2Y_SUB,		    0x400102C @ Background 2 Screen Offset (sub engine)
+
+.equ REG_BG3PA_SUB,		    0x4001030 @ Background 3 Affine transform (sub engine)
+.equ REG_BG3PB_SUB,		    0x4001032 @ Background 3 Affine transform (sub engine)
+.equ REG_BG3PC_SUB,		    0x4001034 @ Background 3 Affine transform (sub engine)
+.equ REG_BG3PD_SUB,		    0x4001036 @ Background 3 Affine transform (sub engine)
+
+.equ REG_BG3X_SUB,		    0x4001038 @ Background 3 Screen Offset (sub engine)
+.equ REG_BG3Y_SUB,		    0x400103C @ Background 3 Screen Offset (sub engine)
+
 
 @ nds/arm9/math.h
 .equ REG_DIVCNT,            0x04000280
@@ -401,8 +467,45 @@
 .equ SPRITE_PALETTE,        0x05000200 @ sprite palette memory
 .equ SPRITE_PALETTE_SUB,    0x05000600 @ sprite palette memory (sub engine)
 
+.equ BG_GFX,			    0x6000000 @ background graphics memory
+.equ BG_GFX_SUB,            0x6200000 @ background graphics memory (sub engine)
+.equ SPRITE_GFX,            0x6400000 @ sprite graphics memory
+.equ SPRITE_GFX_SUB,        0x6600000 @ sprite graphics memory (sub engine)
+
+.equ VRAM_0,                0x6000000
+.equ VRAM,                  0x6800000
+
+
+.equ VRAM_A,                0x6800000 @ pointer to vram bank A mapped as LCD
+.equ VRAM_B,                0x6820000 @ pointer to vram bank B mapped as LCD
+.equ VRAM_C,                0x6840000 @ pointer to vram bank C mapped as LCD
+.equ VRAM_D,                0x6860000 @ pointer to vram bank D mapped as LCD
+.equ VRAM_E,                0x6880000 @ pointer to vram bank E mapped as LCD
+.equ VRAM_F,                0x6890000 @ pointer to vram bank F mapped as LCD
+.equ VRAM_G,                0x6894000 @ pointer to vram bank G mapped as LCD
+.equ VRAM_H,                0x6898000 @ pointer to vram bank H mapped as LCD
+.equ VRAM_I,                0x68A0000 @ pointer to vram bank I mapped as LCD
+
 .equ OAM,                   0x07000000 @ pointer to Object Attribute Memory
 .equ OAM_SUB,               0x07000400 @ pointer to Object Attribute Memory (Sub engine)
+
+
+.equ VRAM_CR,               0x04000240
+.equ VRAM_A_CR,             0x04000240
+.equ VRAM_B_CR,             0x04000241
+.equ VRAM_C_CR,             0x04000242
+.equ VRAM_D_CR,             0x04000243
+.equ VRAM_EFG_CR,           0x04000244
+.equ VRAM_E_CR,             0x04000244
+.equ VRAM_F_CR,             0x04000245
+.equ VRAM_G_CR,             0x04000246
+.equ WRAM_CR,               0x04000247
+.equ VRAM_H_CR,             0x04000248
+.equ VRAM_I_CR,             0x04000249
+
+.equ VRAM_ENABLE,           (1<<7)
+
+
 
 .equ REG_DISPCNT,           0x04000000
 .equ REG_DISPCNT_SUB,       0x04001000
@@ -442,20 +545,52 @@
 
 .equ REG_MASTER_BRIGHT,     0x0400006C
 .equ REG_MASTER_BRIGHT_SUB, 0x0400106C
-.equ VRAM_CR,               0x04000240
-.equ VRAM_A_CR,             0x04000240
-.equ VRAM_B_CR,             0x04000241
-.equ VRAM_C_CR,             0x04000242
-.equ VRAM_D_CR,             0x04000243
-.equ VRAM_EFG_CR,           0x04000244
-.equ VRAM_E_CR,             0x04000244
-.equ VRAM_F_CR,             0x04000245
-.equ VRAM_G_CR,             0x04000246
-.equ WRAM_CR,               0x04000247
-.equ VRAM_H_CR,             0x04000248
-.equ VRAM_I_CR,             0x04000249
 
-.equ VRAM_ENABLE,           (1<<7)
+@ Window 0
+.equ WIN0_X0,               0x04000041
+.equ WIN0_X1,               0x04000040
+.equ WIN0_Y0,               0x04000045
+.equ WIN0_Y1,               0x04000044
+
+@ Window 1
+.equ WIN1_X0,               0x04000043
+.equ WIN1_X1,               0x04000042
+.equ WIN1_Y0,               0x04000047
+.equ WIN1_Y1,               0x04000046
+
+.equ WIN_IN,                0x04000048
+.equ WIN_OUT,               0x0400004A
+
+@ Window 0
+.equ SUB_WIN0_X0,           0x04001041
+.equ SUB_WIN0_X1,           0x04001040
+.equ SUB_WIN0_Y0,           0x04001045
+.equ SUB_WIN0_Y1,           0x04001044
+
+@ Window 1
+.equ SUB_WIN1_X0,           0x04001043
+.equ SUB_WIN1_X1,           0x04001042
+.equ SUB_WIN1_Y0,           0x04001047
+.equ SUB_WIN1_Y1,           0x04001046
+
+.equ SUB_WIN_IN,            0x04001048
+.equ SUB_WIN_OUT,           0x0400104A
+
+.equ REG_MOSAIC,		    0x0400004C
+.equ REG_MOSAIC_SUB,	    0x0400104C
+
+.equ REG_BLDCNT,            0x04000050
+.equ REG_BLDY,              0x04000054
+.equ REG_BLDALPHA,          0x04000052
+
+.equ REG_BLDCNT_SUB,        0x04001050
+.equ REG_BLDALPHA_SUB,      0x04001052
+.equ REG_BLDY_SUB,          0x04001054
+
+
+
+
+
 
 @ 3D core control
 .equ GFX_CONTROL,           0x04000060
@@ -522,12 +657,7 @@
 .equ VECTOR_RESULT,         0x04000630
 
 
-.equ REG_BLDCNT,            0x04000050
-.equ REG_BLDY,              0x04000054
-.equ REG_BLDALPHA,          0x04000052
-.equ REG_BLDCNT_SUB,        0x04001050
-.equ REG_BLDALPHA_SUB,      0x04001052
-.equ REG_BLDY_SUB,          0x04001054
+
 
 
 

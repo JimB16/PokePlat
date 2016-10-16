@@ -1,4 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 23, 0, BONSLY, 158, 0
+@ ?, Level, Pkmn, AltForm, Item, PokeballSeal
+trainerpoke2 0, 23, BONSLY, 0, SITRUS_BERRY, 6

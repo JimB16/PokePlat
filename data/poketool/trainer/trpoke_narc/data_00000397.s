@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 56, 0, DUSKNOIR, 69, 1
-trainerpoke 7, 0, 8, 0, BLASTOISE, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 56, DUSKNOIR, 0, SHADOW_PUNCH, FIRE_PUNCH, ICE_PUNCH, THUNDER_PUNCH, 0

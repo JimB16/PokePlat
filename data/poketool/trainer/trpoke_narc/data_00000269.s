@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 44, 0, PILOSWINE, 89, 0
-trainerpoke 31, 0, 167, 1, LARVITAR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 44, PILOSWINE, 0, EARTHQUAKE, FURY_ATTACK, ICE_FANG, ANCIENT_POWER, 0

@@ -1,5 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 56, 0, ALTARIA, 0, 0
-trainerpoke 50, 0, 56, 0, SEADRA, 0, 0
+@ ?, Level, Pkmn, AltForm, PokeballSeal
+trainerpoke0 50, 56, ALTARIA, 0, 0
+trainerpoke0 50, 56, SEADRA, 0, 0

@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 35, 0, STARAPTOR, 36, 0
-trainerpoke 76, 1, 27, 1, KRABBY, 0, 0
-trainerpoke 50, 0, 36, 0, GIRAFARIG, 202, 1
-trainerpoke 94, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 35, STARAPTOR, 0, TAKE_DOWN, AERIAL_ACE, ENDEAVOR, QUICK_ATTACK, 0
+trainerpoke1 50, 36, GIRAFARIG, 0, DOUBLE_HIT, PSYCHIC_M, NO_MOVE, NO_MOVE, 0

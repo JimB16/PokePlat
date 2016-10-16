@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 57, 0, DELCATTY, 252, 0
-trainerpoke 189, 1, 185, 0, NINETALES, 0, 0
-trainerpoke 50, 0, 58, 0, ABOMASNOW, 164, 1
-trainerpoke 163, 1, 75, 0, KECLEON, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 57, DELCATTY, 0, FAKE_OUT, CAPTIVATE, FEINT_ATTACK, DOUBLE_EDGE, 0
+trainerpoke1 50, 58, ABOMASNOW, 0, ICE_SHARD, AVALANCHE, RAZOR_LEAF, WATER_PULSE, 0

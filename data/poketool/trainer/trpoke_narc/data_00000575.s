@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 55, 0, MIGHTYENA, 242, 0
-trainerpoke 133, 1, 231, 0, AZUMARILL, 0, 0
-trainerpoke 50, 0, 56, 0, KIRLIA, 94, 0
-trainerpoke 89, 1, 95, 1, PUPITAR, 21, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 55, MIGHTYENA, 0, CRUNCH, SUCKER_PUNCH, IRON_TAIL, SCARY_FACE, 0
+trainerpoke1 50, 56, KIRLIA, 0, PSYCHIC_M, MAGICAL_LEAF, SHOCK_WAVE, SHADOW_BALL, 21

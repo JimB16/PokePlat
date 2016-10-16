@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 30, 0, 59, 0, ARCANINE, 245, 0
-trainerpoke 168, 1, 14, 1, HYPNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 30, 59, ARCANINE, 0, EXTREME_SPEED, FIRE_FANG, HELPING_HAND, AGILITY, 0

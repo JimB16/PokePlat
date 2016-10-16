@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 50, 0, LUMINEON, 96, 1
-trainerpoke 136, 1, 189, 1, CARVANHA, 0, 0
-trainerpoke 0, 0, 50, 0, RAPIDASH, 126, 0
-trainerpoke 23, 0, 98, 0, PHANPY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 50, LUMINEON, 0, WATER_PULSE, AQUA_RING, CAPTIVATE, SILVER_WIND, 0
+trainerpoke1 0, 50, RAPIDASH, 0, FIRE_BLAST, STOMP, QUICK_ATTACK, IRON_TAIL, 0

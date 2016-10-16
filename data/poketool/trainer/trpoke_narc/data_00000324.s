@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 20, 0, 17, 0, CHERUBI, 33, 0
-trainerpoke 73, 0, 0, 0, MISSINGNO, 0, 0
-trainerpoke 20, 0, 17, 0, ROSELIA, 72, 0
-trainerpoke 40, 0, 78, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 20, 17, CHERUBI, 0, TACKLE, LEECH_SEED, NO_MOVE, NO_MOVE, 0
+trainerpoke1 20, 17, ROSELIA, 0, MEGA_DRAIN, POISON_STING, STUN_SPORE, NO_MOVE, 0

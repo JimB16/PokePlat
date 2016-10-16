@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 61, 0, JUMPLUFF, 0, 0
-trainerpoke 62, 1, 92, 0, MILTANK, 84, 1
-trainerpoke 0, 0, 200, 0, POLIWRATH, 165, 1
-trainerpoke 0, 0, 76, 0, GASTLY, 241, 0
-trainerpoke 73, 0, 0, 0, MISDREAVUS, 61, 0
-trainerpoke 182, 0, 0, 0, RAMPARDOS, 202, 0
-trainerpoke 19, 1, 241, 0, MISSINGNO, 200, 0
-trainerpoke 63, 0, 133, 1, MISSINGNO, 196, 1
-trainerpoke 242, 0, 89, 0, GABITE, 0, 0
-trainerpoke 200, 0, 65, 0, ROSERADE, 158, 0
-trainerpoke 247, 0, 181, 1, SKIPLOOM, 63, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 61, JUMPLUFF, 0, NO_ITEM, SILVER_WIND, TOXIC, SUNNY_DAY, BOUNCE, 0
+trainerpoke3 200, 62, CHERRIM, 0, NO_ITEM, SOLAR_BEAM, TOXIC, SUNNY_DAY, LEECH_SEED, 0
+trainerpoke3 200, 61, BELLOSSOM, 0, NO_ITEM, DRAIN_PUNCH, GIGA_DRAIN, INGRAIN, SUNNY_DAY, 0
+trainerpoke3 200, 63, TORTERRA, 0, NO_ITEM, WOOD_HAMMER, CRUNCH, EARTHQUAKE, STONE_EDGE, 0
+trainerpoke3 200, 65, ROSERADE, 0, SITRUS_BERRY, SHADOW_BALL, LEAF_STORM, SLUDGE_BOMB, HYPER_BEAM, 0

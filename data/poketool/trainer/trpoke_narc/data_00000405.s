@@ -1,10 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 38, 0, GOLBAT, 0, 0
-trainerpoke 58, 1, 44, 0, GASTLY, 48, 0
-trainerpoke 0, 0, 200, 0, NINETALES, 180, 1
-trainerpoke 0, 0, 104, 1, GRUMPIG, 78, 1
-trainerpoke 109, 0, 0, 0, MISDREAVUS, 40, 0
-trainerpoke 176, 1, 158, 0, HOOTHOOT, 185, 0
-trainerpoke 95, 0, 252, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 38, GOLBAT, 0, NO_ITEM, AIR_CUTTER, BITE, TOXIC, SUPERSONIC, 0
+trainerpoke3 200, 38, BRONZOR, 0, NO_ITEM, GYRO_BALL, EXTRASENSORY, IRON_DEFENSE, CONFUSE_RAY, 0
+trainerpoke3 200, 40, PURUGLY, 0, SITRUS_BERRY, SLASH, FEINT_ATTACK, HYPNOSIS, FAKE_OUT, 0

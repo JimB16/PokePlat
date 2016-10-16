@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 61, 0, AMPHAROS, 179, 1
-trainerpoke 152, 1, 68, 1, SQUIRTLE, 0, 0
-trainerpoke 50, 0, 62, 0, TROPIUS, 181, 1
-trainerpoke 147, 1, 89, 0, CARVANHA, 19, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 61, AMPHAROS, 0, DISCHARGE, POWER_GEM, SIGNAL_BEAM, FIRE_PUNCH, 0
+trainerpoke1 50, 62, TROPIUS, 0, LEAF_STORM, AIR_SLASH, EARTHQUAKE, SILVER_WIND, 19

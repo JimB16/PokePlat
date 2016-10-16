@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 64, 0, SEAKING, 32, 0
-trainerpoke 175, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 250, 64, SEAKING, 0, HORN_DRILL, FLAIL, NO_MOVE, NO_MOVE, 0

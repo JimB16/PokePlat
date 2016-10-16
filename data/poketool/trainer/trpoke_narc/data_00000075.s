@@ -1,5 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 36, 0, GYARADOS, 0, 0
-trainerpoke 50, 0, 36, 0, RAICHU, 0, 0
+@ ?, Level, Pkmn, AltForm, PokeballSeal
+trainerpoke0 50, 36, GYARADOS, 0, 0
+trainerpoke0 50, 36, RAICHU, 0, 0

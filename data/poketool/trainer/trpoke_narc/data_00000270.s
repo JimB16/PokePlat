@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 39, 0, SNORUNT, 167, 1
-trainerpoke 242, 0, 2, 1, BELLOSSOM, 0, 0
-trainerpoke 60, 0, 40, 0, SNORUNT, 167, 1
-trainerpoke 242, 0, 2, 1, BELLOSSOM, 0, 0
-trainerpoke 60, 0, 42, 0, GLALIE, 167, 1
-trainerpoke 242, 0, 2, 1, BELLOSSOM, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 39, SNORUNT, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0
+trainerpoke1 60, 40, SNORUNT, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0
+trainerpoke1 60, 42, GLALIE, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0

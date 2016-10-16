@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 55, 0, FLAAFFY, 179, 1
-trainerpoke 152, 1, 68, 1, CHANSEY, 0, 0
-trainerpoke 50, 0, 56, 0, TROPIUS, 76, 0
-trainerpoke 147, 1, 235, 0, MILTANK, 19, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 55, FLAAFFY, 0, DISCHARGE, POWER_GEM, SIGNAL_BEAM, LIGHT_SCREEN, 0
+trainerpoke1 50, 56, TROPIUS, 0, SOLAR_BEAM, AIR_SLASH, SYNTHESIS, SUNNY_DAY, 19

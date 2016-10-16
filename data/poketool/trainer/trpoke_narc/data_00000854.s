@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 62, 0, HITMONTOP, 0, 0
-trainerpoke 167, 0, 76, 1, KRABBY, 252, 0
-trainerpoke 0, 0, 250, 0, ABRA, 52, 1
-trainerpoke 0, 0, 7, 0, WARTORTLE, 9, 0
-trainerpoke 136, 0, 0, 0, HOOH, 62, 0
-trainerpoke 30, 1, 0, 0, GABITE, 147, 0
-trainerpoke 183, 0, 146, 1, MISSINGNO, 250, 0
-trainerpoke 64, 0, 68, 0, MISSINGNO, 238, 0
-trainerpoke 175, 1, 89, 0, GABITE, 0, 0
-trainerpoke 250, 0, 66, 0, LUCARIO, 0, 0
-trainerpoke 153, 1, 114, 1, SUICUNE, 198, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 250, 62, HITMONTOP, 0, NO_ITEM, TRIPLE_KICK, AERIAL_ACE, QUICK_ATTACK, FAKE_OUT, 0
+trainerpoke3 250, 63, MEDICHAM, 0, NO_ITEM, FIRE_PUNCH, ICE_PUNCH, THUNDER_PUNCH, HIGH_JUMP_KICK, 0
+trainerpoke3 250, 62, BRELOOM, 0, NO_ITEM, STONE_EDGE, SPORE, MACH_PUNCH, SEED_BOMB, 0
+trainerpoke3 250, 64, MACHAMP, 0, NO_ITEM, CROSS_CHOP, ROCK_CLIMB, EARTHQUAKE, STONE_EDGE, 0
+trainerpoke3 250, 66, LUCARIO, 0, NO_ITEM, DRAIN_PUNCH, CLOSE_COMBAT, EXTREME_SPEED, BONE_RUSH, 0

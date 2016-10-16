@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 47, 0, CLEFABLE, 53, 1
-trainerpoke 115, 0, 113, 0, DUSCLOPS, 0, 0
-trainerpoke 50, 0, 48, 0, TORTERRA, 89, 0
-trainerpoke 242, 0, 73, 0, SMEARGLE, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 47, CLEFABLE, 0, METEOR_MASH, REFLECT, LIGHT_SCREEN, GRAVITY, 0
+trainerpoke1 50, 48, TORTERRA, 0, EARTHQUAKE, CRUNCH, LEECH_SEED, SYNTHESIS, 0

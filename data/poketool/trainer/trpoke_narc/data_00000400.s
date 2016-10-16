@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 52, 0, CHIMECHO, 70, 1
-trainerpoke 247, 0, 156, 1, SKORUPI, 0, 0
-trainerpoke 0, 0, 52, 0, HAUNTER, 69, 1
-trainerpoke 143, 1, 109, 0, GASTLY, 0, 0
-trainerpoke 0, 0, 55, 0, GENGAR, 247, 0
-trainerpoke 143, 1, 218, 0, SKIPLOOM, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 52, CHIMECHO, 0, EXTRASENSORY, SHADOW_BALL, ENERGY_BALL, CHARGE_BEAM, 0
+trainerpoke1 0, 52, HAUNTER, 0, SHADOW_PUNCH, DARK_PULSE, CONFUSE_RAY, TOXIC, 0
+trainerpoke1 0, 55, GENGAR, 0, SHADOW_BALL, DARK_PULSE, FRUSTRATION, SLUDGE_BOMB, 0

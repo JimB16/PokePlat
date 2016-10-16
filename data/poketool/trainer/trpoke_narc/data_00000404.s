@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 45, 0, HOUNDOOM, 0, 0
-trainerpoke 53, 0, 143, 1, POOCHYENA, 166, 1
-trainerpoke 0, 0, 250, 0, PARASECT, 174, 1
-trainerpoke 0, 0, 65, 0, BIBAREL, 1, 1
-trainerpoke 94, 0, 0, 0, HOOH, 46, 0
-trainerpoke 169, 0, 0, 0, HAPPINY, 147, 1
-trainerpoke 92, 0, 109, 0, MISSINGNO, 250, 0
-trainerpoke 46, 0, 130, 0, MISSINGNO, 160, 1
-trainerpoke 127, 0, 167, 1, MUK, 0, 0
-trainerpoke 250, 0, 48, 0, WEAVILE, 158, 0
-trainerpoke 144, 1, 8, 0, TREECKO, 148, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 250, 45, HOUNDOOM, 0, NO_ITEM, FLAMETHROWER, DARK_PULSE, WILL_O_WISP, THUNDER_FANG, 0
+trainerpoke3 250, 47, HONCHKROW, 0, NO_ITEM, DRILL_PECK, NIGHT_SLASH, HEAT_WAVE, PSYCHIC_M, 0
+trainerpoke3 250, 46, CROBAT, 0, NO_ITEM, CROSS_POISON, AIR_SLASH, TOXIC, CONFUSE_RAY, 0
+trainerpoke3 250, 46, GYARADOS, 0, NO_ITEM, GIGA_IMPACT, WATERFALL, ICE_FANG, EARTHQUAKE, 0
+trainerpoke3 250, 48, WEAVILE, 0, SITRUS_BERRY, NIGHT_SLASH, ICE_PUNCH, FAKE_OUT, X_SCISSOR, 0

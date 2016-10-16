@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 47, 0, ELECTABUZZ, 85, 0
-trainerpoke 95, 1, 98, 0, PHANPY, 0, 0
-trainerpoke 60, 0, 48, 0, RAICHU, 85, 0
-trainerpoke 91, 0, 86, 0, CHANSEY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 47, ELECTABUZZ, 0, THUNDERBOLT, SHOCK_WAVE, QUICK_ATTACK, IRON_TAIL, 0
+trainerpoke1 60, 48, RAICHU, 0, THUNDERBOLT, DIG, THUNDER_WAVE, LIGHT_SCREEN, 0

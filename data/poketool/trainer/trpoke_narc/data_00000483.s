@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 10, 0, 29, 0, WINGULL, 96, 1
-trainerpoke 17, 0, 48, 0, MISSINGNO, 0, 0
-trainerpoke 10, 0, 30, 0, SHELLOS, 96, 1
-trainerpoke 170, 1, 240, 0, MISSINGNO, 0, 0
-trainerpoke 10, 0, 31, 0, GOLDUCK, 154, 0
-trainerpoke 93, 0, 96, 1, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 10, 29, WINGULL, 0, WATER_PULSE, WING_ATTACK, SUPERSONIC, NO_MOVE, 0
+trainerpoke1 10, 30, SHELLOS, 0, WATER_PULSE, MUD_BOMB, RAIN_DANCE, NO_MOVE, 0
+trainerpoke1 10, 31, GOLDUCK, 0, FURY_SWIPES, CONFUSION, WATER_PULSE, NO_MOVE, 0

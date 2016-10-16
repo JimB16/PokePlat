@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 56, 0, NUZLEAF, 70, 1
-trainerpoke 252, 0, 185, 0, GRAVELER, 0, 0
-trainerpoke 50, 0, 57, 0, GYARADOS, 145, 1
-trainerpoke 56, 0, 93, 1, GASTRODON, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 56, NUZLEAF, 0, EXTRASENSORY, FAKE_OUT, FEINT_ATTACK, RAZOR_LEAF, 0
+trainerpoke1 50, 57, GYARADOS, 0, AQUA_TAIL, HYDRO_PUMP, DRAGON_DANCE, ICE_FANG, 0

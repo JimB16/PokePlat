@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 61, 0, SKARMORY, 0, 0
-trainerpoke 144, 1, 65, 0, SWALOT, 190, 1
-trainerpoke 0, 0, 200, 0, POLIWHIRL, 208, 0
-trainerpoke 0, 0, 104, 1, GASTRODON, 225, 0
-trainerpoke 201, 0, 0, 0, MISDREAVUS, 62, 0
-trainerpoke 206, 1, 0, 0, HONCHKROW, 85, 0
-trainerpoke 48, 0, 86, 0, MISSINGNO, 200, 0
-trainerpoke 63, 0, 155, 1, MISSINGNO, 112, 1
-trainerpoke 246, 0, 78, 1, QUILAVA, 0, 0
-trainerpoke 200, 0, 65, 0, AGGRON, 158, 0
-trainerpoke 112, 1, 188, 1, MUK, 163, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 61, SKARMORY, 0, NO_ITEM, NIGHT_SLASH, DRILL_PECK, ROCK_TOMB, STEALTH_ROCK, 0
+trainerpoke3 200, 61, STEELIX, 0, NO_ITEM, GYRO_BALL, ICE_FANG, DRAGON_BREATH, SANDSTORM, 0
+trainerpoke3 200, 62, MAGNEZONE, 0, NO_ITEM, FLASH_CANNON, THUNDERBOLT, SUPERSONIC, THUNDER_WAVE, 0
+trainerpoke3 200, 63, BASTIODON, 0, NO_ITEM, METAL_BURST, ANCIENT_POWER, IRON_DEFENSE, REST, 0
+trainerpoke3 200, 65, AGGRON, 0, SITRUS_BERRY, METAL_BURST, STONE_EDGE, EARTHQUAKE, AVALANCHE, 0

@@ -1,16 +1,9 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 74, 0, SPIRITOMB, 0, 0
-trainerpoke 143, 1, 94, 0, CARVANHA, 210, 1
-trainerpoke 0, 0, 250, 0, GEODUDE, 151, 1
-trainerpoke 0, 0, 156, 1, SKIPLOOM, 247, 0
-trainerpoke 70, 1, 0, 0, HOOH, 76, 0
-trainerpoke 212, 1, 0, 0, SHINX, 140, 1
-trainerpoke 96, 1, 94, 0, MISSINGNO, 250, 0
-trainerpoke 76, 0, 192, 1, MISSINGNO, 140, 1
-trainerpoke 150, 1, 94, 0, MUK, 0, 0
-trainerpoke 250, 0, 74, 0, MILOTIC, 0, 0
-trainerpoke 57, 0, 58, 0, RAIKOU, 136, 1
-trainerpoke 0, 0, 250, 0, RAPIDASH, 189, 1
-trainerpoke 158, 0, 151, 1, MUK, 24, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 250, 74, SPIRITOMB, 0, NO_ITEM, DARK_PULSE, PSYCHIC_M, SILVER_WIND, OMINOUS_WIND, 0
+trainerpoke3 250, 74, ROSERADE, 0, NO_ITEM, ENERGY_BALL, SLUDGE_BOMB, SHADOW_BALL, EXTRASENSORY, 0
+trainerpoke3 250, 76, TOGEKISS, 0, NO_ITEM, AIR_SLASH, AURA_SPHERE, WATER_PULSE, PSYCHIC_M, 0
+trainerpoke3 250, 76, LUCARIO, 0, NO_ITEM, AURA_SPHERE, DRAGON_PULSE, PSYCHIC_M, EARTHQUAKE, 0
+trainerpoke3 250, 74, MILOTIC, 0, NO_ITEM, SURF, ICE_BEAM, MIRROR_COAT, AQUA_RING, 0
+trainerpoke3 250, 78, GARCHOMP, 0, SITRUS_BERRY, DRAGON_RUSH, EARTHQUAKE, BRICK_BREAK, GIGA_IMPACT, 0

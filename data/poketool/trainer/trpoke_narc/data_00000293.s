@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 10, 0, 28, 0, GOLDEEN, 96, 1
-trainerpoke 64, 0, 175, 0, VENONAT, 0, 0
-trainerpoke 10, 0, 31, 0, SEAKING, 96, 1
-trainerpoke 31, 0, 175, 0, VENONAT, 0, 0
-trainerpoke 10, 0, 31, 0, GYARADOS, 37, 0
-trainerpoke 44, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 10, 28, GOLDEEN, 0, WATER_PULSE, PECK, FLAIL, SUPERSONIC, 0
+trainerpoke1 10, 31, SEAKING, 0, WATER_PULSE, FURY_ATTACK, FLAIL, SUPERSONIC, 0
+trainerpoke1 10, 31, GYARADOS, 0, THRASH, BITE, NO_MOVE, NO_MOVE, 0

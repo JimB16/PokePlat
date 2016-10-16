@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 24, 0, CHATOT, 31, 0
-trainerpoke 47, 0, 45, 0, KADABRA, 0, 0
-trainerpoke 0, 0, 25, 0, CHERRIM, 80, 0
-trainerpoke 241, 0, 89, 1, LOTAD, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 24, CHATOT, 0, FURY_ATTACK, SING, GROWL, PECK, 0
+trainerpoke1 0, 25, CHERRIM, 0, PETAL_DANCE, SUNNY_DAY, MAGICAL_LEAF, HELPING_HAND, 0

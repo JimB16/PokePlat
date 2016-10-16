@@ -1,16 +1,9 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 71, 0, STARAPTOR, 0, 0
-trainerpoke 114, 1, 76, 1, KRABBY, 113, 1
-trainerpoke 0, 0, 250, 0, BELLSPROUT, 151, 1
-trainerpoke 0, 0, 188, 0, WOBBUFFET, 247, 0
-trainerpoke 64, 1, 0, 0, HOOH, 71, 0
-trainerpoke 214, 0, 0, 0, OCTILLERY, 114, 1
-trainerpoke 144, 1, 157, 0, MISSINGNO, 250, 0
-trainerpoke 69, 0, 78, 0, MISSINGNO, 126, 0
-trainerpoke 241, 0, 224, 0, POOCHYENA, 0, 0
-trainerpoke 250, 0, 73, 0, SNORLAX, 0, 0
-trainerpoke 34, 0, 242, 0, MUK, 172, 1
-trainerpoke 0, 0, 250, 0, GRAVELER, 139, 1
-trainerpoke 158, 0, 56, 0, DONPHAN, 65, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 250, 71, STARAPTOR, 0, NO_ITEM, CLOSE_COMBAT, AERIAL_ACE, QUICK_ATTACK, U_TURN, 0
+trainerpoke3 250, 69, ROSERADE, 0, NO_ITEM, SLUDGE_BOMB, GIGA_DRAIN, SHADOW_BALL, GRASS_WHISTLE, 0
+trainerpoke3 250, 71, HERACROSS, 0, NO_ITEM, MEGAHORN, CLOSE_COMBAT, NIGHT_SLASH, ROCK_SLIDE, 0
+trainerpoke3 250, 69, RAPIDASH, 0, NO_ITEM, FIRE_BLAST, SUNNY_DAY, MEGAHORN, WILL_O_WISP, 0
+trainerpoke3 250, 73, SNORLAX, 0, NO_ITEM, BODY_SLAM, CRUNCH, EARTHQUAKE, ZEN_HEADBUTT, 0
+trainerpoke3 250, 75, EMPOLEON, 0, SITRUS_BERRY, HYDRO_PUMP, METAL_CLAW, DRILL_PECK, ICE_BEAM, 24

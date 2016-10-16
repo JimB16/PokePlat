@@ -1,13 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 36, 0, STARAPTOR, 76, 1
-trainerpoke 36, 0, 98, 0, CUBONE, 0, 0
-trainerpoke 100, 0, 35, 0, FLOATZEL, 197, 1
-trainerpoke 228, 0, 98, 0, MAGIKARP, 0, 0
-trainerpoke 100, 0, 37, 0, HERACROSS, 24, 1
-trainerpoke 76, 1, 144, 1, NIDORINA, 0, 0
-trainerpoke 100, 0, 35, 0, ROSERADE, 202, 0
-trainerpoke 134, 1, 73, 0, WAILMER, 0, 0
-trainerpoke 100, 0, 38, 0, INFERNAPE, 24, 1
-trainerpoke 172, 0, 183, 0, CACTURNE, 10, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 100, 36, STARAPTOR, 0, AERIAL_ACE, TAKE_DOWN, QUICK_ATTACK, DOUBLE_TEAM, 0
+trainerpoke1 100, 35, FLOATZEL, 0, AQUA_JET, PURSUIT, QUICK_ATTACK, SWIFT, 0
+trainerpoke1 100, 37, HERACROSS, 0, BRICK_BREAK, AERIAL_ACE, NIGHT_SLASH, HORN_ATTACK, 0
+trainerpoke1 100, 35, ROSERADE, 0, GIGA_DRAIN, TOXIC_SPIKES, LEECH_SEED, GRASS_WHISTLE, 0
+trainerpoke1 100, 38, INFERNAPE, 0, BRICK_BREAK, FLAME_WHEEL, MACH_PUNCH, AERIAL_ACE, 10

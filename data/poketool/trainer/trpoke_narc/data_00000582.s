@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 58, 0, LUXRAY, 179, 1
-trainerpoke 242, 0, 86, 0, ZIGZAGOON, 0, 0
-trainerpoke 50, 0, 59, 0, URSARING, 103, 1
-trainerpoke 188, 1, 14, 0, VESPIQUEN, 0, 0
-trainerpoke 50, 0, 58, 0, GLISCOR, 76, 1
-trainerpoke 148, 1, 89, 0, KRABBY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 58, LUXRAY, 0, DISCHARGE, CRUNCH, THUNDER_WAVE, FACADE, 0
+trainerpoke1 50, 59, URSARING, 0, HAMMER_ARM, STONE_EDGE, SWORDS_DANCE, GIGA_IMPACT, 0
+trainerpoke1 50, 58, GLISCOR, 0, AERIAL_ACE, X_SCISSOR, EARTHQUAKE, QUICK_ATTACK, 0

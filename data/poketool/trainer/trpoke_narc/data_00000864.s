@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 61, 0, PORYGONZ, 0, 0
-trainerpoke 161, 0, 94, 0, DODRIO, 143, 1
-trainerpoke 0, 0, 200, 0, POLIWHIRL, 94, 0
-trainerpoke 0, 0, 247, 0, GENGAR, 188, 0
-trainerpoke 156, 1, 0, 0, MISDREAVUS, 62, 0
-trainerpoke 206, 1, 0, 0, DEWGONG, 174, 1
-trainerpoke 86, 0, 63, 0, MISSINGNO, 200, 0
-trainerpoke 63, 0, 212, 1, MISSINGNO, 245, 0
-trainerpoke 147, 1, 140, 1, GENGAR, 0, 0
-trainerpoke 200, 0, 65, 0, ALAKAZAM, 158, 0
-trainerpoke 94, 0, 155, 1, ANORITH, 63, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 61, PORYGONZ, 0, NO_ITEM, TRI_ATTACK, PSYCHIC_M, THUNDERBOLT, DARK_PULSE, 0
+trainerpoke3 200, 61, GENGAR, 0, NO_ITEM, SHADOW_BALL, PSYCHIC_M, SLUDGE_BOMB, ENERGY_BALL, 0
+trainerpoke3 200, 62, MAGNEZONE, 0, NO_ITEM, THUNDER, FLASH_CANNON, THUNDER_WAVE, HYPER_BEAM, 0
+trainerpoke3 200, 63, TOGEKISS, 0, NO_ITEM, EXTREME_SPEED, AIR_SLASH, AURA_SPHERE, PSYCHIC_M, 0
+trainerpoke3 200, 65, ALAKAZAM, 0, SITRUS_BERRY, PSYCHIC_M, FOCUS_BLAST, CALM_MIND, HYPER_BEAM, 0

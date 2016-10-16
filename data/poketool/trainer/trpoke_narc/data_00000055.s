@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 23, 0, BUNEARY, 193, 0
-trainerpoke 26, 0, 98, 0, RHYHORN, 0, 0
-trainerpoke 0, 0, 23, 0, BUIZEL, 197, 1
-trainerpoke 129, 0, 228, 0, VENOMOTH, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 23, BUNEARY, 0, FORESIGHT, JUMP_KICK, QUICK_ATTACK, DEFENSE_CURL, 0
+trainerpoke1 0, 23, BUIZEL, 0, AQUA_JET, SWIFT, PURSUIT, SONIC_BOOM, 0

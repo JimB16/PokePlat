@@ -1,6 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 30, 0, 21, 0, CROAGUNK, 0, 0
-trainerpoke 30, 0, 24, 0, MEDITITE, 0, 0
-trainerpoke 30, 0, 24, 0, MACHOP, 0, 0
+@ ?, Level, Pkmn, AltForm, PokeballSeal
+trainerpoke0 30, 21, CROAGUNK, 0, 0
+trainerpoke0 30, 24, MEDITITE, 0, 0
+trainerpoke0 30, 24, MACHOP, 0, 0

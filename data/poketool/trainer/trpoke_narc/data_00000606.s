@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 57, 0, RATICATE, 27, 1
-trainerpoke 162, 0, 242, 0, KRABBY, 0, 0
-trainerpoke 100, 0, 58, 0, DRIFBLIM, 153, 0
-trainerpoke 247, 0, 92, 0, RATTATA, 0, 0
-trainerpoke 100, 0, 59, 0, SHIFTRY, 181, 1
-trainerpoke 185, 0, 70, 1, KRABBY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 100, 57, RATICATE, 0, ENDEAVOR, SUPER_FANG, CRUNCH, QUICK_ATTACK, 0
+trainerpoke1 100, 58, DRIFBLIM, 0, EXPLOSION, SHADOW_BALL, TOXIC, FLY, 0
+trainerpoke1 100, 59, SHIFTRY, 0, LEAF_STORM, FEINT_ATTACK, EXTRASENSORY, QUICK_ATTACK, 0

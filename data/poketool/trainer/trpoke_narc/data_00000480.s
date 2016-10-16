@@ -1,15 +1,9 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 48, 0, STARAPTOR, 114, 1
-trainerpoke 76, 1, 211, 0, RELICANTH, 0, 0
-trainerpoke 200, 0, 47, 0, FLOATZEL, 197, 1
-trainerpoke 242, 0, 167, 1, RALTS, 0, 0
-trainerpoke 200, 0, 48, 0, HERACROSS, 114, 1
-trainerpoke 157, 0, 144, 1, CACTURNE, 0, 0
-trainerpoke 200, 0, 47, 0, ROSERADE, 142, 1
-trainerpoke 202, 0, 247, 0, WAILMER, 0, 0
-trainerpoke 200, 0, 49, 0, SNORLAX, 34, 0
-trainerpoke 242, 0, 89, 0, QUILAVA, 0, 0
-trainerpoke 200, 0, 51, 0, INFERNAPE, 53, 0
-trainerpoke 155, 1, 165, 1, CACTURNE, 24, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 200, 48, STARAPTOR, 0, CLOSE_COMBAT, AERIAL_ACE, STEEL_WING, U_TURN, 0
+trainerpoke1 200, 47, FLOATZEL, 0, AQUA_JET, CRUNCH, ICE_FANG, BRICK_BREAK, 0
+trainerpoke1 200, 48, HERACROSS, 0, CLOSE_COMBAT, ROCK_SLIDE, NIGHT_SLASH, AERIAL_ACE, 0
+trainerpoke1 200, 47, ROSERADE, 0, POISON_JAB, GIGA_DRAIN, SHADOW_BALL, GRASS_WHISTLE, 0
+trainerpoke1 200, 49, SNORLAX, 0, BODY_SLAM, CRUNCH, EARTHQUAKE, REST, 0
+trainerpoke1 200, 51, INFERNAPE, 0, FLAMETHROWER, FOCUS_BLAST, SHADOW_CLAW, AERIAL_ACE, 24

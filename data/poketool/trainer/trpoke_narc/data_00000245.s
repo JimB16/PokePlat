@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 10, 0, 9, 0, GEODUDE, 33, 0
-trainerpoke 111, 0, 0, 0, MISSINGNO, 0, 0
-trainerpoke 10, 0, 9, 0, ONIX, 88, 0
-trainerpoke 33, 0, 106, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 10, 9, GEODUDE, 0, TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE, 0
+trainerpoke1 10, 9, ONIX, 0, ROCK_THROW, TACKLE, HARDEN, NO_MOVE, 0

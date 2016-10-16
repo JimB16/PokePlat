@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 250, 0, 53, 0, MRMIME, 0, 0
-trainerpoke 94, 0, 85, 0, KANGASKHAN, 113, 0
-trainerpoke 0, 0, 250, 0, GOLDUCK, 196, 0
-trainerpoke 0, 0, 94, 0, PUPITAR, 98, 0
-trainerpoke 68, 1, 0, 0, HOOH, 54, 0
-trainerpoke 181, 1, 0, 0, GENGAR, 104, 1
-trainerpoke 89, 0, 91, 1, MISSINGNO, 250, 0
-trainerpoke 56, 0, 65, 0, MISSINGNO, 94, 0
-trainerpoke 156, 1, 155, 1, MAROWAK, 0, 0
-trainerpoke 250, 0, 59, 0, GALLADE, 158, 0
-trainerpoke 153, 1, 171, 1, ARMALDO, 188, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 250, 53, MRMIME, 0, NO_ITEM, PSYCHIC_M, THUNDERBOLT, REFLECT, LIGHT_SCREEN, 0
+trainerpoke3 250, 55, ESPEON, 0, NO_ITEM, PSYCHIC_M, SHADOW_BALL, QUICK_ATTACK, SIGNAL_BEAM, 0
+trainerpoke3 250, 54, BRONZONG, 0, NO_ITEM, PSYCHIC_M, GYRO_BALL, EARTHQUAKE, CALM_MIND, 0
+trainerpoke3 250, 56, ALAKAZAM, 0, NO_ITEM, PSYCHIC_M, ENERGY_BALL, FOCUS_BLAST, RECOVER, 0
+trainerpoke3 250, 59, GALLADE, 0, SITRUS_BERRY, DRAIN_PUNCH, PSYCHO_CUT, LEAF_BLADE, STONE_EDGE, 0

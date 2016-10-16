@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 32, 0, AIPOM, 129, 0
-trainerpoke 96, 1, 95, 1, CACTURNE, 0, 0
-trainerpoke 50, 0, 32, 0, GIRAFARIG, 202, 1
-trainerpoke 60, 0, 116, 1, CHANSEY, 0, 0
-trainerpoke 50, 0, 33, 0, GROTLE, 72, 0
-trainerpoke 44, 0, 174, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 32, AIPOM, 0, SWIFT, WATER_PULSE, SHOCK_WAVE, AERIAL_ACE, 0
+trainerpoke1 50, 32, GIRAFARIG, 0, DOUBLE_HIT, PSYBEAM, ASSURANCE, LIGHT_SCREEN, 0
+trainerpoke1 50, 33, GROTLE, 0, MEGA_DRAIN, BITE, CURSE, NO_MOVE, 0

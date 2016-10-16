@@ -1,15 +1,9 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 40, 0, MUNCHLAX, 34, 0
-trainerpoke 254, 0, 0, 1, EXEGGUTOR, 0, 0
-trainerpoke 200, 0, 42, 0, STARAPTOR, 114, 1
-trainerpoke 76, 1, 36, 0, KRABBY, 0, 0
-trainerpoke 200, 0, 40, 0, FLOATZEL, 197, 1
-trainerpoke 228, 0, 24, 1, PHANPY, 0, 0
-trainerpoke 200, 0, 42, 0, HERACROSS, 114, 1
-trainerpoke 24, 1, 144, 1, CACTURNE, 0, 0
-trainerpoke 200, 0, 40, 0, RAPIDASH, 126, 0
-trainerpoke 5, 1, 23, 0, CLEFABLE, 0, 0
-trainerpoke 200, 0, 44, 0, TORTERRA, 202, 0
-trainerpoke 44, 0, 73, 0, SMEARGLE, 10, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 200, 40, MUNCHLAX, 0, BODY_SLAM, STOCKPILE, SWALLOW, SCREECH, 0
+trainerpoke1 200, 42, STARAPTOR, 0, CLOSE_COMBAT, AERIAL_ACE, TAKE_DOWN, QUICK_ATTACK, 0
+trainerpoke1 200, 40, FLOATZEL, 0, AQUA_JET, PURSUIT, BRICK_BREAK, IRON_TAIL, 0
+trainerpoke1 200, 42, HERACROSS, 0, CLOSE_COMBAT, BRICK_BREAK, NIGHT_SLASH, AERIAL_ACE, 0
+trainerpoke1 200, 40, RAPIDASH, 0, FIRE_BLAST, WILL_O_WISP, STOMP, TAKE_DOWN, 0
+trainerpoke1 200, 44, TORTERRA, 0, GIGA_DRAIN, BITE, LEECH_SEED, SYNTHESIS, 10

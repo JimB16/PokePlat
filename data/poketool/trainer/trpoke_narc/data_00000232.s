@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 40, 0, 35, 0, STEELIX, 231, 0
-trainerpoke 157, 0, 201, 0, EXEGGUTOR, 0, 0
-trainerpoke 40, 0, 37, 0, STEELIX, 231, 0
-trainerpoke 157, 0, 201, 0, EXEGGUTOR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 40, 35, STEELIX, 0, IRON_TAIL, ROCK_SLIDE, SANDSTORM, SCREECH, 0
+trainerpoke1 40, 37, STEELIX, 0, IRON_TAIL, ROCK_SLIDE, SANDSTORM, SCREECH, 0

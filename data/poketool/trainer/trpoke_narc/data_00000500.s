@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 54, 0, FORRETRESS, 174, 1
-trainerpoke 157, 0, 190, 1, CHIMCHAR, 0, 0
-trainerpoke 100, 0, 54, 0, GYARADOS, 89, 0
-trainerpoke 145, 1, 167, 1, BUDEW, 0, 0
-trainerpoke 100, 0, 54, 0, HIPPOWDON, 91, 0
-trainerpoke 242, 0, 182, 0, QUILAVA, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 100, 54, FORRETRESS, 0, FLASH_CANNON, ROCK_SLIDE, STEALTH_ROCK, TOXIC_SPIKES, 0
+trainerpoke1 100, 54, GYARADOS, 0, EARTHQUAKE, AQUA_TAIL, ICE_FANG, DRAGON_PULSE, 0
+trainerpoke1 100, 54, HIPPOWDON, 0, DIG, CRUNCH, PROTECT, REST, 0

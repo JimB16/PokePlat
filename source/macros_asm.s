@@ -1,5 +1,7 @@
 
 .include "source/script_plat.s"
+.include "source/item_constants.s"
+.include "source/move_constants.s"
 .include "source/pokemon_constants.s"
 .include "source/function.s"
 
@@ -735,11 +737,19 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .byte   \battletype2, \unknown1, \unknown2, \unknown3
 .endm
 
-.macro	trainerpoke	unknown1, unknown2, level, unknown3, species, unknown4, unknown5
-.byte	\unknown1, \unknown2, \level, \unknown3
-.hword  \species
-.byte   \unknown4, \unknown5
+.macro	trainerpoke0	unknown1, level, species, species_altform, unknown2
+.hword	\unknown1, \level, \species | (\species_altform << 10), \unknown2
 .endm
+.macro	trainerpoke1	unknown1, level, species, species_altform, move1, move2, move3, move4, unknown2
+.hword	\unknown1, \level, \species | (\species_altform << 10), \move1, \move2, \move3, \move4, \unknown2
+.endm
+.macro	trainerpoke2	unknown1, level, species, species_altform, item, unknown2
+.hword	\unknown1, \level, \species | (\species_altform << 10), \item, \unknown2
+.endm
+.macro	trainerpoke3	unknown1, level, species, species_altform, item, move1, move2, move3, move4, unknown2
+.hword	\unknown1, \level, \species | (\species_altform << 10), \item, \move1, \move2, \move3, \move4, \unknown2
+.endm
+
 
 @ AreaData, Unknown, Matrix, Scripts, LevelScripts, Texts, MusicDay, MusicNight, WildPkmn, Events, Name, NameFrame, Weather, Camera, NameStyle, Flags
 .macro	mapheader	AreaData, Unknown, Matrix, Scripts, LevelScripts, Texts, MusicDay, MusicNight, WildPkmn, Events, Name, NameFrame, Weather, Camera, NameStyle, Flags

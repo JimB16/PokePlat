@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 55, 0, DUSCLOPS, 169, 1
-trainerpoke 115, 1, 174, 0, POOCHYENA, 0, 0
-trainerpoke 50, 0, 56, 0, SALAMENCE, 81, 1
-trainerpoke 76, 1, 172, 1, BLISSEY, 23, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 55, DUSCLOPS, 0, SHADOW_SNEAK, PAYBACK, CURSE, WILL_O_WISP, 0
+trainerpoke1 50, 56, SALAMENCE, 0, DRAGON_CLAW, AERIAL_ACE, ZEN_HEADBUTT, CRUNCH, 23

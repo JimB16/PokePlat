@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 59, 0, HYPNO, 95, 0
-trainerpoke 94, 0, 247, 0, OMANYTE, 0, 0
-trainerpoke 0, 0, 61, 0, ALAKAZAM, 105, 0
-trainerpoke 94, 0, 91, 1, PUPITAR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 59, HYPNO, 0, HYPNOSIS, PSYCHIC_M, SHADOW_BALL, DREAM_EATER, 0
+trainerpoke1 0, 61, ALAKAZAM, 0, RECOVER, PSYCHIC_M, CALM_MIND, SHADOW_BALL, 0

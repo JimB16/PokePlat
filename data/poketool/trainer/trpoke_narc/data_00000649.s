@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 52, 0, GARDEVOIR, 248, 0
-trainerpoke 94, 0, 89, 1, ANORITH, 0, 0
-trainerpoke 50, 0, 56, 0, SEAKING, 224, 0
-trainerpoke 32, 0, 96, 1, STARAPTOR, 0, 0
-trainerpoke 50, 0, 52, 0, LOPUNNY, 146, 0
-trainerpoke 98, 0, 153, 1, PUPITAR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 52, GARDEVOIR, 0, FUTURE_SIGHT, PSYCHIC_M, MAGICAL_LEAF, CALM_MIND, 0
+trainerpoke1 50, 56, SEAKING, 0, MEGAHORN, HORN_DRILL, WATER_PULSE, POISON_JAB, 0
+trainerpoke1 50, 52, LOPUNNY, 0, DIZZY_PUNCH, QUICK_ATTACK, DRAIN_PUNCH, SHADOW_BALL, 0

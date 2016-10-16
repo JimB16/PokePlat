@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 15, 0, ZUBAT, 0, 0
-trainerpoke 44, 0, 141, 0, GASTLY, 0, 0
-trainerpoke 0, 0, 100, 0, PIDGEOTTO, 176, 1
-trainerpoke 155, 0, 185, 0, CATERPIE, 252, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 100, 15, ZUBAT, 0, NO_ITEM, BITE, LEECH_LIFE, TOXIC, NO_MOVE, 0
+trainerpoke3 100, 17, PURUGLY, 0, ORAN_BERRY, FEINT_ATTACK, SCRATCH, FAKE_OUT, NO_MOVE, 0

@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 40, 0, 26, 0, CROAGUNK, 207, 0
-trainerpoke 23, 1, 185, 0, MISSINGNO, 0, 0
-trainerpoke 40, 0, 26, 0, MACHOKE, 2, 0
-trainerpoke 193, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 40, 26, CROAGUNK, 0, SWAGGER, REVENGE, FEINT_ATTACK, NO_MOVE, 0
+trainerpoke1 40, 26, MACHOKE, 0, KARATE_CHOP, FORESIGHT, NO_MOVE, NO_MOVE, 0

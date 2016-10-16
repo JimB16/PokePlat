@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 62, 0, AERODACTYL, 0, 0
-trainerpoke 188, 1, 76, 1, MUK, 81, 1
-trainerpoke 0, 0, 200, 0, POLIWHIRL, 220, 1
-trainerpoke 0, 0, 158, 1, MUNCHLAX, 179, 1
-trainerpoke 188, 1, 0, 0, MISDREAVUS, 61, 0
-trainerpoke 76, 0, 0, 0, GABITE, 89, 0
-trainerpoke 24, 1, 53, 0, MISSINGNO, 200, 0
-trainerpoke 63, 0, 153, 1, MISSINGNO, 201, 1
-trainerpoke 172, 1, 163, 1, MUK, 0, 0
-trainerpoke 200, 0, 65, 0, TYRANITAR, 158, 0
-trainerpoke 188, 1, 242, 0, CACTURNE, 168, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 62, AERODACTYL, 0, NO_ITEM, STONE_EDGE, AERIAL_ACE, EARTHQUAKE, DRAGON_CLAW, 0
+trainerpoke3 200, 61, PROBOPASS, 0, NO_ITEM, EARTH_POWER, STEALTH_ROCK, DISCHARGE, STONE_EDGE, 0
+trainerpoke3 200, 61, GOLEM, 0, NO_ITEM, STONE_EDGE, EARTHQUAKE, BRICK_BREAK, FLAMETHROWER, 0
+trainerpoke3 200, 63, RAMPARDOS, 0, NO_ITEM, HEAD_SMASH, ZEN_HEADBUTT, AVALANCHE, EARTHQUAKE, 0
+trainerpoke3 200, 65, TYRANITAR, 0, SITRUS_BERRY, STONE_EDGE, CRUNCH, AERIAL_ACE, FIRE_FANG, 0

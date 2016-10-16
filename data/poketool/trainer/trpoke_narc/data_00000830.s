@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 40, 0, KIRLIA, 94, 0
-trainerpoke 89, 1, 95, 0, TYRANITAR, 0, 0
-trainerpoke 0, 0, 40, 0, KADABRA, 94, 0
-trainerpoke 171, 1, 86, 0, MAROWAK, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 40, KIRLIA, 0, PSYCHIC_M, MAGICAL_LEAF, HYPNOSIS, FUTURE_SIGHT, 0
+trainerpoke1 0, 40, KADABRA, 0, PSYCHIC_M, PSYCHO_CUT, THUNDER_WAVE, RECOVER, 0

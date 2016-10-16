@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 21, 0, GASTLY, 101, 0
-trainerpoke 133, 1, 174, 0, KOFFING, 0, 0
-trainerpoke 60, 0, 22, 0, GASTLY, 101, 0
-trainerpoke 133, 1, 95, 0, KOFFING, 0, 0
-trainerpoke 60, 0, 24, 0, HAUNTER, 247, 0
-trainerpoke 109, 0, 174, 0, SCIZOR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 21, GASTLY, 0, NIGHT_SHADE, SUCKER_PUNCH, CURSE, CONFUSE_RAY, 0
+trainerpoke1 60, 22, GASTLY, 0, NIGHT_SHADE, SUCKER_PUNCH, HYPNOSIS, CONFUSE_RAY, 0
+trainerpoke1 60, 24, HAUNTER, 0, SHADOW_BALL, CONFUSE_RAY, CURSE, MEAN_LOOK, 0

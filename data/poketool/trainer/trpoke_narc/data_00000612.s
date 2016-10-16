@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 30, 0, 26, 0, KADABRA, 93, 0
-trainerpoke 95, 1, 148, 0, VAPOREON, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 30, 26, KADABRA, 0, CONFUSION, SHOCK_WAVE, FLASH, KINESIS, 0

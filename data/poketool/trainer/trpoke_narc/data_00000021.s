@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 14, 0, ROSELIA, 74, 0
-trainerpoke 72, 0, 0, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 14, ROSELIA, 0, GROWTH, MEGA_DRAIN, NO_MOVE, NO_MOVE, 0

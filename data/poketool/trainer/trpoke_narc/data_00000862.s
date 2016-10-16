@@ -1,14 +1,8 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 200, 0, 61, 0, SHUCKLE, 0, 0
-trainerpoke 156, 0, 92, 0, BELLOSSOM, 201, 0
-trainerpoke 0, 0, 200, 0, POLIWRATH, 197, 0
-trainerpoke 0, 0, 143, 1, GENGAR, 109, 0
-trainerpoke 104, 0, 0, 0, MISDREAVUS, 61, 0
-trainerpoke 68, 1, 0, 0, MUK, 5, 1
-trainerpoke 28, 1, 182, 0, MISSINGNO, 200, 0
-trainerpoke 63, 0, 221, 1, MISSINGNO, 7, 0
-trainerpoke 8, 0, 9, 0, PUPITAR, 0, 0
-trainerpoke 200, 0, 65, 0, CLAYDOL, 158, 0
-trainerpoke 158, 1, 94, 0, LARVITAR, 91, 1
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 200, 61, SHUCKLE, 0, NO_ITEM, REST, TOXIC, PROTECT, SANDSTORM, 0
+trainerpoke3 200, 62, UMBREON, 0, NO_ITEM, DARK_PULSE, PSYCHIC_M, CONFUSE_RAY, DOUBLE_TEAM, 0
+trainerpoke3 200, 61, TORKOAL, 0, NO_ITEM, EARTHQUAKE, WILL_O_WISP, ERUPTION, PROTECT, 0
+trainerpoke3 200, 63, DUSKNOIR, 0, NO_ITEM, FIRE_PUNCH, ICE_PUNCH, THUNDER_PUNCH, SHADOW_BALL, 0
+trainerpoke3 200, 65, CLAYDOL, 0, SITRUS_BERRY, EARTH_POWER, PSYCHIC_M, ANCIENT_POWER, CALM_MIND, 0

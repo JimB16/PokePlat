@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 44, 0, ROSELIA, 134, 1
-trainerpoke 202, 0, 73, 0, GASTLY, 0, 0
-trainerpoke 50, 0, 44, 0, KIRLIA, 94, 0
-trainerpoke 89, 1, 91, 1, CUBONE, 0, 0
-trainerpoke 50, 0, 45, 0, LICKITUNG, 48, 0
-trainerpoke 23, 0, 205, 0, RHYHORN, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 44, ROSELIA, 0, TOXIC_SPIKES, GIGA_DRAIN, LEECH_SEED, TOXIC, 0
+trainerpoke1 50, 44, KIRLIA, 0, PSYCHIC_M, MAGICAL_LEAF, CALM_MIND, DOUBLE_TEAM, 0
+trainerpoke1 50, 45, LICKITUNG, 0, SUPERSONIC, STOMP, ROLLOUT, DEFENSE_CURL, 0

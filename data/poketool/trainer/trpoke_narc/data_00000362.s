@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 53, 0, MUK, 151, 0
-trainerpoke 92, 0, 188, 0, BIDOOF, 0, 0
-trainerpoke 100, 0, 53, 0, MIGHTYENA, 133, 1
-trainerpoke 13, 1, 116, 1, CLEFABLE, 0, 0
-trainerpoke 100, 0, 56, 0, LICKITUNG, 182, 1
-trainerpoke 160, 1, 57, 0, MAGMAR, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 100, 53, MUK, 0, ACID_ARMOR, TOXIC, SLUDGE_BOMB, DARK_PULSE, 0
+trainerpoke1 100, 53, MIGHTYENA, 0, SUCKER_PUNCH, TAUNT, ASSURANCE, TAKE_DOWN, 0
+trainerpoke1 100, 56, LICKITUNG, 0, POWER_WHIP, GIGA_IMPACT, SURF, FIRE_BLAST, 0

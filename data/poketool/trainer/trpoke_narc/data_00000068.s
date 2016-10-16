@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 100, 0, 32, 0, TANGELA, 19, 1
-trainerpoke 202, 0, 246, 0, GASTLY, 0, 0
-trainerpoke 100, 0, 32, 0, PONYTA, 83, 0
-trainerpoke 23, 0, 36, 0, MISSINGNO, 0, 0
-trainerpoke 100, 0, 32, 0, BUIZEL, 197, 1
-trainerpoke 250, 0, 228, 0, KRABBY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 100, 32, TANGELA, 0, INGRAIN, GIGA_DRAIN, ANCIENT_POWER, TOXIC, 0
+trainerpoke1 100, 32, PONYTA, 0, FIRE_SPIN, STOMP, TAKE_DOWN, NO_MOVE, 0
+trainerpoke1 100, 32, BUIZEL, 0, AQUA_JET, WHIRLPOOL, PURSUIT, QUICK_ATTACK, 0

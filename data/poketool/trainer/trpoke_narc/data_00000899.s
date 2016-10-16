@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 29, 0, CLEFAIRY, 118, 0
-trainerpoke 227, 0, 53, 1, GIRAFARIG, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 29, CLEFAIRY, 0, METRONOME, ENCORE, METEOR_MASH, ENDURE, 0

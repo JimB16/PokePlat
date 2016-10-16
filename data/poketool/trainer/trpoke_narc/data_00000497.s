@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 10, 0, 32, 0, BIBAREL, 55, 0
-trainerpoke 205, 0, 158, 0, KIRLIA, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 10, 32, BIBAREL, 0, WATER_GUN, ROLLOUT, HYPER_FANG, YAWN, 0

@@ -1,4 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 39, 0, GOLBAT, 5, 0
+@ ?, Level, Pkmn, AltForm, PokeballSeal
+trainerpoke0 0, 39, GOLBAT, 0, 5

@@ -93,7 +93,7 @@ MoveNameList = [
 "Dig",
 "Toxic",
 "Confusion",
-"Psychic",
+"Psychic_m",
 "Hypnosis",
 "Meditate",
 "Agility",

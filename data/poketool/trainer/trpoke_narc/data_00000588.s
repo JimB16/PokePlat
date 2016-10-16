@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 30, 0, 58, 0, BRELOOM, 147, 0
-trainerpoke 183, 0, 146, 1, SPINDA, 0, 0
-trainerpoke 30, 0, 58, 0, MEDICHAM, 197, 0
-trainerpoke 94, 0, 136, 0, WARTORTLE, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 30, 58, BRELOOM, 0, SPORE, MACH_PUNCH, SEED_BOMB, SKY_UPPERCUT, 0
+trainerpoke1 30, 58, MEDICHAM, 0, DETECT, PSYCHIC_M, HIGH_JUMP_KICK, ICE_PUNCH, 0

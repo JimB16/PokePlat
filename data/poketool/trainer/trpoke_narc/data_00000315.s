@@ -1,10 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 20, 0, TURTWIG, 0, 0
-trainerpoke 191, 1, 75, 0, MILTANK, 115, 0
-trainerpoke 0, 0, 50, 0, RATICATE, 165, 1
-trainerpoke 0, 0, 191, 1, TENTACRUEL, 89, 1
-trainerpoke 219, 0, 0, 0, DIGLETT, 22, 0
-trainerpoke 151, 1, 158, 0, RIOLU, 89, 1
-trainerpoke 40, 0, 78, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Item, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke3 50, 20, TURTWIG, 0, NO_ITEM, GRASS_KNOT, RAZOR_LEAF, SUNNY_DAY, REFLECT, 0
+trainerpoke3 50, 20, CHERRIM, 0, NO_ITEM, GRASS_KNOT, LEECH_SEED, MAGICAL_LEAF, SAFEGUARD, 0
+trainerpoke3 50, 22, ROSERADE, 0, SITRUS_BERRY, GRASS_KNOT, MAGICAL_LEAF, POISON_STING, STUN_SPORE, 0

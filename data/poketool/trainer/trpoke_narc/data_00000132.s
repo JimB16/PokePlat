@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 39, 0, AMBIPOM, 202, 1
-trainerpoke 113, 1, 28, 0, EXEGGUTOR, 0, 0
-trainerpoke 50, 0, 40, 0, PORYGON2, 60, 0
-trainerpoke 68, 1, 176, 0, MAROWAK, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 39, AMBIPOM, 0, DOUBLE_HIT, U_TURN, SAND_ATTACK, SCREECH, 0
+trainerpoke1 50, 40, PORYGON2, 0, PSYBEAM, SIGNAL_BEAM, CONVERSION_2, RECOVER, 0

@@ -1,9 +1,6 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 35, 0, BRONZOR, 104, 1
-trainerpoke 70, 1, 109, 0, MISSINGNO, 0, 0
-trainerpoke 60, 0, 36, 0, BRONZOR, 104, 1
-trainerpoke 70, 1, 109, 0, MISSINGNO, 0, 0
-trainerpoke 60, 0, 38, 0, BRONZOR, 104, 1
-trainerpoke 70, 1, 109, 0, MISSINGNO, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 35, BRONZOR, 0, GYRO_BALL, EXTRASENSORY, CONFUSE_RAY, NO_MOVE, 0
+trainerpoke1 60, 36, BRONZOR, 0, GYRO_BALL, EXTRASENSORY, CONFUSE_RAY, NO_MOVE, 0
+trainerpoke1 60, 38, BRONZOR, 0, GYRO_BALL, EXTRASENSORY, CONFUSE_RAY, NO_MOVE, 0

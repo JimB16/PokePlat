@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 60, 0, 41, 0, SNOVER, 164, 1
-trainerpoke 207, 0, 196, 0, DRAPION, 0, 0
-trainerpoke 60, 0, 42, 0, SNEASEL, 196, 0
-trainerpoke 163, 0, 185, 0, KRABBY, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 60, 41, SNOVER, 0, ICE_SHARD, SWAGGER, ICY_WIND, WOOD_HAMMER, 0
+trainerpoke1 60, 42, SNEASEL, 0, ICY_WIND, SLASH, FEINT_ATTACK, QUICK_ATTACK, 0

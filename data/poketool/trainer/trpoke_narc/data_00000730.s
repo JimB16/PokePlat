@@ -1,5 +1,4 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 0, 0, 45, 0, CHERRIM, 76, 0
-trainerpoke 241, 0, 73, 0, LILEEP, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 0, 45, CHERRIM, 0, SOLAR_BEAM, SUNNY_DAY, LEECH_SEED, MAGICAL_LEAF, 0

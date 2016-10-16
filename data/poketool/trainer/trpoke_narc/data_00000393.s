@@ -1,7 +1,5 @@
 .include "source/macros_asm.s"
 
-@ ?, ?, Level, ?, Pkmn, ?, ?
-trainerpoke 50, 0, 54, 0, MAROWAK, 198, 0
-trainerpoke 188, 1, 14, 0, SURSKIT, 0, 0
-trainerpoke 50, 0, 57, 0, KANGASKHAN, 146, 0
-trainerpoke 242, 0, 200, 0, MUK, 0, 0
+@ ?, Level, Pkmn, AltForm, Move1, Move2, Move3, Move4, PokeballSeal
+trainerpoke1 50, 54, MAROWAK, 0, BONE_RUSH, STONE_EDGE, SWORDS_DANCE, ENDEAVOR, 0
+trainerpoke1 50, 57, KANGASKHAN, 0, DIZZY_PUNCH, CRUNCH, OUTRAGE, EARTHQUAKE, 0

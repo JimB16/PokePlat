@@ -1,6 +1,7 @@
 
 .include "source/script_plat.s"
 .include "source/pokemon_constants.s"
+.include "source/function.s"
 
 
 .equ NrOfPkmn, 493 @ 0x1ed
@@ -13,6 +14,8 @@
 */
 
 @ Constants for ReadPkmnData- and WritePkmnData-functions (arm9.s)
+@ Constants for GetPkmnData-functions (arm9.s) r1
+@ ChangePkmnData0?
 @ https://projectpokemon.org/wiki/Pokemon_NDS_Structure
 @ http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_structure_in_Generation_IV
 .equ PKMNDATA_PERSONALITYVALUE,  0x0
@@ -49,6 +52,7 @@
 .equ PKMNDATA_MOVEPPUPS2,  0x3f
 .equ PKMNDATA_MOVEPPUPS3,  0x40
 .equ PKMNDATA_MOVEPPUPS4,  0x41
+.equ PKMNDATA_42,  0x42
 .equ PKMNDATA_IVHP,  0x46
 .equ PKMNDATA_IVATK, 0x47
 .equ PKMNDATA_IVDEF, 0x48
@@ -87,7 +91,8 @@
 @ ? = 0xae
 
 
-@ Constants for LoadPkmnBaseData-function (arm9.s)
+@ Constants for LoadPkmnBaseData-function (arm9_pkmndata.s) r1
+@ Constants for GetPkmnBaseData1-function (arm9_pkmndata.s) r1
 .equ PKMNBASEDATA_HP,  0x0
 .equ PKMNBASEDATA_ATK,  0x1
 .equ PKMNBASEDATA_DEF,  0x2
@@ -118,7 +123,7 @@
 
 
 
-@ Constants for ReadPkmnBattleData1- and WritePkmnBattleData1-functions (overlay_0016.s)
+@ Constants for ReadPkmnBattleData1- and WritePkmnBattleData1-functions (overlay_0016.s) r2   -ChangePkmnBattleDataWithTrainerNr?
 .equ PKMNBATTLEDATA_SPECIES,  0x0
 .equ PKMNBATTLEDATA_ATK,  0x1
 .equ PKMNBATTLEDATA_DEF,  0x2
@@ -130,6 +135,15 @@
 .equ PKMNBATTLEDATA_MOVE3,  0x8
 .equ PKMNBATTLEDATA_MOVE4,  0x9
 .equ PKMNBATTLEDATA_STATLEVEL,  0x12 @ 0x19
+.equ PKMNBATTLEDATA_13,  0x13
+.equ PKMNBATTLEDATA_14,  0x14
+.equ PKMNBATTLEDATA_15,  0x15
+.equ PKMNBATTLEDATA_16,  0x16
+.equ PKMNBATTLEDATA_17,  0x17
+.equ PKMNBATTLEDATA_18,  0x18
+.equ PKMNBATTLEDATA_TYPE1,  0x1b
+.equ PKMNBATTLEDATA_TYPE2,  0x1c
+.equ PKMNBATTLEDATA_1d,  0x1d
 .equ PKMNBATTLEDATA_MOVE1PP,  0x1f
 .equ PKMNBATTLEDATA_MOVE2PP,  0x20
 .equ PKMNBATTLEDATA_MOVE3PP,  0x21
@@ -147,9 +161,14 @@
 .equ PKMNBATTLEDATA_CURHP,  0x2f
 .equ PKMNBATTLEDATA_MAXHP,  0x30
 .equ PKMNBATTLEDATA_EXPPTS,  0x32
+.equ PKMNBATTLEDATA_34,  0x34
+.equ PKMNBATTLEDATA_35,  0x35
 .equ PKMNBATTLEDATA_ITEM,  0x37
+.equ PKMNBATTLEDATA_49,  0x49
+.equ PKMNBATTLEDATA_59,  0x59
 
-@ Constants for ReadMoveData-function (arm9.s)
+@ Constants for ReadMoveData-function (arm9.s) r1
+@ Constants for LoadMoveData-function (arm9.s) r1
 .equ MOVEDATA_EFFECT, 0x0
 .equ MOVEDATA_CATEGORY, 0x1
 .equ MOVEDATA_POWER, 0x2
@@ -176,6 +195,54 @@
 .equ CARD_1B4,              0x040001B4
 .equ CARD_1B8,              0x040001B8
 .equ CARD_1BA,              0x040001BA
+
+.equ CARD_CR1_ENABLE,       0x80  @ in byte 1, i.e. 0x8000
+.equ CARD_CR1_IRQ,          0x40  @ in byte 1, i.e. 0x4000
+
+// SPI EEPROM COMMANDS
+.equ SPI_EEPROM_WRSR,       0x01
+.equ SPI_EEPROM_PP,         0x02  @ Page Program
+.equ SPI_EEPROM_READ,       0x03
+.equ SPI_EEPROM_WRDI,       0x04  @ Write disable
+.equ SPI_EEPROM_RDSR,       0x05  @ Read status register
+.equ SPI_EEPROM_WREN,       0x06  @ Write enable
+.equ SPI_EEPROM_PW,         0x0a  @ Page Write
+.equ SPI_EEPROM_FAST,       0x0b  @ Fast Read
+.equ SPI_EEPROM_RDID,       0x9f
+.equ SPI_EEPROM_RDP,        0xab  @ Release from deep power down
+.equ SPI_EEPROM_DPD,        0xb9  @ Deep power down
+
+.equ CARD_ACTIVATE,         (1<<31)     @ when writing, get the ball rolling
+.equ CARD_WR,               (1<<30)     @ Card write enable
+.equ CARD_nRESET,           (1<<29)     @ value on the /reset pin (1 = high out, not a reset state, 0 = low out = in reset)
+.equ CARD_SEC_LARGE,        (1<<28)     @ Use "other" secure area mode, which tranfers blocks of 0x1000 bytes at a time
+.equ CARD_CLK_SLOW,         (1<<27)     @ Transfer clock rate (0 = 6.7MHz, 1 = 4.2MHz)
+.macro	CARD_BLK_SIZE name n            @ Transfer block size, (0 = None, 1..6 = (0x100 << n) bytes, 7 = 4 bytes)
+.set   \name, (((\n)&0x7)<<24)
+.endm
+.equ CARD_SEC_CMD,          (1<<22)     @ The command transfer will be hardware encrypted (KEY2)
+.macro	CARD_DELAY2 name n              @ Transfer delay length part 2
+.set   \name, (((\n)&0x3F)<<16)
+.endm
+.equ CARD_SEC_SEED,         (1<<15)     @ Apply encryption (KEY2) seed to hardware registers
+.equ CARD_SEC_EN,           (1<<14)     @ Security enable
+.equ CARD_SEC_DAT,          (1<<13)     @ The data transfer will be hardware encrypted (KEY2)
+.macro	CARD_DELAY1 name n              @ Transfer delay length part 1
+.set   \name, ((\n)&0x1FFF)
+.endm
+
+/*
+.macro pixw nm, x, y
+ .set \nm, (\x+\y*240)*2
+.endm
+pixw pix10_2,10,2 ; variable pixo is macro as parameters
+ ldrh  r0, [r1, #pix10_2] ; get pixel offset.
+*/
+
+@ 3 bits in b10..b8 indicate something
+@ read bits
+.equ CARD_BUSY,             (1<<31)      @ when reading, still expecting incomming data?
+.equ CARD_DATA_READY,       (1<<23)      @ when reading, CARD_DATA_RD or CARD_DATA has another word of data and is good to go
 
 @ Card commands
 .equ CARD_CMD_DUMMY,          0x9F

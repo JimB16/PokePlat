@@ -141,13 +141,13 @@
 1:
 .endm
 
-.macro	AI_17_If356Eq a adr
+.macro	AI_MoveEq a adr
 .word   0x17, \a
 .word   (\adr - 1f)>>2
 1:
 .endm
 
-.macro	AI_18_If356Ne a adr
+.macro	AI_MoveNe a adr
 .word   0x18, \a
 .word   (\adr - 1f)>>2
 1:
@@ -231,25 +231,25 @@
 1:
 .endm
 
-.macro	AI_31_Lt a b c adr
+.macro	AI_StatLvlLt a b c adr
 .word   0x31, \a, \b, \c
 .word   (\adr - 1f)>>2
 1:
 .endm
 
-.macro	AI_32_Gt a b c adr
+.macro	AI_StatLvlGt a b c adr
 .word   0x32, \a, \b, \c
 .word   (\adr - 1f)>>2
 1:
 .endm
 
-.macro	AI_33_Eq a b c adr
+.macro	AI_StatLvlEq a b c adr
 .word   0x33, \a, \b, \c
 .word   (\adr - 1f)>>2
 1:
 .endm
 
-.macro	AI_34_Ne a b c adr
+.macro	AI_StatLvlNe a b c adr
 .word   0x34, \a, \b, \c
 .word   (\adr - 1f)>>2
 1:

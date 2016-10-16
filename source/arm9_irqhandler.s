@@ -51,7 +51,7 @@ branch_1ff8038: @ 1ff8038 :arm
 
 .arm
 Function_1ff8068: @ 1ff8068 :arm
-	ldr     r12, [pc, #0x164] @ [0x1ff81d4] (=#RAM_27e0060)
+	ldr     r12, [pc, #0x164] @ [0x1ff81d4] (=RAM_27e0060)
 	mov     r3, #0x0
 	ldr     r12, [r12]
 	mov     r2, #0x1
@@ -66,14 +66,14 @@ branch_1ff8080: @ 1ff8080 :arm
 	mov     r12, r0
 	cmp     r12, #0x0
 	bne     branch_1ff8080
-	ldr     r12,  [pc, #0x12c] @ [0x1ff81d4] (=#RAM_27e0060)
+	ldr     r12,  [pc, #0x12c] @ [0x1ff81d4] (=RAM_27e0060)
 	str     r3, [r12]
 	str     r3, [r12, #0x4]
-	ldr     r12,  [pc, #0x124] @ [0x1ff81d8] (=#RAM_21ccc80)
+	ldr     r12,  [pc, #0x124] @ [0x1ff81d8] (=RAM_21ccc80)
 	mov     r1, #0x1
 	strh    r1, [r12]
 branch_1ff80b8: @ 1ff80b8 :arm
-	ldr     r12,  [pc, #0x118] @ [0x1ff81d8] (=#RAM_21ccc80)
+	ldr     r12,  [pc, #0x118] @ [0x1ff81d8] (=RAM_21ccc80)
 	ldrh    r1, [r12]
 	cmp     r1, #0x0
 	beq     branch_1ff80cc
@@ -174,7 +174,7 @@ branch_1ff8150: @ 1ff8150 :arm
 OSi_DoResetSystem: @ 1ff81e4 :arm
 	stmfd   sp!, {r3,lr}
 
-	ldr     r0, [pc, #0x20] @ [0x1ff8210] (=#0x21ccfe4)
+	ldr     r0, [pc, #0x20] @ [0x1ff8210] (=RAM_21ccfe4)
 branch_1ff81ec: @ 1ff81ec :arm
 	ldrh    r1, [r0]
 	cmp     r1, #0x0
@@ -190,7 +190,7 @@ branch_1ff81ec: @ 1ff81ec :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x1ff8210
 
-.word 0x21ccfe4 @ 0x1ff8210
+.word RAM_21ccfe4 @ 0x1ff8210
 .word REG_IME @ 0x1ff8214
 
 
@@ -213,21 +213,21 @@ branch_1ff8238: @ 1ff8238 :arm
 	mov     r0, #0x100
 	strh    r0, [r1]
 	mov     r0, #0x0
-	ldr     r3, [pc, #0x70] @ [0x1ff82cc] (=#0x27ffd9c)
+	ldr     r3, [pc, #0x70] @ [0x1ff82cc] (=RAM_27ffd9c)
 	ldr     r4, [r3]
-	ldr     r1, [pc, #0x6c] @ [0x1ff82d0] (=#0x27ffd80)
+	ldr     r1, [pc, #0x6c] @ [0x1ff82d0] (=RAM_27ffd80)
 	mov     r2, #0x80
 	bl      Function_1ff82e4
 	str     r4, [r3]
-	ldr     r1, [pc, #0x60] @ [0x1ff82d4] (=#RAM_27fff80)
+	ldr     r1, [pc, #0x60] @ [0x1ff82d4] (=RAM_27fff80)
 	mov     r2, #0x18
 	bl      Function_1ff82e4
-	ldr     r1, [pc, #0x58] @ [0x1ff82d8] (=#RAM_27fff98)
+	ldr     r1, [pc, #0x58] @ [0x1ff82d8] (=RAM_27fff98)
 	strh    r0, [r1]
-	ldr     r1, [pc, #0x54] @ [0x1ff82dc] (=#RAM_27fff9c)
+	ldr     r1, [pc, #0x54] @ [0x1ff82dc] (=RAM_27fff9c)
 	mov     r2, #0x64
 	bl      Function_1ff82e4
-	ldr     r1, [pc, #0x34] @ [0x1ff82c8] (=#REG_IPC_SYNC)
+	ldr     r1, [pc, #0x34] @ [0x1ff82c8] (=REG_IPC_SYNC)
 branch_1ff8290: @ 1ff8290 :arm
 	ldrh    r0, [r1]
 	and     r0, r0, #0xf
@@ -235,10 +235,10 @@ branch_1ff8290: @ 1ff8290 :arm
 	beq     branch_1ff8290
 	mov     r0, #0x0
 	strh    r0, [r1]
-	ldr     r3, [pc, #0x30] @ [0x1ff82e0] (=#0x27ffe00)
+	ldr     r3, [pc, #0x30] @ [0x1ff82e0] (=RAM_27ffe00)
 	ldr     r12, [r3, #0x24]
 	mov     lr, r12
-	ldr     r11, [pc, #0x18] @ [0x1ff82d4] (=#RAM_27fff80)
+	ldr     r11, [pc, #0x18] @ [0x1ff82d4] (=RAM_27fff80)
 	ldmia   r11, {r0-r10}
 	mov     r11, #0x0
 	bx      r12
@@ -246,12 +246,12 @@ branch_1ff8290: @ 1ff8290 :arm
 
 .word RAM_27e0000 @ 0x1ff82c4
 .word REG_IPC_SYNC @ 0x1ff82c8
-.word 0x27ffd9c @ 0x1ff82cc
-.word 0x27ffd80 @ 0x1ff82d0
+.word RAM_27ffd9c @ 0x1ff82cc
+.word RAM_27ffd80 @ 0x1ff82d0
 .word RAM_27fff80 @ 0x1ff82d4
 .word RAM_27fff98 @ 0x1ff82d8
 .word RAM_27fff9c @ 0x1ff82dc
-.word 0x27ffe00 @ 0x1ff82e0
+.word RAM_27ffe00 @ 0x1ff82e0
 
 
 
@@ -274,7 +274,7 @@ branch_1ff82f8: @ 1ff82f8 :arm
 .arm
 OSi_ReloadRomData: @ 1ff8300 :arm
 	stmfd   sp!, {r3-r11,lr}
-	ldr     r1,  [pc, #0x94] @ [0x1ff83a0] (=#0x27ffc2c)
+	ldr     r1,  [pc, #0x94] @ [0x1ff83a0] (=RAM_27ffc2c)
 	ldr     r4, [r1]
 	cmp     r4, #0x8000
 	bcc     branch_1ff8324
@@ -283,7 +283,7 @@ OSi_ReloadRomData: @ 1ff8300 :arm
 	mov     r2, #0x160
 	bl      OSi_ReadCardRom32
 branch_1ff8324: @ 1ff8324 :arm
-	ldr     r0,  [pc, #0x78] @ [0x1ff83a4] (=#0x27ffe20)
+	ldr     r0,  [pc, #0x78] @ [0x1ff83a4] (=RAM_27ffe20)
 	ldr     r5, [r0]
 	ldr     r6, [r0, #0x8]
 	ldr     r7, [r0, #0xc]
@@ -317,33 +317,33 @@ branch_1ff837c: @ 1ff837c :arm
 	ldmfd   sp!, {r3-r11,pc}
 @ 0x1ff83a0
 
-.word 0x27ffc2c @ 0x1ff83a0
-.word 0x27ffe20 @ 0x1ff83a4
+.word RAM_27ffc2c @ 0x1ff83a0
+.word RAM_27ffe20 @ 0x1ff83a4
 
 
 
 .arm
 OSi_ReadCardRom32: @ 1ff83a8 :arm
 	stmfd   sp!, {r3-r9,lr}
-	ldr     r4,  [pc, #0xb8] @ [0x1ff846c] (=#0x27ffe60)
-	ldr     r3,  [pc, #0xb8] @ [0x1ff8470] (=#0x1ff)
+	ldr     r4,  [pc, #0xb8] @ [0x1ff846c] (=RAM_27ffe60)
+	ldr     r3,  [pc, #0xb8] @ [0x1ff8470] (=0x1ff)
 	ldr     r5, [r4]
 	and     r4, r0, r3
 	bic     r3, r5, #0x7000000
-	ldr     r5,  [pc, #0xac] @ [0x1ff8474] (=#REG_ROMCTRL)
+	ldr     r5,  [pc, #0xac] @ [0x1ff8474] (=REG_ROMCTRL)
 	orr     r3, r3, #161, 8 @ #0xa1000000
 	rsb     r12, r4, #0x0
 branch_1ff83cc: @ 1ff83cc :arm
 	ldr     r4, [r5]
 	tst     r4, #0x80000000
 	bne     branch_1ff83cc
-	ldr     r7,  [pc, #0x98] @ [0x1ff8478] (=#0x40001a1)
+	ldr     r7,  [pc, #0x98] @ [0x1ff8478] (=REG_AUXSPICNTH)
 	mov     r4, #0x80
 	strb    r4, [r7]
 	cmp     r12, r2
 	add     r0, r0, r12
 	ldmgefd sp!, {r3-r9,pc}
-	ldr     r4,  [pc, #0x84] @ [0x1ff847c] (=#CARD_DATA_RD)
+	ldr     r4,  [pc, #0x84] @ [0x1ff847c] (=CARD_DATA_RD)
 	mov     r9, r0, lsr #8
 	mov     r6, #CARD_CMD_DATA_READ
 	mov     r5, #0x0
@@ -380,10 +380,10 @@ branch_1ff8450: @ 1ff8450 :arm
 	ldmfd   sp!, {r3-r9,pc}
 @ 0x1ff846c
 
-.word 0x27ffe60 @ 0x1ff846c
+.word RAM_27ffe60 @ 0x1ff846c
 .word 0x1ff @ 0x1ff8470
 .word REG_ROMCTRL @ 0x1ff8474
-.word 0x40001a1 @ 0x1ff8478
+.word REG_AUXSPICNTH @ 0x1ff8478
 .word CARD_DATA_RD @ 0x1ff847c
 
 
@@ -435,7 +435,7 @@ PreITCM_MIi_DmaSetParams_wait: @ 1ff84c0 :arm
 
 	mov     r2, #0x0
 	str     r2, [r3]
-	ldr     r1,  [pc, #0x10] @ [0x1ff852c] (=#0x81400001)
+	ldr     r1,  [pc, #0x10] @ [0x1ff852c] (=0x81400001)
 	str     r2, [r3, #0x4]
 	str     r1, [r3, #0x8]
 branch_1ff8520: @ 1ff8520 :arm
@@ -482,7 +482,7 @@ MIi_DmaSetParams_wait_noInt: @ 1ff8554 :arm
 	bne     branch_1ff85a0
 	mov     r1, #0x0
 	str     r1, [r12]
-	ldr     r0,  [pc, #0x18] @ [0x1ff85b4] (=#0x81400001)
+	ldr     r0,  [pc, #0x18] @ [0x1ff85b4] (=0x81400001)
 	str     r1, [r12, #0x4]
 	str     r0, [r12, #0x8]
 branch_1ff85a0: @ 1ff85a0 :arm
@@ -518,7 +518,7 @@ branch_1ff85e8: @ 1ff85e8 :arm
 	cmp     r8, #0x0
 	beq     branch_1ff8634
 	ldr     r11,  [pc, #0x40] @ [0x1ff8644] (=GFX_FIFO)
-	ldr     r4,  [pc, #0x40] @ [0x1ff8648] (=#0x84400000)
+	ldr     r4,  [pc, #0x40] @ [0x1ff8648] (=0x84400000)
 	mov     r5, #118, 30 @ #0x1d8
 branch_1ff8608: @ 1ff8608 :arm
 	cmp     r8, #118, 30 @ #0x1d8

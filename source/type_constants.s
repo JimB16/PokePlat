@@ -12,7 +12,7 @@
 .equ WATER, 11
 .equ GRASS, 12
 .equ ELECTRIC, 13
-@.equ PSYCHIC, 14
+.equ PSYCHIC, 14
 .equ ICE, 15
 .equ DRAGON, 16
 .equ DARK, 17

@@ -26,11 +26,24 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
 * Compilable main arm9-binary (with some of the overlays)
   * [**source/arm9.s**](source/arm9.s)
     * code is mostly disassembled
-    * contains the GraphicEngine, the ScriptHandler
+    * contains the GraphicEngine and the ScriptHandler
     * [**source/arm9_irqhandler.s**](source/arm9_irqhandler.s)
       * contains the IRQHandler (InterruptRequest)
     * [**source/arm9_narctable.s**](source/arm9_narctable.s)
       * contains the filelist that is used to load files with the filesystem
+    * [**source/arm9_scriptcmds.s**](source/arm9_scriptcmds.s)
+    * [**source/arm9_pkmndata.s**](source/arm9_pkmndata.s)
+    * [**source/arm9_fplib.s**](source/arm9_fplib.s)
+      * The software floating-point library, fplib (http://www.keil.com/support/man/docs/armlib/armlib_chr1358938941317.htm)
+    * [**source/arm9_card.s**](source/arm9_card.s)
+    * [**source/arm9_crt0.s**](source/arm9_crt0.s)
+    * [**source/arm9_fs.s**](source/arm9_fs.s)
+    * [**source/arm9_fx.s**](source/arm9_fx.s)
+    * [**source/arm9_gx.s**](source/arm9_gx.s)
+    * [**source/arm9_mi.s**](source/arm9_mi.s)
+    * [**source/arm9_mtx.s**](source/arm9_mtx.s)
+    * [**source/arm9_os.s**](source/arm9_os.s)
+    * [**source/arm9_wm.s**](source/arm9_wm.s)
   * [**source/overlay_0005.s**](source/overlay_0005.s)
     * contains the rest of the Script-functions that are listed in arm9.s
   * [**source/overlay_0012.s**](source/overlay_0012.s)

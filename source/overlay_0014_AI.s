@@ -45,8 +45,8 @@ Tr_Ai_22248a4: @ 0x4c84
 
 Script_1: @ 4d04
 	AI_51 Script_branch_f23c
-	AI_17_If356Eq FISSURE, Script_branch_4d38
-	AI_17_If356Eq HORN_DRILL, Script_branch_4d38
+	AI_MoveEq FISSURE, Script_branch_4d38
+	AI_MoveEq HORN_DRILL, Script_branch_4d38
 	AI_20 0x0
 	AI_If35cEq 0x0, Script_branch_4e7c
 Script_branch_4d38: @ 4d38
@@ -94,17 +94,17 @@ Script_branch_4e7c: @ 4e7c
 	AI_If35cNe SOUNDPROOF, Script_branch_4f28
 	AI_GetAbility ATTACKER
 	AI_If35cEq MOLD_BREAKER, Script_branch_4f28
-	AI_17_If356Eq GROWL, Script_branch_73ec
-	AI_17_If356Eq ROAR, Script_branch_73ec
-	AI_17_If356Eq SING, Script_branch_73ec
-	AI_17_If356Eq SUPERSONIC, Script_branch_73ec
-	AI_17_If356Eq SCREECH, Script_branch_73ec
-	AI_17_If356Eq SNORE, Script_branch_73ec
-	AI_17_If356Eq UPROAR, Script_branch_73ec
-	AI_17_If356Eq METAL_SOUND, Script_branch_73ec
-	AI_17_If356Eq GRASS_WHISTLE, Script_branch_73ec
-	AI_17_If356Eq BUG_BUZZ, Script_branch_73ec
-	AI_17_If356Eq CHATTER, Script_branch_73ec
+	AI_MoveEq GROWL, Script_branch_73ec
+	AI_MoveEq ROAR, Script_branch_73ec
+	AI_MoveEq SING, Script_branch_73ec
+	AI_MoveEq SUPERSONIC, Script_branch_73ec
+	AI_MoveEq SCREECH, Script_branch_73ec
+	AI_MoveEq SNORE, Script_branch_73ec
+	AI_MoveEq UPROAR, Script_branch_73ec
+	AI_MoveEq METAL_SOUND, Script_branch_73ec
+	AI_MoveEq GRASS_WHISTLE, Script_branch_73ec
+	AI_MoveEq BUG_BUZZ, Script_branch_73ec
+	AI_MoveEq CHATTER, Script_branch_73ec
 Script_branch_4f28: @ 4f28
 	AI_2f POUND, Script_branch_564c
 	AI_2f FIRE_PUNCH, Script_branch_5690
@@ -162,7 +162,7 @@ Script_branch_4f28: @ 4f28
 	AI_2f EARTHQUAKE, Script_branch_5dc4
 	AI_2f FISSURE, Script_branch_5fb0
 	AI_2f TOXIC, Script_branch_5fc4
-	AI_2f PSYCHIC, Script_branch_5fd8
+	AI_2f PSYCHIC_M, Script_branch_5fd8
 	AI_2f AGILITY, Script_branch_5fc4
 	AI_2f RAGE, Script_branch_5dc4
 	AI_2f HARDEN, Script_branch_6014
@@ -305,24 +305,24 @@ Script_branch_5750: @ 5750
 Script_branch_5760: @ 5760
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_578c
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_73ec
 	AI_4d
 @ 578c
 
 Script_branch_578c: @ 578c
-	AI_33_Eq ATTACKER, 0x1, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x1, 12, Script_branch_73ec
 	AI_4d
 @ 57a4
 
 Script_branch_57a4: @ 57a4
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_57d0
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_73ec
 	AI_4d
 @ 57d0
 
 Script_branch_57d0: @ 57d0
-	AI_33_Eq ATTACKER, 0x2, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x2, 12, Script_branch_73ec
 	AI_4d
 @ 57e8
 
@@ -330,36 +330,36 @@ Script_branch_57e8: @ 57e8
 	AI_56 0x70000, Script_branch_73ec
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_5820
-	AI_32_Gt ATTACKER, 0x3, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x3, 8, Script_branch_73ec
 	AI_4d
 @ 5820
 
 Script_branch_5820: @ 5820
-	AI_33_Eq ATTACKER, 0x3, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x3, 12, Script_branch_73ec
 	AI_4d
 @ 5838
 
 Script_branch_5838: @ 5838
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_5864
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_73ec
 	AI_4d
 @ 5864
 
 Script_branch_5864: @ 5864
-	AI_33_Eq ATTACKER, 0x4, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x4, 12, Script_branch_73ec
 	AI_4d
 @ 587c
 
 Script_branch_587c: @ 587c
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_58a8
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_73ec
 	AI_4d
 @ 58a8
 
 Script_branch_58a8: @ 58a8
-	AI_33_Eq ATTACKER, 0x5, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x5, 12, Script_branch_73ec
 	AI_4d
 @ 58c0
 
@@ -369,12 +369,12 @@ Script_branch_58c0: @ 58c0
 	AI_GetAbility ATTACKER
 	AI_If35cEq NO_GUARD, Script_branch_73ec
 	AI_If35cNe SIMPLE, Script_branch_590c
-	AI_32_Gt ATTACKER, 0x6, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x6, 8, Script_branch_73ec
 	AI_4d
 @ 590c
 
 Script_branch_590c: @ 590c
-	AI_33_Eq ATTACKER, 0x6, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x6, 12, Script_branch_73ec
 	AI_4d
 @ 5924
 
@@ -384,37 +384,37 @@ Script_branch_5924: @ 5924
 	AI_GetAbility ATTACKER
 	AI_If35cEq NO_GUARD, Script_branch_73ec
 	AI_If35cNe SIMPLE, Script_branch_5970
-	AI_32_Gt ATTACKER, 0x7, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x7, 8, Script_branch_73ec
 	AI_4d
 @ 5970
 
 Script_branch_5970: @ 5970
-	AI_33_Eq ATTACKER, 0x7, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x7, 12, Script_branch_73ec
 	AI_4d
 @ 5988
 
 Script_branch_5988: @ 5988
-	AI_33_Eq DEFENDER, 0x1, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x1, 0, Script_branch_73ec
 	AI_GetAbility DEFENDER
 	AI_If35cEq HYPER_CUTTER, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_59b8: @ 59b8
-	AI_33_Eq DEFENDER, 0x2, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x2, 0, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_59d4: @ 59d4
 	AI_56 0x70000, Script_branch_73ec
-	AI_33_Eq DEFENDER, 0x3, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x3, 0, Script_branch_73ec
 	AI_53 DEFENDER, 0x3
 	AI_If35cEq 0x1, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_5a14: @ 5a14
-	AI_33_Eq DEFENDER, 0x4, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x4, 0, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_5a30: @ 5a30
-	AI_33_Eq DEFENDER, 0x5, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x5, 0, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_5a4c: @ 5a4c
-	AI_33_Eq DEFENDER, 0x6, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x6, 0, Script_branch_73ec
 	AI_GetAbility ATTACKER
 	AI_If35cEq NO_GUARD, Script_branch_73ec
 	AI_GetAbility DEFENDER
@@ -422,7 +422,7 @@ Script_branch_5a4c: @ 5a4c
 	AI_If35cEq NO_GUARD, Script_branch_73ec
 	AI_Jump Script_branch_5ad8
 Script_branch_5a9c: @ 5a9c
-	AI_33_Eq DEFENDER, 0x7, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x7, 0, Script_branch_73ec
 	AI_GetAbility ATTACKER
 	AI_If35cEq NO_GUARD, Script_branch_73ec
 	AI_GetAbility DEFENDER
@@ -435,20 +435,20 @@ Script_branch_5ad8: @ 5ad8
 @ 5afc
 
 Script_branch_5afc: @ 5afc
-	AI_31_Lt ATTACKER, 0x1, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x2, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x3, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x4, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x5, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x6, 6, Script_branch_5c1c
-	AI_31_Lt ATTACKER, 0x7, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x1, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x2, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x3, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x4, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x5, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x6, 6, Script_branch_5c1c
-	AI_32_Gt DEFENDER, 0x7, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x1, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x2, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x3, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x4, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x5, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x6, 6, Script_branch_5c1c
+	AI_StatLvlLt ATTACKER, 0x7, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x1, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x2, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x3, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x4, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x5, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x6, 6, Script_branch_5c1c
+	AI_StatLvlGt DEFENDER, 0x7, 6, Script_branch_5c1c
 	AI_Jump Script_branch_73ec
 Script_branch_5c1c: @ 5c1c
 	AI_4d
@@ -560,7 +560,7 @@ Script_branch_5e90: @ 5e90
 	AI_If35cEq MAGIC_GUARD, Script_branch_73ec
 	AI_GetAbility ATTACKER
 	AI_If35cEq MOLD_BREAKER, Script_branch_5f04
-	AI_17_If356Eq THUNDER_WAVE, Script_branch_5ee4
+	AI_MoveEq THUNDER_WAVE, Script_branch_5ee4
 	AI_Jump Script_branch_5f04
 Script_branch_5ee4: @ 5ee4
 	AI_GetAbility DEFENDER
@@ -625,14 +625,14 @@ Script_branch_6028: @ 6028
 	AI_If35cEq 0x7, Script_branch_60bc
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_6090
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_73ec
 	AI_4d
 @ 6090
 
 Script_branch_6090: @ 6090
-	AI_33_Eq ATTACKER, 0x1, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x2, 12, Script_branch_73e0
+	AI_StatLvlEq ATTACKER, 0x1, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x2, 12, Script_branch_73e0
 	AI_4d
 @ 60bc
 
@@ -699,8 +699,8 @@ Script_branch_61ec: @ 61ec
 	AI_If35cEq CLEAR_BODY, Script_branch_73ec
 	AI_If35cEq WHITE_SMOKE, Script_branch_73ec
 Script_branch_6220: @ 6220
-	AI_33_Eq DEFENDER, 0x1, 0, Script_branch_73ec
-	AI_33_Eq DEFENDER, 0x4, 0, Script_branch_73e0
+	AI_StatLvlEq DEFENDER, 0x1, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x4, 0, Script_branch_73e0
 	AI_26 ATTACKER
 	AI_If35cEq 0x0, Script_branch_73ec
 	AI_4d
@@ -844,36 +844,36 @@ Script_branch_653c: @ 653c
 	AI_If35cEq CLEAR_BODY, Script_branch_73ec
 	AI_If35cEq WHITE_SMOKE, Script_branch_73ec
 Script_branch_6570: @ 6570
-	AI_33_Eq DEFENDER, 0x1, 0, Script_branch_73ec
-	AI_33_Eq DEFENDER, 0x2, 0, Script_branch_73e0
+	AI_StatLvlEq DEFENDER, 0x1, 0, Script_branch_73ec
+	AI_StatLvlEq DEFENDER, 0x2, 0, Script_branch_73e0
 	AI_4d
 @ 659c
 
 Script_branch_659c: @ 659c
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_65dc
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_73ec
 	AI_4d
 @ 65dc
 
 Script_branch_65dc: @ 65dc
-	AI_33_Eq ATTACKER, 0x2, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x5, 12, Script_branch_73e0
+	AI_StatLvlEq ATTACKER, 0x2, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x5, 12, Script_branch_73e0
 	AI_4d
 @ 6608
 
 Script_branch_6608: @ 6608
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_6648
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_73ec
 	AI_4d
 @ 6648
 
 Script_branch_6648: @ 6648
-	AI_33_Eq ATTACKER, 0x1, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x2, 12, Script_branch_73e0
+	AI_StatLvlEq ATTACKER, 0x1, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x2, 12, Script_branch_73e0
 	AI_4d
 @ 6674
 
@@ -885,14 +885,14 @@ Script_branch_6674: @ 6674
 Script_branch_6688: @ 6688
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_66c8
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_73ec
 	AI_4d
 @ 66c8
 
 Script_branch_66c8: @ 66c8
-	AI_33_Eq ATTACKER, 0x4, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x5, 12, Script_branch_73e0
+	AI_StatLvlEq ATTACKER, 0x4, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x5, 12, Script_branch_73e0
 	AI_4d
 @ 66f4
 
@@ -900,14 +900,14 @@ Script_branch_66f4: @ 66f4
 	AI_56 0x70000, Script_branch_73ec
 	AI_GetAbility ATTACKER
 	AI_If35cNe SIMPLE, Script_branch_6740
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x3, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x3, 8, Script_branch_73ec
 	AI_4d
 @ 6740
 
 Script_branch_6740: @ 6740
-	AI_33_Eq ATTACKER, 0x1, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x3, 12, Script_branch_73e0
+	AI_StatLvlEq ATTACKER, 0x1, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x3, 12, Script_branch_73e0
 	AI_4d
 @ 676c
 
@@ -957,24 +957,24 @@ Script_branch_6910: @ 6910
 Script_branch_6930: @ 6930
 	AI_GetAbility ATTACKER
 	AI_If35cEq SIMPLE, Script_branch_69d4
-	AI_33_Eq ATTACKER, 0x1, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x2, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x3, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x4, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x5, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x7, 12, Script_branch_73ec
-	AI_33_Eq ATTACKER, 0x6, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x1, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x2, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x3, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x4, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x5, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x7, 12, Script_branch_73ec
+	AI_StatLvlEq ATTACKER, 0x6, 12, Script_branch_73ec
 	AI_4d
 @ 69d4
 
 Script_branch_69d4: @ 69d4
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x3, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x7, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER, 0x6, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x3, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x7, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER, 0x6, 8, Script_branch_73ec
 	AI_4d
 @ 6a64
 
@@ -1160,7 +1160,7 @@ Script_branch_6ff4: @ 6ff4
 
 Script_branch_7008: @ 7008
 	AI_GetRoundNr
-	AI_If35cNe CACOPHONY, Script_branch_7024
+	AI_If35cNe 0x0, Script_branch_7024
 	AI_24 0x0, Script_branch_73ec
 Script_branch_7024: @ 7024
 	AI_4d
@@ -1238,7 +1238,7 @@ Script_branch_7174: @ 7174
 @ 71c4
 
 Script_branch_71c4: @ 71c4
-	AI_34_Ne DEFENDER, 0x7, 0, Script_branch_7254
+	AI_StatLvlNe DEFENDER, 0x7, 0, Script_branch_7254
 	AI_f DEFENDER, 0x2, Script_branch_7254
 	AI_f DEFENDER, 0x1, Script_branch_7254
 	AI_2e
@@ -1280,7 +1280,7 @@ Script_branch_72f8: @ 72f8
 	AI_If35cEq 0x0, Script_branch_7314
 	AI_Jump Script_branch_73ec
 Script_branch_7314: @ 7314
-	AI_31_Lt DEFENDER, 0x4, 1, Script_branch_73ec
+	AI_StatLvlLt DEFENDER, 0x4, 1, Script_branch_73ec
 	AI_4d
 @ 732c
 
@@ -1438,7 +1438,7 @@ Script_3: @ 744c
 	AI_2f FISSURE, Script_branch_965c
 	AI_2f DIG, Script_branch_9804
 	AI_2f TOXIC, Script_branch_986c
-	AI_2f PSYCHIC, Script_branch_9878
+	AI_2f PSYCHIC_M, Script_branch_9878
 	AI_2f AGILITY, Script_branch_9890
 	AI_2f QUICK_ATTACK, Script_branch_98ac
 	AI_2f RAGE, Script_branch_9930
@@ -1579,9 +1579,9 @@ Script_branch_7d30: @ 7d30
 @ 7d34
 
 Script_branch_7d34: @ 7d34
-	AI_31_Lt DEFENDER, 0x7, 7, Script_branch_7d78
+	AI_StatLvlLt DEFENDER, 0x7, 7, Script_branch_7d78
 	AI_AddScore -1
-	AI_31_Lt DEFENDER, 0x7, 10, Script_branch_7d78
+	AI_StatLvlLt DEFENDER, 0x7, 10, Script_branch_7d78
 	AI_RandomJumpLt 0x80, Script_branch_7d78
 	AI_AddScore -1
 Script_branch_7d78: @ 7d78
@@ -1642,7 +1642,7 @@ Script_branch_7ed8: @ 7ed8
 
 
 Script_branch_7f9c: @ 7f9c
-	AI_31_Lt ATTACKER, 0x1, 9, Script_branch_7fcc
+	AI_StatLvlLt ATTACKER, 0x1, 9, Script_branch_7fcc
 	AI_RandomJumpLt 0x64, Script_branch_7ff0
 	AI_AddScore -1
 	AI_Jump Script_branch_7ff0
@@ -1661,7 +1661,7 @@ Script_branch_8024: @ 8024
 @ 8028
 
 Script_branch_8028: @ 8028
-	AI_31_Lt ATTACKER, 0x2, 9, Script_branch_8058
+	AI_StatLvlLt ATTACKER, 0x2, 9, Script_branch_8058
 	AI_RandomJumpLt 0x64, Script_branch_807c
 	AI_AddScore -1
 	AI_Jump Script_branch_807c
@@ -1704,7 +1704,7 @@ Script_branch_814c: @ 814c
 @ 8150
 
 Script_branch_8150: @ 8150
-	AI_31_Lt ATTACKER, 0x4, 9, Script_branch_8180
+	AI_StatLvlLt ATTACKER, 0x4, 9, Script_branch_8180
 	AI_RandomJumpLt 0x64, Script_branch_81a4
 	AI_AddScore -1
 	AI_Jump Script_branch_81a4
@@ -1723,7 +1723,7 @@ Script_branch_81d8: @ 81d8
 @ 81dc
 
 Script_branch_81dc: @ 81dc
-	AI_31_Lt ATTACKER, 0x5, 9, Script_branch_820c
+	AI_StatLvlLt ATTACKER, 0x5, 9, Script_branch_820c
 	AI_RandomJumpLt 0x64, Script_branch_8230
 	AI_AddScore -1
 	AI_Jump Script_branch_8230
@@ -1755,7 +1755,7 @@ Script_branch_82a4: @ 82a4
 
 
 Script_branch_82d0: @ 82d0
-	AI_31_Lt ATTACKER, 0x6, 9, Script_branch_82f8
+	AI_StatLvlLt ATTACKER, 0x6, 9, Script_branch_82f8
 	AI_RandomJumpLt 0x32, Script_branch_82f8
 	AI_AddScore -2
 Script_branch_82f8: @ 82f8
@@ -1770,7 +1770,7 @@ Script_branch_8314: @ 8314
 	AI_RandomJumpLt 0x64, Script_branch_8338
 	AI_AddScore 3
 Script_branch_8338: @ 8338
-	AI_31_Lt ATTACKER, 0x7, 9, Script_branch_8360
+	AI_StatLvlLt ATTACKER, 0x7, 9, Script_branch_8360
 	AI_RandomJumpLt 0x80, Script_branch_8360
 	AI_AddScore -1
 Script_branch_8360: @ 8360
@@ -1800,7 +1800,7 @@ Script_branch_841c: @ 841c
 	AI_AddScore 3
 Script_branch_8440: @ 8440
 	AI_HPGt ATTACKER, 70, Script_branch_8498
-	AI_33_Eq ATTACKER, 0x7, 6, Script_branch_8498
+	AI_StatLvlEq ATTACKER, 0x7, 6, Script_branch_8498
 	AI_HPLt ATTACKER, 40, Script_branch_8490
 	AI_HPLt DEFENDER, 40, Script_branch_8490
 	AI_RandomJumpLt 0x46, Script_branch_8498
@@ -1811,10 +1811,10 @@ Script_branch_8498: @ 8498
 @ 849c
 
 Script_branch_849c: @ 849c
-	AI_32_Gt DEFENDER, 0x7, 10, Script_branch_84f4
-	AI_31_Lt ATTACKER, 0x6, 2, Script_branch_84f4
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_84fc
-	AI_31_Lt ATTACKER, 0x6, 4, Script_branch_84fc
+	AI_StatLvlGt DEFENDER, 0x7, 10, Script_branch_84f4
+	AI_StatLvlLt ATTACKER, 0x6, 2, Script_branch_84f4
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_84fc
+	AI_StatLvlLt ATTACKER, 0x6, 4, Script_branch_84fc
 	AI_Jump Script_branch_8510
 Script_branch_84f4: @ 84f4
 	AI_AddScore 1
@@ -1826,12 +1826,12 @@ Script_branch_8510: @ 8510
 @ 8514
 
 Script_branch_8514: @ 8514
-	AI_33_Eq DEFENDER, 0x1, 6, Script_branch_8570
+	AI_StatLvlEq DEFENDER, 0x1, 6, Script_branch_8570
 	AI_AddScore -1
 	AI_HPGt ATTACKER, 90, Script_branch_8548
 	AI_AddScore -1
 Script_branch_8548: @ 8548
-	AI_32_Gt DEFENDER, 0x1, 3, Script_branch_8570
+	AI_StatLvlGt DEFENDER, 0x1, 3, Script_branch_8570
 	AI_RandomJumpLt 0x32, Script_branch_8570
 	AI_AddScore -2
 Script_branch_8570: @ 8570
@@ -1852,7 +1852,7 @@ Script_branch_85ac: @ 85ac
 
 Script_branch_85cc: @ 85cc
 	AI_HPLt ATTACKER, 70, Script_branch_85f0
-	AI_32_Gt DEFENDER, 0x2, 3, Script_branch_8604
+	AI_StatLvlGt DEFENDER, 0x2, 3, Script_branch_8604
 Script_branch_85f0: @ 85f0
 	AI_RandomJumpLt 0x32, Script_branch_8604
 	AI_AddScore -2
@@ -1867,9 +1867,9 @@ Script_branch_8620: @ 8620
 	AI_2b 0x0, Script_branch_866c
 	AI_2b 0xa, Script_branch_866c
 	AI_2b 0x14, Script_branch_866c
-	AI_17_If356Eq ICY_WIND, Script_branch_8670
-	AI_17_If356Eq ROCK_TOMB, Script_branch_8670
-	AI_17_If356Eq MUD_SHOT, Script_branch_8670
+	AI_MoveEq ICY_WIND, Script_branch_8670
+	AI_MoveEq ROCK_TOMB, Script_branch_8670
+	AI_MoveEq MUD_SHOT, Script_branch_8670
 	AI_4d
 @ 866c
 
@@ -1889,12 +1889,12 @@ Script_branch_86a0: @ 86a0
 @ 86a4
 
 Script_branch_86a4: @ 86a4
-	AI_33_Eq DEFENDER, 0x4, 6, Script_branch_8700
+	AI_StatLvlEq DEFENDER, 0x4, 6, Script_branch_8700
 	AI_AddScore -1
 	AI_HPGt ATTACKER, 90, Script_branch_86d8
 	AI_AddScore -1
 Script_branch_86d8: @ 86d8
-	AI_32_Gt DEFENDER, 0x4, 3, Script_branch_8700
+	AI_StatLvlGt DEFENDER, 0x4, 3, Script_branch_8700
 	AI_RandomJumpLt 0x32, Script_branch_8700
 	AI_AddScore -2
 Script_branch_8700: @ 8700
@@ -1915,7 +1915,7 @@ Script_branch_873c: @ 873c
 
 Script_branch_8764: @ 8764
 	AI_HPLt ATTACKER, 70, Script_branch_8788
-	AI_32_Gt DEFENDER, 0x5, 3, Script_branch_879c
+	AI_StatLvlGt DEFENDER, 0x5, 3, Script_branch_879c
 Script_branch_8788: @ 8788
 	AI_RandomJumpLt 0x32, Script_branch_879c
 	AI_AddScore -2
@@ -1933,7 +1933,7 @@ Script_branch_87d8: @ 87d8
 	AI_RandomJumpLt 0x64, Script_branch_87ec
 	AI_AddScore -1
 Script_branch_87ec: @ 87ec
-	AI_32_Gt ATTACKER, 0x6, 4, Script_branch_8814
+	AI_StatLvlGt ATTACKER, 0x6, 4, Script_branch_8814
 	AI_RandomJumpLt 0x50, Script_branch_8814
 	AI_AddScore -2
 Script_branch_8814: @ 8814
@@ -1959,7 +1959,7 @@ Script_branch_88ac: @ 88ac
 	AI_AddScore 2
 Script_branch_88d0: @ 88d0
 	AI_HPGt ATTACKER, 70, Script_branch_8928
-	AI_33_Eq DEFENDER, 0x6, 6, Script_branch_8928
+	AI_StatLvlEq DEFENDER, 0x6, 6, Script_branch_8928
 	AI_HPLt ATTACKER, 40, Script_branch_8920
 	AI_HPLt DEFENDER, 40, Script_branch_8920
 	AI_RandomJumpLt 0x46, Script_branch_8928
@@ -1971,7 +1971,7 @@ Script_branch_8928: @ 8928
 
 Script_branch_892c: @ 892c
 	AI_HPLt ATTACKER, 70, Script_branch_8950
-	AI_32_Gt DEFENDER, 0x7, 3, Script_branch_8964
+	AI_StatLvlGt DEFENDER, 0x7, 3, Script_branch_8964
 Script_branch_8950: @ 8950
 	AI_RandomJumpLt 0x32, Script_branch_8964
 	AI_AddScore -2
@@ -1983,31 +1983,31 @@ Script_branch_897c: @ 897c
 @ 8980
 
 Script_branch_8980: @ 8980
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_8a50
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_8a50
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_8a50
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_8a50
-	AI_32_Gt ATTACKER, 0x7, 8, Script_branch_8a50
-	AI_31_Lt DEFENDER, 0x1, 4, Script_branch_8a50
-	AI_31_Lt DEFENDER, 0x2, 4, Script_branch_8a50
-	AI_31_Lt DEFENDER, 0x4, 4, Script_branch_8a50
-	AI_31_Lt DEFENDER, 0x5, 4, Script_branch_8a50
-	AI_31_Lt DEFENDER, 0x6, 4, Script_branch_8a50
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_8a50
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_8a50
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_8a50
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_8a50
+	AI_StatLvlGt ATTACKER, 0x7, 8, Script_branch_8a50
+	AI_StatLvlLt DEFENDER, 0x1, 4, Script_branch_8a50
+	AI_StatLvlLt DEFENDER, 0x2, 4, Script_branch_8a50
+	AI_StatLvlLt DEFENDER, 0x4, 4, Script_branch_8a50
+	AI_StatLvlLt DEFENDER, 0x5, 4, Script_branch_8a50
+	AI_StatLvlLt DEFENDER, 0x6, 4, Script_branch_8a50
 	AI_Jump Script_branch_8a64
 Script_branch_8a50: @ 8a50
 	AI_RandomJumpLt 0x32, Script_branch_8a64
 	AI_AddScore -3
 Script_branch_8a64: @ 8a64
-	AI_32_Gt DEFENDER, 0x1, 8, Script_branch_8b48
-	AI_32_Gt DEFENDER, 0x2, 8, Script_branch_8b48
-	AI_32_Gt DEFENDER, 0x4, 8, Script_branch_8b48
-	AI_32_Gt DEFENDER, 0x5, 8, Script_branch_8b48
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_8b48
-	AI_31_Lt ATTACKER, 0x1, 4, Script_branch_8b48
-	AI_31_Lt ATTACKER, 0x2, 4, Script_branch_8b48
-	AI_31_Lt ATTACKER, 0x4, 4, Script_branch_8b48
-	AI_31_Lt ATTACKER, 0x5, 4, Script_branch_8b48
-	AI_31_Lt ATTACKER, 0x6, 4, Script_branch_8b48
+	AI_StatLvlGt DEFENDER, 0x1, 8, Script_branch_8b48
+	AI_StatLvlGt DEFENDER, 0x2, 8, Script_branch_8b48
+	AI_StatLvlGt DEFENDER, 0x4, 8, Script_branch_8b48
+	AI_StatLvlGt DEFENDER, 0x5, 8, Script_branch_8b48
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_8b48
+	AI_StatLvlLt ATTACKER, 0x1, 4, Script_branch_8b48
+	AI_StatLvlLt ATTACKER, 0x2, 4, Script_branch_8b48
+	AI_StatLvlLt ATTACKER, 0x4, 4, Script_branch_8b48
+	AI_StatLvlLt ATTACKER, 0x5, 4, Script_branch_8b48
+	AI_StatLvlLt ATTACKER, 0x6, 4, Script_branch_8b48
 	AI_RandomJumpLt 0x32, Script_branch_8b5c
 	AI_AddScore -1
 	AI_Jump Script_branch_8b5c
@@ -2031,11 +2031,11 @@ Script_branch_8b7c: @ 8b7c
 	AI_f DEFENDER, 0x4, Script_branch_8c48
 	AI_f DEFENDER, 0x80, Script_branch_8c48
 	AI_f DEFENDER, 0x400, Script_branch_8c48
-	AI_32_Gt DEFENDER, 0x1, 8, Script_branch_8c48
-	AI_32_Gt DEFENDER, 0x2, 8, Script_branch_8c48
-	AI_32_Gt DEFENDER, 0x4, 8, Script_branch_8c48
-	AI_32_Gt DEFENDER, 0x5, 8, Script_branch_8c48
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_8c48
+	AI_StatLvlGt DEFENDER, 0x1, 8, Script_branch_8c48
+	AI_StatLvlGt DEFENDER, 0x2, 8, Script_branch_8c48
+	AI_StatLvlGt DEFENDER, 0x4, 8, Script_branch_8c48
+	AI_StatLvlGt DEFENDER, 0x5, 8, Script_branch_8c48
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_8c48
 	AI_AddScore -3
 	AI_Jump Script_branch_8c5c
 Script_branch_8c34: @ 8c34
@@ -2223,7 +2223,7 @@ Script_branch_90fc: @ 90fc
 @ 9100
 
 Script_branch_9100: @ 9100
-	AI_32_Gt DEFENDER, 0x1, 3, Script_branch_913c
+	AI_StatLvlGt DEFENDER, 0x1, 3, Script_branch_913c
 	AI_AddScore 3
 	AI_GetRoundNr
 	AI_If35cNe 0x0, Script_branch_9144
@@ -2542,7 +2542,7 @@ Script_branch_9a9c: @ 9a9c
 	AI_If35cEq 0x7, Script_branch_9b80
 	AI_1e 0x3
 	AI_If35cEq 0x7, Script_branch_9b80
-	AI_32_Gt ATTACKER, 0x2, 9, Script_branch_9b98
+	AI_StatLvlGt ATTACKER, 0x2, 9, Script_branch_9b98
 	AI_37 ATTACKER, GYRO_BALL, Script_branch_9b00
 	AI_37 ATTACKER, TRICK_ROOM, Script_branch_9b00
 	AI_Jump Script_branch_9b14
@@ -2553,11 +2553,11 @@ Script_branch_9b14: @ 9b14
 	AI_RandomJumpLt 0x80, Script_branch_9b28
 	AI_AddScore 1
 Script_branch_9b28: @ 9b28
-	AI_32_Gt ATTACKER, 0x2, 7, Script_branch_9b98
+	AI_StatLvlGt ATTACKER, 0x2, 7, Script_branch_9b98
 	AI_RandomJumpLt 0x80, Script_branch_9b50
 	AI_AddScore 1
 Script_branch_9b50: @ 9b50
-	AI_32_Gt ATTACKER, 0x2, 6, Script_branch_9b98
+	AI_StatLvlGt ATTACKER, 0x2, 6, Script_branch_9b98
 	AI_RandomJumpLt 0x80, Script_branch_9b98
 	AI_AddScore 1
 	AI_Jump Script_branch_9b98
@@ -2635,7 +2635,7 @@ Script_branch_9dc4: @ 9dc4
 	AI_If35cEq 0x7, Script_branch_9e10
 	AI_1e 0x3
 	AI_If35cEq 0x7, Script_branch_9e10
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_9e1c
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_9e1c
 	AI_AddScore -2
 	AI_Jump Script_branch_9e30
 Script_branch_9e10: @ 9e10
@@ -2661,11 +2661,11 @@ Script_branch_9e78: @ 9e78
 @ 9e7c
 
 Script_branch_9e7c: @ 9e7c
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_9ee8
-	AI_32_Gt ATTACKER, 0x2, 8, Script_branch_9ee8
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_9ee8
-	AI_32_Gt ATTACKER, 0x5, 8, Script_branch_9ee8
-	AI_32_Gt ATTACKER, 0x7, 8, Script_branch_9ee8
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_9ee8
+	AI_StatLvlGt ATTACKER, 0x2, 8, Script_branch_9ee8
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_9ee8
+	AI_StatLvlGt ATTACKER, 0x5, 8, Script_branch_9ee8
+	AI_StatLvlGt ATTACKER, 0x7, 8, Script_branch_9ee8
 	AI_Jump Script_branch_9f38
 Script_branch_9ee8: @ 9ee8
 	AI_24 0x1, Script_branch_9f0c
@@ -2678,11 +2678,11 @@ Script_branch_9f1c: @ 9f1c
 	AI_AddScore 2
 	AI_Jump Script_branch_9fe0
 Script_branch_9f38: @ 9f38
-	AI_32_Gt ATTACKER, 0x1, 7, Script_branch_9fa4
-	AI_32_Gt ATTACKER, 0x2, 7, Script_branch_9fa4
-	AI_32_Gt ATTACKER, 0x4, 7, Script_branch_9fa4
-	AI_32_Gt ATTACKER, 0x5, 7, Script_branch_9fa4
-	AI_32_Gt ATTACKER, 0x7, 7, Script_branch_9fa4
+	AI_StatLvlGt ATTACKER, 0x1, 7, Script_branch_9fa4
+	AI_StatLvlGt ATTACKER, 0x2, 7, Script_branch_9fa4
+	AI_StatLvlGt ATTACKER, 0x4, 7, Script_branch_9fa4
+	AI_StatLvlGt ATTACKER, 0x5, 7, Script_branch_9fa4
+	AI_StatLvlGt ATTACKER, 0x7, 7, Script_branch_9fa4
 	AI_Jump Script_branch_9fd8
 Script_branch_9fa4: @ 9fa4
 	AI_24 0x1, Script_branch_9fc8
@@ -2773,18 +2773,18 @@ Script_branch_a1e4: @ a1e4
 @ a1e8
 
 Script_branch_a1e8: @ a1e8
-	AI_32_Gt DEFENDER, 0x1, 8, Script_branch_a254
-	AI_32_Gt DEFENDER, 0x2, 8, Script_branch_a254
-	AI_32_Gt DEFENDER, 0x4, 8, Script_branch_a254
-	AI_32_Gt DEFENDER, 0x5, 8, Script_branch_a254
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_a254
+	AI_StatLvlGt DEFENDER, 0x1, 8, Script_branch_a254
+	AI_StatLvlGt DEFENDER, 0x2, 8, Script_branch_a254
+	AI_StatLvlGt DEFENDER, 0x4, 8, Script_branch_a254
+	AI_StatLvlGt DEFENDER, 0x5, 8, Script_branch_a254
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_a254
 	AI_Jump Script_branch_a2e0
 Script_branch_a254: @ a254
-	AI_31_Lt ATTACKER, 0x1, 7, Script_branch_a2d4
-	AI_31_Lt ATTACKER, 0x2, 7, Script_branch_a2d4
-	AI_31_Lt ATTACKER, 0x4, 7, Script_branch_a2d4
-	AI_31_Lt ATTACKER, 0x5, 7, Script_branch_a2d4
-	AI_31_Lt ATTACKER, 0x7, 7, Script_branch_a2cc
+	AI_StatLvlLt ATTACKER, 0x1, 7, Script_branch_a2d4
+	AI_StatLvlLt ATTACKER, 0x2, 7, Script_branch_a2d4
+	AI_StatLvlLt ATTACKER, 0x4, 7, Script_branch_a2d4
+	AI_StatLvlLt ATTACKER, 0x5, 7, Script_branch_a2d4
+	AI_StatLvlLt ATTACKER, 0x7, 7, Script_branch_a2cc
 	AI_RandomJumpLt 0x32, Script_branch_a2e8
 	AI_Jump Script_branch_a2e0
 Script_branch_a2cc: @ a2cc
@@ -3164,7 +3164,7 @@ Script_branch_ae68: @ ae68
 	AI_2b 0x0, Script_branch_aed4
 	AI_2b 0xa, Script_branch_aed4
 	AI_2b 0x14, Script_branch_aed4
-	AI_31_Lt ATTACKER, 0x1, 6, Script_branch_aed4
+	AI_StatLvlLt ATTACKER, 0x1, 6, Script_branch_aed4
 	AI_24 0x1, Script_branch_aec4
 	AI_HPGt ATTACKER, 40, Script_branch_aed4
 	AI_Jump Script_branch_aedc
@@ -3404,7 +3404,7 @@ Script_branch_b464: @ b464
 	AI_If35cEq 0x11, Script_branch_b4ac
 	AI_1e 0x2
 	AI_If35cEq 0x11, Script_branch_b4ac
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_b4b8
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_b4b8
 	AI_AddScore -2
 	AI_4d
 @ b4ac
@@ -3754,10 +3754,10 @@ Script_branch_bd38: @ bd38
 	AI_RandomJumpLt 0x1e, Script_branch_bdac
 	AI_AddScore 1
 Script_branch_bdac: @ bdac
-	AI_32_Gt DEFENDER, 0x7, 10, Script_branch_be04
-	AI_31_Lt ATTACKER, 0x6, 2, Script_branch_be04
-	AI_32_Gt DEFENDER, 0x7, 8, Script_branch_be0c
-	AI_31_Lt ATTACKER, 0x6, 4, Script_branch_be0c
+	AI_StatLvlGt DEFENDER, 0x7, 10, Script_branch_be04
+	AI_StatLvlLt ATTACKER, 0x6, 2, Script_branch_be04
+	AI_StatLvlGt DEFENDER, 0x7, 8, Script_branch_be0c
+	AI_StatLvlLt ATTACKER, 0x6, 4, Script_branch_be0c
 	AI_Jump Script_branch_be40
 Script_branch_be04: @ be04
 	AI_AddScore 1
@@ -4117,19 +4117,19 @@ Script_branch_c8dc: @ c8dc
 @ c8e0
 
 Script_branch_c8e0: @ c8e0
-	AI_32_Gt DEFENDER, 0x1, 7, Script_branch_c95c
-	AI_32_Gt DEFENDER, 0x2, 7, Script_branch_c95c
-	AI_32_Gt DEFENDER, 0x4, 7, Script_branch_c95c
-	AI_32_Gt DEFENDER, 0x5, 7, Script_branch_c95c
-	AI_32_Gt DEFENDER, 0x7, 7, Script_branch_c95c
+	AI_StatLvlGt DEFENDER, 0x1, 7, Script_branch_c95c
+	AI_StatLvlGt DEFENDER, 0x2, 7, Script_branch_c95c
+	AI_StatLvlGt DEFENDER, 0x4, 7, Script_branch_c95c
+	AI_StatLvlGt DEFENDER, 0x5, 7, Script_branch_c95c
+	AI_StatLvlGt DEFENDER, 0x7, 7, Script_branch_c95c
 	AI_b DEFENDER, 0x100000, Script_branch_c95c
 	AI_Jump Script_branch_c9f8
 Script_branch_c95c: @ c95c
-	AI_31_Lt ATTACKER, 0x1, 7, Script_branch_c9ec
-	AI_31_Lt ATTACKER, 0x2, 7, Script_branch_c9ec
-	AI_31_Lt ATTACKER, 0x4, 7, Script_branch_c9ec
-	AI_31_Lt ATTACKER, 0x5, 7, Script_branch_c9ec
-	AI_31_Lt ATTACKER, 0x7, 7, Script_branch_c9e4
+	AI_StatLvlLt ATTACKER, 0x1, 7, Script_branch_c9ec
+	AI_StatLvlLt ATTACKER, 0x2, 7, Script_branch_c9ec
+	AI_StatLvlLt ATTACKER, 0x4, 7, Script_branch_c9ec
+	AI_StatLvlLt ATTACKER, 0x5, 7, Script_branch_c9ec
+	AI_StatLvlLt ATTACKER, 0x7, 7, Script_branch_c9e4
 	AI_c ATTACKER, 0x100000, Script_branch_c9ec
 	AI_RandomJumpLt 0x32, Script_branch_ca00
 	AI_Jump Script_branch_c9f8
@@ -4206,7 +4206,7 @@ Script_branch_cbac: @ cbac
 	AI_Jump Script_branch_cbc8
 Script_branch_cbc8: @ cbc8
 	AI_HPLt ATTACKER, 70, Script_branch_cbec
-	AI_32_Gt DEFENDER, 0x7, 3, Script_branch_cc00
+	AI_StatLvlGt DEFENDER, 0x7, 3, Script_branch_cc00
 Script_branch_cbec: @ cbec
 	AI_RandomJumpLt 0x32, Script_branch_cc00
 	AI_AddScore -2
@@ -4254,12 +4254,12 @@ Script_branch_ccdc: @ ccdc
 
 
 Script_branch_cce4: @ cce4
-	AI_33_Eq DEFENDER, 0x4, 6, Script_branch_cd40
+	AI_StatLvlEq DEFENDER, 0x4, 6, Script_branch_cd40
 	AI_AddScore -1
 	AI_HPGt ATTACKER, 90, Script_branch_cd18
 	AI_AddScore -1
 Script_branch_cd18: @ cd18
-	AI_32_Gt DEFENDER, 0x4, 3, Script_branch_cd40
+	AI_StatLvlGt DEFENDER, 0x4, 3, Script_branch_cd40
 	AI_RandomJumpLt 0x32, Script_branch_cd40
 	AI_AddScore -2
 Script_branch_cd40: @ cd40
@@ -4425,12 +4425,12 @@ Script_7: @ d210
 	AI_39 ATTACKER, WATERFALL, Script_branch_d25c
 	AI_RandomJumpLt 0x50, Script_branch_d1a4
 Script_branch_d25c: @ d25c
-	AI_17_If356Eq SWORDS_DANCE, Script_branch_d2b8
-	AI_17_If356Eq DRAGON_DANCE, Script_branch_d2b8
-	AI_17_If356Eq CALM_MIND, Script_branch_d2b8
-	AI_17_If356Eq NASTY_PLOT, Script_branch_d2b8
+	AI_MoveEq SWORDS_DANCE, Script_branch_d2b8
+	AI_MoveEq DRAGON_DANCE, Script_branch_d2b8
+	AI_MoveEq CALM_MIND, Script_branch_d2b8
+	AI_MoveEq NASTY_PLOT, Script_branch_d2b8
 	AI_2f DEFENSE_CURL, Script_branch_d2e0
-	AI_17_If356Eq BATON_PASS, Script_branch_d30c
+	AI_MoveEq BATON_PASS, Script_branch_d30c
 	AI_RandomJumpLt 0x14, Script_branch_d1a4
 	AI_AddScore 3
 Script_branch_d2b8: @ d2b8
@@ -4452,12 +4452,12 @@ Script_branch_d2e0: @ d2e0
 Script_branch_d30c: @ d30c
 	AI_GetRoundNr
 	AI_If35cEq 0x0, Script_branch_73b0
-	AI_32_Gt ATTACKER, 0x1, 8, Script_branch_7428
-	AI_32_Gt ATTACKER, 0x1, 7, Script_branch_741c
-	AI_32_Gt ATTACKER, 0x1, 6, Script_branch_7410
-	AI_32_Gt ATTACKER, 0x4, 8, Script_branch_7428
-	AI_32_Gt ATTACKER, 0x4, 7, Script_branch_741c
-	AI_32_Gt ATTACKER, 0x4, 6, Script_branch_7410
+	AI_StatLvlGt ATTACKER, 0x1, 8, Script_branch_7428
+	AI_StatLvlGt ATTACKER, 0x1, 7, Script_branch_741c
+	AI_StatLvlGt ATTACKER, 0x1, 6, Script_branch_7410
+	AI_StatLvlGt ATTACKER, 0x4, 8, Script_branch_7428
+	AI_StatLvlGt ATTACKER, 0x4, 7, Script_branch_741c
+	AI_StatLvlGt ATTACKER, 0x4, 6, Script_branch_7410
 	AI_4d
 @ d398
 
@@ -4519,19 +4519,19 @@ Script_branch_d560: @ d560
 	AI_AddScore 1
 	AI_Jump Script_branch_d57c
 Script_branch_d57c: @ d57c
-	AI_17_If356Eq SKILL_SWAP, Script_branch_e040
+	AI_MoveEq SKILL_SWAP, Script_branch_e040
 	AI_1e 0x4
-	AI_17_If356Eq EARTHQUAKE, Script_branch_de70
-	AI_17_If356Eq MAGNITUDE, Script_branch_de70
-	AI_17_If356Eq FUTURE_SIGHT, Script_branch_df18
-	AI_17_If356Eq DOOM_DESIRE, Script_branch_df18
-	AI_17_If356Eq RAIN_DANCE, Script_branch_d654
-	AI_17_If356Eq SUNNY_DAY, Script_branch_d6f8
-	AI_17_If356Eq HAIL, Script_branch_d87c
-	AI_17_If356Eq SANDSTORM, Script_branch_d910
-	AI_17_If356Eq GRAVITY, Script_branch_d9b8
-	AI_17_If356Eq TRICK_ROOM, Script_branch_db40
-	AI_17_If356Eq FOLLOW_ME, Script_branch_dc60
+	AI_MoveEq EARTHQUAKE, Script_branch_de70
+	AI_MoveEq MAGNITUDE, Script_branch_de70
+	AI_MoveEq FUTURE_SIGHT, Script_branch_df18
+	AI_MoveEq DOOM_DESIRE, Script_branch_df18
+	AI_MoveEq RAIN_DANCE, Script_branch_d654
+	AI_MoveEq SUNNY_DAY, Script_branch_d6f8
+	AI_MoveEq HAIL, Script_branch_d87c
+	AI_MoveEq SANDSTORM, Script_branch_d910
+	AI_MoveEq GRAVITY, Script_branch_d9b8
+	AI_MoveEq TRICK_ROOM, Script_branch_db40
+	AI_MoveEq FOLLOW_ME, Script_branch_dc60
 	AI_1e 0x4
 	AI_If35cEq 0xd, Script_branch_e0d8
 	AI_If35cEq 0xa, Script_branch_e2a0
@@ -4876,7 +4876,7 @@ Script_branch_e040: @ e040
 @ e0d8
 
 Script_branch_e0d8: @ e0d8
-	AI_17_If356Eq DISCHARGE, Script_branch_e158
+	AI_MoveEq DISCHARGE, Script_branch_e158
 	AI_53 DEFENDER2ND, 0x1f
 	AI_If35cEq 0x1, Script_branch_e104
 	AI_Jump Script_branch_e12c
@@ -4888,7 +4888,7 @@ Script_branch_e104: @ e104
 Script_branch_e12c: @ e12c
 	AI_53 ATTACKER2ND, 0x1f
 	AI_If35cEq 0x1, Script_branch_73ec
-	AI_17_If356Eq DISCHARGE, Script_branch_e158
+	AI_MoveEq DISCHARGE, Script_branch_e158
 	AI_Jump Script_branch_e1d8
 Script_branch_e158: @ e158
 	AI_53 ATTACKER2ND, 0x4e
@@ -4907,14 +4907,14 @@ Script_branch_e1d8: @ e1d8
 @ e1dc
 
 Script_branch_e1dc: @ e1dc
-	AI_17_If356Eq SURF, Script_branch_e234
+	AI_MoveEq SURF, Script_branch_e234
 	AI_53 DEFENDER2ND, 0x72
 	AI_If35cEq 0x0, Script_branch_e208
 	AI_AddScore -1
 Script_branch_e208: @ e208
 	AI_53 ATTACKER2ND, 0x72
 	AI_If35cEq 0x1, Script_branch_73ec
-	AI_17_If356Eq SURF, Script_branch_e234
+	AI_MoveEq SURF, Script_branch_e234
 	AI_Jump Script_branch_e29c
 Script_branch_e234: @ e234
 	AI_53 ATTACKER2ND, 0x57
@@ -4936,7 +4936,7 @@ Script_branch_e2a0: @ e2a0
 Script_branch_e2b4: @ e2b4
 	AI_AddScore 1
 Script_branch_e2bc: @ e2bc
-	AI_17_If356Eq LAVA_PLUME, Script_branch_e2d0
+	AI_MoveEq LAVA_PLUME, Script_branch_e2d0
 	AI_Jump Script_branch_e368
 Script_branch_e2d0: @ e2d0
 	AI_53 ATTACKER2ND, 0x57
@@ -4964,7 +4964,7 @@ Script_branch_e36c: @ e36c
 	AI_If35cEq 0xa, Script_branch_e3cc
 	AI_If35cEq 0xd, Script_branch_e400
 	AI_If35cEq 0xb, Script_branch_e4e8
-	AI_17_If356Eq FLING, Script_branch_e9bc
+	AI_MoveEq FLING, Script_branch_e9bc
 Script_branch_e3c4: @ e3c4
 	AI_Jump Script_branch_7404
 Script_branch_e3cc: @ e3cc
@@ -4982,7 +4982,7 @@ Script_branch_e400: @ e400
 	AI_Jump Script_branch_e3c4
 Script_branch_e438: @ e438
 	AI_RandomJumpLt 0xa0, Script_branch_e4e4
-	AI_33_Eq ATTACKER2ND, 0x3, 12, Script_branch_e3c4
+	AI_StatLvlEq ATTACKER2ND, 0x3, 12, Script_branch_e3c4
 	AI_Jump Script_branch_7428
 Script_branch_e460: @ e460
 	AI_HPEq ATTACKER2ND, 100, Script_branch_73ec
@@ -5029,17 +5029,17 @@ Script_branch_e5a4: @ e5a4
 @ e5a8
 
 Script_branch_e5a8: @ e5a8
-	AI_17_If356Eq SKILL_SWAP, Script_branch_e634
-	AI_17_If356Eq WILL_O_WISP, Script_branch_e7d0
-	AI_17_If356Eq THUNDER_WAVE, Script_branch_e870
+	AI_MoveEq SKILL_SWAP, Script_branch_e634
+	AI_MoveEq WILL_O_WISP, Script_branch_e7d0
+	AI_MoveEq THUNDER_WAVE, Script_branch_e870
 	AI_2f TACKLE, Script_branch_e8d0
 	AI_2f SUBMISSION, Script_branch_e8d0
-	AI_17_If356Eq HELPING_HAND, Script_branch_e920
-	AI_17_If356Eq SWAGGER, Script_branch_e974
-	AI_17_If356Eq TRICK, Script_branch_e9bc
-	AI_17_If356Eq SWITCHEROO, Script_branch_e9bc
-	AI_17_If356Eq GASTRO_ACID, Script_branch_e9c0
-	AI_17_If356Eq ACUPRESSURE, Script_branch_ea14
+	AI_MoveEq HELPING_HAND, Script_branch_e920
+	AI_MoveEq SWAGGER, Script_branch_e974
+	AI_MoveEq TRICK, Script_branch_e9bc
+	AI_MoveEq SWITCHEROO, Script_branch_e9bc
+	AI_MoveEq GASTRO_ACID, Script_branch_e9c0
+	AI_MoveEq ACUPRESSURE, Script_branch_ea14
 	AI_Jump Script_branch_eba0
 Script_branch_e634: @ e634
 	AI_GetAbility DEFENDER
@@ -5130,7 +5130,7 @@ Script_branch_e974: @ e974
 	AI_55 DEFENDER, 0x9d, Script_branch_e99c
 	AI_Jump Script_branch_eba0
 Script_branch_e99c: @ e99c
-	AI_32_Gt DEFENDER, 0x1, 7, Script_branch_e9b8
+	AI_StatLvlGt DEFENDER, 0x1, 7, Script_branch_e9b8
 	AI_AddScore 3
 Script_branch_e9b8: @ e9b8
 	AI_4d
@@ -5156,22 +5156,22 @@ Script_branch_ea10: @ ea10
 Script_branch_ea14: @ ea14
 	AI_53 ATTACKER2ND, 0x56
 	AI_If35cEq 0x1, Script_branch_eac0
-	AI_33_Eq ATTACKER2ND, 0x1, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x2, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x3, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x4, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x5, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x7, 12, Script_branch_eba0
-	AI_33_Eq ATTACKER2ND, 0x6, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x1, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x2, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x3, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x4, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x5, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x7, 12, Script_branch_eba0
+	AI_StatLvlEq ATTACKER2ND, 0x6, 12, Script_branch_eba0
 	AI_Jump Script_branch_eb4c
 Script_branch_eac0: @ eac0
-	AI_32_Gt ATTACKER2ND, 0x1, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x2, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x3, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x4, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x5, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x7, 8, Script_branch_73ec
-	AI_32_Gt ATTACKER2ND, 0x6, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x1, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x2, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x3, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x4, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x5, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x7, 8, Script_branch_73ec
+	AI_StatLvlGt ATTACKER2ND, 0x6, 8, Script_branch_73ec
 Script_branch_eb4c: @ eb4c
 	AI_HPLt ATTACKER2ND, 51, Script_branch_eb94
 	AI_HPGt ATTACKER2ND, 90, Script_branch_eb78

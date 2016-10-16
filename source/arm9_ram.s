@@ -1,15 +1,26 @@
 
 .section .bss
 
-@ 0x02000000 - 
+/*******************************************
+0x1ff8660 - 0x1ff8680
+- overlay_0003.bin
+*******************************************/
+
+/*******************************************
+0x2000000 - 0x2101d0c
+- arm9.bin
+*******************************************/
 
 .org 0x2101d0c - 0x02000000
 
 RAM_2101d0c:
     .word 0, 0
 RAM_2101d14:
-
-.org 0x2101d44 - 0x02000000
+    .zero 0xc
+RAM_2101d20:
+    .zero 0x18
+RAM_2101d38:
+    .zero 0xc
 
 RAM_2101d44:
     .word 0
@@ -27,33 +38,21 @@ RAM_2101df8:
 .org 0x21beb80 - 0x02000000
 
 RAM_21beb80:
-
-.org 0x21beba0 - 0x02000000
-
+    .zero 0x20
 RAM_21beba0:
 
 .org 0x21bf370 - 0x02000000
 
 RAM_21bf370:
-
-.org 0x21bf3b0 - 0x02000000
-
+    .zero 0x40
 RAM_21bf3b0:
-
-.org 0x21bf3f0 - 0x02000000
-
+    .zero 0x40
 RAM_21bf3f0:
-
-
-.org 0x21bf430 - 0x02000000
-
+    .zero 0x40
 RAM_21bf430:
     .word 0
 RAM_21bf434:
-
-
-.org 0x21bf454 - 0x02000000
-
+    .zero 0x20
 RAM_21bf454:
     .word 0, 0, 0, 0
     .word 0, 0, 0, 0
@@ -64,62 +63,40 @@ RAM_21bf478:
 RAM_21bf47c:
     .word 0, 0, 0
 RAM_21bf488:
-
-
-.org 0x21bf4b8 - 0x02000000
-
+    .zero 0x30
 RAM_21bf4b8:
-
-
-.org 0x21bf4e8 - 0x02000000
-
+    .zero 0x30
 RAM_21bf4e8:
-
-
-.org 0x21bf500 - 0x02000000
-
+    .zero 0x18
 RAM_21bf500:
 
 
 .org 0x21bf5b4 - 0x02000000
 
 RAM_21bf5b4:
-
-
-.org 0x21bf5c8 - 0x02000000
-
+    .zero 0x14
 RAM_21bf5c8:
     .word 0, 0, 0, 0
 RAM_21bf5d8:
     .word 0, 0, 0, 0
 RAM_21bf5e8:
-
-
-.org 0x21bf610 - 0x02000000
-
+    .zero 0x28
 RAM_21bf610:
     .word 0, 0
 RAM_21bf618:
-
-
-.org 0x21bf658 - 0x02000000
-
+    .zero 0x40
 RAM_21bf658:
-
-
-.org 0x21bf678 - 0x02000000
-
+    .zero 0x20
 RAM_21bf678:
     .word 0
+.globl RAM_21bf67c
 RAM_21bf67c:
 
 
 .org 0x21bf6bc - 0x02000000
 
 RAM_21bf6bc:
-
-.org 0x21bf6dc - 0x02000000
-
+    .zero 0x20
 RAM_21bf6dc:
 
 .org 0x21bfae8 - 0x02000000
@@ -131,6 +108,7 @@ RAM_21bfae8:
 @ 27ffda0 init with Function_20c304c
 @ branch_201786a: calculate offset
 RAM_21bfaf0:
+    .zero 0x1c
 
 .equ RAM_21bfaf0_0,         0x0
 .equ RAM_21bfaf0_4,         0x4
@@ -142,8 +120,6 @@ RAM_21bfaf0:
 .equ RAM_21bfaf0_18,        0x18
 .equ RAM_21bfaf0_1a,        0x1a
 
-
-.org 0x21bfb0c - 0x02000000
 
 RAM_21bfb0c:
     .word 0
@@ -163,31 +139,19 @@ RAM_21c0110:
 .org 0x21c0490 - 0x02000000
 
 RAM_21c0490:
-
-
-.org 0x21c04d8 - 0x02000000
-
+    .zero 0x48
 RAM_21c04d8:
     .word 0, 0
 RAM_21c04e0:
-
-
-.org 0x21c0500 - 0x02000000
-
+    .zero 0x20
 RAM_21c0500:
-
-
-.org 0x21c0700 - 0x02000000
-
+    .zero 0x200
 RAM_21c0700:
     .word 0
 RAM_21c0704:
     .word 0, 0, 0
 RAM_21c0710:
-
-
-.org 0x21c0744 - 0x02000000
-
+    .zero 0x34
 RAM_21c0744:
     .word 0, 0, 0, 0, 0, 0, 0
 RAM_21c0760:
@@ -238,10 +202,7 @@ RAM_21c07f0:
 RAM_21c07f4:
     .word 0, 0
 RAM_21c07fc:
-
-
-.org 0x21c0848 - 0x02000000
-
+    .zero 0x4c
 RAM_21c0848:
     .word 0
 RAM_21c084c:
@@ -249,10 +210,7 @@ RAM_21c084c:
 RAM_21c0850:
     .word 0, 0, 0
 RAM_21c085c:
-
-
-.org 0x21c089c - 0x02000000
-
+    .zero 0x40
 RAM_21c089c:
     .word 0
 RAM_21c08a0:
@@ -286,14 +244,9 @@ RAM_21c3a5a:
 RAM_21c3a5e:
     .hword 0
 RAM_21c3a60:
-
-    .word 0, 0, 0, 0
-    .word 0, 0, 0, 0
-
+    .zero 0x20
 RAM_21c3a80:
-    .word 0, 0, 0, 0
-    .word 0, 0, 0, 0
-
+    .zero 0x20
 RAM_21c3aa0:
     .word 0
 RAM_21c3aa4:
@@ -313,25 +266,14 @@ RAM_21c3adc:
 RAM_21c3af0:
     .word 0
 RAM_21c3af4:
-
-    .word 0, 0, 0
-    .word 0
-
+    .zero 0x10
 RAM_21c3b04:
     .hword 0
     .hword 0
 RAM_21c3b08:
     .zero 0x100
-
-
-.org 0x21c3c08 - 0x02000000
-
 RAM_21c3c08:
     .zero 0x400
-
-
-.org 0x21c4008 - 0x02000000
-
 RAM_21c4008:
     .zero 0x40
 RAM_21c4048:
@@ -349,12 +291,7 @@ RAM_21c4a88:
 RAM_21c4ac8:
     .word 0, 0, 0, 0
 RAM_21c4ad8:
-
     .zero 0x80
-
-
-.org 0x21c4b58 - 0x02000000
-
 RAM_21c4b58:
     .zero 4
 RAM_21c4b5c:
@@ -386,14 +323,17 @@ RAM_21c5a88:
     .zero 0x4
 RAM_21c5a8c:
     .zero 0x8
+.globl RAM_21c5a94
 RAM_21c5a94:
     .zero 0x44
 RAM_21c5ad8:
     .zero 0x34
+.globl RAM_21c5b0c
 RAM_21c5b0c:
     .zero 0x28
 RAM_21c5b34:
     .zero 0x14
+.globl RAM_21c5b48
 RAM_21c5b48:
     .zero 0x24
 RAM_21c5b6c:
@@ -410,6 +350,7 @@ RAM_21c5ccc:
     .zero 0xc
 RAM_21c5cd8:
     .zero 0xc
+.globl RAM_21c5ce4
 RAM_21c5ce4:
     .zero 0xc
 RAM_21c5cf0:
@@ -544,11 +485,9 @@ RAM_21ccbb8: @ BankForSubOBJExtPltt
     .hword 0
     .hword 0
 RAM_21ccbbc:
-
     .zero 0x1c
 
 RAM_21ccbd8:
-
     .zero 0x20
 
 RAM_21ccbf8:
@@ -566,9 +505,7 @@ RAM_21ccc2c:
     .word 0
 RAM_21ccc30:
     .word 0
-
-
-.org 0x21ccc58 - 0x02000000
+    .zero 0x24
 
 RAM_21ccc58:
     .word 0
@@ -636,7 +573,6 @@ RAM_21ccc84:
 .equ Thread_Destructor,     0xb4
 
 
-.org 0x21ccc90 - 0x02000000
 
 RAM_21ccc90:
 
@@ -659,9 +595,7 @@ RAM_21ccf08:
 RAM_21ccf0c:
     .zero 0x24
 RAM_21ccf30:
-
-
-.org 0x21ccfb0 - 0x02000000
+    .zero 0x80
 
 RAM_21ccfb0:
     .zero 0x4
@@ -678,7 +612,6 @@ RAM_21ccfe4:
 RAM_21ccfe8:
     .zero 0x4
 RAM_21ccfec:
-
     .zero 0x14
 
 RAM_21cd000:
@@ -725,9 +658,7 @@ RAM_21ceb80:
 RAM_21ceb84:
     .zero 0x4
 RAM_21ceb88:
-
-
-.org 0x21cec08 - 0x02000000
+    .zero 0x80
 
 RAM_21cec08:
     .word 0
@@ -878,10 +809,44 @@ RAM_21d0d68:
 RAM_21d0d80:
 
 
+/*******************************************
+start - data_end - bss_end
+0x21d0d80 - 221A400 - 221F800
+- overlay_0004.bin
+*******************************************/
+/*******************************************
+start - data_end - bss_end
+0x221F800 - 224B260 - 2253440
+- overlay_0018.bin
+*******************************************/
+
 
 .org 0x22c29c8 - 0x02000000
 
 RAM_22c29c8: @ BattleData
+BattleData: @ 0x22c29c8
+.equ BattleData_0,                  0x0     @ ?
+.equ BattleData_RoundNr,            0x150
+.equ BattleData_CurrentMove,        0x355
+.globl BattleData_CurrentMoveID
+.equ BattleData_CurrentMoveID,      0x356
+.equ BattleData_MoveScore,          0x358
+.equ BattleData_Move1Score,         0x358
+.equ BattleData_TempVariable,       0x35c
+.globl BattleData_TrainerAIType
+.equ BattleData_TrainerAIType,      0x365
+.globl BattleData_3cf
+.equ BattleData_3cf,                0x3cf
+.equ BattleData_3de,                0x3de
+.equ BattleData_3e1,                0x3e1
+.globl BattleData_2120
+.equ BattleData_2120,               0x2120
+.globl BattleData_AIScriptPtr
+.equ BattleData_AIScriptPtr,        0x2134
+.globl BattleData_2138
+.equ BattleData_2138,               0x2138
+.globl BattleData_219c
+.equ BattleData_219c,               0x219c
 /*
 + 0x150 Round Nr
 + 0x355 Current Move (0-3)
@@ -901,55 +866,89 @@ RAM_22c29c8: @ BattleData
 
 RAM_22c5708: @ PlayerBattleData +0x2d40
 PlayerBattleData: @ 0x22c5708 +0x2d40
-PlayerBattleData_Species:
+PlayerBattleData_Species:   @ + 0x0 Player Species
     .hword 0
-PlayerBattleData_ATK:
+PlayerBattleData_ATK:       @ + 0x2 2d42 ATK
     .hword 0
-PlayerBattleData_DEF:
+PlayerBattleData_DEF:       @ + 0x4 2d44 DEF
     .hword 0
-PlayerBattleData_SPE:
+PlayerBattleData_SPE:       @ + 0x6 2d46 SPE
     .hword 0
-PlayerBattleData_SPA:
+PlayerBattleData_SPA:       @ + 0x8 2d48 SPA
     .hword 0
-PlayerBattleData_SPD:
+PlayerBattleData_SPD:       @ + 0xa 2d4a SPD
     .hword 0
-PlayerBattleData_Move1:
+PlayerBattleData_Move:      @ + 0xc (22c5714) 2d4c
+PlayerBattleData_Move1:     @ + 0xc (22c5714) 2d4c Move1
     .hword 0
-PlayerBattleData_Move2:
+PlayerBattleData_Move2:     @ + 0xe (22c5716) Move2
     .hword 0
-PlayerBattleData_Move3:
+PlayerBattleData_Move3:     @ + 0x10 (22c5718) Move3
     .hword 0
-PlayerBattleData_Move4:
+PlayerBattleData_Move4:     @ + 0x12 (22c571a) Move4
     .hword 0
     .word 0
-/*
-+ 0x0 Player Species
-+ 0x2 2d42 ATK
-+ 0x4 2d44 DEF
-+ 0x6 2d46 SPE
-+ 0x8 2d48 SPA
-+ 0xa 2d4a SPD
-+ 0xc (22c5714) 2d4c Move1
-+ 0xe (22c5716) Move2
-+ 0x10 (22c5718) Move3
-+ 0x12 (22c571a) Move4
-+ 0x18 (22c5720) 2d58 Level Atk (8 Bytes) val: 0-6-12
-2d67 ability
-+ 0x2c (22c5734) 2d6c Move1 PP
-+ 0x2d Move2 PP
-+ 0x2e Move3 PP
-+ 0x2f Move4 PP
-+ 0x30 2d70 Move1 PPUps
-+ 0x34 2d74 Level
-+ 0x35 2d75 Friendship
-+ 0x4c (22c5754) 2d8c CurHP
-+ 0x50 (22c5758) MaxHP
-+ 0x64 2da4 ExpPts
-+ 0x6c (22c5774) 2dac
-+ 0x70 (22c5778) 2db0 StatusEffect?
-+ 0x78 (22c5780) 2db8 HoldItem
-+ 0x80 (22c5788) 2dc0
-*/
+PlayerBattleData_StatLevel:     @ + 0x18 (22c5720) 2d58 Level Atk (8 Bytes) val: 0-6-12
+    .byte 0, 0, 0, 0, 0, 0, 0, 0
+    .word 0   @ + 0x20 (22c5728) 2d60
+PlayerBattleData_Type1:         @ + 0x24 (22c572c) 2d64   Type1?
+    .byte 0
+PlayerBattleData_Type2:         @ + 0x25 (22c572d) 2d65   Type2?
+    .byte 0
+    .byte 0   @ + 0x26 (22c572e) 2d66
+PlayerBattleData_Ability:   @ + 0x27 (22c572f) 2d67 Ability
+    .byte 0
+    .word 0   @ + 0x28 (22c5730) 2d68
+PlayerBattleData_MovePP:
+PlayerBattleData_Move1PP:   @ + 0x2c (22c5734) 2d6c Move1 PP
+    .byte 0
+PlayerBattleData_Move2PP:   @ + 0x2d 2d6d Move2 PP
+    .byte 0
+PlayerBattleData_Move3PP:   @ + 0x2e 2d6e Move3 PP
+    .byte 0
+PlayerBattleData_Move4PP:   @ + 0x2f 2d6f Move4 PP
+    .byte 0
+PlayerBattleData_Move1PPUps:    @ + 0x30 2d70 Move1 PPUps
+    .byte 0, 0, 0, 0
+PlayerBattleData_Level:     @ + 0x34 2d74 Level
+    .byte 0
+PlayerBattleData_Friendship:    @ + 0x35 2d75 Friendship
+    .byte 0
+    .hword 0
+    .word 0, 0
+    .word 0, 0, 0
+PlayerBattleData_CurHP:     @ + 0x4c (22c5754) 2d8c CurHP
+    .word 0
+PlayerBattleData_MaxHP:     @ + 0x50 (22c5758) MaxHP
+    .word 0
+    .word 0, 0, 0, 0
+PlayerBattleData_ExpPts:    @ + 0x64 2da4 ExpPts
+    .word 0
+    .word 0
+PlayerBattleData_6c:        @ + 0x6c (22c5774) 2dac
+    .word 0
+PlayerBattleData_70:        @ + 0x70 (22c5778) 2db0 StatusEffect?
+    .word 0
+    .word 0
+PlayerBattleData_Item:      @ + 0x78 (22c5780) 2db8 HoldItem
+    .word 0
+    .word 0
+PlayerBattleData_80:        @ + 0x80 (22c5788) 2dc0
+
+
+.globl BattleData_Move
+.equ BattleData_Move,               PlayerBattleData_Move - BattleData      @ 0x2d4c
+.globl BattleData_StatLevel
+.equ BattleData_StatLevel,          PlayerBattleData_StatLevel - BattleData   @ 0x2d58
+.globl BattleData_Ability
+.equ BattleData_Ability,            PlayerBattleData_Ability - BattleData   @ 0x2d67
+.globl BattleData_CurHP
+.equ BattleData_CurHP,              PlayerBattleData_CurHP - BattleData     @ 0x2d8c
+.globl BattleData_2dac
+.equ BattleData_2dac,               PlayerBattleData_6c - BattleData        @ 0x2dac
+.globl BattleData_2db0
+.equ BattleData_2db0,               PlayerBattleData_70 - BattleData        @ 0x2db0
+
 
 
 /*****************
@@ -965,6 +964,14 @@ ScriptHandler
 .equ ScriptHandler_64,              0x64
 .equ ScriptHandler_74,              0x74
 
+/*****************
+TrainerData
+*****************/
+.equ TrainerData_ID,                0x10
+.equ TrainerData_Money,             0x14    @ Maximum is 999999
+.equ TrainerData_Gender,            0x18    @ 0 = Male, 1 = Female
+.equ TrainerData_19,                0x19
+.equ TrainerData_Badge,             0x1a
 
 
 .org 0x27e0000 - 0x02000000
@@ -1017,7 +1024,9 @@ RAM_27ffc80:
 RAM_27ffcf4:
     .zero 0x6
 RAM_27ffcfa:
-    .zero 0xa2
+    .zero 0x86
+RAM_27ffd80:
+    .zero 0x1c
 RAM_27ffd9c:
     .zero 0x4c
 RAM_27ffde8:
@@ -1027,11 +1036,13 @@ RAM_27ffdea:
 RAM_27ffdec:
     .zero 0x14
 RAM_27ffe00:
-    .zero 0x50
+    .zero 0x20
+RAM_27ffe20:
+    .zero 0x30
 RAM_27ffe50:
-
-
-.org 0x27fff80 - 0x02000000
+    .zero 0x10
+RAM_27ffe60:
+    .zero 0x120
 
 RAM_27fff80:
     .word 0, 0, 0, 0
@@ -1083,8 +1094,6 @@ RAM_27ffff0:
 @ 0x21d0d80
 
 
-.equ Unknown_2101d20,              0x2101d20 @ .word
-.equ Unknown_2101d38,              0x2101d38 @ .word
 .equ Unknown_21023e0,              0x21023e0 @ .word
 .equ Unknown_21023f8,             0x021023f8 @ .word
 

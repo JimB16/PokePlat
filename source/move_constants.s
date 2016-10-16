@@ -92,7 +92,7 @@
 .equ DIG, 91
 .equ TOXIC, 92
 .equ CONFUSION, 93
-.equ PSYCHIC, 94
+.equ PSYCHIC_M, 94
 .equ HYPNOSIS, 95
 .equ MEDITATE, 96
 .equ AGILITY, 97

@@ -70,6 +70,11 @@ Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.
     * disassembled 99% of the scripts (only missing some cmds and bytes that are just filler)
   * [**source/script_plat.s**](source/script_plat.s)
     * the raw structure of all cmds is known (cmd nr and number of parameters and their length)
+* Compilable trainer-data
+  * [**data/poketool/trainer/trdata_narc/**](data/poketool/trainer/trdata_narc/)
+    * interpreted by: 'LoadTrainerData: @ 2079170' in [**source/arm9.s**](source/arm9.s)
+  * [**data/poketool/trainer/trpoke_narc/**](data/poketool/trainer/trpoke_narc/)
+    * interpreted by: 'LoadTrainerPokemon: @ 20793b8' in [**source/arm9.s**](source/arm9.s)
 * Export Pokemon sprites (front- and back-pics)
 
 ## Help wanted:

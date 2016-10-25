@@ -465,16 +465,16 @@ x = address where the jump goes to
 .hword  0x7b, \a, \b, \c
 .endm
 
-.macro	GiveItem a, b, c
-.hword  0x7c, \a, \b, \c
+.macro	GiveItem itemid, quantity, return
+.hword  0x7c, \itemid, \quantity, \return
 .endm
 
-.macro	CheckStoreItem a, b, c
-.hword  0x7d, \a, \b, \c
+.macro	CheckStoreItem itemid, b, c
+.hword  0x7d, \itemid, \b, \c
 .endm
 
-.macro	CheckItem a, b, c
-.hword  0x7e, \a, \b, \c
+.macro	CheckItem itemid, quantity, return
+.hword  0x7e, \itemid, \quantity, \return
 .endm
 
 .macro	StoreItemTaken a, b

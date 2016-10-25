@@ -774,6 +774,7 @@ branch_20c8bfc: @ 20c8bfc :arm
 @ 0x20c8c08
 
 
+.globl DGT_Hash1Reset
 DGT_Hash1Reset: @ 20c8c08 :arm
 	ldr     r2, [pc, #0x28] @ [0x20c8c38] (=0x67452301)
 	ldr     r1, [pc, #0x28] @ [0x20c8c3c] (=0xefcdab89)
@@ -797,6 +798,7 @@ DGT_Hash1Reset: @ 20c8c08 :arm
 
 
 .arm
+.globl DGT_Hash1SetSource
 DGT_Hash1SetSource: @ 20c8c48 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r6, r0
@@ -860,6 +862,7 @@ branch_20c8cf8: @ 20c8cf8 :arm
 
 
 .arm
+.globl DGT_Hash1GetDigest_R
 DGT_Hash1GetDigest_R: @ 20c8d10 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r4, r1
@@ -2799,6 +2802,7 @@ TP_CheckError: @ 20ca624 :arm
 
 
 .arm
+.globl MIC_Init
 MIC_Init: @ 20ca638 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r0, [pc, #0x58] @ [0x20ca69c] (=RAM_21ceccc)
@@ -2916,6 +2920,7 @@ branch_20ca728: @ 20ca728 :arm
 
 
 .arm
+.globl MIC_StartAutoSamplingAsync
 MIC_StartAutoSamplingAsync: @ 20ca760 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -3105,6 +3110,7 @@ branch_20ca944: @ 20ca944 :arm
 
 
 .arm
+.globl Function_20ca958
 Function_20ca958: @ 20ca958 :arm
 	ldr     r0, [pc, #0x4] @ [0x20ca964] (=RAM_27fff90)
 	ldr     r0, [r0]
@@ -3434,6 +3440,7 @@ Function_20cac90: @ 20cac90 :arm
 
 
 .arm
+.globl PM_Init
 PM_Init: @ 20cacd0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r0, [pc, #0x84] @ [0x20cad60] (=RAM_21cecec)
@@ -3930,6 +3937,7 @@ PM_ForceToPowerOff: @ 20cb218 :arm
 
 
 .arm
+.globl PM_SetAmp
 PM_SetAmp: @ 20cb240 :arm
 	ldr     r1, [pc, #0x8] @ [0x20cb250] (=RAM_21cecec)
 	ldr     r12, [pc, #0x8] @ [0x20cb254] (=PMi_SetAmp)
@@ -3958,6 +3966,7 @@ PMi_SetAmp: @ 20cb258 :arm
 @ 0x20cb284
 
 
+.globl PM_SetAmpGain
 PM_SetAmpGain: @ 20cb284 :arm
 	ldr     r12, =PMi_WriteRegister
 	mov     r0, r0, lsl #16
@@ -4565,6 +4574,7 @@ branch_20cb944: @ 20cb944 :arm
 
 
 .arm
+.globl RTC_GetDate
 RTC_GetDate: @ 20cb984 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x24] @ [0x20cb9b4] (=Function_20cc0dc)
@@ -4627,6 +4637,7 @@ branch_20cb9ec: @ 20cb9ec :arm
 
 
 .arm
+.globl RTC_GetTime
 RTC_GetTime: @ 20cba30 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x24] @ [0x20cba60] (=Function_20cc0dc)
@@ -4637,7 +4648,6 @@ RTC_GetTime: @ 20cba30 :arm
 	str     r0, [r1, #0x2c]
 	bne     branch_20cba54
 	bl      Function_20cc0ec
-.arm
 branch_20cba54: @ 20cba54 :arm
 	ldr     r0, [pc, #0x8] @ [0x20cba64] (=RAM_21ced58)
 	ldr     r0, [r0, #0x2c]
@@ -4692,6 +4702,7 @@ branch_20cba9c: @ 20cba9c :arm
 
 
 .arm
+.globl Function_20cbae4
 Function_20cbae4: @ 20cbae4 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r2, [pc, #0x24] @ [0x20cbb14] (=0x20cc0dc)
@@ -5342,6 +5353,7 @@ RTCi_ConvertTimeToSecond: @ 20cc200 :arm
 
 
 .arm
+.globl RTC_ConvertDateTimeToSecond
 RTC_ConvertDateTimeToSecond: @ 20cc218 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r1
@@ -5499,6 +5511,7 @@ RTCi_ConvertSecondToTime: @ 20cc37c :arm
 
 
 .arm
+.globl RTC_ConvertSecondToDateTime
 RTC_ConvertSecondToDateTime: @ 20cc3fc :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r2

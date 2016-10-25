@@ -51628,7 +51628,7 @@ Function_21e6de8: @ 21e6de8 :thumb
 	beq     branch_21e6e3a
 	mov     r0, r6
 	mov     r1, r4
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	bne     branch_21e6e3a
 	mov     r5, #0x0
@@ -51639,7 +51639,7 @@ branch_21e6e20: @ 21e6e20 :thumb
 	mov     r4, r0
 	mov     r0, r6
 	mov     r1, r4
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	bne     branch_21e6e3a
 	.hword  0x1c6d @ add r5, r5, #0x1
@@ -52668,7 +52668,7 @@ branch_21e7490: @ 21e7490 :thumb
 	bne     branch_21e7564
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	beq     branch_21e7564
 .thumb
@@ -52678,7 +52678,7 @@ branch_21e7550: @ 21e7550 :thumb
 	mov     r7, r0
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	bne     branch_21e7550
 .thumb

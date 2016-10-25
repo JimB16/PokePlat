@@ -23,10 +23,13 @@ RAM_2101d38:
     .zero 0xc
 
 RAM_2101d44:
-    .word 0
+    .byte 0
+    .byte 0
+    .hword 0
 RAM_2101d48:
     .word 0
 RAM_2101d4c:
+
 
 .org 0x2101df0 - 0x02000000
 
@@ -92,12 +95,19 @@ RAM_21bf678:
 .globl RAM_21bf67c
 RAM_21bf67c:
 
+.equ RAM_21bf67c_0,         0x0
+.equ RAM_21bf67c_44,        0x44
+.equ RAM_21bf67c_48,        0x48
+
 
 .org 0x21bf6bc - 0x02000000
 
 RAM_21bf6bc:
     .zero 0x20
 RAM_21bf6dc:
+
+.equ RAM_21bf6bc_20,         0x20
+.equ RAM_21bf6bc_22,         0x22
 
 .org 0x21bfae8 - 0x02000000
 
@@ -107,6 +117,8 @@ RAM_21bfae8:
 @ init at branch_2017eaa:
 @ 27ffda0 init with Function_20c304c
 @ branch_201786a: calculate offset
+@ Collection of Pointers to DataStructures
+@ TODO TODO TODO
 RAM_21bfaf0:
     .zero 0x1c
 
@@ -129,6 +141,10 @@ RAM_21bfb18:
     .word 0
 RAM_21bfb1c:
     .word 0
+
+.equ RAM_21bfb10_0,         0x0
+.equ RAM_21bfb10_4,         0x4
+.equ RAM_21bfb10_8,         RAM_21bfb18 - RAM_21bfb10
 
 
 .org 0x21c0110 - 0x02000000
@@ -838,13 +854,17 @@ BattleData: @ 0x22c29c8
 .globl BattleData_3cf
 .equ BattleData_3cf,                0x3cf
 .equ BattleData_3de,                0x3de
+.equ BattleData_3e0,                0x3e0
 .equ BattleData_3e1,                0x3e1
+.equ BattleData_3e2,                0x3e2
 .globl BattleData_2120
 .equ BattleData_2120,               0x2120
 .globl BattleData_AIScriptPtr
 .equ BattleData_AIScriptPtr,        0x2134
 .globl BattleData_2138
 .equ BattleData_2138,               0x2138
+.globl BattleData_2158
+.equ BattleData_2158,               0x2158
 .globl BattleData_219c
 .equ BattleData_219c,               0x219c
 /*
@@ -948,6 +968,8 @@ PlayerBattleData_80:        @ + 0x80 (22c5788) 2dc0
 .equ BattleData_2dac,               PlayerBattleData_6c - BattleData        @ 0x2dac
 .globl BattleData_2db0
 .equ BattleData_2db0,               PlayerBattleData_70 - BattleData        @ 0x2db0
+.globl BattleData_2dc0
+.equ BattleData_2dc0,               PlayerBattleData_80 - BattleData        @ 0x2dc0
 
 
 
@@ -956,6 +978,7 @@ ScriptHandler
 *****************/
 .equ ScriptHandler_0,               0x0
 .equ ScriptHandler_1,               0x1     @ 0 = No Active Script, 1 = Normal Script Active, 2 = Execute Function in ScriptHandler_4
+.equ ScriptHandler_2,               0x2     @ Result of CompareValues (ScriptCmd_If)
 .equ ScriptHandler_4,               0x4
 .equ ScriptHandler_Pointer,         0x8
 .equ ScriptHandler_c,               0xc     @ 0x14 * 4 Bytes
@@ -963,6 +986,60 @@ ScriptHandler
 .equ ScriptHandler_NrOfCmds,        0x60    @ =Nr of ScriptCmds (initialised in Function_203e724)
 .equ ScriptHandler_64,              0x64
 .equ ScriptHandler_74,              0x74
+.equ ScriptHandler_80,              0x80
+.equ ScriptHandler_80_0,            0x0
+
+
+/*****************
+Sprite
+*****************/
+.equ Sprite_0,                      0x0
+.equ Sprite_Face,                   0x28
+.equ Sprite_30,                     0x30
+.equ Sprite_4c,                     0x4c
+.equ Sprite_50,                     0x50
+.equ Sprite_54,                     0x54
+.equ Sprite_58,                     0x58
+.equ Sprite_5c,                     0x5c
+.equ Sprite_60,                     0x60
+.equ Sprite_X,                      0x64
+.equ Sprite_68,                     0x68
+.equ Sprite_Y,                      0x6c
+.equ Sprite_70,                     0x70
+.equ Sprite_74,                     0x74
+.equ Sprite_7c,                     0x7c
+.equ Sprite_88,                     0x88
+.equ Sprite_94,                     0x94
+
+
+/*****************
+TextInterpreter
+*****************/
+.equ TextInterpreter_Pointer,             0x0     @ Pointer to current position in Text/Msg
+.equ TextInterpreter_4,             0x4
+.equ TextInterpreter_9,             0x9
+.equ TextInterpreter_a,             0xa
+.equ TextInterpreter_b,             0xb
+.equ TextInterpreter_c,             0xc
+.equ TextInterpreter_e,             0xe
+.equ TextInterpreter_10,            0x10
+.equ TextInterpreter_12,            0x12
+.equ TextInterpreter_15,            0x15
+.equ TextInterpreter_16,            0x16
+.equ TextInterpreter_17,            0x17
+.equ TextInterpreter_18,            0x18
+.equ TextInterpreter_1a,            0x1a
+.equ TextInterpreter_1b,            0x1b
+.equ TextInterpreter_20,            0x20
+.equ TextInterpreter_20_0,          0x0
+.equ TextInterpreter_20_1,          0x1
+.equ TextInterpreter_20_2,          0x2
+.equ TextInterpreter_28,            0x28
+.equ TextInterpreter_29,            0x29
+.equ TextInterpreter_2a,            0x2a
+.equ TextInterpreter_2b,            0x2b
+.equ TextInterpreter_2e,            0x2e
+
 
 /*****************
 TrainerData

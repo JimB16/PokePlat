@@ -3581,6 +3581,7 @@ branch_20c02a0: @ 20c02a0 :arm
 
 
 .arm
+.globl GX_LoadOBJ
 GX_LoadOBJ: @ 20c02bc :arm
 	stmfd   sp!, {r4,lr}
 	ldr     r3, [pc, #0x48] @ [0x20c0310] (=Unknown_2101148)

@@ -20,6 +20,13 @@
 @ ChangePkmnData0?
 @ https://projectpokemon.org/wiki/Pokemon_NDS_Structure
 @ http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_structure_in_Generation_IV
+.equ PkmnData_Offset0, 0x0
+.equ PkmnData_Offset1, 0x8
+.equ PkmnData_Offset2, 0x88
+.equ PkmnData_Size0, 0x8
+.equ PkmnData_Size1, 0x80
+.equ PkmnData_Size2, 0x64
+.equ PkmnData_Size, PkmnData_Size0+PkmnData_Size1+PkmnData_Size2
 .equ PKMNDATA_PERSONALITYVALUE,  0x0
 .equ PKMNDATA_CHECKSUM,  0x4
 .equ PKMNDATA_SPECIES,  0x5
@@ -160,6 +167,7 @@
 .equ PKMNBATTLEDATA_MOVE4MAXPP,  0x2a
 .equ PKMNBATTLEDATA_LEVEL,  0x2b
 .equ PKMNBATTLEDATA_FRIENDSHIP,  0x2c
+.equ PKMNBATTLEDATA_2d,  0x2d
 .equ PKMNBATTLEDATA_CURHP,  0x2f
 .equ PKMNBATTLEDATA_MAXHP,  0x30
 .equ PKMNBATTLEDATA_EXPPTS,  0x32
@@ -167,6 +175,7 @@
 .equ PKMNBATTLEDATA_35,  0x35
 .equ PKMNBATTLEDATA_ITEM,  0x37
 .equ PKMNBATTLEDATA_49,  0x49
+.equ PKMNBATTLEDATA_4b,  0x4b
 .equ PKMNBATTLEDATA_59,  0x59
 
 @ Constants for ReadMoveData-function (arm9.s) r1

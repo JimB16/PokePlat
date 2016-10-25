@@ -894,6 +894,8 @@ _drsb: @ 20e0734 :arm
 	eor     r0, r0, r2
 	eor     r2, r0, r2
 	eor     r0, r0, r2
+
+.globl _dsub
 _dsub: @ 20e074c :arm
 	stmfd   sp!, {r4,lr}
 	eors    r12, r1, r3
@@ -1785,9 +1787,7 @@ Function_20e10ac: @ 20e10ac :arm
 	orrge   r12, r12, #2, 4 @ #0x20000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e10f4
 
-.arm
 branch_20e10f4: @ 20e10f4 :arm
 	mov     r0, #0x0
 	mrs     r12, CPSR
@@ -1798,6 +1798,7 @@ branch_20e10f4: @ 20e10f4 :arm
 
 
 .arm
+.globl Function_20e1108
 Function_20e1108: @ 20e1108 :arm
 	mov     r3, #255, 8 @ #0xff000000
 	cmp     r3, r0, lsl #1
@@ -2569,6 +2570,7 @@ _frsb: @ 20e1a90 :arm
 	eor     r0, r0, r1
 	eor     r1, r0, r1
 	eor     r0, r0, r1
+
 .globl _fsub
 _fsub: @ 20e1a9c :arm
 	eors    r2, r0, r1
@@ -3270,6 +3272,8 @@ _drdiv: @ 20e235c :arm
 	eor     r0, r0, r2
 	eor     r2, r0, r2
 	eor     r0, r0, r2
+
+arm_func_start _ddiv
 _ddiv: @ 20e2374 :arm
 	stmfd   sp!, {r4-r6,lr}
 	ldr     lr, [pc, #0x534] @ [0x20e28b4] (=0xffe)
@@ -3354,7 +3358,6 @@ branch_20e249c: @ 20e249c :arm
 	adc     r1, r1, #0x0
 	ldmfd   sp!, {r4-r6,lr}
 	bx      lr
-@ 0x20e24ac
 
 
 .incbin "./baserom/arm9.bin", 0xe24ac, 0x20e25ac - 0x20e24ac
@@ -3600,3 +3603,4 @@ branch_20e28a4: @ 20e28a4 :arm
 @ 0x20e28b4
 
 .word 0xffe @ 0x20e28b4
+arm_func_end _ddiv

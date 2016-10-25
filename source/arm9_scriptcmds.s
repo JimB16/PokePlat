@@ -30,8 +30,8 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 	mov     r5, r0
 
 	mov     r1, r5
-	add     r1, #0x80
-	ldr     r6, [r1, #0x0]
+	add     r1, #ScriptHandler_80
+	ldr     r6, [r1, #ScriptHandler_80_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r7, r0
 
@@ -42,11 +42,11 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 	mov     r0, r6
 	mov     r1, r4
 	bl      ScriptHandler_CheckLoadParameter
-	strh    r7, [r0, #0x0]
+	strh    r7, [r0, #ScriptHandler_80_0]
 
 	ldr     r1, [pc, #0xc] @ 0x203f708, (=Function_203f70c+1)
 	mov     r0, r5
-	str     r4, [r5, #0x64]
+	str     r4, [r5, #ScriptHandler_64]
 	bl      ScriptHandler_AddFunction
 
 	mov     r0, #0x1
@@ -61,10 +61,10 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 Function_203f70c: @ 203f70c :thumb
 	push    {r3,lr}
 	mov     r1, r0
-	ldr     r1, [r1, #0x64]
-	add     r0, #0x80
+	ldr     r1, [r1, #ScriptHandler_64]
+	add     r0, #ScriptHandler_80
 	lsl     r1, r1, #16
-	ldr     r0, [r0, #0x0]
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	lsr     r1, r1, #16
 	bl      ScriptHandler_CheckLoadParameter
 	ldrh    r1, [r0, #0x0]
@@ -88,9 +88,9 @@ Function_203f734: @ 203f734 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_80
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r0, #0x0
 	pop     {r4,pc}
@@ -100,12 +100,12 @@ Function_203f734: @ 203f734 :thumb
 .align 2, 0
 .thumb
 Function_203f74c: @ 203f74c :thumb
-	ldr     r1, [r0, #0x8]
+	ldr     r1, [r0, #ScriptHandler_Pointer]
 	add     r2, r1, #0x1
-	str     r2, [r0, #0x8]
+	str     r2, [r0, #ScriptHandler_Pointer]
 	ldrb    r3, [r1, #0x0]
 	add     r1, r2, #0x1
-	str     r1, [r0, #0x8]
+	str     r1, [r0, #ScriptHandler_Pointer]
 	ldrb    r2, [r2, #0x0]
 	lsl     r1, r3, #2
 	add     r0, r0, r1
@@ -119,9 +119,9 @@ Function_203f74c: @ 203f74c :thumb
 Function_203f764: @ 203f764 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
-	ldr     r2, [r4, #0x8]
+	ldr     r2, [r4, #ScriptHandler_Pointer]
 	add     r1, r2, #0x1
-	str     r1, [r4, #0x8]
+	str     r1, [r4, #ScriptHandler_Pointer]
 	ldrb    r5, [r2, #0x0]
 	bl      ScriptHandler_LoadWord
 	lsl     r1, r5, #2
@@ -137,9 +137,9 @@ Function_203f764: @ 203f764 :thumb
 Function_203f780: @ 203f780 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r2, [r5, #0x8]
+	ldr     r2, [r5, #ScriptHandler_Pointer]
 	add     r1, r2, #0x1
-	str     r1, [r5, #0x8]
+	str     r1, [r5, #ScriptHandler_Pointer]
 	ldrb    r4, [r2, #0x0]
 	bl      ScriptHandler_LoadWord
 	ldrb    r1, [r0, #0x0]
@@ -390,8 +390,8 @@ ScriptCmd_If: @ 203f900 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	ldrh    r5, [r0, #0x0]
 
@@ -401,7 +401,7 @@ ScriptCmd_If: @ 203f900 :thumb
 
 	mov     r0, r5
 	bl      CompareValues
-	strb    r0, [r4, #0x2]
+	strb    r0, [r4, #ScriptHandler_2]
 
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -417,8 +417,8 @@ ScriptCmd_If2: @ 203f92c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
@@ -426,15 +426,15 @@ ScriptCmd_If2: @ 203f92c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r1, r0
 
 	ldrh    r0, [r4, #0x0]
 	ldrh    r1, [r1, #0x0]
 	bl      CompareValues
-	strb    r0, [r5, #0x2]
+	strb    r0, [r5, #ScriptHandler_2]
 
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -445,8 +445,8 @@ ScriptCmd_If2: @ 203f92c :thumb
 Function_203f964: @ 203f964 :thumb
 	push    {r3-r7,lr}
 	mov     r7, r0
-	add     r0, #0x80
-	ldr     r5, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r5, [r0, #ScriptHandler_80_0]
 	mov     r1, #0x7
 	mov     r0, r5
 	bl      Function_203f098
@@ -474,8 +474,8 @@ Function_203f964: @ 203f964 :thumb
 ScriptCmd_CallStandard: @ 203f99c :thumb
 	push    {r3-r7,lr}
 	str     r0, [sp, #0x0]
-	add     r0, #0x80
-	ldr     r5, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r5, [r0, #ScriptHandler_80_0]
 
 	mov     r1, #0x5
 	mov     r0, r5
@@ -518,8 +518,8 @@ ScriptCmd_CallStandard: @ 203f99c :thumb
 .thumb
 Function_203f9ec: @ 203f9ec :thumb
 	push    {r3,lr}
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	mov     r1, #0x5
 	bl      Function_203f098
 	ldrb    r0, [r0, #0x0]
@@ -533,12 +533,13 @@ branch_203fa02: @ 203fa02 :thumb
 	pop     {r3,pc}
 @ 0x203fa06
 
+
 .align 2, 0
 .thumb
 ScriptCmd_ExitStandard: @ 203fa08 :thumb
 	push    {r3,lr}
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	mov     r1, #0x5
 	bl      Function_203f098
 	mov     r1, #0x0
@@ -548,7 +549,7 @@ ScriptCmd_ExitStandard: @ 203fa08 :thumb
 @ 0x203fa1c
 
 
-.thumb
+thumb_func_start ScriptCmd_Jump
 ScriptCmd_Jump: @ 203fa1c :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -556,14 +557,14 @@ ScriptCmd_Jump: @ 203fa1c :thumb
 	bl      ScriptHandler_LoadWord
 	mov     r2, r0
 
-	ldr     r1, [r4, #0x8]
+	ldr     r1, [r4, #ScriptHandler_Pointer]
 	mov     r0, r4
 	add     r1, r1, r2
 	bl      SetScriptHandlerPointer
 
 	mov     r0, #0x0
 	pop     {r4,pc}
-@ 0x203fa34
+thumb_func_end ScriptCmd_Jump
 
 
 .thumb
@@ -26511,7 +26512,7 @@ branch_204b26a: @ 204b26a :thumb
 	bne     branch_204b26a
 	ldr     r0, [sp, #0x0]
 	mov     r1, r7
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x1
 	beq     branch_204b26a
 	str     r7, [r5, #0x10]
@@ -27713,7 +27714,7 @@ Function_204baac: @ 204baac :thumb
 	cmp     r0, #0x1
 	bne     branch_204bb2e
 	mov     r0, r6
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	beq     branch_204bb30
 branch_204bb18: @ 204bb18 :thumb
@@ -27722,7 +27723,7 @@ branch_204bb18: @ 204bb18 :thumb
 	mov     r1, r0
 	mov     r0, r6
 	str     r1, [sp, #0x38]
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	bne     branch_204bb18
 	b       branch_204bb30
@@ -33874,13 +33875,13 @@ ScriptCmd_TakeItem: @ 204e75c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #0x80
-	ldr     r5, [r1, #0x0]
+	add     r1, #ScriptHandler_80
+	ldr     r5, [r1, #ScriptHandler_80_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
 
@@ -33888,16 +33889,16 @@ ScriptCmd_TakeItem: @ 204e75c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_80
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
@@ -33915,48 +33916,51 @@ ScriptCmd_TakeItem: @ 204e75c :thumb
 @ 0x204e7b4
 
 
+/*
+.macro	GiveItem ItemId, quantity, return
+*/
 .thumb
 ScriptCmd_GiveItem: @ 204e7b4 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #0x80
-	ldr     r5, [r1, #0x0]
+	add     r1, #ScriptHandler_80
+	ldr     r5, [r1, #ScriptHandler_80_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
-	mov     r6, r0
+	mov     r6, r0              @ ItemID
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
-	mov     r7, r0
+	mov     r7, r0              @ quantity
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_80
 	mov     r1, r0
 
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
-	mov     r4, r0
+	mov     r4, r0              @ return
 
 	ldr     r0, [r5, #0xc]
 	bl      Function_207d990
 
-	mov     r1, r6
-	mov     r2, r7
+	mov     r1, r6      @ ItemID
+	mov     r2, r7      @ quantity
 	mov     r3, #0x4
 	bl      GiveItem
-	strh    r0, [r4, #0x0]
+	strh    r0, [r4]            @ return
 
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -33969,13 +33973,13 @@ ScriptCmd_CheckStoreItem: @ 204e80c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #0x80
-	ldr     r5, [r1, #0x0]
+	add     r1, #ScriptHandler_80
+	ldr     r5, [r1, #ScriptHandler_80_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
 
@@ -33983,16 +33987,16 @@ ScriptCmd_CheckStoreItem: @ 204e80c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_80
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
@@ -34016,13 +34020,13 @@ ScriptCmd_CheckItem: @ 204e864 :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #0x80
-	ldr     r5, [r1, #0x0]
+	add     r1, #ScriptHandler_80
+	ldr     r5, [r1, #ScriptHandler_80_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
 
@@ -34030,16 +34034,16 @@ ScriptCmd_CheckItem: @ 204e864 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_80
+	ldr     r0, [r0, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_80
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4, #ScriptHandler_80_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 

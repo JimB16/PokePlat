@@ -1,21 +1,21 @@
 
 
-.arm
-.globl WM_Init
+arm_func_start WM_Init
 WM_Init: @ 20cdb18 :arm
 	stmfd   sp!, {r3,lr}
-	mov     r2, #15, 24 @ #0xf00
+	mov     r2, #0xf00
 	bl      WmInitCore
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3,pc}
-	ldr     r1, [pc, #0xc] @ [0x20cdb40] (=RAM_21cf6a0)
+	ldr     r1, =RAM_21cf6a0
 	mov     r2, #0x0
 	ldr     r1, [r1, #0x4]
 	strh    r2, [r1, #0x16]
 	ldmfd   sp!, {r3,pc}
 @ 0x20cdb40
 
-.word RAM_21cf6a0 @ 0x20cdb40
+.pool
+arm_func_end WM_Init
 
 
 
@@ -34,36 +34,28 @@ WmInitCore: @ 20cdb44 :arm
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x3
 	ldmfd   sp!, {r4-r10,pc}
-@ 0x20cdb78
 
-.arm
 branch_20cdb78: @ 20cdb78 :arm
 	cmp     r6, #0x0
 	bne     branch_20cdb8c
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x6
 	ldmfd   sp!, {r4-r10,pc}
-@ 0x20cdb8c
 
-.arm
 branch_20cdb8c: @ 20cdb8c :arm
 	cmp     r4, #0x3
 	bls     branch_20cdba0
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x6
 	ldmfd   sp!, {r4-r10,pc}
-@ 0x20cdba0
 
-.arm
 branch_20cdba0: @ 20cdba0 :arm
 	tst     r6, #0x1f
 	beq     branch_20cdbb4
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x6
 	ldmfd   sp!, {r4-r10,pc}
-@ 0x20cdbb4
 
-.arm
 branch_20cdbb4: @ 20cdbb4 :arm
 	bl      Function_20c6350
 	mov     r0, #0xa
@@ -75,9 +67,7 @@ branch_20cdbb4: @ 20cdbb4 :arm
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x4
 	ldmfd   sp!, {r4-r10,pc}
-@ 0x20cdbdc
 
-.arm
 branch_20cdbdc: @ 20cdbdc :arm
 	mov     r0, r6
 	mov     r1, r7
@@ -112,12 +102,10 @@ branch_20cdbdc: @ 20cdbdc :arm
 	ldr     r0, [r1, #0x4]
 	str     r3, [r0, #0x14c]
 	ldr     r0, [r1, #0x4]
-	add     r0, r0, #1, 24 @ #0x100
+	add     r0, r0, #0x100
 	strh    r3, [r0, #0x50]
 	b       branch_20cdc88
-@ 0x20cdc6c
 
-.arm
 branch_20cdc6c: @ 20cdc6c :arm
 	ldr     r0, [r1, #0x4]
 	add     r0, r0, r3, lsl #2
@@ -126,7 +114,6 @@ branch_20cdc6c: @ 20cdc6c :arm
 	add     r0, r0, r3, lsl #2
 	str     r2, [r0, #0x10c]
 	add     r3, r3, #0x1
-.arm
 branch_20cdc88: @ 20cdc88 :arm
 	cmp     r3, #0x10
 	blt     branch_20cdc6c
@@ -141,9 +128,7 @@ branch_20cdc88: @ 20cdc88 :arm
 	ldr     r8, [pc, #0x60] @ [0x20cdd18] (=RAM_21cf6a8)
 	mov     r7, #0x1
 	b       branch_20cdce4
-@ 0x20cdcbc
 
-.arm
 branch_20cdcbc: @ 20cdcbc :arm
 	mov     r2, r6, lsl #8
 	mov     r1, r9
@@ -155,7 +140,6 @@ branch_20cdcbc: @ 20cdcbc :arm
 	add     r1, r10, r6, lsl #8
 	bl      OS_SendMessage
 	add     r6, r6, #0x1
-.arm
 branch_20cdce4: @ 20cdce4 :arm
 	cmp     r6, #0xa
 	blt     branch_20cdcbc
@@ -179,7 +163,7 @@ branch_20cdce4: @ 20cdce4 :arm
 
 
 
-.arm
+arm_func_start WM_Finish
 WM_Finish: @ 20cdd28 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -202,7 +186,7 @@ branch_20cdd50: @ 20cdd50 :arm
 	mov     r0, #0xa
 	mov     r1, #0x0
 	bl      PXI_SetFifoRecvCallback
-	ldr     r1, [pc, #0x18] @ [0x20cdd94] (=RAM_21cf6a0)
+	ldr     r1, =RAM_21cf6a0
 	mov     r2, #0x0
 	str     r2, [r1, #0x4]
 	mov     r0, r4
@@ -212,7 +196,8 @@ branch_20cdd50: @ 20cdd50 :arm
 	ldmfd   sp!, {r4,pc}
 @ 0x20cdd94
 
-.word RAM_21cf6a0 @ 0x20cdd94
+.pool
+arm_func_end WM_Finish
 
 
 
@@ -277,7 +262,6 @@ WMi_SendCommand: @ 20cde08 :arm
 	cmp     r5, #0x0
 	add     r2, r0, #0x4
 	ble     branch_20cde68
-.arm
 branch_20cde4c: @ 20cde4c :arm
 	add     r2, r2, #0x4
 	ldr     r1, [r2, #-0x4]
@@ -459,7 +443,6 @@ WmReceiveFifo: @ 20ce02c :arm
 	ldr     r0, [r4, #0x4]
 	mov     r1, #2, 22 @ #0x800
 	bl      DC_InvalidateRange
-.arm
 branch_20ce070: @ 20ce070 :arm
 	ldr     r0, [r4, #0x10]
 	cmp     r10, r0
@@ -467,7 +450,6 @@ branch_20ce070: @ 20ce070 :arm
 	mov     r0, r10
 	mov     r1, #1, 24 @ #0x100
 	bl      DC_InvalidateRange
-.arm
 branch_20ce088: @ 20ce088 :arm
 	ldrh    r0, [r10]
 	cmp     r0, #0x2c
@@ -478,7 +460,6 @@ branch_20ce088: @ 20ce088 :arm
 	cmp     r0, #0x13
 	bne     branch_20ce0ac
 	bl      OS_Panic
-.arm
 branch_20ce0ac: @ 20ce0ac :arm
 	ldr     r1, [r4, #0xc8]
 	cmp     r1, #0x0
@@ -486,9 +467,7 @@ branch_20ce0ac: @ 20ce0ac :arm
 	mov     r0, r10
 	blx     r1
 	b       branch_20ce384
-@ 0x20ce0c4
 
-.arm
 branch_20ce0c4: @ 20ce0c4 :arm
 	cmp     r0, #0x82
 	bne     branch_20ce118
@@ -511,9 +490,7 @@ branch_20ce0c4: @ 20ce0c4 :arm
 	ldr     r1, [r1, #0xcc]
 	blx     r1
 	b       branch_20ce384
-@ 0x20ce118
 
-.arm
 branch_20ce118: @ 20ce118 :arm
 	cmp     r0, #0x81
 	bne     branch_20ce384
@@ -525,9 +502,7 @@ branch_20ce118: @ 20ce118 :arm
 	mov     r0, r10
 	blx     r1
 	b       branch_20ce384
-@ 0x20ce140
 
-.arm
 branch_20ce140: @ 20ce140 :arm
 	cmp     r0, #0xe
 	bne     branch_20ce180
@@ -545,7 +520,6 @@ branch_20ce140: @ 20ce140 :arm
 	ldr     r0, [r10, #0x8]
 	ldrh    r1, [r1, #0x72]
 	bl      DC_InvalidateRange
-.arm
 branch_20ce180: @ 20ce180 :arm
 	ldrh    r1, [r10]
 	cmp     r1, #0x2
@@ -562,9 +536,7 @@ branch_20ce180: @ 20ce180 :arm
 	blx     r4
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r3-r11,pc}
-@ 0x20ce1bc
 
-.arm
 branch_20ce1bc: @ 20ce1bc :arm
 	ldr     r1, [r0, #0x18]
 	cmp     r1, #0x0
@@ -576,7 +548,6 @@ branch_20ce1bc: @ 20ce1bc :arm
 	cmp     r0, #0x0
 	addeq   sp, sp, #0x8
 	ldmeqfd sp!, {r3-r11,pc}
-.arm
 branch_20ce1e4: @ 20ce1e4 :arm
 	ldrh    r0, [r10]
 	cmp     r0, #0x8
@@ -595,9 +566,7 @@ branch_20ce1e4: @ 20ce1e4 :arm
 	ldrh    r8, [r10, #0x2c]
 	ldrh    r9, [r10, #0x2e]
 	b       branch_20ce258
-@ 0x20ce228
 
-.arm
 branch_20ce228: @ 20ce228 :arm
 	cmp     r0, #0xc
 	bne     branch_20ce258
@@ -611,7 +580,6 @@ branch_20ce228: @ 20ce228 :arm
 	ldrh    r8, [r10, #0x16]
 	ldrh    r9, [r10, #0x18]
 	str     r0, [sp]
-.arm
 branch_20ce258: @ 20ce258 :arm
 	cmp     r5, #0x7
 	cmpne   r5, #0x9
@@ -659,14 +627,11 @@ branch_20ce258: @ 20ce258 :arm
 	mov     r0, r11
 	bl      MIi_CpuCopy16
 	b       branch_20ce31c
-@ 0x20ce310
 
-.arm
 branch_20ce310: @ 20ce310 :arm
 	ldr     r1, [pc, #0xbc] @ [0x20ce3d4] (=RAM_21cf714)
 	mov     r0, #0x0
 	bl      MIi_CpuClear16
-.arm
 branch_20ce31c: @ 20ce31c :arm
 	cmp     r7, #0x0
 	moveq   r1, r8
@@ -679,7 +644,6 @@ branch_20ce31c: @ 20ce31c :arm
 	ldr     r5, [pc, #0x84] @ [0x20ce3c8] (=RAM_21cf6f0)
 	mov     r6, #0x0
 	strh    r9, [r7, #0x92]
-.arm
 branch_20ce348: @ 20ce348 :arm
 	strh    r6, [r7, #0x56]
 	add     r2, r4, r6, lsl #2
@@ -691,14 +655,12 @@ branch_20ce348: @ 20ce348 :arm
 	str     r1, [r7, #0x6c]
 	ldr     r1, [r2, #0xcc]
 	blx     r1
-.arm
 branch_20ce370: @ 20ce370 :arm
 	add     r0, r6, #0x1
 	mov     r0, r0, lsl #16
 	mov     r6, r0, lsr #16
 	cmp     r6, #0x10
 	bcc     branch_20ce348
-.arm
 branch_20ce384: @ 20ce384 :arm
 	ldr     r0, [r4, #0x10]
 	mov     r1, #1, 24 @ #0x100
@@ -741,6 +703,7 @@ WmClearFifoRecvFlag: @ 20ce3d8 :arm
 
 
 .arm
+.globl WMi_GetStatusAddress
 WMi_GetStatusAddress: @ 20ce3f4 :arm
 	stmfd   sp!, {r3,lr}
 	bl      WMi_CheckInitialized
@@ -795,6 +758,7 @@ WM_GetConnectedAIDs: @ 20ce448 :arm
 
 
 .arm
+.globl WM_SetIndCallback
 WM_SetIndCallback: @ 20ce478 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -1064,6 +1028,7 @@ branch_20ce7b0: @ 20ce7b0 :arm
 
 
 .arm
+.globl WM_GetAllowedChannel
 WM_GetAllowedChannel: @ 20ce7f4 :arm
 	stmfd   sp!, {r3,lr}
 	bl      WMi_CheckInitialized
@@ -1368,6 +1333,7 @@ branch_20ceb68: @ 20ceb68 :arm
 
 
 .arm
+.globl Function_20ceb94
 Function_20ceb94: @ 20ceb94 :arm
 	ldr     r12, [pc, #0x4] @ [0x20ceba0] (=WMi_EnableEx)
 	mov     r1, #0x0
@@ -1409,6 +1375,7 @@ WMi_EnableEx: @ 20ceba4 :arm
 
 
 .arm
+.globl Function_20cec08
 Function_20cec08: @ 20cec08 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1430,6 +1397,7 @@ Function_20cec08: @ 20cec08 :arm
 
 
 .arm
+.globl Function_20cec48
 Function_20cec48: @ 20cec48 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1451,6 +1419,7 @@ Function_20cec48: @ 20cec48 :arm
 
 
 .arm
+.globl Function_20cec88
 Function_20cec88: @ 20cec88 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1472,6 +1441,7 @@ Function_20cec88: @ 20cec88 :arm
 
 
 .arm
+.globl Function_20cecc8
 Function_20cecc8: @ 20cecc8 :arm
 	ldr     r12, [pc, #0x4] @ [0x20cecd4] (=Function_20cecf0)
 	mov     r3, #0x0
@@ -1525,6 +1495,7 @@ Function_20cecf0: @ 20cecf0 :arm
 
 
 .arm
+.globl WM_Reset
 WM_Reset: @ 20ced50 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1544,6 +1515,7 @@ WM_Reset: @ 20ced50 :arm
 
 
 .arm
+.globl WM_End
 WM_End: @ 20ced88 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1887,6 +1859,7 @@ branch_20cf154: @ 20cf154 :arm
 
 
 .arm
+.globl WM_EndScan
 WM_EndScan: @ 20cf1dc :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1908,6 +1881,7 @@ WM_EndScan: @ 20cf1dc :arm
 
 
 .arm
+.globl WM_StartConnectEx
 WM_StartConnectEx: @ 20cf21c :arm
 	stmfd   sp!, {r3-r7,lr}
 	sub     sp, sp, #0x28
@@ -1967,6 +1941,7 @@ branch_20cf2c0: @ 20cf2c0 :arm
 
 
 .arm
+.globl WM_Disconnect
 WM_Disconnect: @ 20cf2e8 :arm
 	stmfd   sp!, {r4-r6,lr}
 	sub     sp, sp, #0x8
@@ -2329,6 +2304,7 @@ WM_EndMP: @ 20cf77c :arm
 
 
 .arm
+.globl Function_20cf7ec
 Function_20cf7ec: @ 20cf7ec :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -2433,6 +2409,7 @@ WM_SetDCFData: @ 20cf88c :arm
 
 
 .arm
+.globl Function_20cf958
 Function_20cf958: @ 20cf958 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -3424,6 +3401,7 @@ branch_20d05b4: @ 20d05b4 :arm
 @ 0x20d05e0
 
 .arm
+.globl Function_20d05e0
 Function_20d05e0: @ 20d05e0 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -3515,6 +3493,7 @@ WM_SetGameInfo: @ 20d065c :arm
 
 
 .arm
+.globl Function_20d0714
 Function_20d0714: @ 20d0714 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0

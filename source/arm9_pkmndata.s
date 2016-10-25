@@ -8,19 +8,19 @@ ClearCompletePkmnDataStructure: @ 2073c2c :thumb
 
 	mov     r0, #0x0
 	mov     r1, r4
-	mov     r2, #0xec
+	mov     r2, #PkmnData_Size
 	blx     MIi_CpuClearFast
 
 	mov     r0, r4
 	ldrh    r2, [r4, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      Call_DecryptPkmnData2
 
 	mov     r0, r4
 	ldr     r2, [r4, #0x0]
-	add     r0, #0x88
-	mov     r1, #0x64
+	add     r0, #PkmnData_Offset2
+	mov     r1, #PkmnData_Size2
 	bl      Call_DecryptPkmnData2
 
 	pop     {r4,pc}
@@ -34,13 +34,13 @@ ClearPkmnDataStructure1: @ 2073c54 :thumb
 
 	mov     r0, #0x0
 	mov     r1, r4
-	mov     r2, #0x88
+	mov     r2, #PkmnData_Size0+PkmnData_Size1
 	blx     MIi_CpuClearFast
 
 	mov     r0, r4
 	ldrh    r2, [r4, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      Call_DecryptPkmnData2
 
 	pop     {r4,pc}
@@ -48,6 +48,7 @@ thumb_func_end ClearPkmnDataStructure1
 
 
 .thumb
+.globl Function_2073c70
 Function_2073c70: @ 2073c70 :thumb
 	mov     r0, #0xec
 	bx      lr
@@ -98,14 +99,14 @@ branch_2073ca2: @ 2073ca2 :thumb
 
 	mov     r0, r5
 	ldr     r2, [r5, #0x0]
-	add     r0, #0x88
-	mov     r1, #0x64
+	add     r0, #PkmnData_Offset2
+	mov     r1, #PkmnData_Size2
 	bl      Call_DecryptPkmnData3
 
 	mov     r0, r5
 	ldrh    r2, [r5, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      Call_DecryptPkmnData3
 branch_2073cce: @ 2073cce :thumb
 	mov     r0, r4
@@ -140,20 +141,20 @@ Function_2073cd4: @ 2073cd4 :thumb
 
 	mov     r0, r5
 	ldr     r2, [r5, #0x0]
-	add     r0, #0x88
-	mov     r1, #0x64
+	add     r0, #PkmnData_Offset2
+	mov     r1, #PkmnData_Size2
 	bl      Call_DecryptPkmnData2
 
 	mov     r0, r5
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      CalcPokemonChecksum
 	strh    r0, [r5, #0x6]
 
 	mov     r0, r5
 	ldrh    r2, [r5, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      Call_DecryptPkmnData2
 
 branch_2073d1c: @ 2073d1c :thumb
@@ -177,8 +178,8 @@ Function_2073d20: @ 2073d20 :thumb
 
 	mov     r0, r2
 	ldrh    r2, [r2, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	mov     r4, #0x1
 	bl      Call_DecryptPkmnData3
 
@@ -207,16 +208,16 @@ Function_2073d48: @ 2073d48 :thumb
 	mov     r0, r5
 	strh    r2, [r5, #0x4]
 
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	mov     r4, #0x1
 	bl      CalcPokemonChecksum
 	strh    r0, [r5, #0x6]
 
 	mov     r0, r5
 	ldrh    r2, [r5, #0x6]
-	add     r0, #0x8
-	mov     r1, #0x80
+	add     r0, #PkmnData_Offset1
+	mov     r1, #PkmnData_Size1
 	bl      Call_DecryptPkmnData2
 branch_2073d7c: @ 2073d7c :thumb
 
@@ -255,15 +256,15 @@ InitPkmnData: @ 2073d80 :thumb
 	bl      InitPkmnDataStructure
 
 	mov     r0, r5
-	add     r0, #0x88
-	mov     r1, #0x64
+	add     r0, #PkmnData_Offset2
+	mov     r1, #PkmnData_Size2
 	mov     r2, #0x0
 	bl      Call_DecryptPkmnData2
 
 	mov     r0, r5
 	ldr     r2, [r5, #0x0]
-	add     r0, #0x88
-	mov     r1, #0x64
+	add     r0, #PkmnData_Offset2
+	mov     r1, #PkmnData_Size2
 	bl      Call_DecryptPkmnData2
 
 	mov     r0, r5
@@ -369,7 +370,7 @@ branch_2073e56: @ 2073e56 :thumb
 	eor     r0, r1
 	eor     r0, r2
 	cmp     r0, #0x8
-	bcc     branch_2073e56
+	blo     branch_2073e56
 	b       branch_2073e92
 
 branch_2073e8a: @ 2073e8a :thumb
@@ -613,6 +614,7 @@ thumb_func_end InitPkmnDataStructure
 
 
 .thumb
+.globl Function_2074044
 Function_2074044: @ 2074044 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x18
@@ -649,6 +651,7 @@ branch_2074052: @ 2074052 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_2074088
 Function_2074088: @ 2074088 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x24
@@ -663,7 +666,7 @@ Function_2074088: @ 2074088 :thumb
 	cmp     r0, #0x0
 	beq     branch_2074100
 	cmp     r0, #0x1d
-	bcs     branch_2074100
+	bhs     branch_2074100
 	.hword  0x1e40 @ sub r0, r0, #0x1
 	str     r0, [sp, #0x20]
 branch_20740a8: @ 20740a8 :thumb
@@ -764,6 +767,7 @@ branch_2074154: @ 2074154 :thumb
 
 
 .thumb
+.globl Function_2074158
 Function_2074158: @ 2074158 :thumb
 	push    {r0-r3}
 Function_207415a: @ 207415a :thumb
@@ -2016,7 +2020,7 @@ branch_2074990: @ 2074990 :thumb
 	strh    r0, [r1, #0x0]
 	.hword  0x1c89 @ add r1, r1, #0x2
 	cmp     r4, #0xa
-	bcc     branch_2074990
+	blo     branch_2074990
 	ldr     r2, [pc, #0x138] @ 0x2074ad8, (=0xffff)
 	ldr     r0, [sp, #0x8]
 	lsl     r1, r4, #1
@@ -2089,7 +2093,7 @@ branch_2074a0c: @ 2074a0c :thumb
 	strh    r0, [r2, #0x0]
 	.hword  0x1c92 @ add r2, r2, #0x2
 	cmp     r4, #0x7
-	bcc     branch_2074a0c
+	blo     branch_2074a0c
 	ldr     r2, [pc, #0xbc] @ 0x2074ad8, (=0xffff)
 	ldr     r0, [sp, #0x8]
 	lsl     r1, r4, #1
@@ -3200,7 +3204,7 @@ branch_2075130: @ 2075130 :thumb
 	.hword  0x1ca4 @ add r4, r4, #0x2
 	str     r0, [sp, #0x8]
 	cmp     r2, #0xb
-	bcc     branch_2075130
+	blo     branch_2075130
 	add     sp, #0x50
 	pop     {r3-r7,pc}
 
@@ -3298,7 +3302,7 @@ branch_20751e4: @ 20751e4 :thumb
 	strh    r0, [r6, #0x0]
 	.hword  0x1cb6 @ add r6, r6, #0x2
 	cmp     r1, #0x8
-	bcc     branch_20751e4
+	blo     branch_20751e4
 	add     sp, #0x50
 	pop     {r3-r7,pc}
 
@@ -4864,6 +4868,7 @@ branch_2075bbe: @ 2075bbe :thumb
 
 
 .thumb
+.globl Function_2075bcc
 Function_2075bcc: @ 2075bcc :thumb
 	ldr     r3, [pc, #0x0] @ 0x2075bd0, (=Function_2075bd4+1)
 	bx      r3
@@ -4914,7 +4919,7 @@ Function_2075bfc: @ 2075bfc :thumb
 Function_2075c0c: @ 2075c0c :thumb
 	push    {r3,lr}
 	cmp     r2, #0x1
-	bcc     branch_2075c16
+	blo     branch_2075c16
 	cmp     r2, #0x5
 	bls     branch_2075c1a
 branch_2075c16: @ 2075c16 :thumb
@@ -5234,28 +5239,27 @@ branch_2075e04: @ 2075e04 :thumb
 @ 0x2075e0a
 
 
-.align 2, 0
-.thumb
-.globl Function_2075e0c
-Function_2075e0c: @ 2075e0c :thumb
-	ldr     r3, [pc, #0x0] @ 0x2075e10, (=Function_2075e14+1)
+thumb_func_start Call_CheckIfShinyPkmn_2
+Call_CheckIfShinyPkmn_2: @ 2075e0c :thumb
+	ldr     r3, =CheckIfShinyPkmn_2+1
 	bx      r3
 @ 0x2075e10
 
-.word Function_2075e14+1 @ 0x2075e10
+.pool
+thumb_func_end Call_CheckIfShinyPkmn_2
 
 
 
-.thumb
-Function_2075e14: @ 2075e14 :thumb
+thumb_func_start CheckIfShinyPkmn_2
+CheckIfShinyPkmn_2: @ 2075e14 :thumb
 	push    {r3-r5,lr}
 
-	mov     r1, #0x7
+	mov     r1, #PKMNDATA_OTID
 	mov     r2, #0x0
 	mov     r5, r0
 	bl      GetPkmnData2
 
-	mov     r1, #0x0
+	mov     r1, #0x0 @ PKMNDATA_PERSONALITYVALUE
 	mov     r4, r0
 	mov     r0, r5
 	mov     r2, r1
@@ -5263,17 +5267,23 @@ Function_2075e14: @ 2075e14 :thumb
 	mov     r1, r0
 
 	mov     r0, r4
-	bl      Function_2075e38
+	bl      CheckIfShinyPkmn
 
 	pop     {r3-r5,pc}
-@ 0x2075e36
+thumb_func_end CheckIfShinyPkmn_2
 
 
-.align 2, 0
-.thumb
-.globl Function_2075e38
-Function_2075e38: @ 2075e38 :thumb
-	ldr     r3, [pc, #0x24] @ 0x2075e60, (=0xffff0000)
+/* Input:
+r0: Original Trainer ID
+r1: Personality Value
+
+The exact calculation is (TrainerID xor SecretID) xor (PersonalityValue[31..16] xor PersonalityValue[15..0]), where the latter two values represent the highest and lowest 16 bits of the 32-bit personality value respectively; more detailed information can be found at the personality value article.
+
+The above formula can result in a number from 0 to 65535. If the result is less than 8, then the Pokémon is Shiny. This gives an overall probability of 8/65536 or 1/8192, exactly the same as in Generation II. 
+*/
+thumb_func_start CheckIfShinyPkmn
+CheckIfShinyPkmn: @ 2075e38 :thumb
+	ldr     r3, =0xffff0000
 	lsl     r2, r1, #16
 	and     r1, r3
 	and     r3, r0
@@ -5285,24 +5295,26 @@ Function_2075e38: @ 2075e38 :thumb
 	lsr     r2, r2, #16
 	eor     r0, r1
 	eor     r0, r2
-	cmp     r0, #0x8
-	bcs     branch_2075e58
+	cmp     r0, #8
+	bhs     notShinyPkmn
 	mov     r0, #0x1
-	b       branch_2075e5a
+	b       isShinyPkmn
 
-branch_2075e58: @ 2075e58 :thumb
+notShinyPkmn: @ 2075e58 :thumb
 	mov     r0, #0x0
-branch_2075e5a: @ 2075e5a :thumb
+isShinyPkmn: @ 2075e5a :thumb
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	bx      lr
 @ 0x2075e60
 
-.word 0xffff0000 @ 0x2075e60
+.pool
+thumb_func_end CheckIfShinyPkmn
 
 
 
 .thumb
+.globl Function_2075e64
 Function_2075e64: @ 2075e64 :thumb
 	push    {r3-r7,lr}
 	mov     r7, r0
@@ -5419,7 +5431,7 @@ Function_2075f0c: @ 2075f0c :thumb
 	bl      DecidePkmnGender
 	str     r0, [sp, #0x18]
 	mov     r0, r5
-	bl      Function_2075e14
+	bl      CheckIfShinyPkmn_2
 	mov     r1, #0x0
 	mov     r7, r0
 	mov     r0, r5
@@ -5985,7 +5997,7 @@ branch_20762ca: @ 20762ca :thumb
 
 branch_20762d2: @ 20762d2 :thumb
 	cmp     r1, #0x1c
-	bcc     branch_20762f8
+	blo     branch_20762f8
 	mov     r1, #0x0
 	b       branch_20762f8
 
@@ -7366,7 +7378,7 @@ branch_2076b72: @ 2076b72 :thumb
 	bl      Function_2075b00
 	ldr     r1, [sp, #0x4]
 	cmp     r1, r0
-	bcc     branch_2076b8e
+	blo     branch_2076b8e
 
 	mov     r0, r4
 	mov     r1, #PKMNDATA_LEVEL
@@ -7552,7 +7564,7 @@ Jumppoints_2076c86:
 branch_2076cbc: @ 2076cbc :thumb
 	ldr     r0, [sp, #0x20]
 	cmp     r0, #0xdc
-	bcc     branch_2076d98
+	blo     branch_2076d98
 	ldrh    r6, [r4, #0x4]
 	mov     r0, #0x1
 	str     r0, [r5, #0x0]
@@ -7564,7 +7576,7 @@ branch_2076cca: @ 2076cca :thumb
 	bne     branch_2076d98
 	ldr     r0, [sp, #0x20]
 	cmp     r0, #0xdc
-	bcc     branch_2076d98
+	blo     branch_2076d98
 	ldrh    r6, [r4, #0x4]
 	mov     r0, #0x2
 	str     r0, [r5, #0x0]
@@ -7576,7 +7588,7 @@ branch_2076ce0: @ 2076ce0 :thumb
 	bne     branch_2076d98
 	ldr     r0, [sp, #0x20]
 	cmp     r0, #0xdc
-	bcc     branch_2076d98
+	blo     branch_2076d98
 	ldrh    r6, [r4, #0x4]
 	mov     r0, #0x3
 	str     r0, [r5, #0x0]
@@ -7661,7 +7673,7 @@ branch_2076d5e: @ 2076d5e :thumb
 
 	ldr     r1, [sp, #0x3c]
 	cmp     r1, r0
-	bcs     branch_2076d98
+	bhs     branch_2076d98
 	ldrh    r6, [r4, #0x4]
 	mov     r0, #0xa
 	str     r0, [r5, #0x0]
@@ -7984,7 +7996,7 @@ Function_2076f84: @ 2076f84 :thumb
 	strh    r1, [r0, #0x0]
 	ldr     r0, [pc, #0x38] @ 0x2076fcc, (=0x1ee)
 	cmp     r4, r0
-	bcc     branch_2076f9a
+	blo     branch_2076f9a
 	bl      ErrorHandling
 branch_2076f9a: @ 2076f9a :thumb
 	add     r0, sp, #0x4
@@ -8659,7 +8671,7 @@ Function_2077408: @ 2077408 :thumb
 	mov     r4, r1
 	mov     r5, r0
 	cmp     r4, #0x3
-	bcs     branch_207746e
+	bhs     branch_207746e
 	mov     r7, #0x0
 	add     r6, sp, #0x0
 branch_2077416: @ 2077416 :thumb
@@ -8707,7 +8719,7 @@ branch_2077416: @ 2077416 :thumb
 
 	.hword  0x1c64 @ add r4, r4, #0x1
 	cmp     r4, #0x3
-	bcc     branch_2077416
+	blo     branch_2077416
 
 branch_207746e: @ 207746e :thumb
 	mov     r1, #0x0
@@ -9860,9 +9872,9 @@ Function_2077b14: @ 2077b14 :thumb
 	bne     branch_2077b86
 	ldr     r0, [sp, #0x4]
 	cmp     r0, #0x4
-	bcc     branch_2077b86
+	blo     branch_2077b86
 	cmp     r0, #0x14
-	bcs     branch_2077b86
+	bhs     branch_2077b86
 	add     sp, #0x10
 	mov     r0, #0x1
 	pop     {r3-r7,pc}
@@ -9924,9 +9936,9 @@ Function_2077bd8: @ 2077bd8 :thumb
 	push    {r4,lr}
 	ldr     r3, [r2, #0x0]
 	cmp     r3, #0x14
-	bcs     branch_2077be4
+	bhs     branch_2077be4
 	cmp     r3, #0x4
-	bcs     branch_2077c06
+	bhs     branch_2077c06
 branch_2077be4: @ 2077be4 :thumb
 	cmp     r3, #0x4
 	bge     branch_2077bea
@@ -10033,7 +10045,7 @@ branch_2077c94: @ 2077c94 :thumb
 	.hword  0x1c49 @ add r1, r1, #0x1
 	.hword  0x1c9b @ add r3, r3, #0x2
 	cmp     r1, #0x6
-	bcc     branch_2077c68
+	blo     branch_2077c68
 branch_2077c9c: @ 2077c9c :thumb
 	.hword  0x1c6d @ add r5, r5, #0x1
 	cmp     r5, #0x4
@@ -10393,6 +10405,7 @@ Function_2077ef8: @ 2077ef8 :thumb
 
 
 .thumb
+.globl Function_2077f0c
 Function_2077f0c: @ 2077f0c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
@@ -10449,12 +10462,12 @@ branch_2077f7c: @ 2077f7c :thumb
 	lsl     r1, r7, #2
 	ldrh    r0, [r0, r1]
 	cmp     r4, r0
-	bcc     branch_2077fa6
+	blo     branch_2077fa6
 	ldr     r0, [pc, #0x28] @ 0x2077fb0, (=Unknown_20f0576)
 	ldrh    r0, [r0, r1]
 	cmp     r4, r0
 	add     r2, sp, #0x4
-	bcs     branch_2077f9e
+	bhs     branch_2077f9e
 	mov     r0, r5
 	mov     r1, #0x6
 	add     r2, #0x2
@@ -10521,7 +10534,7 @@ Function_2077fe4: @ 2077fe4 :thumb
 
 branch_2077ff0: @ 2077ff0 :thumb
 	cmp     r2, #0x20
-	bcs     branch_2077ffe
+	bhs     branch_2077ffe
 	mov     r3, #0x1
 	mov     r4, r3
 	lsl     r4, r2
@@ -10530,7 +10543,7 @@ branch_2077ff0: @ 2077ff0 :thumb
 
 branch_2077ffe: @ 2077ffe :thumb
 	cmp     r2, #0x40
-	bcs     branch_207800e
+	bhs     branch_207800e
 	mov     r3, #0x1
 	sub     r2, #0x20
 	mov     r4, r3
@@ -10540,7 +10553,7 @@ branch_2077ffe: @ 2077ffe :thumb
 
 branch_207800e: @ 207800e :thumb
 	cmp     r2, #0x60
-	bcs     branch_207801e
+	bhs     branch_207801e
 	mov     r3, #0x1
 	sub     r2, #0x40
 	mov     r4, r3
@@ -10907,7 +10920,7 @@ branch_2078246: @ 2078246 :thumb
 	lsl     r1, r1, #16
 	lsr     r3, r1, #16
 	cmp     r2, r4
-	bcc     branch_2078246
+	blo     branch_2078246
 branch_2078256: @ 2078256 :thumb
 
 	mov     r0, r3
@@ -12035,7 +12048,7 @@ branch_2078812: @ 2078812 :thumb
 	.hword  0x1c52 @ add r2, r2, #0x1
 	.hword  0x1c9b @ add r3, r3, #0x2
 	cmp     r2, #0x12
-	bcc     branch_2078808
+	blo     branch_2078808
 	mov     r0, #0x0
 	bx      lr
 @ 0x207881e
@@ -12048,7 +12061,7 @@ branch_2078812: @ 2078812 :thumb
 .thumb
 Function_2078824: @ 2078824 :thumb
 	cmp     r0, #0x12
-	bcc     branch_207882a
+	blo     branch_207882a
 	mov     r0, #0x0
 branch_207882a: @ 207882a :thumb
 	lsl     r1, r0, #1

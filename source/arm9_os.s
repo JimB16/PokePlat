@@ -44,10 +44,10 @@ waitForInterrupt: @ 20c1308 :arm
 
 
 
-.arm
+arm_func_start OS_IrqDummy
 OS_IrqDummy: @ 20c1328 :arm
 	bx      lr
-@ 0x20c132c
+arm_func_end OS_IrqDummy
 
 
 .arm
@@ -840,6 +840,7 @@ branch_20c1a94: @ 20c1a94 :arm
 
 
 .arm
+.globl Function_20c1ab0
 Function_20c1ab0: @ 20c1ab0 :arm
 	stmfd   sp!, {r0-r3}
 Function_20c1ab4: @ 20c1ab4 :arm
@@ -868,8 +869,7 @@ Function_20c1ad8: @ 20c1ad8 :arm
 
 
 
-.arm
-.globl OS_SNPrintf
+arm_func_start OS_SNPrintf
 OS_SNPrintf: @ 20c1af0 :arm
 	stmfd   sp!, {r0-r3}
 	stmfd   sp!, {r3,lr}
@@ -881,7 +881,7 @@ OS_SNPrintf: @ 20c1af0 :arm
 	ldmfd   sp!, {r3,lr}
 	add     sp, sp, #0x10
 	bx      lr
-@ 0x20c1b18
+arm_func_end OS_SNPrintf
 
 
 .arm
@@ -1267,8 +1267,7 @@ Function_20c1f24: @ 20c1f24 :arm
 r0 = Adr of Thread to Create
 r1 = Adr of Function
 */
-.arm
-.globl OS_CreateThread
+arm_func_start OS_CreateThread
 OS_CreateThread: @ 20c1f34 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r8, r0
@@ -1341,6 +1340,7 @@ OS_CreateThread: @ 20c1f34 :arm
 @ 0x20c2024
 
 .pool
+arm_func_end OS_CreateThread
 
 
 
@@ -1450,6 +1450,7 @@ branch_20c2114: @ 20c2114 :arm
 
 
 .arm
+.globl Function_20c2140
 Function_20c2140: @ 20c2140 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -1532,8 +1533,7 @@ Function_20c2204: @ 20c2204 :arm
 @ 0x20c2218
 
 
-.arm
-.globl OS_SleepThread
+arm_func_start OS_SleepThread
 OS_SleepThread: @ 20c2218 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -1564,11 +1564,11 @@ branch_20c224c: @ 20c224c :arm
 @ 0x20c2264
 
 .pool
+arm_func_end OS_SleepThread
 
 
 
-.arm
-.globl OS_WakeupThread
+arm_func_start OS_WakeupThread
 OS_WakeupThread: @ 20c2268 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -1601,11 +1601,10 @@ branch_20c22c4: @ 20c22c4 :arm
 	mov     r0, r6
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r7,pc}
-@ 0x20c22d0
+arm_func_end OS_WakeupThread
 
 
-.arm
-.globl OS_WakeupThreadDirect
+arm_func_start OS_WakeupThreadDirect
 OS_WakeupThreadDirect: @ 20c22d0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -1619,7 +1618,7 @@ OS_WakeupThreadDirect: @ 20c22d0 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r5,pc}
-@ 0x20c22f8
+arm_func_end OS_WakeupThreadDirect
 
 
 .arm
@@ -1643,8 +1642,7 @@ branch_20c2308: @ 20c2308 :arm
 
 
 
-.arm
-.globl OS_RescheduleThread
+arm_func_start OS_RescheduleThread
 OS_RescheduleThread: @ 20c2320 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -1655,7 +1653,7 @@ OS_RescheduleThread: @ 20c2320 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4,pc}
-@ 0x20c233c
+arm_func_end OS_RescheduleThread
 
 
 .arm
@@ -1726,7 +1724,7 @@ branch_20c23d4: @ 20c23d4 :arm
 r0 = Adr of Thread
 r1 = Priority
 */
-.arm
+arm_func_start OS_SetThreadPriority
 OS_SetThreadPriority: @ 20c23f4 :arm
 	stmfd   sp!, {r4-r8,lr}
 
@@ -1781,18 +1779,19 @@ branch_20c2484: @ 20c2484 :arm
 @ 0x20c2494
 
 .pool
+arm_func_end OS_SetThreadPriority
 
 
 
 .arm
+.globl Function_20c249c
 Function_20c249c: @ 20c249c :arm
 	ldr     r0, [r0, #0x70]
 	bx      lr
 @ 0x20c24a4
 
 
-.arm
-.globl OS_Sleep
+arm_func_start OS_Sleep
 OS_Sleep: @ 20c24a4 :arm
 	stmfd   sp!, {r4,r5,lr}
 	sub     sp, sp, #0x34
@@ -1842,6 +1841,7 @@ branch_20c2530: @ 20c2530 :arm
 @ 0x20c2540
 
 .pool
+arm_func_end OS_Sleep
 
 
 
@@ -1890,8 +1890,7 @@ branch_20c259c: @ 20c259c :arm
 @ 0x20c25a4
 
 
-.arm
-.globl OS_DisableScheduler
+arm_func_start OS_DisableScheduler
 OS_DisableScheduler: @ 20c25a4 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -1910,11 +1909,11 @@ OS_DisableScheduler: @ 20c25a4 :arm
 @ 0x20c25d4
 
 .pool
+arm_func_end OS_DisableScheduler
 
 
 
-.arm
-.globl OS_EnableScheduler
+arm_func_start OS_EnableScheduler
 OS_EnableScheduler: @ 20c25d8 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -1933,6 +1932,7 @@ OS_EnableScheduler: @ 20c25d8 :arm
 @ 0x20c2608
 
 .pool
+arm_func_end OS_EnableScheduler
 
 
 
@@ -2054,8 +2054,7 @@ OS_GetConsoleType: @ 20c2730 :arm
 
 
 
-.arm
-.globl OS_InitMessageQueue
+arm_func_start OS_InitMessageQueue
 OS_InitMessageQueue: @ 20c2748 :arm
 	mov     r3, #0x0
 	str     r3, [r0, #0x4]
@@ -2067,11 +2066,10 @@ OS_InitMessageQueue: @ 20c2748 :arm
 	str     r3, [r0, #0x18]
 	str     r3, [r0, #0x1c]
 	bx      lr
-@ 0x20c2770
+arm_func_end OS_InitMessageQueue
 
 
-.arm
-.globl OS_SendMessage
+arm_func_start OS_SendMessage
 OS_SendMessage: @ 20c2770 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
@@ -2115,11 +2113,10 @@ branch_20c27cc: @ 20c27cc :arm
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
-@ 0x20c2804
+arm_func_end OS_SendMessage
 
 
-.arm
-.globl OS_ReceiveMessage
+arm_func_start OS_ReceiveMessage
 OS_ReceiveMessage: @ 20c2804 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r6, r0
@@ -2167,7 +2164,7 @@ branch_20c2870: @ 20c2870 :arm
 	bl      OS_RestoreInterrupts
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r7,pc}
-@ 0x20c28a8
+arm_func_end OS_ReceiveMessage
 
 
 .arm
@@ -2219,6 +2216,7 @@ branch_20c2904: @ 20c2904 :arm
 
 
 .arm
+.globl Function_20c2944
 Function_20c2944: @ 20c2944 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r6, r0
@@ -2259,8 +2257,7 @@ branch_20c29b0: @ 20c29b0 :arm
 @ 0x20c29c0
 
 
-.arm
-.globl OS_InitMutex
+arm_func_start OS_InitMutex
 OS_InitMutex: @ 20c29c0 :arm
 	mov     r1, #0x0
 	str     r1, [r0, #0x4]
@@ -2268,11 +2265,10 @@ OS_InitMutex: @ 20c29c0 :arm
 	str     r1, [r0, #0x8]
 	str     r1, [r0, #0xc]
 	bx      lr
-@ 0x20c29d8
+arm_func_end OS_InitMutex
 
 
-.arm
-.globl OS_LockMutex
+arm_func_start OS_LockMutex
 OS_LockMutex: @ 20c29d8 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r0
@@ -2316,11 +2312,11 @@ branch_20c2a4c: @ 20c2a4c :arm
 @ 0x20c2a58
 
 .pool
+arm_func_end OS_LockMutex
 
 
 
-.arm
-.globl OS_UnlockMutex
+arm_func_start OS_UnlockMutex
 OS_UnlockMutex: @ 20c2a5c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -2348,10 +2344,11 @@ branch_20c2aa8: @ 20c2aa8 :arm
 @ 0x20c2ab4
 
 .pool
+arm_func_end OS_UnlockMutex
 
 
 
-.arm
+arm_func_start OSi_UnlockAllMutex
 OSi_UnlockAllMutex: @ 20c2ab8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -2369,11 +2366,10 @@ branch_20c2ad0: @ 20c2ad0 :arm
 	cmp     r0, #0x0
 	bne     branch_20c2ad0
 	ldmfd   sp!, {r3-r5,pc}
-@ 0x20c2af4
+arm_func_end OSi_UnlockAllMutex
 
 
-.arm
-.globl OS_TryLockMutex
+arm_func_start OS_TryLockMutex
 OS_TryLockMutex: @ 20c2af4 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r5, r0
@@ -2409,10 +2405,11 @@ branch_20c2b54: @ 20c2b54 :arm
 @ 0x20c2b64
 
 .pool
+arm_func_end OS_TryLockMutex
 
 
 
-.arm
+arm_func_start OSi_EnqueueTail
 OSi_EnqueueTail: @ 20c2b68 :arm
 	ldr     r2, [r0, #0x8c]
 	cmp     r2, #0x0
@@ -2423,10 +2420,10 @@ OSi_EnqueueTail: @ 20c2b68 :arm
 	str     r2, [r1, #0x10]
 	str     r1, [r0, #0x8c]
 	bx      lr
-@ 0x20c2b8c
+arm_func_end OSi_EnqueueTail
 
 
-.arm
+arm_func_start OSi_DequeueItem
 OSi_DequeueItem: @ 20c2b8c :arm
 	ldr     r2, [r1, #0x10]
 	ldr     r1, [r1, #0x14]
@@ -2437,18 +2434,18 @@ OSi_DequeueItem: @ 20c2b8c :arm
 	streq   r2, [r0, #0x88]
 	strne   r2, [r1, #0x10]
 	bx      lr
-@ 0x20c2bb0
+arm_func_end OSi_DequeueItem
 
 
-.arm
+arm_func_start DC_InvalidateAll
 DC_InvalidateAll: @ 20c2bb0 :arm
 	mov     r0, #0x0
 	mcr     p15, 0, r0, c7, c6, 0
 	bx      lr
-@ 0x20c2bbc
+arm_func_end DC_InvalidateAll
 
 
-.arm
+arm_func_start DC_StoreAll
 DC_StoreAll: @ 20c2bbc :arm
 	mov     r1, #0x0
 branch_20c2bc0: @ 20c2bc0 :arm
@@ -2463,10 +2460,10 @@ branch_20c2bc4: @ 20c2bc4 :arm
 	cmp     r1, #0x0
 	bne     branch_20c2bc0
 	bx      lr
-@ 0x20c2be8
+arm_func_end DC_StoreAll
 
 
-.arm
+arm_func_start DC_FlushAll
 DC_FlushAll: @ 20c2be8 :arm
 	mov     r12, #0x0
 	mov     r1, #0x0
@@ -2483,7 +2480,7 @@ branch_20c2bf4: @ 20c2bf4 :arm
 	cmp     r1, #0x0
 	bne     branch_20c2bf0
 	bx      lr
-@ 0x20c2c1c
+arm_func_end DC_FlushAll
 
 
 .arm
@@ -2715,8 +2712,8 @@ branch_20c2e64: @ 20c2e64 :arm
 .arm
 OS_GetArenaHi: @ 20c2e84 :arm
 	mov     r0, r0, lsl #2
-	add     r0, r0, #39, 12 @ #0x2700000
-	add     r0, r0, #255, 20 @ #0xff000
+	add     r0, r0, #0x2700000
+	add     r0, r0, #0xff000
 	ldr     r0, [r0, #0xdc4]
 	bx      lr
 @ 0x20c2e98
@@ -3678,6 +3675,7 @@ branch_20c38ec: @ 20c38ec :arm
 
 
 .arm
+.globl OS_GetTickLo
 OS_GetTickLo: @ 20c3920 :arm
 	ldr     r0, =TIMER0_DATA
 	ldrh    r0, [r0]
@@ -4478,6 +4476,7 @@ branch_20c41c0: @ 20c41c0 :arm
 
 
 .arm
+.globl OS_GetLowEntropyData
 OS_GetLowEntropyData: @ 20c41d8 :arm
 	stmfd   sp!, {r4-r6,lr}
 
@@ -4537,6 +4536,7 @@ OS_GetLowEntropyData: @ 20c41d8 :arm
 
 
 .arm
+.globl OS_Panic
 OS_Panic: @ 20c42a8 :arm
 	stmfd   sp!, {r3,lr}
 branch_20c42ac: @ 20c42ac :arm

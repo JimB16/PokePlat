@@ -54,6 +54,7 @@ MEMORY {
 	rom	: ORIGIN = 0x02000000, LENGTH = 32M
 	iwram	: ORIGIN = 0x021d0d80, LENGTH = 8M
 	iwram_1ff8660 : ORIGIN = 0x01ff8660, LENGTH = 8M
+	iwram_21d0d80 : ORIGIN = 0x021d0d80, LENGTH = 8M
 	iwram_21d0dc0 : ORIGIN = 0x021d0dc0, LENGTH = 8M
 	iwram_221f800 : ORIGIN = 0x0221f800, LENGTH = 8M
 	iwram_221fc20 : ORIGIN = 0x0221fc20, LENGTH = 8M
@@ -69,6 +70,7 @@ MEMORY {
 	iwram_2246c20 : ORIGIN = 0x02246c20, LENGTH = 8M
 	iwram_2249960 : ORIGIN = 0x02249960, LENGTH = 8M
 	iwram_2253ce0 : ORIGIN = 0x02253ce0, LENGTH = 8M
+	iwram_2254de0 : ORIGIN = 0x02254de0, LENGTH = 8M
 	iwram_22561c0 : ORIGIN = 0x022561c0, LENGTH = 8M
 	iwram_225c700 : ORIGIN = 0x0225c700, LENGTH = 8M
 	iwram_2260440 : ORIGIN = 0x02260440, LENGTH = 8M
@@ -82,6 +84,8 @@ __iwram_start	=	ORIGIN(iwram);
 __iwram_top	=	ORIGIN(iwram) + LENGTH(iwram);;
 __iwram_1ff8660_start	=	ORIGIN(iwram_1ff8660);
 __iwram_1ff8660_top	=	ORIGIN(iwram_1ff8660) + LENGTH(iwram_1ff8660);;
+__iwram_21d0d80_start	=	ORIGIN(iwram_21d0d80);
+__iwram_21d0d80_top	=	ORIGIN(iwram_21d0d80) + LENGTH(iwram_21d0d80);;
 __iwram_21d0dc0_start	=	ORIGIN(iwram_21d0dc0);
 __iwram_21d0dc0_top	=	ORIGIN(iwram_21d0dc0) + LENGTH(iwram_21d0dc0);;
 __iwram_221f800_start	=	ORIGIN(iwram_221f800);
@@ -110,6 +114,8 @@ __iwram_2246c20_start	=	ORIGIN(iwram_2246c20);
 __iwram_2246c20_top	=	ORIGIN(iwram_2246c20) + LENGTH(iwram_2246c20);;
 __iwram_2249960_start	=	ORIGIN(iwram_2249960);
 __iwram_2249960_top	=	ORIGIN(iwram_2249960) + LENGTH(iwram_2249960);;
+__iwram_2254de0_start	=	ORIGIN(iwram_2254de0);
+__iwram_2254de0_top	=	ORIGIN(iwram_2254de0) + LENGTH(iwram_2254de0);;
 __iwram_22561c0_start	=	ORIGIN(iwram_22561c0);
 __iwram_22561c0_top	=	ORIGIN(iwram_22561c0) + LENGTH(iwram_22561c0);;
 __iwram_225c700_start	=	ORIGIN(iwram_225c700);
@@ -528,7 +534,7 @@ SECTIONS
 	} > iwram_221f800 = 0xff
     
     temp19 = temp18 + SIZEOF (.iwram18) + SIZEOF (.fill18);
-	.iwram19 __iwram_221fc20_start : AT (temp19) { *(.iwram19) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram19 __iwram_21d0d80_start : AT (temp19) { *(.iwram19) . = ALIGN(4); } > iwram_21d0d80 = 0xff
 	__load_start_iwram19 = LOADADDR (.iwram19);
 	__load_stop_iwram19 = LOADADDR (.iwram19) + SIZEOF (.iwram19);
 	.fill19 :
@@ -536,10 +542,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram19) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram19)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_21d0d80 = 0xff
     
     temp20 = temp19 + SIZEOF (.iwram19) + SIZEOF (.fill19);
-	.iwram20 __iwram_221fc20_start : AT (temp20) { *(.iwram20) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram20 __iwram_21d0d80_start : AT (temp20) { *(.iwram20) . = ALIGN(4); } > iwram_21d0d80 = 0xff
 	__load_start_iwram20 = LOADADDR (.iwram20);
 	__load_stop_iwram20 = LOADADDR (.iwram20) + SIZEOF (.iwram20);
 	.fill20 :
@@ -547,7 +553,7 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram20) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram20)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_21d0d80 = 0xff
     
     temp21 = temp20 + SIZEOF (.iwram20) + SIZEOF (.fill20);
 	.iwram21 __iwram_start : AT (temp21) { *(.iwram21) . = ALIGN(4); } > iwram = 0xff
@@ -561,7 +567,7 @@ SECTIONS
 	} > iwram = 0xff
     
     temp22 = temp21 + SIZEOF (.iwram21) + SIZEOF (.fill21);
-	.iwram22 __iwram_221fc20_start : AT (temp22) { *(.iwram22) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram22 __iwram_2254de0_start : AT (temp22) { *(.iwram22) . = ALIGN(4); } > iwram_2254de0 = 0xff
 	__load_start_iwram22 = LOADADDR (.iwram22);
 	__load_stop_iwram22 = LOADADDR (.iwram22) + SIZEOF (.iwram22);
 	.fill22 :
@@ -569,10 +575,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram22) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram22)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_2254de0 = 0xff
     
     temp23 = temp22 + SIZEOF (.iwram22) + SIZEOF (.fill22);
-	.iwram23 __iwram_221fc20_start : AT (temp23) { *(.iwram23) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram23 __iwram_223e140_start : AT (temp23) { *(.iwram23) . = ALIGN(4); } > iwram_223e140 = 0xff
 	__load_start_iwram23 = LOADADDR (.iwram23);
 	__load_stop_iwram23 = LOADADDR (.iwram23) + SIZEOF (.iwram23);
 	.fill23 :
@@ -580,7 +586,7 @@ SECTIONS
 /*		FILL(0xFF);
 		. = . + ((((__load_stop_iwram23) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram23)) - 1;
 	    BYTE(0xFF);*/
-	} > iwram_221fc20 = 0xff
+	} > iwram_223e140 = 0xff
     
     temp24 = temp23 + SIZEOF (.iwram23) + SIZEOF (.fill23);
 	.iwram24 __iwram_221fc20_start : AT (temp24) { *(.iwram24) . = ALIGN(4); } > iwram_221fc20 = 0xff

@@ -93639,7 +93639,7 @@ Call_DGT_Hash1GetDigest_R: @ 221585c :arm
 @ 0x2215864
 
 .word DGT_Hash1GetDigest_R @ 0x2215864
-@ 0x2215868
+
 
 
 Unknown_2215868: @ 0x2215868

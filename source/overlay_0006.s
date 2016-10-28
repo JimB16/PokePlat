@@ -3738,14 +3738,12 @@ branch_223fb36: @ 223fb36 :thumb
 	ldr     r0, [pc, #0x168] @ 0x223fcb0, (=0x400006c)
 	blx     GXx_SetMasterBrightness_
 	b       branch_223fc74
-@ 0x223fb4c
 
-.thumb
 branch_223fb4c: @ 223fb4c :thumb
 	ldr     r1, [r3, #0x24]
 	add     r0, sp, #0x1c
 	bl      Function_2020aac
-	ldr     r5, [pc, #0x15c] @ 0x223fcb4, (=0x2248e14)
+	ldr     r5, [pc, #0x15c] @ 0x223fcb4, (=Unknown_2248e14)
 	add     r3, sp, #0x4
 	ldmia   r5!, {r0,r1}
 	mov     r2, r3
@@ -3942,7 +3940,6 @@ branch_223fc74: @ 223fc74 :thumb
 	add     r1, sp, #0x0
 	str     r2, [sp, #0x0]
 	blx     Function_20b275c
-.thumb
 branch_223fca8: @ 223fca8 :thumb
 	add     sp, #0x28
 	pop     {r3-r5,pc}
@@ -3950,9 +3947,12 @@ branch_223fca8: @ 223fca8 :thumb
 
 .word 0x2248e20 @ 0x223fcac
 .word 0x400006c @ 0x223fcb0
-.word 0x2248e14 @ 0x223fcb4
+.word Unknown_2248e14 @ 0x223fcb4
 .word 0x6d6 @ 0x223fcb8
 .word 0x4000454 @ 0x223fcbc
+
+
+
 .thumb
 Function_223fcc0: @ 223fcc0 :thumb
 	ldr     r3, [pc, #0x4] @ 0x223fcc8, (=Function_22400c4+1)
@@ -25917,16 +25917,17 @@ Function_2248dd8: @ 2248dd8 :thumb
 .thumb
 branch_2248e06: @ 2248e06 :thumb
 	mov     r5, #0x0
-.thumb
 branch_2248e08: @ 2248e08 :thumb
 	mov     r0, r4
 	bl      Function_20181c4
 	mov     r0, r5
 	pop     {r4-r6,pc}
-@ 0x2248e12
 
 
-.incbin "./baserom/overlay/overlay_0006.bin", 0xacd2, 0x22491ec - 0x2248e12
+
+.align 2, 0
+Unknown_2248e14: @ 0x2248e14
+.incbin "./baserom/overlay/overlay_0006.bin", 0xacd4, 0x22491ec - 0x2248e14
 
 
 Unknown_22491ec:

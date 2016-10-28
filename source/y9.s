@@ -1,8 +1,8 @@
 
 .section .ewram3, "ax"
 
-@.incbin "./baserom/y9.bin"
-/*ARM9 and ARM7 Overlay Tables (OVT) (base/size defined in cart header)
+/*
+ARM9 and ARM7 Overlay Tables (OVT) (base/size defined in cart header)
 Somehow related to Nintendo's compiler, allows to assign compiler Overlay IDs to filesystem File IDs, and to define additional information such like load addresses.
 
   Addr Size Expl.
@@ -13,7 +13,8 @@ Somehow related to Nintendo's compiler, allows to assign compiler Overlay IDs to
   10h  4    Static initialiser start address
   14h  4    Static initialiser end address
   18h  4    File ID  (0000h..EFFFh)
-  1Ch  4    Reserved (zero)*/
+  1Ch  4    Reserved (zero)
+*/
 
 .word 0, __load_start_iwram0, __load_size_iwram0, 0x0, 0x21d0d80, 0x21d0d84, 0, 0
 @.word 0, 0x21d0d80, 0x20, 0x0, 0x21d0d80, 0x21d0d84, 0, 0

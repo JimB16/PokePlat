@@ -4863,11 +4863,12 @@ branch_2221b60: @ 2221b60 :thumb
 	bx      lr
 @ 0x2221b64
 
+
 .thumb
 Function_2221b64: @ 2221b64 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
-	ldr     r3, [pc, #0x48] @ 0x2221bb4, (=0x2238594)
+	ldr     r3, [pc, #0x48] @ 0x2221bb4, (=Unknown_2238594)
 	add     r2, sp, #0x0
 	mov     r5, r0
 	mov     r4, r2
@@ -4877,7 +4878,6 @@ Function_2221b64: @ 2221b64 :thumb
 	stmia   r2!, {r0,r1}
 	ldr     r7, [pc, #0x3c] @ 0x2221bb8, (=0x2238644)
 	mov     r6, #0x0
-.thumb
 branch_2221b7c: @ 2221b7c :thumb
 	ldr     r0, [r5, #0x18]
 	ldr     r1, [r4, #0x0]
@@ -4889,7 +4889,6 @@ branch_2221b7c: @ 2221b7c :thumb
 	lsr     r2, r0, #16
 	cmp     r2, #0x2
 	blt     branch_2221b9e
-.thumb
 branch_2221b92: @ 2221b92 :thumb
 	lsr     r0, r2, #31
 	add     r0, r2, r0
@@ -4914,7 +4913,7 @@ branch_2221ba6: @ 2221ba6 :thumb
 @ 0x2221bb2
 
 .align 2
-.word 0x2238594 @ 0x2221bb4
+.word Unknown_2238594 @ 0x2221bb4
 .word 0x2238644 @ 0x2221bb8
 
 
@@ -56892,6 +56891,8 @@ branch_223858a: @ 223858a :thumb
 .word 0x13b @ 0x2238590
 
 
+
+Unknown_2238594: @ 0x2238594
 .incbin "./baserom/overlay/overlay_0012.bin", 0x18974, 0x22385cc - 0x2238594
 
 

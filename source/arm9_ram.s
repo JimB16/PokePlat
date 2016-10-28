@@ -677,18 +677,52 @@ RAM_21ceb88:
     .zero 0x80
 
 RAM_21cec08:
+.equ RAM_21cec08_0,     0x0
+.equ RAM_21cec08_4,     0x4
+.equ RAM_21cec08_8,     0x8
+.equ RAM_21cec08_a,     0xa
+.equ RAM_21cec08_c,     0xc
     .word 0
 RAM_21cec0c:
     .word 0, 0, 0
-RAM_21cec18:
+
+RomInitialized: @ 0x21cec18
     .word 0
 RAM_21cec1c:
+.equ RAM_21cec1c_0,     0x0
+.equ RAM_21cec1c_4,     0x4
+.equ RAM_21cec1c_8,     0x8
+.equ RAM_21cec1c_c,     0xc
+.equ RAM_21cec1c_10,    0x10
+.equ RAM_21cec1c_14,    0x14
     .word 0, 0
 RAM_21cec24:
     .word 0, 0
 RAM_21cec2c:
     .word 0, 0
-RAM_21cec34:
+
+ArchiveData: @ 0x21cec34
+.equ ArchiveData_0,     0x0
+.equ ArchiveData_8,     0x8
+.equ ArchiveData_c,     0xc
+.equ ArchiveData_10,    0x10
+.equ ArchiveData_14,    0x14
+.equ ArchiveData_18,    0x18
+.equ ArchiveData_1c,    0x1c
+.equ ArchiveData_28,    0x28
+.equ ArchiveData_2c,    0x2c
+.equ ArchiveData_30,    0x30
+.equ ArchiveData_34,    0x34
+.equ ArchiveData_38,    0x38
+.equ ArchiveData_3c,    0x3c
+.equ ArchiveData_40,    0x40
+.equ ArchiveData_44,    0x44
+.equ ArchiveData_48,    0x48
+.equ ArchiveData_4c,    0x4c
+.equ ArchiveData_50,    0x50
+.equ ArchiveData_54,    0x54
+.equ ArchiveData_58,    0x58
+.equ ArchiveData_size,  0x5c
     .zero 0x5c
 
 RAM_21cec90:

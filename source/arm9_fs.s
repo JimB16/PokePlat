@@ -6,6 +6,7 @@ FSi_ReleaseCommand: @ 20c666c :arm
 	mov     r5, r0
 	mov     r4, r1
 	bl      OS_DisableInterrupts
+
 	ldr     r1, [r5]
 	mov     r6, r0
 	ldr     r0, [r5, #0x4]
@@ -21,6 +22,7 @@ FSi_ReleaseCommand: @ 20c666c :arm
 	bic     r1, r1, #0x4f
 	str     r1, [r5, #0xc]
 	str     r4, [r5, #0x14]
+
 	bl      OS_WakeupThread
 	mov     r0, r6
 	bl      OS_RestoreInterrupts
@@ -41,8 +43,8 @@ FSi_TranslateCommand: @ 20c66c8 :arm
 	moveq   r1, #0x0
 	ldr     r0, [r5, #0x1c]
 	cmp     r1, #0x0
-	orrne   r0, r0, #2, 24 @ #0x200
-	orreq   r0, r0, #1, 24 @ #0x100
+	orrne   r0, r0, #0x200
+	orreq   r0, r0, #0x100
 	str     r0, [r5, #0x1c]
 	ldr     r0, [r5, #0x58]
 	tst     r0, r6
@@ -82,7 +84,7 @@ branch_20c6770: @ 20c6770 :arm
 branch_20c6774: @ 20c6774 :arm
 	cmp     r4, #0x7
 	bne     branch_20c6790
-	ldr     r1, [pc, #0xd0] @ [0x20c6854] (=Unknown_20fe484)
+	ldr     r1, =FSi_Jumptable
 	mov     r0, r8
 	ldr     r1, [r1, r7, lsl #0x2]
 	blx     r1
@@ -99,32 +101,28 @@ branch_20c6790: @ 20c6790 :arm
 	bl      OS_DisableInterrupts
 	ldr     r1, [r5, #0x1c]
 	mov     r7, r0
-	tst     r1, #2, 24 @ #0x200
+	tst     r1, #0x200
 	movne   r0, #0x1
 	moveq   r0, #0x0
 	cmp     r0, #0x0
 	beq     branch_20c67f8
 	mov     r4, #0x0
 	mov     r6, #0x1
-.arm
 branch_20c67d8: @ 20c67d8 :arm
 	add     r0, r5, #0xc
 	bl      OS_SleepThread
 	ldr     r0, [r5, #0x1c]
-	tst     r0, #2, 24 @ #0x200
+	tst     r0, #0x200
 	movne   r0, r6
 	moveq   r0, r4
 	cmp     r0, #0x0
 	bne     branch_20c67d8
-.arm
 branch_20c67f8: @ 20c67f8 :arm
 	mov     r0, r7
 	ldr     r4, [r8, #0x14]
 	bl      OS_RestoreInterrupts
 	b       branch_20c684c
-@ 0x20c6808
 
-.arm
 branch_20c6808: @ 20c6808 :arm
 	ldr     r0, [r8, #0xc]
 	tst     r0, #0x4
@@ -134,17 +132,15 @@ branch_20c6808: @ 20c6808 :arm
 	bne     branch_20c683c
 	ldr     r1, [r5, #0x1c]
 	mov     r0, r8
-	bic     r2, r1, #1, 24 @ #0x100
+	bic     r2, r1, #0x100
 	mov     r1, r4
 	str     r2, [r5, #0x1c]
 	bl      FSi_ReleaseCommand
 	b       branch_20c684c
-@ 0x20c683c
 
-.arm
 branch_20c683c: @ 20c683c :arm
 	ldr     r0, [r5, #0x1c]
-	bic     r0, r0, #2, 24 @ #0x200
+	bic     r0, r0, #0x200
 	str     r0, [r5, #0x1c]
 	str     r4, [r8, #0x14]
 branch_20c684c: @ 20c684c :arm
@@ -152,7 +148,7 @@ branch_20c684c: @ 20c684c :arm
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x20c6854
 
-.word Unknown_20fe484 @ 0x20c6854
+.pool
 
 
 
@@ -258,7 +254,7 @@ FSi_SeekDirDirect: @ 20c6968 :arm
 	orr     r3, r3, #0x4
 	str     r3, [r0, #0xc]
 	ldr     r3, [r0, #0x8]
-	ldr     r12, [pc, #0x14] @ [0x20c6998] (=0x20c66c8)
+	ldr     r12, =FSi_TranslateCommand
 	str     r3, [r0, #0x30]
 	str     r2, [r0, #0x38]
 	strh    r2, [r0, #0x36]
@@ -267,7 +263,7 @@ FSi_SeekDirDirect: @ 20c6968 :arm
 	bx      r12
 @ 0x20c6998
 
-.word FSi_TranslateCommand @ =0x20c66c8, 0x20c6998
+.pool
 
 
 
@@ -455,12 +451,9 @@ branch_20c6be0: @ 20c6be0 :arm
 	mov     r0, #0x1
 	mov     r1, r8
 	b       branch_20c6bf4
-@ 0x20c6bf0
 
-.arm
 branch_20c6bf0: @ 20c6bf0 :arm
 	add     r8, r8, #0x1
-.arm
 branch_20c6bf4: @ 20c6bf4 :arm
 	ldrb    r7, [r5, r8]
 	mov     r2, r1
@@ -497,13 +490,10 @@ branch_20c6bf4: @ 20c6bf4 :arm
 	ldr     r1, [r9, #0x2c]
 	mov     r0, r9
 	bl      FSi_SeekDirDirect
-.arm
 branch_20c6c80: @ 20c6c80 :arm
 	add     r5, r5, #0x2
 	b       branch_20c6d54
-@ 0x20c6c88
 
-.arm
 branch_20c6c88: @ 20c6c88 :arm
 	cmp     r8, #0x7f
 	addgt   sp, sp, #0x94
@@ -515,7 +505,6 @@ branch_20c6c88: @ 20c6c88 :arm
 	str     r0, [r9, #0x34]
 	add     r10, sp, #0x14
 	mov     r4, #0x3
-.arm
 branch_20c6cb0: @ 20c6cb0 :arm
 	mov     r0, r9
 	mov     r1, r4
@@ -573,7 +562,6 @@ branch_20c6d54: @ 20c6d54 :arm
 	ldrb    r3, [r5, r0]!
 	cmp     r3, #0x0
 	bne     branch_20c6be0
-.arm
 branch_20c6d70: @ 20c6d70 :arm
 	cmp     r6, #0x0
 	addeq   sp, sp, #0x94
@@ -606,7 +594,7 @@ FSi_GetPathCommand: @ 20c6d9c :arm
 	moveq   r0, #0x0
 	cmp     r0, #0x0
 	ldrneh  r9, [r10, #0x24]
-	movne   r6, #1, 16 @ #0x10000
+	movne   r6, #0x10000
 	bne     branch_20c6e80
 	ldrh    r0, [r10, #0x38]
 	ldr     r6, [r10, #0x20]
@@ -615,11 +603,10 @@ FSi_GetPathCommand: @ 20c6d9c :arm
 	bne     branch_20c6e80
 	mov     r7, #0x0
 	mov     r8, r7
-	mov     r9, #1, 16 @ #0x10000
+	mov     r9, #0x10000
 	add     r5, sp, #0x4
 	mov     r4, #0x3
 	add     r11, sp, #0x4c
-.arm
 branch_20c6e0c: @ 20c6e0c :arm
 	mov     r0, r5
 	mov     r1, r7
@@ -634,7 +621,6 @@ branch_20c6e0c: @ 20c6e0c :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	bne     branch_20c6e6c
-.arm
 branch_20c6e40: @ 20c6e40 :arm
 	ldr     r0, [sp, #0x58]
 	cmp     r0, #0x0
@@ -647,25 +633,21 @@ branch_20c6e40: @ 20c6e40 :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	beq     branch_20c6e40
-.arm
 branch_20c6e6c: @ 20c6e6c :arm
-	cmp     r9, #1, 16 @ #0x10000
+	cmp     r9, #0x10000
 	bne     branch_20c6e80
 	add     r7, r7, #0x1
 	cmp     r7, r8
 	bcc     branch_20c6e0c
-.arm
 branch_20c6e80: @ 20c6e80 :arm
-	cmp     r9, #1, 16 @ #0x10000
+	cmp     r9, #0x10000
 	bne     branch_20c6e9c
 	mov     r0, #0x0
 	strh    r0, [r10, #0x38]
 	add     sp, sp, #0xe0
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r11,pc}
-@ 0x20c6e9c
 
-.arm
 branch_20c6e9c: @ 20c6e9c :arm
 	ldrh    r0, [r10, #0x38]
 	cmp     r0, #0x0
@@ -676,12 +658,11 @@ branch_20c6e9c: @ 20c6e9c :arm
 	cmp     r0, #0xff
 	addls   r8, r1, #0x1
 	bls     branch_20c6ecc
-	cmp     r0, #255, 24 @ #0xff00
+	cmp     r0, #0xff00
 	addls   r8, r1, #0x2
 	addhi   r8, r1, #0x3
-.arm
 branch_20c6ecc: @ 20c6ecc :arm
-	cmp     r6, #1, 16 @ #0x10000
+	cmp     r6, #0x10000
 	ldrne   r0, [sp, #0x5c]
 	add     r8, r8, #0x2
 	addne   r8, r8, r0
@@ -694,7 +675,6 @@ branch_20c6ecc: @ 20c6ecc :arm
 	add     r5, sp, #0x4
 	mov     r4, #0x3
 	add     r11, sp, #0x4c
-.arm
 branch_20c6f00: @ 20c6f00 :arm
 	ldr     r1, [sp, #0x30]
 	mov     r0, r5
@@ -707,7 +687,6 @@ branch_20c6f00: @ 20c6f00 :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	bne     branch_20c6f68
-.arm
 branch_20c6f2c: @ 20c6f2c :arm
 	ldr     r0, [sp, #0x58]
 	cmp     r0, #0x0
@@ -719,26 +698,21 @@ branch_20c6f2c: @ 20c6f2c :arm
 	add     r0, r0, #0x1
 	add     r8, r8, r0
 	b       branch_20c6f68
-@ 0x20c6f54
 
-.arm
 branch_20c6f54: @ 20c6f54 :arm
 	mov     r0, r5
 	mov     r1, r4
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	beq     branch_20c6f2c
-.arm
 branch_20c6f68: @ 20c6f68 :arm
 	ldrh    r7, [sp, #0x28]
 	cmp     r7, #0x0
 	bne     branch_20c6f00
-.arm
 branch_20c6f74: @ 20c6f74 :arm
 	add     r0, r8, #0x1
 	strh    r0, [r10, #0x38]
 	strh    r9, [r10, #0x3a]
-.arm
 branch_20c6f80: @ 20c6f80 :arm
 	ldr     r5, [r10, #0x30]
 	cmp     r5, #0x0
@@ -757,10 +731,9 @@ branch_20c6f80: @ 20c6f80 :arm
 	cmp     r0, #0xff
 	movls   r8, #0x1
 	bls     branch_20c6fd0
-	cmp     r0, #255, 24 @ #0xff00
+	cmp     r0, #0xff00
 	movls   r8, #0x2
 	movhi   r8, #0x3
-.arm
 branch_20c6fd0: @ 20c6fd0 :arm
 	ldr     r0, [sp]
 	mov     r1, r5
@@ -774,7 +747,7 @@ branch_20c6fd0: @ 20c6fd0 :arm
 	add     r0, sp, #0x4
 	mov     r1, r9
 	bl      FSi_SeekDirDirect
-	cmp     r6, #1, 16 @ #0x10000
+	cmp     r6, #0x10000
 	beq     branch_20c7080
 	add     r3, sp, #0x4c
 	mov     r2, #0x0
@@ -787,7 +760,6 @@ branch_20c6fd0: @ 20c6fd0 :arm
 	bne     branch_20c705c
 	add     r8, sp, #0x4
 	mov     r7, #0x3
-.arm
 branch_20c7034: @ 20c7034 :arm
 	ldr     r0, [sp, #0x58]
 	cmp     r0, #0x0
@@ -799,7 +771,6 @@ branch_20c7034: @ 20c7034 :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	beq     branch_20c7034
-.arm
 branch_20c705c: @ 20c705c :arm
 	ldr     r0, [sp, #0x5c]
 	add     r1, r5, r4
@@ -810,15 +781,12 @@ branch_20c705c: @ 20c705c :arm
 	bl      MI_CpuCopy8
 	sub     r4, r4, r6
 	b       branch_20c7090
-@ 0x20c7080
 
-.arm
 branch_20c7080: @ 20c7080 :arm
 	add     r0, r5, r4
 	mov     r1, #0x0
 	strb    r1, [r0, #-0x1]
 	sub     r4, r4, #0x1
-.arm
 branch_20c7090: @ 20c7090 :arm
 	cmp     r9, #0x0
 	beq     branch_20c7138
@@ -827,7 +795,6 @@ branch_20c7090: @ 20c7090 :arm
 	add     r8, sp, #0x4c
 	mov     r7, #0x0
 	mov     r11, #0x2f
-.arm
 branch_20c70ac: @ 20c70ac :arm
 	ldr     r1, [sp, #0x30]
 	mov     r0, r10
@@ -842,7 +809,6 @@ branch_20c70ac: @ 20c70ac :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	bne     branch_20c712c
-.arm
 branch_20c70e0: @ 20c70e0 :arm
 	ldr     r0, [sp, #0x58]
 	cmp     r0, #0x0
@@ -858,16 +824,13 @@ branch_20c70e0: @ 20c70e0 :arm
 	bl      MI_CpuCopy8
 	sub     r4, r4, r9
 	b       branch_20c712c
-@ 0x20c7118
 
-.arm
 branch_20c7118: @ 20c7118 :arm
 	mov     r0, r10
 	mov     r1, r6
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x0
 	beq     branch_20c70e0
-.arm
 branch_20c712c: @ 20c712c :arm
 	ldrh    r9, [sp, #0x28]
 	cmp     r9, #0x0
@@ -1028,7 +991,6 @@ FSi_NextCommand: @ 20c72a4 :arm
 	mov     r8, #0x0
 	mov     r9, #0x1
 	mov     r7, #0x3
-.arm
 branch_20c72f4: @ 20c72f4 :arm
 	ldr     r1, [r0, #0xc]
 	ldr     r5, [r0, #0x4]
@@ -1044,12 +1006,10 @@ branch_20c72f4: @ 20c72f4 :arm
 	bl      FSi_ReleaseCommand
 	cmp     r5, #0x0
 	ldreq   r5, [r6, #0x24]
-.arm
 branch_20c732c: @ 20c732c :arm
 	mov     r0, r5
 	cmp     r5, #0x0
 	bne     branch_20c72f4
-.arm
 branch_20c7338: @ 20c7338 :arm
 	ldr     r0, [r6, #0x1c]
 	tst     r0, #0x40
@@ -1088,7 +1048,6 @@ branch_20c7338: @ 20c7338 :arm
 	mov     r0, r5
 	mov     r1, #0x9
 	blx     r2
-.arm
 branch_20c73cc: @ 20c73cc :arm
 	bl      OS_DisableInterrupts
 	ldr     r1, [r5, #0xc]
@@ -1108,18 +1067,14 @@ branch_20c73cc: @ 20c73cc :arm
 	add     sp, sp, #0x48
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r9,pc}
-@ 0x20c7414
 
-.arm
 branch_20c7414: @ 20c7414 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
 	add     sp, sp, #0x48
 	mov     r0, r5
 	ldmfd   sp!, {r3-r9,pc}
-@ 0x20c7428
 
-.arm
 branch_20c7428: @ 20c7428 :arm
 	ldr     r0, [r6, #0x1c]
 	tst     r0, #0x10
@@ -1140,7 +1095,6 @@ branch_20c7428: @ 20c7428 :arm
 	add     r0, sp, #0x0
 	mov     r1, #0xa
 	blx     r2
-.arm
 branch_20c7474: @ 20c7474 :arm
 	ldr     r0, [r6, #0x1c]
 	tst     r0, #0x40
@@ -1154,7 +1108,6 @@ branch_20c7474: @ 20c7474 :arm
 	orr     r1, r1, #0x8
 	str     r1, [r6, #0x1c]
 	bl      OS_WakeupThread
-.arm
 branch_20c74a4: @ 20c74a4 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
@@ -1170,9 +1123,9 @@ FSi_ExecuteAsyncCommand: @ 20c74b8 :arm
 	movs    r6, r0
 	ldr     r4, [r6, #0x8]
 	ldmeqfd sp!, {r4-r8,pc}
+
 	mov     r7, #0x0
 	mov     r8, #0x1
-.arm
 branch_20c74d0: @ 20c74d0 :arm
 	bl      OS_DisableInterrupts
 	ldr     r1, [r6, #0xc]
@@ -1190,9 +1143,7 @@ branch_20c74d0: @ 20c74d0 :arm
 	mov     r0, r5
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4-r8,pc}
-@ 0x20c7510
 
-.arm
 branch_20c7510: @ 20c7510 :arm
 	ldr     r1, [r6, #0xc]
 	mov     r0, r5
@@ -1204,6 +1155,7 @@ branch_20c7510: @ 20c7510 :arm
 	bl      FSi_TranslateCommand
 	cmp     r0, #0x6
 	ldmeqfd sp!, {r4-r8,pc}
+
 	mov     r0, r4
 	bl      FSi_NextCommand
 	movs    r6, r0
@@ -1265,7 +1217,7 @@ FSi_SendCommand: @ 20c7590 :arm
 	ldmfd   sp!, {r3-r7,pc}
 
 branch_20c75ec: @ 20c75ec :arm
-	tst     r7, #127, 30 @ #0x1fc
+	tst     r7, #0x1fc
 	ldrne   r0, [r6, #0xc]
 	orrne   r0, r0, #0x4
 	strne   r0, [r6, #0xc]
@@ -1307,7 +1259,7 @@ branch_20c7634: @ 20c7634 :arm
 	str     r1, [r4, #0x1c]
 	bl      OS_RestoreInterrupts
 	ldr     r0, [r4, #0x58]
-	tst     r0, #2, 24 @ #0x200
+	tst     r0, #0x200
 	beq     branch_20c76a0
 	ldr     r2, [r4, #0x54]
 	mov     r0, r6
@@ -1361,18 +1313,24 @@ branch_20c7728: @ 20c7728 :arm
 @ 0x20c7734
 
 
+/* Input:
+r0: Pointer to ArchiveData
+*/
 .arm
 FS_InitArchive: @ 20c7734 :arm
 	stmfd   sp!, {r4,lr}
+
 	mov     r1, #0x0
-	mov     r2, #0x5c
+	mov     r2, #ArchiveData_size
 	mov     r4, r0
 	bl      MI_CpuFill8
+
 	mov     r0, #0x0
-	str     r0, [r4, #0x10]
-	str     r0, [r4, #0xc]
-	str     r0, [r4, #0x18]
-	str     r0, [r4, #0x14]
+	str     r0, [r4, #ArchiveData_10]
+	str     r0, [r4, #ArchiveData_c]
+	str     r0, [r4, #ArchiveData_18]
+	str     r0, [r4, #ArchiveData_14]
+
 	ldmfd   sp!, {r4,pc}
 @ 0x20c7760
 
@@ -1383,8 +1341,8 @@ FS_FindArchive: @ 20c7760 :arm
 	bl      FSi_GetPackedName
 	mov     r4, r0
 	bl      OS_DisableInterrupts
-	ldr     r1, [pc, #0x24] @ [0x20c779c] (=RAM_21cec08)
-	ldr     r5, [r1]
+	ldr     r1, =RAM_21cec08
+	ldr     r5, [r1, #RAM_21cec08_0]
 	b       branch_20c7780
 
 branch_20c777c: @ 20c777c :arm
@@ -1399,10 +1357,13 @@ branch_20c7780: @ 20c7780 :arm
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20c779c
 
-.word RAM_21cec08 @ 0x20c779c
+.pool
 
 
 
+/* Input:
+r0: Pointer to ArchiveData
+*/
 .arm
 FS_RegisterArchiveName: @ 20c77a0 :arm
 	stmfd   sp!, {r4-r8,lr}
@@ -1417,45 +1378,39 @@ FS_RegisterArchiveName: @ 20c77a0 :arm
 	bl      FS_FindArchive
 	cmp     r0, #0x0
 	bne     branch_20c7840
-	ldr     r0, [pc, #0x78] @ [0x20c7850] (=RAM_21cec08)
-	ldr     r1, [r0]
+	ldr     r0, =RAM_21cec08
+	ldr     r1, [r0, #RAM_21cec08_0]
 	cmp     r1, #0x0
 	bne     branch_20c77fc
-	str     r7, [r0]
-	str     r7, [r0, #0x4]
+	str     r7, [r0, #RAM_21cec08_0]
+	str     r7, [r0, #RAM_21cec08_4]
 	mov     r1, r8
-	str     r1, [r0, #0xc]
-	strh    r1, [r0, #0xa]
-	strh    r1, [r0, #0x8]
+	str     r1, [r0, #RAM_21cec08_c]
+	strh    r1, [r0, #RAM_21cec08_a]
+	strh    r1, [r0, #RAM_21cec08_8]
 	b       branch_20c7820
-@ 0x20c77fc
 
-.arm
 branch_20c77fc: @ 20c77fc :arm
 	ldr     r0, [r1, #0x4]
 	cmp     r0, #0x0
 	beq     branch_20c7818
-.arm
 branch_20c7808: @ 20c7808 :arm
 	mov     r1, r0
 	ldr     r0, [r0, #0x4]
 	cmp     r0, #0x0
 	bne     branch_20c7808
-.arm
 branch_20c7818: @ 20c7818 :arm
 	str     r7, [r1, #0x4]
-	str     r1, [r7, #0x8]
-.arm
+	str     r1, [r7, #ArchiveData_8]
 branch_20c7820: @ 20c7820 :arm
 	mov     r0, r6
 	mov     r1, r5
 	bl      FSi_GetPackedName
-	str     r0, [r7]
-	ldr     r0, [r7, #0x1c]
+	str     r0, [r7, #ArchiveData_0]
+	ldr     r0, [r7, #ArchiveData_1c]
 	mov     r8, #0x1
 	orr     r0, r0, #0x1
-	str     r0, [r7, #0x1c]
-.arm
+	str     r0, [r7, #ArchiveData_1c]
 branch_20c7840: @ 20c7840 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
@@ -1463,7 +1418,7 @@ branch_20c7840: @ 20c7840 :arm
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x20c7850
 
-.word RAM_21cec08 @ 0x20c7850
+.pool
 
 
 
@@ -1488,52 +1443,55 @@ Function_20c7854: @ 20c7854 :arm
 	str     r3, [r4, #0x8]
 	str     r3, [r4, #0x4]
 	ldr     r2, [r4, #0x1c]
-	ldr     r1, [pc, #0x2c] @ [0x20c78d4] (=RAM_21cec08)
+	ldr     r1, =RAM_21cec08
 	bic     r2, r2, #0x1
 	str     r2, [r4, #0x1c]
-	ldr     r2, [r1, #0x4]
+	ldr     r2, [r1, #RAM_21cec08_4]
 	cmp     r2, r4
 	bne     branch_20c78cc
-	ldr     r2, [r1]
-	str     r2, [r1, #0x4]
-	str     r3, [r1, #0xc]
-	strh    r3, [r1, #0xa]
-	strh    r3, [r1, #0x8]
+	ldr     r2, [r1, #RAM_21cec08_0]
+	str     r2, [r1, #RAM_21cec08_4]
+	str     r3, [r1, #RAM_21cec08_c]
+	strh    r3, [r1, #RAM_21cec08_a]
+	strh    r3, [r1, #RAM_21cec08_8]
 branch_20c78cc: @ 20c78cc :arm
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4,pc}
 @ 0x20c78d4
 
-.word RAM_21cec08 @ 0x20c78d4
+.pool
 
 
 
+/* Input:
+r0: Pointer to ArchiveData
+*/
 .arm
 FS_LoadArchive: @ 20c78d8 :arm
-	str     r1, [r0, #0x28]
-	str     r3, [r0, #0x30]
-	str     r2, [r0, #0x3c]
+	str     r1, [r0, #ArchiveData_28]
+	str     r3, [r0, #ArchiveData_30]
+	str     r2, [r0, #ArchiveData_3c]
 	ldr     r3, [sp, #0x4]
-	str     r2, [r0, #0x2c]
+	str     r2, [r0, #ArchiveData_2c]
 	ldr     r12, [sp, #0x8]
 	ldr     r1, [sp]
-	str     r3, [r0, #0x38]
-	str     r1, [r0, #0x40]
-	str     r1, [r0, #0x34]
+	str     r3, [r0, #ArchiveData_38]
+	str     r1, [r0, #ArchiveData_40]
+	str     r1, [r0, #ArchiveData_34]
 	cmp     r12, #0x0
 	ldreq   r12, [pc, #0x34] @ [0x20c7940] (=Function_20c7250)
 	ldr     r1, [sp, #0xc]
-	str     r12, [r0, #0x48]
+	str     r12, [r0, #ArchiveData_48]
 	cmp     r1, #0x0
 	ldreq   r1, [pc, #0x28] @ [0x20c7944] (=Function_20c726c)
-	str     r1, [r0, #0x4c]
-	ldr     r2, [r0, #0x48]
+	str     r1, [r0, #ArchiveData_4c]
+	ldr     r2, [r0, #ArchiveData_48]
 	mov     r1, #0x0
-	str     r2, [r0, #0x50]
-	str     r1, [r0, #0x44]
-	ldr     r1, [r0, #0x1c]
+	str     r2, [r0, #ArchiveData_50]
+	str     r1, [r0, #ArchiveData_44]
+	ldr     r1, [r0, #ArchiveData_1c]
 	orr     r1, r1, #0x2
-	str     r1, [r0, #0x1c]
+	str     r1, [r0, #ArchiveData_1c]
 	mov     r0, #0x1
 	bx      lr
 @ 0x20c7940
@@ -1566,7 +1524,6 @@ Function_20c7948: @ 20c7948 :arm
 	cmp     r0, #0x0
 	beq     branch_20c79b4
 	mov     r7, #0x3
-.arm
 branch_20c799c: @ 20c799c :arm
 	ldr     r8, [r0, #0x4]
 	mov     r1, r7
@@ -1574,7 +1531,6 @@ branch_20c799c: @ 20c799c :arm
 	mov     r0, r8
 	cmp     r8, #0x0
 	bne     branch_20c799c
-.arm
 branch_20c79b4: @ 20c79b4 :arm
 	mov     r0, #0x0
 	str     r0, [r6, #0x24]
@@ -1582,7 +1538,6 @@ branch_20c79b4: @ 20c79b4 :arm
 	beq     branch_20c79cc
 	mov     r0, r6
 	bl      FS_ResumeArchive
-.arm
 branch_20c79cc: @ 20c79cc :arm
 	mov     r0, #0x0
 	str     r0, [r6, #0x28]
@@ -1595,7 +1550,6 @@ branch_20c79cc: @ 20c79cc :arm
 	ldr     r0, [r6, #0x1c]
 	bic     r0, r0, #0xa2
 	str     r0, [r6, #0x1c]
-.arm
 branch_20c79f8: @ 20c79f8 :arm
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
@@ -1604,13 +1558,16 @@ branch_20c79f8: @ 20c79f8 :arm
 @ 0x20c7a08
 
 
+/* Input:
+r0: Pointer to ArchiveData
+*/
 .arm
 FS_LoadArchiveTables: @ 20c7a08 :arm
 	stmfd   sp!, {r4-r7,lr}
 	sub     sp, sp, #0x4c
 	mov     r7, r0
-	ldr     r3, [r7, #0x30]
-	ldr     r0, [r7, #0x38]
+	ldr     r3, [r7, #ArchiveData_30]
+	ldr     r0, [r7, #ArchiveData_38]
 	mov     r6, r1
 	add     r0, r3, r0
 	add     r0, r0, #0x3f
@@ -1621,23 +1578,23 @@ FS_LoadArchiveTables: @ 20c7a08 :arm
 	add     r0, sp, #0x4
 	bic     r5, r1, #0x1f
 	bl      FS_InitFile
-	ldr     r2, [r7, #0x2c]
+	ldr     r2, [r7, #ArchiveData_2c]
 	mvn     r0, #0x0
 	str     r0, [sp]
-	ldr     r3, [r7, #0x30]
+	ldr     r3, [r7, #ArchiveData_30]
 	add     r0, sp, #0x4
 	mov     r1, r7
 	add     r3, r2, r3
 	bl      FS_OpenFileDirect
 	cmp     r0, #0x0
 	beq     branch_20c7a9c
-	ldr     r2, [r7, #0x30]
+	ldr     r2, [r7, #ArchiveData_30]
 	add     r0, sp, #0x4
 	mov     r1, r5
 	bl      FS_ReadFile
 	cmp     r0, #0x0
 	bge     branch_20c7a94
-	ldr     r2, [r7, #0x30]
+	ldr     r2, [r7, #ArchiveData_30]
 	mov     r0, r5
 	mov     r1, #0x0
 	bl      MI_CpuFill8
@@ -1645,12 +1602,12 @@ branch_20c7a94: @ 20c7a94 :arm
 	add     r0, sp, #0x4
 	bl      FS_CloseFile
 branch_20c7a9c: @ 20c7a9c :arm
-	str     r5, [r7, #0x2c]
-	ldr     r12, [r7, #0x30]
-	ldr     r2, [r7, #0x34]
+	str     r5, [r7, #ArchiveData_2c]
+	ldr     r12, [r7, #ArchiveData_30]
+	ldr     r2, [r7, #ArchiveData_34]
 	mvn     r0, #0x0
 	str     r0, [sp]
-	ldr     r3, [r7, #0x38]
+	ldr     r3, [r7, #ArchiveData_38]
 	add     r0, sp, #0x4
 	mov     r1, r7
 	add     r3, r2, r3
@@ -1658,13 +1615,13 @@ branch_20c7a9c: @ 20c7a9c :arm
 	bl      FS_OpenFileDirect
 	cmp     r0, #0x0
 	beq     branch_20c7b00
-	ldr     r2, [r7, #0x38]
+	ldr     r2, [r7, #ArchiveData_38]
 	add     r0, sp, #0x4
 	mov     r1, r5
 	bl      FS_ReadFile
 	cmp     r0, #0x0
 	bge     branch_20c7af8
-	ldr     r2, [r7, #0x38]
+	ldr     r2, [r7, #ArchiveData_38]
 	mov     r0, r5
 	mov     r1, #0x0
 	bl      MI_CpuFill8
@@ -1672,20 +1629,20 @@ branch_20c7af8: @ 20c7af8 :arm
 	add     r0, sp, #0x4
 	bl      FS_CloseFile
 branch_20c7b00: @ 20c7b00 :arm
-	str     r5, [r7, #0x34]
-	ldr     r0, [pc, #0x1c] @ [0x20c7b28] (=Function_20c728c)
-	str     r6, [r7, #0x44]
-	str     r0, [r7, #0x50]
-	ldr     r0, [r7, #0x1c]
+	str     r5, [r7, #ArchiveData_34]
+	ldr     r0, =Function_20c728c
+	str     r6, [r7, #ArchiveData_44]
+	str     r0, [r7, #ArchiveData_50]
+	ldr     r0, [r7, #ArchiveData_1c]
 	orr     r0, r0, #0x4
-	str     r0, [r7, #0x1c]
+	str     r0, [r7, #ArchiveData_1c]
 branch_20c7b1c: @ 20c7b1c :arm
 	mov     r0, r4
 	add     sp, sp, #0x4c
 	ldmfd   sp!, {r4-r7,pc}
 @ 0x20c7b28
 
-.word Function_20c728c @ 0x20c7b28
+.pool
 
 
 
@@ -1814,6 +1771,9 @@ branch_20c7cbc: @ 20c7cbc :arm
 @ 0x20c7cc4
 
 
+/* Input:
+r0: Pointer to ArchiveData
+*/
 .arm
 FS_SetArchiveProc: @ 20c7cc4 :arm
 	cmp     r2, #0x0
@@ -1822,8 +1782,8 @@ FS_SetArchiveProc: @ 20c7cc4 :arm
 	cmp     r1, #0x0
 	moveq   r2, #0x0
 branch_20c7cd8: @ 20c7cd8 :arm
-	str     r1, [r0, #0x54]
-	str     r2, [r0, #0x58]
+	str     r1, [r0, #ArchiveData_54]
+	str     r2, [r0, #ArchiveData_58]
 	bx      lr
 @ 0x20c7ce4
 
@@ -1871,28 +1831,30 @@ branch_20c7d38: @ 20c7d38 :arm
 .arm
 FS_Init: @ 20c7d68 :arm
 	stmfd   sp!, {r3,lr}
-	ldr     r1, [pc, #0x18] @ [0x20c7d8c] (=RAM_21cec18)
+
+	ldr     r1, =RomInitialized
 	ldr     r2, [r1]
 	cmp     r2, #0x0
 	ldmnefd sp!, {r3,pc}
+
 	mov     r2, #0x1
 	str     r2, [r1]
 	bl      FSi_InitRom
 	ldmfd   sp!, {r3,pc}
 @ 0x20c7d8c
 
-.word RAM_21cec18 @ 0x20c7d8c
+.pool
 
 
 
 .arm
 FS_IsAvailable: @ 20c7d90 :arm
-	ldr     r0, [pc, #0x4] @ [0x20c7d9c] (=RAM_21cec18)
+	ldr     r0, =RomInitialized
 	ldr     r0, [r0]
 	bx      lr
 @ 0x20c7d9c
 
-.word RAM_21cec18 @ 0x20c7d9c
+.pool
 
 
 
@@ -1924,7 +1886,7 @@ FSi_FindPath: @ 20c7dc8 :arm
 	mov     r5, r3
 	cmpne   r1, #0x5c
 	bne     branch_20c7e14
-	ldr     r0, [pc, #0x110] @ [0x20c7f08] (=RAM_21cec0c)
+	ldr     r0, =RAM_21cec0c
 	mov     r1, #0x0
 	ldr     r0, [r0]
 	strh    r1, [sp, #0x4]
@@ -1935,7 +1897,7 @@ FSi_FindPath: @ 20c7dc8 :arm
 	b       branch_20c7eb8
 
 branch_20c7e14: @ 20c7e14 :arm
-	ldr     r0, [pc, #0xec] @ [0x20c7f08] (=RAM_21cec0c)
+	ldr     r0, =RAM_21cec0c
 	add     r3, sp, #0x0
 	ldmia   r0, {r0-r2}
 	stmia   r3, {r0-r2}
@@ -1955,6 +1917,7 @@ branch_20c7e28: @ 20c7e28 :arm
 	addeq   sp, sp, #0xc
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r8,pc}
+
 	ldr     r1, [r0, #0x1c]
 	tst     r1, #0x2
 	movne   r1, #0x1
@@ -1974,14 +1937,11 @@ branch_20c7e28: @ 20c7e28 :arm
 	cmpne   r0, #0x5c
 	addeq   r7, r7, #0x1
 	b       branch_20c7eb8
-@ 0x20c7eac
 
-.arm
 branch_20c7eac: @ 20c7eac :arm
 	add     r4, r4, #0x1
 	cmp     r4, #0x3
 	ble     branch_20c7e28
-.arm
 branch_20c7eb8: @ 20c7eb8 :arm
 	ldr     r1, [sp]
 	add     r0, sp, #0x0
@@ -1998,7 +1958,6 @@ branch_20c7eb8: @ 20c7eb8 :arm
 	mov     r0, #0x1
 	str     r0, [r8, #0x40]
 	str     r5, [r8, #0x44]
-.arm
 branch_20c7ef4: @ 20c7ef4 :arm
 	mov     r0, r8
 	mov     r1, #0x4
@@ -2007,7 +1966,7 @@ branch_20c7ef4: @ 20c7ef4 :arm
 	ldmfd   sp!, {r3-r8,pc}
 @ 0x20c7f08
 
-.word RAM_21cec0c @ 0x20c7f08
+.pool
 
 
 
@@ -2179,6 +2138,7 @@ FS_WaitAsync: @ 20c8104 :arm
 	mov     r6, r0
 	mov     r5, #0x0
 	bl      OS_DisableInterrupts
+
 	ldr     r1, [r6, #0xc]
 	mov     r4, r0
 	tst     r1, #0x1
@@ -2235,24 +2195,24 @@ branch_20c81b0: @ 20c81b0 :arm
 
 .arm
 FS_ReadFileAsync: @ 20c81c4 :arm
-	ldr     r12, [pc, #0x4] @ [0x20c81d0] (=FSi_ReadFileCore)
+	ldr     r12, =FSi_ReadFileCore
 	mov     r3, #0x1
 	bx      r12
 @ 0x20c81d0
 
-.word FSi_ReadFileCore @ 0x20c81d0
+.pool
 
 
 
 .arm
 .globl FS_ReadFile
 FS_ReadFile: @ 20c81d4 :arm
-	ldr     r12, [pc, #0x4] @ [0x20c81e0] (=FSi_ReadFileCore)
+	ldr     r12, =FSi_ReadFileCore
 	mov     r3, #0x0
 	bx      r12
 @ 0x20c81e0
 
-.word FSi_ReadFileCore @ 0x20c81e0
+.pool
 
 
 
@@ -2314,7 +2274,8 @@ FS_ChangeDir: @ 20c8250 :arm
 	addeq   sp, sp, #0x54
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3,r4,pc}
-	ldr     r3, [pc, #0x14] @ [0x20c82a4] (=RAM_21cec0c)
+
+	ldr     r3, =RAM_21cec0c
 	add     r0, sp, #0x0
 	ldmia   r0, {r0-r2}
 	stmia   r3, {r0-r2}
@@ -2323,7 +2284,7 @@ FS_ChangeDir: @ 20c8250 :arm
 	ldmfd   sp!, {r3,r4,pc}
 @ 0x20c82a4
 
-.word RAM_21cec0c @ 0x20c82a4
+.pool
 
 
 

@@ -13,7 +13,7 @@ CARD_ReadRomAsync: @ 20c82cc :arm
 	ldr     r0, =RAM_21cec1c
 	str     r1, [sp, #0x8]
 	mov     r1, r2
-	ldr     r0, [r0, #0x4]
+	ldr     r0, [r0, #RAM_21cec1c_4]
 	mov     r2, lr
 	bl      CARDi_ReadRom
 	mov     r0, #0x6
@@ -46,7 +46,7 @@ FSi_RomArchiveProc: @ 20c831c :arm
 
 branch_20c833c: @ 20c833c :arm
 	ldr     r0, =RAM_21cec1c
-	ldr     r0, [r0]
+	ldr     r0, [r0, #RAM_21cec1c_0]
 	mov     r0, r0, lsl #16
 	mov     r0, r0, lsr #16
 	bl      CARD_LockRom
@@ -55,7 +55,7 @@ branch_20c833c: @ 20c833c :arm
 
 branch_20c8358: @ 20c8358 :arm
 	ldr     r0, =RAM_21cec1c
-	ldr     r0, [r0]
+	ldr     r0, [r0, #RAM_21cec1c_0]
 	mov     r0, r0, lsl #16
 	mov     r0, r0, lsr #16
 	bl      CARD_UnlockRom
@@ -93,36 +93,42 @@ FSi_EmptyArchiveProc: @ 20c8390 :arm
 FSi_InitRom: @ 20c8398 :arm
 	stmfd   sp!, {r4,lr}
 	sub     sp, sp, #0x10
+
 	ldr     r1, [pc, #0x110] @ [0x20c84b8] (=RAM_21cec1c)
-	str     r0, [r1, #0x4]
+	str     r0, [r1, #RAM_21cec1c_4]
 	bl      OS_GetLockID
+
 	ldr     r1, [pc, #0x104] @ [0x20c84b8] (=RAM_21cec1c)
 	mov     r2, #0x0
-	str     r0, [r1]
-	str     r2, [r1, #0x8]
-	str     r2, [r1, #0xc]
-	str     r2, [r1, #0x10]
-	str     r2, [r1, #0x14]
+	str     r0, [r1, #RAM_21cec1c_0]
+	str     r2, [r1, #RAM_21cec1c_8]
+	str     r2, [r1, #RAM_21cec1c_c]
+	str     r2, [r1, #RAM_21cec1c_10]
+	str     r2, [r1, #RAM_21cec1c_14]
+
 	bl      CARD_Init
-	ldr     r0, [pc, #0xe8] @ [0x20c84bc] (=RAM_21cec34)
+
+	ldr     r0, [pc, #0xe8] @ [0x20c84bc] (=ArchiveData)
 	bl      FS_InitArchive
-	ldr     r0, [pc, #0xe0] @ [0x20c84bc] (=RAM_21cec34)
+
+	ldr     r0, [pc, #0xe0] @ [0x20c84bc] (=ArchiveData)
 	ldr     r1, [pc, #0xe0] @ [0x20c84c0] (=Unknown_2101164)
 	mov     r2, #0x3
 	bl      FS_RegisterArchiveName
+
 	ldr     r4, [pc, #0xd8] @ [0x20c84c4] (=RAM_27ffc40)
 	ldrh    r0, [r4]
 	cmp     r0, #0x2
 	bne     branch_20c8450
 	ldr     r3, [pc, #0xbc] @ [0x20c84b8] (=RAM_21cec1c)
 	mvn     r2, #0x0
-	str     r2, [r3, #0x8]
+	str     r2, [r3, #RAM_21cec1c_8]
 	mov     r12, #0x0
-	str     r12, [r3, #0xc]
-	str     r2, [r3, #0x10]
-	ldr     r0, [pc, #0xa8] @ [0x20c84bc] (=RAM_21cec34)
+	str     r12, [r3, #RAM_21cec1c_c]
+	str     r2, [r3, #RAM_21cec1c_10]
+	ldr     r0, [pc, #0xa8] @ [0x20c84bc] (=ArchiveData)
 	ldr     r1, [pc, #0xb0] @ [0x20c84c8] (=FSi_EmptyArchiveProc)
-	str     r12, [r3, #0x14]
+	str     r12, [r3, #RAM_21cec1c_14]
 	bl      FS_SetArchiveProc
 	mov     r1, #0x0
 	str     r1, [sp]
@@ -130,7 +136,7 @@ FSi_InitRom: @ 20c8398 :arm
 	str     r1, [sp, #0x4]
 	str     r0, [sp, #0x8]
 	ldr     r12, [pc, #0x98] @ [0x20c84d0] (=Function_20c8314)
-	ldr     r0, [pc, #0x80] @ [0x20c84bc] (=RAM_21cec34)
+	ldr     r0, [pc, #0x80] @ [0x20c84bc] (=ArchiveData)
 	mov     r2, r1
 	mov     r3, r1
 	str     r12, [sp, #0xc]
@@ -139,7 +145,7 @@ FSi_InitRom: @ 20c8398 :arm
 	ldmfd   sp!, {r4,pc}
 
 branch_20c8450: @ 20c8450 :arm
-	ldr     r0, [pc, #0x64] @ [0x20c84bc] (=RAM_21cec34)
+	ldr     r0, [pc, #0x64] @ [0x20c84bc] (=ArchiveData)
 	ldr     r1, [pc, #0x78] @ [0x20c84d4] (=FSi_RomArchiveProc)
 	ldr     r2, [pc, #0x78] @ [0x20c84d8] (=0x602)
 	bl      FS_SetArchiveProc
@@ -160,7 +166,7 @@ branch_20c8450: @ 20c8450 :arm
 	str     r1, [sp, #0x8]
 	str     r0, [sp, #0xc]
 	ldr     r3, [r4, #0x20c]
-	ldr     r0, [pc, #0x10] @ [0x20c84bc] (=RAM_21cec34)
+	ldr     r0, [pc, #0x10] @ [0x20c84bc] (=ArchiveData)
 	mov     r1, #0x0
 	bl      FS_LoadArchive
 	add     sp, sp, #0x10
@@ -168,7 +174,7 @@ branch_20c8450: @ 20c8450 :arm
 @ 0x20c84b8
 
 .word RAM_21cec1c @ 0x20c84b8
-.word RAM_21cec34 @ 0x20c84bc
+.word ArchiveData @ 0x20c84bc
 .word Unknown_2101164 @ 0x20c84c0
 .word RAM_27ffc40 @ 0x20c84c4
 .word FSi_EmptyArchiveProc @ 0x20c84c8
@@ -186,40 +192,40 @@ FS_SetDefaultDMA: @ 20c84e0 :arm
 	mov     r6, r0
 	bl      OS_DisableInterrupts
 	mov     r4, r0
-	ldr     r1, [pc, #0x30] @ [0x20c8528] (=RAM_21cec1c)
-	ldr     r0, [pc, #0x30] @ [0x20c852c] (=RAM_21cec34)
-	ldr     r5, [r1, #0x4]
+
+	ldr     r1, =RAM_21cec1c
+	ldr     r0, =ArchiveData
+	ldr     r5, [r1, #RAM_21cec1c_4]
 	bl      FS_SuspendArchive
-	ldr     r1, [pc, #0x20] @ [0x20c8528] (=RAM_21cec1c)
+	ldr     r1, =RAM_21cec1c
 	cmp     r0, #0x0
-	str     r6, [r1, #0x4]
+	str     r6, [r1, #RAM_21cec1c_4]
 	beq     branch_20c8518
-	ldr     r0, [pc, #0x14] @ [0x20c852c] (=RAM_21cec34)
+	ldr     r0, =ArchiveData
 	bl      FS_ResumeArchive
 branch_20c8518: @ 20c8518 :arm
+
 	mov     r0, r4
 	bl      OS_RestoreInterrupts
 	mov     r0, r5
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20c8528
 
-.word RAM_21cec1c @ 0x20c8528
-.word RAM_21cec34 @ 0x20c852c
+.pool
 
 
 
 .arm
 FS_TryLoadTable: @ 20c8530 :arm
-	ldr     r12, [pc, #0x10] @ [0x20c8548] (=FS_LoadArchiveTables)
+	ldr     r12, =FS_LoadArchiveTables
 	mov     r3, r0
 	mov     r2, r1
-	ldr     r0, [pc, #0x8] @ [0x20c854c] (=RAM_21cec34)
+	ldr     r0, =ArchiveData
 	mov     r1, r3
 	bx      r12
 @ 0x20c8548
 
-.word FS_LoadArchiveTables @ 0x20c8548
-.word RAM_21cec34 @ 0x20c854c
+.pool
 
 
 
@@ -259,7 +265,7 @@ FS_ClearOverlayImage: @ 20c856c :arm
 FS_GetOverlayFileID: @ 20c85a8 :arm
 	sub     sp, sp, #0x8
 	ldr     r1, [r1, #0x18]
-	ldr     r2, [pc, #0x14] @ [0x20c85cc] (=RAM_21cec34)
+	ldr     r2, =ArchiveData
 	str     r1, [sp, #0x4]
 	str     r2, [r0]
 	str     r2, [sp]
@@ -268,7 +274,7 @@ FS_GetOverlayFileID: @ 20c85a8 :arm
 	bx      lr
 @ 0x20c85cc
 
-.word RAM_21cec34 @ 0x20c85cc
+.pool
 
 
 
@@ -390,7 +396,7 @@ FS_LoadOverlayInfo: @ 20c86c8 :arm
 
 branch_20c8778: @ 20c8778 :arm
 	ldr     r12, [pc, #0x3c] @ [0x20c87bc] (=RAM_27ffe50)
-	ldr     r3, [pc, #0x3c] @ [0x20c87c0] (=RAM_21cec34)
+	ldr     r3, [pc, #0x3c] @ [0x20c87c0] (=ArchiveData)
 	ldr     r1, [r12]
 	mov     r0, r5
 	str     r1, [sp]
@@ -409,7 +415,7 @@ branch_20c8778: @ 20c8778 :arm
 .word RAM_21cec24 @ 0x20c87b4
 .word RAM_21cec2c @ 0x20c87b8
 .word RAM_27ffe50 @ 0x20c87bc
-.word RAM_21cec34 @ 0x20c87c0
+.word ArchiveData @ 0x20c87c0
 
 
 

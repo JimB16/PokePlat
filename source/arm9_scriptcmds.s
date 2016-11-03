@@ -44,7 +44,7 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	strh    r7, [r0, #ScriptHandler_80_0]
 
-	ldr     r1, [pc, #0xc] @ 0x203f708, (=Function_203f70c+1)
+	ldr     r1, =Function_203f70c+1
 	mov     r0, r5
 	str     r4, [r5, #ScriptHandler_64]
 	bl      ScriptHandler_AddFunction
@@ -53,7 +53,7 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 	pop     {r3-r7,pc}
 @ 0x203f708
 
-.word Function_203f70c+1 @ 0x203f708
+.pool
 
 
 
@@ -7829,7 +7829,7 @@ ScriptCmd_EndTrainerBattle: @ 2042e64 :thumb
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [r6, #0x0]
 	mov     r3, #0xb
-	bl      Function_20792f8
+	bl      LoadTrainerTbl_2
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      Function_203f098
@@ -31571,7 +31571,7 @@ Function_204d614: @ 204d614 :thumb
 	lsr     r0, r0, #16
 	mov     r1, #0x1
 	mov     r2, #0xb
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x35
 	bne     branch_204d69a
 	mov     r0, #0x96
@@ -34142,7 +34142,7 @@ Function_204e934: @ 204e934 :thumb
 	mov     r0, r4
 	mov     r1, #0x5
 	mov     r2, #0xb
-	bl      Function_207cff0
+	bl      GetItemData
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}

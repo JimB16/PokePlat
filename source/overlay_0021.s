@@ -2593,7 +2593,7 @@ Function_21d1fa4: @ 21d1fa4 :thumb
 	mov     r5, r0
 	mov     r0, #0x45
 	mov     r4, r1
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r1, #0x9f
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
@@ -2742,7 +2742,7 @@ Function_21d2098: @ 21d2098 :thumb
 	mov     r0, #0x9f
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r2, #0xa
 	mov     r0, r4
 	mov     r1, #0x0
@@ -54811,7 +54811,7 @@ Function_21e7904: @ 21e7904 :thumb
 	str     r0, [sp, #0x14]
 	mov     r0, #0x13
 	mov     r1, r4
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	ldr     r0, [sp, #0x10]
 	ldr     r1, [sp, #0x20]
@@ -54965,7 +54965,7 @@ branch_21e79ac: @ 21e79ac :thumb
 	bl      Function_2009bc4
 	str     r0, [r5, #0x30]
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x2c
 	pop     {r4-r7,pc}
 @ 0x21e7a8e
@@ -57808,7 +57808,7 @@ Function_21e8e0c: @ 21e8e0c :thumb
 	ldr     r1, [r4, #0xc]
 	mov     r5, r0
 	mov     r0, #0x45
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	ldr     r0, [r4, #0x10]
 	mov     r1, #0x5
@@ -58027,7 +58027,7 @@ branch_21e8f2c: @ 21e8f2c :thumb
 	lsl     r0, r0, #2
 	str     r1, [r5, r0]
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x14
 	pop     {r4-r7,pc}
 @ 0x21e9008

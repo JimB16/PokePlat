@@ -941,9 +941,7 @@ branch_20e07b4: @ 20e07b4 :arm
 	sbcs    r1, r1, #0x0
 	bmi     branch_20e0818
 	b       branch_20e0908
-@ 0x20e07f0
 
-.arm
 branch_20e07f0: @ 20e07f0 :arm
 	rsb     lr, r4, #0x20
 	movs    lr, r2, lsl lr
@@ -955,7 +953,6 @@ branch_20e07f0: @ 20e07f0 :arm
 	subs    r0, r0, r2
 	sbcs    r1, r1, r3
 	bpl     branch_20e0908
-.arm
 branch_20e0818: @ 20e0818 :arm
 	movs    r2, r0, lsl #21
 	mov     r0, r0, lsr #11
@@ -974,9 +971,7 @@ branch_20e0818: @ 20e0818 :arm
 	adc     r1, r1, #0x0
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e085c
 
-.arm
 branch_20e085c: @ 20e085c :arm
 	subs    r0, r0, r2
 	sbc     r1, r1, r3
@@ -992,7 +987,6 @@ branch_20e085c: @ 20e085c :arm
 	movs    r1, r0
 	mov     r0, #0x0
 	bmi     branch_20e08b0
-.arm
 branch_20e0894: @ 20e0894 :arm
 	clz     r4, r1
 	movs    r1, r1, lsl r4
@@ -1001,7 +995,6 @@ branch_20e0894: @ 20e0894 :arm
 	rsb     r4, r4, #0x20
 	mov     r0, r0, lsl r4
 	sub     r12, r12, r4
-.arm
 branch_20e08b0: @ 20e08b0 :arm
 	cmp     r12, #0x0
 	bgt     branch_20e08ec
@@ -1016,13 +1009,10 @@ branch_20e08b0: @ 20e08b0 :arm
 	orr     r1, lr, r1, lsr r12
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e08e4
 
-.arm
 branch_20e08e4: @ 20e08e4 :arm
 	cmp     r1, #0x0
 	subges  r12, r12, #0x1
-.arm
 branch_20e08ec: @ 20e08ec :arm
 	mov     r0, r0, lsr #11
 	orr     r0, r0, r1, lsl #21
@@ -1031,9 +1021,7 @@ branch_20e08ec: @ 20e08ec :arm
 	orr     r1, r1, r12, lsl #20
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e0908
 
-.arm
 branch_20e0908: @ 20e0908 :arm
 	mov     lr, r12, lsl #20
 	and     lr, lr, #2, 2 @ #0x80000000
@@ -1044,7 +1032,6 @@ branch_20e0908: @ 20e0908 :arm
 	movs    r1, r0
 	mov     r0, #0x0
 	bmi     branch_20e0948
-.arm
 branch_20e092c: @ 20e092c :arm
 	clz     r4, r1
 	movs    r1, r1, lsl r4
@@ -1053,7 +1040,6 @@ branch_20e092c: @ 20e092c :arm
 	rsb     r4, r4, #0x20
 	mov     r0, r0, lsl r4
 	sub     r12, r12, r4
-.arm
 branch_20e0948: @ 20e0948 :arm
 	cmp     r12, #0x0
 	orrgt   r12, r12, lr, lsr #20
@@ -1069,9 +1055,7 @@ branch_20e0948: @ 20e0948 :arm
 	orr     r1, lr, r1, lsr r12
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e0980
 
-.arm
 branch_20e0980: @ 20e0980 :arm
 	cmp     r12, #2, 22 @ #0x800
 	movge   lr, #2, 2 @ #0x80000000
@@ -1091,9 +1075,7 @@ branch_20e0980: @ 20e0980 :arm
 	orrs    r4, r2, r3, lsl #1
 	beq     branch_20e0adc
 	b       branch_20e0ac8
-@ 0x20e09c8
 
-.arm
 branch_20e09c8: @ 20e09c8 :arm
 	cmp     r4, #2, 22 @ #0x800
 	movge   lr, #2, 2 @ #0x80000000
@@ -1104,9 +1086,7 @@ branch_20e09c8: @ 20e09c8 :arm
 	orrs    r4, r2, r3, lsl #1
 	bne     branch_20e0ac8
 	b       branch_20e0ab4
-@ 0x20e09ec
 
-.arm
 branch_20e09ec: @ 20e09ec :arm
 	orrs    r4, r0, r1, lsl #1
 	beq     branch_20e0a2c
@@ -1124,9 +1104,7 @@ branch_20e09ec: @ 20e09ec :arm
 	orr     r3, r3, #2, 2 @ #0x80000000
 	orr     r12, r12, lr, lsr #20
 	b       branch_20e07b4
-@ 0x20e0a2c
 
-.arm
 branch_20e0a2c: @ 20e0a2c :arm
 	mov     r12, r3, lsr #20
 	mov     r1, r3, lsl #11
@@ -1139,16 +1117,12 @@ branch_20e0a2c: @ 20e0a2c :arm
 	orrs    r4, r0, r1, lsl #1
 	bne     branch_20e0acc
 	b       branch_20e0ab4
-@ 0x20e0a58
 
-.arm
 branch_20e0a58: @ 20e0a58 :arm
 	orrs    r4, r0, r1, lsl #1
 	beq     branch_20e0aec
 	b       branch_20e0a80
-@ 0x20e0a64
 
-.arm
 branch_20e0a64: @ 20e0a64 :arm
 	orrs    r4, r2, r3, lsl #1
 	beq     branch_20e0a90
@@ -1157,17 +1131,13 @@ branch_20e0a64: @ 20e0a64 :arm
 	orr     r12, r12, lr, lsr #20
 	orr     r4, r4, lr, lsr #20
 	b       branch_20e07b4
-@ 0x20e0a80
 
-.arm
 branch_20e0a80: @ 20e0a80 :arm
 	mov     r1, r3
 	mov     r0, r2
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e0a90
 
-.arm
 branch_20e0a90: @ 20e0a90 :arm
 	cmp     r1, #0x0
 	subges  r12, r12, #0x1
@@ -1178,21 +1148,16 @@ branch_20e0a90: @ 20e0a90 :arm
 	orr     r1, r1, r12, lsl #20
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e0ab4
 
-.arm
 branch_20e0ab4: @ 20e0ab4 :arm
 	ldr     r1, [pc, #0x40] @ [0x20e0afc] (=0x7ff00000)
 	orr     r1, lr, r1
 	mov     r0, #0x0
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20e0ac8
 
-.arm
 branch_20e0ac8: @ 20e0ac8 :arm
 	mov     r1, r3
-.arm
 branch_20e0acc: @ 20e0acc :arm
 	mvn     r0, #0x0
 	bic     r1, r0, #2, 2 @ #0x80000000
@@ -1236,7 +1201,6 @@ __fadd_start: @ 20e0b0c :arm
 	orr     r1, r2, r1, lsl #8
 	ands    r2, r12, #0xff
 	beq     branch_20e0be0
-.arm
 branch_20e0b40: @ 20e0b40 :arm
 	subs    r12, r3, r12
 	beq     branch_20e0b58
@@ -1244,7 +1208,6 @@ branch_20e0b40: @ 20e0b40 :arm
 	movs    r2, r1, lsl r2
 	mov     r1, r1, lsr r12
 	orrne   r1, r1, #0x1
-.arm
 branch_20e0b58: @ 20e0b58 :arm
 	adds    r0, r0, r1
 	bcc     branch_20e0b78
@@ -1254,7 +1217,6 @@ branch_20e0b58: @ 20e0b58 :arm
 	and     r2, r3, #0xff
 	cmp     r2, #0xff
 	beq     branch_20e0ce8
-.arm
 branch_20e0b78: @ 20e0b78 :arm
 	ands    r1, r0, #0xff
 	add     r0, r0, r0
@@ -1266,9 +1228,7 @@ branch_20e0b78: @ 20e0b78 :arm
 	andeqs  r1, r0, #0x1
 	addne   r0, r0, #0x1
 	bx      lr
-@ 0x20e0ba0
 
-.arm
 branch_20e0ba0: @ 20e0ba0 :arm
 	cmp     r3, #1, 24 @ #0x100
 	movge   r2, #2, 2 @ #0x80000000
@@ -1286,9 +1246,7 @@ branch_20e0ba0: @ 20e0ba0 :arm
 	cmp     r1, #0x0
 	beq     branch_20e0d08
 	b       branch_20e0d14
-@ 0x20e0be0
 
-.arm
 branch_20e0be0: @ 20e0be0 :arm
 	cmp     r3, #1, 24 @ #0x100
 	movge   r2, #2, 2 @ #0x80000000
@@ -1296,14 +1254,11 @@ branch_20e0be0: @ 20e0be0 :arm
 	and     r3, r3, #0xff
 	ands    r12, r12, #0xff
 	beq     branch_20e0c60
-.arm
 branch_20e0bf8: @ 20e0bf8 :arm
 	movs    r1, r1, lsl #1
 	bne     branch_20e0d14
 	b       branch_20e0d08
-@ 0x20e0c04
 
-.arm
 branch_20e0c04: @ 20e0c04 :arm
 	movs    r0, r0, lsl #1
 	beq     branch_20e0c3c
@@ -1319,9 +1274,7 @@ branch_20e0c04: @ 20e0c04 :arm
 	orr     r3, r3, r2, lsr #23
 	orr     r12, r12, r2, lsr #23
 	b       branch_20e0b40
-@ 0x20e0c3c
 
-.arm
 branch_20e0c3c: @ 20e0c3c :arm
 	mov     r3, r1, lsr #23
 	mov     r0, r1, lsl #9
@@ -1332,9 +1285,7 @@ branch_20e0c3c: @ 20e0c3c :arm
 	cmp     r0, #0x0
 	beq     branch_20e0d08
 	b       branch_20e0d00
-@ 0x20e0c60
 
-.arm
 branch_20e0c60: @ 20e0c60 :arm
 	movs    r1, r1, lsl #1
 	beq     branch_20e0cd0
@@ -1349,7 +1300,6 @@ branch_20e0c60: @ 20e0c60 :arm
 	and     r1, r0, #0x1
 	orr     r0, r1, r0, rrx
 	add     r12, r12, #0x1
-.arm
 branch_20e0c94: @ 20e0c94 :arm
 	cmp     r0, #0x0
 	subge   r12, r12, #0x1
@@ -1364,15 +1314,11 @@ branch_20e0c94: @ 20e0c94 :arm
 	andeqs  r1, r0, #0x1
 	addne   r0, r0, #0x1
 	bx      lr
-@ 0x20e0cc8
 
-.arm
 branch_20e0cc8: @ 20e0cc8 :arm
 	mov     r0, r1
 	bx      lr
-@ 0x20e0cd0
 
-.arm
 branch_20e0cd0: @ 20e0cd0 :arm
 	cmp     r0, #0x0
 	subges  r3, r3, #0x1
@@ -1380,9 +1326,7 @@ branch_20e0cd0: @ 20e0cd0 :arm
 	orr     r0, r2, r0, lsr #9
 	orr     r0, r0, r3, lsl #23
 	bx      lr
-@ 0x20e0ce8
 
-.arm
 branch_20e0ce8: @ 20e0ce8 :arm
 	cmp     r3, #1, 24 @ #0x100
 	movge   r2, #2, 2 @ #0x80000000
@@ -1390,22 +1334,16 @@ branch_20e0ce8: @ 20e0ce8 :arm
 	mov     r0, #255, 8 @ #0xff000000
 	orr     r0, r2, r0, lsr #1
 	bx      lr
-@ 0x20e0d00
 
-.arm
 branch_20e0d00: @ 20e0d00 :arm
 	mvn     r0, #2, 2 @ #0x80000000
 	bx      lr
-@ 0x20e0d08
 
-.arm
 branch_20e0d08: @ 20e0d08 :arm
 	mov     r0, #255, 8 @ #0xff000000
 	orr     r0, r2, r0, lsr #1
 	bx      lr
-@ 0x20e0d14
 
-.arm
 branch_20e0d14: @ 20e0d14 :arm
 	mvn     r0, #2, 2 @ #0x80000000
 	bx      lr
@@ -1418,6 +1356,7 @@ Function_20e0d1c: @ 20e0d1c :arm
 	bx      lr
 @ 0x20e0d24
 
+
 .arm
 Function_20e0d24: @ 20e0d24 :arm
 	mov     r12, #2, 12 @ #0x200000
@@ -1425,7 +1364,6 @@ Function_20e0d24: @ 20e0d24 :arm
 	bcs     branch_20e0d98
 	cmn     r12, r3, lsl #1
 	bcs     branch_20e0dac
-.arm
 branch_20e0d38: @ 20e0d38 :arm
 	orrs    r12, r3, r1
 	bmi     branch_20e0d68
@@ -1493,18 +1431,14 @@ branch_20e0dd0: @ 20e0dd0 :arm
 	movhi   r0, #0x1
 	movls   r0, #0x0
 	bx      lr
-@ 0x20e0dec
 
-.arm
 branch_20e0dec: @ 20e0dec :arm
 	mov     r0, #0x0
 	mrs     r12, CPSR
 	bic     r12, r12, #2, 4 @ #0x20000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e0e00
 
-.arm
 branch_20e0e00: @ 20e0e00 :arm
 	orr     r12, r0, r12, lsl #1
 	orrs    r12, r12, r2

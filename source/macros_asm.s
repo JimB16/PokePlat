@@ -193,6 +193,10 @@
 .equ MOVEDATA_CONTESTEFFECT, 0xa
 .equ MOVEDATA_CONTESTTYPE, 0xb
 
+@ Constants for LoadFromNARC_ItemData-function (arm9.s) r1
+.equ ITEMDATA_LOADDATA, 0x0
+.equ ITEMDATA_LOADICON1, 0x1
+.equ ITEMDATA_LOADICON2, 0x2
 
 
 @ nds/card.h

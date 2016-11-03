@@ -151,7 +151,7 @@ Function_221f8f0: @ 221f8f0 :thumb
 	cmp     r0, #0x0
 	ble     branch_221f90e
 	bl      0x20241b4
-	blx 0x20a73c0
+	blx     0x20a73c0
 branch_221f90e: @ 221f90e :thumb
 	bl      0x20146c0
 branch_221f912: @ 221f912 :thumb

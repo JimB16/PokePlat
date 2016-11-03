@@ -1825,7 +1825,7 @@ Function_20befc4: @ 20befc4 :arm
 .arm
 GX_GetBankForOBJ: @ 20befec :arm
 	ldr     r0, =RAM_21ccba0
-	ldrh    r0, [r0, #RAM_21ccba4 - RAM_21ccba0]
+	ldrh    r0, [r0, #RAM_21ccba0_4]
 	bx      lr
 @ 0x20beff8
 
@@ -1836,7 +1836,7 @@ GX_GetBankForOBJ: @ 20befec :arm
 .arm
 Function_20beffc: @ 20beffc :arm
 	ldr     r0, =RAM_21ccba0
-	ldrh    r0, [r0, #RAM_21ccbb0 - RAM_21ccba0]
+	ldrh    r0, [r0, #RAM_21ccba0_10]
 	bx      lr
 @ 0x20bf008
 
@@ -1848,7 +1848,7 @@ Function_20beffc: @ 20beffc :arm
 .globl Function_20bf00c
 Function_20bf00c: @ 20bf00c :arm
 	ldr     r0, =RAM_21ccba0
-	ldrh    r0, [r0]
+	ldrh    r0, [r0, #RAM_21ccba0_0]
 	bx      lr
 @ 0x20bf018
 
@@ -1859,7 +1859,7 @@ Function_20bf00c: @ 20bf00c :arm
 .arm
 GX_GetBankForSubOBJ: @ 20bf01c :arm
 	ldr     r0, =RAM_21ccba0
-	ldrh    r0, [r0, #RAM_21ccbb4 - RAM_21ccba0]
+	ldrh    r0, [r0, #RAM_21ccba0_14]
 	bx      lr
 @ 0x20bf028
 
@@ -1870,7 +1870,7 @@ GX_GetBankForSubOBJ: @ 20bf01c :arm
 .arm
 GX_GetBankForSubOBJExtPltt: @ 20bf02c :arm
 	ldr     r0, =RAM_21ccba0
-	ldrh    r0, [r0, #RAM_21ccbb8 - RAM_21ccba0]
+	ldrh    r0, [r0, #RAM_21ccba0_18]
 	bx      lr
 @ 0x20bf038
 

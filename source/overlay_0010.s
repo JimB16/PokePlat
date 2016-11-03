@@ -18,7 +18,7 @@ Function_221f800: @ 221f800 :thumb
 	ldr     r2, [pc, #0x48] @ 0x221f860, (=0xbd4)
 	mov     r1, #0x0
 	mov     r4, r0
-	blx 0x20d5124
+	blx     0x20d5124
 	ldr     r0, [pc, #0x44] @ 0x221f864, (=0xb7f)
 	str     r5, [r4, #0x0]
 	mov     r1, #0x0
@@ -170,7 +170,7 @@ branch_221f90a: @ 221f90a :thumb
 	mov     r0, #0x0
 	lsl     r1, r1, #24
 	lsl     r2, r2, #18
-	blx 0x20c4b4c
+	blx     MIi_CpuClear32
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x221f92a
@@ -1237,9 +1237,9 @@ branch_22200ec: @ 22200ec :thumb
 branch_22200f0: @ 22200f0 :thumb
 	.hword  0x1f80 @ sub r0, r0, #0x6
 	ldsb    r4, [r5, r0]
-	bl      0x201d2e8
+	bl      PRNG
 	mov     r1, r4
-	blx 0x20e1f6c
+	blx     _s32_div_f
 	lsr     r0, r4, #31
 	add     r0, r4, r0
 	asr     r0, r0, #1
@@ -1248,9 +1248,9 @@ branch_22200f0: @ 22200f0 :thumb
 	asr     r6, r0, #16
 	ldr     r0, [pc, #0x110] @ 0x222021c, (=0xb7d)
 	ldsb    r4, [r5, r0]
-	bl      0x201d2e8
+	bl      PRNG
 	mov     r1, r4
-	blx 0x20e1f6c
+	blx     _s32_div_f
 	lsr     r0, r4, #31
 	add     r0, r4, r0
 	asr     r0, r0, #1
@@ -2349,7 +2349,7 @@ branch_2220910: @ 2220910 :thumb
 
 .thumb
 branch_2220926: @ 2220926 :thumb
-	bl      0x2022974
+	bl      ErrorHandling
 .thumb
 branch_222092a: @ 222092a :thumb
 	ldr     r0, [r4, #0xc]
@@ -3179,7 +3179,7 @@ Function_2220f1c: @ 2220f1c :thumb
 	bne     branch_2220f44
 .thumb
 branch_2220f40: @ 2220f40 :thumb
-	bl      0x2022974
+	bl      ErrorHandling
 .thumb
 branch_2220f44: @ 2220f44 :thumb
 	ldr     r0, [r4, #0x0]
@@ -3276,7 +3276,7 @@ Function_2221004: @ 2221004 :thumb
 	mov     r1, #0x2
 	mov     r2, #0x1c
 	str     r3, [sp, #0x0]
-	blx 0x20bf55c
+	blx     0x20bf55c
 	pop     {r3,pc}
 @ 0x2221016
 
@@ -3527,7 +3527,7 @@ Function_22211f0: @ 22211f0 :thumb
 	str     r1, [sp, #0x0]
 	str     r2, [sp, #0x4]
 	mov     r7, r3
-	bl      0x207a0f8
+	bl      GetNrOfPkmnInParty
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	str     r0, [sp, #0x8]
@@ -4480,7 +4480,7 @@ Function_2221928: @ 2221928 :thumb
 	bl      0x20145b4
 	cmp     r4, #0x0
 	bne     branch_2221940
-	bl      0x2022974
+	bl      ErrorHandling
 .thumb
 branch_2221940: @ 2221940 :thumb
 	lsl     r0, r4, #16
@@ -4504,7 +4504,7 @@ Function_222194c: @ 222194c :thumb
 	bl      0x20145f4
 	cmp     r4, #0x0
 	bne     branch_2221964
-	bl      0x2022974
+	bl      ErrorHandling
 .thumb
 branch_2221964: @ 2221964 :thumb
 	lsl     r0, r4, #16
@@ -4655,7 +4655,7 @@ Function_2221a3c: @ 2221a3c :thumb
 	bl      0x2006cb8
 	add     r1, sp, #0x10
 	mov     r6, r0
-	blx 0x20a71b0
+	blx     0x20a71b0
 	ldr     r2, [sp, #0x10]
 	mov     r0, #0x3
 	ldr     r1, [r2, #0xc]
@@ -4670,7 +4670,7 @@ Function_2221a3c: @ 2221a3c :thumb
 	add     r0, r5, r0
 	add     r1, #0x60
 	mov     r2, #0x60
-	blx 0x20d50b8
+	blx     0x20d50b8
 	mov     r0, r6
 	bl      0x20181c4
 	ldr     r0, [r5, #0x0]
@@ -4858,11 +4858,11 @@ branch_2221bea: @ 2221bea :thumb
 	add     r0, r0, r1
 	add     r1, r6, r4
 	mov     r2, #0x20
-	blx 0x20d50b8
+	blx     0x20d50b8
 	add     r0, r6, r4
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx 0x20d5124
+	blx     0x20d5124
 	add     r0, r5, #0x1
 	lsl     r0, r0, #16
 	lsr     r5, r0, #16
@@ -5010,7 +5010,7 @@ Function_2221d14: @ 2221d14 :thumb
 	mov     r0, r1
 	str     r1, [sp, #0x0]
 	mov     r5, r2
-	bl      0x207a0f8
+	bl      GetNrOfPkmnInParty
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x8]
@@ -5174,7 +5174,7 @@ Function_2221e58: @ 2221e58 :thumb
 	add     r0, r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x90
-	blx 0x20d5124
+	blx     0x20d5124
 	ldr     r1, [r4, #0x0]
 	mov     r0, r4
 	ldr     r1, [r1, #0x4]

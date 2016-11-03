@@ -1102,7 +1102,7 @@ OSi_RescheduleThread: @ 20c1d14 :arm
 	ldmnefd sp!, {r4-r6,pc}
 
 	ldrh    r0, [r0, #ThreadLinkedList_26]
-	ldr     r4, =ThreadLinkedList+ThreadLinkedList_24   @ RAM_21ccc80
+	ldr     r4, =RAM_21ccc80
 	cmp     r0, #0x0
 	bne     branch_20c1d44
 	bl      OS_GetProcMode
@@ -1141,7 +1141,7 @@ branch_20c1d8c: @ 20c1d8c :arm
 	blx     r2
 branch_20c1da8: @ 20c1da8 :arm
 
-	ldr     r2, [r4, #ThreadLinkedList_30-ThreadLinkedList_24]
+	ldr     r2, [r4, #ThreadLinkedList_24_c]
 	cmp     r2, #0x0
 	beq     branch_20c1dc0
 	mov     r0, r6

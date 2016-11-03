@@ -157,7 +157,7 @@ branch_223b23a: @ 223b23a :thumb
 	cmp     r0, #0x1
 	bne     branch_223b260
 	ldr     r0, [pc, #0x130] @ 0x223b378, (=0xa)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	mov     r0, #0x7
 	str     r0, [r4, #0x0]
 	mov     r0, #0x3d
@@ -223,7 +223,7 @@ branch_223b2b6: @ 223b2b6 :thumb
 	cmp     r0, #0x1
 	bne     branch_223b370
 	ldr     r0, [pc, #0xb4] @ 0x223b378, (=0xa)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	mov     r0, #0x5
 	bl      Function_201807c
 	mov     r0, #0xc
@@ -350,12 +350,12 @@ Function_223b384: @ 223b384 :thumb
 	cmp     r0, #0x0
 	bne     branch_223b3c0
 	ldr     r0, [pc, #0x1c] @ 0x223b3d8, (=0xc)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	b       branch_223b3c6
 
 branch_223b3c0: @ 223b3c0 :thumb
 	ldr     r0, [pc, #0x18] @ 0x223b3dc, (=0xe)
-	bl      Function_2006514
+	bl      UnloadOverlay
 branch_223b3c6: @ 223b3c6 :thumb
 	ldr     r0, [pc, #0x18] @ 0x223b3e0, (=0xd)
 	mov     r1, #0x2
@@ -411,7 +411,7 @@ Function_223b430: @ 223b430 :thumb
 	add     sp, #-0x8
 	mov     r5, r0
 	ldr     r0, [pc, #0xf0] @ 0x223b528, (=0xd)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	ldr     r0, [pc, #0xec] @ 0x223b52c, (=0x2445)
 	ldrb    r0, [r5, r0]
 	cmp     r0, #0x0
@@ -439,11 +439,11 @@ branch_223b456: @ 223b456 :thumb
 
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_223f6e4
@@ -495,9 +495,9 @@ branch_223b456: @ 223b456 :thumb
 	mov     r0, r4
 	bl      Function_2268d40
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r4
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, #0x1
 	bl      Function_20027a8
 	mov     r0, r5
@@ -774,7 +774,7 @@ branch_223b75a: @ 223b75a :thumb
 	strb    r4, [r5, r0]
 	bne     branch_223b772
 	ldr     r0, [pc, #0x24] @ 0x223b788, (=0xe)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	ldr     r0, [pc, #0x20] @ 0x223b78c, (=0xc)
 	mov     r1, #0x2
 	bl      LoadOverlay
@@ -782,7 +782,7 @@ branch_223b75a: @ 223b75a :thumb
 
 branch_223b772: @ 223b772 :thumb
 	ldr     r0, [pc, #0x18] @ 0x223b78c, (=0xc)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	ldr     r0, [pc, #0xc] @ 0x223b788, (=0xe)
 	mov     r1, #0x2
 	bl      LoadOverlay
@@ -895,11 +895,11 @@ branch_223b850: @ 223b850 :thumb
 	bl      Function_201dbec
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, r4
 	bl      Function_223f6e4
@@ -919,9 +919,9 @@ branch_223b850: @ 223b850 :thumb
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	ldr     r1, [r4, #0x4]
 	mov     r0, r4
 	bl      Function_223c004
@@ -1002,11 +1002,11 @@ branch_223b850: @ 223b850 :thumb
 	bl      Function_2268a88
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -1024,9 +1024,9 @@ branch_223b850: @ 223b850 :thumb
 	mov     r0, r5
 	bl      Function_2268d40
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, #0x5
 	bl      Function_200762c
 	mov     r1, r4
@@ -1710,14 +1710,14 @@ branch_223bfb2: @ 223bfb2 :thumb
 	mov     r0, r4
 	bl      Function_20181c4
 	ldr     r0, [pc, #0x3c] @ 0x223bff8, (=0xb)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	ldr     r0, [pc, #0x3c] @ 0x223bffc, (=0xc)
-	bl      Function_2006514
+	bl      UnloadOverlay
 	bl      Function_20389b8
 	cmp     r0, #0x0
 	bne     branch_223bfd2
 	ldr     r0, [pc, #0x30] @ 0x223c000, (=0x15)
-	bl      Function_2006514
+	bl      UnloadOverlay
 branch_223bfd2: @ 223bfd2 :thumb
 	pop     {r3-r7,pc}
 @ 0x223bfd4
@@ -5794,7 +5794,7 @@ Function_223decc: @ 223decc :thumb
 	bl      Function_20389b8
 	cmp     r0, #0x0
 	beq     branch_223dee8
-	blx 0x21d7eae
+	blx     0x21d7eae
 	mov     r1, #0x3
 	sub     r0, r1, r0
 	bl      Function_20397b0
@@ -6709,7 +6709,7 @@ branch_223e380: @ 223e380 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e414
 
@@ -6776,7 +6776,7 @@ branch_223e414: @ 223e414 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e478
 	ldr     r0, [sp, #0x18]
@@ -6825,7 +6825,7 @@ branch_223e478: @ 223e478 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e4dc
 
@@ -6876,7 +6876,7 @@ branch_223e4dc: @ 223e4dc :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e540
 
@@ -6926,7 +6926,7 @@ branch_223e540: @ 223e540 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e5a4
 	ldr     r0, [sp, #0x18]
@@ -6974,7 +6974,7 @@ branch_223e5a4: @ 223e5a4 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e5ec
 	ldr     r0, [sp, #0x10]
@@ -7009,7 +7009,7 @@ branch_223e5ec: @ 223e5ec :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e648
 	ldr     r0, [sp, #0x10]
@@ -7055,7 +7055,7 @@ branch_223e648: @ 223e648 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e6a2
 	ldr     r0, [sp, #0x4]
@@ -7096,7 +7096,7 @@ branch_223e6a2: @ 223e6a2 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e6e0
 	ldr     r0, [sp, #0x10]
@@ -7126,7 +7126,7 @@ branch_223e6e0: @ 223e6e0 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e71e
 	ldr     r0, [sp, #0x10]
@@ -7156,7 +7156,7 @@ branch_223e71e: @ 223e71e :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e75c
 	ldr     r0, [sp, #0x10]
@@ -7186,7 +7186,7 @@ branch_223e75c: @ 223e75c :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e79a
 	ldr     r0, [sp, #0x10]
@@ -7216,7 +7216,7 @@ branch_223e79a: @ 223e79a :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e7d8
 	ldr     r0, [sp, #0x10]
@@ -7246,7 +7246,7 @@ branch_223e7d8: @ 223e7d8 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e816
 	ldr     r0, [sp, #0x10]
@@ -7276,7 +7276,7 @@ branch_223e816: @ 223e816 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e860
 	ldr     r0, [sp, #0x10]
@@ -7312,7 +7312,7 @@ branch_223e860: @ 223e860 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e8f6
 	ldr     r0, [sp, #0x38]
@@ -7320,7 +7320,7 @@ branch_223e860: @ 223e860 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x20]
 	mov     r1, r4
 	ldr     r0, [sp, #0x18]
@@ -7383,7 +7383,7 @@ branch_223e8f6: @ 223e8f6 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e994
 	ldr     r0, [sp, #0x38]
@@ -7391,7 +7391,7 @@ branch_223e8f6: @ 223e8f6 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x20]
 	mov     r4, #0x0
 .thumb
@@ -7463,7 +7463,7 @@ branch_223e994: @ 223e994 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	bne     branch_223e9a8
 	b       branch_223eab0
@@ -7476,7 +7476,7 @@ branch_223e9a8: @ 223e9a8 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223e9d2
 	ldr     r0, [sp, #0x18]
@@ -7517,7 +7517,7 @@ branch_223e9de: @ 223e9de :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x20]
 	cmp     r0, #0xfd
 	beq     branch_223ea3e
@@ -7570,7 +7570,7 @@ branch_223ea5e: @ 223ea5e :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	bne     branch_223eaac
 	ldr     r0, [sp, #0x4]
@@ -7608,7 +7608,7 @@ branch_223eab0: @ 223eab0 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223eae6
 	ldr     r0, [sp, #0x18]
@@ -7625,7 +7625,7 @@ branch_223eab0: @ 223eab0 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x8]
 .thumb
 branch_223eae6: @ 223eae6 :thumb
@@ -7634,7 +7634,7 @@ branch_223eae6: @ 223eae6 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223eb2a
 	ldr     r0, [sp, #0x18]
@@ -7657,7 +7657,7 @@ branch_223eae6: @ 223eae6 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x8]
 .thumb
 branch_223eb2a: @ 223eb2a :thumb
@@ -7666,7 +7666,7 @@ branch_223eb2a: @ 223eb2a :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_223eb60
 	ldr     r0, [sp, #0x18]
@@ -7683,7 +7683,7 @@ branch_223eb2a: @ 223eb2a :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x8]
 .thumb
 branch_223eb60: @ 223eb60 :thumb
@@ -7726,7 +7726,7 @@ branch_223eb98: @ 223eb98 :thumb
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x35
 	bne     branch_223ebc4
 	ldr     r1, [sp, #0x8]
@@ -10320,7 +10320,7 @@ branch_223fae0: @ 223fae0 :thumb
 	mov     r0, r5
 	mov     r1, r7
 	mov     r3, #0x5
-	bl      Function_20792f8
+	bl      LoadTrainerTbl_2
 	mov     r0, r6
 	mov     r1, #0xff
 	bl      Function_201ada4
@@ -31795,7 +31795,7 @@ branch_2248eae: @ 2248eae :thumb
 	lsr     r0, r0, #16
 	mov     r1, #0x1
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x33
 	beq     branch_2248ef6
 
@@ -31910,7 +31910,7 @@ branch_2248f88: @ 2248f88 :thumb
 	lsr     r0, r0, #16
 	mov     r1, #0x1
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	str     r0, [sp, #0x18]
 
 	ldr     r0, [sp, #0x3c]
@@ -33347,12 +33347,12 @@ Function_22499c0: @ 22499c0 :thumb
 	mov     r0, r6
 	mov     r1, #0x1
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	mov     r5, r0
 	mov     r0, r6
 	mov     r1, #0x2
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	mov     r6, r0
 	mov     r0, r4
 	str     r0, [sp, #0x18]
@@ -52456,7 +52456,7 @@ Call_LoadFromNARC: @ 2251e1c :thumb
 
 	mov     r0, r4
 	mov     r1, r6
-	bl      Function_2006b58
+	bl      LoadFromNARC_7
 
 	mov     r1, #0x19
 	lsl     r1, r1, #6
@@ -52497,7 +52497,7 @@ Call_LoadFromNARC_2251e5c: @ 2251e5c :thumb
 
 	mov     r0, r4
 	mov     r1, r6
-	bl      Function_2006b58
+	bl      LoadFromNARC_7
 	mov     r1, #0x19
 	lsl     r1, r1, #6
 	cmp     r0, r1
@@ -57666,7 +57666,7 @@ branch_2254028: @ 2254028 :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, #0xd
 	mov     r2, #0x5
-	bl      Function_2079280
+	bl      LoadTrainerTbl
 	cmp     r0, #0x0
 	beq     branch_2254064
 	mov     r1, #0x85
@@ -57710,7 +57710,7 @@ branch_225406c: @ 225406c :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, #0xe
 	mov     r2, #0x5
-	bl      Function_2079280
+	bl      LoadTrainerTbl
 	cmp     r0, #0x0
 	beq     branch_22540ac
 	ldr     r1, [pc, #0x124] @ 0x22541bc, (=0x2e7d)
@@ -57776,7 +57776,7 @@ branch_22540f6: @ 22540f6 :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, #0xf
 	mov     r2, #0x5
-	bl      Function_2079280
+	bl      LoadTrainerTbl
 	cmp     r0, #0x0
 	beq     branch_2254120
 	ldr     r1, [pc, #0xb0] @ 0x22541bc, (=0x2e7d)
@@ -57849,7 +57849,7 @@ branch_225416a: @ 225416a :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, #0x10
 	mov     r2, #0x5
-	bl      Function_2079280
+	bl      LoadTrainerTbl
 	cmp     r0, #0x0
 	beq     branch_22541a2
 	ldr     r1, [pc, #0x30] @ 0x22541bc, (=0x2e7d)
@@ -71950,7 +71950,7 @@ branch_2259f26: @ 2259f26 :thumb
 	mov     r2, #0x5
 	ldrh    r0, [r1, r0]
 	mov     r1, #0x1
-	bl      Function_207cff0
+	bl      GetItemData
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	bl      Function_2077988
@@ -74404,7 +74404,7 @@ Function_16_225b0fc: @ 225b0fc :thumb
 	bl      Function_207d3b0
 
 	mov     r1, r4
-	bl      Function_207d014
+	bl      ReadItemData1
 
 	pop     {r3-r5,pc}
 @ 0x225b11c
@@ -76768,7 +76768,7 @@ Function_225bffc: @ 225bffc :thumb
 
 	mov     r0, #0x93
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r1, #0x69
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -76905,7 +76905,7 @@ branch_225c11e: @ 225c11e :thumb
 	mov     r0, #0x69
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r4
 	bl      Function_20181c4
 	pop     {r4,pc}
@@ -77903,11 +77903,11 @@ Function_225c79c: @ 225c79c :thumb
 	bne     branch_225c822
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, r5
 	bl      Function_223e02c
@@ -77923,9 +77923,9 @@ Function_225c79c: @ 225c79c :thumb
 	mov     r1, #0x0
 	bl      Function_226bccc
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r1, #0x65
 	lsl     r1, r1, #2
 	ldrb    r1, [r4, r1]
@@ -86596,11 +86596,11 @@ branch_2260690: @ 2260690 :thumb
 branch_2260692: @ 2260692 :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	ldrb    r1, [r4, #0x9]
 	add     r0, sp, #0x10
@@ -86844,9 +86844,9 @@ branch_2260844: @ 2260844 :thumb
 	mov     r0, r6
 	bl      Function_22691bc
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	ldr     r0, [sp, #0x8]
 	cmp     r0, #0x0
 	beq     branch_2260878
@@ -86969,11 +86969,11 @@ branch_2260920: @ 2260920 :thumb
 branch_2260934: @ 2260934 :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
@@ -86992,9 +86992,9 @@ branch_2260934: @ 2260934 :thumb
 	ldr     r0, [sp, #0xc]
 	bl      Function_22647d8
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	b       branch_2260a16
 @ 0x2260980
 
@@ -87002,11 +87002,11 @@ branch_2260934: @ 2260934 :thumb
 branch_2260980: @ 2260980 :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
@@ -87025,9 +87025,9 @@ branch_2260980: @ 2260980 :thumb
 	ldr     r0, [sp, #0xc]
 	bl      Function_22647d8
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	b       branch_2260a16
 @ 0x22609cc
 
@@ -87035,11 +87035,11 @@ branch_2260980: @ 2260980 :thumb
 branch_22609cc: @ 22609cc :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, r6
 	bl      Function_226d088
@@ -87059,9 +87059,9 @@ branch_22609f4: @ 22609f4 :thumb
 	str     r3, [sp, #0x4]
 	bl      Function_2268c04
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	b       branch_2260a16
 @ 0x2260a12
 
@@ -87086,11 +87086,11 @@ branch_2260a24: @ 2260a24 :thumb
 	bne     branch_2260ab0
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
@@ -87113,9 +87113,9 @@ branch_2260a24: @ 2260a24 :thumb
 	mov     r0, #0x8
 	strb    r0, [r4, #0xa]
 	mov     r0, r5
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x58
 	pop     {r3-r7,pc}
 @ 0x2260a86
@@ -87399,11 +87399,11 @@ branch_2260c68: @ 2260c68 :thumb
 	bl      Function_2269218
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	str     r0, [sp, #0xc]
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	add     r5, sp, #0x14
 	str     r0, [sp, #0x8]
 	mov     r2, #0x0
@@ -87437,9 +87437,9 @@ branch_2260cb0: @ 2260cb0 :thumb
 	mov     r3, #0xb
 	bl      Function_2268c04
 	ldr     r0, [sp, #0xc]
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	ldr     r0, [sp, #0x8]
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r4
 	add     r0, #0x20
 	ldrb    r0, [r0, #0x0]
@@ -87788,11 +87788,11 @@ branch_2260f6a: @ 2260f6a :thumb
 branch_2260f76: @ 2260f76 :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	add     r2, sp, #0x10
 	mov     r6, r0
 	mov     r0, #0x0
@@ -87834,9 +87834,9 @@ branch_2260f92: @ 2260f92 :thumb
 	mov     r3, #0xc
 	bl      Function_2268c04
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	ldrb    r0, [r4, #0xf]
 	add     sp, #0x34
 	.hword  0x1c40 @ add r0, r0, #0x1
@@ -88786,7 +88786,7 @@ branch_2261664: @ 2261664 :thumb
 	mov     r1, #0x26
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261694
 	ldr     r0, [r4, #0x0]
@@ -89559,7 +89559,7 @@ branch_2261b9a: @ 2261b9a :thumb
 	str     r0, [sp, #0x24]
 	ldr     r0, [r4, #0x4]
 	ldrh    r0, [r0, #0x1c]
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261bce
 	mov     r6, #0x0
@@ -89570,7 +89570,7 @@ branch_2261bce: @ 2261bce :thumb
 	mov     r1, #0x10
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261be2
 	mov     r6, #0x1
@@ -89581,7 +89581,7 @@ branch_2261be2: @ 2261be2 :thumb
 	mov     r1, #0x11
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261bf6
 	mov     r6, #0x2
@@ -89592,7 +89592,7 @@ branch_2261bf6: @ 2261bf6 :thumb
 	mov     r1, #0x12
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261c0a
 	mov     r6, #0x3
@@ -89603,7 +89603,7 @@ branch_2261c0a: @ 2261c0a :thumb
 	mov     r1, #0x13
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261c1e
 	mov     r6, #0x4
@@ -89614,7 +89614,7 @@ branch_2261c1e: @ 2261c1e :thumb
 	mov     r1, #0x14
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261c32
 	mov     r6, #0x5
@@ -89625,7 +89625,7 @@ branch_2261c32: @ 2261c32 :thumb
 	mov     r1, #0x15
 	ldrh    r0, [r0, #0x1c]
 	mov     r2, #0x5
-	bl      Function_207cff0
+	bl      GetItemData
 	cmp     r0, #0x0
 	beq     branch_2261c46
 	mov     r6, #0x6
@@ -90813,11 +90813,11 @@ branch_22624ac: @ 22624ac :thumb
 branch_22624ae: @ 22624ae :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, r5
 	bl      Function_2269218
@@ -90920,9 +90920,9 @@ branch_226255e: @ 226255e :thumb
 	mov     r0, #0x2
 	strb    r0, [r4, #0xe]
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x38
 	pop     {r3-r7,pc}
 @ 0x2262572
@@ -90952,11 +90952,11 @@ branch_2262590: @ 2262590 :thumb
 	bne     branch_2262622
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	str     r0, [sp, #0x8]
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	ldr     r0, [r4, #0x4]
 	bl      Function_22675ac
@@ -90984,9 +90984,9 @@ branch_22625e4: @ 22625e4 :thumb
 	mov     r0, #0x4
 	strb    r0, [r4, #0xe]
 	ldr     r0, [sp, #0x8]
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x38
 	pop     {r3-r7,pc}
 @ 0x22625f8
@@ -102188,7 +102188,7 @@ Function_22672c4: @ 22672c4 :thumb
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	ldr     r0, [r5, #0xc]
 	bl      Function_223e010
@@ -102247,7 +102247,7 @@ Function_22672c4: @ 22672c4 :thumb
 	bl      Function_200d494
 branch_2267352: @ 2267352 :thumb
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0xc
 	pop     {r4-r7,pc}
 @ 0x226735c
@@ -104864,7 +104864,7 @@ Function_2268520: @ 2268520 :thumb
 	mov     r5, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r4, r0
 	ldr     r0, [r5, #0x4]
 	bl      Function_223e010
@@ -104972,7 +104972,7 @@ branch_226857a: @ 226857a :thumb
 	str     r6, [sp, #0x4]
 	bl      Function_200ce54
 	mov     r0, r4
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x28
 	pop     {r3-r7,pc}
 @ 0x2268614
@@ -115626,7 +115626,7 @@ Function_226d094: @ 226d094 :thumb
 	mov     r0, #0x1b
 	mov     r1, #0x5
 	mov     r7, r2
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	str     r6, [sp, #0x0]
 	mov     r0, #0x6e
@@ -115673,7 +115673,7 @@ Function_226d094: @ 226d094 :thumb
 	mov     r2, r6
 	bl      Function_200ce54
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x18
 	pop     {r3-r7,pc}
 @ 0x226d112
@@ -117283,7 +117283,7 @@ Function_226db7c: @ 226db7c :thumb
 	mov     r0, #0x1b
 	mov     r1, r3
 	mov     r7, r2
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	str     r6, [sp, #0x0]
 	mov     r0, #0x50
@@ -117331,7 +117331,7 @@ Function_226db7c: @ 226db7c :thumb
 	mov     r3, #0xfc
 	bl      Function_200ce54
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x18
 	pop     {r3-r7,pc}
 @ 0x226dbfc
@@ -117670,7 +117670,7 @@ Function_226de44: @ 226de44 :thumb
 	mov     r0, #0x52
 	mov     r1, r2
 	mov     r7, r3
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	str     r6, [sp, #0x0]
 	mov     r0, #0xb
@@ -117718,7 +117718,7 @@ Function_226de44: @ 226de44 :thumb
 	mov     r3, #0xd
 	bl      Function_200ce54
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	add     sp, #0x18
 	pop     {r3-r7,pc}
 @ 0x226dec4
@@ -118175,11 +118175,11 @@ branch_226e1b4: @ 226e1b4 :thumb
 branch_226e1bc: @ 226e1bc :thumb
 	mov     r0, #0x7
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r6, r0
 	mov     r0, #0x1b
 	mov     r1, #0x5
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r7, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -118190,9 +118190,9 @@ branch_226e1bc: @ 226e1bc :thumb
 	mov     r3, #0x12
 	bl      Function_2268c04
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, r7
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	mov     r0, #0x4
 	ldsh    r0, [r4, r0]
 	add     sp, #0x8

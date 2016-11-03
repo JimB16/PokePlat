@@ -118,6 +118,8 @@ __iwram_2254de0_start	=	ORIGIN(iwram_2254de0);
 __iwram_2254de0_top	=	ORIGIN(iwram_2254de0) + LENGTH(iwram_2254de0);;
 __iwram_22561c0_start	=	ORIGIN(iwram_22561c0);
 __iwram_22561c0_top	=	ORIGIN(iwram_22561c0) + LENGTH(iwram_22561c0);;
+__iwram_2253ce0_start	=	ORIGIN(iwram_2253ce0);
+__iwram_2253ce0_top	=	ORIGIN(iwram_2253ce0) + LENGTH(iwram_2253ce0);;
 __iwram_225c700_start	=	ORIGIN(iwram_225c700);
 __iwram_225c700_top	=	ORIGIN(iwram_225c700) + LENGTH(iwram_225c700);;
 __iwram_2260440_start	=	ORIGIN(iwram_2260440);
@@ -589,7 +591,7 @@ SECTIONS
 	} > iwram_223e140 = 0xff
     
     temp24 = temp23 + SIZEOF (.iwram23) + SIZEOF (.fill23);
-	.iwram24 __iwram_221fc20_start : AT (temp24) { *(.iwram24) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram24 __iwram_2253ce0_start : AT (temp24) { *(.iwram24) . = ALIGN(4); } > iwram_2253ce0 = 0xff
 	__load_start_iwram24 = LOADADDR (.iwram24);
 	__load_stop_iwram24 = LOADADDR (.iwram24) + SIZEOF (.iwram24);
 	.fill24 :
@@ -597,10 +599,10 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram24) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram24)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_2253ce0 = 0xff
     
     temp25 = temp24 + SIZEOF (.iwram24) + SIZEOF (.fill24);
-	.iwram25 __iwram_221fc20_start : AT (temp25) { *(.iwram25) . = ALIGN(4); } > iwram_221fc20 = 0xff
+	.iwram25 __iwram_2253ce0_start : AT (temp25) { *(.iwram25) . = ALIGN(4); } > iwram_2253ce0 = 0xff
 	__load_start_iwram25 = LOADADDR (.iwram25);
 	__load_stop_iwram25 = LOADADDR (.iwram25) + SIZEOF (.iwram25);
 	.fill25 :
@@ -608,7 +610,7 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram25) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram25)) - 1;
 	    BYTE(0xFF);
-	} > iwram_221fc20 = 0xff
+	} > iwram_2253ce0 = 0xff
     
     temp26 = temp25 + SIZEOF (.iwram25) + SIZEOF (.fill25);
 	.iwram26 __iwram_22561c0_start : AT (temp26) { *(.iwram26) . = ALIGN(4); } > iwram_22561c0 = 0xff
@@ -943,7 +945,7 @@ SECTIONS
 	} > iwram_22561c0 = 0xff
     
     temp57 = temp56 + SIZEOF (.iwram56) + SIZEOF (.fill56);
-	.iwram57 __iwram_start : AT (temp57) { *(.iwram57) . = ALIGN(4); } > iwram = 0xff
+	.iwram57 __iwram_22561c0_start : AT (temp57) { *(.iwram57) . = ALIGN(4); } > iwram_22561c0 = 0xff
 	__load_start_iwram57 = LOADADDR (.iwram57);
 	__load_stop_iwram57 = LOADADDR (.iwram57) + SIZEOF (.iwram57);
 	.fill57 :
@@ -951,10 +953,10 @@ SECTIONS
 /*		FILL(0xFF);
 		. = . + ((((__load_stop_iwram57) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram57)) - 1;
 	    BYTE(0xFF);*/
-	} > iwram = 0xff
+	} > iwram_22561c0 = 0xff
     
     temp58 = temp57 + SIZEOF (.iwram57) + SIZEOF (.fill57);
-	.iwram58 __iwram_start : AT (temp58) { *(.iwram58) . = ALIGN(4); } > iwram = 0xff
+	.iwram58 __iwram_21d0d80_start : AT (temp58) { *(.iwram58) . = ALIGN(4); } > iwram_21d0d80 = 0xff
 	__load_start_iwram58 = LOADADDR (.iwram58);
 	__load_stop_iwram58 = LOADADDR (.iwram58) + SIZEOF (.iwram58);
 	.fill58 :
@@ -962,7 +964,7 @@ SECTIONS
 		FILL(0xFF);
 		. = . + ((((__load_stop_iwram58) + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram58)) - 1;
 	    BYTE(0xFF);
-	} > iwram = 0xff
+	} > iwram_21d0d80 = 0xff
     
     temp59 = temp58 + SIZEOF (.iwram58) + SIZEOF (.fill58);
 	.iwram59 __iwram_start : AT (temp59) { *(.iwram59) . = ALIGN(4); } > iwram = 0xff

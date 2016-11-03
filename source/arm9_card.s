@@ -347,6 +347,11 @@ branch_20c8668: @ 20c8668 :arm
 @ 0x20c86c8
 
 
+/* Input:
+r0: Ptr to memory
+r1: ?
+r2: OverlayNr
+*/
 .arm
 FS_LoadOverlayInfo: @ 20c86c8 :arm
 	stmfd   sp!, {r3-r5,lr}
@@ -364,6 +369,7 @@ FS_LoadOverlayInfo: @ 20c86c8 :arm
 	addls   sp, sp, #0x60
 	movls   r0, #0x0
 	ldmlsfd sp!, {r3-r5,pc}
+
 	mov     r1, r5
 	add     r0, r12, r3
 	mov     r2, #0x20
@@ -3996,6 +4002,7 @@ PM_GetBackLight: @ 20cb29c :arm
 	bl      PMi_ReadRegister
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3-r5,pc}
+
 	cmp     r5, #0x0
 	beq     branch_20cb2d8
 	ldrh    r1, [sp]
@@ -4006,6 +4013,7 @@ PM_GetBackLight: @ 20cb29c :arm
 branch_20cb2d8: @ 20cb2d8 :arm
 	cmp     r4, #0x0
 	ldmeqfd sp!, {r3-r5,pc}
+
 	ldrh    r1, [sp]
 	tst     r1, #0x4
 	movne   r1, #0x1

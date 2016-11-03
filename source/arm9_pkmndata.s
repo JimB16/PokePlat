@@ -2244,7 +2244,7 @@ branch_2074ae4: @ 2074ae4 :thumb
 	ldrh    r0, [r5, #0x2]
 	mov     r1, #0x1
 	mov     r2, r4
-	bl      Function_207cff0
+	bl      GetItemData
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	bl      Function_2077988
@@ -5020,7 +5020,7 @@ branch_2075c8c: @ 2075c8c :thumb
 	lsr     r0, r0, #16
 	mov     r1, #0x1
 	mov     r2, #0x0
-	bl      Function_207cff0
+	bl      GetItemData
 	lsl     r0, r0, #24
 	mov     r4, #0x0
 	lsr     r7, r0, #24
@@ -7123,7 +7123,7 @@ Function_2076994: @ 2076994 :thumb
 branch_20769b6: @ 20769b6 :thumb
 	ldr     r0, [sp, #0x24]
 	ldr     r1, [sp, #0x98]
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 	mov     r4, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -7174,7 +7174,7 @@ branch_20769b6: @ 20769b6 :thumb
 	mov     r2, r4
 	bl      Function_200ce54
 	mov     r0, r4
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 	ldr     r4, [pc, #0x74] @ 0x2076aa4, (=Unknown_20f05e4)
 	add     r3, sp, #0x3c
 	mov     r2, #0x6
@@ -7447,7 +7447,7 @@ CheckIfPkmnEvolves: @ 2076b94 :thumb
 	str     r0, [sp, #0x1c]
 	ldr     r0, [sp, #0x28]
 	mov     r1, #0x1
-	bl      Function_207cff0
+	bl      GetItemData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
 	ldr     r0, [sp, #0x2c]
@@ -9495,7 +9495,7 @@ Function_2077930: @ 2077930 :thumb
 	lsr     r0, r0, #16
 	mov     r1, #0x1
 	mov     r2, #0x0
-	bl      Function_207cff0
+	bl      GetItemData
 
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
@@ -12509,7 +12509,7 @@ SetPokeballSeal: @ 2078aec :thumb
 branch_2078afe: @ 2078afe :thumb
 	mov     r0, #0x98
 	mov     r1, r2
-	bl      Function_2006c24
+	bl      LoadFromNARC_8
 
 	mov     r1, #0x1
 	.hword  0x1e6d @ sub r5, r5, #0x1
@@ -12536,7 +12536,7 @@ branch_2078afe: @ 2078afe :thumb
 	bl      SetPkmnData
 
 	mov     r0, r6
-	bl      Function_2006ca8
+	bl      Call_FS_CloseFile
 
 	mov     r0, #0x1
 	add     sp, #0x20

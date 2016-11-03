@@ -236,7 +236,7 @@ branch_1ff8290: @ 1ff8290 :arm
 	mov     r0, #0x0
 	strh    r0, [r1]
 	ldr     r3, [pc, #0x30] @ [0x1ff82e0] (=RAM_27ffe00)
-	ldr     r12, [r3, #0x24]
+	ldr     r12, [r3, #RAM_27ffe00_24]
 	mov     lr, r12
 	ldr     r11, [pc, #0x18] @ [0x1ff82d4] (=RAM_27fff80)
 	ldmia   r11, {r0-r10}

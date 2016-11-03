@@ -3,76 +3,120 @@
 .section .iwram24, "ax"
 
 
-.incbin "./baserom/overlay/overlay_0024.bin"
-.section .iwram25, "ax"
-.incbin "./baserom/overlay/overlay_0025.bin"
-.section .iwram26, "ax"
-.incbin "./baserom/overlay/overlay_0026.bin"
-.section .iwram27, "ax"
-.incbin "./baserom/overlay/overlay_0027.bin"
-.section .iwram28, "ax"
-.incbin "./baserom/overlay/overlay_0028.bin"
-.section .iwram29, "ax"
-.incbin "./baserom/overlay/overlay_0029.bin"
-.section .iwram30, "ax"
-.incbin "./baserom/overlay/overlay_0030.bin"
-.section .iwram31, "ax"
-.incbin "./baserom/overlay/overlay_0031.bin"
-.section .iwram32, "ax"
-.incbin "./baserom/overlay/overlay_0032.bin"
-.section .iwram33, "ax"
-.incbin "./baserom/overlay/overlay_0033.bin"
-.section .iwram34, "ax"
-.incbin "./baserom/overlay/overlay_0034.bin"
-.section .iwram35, "ax"
-.incbin "./baserom/overlay/overlay_0035.bin"
-.section .iwram36, "ax"
-.incbin "./baserom/overlay/overlay_0036.bin"
-.section .iwram37, "ax"
-.incbin "./baserom/overlay/overlay_0037.bin"
-.section .iwram38, "ax"
-.incbin "./baserom/overlay/overlay_0038.bin"
-.section .iwram39, "ax"
-.incbin "./baserom/overlay/overlay_0039.bin"
-.section .iwram40, "ax"
-.incbin "./baserom/overlay/overlay_0040.bin"
-.section .iwram41, "ax"
-.incbin "./baserom/overlay/overlay_0041.bin"
-.section .iwram42, "ax"
-.incbin "./baserom/overlay/overlay_0042.bin"
-.section .iwram43, "ax"
-.incbin "./baserom/overlay/overlay_0043.bin"
-.section .iwram44, "ax"
-.incbin "./baserom/overlay/overlay_0044.bin"
-.section .iwram45, "ax"
-.incbin "./baserom/overlay/overlay_0045.bin"
-.section .iwram46, "ax"
-.incbin "./baserom/overlay/overlay_0046.bin"
-.section .iwram47, "ax"
-.incbin "./baserom/overlay/overlay_0047.bin"
-.section .iwram48, "ax"
-.incbin "./baserom/overlay/overlay_0048.bin"
-.section .iwram49, "ax"
-.incbin "./baserom/overlay/overlay_0049.bin"
-.section .iwram50, "ax"
-.incbin "./baserom/overlay/overlay_0050.bin"
-.section .iwram51, "ax"
-.incbin "./baserom/overlay/overlay_0051.bin"
-.section .iwram52, "ax"
-.incbin "./baserom/overlay/overlay_0052.bin"
-.section .iwram53, "ax"
-.incbin "./baserom/overlay/overlay_0053.bin"
-.section .iwram54, "ax"
-.incbin "./baserom/overlay/overlay_0054.bin"
-.section .iwram55, "ax"
-.incbin "./baserom/overlay/overlay_0055.bin"
-.section .iwram56, "ax"
-.incbin "./baserom/overlay/overlay_0056.bin"
-.section .iwram57, "ax"
-.incbin "./baserom/overlay/overlay_0057.bin"
-.section .iwram58, "ax"
-.incbin "./baserom/overlay/overlay_0058.bin"
-.section .iwram59, "ax"
-.incbin "./baserom/overlay/overlay_0059.bin"
+.thumb
+Function_2253ce0: @ 2253ce0 :thumb
+	push    {r3-r5,lr}
+	add     sp, #-0x10
+	mov     r5, r0
+	mov     r0, #0x3
+	mov     r1, #0x8
+	lsl     r2, r0, #15
+	bl      0x2017fc8
+	mov     r0, #0x0
+	blx 0x20bdea8
+	mov     r0, #0x80
+	blx 0x20bea50
+	mov     r0, #0x1
+	lsl     r0, r0, #8
+	blx 0x20beaf8
+	ldr     r2, [pc, #0x88] @ 0x2253d90, (=0x4001000)
+	ldr     r0, [pc, #0x8c] @ 0x2253d94, (=0xffcfffef)
+	ldr     r1, [r2, #0x0]
+	mov     r3, #0x0
+	and     r1, r0
+	mov     r0, #0x10
+	orr     r0, r1
+	str     r0, [r2, #0x0]
+	ldr     r2, [pc, #0x80] @ 0x2253d98, (=Unknown_2253db8)
+	mov     r0, r5
+	mov     r1, #0x4
+	bl      0x20183c4
+	mov     r0, #0xc
+	mov     r1, #0x8
+	bl      0x2006c24
+	mov     r1, #0x0
+	str     r1, [sp, #0x0]
+	str     r1, [sp, #0x4]
+	mov     r1, #0x1
+	str     r1, [sp, #0x8]
+	mov     r1, #0x8
+	str     r1, [sp, #0xc]
+	mov     r1, #0xa
+	mov     r2, r5
+	mov     r3, #0x4
+	mov     r4, r0
+	bl      0x20070e8
+	mov     r0, #0x0
+	str     r0, [sp, #0x0]
+	str     r0, [sp, #0x4]
+	mov     r0, #0x1
+	str     r0, [sp, #0x8]
+	mov     r0, #0x8
+	str     r0, [sp, #0xc]
+	mov     r0, r4
+	mov     r1, #0xb
+	mov     r2, r5
+	mov     r3, #0x4
+	bl      0x200710c
+	mov     r0, #0x20
+	str     r0, [sp, #0x0]
+	mov     r0, #0x8
+	str     r0, [sp, #0x4]
+	mov     r0, r4
+	mov     r1, #0xc
+	mov     r2, #0x4
+	mov     r3, #0x0
+	bl      0x2007130
+	mov     r0, r4
+	bl      0x2006ca8
+	ldr     r2, [pc, #0x18] @ 0x2253d90, (=0x4001000)
+	ldr     r0, [pc, #0x24] @ 0x2253d9c, (=0xffff1fff)
+	ldr     r1, [r2, #0x0]
+	and     r0, r1
+	str     r0, [r2, #0x0]
+	ldr     r1, [r2, #0x0]
+	ldr     r0, [pc, #0x1c] @ 0x2253da0, (=0xffffe0ff)
+	and     r1, r0
+	lsr     r0, r2, #18
+	orr     r0, r1
+	str     r0, [r2, #0x0]
+	add     sp, #0x10
+	pop     {r3-r5,pc}
+@ 0x2253d8e
+
+.align 2
+.word 0x4001000 @ 0x2253d90
+.word 0xffcfffef @ 0x2253d94
+.word Unknown_2253db8 @ 0x2253d98
+.word 0xffff1fff @ 0x2253d9c
+.word 0xffffe0ff @ 0x2253da0
+
+
+
+.thumb
+Function_2253da4: @ 2253da4 :thumb
+	push    {r3,lr}
+	mov     r1, #0x4
+	bl      0x2019044
+	mov     r0, #0x8
+	bl      0x201807c
+	pop     {r3,pc}
+@ 0x2253db4
+
+
+.thumb
+Function_2253db4: @ 2253db4 :thumb
+	mov     r0, #0x1
+	bx      lr
+
+
+
+Unknown_2253db8: @ 0x2253db8
+.incbin "./baserom/overlay/overlay_0024.bin", 0xd8, 0x2253de0 - 0x2253db8
+
+
+@end 0x2253de0
+
+
 
 

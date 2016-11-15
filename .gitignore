@@ -1,6 +1,7 @@
 # generated
 *.elf
 *.o
+*.d
 *.bin
 *.narc
 *.pyc

@@ -10,11 +10,14 @@ branch_2000808: @ 2000808 :arm
 	bl      init_cp15
 	mov     r0, #0x13
 	msr     CPSR_c, r0
+
 	ldr     r0, [pc, #0x108] @ [0x2000930] (=RAM_27e0000)
 	add     r0, r0, #0x3fc0
 	mov     sp, r0
+
 	mov     r0, #0x12
 	msr     CPSR_c, r0
+
 	ldr     r0, [pc, #0xf4] @ [0x2000930] (=RAM_27e0000)
 	add     r0, r0, #0x3fc0
 	sub     r0, r0, #0x40

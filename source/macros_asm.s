@@ -7,6 +7,8 @@
 
 
 .equ NrOfPkmn, 493 @ 0x1ed
+.equ UnknownPkmnID, NrOfPkmn+1 @ 0x1ee
+.equ UnknownPkmnID2, NrOfPkmn+2 @ 0x1ef
 .equ NrOfMoves, 467 @ 0x1d3
 .equ NrSinPokedexEntries, 210 @ 0xd2
 .equ NrNatPokedexEntries, 482 @ 0x1e2 doesn't need Mew, Lugia, Ho-Oh, Celebi, Jirachi, Deoxys, Phione, Manaphy, Darkrai, Shaymin and Arceus
@@ -16,18 +18,87 @@
 */
 
 @ Constants for ReadPkmnData- and WritePkmnData-functions (arm9.s)
+@ Constants for ReadPkmnData1-functions (arm9.s) r1
+@ Constants for GetPkmnData2-functions (arm9.s) r1
 @ Constants for GetPkmnData-functions (arm9.s) r1
 @ ChangePkmnData0?
 @ https://projectpokemon.org/wiki/Pokemon_NDS_Structure
 @ http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_structure_in_Generation_IV
+/* Pokemon NDS Structure
+0x0  4 Personality value (Also known as the PID)
+0x4  2 IsNoValidPkmn
+  Bit 0 Unknown
+  Bit 1 Unknown
+  Bit 2 Unknown (Used for getspecies)
+0x6  2 Checksum
+
+Block A
+0x8  2 National Pokédex ID
+0xa  2 Held Item
+0xc  2 OT ID
+0xe  2 OT Secret ID
+0x10 4 Experience points
+0x14 1 Friendship (Steps to Hatch if an egg)
+0x15 1 Ability
+0x16 1 Markings
+0x17 1 Original Language
+0x18 1 HP Effort Value
+0x19 1 Attack Effort Value
+0x1a 1 Defense Effort Value
+0x1b 1 Speed Effort Value
+0x1c 1 SP Attack Effort Value
+0x1d 1 SP Defense Effort Value
+0x1e 1 Cool Contest Value
+0x1f 1 Beauty Contest Value
+0x20 1 Cute Contest Value
+0x21 1 Smart Contest Value
+0x22 1 Tough Contest Value
+0x23 1 Sheen Contest Value
+0x24 2 Sinnoh Ribbon Set 1
+0x26 2 Sinnoh Ribbon Set 2
+
+Block B
+0x28 2 Move 1 ID
+0x2a 2 Move 2 ID
+0x2c 2 Move 3 ID
+0x2e 2 Move 4 ID
+0x30 1 Move 1 Current PP
+0x31 1 Move 2 Current PP
+0x32 1 Move 3 Current PP
+0x33 1 Move 4 Current PP
+0x34 4 Move PP Ups
+0x38 4
+  Bit 0-4 HP IV
+  Bit 5-9 Attack IV
+  Bit 10-14 Defense IV
+  Bit 15-19 Speed IV
+  Bit 20-24 SP Attack IV
+  Bit 25-29 SP Defense IV
+  Bit 30 IsEgg Flag
+  Bit 31 IsNicknamed Flag
+*/
 .equ PkmnData_Offset0, 0x0
 .equ PkmnData_Offset1, 0x8
 .equ PkmnData_Offset2, 0x88
+
 .equ PkmnData_Size0, 0x8
 .equ PkmnData_Size1, 0x80
 .equ PkmnData_Size2, 0x64
-.equ PkmnData_Size, PkmnData_Size0+PkmnData_Size1+PkmnData_Size2
+.equ PkmnData_Size, PkmnData_Size0+PkmnData_Size1+PkmnData_Size2 @ 0xec
+.equ PkmnParty_Size, 8+PkmnData_Size*6 @ 0x590
+.equ PkmnBattleData_Size, 0xc0
+
+.equ PkmnData_PersonalityValue,  0x0
+.equ PkmnData_4,  0x4
+.equ PkmnData_4_Bit0,  1<<0
+.equ PkmnData_4_Bit1,  1<<1
+.equ PkmnData_4_Bit2,  1<<2
+.equ PkmnData_Checksum,  0x6
+
 .equ PKMNDATA_PERSONALITYVALUE,  0x0
+.equ PKMNDATA_4_BIT0,  0x1
+.equ PKMNDATA_4_BIT1,  0x2
+.equ PKMNDATA_4_BIT2,  0x3
 .equ PKMNDATA_CHECKSUM,  0x4
 .equ PKMNDATA_SPECIES,  0x5
 .equ PKMNDATA_ITEM,  0x6
@@ -49,6 +120,35 @@
 .equ PKMNDATA_SMARTCONTEST,  0x16
 .equ PKMNDATA_TOUGHCONTEST,  0x17
 .equ PKMNDATA_SHEENCONTEST,  0x18
+.equ PKMNDATA_SINNOHRIBBON_CHAMP,  0x19
+.equ PKMNDATA_SINNOHRIBBON_ABILITY,  0x1a
+.equ PKMNDATA_SINNOHRIBBON_GREATABILITY,  0x1b
+.equ PKMNDATA_SINNOHRIBBON_DOUBLEABILITY,  0x1c
+.equ PKMNDATA_SINNOHRIBBON_MULTIABILITY,  0x1d
+.equ PKMNDATA_SINNOHRIBBON_PAIRABILITY,  0x1e
+.equ PKMNDATA_SINNOHRIBBON_WORLDABILITY,  0x1f
+.equ PKMNDATA_SINNOHRIBBON_ALERT,  0x20
+.equ PKMNDATA_SINNOHRIBBON_SHOCK,  0x21
+.equ PKMNDATA_SINNOHRIBBON_DOWNCAST,  0x22
+.equ PKMNDATA_SINNOHRIBBON_CARELESS,  0x23
+.equ PKMNDATA_SINNOHRIBBON_RELAX,  0x24
+.equ PKMNDATA_SINNOHRIBBON_SNOOZE,  0x25
+.equ PKMNDATA_SINNOHRIBBON_SMILE,  0x26
+.equ PKMNDATA_SINNOHRIBBON_GORGEOUS,  0x27
+.equ PKMNDATA_SINNOHRIBBON_ROYAL,  0x28
+.equ PKMNDATA_SINNOHRIBBON_GORGEOUSROYAL,  0x29
+.equ PKMNDATA_SINNOHRIBBON_FOOTPRINT,  0x2a
+.equ PKMNDATA_SINNOHRIBBON_RECORD,  0x2b
+.equ PKMNDATA_SINNOHRIBBON_HISTORY,  0x2c
+.equ PKMNDATA_SINNOHRIBBON_LEGEND,  0x2d
+.equ PKMNDATA_SINNOHRIBBON_RED,  0x2e
+.equ PKMNDATA_SINNOHRIBBON_GREEN,  0x2f
+.equ PKMNDATA_SINNOHRIBBON_BLUE,  0x30
+.equ PKMNDATA_SINNOHRIBBON_FESTIVAL,  0x31
+.equ PKMNDATA_SINNOHRIBBON_CARNIVAL,  0x32
+.equ PKMNDATA_SINNOHRIBBON_CLASSIC,  0x33
+.equ PKMNDATA_SINNOHRIBBON_PREMIER,  0x34
+.equ PKMNDATA_SINNOHRIBBON_29,  0x35
 .equ PKMNDATA_MOVE1,  0x36
 .equ PKMNDATA_MOVE2,  0x37
 .equ PKMNDATA_MOVE3,  0x38
@@ -61,24 +161,61 @@
 .equ PKMNDATA_MOVEPPUPS2,  0x3f
 .equ PKMNDATA_MOVEPPUPS3,  0x40
 .equ PKMNDATA_MOVEPPUPS4,  0x41
-.equ PKMNDATA_42,  0x42
+.equ PKMNDATA_MOVE1MAXPP,  0x42
+.equ PKMNDATA_MOVE2MAXPP,  0x43
+.equ PKMNDATA_MOVE3MAXPP,  0x44
+.equ PKMNDATA_MOVE4MAXPP,  0x45
 .equ PKMNDATA_IVHP,  0x46
 .equ PKMNDATA_IVATK, 0x47
 .equ PKMNDATA_IVDEF, 0x48
 .equ PKMNDATA_IVSPE, 0x49
 .equ PKMNDATA_IVSPA, 0x4a
 .equ PKMNDATA_IVSPD, 0x4b
-.equ PKMNDATA_ISNICKNAMED, 0x4c
-.equ PKMNDATA_EGG, 0x4d
-.equ PKMNDATA_COOLRIBBONHOENN, 0x4e
-.equ PKMNDATA_COOLRIBBONHOENNSUPER, 0x4f
-.equ PKMNDATA_COOLRIBBONHOENNHYPER, 0x50
-.equ PKMNDATA_COOLRIBBONHOENNMASTER, 0x51
+.equ PKMNDATA_ISEGG, 0x4c
+.equ PKMNDATA_ISNICKNAMED, 0x4d
+.equ PKMNDATA_HOENNRIBBON_COOL,  0x4e
+.equ PKMNDATA_HOENNRIBBON_COOLSUPER,  0x4f
+.equ PKMNDATA_HOENNRIBBON_COOLHYPER,  0x50
+.equ PKMNDATA_HOENNRIBBON_COOLMASTER,  0x51
+.equ PKMNDATA_HOENNRIBBON_BEAUTY,  0x52
+.equ PKMNDATA_HOENNRIBBON_BEAUTYSUPER,  0x53
+.equ PKMNDATA_HOENNRIBBON_BEAUTYHYPER,  0x54
+.equ PKMNDATA_HOENNRIBBON_BEAUTYMASTER,  0x55
+.equ PKMNDATA_HOENNRIBBON_CUTE,  0x56
+.equ PKMNDATA_HOENNRIBBON_CUTESUPER,  0x57
+.equ PKMNDATA_HOENNRIBBON_CUTEHYPER,  0x58
+.equ PKMNDATA_HOENNRIBBON_CUTEMASTER,  0x59
+.equ PKMNDATA_HOENNRIBBON_SMART,  0x5a
+.equ PKMNDATA_HOENNRIBBON_SMARTSUPER,  0x5b
+.equ PKMNDATA_HOENNRIBBON_SMARTHYPER,  0x5c
+.equ PKMNDATA_HOENNRIBBON_SMARTMASTER,  0x5d
+.equ PKMNDATA_HOENNRIBBON_TOUGH,  0x5e
+.equ PKMNDATA_HOENNRIBBON_TOUGHSUPER,  0x5f
+.equ PKMNDATA_HOENNRIBBON_TOUGHHYPER,  0x60
+.equ PKMNDATA_HOENNRIBBON_TOUGHMASTER,  0x61
+.equ PKMNDATA_HOENNRIBBON_CHAMPION,  0x62
+.equ PKMNDATA_HOENNRIBBON_WINNING,  0x63
+.equ PKMNDATA_HOENNRIBBON_VICTORY,  0x64
+.equ PKMNDATA_HOENNRIBBON_ARTIST,  0x65
+.equ PKMNDATA_HOENNRIBBON_EFFORT,  0x66
+.equ PKMNDATA_HOENNRIBBON_MARINE,  0x67
+.equ PKMNDATA_HOENNRIBBON_LAND,  0x68
+.equ PKMNDATA_HOENNRIBBON_SKY,  0x69
+.equ PKMNDATA_HOENNRIBBON_COUNTRY,  0x6a
+.equ PKMNDATA_HOENNRIBBON_NATIONAL,  0x6b
+.equ PKMNDATA_HOENNRIBBON_EARTH,  0x6c
+.equ PKMNDATA_HOENNRIBBON_WORLD,  0x6d
 .equ PKMNDATA_FATEFULENCOUNTERED, 0x6e
 .equ PKMNDATA_GENDER, 0x6f
 .equ PKMNDATA_ALTERNATEFORM, 0x70
+.equ PKMNDATA_EGGLOCATION1, 0x73
+.equ PKMNDATA_METATLOCATION1, 0x74
 .equ PKMNDATA_NICKNAME, 0x75
+.equ PKMNDATA_77,  0x77
 .equ PKMNDATA_ORIGINGAME, 0x7a
+.equ PKMNDATA_91,  0x91
+.equ PKMNDATA_EGGLOCATION2, 0x98
+.equ PKMNDATA_METATLOCATION2, 0x99
 .equ PKMNDATA_POKERUS,  0x9a
 .equ PKMNDATA_POKEBALL,  0x9b
 .equ PKMNDATA_METATLEVEL,  0x9c
@@ -94,14 +231,22 @@
 .equ PKMNDATA_SPE,  0xa7
 .equ PKMNDATA_SPA,  0xa8
 .equ PKMNDATA_SPD,  0xa9
+.equ PKMNDATA_aa,  0xaa
 .equ PKMNDATA_SEALCOORDINATES,  0xab
 .equ PKMNDATA_ISPKMNOREGG,  0xac
+.equ PKMNDATA_ad,  0xad
+.equ PKMNDATA_ae,  0xae
+.equ PKMNDATA_af,  0xaf
+.equ PKMNDATA_b1,  0xb1
+.equ PKMNDATA_b2,  0xb2
+.equ PKMNDATA_b3,  0xb3
 @ a0, ac
 @ ? = 0xae
 
 
 @ Constants for LoadPkmnBaseData-function (arm9_pkmndata.s) r1
 @ Constants for GetPkmnBaseData1-function (arm9_pkmndata.s) r1
+@ Constants for GetPkmnBaseData2-function (arm9_pkmndata.s) r2
 .equ PKMNBASEDATA_HP,  0x0
 .equ PKMNBASEDATA_ATK,  0x1
 .equ PKMNBASEDATA_DEF,  0x2
@@ -177,6 +322,15 @@
 .equ PKMNBATTLEDATA_49,  0x49
 .equ PKMNBATTLEDATA_4b,  0x4b
 .equ PKMNBATTLEDATA_59,  0x59
+
+
+@ Constants for ReadBattleData-functions (overlay_0016.s) r2
+@ Constants for WriteBattleData-functions (overlay_0016.s) r2
+.equ BATTLEDATA_0, 0x0
+.equ BATTLEDATA_1, 0x1
+.equ BATTLEDATA_2, 0x2
+.equ BATTLEDATA_ROUNDNR, 0x3
+.equ BATTLEDATA_b, 0xb
 
 @ Constants for ReadMoveData-function (arm9.s) r1
 @ Constants for LoadMoveData-function (arm9.s) r1

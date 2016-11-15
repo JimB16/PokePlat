@@ -4,7 +4,8 @@
 
 
 .thumb
-Function_2253ce0: @ 2253ce0 :thumb
+.globl Function_24_2253ce0
+Function_24_2253ce0: @ 2253ce0 :thumb
 	push    {r3-r5,lr}
 	add     sp, #-0x10
 	mov     r5, r0
@@ -13,12 +14,12 @@ Function_2253ce0: @ 2253ce0 :thumb
 	lsl     r2, r0, #15
 	bl      0x2017fc8
 	mov     r0, #0x0
-	blx 0x20bdea8
+	blx     0x20bdea8
 	mov     r0, #0x80
-	blx 0x20bea50
+	blx     0x20bea50
 	mov     r0, #0x1
 	lsl     r0, r0, #8
-	blx 0x20beaf8
+	blx     0x20beaf8
 	ldr     r2, [pc, #0x88] @ 0x2253d90, (=0x4001000)
 	ldr     r0, [pc, #0x8c] @ 0x2253d94, (=0xffcfffef)
 	ldr     r1, [r2, #0x0]
@@ -94,7 +95,8 @@ Function_2253ce0: @ 2253ce0 :thumb
 
 
 .thumb
-Function_2253da4: @ 2253da4 :thumb
+.globl Function_24_2253da4
+Function_24_2253da4: @ 2253da4 :thumb
 	push    {r3,lr}
 	mov     r1, #0x4
 	bl      0x2019044
@@ -105,7 +107,8 @@ Function_2253da4: @ 2253da4 :thumb
 
 
 .thumb
-Function_2253db4: @ 2253db4 :thumb
+.globl Function_24_2253db4
+Function_24_2253db4: @ 2253db4 :thumb
 	mov     r0, #0x1
 	bx      lr
 

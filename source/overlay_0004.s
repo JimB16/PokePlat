@@ -19,7 +19,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 branch_21d0d98: @ 21d0d98 :thumb
 	ldr     r1, [pc, #0x1ac] @ 0x21d0f48, (=0x1108)
 	mov     r0, r5
-	bl      Function_2018144
+	bl      malloc_maybe
 	ldr     r2, [pc, #0x1a4] @ 0x21d0f48, (=0x1108)
 	mov     r6, r0
 	mov     r1, #0x0
@@ -64,7 +64,7 @@ branch_21d0d98: @ 21d0d98 :thumb
 	str     r4, [r0, r2]
 	mov     r0, r5
 	add     r1, r4, r1
-	bl      Function_2018144
+	bl      malloc_maybe
 	ldr     r3, [pc, #0x144] @ 0x21d0f44, (=0x221a400)
 	mov     r1, #0xf9
 	ldr     r2, [r3, #0x0]
@@ -158,7 +158,7 @@ branch_21d0d98: @ 21d0d98 :thumb
 	ldr     r0, [r4, #0x0]
 	sub     r1, #0x1c
 	ldr     r0, [r0, r1]
-	bl      Function_202b370
+	bl      LoadVariableAreaAdress_1d
 	bl      Function_202ad28
 	mov     r2, r4
 	mov     r1, #0xf1
@@ -168,7 +168,7 @@ branch_21d0d98: @ 21d0d98 :thumb
 	ldr     r0, [r2, #0x0]
 	add     r1, #0x68
 	ldr     r0, [r0, r1]
-	bl      Function_202b370
+	bl      LoadVariableAreaAdress_1d
 	mov     r1, r6
 	bl      Function_202aed8
 	mov     r1, r4
@@ -262,7 +262,7 @@ Function_21d0f68: @ 21d0f68 :thumb
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x4c] @ 0x21d0fdc, (=0xf98)
 	ldr     r0, [r1, r0]
-	bl      Function_20181c4
+	bl      free
 	ldr     r0, [pc, #0x40] @ 0x21d0fd8, (=0x221a400)
 	mov     r2, #0x0
 	ldr     r1, [r0, #0x0]
@@ -1393,7 +1393,7 @@ Function_21d1744: @ 21d1744 :thumb
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x4c] @ 0x21d179c, (=0xf78)
 	ldr     r0, [r1, r0]
-	bl      Function_202b370
+	bl      LoadVariableAreaAdress_1d
 	mov     r1, #0x0
 	bl      Function_202aed8
 	mov     r1, r0
@@ -1408,7 +1408,7 @@ Function_21d1744: @ 21d1744 :thumb
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x28] @ 0x21d179c, (=0xf78)
 	ldr     r0, [r1, r0]
-	bl      Function_202b370
+	bl      LoadVariableAreaAdress_1d
 	mov     r1, r5
 	mov     r2, r4
 	bl      Function_202b270
@@ -1416,7 +1416,7 @@ Function_21d1744: @ 21d1744 :thumb
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x14] @ 0x21d179c, (=0xf78)
 	ldr     r0, [r1, r0]
-	bl      Function_203068c
+	bl      LoadVariableAreaAdress_17
 	mov     r1, r5
 	mov     r2, r4
 	bl      Function_20307f0
@@ -3707,7 +3707,7 @@ Function_21d2618: @ 21d2618 :thumb
 	bne     branch_21d26d0
 	mov     r0, r1
 	ldr     r1, [pc, #0xa4] @ 0x21d26dc, (=0xf020)
-	bl      Function_2018144
+	bl      malloc_maybe
 	ldr     r2, [pc, #0x98] @ 0x21d26d4, (=0x221a400)
 	ldr     r1, [pc, #0xa0] @ 0x21d26e0, (=0xf98)
 	ldr     r3, [r2, #0x0]
@@ -3778,7 +3778,7 @@ branch_21d26b2: @ 21d26b2 :thumb
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x20] @ 0x21d26e0, (=0xf98)
 	ldr     r0, [r1, r0]
-	bl      Function_20181c4
+	bl      free
 	ldr     r0, [pc, #0xc] @ 0x21d26d4, (=0x221a400)
 	mov     r2, #0x0
 	ldr     r1, [r0, #0x0]
@@ -3835,7 +3835,7 @@ Function_21d2700: @ 21d2700 :thumb
 	cmp     r0, #0x1
 	bne     branch_21d2726
 	mov     r0, r1
-	bl      Function_20181c4
+	bl      free
 	b       branch_21d272e
 @ 0x21d2726
 
@@ -3883,7 +3883,7 @@ Function_21d2748: @ 21d2748 :thumb
 	cmp     r0, #0xb
 	bne     branch_21d2780
 	sub     r1, #0x68
-	bl      Function_2018144
+	bl      malloc_maybe
 	ldr     r2, [pc, #0x4c] @ 0x21d27c0, (=0x221a400)
 	ldr     r1, [r2, #0x0]
 	add     r3, r1, r4
@@ -4701,7 +4701,7 @@ Function_21d2c98: @ 21d2c98 :thumb
 	mov     r6, r1
 	mov     r0, r3
 	mov     r1, r4
-	bl      Function_2018144
+	bl      malloc_maybe
 	str     r0, [r5, #0x0]
 	mov     r1, #0x0
 	mov     r2, r4
@@ -71899,13 +71899,13 @@ branch_2205614: @ 2205614 :arm
 .word 0x221c75c @ 0x2205648
 .arm
 Function_220564c: @ 220564c :arm
-	ldr     r12, [pc, #0x8] @ [0x220565c] (=0x20c4c14)
+	ldr     r12, [pc, #0x8] @ [0x220565c] (=MIi_CpuCopyFast)
 	mov     r2, r1
 	ldr     r1, [pc, #0x4] @ [0x2205660] (=0x221c78c)
 	bx      r12
 @ 0x220565c
 
-.word 0x20c4c14 @ 0x220565c
+.word MIi_CpuCopyFast @ 0x220565c
 .word 0x221c78c @ 0x2205660
 .arm
 Function_2205664: @ 2205664 :arm

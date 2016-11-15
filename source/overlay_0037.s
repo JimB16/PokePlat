@@ -26,7 +26,7 @@ Function_22561d4: @ 22561d4 :thumb
 	mov     r1, #0x1c
 	mov     r7, r2
 	str     r3, [sp, #0x0]
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_2256212
 	ldr     r3, [sp, #0x0]
@@ -49,7 +49,7 @@ Function_22561d4: @ 22561d4 :thumb
 .thumb
 branch_225620c: @ 225620c :thumb
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_2256212: @ 2256212 :thumb
 	mov     r0, #0x0
@@ -70,7 +70,7 @@ Function_225621c: @ 225621c :thumb
 	mov     r0, #0x0
 	add     r1, sp, #0x4
 	mov     r6, r2
-	blx 0x20cb29c
+	blx     0x20cb29c
 	ldr     r0, [sp, #0x4]
 	cmp     r0, #0x1
 	bne     branch_2256238
@@ -132,7 +132,7 @@ Function_2256280: @ 2256280 :thumb
 	ldr     r0, [r4, #0x8]
 	bl      Function_2256410
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x2256298
 
@@ -169,7 +169,7 @@ Function_22562a0: @ 22562a0 :thumb
 	mov     r0, r4
 	bl      Function_2256280
 	mov     r0, r5
-	bl      0x200da58
+	bl      Function_200da58
 	ldr     r0, [r4, #0xc]
 	bl      0x2254260
 .thumb
@@ -380,7 +380,7 @@ Function_22563d4: @ 22563d4 :thumb
 	mov     r5, r1
 	mov     r0, #0x8
 	mov     r1, #0x3c
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_225640a
 	add     r0, #0x8
@@ -414,7 +414,7 @@ Function_2256410: @ 2256410 :thumb
 	push    {r3,lr}
 	cmp     r0, #0x0
 	beq     branch_225641a
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_225641a: @ 225641a :thumb
 	pop     {r3,pc}
@@ -650,7 +650,7 @@ Function_2256588: @ 2256588 :thumb
 	bl      0x22558c4
 	mov     r0, #0x1
 	mov     r1, r0
-	blx 0x20cb144
+	blx     0x20cb144
 	b       branch_22565c8
 @ 0x22565ba
 
@@ -660,7 +660,7 @@ branch_22565ba: @ 22565ba :thumb
 	bl      0x22558c4
 	mov     r0, #0x1
 	mov     r1, #0x0
-	blx 0x20cb144
+	blx     0x20cb144
 branch_22565c8: @ 22565c8 :thumb
 	mov     r0, r6
 	bl      Function_22564c4

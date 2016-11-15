@@ -27,7 +27,7 @@ Function_22561d4: @ 22561d4 :thumb
 	lsl     r1, r1, #2
 	mov     r7, r2
 	str     r3, [sp, #0x0]
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_225621c
 	ldr     r3, [sp, #0x0]
@@ -53,7 +53,7 @@ Function_22561d4: @ 22561d4 :thumb
 .thumb
 branch_2256216: @ 2256216 :thumb
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_225621c: @ 225621c :thumb
 	mov     r0, #0x0
@@ -195,7 +195,7 @@ Function_22562ec: @ 22562ec :thumb
 	add     r0, r0, r1
 	mov     r1, #0x0
 	mov     r2, #0x78
-	blx 0x20c4cf4
+	blx     MI_CpuFill8
 	mov     r5, #0x0
 	mov     r12, r5
 .thumb
@@ -293,7 +293,7 @@ Function_2256384: @ 2256384 :thumb
 	ldr     r0, [r4, r0]
 	bl      Function_2256584
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x22563b0
 
@@ -331,7 +331,7 @@ Function_22563cc: @ 22563cc :thumb
 	mov     r0, r4
 	bl      Function_2256384
 	mov     r0, r5
-	bl      0x200da58
+	bl      Function_200da58
 	mov     r0, #0x1f
 	lsl     r0, r0, #4
 	ldr     r0, [r4, r0]
@@ -583,7 +583,7 @@ Function_2256554: @ 2256554 :thumb
 	mov     r6, r1
 	mov     r0, #0x8
 	mov     r1, #0x30
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_2256580
 	add     r0, #0x8
@@ -610,7 +610,7 @@ Function_2256584: @ 2256584 :thumb
 	push    {r3,lr}
 	cmp     r0, #0x0
 	beq     branch_225658e
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_225658e: @ 225658e :thumb
 	pop     {r3,pc}
@@ -729,7 +729,7 @@ Function_2256644: @ 2256644 :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, #0x8
 	lsl     r1, r0, #6
-	bl      0x2018144
+	bl      malloc_maybe
 	str     r0, [sp, #0x1c]
 	cmp     r0, #0x0
 	beq     branch_22566e8
@@ -761,7 +761,7 @@ branch_225666c: @ 225666c :thumb
 	ldr     r1, [sp, #0x14]
 	add     r1, r2, r1
 	mov     r2, #0x20
-	blx 0x20c4bb8
+	blx     MIi_CpuClearFast
 	ldr     r0, [sp, #0x14]
 	ldr     r1, [sp, #0x10]
 	add     r0, #0x20
@@ -803,7 +803,7 @@ branch_225666c: @ 225666c :thumb
 	lsl     r3, r3, #8
 	bl      0x201958c
 	ldr     r0, [sp, #0x1c]
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_22566e8: @ 22566e8 :thumb
 	add     sp, #0x20

@@ -15,13 +15,13 @@ Function_21d0d80: @ 21d0d80 :thumb
 branch_21d0d90: @ 21d0d90 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x1c
-	bl      0x2018144
+	bl      malloc_maybe
 	ldr     r1, [pc, #0x18] @ 0x21d0db4, (=0xb3c)
 	mov     r2, #0x1c
 	str     r0, [r4, r1]
 	ldr     r0, [r4, r1]
 	mov     r1, #0x0
-	blx 0x20c4cf4
+	blx     MI_CpuFill8
 	ldr     r0, [pc, #0x10] @ 0x21d0db8, (=0xb29)
 	ldrb    r1, [r4, r0]
 	add     r0, #0x13
@@ -81,7 +81,7 @@ Jumppoints_21d0de8:
 branch_21d0dfe: @ 21d0dfe :thumb
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      0x2074470
+	bl      GetPkmnData
 	ldr     r2, [pc, #0x158] @ 0x21d0f60, (=0x1df)
 	str     r0, [r4, #0xc]
 	cmp     r0, r2
@@ -158,7 +158,7 @@ branch_21d0e66: @ 21d0e66 :thumb
 branch_21d0e74: @ 21d0e74 :thumb
 	mov     r0, #0x1
 	mov     r1, r0
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, r4
 	bl      Function_21d1028
 	ldr     r0, [r4, #0x0]
@@ -231,7 +231,7 @@ branch_21d0ee8: @ 21d0ee8 :thumb
 	ldr     r0, [pc, #0x7c] @ 0x21d0f68, (=0x69c)
 	mov     r1, #0xca
 	ldr     r0, [r5, r0]
-	bl      0x200b1ec
+	bl      Function_200b1ec
 	mov     r7, r0
 	mov     r0, r6
 	bl      0x2076b10
@@ -247,9 +247,9 @@ branch_21d0ee8: @ 21d0ee8 :thumb
 	.hword  0x1d09 @ add r1, r1, #0x4
 	ldr     r1, [r5, r1]
 	mov     r2, r7
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, r7
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r1, #0x0
 	mov     r0, r5
 	mvn     r1, r1
@@ -301,7 +301,7 @@ Function_21d0f70: @ 21d0f70 :thumb
 	mov     r4, r0
 	ldr     r0, [pc, #0xc] @ 0x21d0f84, (=0xb3c)
 	ldr     r0, [r4, r0]
-	bl      0x20181c4
+	bl      free
 	ldr     r0, [pc, #0x4] @ 0x21d0f84, (=0xb3c)
 	mov     r1, #0x0
 	str     r1, [r4, r0]
@@ -324,7 +324,7 @@ Function_21d0f88: @ 21d0f88 :thumb
 	mov     r2, #0x3f
 	mov     r3, #0x1f
 	str     r1, [sp, #0x0]
-	blx 0x20bf55c
+	blx     G2x_SetBlendAlpha_
 	add     sp, #0x4
 	pop     {r3,r4,pc}
 @ 0x21d0fae
@@ -362,7 +362,7 @@ Function_21d0fdc: @ 21d0fdc :thumb
 	mov     r1, #0x12
 	mov     r0, #0xc
 	lsl     r1, r1, #10
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r2, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -432,7 +432,7 @@ branch_21d1052: @ 21d1052 :thumb
 	mov     r3, r4
 	bl      0x20146f4
 	ldr     r0, [pc, #0x30] @ 0x21d10a8, (=0x553)
-	bl      0x2005748
+	bl      Function_2005748
 	pop     {r4,pc}
 @ 0x21d107e
 
@@ -449,7 +449,7 @@ branch_21d107e: @ 21d107e :thumb
 	mov     r3, r4
 	bl      0x20146f4
 	ldr     r0, [pc, #0x14] @ 0x21d10ac, (=0x554)
-	bl      0x2005748
+	bl      Function_2005748
 	pop     {r4,pc}
 @ 0x21d109e
 
@@ -496,12 +496,12 @@ Function_21d10b0: @ 21d10b0 :thumb
 .thumb
 Function_21d10e8: @ 21d10e8 :thumb
 	push    {r4,lr}
-	bl      0x20241b4
+	bl      Call_G3X_Reset
 	bl      0x201469c
 	mov     r4, r0
 	cmp     r4, #0x0
 	ble     branch_21d10fc
-	bl      0x20241b4
+	bl      Call_G3X_Reset
 .thumb
 branch_21d10fc: @ 21d10fc :thumb
 	bl      0x20146c0
@@ -522,7 +522,7 @@ Function_21d110c: @ 21d110c :thumb
 	ldr     r0, [r5, #0x18]
 	bl      0x201411c
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r3-r5,pc}
 @ 0x21d1126
 

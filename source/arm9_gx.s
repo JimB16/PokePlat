@@ -236,7 +236,12 @@ GXS_SetGraphicsMode: @ 20bdea8 :arm
 
 
 
-
+/* Input:
+r0: REG_MASTER_BRIGHT, REG_MASTER_BRIGHT_SUB
+r1: 0 = disable
+    + = brightness up
+    - = brightness down
+*/
 .arm
 .globl GXx_SetMasterBrightness_
 GXx_SetMasterBrightness_: @ 20bdec4 :arm
@@ -244,10 +249,12 @@ GXx_SetMasterBrightness_: @ 20bdec4 :arm
 	moveq   r1, #0x0
 	streqh  r1, [r0]
 	bxeq    lr
-	orrgt   r1, r1, #0x4000
+
+	orrgt   r1, r1, #1<<14      @ Up
 	strgth  r1, [r0]
+
 	rsble   r1, r1, #0x0
-	orrle   r1, r1, #0x8000
+	orrle   r1, r1, #2<<14      @ Down
 	strleh  r1, [r0]
 	bx      lr
 @ 0x20bdeec
@@ -2447,12 +2454,12 @@ Function_20bf62c: @ 20bf62c :arm
 	mov     r2, #0x16
 	str     r2, [r0]
 	mov     r0, r1
-	ldr     r12, [pc, #0x4] @ [0x20bf64c] (=0x20c4cc8)
+	ldr     r12, [pc, #0x4] @ [0x20bf64c] (=MI_Copy64B)
 	ldr     r1, [r3, #0x4]
 	bx      r12
 @ 0x20bf64c
 
-.word MI_Copy64B @ =0x20c4cc8, 0x20bf64c
+.word MI_Copy64B @ =MI_Copy64B, 0x20bf64c
 .arm
 Function_20bf650: @ 20bf650 :arm
 	ldr     r1, [r0]
@@ -2746,7 +2753,7 @@ G3_MultMtx33: @ 20bf990 :arm
 @ 0x20bf9a4
 
 .word GFX_FIFO @ 0x20bf9a4
-.word MI_Copy36B @ =0x20c4c88, 0x20bf9a8
+.word MI_Copy36B @ =MI_Copy36B, 0x20bf9a8
 
 
 
@@ -2829,6 +2836,7 @@ branch_20bf9c0: @ 20bf9c0 :arm
 
 
 .arm
+.globl G3X_Reset
 G3X_Reset: @ 20bfab8 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r2, [pc, #0x50] @ [0x20bfb14] (=GFX_STATUS)
@@ -3070,7 +3078,7 @@ SetEdgeTable: @ 20bfd2c :arm
 .arm
 .globl Function_20bfd44
 Function_20bfd44: @ 20bfd44 :arm
-	ldr     r12, [pc, #0x4] @ [0x20bfd50] (=0x20c4c6c)
+	ldr     r12, [pc, #0x4] @ [0x20bfd50] (=MI_Copy32B)
 	ldr     r1, [pc, #0x4] @ [0x20bfd54] (=GFX_FOG_TABLE)
 	bx      r12
 @ 0x20bfd50

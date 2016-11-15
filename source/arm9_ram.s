@@ -23,16 +23,6 @@ RAM_2101d14:
 RAM_2101d20:
     .zero 0x18
 
-.equ RAM_2101d20_0,         0x0
-.equ RAM_2101d20_4,         0x4
-.equ RAM_2101d20_8,         0x8
-.equ RAM_2101d20_c,         0xc
-.equ RAM_2101d20_10,        0x10
-.equ RAM_2101d20_14,        0x14
-.equ RAM_2101d20_18,        0x18
-.equ RAM_2101d20_1c,        0x1c
-.equ RAM_2101d20_20,        0x20
-
 .globl RAM_2101d38
 RAM_2101d38:
     .zero 0xc
@@ -80,13 +70,12 @@ RAM_21bf3f0:
 .globl RAM_21bf430
 RAM_21bf430:
     .word 0
-.globl RAM_21bf434
-RAM_21bf434:
+.globl BLDCNT_SUB_Table
+BLDCNT_SUB_Table: @ 0x21bf434
     .zero 0x20
-.globl RAM_21bf454
-RAM_21bf454:
-    .word 0, 0, 0, 0
-    .word 0, 0, 0, 0
+.globl BLDCNT_Table
+BLDCNT_Table: @ 21bf454
+    .zero 0x20
 .globl RAM_21bf474
 RAM_21bf474:
     .word 0
@@ -137,40 +126,13 @@ RAM_21bf678:
     .word 0
 .globl RAM_21bf67c
 RAM_21bf67c:
-
-.equ RAM_21bf67c_0,         0x0
-.equ RAM_21bf67c_4,         0x4
-.equ RAM_21bf67c_8,         0x8
-.equ RAM_21bf67c_c,         0xc
-.equ RAM_21bf67c_18,        0x18
-.equ RAM_21bf67c_1c,        0x1c
-.equ RAM_21bf67c_20,        0x20
-.equ RAM_21bf67c_24,        0x24
-.equ RAM_21bf67c_2c,        0x2c
-.equ RAM_21bf67c_30,        0x30
-.equ RAM_21bf67c_38,        0x38
-.equ RAM_21bf67c_44,        0x44
-.equ RAM_21bf67c_48,        0x48
-.equ RAM_21bf67c_4c,        0x4c
-.equ RAM_21bf67c_6c,        0x6c
-
-
-.org 0x21bf6bc - 0x02000000
+    .zero 0x40
 
 .globl RAM_21bf6bc
 RAM_21bf6bc:
     .zero 0x20
 .globl RAM_21bf6dc
 RAM_21bf6dc:
-
-.equ RAM_21bf6bc_20,         0x20
-.equ RAM_21bf6bc_22,         0x22
-
-.equ RAM_21bf6dc_4,          0x4
-.equ RAM_21bf6dc_5,          0x5
-.equ RAM_21bf6dc_6,          0x6
-.equ RAM_21bf6dc_7,          0x7
-.equ RAM_21bf6dc_8,          0x8
 
 
 .org 0x21bfae8 - 0x02000000
@@ -188,16 +150,6 @@ RAM_21bfae8:
 RAM_21bfaf0:
     .zero 0x1c
 
-.equ RAM_21bfaf0_0,         0x0
-.equ RAM_21bfaf0_4,         0x4
-.equ RAM_21bfaf0_8,         0x8
-.equ RAM_21bfaf0_c,         0xc
-.equ RAM_21bfaf0_10,        0x10
-.equ RAM_21bfaf0_14,        0x14
-.equ RAM_21bfaf0_16,        0x16
-.equ RAM_21bfaf0_18,        0x18
-.equ RAM_21bfaf0_1a,        0x1a
-
 
 .globl RAM_21bfb0c
 RAM_21bfb0c:
@@ -211,10 +163,6 @@ RAM_21bfb18:
 .globl RAM_21bfb1c
 RAM_21bfb1c:
     .word 0
-
-.equ RAM_21bfb10_0,         0x0
-.equ RAM_21bfb10_4,         0x4
-.equ RAM_21bfb10_8,         RAM_21bfb18 - RAM_21bfb10
 
 
 .org 0x21c0110 - 0x02000000
@@ -315,7 +263,7 @@ RAM_21c07e0:
 .globl RAM_21c07f0
 RAM_21c07f0:
     .word 0
-.globl RAM_21c07f4
+.globl RAM_21c07f4 @ Flagsize = 0x16c bytes
 RAM_21c07f4:
     .word 0, 0
 .globl RAM_21c07fc
@@ -723,13 +671,6 @@ RAM_21ccbb8: @ BankForSubOBJExtPltt
 RAM_21ccbbc:
     .zero 0x1c
 
-.equ RAM_21ccba0_0,                 0x0
-.equ RAM_21ccba0_4,                 0x4
-.equ RAM_21ccba0_10,                0x10
-.equ RAM_21ccba0_14,                0x14
-.equ RAM_21ccba0_18,                0x18
-
-
 .globl RAM_21ccbd8
 RAM_21ccbd8:
     .zero 0x20
@@ -777,58 +718,6 @@ RAM_21ccc84:
     .word 0                     @ 0x28
     .word 0                     @ 0x2c FirstNode
     .word 0                     @ 0x30
-.equ ThreadLinkedList_0,                0x0
-.equ ThreadLinkedList_Scheduler,        0x4
-.equ ThreadLinkedList_8,                0x8
-.equ ThreadLinkedList_c,                0xc
-.equ ThreadLinkedList_1c,               0x1c
-.equ ThreadLinkedList_ID,               0x20
-.equ ThreadLinkedList_24,               0x24
-.equ ThreadLinkedList_24_c,             0xc
-.equ ThreadLinkedList_26,               0x26
-.equ ThreadLinkedList_28,               0x28
-.equ ThreadLinkedList_FirstNode,        0x2c
-.equ ThreadLinkedList_30,               0x30
-
-.equ Thread_0,              0x0
-.equ Thread_4,              0x4
-.equ Thread_8,              0x8
-.equ Thread_c,              0xc
-.equ Thread_10,             0x10
-.equ Thread_14,             0x14
-.equ Thread_18,             0x18
-.equ Thread_1c,             0x1c
-.equ Thread_20,             0x20
-.equ Thread_24,             0x24
-.equ Thread_28,             0x28
-.equ Thread_2c,             0x2c
-.equ Thread_30,             0x30
-.equ Thread_34,             0x34
-.equ Thread_38,             0x38
-.equ Thread_3c,             0x3c
-.equ Thread_40,             0x40
-.equ Thread_44,             0x44
-.equ Thread_Active,         0x64 @ 0: NotActive 1: Active 2: ?
-.equ Thread_Next,           0x68
-.equ Thread_ID,             0x6c
-.equ Thread_Priority,       0x70
-.equ Thread_74,             0x74
-.equ Thread_78,             0x78
-.equ Thread_7c,             0x7c
-.equ Thread_80,             0x80
-.equ Thread_84,             0x84
-.equ Thread_88,             0x88
-.equ Thread_8c,             0x8c
-.equ Thread_90,             0x90
-.equ Thread_94,             0x94
-.equ Thread_98,             0x98
-.equ Thread_9c,             0x9c
-.equ Thread_a0,             0xa0
-.globl Thread_a4
-.equ Thread_a4,             0xa4
-.equ Thread_b0,             0xb0
-.equ Thread_Destructor,     0xb4
-
 
 
 .globl RAM_21ccc90
@@ -945,11 +834,6 @@ RAM_21ceb88:
 
 .globl RAM_21cec08
 RAM_21cec08:
-.equ RAM_21cec08_0,     0x0
-.equ RAM_21cec08_4,     0x4
-.equ RAM_21cec08_8,     0x8
-.equ RAM_21cec08_a,     0xa
-.equ RAM_21cec08_c,     0xc
     .word 0
 .globl RAM_21cec0c
 RAM_21cec0c:
@@ -977,27 +861,6 @@ RAM_21cec2c:
 
 .globl ArchiveData
 ArchiveData: @ 0x21cec34
-.equ ArchiveData_0,     0x0
-.equ ArchiveData_8,     0x8
-.equ ArchiveData_c,     0xc
-.equ ArchiveData_10,    0x10
-.equ ArchiveData_14,    0x14
-.equ ArchiveData_18,    0x18
-.equ ArchiveData_1c,    0x1c
-.equ ArchiveData_28,    0x28
-.equ ArchiveData_2c,    0x2c
-.equ ArchiveData_30,    0x30
-.equ ArchiveData_34,    0x34
-.equ ArchiveData_38,    0x38
-.equ ArchiveData_3c,    0x3c
-.equ ArchiveData_40,    0x40
-.equ ArchiveData_44,    0x44
-.equ ArchiveData_48,    0x48
-.equ ArchiveData_4c,    0x4c
-.equ ArchiveData_50,    0x50
-.equ ArchiveData_54,    0x54
-.equ ArchiveData_58,    0x58
-.equ ArchiveData_size,  0x5c
     .zero 0x5c
 
 .globl RAM_21cec90
@@ -1211,10 +1074,10 @@ start - data_end - bss_end
 
 RAM_22c29c8: @ BattleData
 BattleData: @ 0x22c29c8
-.equ BattleData_0,                  0x0     @ ?
+.equ BattleData_0,                  0x0
+.equ BattleData_SkillPtr,           0xb4
 .equ BattleData_RoundNr,            0x150
 .equ BattleData_CurrentMove,        0x355
-.globl BattleData_CurrentMoveID
 .equ BattleData_CurrentMoveID,      0x356
 .equ BattleData_MoveScore,          0x358
 .equ BattleData_Move1Score,         0x358
@@ -1254,7 +1117,6 @@ BattleData: @ 0x22c29c8
 
 .org 0x22c5708 - 0x02000000
 
-RAM_22c5708: @ PlayerBattleData +0x2d40
 PlayerBattleData: @ 0x22c5708 +0x2d40
 PlayerBattleData_Species:   @ + 0x0 Player Species
     .hword 0
@@ -1311,7 +1173,7 @@ PlayerBattleData_CurHP:     @ + 0x4c (22c5754) 2d8c CurHP
     .word 0
 PlayerBattleData_MaxHP:     @ + 0x50 (22c5758) MaxHP
     .word 0
-    .word 0, 0, 0, 0
+    .word 0, 0, 0, 0        @ 
 PlayerBattleData_ExpPts:    @ + 0x64 2da4 ExpPts
     .word 0
     .word 0
@@ -1325,7 +1187,7 @@ PlayerBattleData_Item:      @ + 0x78 (22c5780) 2db8 HoldItem
     .word 0
 PlayerBattleData_80:        @ + 0x80 (22c5788) 2dc0
 
-
+/*
 .globl BattleData_Move
 .equ BattleData_Move,               PlayerBattleData_Move - BattleData      @ 0x2d4c
 .globl BattleData_StatLevel
@@ -1340,7 +1202,7 @@ PlayerBattleData_80:        @ + 0x80 (22c5788) 2dc0
 .equ BattleData_2db0,               PlayerBattleData_70 - BattleData        @ 0x2db0
 .globl BattleData_2dc0
 .equ BattleData_2dc0,               PlayerBattleData_80 - BattleData        @ 0x2dc0
-
+*/
 
 
 /*****************
@@ -1385,7 +1247,7 @@ Sprite
 /*****************
 TextInterpreter
 *****************/
-.equ TextInterpreter_Pointer,             0x0     @ Pointer to current position in Text/Msg
+.equ TextInterpreter_Pointer,       0x0     @ Pointer to current position in Text/Msg
 .equ TextInterpreter_4,             0x4
 .equ TextInterpreter_9,             0x9
 .equ TextInterpreter_a,             0xa
@@ -1400,14 +1262,25 @@ TextInterpreter
 .equ TextInterpreter_18,            0x18
 .equ TextInterpreter_1a,            0x1a
 .equ TextInterpreter_1b,            0x1b
+.equ TextInterpreter_1c,            0x1c
 .equ TextInterpreter_20,            0x20
 .equ TextInterpreter_20_0,          0x0
 .equ TextInterpreter_20_1,          0x1
 .equ TextInterpreter_20_2,          0x2
+.equ TextInterpreter_27,            0x27
+.equ TextInterpreter_27_0,          0x0
 .equ TextInterpreter_28,            0x28
+.equ TextInterpreter_28_0,          0x0
 .equ TextInterpreter_29,            0x29
+.equ TextInterpreter_29_0,          0x0
 .equ TextInterpreter_2a,            0x2a
+.equ TextInterpreter_2a_0,          0x0
 .equ TextInterpreter_2b,            0x2b
+.equ TextInterpreter_2b_0,          0x0
+.equ TextInterpreter_2c,            0x2c
+.equ TextInterpreter_2c_0,          0x0
+.equ TextInterpreter_2d,            0x2d
+.equ TextInterpreter_2d_0,          0x0
 .equ TextInterpreter_2e,            0x2e
 
 

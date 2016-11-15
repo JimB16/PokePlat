@@ -45,7 +45,7 @@ Function_223b164: @ 223b164 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x28
 	mov     r4, r0
-	blx 0x20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, #0x37
 	str     r0, [r4, #0x0]
 	str     r5, [r4, #0x10]
@@ -196,11 +196,11 @@ branch_223b26c: @ 223b26c :thumb
 	ldr     r0, [r6, #0x0]
 	str     r0, [sp, #0x0]
 	ldr     r0, [r6, #0xc]
-	bl      0x20181c4
+	bl      free
 	mov     r0, r6
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx 0x20c4cf4
+	blx     MI_CpuFill8
 	mov     r0, r7
 	bl      0x2006830
 	ldr     r0, [r4, #0x20]
@@ -465,16 +465,16 @@ branch_223b3ee: @ 223b3ee :thumb
 	mov     r2, r0
 	ldr     r1, [r4, #0x18]
 	mov     r0, r5
-	blx 0x20d50b8
+	blx     Function_20d50b8
 	ldr     r0, [r4, #0x18]
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x0
 	str     r0, [r4, #0x18]
 	mov     r0, r5
 	bl      0x207cb94
 	str     r0, [r4, #0x8]
 	mov     r0, r5
-	bl      0x20181c4
+	bl      free
 	mov     r0, r5
 	bl      0x207cb9c
 	cmp     r0, #0x5
@@ -638,7 +638,7 @@ branch_223b526: @ 223b526 :thumb
 	mov     r1, #0x4
 	bl      0x207d9c8
 	ldr     r0, [r4, #0x18]
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x0
 	str     r0, [r4, #0x18]
 	add     sp, #0x4

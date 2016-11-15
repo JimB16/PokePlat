@@ -564,7 +564,7 @@ branch_221fb70: @ 221fb70 :thumb
 	bgt     branch_221fb8a
 	mov     r1, r6
 	mov     r2, r4
-	blx     0x20d50b8
+	blx     Function_20d50b8
 	ldr     r0, [pc, #0xd4] @ 0x221fc58, (=0x2228e40)
 	mov     r1, #0x7
 	str     r1, [r0, #0x0]
@@ -574,7 +574,7 @@ branch_221fb70: @ 221fb70 :thumb
 .thumb
 branch_221fb8a: @ 221fb8a :thumb
 	mov     r1, r6
-	blx     0x20d50b8
+	blx     Function_20d50b8
 	ldr     r0, [pc, #0xc4] @ 0x221fc58, (=0x2228e40)
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -1453,7 +1453,7 @@ branch_2220398: @ 2220398 :arm
 	ldr     r2, [sp, #0x30]
 	mov     r1, r8
 	add     r0, r3, r0
-	bl      0x20d50b8
+	bl      Function_20d50b8
 	str     r4, [r9, #0xc]
 	ldr     r0, [r9, #0x4]
 	mov     r1, #0x0
@@ -1683,7 +1683,7 @@ branch_222065c: @ 222065c :arm
 	mov     r0, r6
 	mov     r2, r4
 	add     r1, r1, r3
-	bl      0x20d50b8
+	bl      Function_20d50b8
 	mov     r0, #0x0
 	strb    r0, [r6, r4]
 	str     r4, [r5]
@@ -5558,7 +5558,7 @@ branch_22235a8: @ 22235a8 :arm
 	mov     r1, r7
 	mov     r2, r5
 	add     r0, r0, r3
-	bl      0x20d50b8
+	bl      Function_20d50b8
 	ldr     r0, [r4, #0x120]
 	mov     r1, #0x0
 	add     r0, r0, r5
@@ -6902,6 +6902,9 @@ Function_2224584: @ 2224584 :arm
 @ 0x222460c
 
 .word 0x27ffe0c @ 0x222460c
+
+
+
 .arm
 Function_2224610: @ 2224610 :arm
 	stmfd   sp!, {r3,lr}
@@ -6909,11 +6912,14 @@ Function_2224610: @ 2224610 :arm
 	mov     r3, #0x2
 	mov     r1, #0x21
 	str     r3, [sp]
-	bl      0x20c1af0
+	bl      OS_SNPrintf
 	ldmfd   sp!, {r3,pc}
 @ 0x222462c
 
 .word 0x2229c08 @ 0x222462c
+
+
+
 .arm
 Function_2224630: @ 2224630 :arm
 	stmfd   sp!, {r3-r11,lr}
@@ -8284,23 +8290,23 @@ Function_222567c: @ 222567c :arm
 .word 0x20d3408 @ 0x2225684
 .arm
 Function_2225688: @ 2225688 :arm
-	ldr     r12, [pc, #0x8] @ [0x2225698] (=0x20c4cf4)
+	ldr     r12, [pc, #0x8] @ [0x2225698] (=MI_CpuFill8)
 	mov     r2, r1
 	mov     r1, #0x0
 	bx      r12
 @ 0x2225698
 
-.word 0x20c4cf4 @ 0x2225698
+.word MI_CpuFill8 @ 0x2225698
 .arm
 Function_222569c: @ 222569c :arm
-	ldr     r12, [pc, #0xc] @ [0x22256b0] (=0x20c4db0)
+	ldr     r12, [pc, #0xc] @ [0x22256b0] (=MI_CpuCopy8)
 	mov     r3, r0
 	mov     r0, r1
 	mov     r1, r3
 	bx      r12
 @ 0x22256b0
 
-.word 0x20c4db0 @ 0x22256b0
+.word MI_CpuCopy8 @ 0x22256b0
 .arm
 Function_22256b4: @ 22256b4 :arm
 	ldr     r12, [pc, #0x0] @ [0x22256bc] (=0x2228980)
@@ -8487,9 +8493,9 @@ Function_22258c4: @ 22258c4 :arm
 	str     r12, [sp]
 	mov     r12, #0x10
 	str     r12, [sp, #0x4]
-	bl      0x20c1f34
+	bl      OS_CreateThread
 	ldr     r0, [pc, #0x8] @ [0x2225900] (=0x222a034)
-	bl      0x20c22d0
+	bl      OS_WakeupThreadDirect
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r3,pc}
 @ 0x2225900
@@ -8974,9 +8980,9 @@ Function_2225e60: @ 2225e60 :arm
 	add     r3, r4, #2, 20 @ #0x2000
 	mov     r2, #0x0
 	str     r5, [sp, #0x4]
-	bl      0x20c1f34
+	bl      OS_CreateThread
 	ldr     r0, [pc, #0x14] @ [0x2225ed0] (=0x222a930)
-	bl      0x20c22d0
+	bl      OS_WakeupThreadDirect
 	mov     r0, #0x1
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r3-r5,pc}
@@ -8986,6 +8992,9 @@ Function_2225e60: @ 2225e60 :arm
 .word 0x222a8f4 @ 0x2225ecc
 .word 0x222a930 @ 0x2225ed0
 .word 0x22274a0 @ 0x2225ed4
+
+
+
 .arm
 Function_2225ed8: @ 2225ed8 :arm
 	stmfd   sp!, {r3,lr}
@@ -8994,19 +9003,22 @@ Function_2225ed8: @ 2225ed8 :arm
 	str     r1, [r0]
 	bl      Function_2225f1c
 	ldr     r0, [pc, #0x8] @ [0x2225efc] (=0x222a930)
-	bl      0x20c21d4
+	bl      Function_20c21d4
 	ldmfd   sp!, {r3,pc}
 @ 0x2225ef8
 
 .word 0x222a024 @ 0x2225ef8
 .word 0x222a930 @ 0x2225efc
+
+
+
 .arm
 Function_2225f00: @ 2225f00 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r0, [pc, #0xc] @ [0x2225f18] (=0x222a910)
 	add     r1, sp, #0x0
 	mov     r2, #0x1
-	bl      0x20c2804
+	bl      OS_ReceiveMessage
 	ldmfd   sp!, {r3,pc}
 @ 0x2225f18
 
@@ -10404,7 +10416,7 @@ Function_2226f6c: @ 2226f6c :arm
 .arm
 branch_2226f8c: @ 2226f8c :arm
 	mov     r0, r5
-	bl      0x20c24a4
+	bl      OS_Sleep
 	mov     r0, r6
 	bl      0x2208540
 	cmp     r0, r4
@@ -10566,23 +10578,23 @@ Function_222714c: @ 222714c :arm
 .word 0x20d33b4 @ 0x2227154
 .arm
 Function_2227158: @ 2227158 :arm
-	ldr     r12, [pc, #0x8] @ [0x2227168] (=0x20c4cf4)
+	ldr     r12, [pc, #0x8] @ [0x2227168] (=MI_CpuFill8)
 	mov     r2, r1
 	mov     r1, #0x0
 	bx      r12
 @ 0x2227168
 
-.word 0x20c4cf4 @ 0x2227168
+.word MI_CpuFill8 @ 0x2227168
 .arm
 Function_222716c: @ 222716c :arm
-	ldr     r12, [pc, #0xc] @ [0x2227180] (=0x20c4db0)
+	ldr     r12, [pc, #0xc] @ [0x2227180] (=MI_CpuCopy8)
 	mov     r3, r0
 	mov     r0, r1
 	mov     r1, r3
 	bx      r12
 @ 0x2227180
 
-.word 0x20c4db0 @ 0x2227180
+.word MI_CpuCopy8 @ 0x2227180
 .arm
 Function_2227184: @ 2227184 :arm
 	stmfd   sp!, {r3-r5,lr}

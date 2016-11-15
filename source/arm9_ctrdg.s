@@ -3176,7 +3176,7 @@ CTRDGi_InitTaskInfo_1: @ 20d2e38 :arm
 	bx      r12
 @ 0x20d2e48
 
-.word MI_CpuFill8 @ =0x20c4cf4, 0x20d2e48
+.word MI_CpuFill8 @ =MI_CpuFill8, 0x20d2e48
 
 
 

@@ -1,34 +1,50 @@
 
-.equ RAM_2101d20_0,         0x0
+.equ RAM_2101d20_0,         0x0 @ Backlight status
 .equ RAM_2101d20_4,         0x4
-.equ RAM_2101d20_8,         0x8
-.equ RAM_2101d20_c,         0xc
-.equ RAM_2101d20_10,        0x10
-.equ RAM_2101d20_14,        0x14
+.equ RAM_2101d20_OverlayToUnload,       0x8
+.equ RAM_2101d20_c_DeinitBSS,           0xc
+.equ RAM_2101d20_OverlayToLoad,         0x10 @ 0xffffffff = No Overlay to load
+.equ RAM_2101d20_14_InitBSS,            0x14
 .equ RAM_2101d20_18,        0x18
 .equ RAM_2101d20_1c,        0x1c
 .equ RAM_2101d20_20,        0x20
 
 
+.equ RAM_21bf5b4_c,         0xc
+.equ RAM_21bf5b4_e,         0xe
+.equ RAM_21bf5b4_f,         0xf
+.equ RAM_21bf5b4_10,        0x10
 
-.equ RAM_21bf67c_0,         0x0
-.equ RAM_21bf67c_4,         0x4
+
+.equ RAM_21bf67c_0_FunctPtr,         0x0
+.equ RAM_21bf67c_4_FunctArg,         0x4
 .equ RAM_21bf67c_8,         0x8
 .equ RAM_21bf67c_c,         0xc
+.equ RAM_21bf67c_10,        0x10
+.equ RAM_21bf67c_14,        0x14
 .equ RAM_21bf67c_18,        0x18
 .equ RAM_21bf67c_1c,        0x1c
 .equ RAM_21bf67c_20,        0x20
 .equ RAM_21bf67c_24,        0x24
 .equ RAM_21bf67c_2c,        0x2c
-.equ RAM_21bf67c_30,        0x30
-.equ RAM_21bf67c_38,        0x38
+.equ RAM_21bf67c_VBlankCounter,        0x30
+.equ RAM_21bf67c_34,        0x34
+.equ RAM_21bf67c_38_KeyOldPressed,        0x38
+.equ RAM_21bf67c_3c_KeyNewPressed,        0x3c
+.equ RAM_21bf67c_40_KeyNewPressed,        0x40
 .equ RAM_21bf67c_44,        0x44
 .equ RAM_21bf67c_48,        0x48
 .equ RAM_21bf67c_4c,        0x4c
+.equ RAM_21bf67c_50_InputDelayCounter,        0x50 @ Init with # of Frames in Input Delay, if =0 calculate new Input
+.equ RAM_21bf67c_54,        0x54
+.equ RAM_21bf67c_58_InputDelay,        0x58 @ # of Frames that Input is collected
 .equ RAM_21bf67c_6c,        0x6c
+.equ RAM_21bf67c_70,        0x70
 
 
 
+.equ RAM_21bf6bc_1c,         0x1c
+.equ RAM_21bf6bc_1e,         0x1e
 .equ RAM_21bf6bc_20,         0x20
 .equ RAM_21bf6bc_22,         0x22
 
@@ -57,6 +73,16 @@
 .equ RAM_21bfb10_4,         0x4
 .equ RAM_21bfb10_8,         0x8 @ RAM_21bfb18 - RAM_21bfb10
 
+
+.equ RAM_21c0794_0,                 0x0 @ Pointer to VariableAreaAdresses
+.equ RAM_21c0794_4,                 0x4
+
+.equ VariableAreaAdresses_0,        0x0
+.equ VariableAreaAdresses_4,        0x4
+.equ VariableAreaAdresses_8,        0x8
+.equ VariableAreaAdresses_c,        0xc
+.equ VariableAreaAdresses_10,       0x10
+.equ VariableAreaAdresses_Size,     0x202cc
 
 
 .equ RAM_21ccba0_0,                 0x0
@@ -138,6 +164,7 @@
 
 
 
+@ ArchiveData: @ 0x21cec34
 .equ ArchiveData_0,     0x0
 .equ ArchiveData_8,     0x8
 .equ ArchiveData_c,     0xc
@@ -162,8 +189,36 @@
 
 
 
-.equ BattleData_0,                  0x0     @ ?
+.equ BattleData_0,                  0x0
+.equ BattleData_8,                  0x8
+.equ BattleData_24,                 0x24
+.equ BattleData_64,                 0x64
+.equ BattleData_6c,                 0x6c
+.equ BattleData_74,                 0x74
+.equ BattleData_78,                 0x78
+.equ BattleData_80,                 0x80
+.equ BattleData_94,                 0x94
+.equ BattleData_ac,                 0xac
+.equ BattleData_b0,                 0xb0
+.equ BattleData_SkillPtr,           0xb4
+.equ BattleData_b8,                 0xb8
+.equ BattleData_bc,                 0xbc
+.equ BattleData_cc,                 0xcc
+.equ BattleData_dc,                 0xdc
+.equ BattleData_134,                0x134
 .equ BattleData_RoundNr,            0x150
+.equ BattleData_Weather,            0x180
+/*
+01 : Rain Dance
+02 : Drizzle
+04 : Sandstorm
+08 : Sand Stream
+10 : Sunny Day
+20 : Drought
+40 : Hail
+80 : Snow Warning
+*/
+.equ BattleData_WeatherCounter,     0x184
 .equ BattleData_CurrentMove,        0x355
 .globl BattleData_CurrentMoveID
 .equ BattleData_CurrentMoveID,      0x356
@@ -172,21 +227,20 @@
 .equ BattleData_TempVariable,       0x35c
 .globl BattleData_TrainerAIType
 .equ BattleData_TrainerAIType,      0x365
-.globl BattleData_3cf
+.equ BattleData_3cc,                0x3cc
+.equ BattleData_3cd,                0x3cd
+.equ BattleData_3ce,                0x3ce
 .equ BattleData_3cf,                0x3cf
 .equ BattleData_3de,                0x3de
 .equ BattleData_3e0,                0x3e0
 .equ BattleData_3e1,                0x3e1
 .equ BattleData_3e2,                0x3e2
-.globl BattleData_2120
 .equ BattleData_2120,               0x2120
-.globl BattleData_AIScriptPtr
 .equ BattleData_AIScriptPtr,        0x2134
-.globl BattleData_2138
 .equ BattleData_2138,               0x2138
-.globl BattleData_2158
+.equ BattleData_214c,               0x214c
+.equ BattleData_2150,               0x2150
 .equ BattleData_2158,               0x2158
-.globl BattleData_219c
 .equ BattleData_219c,               0x219c
 /*
 + 0x150 Round Nr
@@ -201,25 +255,54 @@
 + 0x2138
 */
 
+.equ BattleData_2700,               0x2700 @ Place for the *_seq-file
 
+/* PkmnBattleData
+Size = 0xc0
+*/
+.equ BattleData_BaseAdr,            0x2d40 @ 0x0
+.equ BattleData_Species,            0x2d40 @ 0x0
+.equ BattleData_ATK,                0x2d42 @ 0x2
+.equ BattleData_DEF,                0x2d44 @ 0x4
+.equ BattleData_SPE,                0x2d46 @ 0x6
+.equ BattleData_SPA,                0x2d48 @ 0x8
+.equ BattleData_SPD,                0x2d4a @ 0xa
+.equ BattleData_Move,               0x2d4c @ 0xc  PlayerBattleData_Move - BattleData
+.equ BattleData_Move1,              0x2d4c @ 0xc
+.equ BattleData_Move2,              0x2d4e @ 0xe
+.equ BattleData_Move3,              0x2d50 @ 0x10
+.equ BattleData_Move4,              0x2d52 @ 0x12
+.equ BattleData_StatLevel,          0x2d58 @ 0x18 PlayerBattleData_StatLevel - BattleData 8 bytes
+.equ BattleData_Type1,              0x2d64 @ 0x24
+.equ BattleData_Type2,              0x2d65 @ 0x25
+.equ BattleData_2d66,               0x2d66 @ 0x26
+.equ BattleData_Ability,            0x2d67 @ 0x27 PlayerBattleData_Ability - BattleData
+.equ BattleData_MovePP,             0x2d6c @ 0x2c
+.equ BattleData_Move1PP,            0x2d6c @ 0x2c
+.equ BattleData_Move2PP,            0x2d6d @ 0x2d
+.equ BattleData_Move3PP,            0x2d6e @ 0x2e
+.equ BattleData_Move4PP,            0x2d6f @ 0x2f
+.equ BattleData_MovePPUps,          0x2d70 @ 0x30
+.equ BattleData_Move1PPUps,         0x2d70 @ 0x30
+.equ BattleData_Move2PPUps,         0x2d71 @ 0x31
+.equ BattleData_Move3PPUps,         0x2d72 @ 0x32
+.equ BattleData_Move4PPUps,         0x2d73 @ 0x33
+.equ BattleData_Level,              0x2d74 @ 0x34
+.equ BattleData_Friendship,         0x2d75 @ 0x35
+.equ BattleData_CurHP,              0x2d8c @ 0x4c PlayerBattleData_CurHP - BattleData
+.equ BattleData_MaxHP,              0x2d90 @ 0x50
+.equ BattleData_ExpPts,             0x2da4 @ 0x64
+.equ BattleData_2dac,               0x2dac @ 0x6c PlayerBattleData_6c - BattleData
+.equ BattleData_2db0,               0x2db0 @ 0x70 PlayerBattleData_70 - BattleData
+.equ BattleData_Item,               0x2db8 @ 0x78
+.equ BattleData_2dc0,               0x2dc0 @ 0x80 PlayerBattleData_80 - BattleData
+.equ BattleData_2dcc,               0x2dcc @ 0x8c
+.equ BattleData_2de8,               0x2de8 @ 0xa8
+.equ BattleData_2df8,               0x2df8 @ 0xb8
 
-
-
-
-.globl BattleData_Move
-.equ BattleData_Move,               0x2d4c @ PlayerBattleData_Move - BattleData
-.globl BattleData_StatLevel
-.equ BattleData_StatLevel,          0x2d58 @ PlayerBattleData_StatLevel - BattleData
-.globl BattleData_Ability
-.equ BattleData_Ability,            0x2d67 @ PlayerBattleData_Ability - BattleData
-.globl BattleData_CurHP
-.equ BattleData_CurHP,              0x2d8c @ PlayerBattleData_CurHP - BattleData
-.globl BattleData_2dac
-.equ BattleData_2dac,               0x2dac @ PlayerBattleData_6c - BattleData
-.globl BattleData_2db0
-.equ BattleData_2db0,               0x2db0 @ PlayerBattleData_70 - BattleData
-.globl BattleData_2dc0
-.equ BattleData_2dc0,               0x2dc0 @ PlayerBattleData_80 - BattleData
+.equ BattleData_3044,               0x3044
+.equ BattleData_307c,               0x307c
+.equ BattleData_3154,               0x3154
 
 
 
@@ -265,7 +348,7 @@ Sprite
 /*****************
 TextInterpreter
 *****************/
-.equ TextInterpreter_Pointer,             0x0     @ Pointer to current position in Text/Msg
+.equ TextInterpreter_Pointer,       0x0     @ Pointer to current position in Text/Msg
 .equ TextInterpreter_4,             0x4
 .equ TextInterpreter_9,             0x9
 .equ TextInterpreter_a,             0xa
@@ -280,14 +363,25 @@ TextInterpreter
 .equ TextInterpreter_18,            0x18
 .equ TextInterpreter_1a,            0x1a
 .equ TextInterpreter_1b,            0x1b
+.equ TextInterpreter_1c,            0x1c
 .equ TextInterpreter_20,            0x20
 .equ TextInterpreter_20_0,          0x0
 .equ TextInterpreter_20_1,          0x1
 .equ TextInterpreter_20_2,          0x2
+.equ TextInterpreter_27,            0x27
+.equ TextInterpreter_27_0,          0x0
 .equ TextInterpreter_28,            0x28
+.equ TextInterpreter_28_0,          0x0
 .equ TextInterpreter_29,            0x29
+.equ TextInterpreter_29_0,          0x0
 .equ TextInterpreter_2a,            0x2a
+.equ TextInterpreter_2a_0,          0x0
 .equ TextInterpreter_2b,            0x2b
+.equ TextInterpreter_2b_0,          0x0
+.equ TextInterpreter_2c,            0x2c
+.equ TextInterpreter_2c_0,          0x0
+.equ TextInterpreter_2d,            0x2d
+.equ TextInterpreter_2d_0,          0x0
 .equ TextInterpreter_2e,            0x2e
 
 
@@ -299,6 +393,9 @@ TrainerData
 .equ TrainerData_Gender,            0x18    @ 0 = Male, 1 = Female
 .equ TrainerData_19,                0x19
 .equ TrainerData_Badge,             0x1a
+.equ TrainerData_1b,                0x1b
+.equ TrainerData_1c,                0x1c
+.equ TrainerData_1d,                0x1d
 
 
 

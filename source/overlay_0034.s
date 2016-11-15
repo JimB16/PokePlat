@@ -26,7 +26,7 @@ Function_22561d4: @ 22561d4 :thumb
 	mov     r1, #0x54
 	mov     r7, r2
 	str     r3, [sp, #0x0]
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_2256212
 	ldr     r3, [sp, #0x0]
@@ -49,7 +49,7 @@ Function_22561d4: @ 22561d4 :thumb
 .thumb
 branch_225620c: @ 225620c :thumb
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_2256212: @ 2256212 :thumb
 	mov     r0, #0x0
@@ -98,13 +98,13 @@ Function_2256244: @ 2256244 :thumb
 	ldr     r0, [r4, #0x50]
 	cmp     r0, #0x0
 	beq     branch_2256252
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_2256252: @ 2256252 :thumb
 	ldr     r0, [r4, #0x48]
 	bl      Function_2256604
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x2256260
 
@@ -126,7 +126,7 @@ Function_2256260: @ 2256260 :thumb
 	mov     r0, r4
 	bl      Function_2256244
 	mov     r0, r5
-	bl      0x200da58
+	bl      Function_200da58
 	ldr     r0, [r4, #0x4c]
 	bl      0x2254260
 .thumb
@@ -457,7 +457,7 @@ branch_2256460: @ 2256460 :thumb
 	mul     r1, r0
 	add     r0, r2, r1
 	lsl     r0, r0, #12
-	blx 0x20bcff0
+	blx     0x20bcff0
 	ldrb    r1, [r5, #0x4]
 	lsl     r2, r1, #2
 	ldr     r1, [pc, #0x60] @ 0x22564ec, (=0x2256a28)
@@ -512,7 +512,7 @@ branch_22564d8: @ 22564d8 :thumb
 .thumb
 branch_22564e0: @ 22564e0 :thumb
 	ldr     r0, [sp, #0x4]
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_22564e6: @ 22564e6 :thumb
 	add     sp, #0x10
@@ -595,7 +595,7 @@ Function_2256540: @ 2256540 :thumb
 	mov     r6, r1
 	mov     r0, #0x8
 	mov     r1, #0x90
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r4, r0
 	beq     branch_2256584
 	add     r0, #0x8
@@ -728,7 +728,7 @@ branch_225662e: @ 225662e :thumb
 	add     r0, #0x58
 	bl      0x22559b0
 	mov     r0, r6
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_225663c: @ 225663c :thumb
 	pop     {r4-r6,pc}
@@ -852,13 +852,13 @@ Function_2256690: @ 2256690 :thumb
 	mov     r0, r4
 	add     r0, #0x70
 	mov     r1, #0x20
-	blx 0x20c2c54
+	blx     DC_FlushRange
 	mov     r0, r4
 	mov     r1, #0x1a
 	add     r0, #0x70
 	lsl     r1, r1, #4
 	mov     r2, #0x20
-	blx 0x20c01b8
+	blx     0x20c01b8
 	mov     r0, r4
 	add     r0, #0x8e
 	ldrh    r1, [r0, #0x0]
@@ -868,13 +868,13 @@ Function_2256690: @ 2256690 :thumb
 	mov     r0, r4
 	add     r0, #0x70
 	mov     r1, #0x20
-	blx 0x20c2c54
+	blx     DC_FlushRange
 	mov     r0, r4
 	mov     r1, #0x7
 	add     r0, #0x70
 	lsl     r1, r1, #6
 	mov     r2, #0x20
-	blx 0x20c01b8
+	blx     0x20c01b8
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x6
 	bl      0x2019448

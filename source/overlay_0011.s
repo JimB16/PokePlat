@@ -52,7 +52,7 @@ Function_221f840: @ 221f840 :thumb
 	mov     r1, #0x12
 	lsl     r1, r1, #10
 	mov     r4, r0
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r2, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -90,7 +90,7 @@ Function_221f888: @ 221f888 :thumb
 	mov     r1, #0x42
 	lsl     r1, r1, #8
 	mov     r4, r0
-	bl      0x2018144
+	bl      malloc_maybe
 	mov     r2, r0
 	bne     branch_221f8a0
 	add     sp, #0x8
@@ -136,21 +136,21 @@ Function_221f8d8: @ 221f8d8 :thumb
 	mov     r0, r5
 	bl      0x201411c
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r3-r5,pc}
 @ 0x221f8f0
 
 .thumb
 Function_221f8f0: @ 221f8f0 :thumb
 	push    {r3,lr}
-	bl      0x20241b4
+	bl      Call_G3X_Reset
 	bl      0x2014680
 	cmp     r0, #0x0
 	beq     branch_221f912
 	bl      0x201469c
 	cmp     r0, #0x0
 	ble     branch_221f90e
-	bl      0x20241b4
+	bl      Call_G3X_Reset
 	blx     0x20a73c0
 branch_221f90e: @ 221f90e :thumb
 	bl      0x20146c0

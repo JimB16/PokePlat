@@ -1,6 +1,7 @@
 
 
 .arm
+.globl OS_WaitIrq
 OS_WaitIrq: @ 20c12b4 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r5, r0
@@ -885,6 +886,7 @@ arm_func_end OS_SNPrintf
 
 
 .arm
+.globl OS_VSNPrintf
 OS_VSNPrintf: @ 20c1b18 :arm
 	ldr     r12, [pc, #0x0] @ [0x20c1b20] (=Function_20d3524)
 	bx      r12
@@ -1455,7 +1457,7 @@ Function_20c2140: @ 20c2140 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
 	bl      OS_DisableInterrupts
-	ldr     r1, [pc, #0x64] @ [0x20c21b8] (=ThreadLinkedList)
+	ldr     r1, =ThreadLinkedList
 	mov     r4, r0
 	ldr     r0, [r1, #0x28]
 	cmp     r0, r5
@@ -1486,7 +1488,8 @@ branch_20c218c: @ 20c218c :arm
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20c21b8
 
-.word ThreadLinkedList @ 0x20c21b8
+.align 2
+.pool
 
 
 
@@ -3562,7 +3565,7 @@ OS_InitTick: @ 20c3790 :arm
 	ldr     r3, =TIMER0_CR
 	str     r2, [r0, #0xc]
 	strh    r2, [r3]
-	ldr     r1, =Function_20c3818
+	ldr     r1, =Function_20c3818_IrqTimer0
 	strh    r2, [r3, #-0x2]
 	mov     r2, #0xc1
 	mov     r0, #IRQ_TIMER0
@@ -3596,7 +3599,7 @@ Function_20c3808: @ 20c3808 :arm
 
 
 .arm
-Function_20c3818: @ 20c3818 :arm
+Function_20c3818_IrqTimer0: @ 20c3818 :arm
 	ldr     r0, =RAM_21ccfb4
 	mov     r3, #0x0
 	ldr     r2, [r0, #0x8]
@@ -3617,7 +3620,7 @@ Function_20c3818: @ 20c3818 :arm
 branch_20c385c: @ 20c385c :arm
 	ldr     r12, =OSi_EnterTimerCallback
 	mov     r0, #0x0
-	ldr     r1, =Function_20c3818
+	ldr     r1, =Function_20c3818_IrqTimer0
 	mov     r2, r0
 	bx      r12
 @ 0x20c3870
@@ -4064,7 +4067,7 @@ OS_EnableInterrupts: @ 20c3d84 :arm
 	msr     CPSR_c, r1
 	and     r0, r0, #0x80
 	bx      lr
-@ 0x20c3d98
+@ OS_DisableInterrupts
 
 
 .arm

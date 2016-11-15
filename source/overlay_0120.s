@@ -19,7 +19,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 	mov     r1, #0x0
 	mov     r2, #0x28
 	mov     r4, r0
-	blx 0x20d5124
+	blx     0x20d5124
 	mov     r0, #0x78
 	str     r0, [r4, #0x0]
 	mov     r0, #0x0
@@ -69,7 +69,7 @@ branch_21d0dde: @ 21d0dde :thumb
 	bl      0x200f344
 	mov     r0, r6
 	mov     r1, r0
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	mov     r0, r6
 	mov     r1, r0
 	bl      0x20177bc
@@ -94,7 +94,7 @@ branch_21d0dde: @ 21d0dde :thumb
 	bl      Function_21d114c
 	ldr     r0, [pc, #0xc8] @ 0x21d0ef8, (=0x21d0f19)
 	mov     r1, r4
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	bl      0x201ffd0
 	mov     r0, r6
 	str     r0, [r4, #0x24]
@@ -204,7 +204,7 @@ branch_21d0ec8: @ 21d0ec8 :thumb
 	bl      Function_21d10d4
 	mov     r0, r6
 	mov     r1, r0
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	mov     r6, #0x1
 .thumb
 branch_21d0eea: @ 21d0eea :thumb
@@ -429,7 +429,7 @@ branch_21d0f30: @ 21d0f30 :thumb
 	mov     r1, #0x2
 	mov     r3, #0x4
 	str     r2, [sp, #0x0]
-	blx 0x20bf55c
+	blx     G2x_SetBlendAlpha_
 	add     sp, #0xb8
 	pop     {r3-r5,pc}
 @ 0x21d10b8
@@ -488,7 +488,7 @@ Function_21d10d4: @ 21d10d4 :thumb
 	mov     r1, #0x2
 	bl      0x2019044
 	ldr     r0, [r4, #0x4]
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x21d1146
 
@@ -505,7 +505,7 @@ Function_21d114c: @ 21d114c :thumb
 	ldr     r3, [r4, #0x0]
 	mov     r0, #0x1
 	mov     r1, #0x1a
-	bl      0x200b144
+	bl      Function_200b144
 	str     r0, [r4, #0x8]
 	bl      0x201d710
 	mov     r0, #0x0
@@ -536,7 +536,7 @@ Function_21d1178: @ 21d1178 :thumb
 	ldr     r0, [r0, #0x4]
 	mov     r1, #0x1
 	asr     r3, r3, #4
-	bl      0x2019184
+	bl      Function_2019184
 	pop     {r3,pc}
 @ 0x21d118e
 

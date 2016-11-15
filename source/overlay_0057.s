@@ -241,7 +241,7 @@ Function_2256370: @ 2256370 :thumb
 	cmp     r0, #0x0
 	bne     branch_2256382
 	mov     r0, #0x0
-	blx 0x2149324
+	blx     0x2149324
 .thumb
 branch_2256382: @ 2256382 :thumb
 	pop     {r3,pc}

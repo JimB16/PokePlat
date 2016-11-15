@@ -45,200 +45,200 @@ UgParts_String: @ 0x20fedec
 asciz_align "data/ug_parts.narc"
 
 EmailGra_String: @ 0x20fee00
-.ascii "arc/email_gra.narc\0\0"
+asciz_align "arc/email_gra.narc"
 
 Tradelist_String: @ 0x20fee14
-.ascii "data/tradelist.narc\0"
+asciz_align "data/tradelist.narc"
 
 Oekaki_String: @ 0x20fee28
-.ascii "graphic/oekaki.narc\0"
+asciz_align "graphic/oekaki.narc"
 
 Fldtanime_String: @ 0x20fee3c
-.ascii "data/fldtanime.narc\0"
+asciz_align "data/fldtanime.narc"
 
 PlMsg_String: @ 0x20fee50
-.ascii "msgdata/pl_msg.narc\0"
+asciz_align "msgdata/pl_msg.narc"
 
 Record_String: @ 0x20fee64
-.ascii "graphic/record.narc\0"
+asciz_align "graphic/record.narc"
 
 Arealight_String: @ 0x20fee78
-.ascii "data/arealight.narc\0"
+asciz_align "data/arealight.narc"
 
 UgFossil_String: @ 0x20fee8c
-.ascii "data/ug_fossil.narc\0"
+asciz_align "data/ug_fossil.narc"
 
 Mysign_String: @ 0x20feea0
-.ascii "graphic/mysign.narc\0"
+asciz_align "graphic/mysign.narc"
 
 Bucket_String: @ 0x20feeb4
-.ascii "graphic/bucket.narc\0"
+asciz_align "graphic/bucket.narc"
 
 EncdataEx_String: @ 0x20feec8
-.ascii "arc/encdata_ex.narc\0"
+asciz_align "arc/encdata_ex.narc"
 
 Btower_String: @ 0x20feedc
-.ascii "graphic/btower.narc\0"
+asciz_align "graphic/btower.narc"
 
 CodeinGra_String: @ 0x20feef0
-.ascii "arc/codein_gra.narc\0"
+asciz_align "arc/codein_gra.narc"
 
 Ending_String: @ 0x20fef04
-.ascii "graphic/ending.narc\0"
+asciz_align "graphic/ending.narc"
 
 Fontoam_String: @ 0x20fef18
-.ascii "graphic/fontoam.narc\0\0\0\0"
+asciz_align "graphic/fontoam.narc"
 
 Poketch_String: @ 0x20fef30
-.ascii "graphic/poketch.narc\0\0\0\0"
+asciz_align "graphic/poketch.narc"
 
 Mystery_String: @ 0x20fef48
-.ascii "graphic/mystery.narc\0\0\0\0"
+asciz_align "graphic/mystery.narc"
 
 Opening_String: @ 0x20fef60
-.ascii "graphic/opening.narc\0\0\0\0"
+asciz_align "graphic/opening.narc"
 
 Poruact_String: @ 0x20fef78
-.ascii "graphic/poruact.narc\0\0\0\0"
+asciz_align "graphic/poruact.narc"
 
 Ranking_String: @ 0x20fef90
-.ascii "graphic/ranking.narc\0\0\0\0"
+asciz_align "graphic/ranking.narc"
 
 PlFont_String: @ 0x20fefa8
-.ascii "graphic/pl_font.narc\0\0\0\0"
+asciz_align "graphic/pl_font.narc"
 
 TwArcEtc_String: @ 0x20fefc0
-.ascii "data/tw_arc_etc.narc\0\0\0\0"
+asciz_align "data/tw_arc_etc.narc"
 
 MailGra_String: @ 0x20fefd8
-.ascii "graphic/mail_gra.narc\0\0\0"
+asciz_align "graphic/mail_gra.narc"
 
 PoruGra_String: @ 0x20feff0
-.ascii "graphic/poru_gra.narc\0\0\0"
+asciz_align "graphic/poru_gra.narc"
 
 Porudemo_String: @ 0x20ff008
-.ascii "graphic/porudemo.narc\0\0\0"
+asciz_align "graphic/porudemo.narc"
 
 NtagGra_String: @ 0x20ff020
-.ascii "graphic/ntag_gra.narc\0\0\0"
+asciz_align "graphic/ntag_gra.narc"
 
 WeatherSys_String: @ 0x20ff038
-.ascii "data/weather_sys.narc\0\0\0"
+asciz_align "data/weather_sys.narc"
 
 FieldCutin_String: @ 0x20ff050
-.ascii "data/field_cutin.narc\0\0\0"
+asciz_align "data/field_cutin.narc"
 
 Intro_String: @ 0x20ff068
-.ascii "demo/intro/intro.narc\0\0\0"
+asciz_align "demo/intro/intro.narc"
 
 TmapGra_String: @ 0x20ff080
-.ascii "graphic/tmap_gra.narc\0\0\0"
+asciz_align "graphic/tmap_gra.narc"
 
 Nutmixer_String: @ 0x20ff098
-.ascii "graphic/nutmixer.narc\0\0\0"
+asciz_align "graphic/nutmixer.narc"
 
 AreaWinGra_String: @ 0x20ff0b0
-.ascii "arc/area_win_gra.narc\0\0\0"
+asciz_align "arc/area_win_gra.narc"
 
 DemoClimax_String: @ 0x20ff0c8
-.ascii "data/demo_climax.narc\0\0\0"
+asciz_align "data/demo_climax.narc"
 
 ShopGra_String: @ 0x20ff0e0
-.ascii "graphic/shop_gra.narc\0\0\0"
+asciz_align "graphic/shop_gra.narc"
 
 MenuGra_String: @ 0x20ff0f8
-.ascii "graphic/menu_gra.narc\0\0\0"
+asciz_align "graphic/menu_gra.narc"
 
 ShipDemoPl_String: @ 0x20ff110
-.ascii "arc/ship_demo_pl.narc\0\0\0"
+asciz_align "arc/ship_demo_pl.narc"
 
 Wifip2pmatch_String: @ 0x20ff128
-.ascii "data/wifip2pmatch.narc\0\0"
+asciz_align "data/wifip2pmatch.narc"
 
 UndergRadar_String: @ 0x20ff140
-.ascii "data/underg_radar.narc\0\0"
+asciz_align "data/underg_radar.narc"
 
 BmAnimeList_String: @ 0x20ff158
-.ascii "arc/bm_anime_list.narc\0\0"
+asciz_align "arc/bm_anime_list.narc"
 
 DendouPc_String: @ 0x20ff170
-.ascii "graphic/dendou_pc.narc\0\0"
+asciz_align "graphic/dendou_pc.narc"
 
 Unionroom_String: @ 0x20ff188
-.ascii "graphic/unionroom.narc\0\0"
+asciz_align "graphic/unionroom.narc"
 
 WeSub_String: @ 0x20ff1a0
-.ascii "wazaeffect/we_sub.narc\0\0"
+asciz_align "wazaeffect/we_sub.narc"
 
 Imageclip_String: @ 0x20ff1b8
-.ascii "graphic/imageclip.narc\0\0"
+asciz_align "graphic/imageclip.narc"
 
 LibraryTv_String: @ 0x20ff1d0
-.ascii "graphic/library_tv.narc\0"
+asciz_align "graphic/library_tv.narc"
 
 FldComact_String: @ 0x20ff1e8
-.ascii "graphic/fld_comact.narc\0"
+asciz_align "graphic/fld_comact.narc"
 
 LobbyNews_String: @ 0x20ff200
-.ascii "graphic/lobby_news.narc\0"
+asciz_align "graphic/lobby_news.narc"
 
 Shinzukan_String: @ 0x20ff218
-.ascii "poketool/shinzukan.narc\0"
+asciz_align "poketool/shinzukan.narc"
 
 WifiLobby_String: @ 0x20ff230
-.ascii "graphic/wifi_lobby.narc\0"
+asciz_align "graphic/wifi_lobby.narc"
 
 PlBagGra_String: @ 0x20ff248
-.ascii "graphic/pl_bag_gra.narc\0"
+asciz_align "graphic/pl_bag_gra.narc"
 
 Worldtrade_String: @ 0x20ff260
-.ascii "graphic/worldtrade.narc\0"
+asciz_align "graphic/worldtrade.narc"
 
 FNoteGra_String: @ 0x20ff278
-.ascii "graphic/f_note_gra.narc\0"
+asciz_align "graphic/f_note_gra.narc"
 
 PlPstGra_String: @ 0x20ff290
-.ascii "graphic/pl_pst_gra.narc\0"
+asciz_align "graphic/pl_pst_gra.narc"
 
 Fldeff_String: @ 0x20ff2a8
-.ascii "data/mmodel/fldeff.narc\0"
+asciz_align "data/mmodel/fldeff.narc"
 
 OpDemo_String: @ 0x20ff2c0
-.ascii "demo/title/op_demo.narc\0"
+asciz_align "demo/title/op_demo.narc"
 
 Mmodel_String: @ 0x20ff2d8
-.ascii "data/mmodel/mmodel.narc\0"
+asciz_align "data/mmodel/mmodel.narc"
 
 Ugroundeffect_String: @ 0x20ff2f0
-.ascii "data/ugroundeffect.narc\0"
+asciz_align "data/ugroundeffect.narc"
 
 ConfigGra_String: @ 0x20ff308
-.ascii "graphic/config_gra.narc\0"
+asciz_align "graphic/config_gra.narc"
 
 DemoTrade_String: @ 0x20ff320
-.ascii "graphic/demo_trade.narc\0"
+asciz_align "graphic/demo_trade.narc"
 
 Worldtimer_String: @ 0x20ff338
-.ascii "graphic/worldtimer.narc\0"
+asciz_align "graphic/worldtimer.narc"
 
 Wifi2dchar_String: @ 0x20ff350
-.ascii "graphic/wifi2dchar.narc\0"
+asciz_align "graphic/wifi2dchar.narc"
 
 DemoTenganGra_String: @ 0x20ff368
-.ascii "arc/demo_tengan_gra.narc\0\0\0\0"
+asciz_align "arc/demo_tengan_gra.narc"
 
 PlWifinote_String: @ 0x20ff384
-.ascii "graphic/pl_wifinote.narc\0\0\0\0"
+asciz_align "graphic/pl_wifinote.narc"
 
 PlWinframe_String: @ 0x20ff3a0
 .asciz "graphic/pl_winframe.narc"
 .align 2, 0
 
 DendouDemo_String: @ 0x20ff3bc
-.ascii "graphic/dendou_demo.narc\0\0\0\0"
+asciz_align "graphic/dendou_demo.narc"
 
 IntroTV_String: @ 0x20ff3d8
-.ascii "demo/intro/intro_tv.narc\0\0\0\0"
+asciz_align "demo/intro/intro_tv.narc"
 
 BeSeq_String: @ 0x20ff3f4
 .asciz "battle/skill/be_seq.narc"
@@ -249,20 +249,20 @@ FieldBoard_String: @ 0x20ff410
 .align 2, 0
 
 Btdtr_String: @ 0x20ff42c
-.ascii "battle/b_tower/btdtr.narc\0\0\0"
+asciz_align "battle/b_tower/btdtr.narc"
 
 Btdpm_String: @ 0x20ff448
-.ascii "battle/b_tower/btdpm.narc\0\0\0"
+asciz_align "battle/b_tower/btdpm.narc"
 
 Titledemo_String: @ 0x20ff464
 .asciz "demo/title/titledemo.narc"
 .align 2, 0
 
 DTest_String: @ 0x20ff480
-.ascii "debug/cb_edit/d_test.narc\0\0\0"
+asciz_align "debug/cb_edit/d_test.narc"
 
 HidenEffect_String: @ 0x20ff49c
-.ascii "graphic/hiden_effect.narc\0\0\0"
+asciz_align "graphic/hiden_effect.narc"
 
 PlPlistGra_String: @ 0x20ff4b8
 .asciz "graphic/pl_plist_gra.narc"
@@ -301,306 +301,306 @@ Evo_String: @ 0x20ff598
 .align 2, 0
 
 WifiUnionobj_String: @ 0x20ff5b4
-.ascii "graphic/wifi_unionobj.narc\0\0"
+asciz_align "graphic/wifi_unionobj.narc"
 
 PlPokezukan_String: @ 0x20ff5d0
-.ascii "poketool/pl_pokezukan.narc\0\0"
+asciz_align "poketool/pl_pokezukan.narc"
 
 Trfgra_String: @ 0x20ff5ec
-.ascii "poketool/trgra/trfgra.narc\0\0"
+asciz_align "poketool/trgra/trfgra.narc"
 
 WazaOshieGra_String: @ 0x20ff608
-.ascii "graphic/waza_oshie_gra.narc\0"
+asciz_align "graphic/waza_oshie_gra.narc"
 
 TrAi_String: @ 0x20ff624
-.ascii "battle/tr_ai/tr_ai_seq.narc\0"
+asciz_align "battle/tr_ai/tr_ai_seq.narc"
 .align 2, 0
 
 EggData_String: @ 0x20ff640
-.ascii "demo/egg/data/egg_data.narc\0"
+asciz_align "demo/egg/data/egg_data.narc"
 
 Syoujyou_String: @ 0x20ff65c
-.ascii "demo/syoujyou/syoujyou.narc\0"
+asciz_align "demo/syoujyou/syoujyou.narc"
 
 Trtblofs_String: @ 0x20ff678
-.ascii "poketool/trmsg/trtblofs.narc\0\0\0\0"
+asciz_align "poketool/trmsg/trtblofs.narc"
 
 TouchSubwindow_String: @ 0x20ff698
-.ascii "graphic/touch_subwindow.narc\0\0\0\0"
+asciz_align "graphic/touch_subwindow.narc"
 
 Height_String: @ 0x20ff6b8
 .asciz "poketool/pokegra/height.narc"
 .align 2, 0
 
 Wotbl_String: @ 0x20ff6d8
-.ascii "poketool/personal/wotbl.narc\0\0\0\0"
+asciz_align "poketool/personal/wotbl.narc"
 
 FootprintBoard_String: @ 0x20ff6f8
-.ascii "graphic/footprint_board.narc\0\0\0\0"
+asciz_align "graphic/footprint_board.narc"
 
 Trdata_String: @ 0x20ff718
-.ascii "poketool/trainer/trdata.narc\0\0\0\0"
+asciz_align "poketool/trainer/trdata.narc"
 
 Trpoke_String: @ 0x20ff738
-.ascii "poketool/trainer/trpoke.narc\0\0\0\0"
+asciz_align "poketool/trainer/trpoke.narc"
 
 Zukan_String: @ 0x20ff758
-.ascii "resource/eng/zukan/zukan.narc\0\0\0"
+asciz_align "resource/eng/zukan/zukan.narc"
 
 Pokegra_String: @ 0x20ff778
-.ascii "poketool/pokegra/pokegra.narc\0\0\0"
+asciz_align "poketool/pokegra/pokegra.narc"
 
 BBagGra_String: @ 0x20ff798
-.ascii "battle/graphic/b_bag_gra.narc\0\0\0"
+asciz_align "battle/graphic/b_bag_gra.narc"
 
 ScrMsg_String: @ 0x20ff7b8
-.ascii "msgdata/scenario/scr_msg.narc\0\0\0"
+asciz_align "msgdata/scenario/scr_msg.narc"
 
 ScrSeq_String: @ 0x20ff7d8
-.ascii "fielddata/script/scr_seq.narc\0\0\0"
+asciz_align "fielddata/script/scr_seq.narc"
 
 WifiLobbyOther_String: @ 0x20ff7f8
-.ascii "graphic/wifi_lobby_other.narc\0\0\0"
+asciz_align "graphic/wifi_lobby_other.narc"
 
 ContestData_String: @ 0x20ff818
-.ascii "contest/data/contest_data.narc\0\0"
+asciz_align "contest/data/contest_data.narc"
 
 PlBattBg_String: @ 0x20ff838
-.ascii "battle/graphic/pl_batt_bg.narc\0\0"
+asciz_align "battle/graphic/pl_batt_bg.narc"
 
 FrScript_String: @ 0x20ff858
-.ascii "frontier/script/fr_script.narc\0\0"
+asciz_align "frontier/script/fr_script.narc"
 
 PlWazaTbl_String: @ 0x20ff878
-.ascii "poketool/waza/pl_waza_tbl.narc\0\0"
+asciz_align "poketool/waza/pl_waza_tbl.narc"
 
 HeightO_String: @ 0x20ff898
-.ascii "poketool/pokegra/height_o.narc\0\0"
+asciz_align "poketool/pokegra/height_o.narc"
 
 UgeffectObjGraphic_String: @ 0x20ff8b8
-.ascii "data/ugeffect_obj_graphic.narc\0\0"
+asciz_align "data/ugeffect_obj_graphic.narc"
 
 Particledata_String: @ 0x20ff8d8
-.ascii "particledata/particledata.narc\0\0"
+asciz_align "particledata/particledata.narc"
 
 Pokefoot_String: @ 0x20ff8f8
-.ascii "poketool/pokefoot/pokefoot.narc\0"
+asciz_align "poketool/pokefoot/pokefoot.narc"
 
 TwArc_String: @ 0x20ff918
-.ascii "fielddata/tornworld/tw_arc.narc\0"
+asciz_align "fielddata/tornworld/tw_arc.narc"
 
 Otherpoke_String: @ 0x20ff938
-.ascii "poketool/pokegra/otherpoke.narc\0"
+asciz_align "poketool/pokegra/otherpoke.narc"
 
 PokeYofs_String: @ 0x20ff958
-.ascii "poketool/pokegra/poke_yofs.narc\0"
+asciz_align "poketool/pokegra/poke_yofs.narc"
 
 DpHeight_String: @ 0x20ff978
-.ascii "poketool/pokegra/dp_height.narc\0"
+asciz_align "poketool/pokegra/dp_height.narc"
 
 VsDemoGra_String: @ 0x20ff998
-.ascii "battle/graphic/vs_demo_gra.narc\0"
+asciz_align "battle/graphic/vs_demo_gra.narc"
 
 PlBattObj_String: @ 0x20ff9b8
-.ascii "battle/graphic/pl_batt_obj.narc\0"
+asciz_align "battle/graphic/pl_batt_obj.narc"
 
 ContestBg_String: @ 0x20ff9d8
-.ascii "contest/graphic/contest_bg.narc\0"
+asciz_align "contest/graphic/contest_bg.narc"
 
 Pl_Btdtr_String: @ 0x20ff9f8
-.ascii "battle/b_pl_tower/pl_btdtr.narc\0"
+asciz_align "battle/b_pl_tower/pl_btdtr.narc"
 
 Pl_Btdpm_String: @ 0x20ffa18
-.ascii "battle/b_pl_tower/pl_btdpm.narc\0"
+asciz_align "battle/b_pl_tower/pl_btdpm.narc"
 
 Pl_Bsdpm_String: @ 0x20ffa38
-.ascii "battle/b_pl_stage/pl_bsdpm.narc\0"
+asciz_align "battle/b_pl_stage/pl_bsdpm.narc"
 
 ItemIcon_String: @ 0x20ffa58
-.ascii "itemtool/itemdata/item_icon.narc\0\0\0\0"
+asciz_align "itemtool/itemdata/item_icon.narc"
 
 FieldEncounteffect_String: @ 0x20ffa7c
-.ascii "graphic/field_encounteffect.narc\0\0\0\0"
+asciz_align "graphic/field_encounteffect.narc"
 
 PokeanmPlPokeanm_String: @ 0x20ffaa0
-.ascii "poketool/pokeanm/pl_pokeanm.narc\0\0\0\0"
+asciz_align "poketool/pokeanm/pl_pokeanm.narc"
 
 PlPokegra_String: @ 0x20ffac4
-.ascii "poketool/pokegra/pl_pokegra.narc\0\0\0\0"
+asciz_align "poketool/pokegra/pl_pokegra.narc"
 
 ContestObj_String: @ 0x20ffae8
-.ascii "contest/graphic/contest_obj.narc\0\0\0\0"
+asciz_align "contest/graphic/contest_obj.narc"
 
 NutsData_String: @ 0x20ffb0c
-.ascii "itemtool/itemdata/nuts_data.narc\0\0\0\0"
+asciz_align "itemtool/itemdata/nuts_data.narc"
 
 DpHeightO_String: @ 0x20ffb30
-.ascii "poketool/pokegra/dp_height_o.narc\0\0\0"
+asciz_align "poketool/pokegra/dp_height_o.narc"
 
 PokeShadow_String: @ 0x20ffb54
-.ascii "poketool/pokegra/poke_shadow.narc\0\0\0"
+asciz_align "poketool/pokegra/poke_shadow.narc"
 
 Scratch_String: @ 0x20ffb78
-.ascii "resource/eng/scratch/scratch.narc\0\0\0"
+asciz_align "resource/eng/scratch/scratch.narc"
 
 PlGrowTbl_String: @ 0x20ffb9c
-.ascii "poketool/personal/pl_growtbl.narc\0\0\0"
+asciz_align "poketool/personal/pl_growtbl.narc"
 
 AreaData_String: @ 0x20ffbc0
-.ascii "fielddata/areadata/area_data.narc\0\0\0"
+asciz_align "fielddata/areadata/area_data.narc"
 
 Unionobj2dOnlyfront_String: @ 0x20ffbe4
-.ascii "graphic/unionobj2d_onlyfront.narc\0\0\0"
+asciz_align "graphic/unionobj2d_onlyfront.narc"
 
 PlBPlistGra_String: @ 0x20ffc08
-.ascii "battle/graphic/pl_b_plist_gra.narc\0\0"
+asciz_align "battle/graphic/pl_b_plist_gra.narc"
 
 PlPersonal_String: @ 0x20ffc2c
-.ascii "poketool/personal/pl_personal.narc\0\0"
+asciz_align "poketool/personal/pl_personal.narc"
 
 PlPokeIcon_String: @ 0x20ffc50
-.ascii "poketool/icongra/pl_poke_icon.narc\0\0"
+asciz_align "poketool/icongra/pl_poke_icon.narc"
 
 Wechar_String: @ 0x20ffc74
-.ascii "wazaeffect/effectclact/wechar.narc\0\0"
+asciz_align "wazaeffect/effectclact/wechar.narc"
 
 Wepltt_String: @ 0x20ffc98
-.ascii "wazaeffect/effectclact/wepltt.narc\0\0"
+asciz_align "wazaeffect/effectclact/wepltt.narc"
 
 Wecell_String: @ 0x20ffcbc
-.ascii "wazaeffect/effectclact/wecell.narc\0\0"
+asciz_align "wazaeffect/effectclact/wecell.narc"
 
 PlOtherpoke_String: @ 0x20ffce0
-.ascii "poketool/pokegra/pl_otherpoke.narc\0\0"
+asciz_align "poketool/pokegra/pl_otherpoke.narc"
 
 LandData_String: @ 0x20ffd04
-.ascii "fielddata/land_data/land_data.narc\0\0"
+asciz_align "fielddata/land_data/land_data.narc"
 
 PlItemData_String: @ 0x20ffd28
-.ascii "itemtool/itemdata/pl_item_data.narc\0"
+asciz_align "itemtool/itemdata/pl_item_data.narc"
 
 ZoneEvent_String: @ 0x20ffd4c
-.ascii "fielddata/eventdata/zone_event.narc\0"
+asciz_align "fielddata/eventdata/zone_event.narc"
 
 MapMatrix_String: @ 0x20ffd70
-.ascii "fielddata/mapmatrix/map_matrix.narc\0"
+asciz_align "fielddata/mapmatrix/map_matrix.narc"
 
 TwArcAttr_String: @ 0x20ffd94
-.ascii "fielddata/tornworld/tw_arc_attr.narc\0\0\0\0"
+asciz_align "fielddata/tornworld/tw_arc_attr.narc"
 
 PlPokeData_String: @ 0x20ffdbc
-.ascii "poketool/poke_edit/pl_poke_data.narc\0\0\0\0"
+asciz_align "poketool/poke_edit/pl_poke_data.narc"
 
 BallslowData_String: @ 0x20ffde4
-.ascii "application/bucket/ballslow_data.narc\0\0\0"
+asciz_align "application/bucket/ballslow_data.narc"
 
 PEncData_String: @ 0x20ffe0c
-.ascii "fielddata/encountdata/p_enc_data.narc\0\0\0"
+asciz_align "fielddata/encountdata/p_enc_data.narc"
 
 PokeShadowOfx_String: @ 0x20ffe34
-.ascii "poketool/pokegra/poke_shadow_ofx.narc\0\0\0"
+asciz_align "poketool/pokegra/poke_shadow_ofx.narc"
 
 Wecellanm_String: @ 0x20ffe5c
-.ascii "wazaeffect/effectclact/wecellanm.narc\0\0\0"
+asciz_align "wazaeffect/effectclact/wecellanm.narc"
 
 DEncData_String: @ 0x20ffe84
-.ascii "fielddata/encountdata/d_enc_data.narc\0\0\0"
+asciz_align "fielddata/encountdata/d_enc_data.narc"
 
 MoveModelList_String: @ 0x20ffeac
-.ascii "fielddata/mm_list/move_model_list.narc\0\0"
+asciz_align "fielddata/mm_list/move_model_list.narc"
 
 FldTrade_String: @ 0x20ffed4
-.ascii "fielddata/pokemon_trade/fld_trade.narc\0\0"
+asciz_align "fielddata/pokemon_trade/fld_trade.narc"
 
 BuildModel_String: @ 0x20ffefc
-.ascii "fielddata/build_model/build_model.narc\0\0"
+asciz_align "fielddata/build_model/build_model.narc"
 
 PlEncData_String: @ 0x20fff24
-.ascii "fielddata/encountdata/pl_enc_data.narc\0\0"
+asciz_align "fielddata/encountdata/pl_enc_data.narc"
 
 WifiEarth_String: @ 0x20fff4c
-.ascii "application/wifi_earth/wifi_earth.narc\0\0"
+asciz_align "application/wifi_earth/wifi_earth.narc"
 
 DebugParticle_String: @ 0x20fff74
-.ascii "wazaeffect/pt_debug/debug_particle.narc\0"
+asciz_align "wazaeffect/pt_debug/debug_particle.narc"
 
 BattRecGra_String: @ 0x20fff9c
-.ascii "resource/eng/batt_rec/batt_rec_gra.narc\0"
+asciz_align "resource/eng/batt_rec/batt_rec_gra.narc"
 
 BallParticle_String: @ 0x20fffc4
-.ascii "wazaeffect/effectdata/ball_particle.narc\0\0\0\0"
+asciz_align "wazaeffect/effectdata/ball_particle.narc"
 
 PlEtcParticle_String: @ 0x20ffff0
-.ascii "particledata/pl_etc/pl_etc_particle.narc\0\0\0\0"
+asciz_align "particledata/pl_etc/pl_etc_particle.narc"
 
 WazaParticle_String: @ 0x210001c
-.ascii "wazaeffect/effectdata/waza_particle.narc\0\0\0\0"
+asciz_align "wazaeffect/effectdata/waza_particle.narc"
 
 CbData_String: @ 0x2100048
-.ascii "application/custom_ball/data/cb_data.narc\0\0\0"
+asciz_align "application/custom_ball/data/cb_data.narc"
 
 PmsAikotoba_String: @ 0x2100074
-.ascii "resource/eng/pms_aikotoba/pms_aikotoba.narc\0"
+asciz_align "resource/eng/pms_aikotoba/pms_aikotoba.narc"
 
 WifiEarthPlace_String: @ 0x21000a0
-.ascii "application/wifi_earth/wifi_earth_place.narc\0\0\0\0"
+asciz_align "application/wifi_earth/wifi_earth_place.narc"
 
 BalloonGra_String: @ 0x21000d0
-.ascii "application/balloon/graphic/balloon_gra.narc\0\0\0\0"
+asciz_align "application/balloon/graphic/balloon_gra.narc"
 
 PlCbData_String: @ 0x2100100
-.ascii "application/custom_ball/edit/pl_cb_data.narc\0\0\0\0"
+asciz_align "application/custom_ball/edit/pl_cb_data.narc"
 
 EggDemoParticle_String: @ 0x2100130
-.ascii "demo/egg/data/particle/egg_demo_particle.narc\0\0\0"
+asciz_align "demo/egg/data/particle/egg_demo_particle.narc"
 
 ZukanData_String: @ 0x2100160
-.ascii "application/zukanlist/zkn_data/zukan_data.narc\0\0"
+asciz_align "application/zukanlist/zkn_data/zukan_data.narc"
 
 FrontierBg_String: @ 0x2100190
-.ascii "resource/eng/frontier_graphic/frontier_bg.narc\0\0"
+asciz_align "resource/eng/frontier_graphic/frontier_bg.narc"
 
 WflbyMap_String: @ 0x21001c0
-.ascii "application/wifi_lobby/map_conv/wflby_map.narc\0\0"
+asciz_align "application/wifi_lobby/map_conv/wflby_map.narc"
 
 FrontierObj_String: @ 0x21001f0
-.ascii "resource/eng/frontier_graphic/frontier_obj.narc\0"
+asciz_align "resource/eng/frontier_graphic/frontier_obj.narc"
 
 PokelistParticle_String: @ 0x2100220
-.ascii "particledata/pl_pokelist/pokelist_particle.narc\0"
+asciz_align "particledata/pl_pokelist/pokelist_particle.narc"
 
 FrontierParticle_String: @ 0x2100250
-.ascii "particledata/pl_frontier/frontier_particle.narc\0"
+asciz_align "particledata/pl_frontier/frontier_particle.narc"
 
 MapTexSet_String: @ 0x2100280
-.ascii "fielddata/areadata/area_map_tex/map_tex_set.narc\0\0\0\0"
+asciz_align "fielddata/areadata/area_map_tex/map_tex_set.narc"
 
 WlmngmTool_String: @ 0x21002b4
-.ascii "resource/eng/wifi_lobby_minigame/wlmngm_tool.narc\0\0\0"
+asciz_align "resource/eng/wifi_lobby_minigame/wlmngm_tool.narc"
 
 ZukanEncPearl_String: @ 0x21002e8
-.ascii "application/zukanlist/zkn_data/zukan_enc_pearl.narc\0"
+asciz_align "application/zukanlist/zkn_data/zukan_enc_pearl.narc"
 
 AreaBuild_String: @ 0x210031c
-.ascii "fielddata/areadata/area_build_model/area_build.narc\0"
+asciz_align "fielddata/areadata/area_build_model/area_build.narc"
 
 ShinkaDemoParticle_String: @ 0x2100350
-.ascii "demo/shinka/data/particle/shinka_demo_particle.narc\0"
+asciz_align "demo/shinka/data/particle/shinka_demo_particle.narc"
 
 ZukanDataGira_String: @ 0x2100384
-.ascii "application/zukanlist/zkn_data/zukan_data_gira.narc\0"
+asciz_align "application/zukanlist/zkn_data/zukan_data_gira.narc"
 
 ZukanEncDiamond_String: @ 0x21003b8
-.ascii "application/zukanlist/zkn_data/zukan_enc_diamond.narc\0\0\0"
+asciz_align "application/zukanlist/zkn_data/zukan_enc_diamond.narc"
 
 AreabmTexset_String: @ 0x21003f0
-.ascii "fielddata/areadata/area_build_model/areabm_texset.narc\0\0"
+asciz_align "fielddata/areadata/area_build_model/areabm_texset.narc"
 
 ZukanEncPlatinum_String: @ 0x2100428
-.ascii "application/zukanlist/zkn_data/zukan_enc_platinum.narc\0\0"
+asciz_align "application/zukanlist/zkn_data/zukan_enc_platinum.narc"
 
 AreaMoveModelMoveModelList_String: @ 0x2100460
-.ascii "fielddata/areadata/area_move_model/move_model_list.narc\0"
+asciz_align "fielddata/areadata/area_move_model/move_model_list.narc"
 
 
 NARCStringPointer: @ 0x2100498

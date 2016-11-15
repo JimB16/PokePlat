@@ -84,6 +84,7 @@ branch_20c43b4: @ 20c43b4 :arm
 @ 0x20c43c4
 
 
+.globl MI_DmaCopy16
 MI_DmaCopy16: @ 20c43c4 :arm
 	stmfd   sp!, {r4-r8,lr}
 	movs    r5, r3
@@ -449,19 +450,19 @@ MI_SendGXCommandAsync: @ 20c4808 :arm
 	ldmfd   sp!, {r4,pc}
 
 branch_20c482c: @ 20c482c :arm
-	ldr     r0, [pc, #0xc0] @ [0x20c48f4] (=RAM_21cd000)
+	ldr     r0, =RAM_21cd000
 branch_20c4830: @ 20c4830 :arm
 	ldr     r12, [r0]
 	cmp     r12, #0x0
 	bne     branch_20c4830
-	ldr     r12, [pc, #0xb4] @ [0x20c48f8] (=GFX_STATUS)
+	ldr     r12, =GFX_STATUS
 branch_20c4840: @ 20c4840 :arm
 	ldr     r0, [r12]
-	and     r0, r0, #7, 8 @ #0x7000000
+	and     r0, r0, #0x7000000
 	mov     r0, r0, lsr #24
 	tst     r0, #0x2
 	beq     branch_20c4840
-	ldr     r12, [pc, #0x98] @ [0x20c48f4] (=RAM_21cd000)
+	ldr     r12, =RAM_21cd000
 	mov     r0, #0x1
 	str     r0, [r12]
 	str     r4, [r12, #0x4]
@@ -478,23 +479,23 @@ branch_20c4840: @ 20c4840 :arm
 	bl      MI_WaitDma
 	bl      OS_DisableInterrupts
 
-	ldr     r1, [pc, #0x60] @ [0x20c48f8] (=GFX_STATUS)
+	ldr     r1, =GFX_STATUS
 	mov     r4, r0
 	ldr     r0, [r1]
-	ldr     r1, [pc, #0x50] @ [0x20c48f4] (=RAM_21cd000)
-	and     r0, r0, #3, 2 @ #0xc0000000
+	ldr     r1, =RAM_21cd000
+	and     r0, r0, #0xc0000000
 	mov     r2, r0, lsr #30
 	mov     r0, #IRQ_GEOMETRY_FIFO
 	str     r2, [r1, #0x18]
 	bl      OS_GetIrqFunction
 
-	ldr     r1, [pc, #0x38] @ [0x20c48f4] (=RAM_21cd000)
-	ldr     r2, [pc, #0x38] @ [0x20c48f8] (=GFX_STATUS)
+	ldr     r1, =RAM_21cd000
+	ldr     r2, =GFX_STATUS
 	str     r0, [r1, #0x1c]
 	ldr     r0, [r2]
-	ldr     r1, [pc, #0x30] @ [0x20c48fc] (=MIi_FIFOCallback)
-	bic     r0, r0, #3, 2 @ #0xc0000000
-	orr     r3, r0, #1, 2 @ #0x40000000
+	ldr     r1, =MIi_FIFOCallback
+	bic     r0, r0, #0xc0000000
+	orr     r3, r0, #0x40000000
 	mov     r0, #IRQ_GEOMETRY_FIFO
 	str     r3, [r2]
 	bl      OS_SetIrqFunction
@@ -509,9 +510,8 @@ branch_20c4840: @ 20c4840 :arm
 	ldmfd   sp!, {r4,pc}
 @ 0x20c48f4
 
-.word RAM_21cd000 @ 0x20c48f4
-.word GFX_STATUS @ 0x20c48f8
-.word MIi_FIFOCallback @ =0x20c4900, 0x20c48fc
+.align 2
+.pool
 
 
 
@@ -698,7 +698,7 @@ branch_20c4b0c: @ 20c4b0c :arm
 branch_20c4b10: @ 20c4b10 :arm
 	blt     branch_20c4af4
 	bx      lr
-@ 0x20c4b18
+@ MIi_CpuCopy16
 
 
 .arm
@@ -727,7 +727,7 @@ branch_20c4b40: @ 20c4b40 :arm
 branch_20c4b44: @ 20c4b44 :arm
 	blt     branch_20c4b1c
 	bx      lr
-@ 0x20c4b4c
+@ MIi_CpuClear32
 
 
 .arm
@@ -744,7 +744,7 @@ branch_20c4b5c: @ 20c4b5c :arm
 branch_20c4b60: @ 20c4b60 :arm
 	blt     branch_20c4b50
 	bx      lr
-@ 0x20c4b68
+@ MI_CpuCopy32
 
 
 .arm

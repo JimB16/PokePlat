@@ -888,6 +888,7 @@ DGT_Hash1GetDigest_R: @ 20c8d10 :arm
 	orr     r6, r6, r3, lsr #29
 	mov     r7, r3, lsl #3
 	bl      DGT_Hash1SetSource
+
 	ldr     r0, [r4, #0x10]
 	mov     r1, #0x0
 	and     r3, r0, #0x3f
@@ -897,11 +898,11 @@ DGT_Hash1GetDigest_R: @ 20c8d10 :arm
 	add     r0, r4, #0x18
 	add     r0, r0, r3
 	bl      MI_CpuFill8
+
 	mov     r0, r4
 	bl      ProcessBlock
 	mov     r3, #0x0
 	mov     r2, #0x40
-.arm
 branch_20c8d74: @ 20c8d74 :arm
 	cmp     r2, #0x8
 	bls     branch_20c8d90
@@ -910,20 +911,22 @@ branch_20c8d74: @ 20c8d74 :arm
 	sub     r2, r2, #0x8
 	mov     r1, #0x0
 	bl      MI_CpuFill8
-.arm
 branch_20c8d90: @ 20c8d90 :arm
 	str     r7, [r4, #0x50]
 	mov     r0, r4
 	str     r6, [r4, #0x54]
 	bl      ProcessBlock
+
 	mov     r0, r4
 	mov     r1, r5
 	mov     r2, #0x10
 	bl      MI_CpuCopy8
+
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x58
 	bl      MI_CpuFill8
+
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20c8dc4
 
@@ -995,7 +998,6 @@ branch_20c8de0: @ 20c8de0 :arm
 	blt     branch_20c8de0
 	ldr     r1, [pc, #0x2bc] @ [0x20c9178] (=Unknown_2101174)
 	mov     r6, #0x0
-.arm
 branch_20c8ebc: @ 20c8ebc :arm
 	mvn     r7, lr
 	ldr     r9, [r1]
@@ -1055,7 +1057,6 @@ branch_20c8ebc: @ 20c8ebc :arm
 	cmp     r6, #0x4
 	blt     branch_20c8ebc
 	mov     r6, #0x0
-.arm
 branch_20c8fa4: @ 20c8fa4 :arm
 	ldr     r8, [r1]
 	eor     r7, r3, r12
@@ -1107,7 +1108,6 @@ branch_20c8fa4: @ 20c8fa4 :arm
 	cmp     r6, #0x4
 	blt     branch_20c8fa4
 	mov     r8, #0x0
-.arm
 branch_20c906c: @ 20c906c :arm
 	mvn     r6, lr
 	ldr     r7, [r1]
@@ -4035,6 +4035,7 @@ branch_20cb308: @ 20cb308 :arm
 	bl      PXI_SendWordByFifo
 	cmp     r0, #0x0
 	bne     branch_20cb308
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20cb324
 
@@ -6812,7 +6813,7 @@ branch_20cd284: @ 20cd284 :arm
 .arm
 CARDi_TryReadCardDma: @ 20cd290 :arm
 	stmfd   sp!, {r3-r11,lr}
-	ldr     r4, [pc, #0x16c] @ [0x20cd408] (=RAM_21cee20)
+	ldr     r4, =RAM_21cee20
 	mov     r6, #0x0
 	ldr     r9, [r4, #0x20]
 	mov     r11, r0
@@ -6829,49 +6830,44 @@ branch_20cd2c8: @ 20cd2c8 :arm
 	cmp     r1, #0x0
 	beq     branch_20cd31c
 	bl      OS_GetDTCMAddress
-	ldr     r1, [pc, #0x130] @ [0x20cd40c] (=OS_IrqHandler)
+	ldr     r1, =OS_IrqHandler
 	add     r3, r9, r5
 	cmp     r3, r1
 	mov     r1, #0x1
 	mov     r2, #0x0
 	bls     branch_20cd2f4
-	cmp     r9, #2, 8 @ #0x2000000
+	cmp     r9, #0x2000000
 	movcc   r2, r1
-.arm
 branch_20cd2f4: @ 20cd2f4 :arm
 	cmp     r2, #0x0
 	bne     branch_20cd314
 	cmp     r0, r3
 	bcs     branch_20cd310
-	add     r0, r0, #1, 18 @ #0x4000
+	add     r0, r0, #0x4000
 	cmp     r0, r9
 	bhi     branch_20cd314
-.arm
 branch_20cd310: @ 20cd310 :arm
 	mov     r1, #0x0
-.arm
 branch_20cd314: @ 20cd314 :arm
 	cmp     r1, #0x0
 	moveq   r8, #0x1
-.arm
 branch_20cd31c: @ 20cd31c :arm
 	cmp     r8, #0x0
 	beq     branch_20cd338
 	ldr     r1, [r4, #0x1c]
-	ldr     r0, [pc, #0xe0] @ [0x20cd410] (=0x1ff)
+	ldr     r0, =0x1ff
 	orr     r1, r1, r5
 	tst     r1, r0
 	moveq   r7, #0x1
-.arm
 branch_20cd338: @ 20cd338 :arm
-	ldr     r0, [pc, #0xd4] @ [0x20cd414] (=0x2101480)
+	ldr     r0, =0x2101480
 	cmp     r7, #0x0
 	ldr     r0, [r0]
 	cmpne   r5, #0x0
 	ldr     r0, [r0, #0x60]
 	movne   r6, #0x1
-	bic     r0, r0, #7, 8 @ #0x7000000
-	orr     r0, r0, #161, 8 @ #0xa1000000
+	bic     r0, r0, #0x7000000
+	orr     r0, r0, #0xa1000000
 	cmp     r6, #0x0
 	str     r0, [r11, #0x4]
 	beq     branch_20cd400
@@ -6884,12 +6880,9 @@ branch_20cd338: @ 20cd338 :arm
 	mov     r1, r5
 	bl      IC_InvalidateRange
 	b       branch_20cd38c
-@ 0x20cd388
 
-.arm
 branch_20cd388: @ 20cd388 :arm
 	bl      IC_InvalidateAll
-.arm
 branch_20cd38c: @ 20cd38c :arm
 	ldr     r0, [r4, #0x11c]
 	cmp     r5, r0
@@ -6904,7 +6897,6 @@ branch_20cd38c: @ 20cd38c :arm
 	mov     r1, #0x20
 	bl      DC_StoreRange
 	add     r5, r5, #0x20
-.arm
 branch_20cd3c0: @ 20cd3c0 :arm
 	mov     r0, r9
 	mov     r1, r5
@@ -6915,7 +6907,7 @@ branch_20cd3c0: @ 20cd3c0 :arm
 branch_20cd3d4: @ 20cd3d4 :arm
 	bl      DC_FlushAll
 branch_20cd3d8: @ 20cd3d8 :arm
-	ldr     r1, [pc, #0x38] @ [0x20cd418] (=CARDi_OnReadCard)
+	ldr     r1, =CARDi_OnReadCard
 	mov     r0, #IRQ_CARD
 	bl      OS_SetIrqFunction
 	mov     r0, #IRQ_CARD
@@ -6931,11 +6923,8 @@ branch_20cd400: @ 20cd400 :arm
 	ldmfd   sp!, {r3-r11,pc}
 @ 0x20cd408
 
-.word RAM_21cee20 @ 0x20cd408
-.word OS_IrqHandler @ 0x20cd40c
-.word 0x1ff @ 0x20cd410
-.word Unknown_2101480 @ 0x20cd414
-.word CARDi_OnReadCard @ 0x20cd418
+.align 2
+.pool
 
 
 

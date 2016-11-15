@@ -958,6 +958,7 @@ WM_GetMPReceiveBufferSize: @ 20ce64c :arm
 
 
 .arm
+.globl WM_ReadMPData
 WM_ReadMPData: @ 20ce710 :arm
 	stmfd   sp!, {r3-r6,lr}
 	sub     sp, sp, #0x3c

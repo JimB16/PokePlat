@@ -692,7 +692,7 @@ Function_222e01c: @ 222e01c :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, #0x0
 	mov     r1, r0
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	bl      0x20177a4
 	bl      0x201ff00
 	bl      0x201ff68
@@ -729,7 +729,7 @@ Function_222e01c: @ 222e01c :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, #0x36
-	bl      0x200b144
+	bl      Function_200b144
 	mov     r2, #0x5a
 	ldr     r1, [sp, #0x4]
 	lsl     r2, r2, #2
@@ -738,7 +738,7 @@ Function_222e01c: @ 222e01c :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, #0x36
-	bl      0x200b144
+	bl      Function_200b144
 	mov     r2, #0x5b
 	ldr     r1, [sp, #0x4]
 	lsl     r2, r2, #2
@@ -780,7 +780,7 @@ Function_222e01c: @ 222e01c :thumb
 	mov     r2, #0x80
 	blx     MIi_CpuCopy16
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x0
 	str     r0, [sp, #0x18]
 	str     r0, [sp, #0x1c]
@@ -878,7 +878,7 @@ branch_222e190: @ 222e190 :thumb
 	add     r0, r0, r1
 	mov     r1, #0x2a
 	lsl     r1, r1, #4
-	blx     0x20c2c54
+	blx     DC_FlushRange
 	ldr     r1, [pc, #0x58] @ 0x222e208, (=0xd68)
 	ldr     r0, [sp, #0x4]
 	mov     r2, #0x1
@@ -893,7 +893,7 @@ branch_222e190: @ 222e190 :thumb
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, r2]
 	ldr     r0, [pc, #0x44] @ 0x222e210, (=0x222e5e1)
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	bl      Function_222edd0
 	ldr     r0, [sp, #0x4]
 	ldr     r1, [sp, #0x20]
@@ -1128,7 +1128,7 @@ branch_222e33a: @ 222e33a :thumb
 	str     r2, [r5, r1]
 	mov     r0, #0xf
 	mov     r1, #0x0
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0xf
 	mov     r1, #0x0
 	bl      0x201ff74
@@ -1276,12 +1276,12 @@ Function_222e47c: @ 222e47c :thumb
 	mov     r5, r0
 	mov     r0, #0x0
 	mov     r1, r0
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	ldr     r0, [pc, #0xb0] @ 0x222e53c, (=0xd64)
 	ldr     r0, [r5, r0]
 	cmp     r0, #0x0
 	beq     branch_222e49e
-	bl      0x200da58
+	bl      Function_200da58
 	ldr     r0, [pc, #0xa4] @ 0x222e53c, (=0xd64)
 	mov     r1, #0x0
 	str     r1, [r5, r0]
@@ -1344,11 +1344,11 @@ branch_222e4e0: @ 222e4e0 :thumb
 	mov     r0, #0x5b
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
-	bl      0x200b190
+	bl      Function_200b190
 	mov     r0, #0x5a
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
-	bl      0x200b190
+	bl      Function_200b190
 	mov     r0, #0x59
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -1720,16 +1720,16 @@ Function_222e638: @ 222e638 :thumb
 	bl      0x2019690
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, r0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	ldr     r0, [pc, #0x30] @ 0x222e874, (=0x4000050)
 	mov     r1, #0x0
 	strh    r1, [r0, #0x0]
@@ -1933,7 +1933,7 @@ Function_222e99c: @ 222e99c :thumb
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
 	beq     branch_222e9ae
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x0
 	str     r0, [r4, #0x0]
 .thumb
@@ -1941,7 +1941,7 @@ branch_222e9ae: @ 222e9ae :thumb
 	ldr     r0, [r4, #0x8]
 	cmp     r0, #0x0
 	beq     branch_222e9bc
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x0
 	str     r0, [r4, #0x8]
 .thumb
@@ -2367,26 +2367,26 @@ Function_222ebe0: @ 222ebe0 :thumb
 	mov     r0, #0x5f
 	lsl     r0, r0, #2
 	mov     r1, #0x36
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r1, #0x5d
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
 	add     r1, #0x8
 	mov     r0, r1
 	mov     r1, #0x36
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r1, #0x5f
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
 	mov     r0, r1
 	mov     r1, #0x36
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r1, #0x17
 	lsl     r1, r1, #4
 	str     r0, [r4, r1]
 	mov     r0, #0xb4
 	mov     r1, #0x36
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -2408,19 +2408,19 @@ Function_222ec2c: @ 222ec2c :thumb
 	mov     r0, #0x5e
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r0, #0x5d
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r0, #0x5f
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r0, #0x17
 	lsl     r0, r0, #4
 	ldr     r0, [r4, r0]
-	bl      0x20237bc
+	bl      Function_20237bc
 	pop     {r4,pc}
 @ 0x222ec5a
 
@@ -2456,7 +2456,7 @@ Function_222ec5c: @ 222ec5c :thumb
 	mov     r1, #0x0
 	bl      0x2019044
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x222eca6
 
@@ -2475,16 +2475,16 @@ Function_222eca8: @ 222eca8 :thumb
 	mov     r0, #0x1
 	mov     r5, r1
 	mov     r1, r0
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x2
 	mov     r1, #0x1
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x4
 	mov     r1, #0x1
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x8
 	mov     r1, #0x1
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x1
 	mov     r1, r0
 	bl      0x201ff74
@@ -2719,11 +2719,11 @@ Function_222ee98: @ 222ee98 :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222eec2: @ 222eec2 :thumb
 	mov     r0, #0x1
@@ -2748,14 +2748,14 @@ branch_222eec2: @ 222eec2 :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r2, #0x5a
 	lsl     r2, r2, #2
 	ldr     r0, [r4, r2]
 	add     r2, #0x10
 	ldr     r2, [r4, r2]
 	mov     r1, #0x15
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -2781,7 +2781,7 @@ branch_222eec2: @ 222eec2 :thumb
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x14
 	pop     {r3,r4,pc}
 @ 0x222ef42
@@ -2806,7 +2806,7 @@ Function_222ef4c: @ 222ef4c :thumb
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222ef6c: @ 222ef6c :thumb
 	mov     r0, #0xb3
@@ -2818,7 +2818,7 @@ branch_222ef6c: @ 222ef6c :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222ef84: @ 222ef84 :thumb
 	mov     r0, #0xcb
@@ -2830,7 +2830,7 @@ branch_222ef84: @ 222ef84 :thumb
 	mov     r0, #0xcb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222ef9c: @ 222ef9c :thumb
 	mov     r0, #0xb7
@@ -2842,7 +2842,7 @@ branch_222ef9c: @ 222ef9c :thumb
 	mov     r0, #0xb7
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222efb4: @ 222efb4 :thumb
 	mov     r0, #0xc3
@@ -2854,7 +2854,7 @@ branch_222efb4: @ 222efb4 :thumb
 	mov     r0, #0xc3
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222efcc: @ 222efcc :thumb
 	mov     r0, #0x15
@@ -2864,7 +2864,7 @@ branch_222efcc: @ 222efcc :thumb
 	beq     branch_222efde
 	mov     r1, #0x0
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 .thumb
 branch_222efde: @ 222efde :thumb
 	mov     r0, #0x53
@@ -2888,7 +2888,7 @@ branch_222eff4: @ 222eff4 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222f00c: @ 222f00c :thumb
 	pop     {r4,pc}
@@ -2997,16 +2997,16 @@ branch_222f0bc: @ 222f0bc :thumb
 	bne     branch_222f126
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x1
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, r5
 	mov     r1, #0x12
 	bl      Function_2232ca8
@@ -3187,16 +3187,16 @@ Function_222f21c: @ 222f21c :thumb
 	bl      Function_2232ca8
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x1
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r2, #0x57
 	str     r0, [sp, #0x0]
@@ -3255,7 +3255,7 @@ branch_222f2ac: @ 222f2ac :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	cmp     r6, #0x0
 	bne     branch_222f2f0
 	mov     r0, r5
@@ -3320,16 +3320,16 @@ Function_222f304: @ 222f304 :thumb
 branch_222f324: @ 222f324 :thumb
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, r0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
@@ -3338,7 +3338,7 @@ branch_222f324: @ 222f324 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	cmp     r6, #0x0
 	bne     branch_222f3cc
 	ldr     r0, [r5, #0x0]
@@ -3427,16 +3427,16 @@ Function_222f3dc: @ 222f3dc :thumb
 branch_222f3fc: @ 222f3fc :thumb
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, r0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
@@ -3445,7 +3445,7 @@ branch_222f3fc: @ 222f3fc :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	cmp     r6, #0x0
 	bne     branch_222f480
 	mov     r0, #0xd1
@@ -3505,16 +3505,16 @@ Function_222f490: @ 222f490 :thumb
 	mov     r4, r1
 	mov     r0, #0x0
 	mov     r1, #0x3
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x1
 	mov     r1, r0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x3
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0x2
 	mov     r1, #0x0
-	bl      0x2019060
+	bl      Function_2019060
 	mov     r0, #0xd1
 	mov     r1, #0xf
 	lsl     r0, r0, #2
@@ -3586,11 +3586,11 @@ branch_222f50c: @ 222f50c :thumb
 .thumb
 branch_222f53c: @ 222f53c :thumb
 	ldr     r0, [sp, #0x14]
-	bl      0x2025fcc
+	bl      Function_2025fcc
 	ldr     r1, [r5, #0x4]
 	strb    r0, [r1, #0x18]
 	ldr     r0, [sp, #0x14]
-	bl      0x2025fd8
+	bl      Function_2025fd8
 	ldr     r1, [r5, #0x4]
 	strb    r0, [r1, #0x19]
 	ldr     r0, [sp, #0x10]
@@ -3607,11 +3607,11 @@ branch_222f53c: @ 222f53c :thumb
 	mov     r1, #0x0
 	strb    r1, [r0, #0x1c]
 	ldr     r0, [sp, #0x14]
-	bl      0x2025f8c
+	bl      Function_2025f8c
 	ldr     r1, [r5, #0x4]
 	strb    r0, [r1, #0x1d]
 	ldr     r0, [sp, #0x14]
-	bl      0x2025f30
+	bl      GetGender
 	ldr     r1, [r5, #0x4]
 	strb    r0, [r1, #0x1e]
 	ldr     r0, [sp, #0x8]
@@ -3958,7 +3958,7 @@ Function_222f7ac: @ 222f7ac :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222f7e0: @ 222f7e0 :thumb
 	mov     r0, #0xd1
@@ -4028,7 +4028,7 @@ branch_222f820: @ 222f820 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222f84c: @ 222f84c :thumb
 	mov     r0, r5
@@ -4212,11 +4212,11 @@ branch_222f972: @ 222f972 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222f996: @ 222f996 :thumb
 	mov     r0, #0xb7
@@ -4228,7 +4228,7 @@ branch_222f996: @ 222f996 :thumb
 	mov     r0, #0xb7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222f9ae: @ 222f9ae :thumb
 	mov     r0, #0x57
@@ -4258,13 +4258,13 @@ branch_222f9ae: @ 222f9ae :thumb
 	mov     r0, #0xc3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x15
 	lsl     r0, r0, #4
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x15
 	mov     r1, #0x0
 	lsl     r0, r0, #4
@@ -4753,7 +4753,7 @@ branch_222fd2e: @ 222fd2e :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222fd68: @ 222fd68 :thumb
 	mov     r0, r4
@@ -4781,7 +4781,7 @@ Function_222fd70: @ 222fd70 :thumb
 	cmp     r0, #0x0
 	bne     branch_222fda2
 	mov     r0, r4
-	bl      0x20237bc
+	bl      Function_20237bc
 	add     sp, #0x14
 	pop     {r3-r6,pc}
 @ 0x222fda2
@@ -4792,9 +4792,9 @@ branch_222fda2: @ 222fda2 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, r6
-	bl      0x2025f30
+	bl      GetGender
 	cmp     r0, #0x0
 	bne     branch_222fdbc
 	ldr     r0, [pc, #0x114] @ 0x222fed0, (=0x50600)
@@ -4822,7 +4822,7 @@ branch_222fdc0: @ 222fdc0 :thumb
 	str     r1, [sp, #0xc]
 	bl      0x201d78c
 	mov     r0, r4
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r1, [r5, #0x4]
 	mov     r0, r5
 	bl      Function_222dd20
@@ -4843,7 +4843,7 @@ branch_222fdc0: @ 222fdc0 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	b       branch_222fe64
 @ 0x222fe18
 
@@ -4890,7 +4890,7 @@ branch_222fe54: @ 222fe54 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 .thumb
 branch_222fe64: @ 222fe64 :thumb
 	mov     r1, #0x0
@@ -4946,7 +4946,7 @@ branch_222fea8: @ 222fea8 :thumb
 	mov     r0, #0xb7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x14
 	pop     {r3-r6,pc}
 @ 0x222fed0
@@ -4959,7 +4959,7 @@ Function_222fed8: @ 222fed8 :thumb
 	cmp     r2, #0x0
 	bne     branch_222fee4
 	ldr     r0, [pc, #0x8] @ 0x222fee8, (=0x5dc)
-	bl      0x2005748
+	bl      Function_2005748
 .thumb
 branch_222fee4: @ 222fee4 :thumb
 	pop     {r3,pc}
@@ -4984,7 +4984,7 @@ Function_222feec: @ 222feec :thumb
 	mov     r0, #0xb7
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222ff0a: @ 222ff0a :thumb
 	mov     r0, #0xbb
@@ -4997,11 +4997,11 @@ branch_222ff0a: @ 222ff0a :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_222ff2e: @ 222ff2e :thumb
 	mov     r3, #0x1
@@ -5042,11 +5042,11 @@ branch_222ff2e: @ 222ff2e :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0xbb
 	lsl     r0, r0, #2
 	ldr     r2, [pc, #0x14] @ 0x222ffa8, (=0x1d9)
@@ -5124,13 +5124,13 @@ branch_222ffd8: @ 222ffd8 :thumb
 	mov     r0, #0xc3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x15
 	lsl     r0, r0, #4
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x15
 	mov     r1, #0x0
 	lsl     r0, r0, #4
@@ -5442,14 +5442,14 @@ branch_2230258: @ 2230258 :thumb
 	add     r0, #0x2c
 	add     r1, #0xc
 	mov     r2, #0x20
-	blx     0x20d50b8
+	blx     Function_20d50b8
 	mov     r0, r5
 	bl      Function_22336c4
 	ldr     r0, [sp, #0x4]
 	cmp     r0, #0x1
 	bne     branch_2230280
 	ldr     r0, [pc, #0x18] @ 0x2230294, (=0x64f)
-	bl      0x2005748
+	bl      Function_2005748
 	b       branch_223028c
 @ 0x2230280
 
@@ -5459,7 +5459,7 @@ branch_2230280: @ 2230280 :thumb
 	cmp     r0, #0x1
 	bne     branch_223028c
 	ldr     r0, [pc, #0xc] @ 0x2230294, (=0x64f)
-	bl      0x2005748
+	bl      Function_2005748
 .thumb
 branch_223028c: @ 223028c :thumb
 	ldr     r0, [sp, #0x8]
@@ -5596,7 +5596,7 @@ branch_2230372: @ 2230372 :thumb
 .thumb
 branch_223037c: @ 223037c :thumb
 	ldr     r0, [pc, #0x264] @ 0x22305e4, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r4
 	bl      Function_222fd70
 	mov     r0, #0xd1
@@ -5660,7 +5660,7 @@ branch_22303da: @ 22303da :thumb
 	cmp     r1, r0
 	beq     branch_2230404
 	ldr     r0, [pc, #0x1f4] @ 0x22305e8, (=0x624)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0xd1
 	mov     r1, #0x30
 	lsl     r0, r0, #2
@@ -5773,7 +5773,7 @@ branch_22304ae: @ 22304ae :thumb
 	cmp     r0, #0x0
 	beq     branch_22304f2
 	ldr     r0, [pc, #0x108] @ 0x22305e4, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0xd1
 	mov     r1, #0x27
 	lsl     r0, r0, #2
@@ -5822,7 +5822,7 @@ branch_2230520: @ 2230520 :thumb
 .thumb
 branch_2230524: @ 2230524 :thumb
 	ldr     r0, [pc, #0xbc] @ 0x22305e4, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r6
 	bl      Function_222ddfc
 	cmp     r0, #0x0
@@ -5859,7 +5859,7 @@ branch_2230556: @ 2230556 :thumb
 .thumb
 branch_2230562: @ 2230562 :thumb
 	ldr     r0, [pc, #0x80] @ 0x22305e4, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r6
 	bl      Function_222ddfc
 	cmp     r0, #0x0
@@ -5902,7 +5902,7 @@ branch_22305a4: @ 22305a4 :thumb
 .thumb
 branch_22305b0: @ 22305b0 :thumb
 	ldr     r0, [pc, #0x30] @ 0x22305e4, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r6
 	bl      Function_222ddfc
 	cmp     r0, #0x0
@@ -7226,11 +7226,11 @@ branch_2230ef2: @ 2230ef2 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2230f16: @ 2230f16 :thumb
 	add     r0, r7, #0x1
@@ -7285,7 +7285,7 @@ branch_2230f16: @ 2230f16 :thumb
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, r5
 	mov     r1, #0x8
 	mov     r2, #0x0
@@ -7344,11 +7344,11 @@ Function_2230fbc: @ 2230fbc :thumb
 	sub     r0, #0x28
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	mov     r2, #0x37
@@ -7356,7 +7356,7 @@ Function_2230fbc: @ 2230fbc :thumb
 	ldr     r0, [r5, r0]
 	mov     r1, #0x0
 	add     r2, r5, r2
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -7374,7 +7374,7 @@ branch_2231038: @ 2231038 :thumb
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
-	bl      0x2001288
+	bl      Function_2001288
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_2230140
@@ -7404,14 +7404,14 @@ branch_2231064: @ 2231064 :thumb
 	mov     r0, r5
 	bl      Function_2232dfc
 	ldr     r0, [pc, #0x188] @ 0x22311fc, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	b       branch_22311c6
 @ 0x223107a
 
 .thumb
 branch_223107a: @ 223107a :thumb
 	ldr     r0, [pc, #0x180] @ 0x22311fc, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	cmp     r4, #0x13
 	bne     branch_22310bc
 	cmp     r6, #0x0
@@ -7501,11 +7501,11 @@ branch_2231104: @ 2231104 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	mov     r2, #0x37
@@ -7513,7 +7513,7 @@ branch_2231104: @ 2231104 :thumb
 	ldr     r0, [r5, r0]
 	mov     r1, #0x0
 	add     r2, r5, r2
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -7597,11 +7597,11 @@ branch_22311c6: @ 22311c6 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	mov     r2, #0x37
@@ -7609,7 +7609,7 @@ branch_22311c6: @ 22311c6 :thumb
 	ldr     r0, [r5, r0]
 	mov     r1, #0x0
 	add     r2, r5, r2
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -7679,7 +7679,7 @@ branch_2231238: @ 2231238 :thumb
 	ldr     r0, [r5, r0]
 	bl      0x20329e0
 	bl      0x2032ac0
-	bl      0x203608c
+	bl      Function_203608c
 	bl      0x2032e1c
 	mov     r4, #0x2
 .thumb
@@ -7805,7 +7805,7 @@ branch_2231332: @ 2231332 :thumb
 	ldr     r0, [r5, r0]
 	ldr     r1, [r4, #0x0]
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x59
 	mov     r1, #0x5e
 	mov     r2, #0x17
@@ -7815,7 +7815,7 @@ branch_2231332: @ 2231332 :thumb
 	ldr     r0, [r5, r0]
 	ldr     r1, [r5, r1]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x55
 	mov     r1, #0x5e
 	lsl     r0, r0, #2
@@ -7842,11 +7842,11 @@ branch_2231382: @ 2231382 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_22313a6: @ 22313a6 :thumb
 	mov     r1, #0x9
@@ -7905,7 +7905,7 @@ branch_22313a6: @ 22313a6 :thumb
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0x1
 	add     sp, #0x34
 	pop     {r4-r7,pc}
@@ -7941,11 +7941,11 @@ Function_2231440: @ 2231440 :thumb
 	sub     r0, #0x28
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	ldr     r3, [pc, #0x124] @ 0x223159c, (=0x372)
 	mov     r0, #0x56
 	add     r2, r5, r3
@@ -7956,7 +7956,7 @@ Function_2231440: @ 2231440 :thumb
 	lsl     r3, r3, #1
 	mov     r1, #0x0
 	add     r2, r2, r3
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -7986,7 +7986,7 @@ branch_22314b8: @ 22314b8 :thumb
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
-	bl      0x2001288
+	bl      Function_2001288
 	mov     r4, r0
 	mov     r0, #0x1
 	mvn     r0, r0
@@ -8002,7 +8002,7 @@ branch_22314b8: @ 22314b8 :thumb
 .thumb
 branch_22314d6: @ 22314d6 :thumb
 	ldr     r0, [pc, #0xc8] @ 0x22315a0, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0xd1
 	mov     r1, #0x24
 	lsl     r0, r0, #2
@@ -8013,7 +8013,7 @@ branch_22314d6: @ 22314d6 :thumb
 .thumb
 branch_22314e6: @ 22314e6 :thumb
 	ldr     r0, [pc, #0xb8] @ 0x22315a0, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_2232e58
@@ -8075,11 +8075,11 @@ branch_223155e: @ 223155e :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	ldr     r3, [pc, #0x24] @ 0x223159c, (=0x372)
 	mov     r0, #0x56
 	add     r2, r5, r3
@@ -8090,7 +8090,7 @@ branch_223155e: @ 223155e :thumb
 	lsl     r3, r3, #1
 	mov     r1, #0x0
 	add     r2, r2, r3
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -8386,7 +8386,7 @@ branch_223174c: @ 223174c :thumb
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, r5
 	.hword  0x1e61 @ sub r1, r4, #0x1
 	bl      Function_2232dc0
@@ -8648,7 +8648,7 @@ branch_22318da: @ 22318da :thumb
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0xd1
 	mov     r1, #0x2c
 	lsl     r0, r0, #2
@@ -8863,7 +8863,7 @@ Function_2231a98: @ 2231a98 :thumb
 	ldr     r0, [r5, r0]
 	str     r1, [sp, #0x0]
 	mov     r6, #0x0
-	bl      0x2001288
+	bl      Function_2001288
 	mov     r7, r0
 	mov     r0, r5
 	bl      Function_2230140
@@ -8888,17 +8888,17 @@ branch_2231aba: @ 2231aba :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -8937,7 +8937,7 @@ branch_2231b24: @ 2231b24 :thumb
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, r5
 	.hword  0x1e61 @ sub r1, r4, #0x1
 	bl      Function_2232dc0
@@ -9003,7 +9003,7 @@ branch_2231bb2: @ 2231bb2 :thumb
 .thumb
 branch_2231bb8: @ 2231bb8 :thumb
 	ldr     r0, [pc, #0x2a0] @ 0x2231e5c, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0xd1
 	mov     r1, #0x13
 	lsl     r0, r0, #2
@@ -9014,7 +9014,7 @@ branch_2231bb8: @ 2231bb8 :thumb
 .thumb
 branch_2231bc8: @ 2231bc8 :thumb
 	ldr     r0, [pc, #0x290] @ 0x2231e5c, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	cmp     r7, #0x1
 	beq     branch_2231bd4
 	b       branch_2231dfa
@@ -9349,17 +9349,17 @@ branch_2231e10: @ 2231e10 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0xc7
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x56
 	lsl     r0, r0, #2
 	mov     r1, #0x0
 	ldr     r0, [r5, r0]
 	mov     r2, r1
-	bl      0x2001384
+	bl      Function_2001384
 	mov     r0, #0x55
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -10043,7 +10043,7 @@ Function_223229c: @ 223229c :thumb
 	bl      Function_222dd20
 	add     r1, sp, #0x0
 	strh    r0, [r1, #0x0]
-	bl      0x203608c
+	bl      Function_203608c
 	add     r1, sp, #0x0
 	bl      0x2036614
 	cmp     r0, #0x0
@@ -10067,7 +10067,7 @@ Function_22322dc: @ 22322dc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r7, r1
-	bl      0x203608c
+	bl      Function_203608c
 	cmp     r0, #0x0
 	bne     branch_22322ee
 	mov     r0, #0x1
@@ -11361,7 +11361,7 @@ Function_2232b58: @ 2232b58 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232b9c: @ 2232b9c :thumb
 	mov     r0, #0xb3
@@ -11378,7 +11378,7 @@ branch_2232b9c: @ 2232b9c :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232bc0: @ 2232bc0 :thumb
 	mov     r0, #0x6
@@ -11429,7 +11429,7 @@ branch_2232bec: @ 2232bec :thumb
 	.hword  0x1d12 @ add r2, r2, #0x4
 	ldr     r2, [r5, r2]
 	mov     r1, r4
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	b       branch_2232c38
 @ 0x2232c28
 
@@ -11441,7 +11441,7 @@ branch_2232c28: @ 2232c28 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, r4
-	bl      0x200b1b8
+	bl      Function_200b1b8
 .thumb
 branch_2232c38: @ 2232c38 :thumb
 	mov     r2, #0x59
@@ -11452,12 +11452,12 @@ branch_2232c38: @ 2232c38 :thumb
 	add     r2, #0xc
 	ldr     r1, [r5, r1]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r2, #0xb3
 	lsl     r2, r2, #2
 	add     r0, r5, r2
@@ -11466,9 +11466,9 @@ branch_2232c38: @ 2232c38 :thumb
 	mov     r3, #0xa
 	bl      0x200e060
 	mov     r0, #0x1
-	bl      0x2002ac8
+	bl      Function_2002ac8
 	mov     r0, #0x0
-	bl      0x2002ae4
+	bl      Function_2002ae4
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	str     r7, [sp, #0x4]
@@ -11487,7 +11487,7 @@ branch_2232c38: @ 2232c38 :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x14
 	pop     {r4-r7,pc}
 @ 0x2232ca2
@@ -11518,7 +11518,7 @@ Function_2232ca8: @ 2232ca8 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232cd8: @ 2232cd8 :thumb
 	mov     r0, #0xb3
@@ -11535,7 +11535,7 @@ branch_2232cd8: @ 2232cd8 :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232cfc: @ 2232cfc :thumb
 	mov     r0, #0x6
@@ -11583,7 +11583,7 @@ branch_2232d28: @ 2232d28 :thumb
 	.hword  0x1d12 @ add r2, r2, #0x4
 	ldr     r2, [r5, r2]
 	mov     r1, r4
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x59
 	lsl     r2, r2, #2
 	mov     r1, r2
@@ -11592,12 +11592,12 @@ branch_2232d28: @ 2232d28 :thumb
 	add     r2, #0xc
 	ldr     r1, [r5, r1]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	ldr     r2, [pc, #0x38] @ 0x2232dbc, (=0x1d9)
@@ -11623,7 +11623,7 @@ branch_2232d28: @ 2232d28 :thumb
 	mov     r0, #0xbf
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x14
 	pop     {r4,r5,pc}
 @ 0x2232dba
@@ -11658,7 +11658,7 @@ Function_2232dc0: @ 2232dc0 :thumb
 	mov     r2, r4
 	bl      0x200b498
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_2232dfa: @ 2232dfa :thumb
 	pop     {r4-r6,pc}
@@ -11705,7 +11705,7 @@ branch_2232e30: @ 2232e30 :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232e54: @ 2232e54 :thumb
 	pop     {r4,pc}
@@ -11885,7 +11885,7 @@ Function_2232f50: @ 2232f50 :thumb
 	mov     r0, #0xb3
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 .thumb
 branch_2232f8e: @ 2232f8e :thumb
 	pop     {r4,pc}
@@ -12082,7 +12082,7 @@ branch_22330e6: @ 22330e6 :thumb
 	beq     branch_2233110
 	strb    r1, [r4, r0]
 	ldr     r0, [pc, #0xd0] @ 0x22331cc, (=0x5e1)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r4
 	bl      Function_22336d4
 	ldr     r0, [pc, #0xc8] @ 0x22331d0, (=0xb8d)
@@ -12161,7 +12161,7 @@ branch_223315a: @ 223315a :thumb
 	mov     r0, r4
 	bl      Function_2234da0
 	ldr     r0, [pc, #0x38] @ 0x22331dc, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	b       branch_22331c2
 @ 0x22331a8
 
@@ -12170,7 +12170,7 @@ branch_22331a8: @ 22331a8 :thumb
 	cmp     r5, #0x0
 	beq     branch_22331c2
 	ldr     r0, [pc, #0x2c] @ 0x22331dc, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r4
 	mov     r1, r5
 	bl      Function_223327c
@@ -12369,7 +12369,7 @@ Function_22332c4: @ 22332c4 :thumb
 	add     r0, r4, #0x1
 	strb    r1, [r2, r0]
 	ldr     r0, [pc, #0x8] @ 0x22332f8, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 .thumb
 branch_22332f2: @ 22332f2 :thumb
 	pop     {r3-r5,pc}
@@ -12568,9 +12568,9 @@ branch_223342e: @ 223342e :thumb
 	bl      0x201a7e8
 	ldr     r0, [sp, #0x30]
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	ldr     r0, [sp, #0x30]
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	ldr     r0, [sp, #0x20]
 	ldr     r4, [sp, #0x28]
 	.hword  0x1c40 @ add r0, r0, #0x1
@@ -12609,9 +12609,9 @@ branch_22334a6: @ 22334a6 :thumb
 	bl      0x201a7e8
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, r4
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	.hword  0x1c76 @ add r6, r6, #0x1
 	add     r4, #0x10
 	add     r5, #0xc
@@ -12653,10 +12653,10 @@ branch_22334a6: @ 22334a6 :thumb
 	ldr     r0, [pc, #0x30] @ 0x223356c, (=0xd14)
 	mov     r1, #0x0
 	add     r0, r7, r0
-	bl      0x201ada4
+	bl      Function_201ada4
 	ldr     r0, [pc, #0x24] @ 0x223356c, (=0xd14)
 	add     r0, r7, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	ldr     r1, [sp, #0x14]
 	ldr     r2, [sp, #0x18]
 	mov     r0, r7
@@ -12690,13 +12690,13 @@ Function_2233570: @ 2233570 :thumb
 .thumb
 branch_2233588: @ 2233588 :thumb
 	mov     r0, r7
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r4, #0x0
 	mov     r5, r6
 .thumb
 branch_2233592: @ 2233592 :thumb
 	mov     r0, r5
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	.hword  0x1c64 @ add r4, r4, #0x1
 	add     r5, #0x10
 	cmp     r4, #0x2
@@ -12711,18 +12711,18 @@ branch_2233592: @ 2233592 :thumb
 	ldr     r1, [pc, #0x38] @ 0x22335e8, (=0xd14)
 	ldr     r0, [sp, #0x0]
 	add     r0, r0, r1
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	ldr     r1, [pc, #0x30] @ 0x22335ec, (=0xb1c)
 	ldr     r0, [sp, #0x0]
 	ldr     r0, [r0, r1]
-	bl      0x20181c4
+	bl      free
 	ldr     r4, [sp, #0x0]
 	ldr     r6, [pc, #0x28] @ 0x22335f0, (=0xb24)
 	mov     r5, #0x0
 .thumb
 branch_22335c8: @ 22335c8 :thumb
 	ldr     r0, [r4, r6]
-	bl      0x20181c4
+	bl      free
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1d24 @ add r4, r4, #0x4
 	cmp     r5, #0x7
@@ -12730,7 +12730,7 @@ branch_22335c8: @ 22335c8 :thumb
 	ldr     r1, [pc, #0x1c] @ 0x22335f4, (=0xb5c)
 	ldr     r0, [sp, #0x0]
 	ldr     r0, [r0, r1]
-	bl      0x20181c4
+	bl      free
 	add     sp, #0x8
 	pop     {r3-r7,pc}
 @ 0x22335e4
@@ -13084,18 +13084,18 @@ branch_22337c6: @ 22337c6 :thumb
 branch_223380a: @ 223380a :thumb
 	ldr     r0, [sp, #0x14]
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	ldr     r0, [sp, #0x14]
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	ldr     r5, [sp, #0x10]
 	mov     r4, #0x0
 .thumb
 branch_223381c: @ 223381c :thumb
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, r5
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	.hword  0x1c64 @ add r4, r4, #0x1
 	add     r5, #0x10
 	cmp     r4, #0x2
@@ -13197,7 +13197,7 @@ branch_22338ec: @ 22338ec :thumb
 	ldr     r0, [pc, #0x48] @ 0x2233938, (=0xd14)
 	mov     r1, #0x0
 	add     r0, r5, r0
-	bl      0x201ada4
+	bl      Function_201ada4
 	ldr     r2, [pc, #0x3c] @ 0x2233934, (=0xb8c)
 	mov     r0, r5
 	ldsb    r2, [r5, r2]
@@ -13213,7 +13213,7 @@ branch_22338ec: @ 22338ec :thumb
 	bl      0x201c3c0
 	ldr     r0, [pc, #0x24] @ 0x2233938, (=0xd14)
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0x2
 	mov     r1, #0x0
 	bl      0x201ff74
@@ -13266,7 +13266,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x2a
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x35c] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13274,7 +13274,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13306,7 +13306,7 @@ branch_2233962: @ 2233962 :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13336,14 +13336,14 @@ branch_2233962: @ 2233962 :thumb
 	mov     r2, r6
 	bl      0x200b498
 	mov     r0, r6
-	bl      0x20181c4
+	bl      free
 	mov     r2, #0x5a
 	lsl     r2, r2, #2
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x2b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x20
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13365,7 +13365,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0xda
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x278] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13373,7 +13373,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -13401,7 +13401,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x2c
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x38
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13435,7 +13435,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x2d
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x1dc] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13443,7 +13443,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x38
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13477,7 +13477,7 @@ branch_2233962: @ 2233962 :thumb
 	lsl     r2, r1, #3
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x17c] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13485,7 +13485,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -13513,7 +13513,7 @@ branch_2233962: @ 2233962 :thumb
 	lsl     r2, r1, #3
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x50
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13547,7 +13547,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x30
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0xe0] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13555,7 +13555,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -13587,7 +13587,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x31
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x68
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13621,7 +13621,7 @@ branch_2233962: @ 2233962 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x32
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x3c] @ 0x2233cdc, (=0xb18)
 	lsl     r2, r2, #2
@@ -13629,7 +13629,7 @@ branch_2233962: @ 2233962 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -13673,7 +13673,7 @@ branch_2233cf4: @ 2233cf4 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x33
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x80
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13731,7 +13731,7 @@ branch_2233cf4: @ 2233cf4 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x4a
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x8c] @ 0x2233e18, (=0xb18)
 	lsl     r2, r2, #2
@@ -13739,7 +13739,7 @@ branch_2233cf4: @ 2233cf4 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -13823,7 +13823,7 @@ Function_2233e20: @ 2233e20 :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -13873,7 +13873,7 @@ Function_2233e20: @ 2233e20 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x30
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13919,7 +13919,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -13939,7 +13939,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3c
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x18
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -13960,7 +13960,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3e
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -14027,7 +14027,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x40
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14066,7 +14066,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3d
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x58
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14087,7 +14087,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3e
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -14154,7 +14154,7 @@ Function_2233ef0: @ 2233ef0 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x80
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14209,7 +14209,7 @@ Function_223416c: @ 223416c :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -14229,7 +14229,7 @@ Function_223416c: @ 223416c :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3f
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -14298,7 +14298,7 @@ Function_223416c: @ 223416c :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x50
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14363,7 +14363,7 @@ Function_22342a8: @ 22342a8 :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -14380,7 +14380,7 @@ Function_22342a8: @ 22342a8 :thumb
 	mov     r0, r7
 	mov     r1, #0x7c
 	mov     r2, r4
-	bl      0x2030698
+	bl      Function_2030698
 	mov     r1, r6
 	bl      0x200b32c
 	mov     r6, r0
@@ -14405,7 +14405,7 @@ Function_22342a8: @ 22342a8 :thumb
 	str     r1, [sp, #0xc]
 	bl      0x201d78c
 	mov     r0, r6
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	ldr     r1, [r5, r1]
@@ -14442,7 +14442,7 @@ Function_22342a8: @ 22342a8 :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x50
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14492,7 +14492,7 @@ Function_22343cc: @ 22343cc :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -14542,7 +14542,7 @@ Function_22343cc: @ 22343cc :thumb
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
 	mov     r1, #0x3b
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r0, #0x30
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14593,7 +14593,7 @@ Function_223449c: @ 223449c :thumb
 	ldr     r0, [r5, r2]
 	add     r2, #0x10
 	ldr     r2, [r5, r2]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -14618,7 +14618,7 @@ Function_223449c: @ 223449c :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x47
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x120] @ 0x2234620, (=0xb18)
 	lsl     r2, r2, #2
@@ -14626,7 +14626,7 @@ Function_223449c: @ 223449c :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x18
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14663,7 +14663,7 @@ Function_223449c: @ 223449c :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x47
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0xb8] @ 0x2234620, (=0xb18)
 	lsl     r2, r2, #2
@@ -14671,7 +14671,7 @@ Function_223449c: @ 223449c :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x30
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14708,7 +14708,7 @@ Function_223449c: @ 223449c :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x47
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x54] @ 0x2234620, (=0xb18)
 	lsl     r2, r2, #2
@@ -14716,7 +14716,7 @@ Function_223449c: @ 223449c :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x48
 	str     r0, [sp, #0x0]
 	mov     r2, #0xff
@@ -14824,7 +14824,7 @@ Function_2234694: @ 2234694 :thumb
 	bl      0x203068c
 	mov     r1, r6
 	mov     r2, r7
-	bl      0x2030698
+	bl      Function_2030698
 	mov     r2, r0
 	ldr     r0, [sp, #0x1c]
 	ldr     r3, [sp, #0x18]
@@ -14859,7 +14859,7 @@ branch_22346d6: @ 22346d6 :thumb
 	lsl     r2, r4, #2
 	ldr     r1, [r1, r2]
 	mov     r2, r7
-	bl      0x2030698
+	bl      Function_2030698
 	cmp     r0, #0x0
 	bne     branch_22346f4
 	mov     r1, #0x39
@@ -14875,7 +14875,7 @@ branch_22346f6: @ 22346f6 :thumb
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
 	mov     r2, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	pop     {r3-r7,pc}
 @ 0x2234704
 
@@ -14901,7 +14901,7 @@ Function_2234708: @ 2234708 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x44] @ 0x223477c, (=0xb18)
 	lsl     r2, r2, #2
@@ -14909,7 +14909,7 @@ Function_2234708: @ 2234708 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -15229,7 +15229,7 @@ Function_2234900: @ 2234900 :thumb
 	mov     r1, #0x0
 	str     r2, [sp, #0x10]
 	mov     r4, r3
-	bl      0x201ada4
+	bl      Function_201ada4
 	ldr     r0, [pc, #0x68] @ 0x2234980, (=0x2238934)
 	mov     r2, #0x8
 	ldrb    r7, [r0, r4]
@@ -15260,7 +15260,7 @@ branch_2234934: @ 2234934 :thumb
 	add     r2, #0x8
 	ldr     r2, [r5, r2]
 	mov     r1, #0x2a
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r2, #0x5e
 	ldr     r0, [pc, #0x38] @ 0x2234988, (=0xb18)
 	lsl     r2, r2, #2
@@ -15268,7 +15268,7 @@ branch_2234934: @ 2234934 :thumb
 	sub     r2, #0x8
 	ldr     r0, [r5, r0]
 	ldr     r2, [r5, r2]
-	bl      0x200c388
+	bl      Function_200c388
 	str     r7, [sp, #0x0]
 	mov     r2, #0xff
 	str     r2, [sp, #0x4]
@@ -15281,7 +15281,7 @@ branch_2234934: @ 2234934 :thumb
 	mov     r1, #0x1
 	bl      0x201d78c
 	mov     r0, r6
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x18
 	pop     {r3-r7,pc}
 @ 0x2234980
@@ -15312,7 +15312,7 @@ Function_223498c: @ 223498c :thumb
 branch_22349b2: @ 22349b2 :thumb
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	cmp     r4, #0x0
 	bne     branch_22349d2
 	ldr     r0, [sp, #0x8]
@@ -15354,7 +15354,7 @@ branch_22349e2: @ 22349e2 :thumb
 .thumb
 branch_22349f6: @ 22349f6 :thumb
 	mov     r0, r5
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	.hword  0x1c64 @ add r4, r4, #0x1
 	add     r5, #0x10
 	cmp     r4, #0x2
@@ -15583,7 +15583,7 @@ branch_2234b86: @ 2234b86 :thumb
 	blt     branch_2234b86
 	ldr     r1, [sp, #0x2c]
 	mov     r0, #0x2
-	bl      0x2002bb8
+	bl      Function_2002bb8
 	add     r0, sp, #0x68
 	bl      0x201a7a0
 	mov     r0, #0x0
@@ -15598,14 +15598,14 @@ branch_2234b86: @ 2234b86 :thumb
 	bl      0x201a870
 	ldr     r1, [sp, #0x2c]
 	mov     r0, #0x40
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r6, r0
 	mov     r0, #0x5a
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
 	mov     r1, #0x49
 	mov     r2, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x5e
 	lsl     r1, r1, #2
 	mov     r0, #0x0
@@ -15627,7 +15627,7 @@ branch_2234b86: @ 2234b86 :thumb
 	str     r3, [sp, #0xc]
 	bl      0x201d78c
 	mov     r0, r6
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r1, [sp, #0x2c]
 	add     r0, sp, #0x68
 	bl      0x2012b20
@@ -15685,7 +15685,7 @@ branch_2234c54: @ 2234c54 :thumb
 	mov     r0, r6
 	bl      0x2012b48
 	add     r0, sp, #0x68
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x2
 	bl      0x2002c60
 	ldr     r0, [sp, #0x2c]
@@ -15975,7 +15975,7 @@ branch_2234ec6: @ 2234ec6 :thumb
 	mov     r1, #0x2
 	ldr     r0, [r7, r4]
 	lsl     r1, r1, #12
-	bl      0x2021e2c
+	bl      Function_2021e2c
 	ldr     r0, [r7, r4]
 	bl      0x2021e74
 	mov     r4, r0
@@ -16018,7 +16018,7 @@ branch_2234f0e: @ 2234f0e :thumb
 	lsl     r4, r5, #2
 	add     r6, r0, r1
 	ldr     r0, [r6, r4]
-	bl      0x2021e24
+	bl      Function_2021e24
 	mov     r7, r0
 	ldr     r0, [r6, r4]
 	bl      0x2021e74
@@ -16043,7 +16043,7 @@ branch_2234f4a: @ 2234f4a :thumb
 	mov     r1, #0x2
 	ldr     r0, [r6, r4]
 	lsl     r1, r1, #12
-	bl      0x2021e2c
+	bl      Function_2021e2c
 .thumb
 branch_2234f54: @ 2234f54 :thumb
 	ldr     r0, [sp, #0x8]
@@ -16082,7 +16082,7 @@ Function_2234f68: @ 2234f68 :thumb
 	mov     r2, r4
 	bl      0x200b498
 	mov     r0, r4
-	bl      0x20181c4
+	bl      free
 .thumb
 branch_2234fa0: @ 2234fa0 :thumb
 	pop     {r4-r6,pc}
@@ -18369,7 +18369,7 @@ branch_2235f16: @ 2235f16 :thumb
 	ldr     r2, [pc, #0x50] @ 0x2235f90, (=0xfff40000)
 	asr     r1, r0, #31
 	asr     r3, r2, #20
-	blx     0x20e1f1c
+	blx     _ll_mul
 	mov     r5, #0x2
 	mov     r6, #0x0
 	lsl     r5, r5, #10
@@ -18953,7 +18953,7 @@ Function_22362ec: @ 22362ec :thumb
 	push    {r4,lr}
 	mov     r4, r1
 	ldr     r0, [r4, #0x0]
-	bl      0x20181c4
+	bl      free
 	mov     r1, #0x14
 	mov     r0, #0x0
 .thumb
@@ -19295,7 +19295,7 @@ branch_22364aa: @ 22364aa :thumb
 	bl      Function_22367a8
 	ldr     r0, [pc, #0x18] @ 0x2236544, (=0x2236781)
 	mov     r1, r4
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	bl      0x2039734
 	mov     r0, #0x1
 	add     r4, #0x27
@@ -19509,7 +19509,7 @@ Function_223668c: @ 223668c :thumb
 	bl      0x2006840
 	mov     r0, #0x0
 	mov     r1, r0
-	bl      0x2017798
+	bl      SetMainLoopFunctionCall
 	mov     r0, r4
 	bl      Function_223761c
 	mov     r0, r4
@@ -19546,7 +19546,7 @@ Function_22366e4: @ 22366e4 :thumb
 	cmp     r0, #0x0
 	bne     branch_2236742
 	ldrh    r6, [r4, #0x0]
-	bl      0x203608c
+	bl      Function_203608c
 	cmp     r6, r0
 	ldr     r0, [r4, #0x4]
 	bne     branch_223671c
@@ -19676,7 +19676,7 @@ Function_2236780: @ 2236780 :thumb
 .thumb
 Function_2236794: @ 2236794 :thumb
 	push    {r3,lr}
-	bl      0x203608c
+	bl      Function_203608c
 	cmp     r0, #0x0
 	bne     branch_22367a2
 	mov     r0, #0x1
@@ -19859,10 +19859,10 @@ Function_2236840: @ 2236840 :thumb
 	bl      0x2019ebc
 	mov     r0, #0x8
 	mov     r1, #0x0
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x10
 	mov     r1, #0x1
-	bl      0x201ff0c
+	bl      Function_201ff0c
 	mov     r0, #0x1
 	mov     r1, #0x0
 	bl      0x201ff74
@@ -19966,11 +19966,11 @@ Function_22369f0: @ 22369f0 :thumb
 	mov     r0, #0x1e
 	lsl     r0, r0, #4
 	ldr     r0, [r4, r0]
-	bl      0x20181c4
+	bl      free
 	mov     r0, #0x7b
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      0x20181c4
+	bl      free
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x2
 	bl      0x2019044
@@ -19981,7 +19981,7 @@ Function_22369f0: @ 22369f0 :thumb
 	mov     r1, #0x0
 	bl      0x2019044
 	ldr     r0, [r4, #0x0]
-	bl      0x20181c4
+	bl      free
 	pop     {r4,pc}
 @ 0x2236a28
 
@@ -20043,7 +20043,7 @@ Function_2236a28: @ 2236a28 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x63
 	lsl     r0, r0, #2
 	mov     r1, #0x1
@@ -20070,7 +20070,7 @@ Function_2236a28: @ 2236a28 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x67
 	lsl     r0, r0, #2
 	add     r0, r5, r0
@@ -20096,7 +20096,7 @@ Function_2236a28: @ 2236a28 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x5
 	str     r0, [sp, #0x0]
 	mov     r0, #0x14
@@ -20117,7 +20117,7 @@ Function_2236a28: @ 2236a28 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r5, r0
@@ -20143,7 +20143,7 @@ Function_2236a28: @ 2236a28 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	add     sp, #0x14
 	pop     {r3-r6,pc}
 @ 0x2236b8c
@@ -20163,38 +20163,38 @@ Function_2236b90: @ 2236b90 :thumb
 	mov     r0, #0x63
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x67
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0x67
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x6b
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x73
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0x0
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0x73
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a8fc
+	bl      Function_201a8fc
 	mov     r0, #0x77
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -20224,17 +20224,17 @@ Function_2236c10: @ 2236c10 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, r6
-	bl      0x200b144
+	bl      Function_200b144
 	str     r0, [r5, #0x8]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
 	mov     r1, r6
-	bl      0x2023790
+	bl      Function_2023790
 	str     r0, [r5, #0xc]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
 	mov     r1, r6
-	bl      0x2023790
+	bl      Function_2023790
 	str     r0, [r5, #0x10]
 	mov     r0, #0xff
 	strb    r0, [r5, #0x14]
@@ -20251,11 +20251,11 @@ Function_2236c5c: @ 2236c5c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r0, [r4, #0x10]
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r0, [r4, #0xc]
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r0, [r4, #0x8]
-	bl      0x200b190
+	bl      Function_200b190
 	ldr     r0, [r4, #0x4]
 	bl      0x200b3f0
 	pop     {r4,pc}
@@ -20318,11 +20318,11 @@ branch_2236cc0: @ 2236cc0 :thumb
 	ldr     r0, [r4, #0x8]
 	ldrb    r1, [r1, r2]
 	ldr     r2, [r4, #0x10]
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	ldr     r0, [r4, #0x4]
 	ldr     r1, [r4, #0xc]
 	ldr     r2, [r4, #0x10]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -20338,15 +20338,15 @@ branch_2236cc0: @ 2236cc0 :thumb
 	mov     r0, #0x67
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	ldr     r0, [r4, #0x8]
 	ldr     r2, [r4, #0xc]
 	mov     r1, #0x80
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -20362,11 +20362,11 @@ branch_2236cc0: @ 2236cc0 :thumb
 	mov     r0, #0x6b
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0x63
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x10
 	pop     {r3-r5,pc}
 @ 0x2236d42
@@ -20527,20 +20527,20 @@ branch_2236e74: @ 2236e74 :thumb
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x1
 	ldr     r1, [sp, #0x28]
 	lsl     r0, r0, #8
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r7, r0
 	ldr     r0, [r5, #0x8]
 	ldr     r1, [sp, #0x10]
 	mov     r2, r7
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	ldr     r0, [r5, #0x4]
 	ldr     r1, [r5, #0xc]
 	mov     r2, r7
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	ldrh    r0, [r5, #0x16]
@@ -20558,9 +20558,9 @@ branch_2236e74: @ 2236e74 :thumb
 	mov     r0, #0x63
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, r7
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r0, [r4, #0x8]
 	bl      0x2025e44
 	bl      0x2027b50
@@ -20650,11 +20650,11 @@ branch_2236f54: @ 2236f54 :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r0, #0x63
 	lsl     r0, r0, #2
 	add     r0, r4, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, #0x0
 	strb    r0, [r4, #0x15]
 	pop     {r4,pc}
@@ -20671,12 +20671,12 @@ Function_2236f70: @ 2236f70 :thumb
 	lsl     r0, r0, #8
 	mov     r1, r4
 	str     r2, [sp, #0x14]
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r6, r0
 	mov     r0, #0x1
 	lsl     r0, r0, #8
 	mov     r1, r4
-	bl      0x2023790
+	bl      Function_2023790
 	mov     r7, r0
 	ldr     r1, [sp, #0x10]
 	ldr     r2, [sp, #0x14]
@@ -20693,16 +20693,16 @@ Function_2236f70: @ 2236f70 :thumb
 	ldr     r0, [r5, #0x8]
 	mov     r1, #0x83
 	mov     r2, r6
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	ldr     r0, [r5, #0x4]
 	mov     r1, r7
 	mov     r2, r6
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0x73
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	mov     r1, #0xf
-	bl      0x201ada4
+	bl      Function_201ada4
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r2, #0xff
@@ -20725,11 +20725,11 @@ Function_2236f70: @ 2236f70 :thumb
 	mov     r0, #0x73
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	mov     r0, r6
-	bl      0x20237bc
+	bl      Function_20237bc
 	mov     r0, r7
-	bl      0x20237bc
+	bl      Function_20237bc
 	add     sp, #0x18
 	pop     {r3-r7,pc}
 @ 0x2237014
@@ -20743,7 +20743,7 @@ Function_2237018: @ 2237018 :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	mov     r1, #0x1
-	bl      0x200dc9c
+	bl      Function_200dc9c
 	mov     r0, #0x73
 	lsl     r0, r0, #2
 	add     r0, r4, r0
@@ -20830,12 +20830,12 @@ Function_223709c: @ 223709c :thumb
 	mov     r1, r7
 	str     r2, [sp, #0x20]
 	mov     r4, r3
-	bl      0x2023790
+	bl      Function_2023790
 	str     r0, [sp, #0x28]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
 	mov     r1, r7
-	bl      0x2023790
+	bl      Function_2023790
 	str     r0, [sp, #0x24]
 	ldr     r1, [sp, #0x20]
 	str     r7, [sp, #0x0]
@@ -20846,11 +20846,11 @@ Function_223709c: @ 223709c :thumb
 	ldr     r0, [r5, #0x8]
 	ldr     r2, [sp, #0x28]
 	mov     r1, #0x81
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	ldr     r0, [r5, #0x4]
 	ldr     r1, [sp, #0x24]
 	ldr     r2, [sp, #0x28]
-	bl      0x200c388
+	bl      Function_200c388
 	mov     r0, #0xa0
 	str     r0, [sp, #0x0]
 	mov     r0, #0x10
@@ -20885,11 +20885,11 @@ Function_223709c: @ 223709c :thumb
 	ldr     r0, [r5, #0x8]
 	ldr     r2, [sp, #0x28]
 	mov     r1, #0x82
-	bl      0x200b1b8
+	bl      Function_200b1b8
 	ldr     r0, [r5, #0x4]
 	ldr     r1, [sp, #0x24]
 	ldr     r2, [sp, #0x28]
-	bl      0x200c388
+	bl      Function_200c388
 	str     r6, [sp, #0x0]
 	mov     r2, #0xff
 	str     r2, [sp, #0x4]
@@ -20905,8 +20905,8 @@ Function_223709c: @ 223709c :thumb
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
-	bl      0x203608c
+	bl      Function_201a9a4
+	bl      Function_203608c
 	cmp     r4, r0
 	bne     branch_223717c
 	ldr     r0, [sp, #0x1c]
@@ -20985,9 +20985,9 @@ branch_223718e: @ 223718e :thumb
 	mov     r1, #0x2
 	bl      0x201c3c0
 	ldr     r0, [sp, #0x28]
-	bl      0x20237bc
+	bl      Function_20237bc
 	ldr     r0, [sp, #0x24]
-	bl      0x20237bc
+	bl      Function_20237bc
 	add     sp, #0x2c
 	pop     {r4-r7,pc}
 @ 0x22371f8
@@ -21044,7 +21044,7 @@ Function_22371fc: @ 22371fc :thumb
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	add     r0, r5, r0
-	bl      0x201a9a4
+	bl      Function_201a9a4
 	add     sp, #0x1c
 	pop     {r4,r5,pc}
 @ 0x223726c
@@ -21554,7 +21554,7 @@ Function_2237550: @ 2237550 :thumb
 	mov     r5, r0
 	mov     r6, r1
 	mov     r7, #0x1
-	bl      0x203608c
+	bl      Function_203608c
 	.hword  0x1e44 @ sub r4, r0, #0x1
 	bmi     branch_2237586
 .thumb
@@ -21611,7 +21611,7 @@ branch_223759c: @ 223759c :thumb
 	mov     r1, r7
 	mov     r2, #0x8
 	strh    r5, [r4, #0x0]
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x1
 	beq     branch_22375ba
 	bl      ErrorHandling
@@ -21652,7 +21652,7 @@ branch_22375dc: @ 22375dc :thumb
 	mov     r1, r7
 	mov     r2, #0x8
 	strh    r5, [r4, #0x0]
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x1
 	beq     branch_22375fa
 	bl      ErrorHandling
@@ -21839,7 +21839,7 @@ Function_22376d0: @ 22376d0 :thumb
 	strh    r2, [r1, #0x8]
 	ldrh    r0, [r0, #0xa]
 	strh    r0, [r1, #0xa]
-	bl      0x203608c
+	bl      Function_203608c
 	cmp     r6, r0
 	beq     branch_223772c
 	mov     r0, r6
@@ -21850,7 +21850,7 @@ Function_22376d0: @ 22376d0 :thumb
 .thumb
 branch_2237720: @ 2237720 :thumb
 	mov     r0, r6
-	bl      0x2025f8c
+	bl      Function_2025f8c
 	add     r1, sp, #0x4
 	strh    r0, [r1, #0xa]
 	b       branch_2237740
@@ -21993,7 +21993,7 @@ Function_2237808: @ 2237808 :thumb
 	mov     r0, #0x16
 	add     r1, sp, #0x0
 	mov     r2, #0x8
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x1
 	beq     branch_2237826
 	bl      ErrorHandling
@@ -22302,7 +22302,7 @@ branch_22379e6: @ 22379e6 :thumb
 	mov     r2, #0x4
 	strb    r0, [r1, #0x3]
 	mov     r0, #0x18
-	bl      0x20359dc
+	bl      Function_20359dc
 .thumb
 branch_2237a0c: @ 2237a0c :thumb
 	add     sp, #0x8
@@ -22401,7 +22401,7 @@ branch_2237a84: @ 2237a84 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1
 	bl      0x20388f4
-	bl      0x203608c
+	bl      Function_203608c
 	mov     r1, r0
 	mov     r0, r5
 	mov     r2, r4
@@ -22470,7 +22470,7 @@ branch_2237ad8: @ 2237ad8 :thumb
 	mov     r0, #0x16
 	add     r1, sp, #0x0
 	mov     r2, #0x8
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x1
 	beq     branch_2237b1e
 	bl      ErrorHandling
@@ -22488,7 +22488,7 @@ branch_2237b1e: @ 2237b1e :thumb
 	tst     r1, r0
 	beq     branch_2237b56
 	ldr     r0, [pc, #0x6c] @ 0x2237b98, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, r5
 	bl      Function_2237450
 	cmp     r0, #0x0
@@ -22524,7 +22524,7 @@ branch_2237b56: @ 2237b56 :thumb
 	tst     r2, r1
 	beq     branch_2237b6a
 	ldr     r0, [pc, #0x38] @ 0x2237b98, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0x16
 	strb    r0, [r5, #0x5]
 	b       branch_2237b8c
@@ -22536,7 +22536,7 @@ branch_2237b6a: @ 2237b6a :thumb
 	cmp     r2, #0xff
 	beq     branch_2237b7c
 	ldr     r0, [pc, #0x24] @ 0x2237b98, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 	mov     r0, #0x3
 	strb    r0, [r5, #0x5]
 	b       branch_2237b8c
@@ -22550,7 +22550,7 @@ branch_2237b7c: @ 2237b7c :thumb
 	mov     r0, #0x1e
 	strb    r0, [r5, #0x5]
 	ldr     r0, [pc, #0x10] @ 0x2237b98, (=0x5dd)
-	bl      0x2005748
+	bl      Function_2005748
 .thumb
 branch_2237b8c: @ 2237b8c :thumb
 	mov     r0, #0x0
@@ -22685,7 +22685,7 @@ branch_2237c6a: @ 2237c6a :thumb
 	mov     r0, #0x16
 	add     r1, sp, #0x0
 	mov     r2, #0x8
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x1
 	beq     branch_2237c7c
 	bl      ErrorHandling
@@ -22933,7 +22933,7 @@ Function_2237dd0: @ 2237dd0 :thumb
 	mov     r1, #0x0
 	mov     r0, #0x17
 	mov     r2, r1
-	bl      0x20359dc
+	bl      Function_20359dc
 	cmp     r0, #0x0
 	beq     branch_2237df2
 	mov     r0, #0xe
@@ -22995,7 +22995,7 @@ Function_2237e24: @ 2237e24 :thumb
 	ldrb    r1, [r0, #0x1b]
 	add     r0, sp, #0x0
 	strh    r1, [r0, #0x0]
-	bl      0x203608c
+	bl      Function_203608c
 	add     r1, sp, #0x0
 	bl      0x2036614
 	cmp     r0, #0x1
@@ -23015,7 +23015,7 @@ Function_2237e54: @ 2237e54 :thumb
 	mov     r6, r0
 	bl      Function_2237548
 	mov     r7, r0
-	bl      0x203608c
+	bl      Function_203608c
 	mov     r5, #0x0
 	mov     r4, r5
 	str     r0, [sp, #0x0]
@@ -23769,7 +23769,7 @@ Function_22382b0: @ 22382b0 :thumb
 	bl      Function_2236e50
 	mov     r0, #0x5
 	strb    r0, [r5, #0x5]
-	bl      0x203608c
+	bl      Function_203608c
 	mov     r1, r0
 	mov     r0, r5
 	mov     r2, #0x60
@@ -24042,7 +24042,7 @@ branch_22384a0: @ 22384a0 :thumb
 
 .thumb
 branch_22384a4: @ 22384a4 :thumb
-	bl      0x203608c
+	bl      Function_203608c
 	add     r1, sp, #0x0
 	bl      0x2036614
 	cmp     r0, #0x1
@@ -24065,7 +24065,7 @@ Function_22384bc: @ 22384bc :thumb
 	mov     r6, r0
 	bl      Function_2237548
 	mov     r7, r0
-	bl      0x203608c
+	bl      Function_203608c
 	mov     r5, #0x0
 	mov     r4, r5
 	str     r0, [sp, #0x0]

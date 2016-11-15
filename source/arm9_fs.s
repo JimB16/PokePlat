@@ -1336,6 +1336,7 @@ FS_InitArchive: @ 20c7734 :arm
 
 
 .arm
+.globl FS_FindArchive
 FS_FindArchive: @ 20c7760 :arm
 	stmfd   sp!, {r3-r5,lr}
 	bl      FSi_GetPackedName
@@ -2031,6 +2032,7 @@ FS_ConvertPathToFileID: @ 20c7f88 :arm
 
 
 .arm
+.globl FS_OpenFileDirect
 FS_OpenFileDirect: @ 20c7fc8 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -2108,7 +2110,7 @@ branch_20c80bc: @ 20c80bc :arm
 	mov     r0, #0x0
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r4,pc}
-@ 0x20c80c8
+@ FS_CloseFile
 
 
 .arm
@@ -2217,6 +2219,7 @@ FS_ReadFile: @ 20c81d4 :arm
 
 
 .arm
+.globl FS_SeekFile
 FS_SeekFile: @ 20c81e4 :arm
 	cmp     r2, #0x0
 	beq     branch_20c8200

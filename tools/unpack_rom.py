@@ -253,7 +253,7 @@ class Disassembler(object):
 
 
     def output_bank_opcodes(self, filename="baserom.nds", filedir="", original_offset=0, end_address=0, debug=False):
-        output = ""
+        header_output = ""
         
         rom_path = os.path.join(self.config.path, filename)
         self.rom = bytearray(open(rom_path, "rb").read())
@@ -324,18 +324,27 @@ class Disassembler(object):
         #disasm.write_section_in_file(Banner, BannerSize)
         disasm.write_section_in_file_wfilename(Banner, BannerSize, filedir + "/" + "banner.bin")
         RomMap.append(RomSection("banner.bin", Banner))
+        
+        GameTitle = disasm.get_string_from_rom(0x0, 12)
+        Gamecode = disasm.get_string_from_rom(0xc, 4)
+        Makercode = disasm.get_string_from_rom(0x10, 2)
+        Unitcode = disasm.get_byte_from_rom(0x12)
 
-        output += "\nARM9Rom:     " + hex(ARM9ROM) + " - " + hex(ARM9ROM + ARM9ROMSize)
-        output += "\nARM9Overlay: " + hex(ARM9Overlay) + " - " + hex(ARM9Overlay + ARM9OverlaySize)
-        output += "\nARM7Rom:     " + hex(ARM7ROM) + " - " + hex(ARM7ROM + ARM7ROMSize)
-        output += "\nARM7Overlay: " + hex(ARM7Overlay)
-        output += "\nFNT:         " + hex(FNT)
-        output += "\nFAT:         " + hex(FAT)
-        output += "\nIcon/Title:  " + hex(Banner)
-        #output += disasm.write_fnts_filenames(FNT, FNTSize)
+        header_output += "Game Title:    " + GameTitle
+        header_output += "\nGamecode:      " + Gamecode
+        header_output += "\nMakercode:     " + Makercode
+        header_output += "\nUnitcode:      " + hex(Unitcode)
+        header_output += "\n\nARM9Rom:     " + hex(ARM9ROM) + " - " + hex(ARM9ROM + ARM9ROMSize)
+        header_output += "\nARM9Overlay: " + hex(ARM9Overlay) + " - " + hex(ARM9Overlay + ARM9OverlaySize)
+        header_output += "\nARM7Rom:     " + hex(ARM7ROM) + " - " + hex(ARM7ROM + ARM7ROMSize)
+        header_output += "\nARM7Overlay: " + hex(ARM7Overlay)
+        header_output += "\nFNT:         " + hex(FNT)
+        header_output += "\nFAT:         " + hex(FAT)
+        header_output += "\nIcon/Title:  " + hex(Banner)
+        #header_output += disasm.write_fnts_filenames(FNT, FNTSize)
         disasm.write_fnts_filenames(FNT, FNTSize)
-        output += "\n"
-        output += disasm.get_fnt_maintable(FNT, 0, filedir + "/data/", "/data/", 0)
+        header_output += "\n"
+        header_output += disasm.get_fnt_maintable(FNT, 0, filedir + "/data/", "/data/", 0)
         #disasm.get_fnt_maintable(FNT, 0, "/", 0)
         
         disasm.write_overlays_in_files(ARM9Overlay, ARM9OverlaySize, filedir + "/overlay/", "/overlay/")
@@ -353,6 +362,14 @@ class Disassembler(object):
             f.write(hex(item.address) + " " + str(item.name) + "\n")
         
         
+        headerfilename = filedir + "/" + "Header.txt"
+        if not os.path.exists(os.path.dirname(headerfilename)):
+            os.makedirs(os.path.dirname(headerfilename))
+        fheader = open(headerfilename, 'w')
+        fheader.write(header_output)
+        
+        
+        output = ""
         return (output, offset)
 
 if __name__ == "__main__":

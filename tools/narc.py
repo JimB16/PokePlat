@@ -138,6 +138,8 @@ class NARCHandler(object):
                     filename_temp += ".recn"
                 elif FileType == "BTX0":
                     filename_temp += ".btx0"
+                elif FileType == "BMD0":
+                    filename_temp += ".bmd0"
                 else:
                     filename_temp += ".bin"
             else:

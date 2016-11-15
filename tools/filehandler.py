@@ -33,8 +33,10 @@ class FileHandler(object):
         self.file.seek(0, os.SEEK_END)
         return self.file.tell()
 
-    def AdrInRange(self, adr):
-        if (adr < self.base_address) | (adr >= self.base_address+self.GetFileSize()):
+    def AdrInRange(self, adr, debug=False):
+        if (adr < self.base_address) | (adr >= (self.base_address+self.GetFileSize())):
+            if debug:
+                print("AdrInRange: " + hex(self.base_address) + " - " + hex(adr) + " - " + hex((self.base_address+self.GetFileSize())))
             return False
         return True
     

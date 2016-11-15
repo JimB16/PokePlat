@@ -492,7 +492,7 @@ class AParam():
             output += "[pc, #"
             if not (self.word&(1<<23)):
                 output += "-"
-            output += hex(self.word & 0xfff) + "]" + " @ " + "[" + hex(adr) + "]" + " (=#" + hex(LoadedWord) + ")"
+            output += hex(self.word & 0xfff) + "]" + " @ " + "[" + hex(adr) + "]" + " (=" + hex(LoadedWord) + ")"
         else:
             reg = (self.word>>16)&0xf
             output += "[" + RegisterStrings[reg]
@@ -892,11 +892,21 @@ class ARMInstruction():
                 if ((self.word & 0x0e100000) == 0x08100000): # ldm-instruction
                     if (self.condition == "") & ((self.word>>15) & 1):
                         self.isend = True
+                if ((self.word & 0x0c10f000) == 0x0410f000): # ldr-instruction "ldr%c%b%t%_ %r3, %a"
+                    if (self.condition == "") & ((self.word>>15) & 1):
+                        self.isend = True
+                if ((self.word & 0x0e10f090) == 0x0010f090): # ldr-instruction "ldr%c%h%_ %r3, %a"
+                    if (self.condition == "") & ((self.word>>15) & 1):
+                        self.isend = True
                 break
         
         return output
 
 
+"""
+[0x0c10f000, 0x0410f000, "ldr%c%b%t%_ %r3, %a"],
+[0x0e10f090, 0x0010f090, "ldr%c%h%_ %r3, %a"],
+"""
 
 
 class A2ThumbParam():
@@ -918,7 +928,7 @@ class A2ThumbParam():
         if add & 0x400:
             add |= 0xfff800
         add = (add<<12)|((nopcode&0x7ff)<<1)
-        self.dest = (self.offset+4+add)&0xffffffff # ADDRESS FIX
+        self.dest = (self.offset+4+add)&0xfffffffc # ADDRESS FIX
         
         if input_file.AdrInRange(self.dest):
             if self.instr == 0x1f: # bl-instruction
@@ -1038,7 +1048,7 @@ class I2ThumbParam():
         #output = "[#" + hex(adr) + "]"
         output = "[pc, #" + hex(((self.word&0xff)<<2)) + "]"
         val = input_file.ReadWord(adr)
-        output += " @ " + hex(adr) + ", (=#" + hex(val) + ")"
+        output += " @ " + hex(adr) + ", (=" + hex(val) + ")"
         add_value(adr)
         return output
 
@@ -1753,6 +1763,8 @@ if __name__ == "__main__":
     filename_jumptables = sys.argv[7]
     filename_addjumps = sys.argv[8]
     filename_addjumps_arm = sys.argv[9]
+    filename_function_area = sys.argv[10]
+    filename_function_area_arm = sys.argv[11]
         
     input_file.init(filename, base_address)
     
@@ -1771,7 +1783,7 @@ if __name__ == "__main__":
     for line in content:
         if line.find(" ") != -1:
             adr = int(line.split(" ")[0], 16)
-            if input_file.AdrInRange(adr):
+            if input_file.AdrInRange(adr, debug=True):
                 start_offset += [adr]
                 instr_set += [line.split(" ")[1]]
     
@@ -1826,13 +1838,62 @@ if __name__ == "__main__":
             start_adr = int(line.split(" ")[0], 16)
             end_adr = int(line.split(" ")[1], 16)
             base_adr = start_adr
+            #add_label(base_adr, 'Jumppoints_%x' % (base_adr))
             print("base_adr: " + hex(base_adr))
             while start_adr < end_adr:
-                instr_set += ["arm"]
-                start_offset += [start_adr]
+                #print("function_adr: " + hex(function_adr))
+                if input_file.AdrInRange(start_adr):
+                    instr_set += ["arm"]
+                    start_offset += [start_adr]
                 start_adr += 4
-        
     
+    with open(filename_function_area) as f:
+        content = f.readlines()
+    for line in content:
+        if line.find(" ") != -1:
+            start_adr = int(line.split(" ")[0], 16)
+            end_adr = int(line.split(" ")[1], 16)
+            instr_type = line.split(" ")[2]
+            base_adr = start_adr
+            print("function_area: " + hex(base_adr))
+            print("base_adr: " + hex(base_adr))
+            instr_set += [instr_type]
+            start_offset += [base_adr]
+            start_adr += 2
+            while start_adr < end_adr:
+                instruction = input_file.ReadHWord(start_adr)
+                if (instruction & 0xff00) == 0xb500:        # Format 14: [0xff00, 0xb500, "push%_ {%l,lr}"],
+                    print("function: " + hex(start_adr))
+                    instr_set += [instr_type]
+                    start_offset += [start_adr]
+                start_adr += 2
+    
+    with open(filename_function_area_arm) as f:
+        content = f.readlines()
+    for line in content:
+        if line.find(" ") != -1:
+            start_adr = int(line.split(" ")[0], 16)
+            end_adr = int(line.split(" ")[1], 16)
+            instr_type = line.split(" ")[2]
+            base_adr = start_adr
+            print("armfunction_area: " + hex(base_adr))
+            print("base_adr: " + hex(base_adr))
+            instr_set += [instr_type]
+            start_offset += [base_adr]
+            start_adr += 4
+            while start_adr < end_adr:
+                instruction = input_file.ReadWord(start_adr)
+                #	stmfd   sp!, {r3-r11,lr}
+                if (instruction & (0x0e100000 | (1<<24) | (1<<23) | (0xf<<16) | (1<<14)) == (0x08000000 | (1<<24) | (13<<16) | (1<<14))):        # [0x0e100000, 0x08000000, "stm%c%m%_ %r4%l"],
+                #if (instruction & (0x0e100000)) == (0x08000000):        # [0x0e100000, 0x08000000, "stm%c%m%_ %r4%l"],
+                    print("armfunction: " + hex(start_adr))            # stmfd   sp!, {r3-r5,lr}
+                    instr_set += [instr_type]
+                    start_offset += [start_adr]
+                start_adr += 4
+    
+
+# stmfd   sp!, {r3-r5,lr}
+# [0x0e100000, 0x08000000, "stm%c%m%_ %r4%l"],
 
     #dic = {}
     #dic[12] = "test"

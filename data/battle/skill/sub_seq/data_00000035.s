@@ -1,0 +1,12 @@
+.include "source/macros_asm_.s"
+
+
+Script_1: @ 0
+	Cmd_3c 0x4c
+	Cmd_40 0x1
+	Cmd_34 0xa, 0x1, 0x35, 0x200
+	Cmd_32 Cmd32_Store, 0x15, 0x0
+	end
+@ 38
+
+@ end_0x38

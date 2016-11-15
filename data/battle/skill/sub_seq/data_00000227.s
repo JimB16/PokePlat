@@ -1,0 +1,27 @@
+.include "source/macros_asm_.s"
+
+
+Script_1: @ 0
+	Cmd_13 0x353, 0x1b, 0x1
+	Cmd_e
+	Cmd_1e 0x1e
+	Cmd_7 0x3, 0x3
+	Cmd_e
+	Cmd_45 0x4, 0x1b
+	Cmd_e
+	Cmd_45 0x4, 0x1c
+	Cmd_e
+	JumpIf Eq, 0x2b, 0x0, Script_branch_7c
+	Cmd_13 0x354, 0x2, 0x2
+	Jump Script_branch_8c
+@ 7c
+
+Script_branch_7c: @ 7c
+	Cmd_13 0x355, 0x2, 0x2
+Script_branch_8c: @ 8c
+	Cmd_e
+	Cmd_1e 0x1e
+	end
+@ 9c
+
+@ end_0x9c

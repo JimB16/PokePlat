@@ -2,21 +2,22 @@
 
 
 Script_1: @ 0
-	Cmd_20 Cmd32_TstNe, 0x7, 0x40, Script_branch_94
+	JumpIf TstNe, Var_Weather, 0x40, Script_branch_94
 	Cmd_15 0x32a, 0x0
-	Cmd_32 Cmd32_Bic, 0x7, 0x80ff
-	Cmd_32 Cmd32_Orr, 0x7, 0x40
-	Cmd_32 Cmd32_Store, 0x26, 0x5
-	Cmd_32 Cmd32_Store, 0x3, 0x2000005d
-	Cmd_a6 0x1, 0x1, 0x6e, 0x7
+	Cmd_32 Cmd32_Bic, Var_Weather, 0x80ff
+	Cmd_32 Cmd32_Orr, Var_Weather, 0x40
+	Cmd_32 Cmd32_Store, Var_WeatherCounter, 0x5
+	Cmd_32 Cmd32_Store, Var_3, 0x2000005d
+	Cmd_a6 0x1, 0x1, 0x6e, Script_branch_90
 	Cmd_a8 0x1, 0x9
 	Cmd_39 0x8, 0x26, 0x9
-	Cmd_de
+Script_branch_90: @ 90
+	end
 @ 94
 
 Script_branch_94: @ 94
 	Cmd_32 Cmd32_Orr, 0xa, 0x40
-	Cmd_de
+	end
 @ a8
 
 @ end_0xa8

@@ -4,7 +4,7 @@
 Script_1: @ 0
 	Cmd_26
 	Cmd_f
-	Cmd_de
+	end
 @ c
 
 @ end_0xc

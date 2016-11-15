@@ -332,7 +332,6 @@ class PointerLabelParam(MultiByteParam):
         MultiByteParam.__init__(self, fin, *args, **kwargs)
 
     def parse(self, fin):
-        #fin.seek(self.address+2)
         self.parsed_address = fin.readUInt32() * 4
         self.parsed_address += fin.tell()
         self.parsed_address &= 0xffffffff
@@ -376,17 +375,6 @@ class PointerLabelParam(MultiByteParam):
         label = get_label_for(caddress)
         pointer_part = label # use the label, if it is found
         #print("label " + str(pointer_part) + " " + str(label))
-
-        # check that the label actually points to the right place
-        #result = script_parse_table[caddress]
-        #print("label " + hex(caddress) + " " + str(result))
-        #if result != None and hasattr(result, "label"):
-        #    if result.label.name != label:
-        #        label = None
-        #    elif result.address != caddress:
-        #        label = None
-        #elif result != None:
-        #    label = None
 
         # setup output bytes if the label was not found
         if not label:
@@ -836,15 +824,133 @@ class Function_224abec_Param():
 		#fin.seek(self.address)
 		self.byte = fin.readUInt32()
 		self.byte2 = fin.readUInt32()
+		self.byte3 = 0
+		if (self.byte2 >= 1) and (self.byte2 < 9):
+			self.byte3 = fin.readUInt32()
+			self.size += 4
+		elif (self.byte2 >= 9) and (self.byte2 < 0x1f):
+			self.byte3 = fin.readUInt32()
+			self.size += 8
+		elif (self.byte2 >= 0x1f) and (self.byte2 < 0x34):
+			self.byte3 = fin.readUInt32()
+			self.size += 12
+		elif (self.byte2 >= 0x34) and (self.byte2 < 0x3c):
+			self.byte3 = fin.readUInt32()
+			self.size += 16
+		elif (self.byte2 == 0x3c):
+			self.byte3 = fin.readUInt32()
+			self.size += 24
+		print("size: " + str(self.size))
 
     def get_dependencies(self, recompute=False, global_dependencies=set()):
         return []
 
     def to_asm(self):
         if not self.should_be_decimal:
-            return hex(self.byte) + ", " + hex(self.byte2)
+            if self.byte2 <= 0:
+                return hex(self.byte) + ", " + hex(self.byte2)
+            else:
+                return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
         else:
             return str(self.byte) + ", " + str(self.byte2)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+
+
+class VariableParam():
+    size = 4
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		#fin.seek(self.address)
+		self.byte = fin.readUInt32()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        if self.byte == 0x0:
+            return "Var_0"
+        elif self.byte == 0x1:
+            return "Var_1"
+        elif self.byte == 0x2:
+            return "Var_2"
+        elif self.byte == 0x3:
+            return "Var_3"
+        elif self.byte == 0x7:
+            return "Var_Weather"
+        elif self.byte == 0x19:
+            return "Var_RoundNr"
+        elif self.byte == 0x26:
+            return "Var_WeatherCounter"
+        elif not self.should_be_decimal:
+            return hex(self.byte)
+        else:
+            return str(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+
+
+class Cmd5Param():
+    size = 4
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt32()
+		if self.byte == 0xa:
+			self.byte2 = fin.readUInt32()
+			self.byte3 = fin.readUInt32()
+			self.size += 8
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        if not self.should_be_decimal:
+            if self.byte == 0xa:
+                return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
+            else:
+                return hex(self.byte)
+        else:
+            return str(self.byte)
 
     @staticmethod
     def from_asm(value):
@@ -881,19 +987,19 @@ class Cmd20Param():
 
     def to_asm(self):
         if self.byte == 0x0:
-            return "Cmd20_Eq"
+            return "Eq"
         elif self.byte == 0x1:
-            return "Cmd32_Ne"
+            return "Ne"
         elif self.byte == 0x2:
-            return "Cmd32_Gt"
+            return "Gt"
         elif self.byte == 0x3:
-            return "Cmd32_Le"
+            return "Le"
         elif self.byte == 0x4:
-            return "Cmd32_TstNe"
+            return "TstNe"
         elif self.byte == 0x5:
-            return "Cmd32_TstEq"
+            return "TstEq"
         elif self.byte == 0x6:
-            return "Cmd32_AndEq"
+            return "AndEq"
         elif not self.should_be_decimal:
             return hex(self.byte)
         else:
@@ -1096,19 +1202,236 @@ class StatusLevelParam():
 
 		
 music_commands = {
+    0x0: ["Cmd_0"],
+    0x1: ["Cmd_1", ["unknown", SingleWordParam]],
+    0x2: ["Cmd_2", ["unknown", SingleWordParam]],
+    0x3: ["Cmd_3", ["unknown", SingleWordParam]],
+    0x4: ["Cmd_4", ["unknown", SingleWordParam]],
+    0x5: ["Cmd_5", ["unknown", Cmd5Param]],
+    0x6: ["Cmd_6", ["unknown", SingleWordParam]],
+    0x7: ["Cmd_7", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x8: ["Cmd_8", ["unknown", SingleWordParam]],
+    0x9: ["Cmd_9", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xa: ["Cmd_a"],
+    0xb: ["Cmd_b", ["unknown", SingleWordParam]],
+    0xc: ["Cmd_c", ["unknown", SingleWordParam]],
+    0xd: ["Cmd_d", ["unknown", SingleWordParam]],
+    0xe: ["Cmd_e"],
     0xf: ["Cmd_f"],
+    0x10: ["Cmd_10"],
+    0x11: ["Cmd_11"],
+    0x12: ["Cmd_12", ["unknown", Function_224abec_Param]],
+    0x13: ["Cmd_13", ["unknown", Function_224abec_Param]],
+    0x14: ["Cmd_14"],
     0x15: ["Cmd_15", ["unknown", Function_224abec_Param]],
-    0x20: ["Cmd_20", ["unknown", Cmd20Param], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x16: ["Cmd_16", ["unknown", Function_224abec_Param]],
+    0x17: ["Cmd_17", ["unknown", SingleWordParam]],
+    0x18: ["Cmd_18", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x19: ["Cmd_19", ["unknown", SingleWordParam]],
+    0x1a: ["Cmd_1a", ["unknown", SingleWordParam]],
+    0x1b: ["Cmd_1b", ["unknown", SingleWordParam]],
+    0x1c: ["Cmd_1c", ["unknown", SingleWordParam]],
+    0x1d: ["Cmd_1d"],
+    0x1e: ["Cmd_1e", ["unknown", SingleWordParam]],
+    0x1f: ["Cmd_1f", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x20: ["JumpIf", ["unknown", Cmd20Param], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x21: ["JumpIfPkmnBattleData", ["unknown", Cmd20Param], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x22: ["Cmd_22"],
+    0x23: ["Cmd_23_LoadSubSeq"],
+    0x24: ["Cmd_24"],
+    0x25: ["Cmd_25", ["unknown", SingleWordParam]],
     0x26: ["Cmd_26"],
-    0x32: ["Cmd_32", ["unknown", Cmd32Param], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x27: ["Cmd_27", ["unknown", PointerLabelParam]],
+    0x28: ["Cmd_28"],
+    0x29: ["Cmd_29"],
+    0x2a: ["Cmd_2a_dummy", ["unknown", SingleWordParam]],
+    0x2b: ["Cmd_2b"],
+    0x2c: ["Cmd_2c"],
+    0x2d: ["Cmd_2d", ["unknown", SingleWordParam]],
+    0x2e: ["Cmd_2e", ["unknown", PointerLabelParam]],
+    0x2f: ["Cmd_2f", ["unknown", SingleWordParam]],
+    0x30: ["Cmd_30_WaitFor"],
+    0x31: ["Cmd_31", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x32: ["Cmd_32", ["unknown", Cmd32Param], ["unknown", VariableParam], ["unknown", SingleWordParam]],
+    0x33: ["Cmd_33", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
+    0x34: ["Cmd_34", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x36: ["Cmd_36", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x37: ["Cmd_37", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x38: ["Cmd_38", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
     0x39: ["Cmd_39", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xa6: ["Cmd_a6", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x3a: ["Cmd_3a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x3b: ["Jump", ["unknown", PointerLabelParam]],
+    0x3c: ["Cmd_3c", ["unknown", SingleWordParam]],
+    0x3d: ["Cmd_3d", ["unknown", VariableParam]],
+    0x3e: ["Cmd_3e"],
+    0x3f: ["Cmd_3f"],
+    0x40: ["Cmd_40", ["unknown", SingleWordParam]],
+    0x41: ["Cmd_41", ["unknown", SingleWordParam]],
+    0x42: ["Cmd_42", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x43: ["Cmd_43", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x44: ["Cmd_44"],
+    0x45: ["Cmd_45", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x46: ["Cmd_46", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x47: ["Cmd_47", ["unknown", SingleWordParam], ["unknown", VariableParam]],
+    0x48: ["Cmd_48", ["unknown", SingleWordParam]],
+    0x49: ["Cmd_49", ["unknown", SingleWordParam]],
+    0x4a: ["Cmd_4a", ["unknown", SingleWordParam]],
+    0x4b: ["Cmd_4b", ["unknown", SingleWordParam]],
+    0x4c: ["Cmd_4c", ["unknown", SingleWordParam]],
+    0x4d: ["Cmd_4d", ["unknown", PointerLabelParam]],
+    0x4e: ["Cmd_4e", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x4f: ["Cmd_4f", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x50: ["Cmd_50"],
+    0x51: ["Cmd_51", ["unknown", PointerLabelParam]],
+    0x52: ["Cmd_52", ["unknown", PointerLabelParam]],
+    0x53: ["Cmd_53", ["unknown", PointerLabelParam]],
+    0x54: ["Cmd_54"],
+    0x55: ["Cmd_55", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x56: ["Cmd_56", ["unknown", VariableParam], ["unknown", SingleWordParam]],
+    0x57: ["Cmd_57", ["unknown", PointerLabelParam]],
+    0x58: ["Cmd_58"],
+    0x59: ["Cmd_59", ["unknown", PointerLabelParam]],
+    0x5a: ["Cmd_5a"],
+    0x5b: ["Cmd_5b"],
+    0x5c: ["Cmd_5c", ["unknown", PointerLabelParam]],
+    0x5d: ["Cmd_5d", ["unknown", PointerLabelParam]],
+    0x5e: ["Cmd_5e", ["unknown", PointerLabelParam]],
+    0x5f: ["Cmd_5f", ["unknown", SingleWordParam]],
+    0x60: ["Cmd_60"],
+    0x61: ["Cmd_61", ["unknown", PointerLabelParam]],
+    0x62: ["Cmd_62"],
+    0x63: ["Cmd_63", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]], # both should be pointers
+    0x64: ["Cmd_64", ["unknown", PointerLabelParam]],
+    0x65: ["Cmd_65", ["unknown", PointerLabelParam]],
+    0x66: ["Cmd_66", ["unknown", PointerLabelParam]],
+    0x67: ["Cmd_67"],
+    0x68: ["Cmd_68", ["unknown", PointerLabelParam]],
+    0x69: ["Cmd_69", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x6a: ["Cmd_6a", ["unknown", PointerLabelParam]],
+    0x6b: ["Cmd_6b", ["unknown", VariableParam]],
+    0x6c: ["Cmd_6c", ["unknown", VariableParam], ["unknown", PointerLabelParam]],
+    0x6d: ["Cmd_6d", ["unknown", SingleWordParam]],
+    0x6e: ["Cmd_6e"],
+    0x6f: ["Cmd_6f"],
+    0x70: ["Cmd_70", ["unknown", PointerLabelParam]],
+    0x71: ["Cmd_71", ["unknown", PointerLabelParam]],
+    0x72: ["Cmd_72", ["unknown", PointerLabelParam]],
+    0x73: ["Cmd_73"],
+    0x74: ["Cmd_74", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x75: ["Cmd_75"],
+    0x76: ["Cmd_76"],
+    0x77: ["Cmd_77"],
+    0x78: ["Cmd_78"],
+    0x79: ["Cmd_79", ["unknown", PointerLabelParam]],
+    0x7a: ["Cmd_7a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x7b: ["Cmd_7b", ["unknown", PointerLabelParam]],
+    0x7c: ["Cmd_7c"],
+    0x7d: ["Cmd_7d"],
+    0x7e: ["Cmd_7e", ["unknown", PointerLabelParam]],
+    0x7f: ["Cmd_7f", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
+    0x80: ["Cmd_80", ["unknown", PointerLabelParam]],
+    0x81: ["Cmd_81", ["unknown", PointerLabelParam]],
+    0x82: ["Cmd_82", ["unknown", PointerLabelParam]],
+    0x83: ["Cmd_83"],
+    0x84: ["Cmd_84"],
+    0x85: ["Cmd_85", ["unknown", PointerLabelParam]],
+    0x86: ["Cmd_86", ["unknown", PointerLabelParam]],
+    0x87: ["Cmd_87", ["unknown", PointerLabelParam]],
+    0x88: ["Cmd_88"],
+    0x89: ["Cmd_89", ["unknown", PointerLabelParam]],
+    0x8a: ["Cmd_8a", ["unknown", PointerLabelParam]],
+    0x8b: ["Cmd_8b", ["unknown", PointerLabelParam]],
+    0x8c: ["Cmd_8c"],
+    0x8d: ["Cmd_8d"],
+    0x8e: ["Cmd_8e", ["unknown", PointerLabelParam]],
+    0x8f: ["Cmd_8f"],
+    0x90: ["Cmd_90", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x91: ["Cmd_91", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x92: ["Cmd_92"],
+    0x93: ["Cmd_93", ["unknown", PointerLabelParam]],
+    0x94: ["Cmd_94"],
+    0x95: ["Cmd_95"],
+    0x96: ["Cmd_96", ["unknown", SingleWordParam]],
+    0x97: ["Cmd_97", ["unknown", PointerLabelParam]],
+    0x98: ["Cmd_98", ["unknown", PointerLabelParam]],
+    0x99: ["Cmd_99"],
+    0x9a: ["Cmd_9a", ["unknown", PointerLabelParam]],
+    0x9b: ["Cmd_9b", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x9c: ["Cmd_9c", ["unknown", PointerLabelParam]],
+    0x9d: ["Cmd_9d", ["unknown", PointerLabelParam]],
+    0x9e: ["Cmd_9e", ["unknown", PointerLabelParam]],
+    0x9f: ["Cmd_9f", ["unknown", PointerLabelParam]],
+    0xa0: ["Cmd_a0", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xa1: ["Cmd_a1", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xa2: ["Cmd_a2", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xa3: ["Cmd_a3"],
+    0xa4: ["Cmd_a4"],
+    0xa5: ["Cmd_a5", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xa6: ["Cmd_a6", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xa7: ["Cmd_a7", ["unknown", SingleWordParam], ["unknown", VariableParam]],
     0xa8: ["Cmd_a8", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xde: ["Cmd_de"],
+    0xa9: ["Cmd_a9", ["unknown", PointerLabelParam]],
+    0xaa: ["Cmd_aa"],
+    0xab: ["Cmd_ab"],
+    0xac: ["Cmd_ac", ["unknown", PointerLabelParam]],
+    0xad: ["Cmd_ad", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
+    0xae: ["Cmd_ae", ["unknown", PointerLabelParam]],
+    0xaf: ["Cmd_af", ["unknown", SingleWordParam]],
+    0xb0: ["Cmd_b0", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
+    0xb1: ["Cmd_b1"],
+    0xb2: ["Cmd_b2", ["unknown", PointerLabelParam]],
+    0xb3: ["Cmd_b3"],
+    0xb4: ["Cmd_b4", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xb5: ["Cmd_b5", ["unknown", PointerLabelParam]],
+    0xb6: ["Cmd_b6", ["unknown", PointerLabelParam]],
+    0xb7: ["LoadMoveData", ["unknown", SingleWordParam]],
+    0xb8: ["Cmd_b8", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xb9: ["Cmd_b9", ["unknown", SingleWordParam]],
+    0xba: ["Cmd_ba"],
+    0xbb: ["Cmd_bb", ["unknown", SingleWordParam]],
+    0xbc: ["Cmd_bc", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xbd: ["Cmd_bd", ["unknown", SingleWordParam]],
+    0xbe: ["Cmd_be", ["unknown", SingleWordParam]],
+    0xbf: ["Cmd_bf", ["unknown", SingleWordParam]],
+    0xc0: ["Cmd_c0", ["unknown", SingleWordParam]],
+    0xc1: ["Cmd_c1"],
+    0xc2: ["Cmd_c2"],
+    0xc3: ["Cmd_c3", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xc4: ["Cmd_c4", ["unknown", SingleWordParam]],
+    0xc5: ["Cmd_c5", ["unknown", PointerLabelParam]],
+    0xc6: ["Cmd_c6", ["unknown", SingleWordParam]],
+    0xc7: ["Cmd_c7", ["unknown", SingleWordParam]],
+    0xc8: ["Cmd_c8", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xc9: ["Cmd_c9", ["unknown", PointerLabelParam]],
+    0xca: ["Cmd_ca", ["unknown", SingleWordParam]],
+    0xcb: ["Cmd_cb", ["unknown", SingleWordParam]],
+    0xcc: ["Cmd_cc", ["unknown", PointerLabelParam]],
+    0xcd: ["Cmd_cd"],
+    0xce: ["Cmd_ce"],
+    0xcf: ["Cmd_cf"],
+    0xd0: ["Cmd_d0", ["unknown", SingleWordParam]],
+    0xd1: ["Cmd_d1", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xd2: ["Cmd_d2", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0xd3: ["Cmd_d3", ["unknown", SingleWordParam]],
+    0xd4: ["Cmd_d4", ["unknown", SingleWordParam]],
+    0xd5: ["Cmd_d5", ["unknown", PointerLabelParam]],
+    0xd6: ["Cmd_d6", ["unknown", SingleWordParam]],
+    0xd7: ["Cmd_d7", ["unknown", SingleWordParam]],
+    0xd8: ["Cmd_d8", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xda: ["Cmd_da", ["unknown", SingleWordParam]],
+    0xdc: ["Cmd_dc", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam]],
+    0xdd: ["Cmd_dd", ["unknown", SingleWordParam]],
+    0xde: ["end"],
 }
 
 music_command_enders = [
-	"Cmd_de",
+#	"Cmd_5",
+	"Cmd_23_LoadSubSeq",
+	"Cmd_24", # jump to "be_seq"
+	"Cmd_25", # jump to "sub_seq" or "waza_seq"
+	"Cmd_63",
+	"Jump",
+	"end",
 ]
 
 def create_music_command_classes(debug=False):
@@ -1177,6 +1500,7 @@ class Channel:
 		while not done:
 			fin.seek(self.address)
 			cmd = fin.readUInt32()
+			adress_offset = 0
 
 			class_ = self.get_sound_class(cmd)(fin, address=self.address, channel=self.channel)
 
@@ -1210,9 +1534,15 @@ class Channel:
 						'$%x' % (label_address),
 						label
 					)
+				elif (param['class'] == Function_224abec_Param):
+					print("Function_224abec_Param.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 8
+				elif (param['class'] == Cmd5Param):
+					print("Cmd5Param.size: " + hex(class_.params[key].size))
+					adress_offset = class_.params[key].size - 4
 
-			self.output += [(self.address, '\t' + asm, self.address + class_.size)]
-			self.address += class_.size
+			self.output += [(self.address, '\t' + asm, self.address + class_.size + adress_offset)]
+			self.address += class_.size + adress_offset
 
 			done = class_.end
 			# infinite loops are enders

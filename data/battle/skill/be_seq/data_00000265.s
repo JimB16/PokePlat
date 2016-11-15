@@ -1,0 +1,36 @@
+.include "source/macros_asm_.s"
+
+
+Script_1: @ 0
+	Cmd_a1 0x0, 0x2, 0xc, Script_branch_c4
+	JumpIfPkmnBattleData Eq, 0x1, 0x1d, 0x2, Script_branch_84
+	JumpIfPkmnBattleData Eq, 0x2, 0x1d, 0x2, Script_branch_84
+	Cmd_3a 0x11, 0x2, 0x1d, 0x9
+	Cmd_4f 0x0, Var_1, 0x1d, 0x9, Script_branch_84
+	Cmd_32 Cmd32_Store, Var_2, 0x80000031
+	end
+@ 84
+
+Script_branch_84: @ 84
+	Cmd_11
+	Cmd_e
+	Cmd_1e 0xf
+	Cmd_12 0x4d3, 0x2, 0x2
+	Cmd_e
+	Cmd_1e 0x1e
+	Cmd_32 Cmd32_Orr, 0xa, 0x80000000
+	end
+@ c4
+
+Script_branch_c4: @ c4
+	Cmd_11
+	Cmd_e
+	Cmd_1e 0xf
+	Cmd_12 0x2ca, 0x25, 0x2
+	Cmd_e
+	Cmd_1e 0x1e
+	Cmd_32 Cmd32_Orr, 0xa, 0x80000000
+	end
+@ 10c
+
+@ end_0x10c

@@ -2,10 +2,10 @@
 
 
 Script_1: @ 0
-	Cmd_32 Cmd32_Store, 0x3, 0x80000017
+	Cmd_32 Cmd32_Store, Var_3, 0x80000017
 	Cmd_26
 	Cmd_f
-	Cmd_de
+	end
 @ 1c
 
 @ end_0x1c

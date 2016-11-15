@@ -1903,7 +1903,7 @@ x = address where the jump goes to
 .hword  0x1f6, \a, \b
 .endm
 
-.macro	CheckPokemonPoisoned a, b
+.macro	CheckIsPokemonPoisoned a, b
 .hword  0x1f7, \a, \b
 .endm
 

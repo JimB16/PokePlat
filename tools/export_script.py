@@ -698,6 +698,49 @@ class SingleByteParam():
     @staticmethod
     def from_asm(value):
         return value
+
+
+class SingleByteConditionParam():
+    """or SingleByte(CommandParam)"""
+    size = 1
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt8()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        if self.byte == 0:
+            return "LESSER"
+        elif self.byte == 1:
+            return "EQUAL"
+        elif self.byte == 2:
+            return "GREATER"
+        else:
+            return hex(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
 		
 		
 class SingleHWordParam():
@@ -1076,8 +1119,8 @@ music_commands = {
     0x19: ["Cmd_19", ["unknown", SingleByteParam], ["unknown", SingleWordParam]],
     0x1a: ["Call", ["address", CallPointerLabelParam]],
     0x1b: ["Return"],
-    0x1c: ["CompareLastResultJump", ["unknown", SingleByteParam], ["address", PointerLabelParam]],
-    0x1d: ["CompareLastResultCall", ["unknown", SingleByteParam], ["address", PointerLabelParam]],
+    0x1c: ["CompareLastResultJump", ["unknown", SingleByteConditionParam], ["address", PointerLabelParam]],
+    0x1d: ["CompareLastResultCall", ["unknown", SingleByteConditionParam], ["address", PointerLabelParam]],
     0x1e: ["SetFlag", ["unknown", SingleHWordParam]],
     0x1f: ["ClearFlag", ["unknown", SingleHWordParam]],
     0x20: ["CheckFlag", ["unknown", SingleHWordParam]],
@@ -1086,8 +1129,8 @@ music_commands = {
     0x23: ["SetTrainerId", ["unknown", SingleHWordParam]],
     0x24: ["Cmd_24", ["unknown", SingleHWordParam]],
     0x25: ["ClearTrainerId", ["unknown", SingleHWordParam]],
-    0x26: ["SetValue", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x27: ["CopyValue", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x26: ["ScriptCmd_AddValue", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]], # SetValue
+    0x27: ["ScriptCmd_SubValue", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]], # CopyValue
     0x28: ["SetVar", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x29: ["CopyVar", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a: ["Cmd_2a", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1476,7 +1519,7 @@ music_commands = {
     0x1a9: ["DeactEggDayCMan"],
     0x1aa: ["SetVarPokeAndMoneyDCare", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1ab: ["CheckMoneyDCare", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1ac: ["EggAnm"],
+    0x1ac: ["EggAnimation"],
     0x1ad: ["Cmd_1a5", ["unknown", SingleHWordParam]],
     0x1ae: ["SetVarPokeAndLevelDCare", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1af: ["SetVarPokeChosenDCare", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1497,10 +1540,10 @@ music_commands = {
     0x1be: ["StorePokeDCareLove", ["unknown", SingleHWordParam]],
     0x1bf: ["CheckStatusSolaceonEvent", ["unknown", SingleHWordParam]],
     0x1c0: ["CheckPokeParty", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1c1: ["CopyPokeHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1c2: ["SetvarPokeHeight", ["unknown", SingleHWordParam]],
-    0x1c3: ["ComparePokeHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1c4: ["CheckPokeHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1c1: ["CopyPokemonHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1c2: ["SetVariablePokemonHeight", ["unknown", SingleHWordParam]],
+    0x1c3: ["ComparePokemonHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1c4: ["CheckPokemonHeight", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1c5: ["ShowMoveInfo"],
     0x1c6: ["StorePokeDelete", ["unknown", SingleHWordParam]],
     0x1c7: ["StoreMoveDelete", ["unknown", SingleHWordParam]],
@@ -1519,9 +1562,9 @@ music_commands = {
     0x1d4: ["Cmd_1d4", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1d5: ["GiveAccessories2", ["unknown", SingleHWordParam]],
     0x1d6: ["CheckAccessories2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1d7: ["Berrypoffin", ["unknown", SingleHWordParam]],
+    0x1d7: ["BerryPoffin", ["unknown", SingleHWordParam]],
     0x1d8: ["SetVarBTowerChs", ["unknown", SingleHWordParam]],
-    0x1d9: ["BattleRmResult", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1d9: ["BattleRoomResult", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1da: ["ActivateBTower"],
     0x1db: ["StoreBTowerData", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1dc: ["CloseBTower"],
@@ -1536,10 +1579,10 @@ music_commands = {
     0x1e5: ["RandomEvent", ["unknown", SingleHWordParam]],
     0x1e6: ["Cmd_1e6", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1e7: ["Cmd_1e7", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleByteParam]],
-    0x1e8: ["CheckSinPokedex", ["unknown", SingleHWordParam]],
-    0x1e9: ["CheckNatPokedex", ["unknown", SingleHWordParam]],
-    0x1ea: ["ShowSinSheet"],
-    0x1eb: ["ShowNatSheet"],
+    0x1e8: ["CheckSinnohPokedex", ["unknown", SingleHWordParam]],
+    0x1e9: ["CheckNationalPokedex", ["unknown", SingleHWordParam]],
+    0x1ea: ["ShowSinnohSheet"],
+    0x1eb: ["ShowNationalSheet"],
     0x1ec: ["Cmd_1ec"],
     0x1ed: ["StoreTrophyPokemon", ["unknown", SingleHWordParam]],
     0x1ee: ["Cmd_1ee", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1550,7 +1593,7 @@ music_commands = {
     0x1f3: ["Cmd_1f3"],
     0x1f4: ["CheckItemChosen", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f5: ["CompareItemPokeFossil", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1f6: ["CheckPokeLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1f6: ["CheckPokemonLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f7: ["CheckPokemonPoisoned", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f8: ["PreWfc"],
     0x1f9: ["StoreFurniture", ["unknown", SingleHWordParam]],
@@ -1566,10 +1609,10 @@ music_commands = {
     0x203: ["BattlePokeColosseum", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x204: ["WarpLastElevator"],
     0x205: ["OpenGeoNet"],
-    0x206: ["Gmbynocule"],
+    0x206: ["GreatMarshBynocule"],
     0x207: ["StorePokeColosseumLost", ["unknown", SingleHWordParam]],
-    0x208: ["Pokepic", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x209: ["Hidepic"],
+    0x208: ["PokemonPicture", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x209: ["HidePicture"],
     0x20a: ["Cmd_20a", ["unknown", SingleHWordParam]],
     0x20b: ["Cmd_20b"],
     0x20c: ["Cmd_20c"],
@@ -1596,12 +1639,12 @@ music_commands = {
     0x221: ["StorePokeRemember", ["unknown", SingleHWordParam]],
     0x222: ["Cmd_222"],
     0x223: ["StoreRememberMove", ["unknown", SingleHWordParam]],
-    0x224: ["CopyMoveRemember", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x225: ["StoreMoveRemember", ["unknown", SingleHWordParam]],
+    0x224: ["TeachMove", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x225: ["CheckTeachMove", ["unknown", SingleHWordParam]],
     0x226: ["SetTradeId", ["unknown", SingleByteParam]],
     0x227: ["Cmd_227", ["unknown", SingleHWordParam]],
-    0x228: ["CheckPokeTrade", ["unknown", SingleHWordParam]],
-    0x229: ["TradeChsPoke", ["unknown", SingleHWordParam]],
+    0x228: ["CheckPokemonTrade", ["unknown", SingleHWordParam]],
+    0x229: ["TradeChosenPokemon", ["unknown", SingleHWordParam]],
     0x22a: ["StopTrade"],
     0x22b: ["Cmd_22b"],
     0x22c: ["CloseOakAssistantEvent"],
@@ -1617,11 +1660,11 @@ music_commands = {
     0x236: ["Cmd_236", ["unknown", SingleHWordParam]],
     0x237: ["CheckPhraseBoxInput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x238: ["CheckStatusPhraseBox", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x239: ["Deciderules", ["unknown", SingleHWordParam]],
+    0x239: ["DecideRules", ["unknown", SingleHWordParam]],
     0x23a: ["CheckFootStep", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x23b: ["HealpcAnm", ["unknown", SingleHWordParam]],
+    0x23b: ["HealPokemonAnimation", ["unknown", SingleHWordParam]],
     0x23c: ["StoreElevatorDirection", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x23d: ["ShipAnm", ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x23d: ["ShipAnimation", ["unknown", SingleByteParam], ["unknown", SingleByteParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x23e: ["Cmd_23e", ["unknown", Cmd23eHWordParam]],
     0x23f: ["Cmd_23f"],
     0x240: ["Cmd_240"],
@@ -1633,13 +1676,13 @@ music_commands = {
     0x246: ["StoreMtCoronet", ["unknown", SingleHWordParam]],
     0x247: ["CheckFirstPokeParty", ["unknown", SingleHWordParam]],
     0x248: ["CheckPokeType", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x249: ["CheckPhraseBoxImput2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x249: ["CheckPhraseBoxInput2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x24a: ["StoreUndTime", ["unknown", SingleHWordParam]],
-    0x24b: ["PrpPcAnm", ["unknown", SingleByteParam]],
-    0x24c: ["PcOpnAnm", ["unknown", SingleByteParam]],
-    0x24d: ["PcClsAnm", ["unknown", SingleByteParam]],
-    0x24e: ["CheckLotoNumber", ["unknown", SingleHWordParam]],
-    0x24f: ["CompareLotoNumber", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x24b: ["PreparePcAnimation", ["unknown", SingleByteParam]],
+    0x24c: ["OpenPcAnimation", ["unknown", SingleByteParam]],
+    0x24d: ["ClosePcAnimation", ["unknown", SingleByteParam]],
+    0x24e: ["CheckLottoNumber", ["unknown", SingleHWordParam]],
+    0x24f: ["CompareLottoNumber", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x250: ["Cmd_250"],
     0x251: ["SetvarIdPokeBoxes", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x252: ["CheckBoxesNumber", ["unknown", SingleHWordParam]],
@@ -1649,7 +1692,7 @@ music_commands = {
     0x256: ["CheckCatchingShowRecords", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x257: ["SprtSave"],
     0x258: ["RetSprtSave"],
-    0x259: ["ElevLgAnm"],
+    0x259: ["ElevLgAnimation"],
     0x25a: ["CheckElevLgAnm", ["unknown", SingleHWordParam]],
     0x25b: ["ElevIrAnm"],
     0x25c: ["StopElevAnm"],
@@ -1669,11 +1712,11 @@ music_commands = {
     0x26a: ["CresseliaAnm", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x26b: ["CheckRegi", ["unknown", SingleHWordParam]],
     0x26c: ["CheckMassage", ["unknown", SingleHWordParam]],
-    0x26d: ["Unownmsgbox", ["unknown", SingleHWordParam]],
+    0x26d: ["UnownMessageBox", ["unknown", SingleHWordParam]],
     0x26e: ["CheckPCatchingShow", ["unknown", SingleHWordParam]],
     0x26f: ["Cmd_26f"],
     0x270: ["ShayminAnm", ["unknown", SingleHWordParam], ["unknown", SingleByteParam]],
-    0x271: ["Thanknameins", ["unknown", SingleHWordParam]],
+    0x271: ["ThankNameInsert", ["unknown", SingleHWordParam]],
     0x272: ["SetvarShaymin", ["unknown", SingleByteParam]],
     0x273: ["SetvarAccessories2", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x274: ["Cmd_274", ["unknown", SingleHWordParam], ["unknown", SingleWordParam]],
@@ -1682,7 +1725,7 @@ music_commands = {
     0x277: ["SrtRandomNum", ["unknown", SingleHWordParam]],
     0x278: ["CheckPokeLevel2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x279: ["Cmd_279", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x27a: ["LgCstlView"],
+    0x27a: ["LeagueCastleView"],
     0x27b: ["Cmd_27b"],
     0x27c: ["SetvarAmityPokemon", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x27d: ["Cmd_27d", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1700,7 +1743,7 @@ music_commands = {
     0x289: ["CheckPoffinItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x28a: ["CheckPoffinCaseStatus", ["unknown", SingleHWordParam]],
     0x28b: ["UnkFunct2", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
-    0x28c: ["Pokepartypic", ["unknown", SingleHWordParam]],
+    0x28c: ["PokemonPartyPicture", ["unknown", SingleHWordParam]],
     0x28d: ["ActLearning"],
     0x28e: ["SetSoundLearning", ["unknown", SingleHWordParam]],
     0x28f: ["CheckFirstTimeChampion", ["unknown", SingleHWordParam]],
@@ -1708,9 +1751,9 @@ music_commands = {
     0x291: ["StorePokeDCare", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x292: ["Cmd_292", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x293: ["CheckMasterRank", ["unknown", SingleHWordParam]],
-    0x294: ["ShowBPntsbox", ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
-    0x295: ["HideBPointsbox"],
-    0x296: ["UpdateBPointsbox"],
+    0x294: ["ShowBattlePointsBox", ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
+    0x295: ["HideBattlePointsBox"],
+    0x296: ["UpdateBattlePointsBox"],
     0x297: ["Cmd_297", ["unknown", SingleHWordParam]],
     0x298: ["Cmd_298", ["unknown", SingleHWordParam]],
     0x299: ["TakeBPoints", ["unknown", SingleHWordParam]],
@@ -1718,21 +1761,21 @@ music_commands = {
     0x29b: ["Cmd_29b", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x29c: ["Cmd_29c", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x29d: ["ChoiceMulti", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x29e: ["HmEffect", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x29f: ["CmrBmpEffect", ["unknown", SingleHWordParam]],
+    0x29e: ["HMEffect", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x29f: ["CameraBumpEffect", ["unknown", SingleHWordParam]],
     0x2a0: ["DoubleBattle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x2a1: ["Applymovement2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x2a1: ["ApplyMovement2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a2: ["Cmd_2a2", ["unknown", SingleHWordParam]],
     0x2a3: ["StoreActHeroFriendCode", ["unknown", SingleHWordParam]],
     0x2a4: ["StoreActOtherFriendCode", ["unknown", SingleHWordParam]],
-    0x2a5: ["TradeChosenPoke"],
+    0x2a5: ["ChooseTradePokemon"],
     0x2a6: ["ChsPrizeCasino", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a7: ["CheckPlate", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2a8: ["TakeCoinsCasino", ["unknown", SingleHWordParam]],
     0x2a9: ["CheckCoinsCasino2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x2aa: ["ComparePhraseBoxImput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x2aa: ["ComparePhraseBoxInput", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2ab: ["StoreSealNum", ["unknown", SingleHWordParam]],
-    0x2ac: ["ActMisteryGift"],
+    0x2ac: ["ActivateMysteryGift"],
     0x2ad: ["CheckFollowBattle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2ae: ["Cmd_2ae", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2af: ["Cmd_2af", ["unknown", SingleHWordParam]],
@@ -1751,10 +1794,10 @@ music_commands = {
     0x2bc: ["CheckWildBattle2", ["unknown", SingleHWordParam]],
     0x2bd: ["WildBattle2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2be: ["StoreTrainerCardStar", ["unknown", SingleHWordParam]],
-    0x2bf: ["Bikeride"],
+    0x2bf: ["BikeRide"],
     0x2c0: ["Cmd_2c0", ["unknown", SingleHWordParam]],
-    0x2c1: ["ShowSavebox"],
-    0x2c2: ["HideSavebox"],
+    0x2c1: ["ShowSaveBox"],
+    0x2c2: ["HideSaveBox"],
     0x2c3: ["Cmd_2c3", ["unknown", SingleByteParam]],
     0x2c4: ["ShowBTowerSome", ["unknown", SingleByteParam]],
     0x2c5: ["DeleteSavesBFactory", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1762,7 +1805,7 @@ music_commands = {
     0x2c7: ["CheckVersionGame", ["unknown", SingleHWordParam]],
     0x2c8: ["ShowBArcadeRecors", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2c9: ["EternaGymAnm"],
-    0x2ca: ["FlorarClckAnm"],
+    0x2ca: ["FloralClockAnimation"],
     0x2cb: ["CheckPokeParty2", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2cc: ["CheckPokeCastle", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x2cd: ["ActTeamGalacticEvents", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
@@ -1856,7 +1899,7 @@ music_commands = {
     0x325: ["Cmd_325", ["unknown", SingleHWordParam]],
     0x326: ["Cmd_326", ["unknown", SingleHWordParam]],
     0x327: ["Cmd_327", ["unknown", SingleHWordParam]],
-    0x328: ["Cmd_328", ["unknown", SingleHWordParam]],
+    0x328: ["PortalEffect", ["unknown", SingleHWordParam]],
     0x329: ["Cmd_329", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x32a: ["Cmd_32a", ["unknown", SingleHWordParam]],
     0x32b: ["Cmd_32b", ["unknown", SingleHWordParam]],
@@ -1887,12 +1930,12 @@ music_commands = {
     0x344: ["Cmd_344", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x345: ["Cmd_345", ["unknown", SingleByteParam], ["unknown", SingleHWordParam]],
     0x346: ["Cmd_346", ["unknown", SingleByteParam]],
-    0x347: ["Cmd_347", ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
+    0x347: ["DisplayFloor", ["unknown", SingleByteParam], ["unknown", SingleByteParam]],
 }
 
 music_command_enders = [
 	"End",
-    "Jump",
+    #"Jump",
     "Return",
     #"Cmd_2f5",
 ]
@@ -2114,7 +2157,9 @@ class Channel:
 	def parse(self, fin):
 		noise = False
 		done = False
-		while not done:
+		fin.seek(0, os.SEEK_END)
+		filesize = fin.tell()
+		while (not done) and (self.address+2 <= filesize):
 			fin.seek(self.address)
 			cmd = fin.readUInt16()
 

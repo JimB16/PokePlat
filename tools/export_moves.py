@@ -67,6 +67,8 @@ if __name__ == "__main__":
     
     output_trainers += "move " + str(effect) + ", " + GetCategoryName(category) + ", " + str(power) + ", " + GetTypeName(type) + ", " + str(accuracy) + ", "  + str(pp) + ", "  + str(effectchance) + ", "  + str(flag1) + ", "  + str(priority) + ", "  + str(flag2) + ", "  + str(contesteffect) + ", " + GetContestName(contesttype)
     
+    output_trainers += "\n\n.align 2, 0\n"
+    
     #filenameout = filename.replace(".bin", "_01.script")
     if not os.path.exists(os.path.dirname(output_folder)):
         os.makedirs(os.path.dirname(output_folder))        

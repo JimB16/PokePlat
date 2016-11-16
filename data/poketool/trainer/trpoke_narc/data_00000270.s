@@ -4,3 +4,6 @@
 trainerpoke1 60, 39, SNORUNT, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0
 trainerpoke1 60, 40, SNORUNT, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0
 trainerpoke1 60, 42, GLALIE, 0, ICE_FANG, CRUNCH, HAIL, PROTECT, 0
+
+
+.align 2, 0x0

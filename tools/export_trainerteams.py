@@ -61,7 +61,7 @@ if __name__ == "__main__":
     output_folder_trainer = sys.argv[3]
     output_folder_pkmns = sys.argv[4]
     
-    format = 0 # or 1, 2
+    format = 0
     
     file_trainer.init(os.path.join(conf.path, filename_trainer), 0)
     file_pkmns.init(os.path.join(conf.path, filename_pkmns), 0)
@@ -181,6 +181,8 @@ if __name__ == "__main__":
         
             output_pkmns += "trainerpoke3 " + str(unknown1) + ", " + str(level) + ", " + str(GetPokemonName(species)) + ", " + str(species_altform) + ", " + str(GetItemName(item)) + ", " + str(GetMoveName(move1)) + ", " + str(GetMoveName(move2)) + ", " + str(GetMoveName(move3)) + ", " + str(GetMoveName(move4)) + ", " + str(unknown2) + "\n"
             i += 1
+    
+    output_pkmns += "\n" + "\n" + ".align 2, 0x0" + "\n"
     
     if not os.path.exists(os.path.dirname(output_folder_pkmns)):
         os.makedirs(os.path.dirname(output_folder_pkmns))

@@ -4,3 +4,6 @@
 trainerpoke0 0, 32, GYARADOS, 0, 0
 trainerpoke0 0, 32, GYARADOS, 0, 0
 trainerpoke0 0, 32, GYARADOS, 0, 0
+
+
+.align 2, 0x0

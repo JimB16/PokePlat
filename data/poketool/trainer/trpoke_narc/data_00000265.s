@@ -3,3 +3,6 @@
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 0, 7, STARLY, 0, 0
 trainerpoke0 0, 7, SHINX, 0, 0
+
+
+.align 2, 0x0

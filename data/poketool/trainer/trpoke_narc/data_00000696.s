@@ -4,3 +4,6 @@
 trainerpoke0 0, 50, BASTIODON, 0, 0
 trainerpoke0 0, 50, RAMPARDOS, 0, 0
 trainerpoke0 0, 53, BRONZONG, 0, 0
+
+
+.align 2, 0x0

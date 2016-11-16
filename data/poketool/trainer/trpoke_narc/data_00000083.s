@@ -2,3 +2,6 @@
 
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 0, 27, CHERUBI, 0, 0
+
+
+.align 2, 0x0

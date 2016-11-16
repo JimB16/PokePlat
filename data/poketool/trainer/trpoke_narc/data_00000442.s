@@ -4,3 +4,6 @@
 trainerpoke0 0, 28, BRONZOR, 0, 0
 trainerpoke0 0, 30, BRONZOR, 0, 0
 trainerpoke0 0, 32, BRONZOR, 0, 0
+
+
+.align 2, 0x0

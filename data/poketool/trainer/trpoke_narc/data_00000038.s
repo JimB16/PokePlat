@@ -3,3 +3,6 @@
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 20, 21, MACHOP, 0, 0
 trainerpoke0 20, 21, MEDITITE, 0, 0
+
+
+.align 2, 0x0

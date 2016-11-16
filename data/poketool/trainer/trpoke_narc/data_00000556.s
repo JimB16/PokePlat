@@ -4,3 +4,6 @@
 trainerpoke0 0, 55, STARAVIA, 0, 0
 trainerpoke0 0, 57, FEAROW, 0, 0
 trainerpoke0 0, 59, NOCTOWL, 0, 0
+
+
+.align 2, 0x0

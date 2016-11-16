@@ -4,3 +4,6 @@
 trainerpoke0 0, 36, SNORUNT, 0, 0
 trainerpoke0 0, 36, SWINUB, 0, 0
 trainerpoke0 0, 36, SNOVER, 0, 0
+
+
+.align 2, 0x0

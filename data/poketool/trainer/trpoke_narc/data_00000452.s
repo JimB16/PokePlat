@@ -4,3 +4,6 @@
 trainerpoke0 0, 35, NOSEPASS, 0, 0
 trainerpoke0 0, 33, ONIX, 0, 0
 trainerpoke0 0, 34, STEELIX, 0, 0
+
+
+.align 2, 0x0

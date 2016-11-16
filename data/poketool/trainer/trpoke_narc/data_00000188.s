@@ -4,3 +4,6 @@
 trainerpoke0 0, 41, MANTYKE, 0, 0
 trainerpoke0 0, 42, REMORAID, 0, 0
 trainerpoke0 0, 43, MANTINE, 0, 0
+
+
+.align 2, 0x0

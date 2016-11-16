@@ -3,3 +3,6 @@
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 10, 14, BURMY, 1, 0
 trainerpoke0 10, 14, BURMY, 2, 0
+
+
+.align 2, 0x0

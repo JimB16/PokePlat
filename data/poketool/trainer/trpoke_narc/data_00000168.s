@@ -4,3 +4,6 @@
 trainerpoke0 0, 30, FINNEON, 0, 0
 trainerpoke0 0, 32, FINNEON, 0, 0
 trainerpoke0 0, 34, FINNEON, 0, 0
+
+
+.align 2, 0x0

@@ -3,3 +3,6 @@
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 50, 31, HOOTHOOT, 0, 0
 trainerpoke0 50, 33, NOCTOWL, 0, 0
+
+
+.align 2, 0x0

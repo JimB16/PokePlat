@@ -4,3 +4,6 @@
 trainerpoke0 0, 3, PICHU, 0, 0
 trainerpoke0 0, 3, PICHU, 0, 0
 trainerpoke0 0, 3, PICHU, 0, 0
+
+
+.align 2, 0x0

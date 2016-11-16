@@ -4,3 +4,6 @@
 trainerpoke0 0, 56, MRMIME, 0, 3
 trainerpoke0 0, 56, ALAKAZAM, 0, 3
 trainerpoke0 0, 56, AMBIPOM, 0, 3
+
+
+.align 2, 0x0

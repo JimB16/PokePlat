@@ -4,3 +4,6 @@
 trainerpoke0 30, 37, CROAGUNK, 0, 0
 trainerpoke0 30, 37, RIOLU, 0, 0
 trainerpoke0 30, 37, MACHOKE, 0, 0
+
+
+.align 2, 0x0

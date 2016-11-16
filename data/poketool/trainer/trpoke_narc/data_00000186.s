@@ -4,3 +4,6 @@
 trainerpoke0 0, 40, WINGULL, 0, 0
 trainerpoke0 0, 44, OCTILLERY, 0, 0
 trainerpoke0 0, 44, PELIPPER, 0, 0
+
+
+.align 2, 0x0

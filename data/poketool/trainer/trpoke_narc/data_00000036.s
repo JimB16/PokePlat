@@ -5,3 +5,6 @@ trainerpoke0 0, 17, GEODUDE, 0, 0
 trainerpoke0 0, 17, GEODUDE, 0, 0
 trainerpoke0 0, 19, ONIX, 0, 0
 trainerpoke0 0, 19, GEODUDE, 0, 0
+
+
+.align 2, 0x0

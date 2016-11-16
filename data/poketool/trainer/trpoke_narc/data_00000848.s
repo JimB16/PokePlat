@@ -3,3 +3,6 @@
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 30, 24, ZUBAT, 0, 0
 trainerpoke0 30, 26, STUNKY, 0, 0
+
+
+.align 2, 0x0

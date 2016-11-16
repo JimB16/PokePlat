@@ -7,3 +7,6 @@ trainerpoke0 0, 12, MAGIKARP, 0, 0
 trainerpoke0 0, 12, MAGIKARP, 0, 0
 trainerpoke0 0, 14, MAGIKARP, 0, 0
 trainerpoke0 0, 16, MAGIKARP, 0, 0
+
+
+.align 2, 0x0

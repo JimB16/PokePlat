@@ -2,3 +2,6 @@
 
 @ ?, Level, Pkmn, AltForm, PokeballSeal
 trainerpoke0 0, 53, AZUMARILL, 0, 9
+
+
+.align 2, 0x0

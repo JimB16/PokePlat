@@ -4,3 +4,6 @@
 trainerpoke0 30, 59, HITMONTOP, 0, 0
 trainerpoke0 30, 59, HARIYAMA, 0, 0
 trainerpoke0 30, 59, MACHAMP, 0, 0
+
+
+.align 2, 0x0

@@ -7,3 +7,6 @@ trainerpoke0 80, 53, CLEFAIRY, 0, 2
 trainerpoke0 120, 53, CLEFAIRY, 0, 2
 trainerpoke0 160, 53, CLEFAIRY, 0, 2
 trainerpoke0 200, 53, CLEFAIRY, 0, 2
+
+
+.align 2, 0x0

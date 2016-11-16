@@ -33,6 +33,8 @@ Script_1: @ 1a
 	CompareLastResultJump EQUAL, Script_branch_9c
 	SetFlag 0x113
 	Jump Script_branch_164
+@ 7e
+
 Script_branch_7e: @ 7e
 	Message 0x2
 	YesNoBox 0x800c
@@ -40,6 +42,8 @@ Script_branch_7e: @ 7e
 	CompareLastResultJump EQUAL, Script_branch_9c
 	SetFlag 0x113
 	Jump Script_branch_164
+@ 9c
+
 Script_branch_9c: @ 9c
 	Message 0x3
 	WaitButton
@@ -189,6 +193,8 @@ Script_branch_164: @ 164
 	If 0x40b6, 0x8
 	CompareLastResultJump EQUAL, Script_branch_50a
 	Jump Script_branch_b2
+@ 1df
+
 Script_branch_1df: @ 1df
 	CheckFlag 0x111
 	CompareLastResultJump LESSER, Script_branch_bd
@@ -306,6 +312,8 @@ Function_37f: @ 37f
 	If 0x800c, 0x183
 	CompareLastResultJump EQUAL, Script_branch_3b5
 	Jump Script_branch_3c7
+@ 3a3
+
 Script_branch_3a3: @ 3a3
 	SetVar 0x8004, 0x65
 	SetVar 0x8005, 0x1
@@ -458,6 +466,8 @@ Function_57f: @ 57f
 	If 0x8005, 0x4
 	CompareLastResultJump EQUAL, Script_branch_5ca
 	Jump Script_branch_5d6
+@ 5b2
+
 Script_branch_5b2: @ 5b2
 	ApplyMovement 0x2, Movement_5e4
 	WaitMovement
@@ -565,8 +575,10 @@ Script_5: @ 685
 	LockAll
 	Message 0x29
 	Jump Script_branch_696
-	End
-@ 696
+@ 694
+
+.byte 0x2 @ 0x694
+.byte 0x0 @ 0x695
 
 Script_branch_696: @ 696
 	Message 0x2a
@@ -590,38 +602,50 @@ Script_branch_696: @ 696
 	If 0x8008, 0x4
 	CompareLastResultJump EQUAL, Script_branch_736
 	Jump Script_branch_741
-	End
-@ 70a
+@ 708
+
+.byte 0x2 @ 0x708
+.byte 0x0 @ 0x709
 
 Script_branch_70a: @ 70a
 	Message 0x2b
 	Jump Script_branch_696
-	End
-@ 715
+@ 713
+
+.byte 0x2 @ 0x713
+.byte 0x0 @ 0x714
 
 Script_branch_715: @ 715
 	Message 0x2c
 	Jump Script_branch_696
-	End
-@ 720
+@ 71e
+
+.byte 0x2 @ 0x71e
+.byte 0x0 @ 0x71f
 
 Script_branch_720: @ 720
 	Message 0x2d
 	Jump Script_branch_696
-	End
-@ 72b
+@ 729
+
+.byte 0x2 @ 0x729
+.byte 0x0 @ 0x72a
 
 Script_branch_72b: @ 72b
 	Message 0x2e
 	Jump Script_branch_696
-	End
-@ 736
+@ 734
+
+.byte 0x2 @ 0x734
+.byte 0x0 @ 0x735
 
 Script_branch_736: @ 736
 	Message 0x2f
 	Jump Script_branch_696
-	End
-@ 741
+@ 73f
+
+.byte 0x2 @ 0x73f
+.byte 0x0 @ 0x740
 
 Script_branch_741: @ 741
 	CloseMsgOnKeyPress

@@ -15,6 +15,8 @@ Script_1: @ 6
 	Message 0x0
 	SetFlag 0x1
 	Jump Script_branch_26
+@ 26
+
 Script_branch_26: @ 26
 	Message 0x1
 	YesNoBox 0x800c
@@ -29,6 +31,8 @@ Script_branch_49: @ 49
 	Message 0x2
 	CloseMsgOnKeyPress
 	Jump Script_branch_54
+@ 54
+
 Script_branch_54: @ 54
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
@@ -80,10 +84,14 @@ Script_branch_11a: @ 11a
 	Message 0x5
 	CloseMsgOnKeyPress
 	Jump Script_branch_54
+@ 125
+
 Script_branch_125: @ 125
 	Message 0x4
 	CloseMsgOnKeyPress
 	Jump Script_branch_54
+@ 130
+
 Script_branch_130: @ 130
 	Message 0x3
 	WaitButton

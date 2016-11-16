@@ -264,81 +264,6 @@ class Disassembler(object):
             #py_output += "\"" + l2[3] + "\",\n"
             SYMBOLS[int(l2[0].encode('ascii','ignore'), 16)] = l2[1]
         
-#        SYMBOLS[0x121] = "0"
-#        SYMBOLS[0x122] = "1"
-#        SYMBOLS[0x123] = "2"
-#        SYMBOLS[0x124] = "3"
-#        SYMBOLS[0x125] = "4"
-#        SYMBOLS[0x126] = "5"
-#        SYMBOLS[0x127] = "6"
-#        SYMBOLS[0x128] = "7"
-#        SYMBOLS[0x129] = "8"
-#        SYMBOLS[0x12a] = "9"
-#        SYMBOLS[0x12b] = "A"
-#        SYMBOLS[0x12c] = "B"
-#        SYMBOLS[0x12d] = "C"
-#        SYMBOLS[0x12e] = "D"
-#        SYMBOLS[0x12f] = "E"
-#        SYMBOLS[0x130] = "F"
-#        SYMBOLS[0x131] = "G"
-#        SYMBOLS[0x132] = "H"
-#        SYMBOLS[0x133] = "I"
-#        SYMBOLS[0x134] = "J"
-#        SYMBOLS[0x135] = "K"
-#        SYMBOLS[0x136] = "L"
-#        SYMBOLS[0x137] = "M"
-#        SYMBOLS[0x138] = "N"
-#        SYMBOLS[0x139] = "O"
-#        SYMBOLS[0x13a] = "P"
-#        SYMBOLS[0x13b] = "Q"
-#        SYMBOLS[0x13c] = "R"
-#        SYMBOLS[0x13d] = "S"
-#        SYMBOLS[0x13e] = "T"
-#        SYMBOLS[0x13f] = "U"
-#        SYMBOLS[0x140] = "V"
-#        SYMBOLS[0x141] = "W"
-#        SYMBOLS[0x142] = "X"
-#        SYMBOLS[0x143] = "Y"
-#        SYMBOLS[0x144] = "Z"
-#        SYMBOLS[0x145] = "a"
-#        SYMBOLS[0x146] = "b"
-#        SYMBOLS[0x147] = "c"
-#        SYMBOLS[0x148] = "d"
-#        SYMBOLS[0x149] = "e"
-#        SYMBOLS[0x14a] = "f"
-#        SYMBOLS[0x14b] = "g"
-#        SYMBOLS[0x14c] = "h"
-#        SYMBOLS[0x14d] = "i"
-#        SYMBOLS[0x14e] = "j"
-#        SYMBOLS[0x14f] = "k"
-#        SYMBOLS[0x150] = "l"
-#        SYMBOLS[0x151] = "m"
-#        SYMBOLS[0x152] = "n"
-#        SYMBOLS[0x153] = "o"
-#        SYMBOLS[0x154] = "p"
-#        SYMBOLS[0x155] = "q"
-#        SYMBOLS[0x156] = "r"
-#        SYMBOLS[0x157] = "s"
-#        SYMBOLS[0x158] = "t"
-#        SYMBOLS[0x159] = "u"
-#        SYMBOLS[0x15a] = "v"
-#        SYMBOLS[0x15b] = "w"
-#        SYMBOLS[0x15c] = "x"
-#        SYMBOLS[0x15d] = "y"
-#        SYMBOLS[0x15e] = "z"
-#        SYMBOLS[0x188] = "é"
-#        SYMBOLS[0x1ab] = "!"
-#        SYMBOLS[0x1ac] = "?"
-#        SYMBOLS[0x1ad] = ","
-#        SYMBOLS[0x1ae] = "."
-#        SYMBOLS[0x1b3] = "'"
-#        SYMBOLS[0x1b4] = "“"
-#        SYMBOLS[0x1b5] = "”"
-#        SYMBOLS[0x1be] = "-"
-#        SYMBOLS[0x1c0] = "#"
-#        SYMBOLS[0x1c4] = ":"
-#        SYMBOLS[0x1d2] = "%"
-#        SYMBOLS[0x1de] = " "
 #        SYMBOLS[0x25bc] = "\\r"
 #        SYMBOLS[0x25bd] = "\\f"
 #        SYMBOLS[0xe000] = "\\n"
@@ -363,7 +288,6 @@ class Disassembler(object):
         output += "\nseed: " + hex(seed)
         offsets = []
         sizes = []
-        binarystrings = []
         texts = []
         
         i = 0
@@ -378,6 +302,7 @@ class Disassembler(object):
         #print(sizes)
         
         i = 0
+        MsgNr = 0
         while i < num:
             offset = offsets[i]
             size = sizes[i]
@@ -391,9 +316,8 @@ class Disassembler(object):
                 temp_binarystrings.append(disasm.get_hword_from_rom(offset+2*j) ^ key)
                 key = (key+0x493D)&0xFFFF
                 j += 1
-            binarystrings.append(temp_binarystrings)
             
-            #output += "\n" + hex(binarystrings[i][0])
+            #print(str(temp_binarystrings)) # debug
             
             text = ""
             #text += "\""
@@ -417,6 +341,26 @@ class Disassembler(object):
                     n += tmp
                     text += ""
                     n -= 1
+                elif char == 0x1e2:
+                    text += "\\x01e2"
+                elif char == 0xf100:
+                    text += "\\c"
+                    char2 = 0
+                    shift = 0
+                    while (n+1 < len(temp_binarystrings)) and (temp_binarystrings[n+1] != SYMBOLS[0xe000]):
+                        char2 |= (temp_binarystrings[n+1] << shift)
+                        shift += 15
+                        n += 1
+                    
+                    val = 0
+                    while (shift >= 9) and (0x1ff != (char2&0x1ff)):
+                        val = char2&0x1ff
+                        char2 = char2>>9
+                        shift -= 9
+                        text += SYMBOLS[val]
+                    
+                    #text += SYMBOLS[temp_binarystrings[n+1]]
+                    #n += 1
                 else:
                     text += SYMBOLS[char]
                 n += 1

@@ -1594,7 +1594,7 @@ music_commands = {
     0x1f4: ["CheckItemChosen", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f5: ["CompareItemPokeFossil", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f6: ["CheckPokemonLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1f7: ["CheckPokemonPoisoned", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1f7: ["CheckIsPokemonPoisoned", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f8: ["PreWfc"],
     0x1f9: ["StoreFurniture", ["unknown", SingleHWordParam]],
     0x1fa: ["Cmd_1fa", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1935,7 +1935,7 @@ music_commands = {
 
 music_command_enders = [
 	"End",
-    #"Jump",
+    "Jump",
     "Return",
     #"Cmd_2f5",
 ]

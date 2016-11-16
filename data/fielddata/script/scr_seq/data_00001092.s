@@ -56,6 +56,8 @@ Script_4: @ 57
 	If 0x800c, 0x14
 	CompareLastResultJump LESSER, Script_branch_d3
 	Jump Script_branch_113
+@ 93
+
 Script_branch_93: @ 93
 	CheckFlag 0x134
 	CompareLastResultJump EQUAL, Script_branch_153
@@ -69,6 +71,8 @@ Script_branch_93: @ 93
 	SetFlag 0x134
 	Message 0x3
 	Jump Script_branch_153
+@ d3
+
 Script_branch_d3: @ d3
 	CheckFlag 0x135
 	CompareLastResultJump EQUAL, Script_branch_15e
@@ -82,6 +86,8 @@ Script_branch_d3: @ d3
 	SetFlag 0x135
 	Message 0x4
 	Jump Script_branch_15e
+@ 113
+
 Script_branch_113: @ 113
 	CheckFlag 0x136
 	CompareLastResultJump EQUAL, Script_branch_169
@@ -95,6 +101,8 @@ Script_branch_113: @ 113
 	SetFlag 0x136
 	Message 0x5
 	Jump Script_branch_169
+@ 153
+
 Script_branch_153: @ 153
 	Message 0x6
 	WaitButton

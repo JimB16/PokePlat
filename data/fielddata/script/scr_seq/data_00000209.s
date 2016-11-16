@@ -51,8 +51,10 @@ Script_4: @ 57
 	FacePlayer
 	Message 0x3
 	Jump Script_branch_6a
-	End
-@ 6a
+@ 68
+
+.byte 0x2 @ 0x68
+.byte 0x0 @ 0x69
 
 Script_branch_6a: @ 6a
 	Message 0x4
@@ -85,56 +87,74 @@ Script_branch_6a: @ 6a
 	If 0x8008, 0x7
 	CompareLastResultJump EQUAL, Script_branch_182
 	Jump Script_branch_18d
-	End
-@ 135
+@ 133
+
+.byte 0x2 @ 0x133
+.byte 0x0 @ 0x134
 
 Script_branch_135: @ 135
 	Message 0x6
 	Jump Script_branch_6a
-	End
-@ 140
+@ 13e
+
+.byte 0x2 @ 0x13e
+.byte 0x0 @ 0x13f
 
 Script_branch_140: @ 140
 	Message 0x7
 	Jump Script_branch_6a
-	End
-@ 14b
+@ 149
+
+.byte 0x2 @ 0x149
+.byte 0x0 @ 0x14a
 
 Script_branch_14b: @ 14b
 	Message 0x8
 	Jump Script_branch_6a
-	End
-@ 156
+@ 154
+
+.byte 0x2 @ 0x154
+.byte 0x0 @ 0x155
 
 Script_branch_156: @ 156
 	Message 0x9
 	Jump Script_branch_6a
-	End
-@ 161
+@ 15f
+
+.byte 0x2 @ 0x15f
+.byte 0x0 @ 0x160
 
 Script_branch_161: @ 161
 	Message 0xa
 	Jump Script_branch_6a
-	End
-@ 16c
+@ 16a
+
+.byte 0x2 @ 0x16a
+.byte 0x0 @ 0x16b
 
 Script_branch_16c: @ 16c
 	Message 0xb
 	Jump Script_branch_6a
-	End
-@ 177
+@ 175
+
+.byte 0x2 @ 0x175
+.byte 0x0 @ 0x176
 
 Script_branch_177: @ 177
 	Message 0xc
 	Jump Script_branch_6a
-	End
-@ 182
+@ 180
+
+.byte 0x2 @ 0x180
+.byte 0x0 @ 0x181
 
 Script_branch_182: @ 182
 	Message 0xd
 	Jump Script_branch_6a
-	End
-@ 18d
+@ 18b
+
+.byte 0x2 @ 0x18b
+.byte 0x0 @ 0x18c
 
 Script_branch_18d: @ 18d
 	Message 0x5

@@ -1884,8 +1884,10 @@ Script_9: @ e86
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_fcb
 	Jump Script_branch_f01
-	End
-@ f01
+@ eff
+
+.byte 0x2 @ 0xeff
+.byte 0x0 @ 0xf00
 
 Script_branch_f01: @ f01
 	StoreLeagueTrainer 0x8004
@@ -1893,8 +1895,10 @@ Script_branch_f01: @ f01
 	TrainerBattleStored 0x8000, 0x8001, 0x8002
 	EndtrainerBattle 0x8004, 0x8000
 	Jump Script_branch_f1d
-	End
-@ f1d
+@ f1b
+
+.byte 0x2 @ 0xf1b
+.byte 0x0 @ 0xf1c
 
 Script_branch_f1d: @ f1d
 	CloseMsgOnKeyPress
@@ -1913,8 +1917,10 @@ Script_branch_f40: @ f40
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_f73
 	Jump Script_branch_f5b
-	End
-@ f5b
+@ f59
+
+.byte 0x2 @ 0xf59
+.byte 0x0 @ 0xf5a
 
 Script_branch_f5b: @ f5b
 	Cmd_33
@@ -1935,8 +1941,10 @@ Script_branch_f73: @ f73
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_fcb
 	Jump Script_branch_fa3
-	End
-@ fa3
+@ fa1
+
+.byte 0x2 @ 0xfa1
+.byte 0x0 @ 0xfa2
 
 Script_branch_fa3: @ fa3
 	StoreLeagueTrainer 0x8004
@@ -1945,8 +1953,10 @@ Script_branch_fa3: @ fa3
 	EndtrainerBattle 0x8004, 0x8000
 	CopyVar 0x8004, 0x8007
 	Jump Script_branch_f1d
-	End
-@ fc5
+@ fc3
+
+.byte 0x2 @ 0xfc3
+.byte 0x0 @ 0xfc4
 
 Script_branch_fc5: @ fc5
 	LostGoPc

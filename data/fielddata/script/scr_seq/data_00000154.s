@@ -51,6 +51,8 @@ Script_1: @ e
 	SetVar 0x8005, 0x1
 	CallStandard 0x7ff
 	Jump Script_branch_f6
+@ d5
+
 Script_branch_d5: @ d5
 	Message 0x8
 	WaitButton

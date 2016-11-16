@@ -17,15 +17,19 @@ Script_1: @ 6
 	SetVariableNumber 0x0, 0x1
 	Message 0xf
 	Jump Script_branch_41
-	End
-@ 31
+@ 2f
+
+.byte 0x2 @ 0x2f
+.byte 0x0 @ 0x30
 
 Script_branch_31: @ 31
 	SetVariableNumber 0x0, 0x1
 	Message 0x0
 	Jump Script_branch_41
-	End
-@ 41
+@ 3f
+
+.byte 0x2 @ 0x3f
+.byte 0x0 @ 0x40
 
 Script_branch_41: @ 41
 	Message 0x1
@@ -41,8 +45,10 @@ Script_branch_41: @ 41
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_152
-	End
-@ 85
+@ 83
+
+.byte 0x2 @ 0x83
+.byte 0x0 @ 0x84
 
 Script_branch_85: @ 85
 	SetVariableNumber 0x2, 0x1
@@ -82,26 +88,34 @@ Script_branch_85: @ 85
 	CompareLastResultCall 0x5, Script_branch_24a
 	Message 0x5
 	Jump Script_branch_172
-	End
-@ 147
+@ 145
+
+.byte 0x2 @ 0x145
+.byte 0x0 @ 0x146
 
 Script_branch_147: @ 147
 	Message 0xe
 	Jump Script_branch_168
-	End
-@ 152
+@ 150
+
+.byte 0x2 @ 0x150
+.byte 0x0 @ 0x151
 
 Script_branch_152: @ 152
 	Message 0x5
 	Jump Script_branch_168
-	End
-@ 15d
+@ 15b
+
+.byte 0x2 @ 0x15b
+.byte 0x0 @ 0x15c
 
 Script_branch_15d: @ 15d
 	Message 0x6
 	Jump Script_branch_41
-	End
-@ 168
+@ 166
+
+.byte 0x2 @ 0x166
+.byte 0x0 @ 0x167
 
 Script_branch_168: @ 168
 	WaitButton
@@ -136,14 +150,18 @@ Script_branch_1a3: @ 1a3
 Script_branch_1ab: @ 1ab
 	Message 0x5
 	Jump Script_branch_172
-	End
-@ 1b6
+@ 1b4
+
+.byte 0x2 @ 0x1b4
+.byte 0x0 @ 0x1b5
 
 Script_branch_1b6: @ 1b6
 	If 0x4001, 0x1
 	CompareLastResultJump GREATER, Script_branch_1ce
 	SetVarItem 0x0, 0x4000
 	Jump Script_branch_1d3
+@ 1ce
+
 Script_branch_1ce: @ 1ce
 	Cmd_33d 0x0, 0x4000
 Script_branch_1d3: @ 1d3
@@ -163,6 +181,8 @@ Script_branch_200: @ 200
 	CompareLastResultJump GREATER, Script_branch_218
 	SetVarItem 0x0, 0x4002
 	Jump Script_branch_21d
+@ 218
+
 Script_branch_218: @ 218
 	Cmd_33d 0x0, 0x4002
 Script_branch_21d: @ 21d
@@ -182,6 +202,8 @@ Script_branch_24a: @ 24a
 	CompareLastResultJump GREATER, Script_branch_262
 	SetVarItem 0x0, 0x4004
 	Jump Script_branch_267
+@ 262
+
 Script_branch_262: @ 262
 	Cmd_33d 0x0, 0x4004
 Script_branch_267: @ 267

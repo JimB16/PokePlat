@@ -257,6 +257,8 @@ Script_branch_38a: @ 38a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e7
 	Jump Script_branch_460
+@ 3a9
+
 Script_branch_3a9: @ 3a9
 	Message 0xc
 	FacePlayer
@@ -265,6 +267,8 @@ Script_branch_3a9: @ 3a9
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e7
 	Jump Script_branch_460
+@ 3c8
+
 Script_branch_3c8: @ 3c8
 	Message 0x14
 	FacePlayer
@@ -273,6 +277,8 @@ Script_branch_3c8: @ 3c8
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e7
 	Jump Script_branch_460
+@ 3e7
+
 Script_branch_3e7: @ 3e7
 	CloseMsgOnKeyPress
 	TrainerBattle 0x218, 0x227
@@ -403,6 +409,8 @@ Script_branch_534: @ 534
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_591
 	Jump Script_branch_60a
+@ 553
+
 Script_branch_553: @ 553
 	Message 0x10
 	FacePlayer
@@ -411,6 +419,8 @@ Script_branch_553: @ 553
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_591
 	Jump Script_branch_60a
+@ 572
+
 Script_branch_572: @ 572
 	Message 0x18
 	FacePlayer
@@ -419,6 +429,8 @@ Script_branch_572: @ 572
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_591
 	Jump Script_branch_60a
+@ 591
+
 Script_branch_591: @ 591
 	CloseMsgOnKeyPress
 	TrainerBattle 0x218, 0x227
@@ -549,6 +561,8 @@ Script_branch_6de: @ 6de
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_73b
 	Jump Script_branch_7b4
+@ 6fd
+
 Script_branch_6fd: @ 6fd
 	Message 0x26
 	FacePlayer
@@ -557,6 +571,8 @@ Script_branch_6fd: @ 6fd
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_73b
 	Jump Script_branch_7b4
+@ 71c
+
 Script_branch_71c: @ 71c
 	Message 0x2e
 	FacePlayer
@@ -565,6 +581,8 @@ Script_branch_71c: @ 71c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_73b
 	Jump Script_branch_7b4
+@ 73b
+
 Script_branch_73b: @ 73b
 	CloseMsgOnKeyPress
 	TrainerBattle 0x221, 0x222
@@ -695,6 +713,8 @@ Script_branch_888: @ 888
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_8e5
 	Jump Script_branch_95e
+@ 8a7
+
 Script_branch_8a7: @ 8a7
 	Message 0x2a
 	FacePlayer
@@ -703,6 +723,8 @@ Script_branch_8a7: @ 8a7
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_8e5
 	Jump Script_branch_95e
+@ 8c6
+
 Script_branch_8c6: @ 8c6
 	Message 0x32
 	FacePlayer
@@ -711,6 +733,8 @@ Script_branch_8c6: @ 8c6
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_8e5
 	Jump Script_branch_95e
+@ 8e5
+
 Script_branch_8e5: @ 8e5
 	CloseMsgOnKeyPress
 	TrainerBattle 0x221, 0x222
@@ -841,6 +865,8 @@ Script_branch_a32: @ a32
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_a8f
 	Jump Script_branch_b08
+@ a51
+
 Script_branch_a51: @ a51
 	Message 0x40
 	FacePlayer
@@ -849,6 +875,8 @@ Script_branch_a51: @ a51
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_a8f
 	Jump Script_branch_b08
+@ a70
+
 Script_branch_a70: @ a70
 	Message 0x48
 	FacePlayer
@@ -857,6 +885,8 @@ Script_branch_a70: @ a70
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_a8f
 	Jump Script_branch_b08
+@ a8f
+
 Script_branch_a8f: @ a8f
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21e, 0x21f
@@ -987,6 +1017,8 @@ Script_branch_bdc: @ bdc
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_c39
 	Jump Script_branch_cb2
+@ bfb
+
 Script_branch_bfb: @ bfb
 	Message 0x44
 	FacePlayer
@@ -995,6 +1027,8 @@ Script_branch_bfb: @ bfb
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_c39
 	Jump Script_branch_cb2
+@ c1a
+
 Script_branch_c1a: @ c1a
 	Message 0x4c
 	FacePlayer
@@ -1003,6 +1037,8 @@ Script_branch_c1a: @ c1a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_c39
 	Jump Script_branch_cb2
+@ c39
+
 Script_branch_c39: @ c39
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21e, 0x21f
@@ -1133,6 +1169,8 @@ Script_branch_d86: @ d86
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_de3
 	Jump Script_branch_e5c
+@ da5
+
 Script_branch_da5: @ da5
 	Message 0x5a
 	FacePlayer
@@ -1141,6 +1179,8 @@ Script_branch_da5: @ da5
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_de3
 	Jump Script_branch_e5c
+@ dc4
+
 Script_branch_dc4: @ dc4
 	Message 0x62
 	FacePlayer
@@ -1149,6 +1189,8 @@ Script_branch_dc4: @ dc4
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_de3
 	Jump Script_branch_e5c
+@ de3
+
 Script_branch_de3: @ de3
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21b, 0x217
@@ -1279,6 +1321,8 @@ Script_branch_f30: @ f30
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_f8d
 	Jump Script_branch_1006
+@ f4f
+
 Script_branch_f4f: @ f4f
 	Message 0x5e
 	FacePlayer
@@ -1287,6 +1331,8 @@ Script_branch_f4f: @ f4f
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_f8d
 	Jump Script_branch_1006
+@ f6e
+
 Script_branch_f6e: @ f6e
 	Message 0x66
 	FacePlayer
@@ -1295,6 +1341,8 @@ Script_branch_f6e: @ f6e
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_f8d
 	Jump Script_branch_1006
+@ f8d
+
 Script_branch_f8d: @ f8d
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21b, 0x217
@@ -1425,6 +1473,8 @@ Script_branch_10da: @ 10da
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1137
 	Jump Script_branch_11b0
+@ 10f9
+
 Script_branch_10f9: @ 10f9
 	Message 0x74
 	FacePlayer
@@ -1433,6 +1483,8 @@ Script_branch_10f9: @ 10f9
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1137
 	Jump Script_branch_11b0
+@ 1118
+
 Script_branch_1118: @ 1118
 	Message 0x7c
 	FacePlayer
@@ -1441,6 +1493,8 @@ Script_branch_1118: @ 1118
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1137
 	Jump Script_branch_11b0
+@ 1137
+
 Script_branch_1137: @ 1137
 	CloseMsgOnKeyPress
 	TrainerBattle 0x224, 0x21c
@@ -1571,6 +1625,8 @@ Script_branch_1284: @ 1284
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_12e1
 	Jump Script_branch_135a
+@ 12a3
+
 Script_branch_12a3: @ 12a3
 	Message 0x78
 	FacePlayer
@@ -1579,6 +1635,8 @@ Script_branch_12a3: @ 12a3
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_12e1
 	Jump Script_branch_135a
+@ 12c2
+
 Script_branch_12c2: @ 12c2
 	Message 0x80
 	FacePlayer
@@ -1587,6 +1645,8 @@ Script_branch_12c2: @ 12c2
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_12e1
 	Jump Script_branch_135a
+@ 12e1
+
 Script_branch_12e1: @ 12e1
 	CloseMsgOnKeyPress
 	TrainerBattle 0x224, 0x21c
@@ -1717,6 +1777,8 @@ Script_branch_142e: @ 142e
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_148b
 	Jump Script_branch_1504
+@ 144d
+
 Script_branch_144d: @ 144d
 	Message 0x8e
 	FacePlayer
@@ -1725,6 +1787,8 @@ Script_branch_144d: @ 144d
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_148b
 	Jump Script_branch_1504
+@ 146c
+
 Script_branch_146c: @ 146c
 	Message 0x96
 	FacePlayer
@@ -1733,6 +1797,8 @@ Script_branch_146c: @ 146c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_148b
 	Jump Script_branch_1504
+@ 148b
+
 Script_branch_148b: @ 148b
 	CloseMsgOnKeyPress
 	TrainerBattle 0x228, 0x220
@@ -1863,6 +1929,8 @@ Script_branch_15d8: @ 15d8
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1635
 	Jump Script_branch_16ae
+@ 15f7
+
 Script_branch_15f7: @ 15f7
 	Message 0x92
 	FacePlayer
@@ -1871,6 +1939,8 @@ Script_branch_15f7: @ 15f7
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1635
 	Jump Script_branch_16ae
+@ 1616
+
 Script_branch_1616: @ 1616
 	Message 0x9a
 	FacePlayer
@@ -1879,6 +1949,8 @@ Script_branch_1616: @ 1616
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1635
 	Jump Script_branch_16ae
+@ 1635
+
 Script_branch_1635: @ 1635
 	CloseMsgOnKeyPress
 	TrainerBattle 0x228, 0x220
@@ -2009,6 +2081,8 @@ Script_branch_1782: @ 1782
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_17df
 	Jump Script_branch_1858
+@ 17a1
+
 Script_branch_17a1: @ 17a1
 	Message 0xa8
 	FacePlayer
@@ -2017,6 +2091,8 @@ Script_branch_17a1: @ 17a1
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_17df
 	Jump Script_branch_1858
+@ 17c0
+
 Script_branch_17c0: @ 17c0
 	Message 0xb0
 	FacePlayer
@@ -2025,6 +2101,8 @@ Script_branch_17c0: @ 17c0
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_17df
 	Jump Script_branch_1858
+@ 17df
+
 Script_branch_17df: @ 17df
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21a, 0x223
@@ -2155,6 +2233,8 @@ Script_branch_192c: @ 192c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1989
 	Jump Script_branch_1a02
+@ 194b
+
 Script_branch_194b: @ 194b
 	Message 0xac
 	FacePlayer
@@ -2163,6 +2243,8 @@ Script_branch_194b: @ 194b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1989
 	Jump Script_branch_1a02
+@ 196a
+
 Script_branch_196a: @ 196a
 	Message 0xb4
 	FacePlayer
@@ -2171,6 +2253,8 @@ Script_branch_196a: @ 196a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1989
 	Jump Script_branch_1a02
+@ 1989
+
 Script_branch_1989: @ 1989
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21a, 0x223
@@ -2301,6 +2385,8 @@ Script_branch_1ad6: @ 1ad6
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1b33
 	Jump Script_branch_1bac
+@ 1af5
+
 Script_branch_1af5: @ 1af5
 	Message 0xc2
 	FacePlayer
@@ -2309,6 +2395,8 @@ Script_branch_1af5: @ 1af5
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1b33
 	Jump Script_branch_1bac
+@ 1b14
+
 Script_branch_1b14: @ 1b14
 	Message 0xca
 	FacePlayer
@@ -2317,6 +2405,8 @@ Script_branch_1b14: @ 1b14
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1b33
 	Jump Script_branch_1bac
+@ 1b33
+
 Script_branch_1b33: @ 1b33
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21d, 0x226
@@ -2447,6 +2537,8 @@ Script_branch_1c80: @ 1c80
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1cdd
 	Jump Script_branch_1d56
+@ 1c9f
+
 Script_branch_1c9f: @ 1c9f
 	Message 0xc6
 	FacePlayer
@@ -2455,6 +2547,8 @@ Script_branch_1c9f: @ 1c9f
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1cdd
 	Jump Script_branch_1d56
+@ 1cbe
+
 Script_branch_1cbe: @ 1cbe
 	Message 0xce
 	FacePlayer
@@ -2463,6 +2557,8 @@ Script_branch_1cbe: @ 1cbe
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1cdd
 	Jump Script_branch_1d56
+@ 1cdd
+
 Script_branch_1cdd: @ 1cdd
 	CloseMsgOnKeyPress
 	TrainerBattle 0x21d, 0x226
@@ -2593,6 +2689,8 @@ Script_branch_1e2a: @ 1e2a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1e87
 	Jump Script_branch_1f00
+@ 1e49
+
 Script_branch_1e49: @ 1e49
 	Message 0xdc
 	FacePlayer
@@ -2601,6 +2699,8 @@ Script_branch_1e49: @ 1e49
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1e87
 	Jump Script_branch_1f00
+@ 1e68
+
 Script_branch_1e68: @ 1e68
 	Message 0xe4
 	FacePlayer
@@ -2609,6 +2709,8 @@ Script_branch_1e68: @ 1e68
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1e87
 	Jump Script_branch_1f00
+@ 1e87
+
 Script_branch_1e87: @ 1e87
 	CloseMsgOnKeyPress
 	TrainerBattle 0x225, 0x219
@@ -2739,6 +2841,8 @@ Script_branch_1fd4: @ 1fd4
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_2031
 	Jump Script_branch_20aa
+@ 1ff3
+
 Script_branch_1ff3: @ 1ff3
 	Message 0xe0
 	FacePlayer
@@ -2747,6 +2851,8 @@ Script_branch_1ff3: @ 1ff3
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_2031
 	Jump Script_branch_20aa
+@ 2012
+
 Script_branch_2012: @ 2012
 	Message 0xe8
 	FacePlayer
@@ -2755,6 +2861,8 @@ Script_branch_2012: @ 2012
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_2031
 	Jump Script_branch_20aa
+@ 2031
+
 Script_branch_2031: @ 2031
 	CloseMsgOnKeyPress
 	TrainerBattle 0x225, 0x219

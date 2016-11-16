@@ -31,6 +31,8 @@ Script_branch_2c: @ 2c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_89
 	Jump Script_branch_6b
+@ 6b
+
 Script_branch_6b: @ 6b
 	CheckPokeNature 0x8000, 0xc
 	If 0x8000, 0xff

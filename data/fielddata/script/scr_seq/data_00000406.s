@@ -17,18 +17,24 @@ Script_1: @ 6
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_3c
 	Jump Script_branch_55
+@ 3c
+
 Script_branch_3c: @ 3c
 	Cmd_21d 0x3, 0x1, 0x0
 	Cmd_21d 0x2, 0x1, 0x1
 	Message 0x0
 	Jump Script_branch_a8
+@ 55
+
 Script_branch_55: @ 55
 	Cmd_21d 0x3, 0x1, 0x0
 	Cmd_21d 0x2, 0x1, 0x1
 	Message 0x1
 	Jump Script_branch_8c
-	End
-@ 70
+@ 6e
+
+.byte 0x2 @ 0x6e
+.byte 0x0 @ 0x6f
 
 Script_branch_70: @ 70
 	Message 0x2
@@ -37,6 +43,8 @@ Script_branch_73: @ 73
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_a8
 	Jump Script_branch_8c
+@ 8c
+
 Script_branch_8c: @ 8c
 	Multi2 0x1, 0x1, 0x0, 0x1, 0x8004
 	Cmd_42 0xb, 0x1
@@ -44,6 +52,8 @@ Script_branch_8c: @ 8c
 	Cmd_42 0xe, 0x4
 	CloseMulti
 	Jump Script_branch_c2
+@ a8
+
 Script_branch_a8: @ a8
 	Multi2 0x1, 0x1, 0x0, 0x1, 0x8004
 	Cmd_42 0xb, 0x1
@@ -62,6 +72,8 @@ Script_branch_c2: @ c2
 	If 0x8008, 0x4
 	CompareLastResultJump EQUAL, Script_branch_3e5
 	Jump Script_branch_3e5
+@ 102
+
 Function_102: @ 102
 	Cmd_21d 0x0, 0x0, 0x800c
 	If 0x800c, 0x0
@@ -131,10 +143,14 @@ Script_branch_1f8: @ 1f8
 	Message 0x7
 	WaitButton
 	Jump Script_branch_3ea
+@ 256
+
 Script_branch_256: @ 256
 	Message 0x16
 	WaitButton
 	Jump Script_branch_3ea
+@ 261
+
 Script_branch_261: @ 261
 	Message 0x3
 	Multi2 0x1, 0x1, 0x0, 0x1, 0x8004
@@ -201,10 +217,14 @@ Script_branch_37a: @ 37a
 	Message 0x9
 	WaitButton
 	Jump Script_branch_3ea
+@ 3da
+
 Script_branch_3da: @ 3da
 	Message 0xa
 	Cmd_30
 	Jump Script_branch_73
+@ 3e5
+
 Script_branch_3e5: @ 3e5
 	Message 0x4
 	WaitButton

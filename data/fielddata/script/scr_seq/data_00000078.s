@@ -24,8 +24,10 @@ Script_1: @ 16
 	SetVar 0x4114, 0x1
 	ActBike 0x9
 	Jump Script_branch_52
-	End
-@ 52
+@ 50
+
+.byte 0x2 @ 0x50
+.byte 0x0 @ 0x51
 
 Script_branch_52: @ 52
 	Message 0x1

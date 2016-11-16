@@ -36,6 +36,8 @@ Script_branch_3a: @ 3a
 	CallStandard 0x7fc
 	Call Function_6f
 	Jump Script_branch_64
+@ 64
+
 Script_branch_64: @ 64
 	Message 0x1
 	WaitButton

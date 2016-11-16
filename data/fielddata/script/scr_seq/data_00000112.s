@@ -44,26 +44,34 @@ Script_2: @ 1d
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_c1
 	Jump Script_branch_a5
-	End
-@ a5
+@ a3
+
+.byte 0x2 @ 0xa3
+.byte 0x0 @ 0xa4
 
 Script_branch_a5: @ a5
 	TrainerBattle 0x1d6, 0x0
 	Jump Script_branch_cf
-	End
-@ b3
+@ b1
+
+.byte 0x2 @ 0xb1
+.byte 0x0 @ 0xb2
 
 Script_branch_b3: @ b3
 	TrainerBattle 0x1d7, 0x0
 	Jump Script_branch_cf
-	End
-@ c1
+@ bf
+
+.byte 0x2 @ 0xbf
+.byte 0x0 @ 0xc0
 
 Script_branch_c1: @ c1
 	TrainerBattle 0x1d8, 0x0
 	Jump Script_branch_cf
-	End
-@ cf
+@ cd
+
+.byte 0x2 @ 0xcd
+.byte 0x0 @ 0xce
 
 Script_branch_cf: @ cf
 	CheckTrainerLost 0x800c

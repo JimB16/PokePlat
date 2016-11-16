@@ -66,6 +66,8 @@ Script_branch_d8: @ d8
 	ApplyMovement 0xf2, Movement_12c
 	WaitMovement
 	Jump Script_branch_f0
+@ f0
+
 Script_branch_f0: @ f0
 	SetVar 0x4082, 0x1
 	ReleaseAll

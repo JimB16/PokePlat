@@ -97,6 +97,8 @@ Script_branch_102: @ 102
 	If 0x800c, 0x8
 	CompareLastResultJump 0x4, Script_branch_190
 	Jump Script_branch_185
+@ 14d
+
 Script_branch_14d: @ 14d
 	WaitFanfare 0x5dc
 	PlayCry 0x1ba, 0x0
@@ -226,6 +228,8 @@ Script_branch_254: @ 254
 	CallStandard 0x7fc
 	SetFlag 0xa2
 	Jump Script_branch_20b
+@ 270
+
 Script_3: @ 270
 	CallMessageBox 0x12, 0x1, 0x0, 0x800c
 	TypeMessageBox 0x3

@@ -85,20 +85,26 @@ Script_2: @ e8
 Script_branch_119: @ 119
 	ChangeOwPosition 0x7, 0xad, 0x314
 	Jump Script_branch_149
-	End
-@ 129
+@ 127
+
+.byte 0x2 @ 0x127
+.byte 0x0 @ 0x128
 
 Script_branch_129: @ 129
 	ChangeOwPosition 0x7, 0xae, 0x314
 	Jump Script_branch_149
-	End
-@ 139
+@ 137
+
+.byte 0x2 @ 0x137
+.byte 0x0 @ 0x138
 
 Script_branch_139: @ 139
 	ChangeOwPosition 0x7, 0xaf, 0x314
 	Jump Script_branch_149
-	End
-@ 149
+@ 147
+
+.byte 0x2 @ 0x147
+.byte 0x0 @ 0x148
 
 Script_branch_149: @ 149
 	ClearFlag 0x17a
@@ -151,8 +157,10 @@ Script_branch_18d: @ 18d
 	Message 0x19
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-	End
-@ 21a
+@ 218
+
+.byte 0x2 @ 0x218
+.byte 0x0 @ 0x219
 
 Script_branch_21a: @ 21a
 	Message 0x1
@@ -198,8 +206,10 @@ Script_branch_224: @ 224
 	Message 0x1c
 	CloseMsgOnKeyPress
 	Jump Script_branch_2bb
-	End
-@ 2b1
+@ 2af
+
+.byte 0x2 @ 0x2af
+.byte 0x0 @ 0x2b0
 
 Script_branch_2b1: @ 2b1
 	Message 0x5
@@ -540,8 +550,10 @@ Script_branch_601: @ 601
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 62a
+@ 628
+
+.byte 0x2 @ 0x628
+.byte 0x0 @ 0x629
 
 Script_branch_62a: @ 62a
 	ApplyMovement 0x1a, Movement_690
@@ -552,8 +564,10 @@ Script_branch_62a: @ 62a
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 653
+@ 651
+
+.byte 0x2 @ 0x651
+.byte 0x0 @ 0x652
 
 Script_branch_653: @ 653
 	ApplyMovement 0x1a, Movement_6a0
@@ -564,8 +578,10 @@ Script_branch_653: @ 653
 	ApplyMovement 0xff, Movement_6f8
 	WaitMovement
 	Jump Script_branch_67c
-	End
-@ 67c
+@ 67a
+
+.byte 0x2 @ 0x67a
+.byte 0x0 @ 0x67b
 
 Script_branch_67c: @ 67c
 	ReleaseAll
@@ -644,32 +660,40 @@ Script_branch_73e: @ 73e
 	ApplyMovement 0x1f, Movement_8b4
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 758
+@ 756
+
+.byte 0x2 @ 0x756
+.byte 0x0 @ 0x757
 
 Script_branch_758: @ 758
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8cc
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 772
+@ 770
+
+.byte 0x2 @ 0x770
+.byte 0x0 @ 0x771
 
 Script_branch_772: @ 772
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8e4
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 78c
+@ 78a
+
+.byte 0x2 @ 0x78a
+.byte 0x0 @ 0x78b
 
 Script_branch_78c: @ 78c
 	ApplyMovement 0xff, Movement_894
 	ApplyMovement 0x1f, Movement_8fc
 	WaitMovement
 	Jump Script_branch_7a6
-	End
-@ 7a6
+@ 7a4
+
+.byte 0x2 @ 0x7a4
+.byte 0x0 @ 0x7a5
 
 Script_branch_7a6: @ 7a6
 	Call Function_7fc
@@ -731,29 +755,37 @@ Script_branch_846: @ 846
 	ApplyMovement 0x1f, Movement_924
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 858
+@ 856
+
+.byte 0x2 @ 0x856
+.byte 0x0 @ 0x857
 
 Script_branch_858: @ 858
 	ApplyMovement 0x1f, Movement_930
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 86a
+@ 868
+
+.byte 0x2 @ 0x868
+.byte 0x0 @ 0x869
 
 Script_branch_86a: @ 86a
 	ApplyMovement 0x1f, Movement_93c
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 87c
+@ 87a
+
+.byte 0x2 @ 0x87a
+.byte 0x0 @ 0x87b
 
 Script_branch_87c: @ 87c
 	ApplyMovement 0x1f, Movement_948
 	WaitMovement
 	Jump Script_branch_88e
-	End
-@ 88e
+@ 88c
+
+.byte 0x2 @ 0x88c
+.byte 0x0 @ 0x88d
 
 Script_branch_88e: @ 88e
 	ReleaseAll
@@ -923,24 +955,30 @@ Script_branch_a1c: @ a1c
 	ApplyMovement 0xff, Movement_dd0
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a36
+@ a34
+
+.byte 0x2 @ 0xa34
+.byte 0x0 @ 0xa35
 
 Script_branch_a36: @ a36
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_de4
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a50
+@ a4e
+
+.byte 0x2 @ 0xa4e
+.byte 0x0 @ 0xa4f
 
 Script_branch_a50: @ a50
 	ApplyMovement 0x10, Movement_ebc
 	ApplyMovement 0xff, Movement_df8
 	WaitMovement
 	Jump Script_branch_a6a
-	End
-@ a6a
+@ a68
+
+.byte 0x2 @ 0xa68
+.byte 0x0 @ 0xa69
 
 Script_branch_a6a: @ a6a
 	SetVarHero 0x0
@@ -975,16 +1013,20 @@ Script_branch_adc: @ adc
 	SetVarHero 0x1
 	Message 0x47
 	Jump Script_branch_afe
-	End
-@ aed
+@ aeb
+
+.byte 0x2 @ 0xaeb
+.byte 0x0 @ 0xaec
 
 Script_branch_aed: @ aed
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x48
 	Jump Script_branch_afe
-	End
-@ afe
+@ afc
+
+.byte 0x2 @ 0xafc
+.byte 0x0 @ 0xafd
 
 Script_branch_afe: @ afe
 	CloseMsgOnKeyPress
@@ -1065,16 +1107,20 @@ Script_branch_c30: @ c30
 	SetVarHero 0x1
 	Message 0x4b
 	Jump Script_branch_c52
-	End
-@ c41
+@ c3f
+
+.byte 0x2 @ 0xc3f
+.byte 0x0 @ 0xc40
 
 Script_branch_c41: @ c41
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x4c
 	Jump Script_branch_c52
-	End
-@ c52
+@ c50
+
+.byte 0x2 @ 0xc50
+.byte 0x0 @ 0xc51
 
 Script_branch_c52: @ c52
 	SetVarHero 0x0
@@ -1085,8 +1131,10 @@ Script_branch_c52: @ c52
 	ApplyMovement 0xff, Movement_e08
 	WaitMovement
 	Jump Script_branch_c7c
-	End
-@ c7c
+@ c7a
+
+.byte 0x2 @ 0xc7a
+.byte 0x0 @ 0xc7b
 
 Script_branch_c7c: @ c7c
 	RemovePeople 0x7
@@ -1778,16 +1826,20 @@ Script_branch_12a1: @ 12a1
 	ApplyMovement 0xff, Movement_1314
 	WaitMovement
 	Jump Script_branch_12d5
-	End
-@ 12bb
+@ 12b9
+
+.byte 0x2 @ 0x12b9
+.byte 0x0 @ 0x12ba
 
 Script_branch_12bb: @ 12bb
 	ApplyMovement 0x17, Movement_12f0
 	ApplyMovement 0xff, Movement_1304
 	WaitMovement
 	Jump Script_branch_12d5
-	End
-@ 12d5
+@ 12d3
+
+.byte 0x2 @ 0x12d3
+.byte 0x0 @ 0x12d4
 
 Script_branch_12d5: @ 12d5
 	RemovePeople 0x17

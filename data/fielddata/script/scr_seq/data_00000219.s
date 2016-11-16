@@ -43,10 +43,14 @@ Script_branch_6e: @ 6e
 	ApplyMovement 0x0, Movement_e8
 	WaitMovement
 	Jump Script_branch_8e
+@ 7e
+
 Script_branch_7e: @ 7e
 	ApplyMovement 0x0, Movement_f4
 	WaitMovement
 	Jump Script_branch_8e
+@ 8e
+
 Script_branch_8e: @ 8e
 	CheckFlag 0x8b
 	CompareLastResultCall LESSER, Script_branch_d8
@@ -116,10 +120,14 @@ Script_branch_148: @ 148
 	ApplyMovement 0x0, Movement_174
 	WaitMovement
 	Jump Script_branch_168
+@ 158
+
 Script_branch_158: @ 158
 	ApplyMovement 0x0, Movement_180
 	WaitMovement
 	Jump Script_branch_168
+@ 168
+
 Script_branch_168: @ 168
 	SetVar 0x40b1, 0x0
 	ReleaseAll
@@ -160,15 +168,19 @@ Script_3: @ 198
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1ea
 	Jump Script_branch_1db
-	End
-@ 1db
+@ 1d9
+
+.byte 0x2 @ 0x1d9
+.byte 0x0 @ 0x1da
 
 Script_branch_1db: @ 1db
 	Message 0x6
 	CallStandard 0x7e0
 	Jump Script_branch_1ea
-	End
-@ 1ea
+@ 1e8
+
+.byte 0x2 @ 0x1e8
+.byte 0x0 @ 0x1e9
 
 Script_branch_1ea: @ 1ea
 	CloseMsgOnKeyPress
@@ -184,39 +196,53 @@ Script_branch_1ea: @ 1ea
 	If 0x8005, 0x26
 	CompareLastResultJump EQUAL, Script_branch_29b
 	Jump Script_branch_2b3
-	End
-@ 23b
+@ 239
+
+.byte 0x2 @ 0x239
+.byte 0x0 @ 0x23a
 
 Script_branch_23b: @ 23b
 	ApplyMovement 0x0, Movement_30c
 	ApplyMovement 0xff, Movement_374
 	WaitMovement
 	Jump Script_branch_2cb
+@ 253
+
 Script_branch_253: @ 253
 	ApplyMovement 0x0, Movement_318
 	ApplyMovement 0xff, Movement_388
 	WaitMovement
 	Jump Script_branch_2cb
+@ 26b
+
 Script_branch_26b: @ 26b
 	ApplyMovement 0x0, Movement_324
 	ApplyMovement 0xff, Movement_39c
 	WaitMovement
 	Jump Script_branch_2cb
+@ 283
+
 Script_branch_283: @ 283
 	ApplyMovement 0x0, Movement_330
 	ApplyMovement 0xff, Movement_3b0
 	WaitMovement
 	Jump Script_branch_2cb
+@ 29b
+
 Script_branch_29b: @ 29b
 	ApplyMovement 0x0, Movement_33c
 	ApplyMovement 0xff, Movement_3c4
 	WaitMovement
 	Jump Script_branch_2cb
+@ 2b3
+
 Script_branch_2b3: @ 2b3
 	ApplyMovement 0x0, Movement_348
 	ApplyMovement 0xff, Movement_3d8
 	WaitMovement
 	Jump Script_branch_2cb
+@ 2cb
+
 Script_branch_2cb: @ 2cb
 	ApplyMovement 0x0, Movement_354
 	WaitMovement
@@ -394,29 +420,37 @@ Script_branch_46c: @ 46c
 	ApplyMovement 0x18, Movement_4d0
 	WaitMovement
 	Jump Script_branch_4b4
-	End
-@ 47e
+@ 47c
+
+.byte 0x2 @ 0x47c
+.byte 0x0 @ 0x47d
 
 Script_branch_47e: @ 47e
 	ApplyMovement 0x18, Movement_4c4
 	WaitMovement
 	Jump Script_branch_4b4
-	End
-@ 490
+@ 48e
+
+.byte 0x2 @ 0x48e
+.byte 0x0 @ 0x48f
 
 Script_branch_490: @ 490
 	ApplyMovement 0x18, Movement_4c4
 	WaitMovement
 	Jump Script_branch_4b4
-	End
-@ 4a2
+@ 4a0
+
+.byte 0x2 @ 0x4a0
+.byte 0x0 @ 0x4a1
 
 Script_branch_4a2: @ 4a2
 	ApplyMovement 0x18, Movement_4c4
 	WaitMovement
 	Jump Script_branch_4b4
-	End
-@ 4b4
+@ 4b2
+
+.byte 0x2 @ 0x4b2
+.byte 0x0 @ 0x4b3
 
 Script_branch_4b4: @ 4b4
 	RemovePeople 0x18

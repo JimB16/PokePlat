@@ -146,8 +146,10 @@ Script_13: @ 105
 	LockAll
 	SetVar 0x8005, 0x2
 	Jump Script_branch_119
-	End
-@ 119
+@ 117
+
+.byte 0x2 @ 0x117
+.byte 0x0 @ 0x118
 
 Script_branch_119: @ 119
 	Message 0xb
@@ -163,8 +165,10 @@ Script_branch_119: @ 119
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_184
 	Jump Script_branch_15d
-	End
-@ 15d
+@ 15b
+
+.byte 0x2 @ 0x15b
+.byte 0x0 @ 0x15c
 
 Script_branch_15d: @ 15d
 	CloseMsgOnKeyPress
@@ -186,9 +190,10 @@ Script_branch_163: @ 163
 Script_branch_184: @ 184
 	Message 0xc
 	Jump Script_branch_119
-	End
-@ 18f
+@ 18d
 
+.byte 0x2 @ 0x18d
+.byte 0x0 @ 0x18e
 .byte 0x0 @ 0x18f
 
 @ end_0x190

@@ -34,8 +34,10 @@ Script_1: @ 6
 	SetFlag 0x119
 	Message 0x2
 	Jump Script_branch_9b
-	End
-@ 8b
+@ 89
+
+.byte 0x2 @ 0x89
+.byte 0x0 @ 0x8a
 
 Script_branch_8b: @ 8b
 	CallStandard 0x26e0
@@ -56,8 +58,10 @@ Script_branch_9b: @ 9b
 	SetFlag 0x99
 	Message 0x3
 	Jump Script_branch_150
-	End
-@ b3
+@ b1
+
+.byte 0x2 @ 0xb1
+.byte 0x0 @ 0xb2
 
 Script_branch_b3: @ b3
 	If 0x405e, 0x3
@@ -68,8 +72,10 @@ Script_branch_b3: @ b3
 	CompareLastResultCall EQUAL, Script_branch_fb
 	Message 0x4
 	Jump Script_branch_150
-	End
-@ e5
+@ e3
+
+.byte 0x2 @ 0xe3
+.byte 0x0 @ 0xe4
 
 Script_branch_e5: @ e5
 	SetVar 0x405e, 0x0

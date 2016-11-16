@@ -27,6 +27,8 @@ Script_1: @ 1e
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_c2
 	Jump Script_branch_b7
+@ 5f
+
 Script_branch_5f: @ 5f
 	SetVarHero 0x0
 	Message 0x1
@@ -44,6 +46,8 @@ Script_branch_5f: @ 5f
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_d8
 	Jump Script_branch_e3
+@ b7
+
 Script_branch_b7: @ b7
 	Message 0x2
 	WaitButton

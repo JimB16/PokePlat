@@ -178,26 +178,36 @@ Script_branch_1a8: @ 1a8
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
+@ 1c2
+
 Script_branch_1c2: @ 1c2
 	ApplyMovement 0x12, Movement_24c
 	WaitMovement
 	ApplyMovement 0xff, Movement_228
 	WaitMovement
 	Jump Script_branch_216
+@ 1dc
+
 Script_branch_1dc: @ 1dc
 	Jump Script_branch_216
+@ 1e2
+
 Script_branch_1e2: @ 1e2
 	ApplyMovement 0x12, Movement_25c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
+@ 1fc
+
 Script_branch_1fc: @ 1fc
 	ApplyMovement 0x12, Movement_26c
 	WaitMovement
 	ApplyMovement 0xff, Movement_230
 	WaitMovement
 	Jump Script_branch_216
+@ 216
+
 Script_branch_216: @ 216
 	Call Function_14d
 	Message 0x0

@@ -23,6 +23,8 @@ Script_1: @ e
 	CallStandard 0x7fc
 	SetFlag 0xca
 	Jump Script_branch_53
+@ 53
+
 Script_branch_53: @ 53
 	Message 0x1
 	WaitButton
@@ -66,6 +68,8 @@ Script_2: @ 68
 	If 0x800c, 0x8
 	CompareLastResultJump EQUAL, Script_branch_119
 	Jump Script_branch_124
+@ 103
+
 Script_branch_103: @ 103
 	Message 0x3
 	WaitButton

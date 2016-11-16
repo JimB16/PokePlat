@@ -28,6 +28,8 @@ Script_branch_3b: @ 3b
 	If 0x8002, 0x0
 	CompareLastResultJump 0x5, Script_branch_3b
 	Jump Script_branch_164
+@ 6d
+
 Script_branch_6d: @ 6d
 	If 0x4108, 0x0
 	CompareLastResultCall EQUAL, Script_branch_ed
@@ -43,6 +45,8 @@ Script_branch_6d: @ 6d
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_105
 	Jump Script_branch_c2
+@ c2
+
 Script_branch_c2: @ c2
 	CallStandard 0x7e0
 	ClearFlag 0x137
@@ -95,6 +99,8 @@ Script_branch_114: @ 114
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_105
 	Jump Script_branch_c2
+@ 164
+
 Script_branch_164: @ 164
 	Message 0x0
 	WaitButton

@@ -52,8 +52,10 @@ Script_branch_cd: @ cd
 Script_3: @ e7
 	UndergroundFunction2 0x0
 	Jump Script_branch_f3
-	End
-@ f3
+@ f1
+
+.byte 0x2 @ 0xf1
+.byte 0x0 @ 0xf2
 
 Script_branch_f3: @ f3
 	UndergroundFunction 0x1, 0x800c
@@ -68,45 +70,59 @@ Script_branch_f3: @ f3
 	If 0x8008, 0xffff
 	CompareLastResultJump EQUAL, Script_branch_165
 	Jump Script_branch_17f
-	End
-@ 141
+@ 13f
+
+.byte 0x2 @ 0x13f
+.byte 0x0 @ 0x140
 
 Script_branch_141: @ 141
 	UndergroundFunction2 0x5
 	Jump Script_branch_171
-	End
-@ 14d
+@ 14b
+
+.byte 0x2 @ 0x14b
+.byte 0x0 @ 0x14c
 
 Script_branch_14d: @ 14d
 	UndergroundFunction2 0x3
 	Jump Script_branch_171
-	End
-@ 159
+@ 157
+
+.byte 0x2 @ 0x157
+.byte 0x0 @ 0x158
 
 Script_branch_159: @ 159
 	UndergroundFunction2 0x4
 	Jump Script_branch_171
-	End
-@ 165
+@ 163
+
+.byte 0x2 @ 0x163
+.byte 0x0 @ 0x164
 
 Script_branch_165: @ 165
 	UndergroundFunction2 0x9
 	Jump Script_branch_189
-	End
-@ 171
+@ 16f
+
+.byte 0x2 @ 0x16f
+.byte 0x0 @ 0x170
 
 Script_branch_171: @ 171
 	Cmd_30
 	UndergroundFunction2 0x8
 	Jump Script_branch_f3
-	End
-@ 17f
+@ 17d
+
+.byte 0x2 @ 0x17d
+.byte 0x0 @ 0x17e
 
 Script_branch_17f: @ 17f
 	Cmd_30
 	Jump Script_branch_171
-	End
-@ 189
+@ 187
+
+.byte 0x2 @ 0x187
+.byte 0x0 @ 0x188
 
 Script_branch_189: @ 189
 	Cmd_30
@@ -117,8 +133,10 @@ Script_branch_189: @ 189
 Script_4: @ 18f
 	UndergroundFunction2 0x0
 	Jump Script_branch_19b
-	End
-@ 19b
+@ 199
+
+.byte 0x2 @ 0x199
+.byte 0x0 @ 0x19a
 
 Script_branch_19b: @ 19b
 	UndergroundFunction 0x0, 0x800c
@@ -133,45 +151,59 @@ Script_branch_19b: @ 19b
 	If 0x8008, 0xffff
 	CompareLastResultJump EQUAL, Script_branch_165
 	Jump Script_branch_20d
-	End
-@ 1e9
+@ 1e7
+
+.byte 0x2 @ 0x1e7
+.byte 0x0 @ 0x1e8
 
 Script_branch_1e9: @ 1e9
 	UndergroundFunction2 0x3
 	Jump Script_branch_217
-	End
-@ 1f5
+@ 1f3
+
+.byte 0x2 @ 0x1f3
+.byte 0x0 @ 0x1f4
 
 Script_branch_1f5: @ 1f5
 	UndergroundFunction2 0x4
 	Jump Script_branch_217
-	End
-@ 201
+@ 1ff
+
+.byte 0x2 @ 0x1ff
+.byte 0x0 @ 0x200
 
 Script_branch_201: @ 201
 	UndergroundFunction2 0x5
 	Jump Script_branch_217
-	End
-@ 20d
+@ 20b
+
+.byte 0x2 @ 0x20b
+.byte 0x0 @ 0x20c
 
 Script_branch_20d: @ 20d
 	Cmd_30
 	Jump Script_branch_217
-	End
-@ 217
+@ 215
+
+.byte 0x2 @ 0x215
+.byte 0x0 @ 0x216
 
 Script_branch_217: @ 217
 	Cmd_30
 	UndergroundFunction2 0x8
 	Jump Script_branch_19b
-	End
-@ 225
+@ 223
+
+.byte 0x2 @ 0x223
+.byte 0x0 @ 0x224
 
 Script_5: @ 225
 	UndergroundFunction2 0x1b
 	Jump Script_branch_231
-	End
-@ 231
+@ 22f
+
+.byte 0x2 @ 0x22f
+.byte 0x0 @ 0x230
 
 Script_branch_231: @ 231
 	UndergroundFunction 0x2, 0x800c
@@ -182,27 +214,35 @@ Script_branch_231: @ 231
 	If 0x8008, 0xffff
 	CompareLastResultJump EQUAL, Script_branch_165
 	Jump Script_branch_271
-	End
-@ 265
+@ 263
+
+.byte 0x2 @ 0x263
+.byte 0x0 @ 0x264
 
 Script_branch_265: @ 265
 	UndergroundFunction2 0x3
 	Jump Script_branch_27b
-	End
-@ 271
+@ 26f
+
+.byte 0x2 @ 0x26f
+.byte 0x0 @ 0x270
 
 Script_branch_271: @ 271
 	Cmd_30
 	Jump Script_branch_27b
-	End
-@ 27b
+@ 279
+
+.byte 0x2 @ 0x279
+.byte 0x0 @ 0x27a
 
 Script_branch_27b: @ 27b
 	Cmd_30
 	UndergroundFunction2 0x8
 	Jump Script_branch_231
-	End
-@ 289
+@ 287
+
+.byte 0x2 @ 0x287
+.byte 0x0 @ 0x288
 
 Script_6: @ 289
 	ApplyMovement 0x10, Movement_2d4

@@ -153,24 +153,30 @@ Script_3: @ 154
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_177
 	Jump Script_branch_191
-	End
-@ 177
+@ 175
+
+.byte 0x2 @ 0x175
+.byte 0x0 @ 0x176
 
 Script_branch_177: @ 177
 	ApplyMovement 0xe, Movement_1f0
 	ApplyMovement 0xff, Movement_1e4
 	WaitMovement
 	Jump Script_branch_1ab
-	End
-@ 191
+@ 18f
+
+.byte 0x2 @ 0x18f
+.byte 0x0 @ 0x190
 
 Script_branch_191: @ 191
 	ApplyMovement 0xe, Movement_1fc
 	ApplyMovement 0xff, Movement_1e4
 	WaitMovement
 	Jump Script_branch_1ab
-	End
-@ 1ab
+@ 1a9
+
+.byte 0x2 @ 0x1a9
+.byte 0x0 @ 0x1aa
 
 Script_branch_1ab: @ 1ab
 	ApplyMovement 0xe, Movement_204

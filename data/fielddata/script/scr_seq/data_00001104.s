@@ -389,8 +389,10 @@ Script_9: @ 3d4
 Script_branch_429: @ 429
 	Message 0xc
 	Jump Script_branch_434
-	End
-@ 434
+@ 432
+
+.byte 0x2 @ 0x432
+.byte 0x0 @ 0x433
 
 Script_branch_434: @ 434
 	WaitButton
@@ -423,8 +425,10 @@ Script_10: @ 43c
 Script_branch_491: @ 491
 	Message 0xf
 	Jump Script_branch_434
-	End
-@ 49c
+@ 49a
+
+.byte 0x2 @ 0x49a
+.byte 0x0 @ 0x49b
 
 Script_11: @ 49c
 	PlayFanfare 0x5dc
@@ -450,8 +454,10 @@ Script_11: @ 49c
 Script_branch_4f1: @ 4f1
 	Message 0x12
 	Jump Script_branch_434
-	End
-@ 4fc
+@ 4fa
+
+.byte 0x2 @ 0x4fa
+.byte 0x0 @ 0x4fb
 
 Script_12: @ 4fc
 	PlayFanfare 0x5dc
@@ -477,8 +483,10 @@ Script_12: @ 4fc
 Script_branch_551: @ 551
 	Message 0x15
 	Jump Script_branch_434
-	End
-@ 55c
+@ 55a
+
+.byte 0x2 @ 0x55a
+.byte 0x0 @ 0x55b
 
 Script_13: @ 55c
 	PlayFanfare 0x5dc
@@ -504,8 +512,10 @@ Script_13: @ 55c
 Script_branch_5b1: @ 5b1
 	Message 0x18
 	Jump Script_branch_434
-	End
-@ 5bc
+@ 5ba
+
+.byte 0x2 @ 0x5ba
+.byte 0x0 @ 0x5bb
 
 Script_15: @ 5bc
 	CallMessageBox 0x1b, 0x2, 0x0, 0x800c

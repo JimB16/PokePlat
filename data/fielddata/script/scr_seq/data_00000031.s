@@ -45,32 +45,40 @@ Script_1: @ 32
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_be
 	Jump Script_branch_d8
-	End
-@ a4
+@ a2
+
+.byte 0x2 @ 0xa2
+.byte 0x0 @ 0xa3
 
 Script_branch_a4: @ a4
 	ApplyMovement 0x1, Movement_114
 	ApplyMovement 0xff, Movement_138
 	WaitMovement
 	Jump Script_branch_f2
-	End
-@ be
+@ bc
+
+.byte 0x2 @ 0xbc
+.byte 0x0 @ 0xbd
 
 Script_branch_be: @ be
 	ApplyMovement 0x1, Movement_124
 	ApplyMovement 0xff, Movement_148
 	WaitMovement
 	Jump Script_branch_f2
-	End
-@ d8
+@ d6
+
+.byte 0x2 @ 0xd6
+.byte 0x0 @ 0xd7
 
 Script_branch_d8: @ d8
 	ApplyMovement 0x1, Movement_124
 	ApplyMovement 0xff, Movement_148
 	WaitMovement
 	Jump Script_branch_f2
-	End
-@ f2
+@ f0
+
+.byte 0x2 @ 0xf0
+.byte 0x0 @ 0xf1
 
 Script_branch_f2: @ f2
 	PlayFanfare 0x603
@@ -194,26 +202,34 @@ Script_branch_1e7: @ 1e7
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_22e
 	Jump Script_branch_212
-	End
-@ 212
+@ 210
+
+.byte 0x2 @ 0x210
+.byte 0x0 @ 0x211
 
 Script_branch_212: @ 212
 	TrainerBattle 0x156, 0x0
 	Jump Script_branch_23c
-	End
-@ 220
+@ 21e
+
+.byte 0x2 @ 0x21e
+.byte 0x0 @ 0x21f
 
 Script_branch_220: @ 220
 	TrainerBattle 0x156, 0x0
 	Jump Script_branch_23c
-	End
-@ 22e
+@ 22c
+
+.byte 0x2 @ 0x22c
+.byte 0x0 @ 0x22d
 
 Script_branch_22e: @ 22e
 	TrainerBattle 0x156, 0x0
 	Jump Script_branch_23c
-	End
-@ 23c
+@ 23a
+
+.byte 0x2 @ 0x23a
+.byte 0x0 @ 0x23b
 
 Script_branch_23c: @ 23c
 	CheckTrainerLost 0x800c
@@ -245,8 +261,10 @@ Script_branch_274: @ 274
 	CallStandard 0x7fc
 	SetFlag 0x112
 	Jump Script_branch_2a8
-	End
-@ 2a8
+@ 2a6
+
+.byte 0x2 @ 0x2a6
+.byte 0x0 @ 0x2a7
 
 Script_branch_2a8: @ 2a8
 	Message 0xe
@@ -311,26 +329,34 @@ Script_branch_31a: @ 31a
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_361
 	Jump Script_branch_345
-	End
-@ 345
+@ 343
+
+.byte 0x2 @ 0x343
+.byte 0x0 @ 0x344
 
 Script_branch_345: @ 345
 	TrainerBattle 0x159, 0x0
 	Jump Script_branch_36f
-	End
-@ 353
+@ 351
+
+.byte 0x2 @ 0x351
+.byte 0x0 @ 0x352
 
 Script_branch_353: @ 353
 	TrainerBattle 0x159, 0x0
 	Jump Script_branch_36f
-	End
-@ 361
+@ 35f
+
+.byte 0x2 @ 0x35f
+.byte 0x0 @ 0x360
 
 Script_branch_361: @ 361
 	TrainerBattle 0x159, 0x0
 	Jump Script_branch_36f
-	End
-@ 36f
+@ 36d
+
+.byte 0x2 @ 0x36d
+.byte 0x0 @ 0x36e
 
 Script_branch_36f: @ 36f
 	CheckTrainerLost 0x800c
@@ -389,8 +415,10 @@ Script_11: @ 3d9
 	LockAll
 	Message 0x14
 	Jump Script_branch_3ea
-	End
-@ 3ea
+@ 3e8
+
+.byte 0x2 @ 0x3e8
+.byte 0x0 @ 0x3e9
 
 Script_branch_3ea: @ 3ea
 	Message 0x15
@@ -414,38 +442,50 @@ Script_branch_3ea: @ 3ea
 	If 0x8008, 0x4
 	CompareLastResultJump EQUAL, Script_branch_48b
 	Jump Script_branch_496
-	End
-@ 45f
+@ 45d
+
+.byte 0x2 @ 0x45d
+.byte 0x0 @ 0x45e
 
 Script_branch_45f: @ 45f
 	Message 0x16
 	Jump Script_branch_3ea
-	End
-@ 46a
+@ 468
+
+.byte 0x2 @ 0x468
+.byte 0x0 @ 0x469
 
 Script_branch_46a: @ 46a
 	Message 0x17
 	Jump Script_branch_3ea
-	End
-@ 475
+@ 473
+
+.byte 0x2 @ 0x473
+.byte 0x0 @ 0x474
 
 Script_branch_475: @ 475
 	Message 0x18
 	Jump Script_branch_3ea
-	End
-@ 480
+@ 47e
+
+.byte 0x2 @ 0x47e
+.byte 0x0 @ 0x47f
 
 Script_branch_480: @ 480
 	Message 0x19
 	Jump Script_branch_3ea
-	End
-@ 48b
+@ 489
+
+.byte 0x2 @ 0x489
+.byte 0x0 @ 0x48a
 
 Script_branch_48b: @ 48b
 	Message 0x1a
 	Jump Script_branch_3ea
-	End
-@ 496
+@ 494
+
+.byte 0x2 @ 0x494
+.byte 0x0 @ 0x495
 
 Script_branch_496: @ 496
 	CloseMsgOnKeyPress

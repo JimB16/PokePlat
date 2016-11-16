@@ -136,8 +136,10 @@ Script_4: @ e6
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_155
-	End
-@ 155
+@ 153
+
+.byte 0x2 @ 0x153
+.byte 0x0 @ 0x154
 
 Script_branch_155: @ 155
 	SetFlag 0x120

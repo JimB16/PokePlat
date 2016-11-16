@@ -37,8 +37,10 @@ Script_1: @ 42
 	CompareLastResultJump EQUAL, Script_branch_ae
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 8e
+@ 8c
+
+.byte 0x2 @ 0x8c
+.byte 0x0 @ 0x8d
 
 Script_branch_8e: @ 8e
 	Message 0x2
@@ -48,8 +50,10 @@ Script_branch_8e: @ 8e
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ ae
+@ ac
+
+.byte 0x2 @ 0xac
+.byte 0x0 @ 0xad
 
 Script_branch_ae: @ ae
 	CheckPlaceStored 0x800c, 0xf
@@ -68,8 +72,10 @@ Script_branch_e8: @ e8
 	If 0x8005, 0x0
 	CompareLastResultJump EQUAL, Script_branch_e8
 	Jump Script_branch_66d
-	End
-@ 103
+@ 101
+
+.byte 0x2 @ 0x101
+.byte 0x0 @ 0x102
 
 Script_9: @ 103
 	LockAll
@@ -174,16 +180,20 @@ Script_2: @ 223
 	CompareLastResultJump EQUAL, Script_branch_284
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 275
+@ 273
+
+.byte 0x2 @ 0x273
+.byte 0x0 @ 0x274
 
 Script_branch_275: @ 275
 	Message 0x4
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 284
+@ 282
+
+.byte 0x2 @ 0x282
+.byte 0x0 @ 0x283
 
 Script_branch_284: @ 284
 	SetVarPokeNick 0x0, 0x8004
@@ -200,8 +210,10 @@ Script_branch_2b2: @ 2b2
 	If 0x8005, 0x0
 	CompareLastResultJump EQUAL, Script_branch_2b2
 	Jump Script_branch_66d
-	End
-@ 2cd
+@ 2cb
+
+.byte 0x2 @ 0x2cb
+.byte 0x0 @ 0x2cc
 
 Script_10: @ 2cd
 	LockAll
@@ -241,16 +253,20 @@ Script_3: @ 314
 	CompareLastResultJump EQUAL, Script_branch_381
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 372
+@ 370
+
+.byte 0x2 @ 0x370
+.byte 0x0 @ 0x371
 
 Script_branch_372: @ 372
 	Message 0x8
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 381
+@ 37f
+
+.byte 0x2 @ 0x37f
+.byte 0x0 @ 0x380
 
 Script_branch_381: @ 381
 	HmFunctions 0x1
@@ -266,16 +282,20 @@ Script_branch_381: @ 381
 	CheckEffectHm 0x8004
 	DeActivateLeader 0x16, 0x8004, 0x0, 0x0, 0x0
 	Jump Script_branch_66d
-	End
-@ 3bd
+@ 3bb
+
+.byte 0x2 @ 0x3bb
+.byte 0x0 @ 0x3bc
 
 Script_branch_3bd: @ 3bd
 	Message 0x9
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_66d
-	End
-@ 3cc
+@ 3ca
+
+.byte 0x2 @ 0x3ca
+.byte 0x0 @ 0x3cb
 
 Script_11: @ 3cc
 	LockAll
@@ -293,6 +313,8 @@ Script_11: @ 3cc
 	CheckEffectHm 0x8004
 	DeActivateLeader 0x16, 0x8004, 0x0, 0x0, 0x0
 	Jump Script_branch_675
+@ 40e
+
 Script_4: @ 40e
 	PlayFanfare 0x5dc
 	LockAll
@@ -311,24 +333,30 @@ Script_4: @ 40e
 	CompareLastResultJump EQUAL, Script_branch_487
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 469
+@ 467
+
+.byte 0x2 @ 0x467
+.byte 0x0 @ 0x468
 
 Script_branch_469: @ 469
 	Message 0x14
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 478
+@ 476
+
+.byte 0x2 @ 0x476
+.byte 0x0 @ 0x477
 
 Script_branch_478: @ 478
 	Message 0x15
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 487
+@ 485
+
+.byte 0x2 @ 0x485
+.byte 0x0 @ 0x486
 
 Script_branch_487: @ 487
 	CheckPlaceStored 0x800c, 0x1af
@@ -340,8 +368,10 @@ Script_branch_487: @ 487
 	CheckEffectHm 0x8004
 	DeActivateLeader 0x1a, 0x8004, 0x0, 0x0, 0x0
 	Jump Script_branch_671
-	End
-@ 4b9
+@ 4b7
+
+.byte 0x2 @ 0x4b7
+.byte 0x0 @ 0x4b8
 
 Script_12: @ 4b9
 	LockAll
@@ -367,14 +397,18 @@ Script_5: @ 4dd
 	CompareLastResultJump EQUAL, Script_branch_51f
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 512
+@ 510
+
+.byte 0x2 @ 0x510
+.byte 0x0 @ 0x511
 
 Script_branch_512: @ 512
 	Message 0xe
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
+@ 51f
+
 Script_branch_51f: @ 51f
 	CheckPlaceStored 0x800c, 0x39
 	CopyVar 0x8004, 0x800c
@@ -385,8 +419,10 @@ Script_branch_51f: @ 51f
 	CheckEffectHm 0x8004
 	DeActivateLeader 0x15, 0x8004, 0x0, 0x0, 0x0
 	Jump Script_branch_671
-	End
-@ 551
+@ 54f
+
+.byte 0x2 @ 0x54f
+.byte 0x0 @ 0x550
 
 Script_13: @ 551
 	LockAll
@@ -414,16 +450,20 @@ Script_6: @ 57d
 	CompareLastResultJump EQUAL, Script_branch_5c3
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 5b4
+@ 5b2
+
+.byte 0x2 @ 0x5b2
+.byte 0x0 @ 0x5b3
 
 Script_branch_5b4: @ 5b4
 	Message 0x11
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 5c3
+@ 5c1
+
+.byte 0x2 @ 0x5c1
+.byte 0x0 @ 0x5c2
 
 Script_branch_5c3: @ 5c3
 	CheckPlaceStored 0x800c, 0x1b0
@@ -438,8 +478,10 @@ Script_branch_5c3: @ 5c3
 	If 0x8004, 0x169
 	CompareLastResultCall EQUAL, Script_branch_606
 	Jump Script_branch_671
-	End
-@ 606
+@ 604
+
+.byte 0x2 @ 0x604
+.byte 0x0 @ 0x605
 
 Script_branch_606: @ 606
 	SetFlag 0x7b
@@ -461,6 +503,8 @@ Script_15: @ 60c
 	If 0x8004, 0x169
 	CompareLastResultCall EQUAL, Script_branch_606
 	Jump Script_branch_675
+@ 64c
+
 Script_16: @ 64c
 	LockAll
 	SetVarPokeNick 0x0, 0x8000
@@ -471,6 +515,8 @@ Script_16: @ 64c
 	FlashAnimation
 	Return2 0x2a, 0x800c
 	Jump Script_branch_675
+@ 66d
+
 Script_branch_66d: @ 66d
 	ReleaseAll
 	End
@@ -501,16 +547,20 @@ Script_7: @ 679
 	CompareLastResultJump EQUAL, Script_branch_6d2
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 6c3
+@ 6c1
+
+.byte 0x2 @ 0x6c1
+.byte 0x0 @ 0x6c2
 
 Script_branch_6c3: @ 6c3
 	Message 0x18
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_671
-	End
-@ 6d2
+@ 6d0
+
+.byte 0x2 @ 0x6d0
+.byte 0x0 @ 0x6d1
 
 Script_branch_6d2: @ 6d2
 	CheckPlaceStored 0x800c, 0x7f
@@ -522,8 +572,10 @@ Script_branch_6d2: @ 6d2
 	CheckEffectHm 0x8004
 	DeActivateLeader 0x19, 0x8004, 0x0, 0x0, 0x0
 	Jump Script_branch_671
-	End
-@ 704
+@ 702
+
+.byte 0x2 @ 0x702
+.byte 0x0 @ 0x703
 
 Script_14: @ 704
 	LockAll

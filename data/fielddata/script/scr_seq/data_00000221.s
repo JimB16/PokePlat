@@ -29,8 +29,10 @@ Script_2: @ 10
 	SetFlag 0x138
 	CallStandard 0x7fc
 	Jump Script_branch_62
-	End
-@ 62
+@ 60
+
+.byte 0x2 @ 0x60
+.byte 0x0 @ 0x61
 
 Script_branch_62: @ 62
 	CheckItem 0x5b, 0x1, 0x800c
@@ -38,8 +40,10 @@ Script_branch_62: @ 62
 	CompareLastResultJump EQUAL, Script_branch_82
 	Message 0x1
 	Jump Script_branch_ec
-	End
-@ 82
+@ 80
+
+.byte 0x2 @ 0x80
+.byte 0x0 @ 0x81
 
 Script_branch_82: @ 82
 	SetFlag 0xdb
@@ -68,8 +72,10 @@ Script_branch_a9: @ a9
 Script_branch_e1: @ e1
 	Message 0x3
 	Jump Script_branch_ec
-	End
-@ ec
+@ ea
+
+.byte 0x2 @ 0xea
+.byte 0x0 @ 0xeb
 
 Script_branch_ec: @ ec
 	WaitButton
@@ -81,16 +87,20 @@ Script_branch_ec: @ ec
 Script_branch_f4: @ f4
 	Message 0x7
 	Jump Script_branch_ec
-	End
-@ ff
+@ fd
+
+.byte 0x2 @ 0xfd
+.byte 0x0 @ 0xfe
 
 Script_branch_ff: @ ff
 	Cmd_2fe 0x5b, 0x8000
 	If 0x8000, 0xa
 	CompareLastResultJump 0x4, Script_branch_14e
 	Jump Script_branch_11a
-	End
-@ 11a
+@ 118
+
+.byte 0x2 @ 0x118
+.byte 0x0 @ 0x119
 
 Script_branch_11a: @ 11a
 	RandomEvent 0x46
@@ -100,8 +110,10 @@ Script_branch_11a: @ 11a
 	TakeItem 0x4a, 0x1, 0x800c
 	TakeItem 0x4b, 0x1, 0x800c
 	Jump Script_branch_1e5
-	End
-@ 14e
+@ 14c
+
+.byte 0x2 @ 0x14c
+.byte 0x0 @ 0x14d
 
 Script_branch_14e: @ 14e
 	Message 0x5
@@ -118,8 +130,10 @@ Script_branch_14e: @ 14e
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_19e
 	Jump Script_branch_f4
-	End
-@ 19e
+@ 19c
+
+.byte 0x2 @ 0x19c
+.byte 0x0 @ 0x19d
 
 Script_branch_19e: @ 19e
 	ScriptCmd_SubValue 0x8007, 0x1
@@ -132,8 +146,10 @@ Script_branch_19e: @ 19e
 	If 0x8007, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1e5
 	Jump Script_branch_19e
-	End
-@ 1e5
+@ 1e3
+
+.byte 0x2 @ 0x1e3
+.byte 0x0 @ 0x1e4
 
 Script_branch_1e5: @ 1e5
 	Message 0x6

@@ -52,8 +52,10 @@ Script_4: @ 55
 	CompareLastResultJump EQUAL, Script_branch_12b
 	Message 0x2
 	Jump Script_branch_73
-	End
-@ 73
+@ 71
+
+.byte 0x2 @ 0x71
+.byte 0x0 @ 0x72
 
 Script_branch_73: @ 73
 	SetVar 0x8004, 0x12a
@@ -78,22 +80,28 @@ Script_branch_cc: @ cc
 	ApplyMovement 0x3, Movement_138
 	WaitMovement
 	Jump Script_branch_102
-	End
-@ de
+@ dc
+
+.byte 0x2 @ 0xdc
+.byte 0x0 @ 0xdd
 
 Script_branch_de: @ de
 	ApplyMovement 0x3, Movement_144
 	WaitMovement
 	Jump Script_branch_102
-	End
-@ f0
+@ ee
+
+.byte 0x2 @ 0xee
+.byte 0x0 @ 0xef
 
 Script_branch_f0: @ f0
 	ApplyMovement 0x3, Movement_144
 	WaitMovement
 	Jump Script_branch_102
-	End
-@ 102
+@ 100
+
+.byte 0x2 @ 0x100
+.byte 0x0 @ 0x101
 
 Script_branch_102: @ 102
 	PlayFanfare 0x603
@@ -107,8 +115,10 @@ Script_branch_114: @ 114
 	SetFlag 0xa5
 	Message 0x3
 	Jump Script_branch_123
-	End
-@ 123
+@ 121
+
+.byte 0x2 @ 0x121
+.byte 0x0 @ 0x122
 
 Script_branch_123: @ 123
 	WaitButton
@@ -120,9 +130,10 @@ Script_branch_123: @ 123
 Script_branch_12b: @ 12b
 	Message 0x4
 	Jump Script_branch_73
-	End
-@ 136
+@ 134
 
+.byte 0x2 @ 0x134
+.byte 0x0 @ 0x135
 .byte 0x0 @ 0x136
 .byte 0x0 @ 0x137
 

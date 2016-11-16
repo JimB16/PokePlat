@@ -19,6 +19,8 @@ Script_1: @ 6
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_5a
 	Jump Script_branch_65
+@ 44
+
 Script_branch_44: @ 44
 	Message 0x1
 	WaitButton

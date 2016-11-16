@@ -52,8 +52,10 @@ Script_2: @ 7c
 	Message 0x4
 	Call Function_95
 	Jump Script_branch_103
-	End
-@ 95
+@ 93
+
+.byte 0x2 @ 0x93
+.byte 0x0 @ 0x94
 
 Function_95: @ 95
 Script_branch_95: @ 95
@@ -92,36 +94,46 @@ Script_branch_10e: @ 10e
 	Message 0x5
 	Message 0x4
 	Jump Function_95
-	End
-@ 11c
+@ 11a
+
+.byte 0x2 @ 0x11a
+.byte 0x0 @ 0x11b
 
 Script_branch_11c: @ 11c
 	Message 0x7
 	Message 0x4
 	Jump Function_95
-	End
-@ 12a
+@ 128
+
+.byte 0x2 @ 0x128
+.byte 0x0 @ 0x129
 
 Script_branch_12a: @ 12a
 	Message 0x8
 	Message 0x4
 	Jump Function_95
-	End
-@ 138
+@ 136
+
+.byte 0x2 @ 0x136
+.byte 0x0 @ 0x137
 
 Script_branch_138: @ 138
 	Message 0x9
 	Message 0x4
 	Jump Function_95
-	End
-@ 146
+@ 144
+
+.byte 0x2 @ 0x144
+.byte 0x0 @ 0x145
 
 Script_branch_146: @ 146
 	Message 0x6
 	Message 0x4
 	Jump Function_95
-	End
-@ 154
+@ 152
+
+.byte 0x2 @ 0x152
+.byte 0x0 @ 0x153
 
 Script_3: @ 154
 	PlayFanfare 0x5dc
@@ -139,14 +151,18 @@ Script_3: @ 154
 Script_branch_17f: @ 17f
 	Message 0x12
 	Jump Script_branch_18a
-	End
-@ 18a
+@ 188
+
+.byte 0x2 @ 0x188
+.byte 0x0 @ 0x189
 
 Script_branch_18a: @ 18a
 	Message 0x13
 	Jump Script_branch_195
-	End
-@ 195
+@ 193
+
+.byte 0x2 @ 0x193
+.byte 0x0 @ 0x194
 
 Script_branch_195: @ 195
 	WaitButton
@@ -171,14 +187,18 @@ Script_4: @ 19d
 Script_branch_1c8: @ 1c8
 	Message 0x15
 	Jump Script_branch_1d3
-	End
-@ 1d3
+@ 1d1
+
+.byte 0x2 @ 0x1d1
+.byte 0x0 @ 0x1d2
 
 Script_branch_1d3: @ 1d3
 	Message 0x16
 	Jump Script_branch_1de
-	End
-@ 1de
+@ 1dc
+
+.byte 0x2 @ 0x1dc
+.byte 0x0 @ 0x1dd
 
 Script_branch_1de: @ 1de
 	WaitButton
@@ -203,14 +223,18 @@ Script_5: @ 1e6
 Script_branch_211: @ 211
 	Message 0x18
 	Jump Script_branch_21c
-	End
-@ 21c
+@ 21a
+
+.byte 0x2 @ 0x21a
+.byte 0x0 @ 0x21b
 
 Script_branch_21c: @ 21c
 	Message 0x19
 	Jump Script_branch_227
-	End
-@ 227
+@ 225
+
+.byte 0x2 @ 0x225
+.byte 0x0 @ 0x226
 
 Script_branch_227: @ 227
 	WaitButton
@@ -235,14 +259,18 @@ Script_6: @ 22f
 Script_branch_25a: @ 25a
 	Message 0x1b
 	Jump Script_branch_265
-	End
-@ 265
+@ 263
+
+.byte 0x2 @ 0x263
+.byte 0x0 @ 0x264
 
 Script_branch_265: @ 265
 	Message 0x1c
 	Jump Script_branch_270
-	End
-@ 270
+@ 26e
+
+.byte 0x2 @ 0x26e
+.byte 0x0 @ 0x26f
 
 Script_branch_270: @ 270
 	WaitButton
@@ -267,14 +295,18 @@ Script_7: @ 278
 Script_branch_2a3: @ 2a3
 	Message 0x1e
 	Jump Script_branch_2ae
-	End
-@ 2ae
+@ 2ac
+
+.byte 0x2 @ 0x2ac
+.byte 0x0 @ 0x2ad
 
 Script_branch_2ae: @ 2ae
 	Message 0x1f
 	Jump Script_branch_2b9
-	End
-@ 2b9
+@ 2b7
+
+.byte 0x2 @ 0x2b7
+.byte 0x0 @ 0x2b8
 
 Script_branch_2b9: @ 2b9
 	WaitButton

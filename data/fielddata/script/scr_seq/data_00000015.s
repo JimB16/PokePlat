@@ -41,9 +41,13 @@ Script_branch_6f: @ 6f
 Script_branch_77: @ 77
 	Message 0x1
 	Jump Script_branch_b5
+@ 80
+
 Script_branch_80: @ 80
 	Message 0xb
 	Jump Script_branch_b5
+@ 89
+
 Script_branch_89: @ 89
 	Message 0x3
 	YesNoBox 0x800c
@@ -57,6 +61,8 @@ Script_branch_89: @ 89
 Script_branch_ac: @ ac
 	Message 0x6
 	Jump Script_branch_d5
+@ b5
+
 Script_branch_b5: @ b5
 	YesNoBox 0x800c
 	If 0x800c, 0x0
@@ -87,6 +93,8 @@ Script_branch_f5: @ f5
 Script_branch_115: @ 115
 	SetVar 0x4002, 0x0
 	Jump Script_branch_16c
+@ 121
+
 Script_branch_121: @ 121
 	Message 0x4
 	CloseMsgOnKeyPress
@@ -103,6 +111,8 @@ Script_branch_121: @ 121
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_2be
 	Jump Script_branch_16c
+@ 16c
+
 Script_branch_16c: @ 16c
 	Message 0x5
 	CloseMsgOnKeyPress
@@ -122,18 +132,24 @@ Script_branch_19e: @ 19e
 	ApplyMovement 0xff, Movement_340
 	WaitMovement
 	Jump Script_branch_1ec
+@ 1b8
+
 Script_branch_1b8: @ 1b8
 	ApplyMovement 0x0, Movement_380
 	WaitMovement
 	ApplyMovement 0xff, Movement_348
 	WaitMovement
 	Jump Script_branch_1ec
+@ 1d2
+
 Script_branch_1d2: @ 1d2
 	ApplyMovement 0x0, Movement_38c
 	WaitMovement
 	ApplyMovement 0xff, Movement_354
 	WaitMovement
 	Jump Script_branch_1ec
+@ 1ec
+
 Script_branch_1ec: @ 1ec
 	SetFlag 0x88
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -159,18 +175,24 @@ Script_branch_245: @ 245
 	ApplyMovement 0x0, Movement_398
 	WaitMovement
 	Jump Script_branch_293
+@ 25f
+
 Script_branch_25f: @ 25f
 	ApplyMovement 0xff, Movement_368
 	WaitMovement
 	ApplyMovement 0x0, Movement_3a4
 	WaitMovement
 	Jump Script_branch_293
+@ 279
+
 Script_branch_279: @ 279
 	ApplyMovement 0xff, Movement_368
 	WaitMovement
 	ApplyMovement 0x0, Movement_3b0
 	WaitMovement
 	Jump Script_branch_293
+@ 293
+
 Script_branch_293: @ 293
 	If 0x8005, 0x0
 	CompareLastResultJump EQUAL, Script_branch_335
@@ -179,6 +201,8 @@ Script_branch_293: @ 293
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_2c7
+@ 2b3
+
 Script_branch_2b3: @ 2b3
 	Message 0x2
 	WaitButton
@@ -190,6 +214,8 @@ Script_branch_2b3: @ 2b3
 Script_branch_2be: @ 2be
 	Message 0xd
 	Jump Script_branch_121
+@ 2c7
+
 Script_branch_2c7: @ 2c7
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen
@@ -220,6 +246,8 @@ Script_branch_328: @ 328
 	WaitButton
 	CloseMsgOnKeyPress
 	Jump Script_branch_2c7
+@ 335
+
 Script_branch_335: @ 335
 	Message 0xa
 	WaitButton

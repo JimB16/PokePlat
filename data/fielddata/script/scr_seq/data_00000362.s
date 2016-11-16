@@ -34,6 +34,8 @@ Script_2: @ 37
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_5d
 	Jump Script_branch_9d
+@ 5d
+
 Script_branch_5d: @ 5d
 	Message 0x1
 	CloseMsgOnKeyPress

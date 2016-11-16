@@ -162,6 +162,8 @@ Script_branch_1b9: @ 1b9
 	ShowPokeInfo 0x8000
 	StorePokeMove 0x800c
 	Jump Script_branch_1b9
+@ 1de
+
 Script_branch_1de: @ 1de
 	CallEnd
 	ShowMoney 0x14, 0x2
@@ -185,11 +187,15 @@ Script_branch_1de: @ 1de
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_25f
 	Jump Script_branch_270
+@ 25f
+
 Script_branch_25f: @ 25f
 	PlayCry 0x8001, 0x0
 	Message 0x11
 	WaitCry
 	Jump Script_branch_29f
+@ 270
+
 Script_branch_270: @ 270
 	PlayCry 0x8001, 0x0
 	Message 0x24
@@ -225,8 +231,10 @@ Script_branch_29f: @ 29f
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_17e
 	Jump Script_branch_292
-	End
-@ 2bb
+@ 2b9
+
+.byte 0x2 @ 0x2b9
+.byte 0x0 @ 0x2ba
 
 Script_branch_2bb: @ 2bb
 	Message 0x1f
@@ -289,6 +297,8 @@ Script_branch_309: @ 309
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_346
 	Jump Script_branch_292
+@ 346
+
 Script_branch_346: @ 346
 	CheckPartyNumber 0x800c
 	If 0x800c, 0x6
@@ -310,6 +320,8 @@ Script_branch_346: @ 346
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_3be
 	Jump Script_branch_292
+@ 3be
+
 Script_branch_3be: @ 3be
 	SetVarPokeAndMoneyDCare 0x8004, 0x8001
 	Message 0x1c
@@ -317,6 +329,8 @@ Script_branch_3be: @ 3be
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3de
 	Jump Script_branch_292
+@ 3de
+
 Script_branch_3de: @ 3de
 	CheckMoneyDCare 0x800c, 0x8004
 	If 0x800c, 0x1
@@ -346,12 +360,16 @@ Script_branch_3fe: @ 3fe
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_444
 	Jump Script_branch_292
+@ 444
+
 Script_branch_444: @ 444
 	Message 0x16
 	YesNoBox 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_346
 	Jump Script_branch_292
+@ 45e
+
 Script_branch_45e: @ 45e
 	Message 0x1a
 	WaitButton

@@ -169,8 +169,10 @@ Script_branch_1ea: @ 1ea
 	SetFlag 0x133
 	SetVar 0x4106, 0x2
 	Jump Script_branch_1d9
-	End
-@ 1fc
+@ 1fa
+
+.byte 0x2 @ 0x1fa
+.byte 0x0 @ 0x1fb
 
 Function_1fc: @ 1fc
 	PlayFanfare 0x603

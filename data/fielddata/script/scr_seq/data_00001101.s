@@ -272,8 +272,10 @@ Script_5: @ 2b4
 	SetFlag 0x5
 	Call Function_1091
 	Jump Script_branch_34d
-	End
-@ 32f
+@ 32d
+
+.byte 0x2 @ 0x32d
+.byte 0x0 @ 0x32e
 
 Function_32f: @ 32f
 	Call Function_811
@@ -291,8 +293,10 @@ Script_branch_34d: @ 34d
 	CompareLastResultJump EQUAL, Script_branch_39e
 	Call Function_afc
 	Jump Script_branch_37e
-	End
-@ 36e
+@ 36c
+
+.byte 0x2 @ 0x36c
+.byte 0x0 @ 0x36d
 
 Script_branch_36e: @ 36e
 	Call Function_718
@@ -315,8 +319,10 @@ Script_branch_386: @ 386
 	SetFlag 0x1
 	Call Function_90a
 	Jump Script_branch_37e
-	End
-@ 398
+@ 396
+
+.byte 0x2 @ 0x396
+.byte 0x0 @ 0x397
 
 Script_branch_398: @ 398
 	LostGoPc
@@ -330,8 +336,10 @@ Script_branch_39e: @ 39e
 	If 0x4001, 0x84
 	CompareLastResultCall EQUAL, Script_branch_3c5
 	Jump Script_branch_37e
-	End
-@ 3c0
+@ 3be
+
+.byte 0x2 @ 0x3be
+.byte 0x0 @ 0x3bf
 
 Script_branch_3c0: @ 3c0
 	Message 0x16
@@ -367,15 +375,19 @@ Script_6: @ 3ca
 	SetFlag 0x6
 	Call Function_1091
 	Jump Script_branch_34d
-	End
-@ 445
+@ 443
+
+.byte 0x2 @ 0x443
+.byte 0x0 @ 0x444
 
 Script_branch_445: @ 445
 	SetFlag 0x2
 	Call Function_90a
 	Jump Script_branch_37e
-	End
-@ 457
+@ 455
+
+.byte 0x2 @ 0x455
+.byte 0x0 @ 0x456
 
 Script_7: @ 457
 	PlayFanfare 0x5dc
@@ -401,15 +413,19 @@ Script_7: @ 457
 	SetFlag 0x7
 	Call Function_1091
 	Jump Script_branch_34d
-	End
-@ 4d2
+@ 4d0
+
+.byte 0x2 @ 0x4d0
+.byte 0x0 @ 0x4d1
 
 Script_branch_4d2: @ 4d2
 	SetFlag 0x3
 	Call Function_90a
 	Jump Script_branch_37e
-	End
-@ 4e4
+@ 4e2
+
+.byte 0x2 @ 0x4e2
+.byte 0x0 @ 0x4e3
 
 Script_8: @ 4e4
 	PlayFanfare 0x5dc
@@ -435,15 +451,19 @@ Script_8: @ 4e4
 	SetFlag 0x8
 	Call Function_1091
 	Jump Script_branch_34d
-	End
-@ 55f
+@ 55d
+
+.byte 0x2 @ 0x55d
+.byte 0x0 @ 0x55e
 
 Script_branch_55f: @ 55f
 	SetFlag 0x4
 	Call Function_90a
 	Jump Script_branch_37e
-	End
-@ 571
+@ 56f
+
+.byte 0x2 @ 0x56f
+.byte 0x0 @ 0x570
 
 Function_571: @ 571
 	SetVar 0x8001, 0x0

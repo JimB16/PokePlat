@@ -530,9 +530,13 @@ Script_branch_5f4: @ 5f4
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_611
 	Jump Script_branch_61a
+@ 611
+
 Script_branch_611: @ 611
 	Message 0x14
 	Jump Script_branch_656
+@ 61a
+
 Script_branch_61a: @ 61a
 	Message 0x15
 	WaitButton
@@ -548,9 +552,13 @@ Script_branch_625: @ 625
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_642
 	Jump Script_branch_64b
+@ 642
+
 Script_branch_642: @ 642
 	Message 0x19
 	Jump Script_branch_656
+@ 64b
+
 Script_branch_64b: @ 64b
 	Message 0x1a
 	WaitButton
@@ -656,16 +664,20 @@ Script_branch_83a: @ 83a
 	ApplyMovement 0x1a, Movement_a94
 	WaitMovement
 	Jump Script_branch_86e
-	End
-@ 854
+@ 852
+
+.byte 0x2 @ 0x852
+.byte 0x0 @ 0x853
 
 Script_branch_854: @ 854
 	ApplyMovement 0xff, Movement_bbc
 	ApplyMovement 0x1a, Movement_aa0
 	WaitMovement
 	Jump Script_branch_86e
-	End
-@ 86e
+@ 86c
+
+.byte 0x2 @ 0x86c
+.byte 0x0 @ 0x86d
 
 Script_branch_86e: @ 86e
 	Message 0x23
@@ -704,16 +716,20 @@ Script_branch_8a9: @ 8a9
 	ApplyMovement 0xff, Movement_bc8
 	WaitMovement
 	Jump Script_branch_8dd
-	End
-@ 8c3
+@ 8c1
+
+.byte 0x2 @ 0x8c1
+.byte 0x0 @ 0x8c2
 
 Script_branch_8c3: @ 8c3
 	ApplyMovement 0x1a, Movement_aac
 	ApplyMovement 0xff, Movement_bdc
 	WaitMovement
 	Jump Script_branch_8dd
-	End
-@ 8dd
+@ 8db
+
+.byte 0x2 @ 0x8db
+.byte 0x0 @ 0x8dc
 
 Script_branch_8dd: @ 8dd
 	SetFlag 0x1a9
@@ -1228,6 +1244,8 @@ Script_7: @ c77
 	CallStandard 0x7fc
 	SetFlag 0xcc
 	Jump Script_branch_cbc
+@ cbc
+
 Script_branch_cbc: @ cbc
 	Message 0x33
 	WaitButton
@@ -1387,8 +1405,10 @@ Script_branch_e34: @ e34
 	ApplyMovement 0x1a, Movement_f80
 	WaitMovement
 	Jump Script_branch_ecc
-	End
-@ e5c
+@ e5a
+
+.byte 0x2 @ 0xe5a
+.byte 0x0 @ 0xe5b
 
 Script_branch_e5c: @ e5c
 	ApplyMovement 0x17, Movement_f24
@@ -1397,8 +1417,10 @@ Script_branch_e5c: @ e5c
 	ApplyMovement 0x1a, Movement_f70
 	WaitMovement
 	Jump Script_branch_ecc
-	End
-@ e7c
+@ e7a
+
+.byte 0x2 @ 0xe7a
+.byte 0x0 @ 0xe7b
 
 Script_branch_e7c: @ e7c
 	ApplyMovement 0xff, Movement_f58
@@ -1408,8 +1430,10 @@ Script_branch_e7c: @ e7c
 	ApplyMovement 0x1a, Movement_f90
 	WaitMovement
 	Jump Script_branch_ecc
-	End
-@ ea4
+@ ea2
+
+.byte 0x2 @ 0xea2
+.byte 0x0 @ 0xea3
 
 Script_branch_ea4: @ ea4
 	ApplyMovement 0xff, Movement_f64
@@ -1419,14 +1443,18 @@ Script_branch_ea4: @ ea4
 	ApplyMovement 0x1a, Movement_fa0
 	WaitMovement
 	Jump Script_branch_ecc
-	End
-@ ecc
+@ eca
+
+.byte 0x2 @ 0xeca
+.byte 0x0 @ 0xecb
 
 Script_branch_ecc: @ ecc
 	RemovePeople 0x17
 	Jump Script_branch_ed8
-	End
-@ ed8
+@ ed6
+
+.byte 0x2 @ 0xed6
+.byte 0x0 @ 0xed7
 
 Script_branch_ed8: @ ed8
 	Message 0x26
@@ -1434,8 +1462,10 @@ Script_branch_ed8: @ ed8
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_ef4
 	Jump Script_branch_f0b
-	End
-@ ef4
+@ ef2
+
+.byte 0x2 @ 0xef2
+.byte 0x0 @ 0xef3
 
 Script_branch_ef4: @ ef4
 	SetVar 0x411f, 0x3
@@ -1538,9 +1568,10 @@ Script_30: @ fb0
 	CheckFlag 0x9b
 	CompareLastResultJump EQUAL, Script_branch_ef4
 	Jump Script_branch_ed8
-	End
-@ fdf
+@ fdd
 
+.byte 0x2 @ 0xfdd
+.byte 0x0 @ 0xfde
 .byte 0x0 @ 0xfdf
 
 Movement_fe0: @ fe0
@@ -1764,14 +1795,18 @@ Script_31: @ 1204
 	CompareLastResultJump EQUAL, Script_branch_122b
 	Message 0x35
 	Jump Script_branch_1236
-	End
-@ 122b
+@ 1229
+
+.byte 0x2 @ 0x1229
+.byte 0x0 @ 0x122a
 
 Script_branch_122b: @ 122b
 	Message 0x36
 	Jump Script_branch_1236
-	End
-@ 1236
+@ 1234
+
+.byte 0x2 @ 0x1234
+.byte 0x0 @ 0x1235
 
 Script_branch_1236: @ 1236
 	WaitButton

@@ -28,6 +28,8 @@ Script_1: @ 12
 	CallStandard 0x7fc
 	SetFlag 0xc6
 	Jump Script_branch_66
+@ 66
+
 Script_branch_66: @ 66
 	FacePlayer
 	Message 0x2

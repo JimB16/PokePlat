@@ -28,40 +28,50 @@ Script_branch_57: @ 57
 	ApplyMovement 0x0, Movement_1f0
 	WaitMovement
 	Jump Script_branch_d9
-	End
-@ 71
+@ 6f
+
+.byte 0x2 @ 0x6f
+.byte 0x0 @ 0x70
 
 Script_branch_71: @ 71
 	ApplyMovement 0xff, Movement_154
 	ApplyMovement 0x0, Movement_200
 	WaitMovement
 	Jump Script_branch_d9
-	End
-@ 8b
+@ 89
+
+.byte 0x2 @ 0x89
+.byte 0x0 @ 0x8a
 
 Script_branch_8b: @ 8b
 	ApplyMovement 0xff, Movement_160
 	ApplyMovement 0x0, Movement_210
 	WaitMovement
 	Jump Script_branch_d9
-	End
-@ a5
+@ a3
+
+.byte 0x2 @ 0xa3
+.byte 0x0 @ 0xa4
 
 Script_branch_a5: @ a5
 	ApplyMovement 0xff, Movement_16c
 	ApplyMovement 0x0, Movement_220
 	WaitMovement
 	Jump Script_branch_d9
-	End
-@ bf
+@ bd
+
+.byte 0x2 @ 0xbd
+.byte 0x0 @ 0xbe
 
 Script_branch_bf: @ bf
 	ApplyMovement 0xff, Movement_178
 	ApplyMovement 0x0, Movement_230
 	WaitMovement
 	Jump Script_branch_d9
-	End
-@ d9
+@ d7
+
+.byte 0x2 @ 0xd7
+.byte 0x0 @ 0xd8
 
 Script_branch_d9: @ d9
 	Message 0x0

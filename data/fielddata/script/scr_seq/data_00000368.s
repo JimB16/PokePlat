@@ -99,24 +99,30 @@ Script_2: @ 146
 	SetVar 0x4000, 0x0
 	Call Function_132
 	Jump Script_branch_a6
-	End
-@ 15c
+@ 15a
+
+.byte 0x2 @ 0x15a
+.byte 0x0 @ 0x15b
 
 Script_3: @ 15c
 	LockAll
 	SetVar 0x4000, 0x0
 	Call Function_132
 	Jump Script_branch_e9
-	End
-@ 172
+@ 170
+
+.byte 0x2 @ 0x170
+.byte 0x0 @ 0x171
 
 Script_4: @ 172
 	LockAll
 	SetVar 0x4000, 0x1
 	Call Function_132
 	Jump Script_branch_10a
-	End
-@ 188
+@ 186
+
+.byte 0x2 @ 0x186
+.byte 0x0 @ 0x187
 
 Function_188: @ 188
 	ApplyMovement 0xff, Movement_1bc

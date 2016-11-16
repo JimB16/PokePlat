@@ -51,6 +51,8 @@ Script_4: @ 44
 	If 0x800c, 0x32
 	CompareLastResultJump 0x4, Script_branch_cb
 	Jump Script_branch_d6
+@ 84
+
 Script_branch_84: @ 84
 	Message 0x3
 	SetVar 0x8004, 0x3
@@ -61,6 +63,8 @@ Script_branch_84: @ 84
 	CallStandard 0x7fc
 	SetFlag 0xaa1
 	Jump Script_branch_c0
+@ b6
+
 Script_branch_b6: @ b6
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress

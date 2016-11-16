@@ -232,8 +232,10 @@ Script_branch_220: @ 220
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_292
 	Jump Script_branch_2b2
-	End
-@ 25a
+@ 258
+
+.byte 0x2 @ 0x258
+.byte 0x0 @ 0x259
 
 Script_branch_25a: @ 25a
 	SetVar 0x8007, 0x2
@@ -241,16 +243,20 @@ Script_branch_25a: @ 25a
 	ApplyMovement 0xff, Movement_2ec
 	WaitMovement
 	Jump Script_branch_2d2
-	End
-@ 27a
+@ 278
+
+.byte 0x2 @ 0x278
+.byte 0x0 @ 0x279
 
 Script_branch_27a: @ 27a
 	SetVar 0x8007, 0x3
 	ApplyMovement 0x15, Movement_398
 	WaitMovement
 	Jump Script_branch_2d2
-	End
-@ 292
+@ 290
+
+.byte 0x2 @ 0x290
+.byte 0x0 @ 0x291
 
 Script_branch_292: @ 292
 	SetVar 0x8007, 0x0
@@ -258,8 +264,10 @@ Script_branch_292: @ 292
 	ApplyMovement 0xff, Movement_30c
 	WaitMovement
 	Jump Script_branch_2d2
-	End
-@ 2b2
+@ 2b0
+
+.byte 0x2 @ 0x2b0
+.byte 0x0 @ 0x2b1
 
 Script_branch_2b2: @ 2b2
 	SetVar 0x8007, 0x1
@@ -267,8 +275,10 @@ Script_branch_2b2: @ 2b2
 	ApplyMovement 0xff, Movement_304
 	WaitMovement
 	Jump Script_branch_2d2
-	End
-@ 2d2
+@ 2d0
+
+.byte 0x2 @ 0x2d0
+.byte 0x0 @ 0x2d1
 
 Script_branch_2d2: @ 2d2
 	PlayFanfare 0x603
@@ -561,8 +571,10 @@ Script_17: @ 43e
 	SetVarHero 0x1
 	Message 0x4
 	Jump Script_branch_4a6
-	End
-@ 471
+@ 46f
+
+.byte 0x2 @ 0x46f
+.byte 0x0 @ 0x470
 
 Script_branch_471: @ 471
 	CheckFacePosition 0x800c
@@ -581,8 +593,10 @@ Script_branch_498: @ 498
 	SetVariableRival 0x0
 	Message 0xf
 	Jump Script_branch_4a6
-	End
-@ 4a6
+@ 4a4
+
+.byte 0x2 @ 0x4a4
+.byte 0x0 @ 0x4a5
 
 Script_branch_4a6: @ 4a6
 	WaitButton
@@ -633,15 +647,23 @@ Script_18: @ 4c8
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_557
 	Jump Script_branch_53f
+@ 53f
+
 Script_branch_53f: @ 53f
 	TrainerBattle 0x1d9, 0x0
 	Jump Script_branch_563
+@ 54b
+
 Script_branch_54b: @ 54b
 	TrainerBattle 0x1da, 0x0
 	Jump Script_branch_563
+@ 557
+
 Script_branch_557: @ 557
 	TrainerBattle 0x1db, 0x0
 	Jump Script_branch_563
+@ 563
+
 Script_branch_563: @ 563
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
@@ -1246,8 +1268,10 @@ Script_23: @ bf0
 	If 0x800c, 0x5a
 	CompareLastResultJump 0x4, Script_branch_c22
 	Jump Script_branch_c1e
-	End
-@ c1e
+@ c1c
+
+.byte 0x2 @ 0xc1c
+.byte 0x0 @ 0xc1d
 
 Script_branch_c1e: @ c1e
 	ReleaseAll

@@ -32,18 +32,26 @@ Script_branch_5f: @ 5f
 	ApplyMovement 0x0, Movement_144
 	WaitMovement
 	Jump Script_branch_9f
+@ 6f
+
 Script_branch_6f: @ 6f
 	ApplyMovement 0x0, Movement_168
 	WaitMovement
 	Jump Script_branch_9f
+@ 7f
+
 Script_branch_7f: @ 7f
 	ApplyMovement 0x0, Movement_fc
 	WaitMovement
 	Jump Script_branch_9f
+@ 8f
+
 Script_branch_8f: @ 8f
 	ApplyMovement 0x0, Movement_120
 	WaitMovement
 	Jump Script_branch_9f
+@ 9f
+
 Script_branch_9f: @ 9f
 	Message 0x2
 	Multi 0x1, 0x1, 0x0, 0x0, 0x8000

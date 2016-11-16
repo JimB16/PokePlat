@@ -100,12 +100,18 @@ Script_5: @ c0
 	If 0x4000, 0x0
 	CompareLastResultJump EQUAL, Script_branch_f0
 	Jump Script_branch_f9
+@ f0
+
 Script_branch_f0: @ f0
 	Message 0x3
 	Jump Script_branch_102
+@ f9
+
 Script_branch_f9: @ f9
 	Message 0x4
 	Jump Script_branch_102
+@ 102
+
 Script_branch_102: @ 102
 	StoreTotPokemonSeen 0x8004
 	SetVariableNumber 0x1, 0x8004

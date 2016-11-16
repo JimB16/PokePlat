@@ -18,22 +18,28 @@ Script_1: @ a
 	SetFlag 0xb5
 	Message 0x0
 	Jump Script_branch_42
-	End
-@ 37
+@ 35
+
+.byte 0x2 @ 0x35
+.byte 0x0 @ 0x36
 
 Script_branch_37: @ 37
 	Message 0x1
 	Jump Script_branch_42
-	End
-@ 42
+@ 40
+
+.byte 0x2 @ 0x40
+.byte 0x0 @ 0x41
 
 Script_branch_42: @ 42
 	YesNoBox 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_5b
 	Jump Script_branch_fe
-	End
-@ 5b
+@ 59
+
+.byte 0x2 @ 0x59
+.byte 0x0 @ 0x5a
 
 Script_branch_5b: @ 5b
 	CheckPartyNumber 0x800c
@@ -84,20 +90,26 @@ Script_branch_ed: @ ed
 Script_branch_f3: @ f3
 	Message 0x5
 	Jump Script_branch_114
-	End
-@ fe
+@ fc
+
+.byte 0x2 @ 0xfc
+.byte 0x0 @ 0xfd
 
 Script_branch_fe: @ fe
 	Message 0x6
 	Jump Script_branch_114
-	End
-@ 109
+@ 107
+
+.byte 0x2 @ 0x107
+.byte 0x0 @ 0x108
 
 Script_branch_109: @ 109
 	Message 0x7
 	Jump Script_branch_114
-	End
-@ 114
+@ 112
+
+.byte 0x2 @ 0x112
+.byte 0x0 @ 0x113
 
 Script_branch_114: @ 114
 	WaitButton

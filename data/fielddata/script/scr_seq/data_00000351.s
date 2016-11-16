@@ -117,8 +117,10 @@ Script_3: @ 6f
 	RemovePeople 0x5
 	PlayFanfare 0x603
 	Jump Script_branch_1a1
-	End
-@ 1a1
+@ 19f
+
+.byte 0x2 @ 0x19f
+.byte 0x0 @ 0x1a0
 
 Script_branch_1a1: @ 1a1
 	SetVar 0x4086, 0x4
@@ -674,14 +676,20 @@ Script_5: @ 44b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_46a
 	Jump Script_branch_476
+@ 46a
+
 Script_branch_46a: @ 46a
 	SetVarHero 0x0
 	Message 0xa
 	Jump Script_branch_482
+@ 476
+
 Script_branch_476: @ 476
 	SetVarHero 0x0
 	Message 0xb
 	Jump Script_branch_482
+@ 482
+
 Script_branch_482: @ 482
 	WaitButton
 	CloseMsgOnKeyPress

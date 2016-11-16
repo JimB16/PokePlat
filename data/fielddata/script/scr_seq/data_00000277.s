@@ -147,6 +147,8 @@ Function_10e: @ 10e
 	CallStandard 0x7fc
 	Message 0x9
 	Jump Script_branch_1b0
+@ 1ad
+
 Script_branch_1ad: @ 1ad
 	Message 0xc
 Script_branch_1b0: @ 1b0
@@ -187,8 +189,10 @@ Script_5: @ 1da
 	Message 0xa
 	ShowMoney 0x14, 0x2
 	Jump Script_branch_1f3
-	End
-@ 1f3
+@ 1f1
+
+.byte 0x2 @ 0x1f1
+.byte 0x0 @ 0x1f2
 
 Script_branch_1f3: @ 1f3
 	Multi2 0x1e, 0xb, 0x0, 0x1, 0x800c
@@ -205,8 +209,10 @@ Script_branch_1f3: @ 1f3
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_2c8
 	Jump Script_branch_2c8
-	End
-@ 241
+@ 23f
+
+.byte 0x2 @ 0x23f
+.byte 0x0 @ 0x240
 
 Script_branch_241: @ 241
 	CheckMoney 0x800c, 0x64
@@ -215,8 +221,10 @@ Script_branch_241: @ 241
 	SetVar 0x8005, 0x1
 	SetVar 0x8006, 0x64
 	Jump Script_branch_293
-	End
-@ 26a
+@ 268
+
+.byte 0x2 @ 0x268
+.byte 0x0 @ 0x269
 
 Script_branch_26a: @ 26a
 	CheckMoney 0x800c, 0x3e8
@@ -225,8 +233,10 @@ Script_branch_26a: @ 26a
 	SetVar 0x8005, 0xa
 	SetVar 0x8006, 0x3e8
 	Jump Script_branch_293
-	End
-@ 293
+@ 291
+
+.byte 0x2 @ 0x291
+.byte 0x0 @ 0x292
 
 Script_branch_293: @ 293
 	SetVar 0x8004, 0x5e

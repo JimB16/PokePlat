@@ -32,8 +32,10 @@ Script_3: @ 2b
 	ShowMoney 0x14, 0x2
 	Message 0x1
 	Jump Script_branch_44
-	End
-@ 44
+@ 42
+
+.byte 0x2 @ 0x42
+.byte 0x0 @ 0x43
 
 Script_branch_44: @ 44
 	Multi2 0x1e, 0xb, 0x0, 0x1, 0x800c
@@ -50,8 +52,10 @@ Script_branch_44: @ 44
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_15d
 	Jump Script_branch_15d
-	End
-@ 92
+@ 90
+
+.byte 0x2 @ 0x90
+.byte 0x0 @ 0x91
 
 Script_branch_92: @ 92
 	CheckMoney 0x800c, 0x1f4
@@ -60,8 +64,10 @@ Script_branch_92: @ 92
 	SetVar 0x8005, 0x1
 	SetVar 0x8006, 0x1f4
 	Jump Script_branch_e4
-	End
-@ bb
+@ b9
+
+.byte 0x2 @ 0xb9
+.byte 0x0 @ 0xba
 
 Script_branch_bb: @ bb
 	CheckMoney 0x800c, 0x1770
@@ -70,8 +76,10 @@ Script_branch_bb: @ bb
 	SetVar 0x8005, 0xc
 	SetVar 0x8006, 0x1770
 	Jump Script_branch_e4
-	End
-@ e4
+@ e2
+
+.byte 0x2 @ 0xe2
+.byte 0x0 @ 0xe3
 
 Script_branch_e4: @ e4
 	SetVar 0x8004, 0x21

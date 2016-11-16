@@ -23,32 +23,42 @@ Script_1: @ a
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_77
 	Jump Script_branch_85
-	End
-@ 5b
+@ 59
+
+.byte 0x2 @ 0x59
+.byte 0x0 @ 0x5a
 
 Script_branch_5b: @ 5b
 	SetVar 0x8004, 0x48
 	Jump Script_branch_93
-	End
-@ 69
+@ 67
+
+.byte 0x2 @ 0x67
+.byte 0x0 @ 0x68
 
 Script_branch_69: @ 69
 	SetVar 0x8004, 0x49
 	Jump Script_branch_93
-	End
-@ 77
+@ 75
+
+.byte 0x2 @ 0x75
+.byte 0x0 @ 0x76
 
 Script_branch_77: @ 77
 	SetVar 0x8004, 0x4a
 	Jump Script_branch_93
-	End
-@ 85
+@ 83
+
+.byte 0x2 @ 0x83
+.byte 0x0 @ 0x84
 
 Script_branch_85: @ 85
 	SetVar 0x8004, 0x4b
 	Jump Script_branch_93
-	End
-@ 93
+@ 91
+
+.byte 0x2 @ 0x91
+.byte 0x0 @ 0x92
 
 Script_branch_93: @ 93
 	SetVar 0x8005, 0x1

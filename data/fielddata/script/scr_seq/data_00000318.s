@@ -67,9 +67,13 @@ Script_branch_95: @ 95
 	SetVarHero 0x0
 	Message 0x9
 	Jump Script_branch_d2
+@ bb
+
 Script_branch_bb: @ bb
 	Message 0xa
 	Jump Script_branch_d2
+@ c4
+
 Script_branch_c4: @ c4
 	SetVarHero 0x0
 	Message 0xb
@@ -99,16 +103,22 @@ Script_4: @ e2
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_103
 	Jump Script_branch_11b
+@ 103
+
 Script_branch_103: @ 103
 	ApplyMovement 0xff, Movement_194
 	ApplyMovement 0x4, Movement_1d8
 	WaitMovement
 	Jump Script_branch_133
+@ 11b
+
 Script_branch_11b: @ 11b
 	ApplyMovement 0xff, Movement_19c
 	ApplyMovement 0x4, Movement_1e4
 	WaitMovement
 	Jump Script_branch_133
+@ 133
+
 Script_branch_133: @ 133
 	SetVarHero 0x0
 	Message 0x5
@@ -117,16 +127,22 @@ Script_branch_133: @ 133
 	If 0x800c, 0x3
 	CompareLastResultJump EQUAL, Script_branch_152
 	Jump Script_branch_16a
+@ 152
+
 Script_branch_152: @ 152
 	ApplyMovement 0xff, Movement_1a4
 	ApplyMovement 0x4, Movement_1f0
 	WaitMovement
 	Jump Script_branch_182
+@ 16a
+
 Script_branch_16a: @ 16a
 	ApplyMovement 0xff, Movement_1b0
 	ApplyMovement 0x4, Movement_200
 	WaitMovement
 	Jump Script_branch_182
+@ 182
+
 Script_branch_182: @ 182
 	RemovePeople 0x4
 	SetFlag 0xe4

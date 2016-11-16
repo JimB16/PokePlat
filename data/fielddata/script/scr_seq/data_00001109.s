@@ -94,6 +94,8 @@ Script_2: @ d6
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_18a
 	Jump Script_branch_12f
+@ 12f
+
 Script_branch_12f: @ 12f
 	ShowMoney 0x14, 0x2
 	Message 0x3

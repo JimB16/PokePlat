@@ -240,8 +240,10 @@ Script_2: @ 398
 	If 0x8006, 0x1
 	CompareLastResultJump EQUAL, Script_branch_6a8
 	Jump Script_branch_486
-	End
-@ 40f
+@ 40d
+
+.byte 0x2 @ 0x40d
+.byte 0x0 @ 0x40e
 
 Script_3: @ 40f
 	PlayFanfare 0x5dc
@@ -264,8 +266,10 @@ Script_3: @ 40f
 	If 0x8006, 0x1
 	CompareLastResultJump EQUAL, Script_branch_6a8
 	Jump Script_branch_486
-	End
-@ 486
+@ 484
+
+.byte 0x2 @ 0x484
+.byte 0x0 @ 0x485
 
 Script_branch_486: @ 486
 	SetVar 0x8000, 0x1
@@ -291,8 +295,10 @@ Script_branch_486: @ 486
 	If 0x402a, 0xa
 	CompareLastResultCall EQUAL, Script_branch_9c2
 	Jump Script_branch_570
-	End
-@ 51a
+@ 518
+
+.byte 0x2 @ 0x518
+.byte 0x0 @ 0x519
 
 Script_branch_51a: @ 51a
 	If 0x402b, 0x23
@@ -308,8 +314,10 @@ Script_branch_51a: @ 51a
 	If 0x402b, 0xa
 	CompareLastResultCall EQUAL, Script_branch_9c2
 	Jump Script_branch_570
-	End
-@ 570
+@ 56e
+
+.byte 0x2 @ 0x56e
+.byte 0x0 @ 0x56f
 
 Script_branch_570: @ 570
 	YesNoBox 0x800c
@@ -325,14 +333,18 @@ Script_branch_590: @ 590
 	CompareLastResultJump EQUAL, Script_branch_5ab
 	Call Function_100c
 	Jump Script_branch_81a
-	End
-@ 5ab
+@ 5a9
+
+.byte 0x2 @ 0x5a9
+.byte 0x0 @ 0x5aa
 
 Script_branch_5ab: @ 5ab
 	Call Function_1036
 	Jump Script_branch_81a
-	End
-@ 5b9
+@ 5b7
+
+.byte 0x2 @ 0x5b7
+.byte 0x0 @ 0x5b8
 
 Script_branch_5b9: @ 5b9
 	If 0x402a, 0x16
@@ -361,8 +373,10 @@ Script_branch_5ce: @ 5ce
 	If 0x402a, 0xa
 	CompareLastResultCall EQUAL, Script_branch_be6
 	Jump Script_branch_687
-	End
-@ 631
+@ 62f
+
+.byte 0x2 @ 0x62f
+.byte 0x0 @ 0x630
 
 Script_branch_631: @ 631
 	If 0x402b, 0x23
@@ -378,8 +392,10 @@ Script_branch_631: @ 631
 	If 0x402b, 0xa
 	CompareLastResultCall EQUAL, Script_branch_be6
 	Jump Script_branch_687
-	End
-@ 687
+@ 685
+
+.byte 0x2 @ 0x685
+.byte 0x0 @ 0x686
 
 Script_branch_687: @ 687
 	CloseMsgOnKeyPress
@@ -388,8 +404,10 @@ Script_branch_687: @ 687
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_822
 	Jump Script_branch_6a8
-	End
-@ 6a8
+@ 6a6
+
+.byte 0x2 @ 0x6a6
+.byte 0x0 @ 0x6a7
 
 Script_branch_6a8: @ 6a8
 	If 0x8004, 0x1
@@ -407,8 +425,10 @@ Script_branch_6a8: @ 6a8
 	If 0x402a, 0xa
 	CompareLastResultCall EQUAL, Script_branch_fcc
 	Jump Script_branch_81a
-	End
-@ 70b
+@ 709
+
+.byte 0x2 @ 0x709
+.byte 0x0 @ 0x70a
 
 Script_branch_70b: @ 70b
 	If 0x402b, 0x23
@@ -424,8 +444,10 @@ Script_branch_70b: @ 70b
 	If 0x402b, 0xa
 	CompareLastResultCall EQUAL, Script_branch_fcc
 	Jump Script_branch_81a
-	End
-@ 761
+@ 75f
+
+.byte 0x2 @ 0x75f
+.byte 0x0 @ 0x760
 
 Script_branch_761: @ 761
 	If 0x8004, 0x1
@@ -443,8 +465,10 @@ Script_branch_761: @ 761
 	If 0x402a, 0xa
 	CompareLastResultCall EQUAL, Script_branch_dc2
 	Jump Script_branch_81a
-	End
-@ 7c4
+@ 7c2
+
+.byte 0x2 @ 0x7c2
+.byte 0x0 @ 0x7c3
 
 Script_branch_7c4: @ 7c4
 	If 0x402b, 0x23
@@ -460,8 +484,10 @@ Script_branch_7c4: @ 7c4
 	If 0x402b, 0xa
 	CompareLastResultCall EQUAL, Script_branch_dc2
 	Jump Script_branch_81a
-	End
-@ 81a
+@ 818
+
+.byte 0x2 @ 0x818
+.byte 0x0 @ 0x819
 
 Script_branch_81a: @ 81a
 	WaitButton

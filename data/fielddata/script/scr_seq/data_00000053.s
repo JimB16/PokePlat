@@ -48,10 +48,14 @@ Script_4: @ 50
 	CompareLastResultJump EQUAL, Script_branch_6c
 	Message 0x2
 	Jump Script_branch_78
+@ 6c
+
 Script_branch_6c: @ 6c
 	SetVarWiFiSprite 0x0
 	Message 0x7
 	Jump Script_branch_78
+@ 78
+
 Script_branch_78: @ 78
 	Message 0x3
 	OpenWiFiSprite
@@ -76,6 +80,8 @@ Script_branch_78: @ 78
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_f4
 	Jump Script_branch_78
+@ e9
+
 Script_branch_e9: @ e9
 	Message 0x6
 	WaitButton
@@ -91,6 +97,8 @@ Script_branch_f4: @ f4
 	Cmd_29c 0x8004, 0x8005
 	ActWiFiSprite 0x8005
 	Jump Script_branch_e9
+@ 110
+
 Script_5: @ 110
 	PlayFanfare 0x5dc
 	LockAll

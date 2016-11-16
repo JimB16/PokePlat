@@ -60,20 +60,26 @@ Script_1: @ 2e
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_ee
 	Jump Script_branch_f9
-	End
-@ ee
+@ ec
+
+.byte 0x2 @ 0xec
+.byte 0x0 @ 0xed
 
 Script_branch_ee: @ ee
 	Message 0x8
 	Jump Script_branch_104
-	End
-@ f9
+@ f7
+
+.byte 0x2 @ 0xf7
+.byte 0x0 @ 0xf8
 
 Script_branch_f9: @ f9
 	Message 0x9
 	Jump Script_branch_104
-	End
-@ 104
+@ 102
+
+.byte 0x2 @ 0x102
+.byte 0x0 @ 0x103
 
 Script_branch_104: @ 104
 	Cmd_4f
@@ -475,60 +481,76 @@ Script_branch_52b: @ 52b
 	ApplyMovement 0xa, Movement_624
 	WaitMovement
 	Jump Script_branch_4ec
-	End
-@ 53d
+@ 53b
+
+.byte 0x2 @ 0x53b
+.byte 0x0 @ 0x53c
 
 Script_branch_53d: @ 53d
 	ApplyMovement 0xa, Movement_638
 	WaitMovement
 	Jump Script_branch_4ec
-	End
-@ 54f
+@ 54d
+
+.byte 0x2 @ 0x54d
+.byte 0x0 @ 0x54e
 
 Script_branch_54f: @ 54f
 	ApplyMovement 0xa, Movement_64c
 	WaitMovement
 	Jump Script_branch_4ec
-	End
-@ 561
+@ 55f
+
+.byte 0x2 @ 0x55f
+.byte 0x0 @ 0x560
 
 Script_branch_561: @ 561
 	ApplyMovement 0xa, Movement_660
 	WaitMovement
 	Jump Script_branch_4ec
-	End
-@ 573
+@ 571
+
+.byte 0x2 @ 0x571
+.byte 0x0 @ 0x572
 
 Script_branch_573: @ 573
 	ApplyMovement 0xa, Movement_5e8
 	ApplyMovement 0xff, Movement_604
 	WaitMovement
 	Jump Script_branch_5d3
-	End
-@ 58d
+@ 58b
+
+.byte 0x2 @ 0x58b
+.byte 0x0 @ 0x58c
 
 Script_branch_58d: @ 58d
 	ApplyMovement 0xa, Movement_5e8
 	ApplyMovement 0xff, Movement_604
 	WaitMovement
 	Jump Script_branch_5d3
-	End
-@ 5a7
+@ 5a5
+
+.byte 0x2 @ 0x5a5
+.byte 0x0 @ 0x5a6
 
 Script_branch_5a7: @ 5a7
 	ApplyMovement 0xa, Movement_5e8
 	WaitMovement
 	Jump Script_branch_5d3
-	End
-@ 5b9
+@ 5b7
+
+.byte 0x2 @ 0x5b7
+.byte 0x0 @ 0x5b8
 
 Script_branch_5b9: @ 5b9
 	ApplyMovement 0xa, Movement_5f4
 	ApplyMovement 0xff, Movement_610
 	WaitMovement
 	Jump Script_branch_5d3
-	End
-@ 5d3
+@ 5d1
+
+.byte 0x2 @ 0x5d1
+.byte 0x0 @ 0x5d2
 
 Script_branch_5d3: @ 5d3
 	PlayFanfare 0x603

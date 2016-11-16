@@ -52,8 +52,10 @@ Function_62: @ 62
 	CompareLastResultJump EQUAL, Script_branch_c5
 	SetVar 0x4118, 0x1
 	Jump Script_branch_c5
-	End
-@ c5
+@ c3
+
+.byte 0x2 @ 0xc3
+.byte 0x0 @ 0xc4
 
 Script_branch_c5: @ c5
 	Return
@@ -134,8 +136,10 @@ Script_3: @ 154
 	If 0x800c, 0x0
 	CompareLastResultJump 0x5, Script_branch_1a6
 	Jump Script_branch_181
-	End
-@ 181
+@ 17f
+
+.byte 0x2 @ 0x17f
+.byte 0x0 @ 0x180
 
 Script_branch_181: @ 181
 	Message 0x1
@@ -272,8 +276,10 @@ Script_5: @ 249
 	RemovePeople 0x5
 	SetVar 0x4098, 0x2
 	Jump Script_branch_508
-	End
-@ 2d0
+@ 2ce
+
+.byte 0x2 @ 0x2ce
+.byte 0x0 @ 0x2cf
 
 Script_branch_2d0: @ 2d0
 	SetVar 0x4098, 0x1
@@ -530,8 +536,10 @@ Script_branch_508: @ 508
 	PlaySound 0x478
 	Cmd_5d
 	Jump Script_branch_567
-	End
-@ 567
+@ 565
+
+.byte 0x2 @ 0x565
+.byte 0x0 @ 0x566
 
 Script_branch_567: @ 567
 	SetvarMtCoronet 0x1, 0x800c

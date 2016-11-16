@@ -25,14 +25,18 @@ Script_1: @ 1c
 	CompareLastResultJump EQUAL, Script_branch_43
 	Message 0x1
 	Jump Script_branch_4e
-	End
-@ 43
+@ 41
+
+.byte 0x2 @ 0x41
+.byte 0x0 @ 0x42
 
 Script_branch_43: @ 43
 	Message 0x2
 	Jump Script_branch_4e
-	End
-@ 4e
+@ 4c
+
+.byte 0x2 @ 0x4c
+.byte 0x0 @ 0x4d
 
 Script_branch_4e: @ 4e
 	WaitButton
@@ -51,21 +55,27 @@ Script_2: @ 56
 	CompareLastResultJump EQUAL, Script_branch_8e
 	Message 0x3
 	Jump Script_branch_99
-	End
-@ 7f
+@ 7d
+
+.byte 0x2 @ 0x7d
+.byte 0x0 @ 0x7e
 
 Script_branch_7f: @ 7f
 	SetFlag 0x145
 	Message 0x5
 	Jump Script_branch_99
-	End
-@ 8e
+@ 8c
+
+.byte 0x2 @ 0x8c
+.byte 0x0 @ 0x8d
 
 Script_branch_8e: @ 8e
 	Message 0x4
 	Jump Script_branch_99
-	End
-@ 99
+@ 97
+
+.byte 0x2 @ 0x97
+.byte 0x0 @ 0x98
 
 Script_branch_99: @ 99
 	WaitButton

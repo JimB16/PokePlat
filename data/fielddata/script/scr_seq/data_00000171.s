@@ -66,15 +66,21 @@ Script_branch_92: @ 92
 	ApplyMovement 0xff, Movement_13c
 	WaitMovement
 	Jump Script_branch_d2
+@ aa
+
 Script_branch_aa: @ aa
 	ApplyMovement 0x2, Movement_118
 	ApplyMovement 0xff, Movement_148
 	WaitMovement
 	Jump Script_branch_d2
+@ c2
+
 Script_branch_c2: @ c2
 	ApplyMovement 0x2, Movement_118
 	WaitMovement
 	Jump Script_branch_d2
+@ d2
+
 Script_branch_d2: @ d2
 	PrepareDoorAnimation 0x0, 0x0, 0x6, 0x9, 0x4d
 	OpenDoor 0x4d

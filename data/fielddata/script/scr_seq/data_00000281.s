@@ -27,10 +27,14 @@ Script_2: @ 15
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_5d
 	Jump Script_branch_98
+@ 52
+
 Script_branch_52: @ 52
 	Message 0x0
 	CloseMsgOnKeyPress
 	Jump Script_branch_5d
+@ 5d
+
 Script_branch_5d: @ 5d
 	Call Function_a3
 	If 0x8004, 0x1

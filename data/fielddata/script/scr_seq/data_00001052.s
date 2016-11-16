@@ -105,46 +105,64 @@ Script_4: @ cd
 	If 0x8004, 0x72
 	CompareLastResultJump EQUAL, Script_branch_1d0
 	Jump Script_branch_1e8
+@ 140
+
 Script_branch_140: @ 140
 	ApplyMovement 0xff, Movement_2f0
 	ApplyMovement 0x3, Movement_3c4
 	WaitMovement
 	Jump Script_branch_200
+@ 158
+
 Script_branch_158: @ 158
 	ApplyMovement 0xff, Movement_308
 	ApplyMovement 0x3, Movement_3e0
 	WaitMovement
 	Jump Script_branch_200
+@ 170
+
 Script_branch_170: @ 170
 	ApplyMovement 0xff, Movement_320
 	ApplyMovement 0x3, Movement_3f4
 	WaitMovement
 	Jump Script_branch_200
+@ 188
+
 Script_branch_188: @ 188
 	ApplyMovement 0xff, Movement_338
 	ApplyMovement 0x3, Movement_408
 	WaitMovement
 	Jump Script_branch_200
+@ 1a0
+
 Script_branch_1a0: @ 1a0
 	ApplyMovement 0xff, Movement_350
 	ApplyMovement 0x3, Movement_41c
 	WaitMovement
 	Jump Script_branch_200
+@ 1b8
+
 Script_branch_1b8: @ 1b8
 	ApplyMovement 0xff, Movement_368
 	ApplyMovement 0x3, Movement_430
 	WaitMovement
 	Jump Script_branch_200
+@ 1d0
+
 Script_branch_1d0: @ 1d0
 	ApplyMovement 0xff, Movement_380
 	ApplyMovement 0x3, Movement_444
 	WaitMovement
 	Jump Script_branch_200
+@ 1e8
+
 Script_branch_1e8: @ 1e8
 	ApplyMovement 0xff, Movement_398
 	ApplyMovement 0x3, Movement_458
 	WaitMovement
 	Jump Script_branch_200
+@ 200
+
 Script_branch_200: @ 200
 	SetVarHero 0x0
 	SetVariableRival 0x1
@@ -165,38 +183,56 @@ Script_branch_200: @ 200
 	If 0x8004, 0x72
 	CompareLastResultJump EQUAL, Script_branch_2cc
 	Jump Script_branch_2dc
+@ 26c
+
 Script_branch_26c: @ 26c
 	ApplyMovement 0x3, Movement_46c
 	WaitMovement
 	Jump Script_branch_2ec
+@ 27c
+
 Script_branch_27c: @ 27c
 	ApplyMovement 0x3, Movement_47c
 	WaitMovement
 	Jump Script_branch_2ec
+@ 28c
+
 Script_branch_28c: @ 28c
 	ApplyMovement 0x3, Movement_488
 	WaitMovement
 	Jump Script_branch_2ec
+@ 29c
+
 Script_branch_29c: @ 29c
 	ApplyMovement 0x3, Movement_494
 	WaitMovement
 	Jump Script_branch_2ec
+@ 2ac
+
 Script_branch_2ac: @ 2ac
 	ApplyMovement 0x3, Movement_4a0
 	WaitMovement
 	Jump Script_branch_2ec
+@ 2bc
+
 Script_branch_2bc: @ 2bc
 	ApplyMovement 0x3, Movement_4ac
 	WaitMovement
 	Jump Script_branch_2ec
+@ 2cc
+
 Script_branch_2cc: @ 2cc
 	ApplyMovement 0x3, Movement_4b8
 	WaitMovement
 	Jump Script_branch_2ec
+@ 2dc
+
 Script_branch_2dc: @ 2dc
 	ApplyMovement 0x3, Movement_4c4
 	WaitMovement
 	Jump Script_branch_2ec
+@ 2ec
+
 Script_branch_2ec: @ 2ec
 	ReleaseAll
 	End

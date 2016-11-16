@@ -17,22 +17,28 @@ Script_1: @ 6
 	SetFlag 0x97e
 	Message 0x0
 	Jump Script_branch_3e
-	End
-@ 33
+@ 31
+
+.byte 0x2 @ 0x31
+.byte 0x0 @ 0x32
 
 Script_branch_33: @ 33
 	Message 0x1
 	Jump Script_branch_3e
-	End
-@ 3e
+@ 3c
+
+.byte 0x2 @ 0x3c
+.byte 0x0 @ 0x3d
 
 Script_branch_3e: @ 3e
 	YesNoBox 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_57
 	Jump Script_branch_fa
-	End
-@ 57
+@ 55
+
+.byte 0x2 @ 0x55
+.byte 0x0 @ 0x56
 
 Script_branch_57: @ 57
 	CheckPartyNumber 0x800c

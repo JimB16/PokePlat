@@ -101,8 +101,10 @@ Script_5: @ a2
 	If 0x8000, 0x4
 	CompareLastResultCall EQUAL, Script_branch_110
 	Jump Script_branch_115
-	End
-@ fc
+@ fa
+
+.byte 0x2 @ 0xfa
+.byte 0x0 @ 0xfb
 
 Script_branch_fc: @ fc
 	Message 0x9

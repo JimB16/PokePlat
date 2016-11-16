@@ -19,6 +19,8 @@ Script_1: @ e
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3b
 	Jump Script_branch_ac
+@ 3b
+
 Script_branch_3b: @ 3b
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0

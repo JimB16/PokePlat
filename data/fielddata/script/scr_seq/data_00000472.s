@@ -40,6 +40,8 @@ Script_branch_44: @ 44
 	CallStandard 0x7fc
 	SetFlag 0xde
 	Jump Script_branch_39
+@ 76
+
 Script_branch_76: @ 76
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress

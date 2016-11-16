@@ -97,6 +97,8 @@ Script_5: @ c4
 	CloseMsgOnKeyPress
 	Message 0x4
 	Jump Script_branch_194
+@ 14e
+
 Script_branch_14e: @ 14e
 	Cmd_311 0x82
 	Cmd_311 0x81
@@ -106,6 +108,8 @@ Script_branch_14e: @ 14e
 	CloseMsgOnKeyPress
 	Message 0x6
 	Jump Script_branch_194
+@ 16e
+
 Script_branch_16e: @ 16e
 	SetFlag 0x121
 	SetFlag 0x250

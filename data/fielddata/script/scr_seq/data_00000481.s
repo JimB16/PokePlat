@@ -55,6 +55,8 @@ Script_2: @ 7d
 	CallStandard 0x7fc
 	SetFlag 0xce
 	Jump Script_branch_c2
+@ c2
+
 Script_branch_c2: @ c2
 	Message 0x1
 	WaitButton

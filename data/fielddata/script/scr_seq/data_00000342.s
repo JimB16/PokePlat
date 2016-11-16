@@ -20,6 +20,8 @@ Script_1: @ 1e
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e
 	Jump Script_branch_74
+@ 3e
+
 Script_branch_3e: @ 3e
 	SetVarHero 0x0
 	Message 0x1
@@ -109,15 +111,19 @@ Script_6: @ cf
 	CompareLastResultJump EQUAL, Script_branch_10a
 	Message 0x6
 	Jump Script_branch_10a
-	End
-@ 10a
+@ 108
+
+.byte 0x2 @ 0x108
+.byte 0x0 @ 0x109
 
 Script_branch_10a: @ 10a
 	SetVarHero 0x0
 	Message 0x4
 	Jump Script_branch_118
-	End
-@ 118
+@ 116
+
+.byte 0x2 @ 0x116
+.byte 0x0 @ 0x117
 
 Script_branch_118: @ 118
 	WaitButton

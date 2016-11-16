@@ -39,8 +39,10 @@ Script_3: @ 2a
 	CallStandard 0x7fc
 	SetFlag 0xd5
 	Jump Script_branch_71
-	End
-@ 71
+@ 6f
+
+.byte 0x2 @ 0x6f
+.byte 0x0 @ 0x70
 
 Script_branch_71: @ 71
 	Message 0x1

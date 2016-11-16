@@ -48,8 +48,10 @@ Script_3: @ 40
 	CallStandard 0x7fc
 	SetFlag 0x105
 	Jump Script_branch_87
-	End
-@ 87
+@ 85
+
+.byte 0x2 @ 0x85
+.byte 0x0 @ 0x86
 
 Script_branch_87: @ 87
 	Message 0x3
@@ -93,6 +95,8 @@ Script_6: @ c0
 	Message 0x6
 	ShowMoney 0x14, 0x2
 	Jump Script_branch_d5
+@ d5
+
 Script_branch_d5: @ d5
 	Multi 0x1, 0x1, 0x0, 0x1, 0x8000
 	Cmd_42 0xdb, 0x0
@@ -109,15 +113,23 @@ Script_branch_d5: @ d5
 	CompareLastResultJump EQUAL, Script_branch_13d
 	Message 0xa
 	Jump Script_branch_28c
+@ 125
+
 Script_branch_125: @ 125
 	SetVar 0x8001, 0x1e
 	Jump Script_branch_191
+@ 131
+
 Script_branch_131: @ 131
 	SetVar 0x8001, 0x1f
 	Jump Script_branch_191
+@ 13d
+
 Script_branch_13d: @ 13d
 	SetVar 0x8001, 0x20
 	Jump Script_branch_191
+@ 149
+
 Script_branch_149: @ 149
 	CheckMoney 0x800c, 0xc8
 	Return
@@ -190,12 +202,18 @@ Script_branch_191: @ 191
 	SetVar 0x8005, 0x1
 	CallStandard 0x7fc
 	Jump Script_branch_26e
+@ 26e
+
 Script_branch_26e: @ 26e
 	Message 0x6
 	Jump Script_branch_d5
+@ 277
+
 Script_branch_277: @ 277
 	Message 0x9
 	Jump Script_branch_28c
+@ 280
+
 Script_branch_280: @ 280
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress

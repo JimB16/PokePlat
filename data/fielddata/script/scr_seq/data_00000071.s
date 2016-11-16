@@ -204,38 +204,50 @@ Script_branch_1fd: @ 1fd
 Script_branch_226: @ 226
 	ChangeOwPosition 0xc, 0x139, 0x20c
 	Jump Script_branch_286
-	End
-@ 236
+@ 234
+
+.byte 0x2 @ 0x234
+.byte 0x0 @ 0x235
 
 Script_branch_236: @ 236
 	ChangeOwPosition 0xc, 0x13a, 0x20c
 	Jump Script_branch_286
-	End
-@ 246
+@ 244
+
+.byte 0x2 @ 0x244
+.byte 0x0 @ 0x245
 
 Script_branch_246: @ 246
 	ChangeOwPosition 0xc, 0x13b, 0x20c
 	Jump Script_branch_286
-	End
-@ 256
+@ 254
+
+.byte 0x2 @ 0x254
+.byte 0x0 @ 0x255
 
 Script_branch_256: @ 256
 	ChangeOwPosition 0xc, 0x139, 0x20b
 	Jump Script_branch_286
-	End
-@ 266
+@ 264
+
+.byte 0x2 @ 0x264
+.byte 0x0 @ 0x265
 
 Script_branch_266: @ 266
 	ChangeOwPosition 0xc, 0x139, 0x20c
 	Jump Script_branch_286
-	End
-@ 276
+@ 274
+
+.byte 0x2 @ 0x274
+.byte 0x0 @ 0x275
 
 Script_branch_276: @ 276
 	ChangeOwPosition 0xc, 0x139, 0x20d
 	Jump Script_branch_286
-	End
-@ 286
+@ 284
+
+.byte 0x2 @ 0x284
+.byte 0x0 @ 0x285
 
 Script_branch_286: @ 286
 	ClearFlag 0x180
@@ -313,48 +325,60 @@ Script_branch_38f: @ 38f
 	ApplyMovement 0xff, Movement_4e4
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 3a9
+@ 3a7
+
+.byte 0x2 @ 0x3a7
+.byte 0x0 @ 0x3a8
 
 Script_branch_3a9: @ 3a9
 	ApplyMovement 0xc, Movement_48c
 	ApplyMovement 0xff, Movement_4e4
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 3c3
+@ 3c1
+
+.byte 0x2 @ 0x3c1
+.byte 0x0 @ 0x3c2
 
 Script_branch_3c3: @ 3c3
 	ApplyMovement 0xc, Movement_498
 	ApplyMovement 0xff, Movement_4e4
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 3dd
+@ 3db
+
+.byte 0x2 @ 0x3db
+.byte 0x0 @ 0x3dc
 
 Script_branch_3dd: @ 3dd
 	ApplyMovement 0xc, Movement_4a4
 	ApplyMovement 0xff, Movement_4f0
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 3f7
+@ 3f5
+
+.byte 0x2 @ 0x3f5
+.byte 0x0 @ 0x3f6
 
 Script_branch_3f7: @ 3f7
 	ApplyMovement 0xc, Movement_4b4
 	ApplyMovement 0xff, Movement_4f0
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 411
+@ 40f
+
+.byte 0x2 @ 0x40f
+.byte 0x0 @ 0x410
 
 Script_branch_411: @ 411
 	ApplyMovement 0xc, Movement_4c4
 	ApplyMovement 0xff, Movement_4f0
 	WaitMovement
 	Jump Script_branch_42b
-	End
-@ 42b
+@ 429
+
+.byte 0x2 @ 0x429
+.byte 0x0 @ 0x42a
 
 Script_branch_42b: @ 42b
 	RemovePeople 0xc
@@ -940,24 +964,30 @@ Script_branch_99d: @ 99d
 	ApplyMovement 0xff, Movement_bdc
 	WaitMovement
 	Jump Script_branch_9eb
-	End
-@ 9b7
+@ 9b5
+
+.byte 0x2 @ 0x9b5
+.byte 0x0 @ 0x9b6
 
 Script_branch_9b7: @ 9b7
 	ApplyMovement 0x21, Movement_b64
 	ApplyMovement 0xff, Movement_bfc
 	WaitMovement
 	Jump Script_branch_9eb
-	End
-@ 9d1
+@ 9cf
+
+.byte 0x2 @ 0x9cf
+.byte 0x0 @ 0x9d0
 
 Script_branch_9d1: @ 9d1
 	ApplyMovement 0x21, Movement_b70
 	ApplyMovement 0xff, Movement_c1c
 	WaitMovement
 	Jump Script_branch_9eb
-	End
-@ 9eb
+@ 9e9
+
+.byte 0x2 @ 0x9e9
+.byte 0x0 @ 0x9ea
 
 Script_branch_9eb: @ 9eb
 	PlayFanfare 0x602
@@ -986,8 +1016,10 @@ Script_branch_a32: @ a32
 	ApplyMovement 0xff, Movement_c74
 	WaitMovement
 	Jump Script_branch_ab6
-	End
-@ a5e
+@ a5c
+
+.byte 0x2 @ 0xa5c
+.byte 0x0 @ 0xa5d
 
 Script_branch_a5e: @ a5e
 	ApplyMovement 0x21, Movement_b8c
@@ -997,8 +1029,10 @@ Script_branch_a5e: @ a5e
 	ApplyMovement 0xff, Movement_c88
 	WaitMovement
 	Jump Script_branch_ab6
-	End
-@ a8a
+@ a88
+
+.byte 0x2 @ 0xa88
+.byte 0x0 @ 0xa89
 
 Script_branch_a8a: @ a8a
 	ApplyMovement 0x21, Movement_ba0
@@ -1008,8 +1042,10 @@ Script_branch_a8a: @ a8a
 	ApplyMovement 0xff, Movement_c98
 	WaitMovement
 	Jump Script_branch_ab6
-	End
-@ ab6
+@ ab4
+
+.byte 0x2 @ 0xab4
+.byte 0x0 @ 0xab5
 
 Script_branch_ab6: @ ab6
 	SetVariableRival 0x0
@@ -1262,43 +1298,55 @@ Script_branch_d64: @ d64
 	ChangeOwPosition 0xc, 0x130, 0x224
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ d7a
+@ d78
+
+.byte 0x2 @ 0xd78
+.byte 0x0 @ 0xd79
 
 Script_branch_d7a: @ d7a
 	ChangeOwPosition 0xc, 0x130, 0x225
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ d90
+@ d8e
+
+.byte 0x2 @ 0xd8e
+.byte 0x0 @ 0xd8f
 
 Script_branch_d90: @ d90
 	ChangeOwPosition 0xc, 0x130, 0x226
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ da6
+@ da4
+
+.byte 0x2 @ 0xda4
+.byte 0x0 @ 0xda5
 
 Script_branch_da6: @ da6
 	ChangeOwPosition 0xc, 0x130, 0x227
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ dbc
+@ dba
+
+.byte 0x2 @ 0xdba
+.byte 0x0 @ 0xdbb
 
 Script_branch_dbc: @ dbc
 	ChangeOwPosition 0xc, 0x130, 0x228
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ dd2
+@ dd0
+
+.byte 0x2 @ 0xdd0
+.byte 0x0 @ 0xdd1
 
 Script_branch_dd2: @ dd2
 	ChangeOwPosition 0xc, 0x130, 0x229
 	Call Function_de8
 	Jump Script_branch_df6
-	End
-@ de8
+@ de6
+
+.byte 0x2 @ 0xde6
+.byte 0x0 @ 0xde7
 
 Function_de8: @ de8
 	ClearFlag 0x180
@@ -1324,8 +1372,10 @@ Script_branch_df6: @ df6
 	WaitMovement
 	RemovePeople 0xc
 	Jump Script_branch_e83
-	End
-@ e4b
+@ e49
+
+.byte 0x2 @ 0xe49
+.byte 0x0 @ 0xe4a
 
 Function_e4b: @ e4b
 	Soundfr 0x486
@@ -1341,14 +1391,18 @@ Function_e4b: @ e4b
 Script_branch_e67: @ e67
 	Call Function_fbe
 	Jump Script_branch_e83
-	End
-@ e75
+@ e73
+
+.byte 0x2 @ 0xe73
+.byte 0x0 @ 0xe74
 
 Script_branch_e75: @ e75
 	Call Function_fcd
 	Jump Script_branch_e83
-	End
-@ e83
+@ e81
+
+.byte 0x2 @ 0xe81
+.byte 0x0 @ 0xe82
 
 Script_branch_e83: @ e83
 	ReleaseAll
@@ -1413,49 +1467,63 @@ Script_branch_f32: @ f32
 	ApplyMovement 0xff, Movement_10e0
 	WaitMovement
 	Jump Script_branch_f92
-	End
-@ f4c
+@ f4a
+
+.byte 0x2 @ 0xf4a
+.byte 0x0 @ 0xf4b
 
 Script_branch_f4c: @ f4c
 	ApplyMovement 0xc, Movement_10bc
 	ApplyMovement 0xff, Movement_10e0
 	WaitMovement
 	Jump Script_branch_f92
-	End
-@ f66
+@ f64
+
+.byte 0x2 @ 0xf64
+.byte 0x0 @ 0xf65
 
 Script_branch_f66: @ f66
 	ApplyMovement 0xc, Movement_10bc
 	WaitMovement
 	Jump Script_branch_f92
-	End
-@ f78
+@ f76
+
+.byte 0x2 @ 0xf76
+.byte 0x0 @ 0xf77
 
 Script_branch_f78: @ f78
 	ApplyMovement 0xc, Movement_10c8
 	ApplyMovement 0xff, Movement_10ec
 	WaitMovement
 	Jump Script_branch_f92
-	End
-@ f92
+@ f90
+
+.byte 0x2 @ 0xf90
+.byte 0x0 @ 0xf91
 
 Script_branch_f92: @ f92
 	RemovePeople 0xc
 	Jump Script_branch_fba
-	End
-@ f9e
+@ f9c
+
+.byte 0x2 @ 0xf9c
+.byte 0x0 @ 0xf9d
 
 Script_branch_f9e: @ f9e
 	Call Function_fbe
 	Jump Script_branch_fba
-	End
-@ fac
+@ faa
+
+.byte 0x2 @ 0xfaa
+.byte 0x0 @ 0xfab
 
 Script_branch_fac: @ fac
 	Call Function_fcd
 	Jump Script_branch_fba
-	End
-@ fba
+@ fb8
+
+.byte 0x2 @ 0xfb8
+.byte 0x0 @ 0xfb9
 
 Script_branch_fba: @ fba
 	ReleaseAll
@@ -1500,43 +1568,55 @@ Script_branch_1034: @ 1034
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 1046
+@ 1044
+
+.byte 0x2 @ 0x1044
+.byte 0x0 @ 0x1045
 
 Script_branch_1046: @ 1046
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 1058
+@ 1056
+
+.byte 0x2 @ 0x1056
+.byte 0x0 @ 0x1057
 
 Script_branch_1058: @ 1058
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 106a
+@ 1068
+
+.byte 0x2 @ 0x1068
+.byte 0x0 @ 0x1069
 
 Script_branch_106a: @ 106a
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 107c
+@ 107a
+
+.byte 0x2 @ 0x107a
+.byte 0x0 @ 0x107b
 
 Script_branch_107c: @ 107c
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 108e
+@ 108c
+
+.byte 0x2 @ 0x108c
+.byte 0x0 @ 0x108d
 
 Script_branch_108e: @ 108e
 	ApplyMovement 0xc, Movement_10b4
 	WaitMovement
 	Jump Script_branch_10a0
-	End
-@ 10a0
+@ 109e
+
+.byte 0x2 @ 0x109e
+.byte 0x0 @ 0x109f
 
 Script_branch_10a0: @ 10a0
 	Message 0xd

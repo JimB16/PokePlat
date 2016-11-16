@@ -24,12 +24,16 @@ Script_2: @ 10
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_5b
 	Jump Script_branch_a2
+@ 41
+
 Script_branch_41: @ 41
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_5b
 	Jump Script_branch_a2
+@ 5b
+
 Script_branch_5b: @ 5b
 	Message 0x2
 	WaitButton
@@ -92,6 +96,8 @@ Script_branch_a6: @ a6
 	If 0x8005, 0x10
 	CompareLastResultJump EQUAL, Script_branch_e7
 	Jump Script_branch_fc
+@ e7
+
 Script_branch_e7: @ e7
 	CheckMove 0x800c, 0x1b2, 0x4000
 	If 0x800c, 0x0
@@ -100,6 +106,8 @@ Script_branch_fc: @ fc
 	If 0x4000, 0x0
 	CompareLastResultJump 0x5, Script_branch_a6
 	Jump Script_branch_66
+@ 10f
+
 Script_branch_10f: @ 10f
 	Message 0x4
 	CloseMsgOnKeyPress
@@ -126,6 +134,8 @@ Script_branch_10f: @ 10f
 	CompareLastResultJump LESSER, Script_branch_97
 	SetVar 0x8003, 0x1b2
 	Jump Script_branch_19b
+@ 19b
+
 Script_branch_19b: @ 19b
 	FadeScreen 0x6, 0x1, 0x0, 0x0
 	ResetScreen

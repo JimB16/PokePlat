@@ -28,14 +28,18 @@ Script_2: @ 1d
 	CompareLastResultJump EQUAL, Script_branch_44
 	Message 0x2
 	Jump Script_branch_4f
-	End
-@ 44
+@ 42
+
+.byte 0x2 @ 0x42
+.byte 0x0 @ 0x43
 
 Script_branch_44: @ 44
 	Message 0x3
 	Jump Script_branch_4f
-	End
-@ 4f
+@ 4d
+
+.byte 0x2 @ 0x4d
+.byte 0x0 @ 0x4e
 
 Script_branch_4f: @ 4f
 	WaitButton

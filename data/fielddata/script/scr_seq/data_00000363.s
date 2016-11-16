@@ -73,6 +73,8 @@ Script_branch_d8: @ d8
 	Message 0x1
 	CloseMsgOnKeyPress
 	Jump Script_branch_bc
+@ e3
+
 Script_branch_e3: @ e3
 	Message 0x2
 	CloseMsgOnKeyPress

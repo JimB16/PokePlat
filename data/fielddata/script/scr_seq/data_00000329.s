@@ -322,8 +322,10 @@ Script_branch_353: @ 353
 Script_branch_366: @ 366
 	Message 0xe
 	Jump Function_2f9
-	End
-@ 371
+@ 36f
+
+.byte 0x2 @ 0x36f
+.byte 0x0 @ 0x370
 
 Function_371: @ 371
 	SetFlag 0xe5
@@ -517,26 +519,34 @@ Script_8: @ 468
 	SetVarHero 0x0
 	Message 0x12
 	Jump Script_branch_4f6
-	End
-@ 4ca
+@ 4c8
+
+.byte 0x2 @ 0x4c8
+.byte 0x0 @ 0x4c9
 
 Script_branch_4ca: @ 4ca
 	Message 0x13
 	Jump Script_branch_4f6
-	End
-@ 4d5
+@ 4d3
+
+.byte 0x2 @ 0x4d3
+.byte 0x0 @ 0x4d4
 
 Script_branch_4d5: @ 4d5
 	Message 0x14
 	Jump Script_branch_4f6
-	End
-@ 4e0
+@ 4de
+
+.byte 0x2 @ 0x4de
+.byte 0x0 @ 0x4df
 
 Script_branch_4e0: @ 4e0
 	Message 0x15
 	Jump Script_branch_4f6
-	End
-@ 4eb
+@ 4e9
+
+.byte 0x2 @ 0x4e9
+.byte 0x0 @ 0x4ea
 
 Script_branch_4eb: @ 4eb
 	Message 0x16

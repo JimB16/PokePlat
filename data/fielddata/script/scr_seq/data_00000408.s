@@ -634,57 +634,73 @@ Script_branch_575: @ 575
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 588
+@ 586
+
+.byte 0x2 @ 0x586
+.byte 0x0 @ 0x587
 
 Script_branch_588: @ 588
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 59b
+@ 599
+
+.byte 0x2 @ 0x599
+.byte 0x0 @ 0x59a
 
 Script_branch_59b: @ 59b
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 5ae
+@ 5ac
+
+.byte 0x2 @ 0x5ac
+.byte 0x0 @ 0x5ad
 
 Script_branch_5ae: @ 5ae
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 5c1
+@ 5bf
+
+.byte 0x2 @ 0x5bf
+.byte 0x0 @ 0x5c0
 
 Script_branch_5c1: @ 5c1
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 5d4
+@ 5d2
+
+.byte 0x2 @ 0x5d2
+.byte 0x0 @ 0x5d3
 
 Script_branch_5d4: @ 5d4
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 5e7
+@ 5e5
+
+.byte 0x2 @ 0x5e5
+.byte 0x0 @ 0x5e6
 
 Script_branch_5e7: @ 5e7
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 5fa
+@ 5f8
+
+.byte 0x2 @ 0x5f8
+.byte 0x0 @ 0x5f9
 
 Script_branch_5fa: @ 5fa
 	StoreItemType 0x8004, 0x800c
 	SetVarItemNum 0x2, 0x800c
 	Jump Script_branch_60d
-	End
-@ 60d
+@ 60b
+
+.byte 0x2 @ 0x60b
+.byte 0x0 @ 0x60c
 
 Script_branch_60d: @ 60d
 	Cmd_22 0x8006
@@ -692,8 +708,10 @@ Script_branch_60d: @ 60d
 	WaitButton
 	SetVar 0x800c, 0x1
 	Jump Script_branch_4ac
-	End
-@ 624
+@ 622
+
+.byte 0x2 @ 0x622
+.byte 0x0 @ 0x623
 
 Script_branch_624: @ 624
 	SetVarHero 0x0
@@ -701,16 +719,20 @@ Script_branch_624: @ 624
 	SetVarAtkItem 0x2, 0x8004
 	Message 0x6
 	Jump Script_branch_4e2
-	End
-@ 63c
+@ 63a
+
+.byte 0x2 @ 0x63a
+.byte 0x0 @ 0x63b
 
 Script_branch_63c: @ 63c
 	SetVarHero 0x0
 	Cmd_33c 0x1, 0x8004
 	Message 0x3
 	Jump Script_branch_4e2
-	End
-@ 64f
+@ 64d
+
+.byte 0x2 @ 0x64d
+.byte 0x0 @ 0x64e
 
 Script_branch_64f: @ 64f
 	SetVarItem 0x0, 0x8004
@@ -718,8 +740,10 @@ Script_branch_64f: @ 64f
 	WaitButton
 	SetVar 0x800c, 0x0
 	Jump Script_branch_4ac
-	End
-@ 667
+@ 665
+
+.byte 0x2 @ 0x665
+.byte 0x0 @ 0x666
 
 Script_branch_667: @ 667
 	CallStandard 0x7f6

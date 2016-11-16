@@ -51,6 +51,8 @@ Script_2: @ 25
 	SetFlag 0x1bf
 	Message 0x3
 	Jump Script_branch_b0
+@ b0
+
 Script_branch_b0: @ b0
 	SetVar 0x8004, 0x18f
 	SetVar 0x8005, 0x1

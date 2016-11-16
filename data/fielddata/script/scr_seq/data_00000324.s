@@ -25,6 +25,8 @@ Script_2: @ 14
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e
 	Jump Script_branch_71
+@ 3e
+
 Script_branch_3e: @ 3e
 	Message 0x4
 	CloseMsgOnKeyPress
@@ -113,20 +115,26 @@ Script_3: @ fc
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_140
 	Jump Script_branch_135
-	End
-@ 135
+@ 133
+
+.byte 0x2 @ 0x133
+.byte 0x0 @ 0x134
 
 Script_branch_135: @ 135
 	Message 0x1
 	Jump Script_branch_14b
-	End
-@ 140
+@ 13e
+
+.byte 0x2 @ 0x13e
+.byte 0x0 @ 0x13f
 
 Script_branch_140: @ 140
 	Message 0x2
 	Jump Script_branch_14b
-	End
-@ 14b
+@ 149
+
+.byte 0x2 @ 0x149
+.byte 0x0 @ 0x14a
 
 Script_branch_14b: @ 14b
 	CloseMsgOnKeyPress

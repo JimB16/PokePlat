@@ -44,8 +44,10 @@ Script_2: @ 4e
 	ApplyMovement 0xff, Movement_174
 	WaitMovement
 	Jump Script_branch_9c
-	End
-@ 8e
+@ 8c
+
+.byte 0x2 @ 0x8c
+.byte 0x0 @ 0x8d
 
 Function_8e: @ 8e
 	ClearFlag 0x1cc
@@ -59,6 +61,8 @@ Script_branch_9c: @ 9c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_b3
 	Jump Script_branch_f1
+@ b3
+
 Script_branch_b3: @ b3
 	SetVarHero 0x0
 	Message 0x0
@@ -73,6 +77,8 @@ Script_branch_b3: @ b3
 	Call Function_145
 	Message 0x3
 	Jump Script_branch_156
+@ f1
+
 Script_branch_f1: @ f1
 	SetVarHero 0x0
 	Message 0x4
@@ -87,6 +93,8 @@ Script_branch_f1: @ f1
 	Call Function_145
 	Message 0x7
 	Jump Script_branch_156
+@ 12f
+
 Function_12f: @ 12f
 	SetFlag 0x97f
 	SetVar 0x8004, 0x1bb

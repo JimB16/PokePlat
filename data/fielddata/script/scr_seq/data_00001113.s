@@ -54,14 +54,18 @@ Script_3: @ 47
 Script_branch_6f: @ 6f
 	Message 0x3
 	Jump Script_branch_85
-	End
-@ 7a
+@ 78
+
+.byte 0x2 @ 0x78
+.byte 0x0 @ 0x79
 
 Script_branch_7a: @ 7a
 	Message 0x4
 	Jump Script_branch_85
-	End
-@ 85
+@ 83
+
+.byte 0x2 @ 0x83
+.byte 0x0 @ 0x84
 
 Script_branch_85: @ 85
 	WaitButton

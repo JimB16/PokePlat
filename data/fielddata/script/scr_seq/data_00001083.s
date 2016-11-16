@@ -21,13 +21,19 @@ Script_1: @ e
 	If 0x40e5, 0x0
 	CompareLastResultJump EQUAL, Script_branch_57
 	Jump Script_branch_81
+@ 4a
+
 Script_branch_4a: @ 4a
 	SetFlag 0xd8
 	Message 0x0
 	Jump Script_branch_60
+@ 57
+
 Script_branch_57: @ 57
 	Message 0x1
 	Jump Script_branch_60
+@ 60
+
 Script_branch_60: @ 60
 	ChsRSPoke 0x800c
 	CopyVar 0x40e5, 0x800c
@@ -49,6 +55,8 @@ Script_branch_81: @ 81
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_283
 	Jump Script_branch_ae
+@ ae
+
 Script_branch_ae: @ ae
 	SetVarPokeStored 0x0, 0x40e5, 0x0, 0x0
 	Message 0x4
@@ -169,15 +177,19 @@ Script_branch_216: @ 216
 	CopyVar 0x8004, 0x4117
 	SetVar 0x8005, 0x3
 	Jump Script_branch_25c
-	End
-@ 23f
+@ 23d
+
+.byte 0x2 @ 0x23d
+.byte 0x0 @ 0x23e
 
 Script_branch_23f: @ 23f
 	CopyVar 0x4117, 0x8004
 	SetFlag 0xdc
 	Jump Script_branch_251
-	End
-@ 251
+@ 24f
+
+.byte 0x2 @ 0x24f
+.byte 0x0 @ 0x250
 
 Script_branch_251: @ 251
 	Message 0x6
@@ -261,8 +273,10 @@ Script_3: @ 2ce
 	If 0x8008, 0x3
 	CompareLastResultJump EQUAL, Script_branch_365
 	Jump Script_branch_370
-	End
-@ 344
+@ 342
+
+.byte 0x2 @ 0x342
+.byte 0x0 @ 0x343
 
 Script_branch_344: @ 344
 	Message 0xe

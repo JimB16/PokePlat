@@ -1,496 +1,496 @@
 num: 494
 seed: 0xfc7f
 ????.? lbs.
- 0x1e2 0x1e215.2 lbs.
- 0x1e2 0x1e228.7 lbs.
- 0x1e2220.5 lbs.
- 0x1e2 0x1e218.7 lbs.
- 0x1e2 0x1e241.9 lbs.
- 0x1e2199.5 lbs.
- 0x1e2 0x1e219.8 lbs.
- 0x1e2 0x1e249.6 lbs.
- 0x1e2188.5 lbs.
- 0x1e2 0x1e2 0x1e26.4 lbs.
- 0x1e2 0x1e221.8 lbs.
- 0x1e2 0x1e270.5 lbs.
- 0x1e2 0x1e2 0x1e27.1 lbs.
- 0x1e2 0x1e222.0 lbs.
- 0x1e2 0x1e265.0 lbs.
- 0x1e2 0x1e2 0x1e24.0 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e287.1 lbs.
- 0x1e2 0x1e2 0x1e27.7 lbs.
- 0x1e2 0x1e240.8 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2 0x1e283.8 lbs.
- 0x1e2 0x1e215.2 lbs.
- 0x1e2143.3 lbs.
- 0x1e2 0x1e213.2 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2 0x1e265.0 lbs.
- 0x1e2 0x1e215.4 lbs.
- 0x1e2 0x1e244.1 lbs.
- 0x1e2132.3 lbs.
- 0x1e2 0x1e219.8 lbs.
- 0x1e2 0x1e243.0 lbs.
- 0x1e2136.7 lbs.
- 0x1e2 0x1e216.5 lbs.
- 0x1e2 0x1e288.2 lbs.
- 0x1e2 0x1e221.8 lbs.
- 0x1e2 0x1e243.9 lbs.
- 0x1e2 0x1e212.1 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2 0x1e216.5 lbs.
- 0x1e2121.3 lbs.
- 0x1e2 0x1e211.9 lbs.
- 0x1e2 0x1e219.0 lbs.
- 0x1e2 0x1e241.0 lbs.
- 0x1e2 0x1e211.9 lbs.
- 0x1e2 0x1e265.0 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e227.6 lbs.
- 0x1e2 0x1e2 0x1e21.8 lbs.
- 0x1e2 0x1e273.4 lbs.
- 0x1e2 0x1e2 0x1e29.3 lbs.
- 0x1e2 0x1e270.5 lbs.
- 0x1e2 0x1e243.2 lbs.
- 0x1e2168.9 lbs.
- 0x1e2 0x1e261.7 lbs.
- 0x1e2 0x1e270.5 lbs.
- 0x1e2 0x1e241.9 lbs.
- 0x1e2341.7 lbs.
- 0x1e2 0x1e227.3 lbs.
- 0x1e2 0x1e244.1 lbs.
- 0x1e2119.0 lbs.
- 0x1e2 0x1e243.0 lbs.
- 0x1e2124.6 lbs.
- 0x1e2105.8 lbs.
- 0x1e2 0x1e243.0 lbs.
- 0x1e2155.4 lbs.
- 0x1e2286.6 lbs.
- 0x1e2 0x1e2 0x1e28.8 lbs.
- 0x1e2 0x1e214.1 lbs.
- 0x1e2 0x1e234.2 lbs.
- 0x1e2100.3 lbs.
- 0x1e2121.3 lbs.
- 0x1e2 0x1e244.1 lbs.
- 0x1e2231.5 lbs.
- 0x1e2661.4 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2209.4 lbs.
- 0x1e2 0x1e279.4 lbs.
- 0x1e2173.1 lbs.
- 0x1e2 0x1e213.2 lbs.
- 0x1e2132.3 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e286.4 lbs.
- 0x1e2187.8 lbs.
- 0x1e2198.4 lbs.
- 0x1e2264.6 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e2 0x1e28.8 lbs.
- 0x1e2292.1 lbs.
- 0x1e2 0x1e2 0x1e20.2 lbs.
- 0x1e2 0x1e2 0x1e20.2 lbs.
- 0x1e2 0x1e289.3 lbs.
- 0x1e2463.0 lbs.
- 0x1e2 0x1e271.4 lbs.
- 0x1e2166.7 lbs.
- 0x1e2 0x1e214.3 lbs.
- 0x1e2132.3 lbs.
- 0x1e2 0x1e222.9 lbs.
- 0x1e2146.8 lbs.
- 0x1e2 0x1e2 0x1e25.5 lbs.
- 0x1e2264.6 lbs.
- 0x1e2 0x1e214.3 lbs.
- 0x1e2 0x1e299.2 lbs.
- 0x1e2109.8 lbs.
- 0x1e2110.7 lbs.
- 0x1e2144.4 lbs.
- 0x1e2 0x1e2 0x1e22.2 lbs.
- 0x1e2 0x1e220.9 lbs.
- 0x1e2253.5 lbs.
- 0x1e2264.6 lbs.
- 0x1e2 0x1e276.3 lbs.
- 0x1e2 0x1e277.2 lbs.
- 0x1e2176.4 lbs.
- 0x1e2 0x1e217.6 lbs.
- 0x1e2 0x1e255.1 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e286.0 lbs.
- 0x1e2 0x1e276.1 lbs.
- 0x1e2176.4 lbs.
- 0x1e2120.1 lbs.
- 0x1e2123.5 lbs.
- 0x1e2 0x1e289.5 lbs.
- 0x1e2 0x1e266.1 lbs.
- 0x1e2 0x1e298.1 lbs.
- 0x1e2121.3 lbs.
- 0x1e2194.9 lbs.
- 0x1e2 0x1e222.0 lbs.
- 0x1e2518.1 lbs.
- 0x1e2485.0 lbs.
- 0x1e2 0x1e2 0x1e28.8 lbs.
- 0x1e2 0x1e214.3 lbs.
- 0x1e2 0x1e263.9 lbs.
- 0x1e2 0x1e254.0 lbs.
- 0x1e2 0x1e255.1 lbs.
- 0x1e2 0x1e280.5 lbs.
- 0x1e2 0x1e216.5 lbs.
- 0x1e2 0x1e277.2 lbs.
- 0x1e2 0x1e225.4 lbs.
- 0x1e2 0x1e289.3 lbs.
- 0x1e2130.1 lbs.
+\x01e2\x01e215.2 lbs.
+\x01e2\x01e228.7 lbs.
+\x01e2220.5 lbs.
+\x01e2\x01e218.7 lbs.
+\x01e2\x01e241.9 lbs.
+\x01e2199.5 lbs.
+\x01e2\x01e219.8 lbs.
+\x01e2\x01e249.6 lbs.
+\x01e2188.5 lbs.
+\x01e2\x01e2\x01e26.4 lbs.
+\x01e2\x01e221.8 lbs.
+\x01e2\x01e270.5 lbs.
+\x01e2\x01e2\x01e27.1 lbs.
+\x01e2\x01e222.0 lbs.
+\x01e2\x01e265.0 lbs.
+\x01e2\x01e2\x01e24.0 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e287.1 lbs.
+\x01e2\x01e2\x01e27.7 lbs.
+\x01e2\x01e240.8 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2\x01e283.8 lbs.
+\x01e2\x01e215.2 lbs.
+\x01e2143.3 lbs.
+\x01e2\x01e213.2 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2\x01e265.0 lbs.
+\x01e2\x01e215.4 lbs.
+\x01e2\x01e244.1 lbs.
+\x01e2132.3 lbs.
+\x01e2\x01e219.8 lbs.
+\x01e2\x01e243.0 lbs.
+\x01e2136.7 lbs.
+\x01e2\x01e216.5 lbs.
+\x01e2\x01e288.2 lbs.
+\x01e2\x01e221.8 lbs.
+\x01e2\x01e243.9 lbs.
+\x01e2\x01e212.1 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2\x01e216.5 lbs.
+\x01e2121.3 lbs.
+\x01e2\x01e211.9 lbs.
+\x01e2\x01e219.0 lbs.
+\x01e2\x01e241.0 lbs.
+\x01e2\x01e211.9 lbs.
+\x01e2\x01e265.0 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e227.6 lbs.
+\x01e2\x01e2\x01e21.8 lbs.
+\x01e2\x01e273.4 lbs.
+\x01e2\x01e2\x01e29.3 lbs.
+\x01e2\x01e270.5 lbs.
+\x01e2\x01e243.2 lbs.
+\x01e2168.9 lbs.
+\x01e2\x01e261.7 lbs.
+\x01e2\x01e270.5 lbs.
+\x01e2\x01e241.9 lbs.
+\x01e2341.7 lbs.
+\x01e2\x01e227.3 lbs.
+\x01e2\x01e244.1 lbs.
+\x01e2119.0 lbs.
+\x01e2\x01e243.0 lbs.
+\x01e2124.6 lbs.
+\x01e2105.8 lbs.
+\x01e2\x01e243.0 lbs.
+\x01e2155.4 lbs.
+\x01e2286.6 lbs.
+\x01e2\x01e2\x01e28.8 lbs.
+\x01e2\x01e214.1 lbs.
+\x01e2\x01e234.2 lbs.
+\x01e2100.3 lbs.
+\x01e2121.3 lbs.
+\x01e2\x01e244.1 lbs.
+\x01e2231.5 lbs.
+\x01e2661.4 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2209.4 lbs.
+\x01e2\x01e279.4 lbs.
+\x01e2173.1 lbs.
+\x01e2\x01e213.2 lbs.
+\x01e2132.3 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e286.4 lbs.
+\x01e2187.8 lbs.
+\x01e2198.4 lbs.
+\x01e2264.6 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e2\x01e28.8 lbs.
+\x01e2292.1 lbs.
+\x01e2\x01e2\x01e20.2 lbs.
+\x01e2\x01e2\x01e20.2 lbs.
+\x01e2\x01e289.3 lbs.
+\x01e2463.0 lbs.
+\x01e2\x01e271.4 lbs.
+\x01e2166.7 lbs.
+\x01e2\x01e214.3 lbs.
+\x01e2132.3 lbs.
+\x01e2\x01e222.9 lbs.
+\x01e2146.8 lbs.
+\x01e2\x01e2\x01e25.5 lbs.
+\x01e2264.6 lbs.
+\x01e2\x01e214.3 lbs.
+\x01e2\x01e299.2 lbs.
+\x01e2109.8 lbs.
+\x01e2110.7 lbs.
+\x01e2144.4 lbs.
+\x01e2\x01e2\x01e22.2 lbs.
+\x01e2\x01e220.9 lbs.
+\x01e2253.5 lbs.
+\x01e2264.6 lbs.
+\x01e2\x01e276.3 lbs.
+\x01e2\x01e277.2 lbs.
+\x01e2176.4 lbs.
+\x01e2\x01e217.6 lbs.
+\x01e2\x01e255.1 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e286.0 lbs.
+\x01e2\x01e276.1 lbs.
+\x01e2176.4 lbs.
+\x01e2120.1 lbs.
+\x01e2123.5 lbs.
+\x01e2\x01e289.5 lbs.
+\x01e2\x01e266.1 lbs.
+\x01e2\x01e298.1 lbs.
+\x01e2121.3 lbs.
+\x01e2194.9 lbs.
+\x01e2\x01e222.0 lbs.
+\x01e2518.1 lbs.
+\x01e2485.0 lbs.
+\x01e2\x01e2\x01e28.8 lbs.
+\x01e2\x01e214.3 lbs.
+\x01e2\x01e263.9 lbs.
+\x01e2\x01e254.0 lbs.
+\x01e2\x01e255.1 lbs.
+\x01e2\x01e280.5 lbs.
+\x01e2\x01e216.5 lbs.
+\x01e2\x01e277.2 lbs.
+\x01e2\x01e225.4 lbs.
+\x01e2\x01e289.3 lbs.
+\x01e2130.1 lbs.
 1014.1 lbs.
- 0x1e2122.1 lbs.
- 0x1e2116.0 lbs.
- 0x1e2132.3 lbs.
- 0x1e2 0x1e2 0x1e27.3 lbs.
- 0x1e2 0x1e236.4 lbs.
- 0x1e2463.0 lbs.
- 0x1e2269.0 lbs.
- 0x1e2 0x1e2 0x1e28.8 lbs.
- 0x1e2 0x1e214.1 lbs.
- 0x1e2 0x1e234.8 lbs.
- 0x1e2221.6 lbs.
- 0x1e2 0x1e217.4 lbs.
- 0x1e2 0x1e241.9 lbs.
- 0x1e2175.3 lbs.
- 0x1e2 0x1e220.9 lbs.
- 0x1e2 0x1e255.1 lbs.
- 0x1e2195.8 lbs.
- 0x1e2 0x1e213.2 lbs.
- 0x1e2 0x1e271.6 lbs.
- 0x1e2 0x1e246.7 lbs.
- 0x1e2 0x1e289.9 lbs.
- 0x1e2 0x1e223.8 lbs.
- 0x1e2 0x1e278.5 lbs.
- 0x1e2 0x1e218.7 lbs.
- 0x1e2 0x1e273.9 lbs.
- 0x1e2165.3 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2 0x1e249.6 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2 0x1e2 0x1e26.6 lbs.
- 0x1e2 0x1e2 0x1e22.2 lbs.
- 0x1e2 0x1e2 0x1e23.3 lbs.
- 0x1e2 0x1e2 0x1e27.1 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e217.2 lbs.
- 0x1e2 0x1e229.3 lbs.
- 0x1e2135.6 lbs.
- 0x1e2 0x1e212.8 lbs.
- 0x1e2 0x1e218.7 lbs.
- 0x1e2 0x1e262.8 lbs.
- 0x1e2 0x1e283.8 lbs.
- 0x1e2 0x1e274.7 lbs.
- 0x1e2 0x1e2 0x1e21.1 lbs.
- 0x1e2 0x1e2 0x1e22.2 lbs.
- 0x1e2 0x1e2 0x1e26.6 lbs.
- 0x1e2 0x1e225.4 lbs.
- 0x1e2 0x1e2 0x1e24.0 lbs.
- 0x1e2 0x1e218.7 lbs.
- 0x1e2 0x1e283.8 lbs.
- 0x1e2 0x1e218.7 lbs.
- 0x1e2165.3 lbs.
- 0x1e2 0x1e258.4 lbs.
- 0x1e2 0x1e259.5 lbs.
- 0x1e2 0x1e2 0x1e24.6 lbs.
- 0x1e2175.3 lbs.
- 0x1e2 0x1e2 0x1e22.2 lbs.
- 0x1e2 0x1e211.0 lbs.
- 0x1e2 0x1e262.8 lbs.
- 0x1e2 0x1e291.5 lbs.
- 0x1e2 0x1e215.9 lbs.
- 0x1e2277.3 lbs.
- 0x1e2 0x1e230.9 lbs.
- 0x1e2142.9 lbs.
- 0x1e2881.8 lbs.
- 0x1e2 0x1e217.2 lbs.
- 0x1e2107.4 lbs.
- 0x1e2 0x1e2 0x1e28.6 lbs.
- 0x1e2260.1 lbs.
- 0x1e2 0x1e245.2 lbs.
- 0x1e2119.0 lbs.
- 0x1e2 0x1e261.7 lbs.
- 0x1e2 0x1e219.4 lbs.
- 0x1e2277.3 lbs.
- 0x1e2 0x1e277.2 lbs.
- 0x1e2121.3 lbs.
- 0x1e2 0x1e214.3 lbs.
- 0x1e2123.0 lbs.
- 0x1e2 0x1e211.0 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2 0x1e262.8 lbs.
- 0x1e2 0x1e235.3 lbs.
- 0x1e2485.0 lbs.
- 0x1e2111.3 lbs.
- 0x1e2 0x1e223.8 lbs.
- 0x1e2 0x1e277.2 lbs.
- 0x1e2335.1 lbs.
- 0x1e2 0x1e273.9 lbs.
- 0x1e2264.6 lbs.
- 0x1e2 0x1e271.6 lbs.
- 0x1e2157.0 lbs.
- 0x1e2127.9 lbs.
- 0x1e2 0x1e246.3 lbs.
- 0x1e2105.8 lbs.
- 0x1e2 0x1e213.2 lbs.
- 0x1e2 0x1e251.8 lbs.
- 0x1e2 0x1e247.2 lbs.
- 0x1e2166.4 lbs.
- 0x1e2103.2 lbs.
- 0x1e2392.4 lbs.
- 0x1e2436.5 lbs.
- 0x1e2412.3 lbs.
- 0x1e2158.7 lbs.
- 0x1e2335.1 lbs.
- 0x1e2445.3 lbs.
- 0x1e2476.2 lbs.
- 0x1e2438.7 lbs.
- 0x1e2 0x1e211.0 lbs.
- 0x1e2 0x1e211.0 lbs.
- 0x1e2 0x1e247.6 lbs.
- 0x1e2115.1 lbs.
- 0x1e2 0x1e2 0x1e25.5 lbs.
- 0x1e2 0x1e243.0 lbs.
- 0x1e2114.6 lbs.
- 0x1e2 0x1e216.8 lbs.
- 0x1e2 0x1e261.7 lbs.
- 0x1e2180.6 lbs.
- 0x1e2 0x1e230.0 lbs.
- 0x1e2 0x1e281.6 lbs.
- 0x1e2 0x1e238.6 lbs.
- 0x1e2 0x1e271.6 lbs.
- 0x1e2 0x1e2 0x1e27.9 lbs.
- 0x1e2 0x1e222.0 lbs.
- 0x1e2 0x1e262.6 lbs.
- 0x1e2 0x1e225.4 lbs.
- 0x1e2 0x1e269.7 lbs.
- 0x1e2 0x1e2 0x1e25.7 lbs.
- 0x1e2 0x1e271.6 lbs.
- 0x1e2121.3 lbs.
- 0x1e2 0x1e2 0x1e28.8 lbs.
- 0x1e2 0x1e261.7 lbs.
- 0x1e2131.4 lbs.
- 0x1e2 0x1e2 0x1e25.1 lbs.
- 0x1e2 0x1e243.7 lbs.
- 0x1e2 0x1e220.9 lbs.
- 0x1e2 0x1e261.7 lbs.
- 0x1e2 0x1e214.6 lbs.
- 0x1e2 0x1e244.5 lbs.
- 0x1e2106.7 lbs.
- 0x1e2 0x1e2 0x1e23.7 lbs.
- 0x1e2 0x1e2 0x1e27.9 lbs.
- 0x1e2 0x1e2 0x1e29.9 lbs.
- 0x1e2 0x1e286.4 lbs.
- 0x1e2 0x1e252.9 lbs.
- 0x1e2102.5 lbs.
- 0x1e2287.7 lbs.
- 0x1e2 0x1e212.1 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2 0x1e2 0x1e22.6 lbs.
- 0x1e2 0x1e235.9 lbs.
- 0x1e2 0x1e289.3 lbs.
- 0x1e2185.2 lbs.
- 0x1e2190.5 lbs.
- 0x1e2559.5 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2213.8 lbs.
- 0x1e2 0x1e224.3 lbs.
- 0x1e2 0x1e271.9 lbs.
- 0x1e2 0x1e224.3 lbs.
- 0x1e2 0x1e225.4 lbs.
- 0x1e2132.3 lbs.
- 0x1e2264.6 lbs.
- 0x1e2793.7 lbs.
- 0x1e2 0x1e224.7 lbs.
- 0x1e2 0x1e269.4 lbs.
- 0x1e2 0x1e233.5 lbs.
- 0x1e2 0x1e288.6 lbs.
- 0x1e2 0x1e2 0x1e29.3 lbs.
- 0x1e2 0x1e2 0x1e29.3 lbs.
- 0x1e2 0x1e239.0 lbs.
- 0x1e2 0x1e239.0 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2 0x1e222.7 lbs.
- 0x1e2176.4 lbs.
- 0x1e2 0x1e245.9 lbs.
- 0x1e2195.8 lbs.
- 0x1e2286.6 lbs.
- 0x1e2877.4 lbs.
- 0x1e2 0x1e252.9 lbs.
- 0x1e2485.0 lbs.
- 0x1e2177.2 lbs.
- 0x1e2 0x1e267.5 lbs.
- 0x1e2157.6 lbs.
- 0x1e2 0x1e211.0 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e233.7 lbs.
- 0x1e2180.8 lbs.
- 0x1e2113.1 lbs.
- 0x1e2170.6 lbs.
- 0x1e2 0x1e2 0x1e22.6 lbs.
- 0x1e2 0x1e245.4 lbs.
- 0x1e2 0x1e288.8 lbs.
- 0x1e2115.7 lbs.
- 0x1e2370.4 lbs.
- 0x1e2339.5 lbs.
- 0x1e2 0x1e2 0x1e24.2 lbs.
- 0x1e2 0x1e252.0 lbs.
- 0x1e2 0x1e225.4 lbs.
- 0x1e2 0x1e272.3 lbs.
- 0x1e2 0x1e247.4 lbs.
- 0x1e2238.1 lbs.
- 0x1e2 0x1e252.5 lbs.
- 0x1e2133.2 lbs.
- 0x1e2 0x1e227.6 lbs.
- 0x1e2150.4 lbs.
- 0x1e2 0x1e216.3 lbs.
- 0x1e2357.1 lbs.
- 0x1e2 0x1e2 0x1e21.8 lbs.
- 0x1e2 0x1e248.5 lbs.
- 0x1e2 0x1e2 0x1e25.1 lbs.
- 0x1e2 0x1e227.6 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e267.5 lbs.
- 0x1e2220.5 lbs.
- 0x1e2 0x1e2 0x1e22.2 lbs.
- 0x1e2103.6 lbs.
- 0x1e2 0x1e230.9 lbs.
- 0x1e2 0x1e237.0 lbs.
- 0x1e2565.5 lbs.
- 0x1e2 0x1e287.1 lbs.
- 0x1e2193.1 lbs.
- 0x1e2332.0 lbs.
- 0x1e2115.7 lbs.
- 0x1e2 0x1e259.5 lbs.
- 0x1e2 0x1e249.8 lbs.
- 0x1e2 0x1e251.6 lbs.
- 0x1e2 0x1e219.2 lbs.
- 0x1e2 0x1e292.8 lbs.
- 0x1e2243.6 lbs.
- 0x1e2226.2 lbs.
- 0x1e2209.9 lbs.
- 0x1e2446.4 lbs.
+\x01e2122.1 lbs.
+\x01e2116.0 lbs.
+\x01e2132.3 lbs.
+\x01e2\x01e2\x01e27.3 lbs.
+\x01e2\x01e236.4 lbs.
+\x01e2463.0 lbs.
+\x01e2269.0 lbs.
+\x01e2\x01e2\x01e28.8 lbs.
+\x01e2\x01e214.1 lbs.
+\x01e2\x01e234.8 lbs.
+\x01e2221.6 lbs.
+\x01e2\x01e217.4 lbs.
+\x01e2\x01e241.9 lbs.
+\x01e2175.3 lbs.
+\x01e2\x01e220.9 lbs.
+\x01e2\x01e255.1 lbs.
+\x01e2195.8 lbs.
+\x01e2\x01e213.2 lbs.
+\x01e2\x01e271.6 lbs.
+\x01e2\x01e246.7 lbs.
+\x01e2\x01e289.9 lbs.
+\x01e2\x01e223.8 lbs.
+\x01e2\x01e278.5 lbs.
+\x01e2\x01e218.7 lbs.
+\x01e2\x01e273.9 lbs.
+\x01e2165.3 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2\x01e249.6 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2\x01e2\x01e26.6 lbs.
+\x01e2\x01e2\x01e22.2 lbs.
+\x01e2\x01e2\x01e23.3 lbs.
+\x01e2\x01e2\x01e27.1 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e217.2 lbs.
+\x01e2\x01e229.3 lbs.
+\x01e2135.6 lbs.
+\x01e2\x01e212.8 lbs.
+\x01e2\x01e218.7 lbs.
+\x01e2\x01e262.8 lbs.
+\x01e2\x01e283.8 lbs.
+\x01e2\x01e274.7 lbs.
+\x01e2\x01e2\x01e21.1 lbs.
+\x01e2\x01e2\x01e22.2 lbs.
+\x01e2\x01e2\x01e26.6 lbs.
+\x01e2\x01e225.4 lbs.
+\x01e2\x01e2\x01e24.0 lbs.
+\x01e2\x01e218.7 lbs.
+\x01e2\x01e283.8 lbs.
+\x01e2\x01e218.7 lbs.
+\x01e2165.3 lbs.
+\x01e2\x01e258.4 lbs.
+\x01e2\x01e259.5 lbs.
+\x01e2\x01e2\x01e24.6 lbs.
+\x01e2175.3 lbs.
+\x01e2\x01e2\x01e22.2 lbs.
+\x01e2\x01e211.0 lbs.
+\x01e2\x01e262.8 lbs.
+\x01e2\x01e291.5 lbs.
+\x01e2\x01e215.9 lbs.
+\x01e2277.3 lbs.
+\x01e2\x01e230.9 lbs.
+\x01e2142.9 lbs.
+\x01e2881.8 lbs.
+\x01e2\x01e217.2 lbs.
+\x01e2107.4 lbs.
+\x01e2\x01e2\x01e28.6 lbs.
+\x01e2260.1 lbs.
+\x01e2\x01e245.2 lbs.
+\x01e2119.0 lbs.
+\x01e2\x01e261.7 lbs.
+\x01e2\x01e219.4 lbs.
+\x01e2277.3 lbs.
+\x01e2\x01e277.2 lbs.
+\x01e2121.3 lbs.
+\x01e2\x01e214.3 lbs.
+\x01e2123.0 lbs.
+\x01e2\x01e211.0 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2\x01e262.8 lbs.
+\x01e2\x01e235.3 lbs.
+\x01e2485.0 lbs.
+\x01e2111.3 lbs.
+\x01e2\x01e223.8 lbs.
+\x01e2\x01e277.2 lbs.
+\x01e2335.1 lbs.
+\x01e2\x01e273.9 lbs.
+\x01e2264.6 lbs.
+\x01e2\x01e271.6 lbs.
+\x01e2157.0 lbs.
+\x01e2127.9 lbs.
+\x01e2\x01e246.3 lbs.
+\x01e2105.8 lbs.
+\x01e2\x01e213.2 lbs.
+\x01e2\x01e251.8 lbs.
+\x01e2\x01e247.2 lbs.
+\x01e2166.4 lbs.
+\x01e2103.2 lbs.
+\x01e2392.4 lbs.
+\x01e2436.5 lbs.
+\x01e2412.3 lbs.
+\x01e2158.7 lbs.
+\x01e2335.1 lbs.
+\x01e2445.3 lbs.
+\x01e2476.2 lbs.
+\x01e2438.7 lbs.
+\x01e2\x01e211.0 lbs.
+\x01e2\x01e211.0 lbs.
+\x01e2\x01e247.6 lbs.
+\x01e2115.1 lbs.
+\x01e2\x01e2\x01e25.5 lbs.
+\x01e2\x01e243.0 lbs.
+\x01e2114.6 lbs.
+\x01e2\x01e216.8 lbs.
+\x01e2\x01e261.7 lbs.
+\x01e2180.6 lbs.
+\x01e2\x01e230.0 lbs.
+\x01e2\x01e281.6 lbs.
+\x01e2\x01e238.6 lbs.
+\x01e2\x01e271.6 lbs.
+\x01e2\x01e2\x01e27.9 lbs.
+\x01e2\x01e222.0 lbs.
+\x01e2\x01e262.6 lbs.
+\x01e2\x01e225.4 lbs.
+\x01e2\x01e269.7 lbs.
+\x01e2\x01e2\x01e25.7 lbs.
+\x01e2\x01e271.6 lbs.
+\x01e2121.3 lbs.
+\x01e2\x01e2\x01e28.8 lbs.
+\x01e2\x01e261.7 lbs.
+\x01e2131.4 lbs.
+\x01e2\x01e2\x01e25.1 lbs.
+\x01e2\x01e243.7 lbs.
+\x01e2\x01e220.9 lbs.
+\x01e2\x01e261.7 lbs.
+\x01e2\x01e214.6 lbs.
+\x01e2\x01e244.5 lbs.
+\x01e2106.7 lbs.
+\x01e2\x01e2\x01e23.7 lbs.
+\x01e2\x01e2\x01e27.9 lbs.
+\x01e2\x01e2\x01e29.9 lbs.
+\x01e2\x01e286.4 lbs.
+\x01e2\x01e252.9 lbs.
+\x01e2102.5 lbs.
+\x01e2287.7 lbs.
+\x01e2\x01e212.1 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2\x01e2\x01e22.6 lbs.
+\x01e2\x01e235.9 lbs.
+\x01e2\x01e289.3 lbs.
+\x01e2185.2 lbs.
+\x01e2190.5 lbs.
+\x01e2559.5 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2213.8 lbs.
+\x01e2\x01e224.3 lbs.
+\x01e2\x01e271.9 lbs.
+\x01e2\x01e224.3 lbs.
+\x01e2\x01e225.4 lbs.
+\x01e2132.3 lbs.
+\x01e2264.6 lbs.
+\x01e2793.7 lbs.
+\x01e2\x01e224.7 lbs.
+\x01e2\x01e269.4 lbs.
+\x01e2\x01e233.5 lbs.
+\x01e2\x01e288.6 lbs.
+\x01e2\x01e2\x01e29.3 lbs.
+\x01e2\x01e2\x01e29.3 lbs.
+\x01e2\x01e239.0 lbs.
+\x01e2\x01e239.0 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2\x01e222.7 lbs.
+\x01e2176.4 lbs.
+\x01e2\x01e245.9 lbs.
+\x01e2195.8 lbs.
+\x01e2286.6 lbs.
+\x01e2877.4 lbs.
+\x01e2\x01e252.9 lbs.
+\x01e2485.0 lbs.
+\x01e2177.2 lbs.
+\x01e2\x01e267.5 lbs.
+\x01e2157.6 lbs.
+\x01e2\x01e211.0 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e233.7 lbs.
+\x01e2180.8 lbs.
+\x01e2113.1 lbs.
+\x01e2170.6 lbs.
+\x01e2\x01e2\x01e22.6 lbs.
+\x01e2\x01e245.4 lbs.
+\x01e2\x01e288.8 lbs.
+\x01e2115.7 lbs.
+\x01e2370.4 lbs.
+\x01e2339.5 lbs.
+\x01e2\x01e2\x01e24.2 lbs.
+\x01e2\x01e252.0 lbs.
+\x01e2\x01e225.4 lbs.
+\x01e2\x01e272.3 lbs.
+\x01e2\x01e247.4 lbs.
+\x01e2238.1 lbs.
+\x01e2\x01e252.5 lbs.
+\x01e2133.2 lbs.
+\x01e2\x01e227.6 lbs.
+\x01e2150.4 lbs.
+\x01e2\x01e216.3 lbs.
+\x01e2357.1 lbs.
+\x01e2\x01e2\x01e21.8 lbs.
+\x01e2\x01e248.5 lbs.
+\x01e2\x01e2\x01e25.1 lbs.
+\x01e2\x01e227.6 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e267.5 lbs.
+\x01e2220.5 lbs.
+\x01e2\x01e2\x01e22.2 lbs.
+\x01e2103.6 lbs.
+\x01e2\x01e230.9 lbs.
+\x01e2\x01e237.0 lbs.
+\x01e2565.5 lbs.
+\x01e2\x01e287.1 lbs.
+\x01e2193.1 lbs.
+\x01e2332.0 lbs.
+\x01e2115.7 lbs.
+\x01e2\x01e259.5 lbs.
+\x01e2\x01e249.8 lbs.
+\x01e2\x01e251.6 lbs.
+\x01e2\x01e219.2 lbs.
+\x01e2\x01e292.8 lbs.
+\x01e2243.6 lbs.
+\x01e2226.2 lbs.
+\x01e2209.9 lbs.
+\x01e2446.4 lbs.
 1212.5 lbs.
- 0x1e2507.1 lbs.
- 0x1e2385.8 lbs.
- 0x1e2451.9 lbs.
- 0x1e2 0x1e288.2 lbs.
- 0x1e2132.3 lbs.
- 0x1e2776.0 lbs.
+\x01e2507.1 lbs.
+\x01e2385.8 lbs.
+\x01e2451.9 lbs.
+\x01e2\x01e288.2 lbs.
+\x01e2132.3 lbs.
+\x01e2776.0 lbs.
 2094.4 lbs.
- 0x1e2455.2 lbs.
- 0x1e2 0x1e2 0x1e22.4 lbs.
- 0x1e2134.0 lbs.
- 0x1e2 0x1e222.5 lbs.
- 0x1e2213.8 lbs.
- 0x1e2683.4 lbs.
- 0x1e2 0x1e213.7 lbs.
- 0x1e2 0x1e248.5 lbs.
- 0x1e2121.3 lbs.
- 0x1e2 0x1e211.5 lbs.
- 0x1e2 0x1e250.7 lbs.
- 0x1e2186.3 lbs.
- 0x1e2 0x1e2 0x1e24.4 lbs.
- 0x1e2 0x1e234.2 lbs.
- 0x1e2 0x1e254.9 lbs.
- 0x1e2 0x1e244.1 lbs.
- 0x1e2 0x1e269.4 lbs.
- 0x1e2 0x1e2 0x1e24.9 lbs.
- 0x1e2 0x1e256.2 lbs.
- 0x1e2 0x1e220.9 lbs.
- 0x1e2 0x1e267.2 lbs.
- 0x1e2 0x1e292.6 lbs.
- 0x1e2 0x1e2 0x1e22.6 lbs.
- 0x1e2 0x1e232.0 lbs.
- 0x1e2 0x1e269.4 lbs.
- 0x1e2226.0 lbs.
- 0x1e2125.7 lbs.
- 0x1e2329.6 lbs.
- 0x1e2 0x1e2 0x1e27.5 lbs.
- 0x1e2 0x1e214.3 lbs.
- 0x1e2 0x1e251.4 lbs.
- 0x1e2 0x1e212.1 lbs.
- 0x1e2 0x1e284.9 lbs.
- 0x1e2 0x1e2 0x1e28.6 lbs.
- 0x1e2 0x1e265.0 lbs.
- 0x1e2 0x1e273.9 lbs.
- 0x1e2 0x1e2 0x1e27.3 lbs.
- 0x1e2 0x1e220.5 lbs.
- 0x1e2 0x1e213.9 lbs.
- 0x1e2 0x1e265.9 lbs.
- 0x1e2 0x1e244.8 lbs.
- 0x1e2 0x1e2 0x1e22.6 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e212.1 lbs.
- 0x1e2 0x1e273.4 lbs.
- 0x1e2 0x1e2 0x1e29.7 lbs.
- 0x1e2 0x1e260.2 lbs.
- 0x1e2 0x1e2 0x1e28.6 lbs.
- 0x1e2 0x1e296.6 lbs.
- 0x1e2 0x1e2 0x1e21.3 lbs.
- 0x1e2 0x1e242.3 lbs.
- 0x1e2 0x1e283.8 lbs.
- 0x1e2133.4 lbs.
- 0x1e2412.3 lbs.
- 0x1e2 0x1e233.1 lbs.
- 0x1e2 0x1e228.7 lbs.
- 0x1e2 0x1e253.8 lbs.
- 0x1e2 0x1e2 0x1e24.2 lbs.
- 0x1e2238.1 lbs.
- 0x1e2 0x1e245.2 lbs.
- 0x1e2123.5 lbs.
- 0x1e2209.4 lbs.
- 0x1e2231.5 lbs.
- 0x1e2 0x1e244.5 lbs.
- 0x1e2119.0 lbs.
- 0x1e2109.1 lbs.
- 0x1e2661.4 lbs.
- 0x1e2 0x1e226.5 lbs.
- 0x1e2135.6 lbs.
- 0x1e2 0x1e250.7 lbs.
- 0x1e2 0x1e297.9 lbs.
- 0x1e2 0x1e259.5 lbs.
- 0x1e2 0x1e215.4 lbs.
- 0x1e2 0x1e252.9 lbs.
- 0x1e2143.3 lbs.
- 0x1e2111.3 lbs.
- 0x1e2298.7 lbs.
- 0x1e2 0x1e275.0 lbs.
- 0x1e2396.8 lbs.
- 0x1e2308.6 lbs.
- 0x1e2623.5 lbs.
- 0x1e2283.5 lbs.
- 0x1e2305.6 lbs.
- 0x1e2149.9 lbs.
- 0x1e2 0x1e283.8 lbs.
- 0x1e2113.5 lbs.
- 0x1e2 0x1e256.2 lbs.
- 0x1e2 0x1e257.1 lbs.
- 0x1e2 0x1e293.7 lbs.
- 0x1e2641.5 lbs.
- 0x1e2 0x1e275.0 lbs.
- 0x1e2114.6 lbs.
- 0x1e2749.6 lbs.
- 0x1e2235.0 lbs.
- 0x1e2 0x1e258.6 lbs.
- 0x1e2 0x1e2 0x1e20.7 lbs.
- 0x1e2 0x1e2 0x1e20.7 lbs.
- 0x1e2 0x1e2 0x1e20.7 lbs.
- 0x1e2 0x1e2 0x1e20.7 lbs.
+\x01e2455.2 lbs.
+\x01e2\x01e2\x01e22.4 lbs.
+\x01e2134.0 lbs.
+\x01e2\x01e222.5 lbs.
+\x01e2213.8 lbs.
+\x01e2683.4 lbs.
+\x01e2\x01e213.7 lbs.
+\x01e2\x01e248.5 lbs.
+\x01e2121.3 lbs.
+\x01e2\x01e211.5 lbs.
+\x01e2\x01e250.7 lbs.
+\x01e2186.3 lbs.
+\x01e2\x01e2\x01e24.4 lbs.
+\x01e2\x01e234.2 lbs.
+\x01e2\x01e254.9 lbs.
+\x01e2\x01e244.1 lbs.
+\x01e2\x01e269.4 lbs.
+\x01e2\x01e2\x01e24.9 lbs.
+\x01e2\x01e256.2 lbs.
+\x01e2\x01e220.9 lbs.
+\x01e2\x01e267.2 lbs.
+\x01e2\x01e292.6 lbs.
+\x01e2\x01e2\x01e22.6 lbs.
+\x01e2\x01e232.0 lbs.
+\x01e2\x01e269.4 lbs.
+\x01e2226.0 lbs.
+\x01e2125.7 lbs.
+\x01e2329.6 lbs.
+\x01e2\x01e2\x01e27.5 lbs.
+\x01e2\x01e214.3 lbs.
+\x01e2\x01e251.4 lbs.
+\x01e2\x01e212.1 lbs.
+\x01e2\x01e284.9 lbs.
+\x01e2\x01e2\x01e28.6 lbs.
+\x01e2\x01e265.0 lbs.
+\x01e2\x01e273.9 lbs.
+\x01e2\x01e2\x01e27.3 lbs.
+\x01e2\x01e220.5 lbs.
+\x01e2\x01e213.9 lbs.
+\x01e2\x01e265.9 lbs.
+\x01e2\x01e244.8 lbs.
+\x01e2\x01e2\x01e22.6 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e212.1 lbs.
+\x01e2\x01e273.4 lbs.
+\x01e2\x01e2\x01e29.7 lbs.
+\x01e2\x01e260.2 lbs.
+\x01e2\x01e2\x01e28.6 lbs.
+\x01e2\x01e296.6 lbs.
+\x01e2\x01e2\x01e21.3 lbs.
+\x01e2\x01e242.3 lbs.
+\x01e2\x01e283.8 lbs.
+\x01e2133.4 lbs.
+\x01e2412.3 lbs.
+\x01e2\x01e233.1 lbs.
+\x01e2\x01e228.7 lbs.
+\x01e2\x01e253.8 lbs.
+\x01e2\x01e2\x01e24.2 lbs.
+\x01e2238.1 lbs.
+\x01e2\x01e245.2 lbs.
+\x01e2123.5 lbs.
+\x01e2209.4 lbs.
+\x01e2231.5 lbs.
+\x01e2\x01e244.5 lbs.
+\x01e2119.0 lbs.
+\x01e2109.1 lbs.
+\x01e2661.4 lbs.
+\x01e2\x01e226.5 lbs.
+\x01e2135.6 lbs.
+\x01e2\x01e250.7 lbs.
+\x01e2\x01e297.9 lbs.
+\x01e2\x01e259.5 lbs.
+\x01e2\x01e215.4 lbs.
+\x01e2\x01e252.9 lbs.
+\x01e2143.3 lbs.
+\x01e2111.3 lbs.
+\x01e2298.7 lbs.
+\x01e2\x01e275.0 lbs.
+\x01e2396.8 lbs.
+\x01e2308.6 lbs.
+\x01e2623.5 lbs.
+\x01e2283.5 lbs.
+\x01e2305.6 lbs.
+\x01e2149.9 lbs.
+\x01e2\x01e283.8 lbs.
+\x01e2113.5 lbs.
+\x01e2\x01e256.2 lbs.
+\x01e2\x01e257.1 lbs.
+\x01e2\x01e293.7 lbs.
+\x01e2641.5 lbs.
+\x01e2\x01e275.0 lbs.
+\x01e2114.6 lbs.
+\x01e2749.6 lbs.
+\x01e2235.0 lbs.
+\x01e2\x01e258.6 lbs.
+\x01e2\x01e2\x01e20.7 lbs.
+\x01e2\x01e2\x01e20.7 lbs.
+\x01e2\x01e2\x01e20.7 lbs.
+\x01e2\x01e2\x01e20.7 lbs.
 1505.8 lbs.
- 0x1e2740.8 lbs.
- 0x1e2948.0 lbs.
- 0x1e2925.9 lbs.
+\x01e2740.8 lbs.
+\x01e2948.0 lbs.
+\x01e2925.9 lbs.
 1653.5 lbs.
- 0x1e2188.7 lbs.
- 0x1e2 0x1e2 0x1e26.8 lbs.
- 0x1e2 0x1e2 0x1e23.1 lbs.
- 0x1e2111.3 lbs.
- 0x1e2 0x1e2 0x1e24.6 lbs.
- 0x1e2705.5 lbs.
+\x01e2188.7 lbs.
+\x01e2\x01e2\x01e26.8 lbs.
+\x01e2\x01e2\x01e23.1 lbs.
+\x01e2111.3 lbs.
+\x01e2\x01e2\x01e24.6 lbs.
+\x01e2705.5 lbs.

@@ -71,6 +71,8 @@ Script_5: @ 96
 	CompareLastResultJump EQUAL, Script_branch_e6
 	ApplyMovement 0xff, Movement_210
 	Jump Script_branch_ee
+@ e6
+
 Script_branch_e6: @ e6
 	ApplyMovement 0xff, Movement_248
 Script_branch_ee: @ ee
@@ -85,6 +87,8 @@ Script_branch_ee: @ ee
 	CompareLastResultJump EQUAL, Script_branch_12f
 	ApplyMovement 0xff, Movement_254
 	Jump Script_branch_13f
+@ 12f
+
 Script_branch_12f: @ 12f
 	ApplyMovement 0x80, Movement_2e8
 	ApplyMovement 0xff, Movement_264
@@ -97,6 +101,8 @@ Script_branch_13f: @ 13f
 	ApplyMovement 0x80, Movement_2f8
 	ApplyMovement 0xff, Movement_274
 	Jump Script_branch_17d
+@ 16d
+
 Script_branch_16d: @ 16d
 	ApplyMovement 0x80, Movement_300
 	ApplyMovement 0xff, Movement_280
@@ -115,6 +121,8 @@ Script_branch_17d: @ 17d
 	CompareLastResultJump EQUAL, Script_branch_1bb
 	ApplyMovement 0xff, Movement_220
 	Jump Script_branch_1c3
+@ 1bb
+
 Script_branch_1bb: @ 1bb
 	ApplyMovement 0xff, Movement_234
 Script_branch_1c3: @ 1c3

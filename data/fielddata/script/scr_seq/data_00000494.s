@@ -26,14 +26,18 @@ Script_1: @ 16
 Script_branch_41: @ 41
 	Message 0x1
 	Jump Script_branch_57
-	End
-@ 4c
+@ 4a
+
+.byte 0x2 @ 0x4a
+.byte 0x0 @ 0x4b
 
 Script_branch_4c: @ 4c
 	Message 0x2
 	Jump Script_branch_57
-	End
-@ 57
+@ 55
+
+.byte 0x2 @ 0x55
+.byte 0x0 @ 0x56
 
 Script_branch_57: @ 57
 	WaitButton

@@ -23,6 +23,8 @@ Script_2: @ e
 	CompareLastResultJump EQUAL, Script_branch_3b
 	Message 0x1
 	Jump Script_branch_3e
+@ 3b
+
 Script_branch_3b: @ 3b
 	Message 0x2
 Script_branch_3e: @ 3e

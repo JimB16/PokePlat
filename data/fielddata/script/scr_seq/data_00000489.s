@@ -242,8 +242,10 @@ Script_3: @ 1f6
 	ApplyMovement 0xff, Movement_26c
 	WaitMovement
 	Jump Script_branch_212
-	End
-@ 212
+@ 210
+
+.byte 0x2 @ 0x210
+.byte 0x0 @ 0x211
 
 Script_branch_212: @ 212
 	SetVarHero 0x0
@@ -259,8 +261,10 @@ Script_branch_212: @ 212
 Script_branch_238: @ 238
 	Message 0x3
 	Jump Script_branch_212
-	End
-@ 243
+@ 241
+
+.byte 0x2 @ 0x241
+.byte 0x0 @ 0x242
 
 Script_branch_243: @ 243
 	ApplyMovement 0xb, Movement_290

@@ -29,8 +29,10 @@ Script_1: @ a
 	Message 0x1
 	CallStandard 0x7fc
 	Jump Script_branch_79
-	End
-@ 79
+@ 77
+
+.byte 0x2 @ 0x77
+.byte 0x0 @ 0x78
 
 Script_branch_79: @ 79
 	Message 0x2

@@ -17,6 +17,8 @@ Script_1: @ 6
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_50
 	Jump Script_branch_59
+@ 43
+
 Script_branch_43: @ 43
 	ReleaseAll
 	End
@@ -25,13 +27,19 @@ Script_branch_43: @ 43
 Script_branch_47: @ 47
 	Message 0x0
 	Jump Script_branch_68
+@ 50
+
 Script_branch_50: @ 50
 	Message 0x1
 	Jump Script_branch_68
+@ 59
+
 Script_branch_59: @ 59
 	Return2 0x1e, 0x800c
 	Message 0x2
 	Jump Script_branch_68
+@ 68
+
 Script_branch_68: @ 68
 	WaitButton
 	CloseMsgOnKeyPress

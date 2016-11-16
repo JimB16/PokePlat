@@ -51,8 +51,10 @@ Script_2: @ 5c
 	CompareLastResultJump 0x4, Script_branch_82
 	Message 0x2
 	Jump Script_branch_7a
-	End
-@ 7a
+@ 78
+
+.byte 0x2 @ 0x78
+.byte 0x0 @ 0x79
 
 Script_branch_7a: @ 7a
 	WaitButton
@@ -65,8 +67,10 @@ Script_branch_82: @ 82
 	SetVarHero 0x0
 	Message 0xd
 	Jump Script_branch_7a
-	End
-@ 90
+@ 8e
+
+.byte 0x2 @ 0x8e
+.byte 0x0 @ 0x8f
 
 Script_3: @ 90
 	PlayFanfare 0x5dc

@@ -63,26 +63,34 @@ Script_2: @ 10
 Script_branch_de: @ de
 	ChangeOwPosition 0x1, 0xc, 0x16
 	Jump Script_branch_11e
-	End
-@ ee
+@ ec
+
+.byte 0x2 @ 0xec
+.byte 0x0 @ 0xed
 
 Script_branch_ee: @ ee
 	ChangeOwPosition 0x1, 0xc, 0x14
 	Jump Script_branch_11e
-	End
-@ fe
+@ fc
+
+.byte 0x2 @ 0xfc
+.byte 0x0 @ 0xfd
 
 Script_branch_fe: @ fe
 	ChangeOwPosition 0x1, 0xd, 0x15
 	Jump Script_branch_11e
-	End
-@ 10e
+@ 10c
+
+.byte 0x2 @ 0x10c
+.byte 0x0 @ 0x10d
 
 Script_branch_10e: @ 10e
 	ChangeOwPosition 0x1, 0xb, 0x15
 	Jump Script_branch_11e
-	End
-@ 11e
+@ 11c
+
+.byte 0x2 @ 0x11c
+.byte 0x0 @ 0x11d
 
 Script_branch_11e: @ 11e
 	ClearFlag 0x296

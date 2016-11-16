@@ -100,8 +100,10 @@ Script_branch_b0: @ b0
 	If 0x800c, 0x4
 	CompareLastResultJump EQUAL, Script_branch_161
 	Jump Script_branch_256
-	End
-@ 161
+@ 15f
+
+.byte 0x2 @ 0x15f
+.byte 0x0 @ 0x160
 
 Script_branch_161: @ 161
 	SetVarPokeNick 0x0, 0x8000
@@ -141,8 +143,10 @@ Script_branch_161: @ 161
 	Cmd_4f
 	Return2 0x10, 0x800c
 	Jump Script_branch_277
-	End
-@ 21b
+@ 219
+
+.byte 0x2 @ 0x219
+.byte 0x0 @ 0x21a
 
 Script_branch_21b: @ 21b
 	SetVarPokeNick 0x0, 0x8000
@@ -152,16 +156,20 @@ Script_branch_21b: @ 21b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_241
 	Jump Script_branch_161
-	End
-@ 241
+@ 23f
+
+.byte 0x2 @ 0x23f
+.byte 0x0 @ 0x240
 
 Script_branch_241: @ 241
 	SetVarPokeNick 0x0, 0x8000
 	SetVarAtk 0x1, 0x8003
 	Message 0x12
 	Jump Script_branch_296
-	End
-@ 256
+@ 254
+
+.byte 0x2 @ 0x254
+.byte 0x0 @ 0x255
 
 Script_branch_256: @ 256
 	SetVarPokeNick 0x0, 0x8000
@@ -171,15 +179,19 @@ Script_branch_256: @ 256
 	Cmd_4f
 	Return2 0x10, 0x800c
 	Jump Script_branch_277
-	End
-@ 277
+@ 275
+
+.byte 0x2 @ 0x275
+.byte 0x0 @ 0x276
 
 Script_branch_277: @ 277
 	Cmd_2eb 0x8003
 	Cmd_2e9 0x8000, 0x8002, 0x8003
 	Jump Script_branch_296
-	End
-@ 28b
+@ 289
+
+.byte 0x2 @ 0x289
+.byte 0x0 @ 0x28a
 
 Script_branch_28b: @ 28b
 	Message 0x17

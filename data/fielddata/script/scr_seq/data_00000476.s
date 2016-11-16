@@ -16,20 +16,26 @@ Script_2: @ a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_3c
-	End
-@ 31
+@ 2f
+
+.byte 0x2 @ 0x2f
+.byte 0x0 @ 0x30
 
 Script_branch_31: @ 31
 	Message 0x2
 	Jump Script_branch_47
-	End
-@ 3c
+@ 3a
+
+.byte 0x2 @ 0x3a
+.byte 0x0 @ 0x3b
 
 Script_branch_3c: @ 3c
 	Message 0x3
 	Jump Script_branch_47
-	End
-@ 47
+@ 45
+
+.byte 0x2 @ 0x45
+.byte 0x0 @ 0x46
 
 Script_branch_47: @ 47
 	Message 0x4
@@ -55,8 +61,10 @@ Function_6a: @ 6a
 	If 0x8006, 0x8
 	CompareLastResultJump EQUAL, Script_branch_d0
 	Jump Script_branch_dc
-	End
-@ ac
+@ aa
+
+.byte 0x2 @ 0xaa
+.byte 0x0 @ 0xab
 
 Script_branch_ac: @ ac
 	ApplyMovement 0x1, Movement_168
@@ -99,8 +107,10 @@ Function_e8: @ e8
 	If 0x8006, 0x8
 	CompareLastResultJump EQUAL, Script_branch_14e
 	Jump Script_branch_15a
-	End
-@ 12a
+@ 128
+
+.byte 0x2 @ 0x128
+.byte 0x0 @ 0x129
 
 Script_branch_12a: @ 12a
 	ApplyMovement 0x1, Movement_1c4

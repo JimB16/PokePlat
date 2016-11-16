@@ -64,31 +64,39 @@ Script_2: @ 78
 	If 0x8004, 0x3
 	CompareLastResultJump EQUAL, Script_branch_df
 	Jump Script_branch_c5
-	End
-@ c5
+@ c3
+
+.byte 0x2 @ 0xc3
+.byte 0x0 @ 0xc4
 
 Script_branch_c5: @ c5
 	ApplyMovement 0x1e, Movement_390
 	ApplyMovement 0xff, Movement_3f0
 	WaitMovement
 	Jump Script_branch_10b
-	End
-@ df
+@ dd
+
+.byte 0x2 @ 0xdd
+.byte 0x0 @ 0xde
 
 Script_branch_df: @ df
 	ApplyMovement 0x1e, Movement_390
 	WaitMovement
 	Jump Script_branch_10b
-	End
-@ f1
+@ ef
+
+.byte 0x2 @ 0xef
+.byte 0x0 @ 0xf0
 
 Script_branch_f1: @ f1
 	ApplyMovement 0x1e, Movement_398
 	ApplyMovement 0xff, Movement_3f0
 	WaitMovement
 	Jump Script_branch_10b
-	End
-@ 10b
+@ 109
+
+.byte 0x2 @ 0x109
+.byte 0x0 @ 0x10a
 
 Script_branch_10b: @ 10b
 	SetFlag 0x118
@@ -115,24 +123,30 @@ Script_branch_133: @ 133
 	If 0x8004, 0x2
 	CompareLastResultJump EQUAL, Script_branch_180
 	Jump Script_branch_166
-	End
-@ 166
+@ 164
+
+.byte 0x2 @ 0x164
+.byte 0x0 @ 0x165
 
 Script_branch_166: @ 166
 	ApplyMovement 0xff, Movement_3c0
 	ApplyMovement 0x1e, Movement_3a4
 	WaitMovement
 	Jump Script_branch_19a
-	End
-@ 180
+@ 17e
+
+.byte 0x2 @ 0x17e
+.byte 0x0 @ 0x17f
 
 Script_branch_180: @ 180
 	ApplyMovement 0xff, Movement_3c0
 	ApplyMovement 0x1e, Movement_3b4
 	WaitMovement
 	Jump Script_branch_19a
-	End
-@ 19a
+@ 198
+
+.byte 0x2 @ 0x198
+.byte 0x0 @ 0x199
 
 Script_branch_19a: @ 19a
 	RemovePeople 0x1e

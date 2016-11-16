@@ -34,10 +34,14 @@ Script_branch_74: @ 74
 	SetVarHero 0x0
 	Message 0x4
 	Jump Script_branch_8c
+@ 80
+
 Script_branch_80: @ 80
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_8c
+@ 8c
+
 Script_branch_8c: @ 8c
 	CloseMsgOnKeyPress
 	ApplyMovement 0xff, Movement_12c

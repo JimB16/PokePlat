@@ -83,14 +83,18 @@ Script_2: @ c0
 	CompareLastResultJump 0x4, Script_branch_e0
 	Message 0x3
 	Jump Script_branch_eb
-	End
-@ e0
+@ de
+
+.byte 0x2 @ 0xde
+.byte 0x0 @ 0xdf
 
 Script_branch_e0: @ e0
 	Message 0x4
 	Jump Script_branch_eb
-	End
-@ eb
+@ e9
+
+.byte 0x2 @ 0xe9
+.byte 0x0 @ 0xea
 
 Script_branch_eb: @ eb
 	WaitButton

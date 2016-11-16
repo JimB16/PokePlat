@@ -69,14 +69,20 @@ Script_branch_d5: @ d5
 	ApplyMovement 0x0, Movement_128
 	WaitMovement
 	Jump Script_branch_105
+@ e5
+
 Script_branch_e5: @ e5
 	ApplyMovement 0x0, Movement_134
 	WaitMovement
 	Jump Script_branch_105
+@ f5
+
 Script_branch_f5: @ f5
 	ApplyMovement 0x0, Movement_140
 	WaitMovement
 	Jump Script_branch_105
+@ 105
+
 Script_branch_105: @ 105
 	ReleaseAll
 	End
@@ -262,24 +268,30 @@ Script_branch_2c0: @ 2c0
 	ApplyMovement 0xff, Movement_384
 	WaitMovement
 	Jump Script_branch_30e
-	End
-@ 2da
+@ 2d8
+
+.byte 0x2 @ 0x2d8
+.byte 0x0 @ 0x2d9
 
 Script_branch_2da: @ 2da
 	ApplyMovement 0x0, Movement_360
 	ApplyMovement 0xff, Movement_38c
 	WaitMovement
 	Jump Script_branch_30e
-	End
-@ 2f4
+@ 2f2
+
+.byte 0x2 @ 0x2f2
+.byte 0x0 @ 0x2f3
 
 Script_branch_2f4: @ 2f4
 	ApplyMovement 0x0, Movement_354
 	ApplyMovement 0xff, Movement_384
 	WaitMovement
 	Jump Script_branch_30e
-	End
-@ 30e
+@ 30c
+
+.byte 0x2 @ 0x30c
+.byte 0x0 @ 0x30d
 
 Script_branch_30e: @ 30e
 	Message 0x3

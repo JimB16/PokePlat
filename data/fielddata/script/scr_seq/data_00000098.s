@@ -45,18 +45,26 @@ Script_branch_7b: @ 7b
 	ApplyMovement 0x0, Movement_1b8
 	WaitMovement
 	Jump Script_branch_bb
+@ 8b
+
 Script_branch_8b: @ 8b
 	ApplyMovement 0x0, Movement_1dc
 	WaitMovement
 	Jump Script_branch_bb
+@ 9b
+
 Script_branch_9b: @ 9b
 	ApplyMovement 0x0, Movement_200
 	WaitMovement
 	Jump Script_branch_bb
+@ ab
+
 Script_branch_ab: @ ab
 	ApplyMovement 0x0, Movement_224
 	WaitMovement
 	Jump Script_branch_bb
+@ bb
+
 Script_branch_bb: @ bb
 	CheckBadge 0x4, 0x800c
 	If 0x800c, 0x1
@@ -91,6 +99,8 @@ Script_branch_bb: @ bb
 	ClearFlag 0x207
 	Message 0x3
 	Jump Script_branch_158
+@ 158
+
 Script_2: @ 158
 Script_branch_158: @ 158
 	SetVar 0x8004, 0x188

@@ -53,8 +53,10 @@ Script_branch_88: @ 88
 	Message 0x5
 	SetFlag 0x29e
 	Jump Script_branch_da
-	End
-@ da
+@ d8
+
+.byte 0x2 @ 0xd8
+.byte 0x0 @ 0xd9
 
 Script_branch_da: @ da
 	Message 0x6

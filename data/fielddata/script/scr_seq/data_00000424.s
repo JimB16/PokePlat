@@ -15,8 +15,10 @@ Script_1: @ 6
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_54
-	End
-@ 31
+@ 2f
+
+.byte 0x2 @ 0x2f
+.byte 0x0 @ 0x30
 
 Script_branch_31: @ 31
 	Message 0x0
@@ -49,8 +51,10 @@ Script_branch_54: @ 54
 	PlayCry 0x1b9, 0x0
 	WaitCry
 	Jump Script_branch_b2
-	End
-@ b2
+@ b0
+
+.byte 0x2 @ 0xb0
+.byte 0x0 @ 0xb1
 
 Script_branch_b2: @ b2
 	HidePicture

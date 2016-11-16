@@ -189,32 +189,40 @@ Script_branch_1bd: @ 1bd
 	ApplyMovement 0xff, Movement_27c
 	WaitMovement
 	Jump Script_branch_225
-	End
-@ 1d7
+@ 1d5
+
+.byte 0x2 @ 0x1d5
+.byte 0x0 @ 0x1d6
 
 Script_branch_1d7: @ 1d7
 	ApplyMovement 0x0, Movement_240
 	ApplyMovement 0xff, Movement_294
 	WaitMovement
 	Jump Script_branch_225
-	End
-@ 1f1
+@ 1ef
+
+.byte 0x2 @ 0x1ef
+.byte 0x0 @ 0x1f0
 
 Script_branch_1f1: @ 1f1
 	ApplyMovement 0x0, Movement_240
 	ApplyMovement 0xff, Movement_2ac
 	WaitMovement
 	Jump Script_branch_225
-	End
-@ 20b
+@ 209
+
+.byte 0x2 @ 0x209
+.byte 0x0 @ 0x20a
 
 Script_branch_20b: @ 20b
 	ApplyMovement 0x0, Movement_258
 	ApplyMovement 0xff, Movement_2c4
 	WaitMovement
 	Jump Script_branch_225
-	End
-@ 225
+@ 223
+
+.byte 0x2 @ 0x223
+.byte 0x0 @ 0x224
 
 Script_branch_225: @ 225
 	SetFlag 0x1
@@ -359,6 +367,8 @@ Script_15: @ 31b
 	CompareLastResultJump LESSER, Script_branch_3ac
 	SetFlag 0x15b
 	Jump Script_branch_6e8
+@ 3ac
+
 Script_branch_3ac: @ 3ac
 	CheckFlag 0x14a
 	CompareLastResultJump EQUAL, Script_branch_3f4
@@ -564,6 +574,8 @@ Script_branch_694: @ 694
 
 Script_branch_6e2: @ 6e2
 	Jump Script_branch_6fe
+@ 6e8
+
 Script_branch_6e8: @ 6e8
 	Message 0x1b
 	WaitButton
@@ -653,36 +665,46 @@ Script_branch_7a8: @ 7a8
 	ChangeOwPosition 0x20, 0x1d7, 0x2d5
 	ChangeOwPosition 0x1f, 0x1d7, 0x2d5
 	Jump Script_branch_820
-	End
-@ 7c0
+@ 7be
+
+.byte 0x2 @ 0x7be
+.byte 0x0 @ 0x7bf
 
 Script_branch_7c0: @ 7c0
 	ChangeOwPosition 0x20, 0x1d7, 0x2d6
 	ChangeOwPosition 0x1f, 0x1d7, 0x2d6
 	Jump Script_branch_820
-	End
-@ 7d8
+@ 7d6
+
+.byte 0x2 @ 0x7d6
+.byte 0x0 @ 0x7d7
 
 Script_branch_7d8: @ 7d8
 	ChangeOwPosition 0x20, 0x1d7, 0x2d7
 	ChangeOwPosition 0x1f, 0x1d7, 0x2d7
 	Jump Script_branch_820
-	End
-@ 7f0
+@ 7ee
+
+.byte 0x2 @ 0x7ee
+.byte 0x0 @ 0x7ef
 
 Script_branch_7f0: @ 7f0
 	ChangeOwPosition 0x20, 0x1d7, 0x2d8
 	ChangeOwPosition 0x1f, 0x1d7, 0x2d8
 	Jump Script_branch_820
-	End
-@ 808
+@ 806
+
+.byte 0x2 @ 0x806
+.byte 0x0 @ 0x807
 
 Script_branch_808: @ 808
 	ChangeOwPosition 0x20, 0x1d7, 0x2d9
 	ChangeOwPosition 0x1f, 0x1d7, 0x2d9
 	Jump Script_branch_820
-	End
-@ 820
+@ 81e
+
+.byte 0x2 @ 0x81e
+.byte 0x0 @ 0x81f
 
 Script_branch_820: @ 820
 	ClearFlag 0x23c

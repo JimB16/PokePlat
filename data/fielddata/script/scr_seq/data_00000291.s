@@ -45,8 +45,10 @@ Script_2: @ 37
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_90
 	Jump Script_branch_84
-	End
-@ 84
+@ 82
+
+.byte 0x2 @ 0x82
+.byte 0x0 @ 0x83
 
 Script_branch_84: @ 84
 	SetFlag 0x121
@@ -93,9 +95,13 @@ Script_branch_cb: @ cb
 Script_branch_f4: @ f4
 	SetVar 0x8004, 0x145
 	Jump Script_branch_cb
+@ 100
+
 Script_branch_100: @ 100
 	SetVar 0x8004, 0x6a
 	Jump Script_branch_cb
+@ 10c
+
 Script_branch_10c: @ 10c
 	CallStandard 0x7e1
 	CloseMsgOnKeyPress
@@ -121,8 +127,10 @@ Script_6: @ 127
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_149
 	Jump Script_branch_17f
-	End
-@ 149
+@ 147
+
+.byte 0x2 @ 0x147
+.byte 0x0 @ 0x148
 
 Script_branch_149: @ 149
 	SetVarHero 0x0

@@ -70,31 +70,43 @@ Script_branch_e7: @ e7
 	ApplyMovement 0xff, Movement_47c
 	WaitMovement
 	Jump Script_branch_169
+@ ff
+
 Script_branch_ff: @ ff
 	ApplyMovement 0x4, Movement_3c4
 	WaitMovement
 	Jump Script_branch_169
+@ 10f
+
 Script_branch_10f: @ 10f
 	ApplyMovement 0x4, Movement_3d4
 	WaitMovement
 	Jump Script_branch_169
+@ 11f
+
 Script_branch_11f: @ 11f
 	ApplyMovement 0x4, Movement_3dc
 	ApplyMovement 0xff, Movement_4a0
 	WaitMovement
 	Jump Script_branch_169
+@ 137
+
 Script_branch_137: @ 137
 	ApplyMovement 0x4, Movement_3e8
 	ApplyMovement 0xff, Movement_4ac
 	WaitMovement
 	Jump Script_branch_169
+@ 14f
+
 Script_branch_14f: @ 14f
 	ApplyMovement 0x4, Movement_3f4
 	ApplyMovement 0xff, Movement_4b8
 	WaitMovement
 	Jump Script_branch_169
-	End
-@ 169
+@ 167
+
+.byte 0x2 @ 0x167
+.byte 0x0 @ 0x168
 
 Script_branch_169: @ 169
 	CheckGender 0x800c
@@ -109,10 +121,14 @@ Script_branch_189: @ 189
 	SetVarAlter 0x0
 	Message 0x0
 	Jump Script_branch_1a1
+@ 195
+
 Script_branch_195: @ 195
 	SetVarAlter 0x0
 	Message 0x2
 	Jump Script_branch_1a1
+@ 1a1
+
 Script_branch_1a1: @ 1a1
 	CloseMsgOnKeyPress
 	If 0x8005, 0x34b
@@ -135,31 +151,43 @@ Script_branch_1f3: @ 1f3
 	ApplyMovement 0xff, Movement_4c4
 	WaitMovement
 	Jump Script_branch_283
+@ 20b
+
 Script_branch_20b: @ 20b
 	ApplyMovement 0x4, Movement_40c
 	ApplyMovement 0xff, Movement_4d4
 	WaitMovement
 	Jump Script_branch_283
+@ 223
+
 Script_branch_223: @ 223
 	ApplyMovement 0x4, Movement_418
 	ApplyMovement 0xff, Movement_4e4
 	WaitMovement
 	Jump Script_branch_283
+@ 23b
+
 Script_branch_23b: @ 23b
 	ApplyMovement 0x4, Movement_428
 	ApplyMovement 0xff, Movement_4f8
 	WaitMovement
 	Jump Script_branch_283
+@ 253
+
 Script_branch_253: @ 253
 	ApplyMovement 0x4, Movement_43c
 	ApplyMovement 0xff, Movement_510
 	WaitMovement
 	Jump Script_branch_283
+@ 26b
+
 Script_branch_26b: @ 26b
 	ApplyMovement 0x4, Movement_44c
 	ApplyMovement 0xff, Movement_520
 	WaitMovement
 	Jump Script_branch_283
+@ 283
+
 Script_branch_283: @ 283
 	CheckGender 0x800c
 	If 0x800c, 0x0
@@ -172,9 +200,13 @@ Script_branch_283: @ 283
 Script_branch_2a3: @ 2a3
 	Message 0x1
 	Jump Script_branch_2b5
+@ 2ac
+
 Script_branch_2ac: @ 2ac
 	Message 0x3
 	Jump Script_branch_2b5
+@ 2b5
+
 Script_branch_2b5: @ 2b5
 	PrepareDoorAnimation 0x5, 0x1a, 0x8, 0xa, 0x4d
 	OpenDoor 0x4d
@@ -212,13 +244,17 @@ Script_branch_344: @ 344
 	SetVarAlter 0x0
 	Message 0x6
 	Jump Script_branch_35e
-	End
-@ 352
+@ 350
+
+.byte 0x2 @ 0x350
+.byte 0x0 @ 0x351
 
 Script_branch_352: @ 352
 	SetVarAlter 0x0
 	Message 0x7
 	Jump Script_branch_35e
+@ 35e
+
 Script_branch_35e: @ 35e
 	CloseMsgOnKeyPress
 	ApplyMovement 0x4, Movement_45c
@@ -507,15 +543,19 @@ Script_branch_610: @ 610
 	Message 0xb
 	CloseMsgOnKeyPress
 	Jump Script_branch_62a
-	End
-@ 61d
+@ 61b
+
+.byte 0x2 @ 0x61b
+.byte 0x0 @ 0x61c
 
 Script_branch_61d: @ 61d
 	Message 0xc
 	CloseMsgOnKeyPress
 	Jump Script_branch_62a
-	End
-@ 62a
+@ 628
+
+.byte 0x2 @ 0x628
+.byte 0x0 @ 0x629
 
 Script_branch_62a: @ 62a
 	ApplyMovement 0xff, Movement_7b8
@@ -534,11 +574,15 @@ Script_branch_65c: @ 65c
 	SetVarHero 0x1
 	Message 0xd
 	Jump Script_branch_67a
+@ 66b
+
 Script_branch_66b: @ 66b
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x11
 	Jump Script_branch_67a
+@ 67a
+
 Script_branch_67a: @ 67a
 	CloseMsgOnKeyPress
 	CallStandard 0x800
@@ -558,11 +602,15 @@ Script_branch_6b2: @ 6b2
 	SetVarHero 0x1
 	Message 0xe
 	Jump Script_branch_6d0
+@ 6c1
+
 Script_branch_6c1: @ 6c1
 	SetVarAlter 0x0
 	SetVarHero 0x1
 	Message 0x12
 	Jump Script_branch_6d0
+@ 6d0
+
 Script_branch_6d0: @ 6d0
 	CloseMsgOnKeyPress
 	ApplyMovement 0x4, Movement_814
@@ -580,10 +628,14 @@ Script_branch_704: @ 704
 	SetVarHero 0x0
 	Message 0xf
 	Jump Script_branch_71c
+@ 710
+
 Script_branch_710: @ 710
 	SetVarHero 0x0
 	Message 0x13
 	Jump Script_branch_71c
+@ 71c
+
 Script_branch_71c: @ 71c
 	CloseMsgOnKeyPress
 	ApplyMovement 0x4, Movement_820
@@ -603,10 +655,14 @@ Script_branch_75a: @ 75a
 	SetVarHero 0x1
 	Message 0x10
 	Jump Script_branch_772
+@ 766
+
 Script_branch_766: @ 766
 	SetVarHero 0x1
 	Message 0x14
 	Jump Script_branch_772
+@ 772
+
 Script_branch_772: @ 772
 	CloseMsgOnKeyPress
 	ApplyMovement 0x4, Movement_830

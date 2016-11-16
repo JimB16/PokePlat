@@ -82,26 +82,34 @@ Script_6: @ 97
 Script_7: @ a8
 	SetVar 0x4000, 0x0
 	Jump Script_branch_e0
-	End
-@ b6
+@ b4
+
+.byte 0x2 @ 0xb4
+.byte 0x0 @ 0xb5
 
 Script_8: @ b6
 	SetVar 0x4000, 0x1
 	Jump Script_branch_e0
-	End
-@ c4
+@ c2
+
+.byte 0x2 @ 0xc2
+.byte 0x0 @ 0xc3
 
 Script_9: @ c4
 	SetVar 0x4000, 0x2
 	Jump Script_branch_e0
-	End
-@ d2
+@ d0
+
+.byte 0x2 @ 0xd0
+.byte 0x0 @ 0xd1
 
 Script_10: @ d2
 	SetVar 0x4000, 0x3
 	Jump Script_branch_e0
-	End
-@ e0
+@ de
+
+.byte 0x2 @ 0xde
+.byte 0x0 @ 0xdf
 
 Script_branch_e0: @ e0
 	LockAll

@@ -81,22 +81,28 @@ Script_2: @ 62
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_116
 	Jump Script_branch_124
-	End
-@ 116
+@ 114
+
+.byte 0x2 @ 0x114
+.byte 0x0 @ 0x115
 
 Script_branch_116: @ 116
 	SetVarHero 0x0
 	Message 0x9
 	Jump Script_branch_132
-	End
-@ 124
+@ 122
+
+.byte 0x2 @ 0x122
+.byte 0x0 @ 0x123
 
 Script_branch_124: @ 124
 	SetVarHero 0x0
 	Message 0xa
 	Jump Script_branch_132
-	End
-@ 132
+@ 130
+
+.byte 0x2 @ 0x130
+.byte 0x0 @ 0x131
 
 Script_branch_132: @ 132
 	Message 0xb
@@ -108,24 +114,30 @@ Script_branch_132: @ 132
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_162
 	Jump Script_branch_173
-	End
-@ 162
+@ 160
+
+.byte 0x2 @ 0x160
+.byte 0x0 @ 0x161
 
 Script_branch_162: @ 162
 	Message 0xc
 	SetVarAlter 0x0
 	Message 0xd
 	Jump Script_branch_184
-	End
-@ 173
+@ 171
+
+.byte 0x2 @ 0x171
+.byte 0x0 @ 0x172
 
 Script_branch_173: @ 173
 	Message 0xe
 	SetVarAlter 0x0
 	Message 0xf
 	Jump Script_branch_184
-	End
-@ 184
+@ 182
+
+.byte 0x2 @ 0x182
+.byte 0x0 @ 0x183
 
 Script_branch_184: @ 184
 	CloseMsgOnKeyPress
@@ -600,8 +612,10 @@ Script_11: @ 616
 	If 0x800c, 0x2
 	CompareLastResultJump EQUAL, Script_branch_689
 	Jump Script_branch_694
-	End
-@ 673
+@ 671
+
+.byte 0x2 @ 0x671
+.byte 0x0 @ 0x672
 
 Script_branch_673: @ 673
 	Message 0x37

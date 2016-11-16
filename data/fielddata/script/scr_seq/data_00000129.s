@@ -70,10 +70,14 @@ Script_branch_e2: @ e2
 	ApplyMovement 0xff, Movement_19c
 	WaitMovement
 	Jump Script_branch_102
+@ f2
+
 Script_branch_f2: @ f2
 	ApplyMovement 0xff, Movement_1b4
 	WaitMovement
 	Jump Script_branch_102
+@ 102
+
 Script_branch_102: @ 102
 	SetVar 0x40da, 0x1
 	GreatMarshFunction 0x0
@@ -274,14 +278,18 @@ Script_6: @ 300
 	CompareLastResultJump EQUAL, Script_branch_31e
 	Message 0xf
 	Jump Script_branch_329
-	End
-@ 31e
+@ 31c
+
+.byte 0x2 @ 0x31c
+.byte 0x0 @ 0x31d
 
 Script_branch_31e: @ 31e
 	Message 0x13
 	Jump Script_branch_329
-	End
-@ 329
+@ 327
+
+.byte 0x2 @ 0x327
+.byte 0x0 @ 0x328
 
 Script_branch_329: @ 329
 	WaitButton

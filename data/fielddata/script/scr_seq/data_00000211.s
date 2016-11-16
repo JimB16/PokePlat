@@ -339,13 +339,13 @@ Script_4: @ 3e8
 	CheckPartyNumber 0x8004
 	SetVar 0x8005, 0x0
 Script_branch_3f4: @ 3f4
-	CheckPokemonPoisoned 0x800c, 0x8005
+	CheckIsPokemonPoisoned 0x800c, 0x8005
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_40f
 	SetVarPokeNick 0x0, 0x8005
 	Message 0x42
 Script_branch_40f: @ 40f
-	SetValue 0x8005, 0x1
+	ScriptCmd_AddValue 0x8005, 0x1
 	If2 0x8004, 0x8005
 	CompareLastResultJump 0x5, Script_branch_3f4
 	CheckPokePartyHealth 0x800c, 0x6
@@ -1842,7 +1842,7 @@ Script_39: @ 13be
 
 Function_13c8: @ 13c8
 Script_branch_13c8: @ 13c8
-	SetValue 0x4115, 0x1
+	ScriptCmd_AddValue 0x4115, 0x1
 	If 0x4115, 0x9
 	CompareLastResultCall 0x4, Script_branch_1445
 	If 0x4115, 0x1

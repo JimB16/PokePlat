@@ -22,9 +22,13 @@ Script_1: @ 6
 Script_branch_34: @ 34
 	DisplayFloor 0x0, 0x2
 	Jump Script_branch_48
+@ 3e
+
 Script_branch_3e: @ 3e
 	DisplayFloor 0x0, 0x1
 	Jump Script_branch_48
+@ 48
+
 Script_branch_48: @ 48
 	StartLift 0x14, 0x1, 0x40ce, 0x40ce
 	Message 0x0
@@ -39,6 +43,8 @@ Script_branch_48: @ 48
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_ca
 	Jump Script_branch_152
+@ 8f
+
 Script_branch_8f: @ 8f
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -49,6 +55,8 @@ Script_branch_8f: @ 8f
 	Call Function_105
 	SetVar 0x40ce, 0x0
 	Jump Script_branch_147
+@ ca
+
 Script_branch_ca: @ ca
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -59,6 +67,8 @@ Script_branch_ca: @ ca
 	Call Function_105
 	SetVar 0x40ce, 0x1
 	Jump Script_branch_147
+@ 105
+
 Function_105: @ 105
 	SetVar 0x40ce, 0xffff
 	If 0x8004, 0x1

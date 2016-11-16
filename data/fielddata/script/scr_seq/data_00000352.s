@@ -81,22 +81,28 @@ Script_3: @ cb
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_104
 	Jump Script_branch_112
-	End
-@ 104
+@ 102
+
+.byte 0x2 @ 0x102
+.byte 0x0 @ 0x103
 
 Script_branch_104: @ 104
 	SetVarHero 0x0
 	Message 0x3
 	Jump Script_branch_120
-	End
-@ 112
+@ 110
+
+.byte 0x2 @ 0x110
+.byte 0x0 @ 0x111
 
 Script_branch_112: @ 112
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_120
-	End
-@ 120
+@ 11e
+
+.byte 0x2 @ 0x11e
+.byte 0x0 @ 0x11f
 
 Script_branch_120: @ 120
 	WaitButton
@@ -126,22 +132,28 @@ Script_4: @ 13b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_167
 	Jump Script_branch_175
-	End
-@ 167
+@ 165
+
+.byte 0x2 @ 0x165
+.byte 0x0 @ 0x166
 
 Script_branch_167: @ 167
 	SetVarHero 0x0
 	Message 0x7
 	Jump Script_branch_183
-	End
-@ 175
+@ 173
+
+.byte 0x2 @ 0x173
+.byte 0x0 @ 0x174
 
 Script_branch_175: @ 175
 	SetVarHero 0x0
 	Message 0x8
 	Jump Script_branch_183
-	End
-@ 183
+@ 181
+
+.byte 0x2 @ 0x181
+.byte 0x0 @ 0x182
 
 Script_branch_183: @ 183
 	WaitButton
@@ -155,22 +167,28 @@ Script_branch_18b: @ 18b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1a4
 	Jump Script_branch_1b2
-	End
-@ 1a4
+@ 1a2
+
+.byte 0x2 @ 0x1a2
+.byte 0x0 @ 0x1a3
 
 Script_branch_1a4: @ 1a4
 	SetVarHero 0x0
 	Message 0xf
 	Jump Script_branch_1c0
-	End
-@ 1b2
+@ 1b0
+
+.byte 0x2 @ 0x1b0
+.byte 0x0 @ 0x1b1
 
 Script_branch_1b2: @ 1b2
 	SetVarHero 0x0
 	Message 0x10
 	Jump Script_branch_1c0
-	End
-@ 1c0
+@ 1be
+
+.byte 0x2 @ 0x1be
+.byte 0x0 @ 0x1bf
 
 Script_branch_1c0: @ 1c0
 	WaitButton
@@ -192,22 +210,28 @@ Script_5: @ 1d0
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1f5
 	Jump Script_branch_203
-	End
-@ 1f5
+@ 1f3
+
+.byte 0x2 @ 0x1f3
+.byte 0x0 @ 0x1f4
 
 Script_branch_1f5: @ 1f5
 	SetVarHero 0x0
 	Message 0x0
 	Jump Script_branch_211
-	End
-@ 203
+@ 201
+
+.byte 0x2 @ 0x201
+.byte 0x0 @ 0x202
 
 Script_branch_203: @ 203
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_211
-	End
-@ 211
+@ 20f
+
+.byte 0x2 @ 0x20f
+.byte 0x0 @ 0x210
 
 Script_branch_211: @ 211
 	SetVar 0x4097, 0x1

@@ -18,6 +18,8 @@ Script_1: @ a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_5f
 	Jump Script_branch_6a
+@ 3d
+
 Script_branch_3d: @ 3d
 	SetFlag 0xe9
 	Message 0x0
@@ -25,6 +27,8 @@ Script_branch_3d: @ 3d
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_5f
 	Jump Script_branch_6a
+@ 5f
+
 Script_branch_5f: @ 5f
 	Message 0x2
 	WaitButton

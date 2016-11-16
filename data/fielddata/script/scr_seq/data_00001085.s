@@ -34,6 +34,8 @@ Script_branch_48: @ 48
 	If2 0x4000, 0x8006
 	CompareLastResultJump EQUAL, Script_branch_eb
 	Jump Script_branch_67
+@ 67
+
 Script_branch_67: @ 67
 	SetVar 0x8007, 0x32
 	ScriptCmd_AddValue 0x8007, 0x8006
@@ -56,6 +58,8 @@ Script_branch_b3: @ b3
 	CompareLastResultJump EQUAL, Script_branch_db
 	Cmd_345 0x0, 0x8007
 	Jump Script_branch_e0
+@ db
+
 Script_branch_db: @ db
 	SetvarSealRandom 0x0, 0x8007
 Script_branch_e0: @ e0

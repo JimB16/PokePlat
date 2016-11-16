@@ -71,6 +71,8 @@ Script_branch_bc: @ bc
 	ApplyMovement 0xff, Movement_204
 	WaitMovement
 	Jump Script_branch_166
+@ ec
+
 Script_branch_ec: @ ec
 	ApplyMovement 0x2, Movement_198
 	ApplyMovement 0xff, Movement_1f0
@@ -79,6 +81,8 @@ Script_branch_ec: @ ec
 	ApplyMovement 0x3, Movement_1c0
 	WaitMovement
 	Jump Script_branch_166
+@ 114
+
 Script_branch_114: @ 114
 	ApplyMovement 0x2, Movement_1a4
 	ApplyMovement 0xff, Movement_1fc
@@ -87,6 +91,8 @@ Script_branch_114: @ 114
 	ApplyMovement 0x3, Movement_1d0
 	WaitMovement
 	Jump Script_branch_166
+@ 13c
+
 Function_13c: @ 13c
 	RemovePeople 0x2
 	RemovePeople 0x3

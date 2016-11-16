@@ -129,6 +129,8 @@ Script_4: @ 108
 	CompareLastResultJump EQUAL, Script_branch_269
 	Message 0x9
 	Jump Script_branch_229
+@ 180
+
 Script_branch_180: @ 180
 	If 0x8000, 0x0
 	CompareLastResultCall EQUAL, Script_branch_275
@@ -158,6 +160,8 @@ Script_branch_180: @ 180
 	Message 0xa
 	Message 0x8
 	Jump Script_branch_229
+@ 229
+
 Script_branch_229: @ 229
 	WaitButton
 	CloseMsgOnKeyPress
@@ -169,21 +173,33 @@ Script_branch_229: @ 229
 Script_branch_233: @ 233
 	Message 0xb
 	Jump Script_branch_229
+@ 23c
+
 Script_branch_23c: @ 23c
 	Message 0xc
 	Jump Script_branch_229
+@ 245
+
 Script_branch_245: @ 245
 	SetVar 0x8001, 0x5f
 	Jump Script_branch_180
+@ 251
+
 Script_branch_251: @ 251
 	SetVar 0x8001, 0x60
 	Jump Script_branch_180
+@ 25d
+
 Script_branch_25d: @ 25d
 	SetVar 0x8001, 0x61
 	Jump Script_branch_180
+@ 269
+
 Script_branch_269: @ 269
 	SetVar 0x8001, 0x62
 	Jump Script_branch_180
+@ 275
+
 Script_branch_275: @ 275
 	CheckMoney 0x800c, 0xc8
 	Return
@@ -234,8 +250,10 @@ Script_5: @ 2d5
 	FacePlayer
 	Message 0xd
 	Jump Script_branch_2e8
-	End
-@ 2e8
+@ 2e6
+
+.byte 0x2 @ 0x2e6
+.byte 0x0 @ 0x2e7
 
 Script_branch_2e8: @ 2e8
 	Message 0xe
@@ -259,32 +277,42 @@ Script_branch_2e8: @ 2e8
 	If 0x8008, 0x4
 	CompareLastResultJump EQUAL, Script_branch_387
 	Jump Script_branch_387
-	End
-@ 35b
+@ 359
+
+.byte 0x2 @ 0x359
+.byte 0x0 @ 0x35a
 
 Script_branch_35b: @ 35b
 	Message 0xf
 	Jump Script_branch_2e8
-	End
-@ 366
+@ 364
+
+.byte 0x2 @ 0x364
+.byte 0x0 @ 0x365
 
 Script_branch_366: @ 366
 	Message 0x10
 	Jump Script_branch_2e8
-	End
-@ 371
+@ 36f
+
+.byte 0x2 @ 0x36f
+.byte 0x0 @ 0x370
 
 Script_branch_371: @ 371
 	Message 0x11
 	Jump Script_branch_2e8
-	End
-@ 37c
+@ 37a
+
+.byte 0x2 @ 0x37a
+.byte 0x0 @ 0x37b
 
 Script_branch_37c: @ 37c
 	Message 0x12
 	Jump Script_branch_2e8
-	End
-@ 387
+@ 385
+
+.byte 0x2 @ 0x385
+.byte 0x0 @ 0x386
 
 Script_branch_387: @ 387
 	CloseMsgOnKeyPress

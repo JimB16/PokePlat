@@ -14,8 +14,10 @@ Script_1: @ e
 	CheckFlag 0xd6
 	CompareLastResultJump EQUAL, Script_branch_596
 	Jump Script_branch_27
-	End
-@ 27
+@ 25
+
+.byte 0x2 @ 0x25
+.byte 0x0 @ 0x26
 
 Script_branch_27: @ 27
 	CheckFlag 0xa7
@@ -599,8 +601,10 @@ Script_branch_596: @ 596
 	CompareLastResultJump EQUAL, Script_branch_753
 	Message 0x16
 	Jump Script_branch_75e
-	End
-@ 6cf
+@ 6cd
+
+.byte 0x2 @ 0x6cd
+.byte 0x0 @ 0x6ce
 
 Script_branch_6cf: @ 6cf
 	ApplyMovement 0x2, Movement_7b0
@@ -659,8 +663,10 @@ Script_branch_73f: @ 73f
 Script_branch_753: @ 753
 	Message 0x17
 	Jump Script_branch_75e
-	End
-@ 75e
+@ 75c
+
+.byte 0x2 @ 0x75c
+.byte 0x0 @ 0x75d
 
 Script_branch_75e: @ 75e
 	CloseMsgOnKeyPress

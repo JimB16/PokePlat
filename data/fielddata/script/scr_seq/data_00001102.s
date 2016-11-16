@@ -21,6 +21,8 @@ Script_1: @ 6
 	CallStandard 0x7fc
 	SetFlag 0xcb
 	Jump Script_branch_4b
+@ 4b
+
 Script_branch_4b: @ 4b
 	Message 0x1
 	WaitButton

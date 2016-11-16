@@ -24,8 +24,10 @@ Script_1: @ a
 	CallStandard 0x7fc
 	SetFlag 0xa1
 	Jump Script_branch_5c
-	End
-@ 5c
+@ 5a
+
+.byte 0x2 @ 0x5a
+.byte 0x0 @ 0x5b
 
 Script_branch_5c: @ 5c
 	Message 0x1
@@ -60,8 +62,10 @@ Script_2: @ 72
 	CallStandard 0x7fc
 	SetFlag 0x116
 	Jump Script_branch_c4
-	End
-@ c4
+@ c2
+
+.byte 0x2 @ 0xc2
+.byte 0x0 @ 0xc3
 
 Script_branch_c4: @ c4
 	Message 0x4

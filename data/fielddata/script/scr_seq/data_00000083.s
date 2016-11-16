@@ -82,40 +82,50 @@ Script_1: @ ed
 	LockAll
 	SetVar 0x8004, 0x1
 	Jump Script_branch_151
-	End
-@ 101
+@ ff
+
+.byte 0x2 @ 0xff
+.byte 0x0 @ 0x100
 
 Script_2: @ 101
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8004, 0x3
 	Jump Script_branch_151
-	End
-@ 115
+@ 113
+
+.byte 0x2 @ 0x113
+.byte 0x0 @ 0x114
 
 Script_3: @ 115
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8004, 0x2
 	Jump Script_branch_151
-	End
-@ 129
+@ 127
+
+.byte 0x2 @ 0x127
+.byte 0x0 @ 0x128
 
 Script_4: @ 129
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8004, 0x4
 	Jump Script_branch_151
-	End
-@ 13d
+@ 13b
+
+.byte 0x2 @ 0x13b
+.byte 0x0 @ 0x13c
 
 Script_5: @ 13d
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8004, 0x5
 	Jump Script_branch_151
-	End
-@ 151
+@ 14f
+
+.byte 0x2 @ 0x14f
+.byte 0x0 @ 0x150
 
 Script_branch_151: @ 151
 	CheckPokeParty 0x800c, 0x1df
@@ -144,8 +154,10 @@ Script_branch_151: @ 151
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_740
 	Jump Script_branch_1f8
-	End
-@ 1f8
+@ 1f6
+
+.byte 0x2 @ 0x1f6
+.byte 0x0 @ 0x1f7
 
 Script_branch_1f8: @ 1f8
 	If 0x8004, 0x1
@@ -162,8 +174,10 @@ Script_branch_1f8: @ 1f8
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_3f5
 	Jump Script_branch_403
-	End
-@ 254
+@ 252
+
+.byte 0x2 @ 0x252
+.byte 0x0 @ 0x253
 
 Script_branch_254: @ 254
 	Multi2 0x1f, 0xb, 0x0, 0x1, 0x800c
@@ -178,8 +192,10 @@ Script_branch_254: @ 254
 	If 0x8008, 0x2
 	CompareLastResultJump EQUAL, Script_branch_295
 	Jump Script_branch_740
-	End
-@ 295
+@ 293
+
+.byte 0x2 @ 0x293
+.byte 0x0 @ 0x294
 
 Script_branch_295: @ 295
 	Cmd_303 0x8003, 0x800c
@@ -187,8 +203,10 @@ Script_branch_295: @ 295
 	If 0x8003, 0x2
 	CompareLastResultJump 0x4, Script_branch_37b
 	Jump Script_branch_2b6
-	End
-@ 2b6
+@ 2b4
+
+.byte 0x2 @ 0x2b4
+.byte 0x0 @ 0x2b5
 
 Script_branch_2b6: @ 2b6
 	SetVarPokeNick 0x0, 0x8000
@@ -209,8 +227,10 @@ Script_branch_2b6: @ 2b6
 	If 0x8004, 0x5
 	CompareLastResultCall EQUAL, Script_branch_371
 	Jump Script_branch_325
-	End
-@ 325
+@ 323
+
+.byte 0x2 @ 0x323
+.byte 0x0 @ 0x324
 
 Script_branch_325: @ 325
 	CheckSpritePosition 0x8006, 0x8007
@@ -272,14 +292,18 @@ Script_branch_37b: @ 37b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e8
 	Jump Script_branch_2b6
-	End
-@ 3e8
+@ 3e6
+
+.byte 0x2 @ 0x3e6
+.byte 0x0 @ 0x3e7
 
 Script_branch_3e8: @ 3e8
 	Message 0x11
 	Jump Script_branch_7a2
-	End
-@ 3f3
+@ 3f1
+
+.byte 0x2 @ 0x3f1
+.byte 0x0 @ 0x3f2
 
 Script_branch_3f3: @ 3f3
 	End
@@ -288,8 +312,10 @@ Script_branch_3f3: @ 3f3
 Script_branch_3f5: @ 3f5
 	Cmd_2dd 0x8000, 0x1df
 	Jump Script_branch_473
-	End
-@ 403
+@ 401
+
+.byte 0x2 @ 0x401
+.byte 0x0 @ 0x402
 
 Script_branch_403: @ 403
 	Message 0x7
@@ -309,20 +335,26 @@ Script_branch_403: @ 403
 	If 0x800c, 0x1df
 	CompareLastResultJump 0x5, Script_branch_468
 	Jump Script_branch_473
-	End
-@ 45d
+@ 45b
+
+.byte 0x2 @ 0x45b
+.byte 0x0 @ 0x45c
 
 Script_branch_45d: @ 45d
 	Message 0x8
 	Jump Script_branch_7a2
-	End
-@ 468
+@ 466
+
+.byte 0x2 @ 0x466
+.byte 0x0 @ 0x467
 
 Script_branch_468: @ 468
 	Message 0x9
 	Jump Script_branch_7a2
-	End
-@ 473
+@ 471
+
+.byte 0x2 @ 0x471
+.byte 0x0 @ 0x472
 
 Script_branch_473: @ 473
 	CheckMove 0x800c, 0x13b, 0x8000
@@ -345,21 +377,27 @@ Script_branch_473: @ 473
 	If 0x800c, 0x4
 	CompareLastResultJump EQUAL, Script_branch_51b
 	Jump Script_branch_50b
-	End
-@ 4fd
+@ 4fb
+
+.byte 0x2 @ 0x4fb
+.byte 0x0 @ 0x4fc
 
 Script_branch_4fd: @ 4fd
 	SetVar 0x8002, 0x0
 	Jump Script_branch_50b
-	End
-@ 50b
+@ 509
+
+.byte 0x2 @ 0x509
+.byte 0x0 @ 0x50a
 
 Script_branch_50b: @ 50b
 	SetVarPokeNick 0x0, 0x8000
 	Message 0xa
 	Jump Script_branch_613
-	End
-@ 51b
+@ 519
+
+.byte 0x2 @ 0x519
+.byte 0x0 @ 0x51a
 
 Script_branch_51b: @ 51b
 	SetVarPokeNick 0x0, 0x8000
@@ -369,8 +407,10 @@ Script_branch_51b: @ 51b
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_5fe
 	Jump Script_branch_541
-	End
-@ 541
+@ 53f
+
+.byte 0x2 @ 0x53f
+.byte 0x0 @ 0x540
 
 Script_branch_541: @ 541
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -404,8 +444,10 @@ Script_branch_541: @ 541
 	Cmd_4f
 	Return2 0x10, 0x800c
 	Jump Script_branch_613
-	End
-@ 5dd
+@ 5db
+
+.byte 0x2 @ 0x5db
+.byte 0x0 @ 0x5dc
 
 Script_branch_5dd: @ 5dd
 	SetVarAtk 0x1, 0x8001
@@ -414,16 +456,20 @@ Script_branch_5dd: @ 5dd
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_541
 	Jump Script_branch_5fe
-	End
-@ 5fe
+@ 5fc
+
+.byte 0x2 @ 0x5fc
+.byte 0x0 @ 0x5fd
 
 Script_branch_5fe: @ 5fe
 	SetVarPokeNick 0x0, 0x8000
 	SetVarAtk 0x1, 0x8001
 	Message 0x2
 	Jump Script_branch_7a2
-	End
-@ 613
+@ 611
+
+.byte 0x2 @ 0x611
+.byte 0x0 @ 0x612
 
 Script_branch_613: @ 613
 	Cmd_304 0x8000, 0x8002, 0x8001, 0x8004
@@ -443,8 +489,10 @@ Script_branch_613: @ 613
 	CheckFlag 0x77
 	CompareLastResultJump LESSER, Script_branch_80c
 	Jump Script_branch_325
-	End
-@ 67f
+@ 67d
+
+.byte 0x2 @ 0x67d
+.byte 0x0 @ 0x67e
 
 Script_branch_67f: @ 67f
 	RemovePeople 0x0
@@ -533,8 +581,10 @@ Script_branch_6de: @ 6de
 	If 0x8004, 0x5
 	CompareLastResultCall EQUAL, Script_branch_73b
 	Jump Script_branch_7a2
-	End
-@ 727
+@ 725
+
+.byte 0x2 @ 0x725
+.byte 0x0 @ 0x726
 
 Script_branch_727: @ 727
 	Message 0x13
@@ -573,8 +623,10 @@ Script_branch_740: @ 740
 	If 0x8004, 0x5
 	CompareLastResultCall EQUAL, Script_branch_79d
 	Jump Script_branch_7a2
-	End
-@ 789
+@ 787
+
+.byte 0x2 @ 0x787
+.byte 0x0 @ 0x788
 
 Script_branch_789: @ 789
 	Message 0x15
@@ -649,8 +701,10 @@ Script_branch_80c: @ 80c
 	SetFlag 0x77
 	SetVar 0x411b, 0x1
 	Jump Script_branch_325
-	End
-@ 81e
+@ 81c
+
+.byte 0x2 @ 0x81c
+.byte 0x0 @ 0x81d
 
 Script_11: @ 81e
 	LockAll
@@ -797,8 +851,10 @@ Script_10: @ 908
 	CompareLastResultJump EQUAL, Script_branch_9cf
 	Message 0x2f
 	Jump Script_branch_9d5
-	End
-@ 9cf
+@ 9cd
+
+.byte 0x2 @ 0x9cd
+.byte 0x0 @ 0x9ce
 
 Script_branch_9cf: @ 9cf
 	CloseMsgOnKeyPress

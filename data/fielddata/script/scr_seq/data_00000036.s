@@ -162,18 +162,28 @@ Script_2: @ 1f9
 Script_branch_244: @ 244
 	ChangeOwPosition 0xb, 0x26, 0x2d3
 	Jump Script_branch_28a
+@ 252
+
 Script_branch_252: @ 252
 	ChangeOwPosition 0xb, 0x26, 0x2d4
 	Jump Script_branch_28a
+@ 260
+
 Script_branch_260: @ 260
 	ChangeOwPosition 0xb, 0x26, 0x2d5
 	Jump Script_branch_28a
+@ 26e
+
 Script_branch_26e: @ 26e
 	ChangeOwPosition 0xb, 0x26, 0x2d6
 	Jump Script_branch_28a
+@ 27c
+
 Script_branch_27c: @ 27c
 	ChangeOwPosition 0xb, 0x26, 0x2d7
 	Jump Script_branch_28a
+@ 28a
+
 Script_branch_28a: @ 28a
 	ChangeOwMovement 0xb, 0x11
 	ClearFlag 0x1b2
@@ -193,15 +203,23 @@ Script_branch_28a: @ 28a
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_2f7
 	Jump Script_branch_2df
+@ 2df
+
 Script_branch_2df: @ 2df
 	TrainerBattle 0x1dc, 0x0
 	Jump Script_branch_303
+@ 2eb
+
 Script_branch_2eb: @ 2eb
 	TrainerBattle 0x1dd, 0x0
 	Jump Script_branch_303
+@ 2f7
+
 Script_branch_2f7: @ 2f7
 	TrainerBattle 0x1de, 0x0
 	Jump Script_branch_303
+@ 303
+
 Script_branch_303: @ 303
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
@@ -325,13 +343,19 @@ Script_5: @ 3c8
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_45e
 	Jump Script_branch_46a
+@ 45e
+
 Script_branch_45e: @ 45e
 	SetVarHero 0x0
 	Message 0x9
 	Jump Script_branch_473
+@ 46a
+
 Script_branch_46a: @ 46a
 	Message 0xa
 	Jump Script_branch_473
+@ 473
+
 Script_branch_473: @ 473
 	WaitButton
 	CloseMsgOnKeyPress
@@ -404,12 +428,18 @@ Script_7: @ 4e7
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_506
 	Jump Script_branch_50f
+@ 506
+
 Script_branch_506: @ 506
 	Message 0xb
 	Jump Script_branch_518
+@ 50f
+
 Script_branch_50f: @ 50f
 	Message 0xc
 	Jump Script_branch_518
+@ 518
+
 Script_branch_518: @ 518
 	WaitButton
 	CloseMsgOnKeyPress
@@ -425,9 +455,13 @@ Script_8: @ 520
 	CompareLastResultJump EQUAL, Script_branch_53c
 	Message 0xe
 	Jump Script_branch_545
+@ 53c
+
 Script_branch_53c: @ 53c
 	Message 0xf
 	Jump Script_branch_545
+@ 545
+
 Script_branch_545: @ 545
 	WaitButton
 	CloseMsgOnKeyPress
@@ -445,28 +479,36 @@ Script_9: @ 54d
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_591
 	Jump Script_branch_57b
-	End
-@ 57b
+@ 579
+
+.byte 0x2 @ 0x579
+.byte 0x0 @ 0x57a
 
 Script_branch_57b: @ 57b
 	Message 0x10
 	Jump Script_branch_545
-	End
-@ 586
+@ 584
+
+.byte 0x2 @ 0x584
+.byte 0x0 @ 0x585
 
 Script_branch_586: @ 586
 	Message 0x11
 	Jump Script_branch_545
-	End
-@ 591
+@ 58f
+
+.byte 0x2 @ 0x58f
+.byte 0x0 @ 0x590
 
 Script_branch_591: @ 591
 	If 0x4078, 0x5
 	CompareLastResultJump 0x4, Script_branch_57b
 	Message 0x12
 	Jump Script_branch_545
-	End
-@ 5a9
+@ 5a7
+
+.byte 0x2 @ 0x5a7
+.byte 0x0 @ 0x5a8
 
 Script_10: @ 5a9
 	PlayFanfare 0x5dc
@@ -476,9 +518,13 @@ Script_10: @ 5a9
 	CompareLastResultJump EQUAL, Script_branch_5c5
 	Message 0x13
 	Jump Script_branch_545
+@ 5c5
+
 Script_branch_5c5: @ 5c5
 	Message 0x14
 	Jump Script_branch_545
+@ 5ce
+
 Script_11: @ 5ce
 	PlayFanfare 0x5dc
 	LockAll
@@ -487,9 +533,13 @@ Script_11: @ 5ce
 	CompareLastResultJump EQUAL, Script_branch_5ea
 	Message 0x15
 	Jump Script_branch_545
+@ 5ea
+
 Script_branch_5ea: @ 5ea
 	Message 0x16
 	Jump Script_branch_545
+@ 5f3
+
 Script_12: @ 5f3
 	PlayFanfare 0x5dc
 	LockAll
@@ -499,10 +549,14 @@ Script_12: @ 5f3
 	PlayCry 0x36, 0x0
 	Message 0x17
 	Jump Script_branch_545
+@ 615
+
 Script_branch_615: @ 615
 	PlayCry 0x36, 0x0
 	Message 0x18
 	Jump Script_branch_545
+@ 624
+
 Script_13: @ 624
 	PlayFanfare 0x5dc
 	LockAll
@@ -511,9 +565,13 @@ Script_13: @ 624
 	CompareLastResultJump EQUAL, Script_branch_640
 	Message 0x19
 	Jump Script_branch_545
+@ 640
+
 Script_branch_640: @ 640
 	Message 0x1a
 	Jump Script_branch_545
+@ 649
+
 Script_14: @ 649
 	CallMessageBox 0x24, 0x0, 0x0, 0x800c
 	TypeMessageBox 0x3
@@ -616,8 +674,10 @@ Script_20: @ 708
 	If 0x800c, 0x3
 	CompareLastResultJump EQUAL, Script_branch_847
 	Jump Script_branch_847
-	End
-@ 78a
+@ 788
+
+.byte 0x2 @ 0x788
+.byte 0x0 @ 0x789
 
 Script_branch_78a: @ 78a
 	Cmd_42 0xd7, 0x2
@@ -765,6 +825,8 @@ Script_branch_938: @ 938
 	Message 0x20
 	CloseMsgOnKeyPress
 	Jump Script_branch_7d1
+@ 943
+
 Script_branch_943: @ 943
 	Message 0x21
 	WaitButton

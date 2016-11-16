@@ -37,6 +37,8 @@ Script_2: @ 3a
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_9a
 	Jump Script_branch_5a
+@ 5a
+
 Script_branch_5a: @ 5a
 	CheckGender 0x800c
 	If 0x800c, 0x0
@@ -50,10 +52,14 @@ Script_branch_7a: @ 7a
 	SetVarHero 0x0
 	Message 0x2
 	Jump Script_branch_92
+@ 86
+
 Script_branch_86: @ 86
 	SetVarHero 0x0
 	Message 0x3
 	Jump Script_branch_92
+@ 92
+
 Script_branch_92: @ 92
 	WaitButton
 	CloseMsgOnKeyPress
@@ -92,10 +98,14 @@ Script_branch_c4: @ c4
 Script_branch_fa: @ fa
 	Message 0x5
 	Jump Script_branch_10f
+@ 103
+
 Script_branch_103: @ 103
 	SetVarHero 0x0
 	Message 0x6
 	Jump Script_branch_10f
+@ 10f
+
 Script_branch_10f: @ 10f
 	WaitButton
 	CloseMsgOnKeyPress

@@ -62,8 +62,10 @@ Script_7: @ 8c
 	FacePlayer
 	SetVar 0x8005, 0x0
 	Jump Script_branch_b8
-	End
-@ a2
+@ a0
+
+.byte 0x2 @ 0xa0
+.byte 0x0 @ 0xa1
 
 Script_8: @ a2
 	PlayFanfare 0x5dc
@@ -71,8 +73,10 @@ Script_8: @ a2
 	FacePlayer
 	SetVar 0x8005, 0x1
 	Jump Script_branch_b8
-	End
-@ b8
+@ b6
+
+.byte 0x2 @ 0xb6
+.byte 0x0 @ 0xb7
 
 Script_branch_b8: @ b8
 	If 0x8005, 0x0
@@ -82,8 +86,10 @@ Script_branch_b8: @ b8
 	If 0x8005, 0x2
 	CompareLastResultCall EQUAL, Script_branch_25b
 	Jump Script_branch_e7
-	End
-@ e7
+@ e5
+
+.byte 0x2 @ 0xe5
+.byte 0x0 @ 0xe6
 
 Script_branch_e7: @ e7
 	If 0x8005, 0x0
@@ -102,8 +108,10 @@ Script_branch_e7: @ e7
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_146
 	Jump Script_branch_175
-	End
-@ 146
+@ 144
+
+.byte 0x2 @ 0x144
+.byte 0x0 @ 0x145
 
 Script_branch_146: @ 146
 	If 0x8005, 0x0
@@ -113,13 +121,17 @@ Script_branch_146: @ 146
 	If 0x8005, 0x2
 	CompareLastResultCall EQUAL, Script_branch_273
 	Jump Script_branch_e7
-	End
-@ 175
+@ 173
+
+.byte 0x2 @ 0x173
+.byte 0x0 @ 0x174
 
 Script_branch_175: @ 175
 	Jump Script_branch_17d
-	End
-@ 17d
+@ 17b
+
+.byte 0x2 @ 0x17b
+.byte 0x0 @ 0x17c
 
 Script_branch_17d: @ 17d
 	Message 0x6
@@ -141,20 +153,26 @@ Script_branch_188: @ 188
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_1d1
 	Jump Script_branch_175
-	End
-@ 1c3
+@ 1c1
+
+.byte 0x2 @ 0x1c1
+.byte 0x0 @ 0x1c2
 
 Script_branch_1c3: @ 1c3
 	SetVar 0x8006, 0x0
 	Jump Script_branch_1df
-	End
-@ 1d1
+@ 1cf
+
+.byte 0x2 @ 0x1cf
+.byte 0x0 @ 0x1d0
 
 Script_branch_1d1: @ 1d1
 	SetVar 0x8006, 0x1
 	Jump Script_branch_1df
-	End
-@ 1df
+@ 1dd
+
+.byte 0x2 @ 0x1dd
+.byte 0x0 @ 0x1de
 
 Script_branch_1df: @ 1df
 	Message 0x8
@@ -162,8 +180,10 @@ Script_branch_1df: @ 1df
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_175
 	Jump Script_branch_1fb
-	End
-@ 1fb
+@ 1f9
+
+.byte 0x2 @ 0x1f9
+.byte 0x0 @ 0x1fa
 
 Script_branch_1fb: @ 1fb
 	SetVar 0x4000, 0x0
@@ -172,8 +192,10 @@ Script_branch_1fb: @ 1fb
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_175
 	Jump Script_branch_220
-	End
-@ 220
+@ 21e
+
+.byte 0x2 @ 0x21e
+.byte 0x0 @ 0x21f
 
 Script_branch_220: @ 220
 	Message 0x9

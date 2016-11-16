@@ -45,8 +45,10 @@ Script_1: @ e
 	SetFlag 0x198
 	Message 0x3
 	Jump Script_branch_bb
-	End
-@ bb
+@ b9
+
+.byte 0x2 @ 0xb9
+.byte 0x0 @ 0xba
 
 Script_branch_bb: @ bb
 	SetVar 0x8004, 0x193

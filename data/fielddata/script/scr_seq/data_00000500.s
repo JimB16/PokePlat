@@ -16,8 +16,10 @@ Script_1: @ 1a
 	LockAll
 	SetVar 0x8000, 0x1
 	Jump Script_branch_2e
-	End
-@ 2e
+@ 2c
+
+.byte 0x2 @ 0x2c
+.byte 0x0 @ 0x2d
 
 Script_branch_2e: @ 2e
 	Call Function_299
@@ -29,16 +31,20 @@ Script_branch_2e: @ 2e
 	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_2e
-	End
-@ 68
+@ 66
+
+.byte 0x2 @ 0x66
+.byte 0x0 @ 0x67
 
 Script_2: @ 68
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x1
 	Jump Script_branch_7c
-	End
-@ 7c
+@ 7a
+
+.byte 0x2 @ 0x7a
+.byte 0x0 @ 0x7b
 
 Script_branch_7c: @ 7c
 	Call Function_299
@@ -50,16 +56,20 @@ Script_branch_7c: @ 7c
 	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_7c
-	End
-@ b6
+@ b4
+
+.byte 0x2 @ 0xb4
+.byte 0x0 @ 0xb5
 
 Script_3: @ b6
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x2
 	Jump Script_branch_ca
-	End
-@ ca
+@ c8
+
+.byte 0x2 @ 0xc8
+.byte 0x0 @ 0xc9
 
 Script_branch_ca: @ ca
 	Call Function_299
@@ -71,16 +81,20 @@ Script_branch_ca: @ ca
 	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_ca
-	End
-@ 104
+@ 102
+
+.byte 0x2 @ 0x102
+.byte 0x0 @ 0x103
 
 Script_4: @ 104
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x5
 	Jump Script_branch_118
-	End
-@ 118
+@ 116
+
+.byte 0x2 @ 0x116
+.byte 0x0 @ 0x117
 
 Script_branch_118: @ 118
 	Call Function_299
@@ -97,22 +111,28 @@ Script_branch_118: @ 118
 	SetVarPokeStored 0x0, 0x800c, 0x0, 0x0
 	Message 0x7
 	Jump Script_branch_17f
-	End
-@ 174
+@ 172
+
+.byte 0x2 @ 0x172
+.byte 0x0 @ 0x173
 
 Script_branch_174: @ 174
 	Message 0x6
 	Jump Script_branch_17f
-	End
-@ 17f
+@ 17d
+
+.byte 0x2 @ 0x17d
+.byte 0x0 @ 0x17e
 
 Script_branch_17f: @ 17f
 	SetVar 0x8002, 0x0
 	SetVar 0x8004, 0x0
 	SetVar 0x8005, 0x0
 	Jump Script_branch_199
-	End
-@ 199
+@ 197
+
+.byte 0x2 @ 0x197
+.byte 0x0 @ 0x198
 
 Script_branch_199: @ 199
 	Call Function_2bd
@@ -124,8 +144,10 @@ Script_branch_199: @ 199
 	SetVar 0x8006, 0x0
 	SetVar 0x8007, 0x0
 	Jump Script_branch_1d3
-	End
-@ 1d3
+@ 1d1
+
+.byte 0x2 @ 0x1d1
+.byte 0x0 @ 0x1d2
 
 Script_branch_1d3: @ 1d3
 	Cmd_2de 0x8001, 0x8002, 0x8003, 0x8006, 0x8007
@@ -134,16 +156,20 @@ Script_branch_1d3: @ 1d3
 	Call Function_32b
 	Message 0x6
 	Jump Script_branch_1d3
-	End
-@ 1fd
+@ 1fb
+
+.byte 0x2 @ 0x1fb
+.byte 0x0 @ 0x1fc
 
 Script_5: @ 1fd
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x4
 	Jump Script_branch_211
-	End
-@ 211
+@ 20f
+
+.byte 0x2 @ 0x20f
+.byte 0x0 @ 0x210
 
 Script_branch_211: @ 211
 	Call Function_299
@@ -155,16 +181,20 @@ Script_branch_211: @ 211
 	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_211
-	End
-@ 24b
+@ 249
+
+.byte 0x2 @ 0x249
+.byte 0x0 @ 0x24a
 
 Script_6: @ 24b
 	PlayFanfare 0x5dc
 	LockAll
 	SetVar 0x8000, 0x6
 	Jump Script_branch_25f
-	End
-@ 25f
+@ 25d
+
+.byte 0x2 @ 0x25d
+.byte 0x0 @ 0x25e
 
 Script_branch_25f: @ 25f
 	Call Function_299
@@ -176,8 +206,10 @@ Script_branch_25f: @ 25f
 	CompareLastResultJump EQUAL, Script_branch_31d
 	Call Function_32b
 	Jump Script_branch_25f
-	End
-@ 299
+@ 297
+
+.byte 0x2 @ 0x297
+.byte 0x0 @ 0x298
 
 Function_299: @ 299
 	Message 0x0
@@ -214,8 +246,10 @@ Function_2bd: @ 2bd
 Script_branch_31d: @ 31d
 	CloseMsgOnKeyPress
 	Jump Script_branch_327
-	End
-@ 327
+@ 325
+
+.byte 0x2 @ 0x325
+.byte 0x0 @ 0x326
 
 Script_branch_327: @ 327
 	ReleaseAll

@@ -16,8 +16,10 @@ Script_1: @ 12
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_31
 	Jump Script_branch_3e
-	End
-@ 31
+@ 2f
+
+.byte 0x2 @ 0x2f
+.byte 0x0 @ 0x30
 
 Script_branch_31: @ 31
 	Message 0x2
@@ -47,8 +49,10 @@ Script_3: @ 4c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_90
 	Jump Script_branch_9d
-	End
-@ 86
+@ 84
+
+.byte 0x2 @ 0x84
+.byte 0x0 @ 0x85
 
 Script_branch_86: @ 86
 	Message 0x12
@@ -96,9 +100,13 @@ Function_b5: @ b5
 Script_branch_d6: @ d6
 	Message 0x2b
 	Jump Function_e8
+@ df
+
 Script_branch_df: @ df
 	Message 0x2c
 	Jump Script_branch_126
+@ e8
+
 Function_e8: @ e8
 Script_branch_e8: @ e8
 	CheckFlag 0x9ba

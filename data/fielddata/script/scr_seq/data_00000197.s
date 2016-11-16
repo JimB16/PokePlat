@@ -52,10 +52,14 @@ Script_branch_b1: @ b1
 	SetVarHero 0x0
 	Message 0x5
 	Jump Script_branch_c9
+@ bd
+
 Script_branch_bd: @ bd
 	SetVarHero 0x0
 	Message 0x6
 	Jump Script_branch_c9
+@ c9
+
 Script_branch_c9: @ c9
 	Message 0x7
 	CloseMsgOnKeyPress

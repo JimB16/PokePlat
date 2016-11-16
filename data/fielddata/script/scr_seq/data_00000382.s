@@ -28,6 +28,8 @@ Script_2: @ 12
 	ApplyMovement 0x80, Movement_e4
 	WaitMovement
 	Jump Script_branch_7a
+@ 59
+
 Script_branch_59: @ 59
 	ApplyMovement 0x80, Movement_f0
 	WaitMovement
@@ -52,10 +54,14 @@ Script_branch_84: @ 84
 	ApplyMovement 0x80, Movement_104
 	WaitMovement
 	Jump Script_branch_d0
+@ b6
+
 Script_branch_b6: @ b6
 	ApplyMovement 0x80, Movement_10c
 	WaitMovement
 	Jump Script_branch_d0
+@ c6
+
 Script_branch_c6: @ c6
 	ApplyMovement 0x80, Movement_114
 	WaitMovement

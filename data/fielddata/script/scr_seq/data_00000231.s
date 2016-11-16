@@ -33,8 +33,10 @@ Script_branch_4a: @ 4a
 	If 0x40aa, 0x2
 	CompareLastResultJump 0x4, Script_branch_69
 	Jump Script_branch_5f
-	End
-@ 5f
+@ 5d
+
+.byte 0x2 @ 0x5d
+.byte 0x0 @ 0x5e
 
 Script_branch_5f: @ 5f
 	SetTilePassable 0x1, 0x7, 0x5
@@ -55,8 +57,10 @@ Script_branch_69: @ 69
 	If 0x4001, 0x1
 	CompareLastResultJump EQUAL, Script_branch_104
 	Jump Script_branch_bc
-	End
-@ bc
+@ ba
+
+.byte 0x2 @ 0xba
+.byte 0x0 @ 0xbb
 
 Script_branch_bc: @ bc
 	CheckFlag 0xd1
@@ -70,8 +74,10 @@ Script_branch_bc: @ bc
 	If 0x4001, 0x1
 	CompareLastResultJump EQUAL, Script_branch_10e
 	Jump Script_branch_5f
-	End
-@ 104
+@ 102
+
+.byte 0x2 @ 0x102
+.byte 0x0 @ 0x103
 
 Script_branch_104: @ 104
 	SetTilePassable 0x3, 0x7, 0x5

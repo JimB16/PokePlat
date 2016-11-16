@@ -49,22 +49,28 @@ Script_branch_a4: @ a4
 	ApplyMovement 0xff, Movement_174
 	WaitMovement
 	Jump Script_branch_e2
-	End
-@ be
+@ bc
+
+.byte 0x2 @ 0xbc
+.byte 0x0 @ 0xbd
 
 Script_branch_be: @ be
 	ApplyMovement 0x2, Movement_15c
 	WaitMovement
 	Jump Script_branch_e2
-	End
-@ d0
+@ ce
+
+.byte 0x2 @ 0xce
+.byte 0x0 @ 0xcf
 
 Script_branch_d0: @ d0
 	ApplyMovement 0x2, Movement_168
 	WaitMovement
 	Jump Script_branch_e2
-	End
-@ e2
+@ e0
+
+.byte 0x2 @ 0xe0
+.byte 0x0 @ 0xe1
 
 Script_branch_e2: @ e2
 	Message 0x4

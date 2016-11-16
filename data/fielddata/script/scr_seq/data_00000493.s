@@ -19,12 +19,16 @@ Script_1: @ a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_55
 	Jump Script_branch_28f
+@ 3b
+
 Script_branch_3b: @ 3b
 	Message 0x1
 	YesNoBox 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_55
 	Jump Script_branch_28f
+@ 55
+
 Script_branch_55: @ 55
 	Message 0x2
 	CloseMsgOnKeyPress
@@ -56,6 +60,8 @@ Script_branch_55: @ 55
 	If 0x8002, 0x2
 	CompareLastResultJump EQUAL, Script_branch_11e
 	Jump Script_branch_13e
+@ fe
+
 Script_branch_fe: @ fe
 	Message 0x9
 	YesNoBox 0x800c
@@ -63,6 +69,8 @@ Script_branch_fe: @ fe
 	CompareLastResultJump EQUAL, Script_branch_28f
 	SetVar 0x8003, 0x133
 	Jump Script_branch_15e
+@ 11e
+
 Script_branch_11e: @ 11e
 	Message 0xa
 	YesNoBox 0x800c
@@ -70,6 +78,8 @@ Script_branch_11e: @ 11e
 	CompareLastResultJump EQUAL, Script_branch_28f
 	SetVar 0x8003, 0x134
 	Jump Script_branch_15e
+@ 13e
+
 Script_branch_13e: @ 13e
 	Message 0xb
 	YesNoBox 0x800c
@@ -77,6 +87,8 @@ Script_branch_13e: @ 13e
 	CompareLastResultJump EQUAL, Script_branch_28f
 	SetVar 0x8003, 0x152
 	Jump Script_branch_15e
+@ 15e
+
 Script_branch_15e: @ 15e
 	CloseMsgOnKeyPress
 	FadeScreen 0x6, 0x1, 0x0, 0x0
@@ -142,6 +154,8 @@ Function_251: @ 251
 	If 0x8002, 0x2
 	CompareLastResultJump EQUAL, Script_branch_27b
 	Jump Script_branch_285
+@ 271
+
 Script_branch_271: @ 271
 	CheckMove 0x800c, 0x133, 0x8000
 	Return

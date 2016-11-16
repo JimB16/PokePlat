@@ -21,6 +21,8 @@ Script_1: @ 1e
 	If 0x4000, 0x5
 	CompareLastResultJump 0x3, Script_branch_5b
 	Jump Script_branch_4f
+@ 4f
+
 Script_branch_4f: @ 4f
 	ClearFlag 0x28b
 	SetVar 0x4116, 0x0
@@ -45,6 +47,8 @@ Script_2: @ 67
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_aa
 	Jump Script_branch_9f
+@ 9f
+
 Script_branch_9f: @ 9f
 	Message 0x0
 	WaitButton
@@ -102,6 +106,8 @@ Script_branch_fb: @ fb
 	Call Function_16c
 	SetFlag 0xaa2
 	Jump Script_branch_155
+@ 155
+
 Script_branch_155: @ 155
 	StoreTrophyPokemon 0x8000
 	SetVarPokeStored 0x0, 0x8000, 0x0, 0x0
@@ -120,6 +126,8 @@ Function_16c: @ 16c
 	If 0x8002, 0x6
 	CompareLastResultJump EQUAL, Script_branch_1b1
 	Jump Script_branch_1bd
+@ 199
+
 Script_branch_199: @ 199
 	ApplyMovement 0x1, Movement_204
 	WaitMovement
@@ -202,12 +210,16 @@ Script_3: @ 224
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_244
 	Jump Script_branch_270
+@ 244
+
 Script_branch_244: @ 244
 	CheckFlag 0x164
 	CompareLastResultJump EQUAL, Script_branch_270
 	Jump Script_branch_257
-	End
-@ 257
+@ 255
+
+.byte 0x2 @ 0x255
+.byte 0x0 @ 0x256
 
 Script_branch_257: @ 257
 	Message 0xf
@@ -367,21 +379,27 @@ Script_branch_3c2: @ 3c2
 	SetFlag 0xfb
 	Message 0x15
 	Jump Script_branch_416
-	End
-@ 3fc
+@ 3fa
+
+.byte 0x2 @ 0x3fa
+.byte 0x0 @ 0x3fb
 
 Script_branch_3fc: @ 3fc
 	SetFlag 0xfb
 	Jump Script_branch_408
-	End
-@ 408
+@ 406
+
+.byte 0x2 @ 0x406
+.byte 0x0 @ 0x407
 
 Script_branch_408: @ 408
 	SetVarHero 0x0
 	Message 0x16
 	Jump Script_branch_416
-	End
-@ 416
+@ 414
+
+.byte 0x2 @ 0x414
+.byte 0x0 @ 0x415
 
 Script_branch_416: @ 416
 	WaitButton

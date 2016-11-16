@@ -61,14 +61,20 @@ Script_branch_b8: @ b8
 	ApplyMovement 0x0, Movement_104
 	WaitMovement
 	Jump Script_branch_e8
+@ c8
+
 Script_branch_c8: @ c8
 	ApplyMovement 0x0, Movement_110
 	WaitMovement
 	Jump Script_branch_e8
+@ d8
+
 Script_branch_d8: @ d8
 	ApplyMovement 0x0, Movement_11c
 	WaitMovement
 	Jump Script_branch_e8
+@ e8
+
 Script_branch_e8: @ e8
 	SetFlag 0xaf
 	Message 0x3
@@ -148,14 +154,20 @@ Script_branch_191: @ 191
 	ApplyMovement 0x5, Movement_2c0
 	WaitMovement
 	Jump Script_branch_1c1
+@ 1a1
+
 Script_branch_1a1: @ 1a1
 	ApplyMovement 0x5, Movement_2d0
 	WaitMovement
 	Jump Script_branch_1c1
+@ 1b1
+
 Script_branch_1b1: @ 1b1
 	ApplyMovement 0x5, Movement_2d8
 	WaitMovement
 	Jump Script_branch_1c1
+@ 1c1
+
 Script_branch_1c1: @ 1c1
 	ApplyMovement 0xff, Movement_2b8
 	WaitMovement
@@ -168,15 +180,23 @@ Script_branch_1c1: @ 1c1
 	If 0x800c, 0x186
 	CompareLastResultJump EQUAL, Script_branch_20f
 	Jump Script_branch_1f7
+@ 1f7
+
 Script_branch_1f7: @ 1f7
 	TrainerBattle 0x1df, 0x0
 	Jump Script_branch_21b
+@ 203
+
 Script_branch_203: @ 203
 	TrainerBattle 0x1e0, 0x0
 	Jump Script_branch_21b
+@ 20f
+
 Script_branch_20f: @ 20f
 	TrainerBattle 0x1e1, 0x0
 	Jump Script_branch_21b
+@ 21b
+
 Script_branch_21b: @ 21b
 	CheckTrainerLost 0x800c
 	If 0x800c, 0x0
@@ -199,14 +219,20 @@ Script_branch_266: @ 266
 	ApplyMovement 0x5, Movement_2e8
 	WaitMovement
 	Jump Script_branch_296
+@ 276
+
 Script_branch_276: @ 276
 	ApplyMovement 0x5, Movement_2f8
 	WaitMovement
 	Jump Script_branch_296
+@ 286
+
 Script_branch_286: @ 286
 	ApplyMovement 0x5, Movement_300
 	WaitMovement
 	Jump Script_branch_296
+@ 296
+
 Script_branch_296: @ 296
 	PlayFanfare 0x603
 	RemovePeople 0x5

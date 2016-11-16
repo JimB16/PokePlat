@@ -31,11 +31,15 @@ Script_branch_5c: @ 5c
 	SetVariableRival 0x1
 	Message 0x0
 	Jump Script_branch_7a
+@ 6b
+
 Script_branch_6b: @ 6b
 	SetVarHero 0x0
 	SetVariableRival 0x1
 	Message 0x1
 	Jump Script_branch_7a
+@ 7a
+
 Script_branch_7a: @ 7a
 	WaitButton
 	CloseMsgOnKeyPress

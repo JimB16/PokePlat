@@ -107,9 +107,13 @@ Script_branch_13e: @ 13e
 	ScriptCmd_AddValue 0x8006, 0x9c
 	ChoiceMulti 0x8006, 0x8004
 	Jump Script_branch_225
+@ 219
+
 Script_branch_219: @ 219
 	ScriptCmd_AddValue 0x8005, 0x1
 	Jump Script_branch_13e
+@ 225
+
 Script_branch_225: @ 225
 	ScriptCmd_AddValue 0x8004, 0x1
 	ScriptCmd_AddValue 0x8005, 0x1
@@ -140,6 +144,8 @@ Script_branch_225: @ 225
 	CompareLastResultJump EQUAL, Script_branch_3e7
 	GiveItem 0x8002, 0x1, 0x800c
 	Jump Script_branch_3d8
+@ 2dc
+
 Script_branch_2dc: @ 2dc
 	SetVar 0x4000, 0x67
 	CheckItem 0x4000, 0x1, 0x800c
@@ -257,6 +263,8 @@ Script_branch_3bc: @ 3bc
 	CheckItemChosen 0x40b4, 0x8002
 	GiveItem 0x8002, 0x1, 0x800c
 	Jump Script_branch_3d8
+@ 3d8
+
 Script_branch_3d8: @ 3d8
 	SetFlag 0x1
 	Message 0x6

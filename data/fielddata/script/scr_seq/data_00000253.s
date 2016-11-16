@@ -27,8 +27,10 @@ Script_1: @ 6
 Script_branch_44: @ 44
 	Message 0x1
 	Jump Script_branch_4f
-	End
-@ 4f
+@ 4d
+
+.byte 0x2 @ 0x4d
+.byte 0x0 @ 0x4e
 
 Script_branch_4f: @ 4f
 	ApplyMovement 0x0, Movement_d4

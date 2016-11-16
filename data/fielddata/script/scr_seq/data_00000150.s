@@ -18,8 +18,10 @@ Script_1: @ e
 	SetVar 0x8005, 0x0
 	SetVar 0x8006, 0x0
 	Jump Script_branch_39
-	End
-@ 39
+@ 37
+
+.byte 0x2 @ 0x37
+.byte 0x0 @ 0x38
 
 Script_branch_39: @ 39
 	Message 0x1
@@ -49,8 +51,10 @@ Script_branch_39: @ 39
 	PlayFanfare 0x644
 	WaitFanfare 0x644
 	Jump Script_branch_39
-	End
-@ d8
+@ d6
+
+.byte 0x2 @ 0xd6
+.byte 0x0 @ 0xd7
 
 Script_branch_d8: @ d8
 	Message 0x7
@@ -65,14 +69,18 @@ Script_branch_e5: @ e5
 	SetVarItem 0x0, 0x8000
 	Message 0x6
 	Jump Script_branch_39
-	End
-@ f5
+@ f3
+
+.byte 0x2 @ 0xf3
+.byte 0x0 @ 0xf4
 
 Script_branch_f5: @ f5
 	Message 0x5
 	Jump Script_branch_39
-	End
-@ 100
+@ fe
+
+.byte 0x2 @ 0xfe
+.byte 0x0 @ 0xff
 
 Script_branch_100: @ 100
 	SetVarItem 0x0, 0x8000
@@ -92,8 +100,10 @@ Function_119: @ 119
 	SetVar 0x8009, 0x0
 	Multi3 0x1, 0x1, 0x0, 0x1, 0x800c
 	Jump Script_branch_135
-	End
-@ 135
+@ 133
+
+.byte 0x2 @ 0x133
+.byte 0x0 @ 0x134
 
 Script_branch_135: @ 135
 	ChsPrizeCasino 0x8008, 0x8000, 0x8001
@@ -104,8 +114,10 @@ Script_branch_135: @ 135
 	If2 0x8008, 0x4001
 	CompareLastResultJump LESSER, Script_branch_135
 	Jump Script_branch_16c
-	End
-@ 16c
+@ 16a
+
+.byte 0x2 @ 0x16a
+.byte 0x0 @ 0x16b
 
 Script_branch_16c: @ 16c
 	TxtMsgScrpMulti 0xa9, 0xff, 0x8008
@@ -125,8 +137,10 @@ Script_2: @ 17c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_250
 	Jump Script_branch_1cb
-	End
-@ 1af
+@ 1ad
+
+.byte 0x2 @ 0x1ad
+.byte 0x0 @ 0x1ae
 
 Script_branch_1af: @ 1af
 	Message 0x9
@@ -134,8 +148,10 @@ Script_branch_1af: @ 1af
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_250
 	Jump Script_branch_1cb
-	End
-@ 1cb
+@ 1c9
+
+.byte 0x2 @ 0x1c9
+.byte 0x0 @ 0x1ca
 
 Script_branch_1cb: @ 1cb
 	CloseMsgOnKeyPress
@@ -160,33 +176,43 @@ Script_branch_1cb: @ 1cb
 	Cmd_2fd 0x0, 0x8004
 	Message 0xb
 	Jump Script_branch_276
-	End
-@ 245
+@ 243
+
+.byte 0x2 @ 0x243
+.byte 0x0 @ 0x244
 
 Script_branch_245: @ 245
 	Message 0xe
 	Jump Script_branch_276
-	End
-@ 250
+@ 24e
+
+.byte 0x2 @ 0x24e
+.byte 0x0 @ 0x24f
 
 Script_branch_250: @ 250
 	Message 0xc
 	Jump Script_branch_276
-	End
-@ 25b
+@ 259
+
+.byte 0x2 @ 0x259
+.byte 0x0 @ 0x25a
 
 Script_branch_25b: @ 25b
 	Message 0xd
 	Jump Script_branch_276
-	End
-@ 266
+@ 264
+
+.byte 0x2 @ 0x264
+.byte 0x0 @ 0x265
 
 Script_branch_266: @ 266
 	Cmd_2fd 0x0, 0x8004
 	Message 0xa
 	Jump Script_branch_276
-	End
-@ 276
+@ 274
+
+.byte 0x2 @ 0x274
+.byte 0x0 @ 0x275
 
 Script_branch_276: @ 276
 	WaitButton

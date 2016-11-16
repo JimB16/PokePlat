@@ -175,14 +175,18 @@ Script_11: @ 141
 Script_branch_19d: @ 19d
 	Message 0xb
 	Jump Script_branch_1b3
-	End
-@ 1a8
+@ 1a6
+
+.byte 0x2 @ 0x1a6
+.byte 0x0 @ 0x1a7
 
 Script_branch_1a8: @ 1a8
 	Message 0xa
 	Jump Script_branch_1b3
-	End
-@ 1b3
+@ 1b1
+
+.byte 0x2 @ 0x1b1
+.byte 0x0 @ 0x1b2
 
 Script_branch_1b3: @ 1b3
 	WaitButton

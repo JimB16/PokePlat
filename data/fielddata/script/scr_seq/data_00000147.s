@@ -30,23 +30,35 @@ Script_1: @ 6
 Script_branch_68: @ 68
 	DisplayFloor 0x0, 0x5
 	Jump Script_branch_a6
+@ 72
+
 Script_branch_72: @ 72
 	DisplayFloor 0x0, 0x4
 	Jump Script_branch_a6
+@ 7c
+
 Script_branch_7c: @ 7c
 	DisplayFloor 0x0, 0x3
 	Jump Script_branch_a6
+@ 86
+
 Script_branch_86: @ 86
 	DisplayFloor 0x0, 0x2
 	Jump Script_branch_a6
+@ 90
+
 Script_branch_90: @ 90
 	DisplayFloor 0x0, 0x1
 	Jump Script_branch_a6
+@ 9a
+
 Script_branch_9a: @ 9a
 	DisplayFloor 0x0, 0x0
 	Jump Script_branch_a6
-	End
-@ a6
+@ a4
+
+.byte 0x2 @ 0xa4
+.byte 0x0 @ 0xa5
 
 Script_branch_a6: @ a6
 	StartLift 0x14, 0x1, 0x40ce, 0x40ce
@@ -74,6 +86,8 @@ Script_branch_a6: @ a6
 	If 0x8008, 0x5
 	CompareLastResultJump EQUAL, Script_branch_131
 	Jump Script_branch_3f6
+@ 131
+
 Script_branch_131: @ 131
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -87,6 +101,8 @@ Script_branch_131: @ 131
 	Call Function_321
 	SetVar 0x40ce, 0x5
 	Jump Script_branch_33f
+@ 180
+
 Script_branch_180: @ 180
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -100,6 +116,8 @@ Script_branch_180: @ 180
 	Call Function_321
 	SetVar 0x40ce, 0x4
 	Jump Script_branch_33f
+@ 1cf
+
 Script_branch_1cf: @ 1cf
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -113,6 +131,8 @@ Script_branch_1cf: @ 1cf
 	Call Function_321
 	SetVar 0x40ce, 0x3
 	Jump Script_branch_33f
+@ 21e
+
 Script_branch_21e: @ 21e
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -126,6 +146,8 @@ Script_branch_21e: @ 21e
 	Call Function_321
 	SetVar 0x40ce, 0x2
 	Jump Script_branch_33f
+@ 26d
+
 Script_branch_26d: @ 26d
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -139,6 +161,8 @@ Script_branch_26d: @ 26d
 	Call Function_321
 	SetVar 0x40ce, 0x1
 	Jump Script_branch_33f
+@ 2bc
+
 Script_branch_2bc: @ 2bc
 	Return2 0x1, 0x800c
 	CheckFloor 0x40ce
@@ -152,6 +176,8 @@ Script_branch_2bc: @ 2bc
 	Call Function_321
 	SetVar 0x40ce, 0x0
 	Jump Script_branch_33f
+@ 30b
+
 Script_branch_30b: @ 30b
 	Message 0x2
 	SetVar 0x8004, 0x0
@@ -194,38 +220,50 @@ Script_branch_33f: @ 33f
 Script_branch_395: @ 395
 	Message 0x9
 	Jump Script_branch_3d7
-	End
-@ 3a0
+@ 39e
+
+.byte 0x2 @ 0x39e
+.byte 0x0 @ 0x39f
 
 Script_branch_3a0: @ 3a0
 	Message 0x8
 	Jump Script_branch_3d7
-	End
-@ 3ab
+@ 3a9
+
+.byte 0x2 @ 0x3a9
+.byte 0x0 @ 0x3aa
 
 Script_branch_3ab: @ 3ab
 	Message 0x7
 	Jump Script_branch_3d7
-	End
-@ 3b6
+@ 3b4
+
+.byte 0x2 @ 0x3b4
+.byte 0x0 @ 0x3b5
 
 Script_branch_3b6: @ 3b6
 	Message 0x6
 	Jump Script_branch_3d7
-	End
-@ 3c1
+@ 3bf
+
+.byte 0x2 @ 0x3bf
+.byte 0x0 @ 0x3c0
 
 Script_branch_3c1: @ 3c1
 	Message 0x5
 	Jump Script_branch_3d7
-	End
-@ 3cc
+@ 3ca
+
+.byte 0x2 @ 0x3ca
+.byte 0x0 @ 0x3cb
 
 Script_branch_3cc: @ 3cc
 	Message 0xa
 	Jump Script_branch_3d7
-	End
-@ 3d7
+@ 3d5
+
+.byte 0x2 @ 0x3d5
+.byte 0x0 @ 0x3d6
 
 Script_branch_3d7: @ 3d7
 	WaitButton

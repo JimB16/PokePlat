@@ -61,8 +61,10 @@ Script_3: @ 7b
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_9d
 	Jump Script_branch_d3
-	End
-@ 9d
+@ 9b
+
+.byte 0x2 @ 0x9b
+.byte 0x0 @ 0x9c
 
 Script_branch_9d: @ 9d
 	SetVarHero 0x0

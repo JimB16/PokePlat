@@ -49,8 +49,10 @@ Script_2: @ 22
 	SetVar 0x411a, 0x1
 	Message 0x3
 	Jump Script_branch_b7
-	End
-@ b7
+@ b5
+
+.byte 0x2 @ 0xb5
+.byte 0x0 @ 0xb6
 
 Script_branch_b7: @ b7
 	SetVar 0x8004, 0x183

@@ -32,6 +32,8 @@ Script_1: @ 24
 	If 0x4000, 0x5
 	CompareLastResultJump 0x5, Script_branch_7c
 	Jump Script_branch_76
+@ 76
+
 Script_branch_76: @ 76
 	ClearFlag 0x20b
 	End

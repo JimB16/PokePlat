@@ -119,22 +119,28 @@ Script_branch_139: @ 139
 	ApplyMovement 0xff, Movement_17c
 	WaitMovement
 	Jump Script_branch_137
-	End
-@ 14b
+@ 149
+
+.byte 0x2 @ 0x149
+.byte 0x0 @ 0x14a
 
 Script_branch_14b: @ 14b
 	ApplyMovement 0xff, Movement_18c
 	WaitMovement
 	Jump Script_branch_137
-	End
-@ 15d
+@ 15b
+
+.byte 0x2 @ 0x15b
+.byte 0x0 @ 0x15c
 
 Script_branch_15d: @ 15d
 	ApplyMovement 0xff, Movement_194
 	WaitMovement
 	Jump Script_branch_137
-	End
-@ 16f
+@ 16d
+
+.byte 0x2 @ 0x16d
+.byte 0x0 @ 0x16e
 
 Function_16f: @ 16f
 	ApplyMovement 0xff, Movement_1a4

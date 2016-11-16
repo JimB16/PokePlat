@@ -47,8 +47,10 @@ Script_2: @ 3d
 	SetVar 0x406b, 0x10e
 	Message 0x1
 	Jump Script_branch_125
-	End
-@ ae
+@ ac
+
+.byte 0x2 @ 0xac
+.byte 0x0 @ 0xad
 
 Script_branch_ae: @ ae
 	PlayCry 0x179, 0x0
@@ -70,15 +72,19 @@ Script_branch_ae: @ ae
 Script_branch_ed: @ ed
 	Message 0x3
 	Jump Script_branch_125
-	End
-@ f8
+@ f6
+
+.byte 0x2 @ 0xf6
+.byte 0x0 @ 0xf7
 
 Script_branch_f8: @ f8
 	SetVar 0x406b, 0x118
 	Message 0x3
 	Jump Script_branch_125
-	End
-@ 109
+@ 107
+
+.byte 0x2 @ 0x107
+.byte 0x0 @ 0x108
 
 Script_branch_109: @ 109
 	LostGoPc
@@ -89,14 +95,18 @@ Script_branch_109: @ 109
 Script_branch_10f: @ 10f
 	Message 0x4
 	Jump Script_branch_125
-	End
-@ 11a
+@ 118
+
+.byte 0x2 @ 0x118
+.byte 0x0 @ 0x119
 
 Script_branch_11a: @ 11a
 	Message 0x0
 	Jump Script_branch_125
-	End
-@ 125
+@ 123
+
+.byte 0x2 @ 0x123
+.byte 0x0 @ 0x124
 
 Script_branch_125: @ 125
 	WaitButton
@@ -110,56 +120,70 @@ Script_3: @ 12d
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 148
+@ 146
+
+.byte 0x2 @ 0x146
+.byte 0x0 @ 0x147
 
 Script_4: @ 148
 	SetVar 0x4002, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 163
+@ 161
+
+.byte 0x2 @ 0x161
+.byte 0x0 @ 0x162
 
 Script_5: @ 163
 	SetVar 0x4003, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 17e
+@ 17c
+
+.byte 0x2 @ 0x17c
+.byte 0x0 @ 0x17d
 
 Script_6: @ 17e
 	SetVar 0x4004, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 199
+@ 197
+
+.byte 0x2 @ 0x197
+.byte 0x0 @ 0x198
 
 Script_7: @ 199
 	SetVar 0x4005, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 1b4
+@ 1b2
+
+.byte 0x2 @ 0x1b2
+.byte 0x0 @ 0x1b3
 
 Script_8: @ 1b4
 	SetVar 0x4006, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 1cf
+@ 1cd
+
+.byte 0x2 @ 0x1cd
+.byte 0x0 @ 0x1ce
 
 Script_9: @ 1cf
 	SetVar 0x4007, 0x1
 	If 0x406b, 0x104
 	CompareLastResultJump 0x4, Script_branch_20d
 	Jump Script_branch_1ea
-	End
-@ 1ea
+@ 1e8
+
+.byte 0x2 @ 0x1e8
+.byte 0x0 @ 0x1e9
 
 Script_branch_1ea: @ 1ea
 	LockAll

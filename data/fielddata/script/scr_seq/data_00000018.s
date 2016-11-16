@@ -26,26 +26,34 @@ Script_1: @ 6
 Script_branch_4e: @ 4e
 	DisplayFloor 0x0, 0x4
 	Jump Script_branch_7e
-	End
-@ 5a
+@ 58
+
+.byte 0x2 @ 0x58
+.byte 0x0 @ 0x59
 
 Script_branch_5a: @ 5a
 	DisplayFloor 0x0, 0x3
 	Jump Script_branch_7e
-	End
-@ 66
+@ 64
+
+.byte 0x2 @ 0x64
+.byte 0x0 @ 0x65
 
 Script_branch_66: @ 66
 	DisplayFloor 0x0, 0x2
 	Jump Script_branch_7e
-	End
-@ 72
+@ 70
+
+.byte 0x2 @ 0x70
+.byte 0x0 @ 0x71
 
 Script_branch_72: @ 72
 	DisplayFloor 0x0, 0x1
 	Jump Script_branch_7e
-	End
-@ 7e
+@ 7c
+
+.byte 0x2 @ 0x7c
+.byte 0x0 @ 0x7d
 
 Script_branch_7e: @ 7e
 	StartLift 0x14, 0x1, 0x40ce, 0x40ce
@@ -67,8 +75,10 @@ Script_branch_7e: @ 7e
 	If 0x8008, 0x3
 	CompareLastResultJump EQUAL, Script_branch_e9
 	Jump Script_branch_283
-	End
-@ e9
+@ e7
+
+.byte 0x2 @ 0xe7
+.byte 0x0 @ 0xe8
 
 Script_branch_e9: @ e9
 	Return2 0x1, 0x800c
@@ -83,8 +93,10 @@ Script_branch_e9: @ e9
 	Call Function_243
 	SetVar 0x40ce, 0x3
 	Jump Script_branch_261
-	End
-@ 13a
+@ 138
+
+.byte 0x2 @ 0x138
+.byte 0x0 @ 0x139
 
 Script_branch_13a: @ 13a
 	Return2 0x1, 0x800c
@@ -99,8 +111,10 @@ Script_branch_13a: @ 13a
 	Call Function_243
 	SetVar 0x40ce, 0x2
 	Jump Script_branch_261
-	End
-@ 18b
+@ 189
+
+.byte 0x2 @ 0x189
+.byte 0x0 @ 0x18a
 
 Script_branch_18b: @ 18b
 	Return2 0x1, 0x800c
@@ -115,8 +129,10 @@ Script_branch_18b: @ 18b
 	Call Function_243
 	SetVar 0x40ce, 0x1
 	Jump Script_branch_261
-	End
-@ 1dc
+@ 1da
+
+.byte 0x2 @ 0x1da
+.byte 0x0 @ 0x1db
 
 Script_branch_1dc: @ 1dc
 	Return2 0x1, 0x800c
@@ -131,8 +147,10 @@ Script_branch_1dc: @ 1dc
 	Call Function_243
 	SetVar 0x40ce, 0x0
 	Jump Script_branch_261
-	End
-@ 22d
+@ 22b
+
+.byte 0x2 @ 0x22b
+.byte 0x0 @ 0x22c
 
 Script_branch_22d: @ 22d
 	Message 0x2

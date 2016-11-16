@@ -71,20 +71,28 @@ Script_3: @ 9d
 	If 0x8004, 0x0
 	CompareLastResultJump EQUAL, Script_branch_fe
 	Jump Script_branch_10e
+@ e6
+
 Script_branch_e6: @ e6
 	ApplyMovement 0x5, Movement_21c
 	ApplyMovement 0xff, Movement_1e0
 	WaitMovement
 	Jump Script_branch_126
+@ fe
+
 Script_branch_fe: @ fe
 	ApplyMovement 0x5, Movement_228
 	WaitMovement
 	Jump Script_branch_126
+@ 10e
+
 Script_branch_10e: @ 10e
 	ApplyMovement 0x5, Movement_228
 	ApplyMovement 0xff, Movement_1ec
 	WaitMovement
 	Jump Script_branch_126
+@ 126
+
 Script_branch_126: @ 126
 	SetOwPosition 0x5, 0x2d3, 0x1, 0x301, 0x0
 	SetFlag 0x106
@@ -109,27 +117,37 @@ Script_branch_13a: @ 13a
 	If 0x8004, 0x0
 	CompareLastResultJump EQUAL, Script_branch_19d
 	Jump Script_branch_1ad
+@ 185
+
 Script_branch_185: @ 185
 	ApplyMovement 0x5, Movement_230
 	ApplyMovement 0xff, Movement_1f4
 	WaitMovement
 	Jump Script_branch_1c5
+@ 19d
+
 Script_branch_19d: @ 19d
 	ApplyMovement 0x5, Movement_23c
 	WaitMovement
 	Jump Script_branch_1c5
+@ 1ad
+
 Script_branch_1ad: @ 1ad
 	ApplyMovement 0x5, Movement_23c
 	ApplyMovement 0xff, Movement_208
 	WaitMovement
 	Jump Script_branch_1c5
+@ 1c5
+
 Script_branch_1c5: @ 1c5
 	RemovePeople 0x5
 	SetFlag 0x211
 	ClearFlag 0x156
 	Jump Script_branch_248
-	End
-@ 1d9
+@ 1d7
+
+.byte 0x2 @ 0x1d7
+.byte 0x0 @ 0x1d8
 
 Script_branch_1d9: @ 1d9
 	LostGoPc
@@ -390,14 +408,18 @@ Script_branch_4e0: @ 4e0
 Script_branch_4ec: @ 4ec
 	Message 0xa
 	Jump Script_branch_502
-	End
-@ 4f7
+@ 4f5
+
+.byte 0x2 @ 0x4f5
+.byte 0x0 @ 0x4f6
 
 Script_branch_4f7: @ 4f7
 	Message 0xb
 	Jump Script_branch_502
-	End
-@ 502
+@ 500
+
+.byte 0x2 @ 0x500
+.byte 0x0 @ 0x501
 
 Script_branch_502: @ 502
 	Message 0xc
@@ -407,14 +429,18 @@ Script_branch_502: @ 502
 	Message 0xd
 	CloseMsgOnKeyPress
 	Jump Script_branch_522
-	End
-@ 522
+@ 520
+
+.byte 0x2 @ 0x520
+.byte 0x0 @ 0x521
 
 Script_branch_522: @ 522
 	ApplyMovement 0x0, Movement_5bc
 	ApplyMovement 0xff, Movement_600
 	WaitMovement
 	Jump Script_branch_53a
+@ 53a
+
 Script_branch_53a: @ 53a
 	RemovePeople 0x0
 	SetVar 0x4083, 0x2

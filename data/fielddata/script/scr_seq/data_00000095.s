@@ -27,14 +27,18 @@ Script_1: @ e
 Script_branch_4c: @ 4c
 	Message 0x2
 	Jump Script_branch_62
-	End
-@ 57
+@ 55
+
+.byte 0x2 @ 0x55
+.byte 0x0 @ 0x56
 
 Script_branch_57: @ 57
 	Message 0x3
 	Jump Script_branch_62
-	End
-@ 62
+@ 60
+
+.byte 0x2 @ 0x60
+.byte 0x0 @ 0x61
 
 Script_branch_62: @ 62
 	WaitButton
@@ -47,8 +51,10 @@ Script_branch_6a: @ 6a
 	SetVarHero 0x0
 	Message 0x4
 	Jump Script_branch_62
-	End
-@ 78
+@ 76
+
+.byte 0x2 @ 0x76
+.byte 0x0 @ 0x77
 
 Script_2: @ 78
 	PlayFanfare 0x5dc

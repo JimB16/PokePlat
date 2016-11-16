@@ -38,18 +38,26 @@ Script_2: @ 35
 	If 0x8008, 0x1
 	CompareLastResultJump EQUAL, Script_branch_8a
 	Jump Script_branch_96
+@ 7e
+
 Script_branch_7e: @ 7e
 	SetVarHero 0x0
 	Message 0x0
 	Jump Script_branch_a2
+@ 8a
+
 Script_branch_8a: @ 8a
 	SetVarHero 0x0
 	Message 0x1
 	Jump Script_branch_a2
+@ 96
+
 Script_branch_96: @ 96
 	SetVarHero 0x0
 	Message 0x2
 	Jump Script_branch_a2
+@ a2
+
 Script_branch_a2: @ a2
 	Cmd_23e 0x3, 0x800c
 	If 0x800c, 0x0
@@ -62,15 +70,21 @@ Script_branch_a2: @ a2
 	WaitButton
 	Cmd_23e 0x4
 	Jump Script_branch_103
+@ d8
+
 Script_branch_d8: @ d8
 	Cmd_23e 0x6, 0x8005, 0x8006
 	CopyFurniture 0x8005, 0x8006
 	WaitButton
 	Jump Script_branch_f9
+@ ee
+
 Script_branch_ee: @ ee
 	Message 0x3
 	WaitButton
 	Jump Script_branch_f9
+@ f9
+
 Script_branch_f9: @ f9
 	CloseMsgOnKeyPress
 	ReleaseAll

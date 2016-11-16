@@ -73,40 +73,50 @@ Script_branch_fa: @ fa
 	ApplyMovement 0xff, Movement_4f4
 	WaitMovement
 	Jump Script_branch_17c
-	End
-@ 114
+@ 112
+
+.byte 0x2 @ 0x112
+.byte 0x0 @ 0x113
 
 Script_branch_114: @ 114
 	ApplyMovement 0x14, Movement_464
 	ApplyMovement 0xff, Movement_4f4
 	WaitMovement
 	Jump Script_branch_17c
-	End
-@ 12e
+@ 12c
+
+.byte 0x2 @ 0x12c
+.byte 0x0 @ 0x12d
 
 Script_branch_12e: @ 12e
 	ApplyMovement 0x14, Movement_474
 	ApplyMovement 0xff, Movement_504
 	WaitMovement
 	Jump Script_branch_17c
-	End
-@ 148
+@ 146
+
+.byte 0x2 @ 0x146
+.byte 0x0 @ 0x147
 
 Script_branch_148: @ 148
 	ApplyMovement 0x14, Movement_480
 	ApplyMovement 0xff, Movement_50c
 	WaitMovement
 	Jump Script_branch_17c
-	End
-@ 162
+@ 160
+
+.byte 0x2 @ 0x160
+.byte 0x0 @ 0x161
 
 Script_branch_162: @ 162
 	ApplyMovement 0x14, Movement_490
 	ApplyMovement 0xff, Movement_50c
 	WaitMovement
 	Jump Script_branch_17c
-	End
-@ 17c
+@ 17a
+
+.byte 0x2 @ 0x17a
+.byte 0x0 @ 0x17b
 
 Script_branch_17c: @ 17c
 	SetVariableRival 0x0
@@ -484,8 +494,10 @@ Script_9: @ 530
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_561
 	Jump Script_branch_56c
-	End
-@ 561
+@ 55f
+
+.byte 0x2 @ 0x55f
+.byte 0x0 @ 0x560
 
 Script_branch_561: @ 561
 	Message 0x5
@@ -527,10 +539,14 @@ Script_branch_5b7: @ 5b7
 	ApplyMovement 0x12, Movement_63c
 	WaitMovement
 	Jump Script_branch_5d7
+@ 5c7
+
 Script_branch_5c7: @ 5c7
 	ApplyMovement 0x12, Movement_650
 	WaitMovement
 	Jump Script_branch_5d7
+@ 5d7
+
 Script_branch_5d7: @ 5d7
 	Message 0x0
 	CloseMsgOnKeyPress
@@ -747,24 +763,38 @@ Script_17: @ 791
 Script_branch_806: @ 806
 	Pokemart3 0x0
 	Jump Script_branch_84c
+@ 810
+
 Script_branch_810: @ 810
 	Pokemart3 0x1
 	Jump Script_branch_84c
+@ 81a
+
 Script_branch_81a: @ 81a
 	Pokemart3 0x2
 	Jump Script_branch_84c
+@ 824
+
 Script_branch_824: @ 824
 	Pokemart3 0x3
 	Jump Script_branch_84c
+@ 82e
+
 Script_branch_82e: @ 82e
 	Pokemart3 0x4
 	Jump Script_branch_84c
+@ 838
+
 Script_branch_838: @ 838
 	Pokemart3 0x5
 	Jump Script_branch_84c
+@ 842
+
 Script_branch_842: @ 842
 	Pokemart3 0x6
 	Jump Script_branch_84c
+@ 84c
+
 Script_branch_84c: @ 84c
 	ReleaseAll
 	End
@@ -802,16 +832,22 @@ Script_branch_8a6: @ 8a6
 	ApplyMovement 0xff, Movement_914
 	WaitMovement
 	Jump Script_branch_8ee
+@ 8be
+
 Script_branch_8be: @ 8be
 	ApplyMovement 0x12, Movement_908
 	ApplyMovement 0xff, Movement_920
 	WaitMovement
 	Jump Script_branch_8ee
+@ 8d6
+
 Script_branch_8d6: @ 8d6
 	ApplyMovement 0x12, Movement_908
 	ApplyMovement 0xff, Movement_914
 	WaitMovement
 	Jump Script_branch_8ee
+@ 8ee
+
 Script_branch_8ee: @ 8ee
 	RemovePeople 0x12
 	ReleaseAll

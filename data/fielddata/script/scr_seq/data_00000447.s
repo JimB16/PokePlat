@@ -103,10 +103,14 @@ Script_branch_15b: @ 15b
 	ChangeOwPosition 0x14, 0x230, 0x254
 	ChangeOwMovement 0x14, 0xe
 	Jump Script_branch_183
+@ 16f
+
 Script_branch_16f: @ 16f
 	ChangeOwPosition 0x14, 0x231, 0x254
 	ChangeOwMovement 0x14, 0xe
 	Jump Script_branch_183
+@ 183
+
 Script_branch_183: @ 183
 	ClearFlag 0x1b1
 	AddPeople 0x14
@@ -152,10 +156,14 @@ Script_branch_220: @ 220
 	ApplyMovement 0x14, Movement_2cc
 	WaitMovement
 	Jump Script_branch_240
+@ 230
+
 Script_branch_230: @ 230
 	ApplyMovement 0x14, Movement_2d4
 	WaitMovement
 	Jump Script_branch_240
+@ 240
+
 Script_branch_240: @ 240
 	RemovePeople 0x14
 	SetFlag 0x107
@@ -295,6 +303,8 @@ Script_3: @ 31f
 	CallStandard 0x7fc
 	SetFlag 0xc7
 	Jump Script_branch_364
+@ 364
+
 Script_branch_364: @ 364
 	Message 0x8
 	WaitButton

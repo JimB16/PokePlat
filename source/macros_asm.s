@@ -1,9 +1,11 @@
 
-.include "source/script_plat.s"
-.include "source/item_constants.s"
-.include "source/move_constants.s"
-.include "source/pokemon_constants.s"
-.include "source/function.s"
+.include "constants/event_constants.s"
+.include "constants/item_constants.s"
+.include "constants/move_constants.s"
+.include "constants/pokemon_constants.s"
+.include "constants/type_constants.s"
+.include "macros/function.s"
+.include "scripts/script_plat.s"
 
 
 .equ NrOfPkmn, 493 @ 0x1ed
@@ -926,55 +928,27 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
+@ move category
+.equ PHYSICAL,              0
+.equ SPECIAL,               1
+.equ STATUS,                2
+
+@ contest type
+.equ COOL,                  0
+.equ BEAUTIFUL,             1
+.equ TOUGH,                 4
+
+.macro	move	effect, category, power, type, accuracy, pp, effectchance, flag1, priority, flag2, contesteffect, contesttype
+.hword	\effect
+.byte   \category, \power, \type, \accuracy, \pp, \effectchance
+.hword  \flag1
+.byte   \priority, \flag2, \contesteffect, \contesttype
+.endm
+
+
 .macro	asciz_align str
 .asciz	"\str"
 .align 2, 0
 .endm
 
-
-@ event_constants
-.equ SPRITE_LUCAS, 0
-.equ SPRITE_LITTLEBOY, 1
-.equ SPRITE_LITTLEGIRL, 2
-.equ SPRITE_MALESCHOOLKID, 3
-.equ SPRITE_YOUNGSTER, 4
-.equ SPRITE_BUGCATCHER, 5
-.equ SPRITE_LASS, 6
-.equ SPRITE_BATTLEGIRL, 7
-.equ SPRITE_SCHOOLGIRL, 8
-.equ SPRITE_GENERICMALE, 9
-.equ SPRITE_ROCKER, 10
-.equ SPRITE_ACETRAINERMALE, 11
-.equ SPRITE_GENERICFEMALE, 12
-.equ SPRITE_BEAUTY, 13
-.equ SPRITE_ACETRAINERFEMALE, 14
-.equ SPRITE_BARRYSMOM, 16
-.equ SPRITE_OLDMAN, 17
-.equ SPRITE_OLDWOMAN, 18
-.equ SPRITE_FATGUY, 19
-.equ SPRITE_HIKER, 20
-.equ SPRITE_REPORTER, 22
-.equ SPRITE_CAMERAMAN, 23
-.equ SPRITE_MALESCIENTIST, 29
-.equ SPRITE_FEMALESCIENTIST, 30
-.equ SPRITE_ROUGHNECK, 31
-.equ SPRITE_CLOWN, 43
-.equ SPRITE_CAMPER, 52
-.equ SPRITE_PICNICKER, 53
-.equ SPRITE_FISHERMAN, 54
-.equ SPRITE_PSYCHIC, 70
-.equ SPRITE_POKEBALL, 87
-.equ SPRITE_SIGNPOST, 91
-.equ SPRITE_POSTBOX, 92
-.equ SPRITE_GUIDEPOST, 94
-.equ SPRITE_BERRYTREE, 100
-.equ SPRITE_ROARK, 126
-.equ SPRITE_BARRY, 148
-.equ SPRITE_AIRVENT, 182
-.equ SPRITE_CHARON, 214
-
-.equ ORIENT_UP,          0
-.equ ORIENT_DOWN,        1
-.equ ORIENT_LEFT,        2
-.equ ORIENT_RIGHT,       3
 

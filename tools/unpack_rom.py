@@ -128,7 +128,7 @@ class Disassembler(object):
             ARM9OverlayNewSize = disasm.get_word_from_rom(offset+8)
             #disasm.write_section_in_file(ARM9OverlayNew, ARM9OverlayNewSize)
             disasm.write_section_in_file_wfilename(ARM9OverlayNew, ARM9OverlayNewSize, OverlayDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin")
-            RomMap.append(RomSection(NameDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin", ARM9OverlayNew))
+            #RomMap.append(RomSection(NameDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin", ARM9OverlayNew))
             
             offset += 0x20
             ARM9OverlayOld = ARM9OverlayNew
@@ -274,13 +274,14 @@ class Disassembler(object):
         ARM9ROMSize = disasm.get_word_from_rom(0x2c) + 12
         #disasm.write_section_in_file(ARM9ROM, ARM9ROMSize)
         disasm.write_section_in_file_wfilename(ARM9ROM, ARM9ROMSize, filedir + "/" + "arm9.bin")
-        RomMap.append(RomSection("arm9.bin", ARM9ROM))
+        #RomMap.append(RomSection("arm9.bin", ARM9ROM))
+        RomMap.append(RomSection("arm9_full.bin", ARM9ROM))
         
         ARM9Overlay = disasm.get_word_from_rom(0x50)
         ARM9OverlaySize = disasm.get_word_from_rom(0x54)
         #disasm.write_section_in_file(ARM9Overlay, ARM9OverlaySize)
         disasm.write_section_in_file_wfilename(ARM9Overlay, ARM9OverlaySize, filedir + "/" + "y9.bin")
-        RomMap.append(RomSection("y9.bin", ARM9Overlay))
+        #RomMap.append(RomSection("y9.bin", ARM9Overlay))
         
 #        ARM9Overlay1 = ((ARM9Overlay + ARM9OverlaySize) + 0x1ff) & 0xfffffe00
 #        ARM9Overlay1Size = disasm.get_word_from_rom(ARM9Overlay+8)

@@ -158,9 +158,9 @@ class NARCHandler(object):
 
         offset = original_offset
         
-        for file in os.listdir(folder):
-            if file.endswith(".bin"):
-                print(file)
+        #for file in os.listdir(folder):
+            #if file.endswith(".bin"):
+                #print(file)
         
         if not os.path.exists(os.path.dirname(filename)):
             os.makedirs(os.path.dirname(filename))
@@ -271,8 +271,8 @@ if __name__ == "__main__":
         elif sys.argv[i] == "-p":
             cmd = "pack"
             path = sys.argv[i+1]
-            filedir = path + ".narc"
-            i += 2
+            filename = sys.argv[i+2]
+            i += 3
         elif sys.argv[i] == "-o":
             filedir = sys.argv[i+1]
             i += 2
@@ -287,5 +287,5 @@ if __name__ == "__main__":
         narchand.initialize(filename)
         output = narchand.unpack_narc_file(filename, debug=debugFlag)[0]
     elif cmd == "pack":
-        output = narchand.create_narc_file(path, filedir, debug=debugFlag)[0]
+        output = narchand.create_narc_file(path, filename, debug=debugFlag)[0]
     print output

@@ -1,10 +1,9 @@
+
 @.include "source/macros_asm_.s"
-.include "source/script_AI.s"
-.include "source/move_constants.s"
-.include "source/ability_constants.s"
-.include "source/type_constants.s"
-
-
+.include "scripts/script_AI.s"
+.include "constants/move_constants.s"
+.include "constants/ability_constants.s"
+.include "constants/type_constants.s"
 
 
 

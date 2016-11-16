@@ -1,6 +1,6 @@
 
 .include "source/macros_asm.s"
-.include "source/type_constants.s"
+.include "constants/type_constants.s"
 .include "source/arm9_ram_2.s"
 
 
@@ -8,7 +8,6 @@
 
 
 @ 1d8600 = 0
-@ 1db690 = 3090
 
 .thumb
 Function_223b140: @ 223b140 :thumb

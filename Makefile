@@ -12,11 +12,12 @@ endif
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: pokeplat asm all clean init pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect
+.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/narc.py -x
 create_narc    := $(PYTHON) tools/narc.py -p
+create_narc2   := $(PYTHON) tools/narc.py -p2
 armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 create_rom     := $(PYTHON) tools/create_rom.py
@@ -30,6 +31,9 @@ ex_ai2         := $(PYTHON) tools/export_ai2.py
 ex_landdata    := $(PYTHON) tools/export_land_data.py
 ex_font        := $(PYTHON) tools/font.py
 ex_moves       := $(PYTHON) tools/export_moves.py
+ex_itemdata    := $(PYTHON) tools/export_itemdata.py
+ex_pokebasedata := $(PYTHON) tools/export_pokebasedata.py
+ex_wotable     := $(PYTHON) tools/export_wotable.py
 ex_beseq       := $(PYTHON) tools/export_beseq.py
 ex_wazaeffect  := $(PYTHON) tools/export_wazaeffect.py
 ex_btx         := $(PYTHON) tools/export_btx.py
@@ -49,26 +53,21 @@ DEPS7 = $(addprefix build/, $(SRCS7:.s=.d))
 
 
 narc_files := \
+$(wildcard ./baserom/data/application/balloon/**/*.narc) \
+$(wildcard ./baserom/data/application/**/*.narc) \
 "./baserom/data/battle/tr_ai/tr_ai_seq.narc" \
-"./baserom/data/battle/b_pl_stage/pl_bsdpm.narc" \
-"./baserom/data/battle/b_pl_tower/pl_btdpm.narc" \
-"./baserom/data/battle/b_pl_tower/pl_btdtr.narc" \
+$(wildcard ./baserom/data/battle/b_pl_tower/*.narc) \
 "./baserom/data/battle/b_tower/btdpm.narc" \
 "./baserom/data/battle/b_tower/btdtr.narc" \
-"./baserom/data/battle/skill/be_seq.narc" \
-"./baserom/data/battle/skill/sub_seq.narc" \
-"./baserom/data/battle/skill/waza_seq.narc" \
-"./baserom/data/data/mmodel/fldeff.narc" \
-"./baserom/data/data/mmodel/mmodel.narc" \
+$(wildcard ./baserom/data/battle/skill/*.narc) \
+$(wildcard ./baserom/data/data/mmodel/*.narc) \
 "./baserom/data/fielddata/areadata/area_data.narc" \
 "./baserom/data/fielddata/areadata/area_build_model/area_build.narc" \
 "./baserom/data/fielddata/areadata/area_build_model/areabm_texset.narc" \
 "./baserom/data/fielddata/areadata/area_map_tex/map_tex_set.narc" \
 "./baserom/data/fielddata/areadata/area_move_model/move_model_list.narc" \
 "./baserom/data/fielddata/build_model/build_model.narc" \
-"./baserom/data/fielddata/encountdata/d_enc_data.narc" \
-"./baserom/data/fielddata/encountdata/p_enc_data.narc" \
-"./baserom/data/fielddata/encountdata/pl_enc_data.narc" \
+$(wildcard ./baserom/data/fielddata/encountdata/*.narc) \
 "./baserom/data/fielddata/eventdata/zone_event.narc" \
 "./baserom/data/fielddata/land_data/land_data.narc" \
 "./baserom/data/fielddata/mapmatrix/map_matrix.narc" \
@@ -78,16 +77,13 @@ narc_files := \
 "./baserom/data/fielddata/tornworld/tw_arc.narc" \
 "./baserom/data/fielddata/tornworld/tw_arc_attr.narc" \
 "./baserom/data/frontier/script/fr_script.narc" \
-"./baserom/data/graphic/font.narc" \
-"./baserom/data/graphic/pl_font.narc" \
-"./baserom/data/msgdata/msg.narc" \
-"./baserom/data/msgdata/pl_msg.narc" \
+$(wildcard ./baserom/data/graphic/*.narc) \
+$(wildcard ./baserom/data/itemtool/itemdata/*.narc) \
+$(wildcard ./baserom/data/msgdata/*.narc) \
+"./baserom/data/msgdata/scenario/scr_msg.narc" \
 "./baserom/data/poketool/pl_pokezukan.narc" \
 "./baserom/data/poketool/icongra/pl_poke_icon.narc" \
-"./baserom/data/poketool/personal/evo.narc" \
-"./baserom/data/poketool/personal/personal.narc" \
-"./baserom/data/poketool/personal/pl_growtbl.narc" \
-"./baserom/data/poketool/personal/wotbl.narc" \
+$(wildcard ./baserom/data/poketool/personal/*.narc) \
 "./baserom/data/poketool/pokeanm/pl_pokeanm.narc" \
 "./baserom/data/poketool/pokeanm/pokeanm.narc" \
 "./baserom/data/poketool/pokefoot/pokefoot.narc" \
@@ -101,12 +97,9 @@ narc_files := \
 "./baserom/data/poketool/trmsg/trtblofs.narc" \
 "./baserom/data/poketool/waza/pl_waza_tbl.narc" \
 "./baserom/data/poketool/waza/waza_tbl.narc" \
-"./baserom/data/wazaeffect/we.arc" \
-"./baserom/data/wazaeffect/we_sub.narc" \
-"./baserom/data/wazaeffect/effectclact/wecell.narc" \
-"./baserom/data/wazaeffect/effectclact/wecellanm.narc" \
-"./baserom/data/wazaeffect/effectclact/wechar.narc" \
-"./baserom/data/wazaeffect/effectclact/wepltt.narc" \
+$(wildcard ./baserom/data/wazaeffect/*.arc) \
+$(wildcard ./baserom/data/wazaeffect/*.narc) \
+$(wildcard ./baserom/data/wazaeffect/effectclact/*.narc) \
 "./baserom/data/wazaeffect/effectdata/ball_particle.narc" \
 "./baserom/data/wazaeffect/effectdata/waza_particle.narc"
 
@@ -221,8 +214,6 @@ $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_0000103*.bin) \
 $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_0000104*.bin) \
 $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_00001050.bin)
 
-build_script_files_bin := $(subst scr_seq_narc/,scr_seq/,$(subst baserom/,,$(script_files_bin:.bin=)))
-
 frscript_files_bin := \
 $(wildcard ./baserom/data/frontier/script/fr_script_narc/data_000000**.bin)
 
@@ -262,30 +253,23 @@ build:
 	$(create_rom) "./newrom"
 
 build_narc2:
-	$(create_narc) "./newrom/data/fielddata/script/scr_seq_narc" "./newrom/data/fielddata/script/scr_seq.narc"
-	$(create_narc) "./newrom/data/fielddata/eventdata/zone_event_narc" "./newrom/data/fielddata/eventdata/zone_event.narc"
-	$(create_narc) "./newrom/data/msgdata/pl_msg_narc" "./newrom/data/msgdata//pl_msg.narc"
-	$(create_narc) "./newrom/data/poketool/trainer/trdata_narc" "./newrom/data/poketool/trainer//trdata.narc"
-	$(create_narc) "./newrom/data/poketool/trainer/trpoke_narc" "./newrom/data/poketool/trainer//trpoke.narc"
+	$(create_narc) "./newrom/data/fielddata/script/scr_seq_narc" -o "./newrom/data/fielddata/script/scr_seq.narc"
+	$(create_narc) "./newrom/data/fielddata/eventdata/zone_event_narc" -o "./newrom/data/fielddata/eventdata/zone_event.narc"
+	$(create_narc) "./newrom/data/msgdata/pl_msg_narc" -o "./newrom/data/msgdata//pl_msg.narc"
+	$(create_narc) "./newrom/data/poketool/trainer/trdata_narc" -o "./newrom/data/poketool/trainer//trdata.narc"
+	$(create_narc) "./newrom/data/poketool/trainer/trpoke_narc" -o "./newrom/data/poketool/trainer//trpoke.narc"
 
 
 
 ex_script:
 	$(foreach f,$(script_files_bin),$(ex_script) $(f) "./data/fielddata/script/scr_seq/";)
 
-SCRIPTS := $(subst scr_seq_narc/,scr_seq_narc/,$(subst baserom/,newrom/,$(script_files_bin:.bin=.bin)))
-
-newrom/data/fielddata/script/scr_seq_narc/%.bin: data/fielddata/script/scr_seq/%.s
-	${MKDIR_P} $(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
-	rm $(subst .s,.o,$<)
-	rm $(subst .s,.elf,$<)
+script_files := $(wildcard data/fielddata/script/scr_seq/data_0000*.s)
+SCRIPTS := $(addprefix build/, $(script_files:.s=.bin))
 
 newrom/data/fielddata/script/scr_seq.narc: $(SCRIPTS)
-	$(foreach f,$(script_files_bin_rest),cp -f $(f) "./newrom/data/fielddata/script/scr_seq_narc";)
-	$(create_narc) "./newrom/data/fielddata/script/scr_seq_narc" $@
+	$(foreach f,$(script_files_bin_rest),cp -f $(f) "./build/data/fielddata/script/scr_seq";)
+	$(create_narc) "./build/data/fielddata/script/scr_seq" -o $@
 	sh compare_script.sh > diff_script.txt
 
 
@@ -294,55 +278,32 @@ ex_frscript:
 	$(foreach f,$(frscript_files_bin),$(ex_script) $(f) "./data/frontier/script/frscript/";)
 
 
-text_files := \
-$(wildcard ./baserom/data/msgdata/pl_msg_narc/data_00000*.bin)
-#$(wildcard ./baserom/data/msgdata/pl_msg_narc/data_00000*.bin)
+
+
+pltext_files_bin := $(wildcard ./baserom/data/msgdata/pl_msg_narc/data_00000*.bin)
+text_files_bin := $(wildcard ./baserom/data/msgdata/msg_narc/data_00000*.bin)
 
 ex_text:
-	$(foreach f,$(text_files),$(ex_msg) $(f) "./data/msgdata/pl_msg/";)
+	$(foreach f,$(pltext_files_bin),$(ex_msg) $(f) "./data/msgdata/pl_msg/";)
+	$(foreach f,$(text_files_bin),$(ex_msg) $(f) "./data/msgdata/msg/";)
 
-build_msg_files_bin := \
-$(wildcard ./baserom/data/msgdata/pl_msg_narc/data_00000*.bin)
+pltext_files := $(wildcard data/msgdata/pl_msg/data_00000*.msg)
+text_files := $(wildcard data/msgdata/msg/data_00000*.msg)
+PLMSGS := $(addprefix build/, $(pltext_files:.msg=.bin))
+MSGS := $(addprefix build/, $(text_files:.msg=.bin))
 
-MSGS := $(subst baserom/,newrom/,$(build_msg_files_bin:.bin=.bin))
-
-newrom/data/msgdata/pl_msg_narc/%.bin: data/msgdata/pl_msg/%.s
+build/data/msgdata/%.bin: data/msgdata/%.msg
 	${MKDIR_P} $(dir $@)
-	$(create_msg) $< "./newrom/data/msgdata/pl_msg_narc/"
+	$(create_msg) $< $(dir $@)
 
-newrom/data/msgdata/pl_msg.narc: $(MSGS)
-	$(create_narc) "./newrom/data/msgdata/pl_msg_narc" $@
+newrom/data/msgdata/pl_msg.narc: $(PLMSGS)
+	$(create_narc) "./build/data/msgdata/pl_msg/" -o $@
 	sh compare_text.sh > diff_text.txt
 
+newrom/data/msgdata/msg.narc: $(MSGS)
+	$(create_narc) "./build/data/msgdata/msg/" -o $@
+	sh compare_text.sh > diff_text.txt
 
-
-trainerteams_files_bin := $(wildcard ./baserom/data/poketool/trainer/trdata_narc/data_00000*.bin)
-
-ex_trainerteams:
-	$(foreach f,$(trainerteams_files_bin),$(ex_trainerteams) $(f) $(subst trdata_narc,trpoke_narc,$(f)) "./data/poketool/trainer/trdata_narc/" "./data/poketool/trainer/trpoke_narc/";)
-
-trainer_files := $(wildcard ./data/poketool/trainer/trdata_narc/*.s)
-trainerpoke_files := $(wildcard ./data/poketool/trainer/trpoke_narc/*.s)
-TRAINER := $(subst ./,newrom/,$(trainer_files:.s=.bin))
-TRAINERPOKE := $(subst ./,newrom/,$(trainerpoke_files:.s=.bin))
-
-newrom/data/poketool/trainer/%.bin: data/poketool/trainer/%.s
-	${MKDIR_P} $(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
-
-newrom/data/poketool/trainer/trdata.narc: $(TRAINER)
-	$(create_narc) "./newrom/data/poketool/trainer/trdata_narc" $@
-	rm -f ./data/poketool/trainer/trdata_narc/*.o
-	rm -f ./data/poketool/trainer/trdata_narc/*.elf
-	sh compare_trainer.sh > diff_trainer.txt
-
-newrom/data/poketool/trainer/trpoke.narc: $(TRAINERPOKE)
-	$(create_narc) "./newrom/data/poketool/trainer/trpoke_narc" $@
-	rm -f ./data/poketool/trainer/trpoke_narc/*.o
-	rm -f ./data/poketool/trainer/trpoke_narc/*.elf
-	sh compare_trainerpoke.sh > diff_trainerpoke.txt
 
 
 
@@ -361,27 +322,27 @@ ex_font:
 
 
 
+
+plitemdata_files_bin := $(wildcard ./baserom/data/itemtool/itemdata/pl_item_data_narc/*.bin)
+itemdata_files_bin := $(wildcard ./baserom/data/itemtool/itemdata/item_data_narc/*.bin)
+
+ex_itemdata:
+	$(foreach f,$(plitemdata_files_bin),$(ex_itemdata) $(f) "./data/itemtool/itemdata/pl_item_data/";)
+	$(foreach f,$(itemdata_files_bin),$(ex_itemdata) $(f) "./data/itemtool/itemdata/item_data/";)
+
+
+
+
 event_files_bin := \
 $(wildcard ./baserom/data/fielddata/eventdata/zone_event_narc/data_00000*.bin)
 
 ex_event:
 	$(foreach f,$(event_files_bin),$(ex_event) $(f) "./data/fielddata/eventdata/zone_event/";)
 
-EVENTS := $(subst zone_event_narc/,zone_event/,$(subst baserom/,newrom/,$(event_files_bin:.bin=.bin)))
+trainerteams_files_bin := $(wildcard ./baserom/data/poketool/trainer/trdata_narc/data_00000*.bin)
 
-newrom/data/fielddata/eventdata/zone_event/%.bin: data/fielddata/eventdata/zone_event/%.s
-	${MKDIR_P} $(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
-
-newrom/data/fielddata/eventdata/zone_event.narc: $(EVENTS)
-	$(create_narc) "./newrom/data/fielddata/eventdata/zone_event" $@
-	rm -f ./data/fielddata/eventdata/zone_event_narc/*.o
-	rm -f ./data/fielddata/eventdata/zone_event_narc/*.elf
-	sh compare_event.sh > diff_event.txt
-
-
+ex_trainerteams:
+	$(foreach f,$(trainerteams_files_bin),$(ex_trainerteams) $(f) $(subst trdata_narc,trpoke_narc,$(f)) "./data/poketool/trainer/trdata/" "./data/poketool/trainer/trpoke/";)
 
 plmove_files_bin := $(wildcard ./baserom/data/poketool/waza/pl_waza_tbl_narc/*.bin)
 move_files_bin := $(wildcard ./baserom/data/poketool/waza/waza_tbl_narc/*.bin)
@@ -390,26 +351,59 @@ ex_moves:
 	$(foreach f,$(plmove_files_bin),$(ex_moves) $(f) "./data/poketool/waza/pl_waza_tbl/";)
 	$(foreach f,$(move_files_bin),$(ex_moves) $(f) "./data/poketool/waza/waza_tbl/";)
 
-PLMOVES := $(subst pl_waza_tbl_narc/,pl_waza_tbl/,$(subst baserom/,newrom/,$(plmove_files_bin:.bin=.bin)))
-MOVES := $(subst waza_tbl_narc/,waza_tbl/,$(subst baserom/,newrom/,$(move_files_bin:.bin=.bin)))
-
-newrom/data/poketool/waza/%.bin: data/poketool/waza/%.s
+build/data/%.bin: data/%.s
 	${MKDIR_P} $(dir $@)
 	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
 	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
+	rm -f $(subst .s,.o,$<)
+	rm -f $(subst .s,.elf,$<)
 
-newrom/data/poketool/waza/pl_waza_tbl.narc: $(PLMOVES)
-	$(create_narc) "./newrom/data/poketool/waza/pl_waza_tbl" $@
-	rm -f ./data/poketool/waza/pl_waza_tbl/*.o
-	rm -f ./data/poketool/waza/pl_waza_tbl/*.elf
-	sh compare_move.sh > diff_move.txt
 
-newrom/data/poketool/waza/waza_tbl.narc: $(MOVES)
-	$(create_narc) "./newrom/data/poketool/waza/waza_tbl" $@
-	rm -f ./data/poketool/waza/waza_tbl/*.o
-	rm -f ./data/poketool/waza/waza_tbl/*.elf
-	sh compare_move.sh > diff_move.txt
+
+define NARC_RULE_TEMPLATE
+FILES := $(addprefix build/, $(patsubst %.s,%.bin,$(wildcard $(1)/*.s)))
+all : newrom/$(1).narc
+newrom/$(1).narc: $$(FILES)
+endef
+
+
+$(eval $(call NARC_RULE_TEMPLATE,data/fielddata/eventdata/zone_event))
+$(eval $(call NARC_RULE_TEMPLATE,data/itemtool/itemdata/item_data))
+$(eval $(call NARC_RULE_TEMPLATE,data/itemtool/itemdata/pl_item_data))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/personal))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/pl_personal))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/wotbl))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/trainer/trdata))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/trainer/trpoke))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/waza/pl_waza_tbl))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/waza/waza_tbl))
+
+newrom/%.narc:
+	$(create_narc2) $^ -o $@
+	hexdump -C $(subst newrom,baserom,$@) > $(subst .narc,.txt,$(subst newrom,baserom,$@))
+	hexdump -C $@ > $(subst .narc,.txt,$@)
+	diff -u $(subst .narc,.txt,$(subst newrom,baserom,$@)) $(subst .narc,.txt,$@) | less > diff_$(notdir $(subst .narc,.txt,$@))
+
+
+
+##########################################################
+
+
+
+
+wotable_files_bin := $(wildcard ./baserom/data/poketool/personal/wotbl_narc/*.bin)
+
+ex_wotable:
+	$(foreach f,$(wotable_files_bin),$(ex_wotable) $(f) "./data/poketool/personal/wotbl/";)
+
+
+plpersonal_files_bin := $(wildcard ./baserom/data/poketool/personal/pl_personal_narc/*.bin)
+personal_files_bin := $(wildcard ./baserom/data/poketool/personal/personal_narc/*.bin)
+
+ex_pokebasedata:
+	$(foreach f,$(plpersonal_files_bin),$(ex_pokebasedata) $(f) "./data/poketool/personal/pl_personal/";)
+	$(foreach f,$(personal_files_bin),$(ex_pokebasedata) $(f) "./data/poketool/personal/personal/";)
 
 
 
@@ -429,8 +423,8 @@ ex_beseq:
 
 
 wazaeffect_files_bin := \
-$(wildcard ./baserom/data/wazaeffect/we_arc/data_00000000.bin) \
-$(wildcard ./baserom/data/wazaeffect/we_arc/data_00000001.bin) \
+$(wildcard ./baserom/data/wazaeffect/we_arc/data_0000000*.bin) \
+$(wildcard ./baserom/data/wazaeffect/we_arc/data_0000001*.bin) \
 $(wildcard ./baserom/data/wazaeffect/we_arc/data_00000070.bin) \
 $(wildcard ./baserom/data/wazaeffect/we_arc/data_00000263.bin)
 
@@ -462,25 +456,7 @@ baserom/data/poketool/trgra/trfgra_narc/%_00000004.png: baserom/data/poketool/tr
 pics2: $(all_icons_png) $(all_trainer_png)
 
 
-#$(trainer_files:.s=.bin):
-#	${MKDIR_P} build/$(dir $@)
-#	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
-#	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
-#	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
 
-#$(trainerpoke_files:.s=.bin):
-#	${MKDIR_P} build/$(dir $@)
-#	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $(basename $@).s -o $(basename $@).o
-#	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(basename $@).o -o $(basename $@).elf
-#	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(basename $@).elf build/$(basename $@).bin
-
-comp_trainers: $(trainer_files:.s=.bin)
-	rm ./data/poketool/trainer/trdata/*.o
-	rm ./data/poketool/trainer/trdata/*.elf
-
-comp_trainerpoke: $(trainerpoke_files:.s=.bin)
-	rm ./data/poketool/trainer/trpoke/*.o
-	rm ./data/poketool/trainer/trpoke/*.elf
 
 disassem:
 	$(armdisassem) "./baserom/arm9.bin" 0x02000000 800 800
@@ -513,7 +489,16 @@ asm7: $(OBJS7) $(DEPS7)
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary "source/arm7.elf" "source/arm7_own.bin"
 	sh compare_arm7.sh > diff_arm7.txt
 
-pokeplat: newrom/arm9_full.bin newrom/data/fielddata/script/scr_seq.narc newrom/data/msgdata/pl_msg.narc newrom/data/poketool/trainer/trdata.narc newrom/data/poketool/trainer/trpoke.narc newrom/data/fielddata/eventdata/zone_event.narc newrom/data/poketool/waza/pl_waza_tbl.narc newrom/data/poketool/waza/waza_tbl.narc
+
+built_narc_files := \
+newrom/data/itemtool/itemdata/item_data.narc \
+newrom/data/itemtool/itemdata/pl_item_data.narc \
+newrom/data/poketool/trainer/trdata.narc \
+newrom/data/poketool/trainer/trpoke.narc
+
+pokeplat.nds: newrom/arm9_full.bin $(built_narc_files) newrom/data/fielddata/script/scr_seq.narc newrom/data/msgdata/pl_msg.narc newrom/data/msgdata/msg.narc newrom/data/fielddata/eventdata/zone_event.narc newrom/data/poketool/waza/pl_waza_tbl.narc newrom/data/poketool/waza/waza_tbl.narc newrom/data/poketool/personal/pl_personal.narc newrom/data/poketool/personal/personal.narc newrom/data/poketool/personal/wotbl.narc
 	$(create_rom) "./newrom"
 	md5sum ./pokeplat.nds
+
+pokeplat: pokeplat.nds
 

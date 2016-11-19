@@ -151,7 +151,7 @@ class NARCHandler(object):
         return (output, offset)
 
 
-    def create_narc_file(self, path, filename, original_offset=0, debug=False):
+    def create_narc_file(self, path, filelist, filename, original_offset=0, debug=False):
         output = ""
         
         folder = path
@@ -186,21 +186,38 @@ class NARCHandler(object):
         aligns = []
         offset = 0
         NrOfFiles = 0
-        for file in os.listdir(folder):
-            if file.endswith(".bin"):
-                NrOfFiles += 1
-                a.append(offset)
-                size = os.path.getsize(folder + "/" + file)
-                if((size % 4) == 0):
-                    aligns.append(0)
-                else:
-                    aligns.append(4 - (size % 4))
-                offset += size
-                a.append(offset)
-                if((size % 4) == 0):
-                    offset += 0
-                else:
-                    offset += 4 - (size % 4)
+        if len(filelist) == 0:
+            for file in os.listdir(folder):
+                if file.endswith(".bin"):
+                    NrOfFiles += 1
+                    a.append(offset)
+                    size = os.path.getsize(folder + "/" + file)
+                    if((size % 4) == 0):
+                        aligns.append(0)
+                    else:
+                        aligns.append(4 - (size % 4))
+                    offset += size
+                    a.append(offset)
+                    if((size % 4) == 0):
+                        offset += 0
+                    else:
+                        offset += 4 - (size % 4)
+        else:
+            for file in filelist:
+                if file.endswith(".bin"):
+                    NrOfFiles += 1
+                    a.append(offset)
+                    size = os.path.getsize(file)
+                    if((size % 4) == 0):
+                        aligns.append(0)
+                    else:
+                        aligns.append(4 - (size % 4))
+                    offset += size
+                    a.append(offset)
+                    if((size % 4) == 0):
+                        offset += 0
+                    else:
+                        offset += 4 - (size % 4)
         
         a.tofile(f)
         BTAF_End = f.tell()
@@ -216,14 +233,24 @@ class NARCHandler(object):
         f.write(bytearray([00, 00, 00, 00]))
         
         i = 0
-        for file in os.listdir(folder):
-            if file.endswith(".bin"):
-                filepath = os.path.join(self.config.path, folder + "/" + file)
-                filepart = bytearray(open(filepath, "rb").read())
-                f.write(filepart)
-                if(aligns[i] == 2):
-                    f.write(bytearray([0xff, 0xff]))
-                i += 1
+        if len(filelist) == 0:
+            for file in os.listdir(folder):
+                if file.endswith(".bin"):
+                    filepath = os.path.join(self.config.path, folder + "/" + file)
+                    filepart = bytearray(open(filepath, "rb").read())
+                    f.write(filepart)
+                    if(aligns[i] == 2):
+                        f.write(bytearray([0xff, 0xff]))
+                    i += 1
+        else:
+            for file in filelist:
+                if file.endswith(".bin"):
+                    filepath = os.path.join(self.config.path, file)
+                    filepart = bytearray(open(filepath, "rb").read())
+                    f.write(filepart)
+                    if(aligns[i] == 2):
+                        f.write(bytearray([0xff, 0xff]))
+                    i += 1
         
         GMIF_End = f.tell()
         GMIF_Size = GMIF_End - GMIF_Begin
@@ -259,33 +286,45 @@ if __name__ == "__main__":
     cmd = ""
     filename = ""
     path = ""
-    filedir = ""
     debugFlag = False
+    filelist = []
+    filelist_on = 0
     
     i = 1
     while i < len(sys.argv):
         if sys.argv[i] == "-x":
+            filelist_on = 0
             cmd = "unpack"
             filename = sys.argv[i+1]
             i += 2
         elif sys.argv[i] == "-p":
             cmd = "pack"
             path = sys.argv[i+1]
-            filename = sys.argv[i+2]
-            i += 3
+            filelist_on = 1
+            i += 2
+        elif sys.argv[i] == "-p2":
+            cmd = "pack"
+            filelist_on = 1
+            i += 1
         elif sys.argv[i] == "-o":
-            filedir = sys.argv[i+1]
+            filelist_on = 0
+            filename = sys.argv[i+1]
             i += 2
         elif sys.argv[i] == "-debug":
+            filelist_on = 0
             debugFlag = True
             i += 2
         else:
+            if filelist_on == 1:
+                filelist += [sys.argv[i]]
             i += 1
 
     print(cmd + ': ' + filename)
+    filelist.sort()
+    print("filelist: " + str(filelist))
     if cmd == "unpack":
         narchand.initialize(filename)
         output = narchand.unpack_narc_file(filename, debug=debugFlag)[0]
     elif cmd == "pack":
-        output = narchand.create_narc_file(path, filename, debug=debugFlag)[0]
+        output = narchand.create_narc_file(path, filelist, filename, debug=debugFlag)[0]
     print output

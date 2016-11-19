@@ -1090,25 +1090,41 @@ class StatusLevelParam():
 
 		
 music_commands = {
-    0x0: ["Cmd_0", ["unknown", SingleWordParam]],
+    0x0: ["Wait", ["unknown", SingleWordParam]],
     0x1: ["Cmd_1"],
-    0x4: ["Cmd_4"],
+    0x2: ["Cmd_2", ["unknown", SingleWordParam]],
+    0x3: ["Cmd_3"],
+    0x4: ["End"],
+    0x6: ["Cmd_6"],
+    0xc: ["Cmd_c", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0xd: ["Cmd_d"],
+    0x10: ["Cmd_10", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x12: ["Cmd_12", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x14: ["Cmd_14"],
     0x16: ["Cmd_16", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x18: ["Cmd_18", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
     0x19: ["Cmd_19", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x1a: ["Cmd_1a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x1f: ["Cmd_1f", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x20: ["Cmd_20", ["unknown", SingleWordParam]],
     0x2d: ["Cmd_2d", ["unknown", SingleWordParam], ["unknown", Cmd2dParam]],
     0x2e: ["Cmd_2e", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
     0x32: ["Cmd_32"],
     0x33: ["Cmd_33", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]], # 3rd parameter ???
     0x35: ["Cmd_35", ["unknown", SingleWordParam]],
-    0x38: ["Cmd_38"],
+    0x37: ["Cmd_37_Error"],
+    0x38: ["Init"],
     0x39: ["Cmd_39", ["unknown", SingleWordParam]],
     0x3a: ["Cmd_3a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
     0x3b: ["Cmd_3b"],
     0x3c: ["Cmd_3c", ["unknown", SingleWordParam]],
+    0x3e: ["Cmd_3e", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x3f: ["Cmd_3f", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x43: ["Cmd_43"],
 }
 
 music_command_enders = [
-	"Cmd_4",
+	"End",
 ]
 
 def create_music_command_classes(debug=False):

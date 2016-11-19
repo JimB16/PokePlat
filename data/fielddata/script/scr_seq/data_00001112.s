@@ -2914,140 +2914,140 @@ Script_branch_206f: @ 206f
 
 Script_branch_2079: @ 2079
 	Cmd_335 0x23, 0x0
-	TakeMoney 0x0
+	TakeMoney 0
 	SetFlag 0x997
 	Return
 @ 208d
 
 Script_branch_208d: @ 208d
 	Cmd_335 0x23, 0x1d4c0
-	TakeMoney 0x1d4c0
+	TakeMoney 120000
 	SetFlag 0x998
 	Return
 @ 20a1
 
 Script_branch_20a1: @ 20a1
 	Cmd_335 0x23, 0x15f90
-	TakeMoney 0x15f90
+	TakeMoney 90000
 	SetFlag 0x999
 	Return
 @ 20b5
 
 Script_branch_20b5: @ 20b5
 	Cmd_335 0x23, 0x2da78
-	TakeMoney 0x2da78
+	TakeMoney 187000
 	SetFlag 0x99a
 	Return
 @ 20c9
 
 Script_branch_20c9: @ 20c9
 	Cmd_335 0x23, 0xe290
-	TakeMoney 0xe290
+	TakeMoney 58000
 	SetFlag 0x99b
 	Return
 @ 20dd
 
 Script_branch_20dd: @ 20dd
 	Cmd_335 0x23, 0x35b60
-	TakeMoney 0x35b60
+	TakeMoney 220000
 	SetFlag 0x99c
 	Return
 @ 20f1
 
 Script_branch_20f1: @ 20f1
 	Cmd_335 0x23, 0x27100
-	TakeMoney 0x27100
+	TakeMoney 160000
 	SetFlag 0x99d
 	Return
 @ 2105
 
 Script_branch_2105: @ 2105
 	Cmd_335 0x23, 0x249f0
-	TakeMoney 0x249f0
+	TakeMoney 150000
 	SetFlag 0x99e
 	Return
 @ 2119
 
 Script_branch_2119: @ 2119
 	Cmd_335 0x23, 0x1f018
-	TakeMoney 0x1f018
+	TakeMoney 127000
 	SetFlag 0x99f
 	Return
 @ 212d
 
 Script_branch_212d: @ 212d
 	Cmd_335 0x23, 0x1d4c0
-	TakeMoney 0x1d4c0
+	TakeMoney 120000
 	SetFlag 0x9a0
 	Return
 @ 2141
 
 Script_branch_2141: @ 2141
 	Cmd_335 0x23, 0x29040
-	TakeMoney 0x29040
+	TakeMoney 168000
 	SetFlag 0x9a1
 	Return
 @ 2155
 
 Script_branch_2155: @ 2155
 	Cmd_335 0x23, 0x62d4
-	TakeMoney 0x62d4
+	TakeMoney 25300
 	SetFlag 0x9a2
 	Return
 @ 2169
 
 Script_branch_2169: @ 2169
 	Cmd_335 0x23, 0x249f0
-	TakeMoney 0x249f0
+	TakeMoney 150000
 	SetFlag 0x9a3
 	Return
 @ 217d
 
 Script_branch_217d: @ 217d
 	Cmd_335 0x23, 0x249f0
-	TakeMoney 0x249f0
+	TakeMoney 150000
 	SetFlag 0x9a4
 	Return
 @ 2191
 
 Script_branch_2191: @ 2191
 	Cmd_335 0x23, 0x23d0c
-	TakeMoney 0x23d0c
+	TakeMoney 146700
 	SetFlag 0x9a5
 	Return
 @ 21a5
 
 Script_branch_21a5: @ 21a5
 	Cmd_335 0x23, 0x32c80
-	TakeMoney 0x32c80
+	TakeMoney 208000
 	SetFlag 0x9a6
 	Return
 @ 21b9
 
 Script_branch_21b9: @ 21b9
 	Cmd_335 0x23, 0xcb20
-	TakeMoney 0xcb20
+	TakeMoney 52000
 	SetFlag 0x9a7
 	Return
 @ 21cd
 
 Script_branch_21cd: @ 21cd
 	Cmd_335 0x23, 0x222e0
-	TakeMoney 0x222e0
+	TakeMoney 140000
 	SetFlag 0x9a8
 	Return
 @ 21e1
 
 Script_branch_21e1: @ 21e1
 	Cmd_335 0x23, 0x1a5e0
-	TakeMoney 0x1a5e0
+	TakeMoney 108000
 	SetFlag 0x9a9
 	Return
 @ 21f5
 
 Script_branch_21f5: @ 21f5
 	Cmd_335 0x23, 0x1d4c0
-	TakeMoney 0x1d4c0
+	TakeMoney 120000
 	SetFlag 0x9aa
 	Return
 @ 2209

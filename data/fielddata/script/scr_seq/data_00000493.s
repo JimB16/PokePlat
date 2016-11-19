@@ -157,17 +157,17 @@ Function_251: @ 251
 @ 271
 
 Script_branch_271: @ 271
-	CheckMove 0x800c, 0x133, 0x8000
+	CheckMove 0x800c, BLAST_BURN, 0x8000
 	Return
 @ 27b
 
 Script_branch_27b: @ 27b
-	CheckMove 0x800c, 0x134, 0x8000
+	CheckMove 0x800c, HYDRO_CANNON, 0x8000
 	Return
 @ 285
 
 Script_branch_285: @ 285
-	CheckMove 0x800c, 0x152, 0x8000
+	CheckMove 0x800c, FRENZY_PLANT, 0x8000
 	Return
 @ 28f
 

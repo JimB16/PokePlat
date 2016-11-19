@@ -50,7 +50,7 @@ Script_branch_8c: @ 8c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_141
 	PlayFanfare 0x644
-	TakeMoney 0x1f4
+	TakeMoney 500
 	UpdateMoney
 	Message 0x2
 	SetVarHero 0x0

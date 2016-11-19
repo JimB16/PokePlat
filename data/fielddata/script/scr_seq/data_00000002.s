@@ -500,7 +500,7 @@ Script_12: @ 58c
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x0, 0x800c
+	CheckBadge 0, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_5b2
 	Message 0x1d
@@ -1794,9 +1794,9 @@ Script_branch_121b: @ 121b
 
 Script_branch_1223: @ 1223
 	Message 0x2a
-	GiveItem 0x1cc, 0x1, 0x800c
-	GiveItem 0x1cd, 0x1, 0x800c
-	GiveItem 0x1ce, 0x1, 0x800c
+	GiveItem COUPON_1, 1, 0x800c
+	GiveItem COUPON_2, 1, 0x800c
+	GiveItem COUPON_3, 1, 0x800c
 	GivePoketch
 	SetVar 0x4077, 0x2
 	ActPktchAppl 0x0

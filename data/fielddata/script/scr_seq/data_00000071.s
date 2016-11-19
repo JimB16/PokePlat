@@ -1383,7 +1383,7 @@ Function_e4b: @ e4b
 	Message 0xa
 	Message 0x10
 	CloseMsgOnKeyPress
-	GiveEgg 0xaf, 0xb
+	GiveEgg TOGEPI, 0xb
 	SetVar 0x407a, 0x5
 	Return
 @ e67

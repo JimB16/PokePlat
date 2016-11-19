@@ -623,7 +623,7 @@ Script_branch_6bb: @ 6bb
 @ 6d5
 
 Script_branch_6d5: @ 6d5
-	GiveItem 0x5e, 0x1, 0x800c
+	GiveItem HONEY, 1, 0x800c
 	MainEvent 0x1
 	HoneyTreeBattle
 	Return2 0xa, 0x800c
@@ -1484,7 +1484,7 @@ Script_22: @ 103a
 	Message 0x2b
 	Call Function_10c7
 	Call Function_1c1
-	CheckBadge 0x0, 0x800c
+	CheckBadge 0, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_10a2
 	Message 0x2c

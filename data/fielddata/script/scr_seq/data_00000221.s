@@ -104,11 +104,11 @@ Script_branch_ff: @ ff
 
 Script_branch_11a: @ 11a
 	RandomEvent 0x46
-	GiveItem 0x5b, 0x1, 0x800c
-	TakeItem 0x48, 0x1, 0x800c
-	TakeItem 0x49, 0x1, 0x800c
-	TakeItem 0x4a, 0x1, 0x800c
-	TakeItem 0x4b, 0x1, 0x800c
+	GiveItem STAR_PIECE, 1, 0x800c
+	TakeItem RED_SHARD, 1, 0x800c
+	TakeItem BLUE_SHARD, 1, 0x800c
+	TakeItem YELLOW_SHARD, 1, 0x800c
+	TakeItem GREEN_SHARD, 1, 0x800c
 	Jump Script_branch_1e5
 @ 14c
 
@@ -138,11 +138,11 @@ Script_branch_14e: @ 14e
 Script_branch_19e: @ 19e
 	ScriptCmd_SubValue 0x8007, 0x1
 	RandomEvent 0x46
-	TakeItem 0x48, 0x1, 0x800c
-	TakeItem 0x49, 0x1, 0x800c
-	TakeItem 0x4a, 0x1, 0x800c
-	TakeItem 0x4b, 0x1, 0x800c
-	GiveItem 0x5b, 0x1, 0x800c
+	TakeItem RED_SHARD, 1, 0x800c
+	TakeItem BLUE_SHARD, 1, 0x800c
+	TakeItem YELLOW_SHARD, 1, 0x800c
+	TakeItem GREEN_SHARD, 1, 0x800c
+	GiveItem STAR_PIECE, 1, 0x800c
 	If 0x8007, 0x0
 	CompareLastResultJump EQUAL, Script_branch_1e5
 	Jump Script_branch_19e

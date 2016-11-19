@@ -357,19 +357,19 @@ Script_branch_468: @ 468
 .byte 0x0 @ 0x472
 
 Script_branch_473: @ 473
-	CheckMove 0x800c, 0x13b, 0x8000
+	CheckMove 0x800c, OVERHEAT, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_4fd
-	CheckMove 0x800c, 0x3b, 0x8000
+	CheckMove 0x800c, BLIZZARD, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_4fd
-	CheckMove 0x800c, 0x38, 0x8000
+	CheckMove 0x800c, HYDRO_PUMP, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_4fd
-	CheckMove 0x800c, 0x193, 0x8000
+	CheckMove 0x800c, AIR_SLASH, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_4fd
-	CheckMove 0x800c, 0x1b5, 0x8000
+	CheckMove 0x800c, LEAF_STORM, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_4fd
 	CheckMoveNumDelete 0x800c, 0x8000

@@ -169,11 +169,11 @@ Script_branch_1e3: @ 1e3
 	CompareLastResultJump EQUAL, Script_branch_2ac
 	PlayFanfare 0x644
 	Cmd_334 0x23, 0x3e8
-	TakeMoney 0x3e8
+	TakeMoney 1000
 	UpdateMoney
 	WaitFanfare 0x644
 	PlayFanfare 0x5d5
-	GiveCoins 0x32
+	GiveCoins 50
 	UpdateCoins
 	WaitFanfare 0x5d5
 	Message 0x3
@@ -191,11 +191,11 @@ Script_branch_240: @ 240
 	CompareLastResultJump EQUAL, Script_branch_2ac
 	PlayFanfare 0x644
 	Cmd_334 0x23, 0x2710
-	TakeMoney 0x2710
+	TakeMoney 10000
 	UpdateMoney
 	WaitFanfare 0x644
 	PlayFanfare 0x5d5
-	GiveCoins 0x1f4
+	GiveCoins 500
 	UpdateCoins
 	WaitFanfare 0x5d5
 	Message 0x3
@@ -310,7 +310,7 @@ Script_15: @ 346
 	Message 0xe
 	WaitButton
 	PlayFanfare 0x5d5
-	GiveCoins 0x14
+	GiveCoins 20
 	WaitFanfare 0x5d5
 	CloseMsgOnKeyPress
 	ReleaseAll
@@ -351,7 +351,7 @@ Script_16: @ 3b7
 	Message 0x11
 	WaitButton
 	PlayFanfare 0x5d5
-	GiveCoins 0x32
+	GiveCoins 50
 	WaitFanfare 0x5d5
 	CloseMsgOnKeyPress
 	ReleaseAll

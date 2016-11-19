@@ -17,7 +17,7 @@ Script_2: @ 14
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x0, 0x800c
+	CheckBadge 0, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3a
 	Message 0x2

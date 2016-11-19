@@ -50,7 +50,7 @@ Script_branch_5b: @ 5b
 	SetVarHero 0x0
 	Message 0x3
 	Cmd_4f
-	GivePokemon 0x89, 0x19, 0x0, 0x800c
+	GivePokemon PORYGON, 25, NO_ITEM, 0x800c
 	SetFlag 0x97
 	Message 0x4
 	YesNoBox 0x800c

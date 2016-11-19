@@ -135,7 +135,7 @@ Script_branch_158: @ 158
 	LockAll
 	SetFlag 0x12c
 	SetVar 0x4106, 0x3
-	GiveItem 0x1c5, 0x1, 0x800c
+	GiveItem LUNAR_WING, 1, 0x800c
 	SetVarHero 0x0
 	Message 0x2
 	Message 0x3

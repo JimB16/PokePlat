@@ -99,7 +99,7 @@ Script_branch_a6: @ a6
 @ e7
 
 Script_branch_e7: @ e7
-	CheckMove 0x800c, 0x1b2, 0x4000
+	CheckMove 0x800c, DRACO_METEOR, 0x4000
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_10f
 Script_branch_fc: @ fc
@@ -126,7 +126,7 @@ Script_branch_10f: @ 10f
 	Call Function_1d7
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_71
-	CheckMove 0x800c, 0x1b2, 0x8000
+	CheckMove 0x800c, DRACO_METEOR, 0x8000
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_87
 	StoreHappyPoke 0x800c, 0x8000

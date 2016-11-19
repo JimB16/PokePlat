@@ -1329,7 +1329,7 @@ Script_11: @ d5c
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x2, 0x800c
+	CheckBadge 2, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_d82
 	Message 0xc
@@ -1351,7 +1351,7 @@ Script_12: @ d8d
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x2, 0x800c
+	CheckBadge 2, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_db3
 	Message 0xd

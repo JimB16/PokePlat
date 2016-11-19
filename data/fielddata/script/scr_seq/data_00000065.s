@@ -142,7 +142,7 @@ Script_branch_225: @ 225
 	CheckItemChosen 0x40b4, 0x8002
 	If 0x40b4, 0x0
 	CompareLastResultJump EQUAL, Script_branch_3e7
-	GiveItem 0x8002, 0x1, 0x800c
+	GiveItem 0x8002, 1, 0x800c
 	Jump Script_branch_3d8
 @ 2dc
 
@@ -261,7 +261,7 @@ Script_branch_3b4: @ 3b4
 Script_branch_3bc: @ 3bc
 	CompareItemPokeFossil 0x8002, 0x8004, 0x1
 	CheckItemChosen 0x40b4, 0x8002
-	GiveItem 0x8002, 0x1, 0x800c
+	GiveItem 0x8002, 1, 0x800c
 	Jump Script_branch_3d8
 @ 3d8
 
@@ -293,7 +293,7 @@ Script_branch_3f2: @ 3f2
 	Soundfr 0x486
 	Message 0x8
 	Cmd_4f
-	GivePokemon 0x40b4, 0x14, 0x0, 0x800c
+	GivePokemon 0x40b4, 20, NO_ITEM, 0x800c
 	RandomEvent 0x73
 	SetVar 0x40b4, 0x0
 	Message 0x9

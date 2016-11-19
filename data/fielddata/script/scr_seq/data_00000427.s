@@ -332,7 +332,7 @@ Script_13: @ 42e
 	FadeScreen 0x6, 0x1, 0x1, 0x0
 	ResetScreen
 	StoreStarter 0x8000
-	GivePokemon 0x8000, 0x5, 0x0, 0x800c
+	GivePokemon 0x8000, 5, NO_ITEM, 0x800c
 	ApplyMovement 0x5, Movement_7f8
 	ApplyMovement 0x2, Movement_760
 	ApplyMovement 0xff, Movement_884

@@ -111,7 +111,7 @@ Script_3: @ fc
 	SetVar 0x8004, 0x1a7
 	SetVar 0x8005, 0x1
 	CallStandard 0x7fc
-	CheckBadge 0x5, 0x800c
+	CheckBadge 5, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_140
 	Jump Script_branch_135

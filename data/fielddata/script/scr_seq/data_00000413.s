@@ -321,7 +321,7 @@ Script_branch_42d: @ 42d
 @ 49d
 
 Script_branch_49d: @ 49d
-	GiveItem 0x8005, 0x1, 0x8004
+	GiveItem 0x8005, 1, 0x8004
 	CheckDeoxis 0x8005
 	Cmd_17a 0x4, 0x800c
 	If 0x800c, 0x0
@@ -357,7 +357,7 @@ Script_branch_4ee: @ 4ee
 	SetVarItem 0x0, 0x800c
 	Message 0xc
 	WaitButton
-	GiveItem 0x800c, 0x1, 0x8004
+	GiveItem 0x800c, 1, 0x8004
 	Cmd_183 0x800c
 	Jump Script_branch_53a
 @ 53a
@@ -391,7 +391,7 @@ Script_2: @ 55f
 	Message 0xc
 	WaitButton
 	CloseMsgOnKeyPress
-	GiveItem 0x8000, 0x1, 0x8004
+	GiveItem 0x8000, 1, 0x8004
 	Cmd_183 0x8000
 	ReleaseAll
 	End

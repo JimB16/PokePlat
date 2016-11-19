@@ -21,7 +21,7 @@ Script_2: @ 22
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x2, 0x800c
+	CheckBadge 2, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_ff
 	DeActivateLeader 0x9, 0x85, 0x0, 0x0, 0x0
@@ -36,7 +36,7 @@ Script_2: @ 22
 	Message 0x2
 	Soundfr 0x489
 	Cmd_4f
-	EnableBadge 0x2
+	EnableBadge 2
 	MainEvent 0x17
 	SetTrainerId 0x135
 	SetTrainerId 0x136
@@ -99,7 +99,7 @@ Script_3: @ 11e
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x2, 0x800c
+	CheckBadge 2, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_144
 	Message 0x6
@@ -121,7 +121,7 @@ Script_branch_144: @ 144
 Script_4: @ 152
 	PlayFanfare 0x5dc
 	LockAll
-	CheckBadge 0x2, 0x800c
+	CheckBadge 2, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_17c
 	SetVariableRival 0x0

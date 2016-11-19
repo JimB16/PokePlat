@@ -56,7 +56,7 @@ Script_2: @ 90
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x0, 0x800c
+	CheckBadge 0, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_c1
 	CheckFlag 0x7a

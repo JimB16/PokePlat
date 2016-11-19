@@ -28,7 +28,7 @@ Script_branch_3e: @ 3e
 	CheckMoney 0x800c, 0x64
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_6b
-	TakeMoney 0x64
+	TakeMoney 100
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644

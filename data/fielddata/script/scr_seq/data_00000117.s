@@ -49,7 +49,7 @@ Script_branch_57: @ 57
 	SetVarHero 0x0
 	Message 0x3
 	Cmd_4f
-	GivePokemon 0x85, 0x14, 0x0, 0x800c
+	GivePokemon EEVEE, 20, NO_ITEM, 0x800c
 	SetFlag 0x131
 	Message 0x4
 	YesNoBox 0x800c

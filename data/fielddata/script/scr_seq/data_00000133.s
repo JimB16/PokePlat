@@ -67,7 +67,7 @@ Script_branch_6a: @ 6a
 	ResetScreen
 	If 0x800c, 0xff
 	CompareLastResultJump EQUAL, Script_branch_5f
-	GiveItem 0x5d, 0x1, 0x800c
+	GiveItem HEART_SCALE, 1, 0x800c
 	SetVarHero 0x3
 	Message 0x10
 	WaitButton

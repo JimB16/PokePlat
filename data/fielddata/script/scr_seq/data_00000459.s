@@ -20,7 +20,7 @@ Script_1: @ 22
 @ 2f
 
 Script_branch_2f: @ 2f
-	CheckBadge 0x3, 0x4000
+	CheckBadge 3, 0x4000
 	If 0x4000, 0x1
 	CompareLastResultJump EQUAL, Script_branch_44
 	End

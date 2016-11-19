@@ -475,7 +475,7 @@ Script_9: @ 54d
 	FacePlayer
 	CheckFlag 0xa8
 	CompareLastResultJump EQUAL, Script_branch_586
-	CheckBadge 0x5, 0x800c
+	CheckBadge 5, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_591
 	Jump Script_branch_57b

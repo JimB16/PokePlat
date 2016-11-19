@@ -600,7 +600,7 @@ Script_5: @ 632
 Script_branch_65a: @ 65a
 	Message 0x13
 	CloseMsgOnKeyPress
-	GiveItem 0x1c3, 0x1, 0x800c
+	GiveItem SUITE_KEY, 1, 0x800c
 	ApplyMovement 0x8, Movement_6a8
 	WaitMovement
 	PrepareDoorAnimation 0x16, 0x18, 0xb, 0xd, 0x4d

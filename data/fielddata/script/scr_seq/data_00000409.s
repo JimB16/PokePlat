@@ -28,7 +28,7 @@ Script_1: @ 42
 	CheckPlaceStored 0x800c, 0xf
 	If 0x800c, 0x6
 	CompareLastResultJump EQUAL, Script_branch_8e
-	CheckBadge 0x1, 0x800c
+	CheckBadge 1, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_8e
 	Message 0x0
@@ -171,7 +171,7 @@ Script_2: @ 223
 	CopyVar 0x8004, 0x800c
 	If 0x800c, 0x6
 	CompareLastResultJump EQUAL, Script_branch_275
-	CheckBadge 0x0, 0x800c
+	CheckBadge 0, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_275
 	Message 0x3
@@ -244,7 +244,7 @@ Script_3: @ 314
 	CheckPlaceStored 0x800c, 0x46
 	If 0x800c, 0x6
 	CompareLastResultJump EQUAL, Script_branch_372
-	CheckBadge 0x5, 0x800c
+	CheckBadge 5, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_372
 	Message 0x6
@@ -321,7 +321,7 @@ Script_4: @ 40e
 	CheckPlaceStored 0x800c, 0x1af
 	If 0x800c, 0x6
 	CompareLastResultJump EQUAL, Script_branch_469
-	CheckBadge 0x6, 0x800c
+	CheckBadge 6, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_469
 	CheckFollow 0x800c
@@ -538,7 +538,7 @@ Script_7: @ 679
 	CheckPlaceStored 0x800c, 0x7f
 	If 0x800c, 0x6
 	CompareLastResultJump EQUAL, Script_branch_6c3
-	CheckBadge 0x7, 0x800c
+	CheckBadge 7, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_6c3
 	Message 0x16

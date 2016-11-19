@@ -184,7 +184,7 @@ Script_branch_18f: @ 18f
 .byte 0x0 @ 0x1cd
 
 Script_branch_1ce: @ 1ce
-	TakeItem 0x2a, 0x8004, 0x800c
+	TakeItem LAVA_COOKIE, 0x8004, 0x800c
 	PlayFanfare 0x644
 	Cmd_334 0x23, 0x8005
 	TakeMoneyDCare 0x8005

@@ -106,7 +106,7 @@ Script_branch_12f: @ 12f
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_334 0x23, 0x2710
-	TakeMoney 0x2710
+	TakeMoney 10000
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644
@@ -130,7 +130,7 @@ Script_branch_18a: @ 18a
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_335 0x23, 0x186a0
-	TakeMoney 0x186a0
+	TakeMoney 100000
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644
@@ -154,7 +154,7 @@ Script_branch_1e7: @ 1e7
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_24f
 	Cmd_335 0x23, 0xf423f
-	TakeMoney 0xf423f
+	TakeMoney 999999
 	UpdateMoney
 	PlayFanfare 0x644
 	WaitFanfare 0x644

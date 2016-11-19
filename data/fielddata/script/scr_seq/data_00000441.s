@@ -77,7 +77,7 @@ Script_branch_e6: @ e6
 	SetVarHero 0x0
 	Message 0x3
 	WaitButton
-	GiveItem 0x6f, 0x1, 0x800c
+	GiveItem ODD_KEYSTONE, 1, 0x800c
 	SetVar 0x408a, 0x1
 	CloseMsgOnKeyPress
 	ReleaseAll

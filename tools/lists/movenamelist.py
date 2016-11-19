@@ -117,7 +117,7 @@ MoveNameList = [
 "Reflect",
 "Focus_Energy",
 "Bide",
-"Metronome",
+"Metronome_m",
 "Mirror_Move",
 "Self_Destruct",
 "Egg_Bomb",

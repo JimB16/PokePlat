@@ -45,7 +45,7 @@ Script_branch_39: @ 39
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_e5
 	Message 0x4
-	TakeItem 0x8000, 0x1, 0x800c
+	TakeItem 0x8000, 1, 0x800c
 	TakeCoinsCasino 0x8001
 	UpdateCoins
 	PlayFanfare 0x644
@@ -170,7 +170,7 @@ Script_branch_1cb: @ 1cb
 	Cmd_2ff 0x8000, 0x8004
 	If 0x8004, 0xffff
 	CompareLastResultJump EQUAL, Script_branch_245
-	CheckMove 0x800c, 0xed, 0x8000
+	CheckMove 0x800c, HIDDEN_POWER, 0x8000
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_266
 	Cmd_2fd 0x0, 0x8004

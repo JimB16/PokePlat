@@ -180,7 +180,7 @@ Script_branch_262: @ 262
 .byte 0x0 @ 0x273
 
 Script_branch_274: @ 274
-	CheckPokemonLevel 0x800c, 0x1e
+	CheckPokemonLevel 0x800c, 30
 	If 0x800c, 0x2
 	CompareLastResultJump LESSER, Script_branch_322
 	CheckOtherDecisionUnion 0x0, 0x2
@@ -755,7 +755,7 @@ Script_branch_95c: @ 95c
 	YesNoBox 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_a06
-	CheckPokemonLevel 0x800c, 0x1e
+	CheckPokemonLevel 0x800c, 30
 	If 0x800c, 0x2
 	CompareLastResultJump LESSER, Script_branch_a17
 	CheckOtherDecisionUnion 0x1, 0x0

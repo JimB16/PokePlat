@@ -28,7 +28,7 @@ Script_1: @ 32
 	SetVarHero 0x0
 	Message 0x1
 	Cmd_4f
-	GiveItem 0x1cb, 0x1, 0x800c
+	GiveItem PARCEL, 1, 0x800c
 	SetVarHero 0x0
 	SetVariableRival 0x1
 	Message 0x2

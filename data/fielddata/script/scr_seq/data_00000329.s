@@ -300,7 +300,7 @@ Script_branch_31c: @ 31c
 	Soundfr 0x486
 	Cmd_4f
 	Message 0xc
-	GiveEgg 0x1bf, 0xa
+	GiveEgg RIOLU, 0xa
 	SetFlag 0x1e5
 	ClearFlag 0xe2
 	Call Function_371

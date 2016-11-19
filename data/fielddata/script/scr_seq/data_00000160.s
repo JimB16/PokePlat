@@ -29,7 +29,7 @@ Script_4: @ 27
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x7, 0x800c
+	CheckBadge 7, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_104
 	DeActivateLeader 0x9, 0x9c, 0x0, 0x0, 0x0
@@ -44,7 +44,7 @@ Script_4: @ 27
 	Message 0x2
 	Soundfr 0x489
 	Cmd_4f
-	EnableBadge 0x7
+	EnableBadge 7
 	MainEvent 0x17
 	SetTrainerId 0x119
 	SetTrainerId 0x11d

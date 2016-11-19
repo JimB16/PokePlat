@@ -30,7 +30,7 @@ Script_branch_3c: @ 3c
 @ 4e
 
 Script_1: @ 4e
-	CheckBadge 0x6, 0x4000
+	CheckBadge 6, 0x4000
 	If 0x4000, 0x1
 	CompareLastResultCall EQUAL, Script_branch_79
 	CheckFlag 0xba

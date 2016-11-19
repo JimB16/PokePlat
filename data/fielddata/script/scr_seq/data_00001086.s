@@ -112,7 +112,7 @@ Script_branch_166: @ 166
 	Soundfr 0x486
 	Message 0x6
 	Cmd_4f
-	GiveItem 0x1b7, 0x1, 0x800c
+	GiveItem OLD_CHARM, 1, 0x800c
 	SetFlag 0xa6
 	Message 0x7
 	WaitButton

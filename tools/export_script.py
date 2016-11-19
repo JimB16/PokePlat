@@ -19,11 +19,32 @@ import labels
 from labels import line_has_label
 import interval_map
 
+from lists.pokemonnamelist import PokemonNameList
+from lists.movenamelist import MoveNameList
+from lists.itemnamelist import ItemNameList
+from lists.abilitynamelist import AbilityNameList
+from lists.typelist import TypeList
 
 
+def GetItemName(item):
+    if item <= 536:
+        return ItemNameList[item].upper()
+    else:
+        return hex(item)
 
-#fin = open("./testio2.bin", "rb")
-#fin = (BinaryIO.reader(fin.read())).adapter(fin)
+
+def GetPokemonName(species):
+    if species <= 493:
+        return PokemonNameList[species].upper()
+    else:
+        return hex(species)
+
+
+def GetMoveName(move):
+    if move <= 467:
+        return MoveNameList[move].upper()
+    else:
+        return hex(move)
 
 
 
@@ -741,6 +762,111 @@ class SingleByteConditionParam():
     @staticmethod
     def from_asm(value):
         return value
+
+
+class PkmnParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        return GetPokemonName(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+
+
+class ItemParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        return GetItemName(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+
+
+class MoveParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        return GetMoveName(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
 		
 		
 class SingleHWordParam():
@@ -773,6 +899,44 @@ class SingleHWordParam():
 
     def to_asm(self):
         if not self.should_be_decimal:
+            return hex(self.byte)
+        else:
+            return str(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
+		
+		
+class SingleHWordDecParam():
+    size = 2
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt16()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        if self.byte >= 0x4000:
             return hex(self.byte)
         else:
             return str(self.byte)
@@ -1047,6 +1211,41 @@ class SingleWordParam():
     @staticmethod
     def from_asm(value):
         return value
+		
+		
+class SingleWordDecParam():
+    size = 4
+    should_be_decimal = False
+    byte_type = "db"
+
+    def __init__(self, fin, *args, **kwargs):
+        for (key, value) in kwargs.items():
+            setattr(self, key, value)
+        # check address
+        if not hasattr(self, "address"):
+            raise Exception("an address is a requirement")
+        elif self.address == None:
+            raise Exception("address must not be None")
+       # elif not is_valid_address(self.address):
+       #     raise Exception("address must be valid")
+        # check size
+        if not hasattr(self, "size") or self.size == None:
+            raise Exception("size is probably 1?")
+        # parse bytes from ROM
+        self.parse(fin)
+
+    def parse(self, fin):
+		self.byte = fin.readUInt32()
+
+    def get_dependencies(self, recompute=False, global_dependencies=set()):
+        return []
+
+    def to_asm(self):
+        return str(self.byte)
+
+    @staticmethod
+    def from_asm(value):
+        return value
 
 
 class SingleCallStandardParam():
@@ -1203,7 +1402,7 @@ music_commands = {
     0x6d: ["FollowHero", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x6e: ["StopFollowHero"],
     0x6f: ["GiveMoney", ["unknown", SingleWordParam]],
-    0x70: ["TakeMoney", ["unknown", SingleWordParam]],
+    0x70: ["TakeMoney", ["unknown", SingleWordDecParam]],
     0x71: ["CheckMoney", ["unknown", SingleHWordParam], ["unknown", SingleWordParam]],
     0x72: ["ShowMoney", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x73: ["HideMoney"],
@@ -1212,10 +1411,10 @@ music_commands = {
     0x76: ["HideCoins"],
     0x77: ["UpdateCoins"],
     0x78: ["CheckCoins", ["unknown", SingleHWordParam]],
-    0x79: ["GiveCoins", ["unknown", SingleHWordParam]],
-    0x7a: ["TakeCoins", ["unknown", SingleHWordParam]],
-    0x7b: ["TakeItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x7c: ["GiveItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x79: ["GiveCoins", ["unknown", SingleHWordDecParam]],
+    0x7a: ["TakeCoins", ["unknown", SingleHWordDecParam]],
+    0x7b: ["TakeItem", ["ItemID", ItemParam], ["Quantity", SingleHWordDecParam], ["unknown", SingleHWordParam]],
+    0x7c: ["GiveItem", ["ItemID", ItemParam], ["Quantity", SingleHWordDecParam], ["unknown", SingleHWordParam]],
     0x7d: ["CheckStoreItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x7e: ["CheckItem", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x7f: ["StoreItemTaken", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
@@ -1241,10 +1440,10 @@ music_commands = {
     0x93: ["CheckPokemonParty", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x94: ["StorePokemonParty", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x95: ["SetPokemonPartyStored", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x96: ["GivePokemon", ["PkmnID", SingleHWordParam], ["Level", SingleHWordParam], ["Item", SingleHWordParam], ["ReturnValue", SingleHWordParam]],
-    0x97: ["GiveEgg", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x96: ["GivePokemon", ["PkmnID", PkmnParam], ["Level", SingleHWordDecParam], ["Item", ItemParam], ["ReturnValue", SingleHWordParam]],
+    0x97: ["GiveEgg", ["unknown", PkmnParam], ["unknown", SingleHWordParam]],
     0x98: ["Cmd_98", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x99: ["CheckMove", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x99: ["CheckMove", ["unknown", SingleHWordParam], ["unknown", MoveParam], ["unknown", SingleHWordParam]],
     0x9a: ["CheckPlaceStored", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x9b: ["Cmd_9b", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x9c: ["Cmd_9c"],
@@ -1438,8 +1637,8 @@ music_commands = {
     0x158: ["ActivatePokedex"],
     0x159: ["Cmd_159", ["unknown", SingleHWordParam]],
     0x15a: ["GiveRunningShoes"],
-    0x15b: ["CheckBadge", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x15c: ["EnableBadge", ["unknown", SingleHWordParam]],
+    0x15b: ["CheckBadge", ["unknown", SingleHWordDecParam], ["unknown", SingleHWordParam]],
+    0x15c: ["EnableBadge", ["unknown", SingleHWordDecParam]],
     0x15d: ["DisableBadge", ["unknown", SingleHWordParam]],
     0x15e: ["Cmd_15e", ["unknown", SingleHWordParam]],
     0x15f: ["Cmd_15f"],
@@ -1593,7 +1792,7 @@ music_commands = {
     0x1f3: ["Cmd_1f3"],
     0x1f4: ["CheckItemChosen", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f5: ["CompareItemPokeFossil", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
-    0x1f6: ["CheckPokemonLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
+    0x1f6: ["CheckPokemonLevel", ["unknown", SingleHWordParam], ["unknown", SingleHWordDecParam]],
     0x1f7: ["CheckIsPokemonPoisoned", ["unknown", SingleHWordParam], ["unknown", SingleHWordParam]],
     0x1f8: ["PreWfc"],
     0x1f9: ["StoreFurniture", ["unknown", SingleHWordParam]],

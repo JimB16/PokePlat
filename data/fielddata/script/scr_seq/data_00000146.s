@@ -147,19 +147,19 @@ Script_branch_15d: @ 15d
 
 Script_branch_167: @ 167
 	Cmd_334 0x23, 0xc8
-	TakeMoney 0xc8
+	TakeMoney 200
 	Return
 @ 175
 
 Script_branch_175: @ 175
 	Cmd_334 0x23, 0x12c
-	TakeMoney 0x12c
+	TakeMoney 300
 	Return
 @ 183
 
 Script_branch_183: @ 183
 	Cmd_334 0x23, 0x15e
-	TakeMoney 0x15e
+	TakeMoney 350
 	Return
 @ 191
 

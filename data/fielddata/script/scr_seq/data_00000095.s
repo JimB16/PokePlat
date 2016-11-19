@@ -12,7 +12,7 @@ Script_1: @ e
 	PlayFanfare 0x5dc
 	LockAll
 	FacePlayer
-	CheckBadge 0x4, 0x800c
+	CheckBadge 4, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_6a
 	Message 0x1
@@ -59,7 +59,7 @@ Script_branch_6a: @ 6a
 Script_2: @ 78
 	PlayFanfare 0x5dc
 	LockAll
-	CheckBadge 0x4, 0x800c
+	CheckBadge 4, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_a2
 	SetVariableRival 0x0

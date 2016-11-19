@@ -155,7 +155,7 @@ Script_branch_180: @ 180
 	CompareLastResultCall EQUAL, Script_branch_2c7
 	UpdateMoney
 	PlayFanfare 0x644
-	TakeItem 0x8001, 0x1, 0x800c
+	TakeItem 0x8001, 1, 0x800c
 	SetVarItem 0x0, 0x8001
 	Message 0xa
 	Message 0x8
@@ -222,25 +222,25 @@ Script_branch_293: @ 293
 
 Script_branch_29d: @ 29d
 	Cmd_334 0x23, 0xc8
-	TakeMoney 0xc8
+	TakeMoney 200
 	Return
 @ 2ab
 
 Script_branch_2ab: @ 2ab
 	Cmd_334 0x23, 0xc8
-	TakeMoney 0xc8
+	TakeMoney 200
 	Return
 @ 2b9
 
 Script_branch_2b9: @ 2b9
 	Cmd_334 0x23, 0xc8
-	TakeMoney 0xc8
+	TakeMoney 200
 	Return
 @ 2c7
 
 Script_branch_2c7: @ 2c7
 	Cmd_334 0x23, 0xc8
-	TakeMoney 0xc8
+	TakeMoney 200
 	Return
 @ 2d5
 

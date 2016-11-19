@@ -49,7 +49,7 @@ Script_branch_63: @ 63
 
 Script_branch_86: @ 86
 	SetFlag 0x10e
-	GiveItem 0x1cf, 0x1, 0x800c
+	GiveItem STORAGE_KEY, 1, 0x800c
 	SetVarHero 0x0
 	Message 0x9
 	WaitButton

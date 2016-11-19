@@ -490,7 +490,7 @@ Script_9: @ 530
 	CheckFlag 0x9a
 	CompareLastResultJump EQUAL, Script_branch_56c
 	Message 0x8
-	CheckBadge 0x7, 0x800c
+	CheckBadge 7, 0x800c
 	If 0x800c, 0x0
 	CompareLastResultJump EQUAL, Script_branch_561
 	Jump Script_branch_56c

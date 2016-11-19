@@ -66,7 +66,7 @@ Script_branch_ab: @ ab
 @ bb
 
 Script_branch_bb: @ bb
-	CheckBadge 0x4, 0x800c
+	CheckBadge 4, 0x800c
 	If 0x800c, 0x1
 	CompareLastResultJump EQUAL, Script_branch_1a0
 	DeActivateLeader 0x9, 0x5b, 0x0, 0x0, 0x0
@@ -83,7 +83,7 @@ Script_branch_bb: @ bb
 	Message 0x2
 	Soundfr 0x489
 	Cmd_4f
-	EnableBadge 0x4
+	EnableBadge 4
 	MainEvent 0x17
 	SetTrainerId 0x10a
 	SetTrainerId 0x118

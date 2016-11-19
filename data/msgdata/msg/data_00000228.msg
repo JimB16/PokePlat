@@ -1,0 +1,5 @@
+num: 3
+seed: 0x5406
+I found this during the Safari\nGame.\rIt's the Hidden Machine Defog, but\nnone of my Pokémon can learn it.\rYou'd be doing me a favor if you\ntook this.\r
+It'd be good if we could set up signs\nfor the Safari Game. Some markers.
+Great Marsh Area 6

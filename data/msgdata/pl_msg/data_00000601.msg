@@ -1,0 +1,7 @@
+num: 5
+seed: 0x440e
+Hello, thank you for visiting us\ntoday.\rTo which floor may I take you?
+Certainly.\nElevator going up.\r
+Certainly.\nElevator going down.\r
+Uh... We are already on that floor?
+Here we are!

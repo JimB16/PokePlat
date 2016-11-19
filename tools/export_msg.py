@@ -374,7 +374,7 @@ class Disassembler(object):
         if not os.path.exists(os.path.dirname(output_folder)):
             os.makedirs(os.path.dirname(output_folder))        
         head, tail = os.path.split(filename)
-        with open(os.path.join(output_folder + tail.replace(".bin", ".s")), 'w') as out:
+        with open(os.path.join(output_folder + tail.replace(".bin", ".msg")), 'w') as out:
             out.write(output.encode('utf8'))
         
         return (output, offset)

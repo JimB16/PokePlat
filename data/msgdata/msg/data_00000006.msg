@@ -1,0 +1,4 @@
+num: 2
+seed: 0xadca
+The data could not be written.\n\nPlease turn off the power, then\nremove and reinsert the DS Game\nCard.
+Error saving data.\n\nThe backup memory has failed.\nThe game may be played, but\nit is impossible to save.\n\nPlease turn off the power.

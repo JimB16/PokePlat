@@ -1,0 +1,3 @@
+num: 1
+seed: 0x640e
+There appears to be a cave painting\nfrom an ancient time...

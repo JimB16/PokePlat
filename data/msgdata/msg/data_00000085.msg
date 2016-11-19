@@ -1,0 +1,4 @@
+num: 2
+seed: 0x141b
+Welcome to Team Galactic. Are you\nhere to donate your Pokémon?\rWhat? You're not?\nThen kindly get off our property!\rDo we have to bring the pain like we\ndid with the Cycle Shop manager?
+Team Galactic isn't interested in the\nworld. Our gaze is beyond the stars!

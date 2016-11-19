@@ -1,0 +1,4 @@
+num: 2
+seed: 0x4af1
+The Badges that Pokémon Gyms give\nyou are a measure of a Trainer's\fworth.\rBy getting more Badges, you get to\nbuy more items in Poké Marts.
+The Poké Mart girls are so pretty,\nthey leave me tongue tied.\rThey sell all sorts of great items,\nso I get even more flustered...

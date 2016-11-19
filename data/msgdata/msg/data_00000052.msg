@@ -1,0 +1,7 @@
+num: 5
+seed: 0x740f
+The books on the third floor are\neasy to read.\rThe ones down here are all too tough\nfor me to understand...
+I looked up a book called\n“Surviving Disasters” right away!
+The ceiling-high bookshelves are\ncrammed with books.
+The shelves are lined with books\nworn from being read by many.
+Please refrain from bringing food\nor beverages into the library.

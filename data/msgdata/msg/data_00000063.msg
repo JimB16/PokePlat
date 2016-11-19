@@ -1,0 +1,7 @@
+num: 5
+seed: 0x6403
+There are eight Gym Leaders in\nthe Sinnoh region.\rThe objective for Trainers is\nto get Gym Badges from them all.
+A Gym Leader isn't just like any\nTrainer you meet.\rI'd take as many Pokémon as possible\nif I were you.
+                  
+                      
+Roark lets us train our Pokémon in\nthe mine.

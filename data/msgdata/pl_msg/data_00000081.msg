@@ -1,0 +1,5 @@
+num: 3
+seed: 0xe43a
+Hiya! Your Pokémon could use some\ntoughening up.\rWhy not try training in\nthe Oreburgh Mine?
+I always have a rotten time trying\nto decide which moves my Pokémon\fshould learn.
+You remind me so much of the time\nI got my first Pokémon.

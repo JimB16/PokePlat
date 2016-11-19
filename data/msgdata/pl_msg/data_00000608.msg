@@ -1,0 +1,7 @@
+num: 5
+seed: 0xd916
+MORNING
+DAY
+EVENING
+NIGHT
+LATE NIGHT

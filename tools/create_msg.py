@@ -182,7 +182,7 @@ if __name__ == "__main__":
     if not os.path.exists(os.path.dirname(dir)):
         os.makedirs(os.path.dirname(dir))        
     head, tail = os.path.split(filename)
-    out = open(os.path.join(dir + tail.replace(".s", ".bin")), 'w')
+    out = open(os.path.join(dir + tail.replace(".msg", ".bin")), 'w')
         
     text = ""
     num = 0

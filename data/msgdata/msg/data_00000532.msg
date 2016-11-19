@@ -1,0 +1,5 @@
+num: 3
+seed: 0x642e
+I must bear down and train...\nAnd for that, time is unimportant.\rTherefore, I have no need for\na watch. Take this from me!\r
+Analog or digital, use whichever\nwatch you prefer.\rThere are many kinds of Pokémon.\nUse whichever you like, too.
+HAPPINY: Pinny haaa!

@@ -1,0 +1,10 @@
+num: 8
+seed: 0xd44f
+It's a bed...\nWant to take a rest?
+\v0103\x0000 quickly fell asleep\nin the bed...\r
+\v0103\x0000 and the Pokémon\nbecame fully healed from the rest!
+Team Galactic Nap Room\rEnsure the bed is unoccupied\nbefore getting into it!
+Team Galactic TV Room\rState-of-the-art audio & video\nsystem for member use only!\rOnward to a new universe!\nTeam Galactic!
+The Team Galactic credo!\nEverything belongs to Team Galactic!\rLook beyond the world--space will\nbecome Team Galactic's!
+There is a notice tacked on to\nthe kitchen sink.\r“Health and prosperity through\nthe partaking of favorite foods!”\rFoul, unidentifiable substances are\ncaked around the sink...
+There is a notice taped on to\nthe refrigerator.\r“Drink all you wish and gain the\nenergy to move us forward!”\rThe refrigerator is filled with murky,\nsinister drinks and nothing else...

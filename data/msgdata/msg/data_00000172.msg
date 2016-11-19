@@ -1,0 +1,9 @@
+num: 7
+seed: 0xc41b
+Hello, hello. Would you like to hear\na trendy saying?
+Very well...\rThe trendy thing to say for you\nwould be...\r\v011c\x0000!\rThat's a trendy sort of thing\nto say.
+Oh, come on now. With an attitude like\nthat, you'll fall behind the times!
+I hope you'll use trendy sayings\nin a trendy way.
+Hello, hello. Are you using trendy\nsayings?
+           
+           

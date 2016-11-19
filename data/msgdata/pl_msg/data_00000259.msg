@@ -1,0 +1,6 @@
+num: 4
+seed: 0xc3ba
+That Pokémon you met was the\nLunar Pokémon...\rI've heard tales of it flying from\nplace to place throughout Sinnoh.\rOh! That sparkle...\nSo, that's the Lunar Wing...\rThank you... That will wake my son\nfrom the nightmare...\r
+Should we sail back to Canalave?
+Aye, aye!\nAnchors aweigh!\r
+All right, then. Tell me if you'd like\nto return to Canalave.

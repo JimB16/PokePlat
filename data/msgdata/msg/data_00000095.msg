@@ -1,0 +1,5 @@
+num: 3
+seed: 0x943a
+Oak: Ah, it's you! Good to see you!\nHow is your Pokédex coming along?\rCapturing every kind of Pokémon is\nno easy feat, I'll grant you that.\rBut I'm sure you can accomplish it!\r
+Oak: Ah, yes!\rAn acquaintance from Kanto has sent\nme something quite interesting.\rI think you'd make better use of it\nthan I ever could.\r
+I understand there is a Pokémon that\nevolves when it is traded while holding\fthat Up-Grade.

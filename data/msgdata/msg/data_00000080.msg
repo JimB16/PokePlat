@@ -1,0 +1,7 @@
+num: 5
+seed: 0x396e
+Gardenia: At my Gym, no one gets to\nbattle with the Gym Leader--me--until\fthey've beaten all the other Trainers.\rI'll be waiting for you in the back.\nGood luck, challenger!\r
+Hey, there!\nHow's it going, Champ-to-be?\rActually, that's what I said to some\nboy who zipped in here earlier, too!\rThe Gym Leader, Gardenia, is a user\nof Grass-type Pokémon.\rIt should be obvious, but Grass-type\nPokémon really hate fire.\rOh, wait a second. I should tell you\nabout the Gym itself first.\rYou can't challenge the Gym Leader\nuntil you find and beat all the Gym's\fTrainers who've hidden themselves.\rIt's a bit challenging, but just think\nof it as good training and go for it!
+Oh! \v0103\x0000!\nYou've beaten the Gym Leader!\rYour Pokémon look much tougher than\nwhen they went in, too!\rAt least that's how I see it!
+Eterna City Pokémon Gym\nLeader: Gardenia\rCertified Trainers:\n\v0103\x0001
+Eterna City Pokémon Gym\nLeader: Gardenia\rCertified Trainers:\n\v0103\x0000\f\v0103\x0001

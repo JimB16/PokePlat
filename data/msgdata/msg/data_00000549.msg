@@ -1,0 +1,3 @@
+num: 1
+seed: 0x5fbd
+Despite the exploration team's best\nefforts, however, the rare, oddly\ncolored Pokémon eluded detection.\nThe rumored red GYARADOS failed to\nappear, even fleetingly, to the\ncrestfallen team...

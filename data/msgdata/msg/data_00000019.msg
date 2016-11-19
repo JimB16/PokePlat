@@ -1,0 +1,4 @@
+num: 2
+seed: 0xcab0
+If you're catching a Pokémon,\nyou have to get its HP down.\rIf you don't, Poké Balls won't be\nvery effective.
+I need Potions most of all!\rIf my Pokémon faints, my eyes grow\ndim and I can't see!

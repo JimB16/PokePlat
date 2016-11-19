@@ -1,0 +1,11 @@
+num: 9
+seed: 0xb5a8
+\vff00\x0001\v0104\x0000\vff00\x0000
+PLAYER:
+BADGES:
+POKéDEX:
+TIME:
+\v0103\x0001
+\v0132\x0002
+\v0134\x0003
+\v0134\x0004:\v0133\x0005

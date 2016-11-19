@@ -1,0 +1,3 @@
+num: 1
+seed: 0xd417
+You took the trouble of coming here?\nI'm sorry, but there's nothing!\rIt's a sad day for me not to be able\nto share in your joy!

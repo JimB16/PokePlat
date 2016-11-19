@@ -1204,7 +1204,7 @@ AICmd_9: @ 2220418 :thumb
 	bl      AI_GetPkmnDataSlot
 	mov     r1, #0xc0
 	mul     r1, r0
-	ldr     r0, =BattleData_2dac
+	ldr     r0, =BattleData_StatusEffect
 	add     r1, r5, r1
 	ldr     r0, [r1, r0]
 	tst     r0, r6
@@ -1249,7 +1249,7 @@ AICmd_a: @ 2220464 :thumb
 	bl      AI_GetPkmnDataSlot
 	mov     r1, #0xc0
 	mul     r1, r0
-	ldr     r0, =BattleData_2dac
+	ldr     r0, =BattleData_StatusEffect
 	add     r1, r5, r1
 	ldr     r0, [r1, r0]
 	tst     r0, r6
@@ -8330,7 +8330,7 @@ Function_22233f4: @ 22233f4 :thumb
 	lsr     r2, r2, #30
 	bne     branch_2223420
 	add     r1, r0, r1
-	ldr     r0, [pc, #0x10] @ 0x2223428, (=0x21a4)
+	ldr     r0, [pc, #0x10] @ 0x2223428, (=BattleData_21a4)
 	mov     r2, #0x6
 	strb    r2, [r1, r0]
 	mov     r0, #0x1
@@ -8344,7 +8344,7 @@ branch_2223420: @ 2223420 :thumb
 @ 0x2223426
 
 .align 2
-.word 0x21a4 @ 0x2223428
+.word BattleData_21a4 @ 0x2223428
 
 
 
@@ -8546,7 +8546,7 @@ branch_2223510: @ 2223510 :thumb
 	cmp     r1, #0x2
 	bge     branch_22235ba
 	ldr     r0, [sp, #0x18]
-	ldr     r1, [pc, #0x3c] @ 0x22235ec, (=0x21a4)
+	ldr     r1, [pc, #0x3c] @ 0x22235ec, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x20]
 	add     sp, #0x44
@@ -8585,7 +8585,7 @@ branch_22235d6: @ 22235d6 :thumb
 .word 0x2d4c @ 0x22235e0
 .word 0x1ee @ 0x22235e4
 .word BattleData_219c @ 0x22235e8
-.word 0x21a4 @ 0x22235ec
+.word BattleData_21a4 @ 0x22235ec
 
 
 
@@ -8931,7 +8931,7 @@ branch_222383e: @ 222383e :thumb
 	cmp     r1, #0x2
 	bge     branch_2223866
 	ldr     r0, [sp, #0x14]
-	ldr     r1, [pc, #0x114] @ 0x2223970, (=0x21a4)
+	ldr     r1, [pc, #0x114] @ 0x2223970, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x30]
 	add     sp, #0xbc
@@ -9000,7 +9000,7 @@ branch_22238cc: @ 22238cc :thumb
 	cmp     r1, #0x2
 	bge     branch_22238f4
 	ldr     r0, [sp, #0x14]
-	ldr     r1, [pc, #0x88] @ 0x2223970, (=0x21a4)
+	ldr     r1, [pc, #0x88] @ 0x2223970, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x30]
 	add     sp, #0xbc
@@ -9080,7 +9080,7 @@ branch_2223926: @ 2223926 :thumb
 .word BattleData_CurHP @ 0x2223964
 .word 0x1ee @ 0x2223968
 .word BattleData_219c @ 0x222396c
-.word 0x21a4 @ 0x2223970
+.word BattleData_21a4 @ 0x2223970
 
 .thumb
 branch_2223974: @ 2223974 :thumb
@@ -9208,7 +9208,7 @@ branch_2223a48: @ 2223a48 :thumb
 	add     r0, r1, r2
 	bne     branch_2223a72
 	ldr     r0, [sp, #0x14]
-	ldr     r1, [pc, #0xc8] @ 0x2223b30, (=0x21a4)
+	ldr     r1, [pc, #0xc8] @ 0x2223b30, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x34]
 	add     sp, #0xbc
@@ -9279,7 +9279,7 @@ branch_2223ad8: @ 2223ad8 :thumb
 	add     r0, r1, r2
 	bne     branch_2223b02
 	ldr     r0, [sp, #0x14]
-	ldr     r1, [pc, #0x38] @ 0x2223b30, (=0x21a4)
+	ldr     r1, [pc, #0x38] @ 0x2223b30, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x34]
 	add     sp, #0xbc
@@ -9320,7 +9320,7 @@ branch_2223b1c: @ 2223b1c :thumb
 .word BattleData_219c @ 0x2223b24
 .word 0x3e1 @ 0x2223b28
 .word BattleData_CurHP @ 0x2223b2c
-.word 0x21a4 @ 0x2223b30
+.word BattleData_21a4 @ 0x2223b30
 
 
 
@@ -9535,24 +9535,20 @@ Function_2223c8c: @ 2223c8c :thumb
 	add     sp, #0x14
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x2223cb6
 
-.thumb
 branch_2223cb6: @ 2223cb6 :thumb
 	ldr     r0, [sp, #0x4]
 	lsl     r1, r0, #1
 	ldr     r0, [sp, #0x0]
 	add     r1, r0, r1
-	ldr     r0, [pc, #0x13c] @ 0x2223dfc, (=0x3064)
+	ldr     r0, [pc, #0x13c] @ 0x2223dfc, (=BattleData_3064)
 	ldrh    r0, [r1, r0]
 	cmp     r0, #0x0
 	bne     branch_2223ccc
 	add     sp, #0x14
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x2223ccc
 
-.thumb
 branch_2223ccc: @ 2223ccc :thumb
 	lsl     r1, r0, #4
 	ldr     r0, [sp, #0x0]
@@ -9564,9 +9560,7 @@ branch_2223ccc: @ 2223ccc :thumb
 	add     sp, #0x14
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x2223ce0
 
-.thumb
 branch_2223ce0: @ 2223ce0 :thumb
 	.hword  0x1c40 @ add r0, r0, #0x1
 	ldrb    r0, [r2, r0]
@@ -9575,9 +9569,7 @@ branch_2223ce0: @ 2223ce0 :thumb
 	mov     r0, #0x12
 	str     r0, [sp, #0x10]
 	b       branch_2223d08
-@ 0x2223cee
 
-.thumb
 branch_2223cee: @ 2223cee :thumb
 	cmp     r0, #0xb
 	bne     branch_2223cf8
@@ -9630,20 +9622,16 @@ branch_2223d1c: @ 2223d1c :thumb
 	mov     r1, #0x8
 	tst     r0, r1
 	beq     branch_2223d3e
-.thumb
 branch_2223d3a: @ 2223d3a :thumb
 	mov     r7, r4
 	b       branch_2223d4a
-@ 0x2223d3e
 
-.thumb
 branch_2223d3e: @ 2223d3e :thumb
 	ldr     r1, [sp, #0x4]
 	mov     r0, r6
 	bl      Function_16_223e258
 	lsl     r0, r0, #24
 	lsr     r7, r0, #24
-.thumb
 branch_2223d4a: @ 2223d4a :thumb
 	ldr     r1, [sp, #0x4]
 	mov     r0, r6
@@ -9657,50 +9645,56 @@ branch_2223d4a: @ 2223d4a :thumb
 	str     r0, [sp, #0x8]
 	ldr     r0, [sp, #0x0]
 	add     r7, r0, r7
-.thumb
 branch_2223d64: @ 2223d64 :thumb
 	ldr     r1, [sp, #0x4]
 	mov     r0, r6
 	mov     r2, r5
 	bl      Function_16_223dfac
-	mov     r1, #0xa3
+	mov     r1, #PKMNDATA_CURHP
 	mov     r2, #0x0
 	mov     r4, r0
 	bl      GetPkmnData
 	cmp     r0, #0x0
 	beq     branch_2223dec
+
 	mov     r0, r4
-	mov     r1, #0xae
+	mov     r1, #PKMNDATA_ae
 	mov     r2, #0x0
 	bl      GetPkmnData
 	cmp     r0, #0x0
 	beq     branch_2223dec
+
 	mov     r0, r4
-	mov     r1, #0xae
+	mov     r1, #PKMNDATA_ae
 	mov     r2, #0x0
 	bl      GetPkmnData
 	ldr     r1, [pc, #0x6c] @ 0x2223e04, (=0x1ee)
 	cmp     r0, r1
 	beq     branch_2223dec
+
 	ldr     r1, [sp, #0x8]
 	ldr     r0, [pc, #0x68] @ 0x2223e08, (=BattleData_219c)
 	ldrb    r0, [r1, r0]
 	cmp     r5, r0
 	beq     branch_2223dec
+
 	ldr     r0, [pc, #0x60] @ 0x2223e08, (=BattleData_219c)
 	ldrb    r0, [r7, r0]
 	cmp     r5, r0
 	beq     branch_2223dec
-	ldr     r0, [pc, #0x5c] @ 0x2223e0c, (=0x21a4)
+
+	ldr     r0, [pc, #0x5c] @ 0x2223e0c, (=BattleData_21a4)
 	ldrb    r0, [r1, r0]
 	cmp     r5, r0
 	beq     branch_2223dec
-	ldr     r0, [pc, #0x54] @ 0x2223e0c, (=0x21a4)
+
+	ldr     r0, [pc, #0x54] @ 0x2223e0c, (=BattleData_21a4)
 	ldrb    r0, [r7, r0]
 	cmp     r5, r0
 	beq     branch_2223dec
+
 	mov     r0, r4
-	mov     r1, #0xa
+	mov     r1, #PKMNDATA_ABILITY
 	mov     r2, #0x0
 	bl      GetPkmnData
 	lsl     r0, r0, #24
@@ -9708,28 +9702,27 @@ branch_2223d64: @ 2223d64 :thumb
 	ldr     r0, [sp, #0x10]
 	cmp     r0, r1
 	bne     branch_2223dec
+
 	mov     r0, r6
 	bl      Function_16_GetRandomNr
 	mov     r1, #0x1
 	tst     r0, r1
 	beq     branch_2223dec
+
 	ldr     r1, [sp, #0x0]
 	ldr     r0, [sp, #0x4]
 	add     sp, #0x14
 	add     r1, r1, r0
-	ldr     r0, [pc, #0x24] @ 0x2223e0c, (=0x21a4)
+	ldr     r0, [pc, #0x24] @ 0x2223e0c, (=BattleData_21a4)
 	strb    r5, [r1, r0]
 	mov     r0, #0x1
 	pop     {r4-r7,pc}
-@ 0x2223dec
 
-.thumb
 branch_2223dec: @ 2223dec :thumb
 	ldr     r0, [sp, #0xc]
 	.hword  0x1c6d @ add r5, r5, #0x1
 	cmp     r5, r0
 	blt     branch_2223d64
-.thumb
 branch_2223df4: @ 2223df4 :thumb
 	mov     r0, #0x0
 	add     sp, #0x14
@@ -9737,11 +9730,11 @@ branch_2223df4: @ 2223df4 :thumb
 @ 0x2223dfa
 
 .align 2
-.word 0x3064 @ 0x2223dfc
+.word BattleData_3064 @ 0x2223dfc
 .word 0x3e1 @ 0x2223e00
 .word 0x1ee @ 0x2223e04
 .word BattleData_219c @ 0x2223e08
-.word 0x21a4 @ 0x2223e0c
+.word BattleData_21a4 @ 0x2223e0c
 
 
 
@@ -9753,7 +9746,7 @@ Function_2223e10: @ 2223e10 :thumb
 	mov     r1, r2
 	lsl     r6, r1, #1
 	str     r3, [sp, #0x1c]
-	ldr     r1, [pc, #0x238] @ 0x2224058, (=0x3064)
+	ldr     r1, [pc, #0x238] @ 0x2224058, (=BattleData_3064)
 	add     r3, r5, r6
 	str     r2, [sp, #0x18]
 	ldrh    r2, [r3, r1]
@@ -9946,7 +9939,7 @@ branch_2223f04: @ 2223f04 :thumb
 	str     r0, [sp, #0xc]
 	add     r0, sp, #0x5c
 	str     r0, [sp, #0x10]
-	ldr     r1, [pc, #0xe0] @ 0x2224058, (=0x3064)
+	ldr     r1, [pc, #0xe0] @ 0x2224058, (=BattleData_3064)
 	mov     r0, r5
 	ldrh    r1, [r4, r1]
 	bl      Function_16_22552d4
@@ -10029,7 +10022,7 @@ branch_2223f8a: @ 2223f8a :thumb
 	cmp     r1, #0x0
 	bne     branch_222403c
 	ldr     r0, [sp, #0x18]
-	ldr     r1, [pc, #0x3c] @ 0x222406c, (=0x21a4)
+	ldr     r1, [pc, #0x3c] @ 0x222406c, (=BattleData_21a4)
 	add     r2, r5, r0
 	ldr     r0, [sp, #0x34]
 	add     sp, #0x60
@@ -10062,12 +10055,12 @@ branch_2224050: @ 2224050 :thumb
 @ 0x2224056
 
 .align 2
-.word 0x3064 @ 0x2224058
+.word BattleData_3064 @ 0x2224058
 .word 0x3e1 @ 0x222405c
 .word 0x1ee @ 0x2224060
 .word BattleData_219c @ 0x2224064
 .word 0x306c @ 0x2224068
-.word 0x21a4 @ 0x222406c
+.word BattleData_21a4 @ 0x222406c
 
 
 
@@ -10081,7 +10074,7 @@ Function_2224070: @ 2224070 :thumb
 	mov     r5, r1
 	mul     r0, r4
 	add     r1, r5, r0
-	ldr     r0, [pc, #0xd4] @ 0x2224158, (=0x2dac)
+	ldr     r0, [pc, #0xd4] @ 0x2224158, (=BattleData_StatusEffect)
 	ldr     r1, [r1, r0]
 	mov     r0, #0x7
 	tst     r0, r1
@@ -10110,7 +10103,7 @@ branch_22240aa: @ 22240aa :thumb
 
 .thumb
 branch_22240b0: @ 22240b0 :thumb
-	ldr     r0, [pc, #0xac] @ 0x2224160, (=0x3064)
+	ldr     r0, [pc, #0xac] @ 0x2224160, (=BattleData_3064)
 	add     r7, r5, r0
 	lsl     r0, r4, #1
 	str     r0, [sp, #0x4]
@@ -10122,7 +10115,7 @@ branch_22240b0: @ 22240b0 :thumb
 	mov     r1, #0x1
 	tst     r0, r1
 	beq     branch_22240d8
-	ldr     r0, [pc, #0x98] @ 0x2224164, (=0x21a4)
+	ldr     r0, [pc, #0x98] @ 0x2224164, (=BattleData_21a4)
 	mov     r3, #0x6
 	add     r2, r5, r4
 	strb    r3, [r2, r0]
@@ -10146,7 +10139,7 @@ branch_22240d8: @ 22240d8 :thumb
 	mov     r1, #0x1
 	tst     r0, r1
 	beq     branch_2224102
-	ldr     r0, [pc, #0x6c] @ 0x2224164, (=0x21a4)
+	ldr     r0, [pc, #0x6c] @ 0x2224164, (=BattleData_21a4)
 	mov     r3, #0x6
 	add     r2, r5, r4
 	strb    r3, [r2, r0]
@@ -10194,16 +10187,14 @@ branch_2224136: @ 2224136 :thumb
 	mov     r1, #0x1
 	tst     r0, r1
 	beq     branch_2224150
-	ldr     r0, [pc, #0x20] @ 0x2224164, (=0x21a4)
+	ldr     r0, [pc, #0x20] @ 0x2224164, (=BattleData_21a4)
 	mov     r3, #0x6
 	add     r2, r5, r4
 	strb    r3, [r2, r0]
 	add     sp, #0x8
 	mov     r0, r1
 	pop     {r3-r7,pc}
-@ 0x2224150
 
-.thumb
 branch_2224150: @ 2224150 :thumb
 	mov     r0, #0x0
 	add     sp, #0x8
@@ -10211,10 +10202,10 @@ branch_2224150: @ 2224150 :thumb
 @ 0x2224156
 
 .align 2
-.word 0x2dac @ 0x2224158
+.word BattleData_StatusEffect @ 0x2224158
 .word BattleData_CurHP @ 0x222415c
-.word 0x3064 @ 0x2224160
-.word 0x21a4 @ 0x2224164
+.word BattleData_3064 @ 0x2224160
+.word BattleData_21a4 @ 0x2224164
 .word 0x3e1 @ 0x2224168
 
 
@@ -10400,11 +10391,11 @@ branch_2224274: @ 2224274 :thumb
 	ldrb    r0, [r7, r0]
 	cmp     r5, r0
 	beq     branch_22242d2
-	ldr     r0, [pc, #0xf8] @ 0x22243b8, (=0x21a4)
+	ldr     r0, [pc, #0xf8] @ 0x22243b8, (=BattleData_21a4)
 	ldrb    r0, [r1, r0]
 	cmp     r5, r0
 	beq     branch_22242d2
-	ldr     r0, [pc, #0xf0] @ 0x22243b8, (=0x21a4)
+	ldr     r0, [pc, #0xf0] @ 0x22243b8, (=BattleData_21a4)
 	ldrb    r0, [r7, r0]
 	cmp     r5, r0
 	beq     branch_22242d2
@@ -10543,7 +10534,7 @@ branch_22243a0: @ 22243a0 :thumb
 .word 0x400e000 @ 0x22243ac
 .word 0x1ee @ 0x22243b0
 .word BattleData_219c @ 0x22243b4
-.word 0x21a4 @ 0x22243b8
+.word BattleData_21a4 @ 0x22243b8
 
 
 
@@ -10572,7 +10563,7 @@ branch_22243e0: @ 22243e0 :thumb
 	bl      Function_22241a4
 	cmp     r0, #0x0
 	beq     branch_222448e
-	ldr     r0, [pc, #0xb8] @ 0x22244a8, (=0x21a4)
+	ldr     r0, [pc, #0xb8] @ 0x22244a8, (=BattleData_21a4)
 	add     r0, r5, r0
 	str     r0, [sp, #0x10]
 	ldrb    r0, [r0, r7]
@@ -10635,11 +10626,11 @@ branch_2224446: @ 2224446 :thumb
 	ldrb    r0, [r5, r0]
 	cmp     r4, r0
 	beq     branch_222447c
-	ldr     r0, [pc, #0x38] @ 0x22244a8, (=0x21a4)
+	ldr     r0, [pc, #0x38] @ 0x22244a8, (=BattleData_21a4)
 	ldrb    r0, [r6, r0]
 	cmp     r4, r0
 	beq     branch_222447c
-	ldr     r0, [pc, #0x30] @ 0x22244a8, (=0x21a4)
+	ldr     r0, [pc, #0x30] @ 0x22244a8, (=BattleData_21a4)
 	ldrb    r0, [r5, r0]
 	cmp     r4, r0
 	bne     branch_2224484
@@ -10673,7 +10664,7 @@ branch_22244a0: @ 22244a0 :thumb
 @ 0x22244a6
 
 .align 2
-.word 0x21a4 @ 0x22244a8
+.word BattleData_21a4 @ 0x22244a8
 .word BattleData_219c @ 0x22244ac
 
 
@@ -10866,7 +10857,7 @@ branch_222460a: @ 222460a :thumb
 	bl      Function_16_225b0fc
 	cmp     r0, #0x0
 	beq     branch_2224640
-	ldr     r0, [pc, #0x1b8] @ 0x22247d4, (=0x2dac)
+	ldr     r0, [pc, #0x1b8] @ 0x22247d4, (=BattleData_StatusEffect)
 	ldr     r1, [r7, r0]
 	mov     r0, #0x7
 	tst     r0, r1
@@ -10896,7 +10887,7 @@ branch_2224640: @ 2224640 :thumb
 	bl      Function_16_225b0fc
 	cmp     r0, #0x0
 	beq     branch_222467a
-	ldr     r0, [pc, #0x184] @ 0x22247d4, (=0x2dac)
+	ldr     r0, [pc, #0x184] @ 0x22247d4, (=BattleData_StatusEffect)
 	mov     r1, #0x8
 	ldr     r0, [r7, r0]
 	tst     r1, r0
@@ -10926,7 +10917,7 @@ branch_222467a: @ 222467a :thumb
 	bl      Function_16_225b0fc
 	cmp     r0, #0x0
 	beq     branch_22246ae
-	ldr     r0, [pc, #0x148] @ 0x22247d4, (=0x2dac)
+	ldr     r0, [pc, #0x148] @ 0x22247d4, (=BattleData_StatusEffect)
 	ldr     r1, [r7, r0]
 	mov     r0, #0x10
 	tst     r0, r1
@@ -10952,7 +10943,7 @@ branch_22246ae: @ 22246ae :thumb
 	bl      Function_16_225b0fc
 	cmp     r0, #0x0
 	beq     branch_22246e2
-	ldr     r0, [pc, #0x114] @ 0x22247d4, (=0x2dac)
+	ldr     r0, [pc, #0x114] @ 0x22247d4, (=BattleData_StatusEffect)
 	ldr     r1, [r7, r0]
 	mov     r0, #0x20
 	tst     r0, r1
@@ -10978,7 +10969,7 @@ branch_22246e2: @ 22246e2 :thumb
 	bl      Function_16_225b0fc
 	cmp     r0, #0x0
 	beq     branch_2224716
-	ldr     r0, [pc, #0xe0] @ 0x22247d4, (=0x2dac)
+	ldr     r0, [pc, #0xe0] @ 0x22247d4, (=BattleData_StatusEffect)
 	ldr     r1, [r7, r0]
 	mov     r0, #0x40
 	tst     r0, r1
@@ -11095,7 +11086,7 @@ branch_222479c: @ 222479c :thumb
 .word BattleData_MaxHP @ 0x22247c8
 .word BattleData_CurHP @ 0x22247cc
 .word 0x3d1 @ 0x22247d0
-.word 0x2dac @ 0x22247d4
+.word BattleData_StatusEffect @ 0x22247d4
 .word 0x2db0 @ 0x22247d8
 .word 0x2dd4 @ 0x22247dc
 

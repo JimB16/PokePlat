@@ -1082,23 +1082,16 @@ BattleData: @ 0x22c29c8
 .equ BattleData_MoveScore,          0x358
 .equ BattleData_Move1Score,         0x358
 .equ BattleData_TempVariable,       0x35c
-.globl BattleData_TrainerAIType
 .equ BattleData_TrainerAIType,      0x365
-.globl BattleData_3cf
 .equ BattleData_3cf,                0x3cf
 .equ BattleData_3de,                0x3de
 .equ BattleData_3e0,                0x3e0
 .equ BattleData_3e1,                0x3e1
 .equ BattleData_3e2,                0x3e2
-.globl BattleData_2120
 .equ BattleData_2120,               0x2120
-.globl BattleData_AIScriptPtr
 .equ BattleData_AIScriptPtr,        0x2134
-.globl BattleData_2138
 .equ BattleData_2138,               0x2138
-.globl BattleData_2158
 .equ BattleData_2158,               0x2158
-.globl BattleData_219c
 .equ BattleData_219c,               0x219c
 /*
 + 0x150 Round Nr

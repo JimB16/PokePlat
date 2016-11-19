@@ -1,4 +1,5 @@
 
+.include "constants/ability_constants.s"
 .include "constants/event_constants.s"
 .include "constants/item_constants.s"
 .include "constants/move_constants.s"
@@ -215,6 +216,7 @@ Block B
 .equ PKMNDATA_NICKNAME, 0x75
 .equ PKMNDATA_77,  0x77
 .equ PKMNDATA_ORIGINGAME, 0x7a
+.equ PKMNDATA_90,  0x90
 .equ PKMNDATA_91,  0x91
 .equ PKMNDATA_EGGLOCATION2, 0x98
 .equ PKMNDATA_METATLOCATION2, 0x99
@@ -279,13 +281,16 @@ Block B
 
 
 
-@ Constants for ReadPkmnBattleData1- and WritePkmnBattleData1-functions (overlay_0016.s) r2   -ChangePkmnBattleDataWithTrainerNr?
+@ Constants for ReadPkmnBattleData1- and WritePkmnBattleData1-functions (overlay_0016.s) r2
+@ -ChangePkmnBattleData (overlay_0016.s) r1
+@ -ChangePkmnBattleDataWithTrainerNr (overlay_0016.s) r2
 .equ PKMNBATTLEDATA_SPECIES,  0x0
 .equ PKMNBATTLEDATA_ATK,  0x1
 .equ PKMNBATTLEDATA_DEF,  0x2
 .equ PKMNBATTLEDATA_SPE,  0x3
 .equ PKMNBATTLEDATA_SPA,  0x4
 .equ PKMNBATTLEDATA_SPD,  0x5
+.equ PKMNBATTLEDATA_MOVE,  0x6
 .equ PKMNBATTLEDATA_MOVE1,  0x6
 .equ PKMNBATTLEDATA_MOVE2,  0x7
 .equ PKMNBATTLEDATA_MOVE3,  0x8
@@ -300,6 +305,7 @@ Block B
 .equ PKMNBATTLEDATA_TYPE1,  0x1b
 .equ PKMNBATTLEDATA_TYPE2,  0x1c
 .equ PKMNBATTLEDATA_1d,  0x1d
+.equ PKMNBATTLEDATA_MOVEPP,  0x1f
 .equ PKMNBATTLEDATA_MOVE1PP,  0x1f
 .equ PKMNBATTLEDATA_MOVE2PP,  0x20
 .equ PKMNBATTLEDATA_MOVE3PP,  0x21
@@ -308,6 +314,7 @@ Block B
 .equ PKMNBATTLEDATA_MOVE2PPUPS,  0x24
 .equ PKMNBATTLEDATA_MOVE3PPUPS,  0x25
 .equ PKMNBATTLEDATA_MOVE4PPUPS,  0x26
+.equ PKMNBATTLEDATA_MOVEMAXPP,  0x27
 .equ PKMNBATTLEDATA_MOVE1MAXPP,  0x27
 .equ PKMNBATTLEDATA_MOVE2MAXPP,  0x28
 .equ PKMNBATTLEDATA_MOVE3MAXPP,  0x29
@@ -324,6 +331,7 @@ Block B
 .equ PKMNBATTLEDATA_49,  0x49
 .equ PKMNBATTLEDATA_4b,  0x4b
 .equ PKMNBATTLEDATA_59,  0x59
+.equ PKMNBATTLEDATA_READFROM78,  0x64
 
 
 @ Constants for ReadBattleData-functions (overlay_0016.s) r2
@@ -943,6 +951,28 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .byte   \category, \power, \type, \accuracy, \pp, \effectchance
 .hword  \flag1
 .byte   \priority, \flag2, \contesteffect, \contesttype
+.endm
+
+
+.macro	PkmnBaseData	hp, atk, def, spe, spa, spd, type1, type2, catchrate, baseexp, ev, item1, item2, gender, hatchcycle, basehappy, exprate, egggroup1, egggroup2, ability1, ability2, flee, unknown19, unknown1a, unknown1c, unknown20, unknown24, unknown28
+.byte   \hp, \atk, \def, \spe, \spa, \spd, \type1, \type2, \catchrate, \baseexp
+.hword  \ev, \item1, \item2
+.byte   \gender, \hatchcycle, \basehappy, \exprate, \egggroup1, \egggroup2, \ability1, \ability2, \flee, \unknown19
+.hword  \unknown1a
+.word   \unknown1c, \unknown20, \unknown24, \unknown28
+.endm
+
+
+.macro	MoveTable	move, lvl
+.hword  \move | (\lvl << 9)
+.endm
+
+
+.macro	itemdata	unknown0, unknown2, unknown3, unknown4, unknown5, unknown6, unknown7, unknown8, unknowna, unknownb, unknownc, unknowne, unknowne1, unknowne2, unknowne3, unknowne4, unknowne5, unknowne6, unknowne7, unknowne8, unknowne9, unknownea, unknowneb, unknownec, unknowned, unknownee, unknownef, unknowne10, unknowne11
+.hword  \unknown0
+.byte   \unknown2, \unknown3, \unknown4, \unknown5, \unknown6, \unknown7
+.hword  \unknown8
+.byte   \unknowna, \unknownb, \unknownc, 0, \unknowne, \unknowne1, \unknowne2, \unknowne3, \unknowne4, \unknowne5, \unknowne6, \unknowne7, \unknowne8, \unknowne9, \unknownea, \unknowneb, \unknownec, \unknowned, \unknownee, \unknownef, \unknowne10, \unknowne11, 0, 0
 .endm
 
 

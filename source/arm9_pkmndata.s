@@ -4335,6 +4335,7 @@ LoadPkmnBaseData: @ 20758b0 :thumb
 	bne     branch_20758be
 	bl      ErrorHandling
 branch_20758be: @ 20758be :thumb
+
 	cmp     r6, #0x20
 	bhi     branch_20759b2
 	add     r0, r6, r6

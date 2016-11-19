@@ -197,6 +197,9 @@
 .equ BattleData_74,                 0x74
 .equ BattleData_78,                 0x78
 .equ BattleData_80,                 0x80
+.equ BattleData_88,                 0x88
+.equ BattleData_8c,                 0x8c
+.equ BattleData_90,                 0x90
 .equ BattleData_94,                 0x94
 .equ BattleData_ac,                 0xac
 .equ BattleData_b0,                 0xb0
@@ -206,6 +209,7 @@
 .equ BattleData_cc,                 0xcc
 .equ BattleData_dc,                 0xdc
 .equ BattleData_134,                0x134
+.equ BattleData_138,                0x138
 .equ BattleData_RoundNr,            0x150
 .equ BattleData_Weather,            0x180
 /*
@@ -219,13 +223,11 @@
 80 : Snow Warning
 */
 .equ BattleData_WeatherCounter,     0x184
-.equ BattleData_CurrentMove,        0x355
-.globl BattleData_CurrentMoveID
+.equ BattleData_CurrentMove,        0x355 @ 0-3
 .equ BattleData_CurrentMoveID,      0x356
 .equ BattleData_MoveScore,          0x358
 .equ BattleData_Move1Score,         0x358
 .equ BattleData_TempVariable,       0x35c
-.globl BattleData_TrainerAIType
 .equ BattleData_TrainerAIType,      0x365
 .equ BattleData_3cc,                0x3cc
 .equ BattleData_3cd,                0x3cd
@@ -238,22 +240,15 @@
 .equ BattleData_2120,               0x2120
 .equ BattleData_AIScriptPtr,        0x2134
 .equ BattleData_2138,               0x2138
+.equ BattleData_213c,               0x213c
 .equ BattleData_214c,               0x214c
 .equ BattleData_2150,               0x2150
 .equ BattleData_2158,               0x2158
+.equ BattleData_216c,               0x216c
+.equ BattleData_2170,               0x2170
 .equ BattleData_219c,               0x219c
-/*
-+ 0x150 Round Nr
-+ 0x355 Current Move (0-3)
-+ 0x356 Current Move ID
-+ 0x358 Move1 Score
-+ 0x359 Move2 Score
-+ 0x35a Move3 Score
-+ 0x35b Move4 Score
-
-+ 0x2134
-+ 0x2138
-*/
+.equ BattleData_21a4,               0x21a4
+.equ BattleData_21ec,               0x21ec
 
 .equ BattleData_2700,               0x2700 @ Place for the *_seq-file
 
@@ -272,11 +267,15 @@ Size = 0xc0
 .equ BattleData_Move2,              0x2d4e @ 0xe
 .equ BattleData_Move3,              0x2d50 @ 0x10
 .equ BattleData_Move4,              0x2d52 @ 0x12
+.equ BattleData_2d54,               0x2d54 @ 0x14
 .equ BattleData_StatLevel,          0x2d58 @ 0x18 PlayerBattleData_StatLevel - BattleData 8 bytes
+.equ PlayerBattleData_StatLevel,    BattleData_StatLevel-BattleData_BaseAdr
+.equ BattleData_2d60,               0x2d60 @ 0x20
 .equ BattleData_Type1,              0x2d64 @ 0x24
 .equ BattleData_Type2,              0x2d65 @ 0x25
 .equ BattleData_2d66,               0x2d66 @ 0x26
 .equ BattleData_Ability,            0x2d67 @ 0x27 PlayerBattleData_Ability - BattleData
+.equ BattleData_2d68,               0x2d68 @ 0x28
 .equ BattleData_MovePP,             0x2d6c @ 0x2c
 .equ BattleData_Move1PP,            0x2d6c @ 0x2c
 .equ BattleData_Move2PP,            0x2d6d @ 0x2d
@@ -289,21 +288,49 @@ Size = 0xc0
 .equ BattleData_Move4PPUps,         0x2d73 @ 0x33
 .equ BattleData_Level,              0x2d74 @ 0x34
 .equ BattleData_Friendship,         0x2d75 @ 0x35
+.equ BattleData_2d76,               0x2d76 @ 0x36
 .equ BattleData_CurHP,              0x2d8c @ 0x4c PlayerBattleData_CurHP - BattleData
 .equ BattleData_MaxHP,              0x2d90 @ 0x50
+.equ BattleData_2d94,               0x2d94 @ 0x54
 .equ BattleData_ExpPts,             0x2da4 @ 0x64
-.equ BattleData_2dac,               0x2dac @ 0x6c PlayerBattleData_6c - BattleData
+.equ BattleData_PersonalityValue,   0x2da8 @ 0x68
+.equ BattleData_StatusEffect,       0x2dac @ 0x6c PlayerBattleData_6c - BattleData
 .equ BattleData_2db0,               0x2db0 @ 0x70 PlayerBattleData_70 - BattleData
+.equ BattleData_OTID,               0x2db4 @ 0x74
 .equ BattleData_Item,               0x2db8 @ 0x78
+.equ BattleData_2dbc,               0x2dbc @ 0x7c
+.equ BattleData_2dbe,               0x2dbe @ 0x7e
+.equ BattleData_Pokeball,           0x2dbf @ 0x7f
 .equ BattleData_2dc0,               0x2dc0 @ 0x80 PlayerBattleData_80 - BattleData
 .equ BattleData_2dcc,               0x2dcc @ 0x8c
 .equ BattleData_2de8,               0x2de8 @ 0xa8
 .equ BattleData_2df8,               0x2df8 @ 0xb8
 
+.equ BattleData_BaseAdr2,           0x2e00 @ BattleData_BaseAdr + 1 * PkmnBattleData_Size
+.equ BattleData_BaseAdr3,           0x2ec0 @ BattleData_BaseAdr + 2 * PkmnBattleData_Size
+.equ BattleData_BaseAdr4,           0x2f80 @ BattleData_BaseAdr + 3 * PkmnBattleData_Size
+
 .equ BattleData_3044,               0x3044
+.equ BattleData_3064,               0x3064
 .equ BattleData_307c,               0x307c
 .equ BattleData_3154,               0x3154
 
+
+/*****************
+WazaEffect (overlay_0012.s)
+*****************/
+.equ WazaEffectStruct_0,            0x0
+.equ WazaEffectStruct_10,           0x10
+.equ WazaEffectStruct_18,           0x18 @ Pointer
+.equ WazaEffectStruct_8d,           0x8d
+.equ WazaEffectStruct_bc,           0xbc @ Callback
+.equ WazaEffectStruct_c0,           0xc0
+.equ WazaEffectStruct_c8,           0xc8
+.equ WazaEffectStruct_138,          0x138
+.equ WazaEffectStruct_13c,          0x13c
+.equ WazaEffectStruct_150,          0x150
+.equ WazaEffectStruct_164,          0x164
+.equ WazaEffectStruct_1a8,          0x1a8
 
 
 /*****************

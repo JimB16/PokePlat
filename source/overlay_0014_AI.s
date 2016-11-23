@@ -1,6 +1,6 @@
 
 @.include "source/macros_asm_.s"
-.include "scripts/script_AI.s"
+.include "macros/script_AI.s"
 .include "constants/move_constants.s"
 .include "constants/ability_constants.s"
 .include "constants/type_constants.s"
@@ -172,7 +172,7 @@ Script_branch_4f28: @ 4f28
 	AI_2f LIGHT_SCREEN, Script_branch_6114
 	AI_2f HAZE, Script_branch_6128
 	AI_2f REFLECT, Script_branch_613c
-	AI_2f METRONOME, Script_branch_5e44
+	AI_2f METRONOME_M, Script_branch_5e44
 	AI_2f SELF_DESTRUCT, Script_branch_6150
 	AI_2f EGG_BOMB, Script_branch_5dc4
 	AI_2f LICK, Script_branch_5dc4
@@ -1425,7 +1425,7 @@ Script_3: @ 744c
 	AI_2f DRILL_PECK, Script_branch_9148
 	AI_2f SUBMISSION, Script_branch_91dc
 	AI_2f LOW_KICK, Script_branch_9208
-	AI_2f METRONOME, Script_branch_9084
+	AI_2f METRONOME_M, Script_branch_9084
 	AI_2f STRENGTH, Script_branch_8620
 	AI_2f RAZOR_LEAF, Script_branch_a46c
 	AI_2f STUN_SPORE, Script_branch_924c

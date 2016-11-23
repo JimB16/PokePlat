@@ -60891,7 +60891,7 @@ Function_2255918: @ 2255918 :thumb
 	sub     r1, #0x6d
 	cmp     r0, r1
 	beq     branch_2255940
-	.hword  0x1e51 @ sub r1, r2, #0x1
+	sub     r1, r2, #0x1
 	cmp     r0, r1
 	beq     branch_2255940
 	ldr     r1, [pc, #0x14] @ 0x225594c, (=0xff8a)
@@ -60900,7 +60900,6 @@ Function_2255918: @ 2255918 :thumb
 	lsr     r0, r0, #16
 	cmp     r0, #0x1
 	bhi     branch_2255944
-.thumb
 branch_2255940: @ 2255940 :thumb
 	mov     r0, #0x1
 	bx      lr
@@ -60999,10 +60998,10 @@ branch_22559ce: @ 22559ce :thumb
 .thumb
 Function_22559dc: @ 22559dc :thumb
 	push    {r3,lr}
-	mov     r2, #0xc0
+	mov     r2, #PkmnBattleData_Size
 	mul     r2, r1
 	add     r1, r0, r2
-	ldr     r0, [pc, #0x10] @ 0x22559f8, (=BattleData_Item)
+	ldr     r0, =BattleData_Item
 	ldrh    r0, [r1, r0]
 	bl      Function_207d2d0
 	cmp     r0, #0x0
@@ -61015,7 +61014,8 @@ branch_22559f4: @ 22559f4 :thumb
 	pop     {r3,pc}
 @ 0x22559f8
 
-.word BattleData_Item @ 0x22559f8
+.align 2
+.pool
 
 
 
@@ -61024,9 +61024,9 @@ Function_22559fc: @ 22559fc :thumb
 	push    {r4-r6,lr}
 	mov     r5, r1
 	ldr     r2, [r5, #0x6c]
-	mov     r1, #0xc0
+	mov     r1, #PkmnBattleData_Size
 	mov     r4, r2
-	ldr     r2, [pc, #0x40] @ 0x2255a48, (=BattleData_Level)
+	ldr     r2, =BattleData_Level
 	mul     r4, r1
 	add     r3, r5, r2
 	ldrb    r4, [r3, r4]
@@ -61043,10 +61043,10 @@ Function_22559fc: @ 22559fc :thumb
 branch_2255a20: @ 2255a20 :thumb
 	bl      Function_16_GetRandomNr
 	ldr     r2, [r5, #0x64]
-	mov     r1, #0xc0
+	mov     r1, #PkmnBattleData_Size
 	mul     r1, r2
 	add     r2, r5, r1
-	ldr     r1, [pc, #0x18] @ 0x2255a48, (=BattleData_Level)
+	ldr     r1, =BattleData_Level
 	lsl     r0, r0, #24
 	ldrb    r1, [r2, r1]
 	lsr     r0, r0, #24
@@ -61058,12 +61058,14 @@ branch_2255a20: @ 2255a20 :thumb
 	cmp     r1, r0
 	ble     branch_2255a44
 	mov     r6, #0x1
+
 branch_2255a44: @ 2255a44 :thumb
 	mov     r0, r6
 	pop     {r4-r6,pc}
 @ 0x2255a48
 
-.word BattleData_Level @ 0x2255a48
+.align 2
+.pool
 
 
 
@@ -61074,7 +61076,7 @@ r1: # of Pkmn (0-3)
 thumb_func_start Function_16_2255a4c
 Function_16_2255a4c: @ 2255a4c :thumb
 	push    {r4,r5}
-	mov     r2, #0xc0
+	mov     r2, #PkmnBattleData_Size
 	mul     r2, r1
 	mov     r3, #0xb7
 	mov     r4, #0x2
@@ -61084,10 +61086,12 @@ Function_16_2255a4c: @ 2255a4c :thumb
 	lsl     r4, r4, #20
 	tst     r4, r1
 	beq     branch_2255a70
-	sub     r3, #0x59
+
+	sub     r3, #0x59           @ BattleData_Ability
 	ldrb    r3, [r5, r3]
-	cmp     r3, #0x79
+	cmp     r3, #MULTITYPE
 	beq     branch_2255a70
+
 	mov     r0, #0x0
 	pop     {r4,r5}
 	bx      lr
@@ -61100,11 +61104,13 @@ branch_2255a70: @ 2255a70 :thumb
 	lsl     r3, r3, #12
 	tst     r3, r4
 	beq     branch_2255a8e
-	ldr     r3, [pc, #0x30] @ 0x2255ab0, (=BattleData_Ability) PlayerBattleData_Ability
+
+	ldr     r3, =BattleData_Ability
 	add     r4, r0, r2
 	ldrb    r3, [r4, r3]
-	cmp     r3, #0x1a
+	cmp     r3, #LEVITATE
 	bne     branch_2255a8e
+
 	mov     r0, #0x0
 	pop     {r4,r5}
 	bx      lr
@@ -61114,24 +61120,27 @@ branch_2255a8e: @ 2255a8e :thumb
 	lsl     r3, r3, #10
 	tst     r1, r3
 	beq     branch_2255aa6
-	ldr     r1, [pc, #0x18] @ 0x2255ab0, (=BattleData_Ability) PlayerBattleData_Ability
+
+	ldr     r1, =BattleData_Ability
 	add     r3, r0, r2
 	ldrb    r1, [r3, r1]
-	cmp     r1, #0x1a
+	cmp     r1, #LEVITATE
 	bne     branch_2255aa6
+
 	mov     r0, #0x0
 	pop     {r4,r5}
 	bx      lr
 
 branch_2255aa6: @ 2255aa6 :thumb
 	add     r1, r0, r2
-	ldr     r0, [pc, #0x4] @ 0x2255ab0, (=BattleData_Ability) PlayerBattleData_Ability
+	ldr     r0, =BattleData_Ability
 	ldrb    r0, [r1, r0]
 	pop     {r4,r5}
 	bx      lr
 @ 0x2255ab0
 
-.word BattleData_Ability @ 0x2255ab0
+.align 2
+.pool
 thumb_func_end Function_16_2255a4c
 
 
@@ -71932,6 +71941,7 @@ branch_225a26c: @ 225a26c :thumb
 .word 0x312c @ 0x225a27c
 
 
+
 /* Input:
 r1: BattleData
 */
@@ -71967,7 +71977,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 
 	add     r0, sp, #0xb0
 	ldrb    r0, [r0, #0x0]
@@ -71979,7 +71989,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x78]
+	str     r0, [sp, #0x78]         @ Defense
 
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
@@ -71988,7 +71998,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x74]
+	str     r0, [sp, #0x74]         @ Special Attack
 
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
@@ -71997,7 +72007,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x10]
+	str     r0, [sp, #0x10]         @ Special Defense
 
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
@@ -72048,7 +72058,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	lsr     r0, r0, #24
 
 	mov     r2, #0x0 @ #PKMNBATTLEDATA_SPECIES
-	str     r0, [sp, #0x60]
+	str     r0, [sp, #0x60]         @ Level
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
 	mov     r3, r2
@@ -72057,14 +72067,14 @@ branch_225a2a4: @ 225a2a4 :thumb
 	lsr     r0, r0, #16
 
 	mov     r2, #0x0 @ #PKMNBATTLEDATA_SPECIES
-	str     r0, [sp, #0x58]
+	str     r0, [sp, #0x58]         @ Species
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
 	mov     r3, r2
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x54]
+	str     r0, [sp, #0x54]         @ Species
 
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
@@ -72073,7 +72083,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	asr     r0, r0, #16
-	str     r0, [sp, #0x50]
+	str     r0, [sp, #0x50]         @ CurHP
 
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
@@ -72088,7 +72098,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x4c]
+	str     r0, [sp, #0x4c]         @ MaxHP
 
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
@@ -72150,7 +72160,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	str     r0, [sp, #0x38]
+	str     r0, [sp, #0x38]         @ Type1
 
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
@@ -72165,7 +72175,7 @@ branch_225a2a4: @ 225a2a4 :thumb
 	bl      ReadPkmnBattleData1
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	str     r0, [sp, #0x34]
+	str     r0, [sp, #0x34]         @ Type2
 
 	ldr     r1, [sp, #0x24]
 	mov     r0, r5
@@ -72313,10 +72323,10 @@ branch_225a53e: @ 225a53e :thumb
 	cmp     r7, #0x4a
 	bne     branch_225a55e
 branch_225a556: @ 225a556 :thumb
-	ldr     r0, [sp, #0x7c]
+	ldr     r0, [sp, #0x7c]         @ Attack
 	lsl     r0, r0, #17
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a55e: @ 225a55e :thumb
 
 	cmp     r7, #0x70
@@ -72336,10 +72346,10 @@ branch_225a55e: @ 225a55e :thumb
 	sub     r0, r1, r0
 	cmp     r0, #0x5
 	bge     branch_225a58c
-	ldr     r0, [sp, #0x7c]
+	ldr     r0, [sp, #0x7c]         @ Attack
 	lsl     r0, r0, #15
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a58c: @ 225a58c :thumb
 	ldr     r3, [pc, #0x1a0] @ 0x225a730, (=Unknown_226ec92)
 	mov     r2, #0x0
@@ -72369,14 +72379,14 @@ branch_225a5b8: @ 225a5b8 :thumb
 	ldr     r0, [sp, #0x30]
 	cmp     r0, #0x37
 	bne     branch_225a5d0
-	ldr     r1, [sp, #0x7c]
+	ldr     r1, [sp, #0x7c]         @ Attack
 	mov     r0, #150
 	mul     r0, r1
 	mov     r1, #100
 	blx     _s32_div_f
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a5d0: @ 225a5d0 :thumb
 
 	ldr     r0, [sp, #0x30]
@@ -72498,10 +72508,10 @@ branch_225a694: @ 225a694 :thumb
 	lsr     r0, r0, #16
 	cmp     r0, #0x1
 	bhi     branch_225a6b0
-	ldr     r0, [sp, #0x7c]
+	ldr     r0, [sp, #0x7c]         @ Attack
 	lsl     r0, r0, #17
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a6b0: @ 225a6b0 :thumb
 
 	ldr     r0, [sp, #0x30]
@@ -72639,14 +72649,14 @@ branch_225a7b0: @ 225a7b0 :thumb
 branch_225a7b4: @ 225a7b4 :thumb
 	cmp     r7, #0x37
 	bne     branch_225a7ca
-	ldr     r1, [sp, #0x7c]
+	ldr     r1, [sp, #0x7c]         @ Attack
 	mov     r0, #150
 	mul     r0, r1
 	mov     r1, #100
 	blx     _s32_div_f
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a7ca: @ 225a7ca :thumb
 
 	cmp     r7, #0x3e
@@ -72654,14 +72664,14 @@ branch_225a7ca: @ 225a7ca :thumb
 	ldr     r0, [sp, #0x48]
 	cmp     r0, #0x0
 	beq     branch_225a7e6
-	ldr     r1, [sp, #0x7c]
+	ldr     r1, [sp, #0x7c]         @ Attack
 	mov     r0, #150
 	mul     r0, r1
 	mov     r1, #100
 	blx     _s32_div_f
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225a7e6: @ 225a7e6 :thumb
 
 	ldr     r1, [sp, #0x24]
@@ -73071,10 +73081,12 @@ branch_225aaec: @ 225aaec :thumb
 	mov     r1, #0xc
 	tst     r0, r1
 	beq     branch_225ab12
-	ldr     r0, [sp, #0x38]
+
+	ldr     r0, [sp, #0x38]         @ Type1
 	cmp     r0, #0x5
 	beq     branch_225ab00
-	ldr     r0, [sp, #0x34]
+
+	ldr     r0, [sp, #0x34]         @ Type2
 	cmp     r0, #0x5
 	bne     branch_225ab12
 branch_225ab00: @ 225ab00 :thumb
@@ -73100,14 +73112,14 @@ branch_225ab12: @ 225ab12 :thumb
 	bl      Function_16_22555a4
 	cmp     r0, #0x0
 	beq     branch_225ab3e
-	ldr     r1, [sp, #0x7c]
+	ldr     r1, [sp, #0x7c]         @ Attack
 	mov     r0, #15
 	mul     r0, r1
 	mov     r1, #10
 	blx     _s32_div_f
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	str     r0, [sp, #0x7c]
+	str     r0, [sp, #0x7c]         @ Attack
 branch_225ab3e: @ 225ab3e :thumb
 
 	ldr     r0, [sp, #0x1c]
@@ -73161,7 +73173,7 @@ branch_225ab8c: @ 225ab8c :thumb
 	ble     branch_225abb4
 	lsl     r1, r0, #1
 	ldr     r0, [pc, #0x1d0] @ 0x225ad74, (=LevelModifier)
-	ldr     r2, [sp, #0x7c]
+	ldr     r2, [sp, #0x7c]         @ Attack
 	ldrb    r0, [r0, r1]
 	mul     r0, r2
 	ldr     r2, [pc, #0x1cc] @ 0x225ad78, (=LevelModifier+1)
@@ -73171,13 +73183,13 @@ branch_225ab8c: @ 225ab8c :thumb
 	b       branch_225abd0
 
 branch_225abb4: @ 225abb4 :thumb
-	ldr     r0, [sp, #0x7c]
+	ldr     r0, [sp, #0x7c]         @ Attack
 	str     r0, [sp, #0x84]
 	b       branch_225abd0
 
 branch_225abba: @ 225abba :thumb
 	ldr     r0, [sp, #0x70]
-	ldr     r2, [sp, #0x7c]
+	ldr     r2, [sp, #0x7c]         @ Attack
 	lsl     r1, r0, #1
 	ldr     r0, [pc, #0x1b0] @ 0x225ad74, (=LevelModifier)
 	ldrb    r0, [r0, r1]
@@ -73331,11 +73343,11 @@ branch_225acba: @ 225acba :thumb
 branch_225acd0: @ 225acd0 :thumb
 	ldr     r0, [sp, #0x84]
 	mov     r1, r0
-	ldr     r0, [sp, #0x60]
+	ldr     r0, [sp, #0x60]         @ Level
 	mul     r1, r4
 	str     r1, [sp, #0x84]
 	lsl     r0, r0, #1
-	mov     r1, #0x5
+	mov     r1, #5
 	blx     _s32_div_f
 	add     r1, r0, #0x2
 	ldr     r0, [sp, #0x84]

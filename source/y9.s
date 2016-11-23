@@ -1,5 +1,5 @@
 
-.section .ewram3, "ax"
+.section .y9, "ax"
 
 /*
 ARM9 and ARM7 Overlay Tables (OVT) (base/size defined in cart header)

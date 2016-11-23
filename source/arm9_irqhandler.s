@@ -3,7 +3,7 @@ Interrupt Request Handler
 ************************/
 
 @ 0x2101d20
-.section .ewram2, "ax"
+.section .itcm, "ax"
 
 .arm
 OS_IrqHandler: @ 1ff8000 :arm
@@ -542,3 +542,8 @@ branch_1ff8634: @ 1ff8634 :arm
 .word GFX_FIFO @ 0x1ff8644
 .word 0x84400000 @ 0x1ff8648
 @ 0x1ff864c
+
+
+
+@ 0x210236c
+.word 0x0, 0x0, 0x0, 0x0, 0x0

@@ -22420,7 +22420,6 @@ Function_380694c: @ 0x380694c :arm
 	ldr     r1, [pc, #0x50] @ [0x38069b8] (=0x4000180)
 	mov     r0, #1, 24 @ #0x100
 	strh    r0, [r1]
-.arm
 branch_380696c: @ 0x380696c :arm
 	ldrh    r0, [r1]
 	and     r0, r0, #0xf
@@ -22429,7 +22428,6 @@ branch_380696c: @ 0x380696c :arm
 	ldr     r1, [pc, #0x34] @ [0x38069b8] (=0x4000180)
 	mov     r0, #0x0
 	strh    r0, [r1]
-.arm
 branch_3806988: @ 0x3806988 :arm
 	ldrh    r0, [r1]
 	cmp     r0, #0x1
@@ -22462,7 +22460,6 @@ Function_38069c0: @ 0x38069c0 :arm
 branch_38069d8: @ 0x38069d8 :arm
 	mov     r0, r6
 	bl      Function_37f8a68
-.arm
 branch_38069e0: @ 0x38069e0 :arm
 	mov     r0, r5
 	mov     r1, r7

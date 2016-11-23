@@ -8,31 +8,29 @@ import sys
 from copy import copy, deepcopy
 from ctypes import c_int8
 import random
-import json
 import operator
+import png
 
 import configuration
 
 
 class RomSection():
-    def __init__(self, name, address):
+    def __init__(self, name, address, fileID, size):
         self.name = name
         self.address = address
+        self.fileID = fileID
+        self.size = size
 
 def getAddress(item):
     return item.address
 
 RomMap = []
 
-def addRomSection(name, address, size):
+def addRomSection(name, address, size, fileID=-1):
     if size > 0:
-        RomMap.append(RomSection(name, address))
+        RomMap.append(RomSection(name, address, fileID, size))
     return None
 
-
-# New versions of json don't have read anymore.
-if not hasattr(json, "read"):
-    json.read = json.loads
 
 spacing = "\t"
 
@@ -45,6 +43,17 @@ def asm_label(address):
 
 def data_label(address):
     return '.data_%x' % address
+
+
+def conv_pic(outfilename, data=[], palette=[]):
+    if not os.path.exists(os.path.dirname(outfilename)):
+        os.makedirs(os.path.dirname(outfilename))
+    
+    f = open(outfilename, 'wb')
+    w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
+    w.write(f, data)
+    f.close()
+
 
 class Disassembler(object):
 
@@ -128,7 +137,7 @@ class Disassembler(object):
             ARM9OverlayNewSize = disasm.get_word_from_rom(offset+8)
             #disasm.write_section_in_file(ARM9OverlayNew, ARM9OverlayNewSize)
             disasm.write_section_in_file_wfilename(ARM9OverlayNew, ARM9OverlayNewSize, OverlayDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin")
-            #RomMap.append(RomSection(NameDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin", ARM9OverlayNew))
+            #addRomSection(NameDir + "overlay_" + "{:04}".format(disasm.get_word_from_rom(offset+0)) + ".bin", ARM9OverlayNew, ARM9OverlayNewSize)
             
             offset += 0x20
             ARM9OverlayOld = ARM9OverlayNew
@@ -214,17 +223,18 @@ class Disassembler(object):
             if FNTSub1Type > 0x80: # directory
                 FNTSubID = disasm.get_byte_from_rom(FNTStart+SubTable+offset+1+FNTSub1Length)
                 output += " - " + hex(FNTSubID)
-                output += "\n" + hex(disasm.get_fat_Start(FNTSubID)) + " - " + hex(disasm.get_fat_Start(FNTSubID))
+                output += "\n" + hex(disasm.get_FileID_Start(FNTSubID)) + " - " + hex(disasm.get_FileID_End(FNTSubID))
                 output += disasm.get_fnt_maintable(FNTStart, FNTSubID, path + disasm.get_string_from_rom(FNTStart+SubTable+offset+1, FNTSub1Length) + "/", NameDir + disasm.get_string_from_rom(FNTStart+SubTable+offset+1, FNTSub1Length) + "/", IDFirstFileSubTable)
             elif FNTSub1Type < 0x80: # file
                 output += " - " + hex(IDFirstFileSubTable)
-                output += "\n" + hex(disasm.get_fat_Start(IDFirstFileSubTable)) + " - " + hex(disasm.get_fat_Start(IDFirstFileSubTable))
-                disasm.write_section_in_file_wfilename(disasm.get_fat_Start(IDFirstFileSubTable), disasm.get_fat_End(IDFirstFileSubTable) - disasm.get_fat_Start(IDFirstFileSubTable), path + disasm.get_string_from_rom(FNTStart+SubTable+offset+1, FNTSub1Length))
+                output += "\n" + hex(disasm.get_FileID_Start(IDFirstFileSubTable)) + " - " + hex(disasm.get_FileID_End(IDFirstFileSubTable))
                 
-                FileFormat = chr(disasm.get_byte_from_rom(disasm.get_fat_Start(IDFirstFileSubTable))) + chr(disasm.get_byte_from_rom(disasm.get_fat_Start(IDFirstFileSubTable)+1)) + chr(disasm.get_byte_from_rom(disasm.get_fat_Start(IDFirstFileSubTable)+2)) + chr(disasm.get_byte_from_rom(disasm.get_fat_Start(IDFirstFileSubTable)+3))
+                disasm.write_section_in_file_wfilename(disasm.get_FileID_Start(IDFirstFileSubTable), disasm.get_FileID_Size(IDFirstFileSubTable), path + disasm.get_string_from_rom(FNTStart+SubTable+offset+1, FNTSub1Length))
+                
+                FileFormat = chr(disasm.get_byte_from_rom(disasm.get_FileID_Start(IDFirstFileSubTable))) + chr(disasm.get_byte_from_rom(disasm.get_FileID_Start(IDFirstFileSubTable)+1)) + chr(disasm.get_byte_from_rom(disasm.get_FileID_Start(IDFirstFileSubTable)+2)) + chr(disasm.get_byte_from_rom(disasm.get_FileID_Start(IDFirstFileSubTable)+3))
                 output += "\n" + FileFormat
                 
-                RomMap.append(RomSection(filename, disasm.get_fat_Start(IDFirstFileSubTable)))
+                addRomSection(filename, disasm.get_FileID_Start(IDFirstFileSubTable), disasm.get_FileID_Size(IDFirstFileSubTable), IDFirstFileSubTable)
                 IDFirstFileSubTable += 1
             
             offset += 1 + FNTSub1Length
@@ -233,49 +243,101 @@ class Disassembler(object):
         
         return output
         
-    def get_fat_Start(self, FileID):
+    def get_FileID_Start(self, FileID):
         FATStart = disasm.get_word_from_rom(0x48)
-        output = ""
         offset = FATStart + FileID*8
         
         Start = disasm.get_word_from_rom(offset)
-        End = disasm.get_word_from_rom(offset+4)
         return Start
         
-    def get_fat_End(self, FileID):
+    def get_FileID_End(self, FileID):
         FATStart = disasm.get_word_from_rom(0x48)
-        output = ""
+        offset = FATStart + FileID*8
+        
+        End = disasm.get_word_from_rom(offset+4)
+        return End
+        
+    def get_FileID_Size(self, FileID):
+        FATStart = disasm.get_word_from_rom(0x48)
         offset = FATStart + FileID*8
         
         Start = disasm.get_word_from_rom(offset)
         End = disasm.get_word_from_rom(offset+4)
-        return End
+        return End-Start
+
+    def export_icon(self, img_addr, img_size, pal_addr, pal_size, filename):
+        if (img_size == 0) or (pal_size == 0): return None
+        data = []
+        tile = []
+        tiles = []
+        palette = []
+
+        rom = self.rom
+        if not os.path.exists(os.path.dirname(filename)):
+            os.makedirs(os.path.dirname(filename))
+        f = open(filename, 'wb')
+        newFileBytes = []
+        
+        i = 0
+        data_row = []
+        while (img_addr+i) < (img_addr+img_size):            
+            byte = rom[img_addr+i]
+            bit1 = byte & 0xf
+            bit2 = (byte >> 4)
+            
+            data_row.append(bit1)
+            data_row.append(bit2)
+            
+            i += 1
+            if (i % 4) == 0:
+                tile += [data_row]
+                data_row = []
+            if (i % (4*8)) == 0:
+                tiles += [tile]
+                tile = []
+        
+        j = 0
+        while j < 4:
+            i = 0
+            while i < 8:
+                data += [tiles[0+j*4][i] + tiles[1+j*4][i] + tiles[2+j*4][i] + tiles[3+j*4][i]]
+                i += 1
+            j += 1
+        
+        i = 0
+        while (pal_addr+i) < (pal_addr+pal_size):
+            byte1 = rom[pal_addr+i]
+            byte2 = rom[pal_addr+i+1]
+            col = byte1 | (byte2<<8)
+            colr = col&0x1f
+            colg = (col>>5)&0x1f
+            colb = (col>>10)&0x1f
+            palette.append((colr*8, colg*8, colb*8))
+            i += 2
+        
+        conv_pic(filename, data, palette)
+        return None
 
 
     def output_bank_opcodes(self, filename="baserom.nds", filedir="", original_offset=0, end_address=0, debug=False):
         header_output = ""
+        offset = original_offset
         
         rom_path = os.path.join(self.config.path, filename)
         self.rom = bytearray(open(rom_path, "rb").read())
-        
-        #filedir = os.path.splitext(filename)[0]
-
         rom = self.rom
-
-        offset = original_offset
 
         Header = 0
         HeaderSize = 0x4000
         #disasm.write_section_in_file(Header, HeaderSize)
         disasm.write_section_in_file_wfilename(Header, HeaderSize, filedir + "/" + "header.bin")
-        RomMap.append(RomSection("header.bin", Header))
+        addRomSection("header.bin", Header, HeaderSize)
         
         ARM9ROM = disasm.get_word_from_rom(0x20)
         ARM9ROMSize = disasm.get_word_from_rom(0x2c) + 12
         #disasm.write_section_in_file(ARM9ROM, ARM9ROMSize)
         disasm.write_section_in_file_wfilename(ARM9ROM, ARM9ROMSize, filedir + "/" + "arm9.bin")
-        #RomMap.append(RomSection("arm9.bin", ARM9ROM))
-        RomMap.append(RomSection("arm9_full.bin", ARM9ROM))
+        addRomSection("arm9_full.bin", ARM9ROM, ARM9ROMSize)
         
         ARM9Overlay = disasm.get_word_from_rom(0x50)
         ARM9OverlaySize = disasm.get_word_from_rom(0x54)
@@ -283,48 +345,36 @@ class Disassembler(object):
         disasm.write_section_in_file_wfilename(ARM9Overlay, ARM9OverlaySize, filedir + "/" + "y9.bin")
         #RomMap.append(RomSection("y9.bin", ARM9Overlay))
         
-#        ARM9Overlay1 = ((ARM9Overlay + ARM9OverlaySize) + 0x1ff) & 0xfffffe00
-#        ARM9Overlay1Size = disasm.get_word_from_rom(ARM9Overlay+8)
-#        disasm.write_section_in_file(ARM9Overlay1, ARM9Overlay1Size)
-        
-#        ARM9Overlay2 = ((ARM9Overlay1 + ARM9Overlay1Size) + 0x1ff) & 0xfffffe00
-#        ARM9Overlay2Size = disasm.get_word_from_rom(ARM9Overlay+0x28)
-#        disasm.write_section_in_file(ARM9Overlay2, ARM9Overlay2Size)
-        
         #disasm.write_overlays_in_files(ARM9Overlay, ARM9OverlaySize)
         
         
         ARM7ROM = disasm.get_word_from_rom(0x30)
         ARM7ROMSize = disasm.get_word_from_rom(0x3c)
-        #disasm.write_section_in_file(ARM7ROM, ARM7ROMSize)
         disasm.write_section_in_file_wfilename(ARM7ROM, ARM7ROMSize, filedir + "/" + "arm7.bin")
-        RomMap.append(RomSection("arm7.bin", ARM7ROM))
+        addRomSection("arm7.bin", ARM7ROM, ARM7ROMSize)
         
         ARM7Overlay = disasm.get_word_from_rom(0x58)
         ARM7OverlaySize = disasm.get_word_from_rom(0x5c)
-        #disasm.write_section_in_file(ARM7Overlay, ARM7OverlaySize)
         disasm.write_section_in_file_wfilename(ARM7Overlay, ARM7OverlaySize, filedir + "/" + "y7.bin")
         addRomSection("y7.bin", ARM7Overlay, ARM7OverlaySize)
         
         FNT = disasm.get_word_from_rom(0x40)
         FNTSize = disasm.get_word_from_rom(0x44)
-        #disasm.write_section_in_file(FNT, FNTSize)
         disasm.write_section_in_file_wfilename(FNT, FNTSize, filedir + "/" + "fnt.bin")
-        RomMap.append(RomSection("fnt.bin", FNT))
+        addRomSection("fnt.bin", FNT, FNTSize)
         
         FAT = disasm.get_word_from_rom(0x48)
         FATSize = disasm.get_word_from_rom(0x4c)
-        #disasm.write_section_in_file(FAT, FATSize)
         disasm.write_section_in_file_wfilename(FAT, FATSize, filedir + "/" + "fat.bin")
-        RomMap.append(RomSection("fat.bin", FAT))
+        addRomSection("fat.bin", FAT, FATSize)
         
         #disasm.write_fats_in_files(FAT, FATSize)
         
         Banner = disasm.get_word_from_rom(0x68)
         BannerSize = 0xa00;
-        #disasm.write_section_in_file(Banner, BannerSize)
         disasm.write_section_in_file_wfilename(Banner, BannerSize, filedir + "/" + "banner.bin")
-        RomMap.append(RomSection("banner.bin", Banner))
+        addRomSection("banner.bin", Banner, BannerSize)
+        disasm.export_icon(Banner+0x20, 0x200, Banner+0x220, 0x20, filedir + "/" + "icon.png")
         
         GameTitle = disasm.get_string_from_rom(0x0, 12)
         Gamecode = disasm.get_string_from_rom(0xc, 4)
@@ -360,7 +410,8 @@ class Disassembler(object):
         
         RomMap.sort(key=operator.attrgetter('address'))
         for item in RomMap:
-            f.write(hex(item.address) + " " + str(item.name) + "\n")
+            filesize = os.path.getsize(filedir + "/" + item.name)
+            f.write(hex(item.address) + " " + str(item.name) + " " + hex(item.fileID) + " " + hex(item.size) + " " + hex(filesize) + "\n")
         
         
         headerfilename = filedir + "/" + "Header.txt"

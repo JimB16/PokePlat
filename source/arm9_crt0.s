@@ -12,7 +12,7 @@ branch_2000808: @ 2000808 :arm
 	msr     CPSR_c, r0
 
 	ldr     r0, [pc, #0x108] @ [0x2000930] (=RAM_27e0000)
-	add     r0, r0, #0x3fc0
+	add     r0, r0, #0x3fc0         @ 0x27e3fc0
 	mov     sp, r0
 
 	mov     r0, #0x12
@@ -21,7 +21,7 @@ branch_2000808: @ 2000808 :arm
 	ldr     r0, [pc, #0xf4] @ [0x2000930] (=RAM_27e0000)
 	add     r0, r0, #0x3fc0
 	sub     r0, r0, #0x40
-	sub     sp, r0, #0x4
+	sub     sp, r0, #0x4            @ 0x27e3fc0-0x44
 	tst     sp, #0x4
 	beq     branch_2000850
 	b       branch_2000854
@@ -51,12 +51,14 @@ branch_2000854: @ 2000854 :arm
 	bl      MIi_CpuClearFast2
     
 	ldr     r1, [pc, #0xa0] @ [0x2000940] (=Unknown_2000ba0)
-	ldr     r0, [r1, #0x14]
+	ldr     r0, [r1, #0x14] @ =0x0
 	bl      Function_2000970
-	bl      Function_2000a1c
+
+	bl      InitTCMAreas
+
 	ldr     r0, [pc, #0x90] @ [0x2000940] (=Unknown_2000ba0)
-	ldr     r1, [r0, #0xc]
-	ldr     r2, [r0, #0x10]
+	ldr     r1, [r0, #0xc]      @ =RAM_2101d20
+	ldr     r2, [r0, #0x10]     @ =RAM_21d0d80
 	mov     r3, r1
 	mov     r0, #0x0
 branch_20008bc: @ 20008bc :arm
@@ -68,6 +70,7 @@ branch_20008c8: @ 20008c8 :arm
 	str     r0, [r1], #0x4
 branch_20008cc: @ 20008cc :arm
 	bcc     branch_20008bc
+
 	bic     r1, r3, #0x1f
 branch_20008d4: @ 20008d4 :arm
 	mcr     p15, 0, r0, c7, c10, 4
@@ -76,6 +79,7 @@ branch_20008d4: @ 20008d4 :arm
 	add     r1, r1, #0x20
 	cmp     r1, r2
 	blt     branch_20008d4
+
 	ldr     r1, [pc, #0x50] @ [0x2000944] (=RAM_27fff9c)
 	str     r0, [r1]
     
@@ -191,16 +195,17 @@ branch_2000a18: @ 2000a18 :arm
 @ 0x2000a1c
 
 
-Function_2000a1c: @ 2000a1c :arm
+InitTCMAreas: @ 2000a1c :arm
 	ldr     r0, =Unknown_2000ba0
-	ldr     r1, [r0]
-	ldr     r2, [r0, #0x4]
-	ldr     r3, [r0, #0x8]
-branch_2000a2c: @ 2000a2c :arm
+	ldr     r1, [r0]            @ =TCMInitAreas
+	ldr     r2, [r0, #0x4]      @ =TCMInitAreas_End
+	ldr     r3, [r0, #0x8]      @ =TCMInitAreas_Source
+
+initTCMAreasLoop: @ 2000a2c :arm
 	cmp     r1, r2
-	beq     branch_2000aa4
-	ldr     r5, [r1], #0x4
-	ldr     r7, [r1], #0x4
+	beq     noAreasToInit
+	ldr     r5, [r1], #0x4      @ Destination
+	ldr     r7, [r1], #0x4      @ Size
 	add     r6, r5, r7
 	mov     r4, r5
 branch_2000a44: @ 2000a44 :arm
@@ -238,9 +243,9 @@ branch_2000a88: @ 2000a88 :arm
 	add     r4, r4, #0x20
 	cmp     r4, r6
 	blt     branch_2000a88
-	b       branch_2000a2c
+	b       initTCMAreasLoop
 
-branch_2000aa4: @ 2000aa4 :arm
+noAreasToInit: @ 2000aa4 :arm
 	b       branch_2000aac
 @ 0x2000aa8
 
@@ -289,7 +294,6 @@ init_cp15: @ 2000ab0 :arm
 	orr     r0, r0, #0xa
 	mcr     p15, 0, r0, c9, c1, 0   @ TCM Data TCM Base and Virtual Size
 	mov     r0, #0x42
-    
 	mcr     p15, 0, r0, c2, c0, 1   @ PU Cachability Bits for Instruction Protection Region
 	mov     r0, #0x42
 	mcr     p15, 0, r0, c2, c0, 0   @ PU Cachability Bits for Data/Unified Protection Region
@@ -314,5 +318,18 @@ init_cp15: @ 2000ab0 :arm
 NitroStartUp: @ 2000b98 :arm
 	bx      lr
 @ 0x2000b9c
+
+
+.arm
+.globl Function_2000b9c
+Function_2000b9c: @ 2000b9c :arm
+	bx      lr
+@ 0x2000ba0
+
+
+Unknown_2000ba0: @ 0x2000ba0
+.word TCMInitAreas, TCMInitAreas_End, TCMInitAreas_Source
+.word RAM_2101d20, RAM_21d0d80
+.word 0x0
 
 

@@ -572,8 +572,9 @@ FS_StartOverlay: @ 20c8974 :arm
 	mov     r1, r1, lsr #24
 	tst     r1, #0x2
 	beq     branch_20c89e4
-	ldr     r1, [pc, #0xac] @ [0x20c8a5c] (=RAM_2101d14)
-	ldr     r3, [pc, #0xac] @ [0x20c8a60] (=RAM_2101d14)
+
+	ldr     r1, [pc, #0xac] @ [0x20c8a5c] (=Unknown_2101d14)
+	ldr     r3, [pc, #0xac] @ [0x20c8a60] (=Unknown_2101d14)
 	ldr     r2, [pc, #0xac] @ [0x20c8a64] (=0x66666667)
 	sub     r12, r1, r3
 	smull   r1, lr, r2, r12
@@ -625,8 +626,8 @@ branch_20c8a48: @ 20c8a48 :arm
 @ 0x20c8a58
 
 .word RAM_27ffc40 @ 0x20c8a58
-.word RAM_2101d14 @ 0x20c8a5c
-.word RAM_2101d14 @ 0x20c8a60
+.word Unknown_2101d14 @ 0x20c8a5c
+.word Unknown_2101d14 @ 0x20c8a60
 .word 0x66666667 @ 0x20c8a64
 
 

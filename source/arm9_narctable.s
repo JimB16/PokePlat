@@ -231,8 +231,7 @@ PlWifinote_String: @ 0x20ff384
 asciz_align "graphic/pl_wifinote.narc"
 
 PlWinframe_String: @ 0x20ff3a0
-.asciz "graphic/pl_winframe.narc"
-.align 2, 0
+asciz_align "graphic/pl_winframe.narc"
 
 DendouDemo_String: @ 0x20ff3bc
 asciz_align "graphic/dendou_demo.narc"
@@ -241,12 +240,10 @@ IntroTV_String: @ 0x20ff3d8
 asciz_align "demo/intro/intro_tv.narc"
 
 BeSeq_String: @ 0x20ff3f4
-.asciz "battle/skill/be_seq.narc"
-.align 2, 0
+asciz_align "battle/skill/be_seq.narc"
 
 FieldBoard_String: @ 0x20ff410
-.asciz "graphic/field_board.narc"
-.align 2, 0
+asciz_align "graphic/field_board.narc"
 
 Btdtr_String: @ 0x20ff42c
 asciz_align "battle/b_tower/btdtr.narc"
@@ -255,8 +252,7 @@ Btdpm_String: @ 0x20ff448
 asciz_align "battle/b_tower/btdpm.narc"
 
 Titledemo_String: @ 0x20ff464
-.asciz "demo/title/titledemo.narc"
-.align 2, 0
+asciz_align "demo/title/titledemo.narc"
 
 DTest_String: @ 0x20ff480
 asciz_align "debug/cb_edit/d_test.narc"
@@ -265,40 +261,31 @@ HidenEffect_String: @ 0x20ff49c
 asciz_align "graphic/hiden_effect.narc"
 
 PlPlistGra_String: @ 0x20ff4b8
-.asciz "graphic/pl_plist_gra.narc"
-.align 2, 0
+asciz_align "graphic/pl_plist_gra.narc"
 
 Trtbl_String: @ 0x20ff4d4
-.asciz "poketool/trmsg/trtbl.narc"
-.align 2, 0
+asciz_align "poketool/trmsg/trtbl.narc"
 
 SubSeq_String: @ 0x20ff4f0
-.asciz "battle/skill/sub_seq.narc"
-.align 2, 0
+asciz_align "battle/skill/sub_seq.narc"
 
 TrainerCase_String: @ 0x20ff50c
-.asciz "graphic/trainer_case.narc"
-.align 2, 0
+asciz_align "graphic/trainer_case.narc"
 
 Trbgra_String: @ 0x20ff528
-.asciz "poketool/trgra/trbgra.narc"
-.align 2, 0
+asciz_align "poketool/trgra/trbgra.narc"
 
 EvPokeselect_String: @ 0x20ff544
-.asciz "graphic/ev_pokeselect.narc"
-.align 2, 0
+asciz_align "graphic/ev_pokeselect.narc"
 
 PlPokeAnm_String: @ 0x20ff560
-.asciz "pokeanime/pl_poke_anm.narc"
-.align 2, 0
+asciz_align "pokeanime/pl_poke_anm.narc"
 
 WazaSeq_String: @ 0x20ff57c
-.asciz "battle/skill/waza_seq.narc"
-.align 2, 0
+asciz_align "battle/skill/waza_seq.narc"
 
 Evo_String: @ 0x20ff598
-.asciz "poketool/personal/evo.narc"
-.align 2, 0
+asciz_align "poketool/personal/evo.narc"
 
 WifiUnionobj_String: @ 0x20ff5b4
 asciz_align "graphic/wifi_unionobj.narc"
@@ -314,7 +301,6 @@ asciz_align "graphic/waza_oshie_gra.narc"
 
 TrAi_String: @ 0x20ff624
 asciz_align "battle/tr_ai/tr_ai_seq.narc"
-.align 2, 0
 
 EggData_String: @ 0x20ff640
 asciz_align "demo/egg/data/egg_data.narc"
@@ -329,8 +315,7 @@ TouchSubwindow_String: @ 0x20ff698
 asciz_align "graphic/touch_subwindow.narc"
 
 Height_String: @ 0x20ff6b8
-.asciz "poketool/pokegra/height.narc"
-.align 2, 0
+asciz_align "poketool/pokegra/height.narc"
 
 Wotbl_String: @ 0x20ff6d8
 asciz_align "poketool/personal/wotbl.narc"

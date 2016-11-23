@@ -11,14 +11,8 @@
 - arm9.bin
 *******************************************/
 
-.org 0x2101d0c - 0x02000000
+.org 0x2101d20 - 0x02000000
 
-.globl RAM_2101d0c
-RAM_2101d0c:
-    .word 0, 0
-.globl RAM_2101d14
-RAM_2101d14:
-    .zero 0xc
 .globl RAM_2101d20
 RAM_2101d20:
     .zero 0x18
@@ -1082,29 +1076,11 @@ BattleData: @ 0x22c29c8
 .equ BattleData_MoveScore,          0x358
 .equ BattleData_Move1Score,         0x358
 .equ BattleData_TempVariable,       0x35c
-.equ BattleData_TrainerAIType,      0x365
-.equ BattleData_3cf,                0x3cf
-.equ BattleData_3de,                0x3de
-.equ BattleData_3e0,                0x3e0
-.equ BattleData_3e1,                0x3e1
-.equ BattleData_3e2,                0x3e2
 .equ BattleData_2120,               0x2120
 .equ BattleData_AIScriptPtr,        0x2134
 .equ BattleData_2138,               0x2138
 .equ BattleData_2158,               0x2158
 .equ BattleData_219c,               0x219c
-/*
-+ 0x150 Round Nr
-+ 0x355 Current Move (0-3)
-+ 0x356 Current Move ID
-+ 0x358 Move1 Score
-+ 0x359 Move2 Score
-+ 0x35a Move3 Score
-+ 0x35b Move4 Score
-
-+ 0x2134
-+ 0x2138
-*/
 
 
 
@@ -1287,31 +1263,7 @@ TrainerData
 .equ TrainerData_Badge,             0x1a
 
 
-.org 0x27e0000 - 0x02000000
 
-.globl RAM_27e0000
-RAM_27e0000:
-    .zero 4*24 @ 24 JumpAdresses, 1 for every IRQs
-
-.globl RAM_27e0060
-RAM_27e0060:
-    .zero 4*8
-
-.globl RAM_27e0080
-RAM_27e0080:
-
-
-.org 0x27e3000 - 0x02000000
-
-.globl RAM_27e3000
-RAM_27e3000:
-    .zero 0xf80
-.globl RAM_27e3f80
-RAM_27e3f80:
-    .zero 0x78
-
-.globl RAM_27e3ff8
-RAM_27e3ff8:
 
 
 .org 0x27ff000 - 0x02000000
@@ -1459,10 +1411,6 @@ RAM_27ffff0:
 @ 0x21d0d80
 
 
-.equ Unknown_21023e0,              0x21023e0 @ .word
-.equ Unknown_21023f8,             0x021023f8 @ .word
 
-.section .bss2
 
-@ 0x027e0000
 

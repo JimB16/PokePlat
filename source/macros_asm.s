@@ -6,7 +6,7 @@
 .include "constants/pokemon_constants.s"
 .include "constants/type_constants.s"
 .include "macros/function.s"
-.include "scripts/script_plat.s"
+.include "macros/script_plat.s"
 
 
 .equ NrOfPkmn, 493 @ 0x1ed

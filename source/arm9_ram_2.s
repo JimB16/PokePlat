@@ -223,16 +223,26 @@
 80 : Snow Warning
 */
 .equ BattleData_WeatherCounter,     0x184
+.equ BattleData_1bc,                0x1bc
+.equ BattleData_354,                0x354
 .equ BattleData_CurrentMove,        0x355 @ 0-3
 .equ BattleData_CurrentMoveID,      0x356
 .equ BattleData_MoveScore,          0x358
 .equ BattleData_Move1Score,         0x358
+.equ BattleData_Move2Score,         0x359
+.equ BattleData_Move3Score,         0x35a
+.equ BattleData_Move4Score,         0x35b
 .equ BattleData_TempVariable,       0x35c
+.equ BattleData_360,                0x360
+.equ BattleData_364,                0x364
 .equ BattleData_TrainerAIType,      0x365
+.equ BattleData_36c,                0x36c
+.equ BattleData_390,                0x390
 .equ BattleData_3cc,                0x3cc
 .equ BattleData_3cd,                0x3cd
 .equ BattleData_3ce,                0x3ce
 .equ BattleData_3cf,                0x3cf
+.equ BattleData_3d0,                0x3d0
 .equ BattleData_3de,                0x3de
 .equ BattleData_3e0,                0x3e0
 .equ BattleData_3e1,                0x3e1
@@ -434,11 +444,6 @@ TrainerData
 .equ RAM_27ffe00_3c,        0x3c
 .equ RAM_27ffe00_80,        0x80
 
-
-
-
-.equ Unknown_21023e0,              0x21023e0 @ .word
-.equ Unknown_21023f8,             0x021023f8 @ .word
 
 
 

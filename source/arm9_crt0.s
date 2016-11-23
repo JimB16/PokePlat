@@ -223,7 +223,9 @@ branch_2000a5c: @ 2000a5c :arm
 	str     r7, [r4], #0x4
 branch_2000a60: @ 2000a60 :arm
 	bmi     branch_2000a44
-	ldr     r7, [r1], #0x4
+
+
+	ldr     r7, [r1], #0x4      @ BSS Size
 	add     r6, r4, r7
 	mov     r7, #0x0
 branch_2000a70: @ 2000a70 :arm
@@ -235,6 +237,8 @@ branch_2000a7c: @ 2000a7c :arm
 	str     r7, [r4], #0x4
 branch_2000a80: @ 2000a80 :arm
 	bcc     branch_2000a70
+
+
 	bic     r4, r5, #0x1f
 branch_2000a88: @ 2000a88 :arm
 	mcr     p15, 0, r7, c7, c10, 4
@@ -262,35 +266,35 @@ init_cp15: @ 2000ab0 :arm
 	mrc     p15, 0, r0, c1, c0, 0   @ Control Register (R/W, or R=Fixed)
 	ldr     r1, =0xf9005
 	bic     r0, r0, r1
-	mcr     p15, 0, r0, c1, c0, 0
+	mcr     p15, 0, r0, c1, c0, 0   @ Control Register (R/W, or R=Fixed)
     
 	mov     r0, #0x0
-	mcr     p15, 0, r0, c7, c5, 0
-	mcr     p15, 0, r0, c7, c6, 0
-	mcr     p15, 0, r0, c7, c10, 4
+	mcr     p15, 0, r0, c7, c5, 0   @ Invalidate Entire Instruction Cache
+	mcr     p15, 0, r0, c7, c6, 0   @ Invalidate Entire Data Cache
+	mcr     p15, 0, r0, c7, c10, 4  @ Drain Write Buffer
     
 	ldr     r0, =0x4000033
-	mcr     p15, 0, r0, c6, c0, 0
+	mcr     p15, 0, r0, c6, c0, 0   @ PU Protection Unit Data/Unified Region 0
 	ldr     r0, =0x200002d
-	mcr     p15, 0, r0, c6, c1, 0
-	ldr     r0, =0x27e0021
-	mcr     p15, 0, r0, c6, c2, 0
+	mcr     p15, 0, r0, c6, c1, 0   @ PU Protection Unit Data/Unified Region 1
+	ldr     r0, =__dtcm_start + 0x21
+	mcr     p15, 0, r0, c6, c2, 0   @ PU Protection Unit Data/Unified Region 2
 	ldr     r0, =0x8000035
-	mcr     p15, 0, r0, c6, c3, 0
-	ldr     r0, =RAM_27e0000
+	mcr     p15, 0, r0, c6, c3, 0   @ PU Protection Unit Data/Unified Region 3
+	ldr     r0, =__dtcm_start
 	orr     r0, r0, #0x1a
 	orr     r0, r0, #0x1
-	mcr     p15, 0, r0, c6, c4, 0
+	mcr     p15, 0, r0, c6, c4, 0   @ PU Protection Unit Data/Unified Region 4
 	ldr     r0, =0x100002f
-	mcr     p15, 0, r0, c6, c5, 0
+	mcr     p15, 0, r0, c6, c5, 0   @ PU Protection Unit Data/Unified Region 5
 	ldr     r0, =0xffff001d
-	mcr     p15, 0, r0, c6, c6, 0
+	mcr     p15, 0, r0, c6, c6, 0   @ PU Protection Unit Data/Unified Region 6
 	ldr     r0, =0x27ff017
-	mcr     p15, 0, r0, c6, c7, 0
+	mcr     p15, 0, r0, c6, c7, 0   @ PU Protection Unit Data/Unified Region 7
     
 	mov     r0, #0x20
 	mcr     p15, 0, r0, c9, c1, 1   @ TCM Instruction TCM Base and Virtual Size
-	ldr     r0, =RAM_27e0000
+	ldr     r0, =__dtcm_start
 	orr     r0, r0, #0xa
 	mcr     p15, 0, r0, c9, c1, 0   @ TCM Data TCM Base and Virtual Size
 	mov     r0, #0x42

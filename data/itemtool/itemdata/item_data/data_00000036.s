@@ -1,4 +1,11 @@
 .include "source/macros_asm.s"
 
-@ all unknown
-itemdata 450, 0, 0, 0, 0, 30, 0, 16543, 1, 2, 1, 63, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 251, 251, 246
+@ price, battleeffect, gain, ...
+itemdata 450, 0, 0, 0, 0, 30, 0, 16543, 1, 2, 1
+
+@ boost: hp, level, evolution, attack, defense, spatk, spdef, speed, acc, crit, pp, target, target2
+itemdataboosts 15, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14
+
+@ unknown, unknown, unknown, unknown, unknown, unknown, hprestore, pprestoren, unknownn, unknownn, unknown
+itemdata2 0, 0, 0, 0, 0, 0, 0, 0, 251, 251, 246
+

@@ -280,15 +280,19 @@ class Palette(object):
         return palette
 
 
-def conv_pic(outfilename, data=[], palette=[], debug=False):
+def write_png(outfilename, data=[], palette=[], debug=False):
 
     if not os.path.exists(os.path.dirname(outfilename)):
         os.makedirs(os.path.dirname(outfilename))
     
+    #s = [[0,0,0,0], [0,0,0,0], [0,1,1,0], [0,1,1,0]]
+    #f = open('png.png', 'wb')
+    #palette=[(0x55,0x55,0x55), (0xff,0x99,0x99)]
+    #w = png.Writer(len(s[0]), len(s), palette=palette, bitdepth=1)
+    #w.write(f, s)
+    #f.close()
+    
     f = open(outfilename, 'wb')
-    #w = png.Writer(len(Tiles[0]), len(Tiles), palette=palette, bitdepth=4)
-    #w.write(f, Tiles)
-    #w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
     w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
     w.write(f, data)
     f.close()
@@ -334,15 +338,8 @@ if __name__ == "__main__":
         else:
             i += 1
     
-    #s = [[0,0,0,0], [0,0,0,0], [0,1,1,0], [0,1,1,0]]
-    #f = open('png.png', 'wb')
-    #palette=[(0x55,0x55,0x55), (0xff,0x99,0x99)]
-    #w = png.Writer(len(s[0]), len(s), palette=palette, bitdepth=1)
-    #w.write(f, s)
-    #f.close()
-    
     gra.init(filename)
     pal.init(palfilename)
     
-    conv_pic(outfilename, gra.read_rgcn(encryption, width, height, debugFlag), pal.read_rlcn(debugFlag), debugFlag)
+    write_png(outfilename, gra.read_rgcn(encryption, width, height, debugFlag), pal.read_rlcn(debugFlag), debugFlag)
     

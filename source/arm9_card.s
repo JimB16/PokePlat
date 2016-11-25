@@ -1814,6 +1814,7 @@ branch_20c995c: @ 20c995c :arm
 
 
 .arm
+.globl CP_SaveContext
 CP_SaveContext: @ 20c99fc :arm
 	ldr     r1, =REG_DIV_NUMER
 	stmfd   sp!, {r4}
@@ -1837,6 +1838,7 @@ CP_SaveContext: @ 20c99fc :arm
 
 
 .arm
+.globl CPi_RestoreContext
 CPi_RestoreContext: @ 20c9a3c :arm
 	stmfd   sp!, {r4}
 	ldr     r1, =REG_DIV_NUMER

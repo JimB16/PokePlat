@@ -968,12 +968,57 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
-.macro	itemdata	unknown0, unknown2, unknown3, unknown4, unknown5, unknown6, unknown7, unknown8, unknowna, unknownb, unknownc, unknowne, unknowne1, unknowne2, unknowne3, unknowne4, unknowne5, unknowne6, unknowne7, unknowne8, unknowne9, unknownea, unknowneb, unknownec, unknowned, unknownee, unknownef, unknowne10, unknowne11
+.macro	itemdata	unknown0, unknown2, unknown3, unknown4, unknown5, unknown6, unknown7, unknown8, unknowna, unknownb, unknownc
 .hword  \unknown0
 .byte   \unknown2, \unknown3, \unknown4, \unknown5, \unknown6, \unknown7
 .hword  \unknown8
-.byte   \unknowna, \unknownb, \unknownc, 0, \unknowne, \unknowne1, \unknowne2, \unknowne3, \unknowne4, \unknowne5, \unknowne6, \unknowne7, \unknowne8, \unknowne9, \unknownea, \unknowneb, \unknownec, \unknowned, \unknownee, \unknownef, \unknowne10, \unknowne11, 0, 0
+.byte   \unknowna, \unknownb, \unknownc, 0
 .endm
+
+.macro	itemdataboosts	boost_hp, boost_level, boost_evolution, boost_attack, boost_defense, boost_spatk, boost_spdef, boost_speed, boost_acc, boost_crit, boost_pp, boost_target, boost_target2
+.byte   \boost_hp | (\boost_level<<4), \boost_evolution | (\boost_attack<<4), \boost_defense | (\boost_spatk<<4), \boost_spdef | (\boost_speed<<4), \boost_acc | (\boost_crit<<4), \boost_pp | (\boost_target<<4), \boost_target2
+.endm
+
+.macro	itemdata2	unknowne7, unknowne8, unknowne9, unknownea, unknowneb, unknownec, unknowned, unknownee, unknownef, unknowne10, unknowne11
+.byte   \unknowne7, \unknowne8, \unknowne9, \unknownea, \unknowneb, \unknownec, \unknowned, \unknownee, \unknownef, \unknowne10, \unknowne11, 0, 0
+.endm
+
+
+.macro WaterEncounter Lvl1, Lvl2, Pkmn
+.byte \Lvl1, \Lvl2
+.hword 0
+.word \Pkmn
+.endm
+
+
+@ evolution conditions
+.equ Evo_NoEvo, 0
+.equ Evo_HighFriendship, 1
+.equ Evo_HighFriendshipAtDaytime, 2
+.equ Evo_HighFriendshipAtNighttime, 3
+.equ Evo_ReachLevel, 4
+.equ Evo_Trade, 5
+.equ Evo_HoldItemAndTrade, 6
+.equ Evo_UseItem, 7
+.equ Evo_ReachLevelAndAtkGtDef, 8
+.equ Evo_ReachLevelAndAtkEqDef, 9
+.equ Evo_ReachLevelAndAtkLtDef, 10
+.equ Evo_DependsOnPersonalityValue1, 11
+.equ Evo_DependsOnPersonalityValue2, 12
+.equ Evo_ReachLevelAndCanCreateExtraPkmn, 13
+.equ Evo_CreateExtraPkmnIfSpaceInParty, 14
+.equ Evo_HighBeauty, 15
+.equ Evo_UseItemAndMale, 16
+.equ Evo_UseItemAndFemale, 17
+.equ Evo_HoldItemAtDaytime, 18
+.equ Evo_HoldItemAtNighttime, 19
+.equ Evo_KnowAttack, 20
+.equ Evo_HaveOtherPkmnInParty, 21
+.equ Evo_EvolvesIfMale, 22
+.equ Evo_EvolvesIfFemale, 23
+.equ Evo_BeAtCertainLocations, 24
+.equ Evo_BeAtMossRockInEternaForest, 25
+.equ Evo_BeAtIceRockInRoute217, 26
 
 
 .macro	asciz_align str

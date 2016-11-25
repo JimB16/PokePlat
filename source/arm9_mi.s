@@ -345,7 +345,7 @@ branch_20c46dc: @ 20c46dc :arm
 
 
 
-.arm
+arm_func_start MIi_CheckDma0SourceAddress
 MIi_CheckDma0SourceAddress: @ 20c46f4 :arm
 	stmfd   sp!, {r3,lr}
 	cmp     r0, #0x0
@@ -372,7 +372,7 @@ branch_20c471c: @ 20c471c :arm
 branch_20c4740: @ 20c4740 :arm
 	bl      OS_Panic
 	ldmfd   sp!, {r3,pc}
-@ 0x20c4748
+arm_func_end MIi_CheckDma0SourceAddress
 
 
 .arm
@@ -1307,6 +1307,7 @@ MI_Init: @ 20c50bc :arm
 	stmfd   sp!, {r3,lr}
 	mov     r0, #0x3
 	bl      MI_SetWramBank
+
 	mov     r0, #0x0
 	bl      MI_StopDma
 	ldmfd   sp!, {r3,pc}

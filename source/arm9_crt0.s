@@ -8,14 +8,15 @@ branch_2000808: @ 2000808 :arm
 	cmp     r0, #0x0
 	bne     branch_2000808
 	bl      init_cp15
-	mov     r0, #0x13
+
+	mov     r0, #0x13               @ Mode: Supervisor (SWI)
 	msr     CPSR_c, r0
 
 	ldr     r0, [pc, #0x108] @ [0x2000930] (=RAM_27e0000)
 	add     r0, r0, #0x3fc0         @ 0x27e3fc0
 	mov     sp, r0
 
-	mov     r0, #0x12
+	mov     r0, #0x12               @ Mode: IRQ
 	msr     CPSR_c, r0
 
 	ldr     r0, [pc, #0xf4] @ [0x2000930] (=RAM_27e0000)
@@ -31,7 +32,7 @@ branch_2000850: @ 2000850 :arm
 branch_2000854: @ 2000854 :arm
 	ldr     r1, [pc, #0xd8] @ [0x2000934] (=0x800)
 	sub     r1, r0, r1
-	mov     r0, #0x1f
+	mov     r0, #0x1f               @ Mode: System
 	msr     CPSR_fsxc, r0
 	sub     sp, r1, #0x4
     

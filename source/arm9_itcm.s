@@ -3,6 +3,10 @@
 ************************/
 
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
+
 /************************
 Interrupt Request Handler
 ************************/
@@ -10,13 +14,13 @@ Interrupt Request Handler
 @ 0x2101d20
 .section .itcm, "ax"
 
-.arm
+arm_func_start OS_IrqHandler
 OS_IrqHandler: @ 1ff8000 :arm
 	stmfd   sp!, {lr}
 
 	mov     r12, #0x4000000
 	add     r12, r12, #0x210
-	ldr     r1, [r12, #-0x8] @ 0x4000208 = REG_IME
+	ldr     r1, [r12, #-0x8]        @ 0x4000208 = REG_IME
 
 	cmp     r1, #IME_DISABLE
 	beq     branch_1ff801c
@@ -26,8 +30,8 @@ branch_1ff801c: @ 1ff801c :arm
 	ldmfd   sp!, {pc}
 
 branch_1ff8020: @ 1ff8020 :arm
-	ldmia   r12, {r1,r2} @ load from REG_IE and REG_IF
-	ands    r1, r1, r2   @ and compare
+	ldmia   r12, {r1,r2}            @ load from REG_IE and REG_IF
+	ands    r1, r1, r2              @ and compare
 	beq     branch_1ff8030
 	b       branch_1ff8034
 
@@ -43,14 +47,15 @@ branch_1ff8038: @ 1ff8038 :arm
 	mov     r1, r3, lsr r0
 	str     r1, [r12, #0x4]
 	rsbs    r0, r0, #0x1f
-	ldr     r1,  [pc, #0x8] @ [0x1ff8060] (=RAM_27e0000)
+	ldr     r1, =RAM_27e0000
 	ldr     r0, [r1, r0, lsl #0x2]
-	ldr     lr,  [pc, #0x4] @ [0x1ff8064] (=Function_1ff8068)
+	ldr     lr, =Function_1ff8068
 	bx      r0
 @ 0x1ff8060
 
-.word RAM_27e0000 @ 0x1ff8060
-.word Function_1ff8068 @ 0x1ff8064
+.align 2
+.pool
+arm_func_end OS_IrqHandler
 
 
 
@@ -175,17 +180,17 @@ branch_1ff8150: @ 1ff8150 :arm
 
 
 
-.arm
+arm_func_start OSi_DoResetSystem
 OSi_DoResetSystem: @ 1ff81e4 :arm
 	stmfd   sp!, {r3,lr}
 
-	ldr     r0, [pc, #0x20] @ [0x1ff8210] (=RAM_21ccfe4)
+	ldr     r0, =RAM_21ccfe4
 branch_1ff81ec: @ 1ff81ec :arm
 	ldrh    r1, [r0]
 	cmp     r1, #0x0
 	beq     branch_1ff81ec
 
-	ldr     r0, [pc, #0x14] @ [0x1ff8214] (=REG_IME)
+	ldr     r0, =REG_IME
 	mov     r1, #IME_DISABLE
 	strh    r1, [r0]
 
@@ -195,8 +200,9 @@ branch_1ff81ec: @ 1ff81ec :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x1ff8210
 
-.word RAM_21ccfe4 @ 0x1ff8210
-.word REG_IME @ 0x1ff8214
+.align 2
+.pool
+arm_func_end OSi_DoResetSystem
 
 
 
@@ -393,7 +399,7 @@ branch_1ff8450: @ 1ff8450 :arm
 
 
 
-.arm
+arm_func_start PreITCM_MIi_DmaSetParams
 PreITCM_MIi_DmaSetParams: @ 1ff8480 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -411,10 +417,10 @@ PreITCM_MIi_DmaSetParams: @ 1ff8480 :arm
 	str     r4, [r1, #0x8]
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r3-r7,pc}
-@ 0x1ff84c0
+arm_func_end PreITCM_MIi_DmaSetParams
 
 
-.arm
+arm_func_start PreITCM_MIi_DmaSetParams_wait
 PreITCM_MIi_DmaSetParams_wait: @ 1ff84c0 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -452,10 +458,11 @@ branch_1ff8520: @ 1ff8520 :arm
 
 .word DMA0_SRC @ 0x1ff8528
 .word 0x81400001 @ 0x1ff852c
+arm_func_end PreITCM_MIi_DmaSetParams_wait
 
 
 
-.arm
+arm_func_start MIi_DmaSetParams_noInt
 MIi_DmaSetParams_noInt: @ 1ff8530 :arm
 	mov     r12, #0xc
 	mul     r12, r0, r12
@@ -466,10 +473,10 @@ MIi_DmaSetParams_noInt: @ 1ff8530 :arm
 	str     r2, [r0, #0x4]
 	str     r3, [r0, #0x8]
 	bx      lr
-@ 0x1ff8554
+arm_func_end MIi_DmaSetParams_noInt
 
 
-.arm
+arm_func_start MIi_DmaSetParams_wait_noInt
 MIi_DmaSetParams_wait_noInt: @ 1ff8554 :arm
 	stmfd   sp!, {r3,lr}
 	mov     r12, #0xc
@@ -499,6 +506,7 @@ branch_1ff85a0: @ 1ff85a0 :arm
 
 .word DMA0_SRC @ 0x1ff85b0
 .word 0x81400001 @ 0x1ff85b4
+arm_func_end MIi_DmaSetParams_wait_noInt
 
 
 
@@ -546,9 +554,10 @@ branch_1ff8634: @ 1ff8634 :arm
 
 .word GFX_FIFO @ 0x1ff8644
 .word 0x84400000 @ 0x1ff8648
+
+
 @ 0x1ff864c
+.align 5, 0
 
 
-
-@ 0x210236c
-.word 0x0, 0x0, 0x0, 0x0, 0x0
+@ 0x1ff8660

@@ -12,12 +12,16 @@ endif
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect
+.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/narc.py -x
 create_narc    := $(PYTHON) tools/narc.py -p
 create_narc2   := $(PYTHON) tools/narc.py -p2
+unpack_sdat    := $(PYTHON) tools/sdat.py -x
+unpack_sseq    := $(PYTHON) tools/sdat.py -sseq
+unpack_it      := $(PYTHON) tools/it.py -x
+create_it      := $(PYTHON) tools/it.py -p
 armdisassem    := $(PYTHON) tools/armdisassem.py
 conv_pics      := $(PYTHON) tools/conv_pics.py
 create_rom     := $(PYTHON) tools/create_rom.py
@@ -37,15 +41,24 @@ ex_wotable     := $(PYTHON) tools/export_wotable.py
 ex_beseq       := $(PYTHON) tools/export_beseq.py
 ex_wazaeffect  := $(PYTHON) tools/export_wazaeffect.py
 ex_btx         := $(PYTHON) tools/export_btx.py
+ex_encdata     := $(PYTHON) tools/export_encounterdata.py
+ex_evo         := $(PYTHON) tools/export_evo.py
+ex_growtbl     := $(PYTHON) tools/export_growtbl.py
 
 
 NARCFOLDER = \
+newrom/data/fielddata/encountdata/d_enc_data \
+newrom/data/fielddata/encountdata/p_enc_data \
+newrom/data/fielddata/encountdata/pl_enc_data \
 newrom/data/fielddata/eventdata/zone_event \
 newrom/data/fielddata/script/scr_seq \
 newrom/data/itemtool/itemdata/item_data \
 newrom/data/itemtool/itemdata/pl_item_data \
 newrom/data/msgdata/msg \
 newrom/data/msgdata/pl_msg \
+newrom/data/poketool/personal/evo \
+newrom/data/poketool/personal/growtbl \
+newrom/data/poketool/personal/pl_growtbl \
 newrom/data/poketool/personal/personal \
 newrom/data/poketool/personal/pl_personal \
 newrom/data/poketool/personal/wotbl \
@@ -54,7 +67,7 @@ newrom/data/poketool/trainer/trpoke \
 newrom/data/poketool/waza/pl_waza_tbl \
 newrom/data/poketool/waza/waza_tbl
 NARCS = $(addsuffix .narc, $(NARCFOLDER))
-SRCS = arm9.s arm9_ram.s y9.s overlay_0000.s overlay_0001.s overlay_0002.s overlay_0003.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0008.s overlay_0009.s overlay_0010.s overlay_0011.s overlay_0012.s overlay_0013.s overlay_0014.s overlay_0015.s overlay_0016.s overlay_0017.s overlay_0018.s overlay_0019.s overlay_0020.s overlay_0021.s overlay_0022.s overlay_0023.s overlay_0024.s overlay_0025.s overlay_0026.s overlay_0027.s overlay_0028.s overlay_0029.s overlay_0030.s overlay_0031.s overlay_0032.s overlay_0033.s overlay_0034.s overlay_0035.s overlay_0036.s overlay_0037.s overlay_0038.s overlay_0039.s overlay_0040.s overlay_0041.s overlay_0042.s overlay_0043.s overlay_0044.s overlay_0045.s overlay_0046.s overlay_0047.s overlay_0048.s overlay_0049.s overlay_0050.s overlay_0051.s overlay_0052.s overlay_0053.s overlay_0054.s overlay_0055.s overlay_0056.s overlay_0057.s overlay_0058.s overlay_0059.s overlay_0060.s overlay_0061.s overlay_0062.s overlay_0063.s overlay_0064.s overlay_0065.s overlay_0066.s overlay_0067.s overlay_0068.s overlay_0069.s overlay_0070.s overlay_0071.s overlay_0072.s overlay_0073.s overlay_0074.s overlay_0075.s overlay_0076.s overlay_0077.s overlay_0078.s overlay_0079.s overlay_0080.s overlay_0081.s overlay_0082.s overlay_0083.s overlay_0084.s overlay_0085.s overlay_0086.s overlay_0087.s overlay_0088.s overlay_0089.s overlay_0090.s overlay_0091.s overlay_0092.s overlay_0093.s overlay_0094.s overlay_0095.s overlay_0096.s overlay_0097.s overlay_0098.s overlay_0099.s overlay_0100.s overlay_0101.s overlay_0102.s overlay_0103.s overlay_0104.s overlay_0105.s overlay_0106.s overlay_0107.s overlay_0108.s overlay_0109.s overlay_0110.s overlay_0111.s overlay_0112.s overlay_0113.s overlay_0114.s overlay_0115.s overlay_0116.s overlay_0117.s overlay_0118.s overlay_0119.s overlay_0120.s overlay_0121.s
+SRCS = arm9.s arm9_ram.s arm9_itcm.s arm9_dtcm.s y9.s overlay_0000.s overlay_0001.s overlay_0002.s overlay_0003.s overlay_0004.s overlay_0005.s overlay_0006.s overlay_0007.s overlay_0008.s overlay_0009.s overlay_0010.s overlay_0011.s overlay_0012.s overlay_0013.s overlay_0014.s overlay_0015.s overlay_0016.s overlay_0017.s overlay_0018.s overlay_0019.s overlay_0020.s overlay_0021.s overlay_0022.s overlay_0023.s overlay_0024.s overlay_0025.s overlay_0026.s overlay_0027.s overlay_0028.s overlay_0029.s overlay_0030.s overlay_0031.s overlay_0032.s overlay_0033.s overlay_0034.s overlay_0035.s overlay_0036.s overlay_0037.s overlay_0038.s overlay_0039.s overlay_0040.s overlay_0041.s overlay_0042.s overlay_0043.s overlay_0044.s overlay_0045.s overlay_0046.s overlay_0047.s overlay_0048.s overlay_0049.s overlay_0050.s overlay_0051.s overlay_0052.s overlay_0053.s overlay_0054.s overlay_0055.s overlay_0056.s overlay_0057.s overlay_0058.s overlay_0059.s overlay_0060.s overlay_0061.s overlay_0062.s overlay_0063.s overlay_0064.s overlay_0065.s overlay_0066.s overlay_0067.s overlay_0068.s overlay_0069.s overlay_0070.s overlay_0071.s overlay_0072.s overlay_0073.s overlay_0074.s overlay_0075.s overlay_0076.s overlay_0077.s overlay_0078.s overlay_0079.s overlay_0080.s overlay_0081.s overlay_0082.s overlay_0083.s overlay_0084.s overlay_0085.s overlay_0086.s overlay_0087.s overlay_0088.s overlay_0089.s overlay_0090.s overlay_0091.s overlay_0092.s overlay_0093.s overlay_0094.s overlay_0095.s overlay_0096.s overlay_0097.s overlay_0098.s overlay_0099.s overlay_0100.s overlay_0101.s overlay_0102.s overlay_0103.s overlay_0104.s overlay_0105.s overlay_0106.s overlay_0107.s overlay_0108.s overlay_0109.s overlay_0110.s overlay_0111.s overlay_0112.s overlay_0113.s overlay_0114.s overlay_0115.s overlay_0116.s overlay_0117.s overlay_0118.s overlay_0119.s overlay_0120.s overlay_0121.s
 OBJS_ = $(SRCS:.S=.o)
 OBJS = $(addprefix build/, $(OBJS_:.s=.o))
 DEPS_ = $(SRCS:.S=.d)
@@ -124,6 +137,21 @@ narc_files2 := \
 "./newrom/data/msgdata/pl_msg.narc" \
 "./newrom/data/poketool/trainer/trdata.narc" \
 "./newrom/data/poketool/trainer/trpoke.narc"
+
+sdat_files := \
+"./baserom/data/data/sound/pl_sound_data.sdat" \
+"./baserom/data/data/sound/sound_data.sdat"
+
+sseq_files := \
+$(wildcard ./baserom/data/data/sound/pl_sound_data_sdat/data_0000000*.sseq) \
+$(wildcard ./baserom/data/data/sound/pl_sound_data_sdat/data_0000001*.sseq) \
+"./baserom/data/data/sound/pl_sound_data_sdat/data_00000098.sseq"
+
+it_files := \
+"./trackerfiles/Module1.it"
+it_folders := \
+"./trackerfiles/Module1_it/"
+
 
 trainer_files := $(wildcard ./data/poketool/trainer/trdata/*.s)
 
@@ -258,6 +286,18 @@ narc:
 narc2:
 	$(foreach f,$(narc_files2),$(unpack_narc) $(f);)
 
+sdat:
+	$(foreach f,$(sdat_files),$(unpack_sdat) $(f) -debug;)
+
+sseq:
+	$(foreach f,$(sseq_files),$(unpack_sseq) $(f) -debug;)
+
+it:
+	$(foreach f,$(it_files),$(unpack_it) $(f) -debug;)
+
+build_it:
+	$(create_it) "./trackerfiles/Module1_it/" -o "./trackerfiles/Module1_it/a.it" -debug
+
 
 
 ex_script:
@@ -361,9 +401,15 @@ newrom/$(1).narc: $$(FILES)
 endef
 
 
+$(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/d_enc_data))
+$(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/p_enc_data))
+$(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/pl_enc_data))
 $(eval $(call NARC_RULE_TEMPLATE,data/fielddata/eventdata/zone_event))
 $(eval $(call NARC_RULE_TEMPLATE,data/itemtool/itemdata/item_data))
 $(eval $(call NARC_RULE_TEMPLATE,data/itemtool/itemdata/pl_item_data))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/evo))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/growtbl))
+$(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/pl_growtbl))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/personal))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/pl_personal))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/personal/wotbl))
@@ -384,6 +430,17 @@ newrom/%.narc:
 
 
 
+ex_growtbl:
+	$(foreach f,$(wildcard ./baserom/data/poketool/personal/growtbl_narc/*.bin),$(ex_growtbl) $(f) "./data/poketool/personal/growtbl/";)
+	$(foreach f,$(wildcard ./baserom/data/poketool/personal/pl_growtbl_narc/*.bin),$(ex_growtbl) $(f) "./data/poketool/personal/pl_growtbl/";)
+
+ex_evo:
+	$(foreach f,$(wildcard ./baserom/data/poketool/personal/evo_narc/*.bin),$(ex_evo) $(f) "./data/poketool/personal/evo/";)
+
+ex_encdata:
+	$(foreach f,$(wildcard ./baserom/data/fielddata/encountdata/d_enc_data_narc/*.bin),$(ex_encdata) $(f) "./data/fielddata/encountdata/d_enc_data/";)
+	$(foreach f,$(wildcard ./baserom/data/fielddata/encountdata/p_enc_data_narc/*.bin),$(ex_encdata) $(f) "./data/fielddata/encountdata/p_enc_data/";)
+	$(foreach f,$(wildcard ./baserom/data/fielddata/encountdata/pl_enc_data_narc/*.bin),$(ex_encdata) $(f) "./data/fielddata/encountdata/pl_enc_data/";)
 
 ex_wotable:
 	$(foreach f,$(wildcard ./baserom/data/poketool/personal/wotbl_narc/*.bin),$(ex_wotable) $(f) "./data/poketool/personal/wotbl/";)

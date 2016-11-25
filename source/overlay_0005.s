@@ -72164,7 +72164,7 @@ LoadAreaData: @ 21ef7a0 :thumb
 	mov     r5, r0
 
 	mov     r0, #0xc2
-	lsl     r0, r0, #4
+	lsl     r0, r0, #4          @ 0xc20
 	ldr     r7, [r5, r0]
 	sub     r0, #0x8
 	ldr     r2, [r7, #0x0]

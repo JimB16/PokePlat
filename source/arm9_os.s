@@ -52,6 +52,7 @@ arm_func_end OS_IrqDummy
 
 
 .arm
+.globl OSi_IrqCallback
 OSi_IrqCallback: @ 20c132c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r1, #0xc
@@ -94,6 +95,7 @@ branch_20c1370: @ 20c1370 :arm
 
 
 .arm
+.globl OSi_IrqDma0
 OSi_IrqDma0: @ 20c13b4 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x0
@@ -105,6 +107,7 @@ OSi_IrqDma0: @ 20c13b4 :arm
 
 
 .arm
+.globl OSi_IrqDma1
 OSi_IrqDma1: @ 20c13c4 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x1
@@ -116,6 +119,7 @@ OSi_IrqDma1: @ 20c13c4 :arm
 
 
 .arm
+.globl OSi_IrqDma2
 OSi_IrqDma2: @ 20c13d4 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x2
@@ -127,6 +131,7 @@ OSi_IrqDma2: @ 20c13d4 :arm
 
 
 .arm
+.globl OSi_IrqDma3
 OSi_IrqDma3: @ 20c13e4 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x3
@@ -138,6 +143,7 @@ OSi_IrqDma3: @ 20c13e4 :arm
 
 
 .arm
+.globl OSi_IrqTimer0
 OSi_IrqTimer0: @ 20c13f4 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x4
@@ -149,6 +155,7 @@ OSi_IrqTimer0: @ 20c13f4 :arm
 
 
 .arm
+.globl OSi_IrqTimer1
 OSi_IrqTimer1: @ 20c1404 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x5
@@ -160,6 +167,7 @@ OSi_IrqTimer1: @ 20c1404 :arm
 
 
 .arm
+.globl OSi_IrqTimer2
 OSi_IrqTimer2: @ 20c1414 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x6
@@ -171,6 +179,7 @@ OSi_IrqTimer2: @ 20c1414 :arm
 
 
 .arm
+.globl OSi_IrqTimer3
 OSi_IrqTimer3: @ 20c1424 :arm
 	ldr     r12, =OSi_IrqCallback
 	mov     r0, #0x7
@@ -2536,6 +2545,7 @@ branch_20c2c60: @ 20c2c60 :arm
 
 
 .arm
+.globl DC_WaitWriteBufferEmpty
 DC_WaitWriteBufferEmpty: @ 20c2c78 :arm
 	mov     r0, #0x0
 	mcr     p15, 0, r0, c7, c10, 4
@@ -2544,6 +2554,7 @@ DC_WaitWriteBufferEmpty: @ 20c2c78 :arm
 
 
 .arm
+.globl IC_InvalidateAll
 IC_InvalidateAll: @ 20c2c84 :arm
 	mov     r0, #0x0
 	mcr     p15, 0, r0, c7, c5, 0

@@ -60,6 +60,41 @@ def GetTypeName(type):
         return str(type)
 
 
+def GetEggGroupName(group):
+    if group == 1:
+        return "EGGGROUP_MONSTER"
+    if group == 2:
+        return "EGGGROUP_WATER1"
+    if group == 3:
+        return "EGGGROUP_BUG"
+    if group == 4:
+        return "EGGGROUP_FLYING"
+    if group == 5:
+        return "EGGGROUP_FIELD"
+    if group == 6:
+        return "EGGGROUP_FAIRY"
+    elif group == 7:
+        return "EGGGROUP_GRASS"
+    elif group == 8:
+        return "EGGGROUP_HUMANLIKE"
+    elif group == 9:
+        return "EGGGROUP_WATER3"
+    elif group == 10:
+        return "EGGGROUP_MINERAL"
+    elif group == 11:
+        return "EGGGROUP_AMORPHOUS"
+    elif group == 12:
+        return "EGGGROUP_WATER2"
+    elif group == 13:
+        return "EGGGROUP_DITTO"
+    elif group == 14:
+        return "EGGGROUP_DRAGON"
+    elif group == 15:
+        return "EGGGROUP_UNDISCOVERED"
+    else:
+        return str(group)
+
+
 if __name__ == "__main__":
     conf = configuration.Config()
     
@@ -109,7 +144,7 @@ if __name__ == "__main__":
     Unknown24 = input_file.ReadWord(0x24)
     Unknown28 = input_file.ReadWord(0x28)
     
-    output_item += "PkmnBaseData " + str(HP) + ", " + str(Atk) + ", " + str(Def) + ", " + str(Spe) + ", " + str(SpA) + ", " + str(SpD) + ", " + GetTypeName(Type1) + ", " + GetTypeName(Type2) + ", " + str(CatchRate) + ", " + str(BaseExp) + ", " + EV_String + ", " + GetItemName(Item1) + ", " + GetItemName(Item2) + ", " + str(Gender) + ", " + str(HatchCycle) + ", " + str(BaseHappy) + ", " + str(ExpRate) + ", " + str(EggGroup1) + ", " + str(EggGroup2) + ", " + GetAbilityName(Ability1) + ", " + GetAbilityName(Ability2) + ", " + str(Flee) + ", " + str(Unknown19) + ", " + str(Unknown1a) + ", " + hex(Unknown1c) + ", " + hex(Unknown20) + ", " + hex(Unknown24) + ", " + str(Unknown28)
+    output_item += "PkmnBaseData " + str(HP) + ", " + str(Atk) + ", " + str(Def) + ", " + str(Spe) + ", " + str(SpA) + ", " + str(SpD) + ", " + GetTypeName(Type1) + ", " + GetTypeName(Type2) + ", " + str(CatchRate) + ", " + str(BaseExp) + ", " + EV_String + ", " + GetItemName(Item1) + ", " + GetItemName(Item2) + ", " + str(Gender) + ", " + str(HatchCycle) + ", " + str(BaseHappy) + ", " + str(ExpRate) + ", " + GetEggGroupName(EggGroup1) + ", " + GetEggGroupName(EggGroup2) + ", " + GetAbilityName(Ability1) + ", " + GetAbilityName(Ability2) + ", " + str(Flee) + ", " + str(Unknown19) + ", " + str(Unknown1a) + ", " + hex(Unknown1c) + ", " + hex(Unknown20) + ", " + hex(Unknown24) + ", " + str(Unknown28)
     
     if not os.path.exists(os.path.dirname(output_folder)):
         os.makedirs(os.path.dirname(output_folder))        

@@ -954,6 +954,22 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
+.equ EGGGROUP_MONSTER, 1
+.equ EGGGROUP_WATER1, 2
+.equ EGGGROUP_BUG, 3
+.equ EGGGROUP_FLYING, 4
+.equ EGGGROUP_FIELD, 5
+.equ EGGGROUP_FAIRY, 6
+.equ EGGGROUP_GRASS, 7
+.equ EGGGROUP_HUMANLIKE, 8
+.equ EGGGROUP_WATER3, 9
+.equ EGGGROUP_MINERAL, 10
+.equ EGGGROUP_AMORPHOUS, 11
+.equ EGGGROUP_WATER2, 12
+.equ EGGGROUP_DITTO, 13
+.equ EGGGROUP_DRAGON, 14
+.equ EGGGROUP_UNDISCOVERED, 15
+
 .macro	PkmnBaseData	hp, atk, def, spe, spa, spd, type1, type2, catchrate, baseexp, ev, item1, item2, gender, hatchcycle, basehappy, exprate, egggroup1, egggroup2, ability1, ability2, flee, unknown19, unknown1a, unknown1c, unknown20, unknown24, unknown28
 .byte   \hp, \atk, \def, \spe, \spa, \spd, \type1, \type2, \catchrate, \baseexp
 .hword  \ev, \item1, \item2

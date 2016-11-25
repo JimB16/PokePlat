@@ -71,7 +71,7 @@ if __name__ == "__main__":
     
     output_item = ""
     output_item += ".include \"source/macros_asm.s\"\n\n"
-    output_item += "@ all unknown\n"
+    output_item += "@ HP, Atk, Def, Spe, SpA, SpD, Type1, Type2, CatchRate, BaseExp, EV ((EV_HP)|(EV_Atk<<2)|(EV_Def<<4)|(EV_Spe<<6)|(EV_SpA<<8)|(EV_SpD<<10)), Item1, Item2, Gender, HatchCycle, BaseHappiness, ExpRate, EggGroup1, EggGroup2, Ability1, Ability2, Flee, unknown, unknown, unknown, unknown, unknown, unknown\n"
     
     HP = input_file.ReadByte(0)
     Atk = input_file.ReadByte(1)
@@ -84,6 +84,13 @@ if __name__ == "__main__":
     CatchRate = input_file.ReadByte(8)
     BaseExp = input_file.ReadByte(9)
     EV = input_file.ReadHWord(0xa)
+    EV_HP = (EV>>0)&0x3
+    EV_Atk = (EV>>2)&0x3
+    EV_Def = (EV>>4)&0x3
+    EV_Spe = (EV>>6)&0x3
+    EV_SpA = (EV>>8)&0x3
+    EV_SpD = (EV>>10)&0x3
+    EV_String = "((" + str(EV_HP) + ")|(" + str(EV_Atk) + "<<2)|(" + str(EV_Def) + "<<4)|(" + str(EV_Spe) + "<<6)|(" + str(EV_SpA) + "<<8)|(" + str(EV_SpD) + "<<10))"
     Item1 = input_file.ReadHWord(0xc)
     Item2 = input_file.ReadHWord(0xe)
     Gender = input_file.ReadByte(0x10)
@@ -102,7 +109,7 @@ if __name__ == "__main__":
     Unknown24 = input_file.ReadWord(0x24)
     Unknown28 = input_file.ReadWord(0x28)
     
-    output_item += "PkmnBaseData " + str(HP) + ", " + str(Atk) + ", " + str(Def) + ", " + str(Spe) + ", " + str(SpA) + ", " + str(SpD) + ", " + GetTypeName(Type1) + ", " + GetTypeName(Type2) + ", " + str(CatchRate) + ", " + str(BaseExp) + ", " + str(EV) + ", " + GetItemName(Item1) + ", " + GetItemName(Item2) + ", " + str(Gender) + ", " + str(HatchCycle) + ", " + str(BaseHappy) + ", " + str(ExpRate) + ", " + str(EggGroup1) + ", " + str(EggGroup2) + ", " + GetAbilityName(Ability1) + ", " + GetAbilityName(Ability2) + ", " + str(Flee) + ", " + str(Unknown19) + ", " + str(Unknown1a) + ", " + hex(Unknown1c) + ", " + hex(Unknown20) + ", " + hex(Unknown24) + ", " + str(Unknown28)
+    output_item += "PkmnBaseData " + str(HP) + ", " + str(Atk) + ", " + str(Def) + ", " + str(Spe) + ", " + str(SpA) + ", " + str(SpD) + ", " + GetTypeName(Type1) + ", " + GetTypeName(Type2) + ", " + str(CatchRate) + ", " + str(BaseExp) + ", " + EV_String + ", " + GetItemName(Item1) + ", " + GetItemName(Item2) + ", " + str(Gender) + ", " + str(HatchCycle) + ", " + str(BaseHappy) + ", " + str(ExpRate) + ", " + str(EggGroup1) + ", " + str(EggGroup2) + ", " + GetAbilityName(Ability1) + ", " + GetAbilityName(Ability2) + ", " + str(Flee) + ", " + str(Unknown19) + ", " + str(Unknown1a) + ", " + hex(Unknown1c) + ", " + hex(Unknown20) + ", " + hex(Unknown24) + ", " + str(Unknown28)
     
     if not os.path.exists(os.path.dirname(output_folder)):
         os.makedirs(os.path.dirname(output_folder))        

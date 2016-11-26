@@ -359,22 +359,35 @@ ex_landdata:
 	$(foreach f,$(landdata_files_bin),$(ex_landdata) $(f) "./data/fielddata/land_data/land_data_narc/";)
 
 
-font_files_bin := $(wildcard baserom/data/graphic/pl_font_narc/data_00000000.bin) \
-$(wildcard baserom/data/graphic/pl_font_narc/data_00000001.bin) \
-$(wildcard baserom/data/graphic/pl_font_narc/data_00000002.bin) \
-$(wildcard baserom/data/graphic/pl_font_narc/data_00000003.bin) \
-$(wildcard baserom/data/graphic/font_narc/data_00000000.bin) \
-$(wildcard baserom/data/graphic/font_narc/data_00000001.bin) \
-$(wildcard baserom/data/graphic/font_narc/data_00000002.bin) \
-$(wildcard baserom/data/graphic/font_narc/data_00000003.bin)
+font_files_bin := $(wildcard ./baserom/data/graphic/pl_font_narc/data_00000000.bin) \
+$(wildcard ./baserom/data/graphic/pl_font_narc/data_00000001.bin) \
+$(wildcard ./baserom/data/graphic/pl_font_narc/data_00000003.bin) \
+$(wildcard ./baserom/data/graphic/font_narc/data_00000000.bin) \
+$(wildcard ./baserom/data/graphic/font_narc/data_00000001.bin) \
+$(wildcard ./baserom/data/graphic/font_narc/data_00000003.bin)
 
-build_font_files_bin := $(subst baserom/,build/, $(subst font_narc,font, $(font_files_bin)))
+font2_files_bin := $(wildcard ./baserom/data/graphic/pl_font_narc/data_00000002.bin) \
+$(wildcard ./baserom/data/graphic/font_narc/data_00000002.bin)
+
+build_font_files_bin := $(wildcard build/data/graphic/pl_font/data_00000000.bin) \
+$(wildcard build/data/graphic/pl_font/data_00000001.bin) \
+$(wildcard build/data/graphic/pl_font/data_00000002.bin) \
+$(wildcard build/data/graphic/pl_font/data_00000003.bin) \
+$(wildcard build/data/graphic/font/data_00000000.bin) \
+$(wildcard build/data/graphic/font/data_00000001.bin) \
+$(wildcard build/data/graphic/font/data_00000002.bin) \
+$(wildcard build/data/graphic/font/data_00000003.bin)
+#$(subst baserom/,build/, $(subst font_narc,font, $(font_files_bin)))
 
 build/data/graphic/%.bin: data/graphic/%.font.png
 	$(ex_font) -p $< -o $@
+	hexdump -C $(subst build,baserom,$(subst font,font_narc,$@)) > $(subst build,baserom,$(subst .bin,.txt,$(subst font,font_narc,$@)))
+	hexdump -C $@ > $(subst .bin,.txt,$@)
+	diff -u $(subst build,baserom,$(subst .bin,.txt,$(subst font,font_narc,$@))) $(subst .bin,.txt,$@) | less > build/diff_$(notdir $(subst .bin,.txt,$@))
 
 ex_font:
 	$(foreach f,$(font_files_bin),$(ex_font) -x $(f) -o $(subst font_narc,font,$(subst .bin,.font.png,$(subst baserom/,,$f)));)
+	$(foreach f,$(font2_files_bin),$(ex_font) -inv -x $(f) -o $(subst font_narc,font,$(subst .bin,.font.png,$(subst baserom/,,$f)));)
 	#$(foreach f,$(font_files_bin),$(ex_font) -p $(subst pl_font_narc,pl_font,$(subst .bin,.png,$(subst baserom/,,$f))) -o $(subst pl_font_narc,pl_font,$(subst .bin,.bin,$(subst baserom/,build/,$f)));)
 	#$(foreach f,$(font_files_bin),$(ex_font) $(f) -o $(subst pl_font_narc,pl_font,$(subst .bin,,$(subst baserom/,,$f)));)
 

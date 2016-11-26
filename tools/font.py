@@ -80,7 +80,7 @@ class FileHandler(object):
 
     
     def extract_font_from_png(self, w, h, pixels, id, debug=False):
-        width = 16
+        width = 0
         x = (id % 16) * 16
         y = (id / 16)
         offset = y*16*16*16+x
@@ -92,8 +92,8 @@ class FileHandler(object):
                     hword = 0
                     for x in range(8):
                         val = pixels[offset + w*(y+(8*n)) + (8*m)+x]
-                        if (val == 4) & (width > ((8*m)+x)):
-                            width = ((8*m)+x)
+                        if (val != 4) & (width < ((8*m)+x+1)):
+                            width = ((8*m)+x+1)
                         val &= 0x3
                         hword |= val << ((7-x)*2)
                     tiles += [hword]
@@ -105,7 +105,7 @@ class FileHandler(object):
         
     
 
-    def read_font(self, offset, width, debug=False):
+    def read_font(self, offset, width, inverted, debug=False):
         data = []
         data_line = []
             
@@ -119,14 +119,22 @@ class FileHandler(object):
             hword = self.get_hword_from_rom(offset+j + tile + 0x0)
             for i in range(8):
                 if width > i:
-                    data_line.append((hword >> ((7-i)*2)) & 0x3)
+                    val = (hword >> ((7-i)*2)) & 0x3
+                    if inverted == 0:
+                        if val == 0:
+                            val = 4
+                    data_line.append(val)
                 else:
                     data_line.append(4)
             
             hword = self.get_hword_from_rom(offset+j + tile + 0x10)
             for i in range(8):
                 if width > 8+i:
-                    data_line.append((hword >> ((7-i)*2)) & 0x3)
+                    val = (hword >> ((7-i)*2)) & 0x3
+                    if inverted == 0:
+                        if val == 0:
+                            val = 4
+                    data_line.append(val)
                 else:
                     data_line.append(4)
             data.append(data_line)
@@ -136,7 +144,7 @@ class FileHandler(object):
         return data
 
 
-    def output_fonts(self, filename, output_filename, debug=False):
+    def output_fonts(self, filename, output_filename, inverted, debug=False):
         output = ""
         
         rom_path = os.path.join(self.config.path, filename)
@@ -175,7 +183,7 @@ class FileHandler(object):
             
             offset = HeaderSize+0x40*i
             
-            data = self.read_font(offset, widths[i], debug)
+            data = self.read_font(offset, widths[i], inverted, debug)
             data_all.append(data)
             #print("data_all: " + str(data_all))
             #print("len(data_all): " + str(len(data_all)))
@@ -204,10 +212,12 @@ class FileHandler(object):
                     if (i+16*n) >= NrOfChars:
                         data_line += [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
                     else:
-                        data_line += data_all[i+16*n][j]
+                        val = data_all[i+16*n][j]
+                        data_line += val
                 data.append(data_line)
         
         #print("data: " + str(data))
+        #print("outfilename: " + str(outfilename))
         f = open(outfilename, 'wb')
         # https://pythonhosted.org/pypng/ex.html
         w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
@@ -224,6 +234,7 @@ if __name__ == "__main__":
     filename = ""
     output_filename = filename + ".bin"
     debugFlag = False
+    inverted = 0
     i = 1
     while i < len(sys.argv):
         if sys.argv[i] == "-x":
@@ -231,9 +242,12 @@ if __name__ == "__main__":
             cmd = "unpack"
             filename = sys.argv[i+1]
             i += 2
-        if sys.argv[i] == "-o":
+        elif sys.argv[i] == "-o":
             output_filename = sys.argv[i+1]
             i += 2
+        elif sys.argv[i] == "-inv":
+            inverted = 1
+            i += 1
         elif sys.argv[i] == "-p":
             cmd = "pack"
             filename = sys.argv[i+1]
@@ -248,7 +262,7 @@ if __name__ == "__main__":
     
     print(cmd + ': ' + filename)
     if cmd == "unpack":
-        output = romhand.output_fonts(filename, output_filename)[0]
+        output = romhand.output_fonts(filename, output_filename, inverted)[0]
     elif cmd == "pack":
         output = romhand.read_png(filename, output_filename)
     

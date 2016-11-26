@@ -58,6 +58,7 @@ class FileHandler(object):
         #print("palette: " + str(img.palette()))
         
         widths = []
+        cell_width = 0 # max width
         data = []
         for i in range(0x1fd):
             width, tiles = self.extract_font_from_png(w, h, pixels, i)
@@ -65,12 +66,14 @@ class FileHandler(object):
                 data.append(tiles[i] & 0xff)
                 data.append(tiles[i] >> 8)
             widths.append(width)
+            if width > cell_width:
+                cell_width = width
         
         
         if not os.path.exists(os.path.dirname(output_filename)):
             os.makedirs(os.path.dirname(output_filename))
         f = open(output_filename, 'wb')
-        filepart = bytearray([0x10, 0x00, 0x00, 0x00, 0x50, 0x7f, 0x00, 0x00, 0xfd, 0x01, 0x00, 0x00, 0x10, 0x10, 0x02, 0x02]) # Header
+        filepart = bytearray([0x10, 0x00, 0x00, 0x00, 0x50, 0x7f, 0x00, 0x00, 0xfd, 0x01, 0x00, 0x00, cell_width, 0x10, 0x02, 0x02]) # Header
         f.write(filepart)
         filepart = bytearray(data)
         f.write(filepart)

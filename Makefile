@@ -23,7 +23,7 @@ unpack_sseq    := $(PYTHON) tools/sdat.py -sseq
 unpack_it      := $(PYTHON) tools/it.py -x
 create_it      := $(PYTHON) tools/it.py -p
 armdisassem    := $(PYTHON) tools/armdisassem.py
-conv_pics      := $(PYTHON) tools/conv_pics.py
+gfx            := $(PYTHON) tools/gfx.py
 create_rom     := $(PYTHON) tools/create_rom.py
 create_msg     := $(PYTHON) tools/create_msg.py
 ex_script      := $(PYTHON) tools/export_script.py
@@ -359,10 +359,24 @@ ex_landdata:
 	$(foreach f,$(landdata_files_bin),$(ex_landdata) $(f) "./data/fielddata/land_data/land_data_narc/";)
 
 
-font_files_bin := $(wildcard ./baserom/data/graphic/pl_font_narc/data_00000000.bin)
+font_files_bin := $(wildcard baserom/data/graphic/pl_font_narc/data_00000000.bin) \
+$(wildcard baserom/data/graphic/pl_font_narc/data_00000001.bin) \
+$(wildcard baserom/data/graphic/pl_font_narc/data_00000002.bin) \
+$(wildcard baserom/data/graphic/pl_font_narc/data_00000003.bin) \
+$(wildcard baserom/data/graphic/font_narc/data_00000000.bin) \
+$(wildcard baserom/data/graphic/font_narc/data_00000001.bin) \
+$(wildcard baserom/data/graphic/font_narc/data_00000002.bin) \
+$(wildcard baserom/data/graphic/font_narc/data_00000003.bin)
+
+build_font_files_bin := $(subst baserom/,build/, $(subst font_narc,font, $(font_files_bin)))
+
+build/data/graphic/%.bin: data/graphic/%.font.png
+	$(ex_font) -p $< -o $@
 
 ex_font:
-	$(foreach f,$(font_files_bin),$(ex_font) $(f);)
+	$(foreach f,$(font_files_bin),$(ex_font) -x $(f) -o $(subst font_narc,font,$(subst .bin,.font.png,$(subst baserom/,,$f)));)
+	#$(foreach f,$(font_files_bin),$(ex_font) -p $(subst pl_font_narc,pl_font,$(subst .bin,.png,$(subst baserom/,,$f))) -o $(subst pl_font_narc,pl_font,$(subst .bin,.bin,$(subst baserom/,build/,$f)));)
+	#$(foreach f,$(font_files_bin),$(ex_font) $(f) -o $(subst pl_font_narc,pl_font,$(subst .bin,,$(subst baserom/,,$f)));)
 
 
 
@@ -466,25 +480,28 @@ ex_wazaeffect:
 	#$(foreach f,$(wazaeffect_sub_files_bin),$(ex_wazaeffect) $(f) "./data/wazaeffect/we_sub_narc/";)
 
 
-baserom/data/poketool/pokegra/pl_pokegra_narc/%.png: baserom/data/poketool/pokegra/pl_pokegra_narc/%.rgcn
-	$(eval Y = $(subst _00000003.png,_00000004.rlcn,$(@)))
+data/poketool/pokegra/pl_pokegra/%.png: baserom/data/poketool/pokegra/pl_pokegra_narc/%.rgcn
+	$(eval X = $(addprefix baserom/, $(subst pl_pokegra,pl_pokegra_narc,$(@))))
+	$(eval Y = $(subst _00000003.png,_00000004.rlcn,$(X)))
 	$(eval Y = $(subst _00000000.png,_00000004.rlcn,$(Y)))
 	$(eval Y = $(subst _00000001.png,_00000004.rlcn,$(Y)))
 	$(eval Y = $(subst _00000002.png,_00000004.rlcn,$(Y)))
-	$(conv_pics) "$<" "$(Y)" "$@" -e forwards
+	$(gfx) "$<" "$(Y)" -o "$@" -e forwards
 
 pics: $(all_pokemon_png)
 
+pics_test: data/poketool/pokegra/pl_pokegra/data_00000006_00000002.png
+
 baserom/data/poketool/icongra/pl_poke_icon_narc/%.png: baserom/data/poketool/icongra/pl_poke_icon_narc/%.rgcn
-	$(conv_pics) "$<" "./baserom/data/poketool/icongra/pl_poke_icon_narc/data_00000000.rlcn" "$@" -w 4 -h 8
+	$(gfx) "$<" "./baserom/data/poketool/icongra/pl_poke_icon_narc/data_00000000.rlcn" -o "$@" -w 4 -h 8
 
 baserom/data/poketool/trgra/trfgra_narc/%_00000000.png: baserom/data/poketool/trgra/trfgra_narc/%_00000000.rgcn
 	$(eval Y = $(subst _00000000.png,_00000001.rlcn,$(@)))
-	$(conv_pics) "$<" "$(Y)" "$@" -w 20 -h 16
+	$(gfx) "$<" "$(Y)" -o "$@" -w 20 -h 16
 
 baserom/data/poketool/trgra/trfgra_narc/%_00000004.png: baserom/data/poketool/trgra/trfgra_narc/%_00000004.rgcn
 	$(eval Y = $(subst _00000004.png,_00000001.rlcn,$(@)))
-	$(conv_pics) "$<" "$(Y)" "$@" -e forwards
+	$(gfx) "$<" "$(Y)" -o "$@" -e forwards
 
 pics2: $(all_icons_png) $(all_trainer_png)
 
@@ -528,7 +545,7 @@ newrom/arm7.bin: $(OBJS7) $(DEPS7)
 
 
 
-pokeplat.nds: newrom/arm9_full.bin newrom/arm7.bin $(NARCS)
+pokeplat.nds: newrom/arm9_full.bin newrom/arm7.bin $(NARCS) $(build_font_files_bin)
 	$(create_rom) -dir "./newrom" -fat "./newrom/fat.bin" -o $@
 	md5sum ./pokeplat.nds
 	hexdump -C baserom/fat.bin > baserom/fat.txt

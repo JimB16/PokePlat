@@ -1,5 +1,29 @@
 # -*- coding: utf-8 -*-
 
+"""
+key = 0xf622
+key * mult + carry = key
+
+0xf622 * mult + carry = 0xb30b
+0xb30b * mult + carry = 0x1df8
+0x1df8 * mult + carry = 0xdc79
+
+mult = (0xb30b - carry) / 0xf622
+mult = (0x1df8 - carry) / 0xb30b
+(0xb30b - carry) / 0xf622 = (0x1df8 - carry) / 0xb30b
+(0xb30b / 0xf622) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (carry / 0xb30b)
+(carry / 0xb30b) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (0xb30b / 0xf622)
+(carry / 0xb30b) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (0xb30b / 0xf622)
+(x / 45835) - (x / 63010) = (7672 / 45835) - (45835 / 63010)
+x = -94173 = FFFFFFFFFFFE9023
+mult = (0xb30b - 0x9023) / 0xf622
+mult = (45835 - 36899) / 63010
+
+0xf622 * mult + carry - 0xb30b = 0
+0xb30b * mult + carry - 0x1df8 = 0
+0x1df8 * mult + carry - 0xdc79 = 0
+"""
+
 import os
 import sys
 from ctypes import c_int8
@@ -18,8 +42,12 @@ ENCRYPTION_FORWARDS = 2
 FORMAT_16BIT = 3
 FORMAT_256BIT = 4
 
-ENCRYPT_MULT = 0x41c64e6d
-ENCRYPT_CARRY = 0x6073
+# pokegra #Pkmn=0 mult: 0xeb65 carry: 0x89c3
+# pl_pokegra #Pkmn=0 mult: 0x4e6d carry: 0xedf9
+#ENCRYPT_MULT = 0x41c64e6d # pl_pokegra
+ENCRYPT_MULT = 0xeb65 # pokegra
+#ENCRYPT_CARRY = 0x6073 # pl_pokegra
+ENCRYPT_CARRY = 0x61a1 # pokegra
 
 TYPE_TILE = 0
 TYPE_LINEAR = 1
@@ -30,14 +58,128 @@ TYPE_LINEAR2 = 256
 class Graphic(object):
     file = FileHandler()
     data = []
+    filename = ""
+    filesize = 0
 
     def __init__(self, config):
         self.config = config
     
     def init(self, filename):
         self.file.init(os.path.join(self.config.path, filename), 0)
+        self.filename = filename
+        self.filesize = os.path.getsize(filename)
+    
+    
+    def encrypt(self, data, encryption=ENCRYPTION_NONE, key=0, mult=0, carry=0, debug=False):
+        dec_data = array.array('H')
+        if encryption != ENCRYPTION_NONE:
+            enc_data = array.array('H', data)
+            #if encryption == NCGR.ENCRYPTION_REVERSE:
+            #    enc_data = enc_data[::-1]
+            if key == 0:
+                key = enc_data[0]
+            if debug:
+                print("- key: " + hex(key))
+            for val in enc_data:
+                val2 = val ^ (key & 0xFFFF)
+                dec_data.append(val2)
+                val2 = key
+                key *= mult # ENCRYPT_MULT # 0x41c64e6d
+                key += carry # ENCRYPT_CARRY # 0x6073
+                key &= 0xFFFF
+        else:
+            enc_data = array.array('H', data)
+            for val in enc_data:
+                dec_data.append(val)
+        
+        return dec_data
 
-    def read_rgcn(self, encryption=ENCRYPTION_NONE, width=1, height=1, debug=False):
+    
+    def read_png(self, filename, encryption=ENCRYPTION_NONE, output_filename="", mult=0, carry=0, key=0, debug=False):
+        if os.path.getsize(filename) == 0:
+            if not os.path.exists(os.path.dirname(output_filename)):
+                os.makedirs(os.path.dirname(output_filename))
+            f = open(output_filename, 'wb')
+            f.close()
+            return
+        
+        f = open(filename, 'r')
+        img = png.Reader(f)
+        w, h, pixels, metadata = img.read_flat()
+        f.close()
+        
+        
+        if not os.path.exists(os.path.dirname(output_filename)):
+            os.makedirs(os.path.dirname(output_filename))
+        f = open(output_filename, 'wb')
+        f.write(bytearray("RGCN")) # RGCN_MagicID 0x0
+        f.write(bytearray([0xff, 0xfe])) # RGCN_Endian
+        f.write(bytearray([0x00, 0x01])) # RGCN_Version
+        f.write(bytearray([0, 0, 0, 0])) # RGCN_Size_ filesize
+        f.write(bytearray([0x10, 0x00])) # RGCN_HeaderSize
+        f.write(bytearray([0x01, 0x00])) # RGCN_NumBlocks
+        
+        f.write(bytearray("RAHC")) # RAHC_MagicID 0x10
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_Size_ filesize-0x10
+        c = array.array("h")
+        c.append(h/8)
+        c.tofile(f) # RAHC_Height
+        c = array.array("h")
+        c.append(w/8)
+        c.tofile(f) # RAHC_Width
+        f.write(bytearray([3, 0, 0, 0])) # RAHC_Format
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_Depth 0x20
+        f.write(bytearray([1, 0, 0, 0])) # RAHC_Type
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_DataSize filesize-0x30
+        f.write(bytearray([0x18, 0, 0, 0])) # RAHC_Offset
+        
+        
+        data = []
+        hword = 0
+        n = 0
+        for val in pixels:
+            hword |= val<<(4*n)
+            n += 1
+            if n == 4:
+                n = 0
+                data.append(hword)
+                hword = 0
+        
+        if key == 0:
+            key = 0
+            for val in data:
+                key += (val & 0xff)
+                key += ((val>>8) & 0xff)
+            key &= 0xffff
+            if debug:
+                print("- key to encrypt: " + hex(key))
+        
+        enc_data = self.encrypt(data, encryption, key, mult, carry, debug)
+        enc_data.tofile(f)
+        
+        
+        filesize = len(enc_data)*2+0x30
+        f.seek(0x8) # RGCN_Size_
+        c = array.array("I")
+        c.append(filesize)
+        c.tofile(f)
+        f.seek(0x14) # RAHC_Size_
+        c = array.array("I")
+        c.append(filesize-0x10)
+        c.tofile(f)
+        f.seek(0x28) # RAHC_DataSize
+        c = array.array("I")
+        c.append(filesize-0x30)
+        c.tofile(f)
+        f.close()
+    
+    
+    # returns indexed color values
+    def read_rgcn(self, encryption=ENCRYPTION_NONE, width=1, height=1, mult=0, carry=0, debug=False):
+        if self.filesize == 0:
+            return []
+        
+        
         # RGCN-Header
         # PPRE/ntr/g2d/ncgr.py
         RGCN_MagicID = chr(self.file.ReadByte(0)) + chr(self.file.ReadByte(1)) + chr(self.file.ReadByte(2)) + chr(self.file.ReadByte(3))
@@ -89,39 +231,25 @@ class Graphic(object):
             i += 2
         
         
-        dec_data = array.array('H')
-        if encryption != ENCRYPTION_NONE:
-            enc_data = array.array('H', data)
-            #if encryption == NCGR.ENCRYPTION_REVERSE:
-            #    enc_data = enc_data[::-1]
-            #for val in enc_data:
-            #    dec_data.append(val)
-            key = enc_data[0]
-            if debug:
-                print("- key: " + hex(key))
-            for val in enc_data:
-                dec_data.append(val ^ (key & 0xFFFF))
-                key *= ENCRYPT_MULT
-                key += ENCRYPT_CARRY
-            #data = dec_data.tostring()
-        else:
-            enc_data = array.array('H', data)
-            for val in enc_data:
-                dec_data.append(val)
+        key = 0
+        dec_data = self.encrypt(data, encryption, key, mult, carry, debug)
+        
+        if debug:
+            sum = 0
+            for val in dec_data:
+                sum += (val & 0xff)
+                sum += ((val>>8) & 0xff)
+            sum &= 0xffff
+            print("- keyguess: " + hex(sum))
         
 
+        # sort the dec_data into rows with length 'width'
         data = []
         data_line = []
         i = 0
         for val in dec_data:
-            a = val&0xf
-            b = (val>>4)&0xf
-            c = (val>>8)&0xf
-            d = (val>>12)&0xf
-            data_line.append(a)
-            data_line.append(b)
-            data_line.append(c)
-            data_line.append(d)
+            for n in range(4):
+                data_line.append((val>>(4*n))&0xf)
             i += 4
             if (RAHC_Type == TYPE_LINEAR or RAHC_Type == TYPE_LINEAR2) and ((i % (width*8)) == 0):
                 data.append(data_line)
@@ -137,11 +265,11 @@ class Graphic(object):
             data_line = []
             for l in range(height):
                 for k in range(8):
+                    data_line = []
                     for j in range(width):
                         for i in range(8):
                             data_line.append(data_temp[l*4*8+j*8+k][i])
                     data.append(data_line)
-                    data_line = []
         
         
         #Tiles = []
@@ -230,12 +358,46 @@ class Graphic(object):
 class Palette(object):
     file = FileHandler()
     data = []
+    filename = ""
 
     def __init__(self, config):
         self.config = config
     
     def init(self, filename):
         self.file.init(os.path.join(self.config.path, filename), 0)
+        self.filename = filename
+        
+        
+    def read_png(self, filename, output_filename="", emptypal=0, debug=False):
+        if os.path.getsize(filename) == 0:
+            return
+        
+        f = open(filename, 'r')
+        img = png.Reader(f)
+        w, h, pixels, metadata = img.read_flat()
+        palette = img.palette()
+        #print("palette: " + str(palette))
+        f.close()
+        
+        write_rlcn(output_filename, palette, emptypal, debug)
+        
+        
+    def read_pal(self, filename, output_filename="", emptypal=0, debug=False):
+        if os.path.getsize(filename) == 0:
+            return
+        
+        f = open(filename, 'r')
+        lines = f.readlines()
+        f.close()
+        
+        palette = []
+        for i in range(16):
+            colors = lines[3+i].split(" ")
+            col = (int(colors[0], 10), int(colors[1], 10), int(colors[2], 10))
+            palette.append(col)
+        
+        write_rlcn(output_filename, palette, emptypal, debug)
+
 
     def read_rlcn(self, debug=False):
         # RLCN-Header
@@ -256,11 +418,11 @@ class Palette(object):
         if (PLTT_MagicID != "TTLP"):
             print("Expected TTLP, got " + PLTT_MagicID)
             return
-        PLTT_Size_ = self.file.ReadWord(0x4)
-        PLTT_Format = self.file.ReadWord(0x8)
-        PLTT_Extended = self.file.ReadWord(0xc)
-        PLTT_Datasize = self.file.ReadWord(0x10)
-        PLTT_Offset = self.file.ReadWord(0x14)
+        PLTT_Size_ = self.file.ReadWord(0x14)
+        PLTT_Format = self.file.ReadWord(0x18)
+        PLTT_Extended = self.file.ReadWord(0x1c)
+        PLTT_Datasize = self.file.ReadWord(0x20)
+        PLTT_Offset = self.file.ReadWord(0x24)
         
         if debug:
             print("RLCN-Data:")
@@ -281,40 +443,127 @@ class Palette(object):
 
 
 def write_png(outfilename, data=[], palette=[], debug=False):
-
     if not os.path.exists(os.path.dirname(outfilename)):
         os.makedirs(os.path.dirname(outfilename))
     
-    #s = [[0,0,0,0], [0,0,0,0], [0,1,1,0], [0,1,1,0]]
-    #f = open('png.png', 'wb')
-    #palette=[(0x55,0x55,0x55), (0xff,0x99,0x99)]
-    #w = png.Writer(len(s[0]), len(s), palette=palette, bitdepth=1)
-    #w.write(f, s)
-    #f.close()
-    
     f = open(outfilename, 'wb')
-    w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
-    w.write(f, data)
+    if len(data) > 0:
+        w = png.Writer(len(data[0]), len(data), palette=palette, bitdepth=4)
+        w.write(f, data)
     f.close()
 
 
+def write_pal(outfilename, palette=[], debug=False):
+    if not os.path.exists(os.path.dirname(outfilename)):
+        os.makedirs(os.path.dirname(outfilename))
+    
+    f = open(outfilename, 'wb')
+    f.write("JASC-PAL\n")
+    f.write("0100\n")
+    f.write(str(len(palette)))
+    for val in palette:
+        f.write("\n" + str(val[0]) + " " + str(val[1]) + " " + str(val[2]))
+    f.close()
+
+
+def write_rlcn(outfilename, palette=[], emptypal=0, debug=False):
+    if not os.path.exists(os.path.dirname(outfilename)):
+        os.makedirs(os.path.dirname(outfilename))
+    
+    f = open(outfilename, 'wb')
+    f.write(bytearray("RLCN")) # RLCN_MagicID 0x0
+    f.write(bytearray([0xff, 0xfe])) # RLCN_Endian
+    f.write(bytearray([0x00, 0x01])) # RLCN_Version
+    f.write(bytearray([0, 0, 0, 0])) # RLCN_Size_ filesize
+    f.write(bytearray([0x10, 0x00])) # RLCN_HeaderSize
+    f.write(bytearray([0x01, 0x00])) # RLCN_NumBlocks
+    
+    f.write(bytearray("TTLP")) # PLTT_MagicID 0x10
+    f.write(bytearray([0, 0, 0, 0])) # PLTT_Size_ filesize-0x10
+    f.write(bytearray([0x4, 0, 0xa, 0])) # PLTT_Format
+    f.write(bytearray([0, 0, 0, 0])) # PLTT_Extended
+    f.write(bytearray([0, 0, 0, 0])) # PLTT_Datasize 0x20 filesize-0x28
+    f.write(bytearray([0x10, 0, 0, 0])) # PLTT_Offset
+    
+    
+    data = []
+    hword = 0
+    n = 0
+    for col in palette:
+        colr = col[0]/8
+        colg = col[1]/8
+        colb = col[2]/8
+        hword = colr|(colg<<5)|(colb<<10)
+        if emptypal == 1:
+            hword = 0xffff
+        data.append(hword)
+        
+    c = array.array("H")
+    for val in data:
+        c.append(val)
+    c.tofile(f)
+        
+        
+    filesize = len(c)*2+0x28
+    f.seek(0x8) # RLCN_Size_
+    c = array.array("I")
+    c.append(filesize)
+    c.tofile(f)
+    f.seek(0x14) # PLTT_Size_
+    c = array.array("I")
+    c.append(filesize-0x10)
+    c.tofile(f)
+    f.seek(0x20) # PLTT_Datasize
+    c = array.array("I")
+    c.append(filesize-0x28)
+    c.tofile(f)
+    f.close()
 
 
 if __name__ == "__main__":
-    conf = configuration.Config()
-    gra = Graphic(conf)
-    pal = Palette(conf)
+    """
+    #values = [0xf622, 0xb30b, 0x1df8, 0xdc79, 0x705e, 0x00b7, 0xa6d4, 0xcf45] # pokegra mult: 0xeb65 carry: 0x61a1
+    #values = [0x18ff, 0x448c, 0xc595, 0x746a, 0xcb1b, 0xa278, 0xab11, 0xf236] # pl_pokegra #Pkmn=0 mult: 0x4e6d carry: 0xedf9
+    values = [0x54de, 0xcf59, 0x0ae0, 0x7423, 0x7c92, 0xb55d, 0x7674, 0xc187] # pokegra #Pkmn=0 mult: 0xeb65 carry: 0x89c3
+
+    mult = 0
+    while mult < 0x10000:
+        carry = 0
+        while carry < 0x10000:
+            if ((values[0] * mult + carry)&0xffff) == values[1]:
+                if ((values[1] * mult + carry)&0xffff) == values[2]:
+                    if ((values[2] * mult + carry)&0xffff) == values[3]:
+                        print ("mult: " + hex(mult))
+                        print ("carry: " + hex(carry))
+            carry += 1
+        mult += 1
+    """
     
-    filename = sys.argv[1]
-    palfilename = sys.argv[2]
+    conf = configuration.Config()
+    
+    filename = ""
+    palfilename = ""
     outfilename = ""
     debugFlag = False
     
     encryption = ENCRYPTION_NONE
+    mult = 0
+    carry = 0
+    emptypal = 0
     width = 1
     height = 1
-    i = 3
+    key = 0
+    i = 1
     while i < len(sys.argv):
+        if sys.argv[i] == "-x":
+            cmd = "unpack"
+            filename = sys.argv[i+1]
+            palfilename = sys.argv[i+2]
+            i += 3
+        if sys.argv[i] == "-xpal":
+            cmd = "unpack palette"
+            palfilename = sys.argv[i+1]
+            i += 2
         if sys.argv[i] == "-o":
             outfilename = sys.argv[i+1]
             i += 2
@@ -324,6 +573,30 @@ if __name__ == "__main__":
             elif sys.argv[i+1] == "forwards":
                 encryption = ENCRYPTION_FORWARDS
             i += 2
+        elif sys.argv[i] == "-mult":
+            mult = int(sys.argv[i+1], 16)
+            i += 2
+        elif sys.argv[i] == "-carry":
+            carry = int(sys.argv[i+1], 16)
+            i += 2
+        elif sys.argv[i] == "-key":
+            key = int(sys.argv[i+1], 16)
+            i += 2
+        elif sys.argv[i] == "-p":
+            cmd = "pack"
+            filename = sys.argv[i+1]
+            i += 2
+        elif sys.argv[i] == "-p2":
+            cmd = "pack2"
+            filename = sys.argv[i+1]
+            i += 2
+        elif sys.argv[i] == "-p3":
+            cmd = "pack3"
+            filename = sys.argv[i+1]
+            i += 2
+        elif sys.argv[i] == "-emptypal":
+            emptypal = 1
+            i += 1
         elif sys.argv[i] == "-w":
             width = sys.argv[i+1]
             width = int(width, 10)
@@ -338,8 +611,27 @@ if __name__ == "__main__":
         else:
             i += 1
     
-    gra.init(filename)
-    pal.init(palfilename)
-    
-    write_png(outfilename, gra.read_rgcn(encryption, width, height, debugFlag), pal.read_rlcn(debugFlag), debugFlag)
+    print(cmd + ': ' + filename)
+    if cmd == "unpack":
+        gra = Graphic(conf)
+        pal = Palette(conf)
+        gra.init(filename)
+        pal.init(palfilename)
+        write_png(outfilename, gra.read_rgcn(encryption, width, height, mult, carry, debugFlag), pal.read_rlcn(debugFlag), debugFlag)
+    elif cmd == "unpack palette":
+        pal = Palette(conf)
+        pal.init(palfilename)
+        write_pal(outfilename, pal.read_rlcn(debugFlag))
+    elif cmd == "pack":
+        gra = Graphic(conf)
+        gra.init(filename)
+        gra.read_png(filename, ENCRYPTION_FORWARDS, outfilename, mult, carry, key, debugFlag)
+    elif cmd == "pack2":
+        pal = Palette(conf)
+        pal.init(filename)
+        pal.read_png(filename, outfilename, emptypal, debugFlag)
+    elif cmd == "pack3":
+        pal = Palette(conf)
+        pal.init(filename)
+        pal.read_pal(filename, outfilename, emptypal, debugFlag)
     

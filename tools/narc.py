@@ -110,16 +110,24 @@ class NARCHandler(object):
             size = self.get_word_from_rom(FATStart+8*i+4)-self.get_word_from_rom(FATStart+8*i)
             
             filename_temp = "./" + folder + "/data_" + "{:08}".format(i)
-            if size >= 4:            
+                
+            if (filename.find("pl_pokegra.narc") != -1) or (filename.find("pokegra.narc") != -1):
+                PokeNr = i / 6
+                PokeOffset = i % 6
+                if PokeOffset == 0 or PokeOffset == 1:
+                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_back" + "{:01}".format(PokeOffset%2) + ".rgcn"
+                elif PokeOffset == 2 or PokeOffset == 3:
+                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_front" + "{:01}".format(PokeOffset%2) + ".rgcn"
+                elif PokeOffset == 4 or PokeOffset == 5:
+                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_pal" + "{:01}".format(PokeOffset%2) + ".rlcn"
+                else:
+                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
+            elif size >= 4:            
                 #self.write_section_in_file_wfilename(self.get_word_from_rom(FATStart+8*i) + IMGStart+8, self.get_word_from_rom(FATStart+8*i+4)-self.get_word_from_rom(FATStart+8*i), "./" + folder + "/data_" + "{:08x}".format(self.get_word_from_rom(FATStart+8*i) + IMGStart+8) + ".bin")
                 FileType = chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+1)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+2)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+3))
                 #print("FileType: " + FileType)
                 
-                if filename.find("pl_pokegra.narc") != -1:
-                    PokeNr = i / 6
-                    PokeOffset = i % 6
-                    filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
-                elif filename.find("trfgra.narc") != -1:
+                if filename.find("trfgra.narc") != -1:
                     PokeNr = i / 5
                     PokeOffset = i % 5
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
@@ -128,7 +136,9 @@ class NARCHandler(object):
                     PokeOffset = i % 5
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
                 
-                if FileType == "RGCN":
+                if FileType == "RCSN":
+                    filename_temp += ".rcsn"
+                elif FileType == "RGCN":
                     filename_temp += ".rgcn"
                 elif FileType == "RLCN":
                     filename_temp += ".rlcn"
@@ -150,7 +160,13 @@ class NARCHandler(object):
         
         return (output, offset)
 
-
+    
+    def test_fileending(self, file):
+        if file.endswith(".bin") or file.endswith(".rgcn") or file.endswith(".rlcn"):
+            return 1
+        
+        return 0
+    
     def create_narc_file(self, path, filelist, filename, original_offset=0, debug=False):
         output = ""
         
@@ -188,7 +204,7 @@ class NARCHandler(object):
         NrOfFiles = 0
         if len(filelist) == 0:
             for file in os.listdir(folder):
-                if file.endswith(".bin"):
+                if self.test_fileending(file):
                     NrOfFiles += 1
                     a.append(offset)
                     size = os.path.getsize(folder + "/" + file)
@@ -204,7 +220,7 @@ class NARCHandler(object):
                         offset += 4 - (size % 4)
         else:
             for file in filelist:
-                if file.endswith(".bin"):
+                if self.test_fileending(file):
                     NrOfFiles += 1
                     a.append(offset)
                     size = os.path.getsize(file)
@@ -235,7 +251,7 @@ class NARCHandler(object):
         i = 0
         if len(filelist) == 0:
             for file in os.listdir(folder):
-                if file.endswith(".bin"):
+                if self.test_fileending(file):
                     filepath = os.path.join(self.config.path, folder + "/" + file)
                     filepart = bytearray(open(filepath, "rb").read())
                     f.write(filepart)
@@ -244,7 +260,7 @@ class NARCHandler(object):
                     i += 1
         else:
             for file in filelist:
-                if file.endswith(".bin"):
+                if self.test_fileending(file):
                     filepath = os.path.join(self.config.path, file)
                     filepart = bytearray(open(filepath, "rb").read())
                     f.write(filepart)

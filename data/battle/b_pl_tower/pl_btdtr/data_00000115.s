@@ -1,0 +1,56 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 27, 50
+.hword UNOWN
+.hword WOBBUFFET
+.hword GIRAFARIG
+.hword PINECO
+.hword FORRETRESS
+.hword DUNSPARCE
+.hword GLIGAR
+.hword STEELIX
+.hword SNUBBULL
+.hword GRANBULL
+.hword QWILFISH
+.hword SCIZOR
+.hword SHUCKLE
+.hword HERACROSS
+.hword SNEASEL
+.hword TEDDIURSA
+.hword URSARING
+.hword SLUGMA
+.hword MAGCARGO
+.hword SWINUB
+.hword PILOSWINE
+.hword CORSOLA
+.hword REMORAID
+.hword OCTILLERY
+.hword DELIBIRD
+.hword MANTINE
+.hword SKARMORY
+.hword HOUNDOUR
+.hword HOUNDOOM
+.hword KINGDRA
+.hword PHANPY
+.hword DONPHAN
+.hword PORYGON2
+.hword STANTLER
+.hword SMEARGLE
+.hword TYROGUE
+.hword HITMONTOP
+.hword SMOOCHUM
+.hword ELEKID
+.hword MAGBY
+.hword MILTANK
+.hword BLISSEY
+.hword RAIKOU
+.hword ENTEI
+.hword SUICUNE
+.hword LARVITAR
+.hword PUPITAR
+.hword TYRANITAR
+.hword LUGIA
+.hword HOOH
+
+.align 2, 0x0

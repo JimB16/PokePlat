@@ -1,0 +1,54 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 53, 48
+.hword GOREBYSS
+.hword REGISTEEL
+.hword CHIMCHAR
+.hword INFERNAPE
+.hword BUDEW
+.hword HAPPINY
+.hword MANTYKE
+.hword RHYPERIOR
+.hword TANGROWTH
+.hword ELECTIVIRE
+.hword 0x1f8
+.hword 0x203
+.hword 0x20e
+.hword 0x210
+.hword 0x21e
+.hword 0x240
+.hword 0x252
+.hword 0x258
+.hword 0x259
+.hword 0x25a
+.hword 0x280
+.hword 0x28b
+.hword 0x296
+.hword 0x298
+.hword 0x2a6
+.hword 0x2c8
+.hword 0x2da
+.hword 0x2e0
+.hword 0x2e1
+.hword 0x2e2
+.hword 0x308
+.hword 0x313
+.hword 0x31e
+.hword 0x320
+.hword 0x32e
+.hword 0x350
+.hword 0x362
+.hword 0x368
+.hword 0x369
+.hword 0x36a
+.hword 0x37f
+.hword 0x386
+.hword 0x38d
+.hword 0x394
+.hword 0x39b
+.hword 0x3a2
+.hword 0x3a9
+.hword 0x3b0
+
+.align 2, 0x0

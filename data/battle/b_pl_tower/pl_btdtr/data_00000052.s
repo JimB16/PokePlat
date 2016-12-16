@@ -1,0 +1,56 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 28, 50
+.hword BULBASAUR
+.hword IVYSAUR
+.hword VENUSAUR
+.hword CHARMANDER
+.hword CHARMELEON
+.hword CHARIZARD
+.hword SQUIRTLE
+.hword WARTORTLE
+.hword BLASTOISE
+.hword CATERPIE
+.hword METAPOD
+.hword BUTTERFREE
+.hword WEEDLE
+.hword KAKUNA
+.hword BEEDRILL
+.hword PIDGEY
+.hword PIDGEOTTO
+.hword PIDGEOT
+.hword RATTATA
+.hword RATICATE
+.hword SPEAROW
+.hword FEAROW
+.hword EKANS
+.hword ARBOK
+.hword PIKACHU
+.hword RAICHU
+.hword SANDSHREW
+.hword SANDSLASH
+.hword NIDORANM
+.hword NIDORINA
+.hword NIDOQUEEN
+.hword NIDORANF
+.hword NIDORINO
+.hword NIDOKING
+.hword CLEFAIRY
+.hword CLEFABLE
+.hword VULPIX
+.hword NINETALES
+.hword JIGGLYPUFF
+.hword WIGGLYTUFF
+.hword ZUBAT
+.hword GOLBAT
+.hword ODDISH
+.hword GLOOM
+.hword VILEPLUME
+.hword PARAS
+.hword PARASECT
+.hword VENONAT
+.hword VENOMOTH
+.hword DIGLETT
+
+.align 2, 0x0

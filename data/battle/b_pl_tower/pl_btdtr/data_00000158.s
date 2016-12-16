@@ -1,0 +1,51 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 54, 45
+.hword SHUPPET
+.hword DUSCLOPS
+.hword ABSOL
+.hword GLALIE
+.hword CLAMPERL
+.hword HUNTAIL
+.hword GOREBYSS
+.hword REGISTEEL
+.hword LATIOS
+.hword KYOGRE
+.hword TURTWIG
+.hword TORTERRA
+.hword CHIMCHAR
+.hword MONFERNO
+.hword INFERNAPE
+.hword PIPLUP
+.hword STARAVIA
+.hword BIDOOF
+.hword BIBAREL
+.hword KRICKETUNE
+.hword SHINX
+.hword BUDEW
+.hword BURMY
+.hword COMBEE
+.hword VESPIQUEN
+.hword CHERRIM
+.hword DRIFLOON
+.hword HAPPINY
+.hword SPIRITOMB
+.hword GABITE
+.hword GARCHOMP
+.hword HIPPOWDON
+.hword DRAPION
+.hword MANTYKE
+.hword RHYPERIOR
+.hword TANGROWTH
+.hword ELECTIVIRE
+.hword GLACEON
+.hword GLISCOR
+.hword MAMOSWINE
+.hword PORYGONZ
+.hword GALLADE
+.hword PROBOPASS
+.hword ROTOM
+.hword REGIGIGAS
+
+.align 2, 0x0

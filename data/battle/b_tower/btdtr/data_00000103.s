@@ -1,0 +1,56 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 13, 50
+.hword MEW
+.hword CHIKORITA
+.hword BAYLEEF
+.hword MEGANIUM
+.hword CYNDAQUIL
+.hword QUILAVA
+.hword TYPHLOSION
+.hword TOTODILE
+.hword CROCONAW
+.hword FERALIGATR
+.hword SENTRET
+.hword FURRET
+.hword HOOTHOOT
+.hword NOCTOWL
+.hword LEDYBA
+.hword LEDIAN
+.hword SPINARAK
+.hword ARIADOS
+.hword CROBAT
+.hword CHINCHOU
+.hword LANTURN
+.hword PICHU
+.hword CLEFFA
+.hword IGGLYBUFF
+.hword TOGEPI
+.hword TOGETIC
+.hword NATU
+.hword XATU
+.hword MAREEP
+.hword FLAAFFY
+.hword AMPHAROS
+.hword BELLOSSOM
+.hword MARILL
+.hword AZUMARILL
+.hword SUDOWOODO
+.hword POLITOED
+.hword HOPPIP
+.hword SKIPLOOM
+.hword JUMPLUFF
+.hword AIPOM
+.hword SUNKERN
+.hword SUNFLORA
+.hword YANMA
+.hword WOOPER
+.hword QUAGSIRE
+.hword ESPEON
+.hword UMBREON
+.hword MURKROW
+.hword SLOWKING
+.hword MISDREAVUS
+
+.align 2, 0x0

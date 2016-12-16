@@ -1007,6 +1007,50 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
+.macro btrainer unknown, nrpkmn
+.hword \unknown, \nrpkmn
+.endm
+
+.macro btpoke species, move1, move2, move3, move4, evs, nature, item, unknown2, unknown3
+.hword \species, \move1, \move2, \move3, \move4
+.byte \evs, \nature, \item, \unknown2
+.hword \unknown3
+.endm
+
+.equ EV_HP, 1<<0
+.equ EV_ATK, 1<<1
+.equ EV_DEF, 1<<2
+.equ EV_SA, 1<<3
+.equ EV_SD, 1<<4
+.equ EV_SPD, 1<<5
+
+.equ HARDY, 0
+.equ LONELY, 1
+.equ BRAVE, 2
+.equ ADAMANT, 3
+.equ NAUGHTY, 4
+.equ BOLD, 5
+.equ DOCILE, 6
+.equ RELAXED, 7
+.equ IMPISH, 8
+.equ LAX, 9
+.equ TIMID, 10
+.equ HASTY, 11
+.equ SERIOUS, 12
+.equ JOLLY, 13
+.equ NAIVE, 14
+.equ MODEST, 15
+.equ MILD, 16
+.equ QUIET, 17
+.equ BASHFUL, 18
+.equ RASH, 19
+.equ CALM, 20
+.equ GENTLE, 21
+.equ SASSY, 22
+.equ CAREFUL, 23
+.equ QUIRKY, 24
+
+
 @ evolution conditions
 .equ Evo_NoEvo, 0
 .equ Evo_HighFriendship, 1

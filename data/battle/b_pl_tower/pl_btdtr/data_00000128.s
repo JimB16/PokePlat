@@ -1,0 +1,56 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 16, 50
+.hword DELCATTY
+.hword SABLEYE
+.hword MAWILE
+.hword ARON
+.hword LAIRON
+.hword AGGRON
+.hword MEDITITE
+.hword MEDICHAM
+.hword ELECTRIKE
+.hword MANECTRIC
+.hword PLUSLE
+.hword MINUN
+.hword VOLBEAT
+.hword ILLUMISE
+.hword ROSELIA
+.hword GULPIN
+.hword SWALOT
+.hword CARVANHA
+.hword SHARPEDO
+.hword WAILMER
+.hword WAILORD
+.hword NUMEL
+.hword CAMERUPT
+.hword TORKOAL
+.hword SPOINK
+.hword GRUMPIG
+.hword SPINDA
+.hword TRAPINCH
+.hword VIBRAVA
+.hword FLYGON
+.hword CACNEA
+.hword CACTURNE
+.hword SWABLU
+.hword ALTARIA
+.hword ZANGOOSE
+.hword SEVIPER
+.hword LUNATONE
+.hword SOLROCK
+.hword BARBOACH
+.hword WHISCASH
+.hword CORPHISH
+.hword CRAWDAUNT
+.hword BALTOY
+.hword CLAYDOL
+.hword LILEEP
+.hword CRADILY
+.hword ANORITH
+.hword ARMALDO
+.hword FEEBAS
+.hword MILOTIC
+
+.align 2, 0x0

@@ -1,0 +1,51 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 44, 45
+.hword VENUSAUR
+.hword CHARIZARD
+.hword BLASTOISE
+.hword BUTTERFREE
+.hword KAKUNA
+.hword RATTATA
+.hword NIDORINO
+.hword NIDOKING
+.hword VILEPLUME
+.hword PARASECT
+.hword DIGLETT
+.hword MEOWTH
+.hword PSYDUCK
+.hword MANKEY
+.hword GROWLITHE
+.hword POLIWAG
+.hword POLIWRATH
+.hword KADABRA
+.hword ALAKAZAM
+.hword BELLSPROUT
+.hword WEEPINBELL
+.hword GOLEM
+.hword PONYTA
+.hword SLOWBRO
+.hword MAGNETON
+.hword DODRIO
+.hword DEWGONG
+.hword GASTLY
+.hword HAUNTER
+.hword KINGLER
+.hword ELECTRODE
+.hword EXEGGCUTE
+.hword MAROWAK
+.hword HITMONCHAN
+.hword LICKITUNG
+.hword KOFFING
+.hword KANGASKHAN
+.hword HORSEA
+.hword MRMIME
+.hword JYNX
+.hword DITTO
+.hword VAPOREON
+.hword JOLTEON
+.hword OMASTAR
+.hword MEWTWO
+
+.align 2, 0x0

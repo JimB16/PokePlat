@@ -1,0 +1,56 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 71, 50
+.hword ELECTRODE
+.hword EXEGGCUTE
+.hword EXEGGUTOR
+.hword CUBONE
+.hword MAROWAK
+.hword HITMONLEE
+.hword HITMONCHAN
+.hword LICKITUNG
+.hword KOFFING
+.hword WEEZING
+.hword RHYHORN
+.hword RHYDON
+.hword CHANSEY
+.hword TANGELA
+.hword KANGASKHAN
+.hword HORSEA
+.hword SEADRA
+.hword GOLDEEN
+.hword SEAKING
+.hword STARYU
+.hword STARMIE
+.hword MRMIME
+.hword SCYTHER
+.hword JYNX
+.hword ELECTABUZZ
+.hword MAGMAR
+.hword PINSIR
+.hword TAUROS
+.hword MAGIKARP
+.hword GYARADOS
+.hword LAPRAS
+.hword DITTO
+.hword EEVEE
+.hword VAPOREON
+.hword JOLTEON
+.hword FLAREON
+.hword PORYGON
+.hword OMANYTE
+.hword OMASTAR
+.hword KABUTO
+.hword KABUTOPS
+.hword AERODACTYL
+.hword SNORLAX
+.hword ARTICUNO
+.hword ZAPDOS
+.hword MOLTRES
+.hword DRATINI
+.hword DRAGONAIR
+.hword DRAGONITE
+.hword MEWTWO
+
+.align 2, 0x0

@@ -1,0 +1,52 @@
+.include "source/macros_asm.s"
+
+@ BTrainer
+btrainer 58, 46
+.hword TREECKO
+.hword GROVYLE
+.hword TORCHIC
+.hword COMBUSKEN
+.hword MUDKIP
+.hword MARSHTOMP
+.hword POOCHYENA
+.hword MIGHTYENA
+.hword LINOONE
+.hword SILCOON
+.hword BEAUTIFLY
+.hword LOTAD
+.hword LUDICOLO
+.hword SEEDOT
+.hword SWELLOW
+.hword WINGULL
+.hword RALTS
+.hword SURSKIT
+.hword SHROOMISH
+.hword SLAKING
+.hword WHISMUR
+.hword EXPLOUD
+.hword HARIYAMA
+.hword AZURILL
+.hword NOSEPASS
+.hword SKITTY
+.hword DELCATTY
+.hword SABLEYE
+.hword MAWILE
+.hword AGGRON
+.hword MANECTRIC
+.hword GULPIN
+.hword CARVANHA
+.hword SHARPEDO
+.hword WAILORD
+.hword CAMERUPT
+.hword SPOINK
+.hword TRAPINCH
+.hword FLYGON
+.hword SWABLU
+.hword ALTARIA
+.hword ZANGOOSE
+.hword SEVIPER
+.hword LUNATONE
+.hword LILEEP
+.hword CRADILY
+
+.align 2, 0x0

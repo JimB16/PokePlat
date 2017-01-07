@@ -170,7 +170,10 @@ class FileHandler(object):
         
         widths = []
         for i in range(NrOfChars):
-            widths.append(self.get_byte_from_rom(FooterOffset+i))
+            if FooterOffset+i < filesize:
+                widths.append(self.get_byte_from_rom(FooterOffset+i))
+            else:
+                widths.append(16)
 
         palette=[]
         palette.append((0xFF, 0xFF, 0xFF, 255))

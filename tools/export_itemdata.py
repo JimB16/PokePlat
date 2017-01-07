@@ -38,6 +38,26 @@ def GetTypeName(type):
     else:
         return str(type)
 
+def GetPocketName(pocket):
+    if pocket == 0:
+        return "ItemPocket_Items".upper()
+    elif pocket == 1:
+        return "ItemPocket_Medicine".upper()
+    elif pocket == 2:
+        return "ItemPocket_PokeBalls".upper()
+    elif pocket == 3:
+        return "ItemPocket_TMHMs".upper()
+    elif pocket == 4:
+        return "ItemPocket_Berries".upper()
+    elif pocket == 5:
+        return "ItemPocket_Mail".upper()
+    elif pocket == 6:
+        return "ItemPocket_BattleItems".upper()
+    elif pocket == 7:
+        return "ItemPocket_KeyItems".upper()
+    else:
+        return str(pocket)
+
 
 if __name__ == "__main__":
     conf = configuration.Config()
@@ -54,11 +74,16 @@ if __name__ == "__main__":
     price = input_file.ReadHWord(0)
     battleeffect = input_file.ReadByte(2)
     gain = input_file.ReadByte(3)
-    Unknown4 = input_file.ReadByte(4)
-    Unknown5 = input_file.ReadByte(5)
-    Unknown6 = input_file.ReadByte(6)
-    Unknown7 = input_file.ReadByte(7)
+    berrytag = input_file.ReadByte(4)
+    flingeffect = input_file.ReadByte(5)
+    flingpower = input_file.ReadByte(6)
+    naturalpower = input_file.ReadByte(7)
     Unknown8 = input_file.ReadHWord(8)
+    Unknown8_1 = (Unknown8>>0) & 0x1f
+    Unknown8_2 = (Unknown8>>5) & 0x1
+    Unknown8_3 = (Unknown8>>6) & 0x1
+    pocket = (Unknown8>>8) & 0xf
+    Unknown8_4 = (Unknown8>>11) & 0x1f
     Unknowna = input_file.ReadByte(0xa)
     Unknownb = input_file.ReadByte(0xb)
     Unknownc = input_file.ReadByte(0xc)
@@ -94,8 +119,13 @@ if __name__ == "__main__":
     Unknowne10 = input_file.ReadByte(0xe+0x10)
     Unknowne11 = input_file.ReadByte(0xe+0x11)
     
-    output_item += "@ price, battleeffect, gain, ...\n"
-    output_item += "itemdata " + str(price) + ", " + str(battleeffect) + ", " + str(gain) + ", " + str(Unknown4) + ", " + str(Unknown5) + ", " + str(Unknown6) + ", " + str(Unknown7) + ", " + str(Unknown8) + ", " + str(Unknowna) + ", " + str(Unknownb) + ", " + str(Unknownc) + "\n\n"
+    output_item += "@ price, battleeffect, gain, berrytag, flingeffect, flingpower, naturalpower, ?, ?, ?, pocket, ?, ...\n"
+    Unknown8_1 = (Unknown8>>0) & 0x1f
+    Unknown8_2 = (Unknown8>>5) & 0x1
+    Unknown8_3 = (Unknown8>>6) & 0x1
+    pocket = (Unknown8>>7) & 0xf
+    Unknown8_4 = (Unknown8>>11) & 0x1f
+    output_item += "itemdata " + str(price) + ", " + str(battleeffect) + ", " + str(gain) + ", " + str(berrytag) + ", " + str(flingeffect) + ", " + str(flingpower) + ", " + str(naturalpower) + ", (" + str(Unknown8_1) + "<<0)|(" + str(Unknown8_2) + "<<5)|(" + str(Unknown8_3) + "<<6)|(" + GetPocketName(pocket) + "<<7)|(" + str(Unknown8_4) + "<<11)" + ", " + str(Unknowna) + ", " + str(Unknownb) + ", " + str(Unknownc) + "\n\n"
     
     output_item += "@ boost: hp, level, evolution, attack, defense, spatk, spdef, speed, acc, crit, pp, target, target2\n"
     output_item += "itemdataboosts " + str(boost_hp) + ", " + str(boost_level) + ", " + str(boost_evolution) + ", " + str(boost_attack) + ", " + str(boost_defense) + ", " + str(boost_spatk) + ", " + str(boost_spdef) + ", " + str(boost_speed) + ", " + str(boost_acc) + ", " + str(boost_crit) + ", " + str(boost_pp) + ", " + str(boost_target) + ", " + str(boost_target2) + "\n\n"

@@ -1,7 +1,7 @@
 .include "source/macros_asm.s"
 
-@ price, battleeffect, gain, ...
-itemdata 350, 0, 100, 0, 0, 30, 0, 31, 19, 0, 1
+@ price, battleeffect, gain, berrytag, flingeffect, flingpower, naturalpower, ?, ?, ?, pocket, ?, ...
+itemdata 350, 0, 100, 0, 0, 30, 0, (31<<0)|(0<<5)|(0<<6)|(ITEMPOCKET_ITEMS<<7)|(0<<11), 19, 0, 1
 
 @ boost: hp, level, evolution, attack, defense, spatk, spdef, speed, acc, crit, pp, target, target2
 itemdataboosts 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0

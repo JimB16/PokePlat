@@ -323,6 +323,7 @@ Function_201807c: @ 201807c :thumb
 	bne     branch_201808c
 	bl      ErrorHandling
 branch_201808c: @ 201808c :thumb
+
 	ldr     r0, =RAM_21bfaf0
 	ldr     r1, [r0, #RAM_21bfaf0_0]
 	ldr     r0, [r0, #RAM_21bfaf0_10]
@@ -331,6 +332,7 @@ branch_201808c: @ 201808c :thumb
 	ldr     r0, [r1, r0]
 	cmp     r0, #0x0
 	beq     branch_20180ea
+
 	blx     Function_20a543c
 	ldr     r1, =RAM_21bfaf0
 	ldr     r0, [r1, #RAM_21bfaf0_10]
@@ -342,6 +344,7 @@ branch_201808c: @ 201808c :thumb
 	ldr     r1, [r1, r2]
 	cmp     r0, #0x0
 	beq     branch_20180be
+
 	cmp     r1, #0x0
 	beq     branch_20180be
 	blx     Function_20a55d8
@@ -379,6 +382,14 @@ thumb_func_end Function_201807c
 
 
 
+/* called by malloc
+Input:
+r1: size
+r2: 4 or 0-4
+
+Return:
+r0: Ptr to Memory
+*/
 thumb_func_start Function_20180f0
 Function_20180f0: @ 20180f0 :thumb
 	push    {r3-r7,lr}
@@ -390,27 +401,30 @@ Function_20180f0: @ 20180f0 :thumb
 	bne     branch_2018102
 	bl      ErrorHandling
 branch_2018102: @ 2018102 :thumb
+
 	blx     OS_DisableInterrupts
-	add     r4, #0x10
+	add     r4, #MallocHeader_Size
 	str     r0, [sp, #0x0]
 	mov     r0, r5
-	mov     r1, r4
+	mov     r1, r4      @ size of memory to allocate
 	mov     r2, r7
 	blx     Function_20a5448
 	mov     r4, r0
+
 	ldr     r0, [sp, #0x0]
 	blx     OS_RestoreInterrupts
 	cmp     r4, #0x0
 	beq     branch_2018130
-	ldr     r1, [r4, #0xc]
+	ldr     r1, [r4, #MallocHeader_c]
 	mov     r0, #0xff
 	bic     r1, r0
 	lsl     r0, r6, #24
 	lsr     r0, r0, #24
 	orr     r0, r1
-	str     r0, [r4, #0xc]
-	add     r4, #0x10
+	str     r0, [r4, #MallocHeader_c]
+	add     r4, #MallocHeader_Size
 branch_2018130: @ 2018130 :thumb
+
 	mov     r0, r4
 	pop     {r3-r7,pc}
 thumb_func_end Function_20180f0
@@ -430,15 +444,16 @@ branch_2018142: @ 2018142 :thumb
 thumb_func_end Function_2018134
 
 
-/* looks like malloc
+/* malloc
 Input:
+r0: offset to sth.
 r1: size
 
 Return:
 r0: Ptr to memory
 */
-thumb_func_start malloc_maybe
-malloc_maybe: @ 2018144 :thumb
+thumb_func_start malloc
+malloc: @ 2018144 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -478,12 +493,12 @@ branch_201817c: @ 201817c :thumb
 @ 0x2018180
 
 .pool
-thumb_func_end malloc_maybe
+thumb_func_end malloc
 
 
 
-thumb_func_start malloc2_maybe
-malloc2_maybe: @ 2018184 :thumb
+thumb_func_start malloc2
+malloc2: @ 2018184 :thumb
 	push    {r3-r5,lr}
 	ldr     r2, =RAM_21bfaf0
 	mov     r5, r0
@@ -519,23 +534,26 @@ branch_20181bc: @ 20181bc :thumb
 @ 0x20181c0
 
 .pool
-thumb_func_end malloc2_maybe
+thumb_func_end malloc2
 
 
-
+/* Input:
+r0: Ptr to Memory
+*/
 thumb_func_start free
 free: @ 20181c4 :thumb
 	push    {r3-r7,lr}
 	mov     r6, r0
 
-	sub     r0, r6, #0x4
-	ldr     r0, [r0, #0x0]
+	sub     r0, r6, #0x4 @ MallocHeader_c
+	ldr     r0, [r0]
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	ldr     r0, =RAM_21bfaf0
 	ldrh    r1, [r0, #RAM_21bfaf0_14]
 	cmp     r4, r1
 	bhs     branch_201822c
+
 	ldr     r1, [r0, #RAM_21bfaf0_0]
 	ldr     r0, [r0, #RAM_21bfaf0_10]
 	ldrb    r0, [r0, r4]
@@ -571,7 +589,7 @@ branch_201820a: @ 201820a :thumb
 	strh    r0, [r1, r5]
 
 	blx     OS_DisableInterrupts
-	sub     r6, #0x10
+	sub     r6, #MallocHeader_Size
 	mov     r4, r0
 	mov     r0, r7
 	mov     r1, r6

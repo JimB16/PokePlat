@@ -4400,7 +4400,7 @@ Function_225e478: @ 225e478 :thumb
 Function_225e4e8: @ 225e4e8 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0xc]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r2, [pc, #0x8] @ 0x225e4fc, (=0x4001000)
 	ldr     r0, [pc, #0xc] @ 0x225e500, (=0xffff1fff)
 	ldr     r1, [r2, #0x0]

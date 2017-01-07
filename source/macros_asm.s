@@ -21,8 +21,8 @@
 */
 
 @ Constants for ReadPkmnData- and WritePkmnData-functions (arm9.s)
-@ Constants for ReadPkmnData1-functions (arm9.s) r1
-@ Constants for GetPkmnData2-functions (arm9.s) r1
+@ Constants for ReadBoxPkmnData-functions (arm9.s) r1
+@ Constants for GetPkmnData-functions (arm9.s) r1
 @ Constants for GetPkmnData-functions (arm9.s) r1
 @ ChangePkmnData0?
 @ https://projectpokemon.org/wiki/Pokemon_NDS_Structure
@@ -278,6 +278,12 @@ Block B
 .equ PKMNBASEDATA_ABILITY1,  0x18
 .equ PKMNBASEDATA_ABILITY2,  0x19
 .equ PKMNBASEDATA_FLEE,  0x1a
+.equ PKMNBASEDATA_1b,  0x1b
+.equ PKMNBASEDATA_1c,  0x1c
+.equ PKMNBASEDATA_TMHMS1,  0x1d
+.equ PKMNBASEDATA_TMHMS2,  0x1e
+.equ PKMNBASEDATA_TMHMS3,  0x1f
+.equ PKMNBASEDATA_TMHMS4,  0x20
 
 
 
@@ -361,6 +367,53 @@ Block B
 .equ ITEMDATA_LOADDATA, 0x0
 .equ ITEMDATA_LOADICON1, 0x1
 .equ ITEMDATA_LOADICON2, 0x2
+
+@ Constants for GetItemData- and ReadItemData1-function (arm9_itemdata.s) r1
+.equ ITEMDATA_PRICE, 0x0
+.equ ITEMDATA_BATTLEEFFECT, 0x1
+.equ ITEMDATA_GAIN, 0x2
+.equ ITEMDATA_POCKET, 0x5
+.equ ITEMDATA_6, 0x6
+.equ ITEMDATA_f, 0xf
+.equ ITEMDATA_10, 0x10
+.equ ITEMDATA_11, 0x11
+.equ ITEMDATA_12, 0x12
+.equ ITEMDATA_13, 0x13
+.equ ITEMDATA_14, 0x14
+.equ ITEMDATA_15, 0x15
+.equ ITEMDATA_16, 0x16
+.equ ITEMDATA_17, 0x17
+.equ ITEMDATA_18, 0x18
+.equ ITEMDATA_1b, 0x1b
+.equ ITEMDATA_1c, 0x1c
+.equ ITEMDATA_1d, 0x1d
+.equ ITEMDATA_1e, 0x1e
+.equ ITEMDATA_1f, 0x1f
+.equ ITEMDATA_20, 0x20
+.equ ITEMDATA_21, 0x21
+.equ ITEMDATA_24, 0x24
+.equ ITEMDATA_25, 0x25
+.equ ITEMDATA_26, 0x26
+.equ ITEMDATA_2d, 0x2d
+.equ ITEMDATA_2e, 0x2e
+.equ ITEMDATA_2f, 0x2f
+.equ ITEMDATA_36, 0x36
+.equ ITEMDATA_37, 0x37
+.equ ITEMDATA_38, 0x38
+.equ ITEMDATA_39, 0x39
+.equ ITEMDATA_3a, 0x3a
+
+@ Constants for GetTrainerData-function (arm9_trainerdata.s) r1
+.equ TRAINERDATA_FLAG, 0x0
+.equ TRAINERDATA_CLASS, 0x1
+.equ TRAINERDATA_BATTLETYPE, 0x2
+.equ TRAINERDATA_NROFPKMN, 0x3
+.equ TRAINERDATA_ITEM1, 0x4
+.equ TRAINERDATA_ITEM2, 0x5
+.equ TRAINERDATA_ITEM3, 0x6
+.equ TRAINERDATA_ITEM4, 0x7
+.equ TRAINERDATA_AI, 0x8
+.equ TRAINERDATA_BATTLETYPE2, 0x9
 
 
 @ nds/card.h
@@ -1000,6 +1053,16 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
+.equ ITEMPOCKET_ITEMS, 0
+.equ ITEMPOCKET_MEDICINE, 1
+.equ ITEMPOCKET_POKEBALLS, 2
+.equ ITEMPOCKET_TMHMS, 3
+.equ ITEMPOCKET_BERRIES, 4
+.equ ITEMPOCKET_MAIL, 5
+.equ ITEMPOCKET_BATTLEITEMS, 6
+.equ ITEMPOCKET_KEYITEMS, 7
+
+
 .macro WaterEncounter Lvl1, Lvl2, Pkmn
 .byte \Lvl1, \Lvl2
 .hword 0
@@ -1087,3 +1150,23 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .endm
 
 
+
+/*
+Offsets for Overlay-Structure (y9.s)
+*/
+.globl Overlay_ID
+.equ Overlay_ID, 0x0
+.globl Overlay_RAMAddress
+.equ Overlay_RAMAddress, 0x4
+.globl Overlay_RAMSize
+.equ Overlay_RAMSize, 0x8
+.globl Overlay_BSSSize
+.equ Overlay_BSSSize, 0xc
+.globl Overlay_StaticInitStart
+.equ Overlay_StaticInitStart, 0x10
+.globl Overlay_StaticInitEnd
+.equ Overlay_StaticInitEnd, 0x14
+.globl Overlay_FileID
+.equ Overlay_FileID, 0x18
+.globl Overlay_Reserved
+.equ Overlay_Reserved, 0x1c

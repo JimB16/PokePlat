@@ -4704,7 +4704,7 @@ Function_21d2e8c: @ 21d2e8c :thumb
 	ldr     r1, [r4, r1]
 	mov     r0, #0x73
 	ldr     r1, [r1, #0x10]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0xe5
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -4730,7 +4730,7 @@ Function_21d2eb4: @ 21d2eb4 :thumb
 	.hword  0x1d09 @ add r1, r1, #0x4
 	ldr     r0, [r0, r1]
 	ldr     r1, [r2, #0x14]
-	ldr     r3, [pc, #0x4] @ 0x21d2ec8, (=Function_20d50b8)
+	ldr     r3, [pc, #0x4] @ 0x21d2ec8, (=CopyDataInByteSteps)
 	ldr     r2, [r2, #0x10]
 	bx      r3
 @ 0x21d2ec6
@@ -4739,7 +4739,7 @@ Function_21d2eb4: @ 21d2eb4 :thumb
 .align 2
 
 
-.word Function_20d50b8 @ 0x21d2ec8
+.word CopyDataInByteSteps @ 0x21d2ec8
 .thumb
 Function_21d2ecc: @ 21d2ecc :thumb
 	push    {r3-r7,lr}
@@ -5441,7 +5441,7 @@ Function_21d33f4: @ 21d33f4 :thumb
 	mov     r1, #0x10
 	mov     r7, r2
 	str     r3, [sp, #0x8]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x10

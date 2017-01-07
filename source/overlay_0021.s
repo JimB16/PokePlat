@@ -7,7 +7,8 @@
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_21_21d0d80
+Function_21_21d0d80: @ 21d0d80 :thumb
 	push    {r3-r5,lr}
 	add     sp, #-0x20
 	mov     r1, #0x0
@@ -23,7 +24,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 	mov     r0, r5
 	mov     r1, #0x4
 	mov     r2, #0x25
-	bl      Function_200681c
+	bl      MallocSomeDataAndStorePtrIn1c
 	mov     r4, r0
 	bne     branch_21d0dae
 	bl      ErrorHandling
@@ -37,7 +38,7 @@ branch_21d0dae: @ 21d0dae :thumb
 	mov     r1, #0x25
 	bl      Function_201dbec
 	mov     r0, r5
-	bl      Function_2006840
+	bl      LoadPtrToOverWorldDataIn18
 	mov     r5, r0
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [pc, #0x68] @ 0x21d0e34, (=#0x1e7)
@@ -92,10 +93,11 @@ branch_21d0df4: @ 21d0df4 :thumb
 
 
 .thumb
-Function_21d0e3c: @ 21d0e3c :thumb
+.globl Function_21_21d0e3c
+Function_21_21d0e3c: @ 21d0e3c :thumb
 	push    {r3-r5,lr}
 	mov     r4, r1
-	bl      Function_200682c
+	bl      LoadPtrToSomeDataIn1c
 	ldr     r1, [r4, #0x0]
 	mov     r5, r0
 	cmp     r1, #0x3
@@ -166,9 +168,7 @@ branch_21d0e9a: @ 21d0e9a :thumb
 	strh    r1, [r0, #0x0]
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
-@ 0x21d0ebc
 
-.thumb
 branch_21d0ebc: @ 21d0ebc :thumb
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -180,10 +180,11 @@ branch_21d0ebc: @ 21d0ebc :thumb
 
 
 .thumb
-Function_21d0ec8: @ 21d0ec8 :thumb
+.globl Function_21_21d0ec8
+Function_21_21d0ec8: @ 21d0ec8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	bl      Function_200682c
+	bl      LoadPtrToSomeDataIn1c
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      SetMainLoopFunctionCall
@@ -192,10 +193,11 @@ Function_21d0ec8: @ 21d0ec8 :thumb
 	beq     branch_21d0ee4
 	bl      ErrorHandling
 branch_21d0ee4: @ 21d0ee4 :thumb
+
 	bl      Function_21d12c4
 	bl      Function_201dc3c
 	mov     r0, r4
-	bl      Function_2006830
+	bl      FreeSomeDataAndStore0In1c
 	mov     r0, #0x25
 	bl      Function_201807c
 	mov     r0, #0x1
@@ -277,7 +279,7 @@ Function_21d0f60: @ 21d0f60 :thumb
 	mov     r5, r1
 	ldr     r1, [pc, #0x11c] @ 0x21d1084, (=#0x1d10)
 	mov     r7, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d0f76
 	bl      ErrorHandling
@@ -285,7 +287,7 @@ branch_21d0f76: @ 21d0f76 :thumb
 	ldr     r2, [pc, #0x10c] @ 0x21d1084, (=#0x1d10)
 	mov     r0, r4
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r7, [r4, #0x4]
 	ldr     r0, [r5, #0x1c]
 	str     r0, [r4, #0x8]
@@ -2747,7 +2749,7 @@ Function_21d2098: @ 21d2098 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	lsl     r2, r2, #6
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	pop     {r4,pc}
 @ 0x21d2124
 
@@ -3650,7 +3652,7 @@ Function_21d26e8: @ 21d26e8 :thumb
 	ldr     r1, [r4, #0x0]
 	mov     r0, r6
 	lsr     r1, r1, #8
-	bl      malloc_maybe
+	bl      malloc
 	mov     r5, r0
 	beq     branch_21d271e
 	mov     r0, r4
@@ -4852,7 +4854,7 @@ Function_21d3034: @ 21d3034 :thumb
 	ldr     r0, [pc, #0x10] @ 0x21d3050, (=Function_21d3064+1)
 	add     r1, r4, r1
 	mov     r2, #0x1
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r1, #0x9d
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -4874,7 +4876,7 @@ Function_21d3054: @ 21d3054 :thumb
 @ 0x21d305e
 
 .align 2
-.word Function_200da58+1 @ 0x21d3060
+.word Call_RemoveTaskFromTaskList+1 @ 0x21d3060
 
 
 
@@ -5088,7 +5090,7 @@ Function_21d31d0: @ 21d31d0 :thumb
 	ldr     r0, [pc, #0x10] @ 0x21d31ec, (=Function_21d3194+1)
 	add     r1, r4, r1
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r1, #0x9e
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -5107,7 +5109,7 @@ Function_21d31f0: @ 21d31f0 :thumb
 	mov     r0, #0x9e
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, #0x9e
 	mov     r1, #0x0
 	lsl     r0, r0, #2
@@ -5125,7 +5127,7 @@ Function_21d3208: @ 21d3208 :thumb
 	ldr     r2, [pc, #0xe8] @ 0x21d32fc, (=#0x1770)
 	mov     r1, #0x0
 	mov     r5, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	str     r0, [r5, #0x0]
 	ldr     r1, [r4, #0x8]
@@ -5521,7 +5523,7 @@ Function_21d3464: @ 21d3464 :thumb
 	mov     r0, r7
 	str     r2, [sp, #0x10]
 	str     r3, [sp, #0x14]
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r6, r0
 	bne     branch_21d3482
 	bl      ErrorHandling
@@ -5529,12 +5531,12 @@ branch_21d3482: @ 21d3482 :thumb
 	ldr     r2, [pc, #0x1f8] @ 0x21d367c, (=#0x3da)
 	mov     r0, r6
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x24]
 	ldr     r1, [pc, #0x1e8] @ 0x21d367c, (=#0x3da)
 	mov     r0, r7
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	bne     branch_21d34a0
 	bl      ErrorHandling
@@ -5542,7 +5544,7 @@ branch_21d34a0: @ 21d34a0 :thumb
 	ldr     r2, [pc, #0x1d8] @ 0x21d367c, (=#0x3da)
 	mov     r0, r4
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r1, #0x0
 	ldr     r0, [sp, #0x48]
 	str     r1, [sp, #0x20]
@@ -5588,13 +5590,13 @@ branch_21d34ea: @ 21d34ea :thumb
 	mov     r0, r6
 	mov     r1, r4
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r2, [sp, #0x20]
 	mov     r0, r4
 	str     r2, [sp, #0x24]
 	mov     r1, #0x0
 	lsl     r2, r2, #1
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x20]
 	ldr     r0, [sp, #0x24]
@@ -5617,13 +5619,13 @@ branch_21d353e: @ 21d353e :thumb
 	mov     r0, r6
 	mov     r1, r4
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r2, [sp, #0x20]
 	mov     r0, r4
 	str     r2, [sp, #0x24]
 	mov     r1, #0x0
 	lsl     r2, r2, #1
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x20]
 	ldr     r0, [sp, #0x24]
@@ -5646,13 +5648,13 @@ branch_21d357a: @ 21d357a :thumb
 	mov     r0, r6
 	mov     r1, r4
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r2, [sp, #0x20]
 	mov     r0, r4
 	str     r2, [sp, #0x24]
 	mov     r1, #0x0
 	lsl     r2, r2, #1
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x20]
 	ldr     r0, [sp, #0x24]
@@ -5675,13 +5677,13 @@ branch_21d35b6: @ 21d35b6 :thumb
 	mov     r0, r6
 	mov     r1, r4
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r2, [sp, #0x20]
 	mov     r0, r4
 	str     r2, [sp, #0x24]
 	mov     r1, #0x0
 	lsl     r2, r2, #1
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x20]
 	ldr     r0, [sp, #0x24]
@@ -5704,13 +5706,13 @@ branch_21d35f2: @ 21d35f2 :thumb
 	mov     r0, r6
 	mov     r1, r4
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r2, [sp, #0x20]
 	mov     r0, r4
 	str     r2, [sp, #0x24]
 	mov     r1, #0x0
 	lsl     r2, r2, #1
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	str     r0, [sp, #0x20]
 	ldr     r1, [r5, #0x0]
@@ -6773,7 +6775,7 @@ branch_21d3c32: @ 21d3c32 :thumb
 	ldr     r0, [sp, #0x10]
 	ldr     r1, [sp, #0x14]
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [sp, #0x30]
 	str     r0, [r7, #0x0]
 	add     sp, #0x1c
@@ -6930,7 +6932,7 @@ branch_21d3d16: @ 21d3d16 :thumb
 	ldr     r1, [sp, #0x10]
 	mov     r0, r7
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [sp, #0x30]
 	str     r0, [r6, #0x0]
 	add     sp, #0x18
@@ -7167,7 +7169,7 @@ branch_21d3e6a: @ 21d3e6a :thumb
 	ldr     r1, [sp, #0x10]
 	mov     r0, r7
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [sp, #0x30]
 	str     r0, [r6, #0x0]
 	add     sp, #0x18
@@ -7374,7 +7376,7 @@ branch_21d3f94: @ 21d3f94 :thumb
 	ldr     r1, [sp, #0x10]
 	mov     r0, r7
 	lsl     r2, r2, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [sp, #0x30]
 	str     r0, [r6, #0x0]
 	add     sp, #0x18
@@ -7424,7 +7426,7 @@ Function_21d3fe0: @ 21d3fe0 :thumb
 	push    {r3-r5,lr}
 	mov     r1, #0x48
 	mov     r5, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d3ff2
 	bl      ErrorHandling
@@ -7432,7 +7434,7 @@ branch_21d3ff2: @ 21d3ff2 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x48
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x5
 	str     r0, [r4, #0x8]
 	str     r5, [r4, #0x44]
@@ -7839,7 +7841,7 @@ branch_21d4230: @ 21d4230 :thumb
 Function_21d423c: @ 21d423c :thumb
 	push    {r4,lr}
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d424c
 	bl      ErrorHandling
@@ -8566,7 +8568,7 @@ Function_21d467c: @ 21d467c :thumb
 	str     r1, [r6, #0x4]
 	mov     r1, #0x30
 	mov     r5, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4696
 	bl      ErrorHandling
@@ -8574,7 +8576,7 @@ branch_21d4696: @ 21d4696 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x30
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d12ec
 	str     r0, [r4, #0x0]
@@ -8628,7 +8630,7 @@ Function_21d4704: @ 21d4704 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x14
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d471e
 	bl      ErrorHandling
@@ -8673,7 +8675,7 @@ Function_21d475c: @ 21d475c :thumb
 	str     r1, [r6, #0x4]
 	mov     r1, #0x30
 	mov     r5, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4776
 	bl      ErrorHandling
@@ -8681,7 +8683,7 @@ branch_21d4776: @ 21d4776 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x30
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d12ec
 	str     r0, [r4, #0x0]
@@ -8739,7 +8741,7 @@ Function_21d47f0: @ 21d47f0 :thumb
 	str     r1, [r6, #0x4]
 	mov     r1, #0x30
 	mov     r5, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d480a
 	bl      ErrorHandling
@@ -8747,7 +8749,7 @@ branch_21d480a: @ 21d480a :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x30
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d12ec
 	str     r0, [r4, #0x0]
@@ -8802,7 +8804,7 @@ Function_21d4878: @ 21d4878 :thumb
 	str     r0, [r5, #0x4]
 	mov     r0, r2
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4894
 	bl      ErrorHandling
@@ -8835,7 +8837,7 @@ Function_21d48b8: @ 21d48b8 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x18
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d48d2
 	bl      ErrorHandling
@@ -8885,7 +8887,7 @@ Function_21d491c: @ 21d491c :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x18
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4936
 	bl      ErrorHandling
@@ -8935,7 +8937,7 @@ Function_21d4980: @ 21d4980 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x18
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d499a
 	bl      ErrorHandling
@@ -8985,7 +8987,7 @@ Function_21d49e4: @ 21d49e4 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0xc
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d49fe
 	bl      ErrorHandling
@@ -9031,7 +9033,7 @@ Function_21d4a3c: @ 21d4a3c :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0xc
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4a56
 	bl      ErrorHandling
@@ -9077,7 +9079,7 @@ Function_21d4a94: @ 21d4a94 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x18
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4aae
 	bl      ErrorHandling
@@ -9127,7 +9129,7 @@ Function_21d4af8: @ 21d4af8 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0xc
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4b12
 	bl      ErrorHandling
@@ -9173,7 +9175,7 @@ Function_21d4b50: @ 21d4b50 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0x18
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4b6a
 	bl      ErrorHandling
@@ -9223,7 +9225,7 @@ Function_21d4bb4: @ 21d4bb4 :thumb
 	str     r1, [r5, #0x4]
 	mov     r1, #0xc
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4bce
 	bl      ErrorHandling
@@ -9266,7 +9268,7 @@ Function_21d4c0c: @ 21d4c0c :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0xc]
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d4c20
 	bl      ErrorHandling
@@ -9286,7 +9288,7 @@ branch_21d4c26: @ 21d4c26 :thumb
 	ldr     r1, [r5, #0x8]
 	ldr     r0, [r5, #0xc]
 	lsl     r1, r1, #4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0xc]
 	cmp     r0, #0x0
 	bne     branch_21d4c4c
@@ -9296,7 +9298,7 @@ branch_21d4c4c: @ 21d4c4c :thumb
 	ldr     r0, [r4, #0xc]
 	mov     r1, #0x0
 	lsl     r2, r2, #4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r5, #0x8]
 	str     r0, [r4, #0x10]
 	ldr     r0, [r5, #0x0]
@@ -9679,7 +9681,7 @@ branch_21d4ee0: @ 21d4ee0 :thumb
 Function_21d4ee4: @ 21d4ee4 :thumb
 	push    {r3,lr}
 	mov     r1, #0x14
-	bl      malloc_maybe
+	bl      malloc
 	mov     r3, r0
 	mov     r2, #0x14
 	mov     r1, #0x0
@@ -11879,7 +11881,7 @@ Function_21d5b90: @ 21d5b90 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x38
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d5ba2
 	bl      ErrorHandling
@@ -11887,7 +11889,7 @@ branch_21d5ba2: @ 21d5ba2 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x38
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d138c
 	str     r0, [r4, #0x0]
@@ -11924,7 +11926,7 @@ Function_21d5be0: @ 21d5be0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d5bf2
 	bl      ErrorHandling
@@ -11966,7 +11968,7 @@ Function_21d5c1c: @ 21d5c1c :thumb
 	mov     r1, #0x14
 	mov     r0, r5
 	mul     r1, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -12043,7 +12045,7 @@ Function_21d5cb8: @ 21d5cb8 :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r4, r1
 	mov     r1, #0x24
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x8]
 	cmp     r0, #0x0
 	bne     branch_21d5cd0
@@ -12052,7 +12054,7 @@ branch_21d5cd0: @ 21d5cd0 :thumb
 	ldr     r0, [r5, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x24
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r1, [r5, #0x8]
 	mov     r0, r4
 	bl      Function_21d5f58
@@ -12150,7 +12152,7 @@ branch_21d5d6c: @ 21d5d6c :thumb
 	mov     r1, #0x52
 	ldr     r0, [r4, #0x4]
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r7, r0
 	bne     branch_21d5d7e
 	bl      ErrorHandling
@@ -14153,7 +14155,7 @@ Function_21d6c24: @ 21d6c24 :thumb
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r5, #0x4]
 	bl      Function_21d3898
 	mov     r1, #0x51
@@ -15706,7 +15708,7 @@ Function_21d7728: @ 21d7728 :thumb
 	mov     r6, r1
 	mov     r1, #0x28
 	mov     r5, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d773c
 	bl      ErrorHandling
@@ -15714,7 +15716,7 @@ branch_21d773c: @ 21d773c :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r6
 	mov     r1, #0x0
 	bl      Function_21d1410
@@ -15743,7 +15745,7 @@ Function_21d7770: @ 21d7770 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d7782
 	bl      ErrorHandling
@@ -15772,7 +15774,7 @@ Function_21d7798: @ 21d7798 :thumb
 	mul     r7, r1
 	mov     r0, r5
 	mov     r1, r7
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d77b8
 	bl      ErrorHandling
@@ -15780,7 +15782,7 @@ branch_21d77b8: @ 21d77b8 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r7
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r4
 	mov     r1, r6
 	mov     r2, r5
@@ -15849,7 +15851,7 @@ Function_21d7818: @ 21d7818 :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r4, r1
 	mov     r1, #0x24
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x8]
 	cmp     r0, #0x0
 	bne     branch_21d7830
@@ -15858,7 +15860,7 @@ branch_21d7830: @ 21d7830 :thumb
 	ldr     r0, [r5, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x24
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r1, [pc, #0x20] @ 0x21d785c, (=#0x4cd)
 	ldr     r0, [r5, #0x8]
 	mov     r2, r4
@@ -15969,7 +15971,7 @@ Jumppoints_21d78da:
 branch_21d78e4: @ 21d78e4 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x3c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	cmp     r0, #0x0
 	bne     branch_21d78f6
@@ -15979,7 +15981,7 @@ branch_21d78f6: @ 21d78f6 :thumb
 	ldr     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x3c
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -16210,7 +16212,7 @@ Function_21d7a64: @ 21d7a64 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x1c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x8]
 	mov     r0, #0x60
 	str     r0, [sp, #0x0]
@@ -16272,7 +16274,7 @@ Function_21d7a64: @ 21d7a64 :thumb
 	bl      Function_21d154c
 	mov     r0, r6
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	mov     r3, r0
 	str     r5, [r3, #0x0]
 	str     r4, [r3, #0x4]
@@ -18011,7 +18013,7 @@ Function_21d86e8: @ 21d86e8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x38
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d86fa
 	bl      ErrorHandling
@@ -18019,7 +18021,7 @@ branch_21d86fa: @ 21d86fa :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x38
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d138c
 	str     r0, [r4, #0x0]
@@ -18041,7 +18043,7 @@ Function_21d8724: @ 21d8724 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d8736
 	bl      ErrorHandling
@@ -18070,7 +18072,7 @@ Function_21d874c: @ 21d874c :thumb
 	mul     r7, r1
 	mov     r0, r5
 	mov     r1, r7
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d876c
 	bl      ErrorHandling
@@ -18078,7 +18080,7 @@ branch_21d876c: @ 21d876c :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r7
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
@@ -18147,7 +18149,7 @@ Function_21d87cc: @ 21d87cc :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r4, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	bne     branch_21d87e2
 	bl      ErrorHandling
@@ -18405,11 +18407,11 @@ Jumppoints_21d8958:
 branch_21d8960: @ 21d8960 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x64
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x64
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -20192,7 +20194,7 @@ Function_21d9534: @ 21d9534 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d9546
 	bl      ErrorHandling
@@ -20229,7 +20231,7 @@ Function_21d957c: @ 21d957c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d958e
 	bl      ErrorHandling
@@ -20311,7 +20313,7 @@ Function_21d95e8: @ 21d95e8 :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r6, r1
 	mov     r1, #0x9c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d95fe
 	bl      ErrorHandling
@@ -20319,7 +20321,7 @@ branch_21d95fe: @ 21d95fe :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x9c
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r4
 	ldr     r1, [pc, #0x3c] @ 0x21d9648, (=#0xffff)
 	str     r4, [r5, #0x8]
@@ -20592,12 +20594,12 @@ branch_21d97c6: @ 21d97c6 :thumb
 	mov     r1, #0x4e
 	ldr     r0, [r4, #0x4]
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x4e
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -21241,7 +21243,7 @@ Function_21d9bec: @ 21d9bec :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
@@ -21485,7 +21487,7 @@ Function_21d9d78: @ 21d9d78 :thumb
 	mov     r0, r2
 	mov     r1, #0x18
 	str     r2, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, #0xc]
 	mov     r0, #0x0
@@ -21685,7 +21687,7 @@ Function_21d9eb4: @ 21d9eb4 :thumb
 	mov     r0, r2
 	mov     r1, #0x28
 	str     r2, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, #0xc]
 	mov     r0, #0x0
@@ -21919,7 +21921,7 @@ Function_21da018: @ 21da018 :thumb
 	mov     r0, r2
 	mov     r1, #0x2c
 	str     r2, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, #0xc]
 	mov     r0, #0x0
@@ -22199,7 +22201,7 @@ Function_21da1c8: @ 21da1c8 :thumb
 	mov     r0, r2
 	mov     r1, #0x28
 	str     r2, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, #0xc]
 	mov     r0, #0x0
@@ -22491,7 +22493,7 @@ Function_21da38c: @ 21da38c :thumb
 	mov     r0, r2
 	mov     r1, #0x3c
 	str     r2, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x4]
 	str     r0, [r1, #0xc]
 	mov     r0, #0x0
@@ -23040,7 +23042,7 @@ Function_21da6b0: @ 21da6b0 :thumb
 	mov     r0, r1
 	mov     r1, #0x7e
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x10]
 	str     r0, [r1, #0x1c]
 	mov     r0, #0x0
@@ -23373,7 +23375,7 @@ Function_21da888: @ 21da888 :thumb
 	mov     r0, r1
 	mov     r1, #0x7e
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x10]
 	str     r0, [r1, #0x1c]
 	mov     r0, #0x0
@@ -23789,7 +23791,7 @@ Function_21daad4: @ 21daad4 :thumb
 	mov     r0, r1
 	mov     r1, #0x7e
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x10]
 	str     r0, [r1, #0x1c]
 	mov     r0, #0x0
@@ -24252,7 +24254,7 @@ Function_21dad74: @ 21dad74 :thumb
 	mov     r0, r1
 	mov     r1, #0x7e
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x10]
 	str     r0, [r1, #0x1c]
 	mov     r0, #0x0
@@ -24735,7 +24737,7 @@ Function_21db02c: @ 21db02c :thumb
 	mov     r0, r1
 	mov     r1, #0x2a
 	lsl     r1, r1, #4
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [sp, #0x10]
 	str     r0, [r1, #0x1c]
 	mov     r0, #0x0
@@ -29046,7 +29048,7 @@ Function_21dca5c: @ 21dca5c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dca6e
 	bl      ErrorHandling
@@ -29082,7 +29084,7 @@ Function_21dcaa0: @ 21dcaa0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x14
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dcab2
 	bl      ErrorHandling
@@ -29145,7 +29147,7 @@ Function_21dcaf8: @ 21dcaf8 :thumb
 	ldr     r0, [r6, #0x4]
 	mov     r5, r1
 	mov     r1, #0x34
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dcb0e
 	bl      ErrorHandling
@@ -29153,7 +29155,7 @@ branch_21dcb0e: @ 21dcb0e :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x34
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r4, [r6, #0x8]
 	ldr     r1, [r5, #0x0]
 	ldr     r0, [pc, #0x48] @ 0x21dcb68, (=#0x1744)
@@ -29297,11 +29299,11 @@ Jumppoints_21dcbfa:
 branch_21dcc02: @ 21dcc02 :thumb
 	ldr     r0, [r4, #0x4]
 	ldr     r1, [pc, #0xc4] @ 0x21dcccc, (=#0x844)
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0xc0] @ 0x21dcccc, (=#0x844)
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r5, [r4, #0x8]
 	ldr     r0, [r7, #0x4]
 	mov     r1, #0x0
@@ -30810,7 +30812,7 @@ Function_21dd710: @ 21dd710 :thumb
 	add     r7, r1, r0
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r5, r0
 	mov     r1, #0x0
 	cmp     r7, #0x0
@@ -30928,7 +30930,7 @@ branch_21dd7e4: @ 21dd7e4 :thumb
 	add     r7, r1, r0
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r5, r0
 	mov     r1, #0x0
 	cmp     r7, #0x0
@@ -31001,13 +31003,13 @@ Function_21dd8b4: @ 21dd8b4 :thumb
 	add     r0, #0xec
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r2, #0x47
 	lsl     r2, r2, #4
 	add     r0, r6, r2
 	mov     r1, #0x0
 	sub     r2, #0xec
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r6
 	add     r0, #0xc4
 	ldr     r0, [r0, #0x0]
@@ -31067,7 +31069,7 @@ branch_21dd928: @ 21dd928 :thumb
 	cmp     r4, #0x0
 	beq     branch_21dd934
 	mov     r1, r4
-	bl      malloc_maybe
+	bl      malloc
 	b       branch_21dd936
 
 branch_21dd934: @ 21dd934 :thumb
@@ -31696,7 +31698,7 @@ Function_21ddda4: @ 21ddda4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dddb6
 	bl      ErrorHandling
@@ -31735,7 +31737,7 @@ Function_21dddf0: @ 21dddf0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dde02
 	bl      ErrorHandling
@@ -31809,7 +31811,7 @@ Function_21dde4c: @ 21dde4c :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r6, r1
 	mov     r1, #0x28
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21dde62
 	bl      ErrorHandling
@@ -31817,7 +31819,7 @@ branch_21dde62: @ 21dde62 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r4, [r5, #0x8]
 	mov     r0, r4
 	mov     r1, r6
@@ -31905,11 +31907,11 @@ Jumppoints_21ddee8:
 branch_21ddef0: @ 21ddef0 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x2c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x2c
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -32499,7 +32501,7 @@ Function_21de2ec: @ 21de2ec :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x14]
 	mov     r1, #0xfe
 	strb    r1, [r0, #0x0]
@@ -33085,7 +33087,7 @@ Function_21de6e8: @ 21de6e8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21de6fa
 	bl      ErrorHandling
@@ -33093,7 +33095,7 @@ branch_21de6fa: @ 21de6fa :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d138c
 	str     r0, [r4, #0x0]
@@ -33115,7 +33117,7 @@ Function_21de724: @ 21de724 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21de736
 	bl      ErrorHandling
@@ -33280,11 +33282,11 @@ Jumppoints_21de820:
 branch_21de828: @ 21de828 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x74
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x74
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -35572,7 +35574,7 @@ Function_21df7cc: @ 21df7cc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21df7de
 	bl      ErrorHandling
@@ -35606,7 +35608,7 @@ Function_21df80c: @ 21df80c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21df81e
 	bl      ErrorHandling
@@ -35757,11 +35759,11 @@ Jumppoints_21df8e0:
 branch_21df8e8: @ 21df8e8 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0xd0
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0xd0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x8]
 	ldr     r1, [r7, #0xc]
 	add     r0, #0xc8
@@ -38836,7 +38838,7 @@ Function_21e0d04: @ 21e0d04 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e0d16
 	bl      ErrorHandling
@@ -38844,7 +38846,7 @@ branch_21e0d16: @ 21e0d16 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d138c
 	str     r0, [r4, #0x0]
@@ -38866,7 +38868,7 @@ Function_21e0d40: @ 21e0d40 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e0d52
 	bl      ErrorHandling
@@ -38974,11 +38976,11 @@ Jumppoints_21e0dc8:
 branch_21e0dd0: @ 21e0dd0 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x58
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x58
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -40710,7 +40712,7 @@ Function_21e199c: @ 21e199c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e19ae
 	bl      ErrorHandling
@@ -40757,7 +40759,7 @@ Function_21e19fc: @ 21e19fc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e1a0e
 	bl      ErrorHandling
@@ -40786,7 +40788,7 @@ Function_21e1a24: @ 21e1a24 :thumb
 	mul     r7, r1
 	mov     r0, r5
 	mov     r1, r7
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e1a44
 	bl      ErrorHandling
@@ -40794,7 +40796,7 @@ branch_21e1a44: @ 21e1a44 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r7
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
@@ -40881,11 +40883,11 @@ Function_21e1ad0: @ 21e1ad0 :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r6, r1
 	mov     r1, #0x3c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, #0x3c
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r1, #0x0
 	mov     r2, r4
 	mov     r0, #0x4
@@ -40989,11 +40991,11 @@ Jumppoints_21e1b86:
 branch_21e1b8e: @ 21e1b8e :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0xc4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0xc4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -41257,7 +41259,7 @@ Function_21e1d40: @ 21e1d40 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, #0xd0
 	str     r0, [sp, #0x0]
@@ -43143,7 +43145,7 @@ Function_21e2a5c: @ 21e2a5c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x34
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e2a6e
 	bl      ErrorHandling
@@ -43151,7 +43153,7 @@ branch_21e2a6e: @ 21e2a6e :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x34
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d13b4
 	str     r0, [r4, #0x0]
@@ -43203,7 +43205,7 @@ Function_21e2ae0: @ 21e2ae0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e2af2
 	bl      ErrorHandling
@@ -43232,7 +43234,7 @@ Function_21e2b08: @ 21e2b08 :thumb
 	mul     r7, r1
 	mov     r0, r5
 	mov     r1, r7
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e2b28
 	bl      ErrorHandling
@@ -43240,7 +43242,7 @@ branch_21e2b28: @ 21e2b28 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r7
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
@@ -43445,11 +43447,11 @@ Jumppoints_21e2c82:
 branch_21e2c8a: @ 21e2c8a :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x28
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r1, [r7, #0x8]
 	ldr     r0, [r4, #0x8]
 	str     r1, [r0, #0x0]
@@ -44561,7 +44563,7 @@ Function_21e33c4: @ 21e33c4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x34
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e33d6
 	bl      ErrorHandling
@@ -44569,7 +44571,7 @@ branch_21e33d6: @ 21e33d6 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x34
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_21d13c8
 	str     r0, [r4, #0x0]
@@ -44591,7 +44593,7 @@ Function_21e3400: @ 21e3400 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e3412
 	bl      ErrorHandling
@@ -44665,7 +44667,7 @@ Function_21e345c: @ 21e345c :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r4, r1
 	mov     r1, #0x1c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	mov     r2, r6
 	mov     r1, #0x1c
@@ -44813,11 +44815,11 @@ Jumppoints_21e355e:
 branch_21e3568: @ 21e3568 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x28
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x28
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -45010,7 +45012,7 @@ Function_21e3688: @ 21e3688 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, #0x30
 	str     r0, [sp, #0x0]
@@ -45902,7 +45904,7 @@ Function_21e3c6c: @ 21e3c6c :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0xa8
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x18]
 	mov     r0, #0x10
 	str     r0, [sp, #0x0]
@@ -46523,7 +46525,7 @@ Function_21e4080: @ 21e4080 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e4092
 	bl      ErrorHandling
@@ -46560,7 +46562,7 @@ Function_21e40c8: @ 21e40c8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x14
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e40da
 	bl      ErrorHandling
@@ -46626,7 +46628,7 @@ Function_21e4120: @ 21e4120 :thumb
 	mov     r7, r0
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e413e
 	bl      ErrorHandling
@@ -46725,12 +46727,12 @@ branch_21e41ce: @ 21e41ce :thumb
 	mov     r1, #0x33
 	ldr     r0, [r4, #0x4]
 	lsl     r1, r1, #4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x33
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	lsl     r2, r2, #4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -48365,7 +48367,7 @@ Function_21e4d24: @ 21e4d24 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e4d36
 	bl      ErrorHandling
@@ -48399,7 +48401,7 @@ Function_21e4d64: @ 21e4d64 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e4d76
 	bl      ErrorHandling
@@ -48476,11 +48478,11 @@ Function_21e4dc0: @ 21e4dc0 :thumb
 	mov     r7, r0
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x70
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, #0x70
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r2, [r5, #0x4]
 	mov     r0, r4
 	mov     r1, r6
@@ -48605,11 +48607,11 @@ Jumppoints_21e4eb4:
 branch_21e4ebc: @ 21e4ebc :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x74
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x74
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -48971,11 +48973,11 @@ Function_21e5128: @ 21e5128 :thumb
 	mov     r6, r1
 	mov     r0, r4
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, r4
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x10]
 	mov     r0, #0x6a
 	str     r0, [sp, #0x0]
@@ -51208,7 +51210,7 @@ Function_21e608c: @ 21e608c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e609e
 	bl      ErrorHandling
@@ -51247,7 +51249,7 @@ Function_21e60d8: @ 21e60d8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e60ea
 	bl      ErrorHandling
@@ -51320,7 +51322,7 @@ Function_21e6134: @ 21e6134 :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e6148
 	bl      ErrorHandling
@@ -51393,7 +51395,7 @@ Jumppoints_21e619a:
 branch_21e61a2: @ 21e61a2 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x14
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r2, #0x14
 	mov     r1, #0x0
@@ -52475,7 +52477,7 @@ Function_21e696c: @ 21e696c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e697e
 	bl      ErrorHandling
@@ -52511,7 +52513,7 @@ Function_21e69b0: @ 21e69b0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e69c2
 	bl      ErrorHandling
@@ -52540,7 +52542,7 @@ Function_21e69d8: @ 21e69d8 :thumb
 	mul     r7, r1
 	mov     r0, r5
 	mov     r1, r7
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e69f8
 	bl      ErrorHandling
@@ -52548,7 +52550,7 @@ branch_21e69f8: @ 21e69f8 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r7
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
@@ -52625,7 +52627,7 @@ Function_21e6a6c: @ 21e6a6c :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r4, r1
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	mov     r2, r6
 	mov     r1, #0x18
@@ -52747,11 +52749,11 @@ Jumppoints_21e6b3c:
 branch_21e6b44: @ 21e6b44 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x40
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x40
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -53086,7 +53088,7 @@ Function_21e6d58: @ 21e6d58 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, #0x80
 	str     r0, [sp, #0x0]
@@ -54002,7 +54004,7 @@ Function_21e73e8: @ 21e73e8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e73fa
 	bl      ErrorHandling
@@ -54035,7 +54037,7 @@ Function_21e7424: @ 21e7424 :thumb
 	mov     r6, r1
 	mov     r1, #0x20
 	mov     r5, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e7438
 	bl      ErrorHandling
@@ -54043,7 +54045,7 @@ branch_21e7438: @ 21e7438 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r6
 	bl      Function_21d13fc
 	str     r0, [r4, #0x0]
@@ -54108,7 +54110,7 @@ Function_21e74a0: @ 21e74a0 :thumb
 	ldr     r0, [r6, #0x4]
 	mov     r5, r1
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e74b6
 	bl      ErrorHandling
@@ -54221,11 +54223,11 @@ Jumppoints_21e7550:
 branch_21e7558: @ 21e7558 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0xc4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0xc4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x8]
 	mov     r1, #0x1
 	add     r0, #0xb8
@@ -54497,7 +54499,7 @@ branch_21e76ea: @ 21e76ea :thumb
 	cmp     r1, #0x0
 	bne     branch_21e76fa
 	ldr     r0, [r0, #0x3c]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21e76fa: @ 21e76fa :thumb
 	ldr     r0, [r4, #0x8]
@@ -54869,7 +54871,7 @@ Function_21e7904: @ 21e7904 :thumb
 branch_21e79ac: @ 21e79ac :thumb
 	mov     r0, r4
 	mov     r1, #0x60
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, r5
 	add     r1, #0xbc
 	str     r0, [r1, #0x0]
@@ -54934,7 +54936,7 @@ branch_21e79ac: @ 21e79ac :thumb
 	bl      Function_200a640
 	mov     r0, r4
 	mov     r1, #0xa0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, r5
 	add     r1, #0xc0
 	str     r0, [r1, #0x0]
@@ -55636,7 +55638,7 @@ branch_21e7fba: @ 21e7fba :thumb
 	ldr     r0, [pc, #0xc] @ 0x21e7fcc, (=#0x21e7fd1)
 	add     r1, #0x40
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r4, #0x3c]
 	pop     {r4,pc}
 @ 0x21e7fcc
@@ -55753,7 +55755,7 @@ branch_21e8064: @ 21e8064 :thumb
 
 .thumb
 branch_21e806e: @ 21e806e :thumb
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x30]
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -55973,7 +55975,7 @@ branch_21e81e4: @ 21e81e4 :thumb
 	ldr     r0, [pc, #0xc] @ 0x21e81f4, (=#0x21e81f9)
 	add     r1, #0x74
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r4, #0x3c]
 	pop     {r3-r5,pc}
 @ 0x21e81f4
@@ -56038,7 +56040,7 @@ branch_21e822c: @ 21e822c :thumb
 	cmp     r4, #0x1
 	bne     branch_21e8254
 	mov     r0, r6
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r5, #0x20]
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -56105,7 +56107,7 @@ branch_21e8268: @ 21e8268 :thumb
 	mov     r1, r5
 	ldr     r0, [pc, #0xc] @ 0x21e82c4, (=#0x21e82c9)
 	add     r1, #0x98
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r5, #0x3c]
 	pop     {r3-r5,pc}
 @ 0x21e82c2
@@ -56266,7 +56268,7 @@ branch_21e83b6: @ 21e83b6 :thumb
 	ldr     r0, [r4, #0x0]
 	bl      Function_2021c50
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x1c]
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -56432,7 +56434,7 @@ Function_21e84fc: @ 21e84fc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e850e
 	bl      ErrorHandling
@@ -56469,7 +56471,7 @@ Function_21e8544: @ 21e8544 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21e8556
 	bl      ErrorHandling
@@ -56543,7 +56545,7 @@ Function_21e85a0: @ 21e85a0 :thumb
 	ldr     r0, [r5, #0x4]
 	mov     r6, r1
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x18
@@ -56663,11 +56665,11 @@ Jumppoints_21e8670:
 branch_21e8678: @ 21e8678 :thumb
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x30
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	mov     r1, #0x0
 	mov     r2, #0x30
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x0]
@@ -56984,7 +56986,7 @@ Function_21e886c: @ 21e886c :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x4]
 	mov     r0, #0xf8
 	str     r0, [sp, #0x0]
@@ -57690,12 +57692,12 @@ Function_21e8d48: @ 21e8d48 :thumb
 	mov     r1, #0x7a
 	ldr     r0, [r5, #0xc]
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x7a
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x5
 	mov     r2, #0x0
@@ -57736,7 +57738,7 @@ branch_21e8d8c: @ 21e8d8c :thumb
 	ldr     r0, [pc, #0x18] @ 0x21e8dcc, (=#0x21e9829)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r1, #0x7
 	lsl     r1, r1, #6
 	str     r0, [r4, r1]
@@ -57759,7 +57761,7 @@ Function_21e8dd0: @ 21e8dd0 :thumb
 	mov     r0, #0x7
 	lsl     r0, r0, #6
 	ldr     r0, [r4, r0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	bl      free
 	pop     {r4,pc}
@@ -59536,7 +59538,7 @@ branch_21e9ace: @ 21e9ace :thumb
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	pop     {r3-r5,pc}
 @ 0x21e9ae6
 

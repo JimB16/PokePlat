@@ -4883,7 +4883,7 @@ Function_21d2fe0: @ 21d2fe0 :thumb
 	mov     r0, #0x0
 	str     r0, [r4, #0x8]
 	mov     r0, #0x5f
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, r0
 	mov     r3, r1
 	mov     r2, #0x18
@@ -4926,7 +4926,7 @@ branch_21d3034: @ 21d3034 :thumb
 	mov     r0, r5
 	bl      free
 	mov     r0, r6
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21d3058: @ 21d3058 :thumb
 	pop     {r4-r6,pc}
@@ -5948,7 +5948,7 @@ branch_21d366a: @ 21d366a :thumb
 	mov     r0, r4
 	bl      free
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21d367c: @ 21d367c :thumb
 	add     sp, #0x10
@@ -5963,7 +5963,7 @@ Function_21d3684: @ 21d3684 :thumb
 	mov     r5, r0
 	mov     r0, #0x5f
 	mov     r1, #0x18
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x18
@@ -6426,7 +6426,7 @@ branch_21d3974: @ 21d3974 :thumb
 	mov     r0, r5
 	bl      free
 	mov     r0, r6
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 branch_21d398c: @ 21d398c :thumb
 	pop     {r4-r6,pc}
 @ 0x21d398e
@@ -6446,7 +6446,7 @@ Function_21d3990: @ 21d3990 :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, #0x5f
 	mov     r1, #0xc
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, r0
 	str     r5, [r1, #0x0]
 	lsl     r2, r4, #2
@@ -6551,14 +6551,14 @@ Function_21d3a2c: @ 21d3a2c :thumb
 	cmp     r5, #0x1
 	bne     branch_21d3a4c
 	mov     r0, #0x5f
-	bl      malloc_maybe
+	bl      malloc
 	b       branch_21d3a52
 @ 0x21d3a4c
 
 .thumb
 branch_21d3a4c: @ 21d3a4c :thumb
 	mov     r0, #0x5f
-	bl      malloc2_maybe
+	bl      malloc2
 .thumb
 branch_21d3a52: @ 21d3a52 :thumb
 	mov     r5, r0
@@ -7405,7 +7405,7 @@ Function_21d3f9c: @ 21d3f9c :thumb
 	bl      0x200682c
 	mov     r6, r0
 	ldr     r0, [r6, #0x30]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, #0x6f
 	lsl     r0, r0, #2
 	ldr     r0, [r6, r0]

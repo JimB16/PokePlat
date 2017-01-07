@@ -24,6 +24,7 @@ unpack_it      := $(PYTHON) tools/it.py -x
 create_it      := $(PYTHON) tools/it.py -p
 armdisassem    := $(PYTHON) tools/armdisassem.py
 gfx            := $(PYTHON) tools/gfx.py
+gfx_btx        := $(PYTHON) tools/gfx_btx.py
 create_rom     := $(PYTHON) tools/create_rom.py
 create_msg     := $(PYTHON) tools/create_msg.py
 ex_script      := $(PYTHON) tools/export_script.py
@@ -306,13 +307,31 @@ clean:
     
 
 init:
-	$(unpack_rom) "baserom.nds"
+	$(unpack_rom) -x "baserom.nds"
     
 init2:
-	$(unpack_rom) "baserom.nds" "newrom"
+	$(unpack_rom) -x "baserom.nds" -of "newrom"
 
 initk:
-	$(unpack_rom) "baserom_3942K.nds" "baserom_3942K"
+	$(unpack_rom) -x "baserom_3942K.nds" -of "baserom_3942K"
+
+diagnose:
+	$(unpack_rom) -d "baserom.nds"
+	$(unpack_rom) -d "pokeplat.nds"
+	$(unpack_rom) -d "baserom_3942K.nds"
+
+diagnose2:
+	$(unpack_rom) -d "../PokemonPlatRoms/2641 - Pokemon Platinum (J)(XenoPhobia).nds"
+	$(unpack_rom) -d "../PokemonPlatRoms/3541 - Pokemon - Platinum Version (USA)NoIntro.nds"
+	$(unpack_rom) -d "../PokemonPlatRoms/3541 - Pokemon Platinum Version (US)(XenoPhobia).nds"
+	$(unpack_rom) -d "../PokemonPlatRoms/3541- Pokemon Platinum (U).nds"
+	$(unpack_rom) -d "../PokemonPlatRoms/4998 - Pokemon - Platinum Version (v01) (U).nds"
+
+diagnose2diff:
+	diff -u "../PokemonPlatRoms/3541 - Pokemon Platinum Version (US)(XenoPhobia).nds_Header.txt" "../PokemonPlatRoms/3541 - Pokemon - Platinum Version (USA)NoIntro.nds_Header.txt" | less > "../PokemonPlatRoms/diff_3541_XenoPhobia_VS_NoIntro.txt"
+	diff -u "../PokemonPlatRoms/3541 - Pokemon Platinum Version (US)(XenoPhobia).nds_Header.txt" "../PokemonPlatRoms/4998 - Pokemon - Platinum Version (v01) (U).nds_Header.txt" | less > "../PokemonPlatRoms/diff_3541_XenoPhobia_VS_USv01.txt"
+	diff -u "../PokemonPlatRoms/3541 - Pokemon - Platinum Version (USA)NoIntro.nds_Header.txt" "../PokemonPlatRoms/4998 - Pokemon - Platinum Version (v01) (U).nds_Header.txt" | less > "../PokemonPlatRoms/diff_3541_NoIntro_VS_USv01.txt"
+	diff -u "../PokemonPlatRoms/3541 - Pokemon - Platinum Version (USA)NoIntro.nds_Header.txt" "../PokemonPlatRoms/2641 - Pokemon Platinum (J)(XenoPhobia).nds_Header.txt" | less > "../PokemonPlatRoms/diff_3541_NoIntro_VS_2641_Jap.txt"
 
 narc:
 	$(foreach f,$(narc_files),$(unpack_narc) $(f) -debug;)
@@ -652,6 +671,20 @@ newrom/data/poketool/pokegra/pokegra.narc: $(POKEGRAS2)
 	hexdump -C $(subst newrom,baserom,$@) > $(subst .narc,.txt,$(subst newrom,baserom,$@))
 	hexdump -C $@ > $(subst newrom,build,$(subst .narc,.txt,$@))
 	diff -u $(subst .narc,.txt,$(subst newrom,baserom,$@)) $(subst newrom,build,$(subst .narc,.txt,$@)) | less > build/diff_$(notdir $(subst .narc,.txt,$@))
+
+all_sprites_btx := $(wildcard ./baserom/data/data/mmodel/mmodel_narc/data_0000*.btx0)
+all_sprites_png := $(subst _narc,,$(subst ./baserom/,,$(all_sprites_btx:.btx0=.png)))
+all_sprites2_btx := $(wildcard ./baserom/data/data/mmodel/fldeff_narc/data_0000*.btx0)
+all_sprites2_png := $(subst _narc,,$(subst ./baserom/,,$(all_sprites2_btx:.btx0=.png)))
+
+pics3: $(all_sprites_png)
+pics4: $(all_sprites2_png)
+
+data/data/mmodel/mmodel/data_%.png: baserom/data/data/mmodel/mmodel_narc/data_%.btx0
+	$(gfx_btx) -x $< -debug -o $@
+
+data/data/mmodel/fldeff/data_%.png: baserom/data/data/mmodel/fldeff_narc/data_%.btx0
+	$(gfx_btx) -x $< -debug -o $@
 
 all_pokemon_rgcn := $(wildcard ./baserom/data/poketool/pokegra/pl_pokegra_narc/data_00000*.rgcn)
 all_pokemon_png := $(subst _narc,,$(subst ./baserom/,,$(all_pokemon_rgcn:.rgcn=.png)))

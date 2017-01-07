@@ -20,7 +20,7 @@ Function_221f800: @ 221f800 :thumb
 	mov     r1, #0x1
 	mov     r0, r4
 	lsl     r1, r1, #18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r1, #0x1
 	mov     r2, #0x0
@@ -3929,7 +3929,7 @@ branch_2222418: @ 2222418 :arm
 	ldr     r1, [pc, #0x758] @ [0x2222b78] (=0x2250d20)
 	ldr     r0, [pc, #0x758] @ [0x2222b7c] (=0x2222330)
 	ldr     r1, [r1, #0x8]
-	bl      0x20cedc8
+	bl      WMi_StartParentEx
 	mov     r1, r0
 	mov     r0, #0x7
 	bl      Function_2223ed8
@@ -4392,7 +4392,7 @@ branch_22229a4: @ 22229a4 :arm
 	mov     r1, #0x0
 	mov     r2, r1
 	mov     r0, #0x1
-	bl      0x20ce4bc
+	bl      WM_SetPortCallback
 	mov     r0, #0x0
 	bl      0x20ce478
 	ldrh    r0, [r4, #0x2]
@@ -5083,7 +5083,7 @@ branch_2223078: @ 2223078 :arm
 	ldr     r0, [pc, #0x390] @ [0x2223418] (=0x2222bf8)
 	mov     r3, #0x1
 	str     r2, [sp]
-	bl      0x20cf21c
+	bl      WM_StartConnectEx
 	mov     r1, r0
 	mov     r0, #0xc
 	bl      Function_2223ed8
@@ -5155,7 +5155,7 @@ branch_222312c: @ 222312c :arm
 	mov     r0, #0x1
 	mov     r2, #0x0
 	strh    r0, [r3, #0x2a]
-	bl      0x20ce4bc
+	bl      WM_SetPortCallback
 	cmp     r0, #0x0
 	addne   sp, sp, #0x1c
 	ldmnefd sp!, {r4-r11,pc}
@@ -5454,10 +5454,10 @@ Function_222348c: @ 222348c :arm
 	cmp     r7, #1, 16 @ #0x10000
 	bic     r5, r0, #0x1f
 	bne     branch_22234e0
-	bl      0x20ceb20
+	bl      WM_GetNextTgid
 	mov     r7, r0
-.arm
 branch_22234e0: @ 22234e0 :arm
+
 	bl      OS_DisableInterrupts
 	ldr     r3, [pc, #0x17c] @ [0x2223668] (=0xffff)
 	ldr     r1, [pc, #0x17c] @ [0x222366c] (=0x224976c)
@@ -6092,7 +6092,7 @@ Function_2223d04: @ 2223d04 :arm
 	mov     r4, #0x3
 	mov     r1, #0x0
 	str     r4, [sp, #0x8]
-	bl      0x20cf64c
+	bl      WM_SetMPDataToPortEx
 	mov     r4, r0
 	mov     r1, r4
 	mov     r0, #0xf
@@ -15663,7 +15663,7 @@ branch_2227f6c: @ 2227f6c :thumb
 	add     r0, #0x2
 	add     r1, r6, #0x4
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	add     r0, sp, #0x48
 	ldr     r1, [r6, #0x0]
 	mov     r7, #0x0
@@ -15776,7 +15776,7 @@ branch_2228040: @ 2228040 :thumb
 	mov     r0, r7
 	add     r1, r5, #0x4
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r1, [r5, #0x0]
 	mov     r0, #0x0
 	strb    r0, [r7, r1]
@@ -15819,7 +15819,7 @@ branch_222808c: @ 222808c :thumb
 	mov     r0, r5
 	add     r1, r4, #0x4
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r1, [r4, #0x0]
 	mov     r0, #0x0
 	strb    r0, [r5, r1]
@@ -16106,7 +16106,7 @@ branch_2228262: @ 2228262 :thumb
 	ldr     r0, [sp, #0x4]
 	add     r1, #0xc
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldrh    r0, [r5, #0xa]
 	str     r0, [r7, #0x4]
 	ldrh    r0, [r5, #0xa]
@@ -16204,7 +16204,7 @@ branch_2228318: @ 2228318 :thumb
 	ldr     r0, [sp, #0x8]
 	ldr     r1, [sp, #0xc]
 	ldr     r2, [sp, #0x10]
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0x60] @ 0x2228384, (=0x2251d10)
 	mov     r1, #0x2
 	str     r1, [r0, #0x38]
@@ -16540,7 +16540,7 @@ Function_22284f4: @ 22284f4 :thumb
 branch_2228544: @ 2228544 :thumb
 	add     r0, r6, #0x6
 	mov     r2, r7
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 .thumb
 branch_222854c: @ 222854c :thumb
 	mov     r0, #0x0
@@ -16650,7 +16650,7 @@ Function_22285b8: @ 22285b8 :thumb
 	mov     r0, r5
 	mov     r1, r7
 	mov     r2, r4
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	add     r0, r5, r6
 	pop     {r3-r7,pc}
 @ 0x2228616
@@ -16874,7 +16874,7 @@ branch_222873c: @ 222873c :thumb
 branch_2228756: @ 2228756 :thumb
 	ldr     r2, [sp, #0x4]
 	mov     r0, r6
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 .thumb
 branch_222875e: @ 222875e :thumb
 	ldr     r0, [sp, #0x4]
@@ -17178,7 +17178,7 @@ branch_2228972: @ 2228972 :thumb
 	ldr     r2, [sp, #0xc]
 	mov     r0, r3
 	mov     r1, r5
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	b       branch_2228aa2
@@ -17327,7 +17327,7 @@ branch_2228a68: @ 2228a68 :thumb
 	add     r0, r0, r1
 	ldr     r2, [sp, #0xc]
 	mov     r1, r5
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	b       branch_2228aa2
 
 branch_2228a7e: @ 2228a7e :thumb
@@ -17347,7 +17347,7 @@ branch_2228a7e: @ 2228a7e :thumb
 	ldr     r2, [sp, #0xc]
 	mov     r0, r3
 	mov     r1, r5
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 .thumb
 branch_2228aa2: @ 2228aa2 :thumb
 	ldr     r2, [sp, #0x4]
@@ -17580,7 +17580,7 @@ branch_2228be0: @ 2228be0 :thumb
 	add     r0, sp, #0x4
 	mov     r1, r6
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r1, #0x0
 	add     r0, sp, #0x24
 	strb    r1, [r0, #0x0]
@@ -18439,7 +18439,7 @@ branch_2229166: @ 2229166 :thumb
 	mov     r1, r5
 	add     r0, #0x8
 	mov     r2, r4
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	add     r3, sp, #0x58
 	add     r2, sp, #0x48
 	mov     r1, #0x8
@@ -18706,7 +18706,7 @@ branch_2229336: @ 2229336 :thumb
 	ldr     r0, [sp, #0x0]
 	mov     r1, r5
 	.hword  0x1e62 @ sub r2, r4, #0x1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, #0x5
 	str     r0, [sp, #0x24]
 	ldr     r0, [sp, #0x14]
@@ -22167,7 +22167,7 @@ Function_222ad04: @ 222ad04 :thumb
 	push    {r3,lr}
 	ldr     r1, [pc, #0xc] @ 0x222ad14, (=0x2251e7c)
 	mov     r2, #0xe8
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x222ad12
@@ -23461,7 +23461,7 @@ Function_222bd88: @ 222bd88 :arm
 	bl      0x20ce7f4
 	cmp     r0, #2, 18 @ #0x8000
 	beq     branch_222bdb0
-	bl      0x20ce814
+	bl      WM_GetLinkLevel
 	mov     r4, r0
 .arm
 branch_222bdb0: @ 222bdb0 :arm
@@ -28012,7 +28012,7 @@ Function_222f3fc: @ 222f3fc :arm
 	mov     r1, #0x0
 	mov     r2, r1
 	mov     r0, #0x1
-	bl      0x20bde40
+	bl      GX_SetGraphicsMode
 	mov     r3, #1, 6 @ #0x4000000
 	ldr     r1, [r3]
 	add     r0, r3, #0x6c
@@ -28147,7 +28147,7 @@ Function_222f3fc: @ 222f3fc :arm
 	bl      Function_2245a44
 	bl      Function_2245bd8
 	bl      Function_22438b8
-	bl      0x20bddf8
+	bl      GX_DispOn
 	ldr     r2, [pc, #0x1c] @ [0x222f668] (=0x4001000)
 	mov     r0, #0x1
 	ldr     r1, [r2]
@@ -47404,7 +47404,7 @@ branch_223d9b8: @ 223d9b8 :arm
 	str     r0, [lr]
 	add     r0, r12, #1, 20 @ #0x1000
 	str     r1, [r0, #0x648]
-	bl      0x20ce934
+	bl      WM_GetDispersionScanPeriod
 	ldr     r1, [pc, #0x1c] @ [0x223da04] (=0x2253380)
 	ldr     r1, [r1]
 	add     r1, r1, #22, 24 @ #0x1600
@@ -49676,7 +49676,7 @@ branch_223f5f0: @ 223f5f0 :arm
 	str     r0, [lr]
 	add     r0, r12, #1, 20 @ #0x1000
 	str     r1, [r0, #0x374]
-	bl      0x20ce934
+	bl      WM_GetDispersionScanPeriod
 	ldr     r1, [pc, #0xb0] @ [0x223f6d0] (=0x2253394)
 	ldr     r1, [r1]
 	add     r1, r1, #19, 24 @ #0x1300
@@ -52147,7 +52147,7 @@ Function_2241520: @ 2241520 :arm
 	ldr     r1, [pc, #0x28] @ [0x224155c] (=0x22533a0)
 	ldr     r0, [pc, #0x28] @ [0x2241560] (=0x2241564)
 	ldr     r1, [r1, #0x4]
-	bl      0x20cedc8
+	bl      WMi_StartParentEx
 	cmp     r0, #0x2
 	moveq   r0, #0x1
 	ldmeqfd sp!, {r3,pc}
@@ -52261,7 +52261,7 @@ Function_224166c: @ 224166c :arm
 	movls   r0, #0x1
 	ldmlsfd sp!, {r3,pc}
 	ldr     r0, [pc, #0x38] @ [0x22416cc] (=0x22416d0)
-	bl      0x20cef50
+	bl      WM_StartParent_9
 	cmp     r0, #0x2
 	beq     branch_22416a8
 	bl      Function_2241500
@@ -52440,7 +52440,7 @@ Function_2241840: @ 2241840 :arm
 	mov     r2, r3, lsl #16
 	mov     r2, r2, lsr #16
 	add     r3, lr, #62, 26 @ #0xf80
-	bl      0x20cf5e4
+	bl      WM_StartMP
 	cmp     r0, #0x2
 	addeq   sp, sp, #0x8
 	moveq   r0, #0x1
@@ -53068,7 +53068,7 @@ Function_2241f64: @ 2241f64 :arm
 	mov     r1, #0x3
 	mov     r2, #0x11
 	str     r12, [sp]
-	bl      0x20d07c4
+	bl      WM_MeasureChannel
 	ldmfd   sp!, {r3,pc}
 @ 0x2241f84
 
@@ -53342,7 +53342,7 @@ branch_22422b4: @ 22422b4 :arm
 	strh    r5, [r1, #0xc]
 	ldr     r0, [r0, #0x4]
 	strh    r4, [r0, #0x32]
-	bl      0x20ce8a4
+	bl      WM_GetDispersionBeaconPeriod
 	ldr     r1, [pc, #0x98] @ [0x2242380] (=0x22533a0)
 	mov     r2, #0xd0
 	ldr     r3, [r1, #0x4]
@@ -53781,7 +53781,7 @@ Function_22427b4: @ 22427b4 :arm
 	mov     r1, #0x1
 	ldr     r0, [r0]
 	strb    r1, [r0, #0xa90]
-	bl      0x20ceb20
+	bl      WM_GetNextTgid
 	ldr     r3, [pc, #0x4c] @ [0x2242830] (=0x22533a8)
 	mov     r2, #0x40
 	ldr     r1, [r3]
@@ -55566,7 +55566,7 @@ Function_22439e0: @ 22439e0 :arm
 	bl      Function_22440bc
 	mov     r4, r0
 	mov     r0, #0x1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	mov     r6, r0
 	cmp     r5, #0x0
 	mov     r0, #138, 30 @ #0x228
@@ -56108,7 +56108,7 @@ Function_2244064: @ 2244064 :arm
 	mov     r5, r0
 	mov     r0, #0x1
 	mov     r4, r1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldrb    r2, [r5, #0x3]
 	mov     r6, r0
 	ldrh    r1, [r5]
@@ -56136,7 +56136,7 @@ Function_22440bc: @ 22440bc :arm
 	mov     r6, r0
 	mov     r0, #0x1
 	mov     r4, #0x0
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldrb    r2, [r6, #0x3]
 	ldrb    r1, [r6, #0x2]
 	mov     r5, r0
@@ -57472,7 +57472,7 @@ Function_224501c: @ 224501c :arm
 	mov     r6, r0
 	mov     r0, #0x1
 	mov     r4, r1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldr     r1, [pc, #0x2c] @ [0x2245064] (=0x22533c4)
 	mov     r5, r0
 	ldr     r0, [r1]
@@ -57509,7 +57509,7 @@ Function_224508c: @ 224508c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
 	mov     r0, #0x1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldr     r1, [r5]
 	mov     r4, r0
 	cmp     r1, #0x0
@@ -57530,7 +57530,7 @@ Function_22450d0: @ 22450d0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
 	mov     r0, #0x1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	mov     r4, r0
 	cmp     r5, #0x0
 	ldmeqfd sp!, {r3-r5,pc}
@@ -58139,7 +58139,7 @@ Function_224589c: @ 224589c :arm
 	ldr     r1, [pc, #0x34] @ [0x2245908] (=0x224594c)
 	str     r0, [r2]
 	mov     r0, #0x1
-	bl      0x20c144c
+	bl      OS_SetIrqFunction
 	mov     r0, #0x1
 	bl      0x20c167c
 	ldr     r2, [pc, #0x20] @ [0x224590c] (=0x4000208)
@@ -58168,7 +58168,7 @@ Function_2245910: @ 2245910 :arm
 	ldr     r1, [pc, #0x10] @ [0x2245948] (=0x22533e0)
 	mov     r0, #0x1
 	ldr     r1, [r1]
-	bl      0x20c144c
+	bl      OS_SetIrqFunction
 	ldmfd   sp!, {r3,pc}
 @ 0x2245944
 
@@ -58219,7 +58219,7 @@ Function_22459bc: @ 22459bc :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
 	mov     r0, #0x1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldmia   r4, {r2,r3}
 	str     r3, [r2, #0x4]
 	ldr     r3, [r4]
@@ -58238,7 +58238,7 @@ Function_22459f4: @ 22459f4 :arm
 	mov     r5, r0
 	mov     r0, #0x1
 	mov     r4, r1
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldr     r1, [r5]
 	str     r4, [r1, #0x4]
 	ldr     r1, [r5]
@@ -58465,7 +58465,7 @@ Function_2245c98: @ 2245c98 :arm
 	mov     r8, r1, asr #2
 	mov     r0, #0x1
 	strh    r8, [r6, #0xa]
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	mov     r7, r0
 	cmp     r10, #0x0
 	mov     r0, #26, 28 @ #0x1a0
@@ -58963,7 +58963,7 @@ Function_2246318: @ 2246318 :arm
 	strb    r6, [r4, #0x10]
 	mov     r0, #0x1
 	strb    r1, [r4, #0x11]
-	bl      0x20c164c
+	bl      OS_DisableIrqMask
 	ldr     r1, [pc, #0x3c] @ [0x22463a0] (=0x2253424)
 	mov     r5, r0
 	ldr     r0, [r1]

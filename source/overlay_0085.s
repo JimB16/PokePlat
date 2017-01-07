@@ -410,7 +410,7 @@ Function_2241718: @ 2241718 :thumb
 	bl      0x2007130
 	mov     r0, #0x24
 	mov     r1, #0x80
-	bl      malloc_maybe
+	bl      malloc
 	mov     r5, r0
 	ldr     r0, [pc, #0x44] @ 0x22417c8, (=0x3001)
 	mov     r2, #0x0

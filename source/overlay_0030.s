@@ -26,7 +26,7 @@ Function_22561d4: @ 22561d4 :thumb
 	mov     r1, #0x2c
 	mov     r7, r2
 	str     r3, [sp, #0x0]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_2256212
 	ldr     r3, [sp, #0x0]
@@ -167,7 +167,7 @@ Function_22562b0: @ 22562b0 :thumb
 	mov     r0, r4
 	bl      Function_2256298
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x28]
 	bl      0x2254260
 .thumb
@@ -357,7 +357,7 @@ Function_22563ec: @ 22563ec :thumb
 	mov     r6, r1
 	mov     r0, #0x8
 	mov     r1, #0x54
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_225643a
 	add     r0, #0x8
@@ -410,7 +410,7 @@ Function_2256444: @ 2256444 :thumb
 	ldr     r0, [r4, #0x30]
 	cmp     r0, #0x0
 	beq     branch_2256458
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_2256458: @ 2256458 :thumb
 	mov     r0, r4

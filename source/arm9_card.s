@@ -229,34 +229,43 @@ FS_TryLoadTable: @ 20c8530 :arm
 
 
 
+/* Input:
+r0: Adr to OverlayInfos (in y9.s)
+*/
 .arm
 FSi_GetOverlayBinarySize: @ 20c8550 :arm
-	ldr     r1, [r0, #0x1c]
+	ldr     r1, [r0, #Overlay_Reserved]
 	mov     r2, r1, lsr #24
 	tst     r2, #0x1
 	movne   r0, r1, lsl #8
 	movne   r0, r0, lsr #8
-	ldreq   r0, [r0, #0x8]
+	ldreq   r0, [r0, #Overlay_RAMSize]
 	bx      lr
 @ 0x20c856c
 
 
+/* Input:
+r0: Adr to OverlayInfos (in y9.s)
+*/
 .arm
 FS_ClearOverlayImage: @ 20c856c :arm
 	stmfd   sp!, {r4-r6,lr}
-	ldr     r1, [r0, #0xc]
-	ldmib   r0, {r4,r5}
+	ldr     r1, [r0, #Overlay_BSSSize]
+	ldmib   r0, {r4,r5}         @ Overlay_ID, Overlay_RAMAddress
 	add     r6, r5, r1
 	mov     r0, r4
 	mov     r1, r6
 	bl      IC_InvalidateRange
+
 	mov     r0, r4
 	mov     r1, r6
 	bl      DC_InvalidateRange
+
 	add     r0, r4, r5
 	sub     r2, r6, r5
 	mov     r1, #0x0
 	bl      MI_CpuFill8
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20c85a8
 
@@ -294,6 +303,7 @@ FSi_LoadOverlayInfoCore: @ 20c85d0 :arm
 	addls   sp, sp, #0x54
 	movls   r0, #0x0
 	ldmlsfd sp!, {r4-r9,pc}
+
 	add     r0, sp, #0xc
 	bl      FS_InitFile
 	mvn     r12, #0x0
@@ -307,6 +317,7 @@ FSi_LoadOverlayInfoCore: @ 20c85d0 :arm
 	addeq   sp, sp, #0x54
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4-r9,pc}
+
 	add     r0, sp, #0xc
 	mov     r1, r4
 	mov     r2, #0x20
@@ -333,6 +344,7 @@ branch_20c8668: @ 20c8668 :arm
 	addeq   sp, sp, #0x54
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4-r9,pc}
+
 	ldr     r1, [sp, #0x30]
 	add     r0, sp, #0xc
 	str     r1, [r4, #0x24]
@@ -388,6 +400,7 @@ FS_LoadOverlayInfo: @ 20c86c8 :arm
 	addeq   sp, sp, #0x60
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r5,pc}
+
 	ldr     r1, [sp, #0x3c]
 	add     r0, sp, #0x18
 	str     r1, [r5, #0x24]
@@ -444,6 +457,7 @@ FS_LoadOverlayImageAsync: @ 20c87c4 :arm
 	addeq   sp, sp, #0x8
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4-r6,pc}
+
 	mov     r0, r6
 	bl      FSi_GetOverlayBinarySize
 	mov     r4, r0
@@ -457,6 +471,7 @@ FS_LoadOverlayImageAsync: @ 20c87c4 :arm
 	addeq   sp, sp, #0x8
 	moveq   r0, #0x1
 	ldmeqfd sp!, {r4-r6,pc}
+
 	mov     r0, r5
 	bl      FS_CloseFile
 	mov     r0, #0x0
@@ -484,6 +499,7 @@ FS_LoadOverlayImage: @ 20c8850 :arm
 	addeq   sp, sp, #0x50
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r5,pc}
+
 	mov     r0, r5
 	bl      FSi_GetOverlayBinarySize
 	mov     r4, r0
@@ -496,8 +512,8 @@ FS_LoadOverlayImage: @ 20c8850 :arm
 	cmp     r4, r0
 	add     r0, sp, #0x8
 	beq     branch_20c88d0
-	bl      FS_CloseFile
 
+	bl      FS_CloseFile
 	add     sp, sp, #0x50
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r5,pc}
@@ -518,15 +534,18 @@ FSi_CompareDigest: @ 20c88e0 :arm
 	mov     r4, r0
 	mov     r6, r1
 	mov     r5, r2
+
 	add     r0, sp, #0x44
 	mov     r1, #0x0
 	mov     r2, #0x14
 	bl      MI_CpuFill8
-	ldr     r2, [pc, #0x64] @ [0x20c8970] (=Unknown_2101168)
+
+	ldr     r2, =Unknown_2101168
 	add     r1, sp, #0x4
 	ldmia   r2, {r0,r2}
 	bl      MI_CpuCopy8
-	ldr     r3, [pc, #0x54] @ [0x20c8970] (=Unknown_2101168)
+
+	ldr     r3, =Unknown_2101168
 	mov     r1, r6
 	ldr     r12, [r3, #0x4]
 	mov     r2, r5
@@ -541,10 +560,12 @@ branch_20c893c: @ 20c893c :arm
 	ldr     r0, [r4, r2]
 	cmp     r1, r0
 	bne     branch_20c895c
+
 	add     r2, r2, #0x4
 	cmp     r2, #0x14
 	add     r3, r3, #0x4
 	bcc     branch_20c893c
+
 branch_20c895c: @ 20c895c :arm
 	cmp     r2, #0x14
 	moveq   r0, #0x1
@@ -553,10 +574,13 @@ branch_20c895c: @ 20c895c :arm
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20c8970
 
-.word Unknown_2101168 @ 0x20c8970
+.pool
 
 
 
+/* Input:
+r0: Adr to OverlayInfos (in y9.s)
+*/
 .arm
 FS_StartOverlay: @ 20c8974 :arm
 	stmfd   sp!, {r3-r5,lr}
@@ -567,7 +591,8 @@ FS_StartOverlay: @ 20c8974 :arm
 	ldrh    r0, [r1]
 	cmp     r0, #0x2
 	bne     branch_20c8a04
-	ldr     r1, [r5, #0x1c]
+
+	ldr     r1, [r5, #Overlay_Reserved]
 	mov     r0, #0x0
 	mov     r1, r1, lsr #24
 	tst     r1, #0x2
@@ -579,19 +604,21 @@ FS_StartOverlay: @ 20c8974 :arm
 	sub     r12, r1, r3
 	smull   r1, lr, r2, r12
 	mov     r1, r12, lsr #31
-	ldr     r2, [r5]
+	ldr     r2, [r5, #Overlay_ID]
 	add     lr, r1, lr, asr #3
 	cmp     r2, lr
 	bcs     branch_20c89e4
+
 	mov     r0, #0x14
 	mla     r0, r2, r0, r3
-	ldr     r1, [r5, #0x4]
+	ldr     r1, [r5, #Overlay_RAMAddress]
 	mov     r2, r4
 	bl      FSi_CompareDigest
 branch_20c89e4: @ 20c89e4 :arm
 	cmp     r0, #0x0
 	bne     branch_20c8a04
-	ldr     r0, [r5, #0x4]
+
+	ldr     r0, [r5, #Overlay_RAMAddress]   @ Init RAM area of the overlay with 0s
 	mov     r2, r4
 	mov     r1, #0x0
 	bl      MI_CpuFill8
@@ -599,29 +626,34 @@ branch_20c89e4: @ 20c89e4 :arm
 	ldmfd   sp!, {r3-r5,pc}
 
 branch_20c8a04: @ 20c8a04 :arm
-	ldr     r0, [r5, #0x1c]
+	ldr     r0, [r5, #Overlay_Reserved]
 	mov     r0, r0, lsr #24
 	tst     r0, #0x1
 	beq     branch_20c8a20
-	ldr     r0, [r5, #0x4]
+
+	ldr     r0, [r5, #Overlay_RAMAddress]
 	add     r0, r0, r4
 	bl      Function_2000970
 branch_20c8a20: @ 20c8a20 :arm
 	ldmib   r5, {r0,r1}
 	bl      DC_FlushRange
-	ldr     r4, [r5, #0x10]
-	ldr     r5, [r5, #0x14]
+
+	ldr     r4, [r5, #Overlay_StaticInitStart]
+	ldr     r5, [r5, #Overlay_StaticInitEnd]
 	cmp     r4, r5
-	ldmcsfd sp!, {r3-r5,pc}
+	ldmcsfd sp!, {r3-r5,pc}             @ no static initialiser for this overlay
+
 branch_20c8a38: @ 20c8a38 :arm
 	ldr     r0, [r4]
 	cmp     r0, #0x0
 	beq     branch_20c8a48
 	blx     r0
 branch_20c8a48: @ 20c8a48 :arm
+
 	add     r4, r4, #0x4
 	cmp     r4, r5
 	bcc     branch_20c8a38
+
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20c8a58
 
@@ -652,7 +684,6 @@ branch_20c8a70: @ 20c8a70 :arm
 	cmp     lr, #0x0
 	beq     branch_20c8b1c
 	mov     r2, r4
-.arm
 branch_20c8aac: @ 20c8aac :arm
 	ldr     r10, [r8, #0x8]
 	ldr     r9, [r8]
@@ -5309,6 +5340,7 @@ Function_20cc144: @ 20cc144 :arm
 
 
 .arm
+.globl RTC_ConvertDateToDay
 RTC_ConvertDateToDay: @ 20cc16c :arm
 	ldr     r3, [r0]
 	cmp     r3, #0x64
@@ -5405,6 +5437,7 @@ branch_20cc270: @ 20cc270 :arm
 
 
 .arm
+.globl RTC_ConvertDayToDate
 RTC_ConvertDayToDate: @ 20cc27c :arm
 	stmfd   sp!, {r4,lr}
 	ldr     r2, [pc, #0xe4] @ [0x20cc36c] (=0x8eac)
@@ -6255,7 +6288,7 @@ CARDi_RequestStreamCommandCore: @ 20ccc20 :arm
 	ldr     r4, [r9, #0x34]
 	ldr     r10, [r9, #0x30]
 	mov     r5, #1, 24 @ #0x100
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	cmp     r7, #0xb
 	bne     branch_20ccc54
 	bl      CARD_GetBackupSectorSize
@@ -6438,7 +6471,7 @@ CARDi_RequestStreamCommand: @ 20cce10 :arm
 	mov     r8, r1
 	mov     r7, r2
 	mov     r6, r3
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	bl      OS_DisableInterrupts
 	ldr     r1, [r4, #0x114]
 	mov     r5, r0
@@ -6520,7 +6553,7 @@ CARD_IdentifyBackup: @ 20ccf0c :arm
 	mov     r6, r0
 	ldr     r0, [pc, #0x11c] @ [0x20cd038] (=Unknown_2000bfc)
 	ldr     r4, [pc, #0x11c] @ [0x20cd03c] (=RAM_21cee20)
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	cmp     r6, #0x0
 	bne     branch_20ccf2c
 	bl      OS_Panic
@@ -6943,12 +6976,15 @@ branch_20cd428: @ 20cd428 :arm
 	and     r2, r1, r0
 	cmp     r2, r1
 	bne     branch_20cd458
+
 	ldr     r5, [r4, #0x20]
 	tst     r5, #0x3
 	bne     branch_20cd458
+
 	ldr     r0, [r4, #0x24]
 	cmp     r0, #0x200
 	bcs     branch_20cd460
+
 branch_20cd458: @ 20cd458 :arm
 	str     r2, [r6, #0x8]
 	add     r5, r6, #0x20
@@ -6975,9 +7011,11 @@ branch_20cd488: @ 20cd488 :arm
 branch_20cd4a8: @ 20cd4a8 :arm
 	tst     r3, #0x80000000
 	bne     branch_20cd488
+
 	ldr     r0, [r4, #0x20]
 	cmp     r5, r0
 	bne     branch_20cd4ec
+
 	ldr     r0, [pc, #0x3c] @ [0x20cd500] (=RAM_21cee20)
 	ldr     r1, [r0, #0x1c]
 	add     r1, r1, #0x200
@@ -6989,6 +7027,7 @@ branch_20cd4a8: @ 20cd4a8 :arm
 	subs    r1, r1, #0x200
 	str     r1, [r0, #0x24]
 	ldmeqfd sp!, {r4-r6,pc}
+
 	b       branch_20cd428
 
 branch_20cd4ec: @ 20cd4ec :arm
@@ -6996,6 +7035,7 @@ branch_20cd4ec: @ 20cd4ec :arm
 	bl      CARDi_ReadFromCache
 	cmp     r0, #0x0
 	bne     branch_20cd428
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20cd500
 
@@ -7129,7 +7169,7 @@ branch_20cd690: @ 20cd690 :arm
 	ldr     r0, [sp, #0x28]
 	cmp     r0, #0x0
 	ldmnefd sp!, {r4-r10,pc}
-	bl      Function_20cd75c
+	bl      Call2_CARDi_WaitAsync
 	ldmfd   sp!, {r4-r10,pc}
 
 branch_20cd6b4: @ 20cd6b4 :arm
@@ -7190,7 +7230,7 @@ CARD_Init: @ 20cd6f8 :arm
 
 
 .arm
-Function_20cd75c: @ 20cd75c :arm
+Call2_CARDi_WaitAsync: @ 20cd75c :arm
 	ldr     r12, [pc, #0x0] @ [0x20cd764] (=CARDi_WaitAsync)
 	bx      r12
 @ 0x20cd764

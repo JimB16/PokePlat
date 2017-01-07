@@ -2413,7 +2413,7 @@ Function_223c370: @ 223c370 :thumb
 	bl      0x2079fec
 	mov     r1, r0
 	mov     r0, #0x1a
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0x54] @ 0x223c448, (=0x221c)
 	str     r0, [r5, r1]
 	ldr     r0, [r5, r1]

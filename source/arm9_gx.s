@@ -164,6 +164,7 @@ GX_DispOff: @ 20bddbc :arm
 
 
 .arm
+.globl GX_DispOn
 GX_DispOn: @ 20bddf8 :arm
 	ldr     r0, =0x21ccb9c
 	ldr     r1, =Unknown_2101144
@@ -2943,6 +2944,7 @@ branch_20bfb7c: @ 20bfb7c :arm
 
 
 .arm
+.globl G3X_ResetMtxStack
 G3X_ResetMtxStack: @ 20bfbe4 :arm
 	stmfd   sp!, {r4,lr}
 	sub     sp, sp, #0x8
@@ -3495,6 +3497,7 @@ branch_20c019c: @ 20c019c :arm
 
 
 .arm
+.globl GXS_LoadOBJPltt
 GXS_LoadOBJPltt: @ 20c01b8 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r3, =Unknown_2101148
@@ -3621,6 +3624,7 @@ branch_20c02fc: @ 20c02fc :arm
 
 
 .arm
+.globl GXS_LoadOBJ
 GXS_LoadOBJ: @ 20c0314 :arm
 	stmfd   sp!, {r4,lr}
 	ldr     r3, [pc, #0x48] @ [0x20c0368] (=Unknown_2101148)

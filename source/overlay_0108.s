@@ -3873,7 +3873,7 @@ Function_224351c: @ 224351c :thumb
 	mov     r1, #0x14
 	mov     r7, r2
 	str     r3, [sp, #0x10]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x14

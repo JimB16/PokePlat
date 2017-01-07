@@ -207,7 +207,7 @@ Function_21d0f14: @ 21d0f14 :thumb
 	bl      0x200682c
 	mov     r4, r0
 	ldr     r0, [r4, #0x8]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	bl      Function_21d1184
 	mov     r0, r4

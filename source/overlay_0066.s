@@ -101,7 +101,7 @@ Function_222dd90: @ 222dd90 :thumb
 	bl      0x200682c
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      SetMainLoopFunctionCall
@@ -151,7 +151,7 @@ Function_222ddf0: @ 222ddf0 :thumb
 	mov     r5, r0
 	mov     r0, r7
 	lsl     r1, r1, #4
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x53
 	mov     r1, #0x0
 	lsl     r2, r2, #4
@@ -5035,7 +5035,7 @@ Function_222fc0c: @ 222fc0c :thumb
 	mov     r4, r1
 	mov     r0, r7
 	mov     r1, #0x94
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	mov     r0, r4
 	add     r0, #0x20
@@ -7644,7 +7644,7 @@ Function_2230c44: @ 2230c44 :thumb
 	mov     r1, #0x48
 	str     r2, [sp, #0x0]
 	str     r3, [sp, #0x4]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, #0x48
 	mov     r4, r0
@@ -7961,7 +7961,7 @@ Function_2230e28: @ 2230e28 :thumb
 	mov     r5, r1
 	mov     r0, r2
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x0]
 	mov     r1, #0x0
 	mov     r2, #0x20
@@ -8135,7 +8135,7 @@ Function_2230f1c: @ 2230f1c :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r2, #0x10
 	mov     r1, #0x0
@@ -8222,7 +8222,7 @@ Function_2230fa0: @ 2230fa0 :thumb
 	mov     r5, r1
 	mov     r0, r2
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x0]
 	mov     r1, #0x0
 	strb    r1, [r0, #0x0]
@@ -8310,7 +8310,7 @@ Function_2231024: @ 2231024 :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0x14
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r2, #0x14
 	mov     r1, #0x0
@@ -8386,7 +8386,7 @@ Function_223108c: @ 223108c :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x3c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	mov     r2, #0x3c
@@ -8477,7 +8477,7 @@ Function_2231134: @ 2231134 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x40
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	mov     r2, #0x40
@@ -8564,7 +8564,7 @@ Function_22311d4: @ 22311d4 :thumb
 	mov     r4, r1
 	mov     r0, r6
 	mov     r1, #0x3c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	mov     r2, #0x3c
@@ -8654,7 +8654,7 @@ Function_223127c: @ 223127c :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0x8
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	strb    r1, [r0, #0x0]
@@ -8743,7 +8743,7 @@ Function_2231300: @ 2231300 :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	strb    r1, [r0, #0x0]
@@ -8834,7 +8834,7 @@ Function_2231374: @ 2231374 :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r2, #0x0
 	strb    r2, [r0, #0x0]
@@ -8865,7 +8865,7 @@ Function_22313ac: @ 22313ac :thumb
 	mov     r4, r1
 	mov     r0, r2
 	mov     r1, #0xc
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	mov     r1, #0x0
 	strb    r1, [r0, #0x0]
@@ -9515,7 +9515,7 @@ Function_223177c: @ 223177c :thumb
 	mov     r1, #0x23
 	lsl     r1, r1, #4
 	mov     r5, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x23
 	mov     r4, r0
 	mov     r1, #0x0
@@ -11754,7 +11754,7 @@ branch_2232506: @ 2232506 :thumb
 branch_2232512: @ 2232512 :thumb
 	ldr     r1, [pc, #0x80] @ 0x2232594, (=0x988)
 	mov     r0, r5
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0x74] @ 0x2232590, (=0x225b6c0)
 	ldr     r2, [pc, #0x74] @ 0x2232594, (=0x988)
 	str     r0, [r1, #0x0]
@@ -14607,7 +14607,7 @@ Function_2233758: @ 2233758 :thumb
 	mul     r4, r0
 	mov     r0, r2
 	mov     r1, r4
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0x18] @ 0x2233784, (=0x225b6c0)
 	ldr     r2, [r1, #0x0]
 	str     r0, [r2, #0x24]
@@ -14686,7 +14686,7 @@ branch_22337dc: @ 22337dc :thumb
 	ldr     r1, [sp, #0x0]
 	add     r0, r5, r4
 	mov     r2, r6
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	pop     {r3-r7,pc}
 @ 0x22337e8
 
@@ -14867,7 +14867,7 @@ branch_22338f0: @ 22338f0 :thumb
 	strh    r1, [r5, r0]
 	ldr     r0, [sp, #0x8]
 	lsl     r1, r6, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x12
 	lsl     r1, r1, #4
 	str     r0, [r5, r1]
@@ -15592,7 +15592,7 @@ Function_2233d94: @ 2233d94 :thumb
 	lsl     r0, r0, #2
 	add     r0, r1, r0
 	ldr     r1, [sp, #0xc]
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0x18] @ 0x2233dd0, (=0x225b6c0)
 	ldr     r2, [r0, #0x0]
 	mov     r0, #0x13
@@ -16423,7 +16423,7 @@ Function_22342f4: @ 22342f4 :thumb
 	mov     r4, r0
 	mov     r0, r2
 	lsl     r1, r5, #3
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x0]
 	strh    r5, [r4, #0x4]
 	mov     r0, #0x0
@@ -16541,13 +16541,13 @@ branch_2234394: @ 2234394 :thumb
 
 .thumb
 Function_223439c: @ 223439c :thumb
-	ldr     r3, [pc, #0x4] @ 0x22343a4, (=Function_20d50b8)
+	ldr     r3, [pc, #0x4] @ 0x22343a4, (=CopyDataInByteSteps)
 	mov     r2, #0xb6
 	lsl     r2, r2, #2
 	bx      r3
 @ 0x22343a4
 
-.word Function_20d50b8 @ 0x22343a4
+.word CopyDataInByteSteps @ 0x22343a4
 .thumb
 Function_22343a8: @ 22343a8 :thumb
 	push    {r3-r7,lr}
@@ -16558,7 +16558,7 @@ Function_22343a8: @ 22343a8 :thumb
 	mov     r0, r7
 	mov     r1, #0x30
 	str     r3, [sp, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, #0x30
 	mov     r4, r0
@@ -16567,7 +16567,7 @@ Function_22343a8: @ 22343a8 :thumb
 	mov     r1, #0x90
 	mov     r0, r7
 	mul     r1, r2
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x10]
 	ldr     r0, [sp, #0x4]
 	mov     r6, #0x0
@@ -27282,7 +27282,7 @@ branch_223c130: @ 223c130 :arm
 	beq     branch_223c150
 	mov     r1, r7
 	mov     r2, r5
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 .arm
 branch_223c150: @ 223c150 :arm
 	ldr     r0, [sp, #0x8]
@@ -27300,7 +27300,7 @@ branch_223c150: @ 223c150 :arm
 	add     r3, r7, r5
 	add     r0, r0, r9
 	add     r1, r3, r1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 .arm
 branch_223c190: @ 223c190 :arm
 	ldr     r1, [pc, #0x158] @ [0x223c2f0] (=0x2258e58)
@@ -27809,7 +27809,7 @@ Function_223c734: @ 223c734 :arm
 	add     r0, r0, r2
 	mov     r1, r5
 	mov     r2, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, r4
@@ -34273,7 +34273,7 @@ Function_2241a94: @ 2241a94 :arm
 	add     r0, r0, r2
 	mov     r1, r5
 	mov     r2, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, r4
@@ -35255,7 +35255,7 @@ Function_2242738: @ 2242738 :arm
 	mov     r2, r7
 	add     r0, r3, r0, lsl #2
 	strb    r12, [sp, #0x1]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, r4
 	mov     r2, r7
 	mov     r1, #0x0
@@ -35516,7 +35516,7 @@ branch_2242aac: @ 2242aac :arm
 	add     r0, r0, r3, lsl #2
 	strb    r12, [sp, #0x1]
 	str     r3, [sp, #0x18]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, r4
 	mov     r2, r7
 	mov     r1, #0x0
@@ -43375,7 +43375,7 @@ branch_2248d2c: @ 2248d2c :arm
 	ldmeqfd sp!, {r4-r8,pc}
 	ldr     r2, [sp, #0x3c]
 	mov     r1, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [sp, #0x38]
 	ldr     r2, [sp, #0x30]
 	ldr     r1, [sp, #0x34]
@@ -43403,7 +43403,7 @@ branch_2248d2c: @ 2248d2c :arm
 branch_2248dd0: @ 2248dd0 :arm
 	ldr     r1, [sp, #0x38]
 	add     r2, r6, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 .arm
 branch_2248ddc: @ 2248ddc :arm
 	ldr     r0, [sp]
@@ -44038,7 +44038,7 @@ branch_22493d8: @ 22493d8 :arm
 branch_2249414: @ 2249414 :arm
 	ldr     r1, [r4, #0x4]
 	mov     r2, #0x20
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	b       branch_224aa5c
 @ 0x2249424
 
@@ -44345,7 +44345,7 @@ branch_2249798: @ 2249798 :arm
 branch_22497d0: @ 22497d0 :arm
 	ldr     r1, [r4, #0x10]
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	b       branch_224aa5c
 @ 0x22497e0
 
@@ -44447,7 +44447,7 @@ branch_22498cc: @ 22498cc :arm
 branch_2249908: @ 2249908 :arm
 	ldr     r1, [r4, #0x8]
 	mov     r2, #0x20
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	b       branch_224aa5c
 @ 0x2249918
 
@@ -44634,7 +44634,7 @@ branch_2249b14: @ 2249b14 :arm
 branch_2249b4c: @ 2249b4c :arm
 	ldr     r1, [r4, #0x10]
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	b       branch_224aa5c
 @ 0x2249b5c
 
@@ -45377,7 +45377,7 @@ branch_224a428: @ 224a428 :arm
 branch_224a460: @ 224a460 :arm
 	ldr     r1, [r4, #0xc]
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	b       branch_224aa5c
 @ 0x224a470
 
@@ -47962,7 +47962,7 @@ branch_224c210: @ 224c210 :arm
 	mov     r0, r4
 	add     r1, r1, #78, 30 @ #0x138
 	mov     r2, #0x20
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, #0x1
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x224c250
@@ -48030,7 +48030,7 @@ branch_224c2fc: @ 224c2fc :arm
 	mov     r1, r4
 	add     r0, r0, #78, 30 @ #0x138
 	mov     r2, #0x20
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x224c32c
 
@@ -48107,7 +48107,7 @@ branch_224c3dc: @ 224c3dc :arm
 	ldmeqfd sp!, {r4-r6,pc}
 	mov     r1, r6
 	add     r2, r4, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x224c430
 
@@ -48898,7 +48898,7 @@ branch_224ce30: @ 224ce30 :arm
 	add     r0, sp, #0x1c
 	mov     r1, r6
 	mov     r2, #0xe0
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r5, #0x134]
 	mov     r1, r6
 	bl      0x21ea4f4
@@ -53688,7 +53688,7 @@ branch_22507f4: @ 22507f4 :arm
 branch_225082c: @ 225082c :arm
 	add     r2, r5, #0x1
 	mov     r1, r9
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldmib   r8, {r0,r1}
 	str     r4, [r1, r0, lsl #0x2]
 	ldr     r1, [r8, #0xc]
@@ -54404,7 +54404,7 @@ branch_22511a4: @ 22511a4 :arm
 	ldmeqfd sp!, {r3-r7,pc}
 	mov     r2, r6
 	add     r1, r7, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, #0x0
 	strb    r0, [r5, r6]
 	add     r1, r6, #0x1
@@ -55487,7 +55487,7 @@ branch_2251f58: @ 2251f58 :arm
 	ldr     r1, [r9, #0x20]
 	add     r2, r4, #0x1
 	ldr     r1, [r1, #0x4]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r9, #0x20]
 	ldr     r0, [r0, #0x8]
 	bl      0x20dae0c
@@ -55511,7 +55511,7 @@ branch_2251fcc: @ 2251fcc :arm
 	ldr     r1, [r9, #0x20]
 	add     r2, r11, #0x1
 	ldr     r1, [r1, #0xc]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r9, [r8, #0x4]
 	mov     r0, #0x1
 	str     r9, [sp, #0x14]
@@ -56115,7 +56115,7 @@ branch_22527dc: @ 22527dc :arm
 	ldmeqfd sp!, {r4-r7,pc}
 	mov     r1, r4
 	add     r2, r7, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldmia   r5, {r0,r1}
 	str     r6, [r1, r0, lsl #0x2]
 	ldr     r0, [r5]
@@ -59728,7 +59728,7 @@ branch_225565c: @ 225565c :arm
 	ldr     r1, [r9, r5, lsl #0x2]
 	mov     r0, r8
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	add     r2, r7, r6
 	mov     r1, r7
 	cmp     r7, r2
@@ -61509,7 +61509,7 @@ branch_2256d80: @ 2256d80 :arm
 	mov     r1, r7
 	mov     r2, r6
 	add     r0, r5, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r8, #0x118]
 	mov     r2, #0xd
 	add     r3, r0, r6
@@ -61818,7 +61818,7 @@ branch_2257198: @ 2257198 :arm
 	beq     branch_22571d8
 	mov     r1, r10
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r9, #0x8]
 	mov     r1, #0x0
 	strb    r1, [r0, r6]
@@ -61840,7 +61840,7 @@ branch_22571d8: @ 22571d8 :arm
 	beq     branch_2257218
 	mov     r1, r4
 	mov     r2, r7
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r9, #0xc]
 	mov     r1, #0x0
 	strb    r1, [r0, r7]
@@ -61862,7 +61862,7 @@ branch_2257218: @ 2257218 :arm
 	beq     branch_2257258
 	mov     r1, r5
 	mov     r2, r8
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r9, #0x10]
 	mov     r1, #0x0
 	strb    r1, [r0, r8]
@@ -62056,7 +62056,7 @@ branch_2257468: @ 2257468 :arm
 	ldmeqfd sp!, {r4-r10,pc}
 	mov     r1, r9
 	mov     r2, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x328]
 	mov     r1, r5
 	strb    r1, [r0, r4]
@@ -62181,7 +62181,7 @@ branch_22575a8: @ 22575a8 :arm
 	beq     branch_22575e0
 	mov     r1, r4
 	mov     r2, r5
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x32c]
 	mov     r1, #0x0
 	strb    r1, [r0, r5]
@@ -62342,7 +62342,7 @@ branch_2257784: @ 2257784 :arm
 	beq     branch_22577c8
 	mov     r1, r4
 	mov     r2, r8
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x344]
 	mov     r1, #0x0
 	strb    r1, [r0, r8]
@@ -62365,7 +62365,7 @@ branch_22577c8: @ 22577c8 :arm
 	beq     branch_225780c
 	mov     r1, r4
 	mov     r2, r6
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x33c]
 	mov     r1, #0x0
 	strb    r1, [r0, r6]
@@ -62388,7 +62388,7 @@ branch_225780c: @ 225780c :arm
 	beq     branch_2257850
 	mov     r1, r4
 	mov     r2, r7
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x340]
 	mov     r1, #0x0
 	strb    r1, [r0, r7]
@@ -63037,7 +63037,7 @@ branch_2258024: @ 2258024 :arm
 	add     r0, sp, #0x25
 	mov     r1, r5
 	mov     r2, #0x20
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	add     r1, sp, #0x11
 	mov     r0, r4
 	mov     r2, #0x34
@@ -63705,7 +63705,7 @@ branch_225883c: @ 225883c :arm
 	ldr     r1, [pc, #0x78] @ [0x22588cc] (=0x225b5a0)
 	ldr     r0, [r0, #0x58]
 	mov     r2, #0x28
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, r4
 	mov     r1, #0x6
 	str     r1, [r0]

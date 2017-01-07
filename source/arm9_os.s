@@ -204,6 +204,7 @@ OS_InitIrqTable: @ 20c1434 :arm
 
 
 .arm
+.globl OS_SetIrqFunction
 OS_SetIrqFunction: @ 20c144c :arm
 	stmfd   sp!, {r3-r9,lr}
 
@@ -367,6 +368,7 @@ OS_SetIrqMask: @ 20c15f0 :arm
 
 
 .arm
+.globl OS_EnableIrqMask
 OS_EnableIrqMask: @ 20c161c :arm
 	ldr     r3, =REG_IME
 	mov     r1, #0x0
@@ -386,6 +388,7 @@ OS_EnableIrqMask: @ 20c161c :arm
 
 
 .arm
+.globl OS_DisableIrqMask
 OS_DisableIrqMask: @ 20c164c :arm
 	ldr     r12, =REG_IME
 	mov     r2, #0x0
@@ -3052,6 +3055,7 @@ branch_20c320c: @ 20c320c :arm
 
 
 .arm
+.globl OS_AllocFromHeap
 OS_AllocFromHeap: @ 20c3214 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r4, r0
@@ -3134,6 +3138,7 @@ branch_20c32f8: @ 20c32f8 :arm
 
 
 .arm
+.globl OS_FreeToHeap
 OS_FreeToHeap: @ 20c331c :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -4151,6 +4156,7 @@ OS_SpinWait: @ 20c3e08 :arm
 
 
 .arm
+.globl Function_20c3e14
 Function_20c3e14: @ 20c3e14 :arm
 	stmfd   sp!, {r3,lr}
 	mov     r0, #0x1
@@ -4234,6 +4240,7 @@ branch_20c3ec8: @ 20c3ec8 :arm
 
 
 .arm
+.globl OS_ResetSystem
 OS_ResetSystem: @ 20c3ee4 :arm
 	stmfd   sp!, {r4,lr}
 	ldr     r1, [pc, #0x84] @ [0x20c3f74] (=RAM_27ffc40)

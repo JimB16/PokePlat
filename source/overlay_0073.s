@@ -68,13 +68,13 @@ Function_21d0d80: @ 21d0d80 :thumb
 	str     r1, [r0, #0x0]
 	mov     r0, #0x52
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, r4
 	add     r1, #0xb8
 	str     r0, [r1, #0x0]
 	mov     r0, #0x52
 	mov     r1, #0x20
-	bl      malloc_maybe
+	bl      malloc
 	add     r4, #0xbc
 	str     r0, [r4, #0x0]
 	mov     r0, #0x1
@@ -1948,7 +1948,7 @@ Function_21d1b80: @ 21d1b80 :thumb
 	bl      Function_2075fb4
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0xc8
-	bl      malloc_maybe
+	bl      malloc
 	mov     r7, r0
 	ldr     r2, [pc, #0x134] @ 0x21d1cd8, (=0x21d39d4)
 	mov     r1, #0x0

@@ -52,7 +52,7 @@ Function_221f840: @ 221f840 :thumb
 	mov     r1, #0x12
 	lsl     r1, r1, #10
 	mov     r4, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -90,7 +90,7 @@ Function_221f888: @ 221f888 :thumb
 	mov     r1, #0x42
 	lsl     r1, r1, #8
 	mov     r4, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, r0
 	bne     branch_221f8a0
 	add     sp, #0x8

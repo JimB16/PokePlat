@@ -19,7 +19,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 branch_21d0d98: @ 21d0d98 :thumb
 	ldr     r1, [pc, #0x1ac] @ 0x21d0f48, (=0x1108)
 	mov     r0, r5
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0x1a4] @ 0x21d0f48, (=0x1108)
 	mov     r6, r0
 	mov     r1, #0x0
@@ -64,7 +64,7 @@ branch_21d0d98: @ 21d0d98 :thumb
 	str     r4, [r0, r2]
 	mov     r0, r5
 	add     r1, r4, r1
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r3, [pc, #0x144] @ 0x21d0f44, (=0x221a400)
 	mov     r1, #0xf9
 	ldr     r2, [r3, #0x0]
@@ -3707,7 +3707,7 @@ Function_21d2618: @ 21d2618 :thumb
 	bne     branch_21d26d0
 	mov     r0, r1
 	ldr     r1, [pc, #0xa4] @ 0x21d26dc, (=0xf020)
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0x98] @ 0x21d26d4, (=0x221a400)
 	ldr     r1, [pc, #0xa0] @ 0x21d26e0, (=0xf98)
 	ldr     r3, [r2, #0x0]
@@ -3883,7 +3883,7 @@ Function_21d2748: @ 21d2748 :thumb
 	cmp     r0, #0xb
 	bne     branch_21d2780
 	sub     r1, #0x68
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0x4c] @ 0x21d27c0, (=0x221a400)
 	ldr     r1, [r2, #0x0]
 	add     r3, r1, r4
@@ -4701,7 +4701,7 @@ Function_21d2c98: @ 21d2c98 :thumb
 	mov     r6, r1
 	mov     r0, r3
 	mov     r1, r4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x0]
 	mov     r1, #0x0
 	mov     r2, r4
@@ -35316,7 +35316,7 @@ branch_21e9748: @ 21e9748 :arm
 	ldr     r0,  [pc, #0x44] @ [0x21e97f4] (=0x221ae65)
 	mov     r1, r4
 	add     r2, r5, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0,  [pc, #0x20] @ [0x21e97e0] (=0x221ae50)
 	add     r1, r5, #0x6
 	str     r1, [r0, #0x50]
@@ -35538,7 +35538,7 @@ Function_21e9a68: @ 21e9a68 :arm
 	bl      Function_21e9bc4
 	ldr     r2, [r5, #0x8]
 	mov     r1, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x21e9a8c
 
@@ -38164,7 +38164,7 @@ Function_21eb8d8: @ 21eb8d8 :arm
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, #33, 28 @ #0x210
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	mov     r0, #0x0
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x21eb918
@@ -38572,7 +38572,7 @@ Function_21ebdcc: @ 21ebdcc :arm
 	ldmeqfd sp!, {r3-r6,pc}
 	mov     r1, #0x0
 	mov     r2, #73, 28 @ #0x490
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r0, [sp]
 	mov     r3, #0x0
 	strb    r3, [r0]
@@ -38867,7 +38867,7 @@ branch_21ec1e8: @ 21ec1e8 :arm
 	ldr     r0, [r10, #0x1ec]
 	ldr     r1, [r10, #0x1dc]
 	add     r2, r2, #0x1
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r10, #0x1dc]
 	add     r1, r5, #0x7
 	ldr     r2, [r10, #0x1e4]
@@ -40393,7 +40393,7 @@ branch_21ed578: @ 21ed578 :arm
 	mov     r1, r8
 	mov     r2, r7
 	add     r0, r6, r4
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	add     r1, r4, r7
 	mov     r0, #0x0
 	strb    r0, [r6, r1]
@@ -41851,7 +41851,7 @@ branch_21ee75c: @ 21ee75c :arm
 branch_21ee7dc: @ 21ee7dc :arm
 	mov     r1, #0x0
 	mov     r2, #194, 30 @ #0x308
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r0, [sp, #0x3c]
 	ldr     r1, [sp, #0x2c]
 	str     r0, [r4, #0x304]
@@ -42838,7 +42838,7 @@ branch_21ef4e8: @ 21ef4e8 :arm
 branch_21ef530: @ 21ef530 :arm
 	mov     r1, #0x0
 	mov     r2, #0x20
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r0, [r5, #0x1a0]
 	mov     r3, #0x0
 	str     r0, [r4, #0x4]
@@ -45870,7 +45870,7 @@ branch_21f17ac: @ 21f17ac :arm
 branch_21f17d4: @ 21f17d4 :arm
 	mov     r1, #0x0
 	mov     r2, #0x20
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r1, [r6, #0x1c]
 	ldr     r0, [pc, #0x260] @ [0x21f1a4c] (=0x201)
 	str     r1, [r5]
@@ -45954,7 +45954,7 @@ branch_21f18b4: @ 21f18b4 :arm
 branch_21f18dc: @ 21f18dc :arm
 	mov     r1, #0x0
 	mov     r2, #129, 30 @ #0x204
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r0, [r6, #0x1c]
 	add     r1, sp, #0x8
 	str     r0, [r4]
@@ -47453,7 +47453,7 @@ Function_21f2a04: @ 21f2a04 :arm
 	ldmeqfd sp!, {r3-r7,pc}
 	mov     r1, #0x0
 	mov     r2, #0x40
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	mov     r0, #0x64
 	stmia   r4, {r0,r6}
 	sub     r0, r0, #0x65
@@ -48444,7 +48444,7 @@ Function_21f36c8: @ 21f36c8 :arm
 branch_21f36fc: @ 21f36fc :arm
 	mov     r1, #0x0
 	mov     r2, #81, 30 @ #0x144
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	str     r5, [r4]
 	mvn     r0, #0x0
 	str     r0, [r4, #0x4]
@@ -49308,7 +49308,7 @@ branch_21f4264: @ 21f4264 :arm
 	add     r9, r7, r8
 	mov     r0, r9
 	mov     r2, #0xac
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	mov     r0, r5
 	bl      Function_20dae0c
 	str     r0, [r7, r8]
@@ -49930,7 +49930,7 @@ branch_21f4a74: @ 21f4a74 :arm
 	add     r7, r8, r9
 	mov     r0, r7
 	mov     r2, #74, 30 @ #0x128
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	mov     r0, #0x1
 	str     r0, [r7, #0x24]
 	mov     r0, r5
@@ -50375,7 +50375,7 @@ branch_21f500c: @ 21f500c :arm
 	mov     r1, #0x0
 	mov     r0, r7
 	mov     r2, #0xac
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r1, [r11, #0x4]
 	mov     r0, r5
 	add     r1, r1, #0x1
@@ -53409,7 +53409,7 @@ branch_21f7568: @ 21f7568 :arm
 	mov     r1, r5
 	mov     r2, r4
 	add     r0, r3, r0
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r6, #0x8]
 	add     r0, r0, r4
 	str     r0, [r6, #0x8]
@@ -54228,7 +54228,7 @@ Function_21f7fb4: @ 21f7fb4 :arm
 	bxeq    lr
 	ldr     r1, [sp, #0x34]
 	ldr     r2, [sp, #0x38]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [sp, #0x38]
 	str     r0, [r5, #0x3c]
 .arm
@@ -57287,7 +57287,7 @@ Function_21fa3fc: @ 21fa3fc :arm
 	ldmeqfd sp!, {r4-r7,pc}
 	mov     r1, #0x0
 	mov     r2, #0x44
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	mvn     r0, #0x0
 	str     r0, [r4]
 	str     r6, [r4, #0x3c]
@@ -57474,7 +57474,7 @@ Function_21fa678: @ 21fa678 :arm
 	beq     branch_21fa808
 	mov     r1, #0x0
 	mov     r2, #0xa0
-	bl      Function_20d5124
+	bl      Call_FillMemWithValue
 	ldr     r0, [sp]
 	str     r5, [r0]
 	ldr     r0, [sp]
@@ -57970,7 +57970,7 @@ branch_21fad18: @ 21fad18 :arm
 	add     r0, sp, #0x0
 	mov     r1, r8
 	mov     r2, r9
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	add     r8, sp, #0x0
 	mov     r0, #0x0
 	strb    r0, [r8, r9]
@@ -59716,7 +59716,7 @@ Function_21fc2d4: @ 21fc2d4 :arm
 	mov     r1, r6
 	mov     r2, r5
 	add     r0, r4, r3
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r4, #0x800]
 	mov     r1, #0x0
 	add     r0, r0, r5
@@ -60827,7 +60827,7 @@ branch_21fd0cc: @ 21fd0cc :arm
 	mov     r2, r7
 	add     r0, r3, r0
 	strb    r4, [sp, #0xc]
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [sp, #0x80c]
 	add     r0, r0, r7
 	str     r0, [sp, #0x80c]
@@ -64233,7 +64233,7 @@ Function_21ff848: @ 21ff848 :arm
 	ldr     r0, [r4]
 	mov     r1, r7
 	mov     r2, r5
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r6]
 	add     r0, r0, r5
 	str     r0, [r6]
@@ -64289,7 +64289,7 @@ Function_21ff910: @ 21ff910 :arm
 	ldr     r0, [r6]
 	mov     r4, r3
 	mov     r5, r2
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r4]
 	add     r0, r0, r5
 	str     r0, [r4]
@@ -72151,7 +72151,7 @@ Function_2205988: @ 2205988 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
 	ldr     r0, [pc, #0x11c] @ [0x2205ab4] (=0x2000c14)
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	cmp     r4, #0x0
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4,pc}
@@ -72402,7 +72402,7 @@ Function_2205c7c: @ 2205c7c :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
 	ldr     r0, [pc, #0x24] @ [0x2205cb0] (=0x2000c30)
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	ldr     r0, [pc, #0x20] @ [0x2205cb4] (=0x221a134)
 	ldr     r1, [r0]
 	cmp     r1, #0x0
@@ -76587,7 +76587,7 @@ Function_2208e24: @ 2208e24 :arm
 	sub     sp, sp, #0x8
 	mov     r4, r0
 	ldr     r0, [pc, #0x1e4] @ [0x220901c] (=0x2000c58)
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	ldr     r3, [r4, #0x18]
 	ldr     r5, [r4, #0x14]
 	cmp     r3, #0x0
@@ -87012,7 +87012,7 @@ Function_2210dc0: @ 2210dc0 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
 	ldr     r0, [pc, #0x18] @ [0x2210de8] (=0x2000c70)
-	bl      Function_2000b9c
+	bl      Function_2000b9c_Dummy
 	ldr     r0, [pc, #0x14] @ [0x2210dec] (=0x21ccc80)
 	ldr     r0, [r0, #0x4]
 	ldr     r0, [r0, #0xa4]

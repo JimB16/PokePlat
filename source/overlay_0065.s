@@ -1281,7 +1281,7 @@ Function_222e47c: @ 222e47c :thumb
 	ldr     r0, [r5, r0]
 	cmp     r0, #0x0
 	beq     branch_222e49e
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [pc, #0xa4] @ 0x222e53c, (=0xd64)
 	mov     r1, #0x0
 	str     r1, [r5, r0]
@@ -5442,7 +5442,7 @@ branch_2230258: @ 2230258 :thumb
 	add     r0, #0x2c
 	add     r1, #0xc
 	mov     r2, #0x20
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, r5
 	bl      Function_22336c4
 	ldr     r0, [sp, #0x4]

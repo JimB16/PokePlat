@@ -311,7 +311,7 @@ Function_21d0ff4: @ 21d0ff4 :thumb
 	bl      0x200682c
 	mov     r6, r0
 	ldr     r0, [r6, #0x20]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, #0x6b
 	lsl     r0, r0, #2
 	ldr     r0, [r6, r0]
@@ -4365,7 +4365,7 @@ Function_21d2c28: @ 21d2c28 :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4405,7 +4405,7 @@ Function_21d2c70: @ 21d2c70 :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4443,7 +4443,7 @@ Function_21d2cb4: @ 21d2cb4 :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4478,7 +4478,7 @@ Function_21d2cf8: @ 21d2cf8 :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4513,7 +4513,7 @@ Function_21d2d3c: @ 21d2d3c :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4548,7 +4548,7 @@ Function_21d2d80: @ 21d2d80 :thumb
 	mov     r5, r0
 	mov     r0, r1
 	mov     r1, r4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r7, r0
 	mov     r0, r5
 	bl      0x202440c
@@ -4888,7 +4888,7 @@ Function_21d2f94: @ 21d2f94 :thumb
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, r5
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	mov     r0, r6
 	bl      Function_21d2a30
@@ -4930,7 +4930,7 @@ Function_21d2fe0: @ 21d2fe0 :thumb
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, r5
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	mov     r0, r6
 	mov     r1, #0x0
@@ -5059,7 +5059,7 @@ Function_21d30b4: @ 21d30b4 :thumb
 	mov     r6, r0
 	mov     r0, r1
 	mov     r1, r5
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, r5

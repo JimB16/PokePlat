@@ -832,7 +832,7 @@ Function_21d13ec: @ 21d13ec :thumb
 	mov     r1, #0x12
 	lsl     r1, r1, #10
 	mov     r4, r0
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -936,7 +936,7 @@ Function_21d14ac: @ 21d14ac :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	bne     branch_21d14c0
 	bl      0x2022974

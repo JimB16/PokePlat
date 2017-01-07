@@ -15,7 +15,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 branch_21d0d90: @ 21d0d90 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x1c
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0x18] @ 0x21d0db4, (=0xb3c)
 	mov     r2, #0x1c
 	str     r0, [r4, r1]
@@ -362,7 +362,7 @@ Function_21d0fdc: @ 21d0fdc :thumb
 	mov     r1, #0x12
 	mov     r0, #0xc
 	lsl     r1, r1, #10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, r0
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]

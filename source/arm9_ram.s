@@ -249,7 +249,7 @@ RAM_21c07d4:
 RAM_21c07d8:
     .word 0
 .globl RAM_21c07dc
-RAM_21c07dc:
+RAM_21c07dc: @ 0x21c07dc
     .word 0
 .globl RAM_21c07e0
 RAM_21c07e0:
@@ -1175,45 +1175,6 @@ PlayerBattleData_80:        @ + 0x80 (22c5788) 2dc0
 
 
 /*****************
-ScriptHandler
-*****************/
-.equ ScriptHandler_0,               0x0
-.equ ScriptHandler_1,               0x1     @ 0 = No Active Script, 1 = Normal Script Active, 2 = Execute Function in ScriptHandler_4
-.equ ScriptHandler_2,               0x2     @ Result of CompareValues (ScriptCmd_If)
-.equ ScriptHandler_4,               0x4
-.equ ScriptHandler_Pointer,         0x8
-.equ ScriptHandler_c,               0xc     @ 0x14 * 4 Bytes
-.equ ScriptHandler_PtrToJumpTable,  0x5c    @ =JumpTable_Scripthandler (initialised in Function_203e724)
-.equ ScriptHandler_NrOfCmds,        0x60    @ =Nr of ScriptCmds (initialised in Function_203e724)
-.equ ScriptHandler_64,              0x64
-.equ ScriptHandler_74,              0x74
-.equ ScriptHandler_80,              0x80
-.equ ScriptHandler_80_0,            0x0
-
-
-/*****************
-Sprite
-*****************/
-.equ Sprite_0,                      0x0
-.equ Sprite_Face,                   0x28
-.equ Sprite_30,                     0x30
-.equ Sprite_4c,                     0x4c
-.equ Sprite_50,                     0x50
-.equ Sprite_54,                     0x54
-.equ Sprite_58,                     0x58
-.equ Sprite_5c,                     0x5c
-.equ Sprite_60,                     0x60
-.equ Sprite_X,                      0x64
-.equ Sprite_68,                     0x68
-.equ Sprite_Y,                      0x6c
-.equ Sprite_70,                     0x70
-.equ Sprite_74,                     0x74
-.equ Sprite_7c,                     0x7c
-.equ Sprite_88,                     0x88
-.equ Sprite_94,                     0x94
-
-
-/*****************
 TextInterpreter
 *****************/
 .equ TextInterpreter_Pointer,       0x0     @ Pointer to current position in Text/Msg
@@ -1325,8 +1286,12 @@ RAM_27ffdea:
 .globl RAM_27ffdec
 RAM_27ffdec:
     .zero 0x14
+
+
+
+@ 27FFE00h 170h  NDS Cart Header at 27FFE00h+0..16Fh
 .globl RAM_27ffe00
-RAM_27ffe00: @ 27FFE00h 170h  NDS Cart Header at 27FFE00h+0..16Fh
+RAM_27ffe00:
     .zero 0x20
 
 .equ RAM_27ffe00_24,        0x24

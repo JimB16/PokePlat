@@ -2637,7 +2637,7 @@ Function_2220d4c: @ 2220d4c :thumb
 	add     r1, r2, r1
 	add     r0, r5, r0
 	mov     r2, #0x40
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	mov     r0, #0x20
@@ -2710,13 +2710,13 @@ Function_2220d4c: @ 2220d4c :thumb
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x20
 	ldr     r0, [r0, #0xc]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x1a
 	lsl     r1, r1, #4
 	add     r1, r6, r1
 	mov     r2, #0x20
 	mov     r4, r0
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	mov     r0, #0x4d
 	lsl     r0, r0, #2
 	add     r1, r6, r0
@@ -4416,8 +4416,7 @@ Function_2221a54: @ 2221a54 :thumb
 	mov     r1, r4
 	mov     r2, #0x1
 	mov     r3, r7
-	bl      0x207d60c
-.thumb
+	bl      GiveItem
 branch_2221a78: @ 2221a78 :thumb
 	mov     r0, r5
 	bl      0x223e1b0
@@ -12737,7 +12736,7 @@ Function_2225c4c: @ 2225c4c :thumb
 	mul     r5, r0
 	mov     r0, r4
 	lsl     r2, r5, #1
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	cmp     r7, #0x5
 	bgt     branch_2225c9a
 	cmp     r7, #0x0
@@ -12925,7 +12924,7 @@ Function_2225d8c: @ 2225d8c :thumb
 	mul     r1, r7
 	ldr     r0, [r0, #0xc]
 	lsl     r1, r1, #1
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [sp, #0x18]
 	ldr     r0, [sp, #0x14]
 	ldr     r1, [sp, #0x18]
@@ -15906,7 +15905,7 @@ Function_2227260: @ 2227260 :thumb
 	mov     r1, r5
 	mov     r2, #0x1
 	mov     r3, r4
-	bl      0x207d60c
+	bl      GiveItem
 	mov     r0, r6
 	bl      0x223e1b0
 	mov     r1, r5
@@ -15914,6 +15913,7 @@ Function_2227260: @ 2227260 :thumb
 	bl      0x207da1c
 	pop     {r3-r7,pc}
 @ 0x2227288
+
 
 .thumb
 Function_2227288: @ 2227288 :thumb
@@ -18743,7 +18743,7 @@ Function_22286b8: @ 22286b8 :thumb
 	mul     r1, r7
 	ldr     r0, [r0, #0xc]
 	lsl     r1, r1, #1
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [sp, #0x18]
 	ldr     r0, [sp, #0x14]
 	ldr     r1, [sp, #0x18]
@@ -19253,7 +19253,7 @@ branch_2228a1a: @ 2228a1a :thumb
 Function_2228a38: @ 2228a38 :thumb
 	push    {r3,lr}
 	mov     r1, #0x10
-	bl      malloc_maybe
+	bl      malloc
 	mov     r3, r0
 	mov     r2, #0x10
 	mov     r1, #0x0

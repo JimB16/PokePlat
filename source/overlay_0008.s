@@ -68,14 +68,14 @@ Function_224997c: @ 224997c :thumb
 	cmp     r0, #0x0
 	beq     branch_2249a2c
 	mov     r0, r4
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x1
 	bl      Function_2027f6c
 	mov     r5, r0
 	mov     r0, #0xb
 	mov     r1, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r2, r0
 	mov     r0, #0x0
 	str     r0, [r2, #0x0]
@@ -185,7 +185,7 @@ Function_2249a94: @ 2249a94 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_2050a64
@@ -308,7 +308,7 @@ Function_2249b74: @ 2249b74 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x28
 	mov     r5, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_2050a64
@@ -519,7 +519,7 @@ Function_2249cd8: @ 2249cd8 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_2050a64
@@ -644,7 +644,7 @@ Function_2249dbc: @ 2249dbc :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x2c
 	mov     r4, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x1
 	bl      Function_2027f6c
@@ -893,12 +893,12 @@ Function_2249fb8: @ 2249fb8 :thumb
 	mov     r5, r0
 	mov     r0, #0xb
 	mov     r1, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r6, r0
 	mov     r0, #0x0
 	str     r0, [r6, #0x0]
 	mov     r0, r5
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x2
 	bl      Function_2027f6c
@@ -941,7 +941,7 @@ Function_224a018: @ 224a018 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0xc
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -1056,7 +1056,7 @@ Function_224a0e8: @ 224a0e8 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0xc
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -1275,14 +1275,14 @@ Function_224a254: @ 224a254 :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0x0]
 	mov     r4, r1
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x3
 	bl      Function_2027f6c
 	str     r0, [sp, #0x4]
 	mov     r0, #0xb
 	mov     r1, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, #0x0
 	str     r1, [r0, #0x0]
 	str     r0, [sp, #0x0]
@@ -1631,7 +1631,7 @@ Function_224a4fc: @ 224a4fc :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -1797,7 +1797,7 @@ Function_224a620: @ 224a620 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x1c
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r7, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -1831,7 +1831,7 @@ Jumppoints_224a654:
 .hword branch_224a754 - Jumppoints_224a654 - 2
 .thumb
 branch_224a65e: @ 224a65e :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a760
 	mov     r0, r6
@@ -1888,7 +1888,7 @@ branch_224a67c: @ 224a67c :thumb
 .thumb
 branch_224a6cc: @ 224a6cc :thumb
 	mov     r0, r6
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a716
 	mov     r0, r6
@@ -1918,7 +1918,7 @@ branch_224a6e0: @ 224a6e0 :thumb
 .thumb
 branch_224a6fe: @ 224a6fe :thumb
 	mov     r0, r6
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a716
 	mov     r0, r6
@@ -1940,7 +1940,7 @@ branch_224a716: @ 224a716 :thumb
 
 .thumb
 branch_224a720: @ 224a720 :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a736
 	mov     r0, r6
@@ -1992,7 +1992,7 @@ Function_224a770: @ 224a770 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x1c
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -2021,7 +2021,7 @@ Jumppoints_224a7a2:
 .hword branch_224a8ac - Jumppoints_224a7a2 - 2
 .thumb
 branch_224a7ac: @ 224a7ac :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	beq     branch_224a7b6
 .thumb
@@ -2085,7 +2085,7 @@ branch_224a7cc: @ 224a7cc :thumb
 .thumb
 branch_224a81c: @ 224a81c :thumb
 	mov     r0, r7
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a866
 	mov     r0, r7
@@ -2115,7 +2115,7 @@ branch_224a830: @ 224a830 :thumb
 .thumb
 branch_224a84e: @ 224a84e :thumb
 	mov     r0, r7
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a866
 	mov     r0, r7
@@ -2137,7 +2137,7 @@ branch_224a866: @ 224a866 :thumb
 
 .thumb
 branch_224a870: @ 224a870 :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224a8b8
 	mov     r0, r7
@@ -2194,14 +2194,14 @@ Function_224a8c8: @ 224a8c8 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x5c
 	mov     r6, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x3
 	bl      Function_2027f6c
 	str     r0, [sp, #0x10]
 	mov     r0, #0x4
 	mov     r1, #0xf4
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [r6, #0x4]
 	add     r2, sp, #0x50
 	str     r0, [r1, #0x24]
@@ -2430,7 +2430,7 @@ branch_224aa78: @ 224aa78 :thumb
 Function_8_224aaa8: @ 224aaa8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x3
@@ -2648,14 +2648,14 @@ Function_224abd4: @ 224abd4 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x2c
 	mov     r5, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x5
 	bl      Function_2027f6c
 	str     r0, [sp, #0xc]
 	mov     r0, #0x4
 	mov     r1, #0x1c
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [r5, #0x4]
 	str     r0, [r1, #0x24]
 	ldr     r0, [r5, #0x4]
@@ -2841,7 +2841,7 @@ Function_224ad34: @ 224ad34 :thumb
 	push    {r3-r7,lr}
 	mov     r7, r0
 	mov     r5, r1
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x5
 	bl      Function_2027f6c
@@ -2850,7 +2850,7 @@ Function_224ad34: @ 224ad34 :thumb
 	mov     r1, #0x4
 	ldr     r4, [r0, #0x24]
 	mov     r0, #0xb
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, #0x0
 	str     r1, [r0, #0x0]
 	strh    r5, [r4, #0x14]
@@ -2941,7 +2941,7 @@ Function_224ade8: @ 224ade8 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	str     r0, [sp, #0x8]
 	mov     r0, r4
 	bl      Function_2050a64
@@ -3301,18 +3301,18 @@ Function_224b020: @ 224b020 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x2c
 	mov     r6, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x8
 	bl      Function_2027f6c
 	str     r0, [sp, #0x10]
 	mov     r0, #0x4
 	mov     r1, #0x40
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [sp, #0xc]
 	mov     r1, #0x0
 	mov     r2, #0x40
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [sp, #0xc]
 	ldr     r1, [r6, #0x4]
 	mov     r4, r0
@@ -3422,7 +3422,7 @@ Function_224b110: @ 224b110 :thumb
 	mov     r5, r1
 	mov     r4, r2
 	ldr     r6, [sp, #0x18]
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x8
 	bl      Function_2027f6c
@@ -3560,7 +3560,7 @@ branch_224b1ee: @ 224b1ee :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [sp, #0x8]
 	ldr     r0, [r5, #0x38]
-	bl      Function_20619dc
+	bl      InitSpriteStruct
 	str     r0, [r4, #0x20]
 	bl      Function_20642f8
 	ldr     r0, [r4, #0x20]
@@ -3571,9 +3571,9 @@ branch_224b1ee: @ 224b1ee :thumb
 	bl      Function_2062d80
 	ldr     r0, [r4, #0x20]
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	ldr     r0, [r4, #0x20]
-	bl      Function_2063070
+	bl      GetSpriteAdr70
 	ldr     r1, [r5, #0x28]
 	mov     r4, r0
 	bl      0x21e931c
@@ -3712,7 +3712,7 @@ Function_224b2e8: @ 224b2e8 :thumb
 	mov     r5, r0
 	ldr     r7, [r5, #0x20]
 	mov     r0, r7
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224b36c
 	mov     r0, r7
@@ -3862,7 +3862,7 @@ Function_224b3d4: @ 224b3d4 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -4253,7 +4253,7 @@ Function_224b67c: @ 224b67c :thumb
 	str     r1, [sp, #0x0]
 	str     r2, [sp, #0x4]
 	str     r3, [sp, #0x8]
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x8
 	bl      Function_2027f6c
@@ -4284,11 +4284,11 @@ branch_224b6a4: @ 224b6a4 :thumb
 	str     r0, [sp, #0x10]
 	mov     r0, #0xb
 	mov     r1, #0x50
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, #0x50
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [sp, #0x0]
 	ldr     r1, [pc, #0x34] @ 0x224b70c, (=0x224c774)
 	str     r0, [r4, #0x44]
@@ -4329,7 +4329,7 @@ Function_224b714: @ 224b714 :thumb
 	mov     r5, r1
 	mov     r6, r2
 	mov     r4, r3
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x8
 	bl      Function_2027f6c
@@ -4378,7 +4378,7 @@ branch_224b75a: @ 224b75a :thumb
 Function_224b764: @ 224b764 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x4
 	bl      Function_2027f6c
@@ -4386,12 +4386,12 @@ Function_224b764: @ 224b764 :thumb
 	mov     r6, r0
 	mov     r0, #0x4
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x79
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x1f
 	str     r4, [r0, #0x24]
@@ -4454,10 +4454,10 @@ Function_224b7d8: @ 224b7d8 :thumb
 	ldr     r5, [r5, #0x0]
 	str     r5, [sp, #0x8]
 	ldr     r0, [r0, #0x38]
-	bl      Function_20619dc
+	bl      InitSpriteStruct
 	mov     r5, r0
 	mov     r1, #0xfd
-	bl      Function_206290c
+	bl      SetSpriteID
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, #0x0
@@ -4610,11 +4610,11 @@ Function_224b8d0: @ 224b8d0 :thumb
 	mov     r0, r6
 	mov     r1, #0x0
 	.hword  0x1f12 @ sub r2, r2, #0x4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, #0xd8
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, #0x0
 	ldr     r7, [pc, #0x5c] @ 0x224b950, (=0x224c99c)
 	str     r0, [sp, #0x0]
@@ -4690,7 +4690,7 @@ Function_224b958: @ 224b958 :thumb
 .thumb
 branch_224b97e: @ 224b97e :thumb
 	ldr     r0, [sp, #0x4]
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r0, #0xfd
 	bne     branch_224b9c4
 	ldr     r0, [sp, #0x4]
@@ -4837,10 +4837,10 @@ branch_224ba5a: @ 224ba5a :thumb
 .thumb
 branch_224ba62: @ 224ba62 :thumb
 	mov     r0, r5
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	str     r0, [sp, #0x4]
 	mov     r0, r5
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	mov     r5, r0
 	ldr     r0, [sp, #0x4]
 	add     r1, r7, r5
@@ -4892,10 +4892,10 @@ Function_224baa0: @ 224baa0 :thumb
 .thumb
 branch_224bac0: @ 224bac0 :thumb
 	mov     r0, r4
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	add     r7, r7, r0
 	mov     r0, r4
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	ldr     r1, [sp, #0x4]
 	mov     r3, r4
 	add     r0, r1, r0
@@ -4925,7 +4925,7 @@ branch_224baee: @ 224baee :thumb
 Function_224baf4: @ 224baf4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_2050a64
@@ -4943,7 +4943,7 @@ Function_224baf4: @ 224baf4 :thumb
 
 .thumb
 branch_224bb1a: @ 224bb1a :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224bb70
 	ldr     r0, [r5, #0x8]
@@ -5053,7 +5053,7 @@ Function_224bbd0: @ 224bbd0 :thumb
 	ldr     r0, [r0, #0x3c]
 	bl      Function_205eb3c
 	mov     r4, r0
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x0
 	bne     branch_224bbec
 	mov     r0, #0x0
@@ -5213,12 +5213,12 @@ branch_224bcf4: @ 224bcf4 :thumb
 	ble     branch_224bdbe
 	str     r1, [r5, #0x14]
 	ldr     r0, [r5, #0x8]
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	ldr     r1, [r4, #0x8]
 	add     r0, r1, r0
 	str     r0, [r4, #0x8]
 	ldr     r0, [r5, #0x8]
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	ldr     r1, [r4, #0xc]
 	add     r2, r1, r0
 	str     r2, [r4, #0xc]
@@ -5240,7 +5240,7 @@ branch_224bcf4: @ 224bcf4 :thumb
 	ldr     r1, [r4, #0xc]
 	bl      SaveSpritePositionY
 	ldr     r0, [r4, #0x10]
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	mov     r1, #0x1
 	ldr     r0, [r4, #0x14]
 	lsl     r1, r1, #12
@@ -5273,10 +5273,10 @@ branch_224bd88: @ 224bd88 :thumb
 .thumb
 branch_224bd8e: @ 224bd8e :thumb
 	ldr     r0, [r5, #0x8]
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	mov     r6, r0
 	ldr     r0, [r5, #0x8]
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	ldr     r1, [r4, #0x8]
 	mov     r2, r0
 	ldr     r3, [r4, #0xc]
@@ -5484,7 +5484,7 @@ Function_224bed8: @ 224bed8 :thumb
 	mov     r0, #0xb
 	mov     r1, #0x78
 	mov     r7, r2
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r4, r0
 	bne     branch_224bef0
 	bl      ErrorHandling
@@ -5493,7 +5493,7 @@ branch_224bef0: @ 224bef0 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x78
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r7, [r4, #0x8]
 	ldr     r0, [r5, #0x8]
 	str     r0, [r4, #0xc]
@@ -5551,7 +5551,7 @@ Function_8_224bf4c: @ 224bf4c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x4
@@ -5635,7 +5635,7 @@ Function_224bfcc: @ 224bfcc :thumb
 	mov     r1, #0x0
 	mov     r2, #0x38
 	mov     r7, r3
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [sp, #0x10]
 	str     r5, [r4, #0x34]
 	ldr     r6, [r0, #0x0]
@@ -5660,13 +5660,13 @@ Function_224bfcc: @ 224bfcc :thumb
 .thumb
 branch_224c014: @ 224c014 :thumb
 	mov     r0, r7
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	ldr     r1, [r4, #0x24]
 	mul     r0, r1
 	add     r0, r6, r0
 	str     r0, [r4, #0x18]
 	mov     r0, r7
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	ldr     r1, [r4, #0x24]
 	mov     r2, r1
 	mul     r2, r0
@@ -5691,7 +5691,7 @@ branch_224c014: @ 224c014 :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [sp, #0x8]
 	ldr     r0, [r5, #0x38]
-	bl      Function_20619dc
+	bl      InitSpriteStruct
 	str     r0, [r4, #0x30]
 	bl      Function_20642f8
 	ldr     r0, [r4, #0x30]
@@ -5702,9 +5702,9 @@ branch_224c014: @ 224c014 :thumb
 	bl      Function_2062d80
 	ldr     r0, [r4, #0x30]
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	ldr     r0, [r4, #0x30]
-	bl      Function_2063070
+	bl      GetSpriteAdr70
 	ldr     r1, [r5, #0x28]
 	mov     r4, r0
 	bl      0x21e931c
@@ -5821,7 +5821,7 @@ Function_224c11c: @ 224c11c :thumb
 .thumb
 branch_224c134: @ 224c134 :thumb
 	ldr     r0, [r4, #0x30]
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224c16e
 	ldr     r1, [r4, #0x28]
@@ -5898,7 +5898,7 @@ Function_224c198: @ 224c198 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r6, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x2
 	bl      Function_2027f6c
@@ -5906,12 +5906,12 @@ Function_224c198: @ 224c198 :thumb
 	mov     r4, r0
 	mov     r0, #0x4
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x7e
 	str     r0, [sp, #0x8]
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [sp, #0x8]
 	str     r6, [r0, #0x0]
 	ldr     r1, [r6, #0x4]
@@ -6121,7 +6121,7 @@ branch_224c362: @ 224c362 :thumb
 	ldr     r0, [pc, #0x20] @ 0x224c384, (=0x224c3b1)
 	ldr     r1, [sp, #0x8]
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r2, #0x7d
 	ldr     r1, [sp, #0x8]
 	lsl     r2, r2, #2
@@ -6146,7 +6146,7 @@ Function_224c388: @ 224c388 :thumb
 	mov     r0, #0x7d
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	bl      Function_224c4f8
 	mov     r0, r4
@@ -6212,7 +6212,7 @@ branch_224c3f8: @ 224c3f8 :thumb
 	add     r0, #0xc
 	mov     r1, r6
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r4, #0x4]
 	mov     r3, #0x0
 	str     r0, [sp, #0x0]
@@ -6258,7 +6258,7 @@ Function_224c444: @ 224c444 :thumb
 	add     r5, r6, #0x4
 	str     r0, [sp, #0x0]
 	str     r7, [sp, #0xc]
-	bl      Function_2062858
+	bl      GetSpriteListc
 	str     r0, [sp, #0x4]
 	ldr     r0, [sp, #0x0]
 	add     r1, sp, #0x8
@@ -6270,7 +6270,7 @@ Function_224c444: @ 224c444 :thumb
 .thumb
 branch_224c46c: @ 224c46c :thumb
 	ldr     r0, [sp, #0x8]
-	bl      Function_2062910
+	bl      GetSpriteID
 	mov     r4, r0
 	ldr     r0, [sp, #0x8]
 	mov     r1, #0x0
@@ -6279,7 +6279,7 @@ branch_224c46c: @ 224c46c :thumb
 	cmp     r4, #0xff
 	beq     branch_224c492
 	ldr     r0, [sp, #0x8]
-	bl      Function_2062950
+	bl      GetSpriteTrainer
 	cmp     r0, #0x1
 	bne     branch_224c4de
 	ldr     r0, [r5, #0x8]
@@ -6312,7 +6312,7 @@ branch_224c4ac: @ 224c4ac :thumb
 	ldr     r0, [pc, #0x34] @ 0x224c4f4, (=0x224c519)
 	mov     r1, r5
 	.hword  0x1c92 @ add r2, r2, #0x2
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r5, #0xc]
 	cmp     r0, #0x0
 	bne     branch_224c4d2
@@ -6358,7 +6358,7 @@ branch_224c500: @ 224c500 :thumb
 	cmp     r0, #0x0
 	beq     branch_224c50e
 	ldr     r0, [r5, #0xc]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	str     r6, [r5, #0x0]
 .thumb
 branch_224c50e: @ 224c50e :thumb
@@ -6382,7 +6382,7 @@ Function_8_224c51c: @ 224c51c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x20
 	mov     r5, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x2
@@ -6432,7 +6432,7 @@ branch_224c564: @ 224c564 :thumb
 	cmp     r0, r1
 	beq     branch_224c5c0
 	ldr     r0, [sp, #0x18]
-	bl      Function_2062960
+	bl      GetSpriteScript
 	mov     r4, r0
 	ldr     r1, [pc, #0x44] @ 0x224c5d8, (=0xf58)
 	ldr     r2, [sp, #0x18]
@@ -6440,7 +6440,7 @@ branch_224c564: @ 224c564 :thumb
 	bl      Function_203e880
 	lsl     r0, r4, #16
 	lsr     r0, r0, #16
-	bl      Function_203f254
+	bl      NormalizeSpriteScriptNr
 	str     r4, [sp, #0x0]
 	str     r0, [sp, #0x4]
 	mov     r0, #0x0
@@ -6481,7 +6481,7 @@ branch_224c5d0: @ 224c5d0 :thumb
 Function_224c5dc: @ 224c5dc :thumb
 	push    {r4,lr}
 	mov     r4, r1
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x2
@@ -6504,13 +6504,13 @@ branch_224c5f4: @ 224c5f4 :thumb
 	bl      Function_2063004
 	mov     r0, r4
 	mov     r1, #0x2
-	bl      Function_20629fc
+	bl      SetSpriteMovementWidth
 	mov     r0, r4
 	mov     r1, #0x2
-	bl      Function_2062a04
+	bl      SetSpriteMovementLength
 	mov     r0, r4
 	mov     r1, #0x3
-	bl      Function_20633a8
+	bl      SetSpriteFollowHero
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x224c62c
@@ -6535,7 +6535,7 @@ Function_8_224c62c: @ 224c62c :thumb
 
 .thumb
 branch_224c644: @ 224c644 :thumb
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r4, r0
 	bl      Function_2027f80

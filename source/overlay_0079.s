@@ -4069,7 +4069,7 @@ Function_21d29e4: @ 21d29e4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r0, [r4, #0x18]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r1, [r4, #0x14]
 	mov     r2, #0x1c
 	ldr     r0, [r1, #0x4]

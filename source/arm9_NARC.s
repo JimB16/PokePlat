@@ -205,13 +205,13 @@ branch_2006a74: @ 2006a74 :thumb
 	bne     branch_2006a84
 	ldr     r0, [sp, #0x0]
 	ldr     r1, [sp, #0x14]
-	bl      malloc_maybe
+	bl      malloc
 	b       branch_2006a8c
 
 branch_2006a84: @ 2006a84 :thumb
 	ldr     r0, [sp, #0x0]
 	ldr     r1, [sp, #0x14]
-	bl      malloc2_maybe
+	bl      malloc2
 branch_2006a8c: @ 2006a8c :thumb
 	mov     r4, r0
 	ldr     r2, [sp, #0x14]
@@ -473,7 +473,7 @@ LoadFromNARC_8: @ 2006c24 :thumb
 
 	mov     r0, r1
 	mov     r1, #0x54
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_2006ca0_end
 

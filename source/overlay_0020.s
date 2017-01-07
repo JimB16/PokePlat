@@ -3245,7 +3245,7 @@ Function_21d2098: @ 21d2098 :thumb
 	mov     r5, r0
 	mov     r0, #0x23
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_21d2118
 	mov     r0, #0x0
@@ -3323,7 +3323,7 @@ branch_21d213a: @ 21d213a :thumb
 	ldr     r0, [r5, #0x8]
 	cmp     r0, #0x0
 	beq     branch_21d2144
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21d2144: @ 21d2144 :thumb
 	.hword  0x1c64 @ add r4, r4, #0x1
@@ -3331,9 +3331,9 @@ branch_21d2144: @ 21d2144 :thumb
 	cmp     r4, #0x4
 	blt     branch_21d213a
 	ldr     r0, [r6, #0x0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r6, #0x4]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	bl      0x200a878
 	ldr     r0, [r6, #0x24]
 	bl      0x2021964
@@ -3392,7 +3392,7 @@ Function_21d21a0: @ 21d21a0 :thumb
 	bcs     branch_21d21ee
 	mov     r0, #0x23
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, r0
 	beq     branch_21d21f2
 	mov     r4, #0x0
@@ -3499,7 +3499,7 @@ Function_21d2238: @ 21d2238 :thumb
 	lsl     r0, r0, #2
 	add     r0, r1, r0
 	ldr     r0, [r0, #0x8]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x10]
 	ldr     r1, [r4, #0x0]
 	lsl     r0, r0, #2
@@ -3618,7 +3618,7 @@ Function_21d2260: @ 21d2260 :thumb
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      0x201ff74
-	blx     0x20bddf8
+	blx     GX_DispOn
 	mov     r0, r5
 	bl      0x2006ca8
 	mov     r0, r4
@@ -3626,14 +3626,14 @@ Function_21d2260: @ 21d2260 :thumb
 	pop     {r3-r5,pc}
 @ 0x21d235e
 
-
 .align 2
-
-
 .word 0xffffe0ff @ 0x21d2360
 .word 0x4001000 @ 0x21d2364
 .word 0xffcfffef @ 0x21d2368
 .word 0x100010 @ 0x21d236c
+
+
+
 .thumb
 Function_21d2370: @ 21d2370 :thumb
 	push    {r4,r5,lr}
@@ -3840,7 +3840,7 @@ Function_21d24ec: @ 21d24ec :thumb
 	mov     r0, #0x1
 	mov     r1, #0x0
 	mov     r2, r0
-	blx     0x20bde40
+	blx     GX_SetGraphicsMode
 	ldr     r0, [pc, #0x4c] @ 0x21d2554, (=0x21d5238)
 	bl      0x201fe94
 	ldr     r0, [pc, #0x4c] @ 0x21d2558, (=0x21d519c)
@@ -5251,7 +5251,7 @@ Function_21d2ea4: @ 21d2ea4 :thumb
 	mov     r0, #0x23
 	lsl     r1, r1, #4
 	mov     r7, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	str     r5, [r4, #0x0]
 	str     r6, [r4, #0x4]
@@ -6681,7 +6681,7 @@ Function_21d3864: @ 21d3864 :thumb
 	mov     r0, #0x23
 	mov     r1, #0x10
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	str     r5, [r0, #0x0]
 	str     r4, [r0, #0x4]
 	str     r6, [r0, #0x8]
@@ -6968,7 +6968,7 @@ Function_21d3a54: @ 21d3a54 :thumb
 	mov     r0, #0x23
 	mov     r1, #0x60
 	mov     r7, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	str     r5, [r4, #0x0]
 	str     r6, [r4, #0x4]
@@ -7915,7 +7915,7 @@ Function_21d40e8: @ 21d40e8 :thumb
 	mov     r0, #0x23
 	mov     r1, #0x94
 	mov     r7, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	str     r5, [r4, #0x0]
 	str     r6, [r4, #0x4]
@@ -8805,7 +8805,7 @@ Function_21d4728: @ 21d4728 :thumb
 	mov     r0, #0x23
 	lsl     r1, r1, #8
 	mov     r7, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	str     r5, [r4, #0x0]
 	str     r6, [r4, #0x4]
@@ -9394,7 +9394,7 @@ Function_21d4ba4: @ 21d4ba4 :thumb
 	mov     r5, r0
 	mov     r0, #0x23
 	mov     r1, #0x18
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_21d4c00
 	ldr     r0, [r5, #0x4]
@@ -9668,7 +9668,7 @@ branch_21d4da0: @ 21d4da0 :thumb
 	mov     r0, r4
 	bl      free
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21d4db4: @ 21d4db4 :thumb
 	add     sp, #0x1c
@@ -9842,7 +9842,7 @@ branch_21d4eb4: @ 21d4eb4 :thumb
 	cmp     r0, #0x0
 	bne     branch_21d4ece
 	ldr     r0, [r4, #0x1c]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldrh    r0, [r4, #0x1a]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	strh    r0, [r4, #0x1a]
@@ -9943,7 +9943,7 @@ Function_21d4f4c: @ 21d4f4c :thumb
 	cmp     r0, #0x0
 	bne     branch_21d4f70
 	ldr     r0, [r4, #0x1c]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x18]
@@ -10048,7 +10048,7 @@ Function_21d4ff0: @ 21d4ff0 :thumb
 	cmp     r0, #0x0
 	bne     branch_21d5014
 	ldr     r0, [r4, #0x1c]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x18]

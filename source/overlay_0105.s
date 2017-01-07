@@ -7879,7 +7879,7 @@ Function_2245464: @ 2245464 :thumb
 	mov     r4, r0
 	mov     r0, #0x5d
 	mov     r1, #0x30
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x5
 	lsl     r1, r1, #6
 	str     r0, [r4, r1]
@@ -9282,7 +9282,7 @@ Function_2245dc4: @ 2245dc4 :thumb
 	mov     r1, #0xc
 	mov     r5, r2
 	mov     r6, r3
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r1, #0x0
 	strb    r1, [r4, #0x0]
@@ -9368,7 +9368,7 @@ Function_2245e54: @ 2245e54 :thumb
 	mov     r0, r3
 	mov     r1, #0x10
 	mov     r6, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x10
@@ -9614,7 +9614,7 @@ Function_2245fb8: @ 2245fb8 :thumb
 	mov     r1, #0x14
 	str     r2, [sp, #0x8]
 	mov     r5, r3
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x14

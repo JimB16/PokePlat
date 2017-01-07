@@ -37,8 +37,8 @@ branch_2000854: @ 2000854 :arm
 	sub     sp, r1, #0x4
     
 	mov     r0, #0x0
-	ldr     r1, [pc, #0xbc] @ [0x2000930] (=RAM_27e0000)
-	mov     r2, #0x4000
+	ldr     r1, [pc, #0xbc] @ [0x2000930] (=RAM_27e0000) __dtcm_start
+	mov     r2, #0x4000 @ __dtcm_top - __dtcm_start
 	bl      MIi_CpuClearFast2
 
 	mov     r0, #0x0
@@ -90,9 +90,10 @@ branch_20008d4: @ 20008d4 :arm
 	ldr     r0, [pc, #0x40] @ [0x2000948] (=OS_IrqHandler)
 	str     r0, [r1]
     
-	bl      Function_20e28b8
+	bl      Function_20e28b8_Dummy
 	bl      NitroStartUp
-	bl      Function_20e402c
+	bl      __call_static_initializers
+
 	ldr     r1, [pc, #0x30] @ [0x200094c] (=start+1)
 	ldr     lr, [pc, #0x30] @ [0x2000950] (=0xffff0000)
 	tst     sp, #0x4
@@ -117,7 +118,6 @@ branch_200092c: @ 200092c :arm
 
 
 
-.arm
 /* Fill memory with value
 
 Input:
@@ -125,6 +125,7 @@ r0 = Fill Value
 r1 = Start Address
 r2 = length
 */
+.arm
 MIi_CpuClearFast2: @ 2000954 :arm
 	add     r12, r1, r2
 branch_2000958: @ 2000958 :arm
@@ -136,6 +137,7 @@ branch_2000964: @ 2000964 :arm
 	stmia   r1!, {r0}
 branch_2000968: @ 2000968 :arm
 	blt     branch_2000958
+
 	bx      lr
 @ 0x2000970
 
@@ -257,6 +259,7 @@ noAreasToInit: @ 2000aa4 :arm
 .pool
 
 
+@ 0x2000aac ARM9 Auto Load List RAM Address (Cartridge Header)
 .arm
 branch_2000aac: @ 2000aac :arm
 	bx      lr
@@ -326,8 +329,8 @@ NitroStartUp: @ 2000b98 :arm
 
 
 .arm
-.globl Function_2000b9c
-Function_2000b9c: @ 2000b9c :arm
+.globl Function_2000b9c_Dummy
+Function_2000b9c_Dummy: @ 2000b9c :arm
 	bx      lr
 @ 0x2000ba0
 

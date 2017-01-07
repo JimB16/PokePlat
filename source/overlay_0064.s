@@ -7808,7 +7808,7 @@ branch_22313ec: @ 22313ec :thumb
 	mov     r1, #0x32
 	ldr     r0, [sp, #0x24]
 	lsl     r1, r1, #6
-	bl      malloc_maybe
+	bl      malloc
 	mov     r3, #0x0
 	str     r0, [sp, #0x34]
 	str     r3, [sp, #0x0]

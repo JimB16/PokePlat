@@ -465,7 +465,7 @@ branch_223b3ee: @ 223b3ee :thumb
 	mov     r2, r0
 	ldr     r1, [r4, #0x18]
 	mov     r0, r5
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [r4, #0x18]
 	bl      free
 	mov     r0, #0x0

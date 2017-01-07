@@ -437,7 +437,7 @@ MI_HBlankDmaCopy16: @ 20c47a8 :arm
 
 
 
-.arm
+arm_func_start MI_SendGXCommandAsync
 MI_SendGXCommandAsync: @ 20c4808 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -512,6 +512,7 @@ branch_20c4840: @ 20c4840 :arm
 
 .align 2
 .pool
+arm_func_end MI_SendGXCommandAsync
 
 
 
@@ -602,7 +603,7 @@ MIi_DMACallback: @ 20c49ac :arm
 
 
 
-.arm
+arm_func_start MI_SendGXCommandAsyncFast
 MI_SendGXCommandAsyncFast: @ 20c4a0c :arm
 	stmfd   sp!, {r4-r6,lr}
 	movs    r4, r2
@@ -657,6 +658,7 @@ branch_20c4a38: @ 20c4a38 :arm
 @ 0x20c4ab8
 
 .pool
+arm_func_end MI_SendGXCommandAsyncFast
 
 
 

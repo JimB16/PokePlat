@@ -607,7 +607,7 @@ Function_225cb1c: @ 225cb1c :thumb
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	beq     branch_225cb4c
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	mov     r1, #0x0
 	add     r0, #0xd4
@@ -978,7 +978,7 @@ Function_225cdc0: @ 225cdc0 :thumb
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	beq     branch_225cdf0
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	mov     r1, #0x0
 	add     r0, #0xd4

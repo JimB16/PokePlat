@@ -22,6 +22,7 @@ Function_20d0888: @ 20d0888 :arm
 
 
 .arm
+.globl Function_20d08c0
 Function_20d08c0: @ 20d08c0 :arm
 	stmfd   sp!, {r3,lr}
 	bl      CTRDG_IsExisting
@@ -67,6 +68,7 @@ CTRDGi_IsAgbCartridgeAtInit: @ 20d0910 :arm
 
 
 .arm
+.globl Function_20d0928
 Function_20d0928: @ 20d0928 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, #0x0
@@ -98,6 +100,7 @@ Function_20d094c: @ 20d094c :arm
 
 
 .arm
+.globl Function_20d0970
 Function_20d0970: @ 20d0970 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, #0x0
@@ -129,22 +132,25 @@ Function_20d0994: @ 20d0994 :arm
 
 
 .arm
+.globl CTRDG_IsPulledOut
 CTRDG_IsPulledOut: @ 20d09b8 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r2, [pc, #0x38] @ [0x20d09fc] (=RAM_27ffc30)
 	ldr     r0, [pc, #0x38] @ [0x20d0a00] (=0xffff)
-	ldrh    r1, [r2]
+	ldrh    r1, [r2, #RAM_27ffc30_0]
 	cmp     r1, r0
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3,pc}
-	ldrb    r0, [r2, #0x5]
+
+	ldrb    r0, [r2, #RAM_27ffc30_5]
 	mov     r0, r0, lsl #30
 	movs    r0, r0, lsr #31
 	bne     branch_20d09e8
 	bl      CTRDG_IsExisting
 branch_20d09e8: @ 20d09e8 :arm
+
 	ldr     r0, [pc, #0xc] @ [0x20d09fc] (=RAM_27ffc30)
-	ldrb    r0, [r0, #0x5]
+	ldrb    r0, [r0, #RAM_27ffc30_5]
 	mov     r0, r0, lsl #30
 	mov     r0, r0, lsr #31
 	ldmfd   sp!, {r3,pc}
@@ -156,27 +162,30 @@ branch_20d09e8: @ 20d09e8 :arm
 
 
 .arm
+.globl CTRDG_IsExisting
 CTRDG_IsExisting: @ 20d0a04 :arm
 	stmfd   sp!, {r4,lr}
 	sub     sp, sp, #0x10
 	ldr     r2, [pc, #0xf0] @ [0x20d0b04] (=RAM_27ffc30)
 	mov     r4, #0x1
-	ldrh    r1, [r2]
+	ldrh    r1, [r2, #RAM_27ffc30_0]
 	rsb     r0, r4, #1, 16 @ #0x10000
 	cmp     r1, r0
 	addeq   sp, sp, #0x10
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4,pc}
-	ldrb    r0, [r2, #0x5]
+
+	ldrb    r0, [r2, #RAM_27ffc30_5]
 	mov     r0, r0, lsl #30
 	mov     r0, r0, lsr #31
 	cmp     r0, #0x1
 	addeq   sp, sp, #0x10
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r4,pc}
+
 	ldr     r0, [pc, #0xb8] @ [0x20d0b08] (=RAM_21d01c0)
 	add     r1, sp, #0x8
-	ldrh    r0, [r0, #0x6]
+	ldrh    r0, [r0, #RAM_21d01c0_6]
 	bl      CTRDGi_LockByProcessor
 	add     r0, sp, #0x0
 	bl      CTRDGi_ChangeLatestAccessCycle
@@ -184,47 +193,49 @@ CTRDG_IsExisting: @ 20d0a04 :arm
 	ldrb    r2, [r0, #0xb2]
 	cmp     r2, #0x96
 	bne     branch_20d0a84
+
 	ldr     r1, [pc, #0x8c] @ [0x20d0b04] (=RAM_27ffc30)
 	ldrh    r0, [r0, #0xbe]
 	ldrh    r1, [r1]
 	cmp     r1, r0
 	bne     branch_20d0acc
-.arm
+
 branch_20d0a84: @ 20d0a84 :arm
 	cmp     r2, #0x96
 	beq     branch_20d0aa4
+
 	ldr     r1, [pc, #0x70] @ [0x20d0b04] (=RAM_27ffc30)
 	ldr     r0, [pc, #0x74] @ [0x20d0b0c] (=0x801fffe)
-	ldrh    r1, [r1]
+	ldrh    r1, [r1, #RAM_27ffc30_0]
 	ldrh    r0, [r0]
 	cmp     r1, r0
 	bne     branch_20d0acc
-.arm
+
 branch_20d0aa4: @ 20d0aa4 :arm
 	ldr     r2, [pc, #0x58] @ [0x20d0b04] (=RAM_27ffc30)
 	mov     r0, #2, 6 @ #0x8000000
-	ldr     r1, [r2, #0x8]
+	ldr     r1, [r2, #RAM_27ffc30_8]
 	ldr     r0, [r0, #0xac]
 	cmp     r1, r0
 	beq     branch_20d0ae0
-	ldrb    r0, [r2, #0x5]
+
+	ldrb    r0, [r2, #RAM_27ffc30_5]
 	mov     r0, r0, lsl #31
 	movs    r0, r0, lsr #31
 	beq     branch_20d0ae0
-.arm
+
 branch_20d0acc: @ 20d0acc :arm
 	ldr     r1, [pc, #0x30] @ [0x20d0b04] (=RAM_27ffc30)
 	mov     r4, #0x0
-	ldrb    r0, [r1, #0x5]
+	ldrb    r0, [r1, #RAM_27ffc30_5]
 	orr     r0, r0, #0x2
-	strb    r0, [r1, #0x5]
-.arm
+	strb    r0, [r1, #RAM_27ffc30_5]
 branch_20d0ae0: @ 20d0ae0 :arm
 	add     r0, sp, #0x0
 	bl      CTRDGi_RestoreAccessCycle
 	ldr     r0, [pc, #0x18] @ [0x20d0b08] (=RAM_21d01c0)
 	add     r1, sp, #0x8
-	ldrh    r0, [r0, #0x6]
+	ldrh    r0, [r0, #RAM_21d01c0_6]
 	bl      CTRDGi_UnlockByProcessor
 	mov     r0, r4
 	add     sp, sp, #0x10
@@ -358,6 +369,7 @@ branch_20d0c38: @ 20d0c38 :arm
 
 
 .arm
+.globl Function_20d0c5c
 Function_20d0c5c: @ 20d0c5c :arm
 	stmfd   sp!, {r3,lr}
 	mov     lr, r1
@@ -387,7 +399,11 @@ branch_20d0c94: @ 20d0c94 :arm
 @ 0x20d0cb0
 
 .word 0xa010000 @ 0x20d0cb0
+
+
+
 .arm
+.globl Function_20d0cb4
 Function_20d0cb4: @ 20d0cb4 :arm
 	stmfd   sp!, {r3,lr}
 	mov     lr, r1
@@ -401,7 +417,9 @@ Function_20d0cb4: @ 20d0cb4 :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x20d0cdc
 
+
 .arm
+.globl Function_20d0cdc
 Function_20d0cdc: @ 20d0cdc :arm
 	stmfd   sp!, {r3,lr}
 	mov     lr, r1
@@ -536,7 +554,11 @@ branch_20d0e1c: @ 20d0e1c :arm
 @ 0x20d0e3c
 
 .word RAM_21d01c0 @ 0x20d0e3c
+
+
+
 .arm
+.globl Function_20d0e40
 Function_20d0e40: @ 20d0e40 :arm
 	ldr     r12, [pc, #0xc] @ [0x20d0e54] (=0x20d0e58)
 	mov     r2, r1
@@ -654,6 +676,7 @@ Function_20d0f38: @ 20d0f38 :arm
 
 
 .arm
+.globl CTRDG_Enable
 CTRDG_Enable: @ 20d0f48 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -694,6 +717,7 @@ Function_20d0f90: @ 20d0f90 :arm
 
 
 .arm
+.globl CTRDG_Init
 CTRDG_Init: @ 20d0fb4 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r0, [pc, #0x94] @ [0x20d1054] (=RAM_21d01e0)
@@ -950,6 +974,7 @@ branch_20d12d8: @ 20d12d8 :arm
 
 
 .arm
+.globl Function_20d12e4
 Function_20d12e4: @ 20d12e4 :arm
 	stmfd   sp!, {r3,lr}
 	mov     r0, #0x2
@@ -972,6 +997,7 @@ Function_20d12f8: @ 20d12f8 :arm
 
 
 .arm
+.globl Function_20d130c
 Function_20d130c: @ 20d130c :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -1557,6 +1583,7 @@ branch_20d1a50: @ 20d1a50 :arm
 
 
 .arm
+.globl CTRDG_ReadAgbFlash
 CTRDG_ReadAgbFlash: @ 20d1a6c :arm
 	stmfd   sp!, {lr}
 	sub     sp, sp, #0x24
@@ -1599,6 +1626,7 @@ CTRDG_VerifyAgbFlash: @ 20d1aac :arm
 
 
 .arm
+.globl CTRDG_WriteAndVerifyAgbFlashAsync
 CTRDG_WriteAndVerifyAgbFlashAsync: @ 20d1ad0 :arm
 	stmfd   sp!, {lr}
 	sub     sp, sp, #0x24

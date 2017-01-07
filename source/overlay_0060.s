@@ -564,7 +564,7 @@ branch_221fb70: @ 221fb70 :thumb
 	bgt     branch_221fb8a
 	mov     r1, r6
 	mov     r2, r4
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0xd4] @ 0x221fc58, (=0x2228e40)
 	mov     r1, #0x7
 	str     r1, [r0, #0x0]
@@ -574,7 +574,7 @@ branch_221fb70: @ 221fb70 :thumb
 .thumb
 branch_221fb8a: @ 221fb8a :thumb
 	mov     r1, r6
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0xc4] @ 0x221fc58, (=0x2228e40)
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -1453,7 +1453,7 @@ branch_2220398: @ 2220398 :arm
 	ldr     r2, [sp, #0x30]
 	mov     r1, r8
 	add     r0, r3, r0
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	str     r4, [r9, #0xc]
 	ldr     r0, [r9, #0x4]
 	mov     r1, #0x0
@@ -1683,7 +1683,7 @@ branch_222065c: @ 222065c :arm
 	mov     r0, r6
 	mov     r2, r4
 	add     r1, r1, r3
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	mov     r0, #0x0
 	strb    r0, [r6, r4]
 	str     r4, [r5]
@@ -5558,7 +5558,7 @@ branch_22235a8: @ 22235a8 :arm
 	mov     r1, r7
 	mov     r2, r5
 	add     r0, r0, r3
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [r4, #0x120]
 	mov     r1, #0x0
 	add     r0, r0, r5

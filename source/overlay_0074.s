@@ -863,7 +863,7 @@ Function_21d1390: @ 21d1390 :thumb
 	bl      0x2006d84
 	mov     r1, r0
 	ldr     r0, [r5, #0x0]
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x1
@@ -894,7 +894,7 @@ Function_21d1390: @ 21d1390 :thumb
 	bl      0x2006d84
 	mov     r1, r0
 	ldr     r0, [r5, #0x0]
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x0
@@ -922,7 +922,7 @@ Function_21d1390: @ 21d1390 :thumb
 	bl      0x2006d84
 	mov     r1, r0
 	ldr     r0, [r5, #0x0]
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r5, #0x24]
 	ldr     r2, [r5, #0x24]
 	mov     r0, r4

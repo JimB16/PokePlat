@@ -625,7 +625,7 @@ Function_223b4b0: @ 223b4b0 :thumb
 	ldr     r0, [pc, #0x54] @ 0x223b514, (=0x223ddf4)
 	mov     r1, r4
 	mov     r2, #0xe4
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0x4c] @ 0x223b518, (=0x223dec0)
 	.hword  0x1e69 @ sub r1, r5, #0x1
 	strb    r1, [r0, #0x18]
@@ -728,7 +728,7 @@ Function_223b574: @ 223b574 :thumb
 	ldr     r0, [pc, #0x3c] @ 0x223b5c0, (=0x223ddf4)
 	mov     r1, r5
 	mov     r2, #0x64
-	blx     Function_20d50b8
+	blx     CopyDataInByteSteps
 	ldr     r0, [pc, #0x38] @ 0x223b5c4, (=0x223dee0)
 	str     r4, [r0, #0x8]
 	bl      0x221fc84
@@ -1018,7 +1018,7 @@ branch_223b6b4: @ 223b6b4 :thumb
 	bl      0x2004550
 	ldr     r1, [pc, #0x70] @ 0x223b7f0, (=0x20020)
 	mov     r0, #0x44
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x24]
 	add     r0, #0x1f
 	mov     r1, #0x1f
@@ -1868,7 +1868,7 @@ Function_223bdec: @ 223bdec :thumb
 	ldr     r0, [r4, r0]
 	cmp     r0, #0x0
 	beq     branch_223be06
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [pc, #0x30] @ 0x223be30, (=0xf98)
 	mov     r1, #0x0
 	str     r1, [r4, r0]

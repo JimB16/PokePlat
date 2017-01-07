@@ -2488,7 +2488,7 @@ Function_2242ca4: @ 2242ca4 :thumb
 	mov     r4, r0
 	mov     r0, #0x62
 	mov     r1, #0x30
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, r4
 	add     r1, #0xbc
 	str     r0, [r1, #0x0]
@@ -3946,7 +3946,7 @@ Function_22435fc: @ 22435fc :thumb
 	mov     r1, #0x14
 	str     r2, [sp, #0x4]
 	mov     r5, r3
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r2, r4
 	mov     r1, #0x14

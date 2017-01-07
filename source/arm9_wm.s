@@ -1,6 +1,7 @@
 
 
-arm_func_start WM_Init
+.arm
+.globl WM_Init
 WM_Init: @ 20cdb18 :arm
 	stmfd   sp!, {r3,lr}
 	mov     r2, #0xf00
@@ -15,7 +16,6 @@ WM_Init: @ 20cdb18 :arm
 @ 0x20cdb40
 
 .pool
-arm_func_end WM_Init
 
 
 
@@ -163,7 +163,7 @@ branch_20cdce4: @ 20cdce4 :arm
 
 
 
-arm_func_start WM_Finish
+.globl WM_Finish
 WM_Finish: @ 20cdd28 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -197,7 +197,6 @@ branch_20cdd50: @ 20cdd50 :arm
 @ 0x20cdd94
 
 .pool
-arm_func_end WM_Finish
 
 
 
@@ -783,6 +782,7 @@ branch_20ce4a4: @ 20ce4a4 :arm
 
 
 .arm
+.globl WM_SetPortCallback
 WM_SetPortCallback: @ 20ce4bc :arm
 	stmfd   sp!, {r3-r8,lr}
 	sub     sp, sp, #0x44
@@ -1092,6 +1092,7 @@ branch_20ce89c: @ 20ce89c :arm
 
 
 .arm
+.globl WM_GetDispersionBeaconPeriod
 WM_GetDispersionBeaconPeriod: @ 20ce8a4 :arm
 	stmfd   sp!, {r3,lr}
 	sub     sp, sp, #0x8
@@ -1296,6 +1297,7 @@ branch_20ceb00: @ 20ceb00 :arm
 
 
 .arm
+.globl WM_GetNextTgid
 WM_GetNextTgid: @ 20ceb20 :arm
 	stmfd   sp!, {lr}
 	sub     sp, sp, #0xc
@@ -1538,6 +1540,7 @@ WM_End: @ 20ced88 :arm
 
 
 .arm
+.globl WMi_StartParentEx
 WMi_StartParentEx: @ 20cedc8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -1668,6 +1671,7 @@ WMi_StartParentEx_0: @ 20ceef4 :arm
 
 
 .arm
+.globl WM_StartParent_9
 WM_StartParent_9: @ 20cef50 :arm
 	ldr     r12, [pc, #0x4] @ [0x20cef5c] (=0x20ceef4)
 	mov     r1, #0x1
@@ -1700,6 +1704,7 @@ WM_EndParent: @ 20cef60 :arm
 
 
 .arm
+.globl WM_StartScan
 WM_StartScan: @ 20cefa0 :arm
 	stmfd   sp!, {r3-r5,lr}
 	sub     sp, sp, #0x10
@@ -2158,6 +2163,7 @@ WM_StartMPEx: @ 20cf540 :arm
 
 
 .arm
+.globl WM_StartMP
 WM_StartMP: @ 20cf5e4 :arm
 	stmfd   sp!, {r3-r7,lr}
 	sub     sp, sp, #0x18
@@ -2189,6 +2195,7 @@ WM_StartMP: @ 20cf5e4 :arm
 
 
 .arm
+.globl WM_SetMPDataToPortEx
 WM_SetMPDataToPortEx: @ 20cf64c :arm
 	stmfd   sp!, {r4-r9,lr}
 	sub     sp, sp, #0x14
@@ -3550,6 +3557,7 @@ WM_SetLifeTime: @ 20d0764 :arm
 
 
 .arm
+.globl WM_MeasureChannel
 WM_MeasureChannel: @ 20d07c4 :arm
 	stmfd   sp!, {r4-r7,lr}
 	sub     sp, sp, #0xc

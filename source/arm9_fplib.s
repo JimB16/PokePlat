@@ -1827,6 +1827,7 @@ branch_20e1214: @ 20e1214 :arm
 
 
 .arm
+.globl Function_20e1228
 Function_20e1228: @ 20e1228 :arm
 	mov     r3, #255, 8 @ #0xff000000
 	cmp     r3, r0, lsl #1
@@ -2877,6 +2878,7 @@ _ll_udiv: @ 20e1ed4 :arm
 
 
 .arm
+.globl _ull_mod
 _ull_mod: @ 20e1ee0 :arm
 	stmfd   sp!, {r4-r7,r11,r12,lr}
 	mov     r4, #0x1

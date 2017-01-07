@@ -762,7 +762,7 @@ Function_21d13e4: @ 21d13e4 :thumb
 	ldr     r1, [pc, #0xa8] @ 0x21d1494, (=0x7d8)
 	mov     r5, r0
 	mov     r0, #0x6f
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0xa0] @ 0x21d1494, (=0x7d8)
 	mov     r1, #0x0
 	mov     r4, r0
@@ -1578,9 +1578,9 @@ Function_21d1a24: @ 21d1a24 :thumb
 .thumb
 branch_21d1a2e: @ 21d1a2e :thumb
 	ldr     r0, [r5, #0x58]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r5, r6]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r5, #0x18]
 	bl      0x200d0f4
 	mov     r0, r5
@@ -2654,7 +2654,7 @@ Function_21d2324: @ 21d2324 :thumb
 .thumb
 branch_21d232a: @ 21d232a :thumb
 	ldr     r0, [r5, #0x54]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r5, #0x14]
 	bl      0x200d0f4
 	.hword  0x1c64 @ add r4, r4, #0x1
@@ -2671,7 +2671,7 @@ Function_21d2340: @ 21d2340 :thumb
 	ldr     r1, [pc, #0xbc] @ 0x21d2404, (=0x1ed0)
 	mov     r5, r0
 	mov     r0, #0x6f
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0xb4] @ 0x21d2404, (=0x1ed0)
 	mov     r1, #0x0
 	mov     r4, r0
@@ -5025,7 +5025,7 @@ Function_21d3620: @ 21d3620 :thumb
 	ldr     r1, [pc, #0x8c] @ 0x21d36b0, (=0x1d60)
 	mov     r5, r0
 	mov     r0, #0x6f
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0x80] @ 0x21d36b0, (=0x1d60)
 	mov     r1, #0x0
 	mov     r4, r0
@@ -5248,7 +5248,7 @@ branch_21d3796: @ 21d3796 :thumb
 
 .thumb
 branch_21d379c: @ 21d379c :thumb
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_21d37a0: @ 21d37a0 :thumb
 	pop     {r4,pc}
@@ -5502,7 +5502,7 @@ branch_21d3962: @ 21d3962 :thumb
 .thumb
 branch_21d3978: @ 21d3978 :thumb
 	mov     r0, r2
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	add     sp, #0x24
 	pop     {r3-r6,pc}
 @ 0x21d3982
@@ -8433,7 +8433,7 @@ Function_21d4e58: @ 21d4e58 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r0, [r4, #0x4]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [r4, #0x0]
 	bl      0x2013d38
 	ldr     r0, [r4, #0x0]
@@ -8719,7 +8719,7 @@ branch_21d5026: @ 21d5026 :thumb
 	mov     r0, #0x1
 	str     r0, [r4, #0x30]
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	pop     {r3-r5,pc}
 @ 0x21d503c
 

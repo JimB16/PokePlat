@@ -752,7 +752,7 @@ branch_21d12da: @ 21d12da :thumb
 	mov     r1, #0xf
 	mov     r0, #0x27
 	lsl     r1, r1, #10
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0x2c] @ 0x21d13ac, (=0x43c8)
 	str     r0, [r7, r1]
 	mov     r0, #0x27

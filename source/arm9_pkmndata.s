@@ -58,7 +58,7 @@ thumb_func_start AllocPkmnData
 AllocPkmnData: @ 2073c74 :thumb
 	push    {r4,lr}
 	mov     r1, #PkmnData_Size
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 
 	bl      ClearCompletePkmnDataStructure
@@ -340,7 +340,7 @@ branch_2073e42: @ 2073e42 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_PERSONALITYVALUE
 	add     r2, sp, #0x34
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r0, [sp, #0x38]
 	cmp     r0, #0x2
@@ -383,22 +383,22 @@ branch_2073e92: @ 2073e92 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_OTID
 	add     r2, sp, #0x3c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r2, =CountryOfOriginValue
 	mov     r0, r5
 	mov     r1, #PKMNDATA_COUNTRYOFORIGIN
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	add     r2, sp, #0x24
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_b3
 	mov     r2, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r0, [sp, #0x24]
 	ldr     r1, [sp, #0x28]
@@ -408,7 +408,7 @@ branch_2073e92: @ 2073e92 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_EXPPTS
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r0, [sp, #0x24]
 	mov     r1, #PKMNBASEDATA_BASEHAPPY
@@ -417,24 +417,24 @@ branch_2073e92: @ 2073e92 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_FRIENDSHIP
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_METATLEVEL
 	add     r2, sp, #0x28
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r2, =GameIDNr
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ORIGINGAME
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, #0x4
 	str     r0, [sp, #0x8]
 	mov     r0, r5
 	mov     r1, #PKMNDATA_POKEBALL
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r0, [sp, #0x2c]
 	cmp     r0, #0x20
@@ -443,32 +443,32 @@ branch_2073e92: @ 2073e92 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVHP
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVATK
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVDEF
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPE
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPA
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPD
 	add     r2, sp, #0x2c
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	b       branch_2073fcc
 
@@ -482,7 +482,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVHP
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, #0x3e
 	ldr     r1, [sp, #0x8]
@@ -494,7 +494,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVATK
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, #0x1f
 	ldr     r1, [sp, #0x8]
@@ -506,7 +506,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVDEF
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	bl      PRNG
 	mov     r1, #0x1f
@@ -517,7 +517,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPE
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, #0x3e
 	ldr     r1, [sp, #0x8]
@@ -529,7 +529,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPA
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, #0x1f
 	ldr     r1, [sp, #0x8]
@@ -541,7 +541,7 @@ branch_2073f48: @ 2073f48 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_IVSPD
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 branch_2073fcc: @ 2073fcc :thumb
 
 
@@ -565,21 +565,21 @@ branch_2073fcc: @ 2073fcc :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	b       skipset2ndAbility
 
 set2ndAbility: @ 2073ff8 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	b       skipset2ndAbility
 
 no2ndAbility: @ 2074004 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 skipset2ndAbility: @ 207400e :thumb
 
 
@@ -590,7 +590,7 @@ skipset2ndAbility: @ 207400e :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_GENDER
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	bl      InitPkmnMovesFromWotbl
@@ -939,7 +939,7 @@ CalcPkmnStats: @ 20741b8 :thumb
 
 	mov     r0, #0x0
 	mov     r1, #0x2c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 
 	ldr     r1, [sp, #0x38]
@@ -1232,7 +1232,7 @@ branch_20744b8: @ 20744b8 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      ReadPkmnData2
+	bl      ReadPkmnData
 	mov     r4, r0
 
 	ldrh    r0, [r5, #PkmnData_4]
@@ -1258,8 +1258,8 @@ branch_20744e4: @ 20744e4 :thumb
 thumb_func_end GetPkmnData
 
 
-thumb_func_start ReadPkmnData2
-ReadPkmnData2: @ 20744e8 :thumb
+thumb_func_start ReadPkmnData
+ReadPkmnData: @ 20744e8 :thumb
 	push    {r3,lr}
 	mov     r3, r1
 	sub     r3, #0xa0
@@ -1352,9 +1352,9 @@ branch_207455e: @ 207455e :thumb
 	pop     {r3,pc}
 
 branch_207456a: @ 207456a :thumb
-	bl      ReadPkmnData1
+	bl      ReadBoxPkmnData
 	pop     {r3,pc}
-thumb_func_end ReadPkmnData2
+thumb_func_end ReadPkmnData
 
 
  /*
@@ -1366,8 +1366,8 @@ r2: ?
 Return:
 r0: return value
 */
-thumb_func_start GetPkmnData2
-GetPkmnData2: @ 2074570 :thumb
+thumb_func_start GetBoxPkmnData
+GetBoxPkmnData: @ 2074570 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	ldrh    r0, [r5, #PkmnData_4]
@@ -1391,10 +1391,12 @@ GetPkmnData2: @ 2074570 :thumb
 	ldrh    r1, [r5, #PkmnData_Checksum]
 	cmp     r0, r1
 	beq     branch_20745ac
+
 	cmp     r0, r1
 	beq     branch_20745a4
 	bl      ErrorHandling
 branch_20745a4: @ 20745a4 :thumb
+
 	ldrh    r1, [r5, #PkmnData_4]
 	mov     r0, #PkmnData_4_Bit2
 	orr     r0, r1
@@ -1403,7 +1405,7 @@ branch_20745ac: @ 20745ac :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      ReadPkmnData1
+	bl      ReadBoxPkmnData
 	mov     r4, r0
 
 	ldrh    r0, [r5, #PkmnData_4]
@@ -1419,7 +1421,7 @@ branch_20745ac: @ 20745ac :thumb
 branch_20745cc: @ 20745cc :thumb
 	mov     r0, r4
 	pop     {r4-r6,pc}
-thumb_func_end GetPkmnData2
+thumb_func_end GetBoxPkmnData
 
 
 /*
@@ -1431,8 +1433,8 @@ r2: ?
 Return:
 r0: return value
 */
-thumb_func_start ReadPkmnData1
-ReadPkmnData1: @ 20745d0 :thumb
+thumb_func_start ReadBoxPkmnData
+ReadBoxPkmnData: @ 20745d0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	str     r1, [sp, #0x4]          @ DataID
@@ -1665,45 +1667,45 @@ Jumppoints_2074626:
 
 readPkmnDataUnused: @ 207478e :thumb
 	mov     r4, #0x0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataPersonalityValue: @ 2074792 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
 	ldr     r4, [r0, #0x0]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnData4_Bit0: @ 2074798 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
 	ldrh    r0, [r0, #PkmnData_4]
 	lsl     r0, r0, #31
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnData4_Bit1: @ 20747a2 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
 	ldrh    r0, [r0, #PkmnData_4]
 	lsl     r0, r0, #30
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnData4_Bit2: @ 20747ac :thumb
 	ldr     r0, [sp, #0x0]          @ source address
 	ldrh    r0, [r0, #PkmnData_4]
 	lsl     r0, r0, #29
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataChecksum: @ 20747b6 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
 	ldrh    r4, [r0, #0x6]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIsPkmnOrEgg: @ 20747bc :thumb
 	ldrh    r0, [r5, #0x0]          @ BlockA + 0x0
 	cmp     r0, #0x0
 	beq     branch_20747f0
 	mov     r4, #0x1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20747c6: @ 20747c6 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
@@ -1714,7 +1716,7 @@ branch_20747c6: @ 20747c6 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10
 	lsl     r0, r0, #1
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20747d8: @ 20747d8 :thumb
 	ldrh    r4, [r5, #0x0]          @ BlockA + 0x0 = National Pokédex ID
@@ -1730,18 +1732,18 @@ branch_20747d8: @ 20747d8 :thumb
 	lsr     r0, r0, #31
 	bne     branch_20747f2
 branch_20747f0: @ 20747f0 :thumb
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20747f2: @ 20747f2 :thumb
 	ldr     r4, =UnknownPkmnID
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataLevel: @ 20747f6 :thumb
 	ldrh    r0, [r5, #0x0]          @ BlockA + 0x0 = National Pokédex ID
 	ldr     r1, [r5, #0x8]          @ BlockA + 0x8 = Experience points
 	bl      CalcPkmnLevel
 	mov     r4, r0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataSpecies: @ 2074802 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
@@ -1750,86 +1752,86 @@ readPkmnDataSpecies: @ 2074802 :thumb
 	lsr     r0, r0, #31
 	beq     branch_2074810
 	ldr     r4, =UnknownPkmnID
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 branch_2074810: @ 2074810 :thumb
 	ldrh    r4, [r5, #0x0]          @ BlockA + 0x0 = National Pokédex ID
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataItem: @ 2074814 :thumb
 	ldrh    r4, [r5, #0x2]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataOTID: @ 2074818 :thumb
 	ldr     r4, [r5, #0x4]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataExpPts: @ 207481c :thumb
 	ldr     r4, [r5, #0x8]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataFriendship: @ 2074820 :thumb
 	ldrb    r4, [r5, #0xc]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataAbility: @ 2074824 :thumb
 	ldrb    r4, [r5, #0xd]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMarkings: @ 2074828 :thumb
 	ldrb    r4, [r5, #0xe]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataCountryOfOrigin: @ 207482c :thumb
 	ldrb    r4, [r5, #0xf]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVHP: @ 2074830 :thumb
 	ldrb    r4, [r5, #0x10]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVATK: @ 2074834 :thumb
 	ldrb    r4, [r5, #0x11]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVDEF: @ 2074838 :thumb
 	ldrb    r4, [r5, #0x12]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVSPE: @ 207483c :thumb
 	ldrb    r4, [r5, #0x13]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVSPA: @ 2074840 :thumb
 	ldrb    r4, [r5, #0x14]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEVSPD: @ 2074844 :thumb
 	ldrb    r4, [r5, #0x15]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataCoolContestValue: @ 2074848 :thumb
 	ldrb    r4, [r5, #0x16]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataBeautyContestValue: @ 207484c :thumb
 	ldrb    r4, [r5, #0x17]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataCuteContestValue: @ 2074850 :thumb
 	ldrb    r4, [r5, #0x18]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataSmartContestValue: @ 2074854 :thumb
 	ldrb    r4, [r5, #0x19]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataToughContestValue: @ 2074858 :thumb
 	ldrb    r4, [r5, #0x1a]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataSheenContestValue: @ 207485c :thumb
 	ldrb    r4, [r5, #0x1b]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataSinnohRibbon: @ 2074860 :thumb
 	ldr     r2, [sp, #0x4]          @ DataID
@@ -1849,7 +1851,7 @@ readPkmnDataSinnohRibbon: @ 2074860 :thumb
 	orr     r0, r1
 	beq     branch_20748fc
 	mov     r4, #0x1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMove: @ 2074886 :thumb
 	ldr     r0, [sp, #0x4]          @ DataID
@@ -1857,7 +1859,7 @@ readPkmnDataMove: @ 2074886 :thumb
 	str     r0, [sp, #0x4]          @ DataID
 	lsl     r0, r0, #1
 	ldrh    r4, [r6, r0]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMoveCurPP: @ 2074892 :thumb
 	ldr     r0, [sp, #0x4]          @ DataID
@@ -1865,7 +1867,7 @@ readPkmnDataMoveCurPP: @ 2074892 :thumb
 	str     r0, [sp, #0x4]          @ DataID
 	add     r0, r6, r0
 	ldrb    r4, [r0, #0x8]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMovePPUps: @ 207489e :thumb
 	ldr     r0, [sp, #0x4]          @ DataID
@@ -1873,7 +1875,7 @@ readPkmnDataMovePPUps: @ 207489e :thumb
 	str     r0, [sp, #0x4]          @ DataID
 	add     r0, r6, r0
 	ldrb    r4, [r0, #0xc]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMoveMaxPP: @ 20748aa :thumb
 	ldr     r0, [sp, #0x4]          @ DataID
@@ -1886,43 +1888,43 @@ readPkmnDataMoveMaxPP: @ 20748aa :thumb
 	ldrb    r1, [r1, #0xc]
 	bl      CalcMovePP
 	mov     r4, r0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVHP: @ 20748c2 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #27
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVATK: @ 20748ca :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #22
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVDEF: @ 20748d2 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #17
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVSPE: @ 20748da :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #12
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVSPA: @ 20748e2 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #7
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIVSPD: @ 20748ea :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = Experience points
 	lsl     r0, r0, #2
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIsEgg: @ 20748f2 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
@@ -1931,18 +1933,18 @@ readPkmnDataIsEgg: @ 20748f2 :thumb
 	lsr     r4, r0, #31
 	beq     branch_20748fe
 branch_20748fc: @ 20748fc :thumb
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20748fe: @ 20748fe :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10
 	lsl     r0, r0, #1
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataIsNicknamed: @ 2074906 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataHoennRibbon: @ 207490c :thumb
 	ldr     r2, [sp, #0x4]          @ DataID
@@ -1962,13 +1964,13 @@ readPkmnDataHoennRibbon: @ 207490c :thumb
 	orr     r0, r1
 	beq     branch_2074a04
 	mov     r4, #0x1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataFatefulEncountered: @ 2074932 :thumb
 	ldrb    r0, [r6, #0x18]
 	lsl     r0, r0, #31
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataGender: @ 207493a :thumb
 	ldr     r1, [sp, #0x0]          @ source address
@@ -1991,21 +1993,21 @@ readPkmnDataGender: @ 207493a :thumb
 	bl      CalcPokemonChecksum
 	ldr     r1, [sp, #0x0]          @ source address
 	strh    r0, [r1, #0x6]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataAlternateForm: @ 2074968 :thumb
 	ldrb    r0, [r6, #0x18]         @ BlockB + 0x18
 	lsl     r0, r0, #24
 	lsr     r4, r0, #27
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074970: @ 2074970 :thumb
 	ldrb    r4, [r6, #0x19]         @ BlockB + 0x19
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074974: @ 2074974 :thumb
 	ldrh    r4, [r6, #0x1a]         @ BlockB + 0x1a
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataNickname: @ 2074978 :thumb
 	ldr     r0, [sp, #0x0]          @ source address
@@ -2017,7 +2019,7 @@ readPkmnDataNickname: @ 2074978 :thumb
 	ldr     r2, [sp, #0x8]
 	mov     r1, r4
 	bl      Function_200b274
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_207498e: @ 207498e :thumb
 	ldr     r1, [sp, #0x8]
@@ -2033,7 +2035,7 @@ branch_2074990: @ 2074990 :thumb
 	ldr     r0, [sp, #0x8]
 	lsl     r1, r4, #1
 	strh    r2, [r0, r1]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20749a8: @ 20749a8 :thumb
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10
@@ -2055,21 +2057,21 @@ branch_20749ac: @ 20749ac :thumb
 	bl      Function_2023810
 	mov     r0, r5
 	bl      Function_20237bc
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20749d0: @ 20749d0 :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, r7
 	bl      Function_2023d28
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_20749da: @ 20749da :thumb
 	ldrb    r4, [r7, #0x16]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataOriginGame: @ 20749de :thumb
 	ldrb    r4, [r7, #0x17]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataSinnohRibbon2: @ 20749e2 :thumb
 	ldr     r2, [sp, #0x4]          @ DataID
@@ -2089,10 +2091,10 @@ readPkmnDataSinnohRibbon2: @ 20749e2 :thumb
 	orr     r0, r1
 	bne     branch_2074a06
 branch_2074a04: @ 2074a04 :thumb
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 branch_2074a06: @ 2074a06 :thumb
 	mov     r4, #0x1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a0a: @ 2074a0a :thumb
 	ldr     r2, [sp, #0x8]
@@ -2108,36 +2110,36 @@ branch_2074a0c: @ 2074a0c :thumb
 	ldr     r0, [sp, #0x8]
 	lsl     r1, r4, #1
 	strh    r2, [r0, r1]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a24: @ 2074a24 :thumb
 	ldr     r0, [sp, #0x8]
 	bl      Function_2023d28
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a2c: @ 2074a2c :thumb
 	ldrb    r4, [r1, #0x10]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a30: @ 2074a30 :thumb
 	ldrb    r4, [r1, #0x11]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a34: @ 2074a34 :thumb
 	ldrb    r4, [r1, #0x12]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a38: @ 2074a38 :thumb
 	ldrb    r4, [r1, #0x13]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a3c: @ 2074a3c :thumb
 	ldrb    r4, [r1, #0x14]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a40: @ 2074a40 :thumb
 	ldrb    r4, [r1, #0x15]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnEggLocation: @ 2074a44 :thumb
 	ldrh    r1, [r1, #0x16]         @ BlockD + 0x16 = Egg Location (Diamond/Pearl)
@@ -2146,10 +2148,10 @@ readPkmnEggLocation: @ 2074a44 :thumb
 	bne     branch_2074a52
 	ldrh    r4, [r6, #0x1c]         @ BlockB + 0x1c = Egg Location (Platinum)
 	cmp     r4, #0x0
-	bne     end_ReadPkmnData1
+	bne     end_ReadBoxPkmnData
 branch_2074a52: @ 2074a52 :thumb
 	mov     r4, r1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnMetAtLocation: @ 2074a56 :thumb
 	ldrh    r1, [r1, #0x18]         @ BlockD + 0x18
@@ -2158,38 +2160,38 @@ readPkmnMetAtLocation: @ 2074a56 :thumb
 	bne     branch_2074a64
 	ldrh    r4, [r6, #0x1e]         @ BlockB + 0x1e
 	cmp     r4, #0x0
-	bne     end_ReadPkmnData1
+	bne     end_ReadBoxPkmnData
 branch_2074a64: @ 2074a64 :thumb
 	mov     r4, r1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataPokerus: @ 2074a68 :thumb
 	ldrb    r4, [r1, #0x1a]         @ BlockD + 0x1a
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataPokeball: @ 2074a6c :thumb
 	ldrb    r4, [r1, #0x1b]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataMetAtLevel: @ 2074a70 :thumb
 	ldrb    r0, [r1, #0x1c]
 	lsl     r0, r0, #25
 	lsr     r4, r0, #25
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataFemaleOTGender: @ 2074a78 :thumb
 	ldrb    r0, [r1, #0x1c]
 	lsl     r0, r0, #24
 	lsr     r4, r0, #31
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 readPkmnDataEncounterType: @ 2074a80 :thumb
 	ldrb    r4, [r1, #0x1d]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a84: @ 2074a84 :thumb
 	ldrh    r4, [r1, #0x1e]
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074a88: @ 2074a88 :thumb
 	ldr     r4, [r6, #0x10]
@@ -2216,20 +2218,22 @@ branch_2074a88: @ 2074a88 :thumb
 	orr     r0, r3
 	mov     r4, r5
 	orr     r4, r0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074aba: @ 2074aba :thumb
 	ldrh    r0, [r5, #0x0]
 	cmp     r0, #0x1d @ NidoranF
 	beq     branch_2074ac4
+
 	cmp     r0, #0x20 @ NidoranM
 	bne     branch_2074ae0
+
 branch_2074ac4: @ 2074ac4 :thumb
 	ldr     r0, [r6, #0x10]
 	lsr     r0, r0, #31
 	bne     branch_2074ae0
 	mov     r4, #0x0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 @ 0x2074ace
 
 .align 2
@@ -2238,7 +2242,7 @@ branch_2074ac4: @ 2074ac4 :thumb
 .thumb
 branch_2074ae0: @ 2074ae0 :thumb
 	mov     r4, #0x1
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074ae4: @ 2074ae4 :thumb
 	ldrh    r0, [r5, #0x0]
@@ -2248,15 +2252,16 @@ branch_2074ae4: @ 2074ae4 :thumb
 	ldrb    r1, [r5, #0xd]
 	cmp     r1, #0x79
 	bne     branch_2074b08
+
 	ldrh    r0, [r5, #0x2]
-	mov     r1, #0x1
+	mov     r1, #ITEMDATA_BATTLEEFFECT
 	mov     r2, r4
 	bl      GetItemData
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	bl      Function_2077988
 	mov     r4, r0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074b08: @ 2074b08 :thumb
 	ldrb    r1, [r6, #0x18]
@@ -2267,14 +2272,14 @@ branch_2074b08: @ 2074b08 :thumb
 	str     r2, [sp, #0x4]          @ DataID
 	bl      GetPkmnBaseData2
 	mov     r4, r0
-	b       end_ReadPkmnData1
+	b       end_ReadBoxPkmnData
 
 branch_2074b1c: @ 2074b1c :thumb
 	ldrh    r0, [r5, #0x0]
 	ldr     r2, [sp, #0x8]
 	mov     r1, r4
 	bl      Function_200b274
-end_ReadPkmnData1: @ 2074b26 :thumb
+end_ReadBoxPkmnData: @ 2074b26 :thumb
 	mov     r0, r4
 	add     sp, #0xc
 	pop     {r4-r7,pc}
@@ -2282,7 +2287,7 @@ end_ReadPkmnData1: @ 2074b26 :thumb
 
 .align 2
 .pool
-thumb_func_end ReadPkmnData1
+thumb_func_end ReadBoxPkmnData
 
 
 
@@ -2339,7 +2344,7 @@ branch_2074b86: @ 2074b86 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      WritePkmnData2
+	bl      WritePkmnData
 	ldrh    r0, [r5, #PkmnData_4]
 	lsl     r0, r0, #31
 	lsr     r0, r0, #31
@@ -2368,8 +2373,8 @@ branch_2074bbc: @ 2074bbc :thumb
 thumb_func_end SetPkmnData
 
 
-thumb_func_start WritePkmnData2
-WritePkmnData2: @ 2074bc0 :thumb
+thumb_func_start WritePkmnData
+WritePkmnData: @ 2074bc0 :thumb
 	push    {r3,lr}
 	mov     r3, r0
 	mov     r0, r1
@@ -2475,13 +2480,13 @@ writePkmnDataSealCoordinates: @ 2074c4c :thumb
 
 branch_2074c58: @ 2074c58 :thumb
 	mov     r0, r3
-	bl      WritePkmnData1
+	bl      WriteBoxPkmnData
 	pop     {r3,pc}
-thumb_func_end WritePkmnData2
+thumb_func_end WritePkmnData
 
 
-thumb_func_start SetPkmnData2
-SetPkmnData2: @ 2074c60 :thumb
+thumb_func_start SetBoxPkmnData
+SetBoxPkmnData: @ 2074c60 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -2528,7 +2533,7 @@ branch_2074caa: @ 2074caa :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      WritePkmnData1
+	bl      WriteBoxPkmnData
 
 	ldrh    r0, [r5, #PkmnData_4]
 	lsl     r0, r0, #30
@@ -2549,11 +2554,11 @@ branch_2074caa: @ 2074caa :thumb
 
 branch_2074cd4: @ 2074cd4 :thumb
 	pop     {r4-r6,pc}
-thumb_func_end SetPkmnData2
+thumb_func_end SetBoxPkmnData
 
 
-thumb_func_start WritePkmnData1
-WritePkmnData1: @ 2074cd8 :thumb
+thumb_func_start WriteBoxPkmnData
+WriteBoxPkmnData: @ 2074cd8 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x50
 
@@ -3530,7 +3535,7 @@ branch_2075348: @ 2075348 :thumb
 
 .align 2
 .pool
-thumb_func_end WritePkmnData1
+thumb_func_end WriteBoxPkmnData
 
 
 
@@ -3582,7 +3587,7 @@ branch_20753ba: @ 20753ba :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      ChangePkmnData2
+	bl      ChangePkmnData
 	ldrh    r0, [r5, #PkmnData_4]
 	lsl     r0, r0, #31
 	lsr     r0, r0, #31
@@ -3610,8 +3615,8 @@ branch_20753f0: @ 20753f0 :thumb
 thumb_func_end ChangePkmnData0
 
 
-thumb_func_start ChangePkmnData2
-ChangePkmnData2: @ 20753f4 :thumb
+thumb_func_start ChangePkmnData
+ChangePkmnData: @ 20753f4 :thumb
 	push    {r3,lr}
 	mov     r3, r1
 	sub     r3, #0xa0
@@ -3667,13 +3672,13 @@ branch_2075446: @ 2075446 :thumb
 	pop     {r3,pc}
 
 branch_207544c: @ 207544c :thumb
-	bl      ChangePkmnData1
+	bl      ChangeBoxPkmnData
 	pop     {r3,pc}
-thumb_func_end ChangePkmnData2
+thumb_func_end ChangePkmnData
 
 
-thumb_func_start ChangePkmnData1
-ChangePkmnData1: @ 2075454 :thumb
+thumb_func_start ChangeBoxPkmnData
+ChangeBoxPkmnData: @ 2075454 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r7, r1
@@ -4275,7 +4280,7 @@ branch_207585a: @ 207585a :thumb
 
 .align 2
 .pool
-thumb_func_end ChangePkmnData1
+thumb_func_end ChangeBoxPkmnData
 
 
 thumb_func_start Function_2075874
@@ -4286,7 +4291,7 @@ Function_2075874: @ 2075874 :thumb
 
 	mov     r0, r2
 	mov     r1, #0x2c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 
 	mov     r0, r5
@@ -4306,7 +4311,7 @@ Load_PlPersonal1: @ 2075894 :thumb
 
 	mov     r0, r1
 	mov     r1, #0x2c
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 
 	mov     r0, r5
@@ -4376,10 +4381,10 @@ Jumppoints_20758ce:
 .hword readPkmnBaseDataFlee - Jumppoints_20758ce - 2 @ 0x1a
 .hword branch_2075994 - Jumppoints_20758ce - 2 @ 0x1b
 .hword branch_207599c - Jumppoints_20758ce - 2 @ 0x1c
-.hword branch_20759a4 - Jumppoints_20758ce - 2 @ 0x1d
-.hword branch_20759a8 - Jumppoints_20758ce - 2 @ 0x1e
-.hword branch_20759ac - Jumppoints_20758ce - 2 @ 0x1f
-.hword branch_20759b0 - Jumppoints_20758ce - 2 @ 0x20
+.hword readPkmnBaseDataTMHMs1 - Jumppoints_20758ce - 2 @ 0x1d
+.hword readPkmnBaseDataTMHMs2 - Jumppoints_20758ce - 2 @ 0x1e
+.hword readPkmnBaseDataTMHMs3 - Jumppoints_20758ce - 2 @ 0x1f
+.hword readPkmnBaseDataTMHMs4 - Jumppoints_20758ce - 2 @ 0x20
 
 readPkmnBaseDataHP: @ 2075910 :thumb
 	ldrb    r5, [r4, #0x0]
@@ -4513,19 +4518,19 @@ branch_207599c: @ 207599c :thumb
 	lsr     r5, r0, #31
 	b       branch_20759b2
 
-branch_20759a4: @ 20759a4 :thumb
+readPkmnBaseDataTMHMs1: @ 20759a4 :thumb
 	ldr     r5, [r4, #0x1c]
 	b       branch_20759b2
 
-branch_20759a8: @ 20759a8 :thumb
+readPkmnBaseDataTMHMs2: @ 20759a8 :thumb
 	ldr     r5, [r4, #0x20]
 	b       branch_20759b2
 
-branch_20759ac: @ 20759ac :thumb
+readPkmnBaseDataTMHMs3: @ 20759ac :thumb
 	ldr     r5, [r4, #0x24]
 	b       branch_20759b2
 
-branch_20759b0: @ 20759b0 :thumb
+readPkmnBaseDataTMHMs4: @ 20759b0 :thumb
 	ldr     r5, [r4, #0x28]
 branch_20759b2: @ 20759b2 :thumb
 	mov     r0, r5
@@ -4661,7 +4666,7 @@ Function_2075a78: @ 2075a78 :thumb
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
 	mov     r4, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r6, r0, #16
 
@@ -4674,7 +4679,7 @@ Function_2075a78: @ 2075a78 :thumb
 	mov     r0, r4
 	mov     r1, #PKMNDATA_EXPPTS
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r4, r0
 
 	mov     r0, r6
@@ -4760,7 +4765,7 @@ branch_2075b16: @ 2075b16 :thumb
 	mov     r1, #101
 	mov     r0, #0x0
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 
 	mov     r0, r6
@@ -4799,13 +4804,13 @@ InitPkmnLevel: @ 2075b40 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r4, r0
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_EXPPTS
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r7, r0
 
 	mov     r0, r5
@@ -4901,7 +4906,7 @@ Function_2075bd4: @ 2075bd4 :thumb
 	mov     r4, r0
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r6, r0
 
 	mov     r0, r5
@@ -5029,7 +5034,7 @@ branch_2075c8c: @ 2075c8c :thumb
 
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	mov     r1, #0x1
+	mov     r1, #ITEMDATA_BATTLEEFFECT
 	mov     r2, #0x0
 	bl      GetItemData
 	lsl     r0, r0, #24
@@ -5159,14 +5164,14 @@ DecidePkmnGender: @ 2075d74 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	lsl     r0, r0, #16
 	mov     r1, #0x0            @ PKMNDATA_PERSONALITYVALUE
 	lsr     r4, r0, #16
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r7, r0
 
 	mov     r0, r5
@@ -5270,13 +5275,13 @@ CheckIfShinyPkmn_2: @ 2075e14 :thumb
 	mov     r1, #PKMNDATA_OTID
 	mov     r2, #0x0
 	mov     r5, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, #0x0 @ PKMNDATA_PERSONALITYVALUE
 	mov     r4, r0
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r1, r0
 
 	mov     r0, r4
@@ -5441,7 +5446,7 @@ Function_2075f0c: @ 2075f0c :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ae
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 	mov     r0, r5
@@ -5454,7 +5459,7 @@ Function_2075f0c: @ 2075f0c :thumb
 	mov     r7, r0
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r6, r0
 
 	ldr     r0, =UnknownPkmnID
@@ -5464,7 +5469,7 @@ Function_2075f0c: @ 2075f0c :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	ldr     r1, =MANAPHY
 	cmp     r0, r1
 	bne     branch_2075f64
@@ -5479,7 +5484,7 @@ branch_2075f68: @ 2075f68 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
 branch_2075f76: @ 2075f76 :thumb
@@ -6514,7 +6519,7 @@ Function_20765c4: @ 20765c4 :thumb
 	mov     r1, #PKMNDATA_ae
 	mov     r2, #0x0
 	mov     r5, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 	mov     r0, r5
@@ -6524,7 +6529,7 @@ Function_20765c4: @ 20765c4 :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r6, r0
 	ldr     r0, =0x1ee
 	cmp     r4, r0
@@ -6533,7 +6538,7 @@ Function_20765c4: @ 20765c4 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	ldr     r1, =0x1ea
 	cmp     r0, r1
 	bne     branch_2076608
@@ -6548,7 +6553,7 @@ branch_207660c: @ 207660c :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r3, r0, #24
 branch_207661a: @ 207661a :thumb
@@ -7299,14 +7304,15 @@ branch_2076ad0: @ 2076ad0 :thumb
 @ 0x2076af0
 
 
-.thumb
-Function_2076af0: @ 2076af0 :thumb
+thumb_func_start Get_PkmnData_Size
+Get_PkmnData_Size: @ 2076af0 :thumb
 	mov     r0, #PkmnData_Size @ 0xec
 	bx      lr
-@ 0x2076af4
+thumb_func_end Get_PkmnData_Size
 
 
 .thumb
+.globl Function_2076af4
 Function_2076af4: @ 2076af4 :thumb
 	mov     r0, #0x88
 	bx      lr
@@ -7329,7 +7335,7 @@ Function_2076b00: @ 2076b00 :thumb
 	push    {r3,lr}
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	pop     {r3,pc}
@@ -7468,7 +7474,7 @@ CheckIfPkmnEvolves: @ 2076b94 :thumb
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x1c]
 	ldr     r0, [sp, #0x28]
-	mov     r1, #0x1
+	mov     r1, #ITEMDATA_BATTLEEFFECT
 	bl      GetItemData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
@@ -7490,7 +7496,7 @@ branch_2076c10: @ 2076c10 :thumb
 branch_2076c16: @ 2076c16 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x2a
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [sp, #0x18]
 	ldr     r0, [sp, #0x2c]
 	ldr     r1, [sp, #0x18]
@@ -7798,7 +7804,7 @@ branch_2076e22: @ 2076e22 :thumb
 	cmp     r0, #0x0
 	beq     branch_2076e9e
 	ldrh    r1, [r4, #0x2]
-	bl      Function_207a230
+	bl      IsFirstPkmnInPartyWantedSpecies
 	cmp     r0, #0x1
 	bne     branch_2076e9e
 	ldrh    r6, [r4, #0x4]
@@ -8112,7 +8118,7 @@ InitPkmnMovesFromWotbl: @ 2077020 :thumb
 
 	mov     r0, #0x0
 	mov     r1, #0x2c
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [sp, #0x0]
 
 	mov     r0, r5
@@ -8122,14 +8128,14 @@ InitPkmnMovesFromWotbl: @ 2077020 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r7, r0
 
 	mov     r0, r5
@@ -8230,7 +8236,7 @@ branch_20770ea: @ 20770ea :thumb
 	mov     r0, r6
 	add     r1, #PKMNDATA_MOVE1
 	mov     r2, r7
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
 	bne     branch_207710c
@@ -8303,7 +8309,7 @@ branch_207715c: @ 207715c :thumb
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVE2
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	ldr     r1, [sp, #0x4]
 	mov     r2, #0x0
 	strh    r0, [r1, #0x0]
@@ -8311,14 +8317,14 @@ branch_207715c: @ 207715c :thumb
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVEPP2
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, r4
 	strb    r0, [r7, #0x0]
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVEPPUPS2
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	strb    r0, [r6, #0x0]
 
 	ldr     r0, [sp, #0x4]
@@ -8350,19 +8356,19 @@ branch_20771b6: @ 20771b6 :thumb
 	ldr     r2, [sp, #0x8]
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVE1
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVEPP1
 	mov     r2, r7
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVEPPUPS1
 	mov     r2, r6
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	ldr     r0, [sp, #0x8]
 	.hword  0x1c64 @ add r4, r4, #0x1
@@ -8440,13 +8446,13 @@ SetPkmnDataMove: @ 2077238 :thumb
 	add     r1, #PKMNDATA_MOVE1
 	add     r2, sp, #0x14
 	mov     r5, r0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #PKMNDATA_MOVEPPUPS1
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
 	add     r0, sp, #0x10
@@ -8459,7 +8465,7 @@ SetPkmnDataMove: @ 2077238 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	add     r2, sp, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	pop     {r3-r5}
 	pop     {r3}
@@ -8479,7 +8485,7 @@ Function_207727c: @ 207727c :thumb
 	mov     r1, #0x2c
 	str     r2, [sp, #0x0]
 	str     r0, [sp, #0x8]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 
 	mov     r0, r7
@@ -8598,42 +8604,42 @@ Function_207734c: @ 207734c :thumb
 	add     r1, #0x36
 	mov     r2, #0x0
 	mov     r5, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strh    r0, [r1, #0x4]
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #0x3a
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strb    r0, [r1, #0x2]
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #0x3e
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strb    r0, [r1, #0x0]
 	mov     r1, r6
 	mov     r0, r5
 	add     r1, #0x36
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strh    r0, [r1, #0x6]
 	mov     r1, r6
 	mov     r0, r5
 	add     r1, #0x3a
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strb    r0, [r1, #0x3]
 	mov     r1, r6
 	mov     r0, r5
 	add     r1, #0x3e
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	add     r1, sp, #0x0
 	strb    r0, [r1, #0x1]
 	mov     r1, r4
@@ -8641,35 +8647,35 @@ Function_207734c: @ 207734c :thumb
 	mov     r0, r5
 	add     r1, #0x36
 	add     r2, #0x2
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	mov     r1, r4
 	add     r2, sp, #0x0
 	mov     r0, r5
 	add     r1, #0x3a
 	add     r2, #0x3
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	add     r4, #0x3e
 	add     r2, sp, #0x0
 	mov     r0, r5
 	mov     r1, r4
 	add     r2, #0x1
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	mov     r1, r6
 	mov     r0, r5
 	add     r1, #0x36
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	mov     r1, r6
 	add     r2, sp, #0x0
 	mov     r0, r5
 	add     r1, #0x3a
 	add     r2, #0x2
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	add     r6, #0x3e
 	mov     r0, r5
 	mov     r1, r6
 	add     r2, sp, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	add     sp, #0x8
 	pop     {r4-r6,pc}
 @ 0x2077406
@@ -9026,7 +9032,7 @@ GetPkmnNatureData: @ 2077634 :thumb
 
 	mov     r1, #0x0 @ PKMNDATA_PERSONALITYVALUE
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, r4
 	bl      CalcPkmnNatureData
@@ -9065,7 +9071,7 @@ Function_2077660: @ 2077660 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x2c
 	mov     r5, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, r7
@@ -9419,7 +9425,7 @@ Function_20778e0: @ 20778e0 :thumb
 	push    {r3,lr}
 	mov     r1, #PKMNDATA_POKERUS
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r1, #0xf
 	tst     r0, r1
 	beq     branch_20778f4
@@ -9448,7 +9454,7 @@ Function_2077900: @ 2077900 :thumb
 	push    {r3,lr}
 	mov     r1, #PKMNDATA_POKERUS
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
 	mov     r0, #0xf
@@ -9490,19 +9496,19 @@ Function_2077930: @ 2077930 :thumb
 
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r4, r0
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r6, r0
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ITEM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	ldr     r1, =ARCEUS
 	cmp     r4, r1
@@ -9512,7 +9518,7 @@ Function_2077930: @ 2077930 :thumb
 
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	mov     r1, #0x1
+	mov     r1, #ITEMDATA_BATTLEEFFECT
 	mov     r2, #0x0
 	bl      GetItemData
 
@@ -9524,7 +9530,7 @@ Function_2077930: @ 2077930 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	add     r2, sp, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 branch_2077980: @ 2077980 :thumb
 	add     sp, #0x4
 	pop     {r3-r6,pc}
@@ -9692,19 +9698,20 @@ branch_2077a18: @ 2077a18 :thumb
 
 
 .thumb
+.globl Function_2077a1c
 Function_2077a1c: @ 2077a1c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r4, r0
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ITEM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	ldr     r1, =0x1e7
 	cmp     r4, r1
@@ -9722,7 +9729,7 @@ branch_2077a44: @ 2077a44 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	add     r2, sp, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r5
 	bl      SetPkmnAbility
@@ -9760,7 +9767,7 @@ Function_2077a64: @ 2077a64 :thumb
 	mov     r0, r4
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	add     r2, sp, #0x0
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	mov     r0, r4
 	bl      SetPkmnAbility
 	mov     r0, r4
@@ -9827,7 +9834,7 @@ Function_2077adc: @ 2077adc :thumb
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
 	mov     r4, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, #0x7b
 	lsl     r1, r1, #2          @ 0x
@@ -9838,10 +9845,11 @@ Function_2077adc: @ 2077adc :thumb
 	ble     branch_2077afc
 	bl      ErrorHandling
 branch_2077afc: @ 2077afc :thumb
+
 	mov     r0, r4
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	add     r2, sp, #0xc
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	mov     r0, r4
 	bl      SetPkmnAbility
 branch_2077b0c: @ 2077b0c :thumb
@@ -10391,17 +10399,17 @@ Function_2077ea4: @ 2077ea4 :thumb
 	ldr     r2, =GameIDNr
 	mov     r0, r4
 	mov     r1, #PKMNDATA_ORIGINGAME
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r4
 	mov     r1, #PKMNDATA_POKEBALL
 	add     r2, sp, #0x18
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	mov     r0, r4
 	mov     r1, #PKMNDATA_ENCOUNTERTYPE
 	add     r2, sp, #0x20
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 
 	add     sp, #0x4
 	pop     {r3,r4}
@@ -10553,14 +10561,14 @@ Function_2077fbc: @ 2077fbc :thumb
 	mov     r1, #0xae
 	mov     r2, #0x0
 	mov     r5, r0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, r0
 	mov     r0, r4
@@ -10656,19 +10664,19 @@ SetPkmnAbility: @ 2078044 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	mov     r1, #0x0 @ PKMNDATA_PERSONALITYVALUE
 	mov     r4, r0
 	mov     r0, r5
 	mov     r2, r1
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r6, r0
 
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ALTERNATEFORM
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	str     r0, [sp, #0x0]
 
 	ldr     r1, [sp, #0x0]
@@ -10691,21 +10699,21 @@ SetPkmnAbility: @ 2078044 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	b       branch_20780b8
 
 branch_20780a2: @ 20780a2 :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 	b       branch_20780b8
 
 branch_20780ae: @ 20780ae :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_ABILITY
 	add     r2, sp, #0x8
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 branch_20780b8: @ 20780b8 :thumb
 	mov     r0, r5
 	mov     r1, r7
@@ -12151,7 +12159,7 @@ Function_207884c: @ 207884c :thumb
 	mov     r0, r5
 	mov     r1, #PKMNDATA_OTID
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	str     r0, [sp, #0x4]
 
 	mov     r0, r4
@@ -12161,7 +12169,7 @@ Function_207884c: @ 207884c :thumb
 	mov     r0, r5
 	mov     r1, #0x9d
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	str     r0, [sp, #0xc]
 
 	mov     r0, r4
@@ -12177,7 +12185,7 @@ Function_207884c: @ 207884c :thumb
 	mov     r1, #0x91
 	mov     r2, r6
 	mov     r4, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 
 	ldr     r1, [sp, #0x0]
 	ldr     r0, [sp, #0x4]
@@ -12323,20 +12331,20 @@ branch_207897e: @ 207897e :thumb
 	mov     r0, r5
 	add     r1, #0x36
 	mov     r2, r7
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	cmp     r0, #0x0
 	beq     branch_20789a8
 	mov     r1, r4
 	mov     r0, r5
 	add     r1, #0x42
 	mov     r2, #0x0
-	bl      GetPkmnData2
+	bl      GetBoxPkmnData
 	mov     r1, r4
 	strb    r0, [r6, #0x0]
 	mov     r0, r5
 	add     r1, #0x3a
 	add     r2, sp, #0x4
-	bl      SetPkmnData2
+	bl      SetBoxPkmnData
 branch_20789a8: @ 20789a8 :thumb
 	.hword  0x1c64 @ add r4, r4, #0x1
 	cmp     r4, #0x4
@@ -13302,3 +13310,155 @@ branch_2078fd6: @ 2078fd6 :thumb
 .align 2
 .pool
 
+
+
+.thumb
+.globl Function_20790b0
+Function_20790b0: @ 20790b0 :thumb
+	push    {r3,lr}
+
+	mov     r1, #0x75
+	lsl     r1, r1, #6
+	mov     r2, #0x0
+	str     r1, [sp, #0x0]
+
+	mov     r1, #0x9                @ poketool/waza/pl_waza_tbl.narc
+	mov     r3, r2
+	bl      LoadFromNARC_3
+
+	pop     {r3,pc}
+@ 0x20790c4
+
+
+thumb_func_start LoadMoveData
+LoadMoveData: @ 20790c4 :thumb
+	push    {r4,lr}
+	add     sp, #-0x10
+
+	mov     r4, r1
+	add     r1, sp, #0x0
+	bl      LoadFromNarc_PlWazaTbl
+
+	add     r0, sp, #0x0
+	mov     r1, r4
+	bl      ReadMoveData
+
+	add     sp, #0x10
+	pop     {r4,pc}
+thumb_func_end LoadMoveData
+
+
+thumb_func_start CalcMovePP
+CalcMovePP: @ 20790dc :thumb
+	push    {r3-r5,lr}
+	mov     r5, r1
+	cmp     r5, #0x3
+	bls     branch_20790e6
+	mov     r5, #0x3
+branch_20790e6: @ 20790e6 :thumb
+	mov     r1, #MOVEDATA_PP
+	bl      LoadMoveData
+	lsl     r0, r0, #24
+	lsr     r4, r0, #24
+	mov     r0, #20
+	mul     r0, r4
+	mul     r0, r5
+	mov     r1, #100
+	blx     _s32_div_f
+	add     r0, r4, r0
+	lsl     r0, r0, #24
+	lsr     r0, r0, #24
+	pop     {r3-r5,pc}
+thumb_func_end CalcMovePP
+
+
+thumb_func_start ReadMoveData
+ReadMoveData: @ 2079104 :thumb
+	cmp     r1, #0xb
+	bhi     branch_207915c
+	add     r1, r1, r1
+	add     r1, pc
+	ldrh    r1, [r1, #0x6]
+	lsl     r1, r1, #16
+	asr     r1, r1, #16
+	add     pc, r1
+@ 0x2079114
+
+Jumppoints_2079114:
+.hword branch_207912c - Jumppoints_2079114 - 2
+.hword branch_2079130 - Jumppoints_2079114 - 2
+.hword branch_2079134 - Jumppoints_2079114 - 2
+.hword branch_2079138 - Jumppoints_2079114 - 2
+.hword branch_207913c - Jumppoints_2079114 - 2
+.hword branch_2079140 - Jumppoints_2079114 - 2
+.hword branch_2079144 - Jumppoints_2079114 - 2
+.hword branch_2079148 - Jumppoints_2079114 - 2
+.hword branch_207914c - Jumppoints_2079114 - 2
+.hword branch_2079152 - Jumppoints_2079114 - 2
+.hword branch_2079156 - Jumppoints_2079114 - 2
+.hword branch_207915a - Jumppoints_2079114 - 2
+.thumb
+branch_207912c: @ 207912c :thumb
+	ldrh    r0, [r0, #0x0]
+	bx      lr
+
+branch_2079130: @ 2079130 :thumb
+	ldrb    r0, [r0, #0x2]
+	bx      lr
+
+branch_2079134: @ 2079134 :thumb
+	ldrb    r0, [r0, #0x3]
+	bx      lr
+
+branch_2079138: @ 2079138 :thumb
+	ldrb    r0, [r0, #0x4]
+	bx      lr
+
+branch_207913c: @ 207913c :thumb
+	ldrb    r0, [r0, #0x5]
+	bx      lr
+
+branch_2079140: @ 2079140 :thumb
+	ldrb    r0, [r0, #0x6]
+	bx      lr
+
+branch_2079144: @ 2079144 :thumb
+	ldrb    r0, [r0, #0x7]
+	bx      lr
+
+branch_2079148: @ 2079148 :thumb
+	ldrh    r0, [r0, #0x8]
+	bx      lr
+
+branch_207914c: @ 207914c :thumb
+	mov     r1, #0xa
+	ldsb    r0, [r0, r1]
+	bx      lr
+
+branch_2079152: @ 2079152 :thumb
+	ldrb    r0, [r0, #0xb]
+	bx      lr
+
+branch_2079156: @ 2079156 :thumb
+	ldrb    r0, [r0, #0xc]
+	bx      lr
+
+branch_207915a: @ 207915a :thumb
+	ldrb    r0, [r0, #0xd]
+branch_207915c: @ 207915c :thumb
+	bx      lr
+thumb_func_end ReadMoveData
+
+
+thumb_func_start LoadFromNarc_PlWazaTbl
+LoadFromNarc_PlWazaTbl: @ 2079160 :thumb
+	ldr     r3, =LoadFromNARC+1
+	mov     r2, r0
+	mov     r0, r1
+	mov     r1, #0x9                @ poketool/waza/pl_waza_tbl.narc
+	bx      r3
+@ 0x207916a
+
+.align 2
+.pool
+thumb_func_end LoadFromNarc_PlWazaTbl

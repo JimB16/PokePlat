@@ -195,7 +195,7 @@ Function_2249ab4: @ 2249ab4 :thumb
 branch_2249ac4: @ 2249ac4 :thumb
 	mov     r0, #0x4
 	mov     r1, #0x9c
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r1, [pc, #0xc0] @ 0x2249b90, (=0x224f5a0)
 	mov     r2, #0x9c
 	str     r0, [r1, #0x0]
@@ -221,7 +221,7 @@ branch_2249ac4: @ 2249ac4 :thumb
 	str     r0, [r2, #0x74]
 	ldr     r0, [r1, #0x0]
 	ldr     r0, [r0, #0x68]
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      LoadTrainerDataAdress
 	ldr     r1, [pc, #0x84] @ 0x2249b90, (=0x224f5a0)
 	ldr     r1, [r1, #0x0]
@@ -672,7 +672,7 @@ branch_2249e46: @ 2249e46 :thumb
 	ldr     r0, [pc, #0x5c] @ 0x2249ed4, (=0x224a719)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	ldr     r0, [pc, #0x4c] @ 0x2249ecc, (=0x224f5a0)
 	ldr     r0, [r0, #0x0]
 	bl      Function_2249ee0
@@ -1570,7 +1570,7 @@ Function_224a53c: @ 224a53c :thumb
 	ldr     r0, [pc, #0x7c] @ 0x224a5c0, (=0x224a719)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	bl      Function_224a5d0
 	ldr     r0, [pc, #0x70] @ 0x224a5c4, (=0x224f5a0)
 	ldr     r0, [r0, #0x0]
@@ -2708,7 +2708,7 @@ branch_224adb8: @ 224adb8 :thumb
 	ldr     r0, [pc, #0x14] @ 0x224add4, (=0x224add9)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	add     sp, #0x84
 	pop     {r3-r6,pc}
 @ 0x224adca
@@ -2742,7 +2742,7 @@ Function_224add8: @ 224add8 :thumb
 	add     r0, #0x88
 	str     r1, [r0, #0x0]
 	mov     r0, r4
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_224ae06: @ 224ae06 :thumb
 	pop     {r4,pc}
@@ -3036,7 +3036,7 @@ branch_224b044: @ 224b044 :thumb
 	cmp     r5, #0x0
 	beq     branch_224b04e
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_224b04e: @ 224b04e :thumb
 	pop     {r3-r5,pc}
@@ -3059,7 +3059,7 @@ Function_224b054: @ 224b054 :thumb
 	ldr     r0, [pc, #0x10] @ 0x224b084, (=0x224a719)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	ldr     r0, [pc, #0xc] @ 0x224b088, (=0x224b0e9)
 	bl      Function_224a530
 	pop     {r4,pc}
@@ -3097,7 +3097,7 @@ Function_224b08c: @ 224b08c :thumb
 	ldr     r0, [pc, #0x20] @ 0x224b0e0, (=0x224a719)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	ldr     r0, [pc, #0x18] @ 0x224b0e4, (=0x224b0e9)
 	bl      Function_224a530
 	ldr     r0, [pc, #0xc] @ 0x224b0dc, (=0x224f5a0)
@@ -3265,7 +3265,7 @@ branch_224b1e8: @ 224b1e8 :thumb
 	mov     r0, r4
 	bl      Function_224b3a8
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	add     sp, #0x84
 	pop     {r3-r6,pc}
 @ 0x224b202
@@ -3377,7 +3377,7 @@ Function_224b2a0: @ 224b2a0 :thumb
 	tst     r0, r1
 	beq     branch_224b2d2
 	mov     r0, r4
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	bl      Function_224a528
 	ldr     r0, [pc, #0x8] @ 0x224b2d4, (=0x224f5a0)
 	mov     r1, #0x1
@@ -3414,7 +3414,7 @@ Function_224b2dc: @ 224b2dc :thumb
 	ldr     r0, [pc, #0xc] @ 0x224b318, (=0x224b31d)
 	mov     r1, r4
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	pop     {r4,pc}
 @ 0x224b314
 
@@ -3436,7 +3436,7 @@ Function_224b31c: @ 224b31c :thumb
 	mov     r0, r4
 	bl      Function_2249e0c
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_224b342: @ 224b342 :thumb
 	pop     {r3-r5,pc}
@@ -3459,7 +3459,7 @@ branch_224b352: @ 224b352 :thumb
 	ldr     r0, [pc, #0xc] @ 0x224b36c, (=0x224b371)
 	mov     r1, r5
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	pop     {r3-r5,pc}
 @ 0x224b36a
 
@@ -3488,7 +3488,7 @@ Function_224b370: @ 224b370 :thumb
 	mov     r0, r4
 	bl      Function_2249e0c
 	mov     r0, r5
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_224b39c: @ 224b39c :thumb
 	pop     {r3-r5,pc}
@@ -4724,7 +4724,7 @@ branch_224bc68: @ 224bc68 :thumb
 Function_224bc74: @ 224bc74 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r0, r4
 	bl      Function_2050a64
 	mov     r4, r0
@@ -4993,7 +4993,7 @@ Function_224be10: @ 224be10 :thumb
 	mov     r5, r0
 	mov     r0, #0xb
 	mov     r1, #0x84
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, #0x0
 	mov     r2, #0x84
 	mov     r4, r0
@@ -5044,7 +5044,7 @@ Function_224be7c: @ 224be7c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r4, r1
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	bl      Function_224be10
 	mov     r2, r0
 	ldr     r1, [pc, #0x8] @ 0x224be98, (=0x224bc75)
@@ -5063,12 +5063,12 @@ Function_224be9c: @ 224be9c :thumb
 	lsl     r1, r1, #2
 	mov     r5, r0
 	mov     r7, r2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0xc1
 	mov     r4, r0
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r5, [r4, #0x18]
 	str     r7, [r4, #0x14]
 	str     r6, [r4, #0x8]
@@ -5077,7 +5077,7 @@ Function_224be9c: @ 224be9c :thumb
 	bl      Function_2029d04
 	str     r0, [r4, #0xc]
 	mov     r0, r6
-	bl      LoadVariableAreaAdress_3
+	bl      LoadVariableAreaAdressItemList
 	str     r0, [r4, #0x10]
 	mov     r2, #0x8f
 	ldr     r3, [r4, #0x18]
@@ -5114,7 +5114,7 @@ Function_224befc: @ 224befc :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	lsl     r2, r2, #2
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r4
 	bl      free
 	pop     {r4,pc}
@@ -7109,7 +7109,7 @@ branch_224cd48: @ 224cd48 :thumb
 	ldrb    r1, [r5, r1]
 	mov     r0, #0xb
 	lsl     r1, r1, #1
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x8b
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
@@ -7145,12 +7145,12 @@ Function_224cd88: @ 224cd88 :thumb
 	mov     r1, #0x95
 	mov     r0, #0xb
 	lsl     r1, r1, #2
-	bl      malloc_maybe
+	bl      malloc
 	mov     r2, #0x95
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r4
 	pop     {r4,pc}
 @ 0x224cda4
@@ -7223,7 +7223,7 @@ Function_224cda4: @ 224cda4 :thumb
 	cmp     r0, #0x0
 	bne     branch_224ce44
 	ldr     r0, [r5, #0xc]
-	bl      LoadVariableAreaAdress_3
+	bl      LoadVariableAreaAdressItemList
 	mov     r1, #0x21
 	lsl     r1, r1, #4
 	str     r0, [r4, r1]
@@ -7235,7 +7235,7 @@ branch_224ce44: @ 224ce44 :thumb
 	cmp     r0, #0x3
 	bne     branch_224ce56
 	ldr     r0, [r5, #0xc]
-	bl      LoadVariableAreaAdress_3
+	bl      LoadVariableAreaAdressItemList
 	mov     r1, #0x21
 	lsl     r1, r1, #4
 	str     r0, [r4, r1]
@@ -7305,7 +7305,7 @@ branch_224cea8: @ 224cea8 :thumb
 Function_224ceac: @ 224ceac :thumb
 	push    {r4-r6,lr}
 	mov     r6, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r6
 	bl      Function_2050a64
@@ -9765,7 +9765,7 @@ Function_224e098: @ 224e098 :thumb
 	ldrh    r2, [r4, r2]
 	ldr     r0, [r4, r0]
 	mov     r3, #0xb
-	bl      Function_207d55c
+	bl      CheckStoreItem
 	b       branch_224e100
 @ 0x224e0bc
 
@@ -9781,7 +9781,7 @@ branch_224e0bc: @ 224e0bc :thumb
 	ldrh    r2, [r4, r2]
 	ldr     r0, [r4, r0]
 	mov     r3, #0xb
-	bl      Function_207d55c
+	bl      CheckStoreItem
 	b       branch_224e100
 @ 0x224e0d6
 
@@ -10253,10 +10253,9 @@ branch_224e428: @ 224e428 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
 	bl      Function_200b77c
-.thumb
 branch_224e438: @ 224e438 :thumb
 	ldr     r0, [pc, #0x16c] @ 0x224e5a8, (=0x246)
-	mov     r1, #0x5
+	mov     r1, #ITEMDATA_POCKET
 	ldrh    r0, [r4, r0]
 	mov     r2, #0xb
 	bl      GetItemData
@@ -10267,9 +10266,7 @@ branch_224e438: @ 224e438 :thumb
 	mov     r1, #0x1
 	bl      Function_200b7b4
 	b       branch_224e518
-@ 0x224e454
 
-.thumb
 branch_224e454: @ 224e454 :thumb
 	cmp     r0, #0x3
 	bne     branch_224e4ac
@@ -10305,7 +10302,7 @@ branch_224e482: @ 224e482 :thumb
 	bl      Function_200b1ec
 	mov     r5, r0
 	ldr     r0, [pc, #0x114] @ 0x224e5a8, (=0x246)
-	mov     r1, #0x5
+	mov     r1, #ITEMDATA_POCKET
 	ldrh    r0, [r4, r0]
 	mov     r2, #0xb
 	bl      GetItemData
@@ -10479,7 +10476,7 @@ branch_224e5c6: @ 224e5c6 :thumb
 	ldrh    r2, [r4, r2]
 	ldr     r0, [r4, r0]
 	mov     r3, #0xb
-	bl      Function_207d570
+	bl      TakeItem
 	mov     r2, #0x22
 	lsl     r2, r2, #4
 	mov     r1, r2
@@ -10506,7 +10503,7 @@ branch_224e5fc: @ 224e5fc :thumb
 	ldrh    r2, [r4, r2]
 	ldr     r0, [r4, r0]
 	mov     r3, #0xb
-	bl      Function_207d570
+	bl      TakeItem
 	b       branch_224e63c
 @ 0x224e616
 
@@ -10658,7 +10655,7 @@ branch_224e6f6: @ 224e6f6 :thumb
 	mov     r1, #0xc
 	mov     r2, #0x1
 	mov     r3, #0xb
-	bl      Function_207d570
+	bl      TakeItem
 	cmp     r0, #0x1
 	bne     branch_224e774
 	mov     r0, r5
@@ -10867,21 +10864,17 @@ Function_224e890: @ 224e890 :thumb
 	cmp     r2, #0x0
 	bne     branch_224e8a6
 	mov     r0, r1
-	mov     r1, #0x0
+	mov     r1, #ITEMDATA_PRICE
 	mov     r2, #0xb
 	bl      GetItemData
 	pop     {r3,pc}
-@ 0x224e8a6
 
-.thumb
 branch_224e8a6: @ 224e8a6 :thumb
 	cmp     r2, #0x3
 	bne     branch_224e8b0
 	bl      Function_224e8cc
 	pop     {r3,pc}
-@ 0x224e8b0
 
-.thumb
 branch_224e8b0: @ 224e8b0 :thumb
 	cmp     r2, #0x1
 	bne     branch_224e8bc
@@ -11399,14 +11392,14 @@ Function_224ec38: @ 224ec38 :thumb
 	cmp     r0, #0x0
 	beq     branch_224ec8e
 	mov     r0, r6
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r6
 	bl      Function_2050a64
 	mov     r4, r0
 	bl      Function_224d21c
 	ldr     r0, [r5, #0xc]
-	bl      LoadVariableAreaAdress_3
+	bl      LoadVariableAreaAdressItemList
 	ldr     r1, [pc, #0x30] @ 0x224ec90, (=0x224f49c)
 	mov     r2, #0xb
 	bl      Function_207d824

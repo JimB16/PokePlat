@@ -1177,7 +1177,7 @@ Function_2260bbc: @ 2260bbc :thumb
 	mov     r1, #0x38
 	mov     r6, r2
 	mov     r7, r3
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r1, #0x0
 	mov     r2, #0x38
@@ -1415,7 +1415,7 @@ Function_2260cec: @ 2260cec :thumb
 	mov     r5, r0
 	mov     r7, r2
 	str     r3, [sp, #0x0]
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0x5c] @ 0x2260d5c, (=0x87e8)
 	mov     r1, #0x0
 	mov     r4, r0
@@ -1454,23 +1454,22 @@ Function_2260cec: @ 2260cec :thumb
 	cmp     r0, #0x1
 	beq     branch_2260d56
 	bl      ErrorHandling
-.thumb
 branch_2260d56: @ 2260d56 :thumb
 	mov     r0, r4
 	pop     {r3-r7,pc}
 @ 0x2260d5a
 
-
 .align 2
-
-
 .word 0x87e8 @ 0x2260d5c
 .word 0x877c @ 0x2260d60
 .word 0x19cc @ 0x2260d64
 .word 0x878c @ 0x2260d68
 .word 0x1ab4 @ 0x2260d6c
 .word 0x87cc @ 0x2260d70
-.word 0x22666c0 @ 0x2260d74
+.word Unknown_22666c0 @ 0x2260d74
+
+
+
 .thumb
 Function_2260d78: @ 2260d78 :thumb
 	push    {r4,lr}
@@ -1479,7 +1478,6 @@ Function_2260d78: @ 2260d78 :thumb
 	cmp     r0, #0x1
 	beq     branch_2260d88
 	bl      ErrorHandling
-.thumb
 branch_2260d88: @ 2260d88 :thumb
 	ldr     r0, [pc, #0x18] @ 0x2260da4, (=0x878c)
 	ldr     r1, [pc, #0x1c] @ 0x2260da8, (=0x1ab4)
@@ -2053,11 +2051,8 @@ branch_226119a: @ 226119a :thumb
 	pop     {r4,pc}
 @ 0x226119e
 
-
 .align 2
-
-
-.word 0x2265b3c @ 0x22611a0
+.word Unknown_2265b3c @ 0x22611a0
 .word 0x87e4 @ 0x22611a4
 .word 0x86ec @ 0x22611a8
 .word 0x8730 @ 0x22611ac
@@ -2067,6 +2062,9 @@ branch_226119a: @ 226119a :thumb
 .word 0x19cc @ 0x22611bc
 .word 0x1ab4 @ 0x22611c0
 .word 0x1c54 @ 0x22611c4
+
+
+
 .thumb
 Function_22611c8: @ 22611c8 :thumb
 	push    {r3,lr}
@@ -2549,11 +2547,11 @@ branch_2261516: @ 2261516 :thumb
 	bx      lr
 @ 0x226151a
 
-
 .align 2
+.word Unknown_2265b2c @ 0x226151c
 
 
-.word 0x2265b2c @ 0x226151c
+
 .thumb
 Function_2261520: @ 2261520 :thumb
 	push    {r4-r7,lr}
@@ -3539,8 +3537,11 @@ Function_2261b34: @ 2261b34 :thumb
 
 .word 0x7fff @ 0x2261bac
 .word 0xe38 @ 0x2261bb0
-.word 0x2265b20 @ 0x2261bb4
+.word Unknown_2265b20 @ 0x2261bb4
 .word 0x9c4 @ 0x2261bb8
+
+
+
 .thumb
 Function_2261bbc: @ 2261bbc :thumb
 	push    {r3-r5,lr}
@@ -3590,16 +3591,17 @@ branch_2261bce: @ 2261bce :thumb
 	pop     {r3-r5,pc}
 @ 0x2261c12
 
-
 .align 2
+.word Unknown_2265b50 @ 0x2261c14
 
 
-.word 0x2265b50 @ 0x2261c14
+
 .thumb
 Function_2261c18: @ 2261c18 :thumb
 	strb    r1, [r0, #0x0]
 	bx      lr
 @ 0x2261c1c
+
 
 .thumb
 Function_2261c1c: @ 2261c1c :thumb
@@ -3771,7 +3773,10 @@ Function_2261c48: @ 2261c48 :thumb
 @ 0x2261d7c
 
 .word 0x20f983c @ 0x2261d7c
-.word 0x2265b44 @ 0x2261d80
+.word Unknown_2265b44 @ 0x2261d80
+
+
+
 .thumb
 Function_2261d84: @ 2261d84 :thumb
 	push    {r4-r7,lr}
@@ -6902,18 +6907,17 @@ branch_2263260: @ 2263260 :thumb
 	pop     {r4-r6,pc}
 @ 0x2263272
 
-
 .align 2
-
-
 .word 0x8544 @ 0x2263274
-.word 0x2265b7c @ 0x2263278
+.word Unknown_2265b7c @ 0x2263278
+
+
+
 .thumb
 Function_226327c: @ 226327c :thumb
 	mov     r3, r0
 	mov     r2, #0x18
 	mov     r1, #0x0
-.thumb
 branch_2263282: @ 2263282 :thumb
 	strb    r1, [r3, #0x0]
 	.hword  0x1c5b @ add r3, r3, #0x1
@@ -7715,13 +7719,16 @@ Function_226376c: @ 226376c :thumb
 	pop     {r4-r6,pc}
 @ 0x2263938
 
-.word 0x2265b6c @ 0x2263938
-.word 0x2265b94 @ 0x226393c
-.word 0x2265bb0 @ 0x2263940
-.word 0x2265bcc @ 0x2263944
-.word 0x2265be8 @ 0x2263948
-.word 0x2265c04 @ 0x226394c
-.word 0x2265c20 @ 0x2263950
+.word Unknown_2265b6c @ 0x2263938
+.word Unknown_2265b94 @ 0x226393c
+.word Unknown_2265bb0 @ 0x2263940
+.word Unknown_2265bcc @ 0x2263944
+.word Unknown_2265be8 @ 0x2263948
+.word Unknown_2265c04 @ 0x226394c
+.word Unknown_2265c20 @ 0x2263950
+
+
+
 .thumb
 Function_2263954: @ 2263954 :thumb
 	push    {r4,lr}
@@ -7825,8 +7832,11 @@ branch_2263a0a: @ 2263a0a :thumb
 	pop     {r4-r7,pc}
 @ 0x2263a34
 
-.word 0x2265b5c @ 0x2263a34
+.word Unknown_2265b5c @ 0x2263a34
 .word 0x200010 @ 0x2263a38
+
+
+
 .thumb
 Function_2263a3c: @ 2263a3c :thumb
 	push    {r4-r6,lr}
@@ -8307,7 +8317,10 @@ Function_2263cd8: @ 2263cd8 :thumb
 	pop     {r3-r7,pc}
 @ 0x2263df0
 
-.word 0x2265ae4 @ 0x2263df0
+.word Unknown_2265ae4 @ 0x2263df0
+
+
+
 .thumb
 Function_2263df4: @ 2263df4 :thumb
 	bx      lr
@@ -8315,8 +8328,6 @@ Function_2263df4: @ 2263df4 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_2263df8: @ 2263df8 :thumb
 	push    {r4-r7,lr}
@@ -8586,9 +8597,9 @@ branch_2263f2c: @ 2263f2c :thumb
 @ 0x2263fda
 
 .align 2
-.word 0x2265afc @ 0x2263fdc
+.word Unknown_2265afc @ 0x2263fdc
 .word 0xffede000 @ 0x2263fe0
-.word 0x2265b14 @ 0x2263fe4
+.word Unknown_2265b14 @ 0x2263fe4
 .word 0x2266644 @ 0x2263fe8
 .word 0x22660a4 @ 0x2263fec
 .word Unknown_2265ae0 @ 0x2263ff0
@@ -9083,8 +9094,11 @@ branch_22642dc: @ 22642dc :thumb
 @ 0x22642ec
 
 .word 0x22e @ 0x22642ec
-.word 0x2265b0a @ 0x22642f0
-.word 0x2265b0b @ 0x22642f4
+.word Unknown_2265b0a @ 0x22642f0
+.word Unknown_2265b0b @ 0x22642f4
+
+
+
 .thumb
 Function_22642f8: @ 22642f8 :thumb
 	push    {r3,r4}
@@ -9379,18 +9393,18 @@ branch_2264528: @ 2264528 :thumb
 	pop     {r4-r7,pc}
 @ 0x2264542
 
-
 .align 2
-
-
 .word 0x6fc @ 0x2264544
-.word 0x2265ae8 @ 0x2264548
+.word Unknown_2265ae8 @ 0x2264548
 .word 0x74c @ 0x226454c
 .word 0x754 @ 0x2264550
 .word 0x75c @ 0x2264554
 .word 0x764 @ 0x2264558
 .word 0x768 @ 0x226455c
 .word 0x76c @ 0x2264560
+
+
+
 .thumb
 Function_2264564: @ 2264564 :thumb
 	push    {r3-r7,lr}
@@ -10832,15 +10846,15 @@ branch_2264f08: @ 2264f08 :thumb
 	pop     {r4-r7,pc}
 @ 0x2264f52
 
-
 .align 2
-
-
 .word 0x2265c5c @ 0x2264f54
-.word 0x2265b02 @ 0x2264f58
+.word Unknown_2265b02 @ 0x2264f58
 .word 0xfff9e000 @ 0x2264f5c
-.word 0x2265af0 @ 0x2264f60
-.word 0x2265af6 @ 0x2264f64
+.word Unknown_2265af0 @ 0x2264f60
+.word Unknown_2265af6 @ 0x2264f64
+
+
+
 .thumb
 Function_2264f68: @ 2264f68 :thumb
 	push    {r3-r7,lr}
@@ -12353,18 +12367,21 @@ Function_2265a08: @ 2265a08 :thumb
 	bx      r3
 @ 0x2265a12
 
-
 .align 2
-
-
 .word 0x2004fa9 @ 0x2265a14
+
+
+
 .thumb
 Function_2265a18: @ 2265a18 :thumb
-	ldr     r0, [pc, #0x0] @ 0x2265a1c, (=0x226664c)
+	ldr     r0, [pc, #0x0] @ 0x2265a1c, (=Unknown_226664c)
 	bx      lr
 @ 0x2265a1c
 
-.word 0x226664c @ 0x2265a1c
+.word Unknown_226664c @ 0x2265a1c
+
+
+
 .thumb
 Function_2265a20: @ 2265a20 :thumb
 	mov     r0, #0x8
@@ -12529,9 +12546,79 @@ Function_2265adc: @ 2265adc :thumb
 
 
 Unknown_2265ae0: @ 0x2265ae0
-.incbin "./baserom/overlay/overlay_0115.bin", 0x56a0, 0x226664c - 0x2265ae0
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56a0, 0x2265ae4 - 0x2265ae0
+
+Unknown_2265ae4: @ 0x2265ae4
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56a4, 0x2265ae8 - 0x2265ae4
+
+Unknown_2265ae8: @ 0x2265ae8
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56a8, 0x2265af0 - 0x2265ae8
+
+Unknown_2265af0: @ 0x2265af0
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56b0, 0x2265af6 - 0x2265af0
+
+Unknown_2265af6: @ 0x2265af6
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56b6, 0x2265afc - 0x2265af6
+
+Unknown_2265afc: @ 0x2265afc
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56bc, 0x2265b02 - 0x2265afc
+
+Unknown_2265b02: @ 0x2265b02
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56c2, 0x2265b0a - 0x2265b02
+
+Unknown_2265b0a: @ 0x2265b0a
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56ca, 0x2265b0b - 0x2265b0a
+
+Unknown_2265b0b: @ 0x2265b0b
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56cb, 0x2265b14 - 0x2265b0b
+
+Unknown_2265b14: @ 0x2265b14
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56d4, 0x2265b20 - 0x2265b14
+
+Unknown_2265b20: @ 0x2265b20
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56e0, 0x2265b2c - 0x2265b20
+
+Unknown_2265b2c: @ 0x2265b2c
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56ec, 0x2265b3c - 0x2265b2c
+
+Unknown_2265b3c: @ 0x2265b3c
+.incbin "./baserom/overlay/overlay_0115.bin", 0x56fc, 0x2265b44 - 0x2265b3c
+
+Unknown_2265b44: @ 0x2265b44
+.incbin "./baserom/overlay/overlay_0115.bin", 0x5704, 0x2265b50 - 0x2265b44
+
+Unknown_2265b50: @ 0x2265b50
+.incbin "./baserom/overlay/overlay_0115.bin", 0x5710, 0x2265b5c - 0x2265b50
+
+Unknown_2265b5c: @ 0x2265b5c
+.incbin "./baserom/overlay/overlay_0115.bin", 0x571c, 0x2265b6c - 0x2265b5c
+
+Unknown_2265b6c: @ 0x2265b6c
+.incbin "./baserom/overlay/overlay_0115.bin", 0x572c, 0x2265b7c - 0x2265b6c
+
+Unknown_2265b7c: @ 0x2265b7c
+.incbin "./baserom/overlay/overlay_0115.bin", 0x573c, 0x2265b94 - 0x2265b7c
+
+Unknown_2265b94: @ 0x2265b94
+.incbin "./baserom/overlay/overlay_0115.bin", 0x5754, 0x2265bb0 - 0x2265b94
+
+Unknown_2265bb0: @ 0x2265bb0
+.incbin "./baserom/overlay/overlay_0115.bin", 0x5770, 0x2265bcc - 0x2265bb0
+
+Unknown_2265bcc: @ 0x2265bcc
+.incbin "./baserom/overlay/overlay_0115.bin", 0x578c, 0x2265be8 - 0x2265bcc
+
+Unknown_2265be8: @ 0x2265be8
+.incbin "./baserom/overlay/overlay_0115.bin", 0x57a8, 0x2265c04 - 0x2265be8
+
+Unknown_2265c04: @ 0x2265c04
+.incbin "./baserom/overlay/overlay_0115.bin", 0x57c4, 0x2265c20 - 0x2265c04
+
+Unknown_2265c20: @ 0x2265c20
+.incbin "./baserom/overlay/overlay_0115.bin", 0x57e0, 0x226664c - 0x2265c20
 
 
+Unknown_226664c: @ 0x226664c
 .word Function_2265a44+1 @ =0x2265a45, 0x226664c
 .word Function_2265a40+1 @ =0x2265a41, 0x2266650
 .word 0x0 @ 0x2266654
@@ -12558,10 +12645,27 @@ Unknown_2265ae0: @ 0x2265ae0
 @ 0x22666a8
 
 
-.incbin "./baserom/overlay/overlay_0115.bin", 0x6268, 0x22666c0 - 0x22666a8
+.incbin "./baserom/overlay/overlay_0115.bin", 0x6268, 0x22666ac - 0x22666a8
+
+
+.globl __overlay115_static_init_start
+__overlay115_static_init_start:
+.incbin "./baserom/overlay/overlay_0115.bin", 0x626c, 0x22666b0 - 0x22666ac
+.globl __overlay115_static_init_end
+__overlay115_static_init_end:
+
+
+.incbin "./baserom/overlay/overlay_0115.bin", 0x6270, 0x22666c0 - 0x22666b0
 
 
 @end 0x22666c0
+
+
+
+.section .overlay115_bss, "ax"
+
+Unknown_22666c0: @ 0x22666c0
+.zero 0x40
 
 
 

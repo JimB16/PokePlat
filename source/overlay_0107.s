@@ -17741,7 +17741,7 @@ Function_2249b1c: @ 2249b1c :thumb
 	mov     r1, #0x8
 	mov     r7, r2
 	str     r3, [sp, #0x10]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	mov     r1, #0x0
 	strb    r1, [r4, #0x0]

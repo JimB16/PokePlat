@@ -281,7 +281,7 @@ branch_222b02c: @ 222b02c :thumb
 	blx     Function_222de8c
 	mov     r1, r0
 	ldr     r0, [r4, #0x4]
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0xed
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
@@ -2066,7 +2066,7 @@ Function_222bbf0: @ 222bbf0 :thumb
 	push    {r4-r6,lr}
 	mov     r1, #0x2
 	lsl     r1, r1, #12
-	bl      malloc_maybe
+	bl      malloc
 	mov     r5, r0
 	mov     r6, #0x2
 	lsl     r6, r6, #12
@@ -2936,7 +2936,7 @@ Function_222c160: @ 222c160 :thumb
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	beq     branch_222c184
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r0, r4
 	mov     r1, #0x0
 	add     r0, #0xa4
@@ -5358,7 +5358,7 @@ branch_222d34c: @ 222d34c :arm
 	mov     r1, r6
 	add     r0, lr, #5, 26 @ #0x140
 	sub     r2, r2, #5, 26 @ #0x140
-	bl      Function_20d50b8
+	bl      CopyDataInByteSteps
 	ldr     r0, [pc, #0x5c] @ [0x222d3e4] (=0x222e764)
 	ldr     r2, [r0, #0x258]
 	ldr     r1, [r0, #0x254]

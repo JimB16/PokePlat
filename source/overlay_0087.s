@@ -452,7 +452,7 @@ Function_21d106c: @ 21d106c :thumb
 	mov     r5, r0
 	ldr     r1, [pc, #0xbc] @ 0x21d1134, (=0xe1c)
 	mov     r0, #0x3d
-	bl      malloc_maybe
+	bl      malloc
 	mov     r4, r0
 	beq     branch_21d112e
 	str     r5, [r4, #0x0]

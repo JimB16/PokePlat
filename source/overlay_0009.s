@@ -10,18 +10,18 @@
 Function_2249960: @ 2249960 :thumb
 	push    {r4-r6,lr}
 	mov     r6, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x9
 	bl      Function_2027f6c
 	mov     r4, r0
 	ldr     r1, [pc, #0xe4] @ 0x2249a5c, (=0x1e74)
 	mov     r0, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	ldr     r2, [pc, #0xdc] @ 0x2249a5c, (=0x1e74)
 	mov     r5, r0
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	str     r6, [r5, #0x0]
 	str     r4, [r5, #0x4]
 	ldr     r0, [r6, #0x4]
@@ -745,12 +745,12 @@ Function_2249e94: @ 2249e94 :thumb
 	strb    r0, [r1, #0x3]
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x38]
-	bl      Function_2062858
+	bl      GetSpriteListc
 	mov     r2, r0
 	ldr     r0, [pc, #0x10] @ 0x2249ec4, (=0x2249edd)
 	mov     r1, r4
 	.hword  0x1c92 @ add r2, r2, #0x2
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r1, #0x61
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
@@ -766,7 +766,7 @@ Function_2249ec8: @ 2249ec8 :thumb
 	ldr     r0, [r0, r1]
 	cmp     r0, #0x0
 	beq     branch_2249ed8
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_2249ed8: @ 2249ed8 :thumb
 	pop     {r3,pc}
@@ -805,7 +805,7 @@ branch_2249f00: @ 2249f00 :thumb
 	ldr     r0, [pc, #0x10] @ 0x2249f14, (=0x2249f3d)
 	mov     r1, r4
 	mov     r2, #0x80
-	bl      Function_200da04
+	bl      AddTaskToTaskList2
 	ldr     r1, [pc, #0x4] @ 0x2249f10, (=0x1e70)
 	str     r0, [r4, r1]
 	pop     {r4,pc}
@@ -826,7 +826,7 @@ Function_2249f18: @ 2249f18 :thumb
 branch_2249f28: @ 2249f28 :thumb
 	ldr     r0, [pc, #0xc] @ 0x2249f38, (=0x1e70)
 	ldr     r0, [r4, r0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	ldr     r0, [pc, #0x4] @ 0x2249f38, (=0x1e70)
 	mov     r1, #0x0
 	str     r1, [r4, r0]
@@ -951,7 +951,7 @@ Function_2249fd0: @ 2249fd0 :thumb
 .thumb
 branch_2249fda: @ 2249fda :thumb
 	mov     r0, r4
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	mov     r1, #0x9
 	bl      Function_2027f6c
@@ -1050,7 +1050,7 @@ branch_224a0a4: @ 224a0a4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x224a0c4, (=0x224a0dd)
 	mov     r1, r5
 	mov     r2, #0x0
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r4, #0x3c]
 	add     sp, #0x1c
 	pop     {r4,r5,pc}
@@ -1070,7 +1070,7 @@ Function_224a0c8: @ 224a0c8 :thumb
 	ldr     r0, [r0, #0x50]
 	cmp     r0, #0x0
 	beq     branch_224a0da
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 .thumb
 branch_224a0da: @ 224a0da :thumb
 	pop     {r3,pc}
@@ -1236,11 +1236,11 @@ Function_224a1e4: @ 224a1e4 :thumb
 	str     r1, [r4, #0x0]
 	mov     r0, #0x4
 	mov     r1, r6
-	bl      malloc_maybe
+	bl      malloc
 	mov     r1, #0x0
 	mov     r2, r6
 	str     r0, [r4, #0x4]
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r4
 	mov     r1, #0x4
 	add     r0, #0x10
@@ -1301,7 +1301,7 @@ branch_224a254: @ 224a254 :thumb
 	ldr     r0, [r5, #0x18]
 	cmp     r0, #0x0
 	beq     branch_224a28c
-	bl      Function_2062920
+	bl      GetSpriteGraphic
 	strh    r0, [r5, #0x14]
 .thumb
 branch_224a28c: @ 224a28c :thumb
@@ -1338,7 +1338,7 @@ Function_224a2ac: @ 224a2ac :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x20
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	pop     {r4,pc}
 @ 0x224a2c0
 
@@ -1371,7 +1371,7 @@ Function_224a2e4: @ 224a2e4 :thumb
 	ldr     r0, [r4, #0x18]
 	cmp     r0, #0x0
 	beq     branch_224a320
-	bl      Function_2062cf8
+	bl      CheckSpriteFlag_Locked
 	cmp     r0, #0x0
 	bne     branch_224a2fa
 	mov     r0, #0x1
@@ -1381,7 +1381,7 @@ Function_224a2e4: @ 224a2e4 :thumb
 .thumb
 branch_224a2fa: @ 224a2fa :thumb
 	ldr     r0, [r4, #0x18]
-	bl      Function_2062910
+	bl      GetSpriteID
 	ldrh    r1, [r4, #0x16]
 	cmp     r1, r0
 	beq     branch_224a30a
@@ -1395,7 +1395,7 @@ branch_224a30a: @ 224a30a :thumb
 	cmp     r0, #0x0
 	beq     branch_224a32e
 	ldr     r0, [r4, #0x18]
-	bl      Function_2062920
+	bl      GetSpriteGraphic
 	ldrh    r1, [r4, #0x14]
 	cmp     r1, r0
 	beq     branch_224a32e
@@ -1474,7 +1474,7 @@ Function_224a374: @ 224a374 :thumb
 	beq     branch_224a38e
 	mov     r0, r1
 	str     r1, [r4, #0x18]
-	bl      Function_2062910
+	bl      GetSpriteID
 	strh    r0, [r4, #0x16]
 .thumb
 branch_224a38e: @ 224a38e :thumb
@@ -1849,7 +1849,7 @@ branch_224a586: @ 224a586 :thumb
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, r4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	pop     {r3-r5,pc}
 @ 0x224a596
@@ -1872,7 +1872,7 @@ Function_9_224a59c: @ 224a59c :thumb
 	add     sp, #-0x10
 	mov     r6, r0
 	mov     r5, r1
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x9
@@ -2083,7 +2083,7 @@ Function_9_224a71c: @ 224a71c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x9
@@ -2354,7 +2354,7 @@ Function_224a8c0: @ 224a8c0 :thumb
 	bne     branch_224a90a
 	mov     r0, r6
 	mov     r1, #0x0
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	b       branch_224a912
 @ 0x224a90a
 
@@ -2362,7 +2362,7 @@ Function_224a8c0: @ 224a8c0 :thumb
 branch_224a90a: @ 224a90a :thumb
 	mov     r0, r6
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 .thumb
 branch_224a912: @ 224a912 :thumb
 	ldr     r0, [sp, #0x10]
@@ -2370,7 +2370,7 @@ branch_224a912: @ 224a912 :thumb
 	bl      Function_205f098
 	mov     r0, r6
 	mov     r7, #0x0
-	bl      Function_2062920
+	bl      GetSpriteGraphic
 	mov     r4, r0
 	cmp     r4, #0xb3
 	bhi     branch_224a942
@@ -2463,7 +2463,7 @@ branch_224a97e: @ 224a97e :thumb
 	cmp     r5, #0x1
 	beq     branch_224a9a0
 	mov     r0, r6
-	bl      Function_2062e44
+	bl      IsSetSpriteFlags800000
 	cmp     r0, #0x1
 	beq     branch_224a9a0
 	bl      ErrorHandling
@@ -2643,7 +2643,7 @@ Function_224aad4: @ 224aad4 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x38
 	mov     r4, r0
-	bl      Function_2050a60
+	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
 	bl      Function_2050a64
@@ -2679,7 +2679,7 @@ branch_224ab12: @ 224ab12 :thumb
 
 .thumb
 branch_224ab18: @ 224ab18 :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x0
 	bne     branch_224ab22
 .thumb
@@ -2758,7 +2758,7 @@ branch_224ab80: @ 224ab80 :thumb
 	bl      Function_2065638
 	mov     r0, r6
 	mov     r1, r5
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	mov     r2, #0x4e
 	mov     r3, #0x50
 	ldsh    r2, [r4, r2]
@@ -2795,7 +2795,7 @@ branch_224abae: @ 224abae :thumb
 	bl      Function_205ebc0
 	mov     r0, r6
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, #0x58
 	ldsh    r0, [r4, r0]
 	cmp     r0, #0x1
@@ -2837,7 +2837,7 @@ branch_224ac0a: @ 224ac0a :thumb
 
 .thumb
 branch_224ac20: @ 224ac20 :thumb
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x0
 	beq     branch_224ac40
 	mov     r0, #0x56
@@ -2877,7 +2877,7 @@ Function_224ac58: @ 224ac58 :thumb
 	mov     r0, r6
 	add     r1, sp, #0x4
 	add     r4, #0x34
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r1, [sp, #0x4]
 	ldr     r0, [r5, #0x8]
 	add     r0, r1, r0
@@ -2892,7 +2892,7 @@ Function_224ac58: @ 224ac58 :thumb
 	str     r0, [sp, #0xc]
 	mov     r0, r6
 	add     r1, sp, #0x4
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r5
 	ldr     r2, [r5, #0x1c]
 	ldr     r1, [r5, #0x28]
@@ -2941,7 +2941,7 @@ branch_224acc4: @ 224acc4 :thumb
 	sub     r1, r2, r1
 	str     r1, [r0, #0x0]
 	mov     r0, r6
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	mov     r1, r0
 	mov     r0, #0x16
 	ldsh    r0, [r4, r0]
@@ -2958,7 +2958,7 @@ branch_224acf2: @ 224acf2 :thumb
 .thumb
 branch_224acf6: @ 224acf6 :thumb
 	mov     r0, r6
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 .thumb
 branch_224acfc: @ 224acfc :thumb
 	ldr     r2, [r5, #0x24]
@@ -2996,7 +2996,7 @@ branch_224ad2e: @ 224ad2e :thumb
 .thumb
 branch_224ad34: @ 224ad34 :thumb
 	mov     r0, r6
-	bl      Function_2063098
+	bl      GetSpriteAdr7c
 	ldr     r2, [r5, #0x14]
 	ldr     r1, [r5, #0x18]
 	add     r1, r2, r1
@@ -3061,16 +3061,16 @@ branch_224ad84: @ 224ad84 :thumb
 	mov     r0, #0x0
 	str     r0, [r7, #0x0]
 	mov     r0, r6
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	mov     r0, r6
 	bl      Function_2062b68
 	mov     r1, #0x22
 	ldsh    r1, [r4, r1]
 	mov     r0, r6
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	mov     r0, r6
 	mov     r1, #0x0
-	bl      Function_2062a0c
+	bl      SetSpritea0
 	add     sp, #0x10
 	mov     r0, #0x1
 	pop     {r3-r7,pc}
@@ -3393,7 +3393,7 @@ branch_224b006: @ 224b006 :thumb
 	ldr     r0, [pc, #0x24] @ 0x224b05c, (=0x224b125)
 	ldr     r2, [pc, #0x28] @ 0x224b060, (=0xffff)
 	mov     r1, r5
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	mov     r1, #0x65
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
@@ -3415,7 +3415,7 @@ Function_224b064: @ 224b064 :thumb
 	mov     r0, #0x65
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
-	bl      Function_200da58
+	bl      Call_RemoveTaskFromTaskList
 	mov     r7, #0x4f
 	mov     r6, #0x0
 	mov     r4, r5
@@ -3956,11 +3956,11 @@ branch_224b436: @ 224b436 :thumb
 	lsl     r5, r0, #2
 	mov     r0, #0x4
 	mov     r1, r5
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, #0x0
 	mov     r2, r5
 	str     r0, [r4, #0x8]
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r3, [sp, #0x18]
 	mov     r0, r6
 	mov     r1, r4
@@ -4947,7 +4947,7 @@ Function_224ba6c: @ 224ba6c :thumb
 .thumb
 branch_224bab6: @ 224bab6 :thumb
 	ldr     r0, [sp, #0x8]
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	cmp     r6, r0
 	bne     branch_224bae2
 	ldr     r0, [sp, #0x8]
@@ -5614,10 +5614,10 @@ Function_224bf8c: @ 224bf8c :thumb
 	mov     r4, r1
 	mov     r1, #0x0
 	mov     r5, r0
-	bl      Function_2006d84
+	bl      Function_2006d84_GetFilesize
 	mov     r1, r0
 	mov     r0, #0x4
-	bl      malloc_maybe
+	bl      malloc
 	str     r0, [r4, #0x8]
 	ldr     r2, [r4, #0x8]
 	mov     r0, r5
@@ -5808,10 +5808,10 @@ branch_224c0a0: @ 224c0a0 :thumb
 	mov     r6, r0
 	ldr     r0, [r5, #0x8]
 	mov     r1, r6
-	bl      Function_2006d84
+	bl      Function_2006d84_GetFilesize
 	mov     r1, r0
 	mov     r0, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	str     r0, [r4, #0x18]
 	ldr     r0, [r5, #0x8]
 	ldr     r2, [r4, #0x18]
@@ -6567,11 +6567,11 @@ Function_224c4f4: @ 224c4f4 :thumb
 branch_224c508: @ 224c508 :thumb
 	ldr     r0, [r5, #0xc]
 	mov     r1, r6
-	bl      Function_2006d84
+	bl      Function_2006d84_GetFilesize
 	str     r0, [r4, #0xc]
 	ldr     r1, [r4, #0xc]
 	mov     r0, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	str     r0, [r4, #0x10]
 	ldr     r0, [r5, #0xc]
 	ldr     r2, [r4, #0x10]
@@ -7223,7 +7223,7 @@ Function_224c8e8: @ 224c8e8 :thumb
 	bl      Function_224d720
 	str     r6, [r4, #0x0]
 	mov     r0, #0x4
-	bl      Function_2039d78
+	bl      Malloc11aa
 	str     r0, [r4, #0x10]
 	ldr     r1, [r4, #0x10]
 	mov     r0, r6
@@ -7279,7 +7279,7 @@ Function_224c8e8: @ 224c8e8 :thumb
 	bl      Function_205eb3c
 	add     r1, sp, #0x10
 	mov     r4, r0
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r0, [r5, #0x28]
 	add     r1, sp, #0x1c
 	bl      0x21ea6bc
@@ -7290,12 +7290,12 @@ Function_224c8e8: @ 224c8e8 :thumb
 	str     r0, [sp, #0x14]
 	mov     r0, r4
 	add     r1, sp, #0x10
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r4
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	mov     r1, r0
 	mov     r0, r4
-	bl      Function_2063014
+	bl      SetSpriteZ2
 	ldr     r1, [sp, #0x14]
 	mov     r0, r4
 	asr     r2, r1, #3
@@ -7303,7 +7303,7 @@ Function_224c8e8: @ 224c8e8 :thumb
 	lsr     r1, r1, #20
 	add     r1, r2, r1
 	asr     r1, r1, #12
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 .thumb
 branch_224c9da: @ 224c9da :thumb
 	add     sp, #0x28
@@ -7648,7 +7648,7 @@ Function_224cbd8: @ 224cbd8 :thumb
 	mov     r0, #0x0
 	str     r0, [r4, #0x0]
 	ldr     r0, [pc, #0xc] @ 0x224cbf4, (=0x224cc09)
-	bl      Function_200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r4, #0x2c]
 	pop     {r4,pc}
 @ 0x224cbf0
@@ -7860,7 +7860,7 @@ branch_224ccdc: @ 224ccdc :thumb
 	bl      Function_224d720
 	mov     r6, r0
 	mov     r0, #0x4
-	bl      Function_2039d78
+	bl      Malloc11aa
 	str     r0, [r4, #0x10]
 	ldr     r0, [r6, #0x0]
 	ldr     r1, [r4, #0x10]
@@ -8091,7 +8091,7 @@ branch_224cee0: @ 224cee0 :thumb
 	cmp     r0, #0x0
 	bne     branch_224cf0a
 	mov     r0, #0x4
-	bl      Function_2039d78
+	bl      Malloc11aa
 	str     r0, [r5, #0x10]
 .thumb
 branch_224cf0a: @ 224cf0a :thumb
@@ -8370,7 +8370,7 @@ Function_224d0c8: @ 224d0c8 :thumb
 	ldr     r0, [r6, #0x0]
 	mov     r1, #0x81
 	ldr     r0, [r0, #0x38]
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	str     r0, [r5, #0x68]
 	cmp     r0, #0x0
 	bne     branch_224d184
@@ -8389,7 +8389,7 @@ branch_224d11c: @ 224d11c :thumb
 	ldr     r0, [r6, #0x0]
 	mov     r1, #0x86
 	ldr     r0, [r0, #0x38]
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	str     r0, [r5, #0x68]
 	cmp     r0, #0x0
 	bne     branch_224d184
@@ -8447,10 +8447,10 @@ branch_224d184: @ 224d184 :thumb
 	mov     r1, r5
 	mov     r6, r0
 	add     r1, #0x14
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, r6
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, #0x0
 	str     r0, [r5, #0x44]
 	str     r0, [r5, #0x48]
@@ -8465,7 +8465,7 @@ branch_224d184: @ 224d184 :thumb
 	add     r0, r1, r0
 	strh    r0, [r5, #0xa]
 	mov     r0, r6
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	strh    r0, [r5, #0xc]
 	mov     r0, #0xc
 	ldsh    r1, [r5, r0]
@@ -8609,7 +8609,7 @@ Function_224d288: @ 224d288 :thumb
 	bl      Function_20630ac
 	ldr     r0, [r5, #0x68]
 	add     r1, sp, #0x0
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r0, [r5, #0x18]
 	add     r1, sp, #0x0
 	str     r0, [sp, #0x4]
@@ -8767,7 +8767,7 @@ branch_224d3e6: @ 224d3e6 :thumb
 	cmp     r0, #0x0
 	beq     branch_224d408
 	add     r1, sp, #0x0
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r0, [r5, #0x18]
 	add     r1, sp, #0x0
 	str     r0, [sp, #0x4]
@@ -8840,22 +8840,22 @@ branch_224d466: @ 224d466 :thumb
 	cmp     r2, r1
 	bne     branch_224d47c
 	mov     r1, #0x80
-	bl      Function_206290c
+	bl      SetSpriteID
 	b       branch_224d48a
 @ 0x224d47c
 
 .thumb
 branch_224d47c: @ 224d47c :thumb
 	mov     r1, #0x80
-	bl      Function_206290c
+	bl      SetSpriteID
 	ldr     r0, [r4, #0x68]
 	mov     r1, #0x6
-	bl      Function_206295c
+	bl      SetSpriteScript
 .thumb
 branch_224d48a: @ 224d48a :thumb
 	ldrh    r1, [r4, #0x6]
 	ldr     r0, [r4, #0x68]
-	bl      Function_2062914
+	bl      SetSprite_c
 .thumb
 branch_224d492: @ 224d492 :thumb
 	ldrb    r0, [r4, #0x0]
@@ -8963,7 +8963,7 @@ branch_224d538: @ 224d538 :thumb
 	cmp     r0, #0x0
 	beq     branch_224d55a
 	add     r1, sp, #0x0
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r0, [r4, #0x18]
 	add     r1, sp, #0x0
 	str     r0, [sp, #0x4]
@@ -9006,21 +9006,21 @@ branch_224d586: @ 224d586 :thumb
 	mov     r1, #0xc
 	ldsh    r1, [r4, r1]
 	mov     r0, r5
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	mov     r1, #0xe
 	ldsh    r1, [r4, r1]
 	mov     r0, r5
 	bl      SaveSpritePositionY
 	mov     r0, r5
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	ldr     r0, [r4, #0x68]
 	cmp     r0, #0x0
 	beq     branch_224d5c6
 	mov     r1, #0xc
 	ldsh    r1, [r4, r1]
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r0, [r4, #0x68]
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 .thumb
 branch_224d5c6: @ 224d5c6 :thumb
 	ldrh    r1, [r4, #0x8]
@@ -9064,13 +9064,13 @@ Function_224d5e8: @ 224d5e8 :thumb
 	mov     r1, #0xc
 	ldsh    r1, [r4, r1]
 	mov     r0, r6
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	mov     r1, #0xe
 	ldsh    r1, [r4, r1]
 	mov     r0, r6
 	bl      SaveSpritePositionY
 	mov     r0, r6
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x1
 	ldr     r0, [r0, #0x3c]
@@ -9080,9 +9080,9 @@ Function_224d5e8: @ 224d5e8 :thumb
 	beq     branch_224d640
 	mov     r1, #0xc
 	ldsh    r1, [r4, r1]
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r0, [r4, #0x68]
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 .thumb
 branch_224d640: @ 224d640 :thumb
 	ldrb    r0, [r4, #0x0]
@@ -9144,7 +9144,7 @@ Function_224d69c: @ 224d69c :thumb
 	mov     r5, r1
 	ldr     r0, [r0, #0x38]
 	mov     r1, #0x86
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	mov     r4, r0
 	bne     branch_224d6b2
 	bl      ErrorHandling
@@ -9164,7 +9164,7 @@ branch_224d6c4: @ 224d6c4 :thumb
 	lsl     r2, r6, #2
 	ldr     r1, [r1, r2]
 	mov     r0, r4
-	bl      Function_2065700
+	bl      Malloc_MovementScript
 	str     r0, [r5, #0x6c]
 	mov     r0, #0x7
 	strh    r0, [r5, #0x4]
@@ -9187,7 +9187,7 @@ Function_224d6e0: @ 224d6e0 :thumb
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x86
 	ldr     r0, [r0, #0x38]
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	mov     r1, r0
 	mov     r0, r4
 	bl      Function_224ee70
@@ -9245,7 +9245,7 @@ Function_224d744: @ 224d744 :thumb
 	ldr     r2, [pc, #0x2c] @ 0x224d77c, (=0x12f8)
 	mov     r0, r4
 	mov     r1, #0x0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r1, #0x0
 	mov     r2, r4
 	mov     r0, #0x19
@@ -9407,7 +9407,7 @@ branch_224d82a: @ 224d82a :thumb
 	lsl     r0, r0, #2
 	add     r7, r7, r0
 	mov     r0, #0x4
-	bl      malloc2_maybe
+	bl      malloc2
 	str     r0, [r7, r4]
 	ldr     r0, [r6, #0x0]
 	ldr     r1, [sp, #0x0]
@@ -10108,7 +10108,7 @@ Function_224dca8: @ 224dca8 :thumb
 .thumb
 branch_224dcd2: @ 224dcd2 :thumb
 	ldr     r0, [sp, #0x0]
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r0, #0xfd
 	bne     branch_224dcec
 	mov     r0, r5
@@ -10417,13 +10417,13 @@ Function_224de94: @ 224de94 :thumb
 	mov     r1, r4
 	ldr     r0, [r0, #0x38]
 	mov     r2, r7
-	bl      Function_20619dc
+	bl      InitSpriteStruct
 	mov     r4, r0
 	mov     r1, r6
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	mov     r0, r4
 	mov     r1, #0xfd
-	bl      Function_206290c
+	bl      SetSpriteID
 	ldr     r1, [sp, #0x20]
 	mov     r0, r4
 	mov     r2, #0x0
@@ -10438,13 +10438,13 @@ Function_224de94: @ 224de94 :thumb
 	bl      Function_20629b4
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_2062e5c
+	bl      UnSetSpriteFlag_Follow
 	mov     r0, r4
 	mov     r1, #0x0
 	bl      Function_2062d80
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      Function_2062fc4
@@ -10490,7 +10490,7 @@ Function_224df10: @ 224df10 :thumb
 	bl      LoadSpritePositionX
 	strh    r0, [r5, #0x6]
 	mov     r0, r4
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	strh    r0, [r5, #0x8]
 	mov     r0, r4
 	bl      LoadSpritePositionY
@@ -10503,13 +10503,13 @@ Function_224df10: @ 224df10 :thumb
 	str     r0, [r5, #0x20]
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_2062e5c
+	bl      UnSetSpriteFlag_Follow
 	mov     r0, r4
 	mov     r1, #0x0
 	bl      Function_2062d80
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      Function_2062fc4
@@ -10624,7 +10624,7 @@ branch_224e052: @ 224e052 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x24
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	pop     {r4,pc}
 @ 0x224e05e
 
@@ -10678,7 +10678,7 @@ Function_224e07c: @ 224e07c :thumb
 	mov     r1, #0x8
 	ldsh    r1, [r5, r1]
 	mov     r0, r4
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	mov     r1, #0xa
 	ldsh    r1, [r5, r1]
 	mov     r0, r4
@@ -11137,7 +11137,7 @@ branch_224e38a: @ 224e38a :thumb
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, r4
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	mov     r0, r5
 	pop     {r3-r5,pc}
 @ 0x224e39a
@@ -11374,14 +11374,14 @@ Function_224e4e8: @ 224e4e8 :thumb
 	ldr     r0, [r4, #0x0]
 	ldr     r1, [r5, #0x0]
 	ldr     r0, [r0, #0x38]
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	mov     r4, r0
 	bne     branch_224e506
 	bl      ErrorHandling
 .thumb
 branch_224e506: @ 224e506 :thumb
 	mov     r0, r4
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x1
 	bne     branch_224e51c
 	ldr     r1, [r5, #0x4]
@@ -11404,7 +11404,7 @@ Function_224e520: @ 224e520 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [r4, #0x0]
 	ldr     r0, [r0, #0x38]
-	bl      Function_206251c
+	bl      GetAdressOfSpriteID
 	mov     r4, r0
 	bne     branch_224e53c
 	bl      ErrorHandling
@@ -11486,7 +11486,7 @@ branch_224e57c: @ 224e57c :thumb
 	bl      Function_205eb3c
 	mov     r5, r0
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, r5
 	add     r1, sp, #0x0
 	bl      Function_206309c
@@ -11546,7 +11546,7 @@ branch_224e61a: @ 224e61a :thumb
 	bl      Function_20630ac
 	mov     r0, r4
 	add     r1, sp, #0x14
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, r4
 	add     r1, sp, #0x14
 	bl      Function_22511f4
@@ -11593,7 +11593,7 @@ branch_224e672: @ 224e672 :thumb
 	bl      Function_20630ac
 	mov     r0, r4
 	add     r1, sp, #0x8
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, r4
 	add     r1, sp, #0x8
 	bl      Function_22511f4
@@ -11694,7 +11694,7 @@ branch_224e73e: @ 224e73e :thumb
 	bl      Function_205eb3c
 	add     r1, sp, #0x0
 	mov     r5, r0
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	ldr     r1, [sp, #0x0]
 	ldr     r0, [sp, #0xc]
 	add     r0, r1, r0
@@ -11756,7 +11756,7 @@ Function_224e798: @ 224e798 :thumb
 	mov     r0, #0x6
 	ldsh    r7, [r6, r0]
 	mov     r0, r4
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	mov     r1, #0x8
 	ldsh    r1, [r6, r1]
 	lsl     r1, r1, #1
@@ -11772,13 +11772,13 @@ Function_224e798: @ 224e798 :thumb
 	bl      SaveSpritePositionX
 	mov     r0, r4
 	mov     r1, r5
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r1, [sp, #0x10]
 	mov     r0, r4
 	add     r1, r6, r1
 	bl      SaveSpritePositionY
 	mov     r0, r4
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	ldr     r0, [sp, #0x4]
 	ldr     r1, [sp, #0xc]
 	ldr     r0, [r0, #0x0]
@@ -11811,7 +11811,7 @@ Function_224e798: @ 224e798 :thumb
 	bne     branch_224e846
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	b       branch_224e84e
 @ 0x224e846
 
@@ -11819,7 +11819,7 @@ Function_224e798: @ 224e798 :thumb
 branch_224e846: @ 224e846 :thumb
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 .thumb
 branch_224e84e: @ 224e84e :thumb
 	ldr     r0, [pc, #0xc] @ 0x224e85c, (=0x5ca)
@@ -12920,28 +12920,26 @@ Function_224eecc: @ 224eecc :thumb
 .thumb
 branch_224eeee: @ 224eeee :thumb
 	ldr     r0, [sp, #0x0]
-	bl      Function_2062918
+	bl      GetSprite_c
 	cmp     r4, r0
 	bne     branch_224ef1a
 	ldr     r0, [sp, #0x0]
-	bl      Function_2062910
+	bl      GetSpriteID
 	ldrh    r1, [r5, #0x0]
 	cmp     r1, r0
 	bne     branch_224ef1a
 	ldr     r0, [sp, #0x0]
-	bl      Function_2062920
+	bl      GetSpriteGraphic
 	ldrh    r1, [r5, #0x2]
 	cmp     r1, r0
 	beq     branch_224ef14
 	bl      ErrorHandling
-.thumb
 branch_224ef14: @ 224ef14 :thumb
+
 	ldr     r0, [sp, #0x0]
 	add     sp, #0x8
 	pop     {r3-r7,pc}
-@ 0x224ef1a
 
-.thumb
 branch_224ef1a: @ 224ef1a :thumb
 	mov     r0, r6
 	mov     r1, r7
@@ -12950,7 +12948,6 @@ branch_224ef1a: @ 224ef1a :thumb
 	bl      Function_20625b0
 	cmp     r0, #0x0
 	bne     branch_224eeee
-.thumb
 branch_224ef2a: @ 224ef2a :thumb
 	mov     r0, #0x0
 	add     sp, #0x8
@@ -13034,7 +13031,7 @@ branch_224ef94: @ 224ef94 :thumb
 	beq     branch_224efb0
 	ldrh    r1, [r4, #0x10]
 	ldr     r0, [r6, #0x0]
-	bl      CheckFlag
+	bl      LoadFlagAdressAndCheckFlag
 	cmp     r0, #0x0
 	beq     branch_224efb6
 .thumb
@@ -13051,7 +13048,7 @@ branch_224efb6: @ 224efb6 :thumb
 	ldr     r0, [r0, #0x38]
 	ldr     r2, [sp, #0x4]
 	add     r1, #0x8
-	bl      Function_2061918
+	bl      CopySpriteStruct
 	str     r0, [r5, #0x0]
 	cmp     r0, #0x0
 	bne     branch_224efce
@@ -13075,14 +13072,14 @@ branch_224efe6: @ 224efe6 :thumb
 	bl      Function_2062fc4
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x1
-	bl      Function_2062e5c
+	bl      UnSetSpriteFlag_Follow
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r1, #0x2
 	ldr     r0, [r5, #0x0]
 	lsl     r1, r1, #12
-	bl      Function_20628bc
+	bl      SetSpriteFlags
 	cmp     r7, #0x0
 	bne     branch_224f038
 	mov     r0, #0x14
@@ -13193,7 +13190,7 @@ branch_224f0b0: @ 224f0b0 :thumb
 	ldr     r0, [r5, #0x0]
 	cmp     r0, #0x0
 	beq     branch_224f0c6
-	bl      Function_2062918
+	bl      GetSprite_c
 	cmp     r6, r0
 	bne     branch_224f0c6
 	ldr     r0, [r5, #0x0]
@@ -13325,11 +13322,11 @@ Function_224f16c: @ 224f16c :thumb
 .thumb
 branch_224f194: @ 224f194 :thumb
 	ldr     r0, [sp, #0x4]
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r6, r0
 	bne     branch_224f1b4
 	ldr     r0, [sp, #0x4]
-	bl      Function_2062918
+	bl      GetSprite_c
 	cmp     r4, r0
 	bne     branch_224f1b4
 	ldr     r0, [sp, #0x0]
@@ -13439,7 +13436,7 @@ Function_9_224f240: @ 224f240 :thumb
 	add     sp, #-0x8
 	mov     r4, r0
 	mov     r5, r1
-	bl      Function_2062c00
+	bl      GetSpriteSpriteListFirstSprite
 	ldr     r0, [r0, #0x1c]
 	ldr     r7, [r0, #0x0]
 	mov     r0, r4
@@ -13449,10 +13446,10 @@ Function_9_224f240: @ 224f240 :thumb
 	bl      LoadSpritePositionY
 	mov     r4, r0
 	mov     r0, r5
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	mov     r6, r0
 	mov     r0, r5
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	mov     r2, r0
 	ldr     r1, [sp, #0x0]
 	mov     r0, r7
@@ -13473,7 +13470,7 @@ Function_224f284: @ 224f284 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r6, r1
-	bl      Function_2062c00
+	bl      GetSpriteSpriteListFirstSprite
 	ldr     r0, [r0, #0x1c]
 	ldr     r4, [r0, #0x0]
 	mov     r0, r5
@@ -13511,11 +13508,11 @@ Function_9_224f2bc: @ 224f2bc :thumb
 	mov     r0, #0x4
 	mov     r1, #0x24
 	mov     r7, r2
-	bl      malloc2_maybe
+	bl      malloc2
 	mov     r1, #0x0
 	mov     r2, #0x24
 	mov     r4, r0
-	blx     Function_20d5124
+	blx     Call_FillMemWithValue
 	ldr     r0, [r5, #0x4]
 	mov     r1, r4
 	ldr     r0, [r0, #0x24]
@@ -13577,7 +13574,7 @@ Function_224f324: @ 224f324 :thumb
 	ldr     r4, [r5, #0xc]
 	add     r1, sp, #0x0
 	mov     r0, r4
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x2
 	ldr     r1, [sp, #0x4]
 	lsl     r0, r0, #14
@@ -13585,7 +13582,7 @@ Function_224f324: @ 224f324 :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, r4
 	add     r1, sp, #0x0
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, #0x73
 	ldr     r1, [sp, #0x4]
 	lsl     r0, r0, #16
@@ -13610,9 +13607,9 @@ branch_224f356: @ 224f356 :thumb
 	mov     r1, #0x91
 	mov     r0, r4
 	lsl     r1, r1, #2
-	bl      Function_2062914
+	bl      SetSprite_c
 	mov     r0, r4
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r0, #0x80
 	beq     branch_224f390
 	cmp     r0, #0x81
@@ -13689,7 +13686,7 @@ branch_224f3de: @ 224f3de :thumb
 	ldr     r5, [r4, #0xc]
 	add     r1, sp, #0x30
 	mov     r0, r5
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x2
 	ldr     r1, [sp, #0x34]
 	lsl     r0, r0, #12
@@ -13697,14 +13694,14 @@ branch_224f3de: @ 224f3de :thumb
 	str     r0, [sp, #0x34]
 	mov     r0, r5
 	add     r1, sp, #0x30
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r5
-	bl      Function_206299c
+	bl      LoadSpriteFace2Direction
 	mov     r2, #0x2
 	mov     r1, r0
 	mov     r0, r5
 	lsl     r2, r2, #12
-	bl      Function_20642a4
+	bl      Movement_AddDeltaPositionToSprite70
 	ldr     r0, [r4, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x18]
@@ -13730,7 +13727,7 @@ branch_224f428: @ 224f428 :thumb
 	ldr     r5, [r4, #0xc]
 	add     r1, sp, #0x24
 	mov     r0, r5
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x1
 	ldr     r1, [sp, #0x28]
 	lsl     r0, r0, #14
@@ -13738,7 +13735,7 @@ branch_224f428: @ 224f428 :thumb
 	str     r0, [sp, #0x28]
 	mov     r0, r5
 	add     r1, sp, #0x24
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	ldr     r0, [r4, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r4, #0x18]
@@ -13759,7 +13756,7 @@ branch_224f454: @ 224f454 :thumb
 	mov     r6, r7
 	bl      Function_2249dc8
 	mov     r0, r5
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r0, #0x80
 	beq     branch_224f478
 	cmp     r0, #0x81
@@ -13800,24 +13797,24 @@ branch_224f48e: @ 224f48e :thumb
 	bl      Function_2249de4
 	mov     r0, r5
 	mov     r1, r7
-	bl      Function_206290c
+	bl      SetSpriteID
 	mov     r0, r5
-	bl      Function_206299c
+	bl      LoadSpriteFace2Direction
 	mov     r6, r0
 	mov     r0, r5
 	bl      LoadSpritePositionX
 	mov     r7, r0
 	mov     r0, r5
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	str     r0, [sp, #0x0]
 	mov     r0, r5
 	bl      LoadSpritePositionY
 	str     r0, [sp, #0x4]
 	mov     r0, r6
-	bl      Function_206419c
+	bl      GetWalkPositionXChange
 	str     r0, [sp, #0x8]
 	mov     r0, r6
-	bl      Function_20641a8
+	bl      GetWalkPositionYChange
 	ldr     r1, [sp, #0x8]
 	mov     r6, r0
 	mov     r0, r5
@@ -13826,13 +13823,13 @@ branch_224f48e: @ 224f48e :thumb
 	ldr     r1, [sp, #0x0]
 	mov     r0, r5
 	.hword  0x1f09 @ sub r1, r1, #0x4
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r1, [sp, #0x4]
 	mov     r0, r5
 	add     r1, r1, r6
 	bl      SaveSpritePositionY
 	mov     r0, r5
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	ldr     r0, [r4, #0xc]
 	add     r1, sp, #0x18
 	bl      Function_206309c
@@ -13998,7 +13995,7 @@ branch_224f5ee: @ 224f5ee :thumb
 	ldr     r4, [r5, #0xc]
 	add     r1, sp, #0x18
 	mov     r0, r4
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x2
 	ldr     r1, [sp, #0x1c]
 	lsl     r0, r0, #12
@@ -14006,14 +14003,14 @@ branch_224f5ee: @ 224f5ee :thumb
 	str     r0, [sp, #0x1c]
 	mov     r0, r4
 	add     r1, sp, #0x18
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r4
-	bl      Function_206299c
+	bl      LoadSpriteFace2Direction
 	mov     r2, #0x2
 	mov     r1, r0
 	mov     r0, r4
 	lsl     r2, r2, #12
-	bl      Function_20642a4
+	bl      Movement_AddDeltaPositionToSprite70
 	ldr     r0, [r5, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r5, #0x18]
@@ -14039,7 +14036,7 @@ branch_224f638: @ 224f638 :thumb
 	ldr     r4, [r5, #0xc]
 	add     r1, sp, #0xc
 	mov     r0, r4
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x1
 	ldr     r1, [sp, #0x10]
 	lsl     r0, r0, #14
@@ -14047,7 +14044,7 @@ branch_224f638: @ 224f638 :thumb
 	str     r0, [sp, #0x10]
 	mov     r0, r4
 	add     r1, sp, #0xc
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	ldr     r0, [r5, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r5, #0x18]
@@ -14073,7 +14070,7 @@ branch_224f670: @ 224f670 :thumb
 	ldr     r4, [r5, #0xc]
 	add     r1, sp, #0x0
 	mov     r0, r4
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, #0x2
 	ldr     r1, [sp, #0x4]
 	lsl     r0, r0, #14
@@ -14081,7 +14078,7 @@ branch_224f670: @ 224f670 :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, r4
 	add     r1, sp, #0x0
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	ldr     r0, [r5, #0x18]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [r5, #0x18]
@@ -14097,7 +14094,7 @@ branch_224f69c: @ 224f69c :thumb
 	ldr     r0, [r5, #0xc]
 	mov     r6, #0x0
 	mov     r4, r6
-	bl      Function_2062910
+	bl      GetSpriteID
 	cmp     r0, #0x80
 	beq     branch_224f6b4
 	cmp     r0, #0x81
@@ -14807,7 +14804,7 @@ branch_224fadc: @ 224fadc :thumb
 	bne     branch_224fb0a
 	mov     r0, r6
 	mov     r1, #0x2
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	ldr     r1, [pc, #0x44] @ 0x224fb38, (=0x2251888)
 	mov     r0, r5
 	bl      Function_224a148
@@ -14835,7 +14832,7 @@ branch_224fb0a: @ 224fb0a :thumb
 	blt     branch_224fb30
 	mov     r0, r6
 	mov     r1, #0x0
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	mov     r0, #0x0
 	mvn     r0, r0
 	strh    r0, [r4, #0x6]
@@ -14868,10 +14865,10 @@ Function_224fb3c: @ 224fb3c :thumb
 	bl      Function_205eb3c
 	mov     r7, r0
 	add     r1, sp, #0x18
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, r7
 	mov     r1, #0x2
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	ldr     r2, [sp, #0x4]
 	mov     r0, r6
 	mov     r1, r5
@@ -14980,7 +14977,7 @@ Function_224fc2c: @ 224fc2c :thumb
 	mov     r1, r5
 	mov     r0, r7
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r6
 	mov     r1, r4
 	bl      Function_224fa94
@@ -15140,7 +15137,7 @@ Function_224fd74: @ 224fd74 :thumb
 	mov     r1, r7
 	ldr     r0, [sp, #0x4]
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r3, r7
 	add     r3, #0x40
 	add     r2, sp, #0x10
@@ -15324,7 +15321,7 @@ Function_224fedc: @ 224fedc :thumb
 	str     r0, [sp, #0x14]
 	mov     r0, r5
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	ldr     r1, [sp, #0x10]
 	mov     r0, r5
 	add     r1, #0x40
@@ -15416,7 +15413,7 @@ branch_224ffc4: @ 224ffc4 :thumb
 	mov     r1, #0x6
 	ldsh    r4, [r0, r1]
 	mov     r0, r5
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	ldr     r1, [sp, #0x8]
 	mov     r2, #0x8
 	ldsh    r1, [r1, r2]
@@ -15436,20 +15433,20 @@ branch_224ffc4: @ 224ffc4 :thumb
 	bl      SaveSpritePositionX
 	ldr     r1, [sp, #0xc]
 	mov     r0, r5
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r2, [sp, #0x24]
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
 	add     r1, r2, r1
 	bl      SaveSpritePositionY
 	mov     r0, r5
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	mov     r0, r5
 	mov     r1, #0x2
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	mov     r0, r5
 	mov     r1, #0x2
-	bl      Function_2062994
+	bl      ChangeSpriteFace2Direction
 	mov     r0, r5
 	add     r1, sp, #0x28
 	bl      Function_2063088
@@ -15475,7 +15472,7 @@ branch_224ffc4: @ 224ffc4 :thumb
 	bl      Function_205f098
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, r7
 	bl      0x21f88fc
 	add     r2, sp, #0x28
@@ -15545,7 +15542,7 @@ Function_22500e0: @ 22500e0 :thumb
 	ldr     r0, [r0, #0x3c]
 	bl      Function_205eb3c
 	mov     r4, r0
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x0
 	bne     branch_225010e
 	add     sp, #0x8
@@ -15632,10 +15629,10 @@ Function_2250170: @ 2250170 :thumb
 	bl      Function_205eb3c
 	mov     r7, r0
 	add     r1, sp, #0x18
-	bl      Function_2063050
+	bl      CopySprite70Struct
 	mov     r0, r7
 	mov     r1, #0x3
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	ldr     r2, [sp, #0x4]
 	mov     r0, r6
 	mov     r1, r5
@@ -15743,7 +15740,7 @@ Function_2250260: @ 2250260 :thumb
 	mov     r1, r5
 	mov     r0, r7
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r6
 	mov     r1, r4
 	bl      Function_2250138
@@ -15890,7 +15887,7 @@ Function_2250388: @ 2250388 :thumb
 	mov     r1, r6
 	ldr     r0, [sp, #0x4]
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r1, r6
 	ldr     r0, [sp, #0x4]
 	add     r1, #0x40
@@ -16004,7 +16001,7 @@ Function_2250468: @ 2250468 :thumb
 	str     r0, [sp, #0x14]
 	mov     r0, r5
 	add     r1, #0x34
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	ldr     r1, [sp, #0x10]
 	mov     r0, r5
 	add     r1, #0x40
@@ -16091,7 +16088,7 @@ Function_2250468: @ 2250468 :thumb
 	mov     r1, #0x6
 	ldsh    r4, [r0, r1]
 	mov     r0, r5
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	ldr     r1, [sp, #0x8]
 	mov     r2, #0x8
 	ldsh    r1, [r1, r2]
@@ -16111,20 +16108,20 @@ Function_2250468: @ 2250468 :thumb
 	bl      SaveSpritePositionX
 	ldr     r1, [sp, #0xc]
 	mov     r0, r5
-	bl      Function_2063034
+	bl      SaveSpritePositionZ
 	ldr     r2, [sp, #0x24]
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
 	add     r1, r2, r1
 	bl      SaveSpritePositionY
 	mov     r0, r5
-	bl      Function_2064208
+	bl      CopySpritePositionsFromOldToNew
 	mov     r0, r5
 	mov     r1, #0x3
-	bl      Function_2062974
+	bl      ChangeSpriteFaceDirection_WithCheck
 	mov     r0, r5
 	mov     r1, #0x3
-	bl      Function_2062994
+	bl      ChangeSpriteFace2Direction
 	mov     r0, r5
 	add     r1, sp, #0x28
 	bl      Function_2063088
@@ -16150,7 +16147,7 @@ Function_2250468: @ 2250468 :thumb
 	bl      Function_205f098
 	mov     r0, r5
 	mov     r1, #0x1
-	bl      Function_2062e28
+	bl      SetUnsetSpriteFlags800000
 	mov     r0, r7
 	bl      0x21f88fc
 	add     r2, sp, #0x28
@@ -16213,7 +16210,7 @@ Function_2250650: @ 2250650 :thumb
 	ldr     r0, [r0, #0x3c]
 	bl      Function_205eb3c
 	mov     r4, r0
-	bl      Function_20655f4
+	bl      IsSpriteMovable
 	cmp     r0, #0x0
 	bne     branch_2250682
 	add     sp, #0xc
@@ -16417,7 +16414,7 @@ Function_9_2250780: @ 2250780 :thumb
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0x38]
-	bl      Function_206285c
+	bl      GetSpriteListAdr18
 	bl      0x21edcb0
 	mov     r1, #0xe6
 	bl      Function_2022d98
@@ -16977,7 +16974,7 @@ branch_2250b50: @ 2250b50 :thumb
 	blt     branch_2250b7c
 	ldr     r0, [r4, #0x14]
 	ldr     r1, [pc, #0xc] @ 0x2250b80, (=0x2251e74)
-	bl      Function_2065700
+	bl      Malloc_MovementScript
 	str     r0, [r4, #0x10]
 	mov     r0, #0x2
 	strh    r0, [r6, #0x0]
@@ -17155,13 +17152,13 @@ branch_2250ca2: @ 2250ca2 :thumb
 .thumb
 branch_2250ca6: @ 2250ca6 :thumb
 	ldr     r0, [r4, #0x18]
-	bl      Function_2065700
+	bl      Malloc_MovementScript
 	str     r0, [r4, #0x10]
 	ldr     r0, [r6, #0x0]
 	ldr     r0, [r0, #0x3c]
 	bl      Function_205eb3c
 	mov     r1, r5
-	bl      Function_2065700
+	bl      Malloc_MovementScript
 	str     r0, [r4, #0x14]
 	mov     r0, #0x2
 	strh    r0, [r7, #0x0]
@@ -17577,7 +17574,7 @@ Function_2250f44: @ 2250f44 :thumb
 	bl      LoadSpritePositionX
 	str     r0, [r5, #0x0]
 	mov     r0, r7
-	bl      Function_2063030
+	bl      LoadSpritePositionZ
 	lsr     r1, r0, #31
 	add     r1, r0, r1
 	asr     r0, r1, #1
@@ -17593,7 +17590,7 @@ Function_2250f44: @ 2250f44 :thumb
 .globl Function_9_2250f74
 Function_9_2250f74: @ 2250f74 :thumb
 	push    {r3,lr}
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x9
@@ -17737,7 +17734,7 @@ Function_2251044: @ 2251044 :thumb
 	mov     r7, r2
 	str     r3, [sp, #0x0]
 	ldr     r4, [sp, #0x18]
-	bl      Function_203d174
+	bl      GetOverWorldData_VariableAreaAdresses
 	bl      Function_2027860
 	bl      Function_2027f80
 	cmp     r0, #0x9
@@ -18033,7 +18030,7 @@ branch_22511f2: @ 22511f2 :thumb
 Function_22511f4: @ 22511f4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	bl      Function_2063060
+	bl      CopyToSprite70Struct
 	mov     r0, r4
 	bl      0x21eb1a0
 	mov     r1, r0

@@ -42,6 +42,10 @@ RAM_27e0000: @ 24 JumpAdresses, 1 for every IRQs
 RAM_27e0060:
     .zero 4*8
 
+    
+
+.section .dtcm_bss2, "ax"
+
 .globl RAM_27e0080
 RAM_27e0080:
 
@@ -54,8 +58,15 @@ RAM_27e3000:
     .zero 0xf80
 .globl RAM_27e3f80
 RAM_27e3f80:
-    .zero 0x78
+    .zero 0x40
+
+RAM_27e3fc0: @ Stackpointer of Mode: Supervisor (SWI)
+    .zero 0x38
 
 .globl RAM_27e3ff8
 RAM_27e3ff8:
+    .word 0
+
+RAM_27e3ffc: @ Interrupt Handler Adr
+    .word 0
 

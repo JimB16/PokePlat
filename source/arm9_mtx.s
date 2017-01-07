@@ -107,6 +107,7 @@ MTX_ScaleApply33: @ 20bb4ec :arm
 
 
 .thumb
+.globl MTX_RotX33_
 MTX_RotX33_: @ 20bb5ac :thumb
 	mov     r3, #0x1
 	lsl     r3, r3, #12
@@ -126,6 +127,7 @@ MTX_RotX33_: @ 20bb5ac :thumb
 
 
 .thumb
+.globl MTX_RotY33_
 MTX_RotY33_: @ 20bb5c8 :thumb
 	str     r2, [r0, #0x0]
 	str     r2, [r0, #0x20]
@@ -145,6 +147,7 @@ MTX_RotY33_: @ 20bb5c8 :thumb
 
 
 .thumb
+.globl MTX_RotZ33_
 MTX_RotZ33_: @ 20bb5e4 :thumb
 	stmia   r0!, {r2}
 	mov     r3, #0x0

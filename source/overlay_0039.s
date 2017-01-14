@@ -38,7 +38,7 @@ Function_22561d4: @ 22561d4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x2256218, (=0x225628d)
 	mov     r1, r4
 	mov     r2, #0x1
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	cmp     r0, #0x0
 	beq     branch_225620c
 	str     r4, [r5, #0x0]
@@ -490,7 +490,7 @@ Function_2256468: @ 2256468 :thumb
 	ldr     r2, [pc, #0x88] @ 0x225650c, (=0x2256620)
 	mov     r1, #0x6
 	mov     r3, #0x0
-	bl      0x20183c4
+	bl      Function_20183c4
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -502,7 +502,7 @@ Function_2256468: @ 2256468 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x3b
 	mov     r3, #0x6
-	bl      0x2006e3c
+	bl      Function_2006e3c
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -514,7 +514,7 @@ Function_2256468: @ 2256468 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x3a
 	mov     r3, #0x6
-	bl      0x2006e60
+	bl      Function_2006e60
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
@@ -533,7 +533,7 @@ branch_22564ca: @ 22564ca :thumb
 	blt     branch_22564ca
 	ldr     r0, [r6, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	ldr     r0, [pc, #0x28] @ 0x2256510, (=0x4001000)
 	ldr     r1, [pc, #0x28] @ 0x2256514, (=0xffffe0ff)
 	ldr     r2, [r0, #0x0]
@@ -565,7 +565,7 @@ Function_2256518: @ 2256518 :thumb
 	bl      0x225523c
 	ldr     r0, [r0, #0x4]
 	mov     r1, #0x6
-	bl      0x2019044
+	bl      Function_2019044
 	mov     r0, r4
 	bl      Function_2256454
 	pop     {r4,pc}
@@ -594,7 +594,7 @@ Function_2256534: @ 2256534 :thumb
 	bl      Function_225659c
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	mov     r0, r5
 	bl      Function_2256454
 	pop     {r3-r5,pc}
@@ -619,7 +619,7 @@ Function_2256568: @ 2256568 :thumb
 	bl      Function_225659c
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	mov     r0, r5
 	bl      Function_2256454
 	pop     {r3-r5,pc}
@@ -633,7 +633,7 @@ Function_225659c: @ 225659c :thumb
 	mov     r1, #0x6
 	mov     r4, r2
 	mov     r6, r3
-	bl      0x2019fe4
+	bl      Function_2019fe4
 	ldr     r1, [pc, #0x3c] @ 0x22565ec, (=0x2256614)
 	lsl     r2, r5, #1
 	ldrh    r1, [r1, r2]

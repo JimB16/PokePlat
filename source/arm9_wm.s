@@ -848,6 +848,7 @@ branch_20ce57c: @ 20ce57c :arm
 
 
 .arm
+.globl Function_20ce594
 Function_20ce594: @ 20ce594 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -856,9 +857,11 @@ Function_20ce594: @ 20ce594 :arm
 	bl      WMi_CheckInitialized
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3-r5,pc}
+
 	cmp     r5, #0x0
 	moveq   r0, #0x6
 	ldmeqfd sp!, {r3-r5,pc}
+
 	ldr     r0, [r4, #0x4]
 	mov     r1, #125, 28 @ #0x7d0
 	bl      DC_InvalidateRange
@@ -1183,6 +1186,7 @@ branch_20ce950: @ 20ce950 :arm
 
 
 .arm
+.globl WM_GetOtherElements
 WM_GetOtherElements: @ 20ce9c8 :arm
 	stmfd   sp!, {r3-r6,lr}
 	sub     sp, sp, #0x84
@@ -1643,6 +1647,7 @@ branch_20ceeec: @ 20ceeec :arm
 
 
 .arm
+.globl WMi_StartParentEx_0
 WMi_StartParentEx_0: @ 20ceef4 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -1652,6 +1657,7 @@ WMi_StartParentEx_0: @ 20ceef4 :arm
 	bl      WMi_CheckStateEx
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3-r5,pc}
+
 	bl      Function_20cdf24
 	add     r1, r0, #1, 24 @ #0x100
 	mov     r2, #0x0
@@ -1673,7 +1679,7 @@ WMi_StartParentEx_0: @ 20ceef4 :arm
 .arm
 .globl WM_StartParent_9
 WM_StartParent_9: @ 20cef50 :arm
-	ldr     r12, [pc, #0x4] @ [0x20cef5c] (=0x20ceef4)
+	ldr     r12, [pc, #0x4] @ [0x20cef5c] (=WMi_StartParentEx_0)
 	mov     r1, #0x1
 	bx      r12
 @ 0x20cef5c
@@ -1683,6 +1689,7 @@ WM_StartParent_9: @ 20cef50 :arm
 
 
 .arm
+.globl WM_EndParent
 WM_EndParent: @ 20cef60 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -1691,6 +1698,7 @@ WM_EndParent: @ 20cef60 :arm
 	bl      WMi_CheckStateEx
 	cmp     r0, #0x0
 	ldmnefd sp!, {r4,pc}
+
 	mov     r1, r4
 	mov     r0, #0x9
 	bl      WMi_SetCallbackTable
@@ -2115,6 +2123,7 @@ branch_20cf4c8: @ 20cf4c8 :arm
 
 
 .arm
+.globl WM_StartMPEx
 WM_StartMPEx: @ 20cf540 :arm
 	stmfd   sp!, {r4-r8,lr}
 	sub     sp, sp, #0x18
@@ -2279,6 +2288,7 @@ branch_20cf6cc: @ 20cf6cc :arm
 
 
 .arm
+.globl WM_EndMP
 WM_EndMP: @ 20cf77c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -2450,6 +2460,7 @@ Function_20cf958: @ 20cf958 :arm
 
 
 .arm
+.globl WM_StartDataSharing
 WM_StartDataSharing: @ 20cf9c4 :arm
 	stmfd   sp!, {r4-r11,lr}
 	sub     sp, sp, #0xc
@@ -2657,6 +2668,7 @@ Function_20cfc18: @ 20cfc18 :arm
 
 
 .arm
+.globl WM_StepDataSharing
 WM_StepDataSharing: @ 20cfc60 :arm
 	stmfd   sp!, {r4-r11,lr}
 	sub     sp, sp, #0xc
@@ -3356,6 +3368,7 @@ WmGetSharedDataAddress: @ 20d0514 :arm
 
 
 .arm
+.globl Function_20d0544
 Function_20d0544: @ 20d0544 :arm
 	stmfd   sp!, {r3,lr}
 	mov     r12, #0x1
@@ -3366,14 +3379,21 @@ Function_20d0544: @ 20d0544 :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x20d0560
 
+
+
 .arm
+.globl Function_20d0560
 Function_20d0560: @ 20d0560 :arm
 	ldr     r12, [pc, #0x0] @ [0x20d0568] (=0x20cfc18)
 	bx      r12
 @ 0x20d0568
 
 .word Function_20cfc18 @ =0x20cfc18, 0x20d0568
+
+
+
 .arm
+.globl Function_20d056c
 Function_20d056c: @ 20d056c :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -3448,6 +3468,7 @@ branch_20d062c: @ 20d062c :arm
 
 
 .arm
+.globl WM_SetGameInfo
 WM_SetGameInfo: @ 20d065c :arm
 	stmfd   sp!, {r4-r7,lr}
 	sub     sp, sp, #0xc

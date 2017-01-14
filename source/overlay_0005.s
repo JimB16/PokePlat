@@ -29,9 +29,8 @@ Function_21d0d80_MainLoopFct: @ 21d0d80 :thumb
 @ 0x21d0da2
 
 
-.align 2, 0
-.thumb
-Function_21d0da4: @ 21d0da4 :thumb
+thumb_func_start OverWorldEngine_Init
+OverWorldEngine_Init: @ 21d0da4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r1
 	mov     r6, #0x0
@@ -63,10 +62,10 @@ branch_21d0dcc: @ 21d0dcc :thumb
 	mov     r1, r0
 	bl      SetMainLoopFunctionCall
 	bl      Function_20177a4
-	ldr     r1, [pc, #0x174] @ 0x21d0f50, (=REG_BLDCNT)
+	ldr     r1, =REG_BLDCNT
 	mov     r0, r6
 	strh    r0, [r1, #0x0]
-	ldr     r1, [pc, #0x174] @ 0x21d0f54, (=REG_BLDCNT_SUB)
+	ldr     r1, =REG_BLDCNT_SUB
 	strh    r0, [r1, #0x0]
 	bl      Function_200f32c
 	mov     r0, #0x1
@@ -81,7 +80,7 @@ branch_21d0dcc: @ 21d0dcc :thumb
 	lsr     r0, r0, #28
 	beq     branch_21d0e3a
 
-	ldr     r0, [pc, #0x154] @ 0x21d0f58, (=0x6)
+	ldr     r0, =OverlayNr6
 	mov     r1, #0x2
 	bl      LoadOverlay
 
@@ -96,19 +95,19 @@ branch_21d0dcc: @ 21d0dcc :thumb
 	b       branch_21d0e3a
 
 branch_21d0e1e: @ 21d0e1e :thumb
-	ldr     r0, [pc, #0x13c] @ 0x21d0f5c, (=0x8)
+	ldr     r0, =OverlayNr8
 	mov     r1, #0x2
 	bl      LoadOverlay
 	b       branch_21d0e3a
 
 branch_21d0e28: @ 21d0e28 :thumb
-	ldr     r0, [pc, #0x134] @ 0x21d0f60, (=0x7)
+	ldr     r0, =OverlayNr7
 	mov     r1, #0x2
 	bl      LoadOverlay
 	b       branch_21d0e3a
 
 branch_21d0e32: @ 21d0e32 :thumb
-	ldr     r0, [pc, #0x130] @ 0x21d0f64, (=0x9)
+	ldr     r0, =OverlayNr9
 	mov     r1, #0x2
 	bl      LoadOverlay
 branch_21d0e3a: @ 21d0e3a :thumb
@@ -250,22 +249,20 @@ branch_21d0f44: @ 21d0f44 :thumb
 @ 0x21d0f4e
 
 .align 2
-.word REG_BLDCNT @ 0x21d0f50
-.word REG_BLDCNT_SUB @ 0x21d0f54
-.word 0x6 @ 0x21d0f58
-.word 0x8 @ 0x21d0f5c
-.word 0x7 @ 0x21d0f60
-.word 0x9 @ 0x21d0f64
+.pool
+thumb_func_end OverWorldEngine_Init
 
 
-.thumb
-Function_21d0f68: @ 21d0f68 :thumb
+thumb_func_start OverWorldEngine_Loop
+OverWorldEngine_Loop: @ 21d0f68 :thumb
 	push    {r4,lr}
 	bl      LoadPtrToOverWorldDataIn18
+
 	mov     r4, r0
 	bl      Function_21d119c
 	cmp     r0, #0x0
 	beq     branch_21d0f94
+
 	mov     r0, r4
 	bl      Function_2055d94
 	mov     r0, r4
@@ -276,7 +273,7 @@ Function_21d0f68: @ 21d0f68 :thumb
 	bl      Function_21ea714
 	mov     r0, r4
 	bl      Function_21d11cc
-.thumb
+
 branch_21d0f94: @ 21d0f94 :thumb
 	mov     r1, r4
 	add     r1, #0xc0
@@ -288,24 +285,23 @@ branch_21d0f94: @ 21d0f94 :thumb
 	ldr     r0, [r4, #0x68]
 	cmp     r0, #0x0
 	beq     branch_21d0fae
+
 	mov     r0, #0x0
 	pop     {r4,pc}
-@ 0x21d0fae
 
-.thumb
 branch_21d0fae: @ 21d0fae :thumb
 	mov     r0, #0x1
 	pop     {r4,pc}
-@ 0x21d0fb2
+thumb_func_end OverWorldEngine_Loop
 
 
-.align 2, 0
-.thumb
-Function_21d0fb4: @ 21d0fb4 :thumb
+thumb_func_start OverWorldEngine_End
+OverWorldEngine_End: @ 21d0fb4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	bl      LoadPtrToOverWorldDataIn18
 	mov     r4, r0
+
 	ldr     r1, [r4, #0x28]
 	bl      Function_21e8188
 	ldr     r0, [r5, #0x0]
@@ -323,29 +319,36 @@ branch_21d0fd4: @ 21d0fd4 :thumb
 branch_21d0fd6: @ 21d0fd6 :thumb
 	mov     r0, r4
 	bl      Function_2068368
+
 	ldr     r0, [r4, #0x28]
 	bl      Function_21e9338
+
 	ldr     r0, [r4, #0x3c]
 	bl      GetSpritePositionX
 	ldr     r1, [r4, #0x1c]
 	str     r0, [r1, #0x8]
+
 	ldr     r0, [r4, #0x3c]
 	bl      GetSpritePositionY
 	ldr     r1, [r4, #0x1c]
 	str     r0, [r1, #0xc]
+
 	ldr     r0, [r4, #0x3c]
 	bl      GetSpriteFaceDirection
 	ldr     r1, [r4, #0x1c]
 	str     r0, [r1, #0x10]
+
 	mov     r0, r4
 	add     r0, #0xa0
 	ldr     r0, [r0, #0x0]
 	bl      Function_21ef300
+
 	ldr     r0, [r4, #0x50]
 	cmp     r0, #0x0
 	bne     branch_21d1014
 	bl      ErrorHandling
 branch_21d1014: @ 21d1014 :thumb
+
 	ldr     r0, [r4, #0x28]
 	bl      Function_21e924c
 	ldr     r0, [r4, #0x50]
@@ -470,15 +473,16 @@ branch_21d10fe: @ 21d10fe :thumb
 	lsl     r0, r0, #8
 	lsr     r0, r0, #28
 	beq     branch_21d1160
-	ldr     r0, [pc, #0x1c] @ 0x21d1168, (=0x6)
+	ldr     r0, =OverlayNr6
 	bl      UnloadOverlay
-	ldr     r0, [pc, #0x1c] @ 0x21d116c, (=0x8)
+	ldr     r0, =OverlayNr8
 	bl      UnloadOverlay
-	ldr     r0, [pc, #0x18] @ 0x21d1170, (=0x7)
+	ldr     r0, =OverlayNr7
 	bl      UnloadOverlay
-	ldr     r0, [pc, #0x18] @ 0x21d1174, (=0x9)
+	ldr     r0, =OverlayNr9
 	bl      UnloadOverlay
 branch_21d1160: @ 21d1160 :thumb
+
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 
@@ -487,10 +491,9 @@ branch_21d1164: @ 21d1164 :thumb
 	pop     {r3-r5,pc}
 @ 0x21d1168
 
-.word 0x6 @ 0x21d1168
-.word 0x8 @ 0x21d116c
-.word 0x7 @ 0x21d1170
-.word 0x9 @ 0x21d1174
+.align 2
+.pool
+thumb_func_end OverWorldEngine_End
 
 
 
@@ -1709,7 +1712,7 @@ Function_21d1a6c: @ 21d1a6c :thumb
 
 .thumb
 Function_21d1a70: @ 21d1a70 :thumb
-	ldr     r3, [pc, #0x0] @ 0x21d1a74, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21d1a74, (=free+1)
 	bx      r3
 @ 0x21d1a74
 
@@ -14664,7 +14667,7 @@ branch_21d6ee8: @ 21d6ee8 :thumb
 
 .thumb
 Function_21d6ef0: @ 21d6ef0 :thumb
-	ldr     r3, [pc, #0x8] @ 0x21d6efc, (=0x20d5124)
+	ldr     r3, [pc, #0x8] @ 0x21d6efc, (=Call_FillMemWithValue)
 	mov     r1, #0x0
 	str     r1, [r0, #0x8]
 	add     r0, #0xc
@@ -25256,7 +25259,7 @@ branch_21db792: @ 21db792 :thumb
 .align 2, 0
 .thumb
 Function_21db7a4: @ 21db7a4 :thumb
-	ldr     r3, [pc, #0x8] @ 0x21db7b0, (=0x200da3d)
+	ldr     r3, [pc, #0x8] @ 0x21db7b0, (=AddTaskToTaskList3+1)
 	mov     r1, r0
 	ldr     r0, [pc, #0x8] @ 0x21db7b4, (=0x21db7b9)
 	mov     r2, #0x80
@@ -32112,7 +32115,7 @@ Function_21de6a4: @ 21de6a4 :thumb
 .align 2, 0
 .thumb
 Function_21de6bc: @ 21de6bc :thumb
-	ldr     r3, [pc, #0x0] @ 0x21de6c0, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21de6c0, (=free+1)
 	bx      r3
 @ 0x21de6c0
 
@@ -32247,7 +32250,7 @@ Function_21de784: @ 21de784 :thumb
 .align 2, 0
 .thumb
 Function_21de79c: @ 21de79c :thumb
-	ldr     r3, [pc, #0x0] @ 0x21de7a0, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21de7a0, (=free+1)
 	bx      r3
 @ 0x21de7a0
 
@@ -32703,7 +32706,7 @@ branch_21dea8e: @ 21dea8e :thumb
 
 .thumb
 Function_21dea98: @ 21dea98 :thumb
-	ldr     r3, [pc, #0x0] @ 0x21dea9c, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21dea9c, (=free+1)
 	bx      r3
 @ 0x21dea9c
 
@@ -33458,7 +33461,7 @@ Function_21def74: @ 21def74 :thumb
 
 .thumb
 Function_21def8c: @ 21def8c :thumb
-	ldr     r3, [pc, #0x8] @ 0x21def98, (=0x200da3d)
+	ldr     r3, [pc, #0x8] @ 0x21def98, (=AddTaskToTaskList3+1)
 	mov     r2, #0x1
 	mov     r1, r0
 	ldr     r0, [pc, #0x8] @ 0x21def9c, (=0x21def75)
@@ -34308,7 +34311,7 @@ Function_21df53c: @ 21df53c :thumb
 
 .thumb
 Function_21df554: @ 21df554 :thumb
-	ldr     r3, [pc, #0x0] @ 0x21df558, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21df558, (=free+1)
 	bx      r3
 @ 0x21df558
 
@@ -39251,7 +39254,7 @@ Function_21e15f4: @ 21e15f4 :thumb
 
 .thumb
 Function_21e1608: @ 21e1608 :thumb
-	ldr     r3, [pc, #0x0] @ 0x21e160c, (=0x20181c5)
+	ldr     r3, [pc, #0x0] @ 0x21e160c, (=free+1)
 	bx      r3
 @ 0x21e160c
 
@@ -42075,7 +42078,7 @@ branch_21e286e: @ 21e286e :thumb
 
 .thumb
 Function_21e2878: @ 21e2878 :thumb
-	ldr     r3, [pc, #0x8] @ 0x21e2884, (=0x200da05)
+	ldr     r3, [pc, #0x8] @ 0x21e2884, (=AddTaskToTaskList2+1)
 	mov     r2, #0x1
 	mov     r1, r0
 	ldr     r0, [pc, #0x8] @ 0x21e2888, (=0x21e288d)
@@ -73549,9 +73552,10 @@ Function_21f00bc: @ 21f00bc :thumb
 	pop     {r4,pc}
 @ 0x21f00e4
 
+
 .thumb
 Function_21f00e4: @ 21f00e4 :thumb
-	ldr     r3, [pc, #0x4] @ 0x21f00ec, (=0x20181c5)
+	ldr     r3, [pc, #0x4] @ 0x21f00ec, (=free+1)
 	ldr     r0, [r2, #0x0]
 	bx      r3
 @ 0x21f00ea
@@ -93888,7 +93892,15 @@ Unknown_21f896c: @ 0x21f896c
 
 
 Unknown_21f8988: @ 0x21f8988
-.word 0x4, 0x0, 0x80, 0x0, 0x60, 0x0, 0x100, 0x0, 0x3, 0x10, Function_21d0da4+1, Function_21d0f68+1, Function_21d0fb4+1, 0xffffffff
+.word 0x4, 0x0, 0x80, 0x0, 0x60, 0x0, 0x100, 0x0, 0x3, 0x10
+
+
+.globl JumpTable_5_OverWorldEngine
+JumpTable_5_OverWorldEngine: @ 0x21f89b0
+.word OverWorldEngine_Init+1
+.word OverWorldEngine_Loop+1
+.word OverWorldEngine_End+1
+.word 0xffffffff
 
 
 Unknown_21f89c0: @ 0x21f89c0

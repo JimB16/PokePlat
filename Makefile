@@ -12,7 +12,7 @@ endif
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect
+.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect test
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/narc.py -x
@@ -301,10 +301,14 @@ all_icons_png := $(all_icons_rgcn:.rgcn=.png)
 all:
 
 clean:
-	rm -f build/*
+	rm -f build/arm9*.*
+	rm -f build/arm7.*
+	rm -f build/overlay_*.*
+	rm -f build/y9.*
+#	rm -f build/*
 #	rm -r -f newrom/data/fielddata/script/*
 #	rm -rf baserom
-    
+
 
 init:
 	$(unpack_rom) -x "baserom.nds"
@@ -784,12 +788,12 @@ build/%.d: source/%.S
 
 build/%.o: source/%.s build/%.d
 	$(MKDIR_P) build/
-	$(DEVKITARM)/bin/arm-none-eabi-as --MD $(subst .s,.d,build/$(notdir $<)) -march=armv5te -mthumb-interwork $< -o $@
+	$(DEVKITARM)/bin/arm-none-eabi-as --MD $(subst .s,.d,build/$(notdir $<)) -march=armv5te $< -o $@
 #	$(DEVKITARM)/bin/arm-none-eabi-gcc -x assembler-with-cpp -march=armv5te -mthumb-interwork $< -c -o $@
 #	$(DEVKITARM)/bin/arm-none-eabi-gcc -x assembler-with-cpp -MMD -MP -MF $(subst .s,.d,build/$(notdir $<)) -march=armv5te -mthumb-interwork $< -c -o $@
 
 newrom/arm9_full.bin: $(OBJS) $(DEPS)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -T "source/ds_arm9.ld" -Map "build/arm9.map" $(OBJS) $(LIBPATHS) -o "build/arm9.elf"
+	$(DEVKITARM)/bin/arm-none-eabi-ld --use-blx -T "source/ds_arm9.ld" -Map "build/arm9.map" $(OBJS) $(LIBPATHS) -o "build/arm9.elf"
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy --gap-fill=0xff -v -O binary "build/arm9.elf" $@
 	hexdump -C $(subst newrom,baserom,$@) > $(subst .bin,.txt,$(subst newrom,baserom,$@))
 	hexdump -C $@ > $(subst newrom,build,$(subst .bin,.txt,$@))
@@ -810,6 +814,9 @@ pokeplat.nds: newrom/arm9_full.bin newrom/arm7.bin $(NARCS) $(build_font_files_b
 	hexdump -C baserom/fat.bin > baserom/fat.txt
 	hexdump -C newrom/fat.bin > build/fat.txt
 	diff -u baserom/fat.txt build/fat.txt | less > build/diff_fat.txt
+	#$(unpack_rom) -d "./baserom.nds"
+	#$(unpack_rom) -d "./pokeplat.nds"
+	#diff -u "./baserom.nds_Header.txt" "./pokeplat.nds_Header.txt" | less > "./diff_baserom_pokeplat.txt"
 
 pokeplat: pokeplat.nds
 

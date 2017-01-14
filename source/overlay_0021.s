@@ -24,7 +24,7 @@ Function_21_21d0d80: @ 21d0d80 :thumb
 	mov     r0, r5
 	mov     r1, #0x4
 	mov     r2, #0x25
-	bl      MallocSomeDataAndStorePtrIn1c
+	bl      MallocSomeDataAndStorePtrInOverlayData1c
 	mov     r4, r0
 	bne     branch_21d0dae
 	bl      ErrorHandling
@@ -97,7 +97,7 @@ branch_21d0df4: @ 21d0df4 :thumb
 Function_21_21d0e3c: @ 21d0e3c :thumb
 	push    {r3-r5,lr}
 	mov     r4, r1
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	ldr     r1, [r4, #0x0]
 	mov     r5, r0
 	cmp     r1, #0x3
@@ -184,7 +184,7 @@ branch_21d0ebc: @ 21d0ebc :thumb
 Function_21_21d0ec8: @ 21d0ec8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      SetMainLoopFunctionCall
@@ -197,7 +197,7 @@ branch_21d0ee4: @ 21d0ee4 :thumb
 	bl      Function_21d12c4
 	bl      Function_201dc3c
 	mov     r0, r4
-	bl      FreeSomeDataAndStore0In1c
+	bl      FreeSomeDataAndStore0InOverlayData1c
 	mov     r0, #0x25
 	bl      Function_201807c
 	mov     r0, #0x1

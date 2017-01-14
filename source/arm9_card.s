@@ -2088,6 +2088,7 @@ branch_20c9ce4: @ 20c9ce4 :arm
 
 
 .arm
+.globl TP_Init
 TP_Init: @ 20c9cf8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r0, [pc, #0x64] @ [0x20c9d68] (=RAM_21cec90)
@@ -2127,6 +2128,7 @@ branch_20c9d44: @ 20c9d44 :arm
 
 
 .arm
+.globl TP_GetUserInfo
 TP_GetUserInfo: @ 20c9d70 :arm
 	stmfd   sp!, {r3-r6,lr}
 	sub     sp, sp, #0x14
@@ -2175,6 +2177,7 @@ branch_20c9df4: @ 20c9df4 :arm
 
 
 .arm
+.globl TP_SetCalibrateParam
 TP_SetCalibrateParam: @ 20c9e04 :arm
 	stmfd   sp!, {r4,lr}
 	movs    r4, r0
@@ -2343,6 +2346,7 @@ TP_WaitRawResult: @ 20c9fc0 :arm
 
 
 .arm
+.globl TP_RequestAutoSamplingStartAsync
 TP_RequestAutoSamplingStartAsync: @ 20ca010 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r12, [pc, #0xf0] @ [0x20ca10c] (=RAM_21cec90)
@@ -2424,6 +2428,7 @@ branch_20ca0e4: @ 20ca0e4 :arm
 
 
 .arm
+.globl TP_RequestAutoSamplingStopAsync
 TP_RequestAutoSamplingStopAsync: @ 20ca110 :arm
 	stmfd   sp!, {r4,lr}
 	bl      OS_DisableInterrupts
@@ -2579,6 +2584,7 @@ branch_20ca2c4: @ 20ca2c4 :arm
 
 
 .arm
+.globl Function_20ca2ec
 Function_20ca2ec: @ 20ca2ec :arm
 	ldr     r0, [pc, #0x4] @ [0x20ca2f8] (=RAM_21cec90)
 	ldrh    r0, [r0, #0x10]
@@ -2736,6 +2742,7 @@ branch_20ca4d4: @ 20ca4d4 :arm
 
 
 .arm
+.globl TP_GetCalibratedPoint
 TP_GetCalibratedPoint: @ 20ca4e8 :arm
 	stmfd   sp!, {r4-r6,lr}
 	ldr     r2, [pc, #0x110] @ [0x20ca604] (=RAM_21cec90)
@@ -2821,6 +2828,7 @@ branch_20ca5a8: @ 20ca5a8 :arm
 
 
 .arm
+.globl TP_WaitBusy
 TP_WaitBusy: @ 20ca60c :arm
 	ldr     r1, [pc, #0xc] @ [0x20ca620] (=RAM_21cec90)
 branch_20ca610: @ 20ca610 :arm
@@ -2836,6 +2844,7 @@ branch_20ca610: @ 20ca610 :arm
 
 
 .arm
+.globl TP_CheckError
 TP_CheckError: @ 20ca624 :arm
 	ldr     r1, [pc, #0x8] @ [0x20ca634] (=RAM_21cec90)
 	ldrh    r1, [r1, #0x38]
@@ -3891,6 +3900,7 @@ branch_20cb120: @ 20cb120 :arm
 
 
 .arm
+.globl PM_SetBackLight
 PM_SetBackLight: @ 20cb144 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r2, [pc, #0x18] @ [0x20cb168] (=Function_20cac88)
@@ -3966,6 +3976,7 @@ branch_20cb1fc: @ 20cb1fc :arm
 
 
 .arm
+.globl PM_ForceToPowerOff
 PM_ForceToPowerOff: @ 20cb218 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r0, [pc, #0x18] @ [0x20cb23c] (=Function_20cac88)
@@ -4027,6 +4038,7 @@ PM_SetAmpGain: @ 20cb284 :arm
 
 
 .arm
+.globl PM_GetBackLight
 PM_GetBackLight: @ 20cb29c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r4, r1
@@ -4309,6 +4321,7 @@ branch_20cb648: @ 20cb648 :arm
 
 
 .arm
+.globl PM_SetLCDPower
 PM_SetLCDPower: @ 20cb65c :arm
 	ldr     r12, =PMi_SetLCDPower
 	mov     r1, #0x0
@@ -4359,7 +4372,11 @@ Function_20cb698: @ 20cb698 :arm
 @ 0x20cb6dc
 
 .word RAM_21cecec @ 0x20cb6dc
+
+
+
 .arm
+.globl Function_20cb6e0
 Function_20cb6e0: @ 20cb6e0 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x18] @ [0x20cb704] (=0x20cac88)
@@ -4402,6 +4419,7 @@ Function_20cb708: @ 20cb708 :arm
 
 
 .arm
+.globl Function_20cb750
 Function_20cb750: @ 20cb750 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x18] @ [0x20cb774] (=0x20cac88)
@@ -4409,6 +4427,7 @@ Function_20cb750: @ 20cb750 :arm
 	bl      Function_20cb708
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3,pc}
+
 	bl      PMi_WaitBusy
 	ldr     r0, [sp]
 	ldmfd   sp!, {r3,pc}
@@ -4551,12 +4570,14 @@ Function_20cb890: @ 20cb890 :arm
 
 
 .arm
+.globl RTC_Init
 RTC_Init: @ 20cb8a8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	ldr     r0, [pc, #0x58] @ [0x20cb90c] (=RAM_21ced58)
 	ldrh    r1, [r0]
 	cmp     r1, #0x0
 	ldmnefd sp!, {r3-r5,pc}
+
 	mov     r1, #0x1
 	strh    r1, [r0]
 	mov     r1, #0x0
@@ -5561,8 +5582,7 @@ RTCi_ConvertSecondToTime: @ 20cc37c :arm
 
 
 
-.arm
-.globl RTC_ConvertSecondToDateTime
+arm_func_start RTC_ConvertSecondToDateTime
 RTC_ConvertSecondToDateTime: @ 20cc3fc :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r5, r2
@@ -5602,6 +5622,7 @@ branch_20cc43c: @ 20cc43c :arm
 
 .word 0xbc19137f @ 0x20cc480
 .word 0x15180 @ 0x20cc484 = 24*60*60
+arm_func_end RTC_ConvertSecondToDateTime
 
 
 
@@ -5958,6 +5979,7 @@ CARD_GetResultCode_0: @ 20cc840 :arm
 
 
 .arm
+.globl CARD_LockRom
 CARD_LockRom: @ 20cc854 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -5970,6 +5992,7 @@ CARD_LockRom: @ 20cc854 :arm
 
 
 .arm
+.globl CARD_UnlockRom
 CARD_UnlockRom: @ 20cc870 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -7121,6 +7144,7 @@ branch_20cd5dc: @ 20cd5dc :arm
 
 
 .arm
+.globl CARDi_ReadRom
 CARDi_ReadRom: @ 20cd600 :arm
 	stmfd   sp!, {r4-r10,lr}
 	mov     r10, r0
@@ -7478,14 +7502,17 @@ CARD_TerminateForPulledOut: @ 20cd9dc :arm
 	bl      MI_StopDma
 	mov     r0, #0x3
 	bl      MI_StopDma
-	ldr     r0, =RAM_27fffa8
+
+	ldr     r0, =RAM_27fffa8_Input
 	ldrh    r0, [r0]
 	and     r0, r0, #0x8000
 	movs    r0, r0, asr #15
 	beq     branch_20cda44
+
 	bl      PM_ForceToPowerOff
 	cmp     r0, #0x4
 	bne     branch_20cda3c
+
 	ldr     r4, =0xa3a47
 branch_20cda28: @ 20cda28 :arm
 	mov     r0, r4
@@ -7493,6 +7520,7 @@ branch_20cda28: @ 20cda28 :arm
 	bl      PM_ForceToPowerOff
 	cmp     r0, #0x4
 	beq     branch_20cda28
+
 branch_20cda3c: @ 20cda3c :arm
 	cmp     r0, #0x0
 	moveq   r5, #0x0

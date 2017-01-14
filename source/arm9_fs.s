@@ -1317,6 +1317,7 @@ branch_20c7728: @ 20c7728 :arm
 r0: Pointer to ArchiveData
 */
 .arm
+.globl FS_InitArchive
 FS_InitArchive: @ 20c7734 :arm
 	stmfd   sp!, {r4,lr}
 
@@ -1366,6 +1367,7 @@ branch_20c7780: @ 20c7780 :arm
 r0: Pointer to ArchiveData
 */
 .arm
+.globl FS_RegisterArchiveName
 FS_RegisterArchiveName: @ 20c77a0 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r6, r1
@@ -1424,12 +1426,14 @@ branch_20c7840: @ 20c7840 :arm
 
 
 .arm
+.globl Function_20c7854
 Function_20c7854: @ 20c7854 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
 	ldr     r0, [r4]
 	cmp     r0, #0x0
 	ldmeqfd sp!, {r4,pc}
+
 	bl      OS_DisableInterrupts
 	ldr     r2, [r4, #0x4]
 	mov     r3, #0x0
@@ -1468,6 +1472,7 @@ branch_20c78cc: @ 20c78cc :arm
 r0: Pointer to ArchiveData
 */
 .arm
+.globl FS_LoadArchive
 FS_LoadArchive: @ 20c78d8 :arm
 	str     r1, [r0, #ArchiveData_28]
 	str     r3, [r0, #ArchiveData_30]
@@ -1503,6 +1508,7 @@ FS_LoadArchive: @ 20c78d8 :arm
 
 
 .arm
+.globl Function_20c7948
 Function_20c7948: @ 20c7948 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r6, r0
@@ -1563,6 +1569,7 @@ branch_20c79f8: @ 20c79f8 :arm
 r0: Pointer to ArchiveData
 */
 .arm
+.globl FS_LoadArchiveTables
 FS_LoadArchiveTables: @ 20c7a08 :arm
 	stmfd   sp!, {r4-r7,lr}
 	sub     sp, sp, #0x4c
@@ -1648,6 +1655,7 @@ branch_20c7b1c: @ 20c7b1c :arm
 
 
 .arm
+.globl Function_20c7b2c
 Function_20c7b2c: @ 20c7b2c :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r0
@@ -1776,6 +1784,7 @@ branch_20c7cbc: @ 20c7cbc :arm
 r0: Pointer to ArchiveData
 */
 .arm
+.globl FS_SetArchiveProc
 FS_SetArchiveProc: @ 20c7cc4 :arm
 	cmp     r2, #0x0
 	moveq   r1, #0x0
@@ -1829,7 +1838,7 @@ branch_20c7d38: @ 20c7d38 :arm
 @ 0x20c7d68
 
 
-.arm
+arm_func_start FS_Init
 FS_Init: @ 20c7d68 :arm
 	stmfd   sp!, {r3,lr}
 
@@ -1845,6 +1854,7 @@ FS_Init: @ 20c7d68 :arm
 @ 0x20c7d8c
 
 .pool
+arm_func_end FS_Init
 
 
 
@@ -2031,8 +2041,7 @@ FS_ConvertPathToFileID: @ 20c7f88 :arm
 @ 0x20c7fc8
 
 
-.arm
-.globl FS_OpenFileDirect
+arm_func_start FS_OpenFileDirect
 FS_OpenFileDirect: @ 20c7fc8 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r0
@@ -2052,7 +2061,7 @@ FS_OpenFileDirect: @ 20c7fc8 :arm
 	bic     r1, r1, #0x20
 	str     r1, [r4, #0xc]
 	ldmfd   sp!, {r4,pc}
-@ 0x20c8010
+arm_func_end FS_OpenFileDirect
 
 
 .arm
@@ -2088,8 +2097,7 @@ FS_OpenFileFast: @ 20c8010 :arm
 @ 0x20c8080
 
 
-.arm
-.globl FS_OpenFile
+arm_func_start FS_OpenFile
 FS_OpenFile: @ 20c8080 :arm
 	stmfd   sp!, {r4,lr}
 	sub     sp, sp, #0x8
@@ -2110,11 +2118,10 @@ branch_20c80bc: @ 20c80bc :arm
 	mov     r0, #0x0
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r4,pc}
-@ FS_CloseFile
+arm_func_end FS_OpenFile
 
 
-.arm
-.globl FS_CloseFile
+arm_func_start FS_CloseFile
 FS_CloseFile: @ 20c80c8 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r1, #0x8
@@ -2123,6 +2130,7 @@ FS_CloseFile: @ 20c80c8 :arm
 	cmp     r0, #0x0
 	mov     r0, #0x0
 	ldmeqfd sp!, {r4,pc}
+
 	str     r0, [r4, #0x8]
 	mov     r0, #0xe
 	str     r0, [r4, #0x10]
@@ -2131,7 +2139,7 @@ FS_CloseFile: @ 20c80c8 :arm
 	bic     r1, r1, #0x30
 	str     r1, [r4, #0xc]
 	ldmfd   sp!, {r4,pc}
-@ 0x20c8104
+arm_func_end FS_CloseFile
 
 
 .arm
@@ -2206,8 +2214,7 @@ FS_ReadFileAsync: @ 20c81c4 :arm
 
 
 
-.arm
-.globl FS_ReadFile
+arm_func_start FS_ReadFile
 FS_ReadFile: @ 20c81d4 :arm
 	ldr     r12, =FSi_ReadFileCore
 	mov     r3, #0x0
@@ -2215,11 +2222,11 @@ FS_ReadFile: @ 20c81d4 :arm
 @ 0x20c81e0
 
 .pool
+arm_func_end FS_ReadFile
 
 
 
-.arm
-.globl FS_SeekFile
+arm_func_start FS_SeekFile
 FS_SeekFile: @ 20c81e4 :arm
 	cmp     r2, #0x0
 	beq     branch_20c8200
@@ -2258,10 +2265,10 @@ branch_20c822c: @ 20c822c :arm
 	str     r1, [r0, #0x2c]
 	mov     r0, #0x1
 	bx      lr
-@ 0x20c8250
+arm_func_end FS_SeekFile
 
 
-.arm
+arm_func_start FS_ChangeDir
 FS_ChangeDir: @ 20c8250 :arm
 	stmfd   sp!, {r3,r4,lr}
 	sub     sp, sp, #0x54
@@ -2288,6 +2295,7 @@ FS_ChangeDir: @ 20c8250 :arm
 @ 0x20c82a4
 
 .pool
+arm_func_end FS_ChangeDir
 
 
 

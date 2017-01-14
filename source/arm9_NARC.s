@@ -465,7 +465,9 @@ branch_2006c18: @ 2006c18 :thumb
 thumb_func_end LoadFromNARC_7
 
 
-
+/* Input:
+r0: file id
+*/
 thumb_func_start LoadFromNARC_8
 LoadFromNARC_8: @ 2006c24 :thumb
 	push    {r3-r5,lr}

@@ -87,14 +87,14 @@ CopyPkmnDataToParty: @ 207a048 :thumb
 	ldr     r1, [r3, #PkmnParty_Nr]
 	ldr     r0, [r3, #PkmnParty_MaxNr]
 	cmp     r1, r0
-	blt     branch_207a05c
+	blt     branch_207a05c_partyNotFull
 
 	mov     r0, #0x0
 	pop     {r4,r5}
 	bx      lr
 
-branch_207a05c: @ 207a05c :thumb
-	mov     r0, #PkmnData_Size @ 0xec
+branch_207a05c_partyNotFull: @ 207a05c :thumb
+	mov     r0, #PkmnData_Size
 	mul     r0, r1
 	add     r5, r3, r0
 	add     r5, #0x8
@@ -313,6 +313,7 @@ branch_207a170: @ 207a170 :thumb
 r0: Ptr to PokeParty
 */
 .thumb
+.globl Function_207a184
 Function_207a184: @ 207a184 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1

@@ -38,7 +38,7 @@ Function_22561d4: @ 22561d4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x2256218, (=0x22562a1)
 	mov     r1, r4
 	mov     r2, #0x1
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	cmp     r0, #0x0
 	beq     branch_225620c
 	str     r4, [r5, #0x0]
@@ -61,6 +61,9 @@ branch_2256212: @ 2256212 :thumb
 
 
 .word 0x22562a1 @ 0x2256218
+
+
+
 .thumb
 Function_225621c: @ 225621c :thumb
 	push    {r4-r6,lr}
@@ -70,7 +73,7 @@ Function_225621c: @ 225621c :thumb
 	mov     r0, #0x0
 	add     r1, sp, #0x4
 	mov     r6, r2
-	blx     0x20cb29c
+	blx     PM_GetBackLight
 	ldr     r0, [sp, #0x4]
 	cmp     r0, #0x1
 	bne     branch_2256238
@@ -434,7 +437,7 @@ Function_225641c: @ 225641c :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, #0xc
 	mov     r1, #0x68
-	bl      0x2006ec0
+	bl      Function_2006ec0
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
 	mov     r0, r5
@@ -557,7 +560,7 @@ Function_22564d8: @ 22564d8 :thumb
 	ldr     r2, [pc, #0x70] @ 0x225655c, (=0x22565f8)
 	mov     r1, #0x6
 	mov     r3, #0x0
-	bl      0x20183c4
+	bl      Function_20183c4
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -569,7 +572,7 @@ Function_22564d8: @ 22564d8 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x65
 	mov     r3, #0x6
-	bl      0x2006e3c
+	bl      Function_2006e3c
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -581,13 +584,13 @@ Function_22564d8: @ 22564d8 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x64
 	mov     r3, #0x6
-	bl      0x2006e60
+	bl      Function_2006e60
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	ldr     r1, [pc, #0x28] @ 0x2256560, (=0x4001000)
 	ldr     r0, [pc, #0x28] @ 0x2256564, (=0xffffe0ff)
 	ldr     r3, [r1, #0x0]
@@ -624,7 +627,7 @@ Function_2256568: @ 2256568 :thumb
 	bl      Function_2256470
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x6
-	bl      0x2019044
+	bl      Function_2019044
 	mov     r0, r5
 	bl      Function_22564c4
 	pop     {r3-r5,pc}
@@ -650,17 +653,15 @@ Function_2256588: @ 2256588 :thumb
 	bl      0x22558c4
 	mov     r0, #0x1
 	mov     r1, r0
-	blx     0x20cb144
+	blx     PM_SetBackLight
 	b       branch_22565c8
-@ 0x22565ba
 
-.thumb
 branch_22565ba: @ 22565ba :thumb
 	mov     r1, #0x1
 	bl      0x22558c4
 	mov     r0, #0x1
 	mov     r1, #0x0
-	blx     0x20cb144
+	blx     PM_SetBackLight
 branch_22565c8: @ 22565c8 :thumb
 	mov     r0, r6
 	bl      Function_22564c4

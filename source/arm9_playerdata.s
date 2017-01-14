@@ -81,7 +81,7 @@ thumb_func_end LoadPlayerDataAdress_26
 Function_2025e68: @ 2025e68 :thumb
 	mov     r0, #0x20
 	bx      lr
-@ 0x2025e6c
+@ AllocTrainerData
 
 
 thumb_func_start AllocTrainerData
@@ -173,6 +173,7 @@ branch_2025ed4: @ 2025ed4 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_2025ee0
 Function_2025ee0: @ 2025ee0 :thumb
 	ldr     r3, =Function_2023df0+1
 	mov     r2, r0
@@ -196,6 +197,7 @@ Function_2025ef0_Dummy: @ 2025ef0 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_2025ef4
 Function_2025ef4: @ 2025ef4 :thumb
 	ldr     r3, =Function_2023d28+1
 	mov     r2, r0

@@ -7,16 +7,17 @@ FX_Div: @ 20bcfd0 :arm
 	bl      FX_DivAsync
 	bl      FX_GetDivResult
 	ldmfd   sp!, {r3,pc}
-@ 0x20bcfe0
+@ FX_Inv
 
 
 .arm
+.globl FX_Inv
 FX_Inv: @ 20bcfe0 :arm
 	stmfd   sp!, {r3,lr}
 	bl      FX_InvAsync
 	bl      FX_GetDivResult
 	ldmfd   sp!, {r3,pc}
-@ 0x20bcff0
+@ FX_Sqrt
 
 
 .arm
@@ -141,6 +142,7 @@ FX_DivAsync: @ 20bd0dc :arm
 
 
 .arm
+.globl Function_20bd104
 Function_20bd104: @ 20bd104 :arm
 	ldr     r2, [pc, #0x2c] @ [0x20bd138] (=REG_DIVCNT)
 	mov     r3, #0x0
@@ -194,6 +196,7 @@ branch_20bd15c: @ 20bd15c :arm
 
 
 .arm
+.globl VEC_Add
 VEC_Add: @ 20bd17c :arm
 	ldr     r12, [r0]
 	ldr     r3, [r1]
@@ -211,7 +214,7 @@ VEC_Add: @ 20bd17c :arm
 	str     r0, [r2, #0x8]
 
 	bx      lr
-@ 0x20bd1b0
+@ VEC_Subtract
 
 
 .arm
@@ -237,6 +240,7 @@ VEC_Subtract: @ 20bd1b0 :arm
 
 
 .arm
+.globl Function_20bd1e4
 Function_20bd1e4: @ 20bd1e4 :arm
 	ldrsh   r12, [r0]
 	ldrsh   r3, [r1]
@@ -367,10 +371,11 @@ VEC_Fx16CrossProduct: @ 20bd31c :arm
 	mov     r0, r1, asr #12
 	strh    r0, [r2, #0x4]
 	ldmfd   sp!, {r4-r6,pc}
-@ 0x20bd384
+@ VEC_Mag
 
 
 .arm
+.globl VEC_Mag
 VEC_Mag: @ 20bd384 :arm
 	ldr     r1, [r0, #0x4]
 	ldr     r2, [r0]
@@ -403,6 +408,7 @@ branch_20bd3bc: @ 20bd3bc :arm
 
 
 .arm
+.globl VEC_Normalize
 VEC_Normalize: @ 20bd3e4 :arm
 	stmfd   sp!, {r3-r9,lr}
 	ldr     r2, [r0, #0x4]
@@ -482,6 +488,7 @@ branch_20bd458: @ 20bd458 :arm
 
 
 .arm
+.globl VEC_Fx16Normalize
 VEC_Fx16Normalize: @ 20bd4fc :arm
 	stmfd   sp!, {r3-r9,lr}
 	ldrsh   r5, [r0]
@@ -718,6 +725,7 @@ Function_20bd76c: @ 20bd76c :arm
 
 
 .arm
+.globl Function_20bd838
 Function_20bd838: @ 20bd838 :arm
 	stmfd   sp!, {r4,lr}
 	cmp     r0, #0x0
@@ -769,6 +777,7 @@ branch_20bd8b4: @ 20bd8b4 :arm
 
 
 .arm
+.globl Function_20bd8d0
 Function_20bd8d0: @ 20bd8d0 :arm
 	stmfd   sp!, {r4,lr}
 	cmp     r0, #0x0

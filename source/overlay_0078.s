@@ -7,8 +7,8 @@
 
 
 .thumb
-.globl Function_78_21d0d80
-Function_78_21d0d80: @ 21d0d80 :thumb
+.globl ChooseStarterScreenInit
+ChooseStarterScreenInit: @ 21d0d80 :thumb
 	push    {r3-r5,lr}
 	add     sp, #-0x10
 	mov     r2, #0x1
@@ -20,7 +20,7 @@ Function_78_21d0d80: @ 21d0d80 :thumb
 	ldr     r1, [pc, #0x150] @ 0x21d0ee4, (=0x6b4)
 	mov     r0, r4
 	mov     r2, #0x2f
-	bl      MallocSomeDataAndStorePtrIn1c
+	bl      MallocSomeDataAndStorePtrInOverlayData1c
 	mov     r5, r0
 	bne     branch_21d0da4
 	bl      ErrorHandling
@@ -164,12 +164,12 @@ branch_21d0dfe: @ 21d0dfe :thumb
 
 
 .thumb
-.globl Function_78_21d0ef4
-Function_78_21d0ef4: @ 21d0ef4 :thumb
+.globl ChooseStarterScreenLoop
+ChooseStarterScreenLoop: @ 21d0ef4 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r4, r1
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	ldr     r2, [pc, #0xa4] @ 0x21d0fa4, (=0x8c3)
 	add     r1, sp, #0x0
 	strh    r2, [r1, #0x0]
@@ -263,12 +263,12 @@ branch_21d0f96: @ 21d0f96 :thumb
 
 
 .thumb
-.globl Function_78_21d0fa8
-Function_78_21d0fa8: @ 21d0fa8 :thumb
+.globl ChooseStarterScreenEnd
+ChooseStarterScreenEnd: @ 21d0fa8 :thumb
 	push    {r4-r6,lr}
 
 	mov     r5, r0
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	mov     r4, r0
 
 	mov     r0, r5
@@ -332,7 +332,7 @@ branch_21d0fda: @ 21d0fda :thumb
 	bl      Function_21d10dc
 	bl      Function_201dc3c
 	mov     r0, r5
-	bl      FreeSomeDataAndStore0In1c
+	bl      FreeSomeDataAndStore0InOverlayData1c
 	mov     r0, #0x2f
 	bl      Function_201807c
 	mov     r0, #0x1

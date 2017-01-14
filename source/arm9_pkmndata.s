@@ -226,6 +226,7 @@ thumb_func_end InitEncryptPkmnData_Part1Again
 
 
 /* Input:
+r0 = Ptr to allocated PkmnData
 r1 = Species
 r2 = Level
 */
@@ -312,6 +313,11 @@ InitPkmnData: @ 2073d80 :thumb
 thumb_func_end InitPkmnData
 
 
+/* Input:
+r0 = Ptr to allocated PkmnData
+r1 = Species
+r3 = Level
+*/
 thumb_func_start InitPkmnDataStructure
 InitPkmnDataStructure: @ 2073e18 :thumb
 	push    {r0-r3}
@@ -347,7 +353,7 @@ branch_2073e42: @ 2073e42 :thumb
 	bne     branch_2073e8a
 	ldr     r7, =0xffff0000
 	mov     r6, r7
-branch_2073e56: @ 2073e56 :thumb
+branch_2073e56_pleaseNoShiny: @ 2073e56 :thumb
 	bl      PRNG
 	mov     r4, r0
 	bl      PRNG
@@ -370,7 +376,7 @@ branch_2073e56: @ 2073e56 :thumb
 	eor     r0, r1
 	eor     r0, r2
 	cmp     r0, #0x8
-	blo     branch_2073e56
+	blo     branch_2073e56_pleaseNoShiny
 	b       branch_2073e92
 
 branch_2073e8a: @ 2073e8a :thumb
@@ -1630,12 +1636,12 @@ Jumppoints_2074626:
 .hword readPkmnDataSinnohRibbon2 - Jumppoints_2074626 - 2 @ 0x8f
 .hword branch_2074a0a - Jumppoints_2074626 - 2 @ 0x90
 .hword branch_2074a24 - Jumppoints_2074626 - 2 @ 0x91
-.hword branch_2074a2c - Jumppoints_2074626 - 2 @ 0x92
-.hword branch_2074a30 - Jumppoints_2074626 - 2 @ 0x93
-.hword branch_2074a34 - Jumppoints_2074626 - 2 @ 0x94
-.hword branch_2074a38 - Jumppoints_2074626 - 2 @ 0x95
-.hword branch_2074a3c - Jumppoints_2074626 - 2 @ 0x96
-.hword branch_2074a40 - Jumppoints_2074626 - 2 @ 0x97
+.hword readPkmnDataDateEggReceived0 - Jumppoints_2074626 - 2 @ 0x92
+.hword readPkmnDataDateEggReceived1 - Jumppoints_2074626 - 2 @ 0x93
+.hword readPkmnDataDateEggReceived2 - Jumppoints_2074626 - 2 @ 0x94
+.hword readPkmnDataDateMet0 - Jumppoints_2074626 - 2 @ 0x95
+.hword readPkmnDataDateMet1 - Jumppoints_2074626 - 2 @ 0x96
+.hword readPkmnDataDateMet2 - Jumppoints_2074626 - 2 @ 0x97
 .hword readPkmnEggLocation - Jumppoints_2074626 - 2 @ 0x98
 .hword readPkmnMetAtLocation - Jumppoints_2074626 - 2 @ 0x99
 .hword readPkmnDataPokerus - Jumppoints_2074626 - 2 @ 0x9a
@@ -2117,27 +2123,27 @@ branch_2074a24: @ 2074a24 :thumb
 	bl      Function_2023d28
 	b       end_ReadBoxPkmnData
 
-branch_2074a2c: @ 2074a2c :thumb
-	ldrb    r4, [r1, #0x10]
+readPkmnDataDateEggReceived0: @ 2074a2c :thumb
+	ldrb    r4, [r1, #0x10]         @ BlockD+0x10
 	b       end_ReadBoxPkmnData
 
-branch_2074a30: @ 2074a30 :thumb
+readPkmnDataDateEggReceived1: @ 2074a30 :thumb
 	ldrb    r4, [r1, #0x11]
 	b       end_ReadBoxPkmnData
 
-branch_2074a34: @ 2074a34 :thumb
+readPkmnDataDateEggReceived2: @ 2074a34 :thumb
 	ldrb    r4, [r1, #0x12]
 	b       end_ReadBoxPkmnData
 
-branch_2074a38: @ 2074a38 :thumb
+readPkmnDataDateMet0: @ 2074a38 :thumb
 	ldrb    r4, [r1, #0x13]
 	b       end_ReadBoxPkmnData
 
-branch_2074a3c: @ 2074a3c :thumb
+readPkmnDataDateMet1: @ 2074a3c :thumb
 	ldrb    r4, [r1, #0x14]
 	b       end_ReadBoxPkmnData
 
-branch_2074a40: @ 2074a40 :thumb
+readPkmnDataDateMet2: @ 2074a40 :thumb
 	ldrb    r4, [r1, #0x15]
 	b       end_ReadBoxPkmnData
 
@@ -2291,6 +2297,11 @@ thumb_func_end ReadBoxPkmnData
 
 
 
+/* Input:
+r0: Ptr to PkmnData
+r1: PKMNDATA_X
+r2: Ptr to Value that is set
+*/
 thumb_func_start SetPkmnData
 SetPkmnData: @ 2074b30 :thumb
 	push    {r4-r6,lr}
@@ -2373,6 +2384,11 @@ branch_2074bbc: @ 2074bbc :thumb
 thumb_func_end SetPkmnData
 
 
+/* Input:
+r0: Ptr to PkmnData
+r1: PKMNDATA_X
+r2: Ptr to Value that is set
+*/
 thumb_func_start WritePkmnData
 WritePkmnData: @ 2074bc0 :thumb
 	push    {r3,lr}
@@ -2381,6 +2397,7 @@ WritePkmnData: @ 2074bc0 :thumb
 	sub     r0, #0xa0
 	cmp     r0, #0xb
 	bhi     branch_2074c58
+
 	add     r0, r0, r0
 	add     r0, pc
 	ldrh    r0, [r0, #0x6]
@@ -2557,6 +2574,11 @@ branch_2074cd4: @ 2074cd4 :thumb
 thumb_func_end SetBoxPkmnData
 
 
+/* Input:
+r0: Ptr to PkmnData
+r1: PKMNDATA_X
+r2: Ptr to Value that is set
+*/
 thumb_func_start WriteBoxPkmnData
 WriteBoxPkmnData: @ 2074cd8 :thumb
 	push    {r3-r7,lr}
@@ -2724,7 +2746,7 @@ Jumppoints_2074d2c:
 .hword branch_2075108 - Jumppoints_2074d2c - 2 @ 0x72
 .hword branch_2075234 - Jumppoints_2074d2c - 2 @ 0x73
 .hword branch_207525a - Jumppoints_2074d2c - 2 @ 0x74
-.hword branch_207512e - Jumppoints_2074d2c - 2 @ 0x75
+.hword writePkmnDataNickname - Jumppoints_2074d2c - 2 @ 0x75
 .hword branch_2075110 - Jumppoints_2074d2c - 2 @ 0x76
 .hword branch_2075172 - Jumppoints_2074d2c - 2 @ 0x77
 .hword branch_2075146 - Jumppoints_2074d2c - 2 @ 0x78
@@ -2753,9 +2775,9 @@ Jumppoints_2074d2c:
 .hword branch_2075194 - Jumppoints_2074d2c - 2 @ 0x8f
 .hword branch_20751e2 - Jumppoints_2074d2c - 2 @ 0x90
 .hword branch_20751f6 - Jumppoints_2074d2c - 2 @ 0x91
-.hword branch_2075204 - Jumppoints_2074d2c - 2 @ 0x92
-.hword branch_207520c - Jumppoints_2074d2c - 2 @ 0x93
-.hword branch_2075214 - Jumppoints_2074d2c - 2 @ 0x94
+.hword writePkmnDataDateEggReceived0 - Jumppoints_2074d2c - 2 @ 0x92
+.hword writePkmnDataDateEggReceived1 - Jumppoints_2074d2c - 2 @ 0x93
+.hword writePkmnDataDateEggReceived2 - Jumppoints_2074d2c - 2 @ 0x94
 .hword branch_207521c - Jumppoints_2074d2c - 2 @ 0x95
 .hword branch_2075224 - Jumppoints_2074d2c - 2 @ 0x96
 .hword branch_207522c - Jumppoints_2074d2c - 2 @ 0x97
@@ -3208,7 +3230,7 @@ branch_2075110: @ 2075110 :thumb
 	and     r1, r2
 	orr     r0, r1
 	str     r0, [r5, #0x10]
-branch_207512e: @ 207512e :thumb
+writePkmnDataNickname: @ 207512e :thumb
 	mov     r2, #0x0
 branch_2075130: @ 2075130 :thumb
 	ldrh    r1, [r4, #0x0]
@@ -3220,6 +3242,7 @@ branch_2075130: @ 2075130 :thumb
 	str     r0, [sp, #0x8]
 	cmp     r2, #0xb
 	blo     branch_2075130
+
 	add     sp, #0x50
 	pop     {r3-r7,pc}
 
@@ -3329,19 +3352,19 @@ branch_20751f6: @ 20751f6 :thumb
 	add     sp, #0x50
 	pop     {r3-r7,pc}
 
-branch_2075204: @ 2075204 :thumb
+writePkmnDataDateEggReceived0: @ 2075204 :thumb
 	ldrb    r0, [r4, #0x0]
 	add     sp, #0x50
 	strb    r0, [r6, #0x10]
 	pop     {r3-r7,pc}
 
-branch_207520c: @ 207520c :thumb
+writePkmnDataDateEggReceived1: @ 207520c :thumb
 	ldrb    r0, [r4, #0x0]
 	add     sp, #0x50
 	strb    r0, [r6, #0x11]
 	pop     {r3-r7,pc}
 
-branch_2075214: @ 2075214 :thumb
+writePkmnDataDateEggReceived2: @ 2075214 :thumb
 	ldrb    r0, [r4, #0x0]
 	add     sp, #0x50
 	strb    r0, [r6, #0x12]
@@ -5315,6 +5338,7 @@ CheckIfShinyPkmn: @ 2075e38 :thumb
 	eor     r0, r2
 	cmp     r0, #8
 	bhs     notShinyPkmn
+
 	mov     r0, #0x1
 	b       isShinyPkmn
 
@@ -7339,7 +7363,7 @@ Function_2076b00: @ 2076b00 :thumb
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	pop     {r3,pc}
-@ 0x2076b10
+@ Function_2076b10_Dummy
 
 
 thumb_func_start Function_2076b10_Dummy
@@ -8225,7 +8249,7 @@ AddMoveToPkmnData: @ 20770d4 :thumb
 	add     sp, #-0x8
 	mov     r5, r1
 	ldr     r1, =0xffff
-	mov     r6, r0
+	mov     r6, r0              @ Pointer to PkmnData
 	str     r1, [sp, #0x4]
 	bl      InitEncryptPkmnData_Part1
 	mov     r4, #0x0
@@ -8233,7 +8257,7 @@ AddMoveToPkmnData: @ 20770d4 :thumb
 	mov     r7, r4
 branch_20770ea: @ 20770ea :thumb
 	mov     r1, r4              @ MoveNr
-	mov     r0, r6
+	mov     r0, r6              @ Pointer to PkmnData
 	add     r1, #PKMNDATA_MOVE1
 	mov     r2, r7
 	bl      GetBoxPkmnData
@@ -8242,7 +8266,7 @@ branch_20770ea: @ 20770ea :thumb
 	bne     branch_207710c
 
 	lsl     r2, r4, #24
-	mov     r0, r6
+	mov     r0, r6              @ Pointer to PkmnData
 	mov     r1, r5              @ MoveID
 	lsr     r2, r2, #24         @ MoveNr
 	bl      SetPkmnDataMove
@@ -8433,6 +8457,7 @@ thumb_func_end Call_SetPkmnDataMove
 
 
 /*
+r0 = Ptr to PkmnData
 r1 = MoveID
 r2 = MoveNr
 */
@@ -8936,6 +8961,7 @@ Function_20775a4: @ 20775a4 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_20775c4
 Function_20775c4: @ 20775c4 :thumb
 	push    {r3,lr}
 	add     sp, #-0x8
@@ -9928,6 +9954,7 @@ branch_2077b86: @ 2077b86 :thumb
 
 
 .thumb
+.globl Function_2077b8c
 Function_2077b8c: @ 2077b8c :thumb
 	push    {r3-r7,lr}
 	str     r0, [sp, #0x0]
@@ -10346,17 +10373,23 @@ Function_2077e3c: @ 2077e3c :thumb
 thumb_func_end Function_2077e3c
 
 
-thumb_func_start InitHPAndStatus
-InitHPAndStatus: @ 2077e64 :thumb
+/* Input:
+r0: Ptr to PkmnData
+r1: TrainerDataAdress
+r2: flags?
+r3: GetMapName
+*/
+thumb_func_start InitMetDataOTIDHPStatus
+InitMetDataOTIDHPStatus: @ 2077e64 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0xc
-	ldr     r6, [sp, #0x20]
-	mov     r5, r0
-	str     r6, [sp, #0x0]
-	ldr     r6, [sp, #0x24]
+	ldr     r6, [sp, #0x20]         @ flags? #0x18
+	mov     r5, r0                  @ Ptr to PkmnData
+	str     r6, [sp, #0x0]          @ flags? #0x18
+	ldr     r6, [sp, #0x24]         @ flags (the same as for AllocPkmnData)
 	mov     r4, r2
-	str     r6, [sp, #0x4]
-	bl      Function_2077ea4
+	str     r6, [sp, #0x4]          @ flags (the same as for AllocPkmnData)
+	bl      SetPkmnDateMetOTIDOriginGamePokeballEncounterType
 	cmp     r4, #0xe
 	bne     branch_2077ea0
 
@@ -10381,20 +10414,29 @@ branch_2077ea0: @ 2077ea0 :thumb
 
 	add     sp, #0xc
 	pop     {r3-r6,pc}
-thumb_func_end InitHPAndStatus
+thumb_func_end InitMetDataOTIDHPStatus
 
 
-.thumb
-Function_2077ea4: @ 2077ea4 :thumb
+/* Input:
+r0: Ptr to PkmnData
+r1: TrainerDataAdress
+Stack:
+0x18 Pokeball
+0x20 Encountertype
+0x20 flags? #0x18
+0x24 flags (the same as for AllocPkmnData)
+*/
+thumb_func_start SetPkmnDateMetOTIDOriginGamePokeballEncounterType
+SetPkmnDateMetOTIDOriginGamePokeballEncounterType: @ 2077ea4 :thumb
 	push    {r0-r3}
 	push    {r3,r4,lr}
 	add     sp, #-0x4
-	ldr     r2, [sp, #0x24]
+	ldr     r2, [sp, #0x24]         @ flags (the same as for AllocPkmnData)
 	mov     r4, r0
-	str     r2, [sp, #0x0]
+	str     r2, [sp, #0x0]         @ flags (the same as for AllocPkmnData)
 
 	mov     r2, #0x0
-	bl      Function_209305c
+	bl      SetPkmnDataDateMetAndOTID
 
 	ldr     r2, =GameIDNr
 	mov     r0, r4
@@ -10420,10 +10462,12 @@ Function_2077ea4: @ 2077ea4 :thumb
 
 .align 2
 .pool
+thumb_func_end SetPkmnDateMetOTIDOriginGamePokeballEncounterType
 
 
 
 .thumb
+.globl Function_2077ee4
 Function_2077ee4: @ 2077ee4 :thumb
 	push    {r4,lr}
 	add     sp, #-0x8
@@ -10445,7 +10489,7 @@ Function_2077ef8: @ 2077ef8 :thumb
 	str     r4, [sp, #0x0]
 	ldr     r4, [sp, #0x14]
 	str     r4, [sp, #0x4]
-	bl      Function_2077ea4
+	bl      SetPkmnDateMetOTIDOriginGamePokeballEncounterType
 	add     sp, #0x8
 	pop     {r4,pc}
 @ 0x2077f0c
@@ -12145,8 +12189,8 @@ Function_2078838: @ 2078838 :thumb
 @ 0x207884c
 
 
-.thumb
-Function_207884c: @ 207884c :thumb
+thumb_func_start CopyTrainerIDtoPkmnOTID
+CopyTrainerIDtoPkmnOTID: @ 207884c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r4, r1
@@ -12167,7 +12211,7 @@ Function_207884c: @ 207884c :thumb
 	str     r0, [sp, #0x8]
 
 	mov     r0, r5
-	mov     r1, #0x9d
+	mov     r1, #PKMNDATA_FEMALEOTGENDER
 	mov     r2, #0x0
 	bl      GetBoxPkmnData
 	str     r0, [sp, #0xc]
@@ -12182,7 +12226,7 @@ Function_207884c: @ 207884c :thumb
 	mov     r6, r0
 
 	mov     r0, r5
-	mov     r1, #0x91
+	mov     r1, #PKMNDATA_91
 	mov     r2, r6
 	mov     r4, #0x0
 	bl      GetBoxPkmnData
@@ -12191,10 +12235,12 @@ Function_207884c: @ 207884c :thumb
 	ldr     r0, [sp, #0x4]
 	cmp     r1, r0
 	bne     branch_20788bc
+
 	ldr     r1, [sp, #0x8]
 	ldr     r0, [sp, #0xc]
 	cmp     r1, r0
 	bne     branch_20788bc
+
 	mov     r0, r7
 	mov     r1, r6
 	bl      Function_2023be0
@@ -12202,6 +12248,7 @@ Function_207884c: @ 207884c :thumb
 	bne     branch_20788bc
 	mov     r4, #0x1
 branch_20788bc: @ 20788bc :thumb
+
 	mov     r0, r6
 	bl      Function_20237bc
 	mov     r0, r7
@@ -12209,7 +12256,7 @@ branch_20788bc: @ 20788bc :thumb
 	mov     r0, r4
 	add     sp, #0x10
 	pop     {r3-r7,pc}
-@ 0x20788ce
+thumb_func_end CopyTrainerIDtoPkmnOTID
 
 
 .align 2, 0
@@ -12291,6 +12338,7 @@ branch_207893a: @ 207893a :thumb
 
 
 .thumb
+.globl Function_207893c
 Function_207893c: @ 207893c :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x1c
@@ -13327,7 +13375,7 @@ Function_20790b0: @ 20790b0 :thumb
 	bl      LoadFromNARC_3
 
 	pop     {r3,pc}
-@ 0x20790c4
+@ LoadMoveData
 
 
 thumb_func_start LoadMoveData

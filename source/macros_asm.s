@@ -9,6 +9,65 @@
 .include "macros/script_plat.s"
 
 
+
+/* macro replacement for "add/sub rn, rn, #value<8"-instruction
+
+THUMB.2: add/subtract
+  15-11  Must be 00011b for 'add/subtract' instructions
+  10-9   Opcode (0-3)
+           0: ADD Rd,Rs,Rn   ;add register        Rd=Rs+Rn
+           1: SUB Rd,Rs,Rn   ;subtract register   Rd=Rs-Rn
+           2: ADD Rd,Rs,#nn  ;add immediate       Rd=Rs+nn
+           3: SUB Rd,Rs,#nn  ;subtract immediate  Rd=Rs-nn
+         Pseudo/alias opcode with Imm=0:
+           2: MOV Rd,Rs      ;move (affects cpsr) Rd=Rs+0
+  8-6    For Register Operand:
+           Rn - Register Operand (R0..R7)
+         For Immediate Operand:
+           nn - Immediate Value  (0-7)
+  5-3    Rs - Source register       (R0..R7)
+  2-0    Rd - Destination register  (R0..R7)
+             .macro  sum from=0, to=5
+             .long   \from
+             .if     \to-\from
+             sum     "(\from+1)",\to
+             .endif
+             .endm
+*/
+.macro	addown	r1, value
+.ifc \r1, r0
+.equ rn1, 0
+.endif
+.ifc \r1, r1
+.equ rn1, 1
+.endif
+.ifc \r1, r2
+.equ rn1, 2
+.endif
+.ifc \r1, r3
+.equ rn1, 3
+.endif
+.ifc \r1, r4
+.equ rn1, 4
+.endif
+.ifc \r1, r5
+.equ rn1, 5
+.endif
+.ifc \r1, r6
+.equ rn1, 6
+.endif
+.ifc \r1, r7
+.equ rn1, 7
+.endif
+
+.hword  0b00011<<11 | 2<<9 | \value<<6 | rn1<<0 | rn1<<3
+.endm
+
+.macro	subown	r1, r2, value
+.hword  0b00011<<11 | 3<<9 | \value<<6 | \r2<<0 | \r1<<3
+.endm
+
+
 .equ NrOfPkmn, 493 @ 0x1ed
 .equ UnknownPkmnID, NrOfPkmn+1 @ 0x1ee
 .equ UnknownPkmnID2, NrOfPkmn+2 @ 0x1ef
@@ -22,6 +81,7 @@
 
 @ Constants for ReadPkmnData- and WritePkmnData-functions (arm9.s)
 @ Constants for ReadBoxPkmnData-functions (arm9.s) r1
+@ GetBoxPkmnData r1
 @ Constants for GetPkmnData-functions (arm9.s) r1
 @ Constants for GetPkmnData-functions (arm9.s) r1
 @ ChangePkmnData0?
@@ -218,6 +278,12 @@ Block B
 .equ PKMNDATA_ORIGINGAME, 0x7a
 .equ PKMNDATA_90,  0x90
 .equ PKMNDATA_91,  0x91
+.equ PKMNDATA_DATEEGGRECEIVED0,  0x92
+.equ PKMNDATA_DATEEGGRECEIVED1,  0x93
+.equ PKMNDATA_DATEEGGRECEIVED2,  0x94
+.equ PKMNDATA_DATEMET0,  0x95
+.equ PKMNDATA_DATEMET1,  0x96
+.equ PKMNDATA_DATEMET2,  0x97
 .equ PKMNDATA_EGGLOCATION2, 0x98
 .equ PKMNDATA_METATLOCATION2, 0x99
 .equ PKMNDATA_POKERUS,  0x9a
@@ -403,7 +469,7 @@ Block B
 .equ ITEMDATA_39, 0x39
 .equ ITEMDATA_3a, 0x3a
 
-@ Constants for GetTrainerData-function (arm9_trainerdata.s) r1
+@ Constants for GetNPCTrainerData-function (arm9_npctrainerdata.s) r1
 .equ TRAINERDATA_FLAG, 0x0
 .equ TRAINERDATA_CLASS, 0x1
 .equ TRAINERDATA_BATTLETYPE, 0x2

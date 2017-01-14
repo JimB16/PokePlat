@@ -496,6 +496,7 @@ branch_203a2c2: @ 203a2c2 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_203a2c8
 Function_203a2c8: @ 203a2c8 :thumb
 	push    {r3,lr}
 	bl      Function_203a260
@@ -512,6 +513,7 @@ branch_203a2d6: @ 203a2d6 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_203a2dc
 Function_203a2dc: @ 203a2dc :thumb
 	ldr     r1, [pc, #0xc] @ 0x203a2ec, (=0x1d2)
 	cmp     r0, r1
@@ -4518,7 +4520,7 @@ branch_203bd02: @ 203bd02 :thumb
 	mov     r0, r6
 	mov     r2, r5
 	str     r6, [r5, #0x1c]
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	str     r5, [r4, r0]
@@ -4634,7 +4636,7 @@ branch_203be48: @ 203be48 :thumb
 	ldr     r1, [pc, #0x30] @ 0x203be80, (=Unknown_20f1e88)
 	mov     r0, r6
 	mov     r2, r5
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	str     r5, [r4, r0]
@@ -5197,7 +5199,7 @@ branch_203c26a: @ 203c26a :thumb
 	strb    r1, [r0, #0x0]
 	ldr     r1, [pc, #0x44] @ 0x203c2d0, (=Unknown_20f1e88)
 	mov     r0, r6
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
@@ -5770,7 +5772,7 @@ Function_203c668: @ 203c668 :thumb
 	ldr     r1, [pc, #0x18] @ 0x203c708, (=Unknown_20f1e88)
 	mov     r0, r5
 	mov     r2, r4
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	str     r4, [r6, r0]
@@ -6615,7 +6617,7 @@ branch_203cc78: @ 203cc78 :thumb
 
 
 .thumb
-Function_203cc84: @ 203cc84 :thumb
+AfterContinueGameDiaryEnd_Init: @ 203cc84 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      LoadPtrToOverWorldDataIn18
@@ -6645,28 +6647,30 @@ branch_203cca8: @ 203cca8 :thumb
 
 
 .thumb
-Function_203ccb4: @ 203ccb4 :thumb
+AfterContinueGameEnd_Init: @ 203ccb4 :thumb
 	push    {r3,lr}
 	bl      InitOverWorldData
-	ldr     r1, [pc, #0xc] @ 0x203ccc8, (=RAM_21c07dc)
+	ldr     r1, =RAM_21c07dc
 	str     r0, [r1, #0x0]
+
 	bl      Function_20535cc
+
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x203ccc6
 
 .align 2
-.word RAM_21c07dc @ 0x203ccc8
+.pool
 
 
 
 /* Input:
-r0: ?
+r0: Ptr to OverlayData
 */
 .thumb
-Function_203cccc: @ 203cccc :thumb
+AfterContinueGame_Loop: @ 203cccc :thumb
 	push    {r3,lr}
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	bl      Function_203ceec
 	cmp     r0, #0x0
 	beq     branch_203ccde
@@ -6682,26 +6686,26 @@ branch_203ccde: @ 203ccde :thumb
 
 .align 2, 0
 .thumb
-Function_203cce4: @ 203cce4 :thumb
+AfterContinueGame_End: @ 203cce4 :thumb
 	push    {r3,lr}
 
 	bl      Function_203ce6c
 
-	ldr     r0, [pc, #0xc] @ 0x203ccf8, (=77)
-	ldr     r1, [pc, #0xc] @ 0x203ccfc, (=0x21d742c)
-	bl      SetOverlayToLoad
+	ldr     r0, =OverlayNr77
+	ldr     r1, =JumpTable_TitleScreen
+	bl      SetOverlayJumpTableDataToLoad
 
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x203ccf6
 
 .align 2
-.word 77 @ 0x203ccf8
-.word 0x21d742c @ 0x203ccfc
+.pool
 
 
 
 .thumb
+.globl Function_203cd00
 Function_203cd00: @ 203cd00 :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -6719,7 +6723,7 @@ branch_203cd10: @ 203cd10 :thumb
 	bl      ErrorHandling
 branch_203cd1c: @ 203cd1c :thumb
 
-	ldr     r0, [pc, #0x1c] @ 0x203cd3c, (=0x5)
+	ldr     r0, [pc, #0x1c] @ 0x203cd3c, (=OverlayNr5)
 	mov     r1, #0x2
 	bl      LoadOverlay
 	mov     r1, #0x0
@@ -6727,20 +6731,21 @@ branch_203cd1c: @ 203cd1c :thumb
 	ldr     r0, [r4, #0x0]
 	mov     r2, #0xb
 	str     r1, [r0, #0x8]
-	ldr     r0, [pc, #0x10] @ 0x203cd40, (=0x21f89b0)
+	ldr     r0, [pc, #0x10] @ 0x203cd40, (=JumpTable_5_OverWorldEngine)
 	mov     r1, r4
-	bl      AllocOverlayData
+	bl      AllocAndInitOverlayData
 	ldr     r1, [r4, #0x0]
 	str     r0, [r1, #0x0]
 	pop     {r4,pc}
 @ 0x203cd3c
 
-.word 0x5 @ 0x203cd3c
-.word 0x21f89b0 @ 0x203cd40
+.word OverlayNr5 @ 0x203cd3c
+.word JumpTable_5_OverWorldEngine @ 0x203cd40
 
 
 
 .thumb
+.globl Function_203cd44
 Function_203cd44: @ 203cd44 :thumb
 	mov     r1, #0x0
 	str     r1, [r0, #0x68]
@@ -6750,6 +6755,7 @@ Function_203cd44: @ 203cd44 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_203cd4c
 Function_203cd4c: @ 203cd4c :thumb
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0x0]
@@ -6801,8 +6807,13 @@ branch_203cd80: @ 203cd80 :thumb
 @ 0x203cd84
 
 
-.thumb
-Function_203cd84: @ 203cd84 :thumb
+/* Input:
+r0: OverWorldData
+r1: Ptr to JumpTable
+r2: Ptr to Data
+*/
+thumb_func_start OverWorldData_AllocAndInitOverlayData
+OverWorldData_AllocAndInitOverlayData: @ 203cd84 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	ldr     r0, [r5, #0x0]
@@ -6817,16 +6828,16 @@ branch_203cd98: @ 203cd98 :thumb
 	mov     r0, r5
 	bl      Function_203cd44
 
-	mov     r0, r4
+	mov     r0, r4          @ Ptr to JumpTable
 	mov     r1, r6
 	mov     r2, #0xb
-	bl      AllocOverlayData
+	bl      AllocAndInitOverlayData
 
 	ldr     r1, [r5, #0x0]
 	str     r0, [r1, #0x4]
 
 	pop     {r4-r6,pc}
-@ 0x203cdae
+thumb_func_end OverWorldData_AllocAndInitOverlayData
 
 
 thumb_func_start InitOverWorldData
@@ -6853,7 +6864,7 @@ InitOverWorldData: @ 203cdb0 :thumb
 	mov     r0, r5
 	mov     r1, #OverWorldData_size
 	mov     r2, #0xb
-	bl      MallocSomeDataAndStorePtrIn1c
+	bl      MallocSomeDataAndStorePtrInOverlayData1c
 
 	mov     r1, #0x0
 	mov     r2, #OverWorldData_size
@@ -6938,7 +6949,7 @@ thumb_func_end InitOverWorldData
 Function_203ce6c: @ 203ce6c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	bl      LoadPtrToSomeDataIn1c
+	bl      LoadOverlayData1c
 	mov     r4, r0
 
 	ldr     r0, [r4, #OverWorldData_2c]
@@ -6971,7 +6982,7 @@ Function_203ce6c: @ 203ce6c :thumb
 	bl      free
 
 	mov     r0, r5
-	bl      FreeSomeDataAndStore0In1c
+	bl      FreeSomeDataAndStore0InOverlayData1c
 
 	mov     r0, #0x5b
 	bl      Function_201807c
@@ -6994,7 +7005,7 @@ Function_203cecc: @ 203cecc :thumb
 	cmp     r0, #0x0
 	beq     branch_203cee8
 
-	bl      HandleOverlays_2
+	bl      CallOverlayDataJumpTable
 	cmp     r0, #0x0
 	beq     branch_203cee8
 
@@ -7041,7 +7052,7 @@ branch_203cf0e: @ 203cf0e :thumb
 	cmp     r0, #0x0
 	bne     branch_203cf36
 
-	ldr     r0, [pc, #0x34] @ 0x203cf58, (=0x5)
+	ldr     r0, =OverlayNr5
 	bl      UnloadOverlay
 	b       branch_203cf36
 
@@ -7078,7 +7089,8 @@ branch_203cf54: @ 203cf54 :thumb
 	pop     {r4,pc}
 @ 0x203cf58
 
-.word 0x5 @ 0x203cf58
+.align 2
+.pool
 
 
 
@@ -7113,7 +7125,7 @@ branch_203cf7c: @ 203cf7c :thumb
 	bl      Function_205f490
 	ldr     r3, [pc, #0x198] @ 0x203d120, (=RAM_21bf67c)
 	add     r0, sp, #0x8
-	ldr     r2, [r3, #RAM_21bf67c_48]
+	ldr     r2, [r3, #RAM_21bf67c_48_KeyNewPressed2]
 	ldr     r3, [r3, #RAM_21bf67c_44]
 	lsl     r2, r2, #16
 	lsl     r3, r3, #16

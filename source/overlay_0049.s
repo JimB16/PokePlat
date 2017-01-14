@@ -38,7 +38,7 @@ Function_22561d4: @ 22561d4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x2256218, (=0x225626d)
 	mov     r1, r4
 	mov     r2, #0x1
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	cmp     r0, #0x0
 	beq     branch_225620c
 	str     r4, [r5, #0x0]
@@ -70,7 +70,7 @@ Function_225621c: @ 225621c :thumb
 	mov     r6, r2
 	bl      0x2254540
 	str     r0, [r5, #0x10]
-	bl      0x2056888
+	bl      Function_2056888
 	str     r0, [r5, #0x4]
 	strb    r0, [r5, #0x3]
 	mov     r0, r5
@@ -285,7 +285,7 @@ Function_2256348: @ 2256348 :thumb
 	bne     branch_2256398
 	add     r0, sp, #0x4
 	add     r1, sp, #0x0
-	bl      0x20227a4
+	bl      Function_20227a4
 	cmp     r0, #0x0
 	beq     branch_2256398
 	ldr     r0, [sp, #0x0]
@@ -311,7 +311,7 @@ branch_2256382: @ 2256382 :thumb
 	str     r1, [r4, #0x4]
 	strb    r1, [r4, #0x3]
 	ldr     r0, [r4, #0x10]
-	bl      0x205689c
+	bl      Function_205689c
 	add     sp, #0x8
 	mov     r0, #0x1
 	pop     {r4,pc}
@@ -421,7 +421,7 @@ Function_2256410: @ 2256410 :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, #0xc
 	mov     r1, #0x45
-	bl      0x2006ec0
+	bl      Function_2006ec0
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
 	mov     r0, r5
@@ -562,7 +562,7 @@ Function_22564e4: @ 22564e4 :thumb
 	ldr     r2, [pc, #0x70] @ 0x225656c, (=0x22565f0)
 	mov     r1, #0x6
 	mov     r3, #0x0
-	bl      0x20183c4
+	bl      Function_20183c4
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -574,7 +574,7 @@ Function_22564e4: @ 22564e4 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x42
 	mov     r3, #0x6
-	bl      0x2006e3c
+	bl      Function_2006e3c
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -586,13 +586,13 @@ Function_22564e4: @ 22564e4 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x41
 	mov     r3, #0x6
-	bl      0x2006e60
+	bl      Function_2006e60
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	ldr     r1, [pc, #0x24] @ 0x2256570, (=0x4001000)
 	ldr     r0, [pc, #0x28] @ 0x2256574, (=0xffffe0ff)
 	ldr     r3, [r1, #0x0]
@@ -623,7 +623,7 @@ Function_2256578: @ 2256578 :thumb
 	bl      0x225523c
 	ldr     r0, [r0, #0x4]
 	mov     r1, #0x6
-	bl      0x2019044
+	bl      Function_2019044
 	mov     r0, r4
 	bl      Function_22564d0
 	pop     {r4,pc}

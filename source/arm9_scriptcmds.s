@@ -1754,7 +1754,7 @@ thumb_func_start WaitButton
 WaitButton: @ 2040204 :thumb
 	push    {r4,lr}
 	ldr     r1, =RAM_21bf67c
-	ldr     r2, [r1, #RAM_21bf67c_48]
+	ldr     r2, [r1, #RAM_21bf67c_48_KeyNewPressed2]
 	mov     r1, #0x3
 	mov     r3, r2
 	tst     r3, r1
@@ -1848,7 +1848,7 @@ Function_2040284: @ 2040284 :thumb
 .thumb
 Function_2040294: @ 2040294 :thumb
 	ldr     r0, =RAM_21bf67c
-	ldr     r1, [r0, #RAM_21bf67c_48]
+	ldr     r1, [r0, #RAM_21bf67c_48_KeyNewPressed2]
 	mov     r0, #0x3
 	tst     r0, r1
 	beq     branch_20402a2
@@ -2401,7 +2401,7 @@ Function_2040670: @ 2040670 :thumb
 branch_20406aa: @ 20406aa :thumb
 	ldr     r0, [pc, #0x64] @ 0x2040710, (=RAM_21bf67c)
 	mov     r1, #0x40
-	ldr     r0, [r0, #RAM_21bf67c_48]
+	ldr     r0, [r0, #RAM_21bf67c_48_KeyNewPressed2]
 	tst     r1, r0
 	beq     branch_20406b8
 	mov     r5, #0x0
@@ -2497,7 +2497,7 @@ Function_2040730: @ 2040730 :thumb
 	mov     r4, r0
 	ldr     r0, [pc, #0x64] @ 0x20407ac, (=RAM_21bf67c)
 	ldr     r1, [pc, #0x68] @ 0x20407b0, (=0xffff)
-	ldr     r2, [r0, #RAM_21bf67c_48]
+	ldr     r2, [r0, #RAM_21bf67c_48_KeyNewPressed2]
 	mov     r0, #0x3
 	mov     r3, r2
 	tst     r3, r0
@@ -3316,7 +3316,7 @@ ScriptCmd_Multirow: @ 2040d08 :thumb
 
 
 .thumb
-Function_2040d34: @ 2040d34 :thumb
+ScriptCmd_33a: @ 2040d34 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -3334,7 +3334,7 @@ Function_2040d34: @ 2040d34 :thumb
 @ 0x2040d54
 
 .thumb
-Function_2040d54: @ 2040d54 :thumb
+ScriptCmd_33b: @ 2040d54 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -4863,7 +4863,7 @@ branch_2041852: @ 2041852 :thumb
 
 .align 2, 0
 .thumb
-Function_2041860: @ 2041860 :thumb
+ScriptCmd_2d0: @ 2041860 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -4928,7 +4928,7 @@ branch_20418d2: @ 20418d2 :thumb
 
 .align 2, 0
 .thumb
-Function_20418e0: @ 20418e0 :thumb
+ScriptCmd_2d4: @ 20418e0 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -5009,7 +5009,7 @@ branch_2041978: @ 2041978 :thumb
 
 
 .thumb
-Function_2041984: @ 2041984 :thumb
+ScriptCmd_2db: @ 2041984 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -6704,13 +6704,13 @@ ScriptCmd_StartWfc: @ 20425c0 :thumb
 @ 0x20425e0
 
 
-.thumb
+thumb_func_start ScriptCmd_ChooseStarter
 ScriptCmd_ChooseStarter: @ 20425e0 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
 	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	ldr     r0, [r0]
 	mov     r1, #0x14
 	bl      ScriptHandler_ExitStandard
 	mov     r4, r0
@@ -6723,16 +6723,16 @@ ScriptCmd_ChooseStarter: @ 20425e0 :thumb
 
 	mov     r0, r5
 	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	ldr     r0, [r0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadPlayerDataAdress
 	str     r0, [r6, #0x4]
 
 	mov     r0, r5
 	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	ldr     r0, [r0]
 	ldr     r1, [r4, #0x0]
-	bl      Function_203e0c0
+	bl      OverWorldData_InitChooseScreen
 
 	ldr     r1, =Function_2041d60+1
 	mov     r0, r5
@@ -6744,20 +6744,21 @@ ScriptCmd_ChooseStarter: @ 20425e0 :thumb
 
 .align 2
 .pool
+thumb_func_end ScriptCmd_ChooseStarter
 
 
 
-.thumb
+thumb_func_start ScriptCmd_BattleStarter
 ScriptCmd_BattleStarter: @ 2042628 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	ldr     r0, [r0]
 	mov     r1, #0x14
 	bl      ScriptHandler_ExitStandard
 	add     r5, #ScriptHandler_80
 	mov     r4, r0
-	ldr     r0, [r5, #ScriptHandler_80_0]
+	ldr     r0, [r5]
 	ldr     r0, [r0, #0xc]
 	bl      LoadFlagAdress
 
@@ -6772,7 +6773,7 @@ ScriptCmd_BattleStarter: @ 2042628 :thumb
 
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x2042658
+thumb_func_end ScriptCmd_BattleStarter
 
 
 .thumb
@@ -6787,12 +6788,9 @@ Function_2042658: @ 2042658 :thumb
 	beq     branch_204266c
 	mov     r0, #0x1
 	b       branch_204266e
-@ 0x204266c
 
-.thumb
 branch_204266c: @ 204266c :thumb
 	mov     r0, #0x0
-.thumb
 branch_204266e: @ 204266e :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
@@ -6806,8 +6804,8 @@ branch_204266e: @ 204266e :thumb
 	cmp     r0, #0x0
 	beq     branch_204268a
 	bl      ErrorHandling
-.thumb
 branch_204268a: @ 204268a :thumb
+
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -6885,8 +6883,6 @@ Function_20426e8: @ 20426e8 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_2042718: @ 2042718 :thumb
 	push    {r4-r7,lr}
@@ -7914,7 +7910,7 @@ ScriptCmd_EndTrainerBattle: @ 2042e64 :thumb
 	ldr     r0, [sp, #0x0]
 	ldr     r2, [r6, #0x0]
 	mov     r3, #0xb
-	bl      LoadTrainerTbl_2
+	bl      LoadNPCTrainerTbl_2
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      ScriptHandler_ExitStandard
@@ -8828,7 +8824,7 @@ Function_2043540: @ 2043540 :thumb
 
 .align 2, 0
 .thumb
-Function_2043568: @ 2043568 :thumb
+ScriptCmd_2d6: @ 2043568 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -8840,7 +8836,7 @@ Function_2043568: @ 2043568 :thumb
 
 
 .thumb
-Function_2043578: @ 2043578 :thumb
+ScriptCmd_2d7: @ 2043578 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -15225,7 +15221,7 @@ Function_20462f4: @ 20462f4 :thumb
 
 
 .thumb
-Function_2046314: @ 2046314 :thumb
+ScriptCmd_2d8: @ 2046314 :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	ldr     r2, [r1, #0x8]
@@ -18712,8 +18708,6 @@ ScriptCmd_SetNaturePokemon: @ 2047c30 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_2047c68: @ 2047c68 :thumb
 	push    {r4-r6,lr}
@@ -18936,11 +18930,10 @@ Function_2047de8: @ 2047de8 :thumb
 @ 0x2047e1e
 
 
+
 .align 2, 0
-
-
 .thumb
-Function_2047e20: @ 2047e20 :thumb
+ScriptCmd_33c: @ 2047e20 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -18971,7 +18964,7 @@ Function_2047e20: @ 2047e20 :thumb
 
 
 .thumb
-Function_2047e58: @ 2047e58 :thumb
+ScriptCmd_33d: @ 2047e58 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19002,7 +18995,7 @@ Function_2047e58: @ 2047e58 :thumb
 
 
 .thumb
-Function_2047e90: @ 2047e90 :thumb
+ScriptCmd_33e: @ 2047e90 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19033,7 +19026,7 @@ Function_2047e90: @ 2047e90 :thumb
 
 
 .thumb
-Function_2047ec8: @ 2047ec8 :thumb
+ScriptCmd_33f: @ 2047ec8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19064,7 +19057,7 @@ Function_2047ec8: @ 2047ec8 :thumb
 
 
 .thumb
-Function_2047f00: @ 2047f00 :thumb
+ScriptCmd_340: @ 2047f00 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19095,7 +19088,7 @@ Function_2047f00: @ 2047f00 :thumb
 
 
 .thumb
-Function_2047f38: @ 2047f38 :thumb
+ScriptCmd_341: @ 2047f38 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 
@@ -19137,7 +19130,7 @@ Function_2047f38: @ 2047f38 :thumb
 
 .align 2, 0
 .thumb
-Function_2047f80: @ 2047f80 :thumb
+ScriptCmd_342: @ 2047f80 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19163,7 +19156,7 @@ Function_2047f80: @ 2047f80 :thumb
 @ 0x2047fb4
 
 .thumb
-Function_2047fb4: @ 2047fb4 :thumb
+ScriptCmd_343: @ 2047fb4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19192,7 +19185,7 @@ Function_2047fb4: @ 2047fb4 :thumb
 
 .align 2, 0
 .thumb
-Function_2047fec: @ 2047fec :thumb
+ScriptCmd_344: @ 2047fec :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19223,7 +19216,7 @@ Function_2047fec: @ 2047fec :thumb
 
 
 .thumb
-Function_2048024: @ 2048024 :thumb
+ScriptCmd_345: @ 2048024 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19253,7 +19246,7 @@ Function_2048024: @ 2048024 :thumb
 @ 0x2048060
 
 .thumb
-Function_2048060: @ 2048060 :thumb
+ScriptCmd_346: @ 2048060 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -19271,7 +19264,7 @@ Function_2048060: @ 2048060 :thumb
 @ 0x2048080
 
 .thumb
-Function_2048080: @ 2048080 :thumb
+ScriptCmd_347: @ 2048080 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -19292,10 +19285,7 @@ Function_2048080: @ 2048080 :thumb
 @ 0x20480a6
 
 
-.align 2, 0
-
-
-.thumb
+thumb_func_start Function_20480a8
 Function_20480a8: @ 20480a8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
@@ -19316,12 +19306,10 @@ Function_20480a8: @ 20480a8 :thumb
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x20480d6
+thumb_func_end Function_20480a8
 
 
 .align 2, 0
-
-
 .thumb
 Function_20480d8: @ 20480d8 :thumb
 	push    {r4-r7,lr}
@@ -23805,9 +23793,8 @@ branch_2049f76: @ 2049f76 :thumb
 
 
 .align 2, 0
-
-
 .thumb
+.globl Function_2049f8c
 Function_2049f8c: @ 2049f8c :thumb
 	ldr     r3, [pc, #0x4] @ 0x2049f94, (=0x20c3ee4)
 	mov     r0, #0x0
@@ -24048,6 +24035,7 @@ branch_204a11e: @ 204a11e :thumb
 
 
 .thumb
+.globl Function_204a124
 Function_204a124: @ 204a124 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
@@ -24293,6 +24281,7 @@ branch_204a316: @ 204a316 :thumb
 
 
 .thumb
+.globl Function_204a32c
 Function_204a32c: @ 204a32c :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -24547,9 +24536,8 @@ branch_204a4c0: @ 204a4c0 :thumb
 
 
 .align 2, 0
-
-
 .thumb
+.globl Function_204a4c8
 Function_204a4c8: @ 204a4c8 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
@@ -24561,7 +24549,7 @@ Function_204a4c8: @ 204a4c8 :thumb
 	beq     branch_204a4dc
 	cmp     r1, #0x3
 	bne     branch_204a53a
-.thumb
+
 branch_204a4dc: @ 204a4dc :thumb
 	cmp     r1, #0x3
 	bne     branch_204a4e8
@@ -24655,6 +24643,7 @@ branch_204a544: @ 204a544 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_204a578
 Function_204a578: @ 204a578 :thumb
 	ldrb    r0, [r0, #0xc]
 	bx      lr
@@ -24662,6 +24651,7 @@ Function_204a578: @ 204a578 :thumb
 
 
 .thumb
+.globl Function_204a57c
 Function_204a57c: @ 204a57c :thumb
 	ldrb    r2, [r0, #0x10]
 	lsl     r1, r2, #31
@@ -24805,7 +24795,9 @@ branch_204a65e: @ 204a65e :thumb
 	pop     {r3-r7,pc}
 @ 0x204a660
 
+
 .thumb
+.globl Function_204a660
 Function_204a660: @ 204a660 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
@@ -24976,12 +24968,13 @@ branch_204a79a: @ 204a79a :thumb
 	pop     {r4-r7,pc}
 @ 0x204a79e
 
-
 .align 2
-
-
 .word 0x270f @ 0x204a7a0
+
+
+
 .thumb
+.globl Function_204a7a4
 Function_204a7a4: @ 204a7a4 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
@@ -25127,13 +25120,14 @@ branch_204a892: @ 204a892 :thumb
 	ldr     r0, [sp, #0x0]
 	mov     r2, #0x4
 	bl      Function_202b758
-.thumb
 branch_204a8c4: @ 204a8c4 :thumb
 	add     sp, #0x10
 	pop     {r3-r7,pc}
 @ 0x204a8c8
 
+
 .thumb
+.globl Function_204a8c8
 Function_204a8c8: @ 204a8c8 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x4
@@ -25292,6 +25286,7 @@ Function_204a9e0: @ 204a9e0 :thumb
 
 
 .thumb
+.globl Function_204a9f8
 Function_204a9f8: @ 204a9f8 :thumb
 	ldrb    r0, [r0, #0xf]
 	bx      lr
@@ -25299,6 +25294,7 @@ Function_204a9f8: @ 204a9f8 :thumb
 
 
 .thumb
+.globl Function_204a9fc
 Function_204a9fc: @ 204a9fc :thumb
 	ldrb    r0, [r0, #0x10]
 	lsl     r0, r0, #29
@@ -25308,6 +25304,7 @@ Function_204a9fc: @ 204a9fc :thumb
 
 
 .thumb
+.globl Function_204aa04
 Function_204aa04: @ 204aa04 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
@@ -26004,6 +26001,7 @@ branch_204ae48: @ 204ae48 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_204ae84
 Function_204ae84: @ 204ae84 :thumb
 	cmp     r0, #0x64
 	bhs     branch_204ae8c
@@ -26053,6 +26051,7 @@ branch_204aebc: @ 204aebc :thumb
 
 
 .thumb
+.globl Function_204aec0
 Function_204aec0: @ 204aec0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
@@ -30720,7 +30719,7 @@ Function_204cfc4: @ 204cfc4 :thumb
 Input:
 r0: Ptr to ScriptHandler-Struct
 */
-.thumb
+thumb_func_start ScriptCmd_GivePokemon
 ScriptCmd_GivePokemon: @ 204cffc :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
@@ -30764,7 +30763,7 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	add     r0, #ScriptHandler_80
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
-	str     r0, [sp, #0x10]
+	str     r0, [sp, #0x10]         @ Item
 
 	@ Load 4. Parameter (ResultVariable)
 	mov     r0, r4
@@ -30778,15 +30777,15 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	ldr     r0, [r5, #OverWorldData_c]
 	bl      LoadPokePartyAdress
 
-	ldr     r0, [sp, #0x10]
+	ldr     r0, [sp, #0x10]         @ Item
 	lsl     r3, r7, #24
-	str     r0, [sp, #0x0]
-	str     r6, [sp, #0x4]
+	str     r0, [sp, #0x0]          @ Item
+	str     r6, [sp, #0x4]          @ GetMapName
 
 	mov     r0, #0x18
 	str     r0, [sp, #0x8]
 
-	ldr     r1, [r5, #0xc]
+	ldr     r1, [r5, #OverWorldData_c]
 	ldr     r2, [sp, #0xc]
 	mov     r0, #0xb
 	lsr     r3, r3, #24
@@ -30796,12 +30795,11 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	mov     r0, #0x0
 	add     sp, #0x14
 	pop     {r4-r7,pc}
-@ 0x204d08a
+thumb_func_end ScriptCmd_GivePokemon
 
 
-.align 2, 0
-.thumb
-Function_204d08c: @ 204d08c :thumb
+thumb_func_start ScriptCmd_198
+ScriptCmd_198: @ 204d08c :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 
@@ -30850,11 +30848,11 @@ branch_204d0e2: @ 204d0e2 :thumb
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
-@ 0x204d0e8
+thumb_func_end ScriptCmd_198
 
 
 .thumb
-Function_204d0e8: @ 204d0e8 :thumb
+ScriptCmd_199: @ 204d0e8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -30908,7 +30906,7 @@ branch_204d14e: @ 204d14e :thumb
 @ 0x204d154
 
 
-.thumb
+thumb_func_start ScriptCmd_GiveEgg
 ScriptCmd_GiveEgg: @ 204d154 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
@@ -30976,11 +30974,10 @@ branch_204d1d4: @ 204d1d4 :thumb
 	mov     r0, #0x0
 	add     sp, #0xc
 	pop     {r4-r7,pc}
-@ 0x204d1da
+thumb_func_end ScriptCmd_GiveEgg
 
 
-.align 2, 0
-.thumb
+thumb_func_start ScriptCmd_98
 ScriptCmd_98: @ 204d1dc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
@@ -31023,11 +31020,10 @@ ScriptCmd_98: @ 204d1dc :thumb
 
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
-@ 0x204d232
+thumb_func_end ScriptCmd_98
 
 
-.align 2, 0
-.thumb
+thumb_func_start ScriptCmd_CheckMove
 ScriptCmd_CheckMove: @ 204d234 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
@@ -31114,7 +31110,7 @@ branch_204d2ce: @ 204d2ce :thumb
 branch_204d2d2: @ 204d2d2 :thumb
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
-@ 0x204d2d6
+thumb_func_end ScriptCmd_CheckMove
 
 
 .align 2, 0
@@ -31261,7 +31257,7 @@ ScriptCmd_CheckIsPokemonPoisoned: @ 204d398 :thumb
 
 
 .thumb
-Function_204d3dc: @ 204d3dc :thumb
+ScriptCmd_1f6: @ 204d3dc :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -32413,7 +32409,7 @@ Function_204dc18: @ 204dc18 :thumb
 
 
 .thumb
-Function_204dc60: @ 204dc60 :thumb
+ScriptCmd_1f0: @ 204dc60 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -32918,7 +32914,7 @@ Function_204dfb0: @ 204dfb0 :thumb
 
 
 .thumb
-Function_204e01c: @ 204e01c :thumb
+ScriptCmd_231: @ 204e01c :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r5, r0
@@ -32972,7 +32968,7 @@ Function_204e01c: @ 204e01c :thumb
 @ 0x204e094
 
 .thumb
-Function_204e094: @ 204e094 :thumb
+ScriptCmd_2b7: @ 204e094 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -33052,13 +33048,13 @@ branch_204e110: @ 204e110 :thumb
 @ 0x204e128
 
 .thumb
-Function_204e128: @ 204e128 :thumb
+ScriptCmd_a0: @ 204e128 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204e12c
 
 .thumb
-Function_204e12c: @ 204e12c :thumb
+ScriptCmd_31c: @ 204e12c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -33141,7 +33137,7 @@ branch_204e1c0: @ 204e1c0 :thumb
 
 
 .thumb
-Function_204e1d0: @ 204e1d0 :thumb
+ScriptCmd_32f: @ 204e1d0 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -33203,7 +33199,7 @@ branch_204e23a: @ 204e23a :thumb
 
 
 .thumb
-Function_204e240: @ 204e240 :thumb
+ScriptCmd_1f1: @ 204e240 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -33244,7 +33240,7 @@ branch_204e260: @ 204e260 :thumb
 
 
 .thumb
-Function_204e28c: @ 204e28c :thumb
+ScriptCmd_1f4: @ 204e28c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33291,7 +33287,7 @@ branch_204e2d2: @ 204e2d2 :thumb
 
 
 .thumb
-Function_204e2e0: @ 204e2e0 :thumb
+ScriptCmd_1f5: @ 204e2e0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -33367,21 +33363,21 @@ branch_204e366: @ 204e366 :thumb
 
 
 .thumb
-Function_204e370: @ 204e370 :thumb
+ScriptCmd_1f2: @ 204e370 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204e374
 
 
 .thumb
-Function_204e374: @ 204e374 :thumb
+ScriptCmd_1f3: @ 204e374 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204e378
 
 
 .thumb
-Function_204e378: @ 204e378 :thumb
+ScriptCmd_2a6: @ 204e378 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33422,7 +33418,7 @@ Function_204e378: @ 204e378 :thumb
 
 
 .thumb
-Function_204e3cc: @ 204e3cc :thumb
+ScriptCmd_157: @ 204e3cc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #ScriptHandler_80
@@ -33461,7 +33457,7 @@ thumb_func_end ScriptCmd_ActivatePokedex
 
 
 .thumb
-Function_204e410: @ 204e410 :thumb
+ScriptCmd_159: @ 204e410 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33573,7 +33569,7 @@ branch_204e4c2: @ 204e4c2 :thumb
 
 .align 2, 0
 .thumb
-Function_204e4d8: @ 204e4d8 :thumb
+ScriptCmd_15e: @ 204e4d8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33642,7 +33638,7 @@ branch_204e53c: @ 204e53c :thumb
 
 
 .thumb
-Function_204e554: @ 204e554 :thumb
+ScriptCmd_15f: @ 204e554 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33655,7 +33651,7 @@ Function_204e554: @ 204e554 :thumb
 
 
 .thumb
-Function_204e568: @ 204e568 :thumb
+ScriptCmd_160: @ 204e568 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33678,7 +33674,7 @@ Function_204e568: @ 204e568 :thumb
 
 .align 2, 0
 .thumb
-Function_204e594: @ 204e594 :thumb
+ScriptCmd_161: @ 204e594 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33691,7 +33687,7 @@ Function_204e594: @ 204e594 :thumb
 
 
 .thumb
-Function_204e5a8: @ 204e5a8 :thumb
+ScriptCmd_162: @ 204e5a8 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33704,7 +33700,7 @@ Function_204e5a8: @ 204e5a8 :thumb
 
 
 .thumb
-Function_204e5bc: @ 204e5bc :thumb
+ScriptCmd_163: @ 204e5bc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33727,7 +33723,7 @@ Function_204e5bc: @ 204e5bc :thumb
 
 .align 2, 0
 .thumb
-Function_204e5e8: @ 204e5e8 :thumb
+ScriptCmd_164: @ 204e5e8 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33740,7 +33736,7 @@ Function_204e5e8: @ 204e5e8 :thumb
 
 
 .thumb
-Function_204e5fc: @ 204e5fc :thumb
+ScriptCmd_165: @ 204e5fc :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33753,7 +33749,7 @@ Function_204e5fc: @ 204e5fc :thumb
 
 
 .thumb
-Function_204e610: @ 204e610 :thumb
+ScriptCmd_166: @ 204e610 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33776,7 +33772,7 @@ Function_204e610: @ 204e610 :thumb
 
 .align 2, 0
 .thumb
-Function_204e63c: @ 204e63c :thumb
+ScriptCmd_167: @ 204e63c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33789,7 +33785,7 @@ Function_204e63c: @ 204e63c :thumb
 
 
 .thumb
-Function_204e650: @ 204e650 :thumb
+ScriptCmd_1cf: @ 204e650 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -33844,7 +33840,7 @@ branch_204e6a8: @ 204e6a8 :thumb
 
 
 .thumb
-Function_204e6ac: @ 204e6ac :thumb
+ScriptCmd_1d0: @ 204e6ac :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -33895,7 +33891,7 @@ branch_204e6fe: @ 204e6fe :thumb
 
 .align 2, 0
 .thumb
-Function_204e704: @ 204e704 :thumb
+ScriptCmd_1d1: @ 204e704 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -34137,7 +34133,7 @@ ScriptCmd_CheckItem: @ 204e864 :thumb
 
 
 .thumb
-Function_204e8bc: @ 204e8bc :thumb
+ScriptCmd_2fe: @ 204e8bc :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -34672,7 +34668,7 @@ ScriptCmd_SendItemType3: @ 204ec98 :thumb
 @ 0x204ecf0
 
 .thumb
-Function_204ecf0: @ 204ecf0 :thumb
+ScriptCmd_90: @ 204ecf0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -34703,7 +34699,7 @@ Function_204ecf0: @ 204ecf0 :thumb
 
 
 .thumb
-Function_204ed2c: @ 204ed2c :thumb
+ScriptCmd_91: @ 204ed2c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -34734,7 +34730,7 @@ Function_204ed2c: @ 204ed2c :thumb
 
 
 .thumb
-Function_204ed68: @ 204ed68 :thumb
+ScriptCmd_92: @ 204ed68 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -34763,7 +34759,7 @@ Function_204ed68: @ 204ed68 :thumb
 
 .align 2, 0
 .thumb
-Function_204eda4: @ 204eda4 :thumb
+ScriptCmd_1c6: @ 204eda4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -34800,7 +34796,7 @@ Function_204eda4: @ 204eda4 :thumb
 
 
 .thumb
-Function_204edec: @ 204edec :thumb
+ScriptCmd_1c7: @ 204edec :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -34841,14 +34837,14 @@ branch_204ee2a: @ 204ee2a :thumb
 
 .align 2, 0
 .thumb
-Function_204ee38: @ 204ee38 :thumb
+ScriptCmd_21e: @ 204ee38 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204ee3c
 
 
 .thumb
-Function_204ee3c: @ 204ee3c :thumb
+ScriptCmd_21f: @ 204ee3c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -34948,14 +34944,14 @@ Function_204ee90: @ 204ee90 :thumb
 
 
 .thumb
-Function_204eefc: @ 204eefc :thumb
+ScriptCmd_220: @ 204eefc :thumb
 	mov     r0, #0x1
 	bx      lr
 @ 0x204ef00
 
 
 .thumb
-Function_204ef00: @ 204ef00 :thumb
+ScriptCmd_221: @ 204ef00 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -34993,7 +34989,7 @@ Function_204ef00: @ 204ef00 :thumb
 
 
 .thumb
-Function_204ef40: @ 204ef40 :thumb
+ScriptCmd_224: @ 204ef40 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -35036,13 +35032,13 @@ Function_204ef40: @ 204ef40 :thumb
 
 .word 0xffff @ 0x204ef9c
 .thumb
-Function_204efa0: @ 204efa0 :thumb
+ScriptCmd_222: @ 204efa0 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204efa4
 
 .thumb
-Function_204efa4: @ 204efa4 :thumb
+ScriptCmd_223: @ 204efa4 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -35086,7 +35082,7 @@ branch_204efda: @ 204efda :thumb
 
 
 .thumb
-Function_204efe8: @ 204efe8 :thumb
+ScriptCmd_225: @ 204efe8 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -35130,7 +35126,7 @@ branch_204f01e: @ 204f01e :thumb
 
 
 .thumb
-Function_204f02c: @ 204f02c :thumb
+ScriptCmd_23f: @ 204f02c :thumb
 	push    {r3,lr}
 	bl      ErrorHandling
 	mov     r0, #0x0
@@ -35142,7 +35138,7 @@ Function_204f02c: @ 204f02c :thumb
 
 
 .thumb
-Function_204f038: @ 204f038 :thumb
+ScriptCmd_240: @ 204f038 :thumb
 	push    {r3,lr}
 	bl      ErrorHandling
 	mov     r0, #0x0
@@ -35154,19 +35150,19 @@ Function_204f038: @ 204f038 :thumb
 
 
 .thumb
-Function_204f044: @ 204f044 :thumb
+ScriptCmd_241: @ 204f044 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204f048
 
 .thumb
-Function_204f048: @ 204f048 :thumb
+ScriptCmd_242: @ 204f048 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x204f04c
 
 .thumb
-Function_204f04c: @ 204f04c :thumb
+ScriptCmd_2c5: @ 204f04c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r6, r0
@@ -35279,7 +35275,7 @@ branch_204f0c8: @ 204f0c8 :thumb
 @ 0x204f13c
 
 .thumb
-Function_204f13c: @ 204f13c :thumb
+ScriptCmd_2cc: @ 204f13c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -35610,7 +35606,7 @@ branch_204f358: @ 204f358 :thumb
 
 
 .thumb
-Function_204f360: @ 204f360 :thumb
+ScriptCmd_2d1: @ 204f360 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -35639,7 +35635,7 @@ Function_204f360: @ 204f360 :thumb
 
 .align 2, 0
 .thumb
-Function_204f398: @ 204f398 :thumb
+ScriptCmd_2cf: @ 204f398 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -35949,7 +35945,7 @@ branch_204f5c2: @ 204f5c2 :thumb
 	ldr     r1, [pc, #0x10] @ 0x204f5d4, (=Unknown_20f1e88)
 	mov     r0, r6
 	mov     r2, r4
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	ldr     r0, [r5, #0x8]
 	str     r4, [r0, #0x0]
 	mov     r0, #0x1
@@ -36057,7 +36053,7 @@ Function_204f628: @ 204f628 :thumb
 	ldr     r1, [pc, #0x14] @ 0x204f6ac, (=Unknown_20f410c)
 	mov     r0, r7
 	mov     r2, r4
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	ldr     r0, [r6, #0x8]
 	str     r4, [r0, #0x0]
 	mov     r0, #0x3
@@ -36093,9 +36089,10 @@ branch_204f6c2: @ 204f6c2 :thumb
 @ 0x204f6d6
 
 
+
 .align 2, 0
 .thumb
-Function_204f6d8: @ 204f6d8 :thumb
+ScriptCmd_324: @ 204f6d8 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x30
 	str     r0, [sp, #0x8]
@@ -36327,7 +36324,7 @@ branch_204f83a: @ 204f83a :thumb
 
 
 .thumb
-Function_204f8a8: @ 204f8a8 :thumb
+ScriptCmd_325: @ 204f8a8 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -36417,7 +36414,7 @@ branch_204f940: @ 204f940 :thumb
 
 
 .thumb
-Function_204f950: @ 204f950 :thumb
+ScriptCmd_326: @ 204f950 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -36487,8 +36484,8 @@ branch_204f9c2: @ 204f9c2 :thumb
 
 
 
-.thumb
-Function_204f9d4: @ 204f9d4 :thumb
+thumb_func_start ScriptCmd_32a
+ScriptCmd_32a: @ 204f9d4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -36527,11 +36524,11 @@ Function_204f9d4: @ 204f9d4 :thumb
 	bne     branch_204fa30
 	mov     r0, #0x1
 	strh    r0, [r4, #0x0]
-.thumb
 branch_204fa30: @ 204fa30 :thumb
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
-@ 0x204fa34
+thumb_func_end ScriptCmd_32a
+
 
 .thumb
 Function_204fa34: @ 204fa34 :thumb
@@ -36548,10 +36545,13 @@ Function_204fa34: @ 204fa34 :thumb
 	ldrh    r0, [r6, #0x4]
 	strh    r0, [r4, #0x6]
 branch_204fa4e: @ 204fa4e :thumb
+
 	pop     {r4-r6,pc}
 @ 0x204fa50
 
+
 .thumb
+.globl Function_204fa50
 Function_204fa50: @ 204fa50 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
@@ -36567,6 +36567,7 @@ Function_204fa50: @ 204fa50 :thumb
 	bl      Function_2030280
 	cmp     r4, #0x3
 	bne     branch_204fa88
+
 	mov     r0, r5
 	bl      LoadVariableAreaAdress_17
 	mov     r6, r0
@@ -36577,7 +36578,7 @@ Function_204fa50: @ 204fa50 :thumb
 	mov     r1, #0x6a
 	mov     r3, #0x0
 	bl      Function_20306e4
-.thumb
+
 branch_204fa88: @ 204fa88 :thumb
 	mov     r0, r5
 	bl      LoadVariableAreaAdress_17
@@ -36600,7 +36601,7 @@ branch_204fa88: @ 204fa88 :thumb
 
 .align 2, 0
 .thumb
-Function_204fab4: @ 204fab4 :thumb
+ScriptCmd_2d2: @ 204fab4 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -36753,7 +36754,7 @@ branch_204fbac: @ 204fbac :thumb
 
 .align 2, 0
 .thumb
-Function_204fbb4: @ 204fbb4 :thumb
+ScriptCmd_2d5: @ 204fbb4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -36868,7 +36869,7 @@ branch_204fc72: @ 204fc72 :thumb
 
 .align 2, 0
 .thumb
-Function_204fcac: @ 204fcac :thumb
+ScriptCmd_2d3: @ 204fcac :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -37202,7 +37203,7 @@ branch_204ff06: @ 204ff06 :thumb
 	ldr     r1, [pc, #0x10] @ 0x204ff18, (=Unknown_20f1e88)
 	mov     r0, r6
 	mov     r2, r4
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	ldr     r0, [r5, #0xc]
 	str     r4, [r0, #0x0]
 	mov     r0, #0x1
@@ -37310,7 +37311,7 @@ Function_204ff6c: @ 204ff6c :thumb
 	ldr     r1, [pc, #0x14] @ 0x204fff0, (=Unknown_20f410c)
 	mov     r0, r7
 	mov     r2, r4
-	bl      Function_203cd84
+	bl      OverWorldData_AllocAndInitOverlayData
 	ldr     r0, [r6, #0xc]
 	str     r4, [r0, #0x0]
 	mov     r0, #0x3
@@ -37368,13 +37369,15 @@ branch_205003a: @ 205003a :thumb
 @ 0x205003c
 
 
-.thumb
+thumb_func_start ScriptCmd_2d9
 ScriptCmd_2d9: @ 205003c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
+
 	bl      ScriptHandler_LoadHWord
 	mov     r7, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -37383,6 +37386,7 @@ ScriptCmd_2d9: @ 205003c :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r5, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -37391,6 +37395,7 @@ ScriptCmd_2d9: @ 205003c :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r6, r0
+
 	mov     r0, r4
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -37410,6 +37415,7 @@ ScriptCmd_2d9: @ 205003c :thumb
 	mov     r1, r0
 	cmp     r7, #0x4
 	bhi     branch_205012c
+
 	add     r0, r7, r7
 	add     r0, pc
 	ldrh    r0, [r0, #0x6]
@@ -37435,9 +37441,7 @@ branch_20500b2: @ 20500b2 :thumb
 	bl      Function_2049ec4
 	strh    r0, [r6, #0x0]
 	b       branch_2050134
-@ 0x20500c4
 
-.thumb
 branch_20500c4: @ 20500c4 :thumb
 	cmp     r5, #0x3
 	bne     branch_20500e8
@@ -37454,9 +37458,7 @@ branch_20500c4: @ 20500c4 :thumb
 	bl      Function_2030698
 	strh    r0, [r6, #0x0]
 	b       branch_2050134
-@ 0x20500e8
 
-.thumb
 branch_20500e8: @ 20500e8 :thumb
 	lsl     r2, r5, #24
 	mov     r3, #0x0
@@ -37467,9 +37469,7 @@ branch_20500e8: @ 20500e8 :thumb
 	bl      Function_2030600
 	strh    r0, [r6, #0x0]
 	b       branch_2050134
-@ 0x20500fc
 
-.thumb
 branch_20500fc: @ 20500fc :thumb
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
@@ -37479,54 +37479,44 @@ branch_20500fc: @ 20500fc :thumb
 	lsr     r2, r2, #24
 	bl      Function_2050174
 	b       branch_2050134
-@ 0x205010e
 
-.thumb
 branch_205010e: @ 205010e :thumb
 	cmp     r5, #0x0
 	bne     branch_2050116
 	mov     r2, #0x0
 	b       branch_2050120
-@ 0x2050116
 
-.thumb
 branch_2050116: @ 2050116 :thumb
 	cmp     r5, #0x1
 	bne     branch_205011e
 	mov     r2, #0x1
 	b       branch_2050120
-@ 0x205011e
 
-.thumb
 branch_205011e: @ 205011e :thumb
 	mov     r2, #0x2
-.thumb
 branch_2050120: @ 2050120 :thumb
 	ldr     r0, [r4, #0x74]
 	bl      Function_20502e0
 	add     sp, #0x8
 	mov     r0, #0x1
 	pop     {r3-r7,pc}
-@ 0x205012c
 
-.thumb
 branch_205012c: @ 205012c :thumb
 	bl      ErrorHandling
 	mov     r0, #0x0
 	strh    r0, [r6, #0x0]
-.thumb
 branch_2050134: @ 2050134 :thumb
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r3-r7,pc}
-@ 0x205013a
+thumb_func_end ScriptCmd_2d9
 
 
-.align 2, 0
-.thumb
-Function_205013c: @ 205013c :thumb
+thumb_func_start ScriptCmd_2dc
+ScriptCmd_2dc: @ 205013c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
+
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
@@ -37534,6 +37524,7 @@ Function_205013c: @ 205013c :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r4, r0
+
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -37548,13 +37539,10 @@ Function_205013c: @ 205013c :thumb
 	bl      Function_2050174
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x2050172
+thumb_func_end ScriptCmd_2dc
 
 
-.align 2, 0
-
-
-.thumb
+thumb_func_start Function_2050174
 Function_2050174: @ 2050174 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
@@ -37597,14 +37585,14 @@ branch_20501ac: @ 20501ac :thumb
 	bl      Function_20306e4
 	add     sp, #0x8
 	pop     {r4-r6,pc}
-@ 0x20501d6
+thumb_func_end Function_2050174
 
 
-.align 2, 0
-.thumb
+thumb_func_start ScriptCmd_2da
 ScriptCmd_2da: @ 20501d8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
+
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
@@ -37612,6 +37600,7 @@ ScriptCmd_2da: @ 20501d8 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r4, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -37620,6 +37609,7 @@ ScriptCmd_2da: @ 20501d8 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -37628,13 +37618,13 @@ ScriptCmd_2da: @ 20501d8 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r3, r0
+
 	ldr     r0, [r5, #0x74]
 	mov     r1, r4
 	mov     r2, r6
 	bl      Function_2050224
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
-@ 0x2050224
-
+thumb_func_end ScriptCmd_2da
 
 

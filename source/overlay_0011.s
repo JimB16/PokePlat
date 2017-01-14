@@ -39,7 +39,7 @@ Function_221f81c: @ 221f81c :thumb
 	mov     r0, r5
 	mov     r2, r4
 	lsr     r3, r3, #16
-	bl      0x2002fbc
+	bl      Function_2002fbc
 	pop     {r3-r5,pc}
 @ 0x221f83e
 
@@ -61,16 +61,16 @@ Function_221f840: @ 221f840 :thumb
 	ldr     r1, [pc, #0x28] @ 0x221f884, (=Function_221f930+1)
 	lsl     r3, r3, #10
 	str     r4, [sp, #0x4]
-	bl      0x2014014
+	bl      Function_2014014
 	mov     r4, r0
-	bl      0x2014784
+	bl      Function_2014784
 	mov     r2, r0
 	beq     branch_221f878
 	mov     r0, #0x1
 	mov     r1, #0xe1
 	lsl     r0, r0, #12
 	lsl     r1, r1, #14
-	bl      0x20206bc
+	bl      Function_20206bc
 branch_221f878: @ 221f878 :thumb
 	mov     r0, r4
 	add     sp, #0x8
@@ -105,16 +105,16 @@ branch_221f8a0: @ 221f8a0 :thumb
 	ldr     r1, [pc, #0x28] @ 0x221f8d4, (=Function_221f930+1)
 	lsl     r3, r3, #8
 	str     r4, [sp, #0x4]
-	bl      0x2014014
+	bl      Function_2014014
 	mov     r4, r0
-	bl      0x2014784
+	bl      Function_2014784
 	mov     r2, r0
 	beq     branch_221f8c8
 	mov     r0, #0x1
 	mov     r1, #0xe1
 	lsl     r0, r0, #12
 	lsl     r1, r1, #14
-	bl      0x20206bc
+	bl      Function_20206bc
 branch_221f8c8: @ 221f8c8 :thumb
 	mov     r0, r4
 	add     sp, #0x8
@@ -131,10 +131,10 @@ branch_221f8c8: @ 221f8c8 :thumb
 Function_221f8d8: @ 221f8d8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	bl      0x2014730
+	bl      Function_2014730
 	mov     r4, r0
 	mov     r0, r5
-	bl      0x201411c
+	bl      Function_201411c
 	mov     r0, r4
 	bl      free
 	pop     {r3-r5,pc}
@@ -144,16 +144,16 @@ Function_221f8d8: @ 221f8d8 :thumb
 Function_221f8f0: @ 221f8f0 :thumb
 	push    {r3,lr}
 	bl      Call_G3X_Reset
-	bl      0x2014680
+	bl      Function_2014680
 	cmp     r0, #0x0
 	beq     branch_221f912
-	bl      0x201469c
+	bl      Function_201469c
 	cmp     r0, #0x0
 	ble     branch_221f90e
 	bl      Call_G3X_Reset
-	blx     0x20a73c0
+	blx     Function_20a73c0
 branch_221f90e: @ 221f90e :thumb
-	bl      0x20146c0
+	bl      Function_20146c0
 branch_221f912: @ 221f912 :thumb
 	pop     {r3,pc}
 @ 0x221f914
@@ -167,7 +167,7 @@ Function_221f914: @ 221f914 :thumb
 	ldr     r3, [r3, #0x0]
 	blx     r3
 	mov     r4, r0
-	bl      0x20145b4
+	bl      Function_20145b4
 	lsl     r0, r4, #16
 	lsr     r0, r0, #13
 	pop     {r4,pc}
@@ -186,7 +186,7 @@ Function_221f930: @ 221f930 :thumb
 	ldr     r3, [r3, #0x0]
 	blx     r3
 	mov     r4, r0
-	bl      0x20145f4
+	bl      Function_20145f4
 	lsl     r0, r4, #16
 	lsr     r0, r0, #13
 	pop     {r4,pc}

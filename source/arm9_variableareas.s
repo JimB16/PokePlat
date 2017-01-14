@@ -100,6 +100,7 @@ Function_2024464: @ 2024464 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_202447c
 Function_202447c: @ 202447c :thumb
 	mov     r3, r1
 	add     r1, r2, #0x2
@@ -457,6 +458,7 @@ branch_2024660: @ 2024660 :thumb
 
 
 .thumb
+.globl Function_20246a8
 Function_20246a8: @ 20246a8 :thumb
 	push    {r4,lr}
 	add     sp, #-0x8
@@ -657,6 +659,7 @@ Function_20247c4: @ 20247c4 :thumb
 
 
 .thumb
+.globl Function_20247c8
 Function_20247c8: @ 20247c8 :thumb
 	push    {r3,lr}
 	bl      LoadVariableAreaAdress_a_3
@@ -696,6 +699,7 @@ branch_20247fa: @ 20247fa :thumb
 
 .align 2, 0
 .thumb
+.globl Function_2024800
 Function_2024800: @ 2024800 :thumb
 	ldr     r0, [r0, #0xc]
 	bx      lr
@@ -788,6 +792,7 @@ Function_2024860: @ 2024860 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_202486c
 Function_202486c: @ 202486c :thumb
 	ldr     r3, =Function_201d628+1
 	mov     r0, r1

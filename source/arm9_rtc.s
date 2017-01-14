@@ -160,6 +160,7 @@ branch_201385e: @ 201385e :thumb
 
 
 .thumb
+.globl Function_2013880
 Function_2013880: @ 2013880 :thumb
 	push    {r4,lr}
 	mov     r4, r0

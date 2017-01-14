@@ -38,7 +38,7 @@ Function_22561d4: @ 22561d4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x2256218, (=0x2256271)
 	mov     r1, r4
 	mov     r2, #0x1
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	cmp     r0, #0x0
 	beq     branch_225620c
 	str     r4, [r5, #0x0]
@@ -56,11 +56,11 @@ branch_2256212: @ 2256212 :thumb
 	pop     {r3-r7,pc}
 @ 0x2256216
 
-
 .align 2
-
-
 .word 0x2256271 @ 0x2256218
+
+
+
 .thumb
 Function_225621c: @ 225621c :thumb
 	push    {r4-r6,lr}
@@ -69,7 +69,7 @@ Function_225621c: @ 225621c :thumb
 	mov     r0, r4
 	mov     r6, r2
 	bl      0x2254544
-	bl      0x2026310
+	bl      LoadVariableAreaAdress_8
 	str     r0, [r5, #0x30]
 	ldr     r1, [r5, #0x30]
 	add     r0, r5, #0x4
@@ -331,7 +331,7 @@ Function_2256388: @ 2256388 :thumb
 	bne     branch_22563c8
 	add     r0, sp, #0x4
 	add     r1, sp, #0x0
-	bl      0x20227c0
+	bl      Function_20227c0
 	cmp     r0, #0x0
 	beq     branch_22563c8
 	ldr     r0, [sp, #0x4]
@@ -389,7 +389,7 @@ Function_22563d0: @ 22563d0 :thumb
 	ldr     r1, [sp, #0x0]
 	strb    r0, [r1, #0x0]
 	ldr     r0, [sp, #0x4]
-	bl      0x2026234
+	bl      Function_2026234
 	ldr     r1, [sp, #0x0]
 	mov     r7, #0x0
 	strb    r0, [r1, #0x1]
@@ -399,28 +399,27 @@ Function_22563d0: @ 22563d0 :thumb
 	ble     branch_2256456
 	mov     r5, r1
 	mov     r6, r1
-.thumb
 branch_22563fa: @ 22563fa :thumb
 	ldr     r0, [sp, #0x4]
 	mov     r1, r7
-	bl      0x2026218
+	bl      Function_2026218
 	str     r0, [sp, #0x8]
-	bl      0x2026220
+	bl      Function_2026220_Dummy
 	mov     r4, r0
-	bl      0x2073d20
+	bl      InitEncryptPkmnData_Part1
 	str     r0, [sp, #0xc]
 	mov     r0, r4
-	bl      0x2079d40
+	bl      Function_2079d40
 	str     r0, [r5, #0x4]
 	mov     r0, r4
 	mov     r1, #0x5
 	mov     r2, #0x0
-	bl      0x2074570
+	bl      GetBoxPkmnData
 	strh    r0, [r6, #0x1c]
 	mov     r0, r4
 	mov     r1, #0x70
 	mov     r2, #0x0
-	bl      0x2074570
+	bl      GetBoxPkmnData
 	strh    r0, [r6, #0x20]
 	ldr     r0, [sp, #0x8]
 	bl      0x21e6590
@@ -430,7 +429,7 @@ branch_22563fa: @ 22563fa :thumb
 	str     r0, [r5, #0x14]
 	ldr     r1, [sp, #0xc]
 	mov     r0, r4
-	bl      0x2073d48
+	bl      InitEncryptPkmnData_Part1Again
 	ldr     r0, [sp, #0x0]
 	.hword  0x1c7f @ add r7, r7, #0x1
 	ldrb    r0, [r0, #0x0]
@@ -438,7 +437,7 @@ branch_22563fa: @ 22563fa :thumb
 	.hword  0x1cb6 @ add r6, r6, #0x2
 	cmp     r7, r0
 	blt     branch_22563fa
-.thumb
+
 branch_2256456: @ 2256456 :thumb
 	add     sp, #0x10
 	pop     {r3-r7,pc}
@@ -472,7 +471,7 @@ Function_225645c: @ 225645c :thumb
 	str     r2, [r0, #0x0]
 	ldr     r0, [pc, #0x24] @ 0x22564b4, (=0x22567e1)
 	mov     r1, r4
-	bl      0x200da3c
+	bl      AddTaskToTaskList3
 	mov     r1, r4
 	add     r1, #0x8c
 	str     r0, [r1, #0x0]
@@ -531,9 +530,9 @@ Function_22564d4: @ 22564d4 :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, #0xc
 	mov     r1, #0x54
-	bl      0x2006ec0
+	bl      Function_2006ec0
 	mov     r1, #0x14
-	blx     0x20e2178
+	blx     _u32_div_f
 	ldr     r1, [sp, #0xc]
 	str     r0, [sp, #0x14]
 	str     r0, [r1, #0x78]
@@ -722,7 +721,7 @@ Function_2256618: @ 2256618 :thumb
 	ldr     r2, [pc, #0x78] @ 0x22566a4, (=0x2256a44)
 	mov     r1, #0x6
 	mov     r3, #0x0
-	bl      0x20183c4
+	bl      Function_20183c4
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -734,7 +733,7 @@ Function_2256618: @ 2256618 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x51
 	mov     r3, #0x6
-	bl      0x2006e3c
+	bl      Function_2006e3c
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -746,13 +745,13 @@ Function_2256618: @ 2256618 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x50
 	mov     r3, #0x6
-	bl      0x2006e60
+	bl      Function_2006e60
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	ldr     r1, [pc, #0x30] @ 0x22566a8, (=0x400104c)
 	mov     r0, #0x0
 	strb    r0, [r1, #0x0]
@@ -822,7 +821,7 @@ branch_22566da: @ 22566da :thumb
 	strb    r1, [r0, #0x1]
 	ldr     r0, [r4, #0x4]
 	mov     r1, #0x6
-	bl      0x2019044
+	bl      Function_2019044
 	mov     r0, r5
 	bl      Function_2256604
 .thumb
@@ -998,7 +997,7 @@ Function_2256808: @ 2256808 :thumb
 	mov     r4, r1
 	mov     r1, r0
 	mov     r2, #0x0
-	bl      0x2079d8c
+	bl      Function_2079d8c
 	ldrb    r1, [r4, #0x0]
 	cmp     r1, #0x0
 	beq     branch_2256824
@@ -1052,7 +1051,7 @@ branch_225685c: @ 225685c :thumb
 	ldrh    r0, [r4, #0x1c]
 	ldrh    r1, [r4, #0x20]
 	mov     r2, #0x0
-	bl      0x2079edc
+	bl      Function_2079edc
 	mov     r1, r0
 	ldr     r0, [r5, #0x24]
 	.hword  0x1c49 @ add r1, r1, #0x1
@@ -1070,7 +1069,7 @@ branch_2256880: @ 2256880 :thumb
 	mov     r0, #0x1
 	mov     r1, #0x0
 	mov     r2, r0
-	bl      0x2079edc
+	bl      Function_2079edc
 	mov     r1, r0
 	ldr     r0, [r7, #0x2c]
 	.hword  0x1c49 @ add r1, r1, #0x1
@@ -1081,7 +1080,7 @@ branch_2256880: @ 2256880 :thumb
 	ldrh    r0, [r6, #0x1c]
 	ldrh    r1, [r6, #0x20]
 	mov     r2, #0x1c
-	bl      0x20759cc
+	bl      GetPkmnBaseData2
 	cmp     r0, #0x0
 	ldr     r0, [r7, #0x24]
 	beq     branch_22568b2

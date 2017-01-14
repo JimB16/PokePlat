@@ -4,8 +4,7 @@ http://www.keil.com/support/man/docs/armlib/armlib_chr1358938941317.htm
 */
 
 
-.arm
-.globl _dadd
+arm_func_start _dadd
 _dadd: @ 20dfc6c :arm
 	stmfd   sp!, {r4,lr}
 	eors    r12, r1, r3
@@ -81,10 +80,12 @@ branch_20dfd50: @ 20dfd50 :arm
 	tst     r2, #0x80000000
 	ldmeqfd sp!, {r4,lr}
 	bxeq    lr
+
 	movs    r2, r2, lsl #1
 	andeqs  r2, r0, #0x1
 	ldmeqfd sp!, {r4,lr}
 	bxeq    lr
+
 	adds    r0, r0, #0x1
 	adc     r1, r1, #0x0
 	ldmfd   sp!, {r4,lr}
@@ -223,7 +224,7 @@ branch_20dff40: @ 20dff40 :arm
 	bic     r1, r0, #0x80000000
 	ldmfd   sp!, {r4,lr}
 	bx      lr
-@ 0x20dff50
+arm_func_end _dadd
 
 
 .arm
@@ -368,7 +369,7 @@ branch_20e00c4: @ 20e00c4 :arm
 
 
 
-.arm
+arm_func_start _dfixu
 _dfixu: @ 20e00d4 :arm
 	tst     r1, #0x80000000
 	bne     branch_20e010c
@@ -400,6 +401,7 @@ branch_20e0120: @ 20e0120 :arm
 @ 0x20e0128
 
 .pool
+arm_func_end _dfixu
 
 
 
@@ -453,8 +455,7 @@ branch_20e01a8: @ 20e01a8 :arm
 
 
 
-.arm
-.globl _dflt
+arm_func_start _dflt
 _dflt: @ 20e01b8 :arm
 	ands    r2, r0, #0x80000000
 	rsbmi   r0, r0, #0x0
@@ -472,10 +473,10 @@ _dflt: @ 20e01b8 :arm
 	orr     r1, r2, r1, lsr #12
 	orr     r1, r1, r3, lsl #20
 	bx      lr
-@ 0x20e01f8
+arm_func_end _dflt
 
 
-.arm
+arm_func_start _dfltu
 _dfltu: @ 20e01f8 :arm
 	cmp     r0, #0x0
 	mov     r1, #0x0
@@ -493,7 +494,7 @@ branch_20e021c: @ 20e021c :arm
 	mov     r1, r1, lsr #12
 	orr     r1, r1, r3, lsl #20
 	bx      lr
-@ 0x20e0234
+arm_func_end _dfltu
 
 
 .arm
@@ -1358,6 +1359,7 @@ Function_20e0d1c: @ 20e0d1c :arm
 
 
 .arm
+.globl Function_20e0d24
 Function_20e0d24: @ 20e0d24 :arm
 	mov     r12, #2, 12 @ #0x200000
 	cmn     r12, r1, lsl #1
@@ -1536,6 +1538,7 @@ branch_20e0ee8: @ 20e0ee8 :arm
 
 
 .arm
+.globl Function_20e0ef8
 Function_20e0ef8: @ 20e0ef8 :arm
 	mov     r12, #2, 12 @ #0x200000
 	cmn     r12, r1, lsl #1
@@ -1646,6 +1649,7 @@ branch_20e1010: @ 20e1010 :arm
 
 
 .arm
+.globl Function_20e1020
 Function_20e1020: @ 20e1020 :arm
 	mov     r12, #2, 12 @ #0x200000
 	cmn     r12, r1, lsl #1
@@ -1702,6 +1706,7 @@ branch_20e109c: @ 20e109c :arm
 
 
 .arm
+.globl Function_20e10ac
 Function_20e10ac: @ 20e10ac :arm
 	mov     r3, #255, 8 @ #0xff000000
 	cmp     r3, r0, lsl #1
@@ -1763,6 +1768,7 @@ branch_20e1150: @ 20e1150 :arm
 
 
 .arm
+.globl Function_20e1164
 Function_20e1164: @ 20e1164 :arm
 	mov     r3, #255, 8 @ #0xff000000
 	cmp     r3, r0, lsl #1
@@ -1826,10 +1832,9 @@ branch_20e1214: @ 20e1214 :arm
 @ 0x20e1228
 
 
-.arm
-.globl Function_20e1228
+arm_func_start Function_20e1228
 Function_20e1228: @ 20e1228 :arm
-	mov     r3, #255, 8 @ #0xff000000
+	mov     r3, #0xff000000
 	cmp     r3, r0, lsl #1
 	bcc     branch_20e127c
 	cmp     r3, r1, lsl #1
@@ -1838,65 +1843,64 @@ Function_20e1228: @ 20e1228 :arm
 	movs    r3, r3, lsl #1
 	moveq   r0, #0x1
 	bne     branch_20e125c
+
 	mrs     r12, CPSR
-	orr     r12, r12, #1, 2 @ #0x40000000
+	orr     r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e125c
 
-.arm
 branch_20e125c: @ 20e125c :arm
 	cmp     r0, r1
 	moveq   r0, #0x1
 	movne   r0, #0x0
 	mrs     r12, CPSR
-	orreq   r12, r12, #1, 2 @ #0x40000000
-	bicne   r12, r12, #1, 2 @ #0x40000000
+	orreq   r12, r12, #0x40000000
+	bicne   r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e127c
 
-.arm
 branch_20e127c: @ 20e127c :arm
 	mov     r0, #0x0
 	mrs     r12, CPSR
-	bic     r12, r12, #1, 2 @ #0x40000000
+	bic     r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e1290
+arm_func_end Function_20e1228
+
 
 .arm
+.globl Function_20e1290
 Function_20e1290: @ 20e1290 :arm
-	mov     r3, #255, 8 @ #0xff000000
+	mov     r3, #0xff000000
 	cmp     r3, r0, lsl #1
 	bcc     branch_20e12e4
 	cmp     r3, r1, lsl #1
 	bcc     branch_20e12e4
+
 	orr     r3, r0, r1
 	movs    r3, r3, lsl #1
 	moveq   r0, #0x0
 	bne     branch_20e12c4
+
 	mrs     r12, CPSR
-	orr     r12, r12, #1, 2 @ #0x40000000
+	orr     r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
-@ 0x20e12c4
 
-.arm
 branch_20e12c4: @ 20e12c4 :arm
 	cmp     r0, r1
 	movne   r0, #0x1
 	moveq   r0, #0x0
 	mrs     r12, CPSR
-	bicne   r12, r12, #1, 2 @ #0x40000000
-	orreq   r12, r12, #1, 2 @ #0x40000000
+	bicne   r12, r12, #0x40000000
+	orreq   r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
 
 branch_20e12e4: @ 20e12e4 :arm
 	mov     r0, #0x1
 	mrs     r12, CPSR
-	bic     r12, r12, #1, 2 @ #0x40000000
+	bic     r12, r12, #0x40000000
 	msr     CPSR_f, r12
 	bx      lr
 @ 0x20e12f8
@@ -1908,16 +1912,18 @@ _frdiv: @ 20e12f8 :arm
 	eor     r1, r0, r1
 	eor     r0, r0, r1
 
-.globl _fdiv
+arm_func_start _fdiv
 _fdiv: @ 20e1304 :arm
 	stmfd   sp!, {lr}
 	mov     r12, #0xff
 	ands    r3, r12, r0, lsr #23
 	cmpne   r3, #0xff
 	beq     branch_20e14d8
+
 	ands    r12, r12, r1, lsr #23
 	cmpne   r12, #0xff
 	beq     branch_20e1514
+
 	orr     r1, r1, #0x800000
 	orr     r0, r0, #0x800000
 	bic     r2, r0, #0xff000000
@@ -1932,7 +1938,7 @@ branch_20e1334: @ 20e1334 :arm
 	rsb     lr, lr, #0x0
 	mov     r0, lr, asr #1
 	mul     r0, r1, r0
-	add     r0, r0, #2, 2 @ #0x80000000
+	add     r0, r0, #0x80000000
 	mov     r0, r0, lsr #6
 	mul     r0, r1, r0
 	mov     r0, r0, lsr #14
@@ -1944,19 +1950,21 @@ branch_20e1334: @ 20e1334 :arm
 	add     r0, r0, r1, lsr #15
 	umull   r1, r0, r2, r0
 	mov     r3, r0
-	orrmi   r0, r0, #2, 2 @ #0x80000000
+	orrmi   r0, r0, #0x80000000
 	adds    r12, r12, #0x7e
 	bmi     branch_20e15dc
 	cmp     r12, #0xfe
 	bge     branch_20e1690
+
 	add     r0, r0, r12, lsl #23
 	mov     r12, r1, lsr #28
 	cmp     r12, #0x7
 	beq     branch_20e14b8
+
 	add     r0, r0, r1, lsr #31
 	ldmfd   sp!, {lr}
 	bx      lr
-@ 0x20e13b8
+arm_func_end _fdiv
 
 
 .incbin "./baserom/arm9.bin", 0xe13b8, 0x20e14b8 - 0x20e13b8
@@ -2162,8 +2170,7 @@ branch_20e16b0: @ 20e16b0 :arm
 @ 0x20e16bc
 
 
-.arm
-.globl _f2d
+arm_func_start _f2d
 _f2d: @ 20e16bc :arm
 	and     r2, r0, #2, 2 @ #0x80000000
 	mov     r12, r0, lsr #23
@@ -2209,6 +2216,7 @@ branch_20e1730: @ 20e1730 :arm
 @ 0x20e173c
 
 .word 0x7ff00000 @ 0x20e173c
+arm_func_end _f2d
 
 
 
@@ -2255,7 +2263,7 @@ branch_20e1798: @ 20e1798 :arm
 branch_20e17ac: @ 20e17ac :arm
 	mvn     r0, #0x0
 	bx      lr
-@ 0x20e17b4
+@ _fflt
 
 
 .arm
@@ -2280,10 +2288,10 @@ branch_20e17c0: @ 20e17c0 :arm
 	andeqs  r3, r0, #0x1
 	addne   r0, r0, #0x1
 	bx      lr
-@ 0x20e17fc
+@ _ffltu
 
 
-.arm
+arm_func_start _ffltu
 _ffltu: @ 20e17fc :arm
 	cmp     r0, #0x0
 	bxeq    lr
@@ -2304,10 +2312,10 @@ branch_20e1818: @ 20e1818 :arm
 	andeqs  r1, r0, #0x1
 	addne   r0, r0, #0x1
 	bx      lr
-@ 0x20e1844
+arm_func_end _ffltu
 
 
-.arm
+arm_func_start _ll_sto_f
 _ll_sto_f: @ 20e1844 :arm
 	ands    r2, r1, #2, 2 @ #0x80000000
 	beq     branch_20e1854
@@ -2339,7 +2347,7 @@ branch_20e1864: @ 20e1864 :arm
 	andeqs  r3, r0, #0x1
 	addne   r0, r0, #0x1
 	bx      lr
-@ 0x20e18b0
+arm_func_end _ll_sto_f
 
 
 .arm
@@ -2723,7 +2731,7 @@ _ll_mod: @ 20e1d14 :arm
 @ 0x20e1d24
 
 
-.arm
+arm_func_start _ll_sdiv
 _ll_sdiv: @ 20e1d24 :arm
 	stmfd   sp!, {r4-r7,r11,r12,lr}
 	eor     r4, r1, r3
@@ -2835,7 +2843,7 @@ branch_20e1e64: @ 20e1e64 :arm
 	orr     r0, r0, r1, lsl r7
 	mov     r1, r1, lsr r5
 	b       branch_20e1e9c
-@ 0x20e1e94
+arm_func_end _ll_sdiv
 
 
 .arm
@@ -2865,7 +2873,7 @@ branch_20e1ec0: @ 20e1ec0 :arm
 	blt     branch_20e1eac
 	ldmfd   sp!, {r4-r7,r11,r12,lr}
 	bx      lr
-@ 0x20e1ed4
+@ _ll_udiv
 
 
 .arm
@@ -2874,7 +2882,7 @@ _ll_udiv: @ 20e1ed4 :arm
 	stmfd   sp!, {r4-r7,r11,r12,lr}
 	mov     r4, #0x0
 	b       branch_20e1ee8
-@ 0x20e1ee0
+@ _ull_mod
 
 
 .arm
@@ -2931,7 +2939,7 @@ branch_20e1f60: @ 20e1f60 :arm
 	mov     r1, r0, lsl r3
 	mov     r0, #0x0
 	bx      lr
-@ 0x20e1f6c
+@ _s32_div_f
 
 
 .arm
@@ -3069,7 +3077,7 @@ branch_20e2164: @ 20e2164 :arm
 	ands    r3, r12, #0x1
 	rsbne   r1, r1, #0x0
 	bx      lr
-@ 0x20e2178
+@ _u32_div_f
 
 
 .arm

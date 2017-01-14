@@ -38,7 +38,7 @@ Function_22561d4: @ 22561d4 :thumb
 	ldr     r0, [pc, #0x1c] @ 0x2256218, (=0x2256385)
 	mov     r1, r4
 	mov     r2, #0x1
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	cmp     r0, #0x0
 	beq     branch_225620c
 	str     r4, [r5, #0x0]
@@ -88,7 +88,7 @@ branch_225623e: @ 225623e :thumb
 	ldr     r3, [sp, #0x8]
 	mov     r1, r6
 	mov     r2, r7
-	bl      0x20569e8
+	bl      Function_20569e8
 	ldrb    r0, [r4, #0x10]
 	.hword  0x1d3f @ add r7, r7, #0x4
 	add     r0, #0x10
@@ -114,15 +114,14 @@ branch_225623e: @ 225623e :thumb
 	str     r0, [r5, #0xc]
 	ldr     r0, [sp, #0x0]
 	bl      0x2254544
-	bl      0x20507e4
+	bl      LoadFlagAdress
 	mov     r7, r0
 	mov     r4, #0x0
 	mov     r6, r5
-.thumb
 branch_225628e: @ 225628e :thumb
 	mov     r0, r7
 	mov     r1, r4
-	bl      0x206b1f0
+	bl      Function_206b1f0
 	str     r0, [r6, #0x30]
 	.hword  0x1c64 @ add r4, r4, #0x1
 	.hword  0x1d36 @ add r6, r6, #0x4
@@ -130,20 +129,19 @@ branch_225628e: @ 225628e :thumb
 	blt     branch_225628e
 	ldr     r0, [sp, #0x0]
 	bl      0x2254544
-	bl      0x202d834
+	bl      LoadVariableAreaAdress_19
 	str     r0, [sp, #0xc]
 	mov     r4, #0x0
 	mov     r7, r5
 	mov     r6, r5
-.thumb
 branch_22562b2: @ 22562b2 :thumb
 	lsl     r1, r4, #24
 	ldr     r0, [sp, #0xc]
 	lsr     r1, r1, #24
-	bl      0x202d924
+	bl      Function_202d924
 	mov     r1, #0x8
 	str     r0, [r7, #0x7c]
-	bl      0x202d93c
+	bl      Function_202d93c
 	str     r0, [r6, #0x40]
 	mov     r1, r5
 	add     r1, #0x9a
@@ -158,12 +156,12 @@ branch_22562b2: @ 22562b2 :thumb
 	bl      0x225453c
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
-	bl      0x203a790
-	bl      0x203a72c
+	bl      LoadVariableAreaAdress_6
+	bl      Function_203a72c
 	mov     r6, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
-	bl      0x203a24c
+	bl      IsMapMatrixEqualZero
 	cmp     r0, #0x0
 	beq     branch_2256304
 	ldr     r0, [r4, #0x1c]
@@ -237,7 +235,7 @@ branch_2256354: @ 2256354 :thumb
 	mov     r1, r4
 	lsr     r2, r2, #24
 	lsr     r3, r3, #24
-	bl      0x20569c4
+	bl      Function_20569c4
 	.hword  0x1c64 @ add r4, r4, #0x1
 	.hword  0x1d2d @ add r5, r5, #0x4
 	cmp     r4, #0x6
@@ -615,12 +613,12 @@ Function_2256584: @ 2256584 :thumb
 	bl      0x225453c
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
-	bl      0x203a790
-	bl      0x203a72c
+	bl      LoadVariableAreaAdress_6
+	bl      Function_203a72c
 	mov     r6, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
-	bl      0x203a24c
+	bl      IsMapMatrixEqualZero
 	cmp     r0, #0x0
 	beq     branch_22565bc
 	ldr     r1, [r4, #0x1c]
@@ -677,7 +675,7 @@ branch_22565fe: @ 22565fe :thumb
 	bne     branch_2256614
 	ldr     r0, [r4, #0x7c]
 	mov     r1, #0x8
-	bl      0x202d93c
+	bl      Function_202d93c
 	str     r0, [r5, #0x40]
 	cmp     r0, #0x0
 	beq     branch_2256614
@@ -688,7 +686,7 @@ branch_2256614: @ 2256614 :thumb
 	beq     branch_2256624
 	ldr     r0, [r4, #0x7c]
 	mov     r1, #0x1
-	bl      0x202d93c
+	bl      Function_202d93c
 	str     r0, [r5, #0x44]
 	mov     r7, #0x1
 .thumb
@@ -775,7 +773,7 @@ Function_2256684: @ 2256684 :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, #0xc
 	mov     r1, #0x78
-	bl      0x2006ec0
+	bl      Function_2006ec0
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
 	mov     r0, r5
@@ -945,7 +943,7 @@ branch_22567de: @ 22567de :thumb
 	ldr     r0, [pc, #0xc] @ 0x22567f8, (=0x2256969)
 	mov     r1, r5
 	mov     r2, #0x3
-	bl      0x200d9e8
+	bl      AddTaskToTaskList1
 	str     r0, [r5, #0x7c]
 	add     sp, #0x3c
 	pop     {r4-r7,pc}
@@ -1092,7 +1090,7 @@ Function_22568bc: @ 22568bc :thumb
 	ldr     r2, [pc, #0x70] @ 0x2256940, (=0x2256a5c)
 	mov     r1, #0x6
 	mov     r3, #0x0
-	bl      0x20183c4
+	bl      Function_20183c4
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1104,7 +1102,7 @@ Function_22568bc: @ 22568bc :thumb
 	mov     r0, #0xc
 	mov     r1, #0x75
 	mov     r3, #0x6
-	bl      0x2006e3c
+	bl      Function_2006e3c
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1116,13 +1114,13 @@ Function_22568bc: @ 22568bc :thumb
 	mov     r0, #0xc
 	mov     r1, #0x73
 	mov     r3, #0x6
-	bl      0x2006e60
+	bl      Function_2006e60
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0x6
-	bl      0x2019448
+	bl      Function_2019448
 	ldr     r1, [pc, #0x28] @ 0x2256944, (=0x4001000)
 	ldr     r0, [pc, #0x28] @ 0x2256948, (=0xffffe0ff)
 	ldr     r3, [r1, #0x0]
@@ -1157,7 +1155,7 @@ Function_225694c: @ 225694c :thumb
 	bl      0x225523c
 	ldr     r0, [r0, #0x4]
 	mov     r1, #0x6
-	bl      0x2019044
+	bl      Function_2019044
 	mov     r0, r4
 	bl      Function_22568a8
 	pop     {r4,pc}

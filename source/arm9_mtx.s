@@ -1,6 +1,7 @@
 
 
 .thumb
+.globl MTX_Rot22_
 MTX_Rot22_: @ 20bb464 :thumb
 	str     r2, [r0, #0x0]
 	str     r1, [r0, #0x4]
@@ -12,6 +13,7 @@ MTX_Rot22_: @ 20bb464 :thumb
 
 
 .arm
+.globl MTX_ScaleApply22
 MTX_ScaleApply22: @ 20bb470 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r12, [r0]
@@ -35,7 +37,7 @@ MTX_ScaleApply22: @ 20bb470 :arm
 	orr     r2, r2, r0, lsl #20
 	str     r2, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
-@ 0x20bb4c8
+@ MTX_Identity33_
 
 
 .arm
@@ -103,7 +105,7 @@ MTX_ScaleApply33: @ 20bb4ec :arm
 	orr     r2, r2, r0, lsl #20
 	str     r2, [r1, #0x20]
 	ldmfd   sp!, {r4,pc}
-@ 0x20bb5ac
+@ MTX_RotX33_
 
 
 .thumb
@@ -123,7 +125,7 @@ MTX_RotX33_: @ 20bb5ac :thumb
 	str     r1, [r0, #0x1c]
 	str     r2, [r0, #0x20]
 	bx      lr
-@ 0x20bb5c8
+@ MTX_RotY33_
 
 
 .thumb
@@ -143,7 +145,7 @@ MTX_RotY33_: @ 20bb5c8 :thumb
 	str     r2, [r0, #0x8]
 	str     r3, [r0, #0x10]
 	bx      lr
-@ 0x20bb5e4
+@ MTX_RotZ33_
 
 
 .thumb
@@ -164,7 +166,7 @@ MTX_RotZ33_: @ 20bb5e4 :thumb
 @ 0x20bb5fc
 
 
-.arm
+arm_func_start MTX_Inverse33
 MTX_Inverse33: @ 20bb5fc :arm
 	stmfd   sp!, {r3-r11,lr}
 	sub     sp, sp, #0x50
@@ -356,7 +358,7 @@ branch_20bb8e0: @ 20bb8e0 :arm
 	mov     r0, #0x0
 	add     sp, sp, #0x50
 	ldmfd   sp!, {r3-r11,pc}
-@ 0x20bb8ec
+arm_func_end MTX_Inverse33
 
 
 .arm
@@ -501,7 +503,7 @@ MTX_Concat33: @ 20bb8ec :arm
 @ 0x20bbb0c
 
 
-.arm
+arm_func_start MTX_MultVec33
 MTX_MultVec33: @ 20bbb0c :arm
 	stmfd   sp!, {r4-r6,lr}
 	ldr     r4, [r1, #0xc]
@@ -534,7 +536,7 @@ MTX_MultVec33: @ 20bbb0c :arm
 	orr     r0, r0, lr, lsl #20
 	str     r0, [r2, #0x8]
 	ldmfd   sp!, {r4-r6,pc}
-@ 0x20bbb88
+arm_func_end MTX_MultVec33
 
 
 .arm
@@ -1067,8 +1069,7 @@ MTX_Concat43: @ 20bbff8 :arm
 @ 0x20bc2cc
 
 
-.arm
-.globl MTX_MultVec43
+arm_func_start MTX_MultVec43
 MTX_MultVec43: @ 20bc2cc :arm
 	stmfd   sp!, {r4-r6,lr}
 	ldr     r4, [r1, #0xc]
@@ -1110,7 +1111,7 @@ MTX_MultVec43: @ 20bc2cc :arm
 	add     r0, r3, r0
 	str     r0, [r2, #0x8]
 	ldmfd   sp!, {r4-r6,pc}
-@ 0x20bc36c
+arm_func_end MTX_MultVec43
 
 
 .arm
@@ -1185,6 +1186,7 @@ MTX_LookAt: @ 20bc36c :arm
 
 
 .arm
+.globl MTX_Identity44_
 MTX_Identity44_: @ 20bc474 :arm
 	mov     r2, #0x1000
 	mov     r3, #0x0
@@ -1200,7 +1202,7 @@ MTX_Identity44_: @ 20bc474 :arm
 @ 0x20bc4a0
 
 
-.arm
+arm_func_start MTX_Copy44To43_
 MTX_Copy44To43_: @ 20bc4a0 :arm
 	ldmia   r0!, {r2,r3,r12}
 	add     r0, r0, #0x4
@@ -1215,10 +1217,11 @@ MTX_Copy44To43_: @ 20bc4a0 :arm
 	add     r0, r0, #0x4
 	stmia   r1!, {r2,r3,r12}
 	bx      lr
-@ 0x20bc4d4
+arm_func_end MTX_Copy44To43_
 
 
 .arm
+.globl Function_20bc4d4
 Function_20bc4d4: @ 20bc4d4 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -1279,6 +1282,7 @@ branch_20bc4f4: @ 20bc4f4 :arm
 
 
 .thumb
+.globl Function_20bc5ac
 Function_20bc5ac: @ 20bc5ac :thumb
 	str     r2, [r0, #0x14]
 	str     r2, [r0, #0x28]
@@ -1302,6 +1306,7 @@ Function_20bc5ac: @ 20bc5ac :thumb
 
 
 .thumb
+.globl Function_20bc5d0
 Function_20bc5d0: @ 20bc5d0 :thumb
 	str     r2, [r0, #0x0]
 	str     r2, [r0, #0x28]
@@ -1325,6 +1330,7 @@ Function_20bc5d0: @ 20bc5d0 :thumb
 
 
 .thumb
+.globl Function_20bc5f4
 Function_20bc5f4: @ 20bc5f4 :thumb
 	str     r2, [r0, #0x0]
 	str     r2, [r0, #0x14]
@@ -1348,6 +1354,7 @@ Function_20bc5f4: @ 20bc5f4 :thumb
 
 .align 2, 0
 .arm
+.globl MTX_Concat44
 MTX_Concat44: @ 20bc618 :arm
 	stmfd   sp!, {r3-r11,lr}
 	sub     sp, sp, #0xe8

@@ -252,6 +252,7 @@ branch_20c14b8: @ 20c14b8 :arm
 
 
 .arm
+.globl OS_GetIrqFunction
 OS_GetIrqFunction: @ 20c14d4 :arm
 	ldr     r2, =RAM_27e0000
 	mov     r1, #0x0
@@ -350,6 +351,7 @@ OSi_EnterTimerCallback: @ 20c15a8 :arm
 
 
 .arm
+.globl OS_SetIrqMask
 OS_SetIrqMask: @ 20c15f0 :arm
 	ldr     r3, =REG_IME
 	mov     r1, #0x0
@@ -408,6 +410,7 @@ OS_DisableIrqMask: @ 20c164c :arm
 
 
 .arm
+.globl OS_ResetRequestIrqMask
 OS_ResetRequestIrqMask: @ 20c167c :arm
 	ldr     r3, =REG_IME
 	mov     r1, #0x0
@@ -778,6 +781,7 @@ OS_ReadOwnerOfLockWord: @ 20c19f8 :arm
 
 
 .arm
+.globl OS_GetLockID
 OS_GetLockID: @ 20c1a00 :arm
 	ldr     r3, [pc, #0x58] @ [0x20c1a60] (=RAM_27fffb0)
 	ldr     r1, [r3]
@@ -819,6 +823,7 @@ branch_20c1a44: @ 20c1a44 :arm
 
 
 .arm
+.globl OS_ReleaseLockID
 OS_ReleaseLockID: @ 20c1a68 :arm
 	ldr     r3, [pc, #0x3c] @ [0x20c1aac] (=RAM_27fffb0)
 	cmp     r0, #0x60
@@ -1268,6 +1273,7 @@ branch_20c1e50: @ 20c1e50 :arm
 
 
 .arm
+.globl Function_20c1f24
 Function_20c1f24: @ 20c1f24 :arm
 	ldr     r0, [pc, #0x4] @ [0x20c1f30] (=RAM_21ccc68)
 	ldr     r0, [r0]
@@ -1359,6 +1365,7 @@ arm_func_end OS_CreateThread
 
 
 .arm
+.globl OS_ExitThread
 OS_ExitThread: @ 20c2030 :arm
 	stmfd   sp!, {r3,lr}
 	bl      OS_DisableInterrupts
@@ -2906,6 +2913,7 @@ OS_SetArenaHi: @ 20c3038 :arm
 
 
 .arm
+.globl OS_SetArenaLo
 OS_SetArenaLo: @ 20c304c :arm
 	mov     r0, r0, lsl #2
 	add     r0, r0, #39, 12 @ #0x2700000
@@ -3172,6 +3180,7 @@ OS_FreeToHeap: @ 20c331c :arm
 
 
 .arm
+.globl Function_20c3384
 Function_20c3384: @ 20c3384 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r4, r0
@@ -3191,6 +3200,7 @@ Function_20c3384: @ 20c3384 :arm
 
 
 .arm
+.globl Function_20c33b4
 Function_20c33b4: @ 20c33b4 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
@@ -3242,6 +3252,7 @@ branch_20c3428: @ 20c3428 :arm
 
 
 .arm
+.globl Function_20c345c
 Function_20c345c: @ 20c345c :arm
 	ldr     r1, =RAM_21ccee0
 	mov     r2, #0x0
@@ -3254,6 +3265,7 @@ Function_20c345c: @ 20c345c :arm
 
 
 .arm
+.globl Function_20c3470
 Function_20c3470: @ 20c3470 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r4, r0
@@ -4077,6 +4089,7 @@ OS_InitVAlarm: @ 20c3d3c :arm
 
 
 .arm
+.globl OS_EnableInterrupts
 OS_EnableInterrupts: @ 20c3d84 :arm
 	mrs     r0, CPSR
 	bic     r1, r0, #0x80
@@ -4148,6 +4161,7 @@ OS_GetProcMode: @ 20c3dfc :arm
 
 
 .arm
+.globl OS_SpinWait
 OS_SpinWait: @ 20c3e08 :arm
 	subs    r0, r0, #0x4
 	bcs     OS_SpinWait
@@ -4239,8 +4253,7 @@ branch_20c3ec8: @ 20c3ec8 :arm
 @ 0x20c3ee4
 
 
-.arm
-.globl OS_ResetSystem
+arm_func_start OS_ResetSystem
 OS_ResetSystem: @ 20c3ee4 :arm
 	stmfd   sp!, {r4,lr}
 	ldr     r1, [pc, #0x84] @ [0x20c3f74] (=RAM_27ffc40)
@@ -4253,6 +4266,7 @@ OS_ResetSystem: @ 20c3ee4 :arm
 	beq     branch_20c3f0c
 	bl      OS_Panic
 branch_20c3f0c: @ 20c3f0c :arm
+
 	bl      OS_GetLockID
 	mov     r0, r0, lsl #16
 	mov     r0, r0, lsr #16
@@ -4292,6 +4306,7 @@ branch_20c3f0c: @ 20c3f0c :arm
 .word 0x10 @ 0x20c3f94
 .word RAM_27e3f80 @ 0x20c3f98
 .word 0x800 @ 0x20c3f9c
+arm_func_end OS_ResetSystem
 
 
 

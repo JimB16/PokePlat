@@ -481,6 +481,7 @@ Function_205eb14: @ 205eb14 :thumb
 
 
 .thumb
+.globl Function_205eb18
 Function_205eb18: @ 205eb18 :thumb
 	push    {r4,lr}
 	mov     r4, r1
@@ -930,6 +931,7 @@ Function_205ecb8: @ 205ecb8 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_205ece0
 Function_205ece0: @ 205ece0 :thumb
 	push    {r3-r7,lr}
 	mov     r6, r1
@@ -14730,8 +14732,7 @@ GetWalkPositionXChange: @ 206419c :thumb
 
 
 
-.thumb
-.globl GetWalkPositionYChange
+thumb_func_start GetWalkPositionYChange
 GetWalkPositionYChange: @ 20641a8 :thumb
 	lsl     r1, r0, #2
 	ldr     r0, =Unknown_20ee78c
@@ -14740,6 +14741,7 @@ GetWalkPositionYChange: @ 20641a8 :thumb
 @ 0x20641b0
 
 .pool
+thumb_func_end GetWalkPositionYChange
 
 
 

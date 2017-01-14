@@ -43051,7 +43051,6 @@ branch_21ef7c0: @ 21ef7c0 :arm
 	bl      Function_21eacf0
 	mvn     r0, #0x0
 	str     r0, [r4, #0x1d4]
-.arm
 branch_21ef80c: @ 21ef80c :arm
 	ldr     r0, [r4, #0x204]
 	mvn     r1, #0x0
@@ -43063,7 +43062,6 @@ branch_21ef80c: @ 21ef80c :arm
 	bl      Function_21eacf0
 	mvn     r0, #0x0
 	str     r0, [r4, #0x204]
-.arm
 branch_21ef834: @ 21ef834 :arm
 	mov     r0, #0x4
 	str     r0, [r4, #0x1d8]

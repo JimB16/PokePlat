@@ -601,6 +601,7 @@ branch_207d27c: @ 207d27c :thumb
 
 
 .thumb
+.globl Function_207d28c
 Function_207d28c: @ 207d28c :thumb
 	ldr     r2, [pc, #0x20] @ 0x207d2b0, (=Unknown_20f0bfc)
 	mov     r3, #0x0
@@ -757,6 +758,7 @@ branch_207d332: @ 207d332 :thumb
 
 
 .thumb
+.globl Function_207d344
 Function_207d344: @ 207d344 :thumb
 	cmp     r0, #0x95
 	bhs     branch_207d34c
@@ -773,6 +775,7 @@ branch_207d34c: @ 207d34c :thumb
 
 
 .thumb
+.globl Function_207d354
 Function_207d354: @ 207d354 :thumb
 	cmp     r0, #0x40
 	blo     branch_207d35c
@@ -907,6 +910,7 @@ thumb_func_end CopyItemList
 
 
 .thumb
+.globl Function_207d3fc
 Function_207d3fc: @ 207d3fc :thumb
 	mov     r1, #0x77
 	lsl     r1, r1, #4
@@ -916,6 +920,7 @@ Function_207d3fc: @ 207d3fc :thumb
 
 
 .thumb
+.globl Function_207d404
 Function_207d404: @ 207d404 :thumb
 	mov     r2, #0x77
 	lsl     r2, r2, #4
@@ -1044,6 +1049,7 @@ r2: ItemID
 r3: quantity
 */
 .thumb
+.globl Function_207d4b4
 Function_207d4b4: @ 207d4b4 :thumb
 	push    {r4-r7}
 	mov     r5, r1
@@ -1119,6 +1125,7 @@ r2 = quantity
 r3 = #0x4 ??
 */
 .thumb
+.globl Function_207d518
 Function_207d518: @ 207d518 :thumb
 	push    {r4,r5,lr}
 	add     sp, #-0xc
@@ -1345,6 +1352,7 @@ thumb_func_end GiveItem
 
 .align 2, 0
 .thumb
+.globl Function_207d658
 Function_207d658: @ 207d658 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
@@ -1374,8 +1382,7 @@ branch_207d67c: @ 207d67c :thumb
 @ 0x207d688
 
 
-.thumb
-.globl CheckItem
+thumb_func_start CheckItem
 CheckItem: @ 207d688 :thumb
 	push    {r3,lr}
 	bl      GetAdrToItemInItemList
@@ -1387,11 +1394,12 @@ CheckItem: @ 207d688 :thumb
 branch_207d696: @ 207d696 :thumb
 	mov     r0, #0x0
 	pop     {r3,pc}
-@ 0x207d69a
+thumb_func_end CheckItem
 
 
 .align 2, 0
 .thumb
+.globl Function_207d69c
 Function_207d69c: @ 207d69c :thumb
 	cmp     r1, #0x7
 	bhi     branch_207d6fc
@@ -1536,6 +1544,7 @@ branch_207d742: @ 207d742 :thumb
 
 .align 2, 0
 .thumb
+.globl Function_207d748
 Function_207d748: @ 207d748 :thumb
 	push    {r3,lr}
 	mov     r3, #0x1

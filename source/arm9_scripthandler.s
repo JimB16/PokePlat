@@ -1862,7 +1862,7 @@ branch_203f282: @ 203f282 :thumb
 Function_203f28c: @ 203f28c :thumb
 	push    {r3,lr}
 	mov     r1, #TRAINERDATA_BATTLETYPE2
-	bl      GetTrainerData
+	bl      GetNPCTrainerData
 	cmp     r0, #0x0
 	beq     branch_203f29c
 	mov     r0, #0x1

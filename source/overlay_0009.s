@@ -886,19 +886,17 @@ Function_2249f84: @ 2249f84 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_2249f88: @ 2249f88 :thumb
 	ldr     r0, [r0, #0x0]
-	ldr     r3, [pc, #0x8] @ 0x2249f94, (=0x2062ccd)
+	ldr     r3, [pc, #0x8] @ 0x2249f94, (=Function_2062ccc+1)
 	ldr     r0, [r0, #0x38]
 	mov     r1, #0x0
 	bx      r3
 @ 0x2249f92
 
 .align 2
-.word 0x2062ccd @ 0x2249f94
+.word Function_2062ccc+1 @ 0x2249f94
 
 
 
@@ -3511,16 +3509,16 @@ branch_224b0e6: @ 224b0e6 :thumb
 
 .thumb
 Function_224b124: @ 224b124 :thumb
-	ldr     r3, [pc, #0x4] @ 0x224b12c, (=0x20219f9)
+	ldr     r3, [pc, #0x4] @ 0x224b12c, (=Function_20219f8+1)
 	ldr     r0, [r1, #0x0]
 	bx      r3
 @ 0x224b12a
 
-
 .align 2
+.word Function_20219f8+1 @ 0x224b12c
 
 
-.word 0x20219f9 @ 0x224b12c
+
 .thumb
 Function_224b130: @ 224b130 :thumb
 	push    {r4-r6,lr}
@@ -3737,16 +3735,16 @@ branch_224b25a: @ 224b25a :thumb
 .word 0xffff @ 0x224b2bc
 .thumb
 Function_224b2c0: @ 224b2c0 :thumb
-	ldr     r3, [pc, #0x4] @ 0x224b2c8, (=0x2021bd5)
+	ldr     r3, [pc, #0x4] @ 0x224b2c8, (=Function_2021bd4+1)
 	ldr     r0, [r1, #0x40]
 	bx      r3
 @ 0x224b2c6
 
-
 .align 2
+.word Function_2021bd4+1 @ 0x224b2c8
 
 
-.word 0x2021bd5 @ 0x224b2c8
+
 .thumb
 Function_224b2cc: @ 224b2cc :thumb
 	push    {r3-r5,lr}
@@ -7655,16 +7653,22 @@ Function_224cbd8: @ 224cbd8 :thumb
 
 .word 0x1c7c @ 0x224cbf0
 .word 0x224cc09 @ 0x224cbf4
+
+
+
 .thumb
 Function_224cbf8: @ 224cbf8 :thumb
 	ldr     r1, [pc, #0x4] @ 0x224cc00, (=0x1ca8)
-	ldr     r3, [pc, #0x8] @ 0x224cc04, (=0x200da59)
+	ldr     r3, [pc, #0x8] @ 0x224cc04, (=Call_RemoveTaskFromTaskList+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x224cc00
 
 .word 0x1ca8 @ 0x224cc00
-.word 0x200da59 @ 0x224cc04
+.word Call_RemoveTaskFromTaskList+1 @ 0x224cc04
+
+
+
 .thumb
 Function_224cc08: @ 224cc08 :thumb
 	push    {r4-r6,lr}
@@ -10006,23 +10010,26 @@ branch_224dc26: @ 224dc26 :thumb
 
 .word 0x22533c4 @ 0x224dc2c
 .word 0x22531d0 @ 0x224dc30
+
+
+
 .thumb
 Function_224dc34: @ 224dc34 :thumb
 	ldr     r1, [pc, #0xc] @ 0x224dc44, (=0x16d0)
 	mov     r2, #0x12
 	add     r0, r0, r1
-	ldr     r3, [pc, #0xc] @ 0x224dc48, (=0x20d5124)
+	ldr     r3, [pc, #0xc] @ 0x224dc48, (=Call_FillMemWithValue)
 	mov     r1, #0x0
 	lsl     r2, r2, #6
 	bx      r3
 @ 0x224dc42
 
-
 .align 2
-
-
 .word 0x16d0 @ 0x224dc44
-.word 0x20d5124 @ 0x224dc48
+.word Call_FillMemWithValue @ 0x224dc48
+
+
+
 .thumb
 Function_224dc4c: @ 224dc4c :thumb
 	push    {r4-r6,lr}
@@ -10030,7 +10037,6 @@ Function_224dc4c: @ 224dc4c :thumb
 	ldr     r0, [pc, #0x1c] @ 0x224dc70, (=0x16d0)
 	mov     r4, #0x0
 	add     r5, r6, r0
-.thumb
 branch_224dc56: @ 224dc56 :thumb
 	ldrb    r0, [r5, #0x0]
 	cmp     r0, #0x0
@@ -11067,22 +11073,20 @@ Function_224e330: @ 224e330 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_224e33c: @ 224e33c :thumb
-	ldr     r3, [pc, #0x8] @ 0x224e348, (=0x20d5124)
+	ldr     r3, [pc, #0x8] @ 0x224e348, (=Call_FillMemWithValue)
 	add     r0, #0xd8
 	mov     r1, #0x0
 	mov     r2, #0xac
 	bx      r3
 @ 0x224e346
 
-
 .align 2
+.word Call_FillMemWithValue @ 0x224e348
 
 
-.word 0x20d5124 @ 0x224e348
+
 .thumb
 Function_224e34c: @ 224e34c :thumb
 	bx      lr
@@ -12188,20 +12192,23 @@ branch_224ea70: @ 224ea70 :thumb
 	pop     {r3-r6,pc}
 @ 0x224ea82
 
-
 .align 2
-
-
 .word 0x22529f8 @ 0x224ea84
+
+
+
 .thumb
 Function_224ea88: @ 224ea88 :thumb
 	ldr     r0, [r1, #0x4]
-	ldr     r3, [pc, #0x4] @ 0x224ea90, (=0x2073a91)
+	ldr     r3, [pc, #0x4] @ 0x224ea90, (=Function_2073a90+1)
 	add     r0, #0x58
 	bx      r3
 @ 0x224ea90
 
-.word 0x2073a91 @ 0x224ea90
+.word Function_2073a90+1 @ 0x224ea90
+
+
+
 .thumb
 Function_224ea94: @ 224ea94 :thumb
 	push    {r4-r7,lr}

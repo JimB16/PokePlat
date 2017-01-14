@@ -136,7 +136,7 @@ RAM_21bfae8:
     .word 0, 0
 
 @ init at branch_2017eaa:
-@ 27ffda0 init with Function_20c304c
+@ 27ffda0 init with OS_SetArenaLo
 @ branch_201786a: calculate offset
 @ Collection of Pointers to DataStructures
 @ TODO TODO TODO
@@ -1337,8 +1337,8 @@ RAM_27fff9c:
 .globl RAM_27fffa0
 RAM_27fffa0:
     .word 0, 0
-.globl RAM_27fffa8
-RAM_27fffa8:
+.globl RAM_27fffa8_Input
+RAM_27fffa8_Input:
     .hword 0
 .globl RAM_27fffaa
 RAM_27fffaa:

@@ -104,6 +104,20 @@ __sp_usr	=	__sp_irq - 0x0a0;
 __irq_flags	=	0x03007ff8;
 __irg_handler = 0x01ff8000;
 
+OverlayNr5 = 5;
+OverlayNr6 = 6;
+OverlayNr7 = 7;
+OverlayNr8 = 8;
+OverlayNr9 = 9;
+OverlayNr10 = 10;
+OverlayNr11 = 11;
+OverlayNr12 = 12;
+OverlayNr16 = 16;
+OverlayNr57 = 57;
+OverlayNr73 = 73;
+OverlayNr77 = 77;
+OverlayNr97 = 97;
+
 SECTIONS
 {
     __mainram_lma = 0x4000;
@@ -576,7 +590,7 @@ SECTIONS
 	__load_size_overlay56 = SIZEOF (.iwram56);
     
     temp57 = temp56 + SIZEOF (.iwram56) + (((__load_stop_iwram56 + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram56));
-	.iwram57 __iwram_22561c0_start : AT (temp57) { *(.iwram57) . = ALIGN(4); } > iwram_22561c0 = 0xff
+	.iwram57 __iwram_21d0d80_start : AT (temp57) { *(.iwram57) . = ALIGN(4); } > iwram_21d0d80 = 0xff
 	__load_start_iwram57 = LOADADDR (.iwram57);
 	__load_stop_iwram57 = LOADADDR (.iwram57) + SIZEOF (.iwram57);
 	__load_size_overlay57 = SIZEOF (.iwram57);

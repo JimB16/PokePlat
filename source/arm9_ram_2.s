@@ -2,12 +2,25 @@
 .equ RAM_2101d20_Backlight,             0x0 @ Backlight status
 .equ RAM_2101d20_4,         0x4
 .equ RAM_2101d20_OverlayToUnload,       0x8
-.equ RAM_2101d20_c_DeinitBSS,           0xc
+.equ RAM_2101d20_PtrToOverlayData,      0xc
 .equ RAM_2101d20_OverlayToLoad,         0x10 @ 0xffffffff = No Overlay to load
-.equ RAM_2101d20_14_InitBSS,            0x14
+.equ RAM_2101d20_JumpTable,             0x14
 .equ RAM_2101d20_18,        0x18
 .equ RAM_2101d20_1c,        0x1c
 .equ RAM_2101d20_VariableAreaAdresses,  0x20 @ Pointer to VariableAreaAdresses
+
+.equ OverlayData_Size,                  0x28
+.equ OverlayData_JumpTable0,                     0x0 @ JumpTable+0x0
+.equ OverlayData_JumpTable1,                     0x4 @ JumpTable+0x4
+.equ OverlayData_JumpTable2,                     0x8 @ JumpTable+0x8
+.equ OverlayData_JumpTable3,                     0xc @ JumpTable+0xc
+.equ OverlayData_FunctionCounter,       0x10
+.equ OverlayData_14,                    0x14
+.equ OverlayData_18,                    0x18
+.equ OverlayData_1c,                    0x1c
+.equ OverlayData_20,                    0x20
+.equ OverlayData_24,                    0x24
+
 
 .equ RAM_2101df0_4,         0x4
 
@@ -48,7 +61,7 @@
 .equ RAM_21bf67c_3c_KeyNewPressed,          0x3c
 .equ RAM_21bf67c_40_KeyNewPressed,          0x40
 .equ RAM_21bf67c_44,        0x44
-.equ RAM_21bf67c_48,        0x48
+.equ RAM_21bf67c_48_KeyNewPressed2,         0x48
 .equ RAM_21bf67c_4c,        0x4c
 .equ RAM_21bf67c_50_InputDelayCounter,      0x50 @ Init with # of Frames in Input Delay, if =0 calculate new Input
 .equ RAM_21bf67c_54,        0x54
@@ -324,6 +337,7 @@
 .equ BattleData_AIScriptPtr,        0x2134
 .equ BattleData_2138,               0x2138
 .equ BattleData_213c,               0x213c
+.equ BattleData_2144,               0x2144
 .equ BattleData_214c,               0x214c
 .equ BattleData_2150,               0x2150
 .equ BattleData_2158,               0x2158
@@ -619,10 +633,33 @@ MainGameData
 .equ MainGameData_PkmnParty,        0x4
 .equ MainGameData_14,               0x14
 .equ MainGameData_18,               0x18
-.equ MainGameData_28,               0x28
+.equ MainGameData_1c,               0x1c
+.equ MainGameData_20,               0x20
+.equ MainGameData_24,               0x24
+
+@ NPC TrainerData
+@ data copied from trdata.narc
+@ 1st TrainerData
+.equ MainGameData_NPCTrainer_Size,      0x34
+.equ MainGameData_28,               0x28 @ Flag
+.equ MainGameData_29,               0x29 @ Class
+.equ MainGameData_2a,               0x2a @ BattleType
+.equ MainGameData_NPCTrainer_NrPkmn,    0x2b @ NrOfPkmn
+.equ MainGameData_2c,               0x2c @ Item1
+.equ MainGameData_2e,               0x2e @ Item2
+.equ MainGameData_30,               0x30 @ Item3
+.equ MainGameData_32,               0x32 @ Item4
+.equ MainGameData_34,               0x34 @ AI
+.equ MainGameData_38,               0x38 @ BattleType2
+.equ MainGameData_39,               0x39 @ Unknown1
+.equ MainGameData_3a,               0x3a @ Unknown2
+.equ MainGameData_3b,               0x3b @ Unknown3
 .equ MainGameData_3c,               0x3c
+
+.equ MainGameData_5c,               0x5c @ 2nd TrainerData
 .equ MainGameData_5d,               0x5d
-.equ MainGameData_90,               0x90
+.equ MainGameData_90,               0x90 @ 3rd TrainerData
+.equ MainGameData_c4,               0xc4 @ 4th TrainerData
 .equ MainGameData_TrainerData,      0xf8
 .equ MainGameData_108,              0x108 @ ItemList
 .equ MainGameData_10c,              0x10c

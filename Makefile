@@ -12,7 +12,7 @@ endif
 PYTHON := python
 MKDIR_P = mkdir -p
 
-.PHONY: pokeplat asm all clean init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect test
+.PHONY: pokeplat asm all clean clean_code init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect test
 
 unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/narc.py -x
@@ -301,13 +301,15 @@ all_icons_png := $(all_icons_rgcn:.rgcn=.png)
 all:
 
 clean:
+	rm -f build/*
+#	rm -r -f newrom/data/fielddata/script/*
+#	rm -rf baserom
+
+clean_code:
 	rm -f build/arm9*.*
 	rm -f build/arm7.*
 	rm -f build/overlay_*.*
 	rm -f build/y9.*
-#	rm -f build/*
-#	rm -r -f newrom/data/fielddata/script/*
-#	rm -rf baserom
 
 
 init:

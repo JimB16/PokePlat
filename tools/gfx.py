@@ -74,8 +74,8 @@ class Graphic(object):
         dec_data = array.array('H')
         if encryption != ENCRYPTION_NONE:
             enc_data = array.array('H', data)
-            #if encryption == NCGR.ENCRYPTION_REVERSE:
-            #    enc_data = enc_data[::-1]
+            if encryption == ENCRYPTION_REVERSE:
+                enc_data = enc_data[::-1]
             if key == 0:
                 key = enc_data[0]
             if debug:
@@ -84,14 +84,16 @@ class Graphic(object):
                 val2 = val ^ (key & 0xFFFF)
                 dec_data.append(val2)
                 val2 = key
-                key *= mult # ENCRYPT_MULT # 0x41c64e6d
-                key += carry # ENCRYPT_CARRY # 0x6073
+                key *= mult # ENCRYPT_MULT
+                key += carry # ENCRYPT_CARRY
                 key &= 0xFFFF
         else:
             enc_data = array.array('H', data)
             for val in enc_data:
                 dec_data.append(val)
         
+        if encryption == ENCRYPTION_REVERSE:
+            dec_data = dec_data[::-1]
         return dec_data
 
     
@@ -109,31 +111,6 @@ class Graphic(object):
         f.close()
         
         
-        if not os.path.exists(os.path.dirname(output_filename)):
-            os.makedirs(os.path.dirname(output_filename))
-        f = open(output_filename, 'wb')
-        f.write(bytearray("RGCN")) # RGCN_MagicID 0x0
-        f.write(bytearray([0xff, 0xfe])) # RGCN_Endian
-        f.write(bytearray([0x00, 0x01])) # RGCN_Version
-        f.write(bytearray([0, 0, 0, 0])) # RGCN_Size_ filesize
-        f.write(bytearray([0x10, 0x00])) # RGCN_HeaderSize
-        f.write(bytearray([0x01, 0x00])) # RGCN_NumBlocks
-        
-        f.write(bytearray("RAHC")) # RAHC_MagicID 0x10
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_Size_ filesize-0x10
-        c = array.array("h")
-        c.append(h/8)
-        c.tofile(f) # RAHC_Height
-        c = array.array("h")
-        c.append(w/8)
-        c.tofile(f) # RAHC_Width
-        f.write(bytearray([3, 0, 0, 0])) # RAHC_Format
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_Depth 0x20
-        f.write(bytearray([1, 0, 0, 0])) # RAHC_Type
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_DataSize filesize-0x30
-        f.write(bytearray([0x18, 0, 0, 0])) # RAHC_Offset
-        
-        
         data = []
         hword = 0
         n = 0
@@ -148,30 +125,21 @@ class Graphic(object):
         if key == 0:
             key = 0
             for val in data:
+                #key += ((val>>0) & 0xf)
+                #key += ((val>>4) & 0xf)
+                #key += ((val>>8) & 0xf)
+                #key += ((val>>12) & 0xf)
+                #val = val ^ 0xffff
                 key += (val & 0xff)
                 key += ((val>>8) & 0xff)
-            key &= 0xffff
+                key &= 0xffff
             if debug:
                 print("- key to encrypt: " + hex(key))
         
         enc_data = self.encrypt(data, encryption, key, mult, carry, debug)
-        enc_data.tofile(f)
+
         
-        
-        filesize = len(enc_data)*2+0x30
-        f.seek(0x8) # RGCN_Size_
-        c = array.array("I")
-        c.append(filesize)
-        c.tofile(f)
-        f.seek(0x14) # RAHC_Size_
-        c = array.array("I")
-        c.append(filesize-0x10)
-        c.tofile(f)
-        f.seek(0x28) # RAHC_DataSize
-        c = array.array("I")
-        c.append(filesize-0x30)
-        c.tofile(f)
-        f.close()
+        write_rgcn(output_filename, enc_data, w, h, debug)
     
     
     # returns indexed color values
@@ -466,6 +434,49 @@ def write_pal(outfilename, palette=[], debug=False):
     f.close()
 
 
+def write_rgcn(outfilename, data=[], w=0, h=0, debug=False):
+        if not os.path.exists(os.path.dirname(outfilename)):
+            os.makedirs(os.path.dirname(outfilename))
+        f = open(outfilename, 'wb')
+        f.write(bytearray("RGCN")) # RGCN_MagicID 0x0
+        f.write(bytearray([0xff, 0xfe])) # RGCN_Endian
+        f.write(bytearray([0x00, 0x01])) # RGCN_Version
+        f.write(bytearray([0, 0, 0, 0])) # RGCN_Size_ filesize
+        f.write(bytearray([0x10, 0x00])) # RGCN_HeaderSize
+        f.write(bytearray([0x01, 0x00])) # RGCN_NumBlocks
+        
+        f.write(bytearray("RAHC")) # RAHC_MagicID 0x10
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_Size_ filesize-0x10
+        c = array.array("h")
+        c.append(h/8)
+        c.tofile(f) # RAHC_Height
+        c = array.array("h")
+        c.append(w/8)
+        c.tofile(f) # RAHC_Width
+        f.write(bytearray([3, 0, 0, 0])) # RAHC_Format
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_Depth 0x20
+        f.write(bytearray([1, 0, 0, 0])) # RAHC_Type
+        f.write(bytearray([0, 0, 0, 0])) # RAHC_DataSize filesize-0x30
+        f.write(bytearray([0x18, 0, 0, 0])) # RAHC_Offset
+
+        data.tofile(f)
+        
+        filesize = len(data)*2+0x30
+        f.seek(0x8) # RGCN_Size_
+        c = array.array("I")
+        c.append(filesize)
+        c.tofile(f)
+        f.seek(0x14) # RAHC_Size_
+        c = array.array("I")
+        c.append(filesize-0x10)
+        c.tofile(f)
+        f.seek(0x28) # RAHC_DataSize
+        c = array.array("I")
+        c.append(filesize-0x30)
+        c.tofile(f)
+        f.close()
+
+
 def write_rlcn(outfilename, palette=[], emptypal=0, debug=False):
     if not os.path.exists(os.path.dirname(outfilename)):
         os.makedirs(os.path.dirname(outfilename))
@@ -625,7 +636,7 @@ if __name__ == "__main__":
     elif cmd == "pack":
         gra = Graphic(conf)
         gra.init(filename)
-        gra.read_png(filename, ENCRYPTION_FORWARDS, outfilename, mult, carry, key, debugFlag)
+        gra.read_png(filename, encryption, outfilename, mult, carry, key, debugFlag)
     elif cmd == "pack2":
         pal = Palette(conf)
         pal.init(filename)

@@ -1,14 +1,13 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_12 0x1b7, 0x11, 0xff
+	Cmd_12 0x1b7, 0x11, 0xff, 0xff
 	Cmd_e
-	Cmd_1e 0x1e
-	JumpIfPkmnBattleData TstNe, 0xff, 0x3b, 0x20, Script_branch_40
-	Cmd_3c 0x2
-Script_branch_40: @ 40
-	end
-@ 44
+@ 18
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000102.bin", 0x18, 0x44 - 0x18
+
 
 @ end_0x44

@@ -28,6 +28,7 @@ gfx_btx        := $(PYTHON) tools/gfx_btx.py
 create_rom     := $(PYTHON) tools/create_rom.py
 create_msg     := $(PYTHON) tools/create_msg.py
 ex_script      := $(PYTHON) tools/export_script.py
+ex_script_scenario := $(PYTHON) tools/export_script_scenario.py
 ex_trainerteams := $(PYTHON) tools/export_trainerteams.py
 ex_trainerpoke := $(PYTHON) tools/export_trainerpoke.py
 ex_msg         := $(PYTHON) tools/export_msg.py
@@ -54,6 +55,9 @@ newrom/data/battle/b_pl_tower/pl_btdpm \
 newrom/data/battle/b_pl_tower/pl_btdtr \
 newrom/data/battle/b_tower/btdpm \
 newrom/data/battle/b_tower/btdtr \
+newrom/data/battle/skill/be_seq \
+newrom/data/battle/skill/sub_seq \
+newrom/data/battle/skill/waza_seq \
 newrom/data/fielddata/encountdata/d_enc_data \
 newrom/data/fielddata/encountdata/p_enc_data \
 newrom/data/fielddata/encountdata/pl_enc_data \
@@ -108,7 +112,12 @@ $(wildcard ./baserom/data/battle/b_pl_stage/*.narc) \
 $(wildcard ./baserom/data/battle/b_pl_tower/*.narc) \
 $(wildcard ./baserom/data/battle/b_tower/*.narc) \
 $(wildcard ./baserom/data/battle/skill/*.narc) \
+$(wildcard ./baserom/data/contest/data/*.narc) \
+$(wildcard ./baserom/data/contest/graphic/*.narc) \
 $(wildcard ./baserom/data/data/mmodel/*.narc) \
+$(wildcard ./baserom/data/debug/cb_edit/*.narc) \
+$(wildcard ./baserom/data/demo/intro/*.narc) \
+$(wildcard ./baserom/data/demo/title/*.narc) \
 "./baserom/data/fielddata/areadata/area_data.narc" \
 "./baserom/data/fielddata/areadata/area_build_model/area_build.narc" \
 "./baserom/data/fielddata/areadata/area_build_model/areabm_texset.narc" \
@@ -122,37 +131,30 @@ $(wildcard ./baserom/data/fielddata/encountdata/*.narc) \
 "./baserom/data/fielddata/mm_list/move_model_list.narc" \
 "./baserom/data/fielddata/pokemon_trade/fld_trade.narc" \
 "./baserom/data/fielddata/script/scr_seq.narc" \
-"./baserom/data/fielddata/tornworld/tw_arc.narc" \
-"./baserom/data/fielddata/tornworld/tw_arc_attr.narc" \
+$(wildcard ./baserom/data/fielddata/tornworld/*.narc) \
 "./baserom/data/frontier/script/fr_script.narc" \
 $(wildcard ./baserom/data/graphic/*.narc) \
 $(wildcard ./baserom/data/itemtool/itemdata/*.narc) \
 $(wildcard ./baserom/data/msgdata/*.narc) \
 "./baserom/data/msgdata/scenario/scr_msg.narc" \
-"./baserom/data/poketool/pl_pokezukan.narc" \
-"./baserom/data/poketool/icongra/pl_poke_icon.narc" \
 $(wildcard ./baserom/data/particledata/*.narc) \
 $(wildcard ./baserom/data/particledata/**/*.narc) \
 $(wildcard ./baserom/data/pokeanime/*.narc) \
+$(wildcard ./baserom/data/poketool/*.narc) \
+$(wildcard ./baserom/data/poketool/icongra/*.narc) \
 $(wildcard ./baserom/data/poketool/personal/*.narc) \
-"./baserom/data/poketool/pokeanm/pl_pokeanm.narc" \
-"./baserom/data/poketool/pokeanm/pokeanm.narc" \
+$(wildcard ./baserom/data/poketool/poke_edit/*.narc) \
+$(wildcard ./baserom/data/poketool/pokeanm/*.narc) \
 "./baserom/data/poketool/pokefoot/pokefoot.narc" \
-"./baserom/data/poketool/pokegra/pl_otherpoke.narc" \
-"./baserom/data/poketool/pokegra/pl_pokegra.narc" \
-"./baserom/data/poketool/trainer/trdata.narc" \
-"./baserom/data/poketool/trainer/trpoke.narc" \
-"./baserom/data/poketool/trgra/trbgra.narc" \
-"./baserom/data/poketool/trgra/trfgra.narc" \
-"./baserom/data/poketool/trmsg/trtbl.narc" \
-"./baserom/data/poketool/trmsg/trtblofs.narc" \
-"./baserom/data/poketool/waza/pl_waza_tbl.narc" \
-"./baserom/data/poketool/waza/waza_tbl.narc" \
+$(wildcard ./baserom/data/poketool/pokegra/*.narc) \
+$(wildcard ./baserom/data/poketool/trainer/*.narc) \
+$(wildcard ./baserom/data/poketool/trgra/*.narc) \
+$(wildcard ./baserom/data/poketool/trmsg/*.narc) \
+$(wildcard ./baserom/data/poketool/waza/*.narc) \
 $(wildcard ./baserom/data/wazaeffect/*.arc) \
 $(wildcard ./baserom/data/wazaeffect/*.narc) \
 $(wildcard ./baserom/data/wazaeffect/effectclact/*.narc) \
-"./baserom/data/wazaeffect/effectdata/ball_particle.narc" \
-"./baserom/data/wazaeffect/effectdata/waza_particle.narc"
+$(wildcard ./baserom/data/wazaeffect/effectdata/*.narc)
 
 narc_files2 := \
 "./newrom/data/fielddata/encountdata/pl_enc_data.narc" \
@@ -290,6 +292,8 @@ $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_0000103*.bin) \
 $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_0000104*.bin) \
 $(wildcard ./baserom/data/fielddata/script/scr_seq_narc/data_00001050.bin)
 
+script_scenario_files_bin := \
+$(wildcard ./baserom/data/msgdata/scenario/scr_msg_narc/data_00000000.bin) \
 
 
 all_trainer_rgcn := $(wildcard ./baserom/data/poketool/trgra/trfgra_narc/*.rgcn)
@@ -364,6 +368,8 @@ build_it:
 	$(create_it) "./trackerfiles/Module1_it/" -o "./trackerfiles/Module1_it/a.it" -debug
 
 
+ex_script_scenario:
+	$(foreach f,$(script_scenario_files_bin),$(ex_script_scenario) $(f) "./data/msgdata/scenario/scr_msg/";)
 
 ex_script:
 	$(foreach f,$(script_files_bin),$(ex_script) $(f) "./data/fielddata/script/scr_seq/";)
@@ -501,6 +507,18 @@ ex_moves:
 
 
 
+build/data/battle/skill/sub_seq/%.bin: data/battle/skill/sub_seq/%.s
+	${MKDIR_P} $(dir $@)
+	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
+	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
+	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
+	rm -f $(subst .s,.o,$<)
+	rm -f $(subst .s,.elf,$<)
+	#hexdump -C $(subst build,baserom,$(subst sub_seq,sub_seq_narc,$@)) > $(subst build,baserom,$(subst .bin,.txt,$(subst sub_seq,sub_seq_narc,$@)))
+	#hexdump -C $@ > $(subst .bin,.txt,$@)
+	#diff -u $(subst build,baserom,$(subst .bin,.txt,$(subst sub_seq,sub_seq_narc,$@))) $(subst .bin,.txt,$@) | less > build/diff_$(notdir $(subst .bin,.txt,$@))
+
+
 build/data/%.bin: data/%.s
 	${MKDIR_P} $(dir $@)
 	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
@@ -522,6 +540,9 @@ $(eval $(call NARC_RULE_TEMPLATE,data/battle/b_pl_tower/pl_btdpm))
 $(eval $(call NARC_RULE_TEMPLATE,data/battle/b_pl_tower/pl_btdtr))
 $(eval $(call NARC_RULE_TEMPLATE,data/battle/b_tower/btdpm))
 $(eval $(call NARC_RULE_TEMPLATE,data/battle/b_tower/btdtr))
+$(eval $(call NARC_RULE_TEMPLATE,data/battle/skill/be_seq))
+$(eval $(call NARC_RULE_TEMPLATE,data/battle/skill/sub_seq))
+$(eval $(call NARC_RULE_TEMPLATE,data/battle/skill/waza_seq))
 $(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/d_enc_data))
 $(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/p_enc_data))
 $(eval $(call NARC_RULE_TEMPLATE,data/fielddata/encountdata/pl_enc_data))
@@ -538,6 +559,7 @@ $(eval $(call NARC_RULE_TEMPLATE,data/poketool/trainer/trdata))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/trainer/trpoke))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/waza/pl_waza_tbl))
 $(eval $(call NARC_RULE_TEMPLATE,data/poketool/waza/waza_tbl))
+
 
 newrom/%.narc:
 	$(create_narc2) $^ -o $@
@@ -682,14 +704,20 @@ all_sprites_btx := $(wildcard ./baserom/data/data/mmodel/mmodel_narc/data_0000*.
 all_sprites_png := $(subst _narc,,$(subst ./baserom/,,$(all_sprites_btx:.btx0=.png)))
 all_sprites2_btx := $(wildcard ./baserom/data/data/mmodel/fldeff_narc/data_0000*.btx0)
 all_sprites2_png := $(subst _narc,,$(subst ./baserom/,,$(all_sprites2_btx:.btx0=.png)))
+all_maptex_btx := $(wildcard ./baserom/data/fielddata/areadata/area_map_tex/map_tex_set_narc/data_0000000*.btx0)
+all_maptex_png := $(subst _narc,,$(subst ./baserom/,,$(all_maptex_btx:.btx0=.png)))
 
 pics3: $(all_sprites_png)
 pics4: $(all_sprites2_png)
+pics5: $(all_maptex_png)
 
 data/data/mmodel/mmodel/data_%.png: baserom/data/data/mmodel/mmodel_narc/data_%.btx0
 	$(gfx_btx) -x $< -debug -o $@
 
 data/data/mmodel/fldeff/data_%.png: baserom/data/data/mmodel/fldeff_narc/data_%.btx0
+	$(gfx_btx) -x $< -debug -o $@
+
+data/fielddata/areadata/area_map_tex/map_tex_set/data_%.png: baserom/data/fielddata/areadata/area_map_tex/map_tex_set_narc/data_%.btx0
 	$(gfx_btx) -x $< -debug -o $@
 
 all_pokemon_rgcn := $(wildcard ./baserom/data/poketool/pokegra/pl_pokegra_narc/data_00000*.rgcn)

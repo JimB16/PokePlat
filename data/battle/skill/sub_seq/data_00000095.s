@@ -1,9 +1,9 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_34 0xa, 0x7, 0x3b, 0x100
-	Cmd_32 Cmd32_Store, 0x22, 0x15
+	ChangePkmnBattleData Orr, Target_7, PkmnBattleData_3b, 0x100
+	Cmd_32 Store, Var_MoveEffectNr, 0x15
 	Cmd_23_LoadSubSeq
 @ 28
 

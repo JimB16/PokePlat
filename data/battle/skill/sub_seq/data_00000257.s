@@ -1,15 +1,15 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_1e 0xf
+	Cmd_1e
+	Cmd_f
 	Cmd_12 0x33b, 0x2, 0x1
 	Cmd_e
-	Cmd_1e 0x1e
-	Cmd_39 0x7, 0x11, 0xf
-	Cmd_32 Cmd32_Store, 0x5, 0x7
-	Cmd_3c 0x12
-	end
-@ 50
+@ 1c
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000257.bin", 0x1c, 0x50 - 0x1c
+
 
 @ end_0x50

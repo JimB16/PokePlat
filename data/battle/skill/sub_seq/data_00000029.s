@@ -1,13 +1,14 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_34 0xb, 0xff, 0x34, 0x20
+	ChangePkmnBattleData Bic, 0xff, PkmnBattleData_StatusEffect, 0x0|Frozen
 	Cmd_12 0x72, 0x2, 0xff
 	Cmd_e
-	Cmd_42 0xff, 0x0
-	Cmd_1e 0x1e
-	end
-@ 40
+@ 28
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000029.bin", 0x28, 0x40 - 0x28
+
 
 @ end_0x40

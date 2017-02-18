@@ -1,37 +1,13 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
 	Cmd_14
 	Cmd_e
-	Cmd_1e 0x1e
-	JumpIfPkmnBattleData Ne, 0xff, 0x50, 0x0, Script_branch_c4
-	Cmd_3a 0x11, 0xff, 0x30, 0x9
-	Cmd_4f 0x0, 0xff, 0x2f, 0x9, Script_branch_9c
-	Cmd_32 Cmd32_Orr, 0x6, 0x40
-	Cmd_45 0xff, 0xe
-	Cmd_e
-	Cmd_3c 0x2
-	Cmd_12 0xb8, 0x2, 0xff
-	Cmd_e
-	Cmd_1e 0x1e
-	end
-@ 9c
+@ 8
 
-Script_branch_9c: @ 9c
-	Cmd_1e 0x1e
-	Cmd_12 0xbb, 0x2, 0xff
-	Cmd_e
-	Cmd_1e 0x1e
-	end
-@ c4
 
-Script_branch_c4: @ c4
-	Cmd_32 Cmd32_Store, 0x23, 0x179
-	Cmd_12 0x41e, 0xa, 0xff
-	Cmd_e
-	Cmd_1e 0x1e
-	end
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000136.bin", 0x8, 0xf8 - 0x8
+
+
 @ end_0xf8
-@ f8
-

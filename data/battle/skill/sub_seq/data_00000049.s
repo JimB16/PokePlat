@@ -1,9 +1,9 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
 	Cmd_51 Script_branch_10
-	Cmd_3c 0x35
+	Cmd_3c_AddNewScript 0x35
 Script_branch_10: @ 10
 	end
 @ 14

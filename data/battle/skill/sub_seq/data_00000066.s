@@ -1,8 +1,8 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_34 0xa, 0x1, 0x35, 0x800000
+	ChangePkmnBattleData Orr, Target_1, PkmnBattleData_35, 0x800000
 	end
 @ 18
 

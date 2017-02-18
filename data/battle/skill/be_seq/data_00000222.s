@@ -1,4 +1,4 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
@@ -10,7 +10,7 @@ Script_1: @ 0
 @ 1c
 
 Script_branch_1c: @ 1c
-	Cmd_32 Cmd32_Orr, 0xa, 0x40
+	Cmd_32 Orr, Var_0xa, 0x40
 	end
 @ 30
 

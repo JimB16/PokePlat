@@ -1,19 +1,24 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_37 0x0, 0x1, 0x45, Script_branch_9c
-	Cmd_37 0x0, 0x1, 0x62, Script_branch_9c
-	Cmd_39 0x7, 0x14, 0xf
-	Cmd_39 0x7, 0x20, 0x36
-	JumpIf Eq, 0x20, 0x0, Script_branch_68
+	Cmd_37 0x0, Target_1, ROCK_HEAD, Script_branch_9c
+	Cmd_37 0x0, Target_1, MAGIC_GUARD, Script_branch_9c
+	Cmd_39 Store, Var_0x14, Var_NrOfPkmn
+	Cmd_39 Store, Var_StatusEffectDamage, Var_0x36
+	JumpIf Eq, Var_StatusEffectDamage, 0x0, Script_branch_68
 	Cmd_55 0x20, 0x2
 Script_branch_68: @ 68
-	Cmd_32 Cmd32_Orr, 0x6, 0x40
-	Cmd_3c 0x2
+	Cmd_32 Orr, Var_6, 0x40
+	Cmd_3c_AddNewScript 0x2
 	Cmd_12 0x117, 0x2, 0x1
 	Cmd_e
-	Cmd_1e 0x1e
+@ 94
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000246.bin", 0x94, 0x9c - 0x94
+
+
 Script_branch_9c: @ 9c
 	end
 @ a0

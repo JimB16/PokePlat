@@ -1,9 +1,9 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	JumpIf TstNe, 0xa, 0x10001, Script_branch_31c
-	Cmd_3c 0x4c
+	JumpIf TstNe, Var_0xa, 0x10001, Script_branch_31c
+	Cmd_3c_AddNewScript 0x4c
 	Cmd_3a 0x11, 0x1, 0x13, 0x9
 	Cmd_3a 0x11, 0x2, 0x13, 0x2b
 	Cmd_3a 0x7, 0x1, 0x13, 0x2b
@@ -34,30 +34,32 @@ Script_1: @ 0
 	Cmd_3a 0x7, 0x2, 0x19, 0x9
 	Cmd_3a 0x11, 0x1, 0x35, 0x9
 	Cmd_3a 0x11, 0x2, 0x35, 0x2b
-	JumpIf TstNe, 0x9, 0x100000, Script_branch_2a4
-	Cmd_34 0xb, 0x2, 0x35, 0x100000
+	JumpIf TstNe, Var_0x9, 0x100000, Script_branch_2a4
+	ChangePkmnBattleData Bic, Target_2, PkmnBattleData_35, 0x100000
 	Jump Script_branch_2b8
 @ 2a4
 
 Script_branch_2a4: @ 2a4
-	Cmd_34 0xa, 0x2, 0x35, 0x100000
+	ChangePkmnBattleData Orr, Target_2, PkmnBattleData_35, 0x100000
 Script_branch_2b8: @ 2b8
-	JumpIf TstNe, 0x2b, 0x100000, Script_branch_2e8
-	Cmd_34 0xb, 0x1, 0x35, 0x100000
+	JumpIf TstNe, Var_0x2b, 0x100000, Script_branch_2e8
+	ChangePkmnBattleData Bic, Target_1, PkmnBattleData_35, 0x100000
 	Jump Script_branch_2fc
 @ 2e8
 
 Script_branch_2e8: @ 2e8
-	Cmd_34 0xa, 0x1, 0x35, 0x100000
+	ChangePkmnBattleData Orr, Target_1, PkmnBattleData_35, 0x100000
 Script_branch_2fc: @ 2fc
 	Cmd_12 0x400, 0x2, 0x1
 	Cmd_e
-	Cmd_1e 0x1e
-	end
-@ 31c
+@ 310
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000168.bin", 0x310, 0x31c - 0x310
+
 
 Script_branch_31c: @ 31c
-	Cmd_32 Cmd32_Orr, 0xa, 0x40
+	Cmd_32 Orr, Var_0xa, 0x40
 	end
 @ 330
 

@@ -1,14 +1,13 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
 	Cmd_45 0x3, 0x14
 	Cmd_e
-	Cmd_12 0x32a, 0x0
-	Cmd_e
-	Cmd_1e 0x1e
-	Cmd_32 Cmd32_Orr, Var_Weather, 0x80
-	end
-@ 3c
+@ 10
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000272.bin", 0x10, 0x3c - 0x10
+
 
 @ end_0x3c

@@ -1,8 +1,8 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_32 Cmd32_Store, Var_2, 0x80000003
+	Cmd_32 Store, Var_MoveEffect_SubSeq, 0x80000003
 	end
 @ 14
 

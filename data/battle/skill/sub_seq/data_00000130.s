@@ -1,13 +1,17 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData Eq, 0x2, 0x2f, 0x0, Script_branch_54
-	Cmd_34 0xb, 0x2, 0x34, 0x40
+	JumpIfPkmnBattleData Eq, Target_2, PkmnBattleData_CurHP, 0x0, Script_branch_54
+	ChangePkmnBattleData Bic, Target_2, PkmnBattleData_StatusEffect, 0x0|Paralyzed
 	Cmd_12 0x88, 0x2, 0x2
 	Cmd_e
-	Cmd_42 0x2, 0x0
-	Cmd_1e 0x1e
+@ 40
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000130.bin", 0x40, 0x54 - 0x40
+
+
 Script_branch_54: @ 54
 	end
 @ 58

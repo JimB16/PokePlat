@@ -1,8 +1,8 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_32 Cmd32_Orr, 0x6, 0x800
+	Cmd_32 Orr, Var_6, 0x800
 	Cmd_5b
 	end
 @ 18

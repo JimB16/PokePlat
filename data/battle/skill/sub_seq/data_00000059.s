@@ -1,14 +1,14 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	Cmd_37 0x0, 0xff, 0x62, Script_branch_14c
-	JumpIf Eq, 0x23, 0x23, Script_branch_a0
-	JumpIf Eq, 0x23, 0x53, Script_branch_b4
-	JumpIf Eq, 0x23, 0x1cf, Script_branch_c8
-	JumpIf Eq, 0x23, 0x80, Script_branch_dc
-	JumpIf Eq, 0x23, 0xfa, Script_branch_f0
-	JumpIf Eq, 0x23, 0x148, Script_branch_104
+	Cmd_37 0x0, 0xff, MAGIC_GUARD, Script_branch_14c
+	JumpIf Eq, Var_0x23, 0x23, Script_branch_a0
+	JumpIf Eq, Var_0x23, 0x53, Script_branch_b4
+	JumpIf Eq, Var_0x23, 0x1cf, Script_branch_c8
+	JumpIf Eq, Var_0x23, 0x80, Script_branch_dc
+	JumpIf Eq, Var_0x23, 0xfa, Script_branch_f0
+	JumpIf Eq, Var_0x23, 0x148, Script_branch_104
 	Cmd_45 0xff, 0x21
 	Jump Script_branch_110
 @ a0
@@ -42,15 +42,10 @@ Script_branch_104: @ 104
 	Cmd_45 0xff, 0x27
 Script_branch_110: @ 110
 	Cmd_e
-	Cmd_12 0x106, 0xa, 0xff
-	Cmd_e
-	Cmd_1e 0x1e
-	Cmd_32 Cmd32_Orr, 0x6, 0x40
-	Cmd_23_LoadSubSeq
-@ 148
+@ 114
 
 
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000059.bin", 0x148, 0x14c - 0x148
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000059.bin", 0x114, 0x14c - 0x114
 
 
 Script_branch_14c: @ 14c

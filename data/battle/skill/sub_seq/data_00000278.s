@@ -1,28 +1,33 @@
-.include "source/macros_asm_.s"
+.include "macros/script_seq.s"
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData Eq, 0x1, 0x55, 0x1, Script_branch_5c
-	JumpIfPkmnBattleData Eq, 0x1, 0x56, 0x0, Script_branch_100
-	JumpIf Eq, 0x45, 0x1, Script_branch_a0
+	JumpIfPkmnBattleData Eq, Target_1, 0x55, 0x1, Script_branch_5c
+	JumpIfPkmnBattleData Eq, Target_1, 0x56, 0x0, Script_branch_100
+	JumpIf Eq, Var_0x45, 0x1, Script_branch_a0
 	Cmd_45 0x1, 0xa
 	Cmd_e
-	Jump Script_branch_a0
-@ 5c
+@ 54
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000278.bin", 0x54, 0x5c - 0x54
+
 
 Script_branch_5c: @ 5c
 	Cmd_45 0x1, 0xa
 	Cmd_e
-	JumpIf Eq, 0x45, 0x1, Script_branch_a0
-	Cmd_12 0x4e6, 0xf, 0x1
-	Cmd_e
-	Cmd_1e 0x1e
+@ 6c
+
+
+.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000278.bin", 0x6c, 0xa0 - 0x6c
+
+
 Script_branch_a0: @ a0
-	JumpIfPkmnBattleData Eq, 0x1, 0x56, 0x0, Script_branch_cc
-	Cmd_34 0x7, 0x1, 0x56, 0x0
+	JumpIfPkmnBattleData Eq, Target_1, 0x56, 0x0, Script_branch_cc
+	ChangePkmnBattleData Store, Target_1, 0x56, 0x0
 Script_branch_cc: @ cc
-	JumpIfPkmnBattleData Eq, 0x1, 0x55, 0x0, Script_branch_100
-	Cmd_34 0x7, 0x1, 0x55, 0x0
+	JumpIfPkmnBattleData Eq, Target_1, 0x55, 0x0, Script_branch_100
+	ChangePkmnBattleData Store, Target_1, 0x55, 0x0
 	Cmd_ca 0x1
 Script_branch_100: @ 100
 	end

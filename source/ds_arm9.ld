@@ -104,6 +104,7 @@ __sp_usr	=	__sp_irq - 0x0a0;
 __irq_flags	=	0x03007ff8;
 __irg_handler = 0x01ff8000;
 
+OverlayNr4 = 4;
 OverlayNr5 = 5;
 OverlayNr6 = 6;
 OverlayNr7 = 7;
@@ -112,11 +113,62 @@ OverlayNr9 = 9;
 OverlayNr10 = 10;
 OverlayNr11 = 11;
 OverlayNr12 = 12;
+OverlayNr13 = 13;
+OverlayNr14 = 14;
 OverlayNr16 = 16;
+OverlayNr17 = 17;
+OverlayNr18 = 18;
+OverlayNr19 = 19;
+OverlayNr20 = 20;
+OverlayNr21 = 21;
+OverlayNr22 = 22;
+OverlayNr23 = 23;
 OverlayNr57 = 57;
+OverlayNr58 = 58;
+OverlayNr59 = 59;
+OverlayNr60 = 60;
+OverlayNr61 = 61;
+OverlayNr64 = 64;
+OverlayNr65 = 65;
+OverlayNr66 = 66;
+OverlayNr71 = 71;
+OverlayNr72 = 72;
 OverlayNr73 = 73;
+OverlayNr74 = 74;
+OverlayNr75 = 75;
+OverlayNr76 = 76;
 OverlayNr77 = 77;
+OverlayNr78 = 78;
+OverlayNr79 = 79;
+OverlayNr80 = 80;
+OverlayNr81 = 81;
+OverlayNr84 = 84;
+OverlayNr85 = 85;
+OverlayNr86 = 86;
+OverlayNr87 = 87;
+OverlayNr88 = 88;
+OverlayNr90 = 90;
+OverlayNr91 = 91;
+OverlayNr92 = 92;
+OverlayNr93 = 93;
+OverlayNr94 = 94;
+OverlayNr95 = 95;
+OverlayNr96 = 96;
 OverlayNr97 = 97;
+OverlayNr98 = 98;
+OverlayNr99 = 99;
+OverlayNr100 = 100;
+OverlayNr101 = 101;
+OverlayNr102 = 102;
+OverlayNr109 = 109;
+OverlayNr110 = 110;
+OverlayNr111 = 111;
+OverlayNr115 = 115;
+OverlayNr116 = 116;
+OverlayNr117 = 117;
+OverlayNr119 = 119;
+OverlayNr120 = 120;
+OverlayNr121 = 121;
 
 SECTIONS
 {
@@ -591,9 +643,18 @@ SECTIONS
     
     temp57 = temp56 + SIZEOF (.iwram56) + (((__load_stop_iwram56 + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram56));
 	.iwram57 __iwram_21d0d80_start : AT (temp57) { *(.iwram57) . = ALIGN(4); } > iwram_21d0d80 = 0xff
-	__load_start_iwram57 = LOADADDR (.iwram57);
+	__load_start_iwram57 = ADDR (.iwram57);
 	__load_stop_iwram57 = LOADADDR (.iwram57) + SIZEOF (.iwram57);
 	__load_size_overlay57 = SIZEOF (.iwram57);
+
+	__overlay57_bss_start = ADDR(.iwram57) + SIZEOF(.iwram57);
+	.overlay57_bss (__overlay57_bss_start) (NOLOAD) :
+	{
+		*(.overlay57_bss)
+		build/overlay_0057.o (.bss)
+		__overlay57_bss_end = ABSOLUTE(.);
+	}>iwram_21d0d80 = 0xff
+	__overlay57_bss_size = SIZEOF(.overlay57_bss);
     
     temp58 = temp57 + SIZEOF (.iwram57) + (((__load_stop_iwram57 + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram57));
 	.iwram58 __iwram_21d0d80_start : AT (temp58) { *(.iwram58) . = ALIGN(4); } > iwram_21d0d80 = 0xff
@@ -831,9 +892,18 @@ SECTIONS
     
     temp97 = temp96 + SIZEOF (.iwram96) + (((__load_stop_iwram96 + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram96));
 	.iwram97 __iwram_222ae60_start : AT (temp97) { *(.iwram97) . = ALIGN(4); } > iwram_222ae60 = 0xff
-	__load_start_iwram97 = LOADADDR (.iwram97);
+	__load_start_iwram97 = ADDR (.iwram97);
 	__load_stop_iwram97 = LOADADDR (.iwram97) + SIZEOF (.iwram97);
 	__load_size_overlay97 = SIZEOF (.iwram97);
+
+	__overlay97_bss_start = ADDR(.iwram97) + SIZEOF(.iwram97);
+	.overlay97_bss (__overlay97_bss_start) (NOLOAD) :
+	{
+		*(.overlay97_bss)
+		build/overlay_0097.o (.bss)
+		__overlay97_bss_end = ABSOLUTE(.);
+	}>iwram_222ae60 = 0xff
+	__overlay97_bss_size = SIZEOF(.overlay97_bss);
     
     temp98 = temp97 + SIZEOF (.iwram97) + (((__load_stop_iwram97 + 0x200 - 1) & ~(0x200 - 1)) - (__load_stop_iwram97));
 	.iwram98 __iwram_2246c20_start : AT (temp98) { *(.iwram98) . = ALIGN(4); } > iwram_2246c20 = 0xff

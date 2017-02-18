@@ -1798,7 +1798,7 @@ branch_20c7cd8: @ 20c7cd8 :arm
 @ 0x20c7ce4
 
 
-.arm
+arm_func_start FS_NotifyArchiveAsyncEnd
 FS_NotifyArchiveAsyncEnd: @ 20c7ce4 :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r4, r0
@@ -1835,7 +1835,7 @@ branch_20c7d38: @ 20c7d38 :arm
 	mov     r0, r5
 	bl      OS_RestoreInterrupts
 	ldmfd   sp!, {r4-r6,pc}
-@ 0x20c7d68
+arm_func_end FS_NotifyArchiveAsyncEnd
 
 
 arm_func_start FS_Init
@@ -1869,20 +1869,23 @@ FS_IsAvailable: @ 20c7d90 :arm
 
 
 
-.arm
-.globl FS_InitFile
+/* Input:
+r0: NARCFileHandler
+r1: ?
+*/
+arm_func_start FS_InitFile
 FS_InitFile: @ 20c7da0 :arm
 	mov     r2, #0x0
-	str     r2, [r0]
-	str     r2, [r0, #0x4]
-	str     r2, [r0, #0x1c]
-	str     r2, [r0, #0x18]
-	str     r2, [r0, #0x8]
+	str     r2, [r0, #NARCFileHandler_0]
+	str     r2, [r0, #NARCFileHandler_4]
+	str     r2, [r0, #NARCFileHandler_1c]
+	str     r2, [r0, #NARCFileHandler_18]
+	str     r2, [r0, #NARCFileHandler_8]
 	mov     r1, #0xe
-	str     r1, [r0, #0x10]
-	str     r2, [r0, #0xc]
+	str     r1, [r0, #NARCFileHandler_10]
+	str     r2, [r0, #NARCFileHandler_c]
 	bx      lr
-@ 0x20c7dc8
+arm_func_end FS_InitFile
 
 
 .arm
@@ -1981,27 +1984,32 @@ branch_20c7ef4: @ 20c7ef4 :arm
 
 
 
-.arm
+/* Input:
+r0: NARCFileHandler
+r1: Destination
+r2: Size
+*/
+arm_func_start FSi_ReadFileCore
 FSi_ReadFileCore: @ 20c7f0c :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
-	ldr     r4, [r7, #0x2c]
-	ldr     r0, [r7, #0x28]
+	ldr     r4, [r7, #NARCFileHandler_2c]
+	ldr     r0, [r7, #NARCFileHandler_28]
 	mov     r6, r2
-	str     r1, [r7, #0x30]
+	str     r1, [r7, #NARCFileHandler_30]
 	sub     r0, r0, r4
 	cmp     r6, r0
 	movgt   r6, r0
 	cmp     r6, #0x0
 	movlt   r6, #0x0
-	str     r2, [r7, #0x34]
+	str     r2, [r7, #NARCFileHandler_34]
 	mov     r5, r3
-	str     r6, [r7, #0x38]
+	str     r6, [r7, #NARCFileHandler_38]
 	cmp     r5, #0x0
-	ldreq   r0, [r7, #0xc]
+	ldreq   r0, [r7, #NARCFileHandler_c]
 	mov     r1, #0x0
 	orreq   r0, r0, #0x4
-	streq   r0, [r7, #0xc]
+	streq   r0, [r7, #NARCFileHandler_c]
 
 	mov     r0, r7
 	bl      FSi_SendCommand
@@ -2011,13 +2019,14 @@ FSi_ReadFileCore: @ 20c7f0c :arm
 	mov     r0, r7
 	bl      FS_WaitAsync
 	cmp     r0, #0x0
-	ldrne   r0, [r7, #0x2c]
+	ldrne   r0, [r7, #NARCFileHandler_2c]
 	subne   r6, r0, r4
 	mvneq   r6, #0x0
+
 branch_20c7f80: @ 20c7f80 :arm
 	mov     r0, r6
 	ldmfd   sp!, {r3-r7,pc}
-@ 0x20c7f88
+arm_func_end FSi_ReadFileCore
 
 
 .arm
@@ -2097,6 +2106,10 @@ FS_OpenFileFast: @ 20c8010 :arm
 @ 0x20c8080
 
 
+/* Input:
+r0: NARCFileHandler
+r1: NARCStringPointer
+*/
 arm_func_start FS_OpenFile
 FS_OpenFile: @ 20c8080 :arm
 	stmfd   sp!, {r4,lr}
@@ -2106,6 +2119,7 @@ FS_OpenFile: @ 20c8080 :arm
 	bl      FS_ConvertPathToFileID
 	cmp     r0, #0x0
 	beq     branch_20c80bc
+
 	add     r1, sp, #0x0
 	mov     r0, r4
 	ldmia   r1, {r1,r2}
@@ -2114,6 +2128,7 @@ FS_OpenFile: @ 20c8080 :arm
 	addne   sp, sp, #0x8
 	movne   r0, #0x1
 	ldmnefd sp!, {r4,pc}
+
 branch_20c80bc: @ 20c80bc :arm
 	mov     r0, #0x0
 	add     sp, sp, #0x8
@@ -2203,7 +2218,7 @@ branch_20c81b0: @ 20c81b0 :arm
 @ 0x20c81c4
 
 
-.arm
+arm_func_start FS_ReadFileAsync
 FS_ReadFileAsync: @ 20c81c4 :arm
 	ldr     r12, =FSi_ReadFileCore
 	mov     r3, #0x1
@@ -2211,9 +2226,14 @@ FS_ReadFileAsync: @ 20c81c4 :arm
 @ 0x20c81d0
 
 .pool
+arm_func_end FS_ReadFileAsync
 
 
-
+/* Input:
+r0: NARCFileHandler
+r1: Destination
+r2: Size
+*/
 arm_func_start FS_ReadFile
 FS_ReadFile: @ 20c81d4 :arm
 	ldr     r12, =FSi_ReadFileCore
@@ -2226,6 +2246,11 @@ arm_func_end FS_ReadFile
 
 
 
+/* Input:
+r0: NARCFileHandler
+r1: Offset
+r2: Mode - 0 AbsPos 1 RelPos 2 EndPos
+*/
 arm_func_start FS_SeekFile
 FS_SeekFile: @ 20c81e4 :arm
 	cmp     r2, #0x0
@@ -2237,17 +2262,17 @@ FS_SeekFile: @ 20c81e4 :arm
 	b       branch_20c8224
 
 branch_20c8200: @ 20c8200 :arm
-	ldr     r2, [r0, #0x24]
+	ldr     r2, [r0, #NARCFileHandler_24]
 	add     r1, r1, r2
 	b       branch_20c822c
 
 branch_20c820c: @ 20c820c :arm
-	ldr     r2, [r0, #0x2c]
+	ldr     r2, [r0, #NARCFileHandler_2c]
 	add     r1, r1, r2
 	b       branch_20c822c
 
 branch_20c8218: @ 20c8218 :arm
-	ldr     r2, [r0, #0x28]
+	ldr     r2, [r0, #NARCFileHandler_28]
 	add     r1, r1, r2
 	b       branch_20c822c
 
@@ -2256,13 +2281,13 @@ branch_20c8224: @ 20c8224 :arm
 	bx      lr
 
 branch_20c822c: @ 20c822c :arm
-	ldr     r2, [r0, #0x24]
+	ldr     r2, [r0, #NARCFileHandler_24]
 	cmp     r1, r2
 	movlt   r1, r2
-	ldr     r2, [r0, #0x28]
+	ldr     r2, [r0, #NARCFileHandler_28]
 	cmp     r1, r2
 	movgt   r1, r2
-	str     r1, [r0, #0x2c]
+	str     r1, [r0, #NARCFileHandler_2c]
 	mov     r0, #0x1
 	bx      lr
 arm_func_end FS_SeekFile

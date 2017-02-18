@@ -24,7 +24,7 @@ branch_207cf62: @ 207cf62 :thumb
 	ldr     r1, =Unknown_20f0cc4
 	lsl     r3, r3, #3
 	ldrh    r1, [r1, r3]
-	mov     r0, #0xf            @ itemtool/itemdata/pl_item_data.narc
+	mov     r0, #PlItemData_Narc
 	bl      LoadFromNARC_2
 	pop     {r3,pc}
 
@@ -32,7 +32,7 @@ branch_207cf70: @ 207cf70 :thumb
 	ldr     r1, =Unknown_20f0cc4+0x2
 	lsl     r3, r3, #3
 	ldrh    r1, [r1, r3]
-	mov     r0, #0x10           @ itemtool/itemdata/item_icon.narc
+	mov     r0, #ItemIcon_Narc
 	bl      LoadFromNARC_2
 	pop     {r3,pc}
 
@@ -40,7 +40,7 @@ branch_207cf7e: @ 207cf7e :thumb
 	ldr     r1, =Unknown_20f0cc4+0x4
 	lsl     r3, r3, #3
 	ldrh    r1, [r1, r3]
-	mov     r0, #0x10           @ itemtool/itemdata/item_icon.narc
+	mov     r0, #ItemIcon_Narc
 	bl      LoadFromNARC_2
 	pop     {r3,pc}
 
@@ -59,17 +59,19 @@ thumb_func_end LoadFromNARC_ItemData
 Function_207cfa0: @ 207cfa0 :thumb
 	push    {r4-r6,lr}
 	mov     r3, r2
+
 	mov     r2, #0x62
 	mov     r5, r0
 	mov     r4, r1
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	lsl     r2, r2, #2
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r6, r0
 	mov     r1, r4
 	mov     r2, r5
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
+
 	mov     r0, r6
 	bl      Function_200b190
 	pop     {r4-r6,pc}
@@ -81,17 +83,18 @@ Function_207cfa0: @ 207cfa0 :thumb
 .globl Function_207cfc8
 Function_207cfc8: @ 207cfc8 :thumb
 	push    {r4-r6,lr}
+
 	mov     r3, r2
 	mov     r5, r0
 	mov     r4, r1
 	ldr     r2, [pc, #0x18] @ 0x207cfec, (=0x187)
 	mov     r0, #0x1
-	mov     r1, #0x1a
-	bl      Function_200b144
+	mov     r1, #PlMsg_Narc
+	bl      LoadFromNARC_9
 	mov     r6, r0
 	mov     r1, r4
 	mov     r2, r5
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	mov     r0, r6
 	bl      Function_200b190
 	pop     {r4-r6,pc}
@@ -832,7 +835,7 @@ Function_207d388: @ 207d388 :thumb
 	str     r1, [sp, #0x0]
 
 	mov     r1, #0x0
-	mov     r0, #0xf        @ itemtool/itemdata/pl_item_data.narc
+	mov     r0, #PlItemData_Narc
 	mov     r2, r4
 	mov     r3, r1
 	bl      LoadFromNARC_5

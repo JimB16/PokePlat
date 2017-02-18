@@ -157,7 +157,7 @@ branch_22562b2: @ 22562b2 :thumb
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a72c
+	bl      AddVariableAreaAdress_6_MapData4
 	mov     r6, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
@@ -614,7 +614,7 @@ Function_2256584: @ 2256584 :thumb
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a72c
+	bl      AddVariableAreaAdress_6_MapData4
 	mov     r6, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
@@ -1102,7 +1102,7 @@ Function_22568bc: @ 22568bc :thumb
 	mov     r0, #0xc
 	mov     r1, #0x75
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1114,7 +1114,7 @@ Function_22568bc: @ 22568bc :thumb
 	mov     r0, #0xc
 	mov     r1, #0x73
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8

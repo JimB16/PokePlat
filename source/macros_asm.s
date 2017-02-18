@@ -3,6 +3,7 @@
 .include "constants/event_constants.s"
 .include "constants/item_constants.s"
 .include "constants/move_constants.s"
+.include "constants/narc_constants.s"
 .include "constants/pokemon_constants.s"
 .include "constants/type_constants.s"
 .include "macros/function.s"
@@ -158,6 +159,7 @@ Block B
 .equ PkmnData_4_Bit2,  1<<2
 .equ PkmnData_Checksum,  0x6
 
+@ GetPkmnData r1
 .equ PKMNDATA_PERSONALITYVALUE,  0x0
 .equ PKMNDATA_4_BIT0,  0x1
 .equ PKMNDATA_4_BIT1,  0x2
@@ -397,13 +399,41 @@ Block B
 .equ PKMNBATTLEDATA_CURHP,  0x2f
 .equ PKMNBATTLEDATA_MAXHP,  0x30
 .equ PKMNBATTLEDATA_EXPPTS,  0x32
-.equ PKMNBATTLEDATA_34,  0x34
+.equ PKMNBATTLEDATA_PERSONALITYVALUE,  0x33
+.equ PKMNBATTLEDATA_STATUSEFFECT,  0x34
 .equ PKMNBATTLEDATA_35,  0x35
 .equ PKMNBATTLEDATA_ITEM,  0x37
 .equ PKMNBATTLEDATA_49,  0x49
 .equ PKMNBATTLEDATA_4b,  0x4b
 .equ PKMNBATTLEDATA_59,  0x59
-.equ PKMNBATTLEDATA_READFROM78,  0x64
+.equ PKMNBATTLEDATA_5f,  0x5f
+.equ PKMNBATTLEDATA_READFROM138,  0x64
+
+
+.equ TrPkmn0_0,              0x0
+.equ TrPkmn0_Lvl,            0x2
+.equ TrPkmn0_Species,        0x4
+.equ TrPkmn0_PokeballSeal,   0x6
+.equ TrPkmn0_Size,           0x8
+.equ TrPkmn1_0,              0x0
+.equ TrPkmn1_Lvl,            0x2
+.equ TrPkmn1_Species,        0x4
+.equ TrPkmn1_Moves,          0x6
+.equ TrPkmn1_PokeballSeal,   0xe
+.equ TrPkmn1_Size,           0x10
+.equ TrPkmn2_0,              0x0
+.equ TrPkmn2_Lvl,            0x2
+.equ TrPkmn2_Species,        0x4
+.equ TrPkmn2_Item,           0x6
+.equ TrPkmn2_PokeballSeal,   0x8
+.equ TrPkmn2_Size,           0xa
+.equ TrPkmn3_0,              0x0
+.equ TrPkmn3_Lvl,            0x2
+.equ TrPkmn3_Species,        0x4
+.equ TrPkmn3_Item,           0x6
+.equ TrPkmn3_Moves,          0x8
+.equ TrPkmn3_PokeballSeal,   0x10
+.equ TrPkmn3_Size,           0x12
 
 
 @ Constants for ReadBattleData-functions (overlay_0016.s) r2
@@ -481,6 +511,16 @@ Block B
 .equ TRAINERDATA_AI, 0x8
 .equ TRAINERDATA_BATTLETYPE2, 0x9
 
+.equ TrData_Flag,           0x0
+.equ TrData_Class,          0x1
+.equ TrData_BattleType,     0x2
+.equ TrData_NrOfPkmn,       0x3
+.equ TrData_Item1,          0x4
+.equ TrData_Item2,          0x6
+.equ TrData_Item3,          0x8
+.equ TrData_Item4,          0xa
+.equ TrData_AI,             0xc
+.equ TrData_BattleType2,    0x10
 
 @ nds/card.h
 .equ CARD_COMMAND,          0x040001A8
@@ -840,16 +880,26 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ VRAM_0,                0x6000000
 .equ VRAM,                  0x6800000
 
+.equ VRAM_BANK_None, 0x0
+.equ VRAM_BANK_A, 0x1
+.equ VRAM_BANK_B, 0x2
+.equ VRAM_BANK_C, 0x4
+.equ VRAM_BANK_D, 0x8
+.equ VRAM_BANK_E, 0x10
+.equ VRAM_BANK_F, 0x20
+.equ VRAM_BANK_G, 0x40
+.equ VRAM_BANK_H, 0x80
+.equ VRAM_BANK_I, 0x100
 
-.equ VRAM_A,                0x6800000 @ pointer to vram bank A mapped as LCD
-.equ VRAM_B,                0x6820000 @ pointer to vram bank B mapped as LCD
-.equ VRAM_C,                0x6840000 @ pointer to vram bank C mapped as LCD
-.equ VRAM_D,                0x6860000 @ pointer to vram bank D mapped as LCD
-.equ VRAM_E,                0x6880000 @ pointer to vram bank E mapped as LCD
-.equ VRAM_F,                0x6890000 @ pointer to vram bank F mapped as LCD
-.equ VRAM_G,                0x6894000 @ pointer to vram bank G mapped as LCD
-.equ VRAM_H,                0x6898000 @ pointer to vram bank H mapped as LCD
-.equ VRAM_I,                0x68A0000 @ pointer to vram bank I mapped as LCD
+.equ VRAM_A,                0x06800000 @ pointer to vram bank A mapped as LCD
+.equ VRAM_B,                0x06820000 @ pointer to vram bank B mapped as LCD
+.equ VRAM_C,                0x06840000 @ pointer to vram bank C mapped as LCD
+.equ VRAM_D,                0x06860000 @ pointer to vram bank D mapped as LCD
+.equ VRAM_E,                0x06880000 @ pointer to vram bank E mapped as LCD
+.equ VRAM_F,                0x06890000 @ pointer to vram bank F mapped as LCD
+.equ VRAM_G,                0x06894000 @ pointer to vram bank G mapped as LCD
+.equ VRAM_H,                0x06898000 @ pointer to vram bank H mapped as LCD
+.equ VRAM_I,                0x068A0000 @ pointer to vram bank I mapped as LCD
 
 .equ OAM,                   0x07000000 @ pointer to Object Attribute Memory
 .equ OAM_SUB,               0x07000400 @ pointer to Object Attribute Memory (Sub engine)
@@ -875,6 +925,8 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ REG_DISPCNT,           0x04000000
 .equ REG_DISPCNT_SUB,       0x04001000
 
+.equ MODE3D_OFF,                0x0 @ <<3
+.equ MODE3D_ON,                 0x1 @ <<3
 .equ ENABLE_3D,             (1<<3)
 .equ DISPLAY_ENABLE_SHIFT,  8
 .equ DISPLAY_BG0_ACTIVE,    (1 << 8)
@@ -886,6 +938,17 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ DISPLAY_WIN1_ON,       (1 << 14)
 .equ DISPLAY_SPR_WIN_ON,    (1 << 15)
 
+.equ BG_MODE_0,             0x0 @ <<0
+.equ BG_MODE_1,             0x1 @ <<0
+.equ BG_MODE_2,             0x2 @ <<0
+.equ BG_MODE_3,             0x3 @ <<0
+.equ BG_MODE_4,             0x4 @ <<0
+.equ BG_MODE_5,             0x5 @ <<0
+.equ BG_MODE_6,             0x6 @ <<0
+.equ DISP_MODE_0,           0x0 @ <<16
+.equ DISP_MODE_1,           0x1 @ <<16
+.equ DISP_MODE_2,           0x2 @ <<16
+.equ DISP_MODE_3,           0x3 @ <<16
 .equ MODE_0_2D,             0x10000 @ 4 2D backgrounds
 .equ MODE_1_2D,             0x10001 @ 4 2D backgrounds
 .equ MODE_2_2D,             0x10002 @ 4 2D backgrounds
@@ -907,6 +970,32 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ MODE_FB1,              (0x00060000) @ video display directly from VRAM_B in LCD mode
 .equ MODE_FB2,              (0x000A0000) @ video display directly from VRAM_C in LCD mode
 .equ MODE_FB3,              (0x000E0000) @ video display directly from VRAM_D in LCD mode
+
+.equ DISPLAY_SPR_HBLANK,			(1 << 23)
+
+.equ DISPLAY_SPR_1D_LAYOUT,		(1 << 4)
+
+.equ DISPLAY_SPR_1D,				(1 << 4)
+.equ DISPLAY_SPR_2D,				(0 << 4)
+.equ DISPLAY_SPR_1D_BMP,			(4 << 4)
+.equ DISPLAY_SPR_2D_BMP_128,		(0 << 4)
+.equ DISPLAY_SPR_2D_BMP_256,		(2 << 4)
+
+
+.equ DISPLAY_SPR_1D_SIZE_32,		(0 << 20)
+.equ DISPLAY_SPR_1D_SIZE_64,		(1 << 20)
+.equ DISPLAY_SPR_1D_SIZE_128,		(2 << 20)
+.equ DISPLAY_SPR_1D_SIZE_256,		(3 << 20)
+.equ DISPLAY_SPR_1D_BMP_SIZE_128,	(0 << 22)
+.equ DISPLAY_SPR_1D_BMP_SIZE_256,	(1 << 22)
+
+@ mask to clear all attributes related to sprites from display control
+.equ DISPLAY_SPRITE_ATTR_MASK,  ((7 << 4) | (7 << 20) | (1 << 31))
+
+.equ DISPLAY_SPR_EXT_PALETTE,		(1 << 31)
+.equ DISPLAY_BG_EXT_PALETTE,		(1 << 30)
+
+.equ DISPLAY_SCREEN_OFF,     (1 << 7)
 
 .equ REG_MASTER_BRIGHT,     0x0400006C
 .equ REG_MASTER_BRIGHT_SUB, 0x0400106C
@@ -942,6 +1031,7 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ SUB_WIN_OUT,           0x0400104A
 
 .equ REG_MOSAIC,		    0x0400004C
+.equ REG_MOSAIC_OBJ,	    0x0400004D
 .equ REG_MOSAIC_SUB,	    0x0400104C
 
 .equ REG_BLDCNT,            0x04000050
@@ -951,6 +1041,12 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ REG_BLDCNT_SUB,        0x04001050
 .equ REG_BLDALPHA_SUB,      0x04001052
 .equ REG_BLDY_SUB,          0x04001054
+
+
+@ Display capture control
+
+.equ REG_DISPCAPCNT,		0x04000064
+.equ REG_DISP_MMEM_FIFO,    0x04000068
 
 
 

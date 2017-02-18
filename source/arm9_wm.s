@@ -3325,6 +3325,7 @@ branch_20d04ac: @ 20d04ac :arm
 
 
 .arm
+.globl Function_20d04c0
 Function_20d04c0: @ 20d04c0 :arm
 	stmfd   sp!, {r3,lr}
 	mov     lr, r1

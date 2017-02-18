@@ -2062,7 +2062,7 @@ branch_20749ac: @ 20749ac :thumb
 	mov     r1, r5
 	bl      Function_2023810
 	mov     r0, r5
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	b       end_ReadBoxPkmnData
 
 branch_20749d0: @ 20749d0 :thumb
@@ -3550,7 +3550,7 @@ branch_2075330: @ 2075330 :thumb
 	mov     r2, #0xb
 	bl      Function_2023df0
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 branch_2075348: @ 2075348 :thumb
 	add     sp, #0x50
 	pop     {r3-r7,pc}
@@ -4762,7 +4762,7 @@ LoadFromNarc_PlGrowTbl: @ 2075ae4 :thumb
 branch_2075af2: @ 2075af2 :thumb
 
 	mov     r0, r4
-	mov     r1, #0x3            @ poketool/personal/pl_growtbl.narc
+	mov     r1, #PlGrowTbl_Narc
 	mov     r2, r5
 	bl      LoadFromNARC
 	pop     {r3-r5,pc}
@@ -6965,7 +6965,7 @@ branch_2076880: @ 2076880 :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x48
 	lsl     r0, r0, #1
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
@@ -6973,25 +6973,25 @@ branch_207688c: @ 207688c :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x4e
 	lsl     r0, r0, #1
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_2076898: @ 2076898 :thumb
 	add     r4, #0x54
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r4, r0
 	b       branch_2076968
 
 branch_20768a0: @ 20768a0 :thumb
 	add     r4, #0x58
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r4, r0
 	b       branch_2076968
 
 branch_20768a8: @ 20768a8 :thumb
 	add     r4, #0x5c
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r4, r0
 	b       branch_2076968
 
@@ -6999,21 +6999,21 @@ branch_20768b0: @ 20768b0 :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x60
 	lsl     r0, r0, #1
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_20768bc: @ 20768bc :thumb
 	lsl     r2, r4, #1
 	add     r2, #0x40
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r0, r2
 	b       branch_2076968
 
 branch_20768c6: @ 20768c6 :thumb
 	lsr     r2, r4, #1
 	lsl     r0, r0, #1
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
@@ -7021,18 +7021,18 @@ branch_20768d0: @ 20768d0 :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x8
 	lsl     r0, r0, #1
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_20768dc: @ 20768dc :thumb
 	mov     r2, r0
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	add     r2, #0x84
 	b       branch_2076968
 
 branch_20768e4: @ 20768e4 :thumb
-	mov     r1, #0xa8
+	mov     r1, #DpHeightO_Narc
 	mov     r2, #0x84
 	b       branch_2076968
 
@@ -7042,12 +7042,12 @@ branch_20768ea: @ 20768ea :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x88
 	lsl     r0, r0, #1
-	mov     r1, #0x79
+	mov     r1, #HeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_20768fa: @ 20768fa :thumb
-	mov     r1, #0xa7
+	mov     r1, #DpHeight_Narc
 	cmp     r6, #0x1
 	beq     branch_2076904
 	mov     r2, #0x1
@@ -7067,12 +7067,12 @@ branch_207690e: @ 207690e :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x8c
 	lsl     r0, r0, #1
-	mov     r1, #0x79
+	mov     r1, #HeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_207691e: @ 207691e :thumb
-	mov     r1, #0xa7
+	mov     r1, #DpHeight_Narc
 	cmp     r6, #0x1
 	beq     branch_2076928
 	mov     r2, #0x1
@@ -7092,12 +7092,12 @@ branch_2076932: @ 2076932 :thumb
 	lsr     r2, r4, #1
 	add     r2, #0x98
 	lsl     r0, r0, #1
-	mov     r1, #0x79
+	mov     r1, #HeightO_Narc
 	add     r2, r2, r0
 	b       branch_2076968
 
 branch_2076942: @ 2076942 :thumb
-	mov     r1, #0xa7
+	mov     r1, #DpHeight_Narc
 	cmp     r6, #0x1
 	beq     branch_207694c
 	mov     r2, #0x1
@@ -7112,7 +7112,7 @@ branch_207694e: @ 207694e :thumb
 	b       branch_2076968
 
 branch_2076956: @ 2076956 :thumb
-	mov     r1, #0xa7
+	mov     r1, #DpHeight_Narc
 	cmp     r6, #0x1
 	beq     branch_2076960
 	mov     r2, #0x1
@@ -7176,7 +7176,7 @@ Function_2076994: @ 2076994 :thumb
 	bne     branch_20769b6
 	mov     r7, #0x2
 branch_20769b6: @ 20769b6 :thumb
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NarctableNr
 	ldr     r1, [sp, #0x98]
 	bl      LoadFromNARC_8
 	mov     r4, r0
@@ -8947,7 +8947,7 @@ Function_20775a4: @ 20775a4 :thumb
 	str     r0, [sp, #0x0]
 
 	add     r0, sp, #0x4
-	mov     r1, #0x6d           @ poketool/pl_pokezukan.narc
+	mov     r1, #PlPokezukan_Narc
 	mov     r2, #0x0
 	lsl     r3, r3, #1
 	bl      LoadFromNARC_3
@@ -8974,7 +8974,7 @@ Function_20775c4: @ 20775c4 :thumb
 	mov     r0, #0x2
 	str     r0, [sp, #0x0]
 	add     r0, sp, #0x4
-	mov     r1, #0x91           @ poketool/shinzukan.narc
+	mov     r1, #Shinzukan_Narc
 	lsl     r3, r3, #1
 	bl      LoadFromNARC_3
 branch_20775e2: @ 20775e2 :thumb
@@ -10199,7 +10199,7 @@ LoadFromNARC_Wotbl: @ 2077d28 :thumb
 
 	mov     r2, r0
 	mov     r0, r4
-	mov     r1, #0x21               @ poketool/personal/wotbl.narc
+	mov     r1, #Wotbl_Narc
 	bl      LoadFromNARC
 
 	pop     {r4,pc}
@@ -10939,7 +10939,7 @@ LoadFromNARC_PlPersonal1: @ 20781f8 :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r0
 	mov     r0, r1
-	mov     r1, #0x2                @ poketool/personal/pl_personal.narc
+	mov     r1, #PlPersonal_Narc
 	bx      r3
 @ 0x2078202
 
@@ -10958,7 +10958,7 @@ LoadFromNARC_PlPersonal2: @ 2078208 :thumb
 
 	mov     r2, r0
 	mov     r0, r4
-	mov     r1, #0x2                @ poketool/personal/pl_personal.narc
+	mov     r1, #PlPersonal_Narc
 	bl      LoadFromNARC
 
 	pop     {r4,pc}
@@ -10970,7 +10970,7 @@ LoadFromNARC_Evo: @ 207821c :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r0
 	mov     r0, r1
-	mov     r1, #0x22               @ poketool/personal/evo.narc
+	mov     r1, #Evo_Narc
 	bx      r3
 @ 0x2078226
 
@@ -12250,9 +12250,9 @@ CopyTrainerIDtoPkmnOTID: @ 207884c :thumb
 branch_20788bc: @ 20788bc :thumb
 
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r4
 	add     sp, #0x10
 	pop     {r3-r7,pc}
@@ -12612,7 +12612,7 @@ SetPokeballSeal: @ 2078aec :thumb
 	pop     {r4-r6,pc}
 
 branch_2078afe: @ 2078afe :thumb
-	mov     r0, #0x98
+	mov     r0, #PlCbData_Narc
 	mov     r1, r2
 	bl      LoadFromNARC_8
 
@@ -13370,7 +13370,7 @@ Function_20790b0: @ 20790b0 :thumb
 	mov     r2, #0x0
 	str     r1, [sp, #0x0]
 
-	mov     r1, #0x9                @ poketool/waza/pl_waza_tbl.narc
+	mov     r1, #PlWazaTbl_Narc
 	mov     r3, r2
 	bl      LoadFromNARC_3
 
@@ -13503,7 +13503,7 @@ LoadFromNarc_PlWazaTbl: @ 2079160 :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r0
 	mov     r0, r1
-	mov     r1, #0x9                @ poketool/waza/pl_waza_tbl.narc
+	mov     r1, #PlWazaTbl_Narc
 	bx      r3
 @ 0x207916a
 

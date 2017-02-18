@@ -2626,11 +2626,11 @@ Function_20666e4: @ 20666e4 :thumb
 	bl      SetSpritea0
 	mov     r0, r4
 	bl      IncreaseSpriteMovementState
-.thumb
 branch_206670c: @ 206670c :thumb
 	mov     r0, #0x0
 	pop     {r4,pc}
 @ 0x2066710
+
 
 .thumb
 Function_2066710: @ 2066710 :thumb
@@ -2644,7 +2644,6 @@ Function_2066710: @ 2066710 :thumb
 	cmp     r0, #0x0
 	beq     branch_206672a
 	bl      Function_207136c
-.thumb
 branch_206672a: @ 206672a :thumb
 	add     r1, sp, #0x0
 	mov     r0, #0x0
@@ -2654,7 +2653,7 @@ branch_206672a: @ 206672a :thumb
 	mov     r0, r4
 	bl      Function_2063088
 	mov     r0, r4
-	bl      0x21f3f10
+	bl      Function_5_21f3f10
 	ldr     r1, [pc, #0x1c] @ 0x2066760, (=0x10004)
 	mov     r0, r4
 	bl      SetSpriteFlags

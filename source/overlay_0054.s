@@ -553,14 +553,14 @@ Function_22564bc: @ 22564bc :thumb
 	bl      Function_201a7e8
 	add     r0, sp, #0x1c
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r0, sp, #0x1c
 	bl      Function_201a9f4
 	ldr     r1, [pc, #0x80] @ 0x22565bc, (=0x1ca)
 	mov     r0, #0x1a
 	mov     r2, #0x0
 	mov     r3, #0x8
-	bl      Function_200b010
+	bl      Function_200b010_LoadFromNARCCallMsgDecrypt
 	mov     r4, r0
 	beq     branch_225657c
 	mov     r0, #0x0
@@ -584,7 +584,7 @@ Function_22564bc: @ 22564bc :thumb
 	add     r0, sp, #0x1c
 	bl      Function_201accc
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 .thumb
 branch_225657c: @ 225657c :thumb
 	add     r0, sp, #0x1c

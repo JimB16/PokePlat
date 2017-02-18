@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram24, "ax"
 
@@ -32,7 +35,8 @@ Function_24_2253ce0: @ 2253ce0 :thumb
 	mov     r0, r5
 	mov     r1, #0x4
 	bl      Function_20183c4
-	mov     r0, #0xc
+
+	mov     r0, #Poketch_Narc
 	mov     r1, #0x8
 	bl      LoadFromNARC_8
 	mov     r1, #0x0

@@ -73,7 +73,7 @@ Somehow related to Nintendo's compiler, allows to assign compiler Overlay IDs to
 .word 54, 0x22561c0, 0x660, 0x0, 0x2256810, 0x2256818, 54, 0
 .word 55, 0x22561c0, 0x320, 0x0, 0x22564d0, 0x22564d8, 55, 0
 .word 56, 0x22561c0, 0x1140, 0x0, 0x22572f0, 0x22572f4, 56, 0
-.word 57, 0x21d0d80, 0x400, 0x0, 0x21d1178, 0x21d117c, 57, 0
+.word 57, __load_start_iwram57, __load_size_overlay57, __overlay57_bss_size, __overlay57_static_init_start, __overlay57_static_init_end, 57, 0
 .word 58, 0x21d0d80, 0x24c0, 0x0, 0x21d3174, 0x21d3178, 58, 0
 .word 59, 0x21d0d80, 0x2780, 0x0, 0x21d3474, 0x21d3478, 59, 0
 .word 60, 0x221f800, 0xa620, 0x1040, 0x2228e24, 0x2228e28, 60, 0
@@ -113,7 +113,7 @@ Somehow related to Nintendo's compiler, allows to assign compiler Overlay IDs to
 .word 94, 0x223b140, 0xb980, 0x160, 0x22463ec, 0x22463f0, 94, 0
 .word 95, 0x2246c20, 0x56c0, 0xa0, 0x224c2a4, 0x224c2a8, 95, 0
 .word 96, 0x223b140, 0x2ca0, 0x120, 0x223db40, 0x223db44, 96, 0
-.word 97, 0x222ae60, 0x14320, 0x1980, 0x223df38, 0x223df3c, 97, 0
+.word 97, __load_start_iwram97, __load_size_overlay97, __overlay97_bss_size, __overlay97_static_init_start, __overlay97_static_init_end, 97, 0
 .word 98, 0x2246c20, 0x3200, 0x20, 0x2249d54, 0x2249d58, 98, 0
 .word 99, 0x21d0d80, 0x4760, 0x0, 0x21d54dc, 0x21d54e0, 99, 0
 .word 100, __load_start_iwram100, 0x47c0, 0x0, 0x21d5490, 0x21d5494, 100, 0

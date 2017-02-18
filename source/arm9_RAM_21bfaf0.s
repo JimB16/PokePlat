@@ -142,6 +142,7 @@ branch_2017f5a: @ 2017f5a :thumb
 	.hword  0x1c64 @ add r4, r4, #0x1
 	cmp     r4, r1
 	blo     branch_2017f5a
+
 branch_2017f6c: @ 2017f6c :thumb
 	cmp     r4, r6
 	bhs     branch_2017f7e
@@ -153,10 +154,12 @@ branch_2017f72: @ 2017f72 :thumb
 	.hword  0x1c64 @ add r4, r4, #0x1
 	cmp     r4, r6
 	blo     branch_2017f72
+
 branch_2017f7e: @ 2017f7e :thumb
 	mov     r4, #0x0
 	cmp     r6, #0x0
 	bls     branch_2017f96
+
 	ldr     r0, =RAM_21bfaf0
 	mov     r3, r4
 	mov     r2, r4
@@ -167,6 +170,7 @@ branch_2017f8a: @ 2017f8a :thumb
 	.hword  0x1c9b @ add r3, r3, #0x2
 	cmp     r4, r6
 	blo     branch_2017f8a
+
 branch_2017f96: @ 2017f96 :thumb
 	add     sp, #0x8
 	pop     {r3-r7,pc}
@@ -731,17 +735,20 @@ Function_20182f0: @ 20182f0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r4, r1
+
 	blx     OS_GetProcMode
 	cmp     r0, #0x12
 	bne     branch_2018302
 	bl      ErrorHandling
 branch_2018302: @ 2018302 :thumb
+
 	mov     r0, r5
 	sub     r0, #0x10
-	blx     Function_20a564c
+	blx     Function_20a564c_LoadSub0xc
 	add     r4, #0x10
 	cmp     r0, r4
 	blo     branch_2018330
+
 	sub     r2, r5, #0x4
 	ldr     r0, =RAM_21bfaf0
 	ldr     r2, [r2, #0x0]

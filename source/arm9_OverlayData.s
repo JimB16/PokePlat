@@ -88,11 +88,11 @@ thumb_func_end FreeSomeDataAndStore0InOverlayData1c
 
 
 /* Input:
-r0: ?
+r0: Ptr to OverlayData
 */
 thumb_func_start LoadPtrToOverWorldDataIn18
 LoadPtrToOverWorldDataIn18: @ 2006840 :thumb
-	ldr     r0, [r0, #0x18]
+	ldr     r0, [r0, #OverlayData_18]
 	bx      lr
 thumb_func_end LoadPtrToOverWorldDataIn18
 
@@ -123,7 +123,6 @@ Jumppoints_200685a:
 .hword callOverlayDataSecondFunction - Jumppoints_200685a - 2
 .hword callOverlayDataThirdFunctionAndUnloadOverlay - Jumppoints_200685a - 2
 
-.thumb
 loadOverlayAndCallFirstFunction: @ 2006862 :thumb
 	mov     r1, #0x0
 	ldr     r0, [r4, #OverlayData_JumpTable3]

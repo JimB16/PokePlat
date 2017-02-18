@@ -32,9 +32,10 @@ Function_205e820: @ 205e820 :thumb
 	ldr     r0, [sp, #0x0]
 	mov     r1, r6
 	bl      Function_205ed6c
-	mov     r1, r0
+	mov     r1, r0              @ SpriteGraphicID
 	mov     r0, r4
 	bl      SetSpriteGraphic
+
 	mov     r1, #0x9
 	mov     r0, r4
 	lsl     r1, r1, #10
@@ -96,7 +97,7 @@ branch_205e896: @ 205e896 :thumb
 	mov     r0, r6
 	mov     r1, r4
 	mov     r2, r7
-	bl      0x21f261c
+	bl      Function_5_21f261c
 	mov     r1, r0
 	mov     r0, r5
 	bl      Function_205ec00
@@ -819,20 +820,22 @@ branch_205ec4e: @ 205ec4e :thumb
 @ 0x205ec52
 
 
-.align 2, 0
-.thumb
+/* Input:
+r0: VariableAreaAdress_6_8c
+*/
+thumb_func_start SetRunningShoes
 SetRunningShoes: @ 205ec54 :thumb
 	cmp     r1, #0x1
 	bne     branch_205ec5e
 	mov     r1, #0x1
-	strh    r1, [r0, #0x2]
+	strh    r1, [r0, #VarArea6_8c_2]
 	bx      lr
 
 branch_205ec5e: @ 205ec5e :thumb
 	mov     r1, #0x0
-	strh    r1, [r0, #0x2]
+	strh    r1, [r0, #VarArea6_8c_2]
 	bx      lr
-@ 0x205ec64
+thumb_func_end SetRunningShoes
 
 
 .thumb
@@ -857,6 +860,7 @@ branch_205ec76: @ 205ec76 :thumb
 	bx      lr
 @ 0x205ec78
 
+
 .thumb
 Function_205ec78: @ 205ec78 :thumb
 	push    {r4,lr}
@@ -866,6 +870,7 @@ Function_205ec78: @ 205ec78 :thumb
 	bl      Function_205ec70
 	pop     {r4,pc}
 @ 0x205ec88
+
 
 .thumb
 Function_205ec88: @ 205ec88 :thumb
@@ -1014,6 +1019,11 @@ branch_205ed64: @ 205ed64 :thumb
 @ 0x205ed6c
 
 
+/* Input:
+
+Return:
+r0: SpriteGraphicID
+*/
 .thumb
 .globl Function_205ed6c
 Function_205ed6c: @ 205ed6c :thumb
@@ -1023,9 +1033,7 @@ Function_205ed6c: @ 205ed6c :thumb
 	cmp     r0, #0x1e
 	bls     branch_205ed78
 	b       branch_205eea6
-@ 0x205ed78
 
-.thumb
 branch_205ed78: @ 205ed78 :thumb
 	add     r0, r0, r0
 	add     r0, pc
@@ -1071,114 +1079,78 @@ Jumppoints_205ed84:
 branch_205edc2: @ 205edc2 :thumb
 	mov     r0, #0x0
 	pop     {r3,pc}
-@ 0x205edc6
 
-.thumb
 branch_205edc6: @ 205edc6 :thumb
 	mov     r0, #0x15
 	pop     {r3,pc}
-@ 0x205edca
 
-.thumb
 branch_205edca: @ 205edca :thumb
 	mov     r0, #0xb2
 	pop     {r3,pc}
-@ 0x205edce
 
-.thumb
 branch_205edce: @ 205edce :thumb
 	mov     r0, #0xb0
 	pop     {r3,pc}
-@ 0x205edd2
 
-.thumb
 branch_205edd2: @ 205edd2 :thumb
 	mov     r0, #0xb4
 	pop     {r3,pc}
-@ 0x205edd6
 
-.thumb
 branch_205edd6: @ 205edd6 :thumb
 	mov     r0, #0xba
 	pop     {r3,pc}
-@ 0x205edda
 
-.thumb
 branch_205edda: @ 205edda :thumb
 	mov     r0, #0xbc
 	pop     {r3,pc}
-@ 0x205edde
 
-.thumb
 branch_205edde: @ 205edde :thumb
 	mov     r0, #0xc4
 	pop     {r3,pc}
-@ 0x205ede2
 
-.thumb
 branch_205ede2: @ 205ede2 :thumb
 	mov     r0, #0xc6
 	pop     {r3,pc}
-@ 0x205ede6
 
-.thumb
 branch_205ede6: @ 205ede6 :thumb
 	mov     r0, #0xc8
 	pop     {r3,pc}
-@ 0x205edea
 
-.thumb
 branch_205edea: @ 205edea :thumb
 	mov     r0, #0x1
 	lsl     r0, r0, #8
 	pop     {r3,pc}
-@ 0x205edf0
 
-.thumb
 branch_205edf0: @ 205edf0 :thumb
 	mov     r0, #0xd4
 	pop     {r3,pc}
-@ 0x205edf4
 
-.thumb
 branch_205edf4: @ 205edf4 :thumb
 	ldr     r0, [pc, #0xb8] @ 0x205eeb0, (=0x102)
 	pop     {r3,pc}
-@ 0x205edf8
 
-.thumb
 branch_205edf8: @ 205edf8 :thumb
 	mov     r0, #0x43
 	lsl     r0, r0, #2
 	pop     {r3,pc}
-@ 0x205edfe
 
-.thumb
 branch_205edfe: @ 205edfe :thumb
 	ldr     r0, [pc, #0xb4] @ 0x205eeb4, (=0x10e)
 	pop     {r3,pc}
-@ 0x205ee02
 
-.thumb
 branch_205ee02: @ 205ee02 :thumb
 	mov     r0, #0xd2
 	pop     {r3,pc}
-@ 0x205ee06
 
-.thumb
 branch_205ee06: @ 205ee06 :thumb
 	mov     r0, #0x11
 	lsl     r0, r0, #4
 	pop     {r3,pc}
-@ 0x205ee0c
 
-.thumb
 branch_205ee0c: @ 205ee0c :thumb
 	ldr     r0, [pc, #0xa8] @ 0x205eeb8, (=0x112)
 	pop     {r3,pc}
-@ 0x205ee10
 
-.thumb
 branch_205ee10: @ 205ee10 :thumb
 	cmp     r0, #0x1e
 	bhi     branch_205eea6
@@ -1226,21 +1198,15 @@ Jumppoints_205ee20:
 branch_205ee5e: @ 205ee5e :thumb
 	mov     r0, #0x61
 	pop     {r3,pc}
-@ 0x205ee62
 
-.thumb
 branch_205ee62: @ 205ee62 :thumb
 	mov     r0, #0x62
 	pop     {r3,pc}
-@ 0x205ee66
 
-.thumb
 branch_205ee66: @ 205ee66 :thumb
 	mov     r0, #0xb3
 	pop     {r3,pc}
-@ 0x205ee6a
 
-.thumb
 branch_205ee6a: @ 205ee6a :thumb
 	mov     r0, #0xb1
 	pop     {r3,pc}
@@ -1956,7 +1922,7 @@ branch_205f19e: @ 205f19e :thumb
 	mov     r2, r6
 	bl      Function_205f350
 	mov     r0, r5
-	bl      0x21dfb5c
+	bl      Function_5_21dfb5c
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_205f62c
@@ -2100,21 +2066,21 @@ branch_205f256: @ 205f256 :thumb
 	ldr     r2, [sp, #0x1c]
 	ldr     r3, [sp, #0x18]
 	mov     r0, r7
-	bl      0x2250fbc
+	bl      Function_9_2250fbc
 	cmp     r0, #0x0
 	bne     branch_205f324
 	ldr     r1, [sp, #0x20]
 	ldr     r2, [sp, #0x1c]
 	ldr     r3, [sp, #0x18]
 	mov     r0, r7
-	bl      0x2250fd8
+	bl      Function_9_2250fd8
 	cmp     r0, #0x1
 	bne     branch_205f324
 	ldr     r1, [sp, #0x20]
 	ldr     r2, [sp, #0x1c]
 	ldr     r3, [sp, #0x18]
 	mov     r0, r7
-	bl      0x2251000
+	bl      Function_9_2251000
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
@@ -2124,7 +2090,7 @@ branch_205f256: @ 205f256 :thumb
 	ldr     r2, [sp, #0x4]
 	ldr     r3, [sp, #0x14]
 	mov     r0, r7
-	bl      0x2251000
+	bl      Function_9_2251000
 	b       branch_205f324
 
 branch_205f318: @ 205f318 :thumb
@@ -3900,21 +3866,21 @@ Function_205fecc: @ 205fecc :thumb
 	ldr     r2, [sp, #0xc]
 	ldr     r3, [sp, #0x8]
 	mov     r0, r7
-	bl      0x2250fbc
+	bl      Function_9_2250fbc
 	cmp     r0, #0x0
 	bne     branch_205ff56
 	ldr     r1, [sp, #0x10]
 	ldr     r2, [sp, #0xc]
 	ldr     r3, [sp, #0x8]
 	mov     r0, r7
-	bl      0x2250fd8
+	bl      Function_9_2250fd8
 	cmp     r0, #0x1
 	bne     branch_205ff56
 	ldr     r1, [sp, #0x10]
 	ldr     r2, [sp, #0xc]
 	ldr     r3, [sp, #0x8]
 	mov     r0, r7
-	bl      0x2251000
+	bl      Function_9_2251000
 	ldr     r2, [sp, #0x4]
 	mov     r0, r5
 	mov     r1, r4
@@ -6094,7 +6060,7 @@ branch_2060e14: @ 2060e14 :thumb
 	add     r1, r6, r1
 	add     r2, r7, r2
 	mov     r3, r4
-	bl      0x22511a0
+	bl      Function_9_22511a0
 	cmp     r0, #0x1
 	bne     branch_2060e3a
 	mov     r5, #0x0
@@ -6616,7 +6582,7 @@ Function_2061180: @ 2061180 :thumb
 	ldr     r2, [sp, #0x8]
 	ldr     r3, [sp, #0x4]
 	mov     r0, r7
-	bl      0x2251044
+	bl      Function_9_2251044
 	ldr     r0, [sp, #0x10]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
@@ -6728,7 +6694,7 @@ Function_2061248: @ 2061248 :thumb
 	ldr     r1, [sp, #0x10]
 	ldr     r2, [sp, #0xc]
 	ldr     r3, [sp, #0x8]
-	bl      0x2251044
+	bl      Function_9_2251044
 	mov     r6, r0
 	cmp     r4, #0x3
 	bhi     branch_2061302
@@ -7088,24 +7054,22 @@ Function_206147c: @ 206147c :thumb
 	bl      Function_205eb08
 	cmp     r4, #0x0
 	bne     branch_20614ae
+
 	mov     r0, r5
 	bl      GetSpriteFaceDirection
 	mov     r1, #0x0
 	bl      Function_2065838
 	pop     {r3-r7,pc}
-@ 0x20614ae
 
-.thumb
 branch_20614ae: @ 20614ae :thumb
 	cmp     r4, #0x2
 	bne     branch_20614bc
+
 	ldr     r0, [sp, #0x0]
 	mov     r1, #0x28
 	bl      Function_2065838
 	pop     {r3-r7,pc}
-@ 0x20614bc
 
-.thumb
 branch_20614bc: @ 20614bc :thumb
 	mov     r0, r5
 	bl      Function_205eb3c
@@ -7114,33 +7078,31 @@ branch_20614bc: @ 20614bc :thumb
 	mov     r1, r0
 	tst     r1, r4
 	beq     branch_20614d0
+
 	mov     r4, #0x38
 	b       branch_2061536
-@ 0x20614d0
 
-.thumb
 branch_20614d0: @ 20614d0 :thumb
 	mov     r1, #0x80
 	tst     r1, r0
 	beq     branch_20614da
+
 	mov     r4, #0x75
 	b       branch_2061536
-@ 0x20614da
 
-.thumb
 branch_20614da: @ 20614da :thumb
 	cmp     r0, #0x0
 	beq     branch_20614ee
+
 	mov     r1, #0x8
 	mov     r4, #0x1c
 	tst     r0, r1
 	bne     branch_2061536
+
 	ldr     r0, [pc, #0x58] @ 0x2061540, (=0x601)
 	bl      Function_2005748
 	b       branch_2061536
-@ 0x20614ee
 
-.thumb
 branch_20614ee: @ 20614ee :thumb
 	cmp     r6, #0x5
 	bhi     branch_2061520
@@ -7159,45 +7121,32 @@ Jumppoints_20614fe:
 .hword branch_2061514 - Jumppoints_20614fe - 2
 .hword branch_2061518 - Jumppoints_20614fe - 2
 .hword branch_206151c - Jumppoints_20614fe - 2
-.thumb
+
 branch_206150a: @ 206150a :thumb
 	b       branch_2061522
-@ 0x206150c
 
-.thumb
 branch_206150c: @ 206150c :thumb
 	mov     r4, #0x8
 	b       branch_2061522
-@ 0x2061510
 
-.thumb
 branch_2061510: @ 2061510 :thumb
 	mov     r4, #0xc
 	b       branch_2061522
-@ 0x2061514
 
-.thumb
 branch_2061514: @ 2061514 :thumb
 	mov     r4, #0x4c
 	b       branch_2061522
-@ 0x2061518
 
-.thumb
 branch_2061518: @ 2061518 :thumb
 	mov     r4, #0x10
 	b       branch_2061522
-@ 0x206151c
 
-.thumb
 branch_206151c: @ 206151c :thumb
 	mov     r4, #0x14
 	b       branch_2061522
-@ 0x2061520
 
-.thumb
 branch_2061520: @ 2061520 :thumb
 	mov     r4, #0x4
-.thumb
 branch_2061522: @ 2061522 :thumb
 	ldr     r0, [sp, #0x18]
 	cmp     r0, #0x1
@@ -7208,8 +7157,8 @@ branch_2061522: @ 2061522 :thumb
 	cmp     r0, #0x1
 	bne     branch_2061536
 	mov     r4, #0x58
-.thumb
 branch_2061536: @ 2061536 :thumb
+
 	ldr     r0, [sp, #0x0]
 	mov     r1, r4
 	bl      Function_2065838
@@ -7260,20 +7209,27 @@ Function_206156c: @ 206156c :thumb
 @ 0x206157c
 
 
-.thumb
-.globl Function_206157c
-Function_206157c: @ 206157c :thumb
+/* Input:
+r0: Ptr to Sprite
+r1: FaceDirection
+r2: Ptr to X-Res
+r3: Ptr to Y-Res
+*/
+thumb_func_start CalcNewSpritePositionXY
+CalcNewSpritePositionXY: @ 206157c :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1
 	str     r0, [sp, #0x0]
 	mov     r6, r2
 	mov     r7, r3
+
 	bl      GetSpritePositionX
 	mov     r4, r0
 	mov     r0, r5
 	bl      GetWalkPositionXChange
 	add     r0, r4, r0
 	str     r0, [r6, #0x0]
+
 	ldr     r0, [sp, #0x0]
 	bl      GetSpritePositionY
 	mov     r4, r0
@@ -7281,14 +7237,13 @@ Function_206157c: @ 206157c :thumb
 	bl      GetWalkPositionYChange
 	add     r0, r4, r0
 	str     r0, [r7, #0x0]
+
 	pop     {r3-r7,pc}
-@ 0x20615aa
+thumb_func_end CalcNewSpritePositionXY
 
 
-.align 2, 0
-.thumb
-.globl Function_20615ac
-Function_20615ac: @ 20615ac :thumb
+thumb_func_start CalcNewSpritePositionXYWithFaceDirection
+CalcNewSpritePositionXYWithFaceDirection: @ 20615ac :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r4, r1
@@ -7298,9 +7253,9 @@ Function_20615ac: @ 20615ac :thumb
 	mov     r0, r5
 	mov     r2, r4
 	mov     r3, r6
-	bl      Function_206157c
+	bl      CalcNewSpritePositionXY
 	pop     {r4-r6,pc}
-@ 0x20615c6
+thumb_func_end CalcNewSpritePositionXYWithFaceDirection
 
 
 .align 2, 0
@@ -7350,20 +7305,18 @@ branch_2061610: @ 2061610 :thumb
 	bl      Function_206417c
 	cmp     r0, #0x1
 	bne     branch_206162a
+
 	sub     r0, r4, #0x2
 	cmp     r0, #0x1
 	bls     branch_2061626
+
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
-@ 0x2061626
 
-.thumb
 branch_2061626: @ 2061626 :thumb
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
-@ 0x206162a
 
-.thumb
 branch_206162a: @ 206162a :thumb
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
@@ -7380,30 +7333,27 @@ Function_2061630: @ 2061630 :thumb
 	mov     r5, r0
 	cmp     r2, r1
 	beq     branch_2061642
+
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x2061642
 
-.thumb
 branch_2061642: @ 2061642 :thumb
 	bl      Function_205eb74
 	cmp     r0, #0x1
 	beq     branch_206164e
+
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x206164e
 
-.thumb
 branch_206164e: @ 206164e :thumb
 	mov     r0, r5
 	bl      Function_205efdc
 	cmp     r0, #0x0
 	bne     branch_206165c
+
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x206165c
 
-.thumb
 branch_206165c: @ 206165c :thumb
 	mov     r0, r5
 	bl      Function_205eb3c
@@ -7411,6 +7361,7 @@ branch_206165c: @ 206165c :thumb
 	bl      Function_206413c
 	cmp     r0, #0x1
 	bne     branch_2061670
+
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 
@@ -7427,9 +7378,11 @@ Function_2061674: @ 2061674 :thumb
 	mov     r4, r1
 	mov     r5, r2
 	mov     r6, r3
+
 	bl      Function_205f108
 	cmp     r0, #0x5
 	bhi     branch_20616de
+
 	add     r0, r0, r0
 	add     r0, pc
 	ldrh    r0, [r0, #0x6]
@@ -7445,7 +7398,7 @@ Jumppoints_2061690:
 .hword branch_20616a4 - Jumppoints_2061690 - 2
 .hword branch_20616ac - Jumppoints_2061690 - 2
 .hword branch_20616b4 - Jumppoints_2061690 - 2
-.thumb
+
 branch_206169c: @ 206169c :thumb
 	ldr     r1, [pc, #0x40] @ 0x20616e0, (=Unknown_20edb04)
 	lsl     r0, r4, #3
@@ -7469,11 +7422,9 @@ branch_20616b4: @ 20616b4 :thumb
 	lsl     r0, r4, #3
 	add     r0, r1, r0
 	b       branch_20616be
-@ 0x20616bc
 
 	pop     {r4-r6,pc}
 
-.thumb
 branch_20616be: @ 20616be :thumb
 	mov     r1, #0x0
 	ldsh    r1, [r0, r1]
@@ -7555,7 +7506,7 @@ branch_206170c: @ 206170c :thumb
 	ldr     r2, [sp, #0x8]
 	ldr     r3, [sp, #0x4]
 	mov     r0, r7
-	bl      0x2251044
+	bl      Function_9_2251044
 branch_2061758: @ 2061758 :thumb
 	ldr     r0, [sp, #0x10]
 	add     sp, #0x14
@@ -7603,7 +7554,7 @@ branch_20617a6: @ 20617a6 :thumb
 	mov     r1, r7
 	mov     r2, r4
 	mov     r3, r5
-	bl      0x2251044
+	bl      Function_9_2251044
 branch_20617b6: @ 20617b6 :thumb
 	ldr     r0, [sp, #0x8]
 	add     sp, #0xc
@@ -7652,7 +7603,9 @@ Function_20617bc: @ 20617bc :thumb
 
 
 /* Input:
+r0: OverWorldData
 r1: NrOfSprites
+r2: 5
 */
 thumb_func_start InitSpriteListAndSprites
 InitSpriteListAndSprites: @ 2061804 :thumb
@@ -7759,7 +7712,7 @@ branch_20618b4: @ 20618b4 :thumb
 	bl      GetSpriteListAdr18
 	mov     r1, r0
 	ldr     r0, [sp, #0x0]
-	bl      0x21eda38
+	bl      Function_5_21eda38
 	add     sp, #0x8
 	pop     {r3-r7,pc}
 @ 0x20618c6
@@ -7774,25 +7727,25 @@ r0: PtrToSpriteList
 thumb_func_start CallocSpriteListAndSprites
 CallocSpriteListAndSprites: @ 20618c8 :thumb
 	push    {r4-r6,lr}
-	mov     r1, #0x4b
+	mov     r1, #SpriteList_Size/4
 	mov     r4, r0
 	mov     r0, #0xb
-	lsl     r1, r1, #2          @ 0x12c
+	lsl     r1, r1, #2
 	bl      malloc
 	mov     r5, r0
 	bne     branch_20618de
 	bl      ErrorHandling
 branch_20618de: @ 20618de :thumb
 
-	mov     r2, #0x4b
+	mov     r2, #SpriteList_Size/4
 	mov     r0, r5
 	mov     r1, #0x0
-	lsl     r2, r2, #2          @ 0x12c
+	lsl     r2, r2, #2
 	blx     Call_FillMemWithValue
 
-	mov     r0, #0x4a
-	lsl     r0, r0, #2          @ 0x128
-	mov     r6, r4
+	mov     r0, #Sprite_Size/4
+	lsl     r0, r0, #2
+	mov     r6, r4              @ * NrOfSprites
 	mul     r6, r0
 	mov     r0, #0xb
 	mov     r1, r6
@@ -8046,12 +7999,16 @@ branch_2061ab0: @ 2061ab0 :thumb
 thumb_func_end Sprite_AddPeople
 
 
+/* Input:
+r1: SpriteGraphicID
+*/
 .thumb
 .globl Function_2061ab4
 Function_2061ab4: @ 2061ab4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      SetSpriteGraphic
+
 	mov     r0, r4
 	bl      Function_2062604
 	mov     r1, #0x1
@@ -8155,7 +8112,7 @@ branch_2061b6c: @ 2061b6c :thumb
 	lsl     r1, r1, #14
 	bl      UnsetSpriteFlags
 branch_2061b76: @ 2061b76 :thumb
-	ldr     r1, [pc, #0x30] @ 0x2061ba8, (=0xffff)
+	ldr     r1, [pc, #0x30] @ 0x2061ba8, (=0xffff)              @ SpriteGraphicID
 	mov     r0, r4
 	bl      SetSpriteGraphic
 
@@ -9047,12 +9004,11 @@ Function_20621ac: @ 20621ac :thumb
 	beq     branch_20621c4
 	cmp     r0, #0x32
 	bne     branch_20621c6
-.thumb
+
 branch_20621c4: @ 20621c4 :thumb
 	.hword  0x1cad @ add r5, r5, #0x2
-.thumb
 branch_20621c6: @ 20621c6 :thumb
-	ldr     r0, [pc, #0x1c] @ 0x20621e4, (=Function_20627e8+1)
+	ldr     r0, =Function_20627e8+1
 	mov     r1, r4
 	mov     r2, r5
 	bl      AddTaskToTaskList1
@@ -9060,6 +9016,7 @@ branch_20621c6: @ 20621c6 :thumb
 	bne     branch_20621d8
 	bl      ErrorHandling
 branch_20621d8: @ 20621d8 :thumb
+
 	mov     r0, r4
 	mov     r1, r5
 	bl      Function_2062a1c
@@ -9067,7 +9024,7 @@ branch_20621d8: @ 20621d8 :thumb
 @ 0x20621e2
 
 .align 2
-.word Function_20627e8+1 @ 0x20621e4
+.pool
 
 
 
@@ -9090,10 +9047,10 @@ Function_20621e8: @ 20621e8 :thumb
 
 	mov     r0, r4
 	bl      GetOverworldsSprite
-	mov     r1, r0
+	mov     r1, r0              @ OverworldSprite
 	mov     r0, r6
-	bl      Function_206262c
-	mov     r1, r0
+	bl      ConvertOverworldSpriteToSpriteGraphicID
+	mov     r1, r0              @ SpriteGraphicID
 	mov     r0, r5
 	bl      SetSpriteGraphic
 
@@ -9647,7 +9604,7 @@ branch_20625da: @ 20625da :thumb
 
 branch_20625f4: @ 20625f4 :thumb
 	mov     r0, #0x4a
-	lsl     r0, r0, #2              @ 0x128
+	lsl     r0, r0, #2              @ 0x128 Sprite_Size
 	add     r4, r4, r0
 	ldr     r0, [r5, #0x0]
 	cmp     r0, r7
@@ -9698,15 +9655,15 @@ Function_2062628_Dummy: @ 2062628 :thumb
 /* Input:
 r1: OverworldsSprite
 */
-.align 2, 0
-.thumb
-Function_206262c: @ 206262c :thumb
+thumb_func_start ConvertOverworldSpriteToSpriteGraphicID
+ConvertOverworldSpriteToSpriteGraphicID: @ 206262c :thumb
 	push    {r3,lr}
-	cmp     r1, #0x65
+	cmp     r1, #101
 	blt     branch_2062642
-	cmp     r1, #0x74
+
+	cmp     r1, #116
 	bgt     branch_2062642
-	sub     r1, #0x65
+	sub     r1, #101
 	lsl     r1, r1, #16
 	lsr     r1, r1, #16
 	bl      Function_203f164
@@ -9715,7 +9672,7 @@ branch_2062642: @ 2062642 :thumb
 
 	mov     r0, r1
 	pop     {r3,pc}
-@ 0x2062646
+thumb_func_end ConvertOverworldSpriteToSpriteGraphicID
 
 
 /* Input:
@@ -10106,19 +10063,19 @@ GetSpriteListAdr18: @ 206285c :thumb
 thumb_func_end GetSpriteListAdr18
 
 
-.thumb
+thumb_func_start SetSpriteList_124
 SetSpriteList_124: @ 2062860 :thumb
-	mov     r2, #0x49
-	lsl     r2, r2, #2 @ 0x124 Sprite_124
+	mov     r2, #SpriteList_124/4
+	lsl     r2, r2, #2
 	str     r1, [r0, r2]
 	bx      lr
-@ 0x2062868
+thumb_func_end SetSpriteList_124
 
 
 thumb_func_start GetSpriteList_124_1
 GetSpriteList_124_1: @ 2062868 :thumb
-	mov     r1, #0x49
-	lsl     r1, r1, #2 @ 0x124 Sprite_124
+	mov     r1, #SpriteList_124/4
+	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	bx      lr
 thumb_func_end GetSpriteList_124_1
@@ -10126,8 +10083,8 @@ thumb_func_end GetSpriteList_124_1
 
 .thumb
 GetSpriteList_124_2: @ 2062870 :thumb
-	mov     r1, #0x49
-	lsl     r1, r1, #2 @ 0x124 Sprite_124
+	mov     r1, #SpriteList_124/4
+	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	bx      lr
 @ 0x2062878
@@ -10135,8 +10092,8 @@ GetSpriteList_124_2: @ 2062870 :thumb
 
 .thumb
 GetSpriteList_124_3: @ 2062878 :thumb
-	mov     r1, #0x49
-	lsl     r1, r1, #2 @ 0x124 Sprite_124
+	mov     r1, #SpriteList_124/4
+	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	bx      lr
 @ 0x2062880
@@ -10174,29 +10131,29 @@ thumb_func_end GetSpriteListFirstSprite
 /* Input:
 r0: SpriteList
 */
-thumb_func_start SaveMemoryLocationOfMModel
-SaveMemoryLocationOfMModel: @ 206289c :thumb
-	str     r1, [r0, #SpriteList_MModel]
+thumb_func_start SetSpriteListNARCFileHandlerOfMModel
+SetSpriteListNARCFileHandlerOfMModel: @ 206289c :thumb
+	str     r1, [r0, #SpriteList_MModelNARCFileHandler]
 	bx      lr
-thumb_func_end SaveMemoryLocationOfMModel
+thumb_func_end SetSpriteListNARCFileHandlerOfMModel
 
 
 /* Input:
 r0: SpriteList
 */
-thumb_func_start LoadMemoryLocationOfMModel
-LoadMemoryLocationOfMModel: @ 20628a0 :thumb
+thumb_func_start GetSpriteListNARCFileHandlerOfMModel
+GetSpriteListNARCFileHandlerOfMModel: @ 20628a0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	ldr     r0, [r4, #SpriteList_MModel]
+	ldr     r0, [r4, #SpriteList_MModelNARCFileHandler]
 	cmp     r0, #0x0
 	bne     branch_20628ae
 	bl      ErrorHandling
 branch_20628ae: @ 20628ae :thumb
 
-	ldr     r0, [r4, #SpriteList_MModel]
+	ldr     r0, [r4, #SpriteList_MModelNARCFileHandler]
 	pop     {r4,pc}
-thumb_func_end LoadMemoryLocationOfMModel
+thumb_func_end GetSpriteListNARCFileHandlerOfMModel
 
 
 
@@ -12152,32 +12109,32 @@ GetOverworldsID: @ 20630f4 :thumb
 thumb_func_end GetOverworldsID
 
 
-.thumb
+thumb_func_start SetOverworldsSprite
 SetOverworldsSprite: @ 20630f8 :thumb
 	strh    r1, [r0, #Overworlds_Sprite]
 	bx      lr
-@ 0x20630fc
+thumb_func_end SetOverworldsSprite
 
 
-.thumb
+thumb_func_start GetOverworldsSprite
 GetOverworldsSprite: @ 20630fc :thumb
 	ldrh    r0, [r0, #Overworlds_Sprite]
 	bx      lr
-@ 0x2063100
+thumb_func_end GetOverworldsSprite
 
 
-.thumb
+thumb_func_start SetOverworldsMovement
 SetOverworldsMovement: @ 2063100 :thumb
 	strh    r1, [r0, #Overworlds_Movement]
 	bx      lr
-@ 0x2063104
+thumb_func_end SetOverworldsMovement
 
 
-.thumb
+thumb_func_start GetOverworldsMovement
 GetOverworldsMovement: @ 2063104 :thumb
 	ldrh    r0, [r0, #Overworlds_Movement]
 	bx      lr
-@ 0x2063108
+thumb_func_end GetOverworldsMovement
 
 
 .thumb
@@ -13103,7 +13060,7 @@ Function_20635ac: @ 20635ac :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	mov     r0, r5
-	bl      0x21ecd04
+	bl      Function_5_21ecd04
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -13168,7 +13125,7 @@ Function_206363c: @ 206363c :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	mov     r0, r5
-	bl      0x21ecd04
+	bl      Function_5_21ecd04
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -13248,7 +13205,7 @@ Function_20636f0: @ 20636f0 :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	mov     r0, r5
-	bl      0x21ecd04
+	bl      Function_5_21ecd04
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -13298,7 +13255,7 @@ Function_206375c: @ 206375c :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	mov     r0, r5
-	bl      0x21ecd04
+	bl      Function_5_21ecd04
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -13353,7 +13310,7 @@ Function_20637d4: @ 20637d4 :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	mov     r0, r5
-	bl      0x21ecd04
+	bl      Function_5_21ecd04
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, r6
@@ -13538,7 +13495,7 @@ Function_2063964: @ 2063964 :thumb
 	bne     branch_206397a
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      0x21f2ea4
+	bl      Function_5_21f2ea4
 branch_206397a: @ 206397a :thumb
 	pop     {r4,pc}
 @ 0x206397c
@@ -13554,7 +13511,7 @@ Function_206397c: @ 206397c :thumb
 	bne     branch_2063992
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      0x21f2ea4
+	bl      Function_5_21f2ea4
 branch_2063992: @ 2063992 :thumb
 	pop     {r4,pc}
 @ 0x2063994
@@ -13580,7 +13537,7 @@ Function_2063994: @ 2063994 :thumb
 	cmp     r0, #0x1
 	bne     branch_20639c0
 	mov     r0, r5
-	bl      0x21f1ebc
+	bl      Function_5_21f1ebc
 	b       branch_20639ca
 
 branch_20639c0: @ 20639c0 :thumb
@@ -13887,7 +13844,7 @@ Function_2063c00: @ 2063c00 :thumb
 	bne     branch_2063c16
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      0x21f3844
+	bl      Function_5_21f3844
 branch_2063c16: @ 2063c16 :thumb
 	pop     {r4,pc}
 @ 0x2063c18
@@ -13903,7 +13860,7 @@ Function_2063c18: @ 2063c18 :thumb
 	bne     branch_2063c2e
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      0x21f3844
+	bl      Function_5_21f3844
 branch_2063c2e: @ 2063c2e :thumb
 	pop     {r4,pc}
 @ 0x2063c30
@@ -13919,7 +13876,7 @@ Function_2063c30: @ 2063c30 :thumb
 	bne     branch_2063c46
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      0x21f3aec
+	bl      Function_5_21f3aec
 branch_2063c46: @ 2063c46 :thumb
 	pop     {r4,pc}
 @ 0x2063c48
@@ -13935,7 +13892,7 @@ Function_2063c48: @ 2063c48 :thumb
 	bne     branch_2063c5e
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      0x21f3aec
+	bl      Function_5_21f3aec
 branch_2063c5e: @ 2063c5e :thumb
 	pop     {r4,pc}
 @ 0x2063c60
@@ -13961,7 +13918,7 @@ Function_2063c60: @ 2063c60 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      0x21f2ae4
+	bl      Function_5_21f2ae4
 branch_2063c90: @ 2063c90 :thumb
 	pop     {r4-r6,pc}
 @ 0x2063c92
@@ -13988,7 +13945,7 @@ Function_2063c94: @ 2063c94 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      0x21f2ae4
+	bl      Function_5_21f2ae4
 branch_2063cc4: @ 2063cc4 :thumb
 	pop     {r4-r6,pc}
 @ 0x2063cc6
@@ -14015,7 +13972,7 @@ Function_2063cc8: @ 2063cc8 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      0x21f2c38
+	bl      Function_5_21f2c38
 branch_2063cf8: @ 2063cf8 :thumb
 	pop     {r4-r6,pc}
 @ 0x2063cfa
@@ -14042,7 +13999,7 @@ Function_2063cfc: @ 2063cfc :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      0x21f2c38
+	bl      Function_5_21f2c38
 branch_2063d2c: @ 2063d2c :thumb
 	pop     {r4-r6,pc}
 @ 0x2063d2e
@@ -14719,23 +14676,23 @@ branch_2064198: @ 2064198 :thumb
 /* Input:
 r0: Orientation
 */
-.thumb
-.globl GetWalkPositionXChange
+thumb_func_start GetWalkPositionXChange
 GetWalkPositionXChange: @ 206419c :thumb
 	lsl     r1, r0, #2
-	ldr     r0, =Unknown_20ee75c
+	ldr     r0, =WalkPositionXChangeValues
 	ldr     r0, [r0, r1]
 	bx      lr
 @ 0x20641a4
 
 .pool
+thumb_func_end GetWalkPositionXChange
 
 
 
 thumb_func_start GetWalkPositionYChange
 GetWalkPositionYChange: @ 20641a8 :thumb
 	lsl     r1, r0, #2
-	ldr     r0, =Unknown_20ee78c
+	ldr     r0, =WalkPositionYChangeValues
 	ldr     r0, [r0, r1]
 	bx      lr
 @ 0x20641b0

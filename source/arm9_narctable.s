@@ -686,13 +686,13 @@ NARCStringPointer: @ 0x2100498
 .word PlPokeAnm_String @ 0x100610 0x5e
 .word Mysign_String @ 0x100614 0x5f
 .word MoveModelList_String @ 0x100618 0x60
-.word FieldCutin_String @ 0x10061c
-.word DemoClimax_String @ 0x100620
-.word BallParticle_String @ 0x100624
-.word DebugParticle_String @ 0x100628
-.word DendouPc_String @ 0x10062c
-.word WifiEarthPlace_String @ 0x100630
-.word TrAi_String @ 0x100634 0x67=103
+.word FieldCutin_String @ 0x10061c 0x61
+.word DemoClimax_String @ 0x100620 0x62
+.word BallParticle_String @ 0x100624 0x63
+.word DebugParticle_String @ 0x100628 0x64
+.word DendouPc_String @ 0x10062c 0x65
+.word WifiEarthPlace_String @ 0x100630 0x66
+.word TrAi_String @ 0x100634 0x67=103 0x67
 .word Worldtrade_String @ 0x100638 0x68
 .word DendouDemo_String @ 0x10063c 0x69
 .word EncdataEx_String @ 0x100640 0x6a
@@ -782,6 +782,6 @@ NARCStringPointer: @ 0x2100498
 .word PlEtcParticle_String @ 0x100790 0xbe
 .word PmsAikotoba_String @ 0x100794 0xbf
 .word Unionobj2dOnlyfront_String @ 0x100798 0xc0
-.word LibraryTv_String @ 0x10079c
-.word ZukanDataGira_String @ 0x1007a0
+.word LibraryTv_String @ 0x10079c 0xc1
+.word ZukanDataGira_String @ 0x1007a0 0xc2
 

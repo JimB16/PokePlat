@@ -87,7 +87,7 @@ Function_2025e68: @ 2025e68 :thumb
 thumb_func_start AllocTrainerData
 AllocTrainerData: @ 2025e6c :thumb
 	push    {r4,lr}
-	mov     r1, #0x20
+	mov     r1, #TrainerData_Size
 	bl      malloc
 	mov     r4, r0
 
@@ -98,17 +98,16 @@ AllocTrainerData: @ 2025e6c :thumb
 thumb_func_end AllocTrainerData
 
 
-.align 2, 0
-.thumb
-.globl Function_2025e80
-Function_2025e80: @ 2025e80 :thumb
+thumb_func_start CopyTrainerData
+CopyTrainerData: @ 2025e80 :thumb
 	ldr     r3, =MI_CpuCopy8
-	mov     r2, #0x20
+	mov     r2, #TrainerData_Size
 	bx      r3
 @ 0x2025e86
 
 .align 2
 .pool
+thumb_func_end CopyTrainerData
 
 
 
@@ -116,7 +115,7 @@ thumb_func_start InitTrainerData
 InitTrainerData: @ 2025e8c :thumb
 	push    {r4,lr}
 	mov     r1, #0x0
-	mov     r2, #0x20
+	mov     r2, #TrainerData_Size
 	mov     r4, r0
 	blx     Call_FillMemWithValue
 

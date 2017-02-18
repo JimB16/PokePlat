@@ -323,30 +323,28 @@ branch_209c7bc: @ 209c7bc :arm
 
 .arm
 Function_209c7e0: @ 209c7e0 :arm
-	ldr     r12, [pc, #0x4] @ [0x209c7ec] (=Function_209c808)
-	ldr     r1, [pc, #0x4] @ [0x209c7f0] (=Function_209ce90)
+	ldr     r12, =BeginDoEndLoadTexPltt
+	ldr     r1, =Function_209ce90
 	bx      r12
 @ 0x209c7ec
 
-.word Function_209c808 @ 0x209c7ec
-.word Function_209ce90 @ 0x209c7f0
+.pool
 
 
 
 .arm
 Function_209c7f4: @ 209c7f4 :arm
-	ldr     r12, [pc, #0x4] @ [0x209c800] (=Function_209c8bc)
-	ldr     r1, [pc, #0x4] @ [0x209c804] (=Function_209cec8)
+	ldr     r12, =BeginDoEndLoadTex
+	ldr     r1, =Function_209cec8
 	bx      r12
 @ 0x209c800
 
-.word Function_209c8bc @ =0x209c8bc, 0x209c800
-.word Function_209cec8 @ 0x209c804
+.pool
 
 
 
-.arm
-Function_209c808: @ 209c808 :arm
+arm_func_start BeginDoEndLoadTexPltt
+BeginDoEndLoadTexPltt: @ 209c808 :arm
 	stmfd   sp!, {r4-r11,lr}
 	sub     sp, sp, #0x4
 	mov     r10, r0
@@ -360,7 +358,6 @@ Function_209c808: @ 209c808 :arm
 	mov     r5, r9
 	mov     r4, r9
 	str     r0, [sp]
-.arm
 branch_209c83c: @ 209c83c :arm
 	ldr     r0, [r10, #0x2c]
 	mov     r6, r4
@@ -383,7 +380,6 @@ branch_209c83c: @ 209c83c :arm
 	add     r0, r1, r0
 	mov     r1, r6
 	bl      GX_LoadTexPltt
-.arm
 branch_209c890: @ 209c890 :arm
 	str     r6, [r8, #0x8]
 	ldrh    r0, [r10, #0x32]
@@ -391,17 +387,18 @@ branch_209c890: @ 209c890 :arm
 	add     r5, r5, #0x14
 	cmp     r9, r0
 	blt     branch_209c83c
-.arm
+
 branch_209c8a8: @ 209c8a8 :arm
 	bl      GX_EndLoadTexPltt
 	mov     r0, #0x1
 	add     sp, sp, #0x4
 	ldmfd   sp!, {r4-r11,lr}
 	bx      lr
-@ 0x209c8bc
+arm_func_end BeginDoEndLoadTexPltt
 
-.arm
-Function_209c8bc: @ 209c8bc :arm
+
+arm_func_start BeginDoEndLoadTex
+BeginDoEndLoadTex: @ 209c8bc :arm
 	stmfd   sp!, {r4-r11,lr}
 	sub     sp, sp, #0xc
 	mov     r10, r0
@@ -416,7 +413,6 @@ Function_209c8bc: @ 209c8bc :arm
 	str     r9, [sp, #0x4]
 	str     r0, [sp]
 	mov     r4, #0x14
-.arm
 branch_209c8f4: @ 209c8f4 :arm
 	ldr     r2, [r10, #0x2c]
 	ldr     r7, [r2, r6]
@@ -431,9 +427,7 @@ branch_209c8f4: @ 209c8f4 :arm
 	ldr     r0, [r0, #0x4]
 	str     r0, [r8, #0x4]
 	b       branch_209c960
-@ 0x209c928
 
-.arm
 branch_209c928: @ 209c928 :arm
 	mov     r0, r0, lsl #28
 	mov     r0, r0, lsr #28
@@ -449,21 +443,21 @@ branch_209c928: @ 209c928 :arm
 	mov     r1, r5
 	bl      GX_LoadTex
 	str     r5, [r8, #0x4]
-.arm
 branch_209c960: @ 209c960 :arm
 	ldrh    r0, [r10, #0x32]
 	add     r9, r9, #0x1
 	add     r6, r6, #0x14
 	cmp     r9, r0
 	blt     branch_209c8f4
-.arm
+
 branch_209c974: @ 209c974 :arm
 	bl      GX_EndLoadTex
 	mov     r0, #0x1
 	add     sp, sp, #0xc
 	ldmfd   sp!, {r4-r11,lr}
 	bx      lr
-@ 0x209c988
+arm_func_end BeginDoEndLoadTex
+
 
 .arm
 Function_209c988: @ 209c988 :arm
@@ -498,7 +492,6 @@ Function_209c988: @ 209c988 :arm
 	str     r0, [sp, #0x1c]
 	str     r0, [sp, #0x20]
 	str     r0, [sp, #0x24]
-.arm
 branch_209ca04: @ 209ca04 :arm
 	ldr     r1, [r10, #0x28]
 	add     r0, r9, r8
@@ -585,7 +578,6 @@ branch_209ca04: @ 209ca04 :arm
 	add     r8, r8, #0x8
 	str     r1, [r0]
 	add     r0, r0, #0x8
-.arm
 branch_209cb58: @ 209cb58 :arm
 	cmp     r4, #0x0
 	beq     branch_209cb78
@@ -595,7 +587,6 @@ branch_209cb58: @ 209cb58 :arm
 	add     r8, r8, #0x8
 	str     r1, [r0]
 	add     r0, r0, #0x8
-.arm
 branch_209cb78: @ 209cb78 :arm
 	cmp     r11, #0x0
 	beq     branch_209cb98
@@ -605,7 +596,6 @@ branch_209cb78: @ 209cb78 :arm
 	add     r8, r8, #0x10
 	str     r1, [r0]
 	add     r0, r0, #0x8
-.arm
 branch_209cb98: @ 209cb98 :arm
 	ldr     r1, [sp, #0x4]
 	cmp     r1, #0x0
@@ -616,7 +606,6 @@ branch_209cb98: @ 209cb98 :arm
 	add     r8, r8, #0x4
 	str     r1, [r0]
 	add     r0, r0, #0x8
-.arm
 branch_209cbbc: @ 209cbbc :arm
 	ldr     r1, [sp, #0x8]
 	cmp     r1, #0x0
@@ -627,7 +616,6 @@ branch_209cbbc: @ 209cbbc :arm
 	add     r8, r8, #0x8
 	str     r1, [r0]
 	add     r0, r0, #0x8
-.arm
 branch_209cbe0: @ 209cbe0 :arm
 	ldr     r1, [sp, #0xc]
 	cmp     r1, #0x0
@@ -638,13 +626,10 @@ branch_209cbe0: @ 209cbe0 :arm
 	add     r8, r8, #0x10
 	str     r1, [r0]
 	b       branch_209cc0c
-@ 0x209cc04
 
-.arm
 branch_209cc04: @ 209cc04 :arm
 	ldr     r0, [sp, #0x24]
 	str     r0, [r7, #0x18]
-.arm
 branch_209cc0c: @ 209cc0c :arm
 	ldr     r0, [sp]
 	ldrh    r1, [r10, #0x30]
@@ -653,7 +638,7 @@ branch_209cc0c: @ 209cc0c :arm
 	str     r0, [sp]
 	cmp     r0, r1
 	blt     branch_209ca04
-.arm
+
 branch_209cc28: @ 209cc28 :arm
 	ldrh    r2, [r10, #0x32]
 	mov     r0, #0x14
@@ -673,9 +658,9 @@ branch_209cc28: @ 209cc28 :arm
 	addle   sp, sp, #0x2c
 	ldmlefd sp!, {r4-r11,lr}
 	bxle    lr
+
 	mov     r4, r3
 	mov     r0, #0x1
-.arm
 branch_209cc78: @ 209cc78 :arm
 	ldr     r2, [r10, #0x2c]
 	add     r1, r9, r8
@@ -783,7 +768,6 @@ Function_209cd00: @ 209cd00 :arm
 	mov     r10, #0x0
 	ble     branch_209ce20
 	add     r4, r5, #0x10
-.arm
 branch_209ce04: @ 209ce04 :arm
 	mov     r0, r4
 	mov     r1, r9
@@ -792,7 +776,7 @@ branch_209ce04: @ 209ce04 :arm
 	cmp     r10, r7
 	add     r9, r9, #0x9c
 	blt     branch_209ce04
-.arm
+
 branch_209ce20: @ 209ce20 :arm
 	mov     r0, #0x44
 	mul     r4, r6, r0
@@ -806,7 +790,6 @@ branch_209ce20: @ 209ce20 :arm
 	mov     r7, #0x0
 	ble     branch_209ce6c
 	add     r4, r5, #0x1c
-.arm
 branch_209ce50: @ 209ce50 :arm
 	mov     r0, r4
 	mov     r1, r8
@@ -815,7 +798,7 @@ branch_209ce50: @ 209ce50 :arm
 	cmp     r7, r6
 	add     r8, r8, #0x44
 	blt     branch_209ce50
-.arm
+
 branch_209ce6c: @ 209ce6c :arm
 	mov     r0, #0x0
 	str     r0, [r5, #0x28]
@@ -895,16 +878,14 @@ Function_209cf00: @ 209cf00 :arm
 	add     sp, sp, #0x4
 	ldmfd   sp!, {r4,r5,lr}
 	bx      lr
-@ 0x209cf58
 
-.arm
 branch_209cf58: @ 209cf58 :arm
 	mov     r1, r1, lsl #9
 	movs    r1, r1, lsr #31
 	bne     branch_209cf68
 	bl      Function_209d064
-.arm
 branch_209cf68: @ 209cf68 :arm
+
 	mov     r0, r4
 	bl      Function_209cf7c
 	add     sp, sp, #0x4
@@ -11102,25 +11083,31 @@ Function_20a5478: @ 20a5478 :arm
 	addeq   sp, sp, #0x10
 	moveq   r0, r9
 	ldmeqfd sp!, {r3-r9,pc}
+
 	bls     branch_20a5598
+
 	ldr     r6, [r5, #0x24]
 	add     r0, r8, #0x10
 	cmp     r6, #0x0
 	add     r0, r7, r0
 	beq     branch_20a54d4
+
 branch_20a54c4: @ 20a54c4 :arm
 	cmp     r6, r0
 	ldrne   r6, [r6, #0xc]
 	cmpne   r6, #0x0
 	bne     branch_20a54c4
+
 branch_20a54d4: @ 20a54d4 :arm
 	cmp     r6, #0x0
 	beq     branch_20a54f0
+
 	ldr     r0, [r6, #0x4]
 	add     r1, r7, #0x10
 	add     r0, r1, r0
 	cmp     r9, r0
 	bls     branch_20a54fc
+
 branch_20a54f0: @ 20a54f0 :arm
 	add     sp, sp, #0x10
 	mov     r0, #0x0
@@ -11157,12 +11144,14 @@ branch_20a54fc: @ 20a54fc :arm
 	add     r0, r5, #0x24
 	bl      Function_20a4f60
 branch_20a5570: @ 20a5570 :arm
+
 	ldr     r0, [r5, #0x20]
 	ldr     r1, [sp, #0x8]
 	and     r0, r0, #0xff
 	tst     r0, #0x1
 	sub     r2, r1, r6
 	beq     branch_20a55c8
+
 	mov     r1, r6
 	mov     r0, #0x0
 	bl      MIi_CpuClear32
@@ -11240,7 +11229,7 @@ Function_20a563c: @ 20a563c :arm
 
 
 .arm
-Function_20a564c: @ 20a564c :arm
+Function_20a564c_LoadSub0xc: @ 20a564c :arm
 	ldr     r0, [r0, #-0xc]
 	bx      lr
 @ 0x20a5654
@@ -13873,6 +13862,8 @@ Function_20a7154: @ 20a7154 :arm
 @ 0x20a7164
 
 
+/* Input:
+*/
 .arm
 .globl Function_20a7164
 Function_20a7164: @ 20a7164 :arm
@@ -13884,6 +13875,7 @@ Function_20a7164: @ 20a7164 :arm
 	moveq   r0, #0x0
 	streq   r0, [r5]
 	ldmeqfd sp!, {r3-r5,pc}
+
 	add     r0, r4, #0x8
 	bl      Function_20a71a0
 	add     r0, r4, #0x8
@@ -15111,7 +15103,7 @@ branch_20a8034: @ 20a8034 :arm
 	mov     r4, r0, lsr #13
 branch_20a8054: @ 20a8054 :arm
 	ldr     r2, [r5]
-	ldr     r1, [pc, #0xbc] @ [0x20a811c] (=RAM_21c3b08)
+	ldr     r1, =RAM_21c3b08
 	mov     r0, #21, 26 @ #0x540
 	mla     r1, r2, r0, r1
 	add     r2, r1, #1, 24 @ #0x100
@@ -15120,7 +15112,7 @@ branch_20a8054: @ 20a8054 :arm
 	add     r6, r2, r0, lsl #3
 	mov     r0, r6
 	bl      DC_InvalidateRange
-	ldr     r0, [pc, #0x9c] @ [0x20a8120] (=Unknown_2101148)
+	ldr     r0, =Unknown_2101148
 	mvn     r1, #0x0
 	ldr     r0, [r0]
 	cmp     r0, r1
@@ -15139,7 +15131,7 @@ branch_20a80a4: @ 20a80a4 :arm
 
 branch_20a80b4: @ 20a80b4 :arm
 	ldr     r2, [r5]
-	ldr     r1, [pc, #0x5c] @ [0x20a811c] (=RAM_21c3b08)
+	ldr     r1, =RAM_21c3b08
 	mov     r0, #21, 26 @ #0x540
 	mla     r1, r2, r0, r1
 	ldrh    r2, [r5, #0x4]
@@ -15160,6 +15152,7 @@ branch_20a80f0: @ 20a80f0 :arm
 	strh    r1, [r3], #0x8
 	mov     r0, r0, lsr #16
 	bhi     branch_20a80f0
+
 branch_20a8108: @ 20a8108 :arm
 	ldrh    r0, [r5, #0x4]
 	strh    r0, [r5, #0x8]
@@ -15168,8 +15161,8 @@ branch_20a8108: @ 20a8108 :arm
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20a811c
 
-.word RAM_21c3b08 @ 0x20a811c
-.word Unknown_2101148 @ 0x20a8120
+.align 2
+.pool
 
 
 
@@ -23748,6 +23741,9 @@ Function_20aea70: @ 20aea70 :arm
 @ 0x20aea90
 
 
+/* Input:
+r0: Model + ?
+*/
 .arm
 Function_20aea90: @ 20aea90 :arm
 	stmfd   sp!, {r3-r11,lr}
@@ -23755,9 +23751,9 @@ Function_20aea90: @ 20aea90 :arm
 	mov     r8, r3
 	ldr     r1, [r8]
 	mov     r10, r0
-	and     r0, r1, #7, 6 @ #0x1c000000
+	and     r0, r1, #0x1c000000
 	ldrh    r3, [r9]
-	cmp     r0, #5, 6 @ #0x14000000
+	cmp     r0, #0x14000000
 	mov     r5, #0x0
 	add     r0, r10, r3
 	str     r0, [sp]
@@ -23769,17 +23765,21 @@ Function_20aea90: @ 20aea90 :arm
 	ldrb    r0, [r9, #0x2]
 	cmp     r0, #0x0
 	bls     branch_20aebac
+
 	add     r4, r10, #0x4
 branch_20aeae0: @ 20aeae0 :arm
 	ldr     r0, [sp]
 	cmp     r10, #0x0
 	ldrb    r2, [r0, r5]
 	beq     branch_20aeb30
+
 	cmp     r4, #0x0
 	beq     branch_20aeb1c
+
 	ldrb    r0, [r10, #0x5]
 	cmp     r2, r0
 	bhs     branch_20aeb1c
+
 	ldrh    r0, [r10, #0xa]
 	add     r1, r4, r0
 	add     r1, r1, #0x4
@@ -23794,6 +23794,7 @@ branch_20aeb20: @ 20aeb20 :arm
 	ldrne   r0, [r1]
 	addne   r7, r10, r0
 	bne     branch_20aeb34
+
 branch_20aeb30: @ 20aeb30 :arm
 	mov     r7, #0x0
 branch_20aeb34: @ 20aeb34 :arm
@@ -23803,7 +23804,7 @@ branch_20aeb34: @ 20aeb34 :arm
 	orr     r0, r1, r0
 	str     r0, [r7, #0x14]
 	ldr     r3, [r8, #0x4]
-	ldr     r0, [pc, #0x68] @ [0x20aebbc] (=0x7ff)
+	ldr     r0, =0x7ff
 	ldrh    r1, [r7, #0x20]
 	and     r2, r3, r0
 	and     r0, r3, r0, lsl #11
@@ -23815,6 +23816,7 @@ branch_20aeb34: @ 20aeb34 :arm
 	mov     r1, r1, lsl #12
 	bl      FX_Div
 branch_20aeb78: @ 20aeb78 :arm
+
 	str     r0, [r7, #0x24]
 	ldrh    r1, [r7, #0x22]
 	cmp     r6, r1
@@ -23824,11 +23826,13 @@ branch_20aeb78: @ 20aeb78 :arm
 	mov     r1, r1, lsl #12
 	bl      FX_Div
 branch_20aeb98: @ 20aeb98 :arm
+
 	str     r0, [r7, #0x28]
 	ldrb    r0, [r9, #0x2]
 	add     r5, r5, #0x1
 	cmp     r5, r0
 	blo     branch_20aeae0
+
 branch_20aebac: @ 20aebac :arm
 	ldrb    r0, [r9, #0x3]
 	orr     r0, r0, #0x1
@@ -23836,7 +23840,7 @@ branch_20aebac: @ 20aebac :arm
 	ldmfd   sp!, {r3-r11,pc}
 @ 0x20aebbc
 
-.word 0x7ff @ 0x20aebbc
+.pool
 
 
 
@@ -23907,6 +23911,10 @@ branch_20aec64: @ 20aec64 :arm
 
 
 
+/* Input:
+r0: Ptr to Model?
+r1: ?
+*/
 .arm
 Function_20aec78: @ 20aec78 :arm
 	stmfd   sp!, {r3-r11,lr}
@@ -23915,7 +23923,7 @@ Function_20aec78: @ 20aec78 :arm
 	ldrne   r1, [r0, #0x8]
 	mov     r7, #0x1
 	cmpne   r1, #0x0
-	addne   r8, r0, r1
+	addne   r8, r0, r1      @ Model + ?
 	moveq   r8, #0x0
 	ldrh    r0, [r8]
 	mov     r6, #0x0
@@ -23923,15 +23931,18 @@ Function_20aec78: @ 20aec78 :arm
 	ldrb    r0, [r5, #0x1]
 	cmp     r0, #0x0
 	bls     branch_20aed70
+
 	mov     r9, r6
 	mov     r4, r6
 	mov     r11, r6
 branch_20aecbc: @ 20aecbc :arm
 	cmp     r5, #0x0
 	beq     branch_20aece8
+
 	ldrb    r0, [r5, #0x1]
 	cmp     r6, r0
 	bhs     branch_20aece8
+
 	ldrh    r0, [r5, #0x6]
 	add     r1, r5, r0
 	ldrh    r0, [r1, #0x2]
@@ -23949,13 +23960,17 @@ branch_20aecec: @ 20aecec :arm
 	bl      Function_20b38e4
 	mov     r3, r0
 branch_20aed04: @ 20aed04 :arm
+
 	cmp     r3, #0x0
 	beq     branch_20aed58
+
 	cmp     r5, #0x0
 	beq     branch_20aed38
+
 	ldrb    r0, [r5, #0x1]
 	cmp     r6, r0
 	bhs     branch_20aed38
+
 	ldrh    r1, [r5, #0x6]
 	ldrh    r0, [r5, r1]
 	add     r1, r5, r1
@@ -23969,6 +23984,7 @@ branch_20aed3c: @ 20aed3c :arm
 	ldrb    r0, [r1, #0x3]
 	tst     r0, #0x1
 	bne     branch_20aed5c
+
 	mov     r0, r8
 	mov     r2, r10
 	bl      Function_20aea90
@@ -23982,6 +23998,7 @@ branch_20aed5c: @ 20aed5c :arm
 	add     r9, r9, #0x10
 	cmp     r6, r0
 	blo     branch_20aecbc
+
 branch_20aed70: @ 20aed70 :arm
 	mov     r0, r7
 	ldmfd   sp!, {r3-r11,pc}
@@ -24166,6 +24183,10 @@ branch_20aef84: @ 20aef84 :arm
 @ 0x20aef94
 
 
+/* Input:
+r0: Ptr to Model?
+r1: ?
+*/
 .arm
 Function_20aef94: @ 20aef94 :arm
 	stmfd   sp!, {r3-r11,lr}
@@ -24182,15 +24203,18 @@ Function_20aef94: @ 20aef94 :arm
 	ldrb    r0, [r5, #0x1]
 	cmp     r0, #0x0
 	bls     branch_20af094
+
 	mov     r9, r6
 	mov     r4, r6
 	mov     r11, r6
 branch_20aefd8: @ 20aefd8 :arm
 	cmp     r5, #0x0
 	beq     branch_20af004
+
 	ldrb    r0, [r5, #0x1]
 	cmp     r6, r0
 	bhs     branch_20af004
+
 	ldrh    r0, [r5, #0x6]
 	add     r1, r5, r0
 	ldrh    r0, [r1, #0x2]
@@ -24210,13 +24234,17 @@ branch_20af008: @ 20af008 :arm
 	bl      Function_20b38e4
 	mov     r3, r0
 branch_20af028: @ 20af028 :arm
+
 	cmp     r3, #0x0
 	beq     branch_20af07c
+
 	cmp     r5, #0x0
 	beq     branch_20af05c
+
 	ldrb    r0, [r5, #0x1]
 	cmp     r6, r0
 	bhs     branch_20af05c
+
 	ldrh    r1, [r5, #0x6]
 	ldrh    r0, [r5, r1]
 	add     r1, r5, r1
@@ -24230,6 +24258,7 @@ branch_20af060: @ 20af060 :arm
 	ldrb    r0, [r1, #0x3]
 	tst     r0, #0x1
 	bne     branch_20af080
+
 	mov     r0, r8
 	mov     r2, r10
 	bl      Function_20aeeb4
@@ -24330,7 +24359,6 @@ Function_20af164: @ 20af164 :arm
 	cmp     r0, #0x0
 	bxls    lr
 	mov     r1, r12
-.arm
 branch_20af194: @ 20af194 :arm
 	cmp     r3, #0x0
 	beq     branch_20af1c0
@@ -24343,12 +24371,9 @@ branch_20af194: @ 20af194 :arm
 	add     r2, r2, #0x4
 	mla     r2, r0, r12, r2
 	b       branch_20af1c4
-@ 0x20af1c0
 
-.arm
 branch_20af1c0: @ 20af1c0 :arm
 	mov     r2, r1
-.arm
 branch_20af1c4: @ 20af1c4 :arm
 	ldrb    r0, [r2, #0x3]
 	add     r12, r12, #0x1
@@ -24362,30 +24387,36 @@ branch_20af1c4: @ 20af1c4 :arm
 @ 0x20af1e8
 
 
-.arm
-.globl Function_20af1e8
+/* Input:
+r0: Ptr to DataPart of File (BMD0)
+*/
+arm_func_start Function_20af1e8
 Function_20af1e8: @ 20af1e8 :arm
 	stmfd   sp!, {r3-r11,lr}
 	mov     r10, r0
-	ldrb    r0, [r10, #0x9]
+	ldrb    r0, [r10, #MDL_HeaderSize+G3DResDict_Num]
 	mov     r9, r1
 	mov     r7, #0x1
 	cmp     r0, #0x0
 	mov     r6, #0x0
 	bls     branch_20af290
-	add     r5, r10, #0x8
+
+	add     r5, r10, #MDL_HeaderSize
 	mov     r4, r6
 	mov     r11, r6
-branch_20af214: @ 20af214 :arm
+branch_20af214_loop: @ 20af214 :arm
 	cmp     r10, #0x0
 	beq     branch_20af25c
+
 	cmp     r5, #0x0
 	beq     branch_20af248
-	ldrb    r0, [r10, #0x9]
+
+	ldrb    r0, [r10, #MDL_HeaderSize+G3DResDict_Num]
 	cmp     r6, r0
 	bhs     branch_20af248
-	ldrh    r1, [r10, #0xe]
-	ldrh    r0, [r5, r1]
+
+	ldrh    r1, [r10, #MDL_HeaderSize+G3DResDict_RefOffsets]
+	ldrh    r0, [r5, r1]            @ sizeunit
 	add     r1, r5, r1
 	add     r1, r1, #0x4
 	mla     r1, r0, r6, r1
@@ -24395,28 +24426,32 @@ branch_20af248: @ 20af248 :arm
 	mov     r1, r4
 branch_20af24c: @ 20af24c :arm
 	cmp     r1, #0x0
-	ldrne   r0, [r1]
-	addne   r8, r10, r0
+	ldrne   r0, [r1]                @ Load offset of Model
+	addne   r8, r10, r0             @ Ptr to Model?
 	bne     branch_20af260
+
 branch_20af25c: @ 20af25c :arm
 	mov     r8, r11
 branch_20af260: @ 20af260 :arm
-	mov     r0, r8
+	mov     r0, r8                  @ Ptr to Model?
 	mov     r1, r9
 	bl      Function_20aec78
 	and     r7, r7, r0
-	mov     r0, r8
+
+	mov     r0, r8                  @ Ptr to Model?
 	mov     r1, r9
 	bl      Function_20aef94
-	ldrb    r1, [r10, #0x9]
+
+	ldrb    r1, [r10, #MDL_HeaderSize+G3DResDict_Num]
 	add     r6, r6, #0x1
 	and     r7, r7, r0
 	cmp     r6, r1
-	blo     branch_20af214
+	blo     branch_20af214_loop
+
 branch_20af290: @ 20af290 :arm
 	mov     r0, r7
 	ldmfd   sp!, {r3-r11,pc}
-@ 0x20af298
+arm_func_end Function_20af1e8
 
 
 .arm
@@ -28441,46 +28476,47 @@ branch_20b25e8: @ 20b25e8 :arm
 .globl Function_20b2628
 Function_20b2628: @ 20b2628 :arm
 	stmfd   sp!, {r3,lr}
-	ldr     r0, [pc, #0x48] @ [0x20b267c] (=RAM_21c89f4)
-	ldr     r0, [r0, #0x4]
+	ldr     r0, =RAM_21c89f4
+	ldr     r0, [r0, #RAM_21c89f4_4]
 	cmp     r0, #0x0
 	beq     branch_20b2640
 	bl      Function_20b2684
 branch_20b2640: @ 20b2640 :arm
 
-	ldr     r0, [pc, #0x34] @ [0x20b267c] (=RAM_21c89f4)
-	ldr     r0, [r0]
+	ldr     r0, =RAM_21c89f4
+	ldr     r0, [r0, #RAM_21c89f4_0]
 	cmp     r0, #0x0
 	ldrne   r2, [r0]
 	cmpne   r2, #0x0
 	ldmeqfd sp!, {r3,pc}
-	ldr     r1, [pc, #0x20] @ [0x20b2680] (=GFX_FIFO)
+
+	ldr     r1, =GFX_FIFO
 	add     r0, r0, #0x4
 	mov     r2, r2, lsl #2
 	bl      MIi_CpuSend32
-	ldr     r0, [pc, #0xc] @ [0x20b267c] (=RAM_21c89f4)
+	ldr     r0, =RAM_21c89f4
 	mov     r1, #0x0
-	ldr     r0, [r0]
+	ldr     r0, [r0, #RAM_21c89f4_0]
 	str     r1, [r0]
 	ldmfd   sp!, {r3,pc}
 @ 0x20b267c
 
-.word RAM_21c89f4 @ 0x20b267c
-.word GFX_FIFO @ 0x20b2680
+.pool
 
 
 
 .arm
 Function_20b2684: @ 20b2684 :arm
-	ldr     r0, [pc, #0xc] @ [0x20b2698] (=RAM_21c89f4)
+	ldr     r0, =RAM_21c89f4
 branch_20b2688: @ 20b2688 :arm
-	ldr     r1, [r0, #0x4]
+	ldr     r1, [r0, #RAM_21c89f4_4]
 	cmp     r1, #0x0
 	bne     branch_20b2688
+
 	bx      lr
 @ 0x20b2698
 
-.word RAM_21c89f4 @ 0x20b2698
+.pool
 
 
 
@@ -28497,14 +28533,15 @@ Function_20b26a8: @ 20b26a8 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r4, r1
 	mov     r5, r0
-	cmp     r4, #1, 24 @ #0x100
+	cmp     r4, #0x100
 	blo     branch_20b26d0
-	ldr     r1, [pc, #0x88] @ [0x20b274c] (=Unknown_2101148)
+
+	ldr     r1, =Unknown_2101148
 	mvn     r0, #0x0
 	ldr     r1, [r1]
 	cmp     r1, r0
 	bne     branch_20b26e8
-.arm
+
 branch_20b26d0: @ 20b26d0 :arm
 	mov     r2, r4, lsr #2
 	ldr     r0, [r5]
@@ -28512,45 +28549,39 @@ branch_20b26d0: @ 20b26d0 :arm
 	sub     r2, r2, #0x1
 	bl      Function_20b275c
 	ldmfd   sp!, {r3-r5,pc}
-@ 0x20b26e8
 
-.arm
 branch_20b26e8: @ 20b26e8 :arm
 	bl      Function_20b2628
-	ldr     r0, [pc, #0x5c] @ [0x20b2750] (=RAM_21c89f4)
+	ldr     r0, =RAM_21c89f4
 	mov     r1, #0x1
-	str     r1, [r0, #0x4]
-	ldr     r0, [r0, #0x8]
+	str     r1, [r0, #RAM_21c89f4_4]
+	ldr     r0, [r0, #RAM_21c89f4_8]
 	cmp     r0, #0x0
 	beq     branch_20b2728
-	ldr     r1, [pc, #0x48] @ [0x20b2754] (=RAM_21c89f8)
-	ldr     r0, [pc, #0x3c] @ [0x20b274c] (=Unknown_2101148)
+
+	ldr     r1, =RAM_21c89f8
+	ldr     r0, =Unknown_2101148
 	str     r1, [sp]
 	ldr     r0, [r0]
-	ldr     r3, [pc, #0x3c] @ [0x20b2758] (=Function_20b269c)
+	ldr     r3, =Function_20b269c
 	mov     r1, r5
 	mov     r2, r4
 	bl      MI_SendGXCommandAsyncFast
 	ldmfd   sp!, {r3-r5,pc}
-@ 0x20b2728
 
-.arm
 branch_20b2728: @ 20b2728 :arm
-	ldr     r1, [pc, #0x24] @ [0x20b2754] (=RAM_21c89f8)
-	ldr     r0, [pc, #0x18] @ [0x20b274c] (=Unknown_2101148)
+	ldr     r1, =RAM_21c89f8
+	ldr     r0, =Unknown_2101148
 	str     r1, [sp]
 	ldr     r0, [r0]
-	ldr     r3, [pc, #0x18] @ [0x20b2758] (=Function_20b269c)
+	ldr     r3, =Function_20b269c
 	mov     r1, r5
 	mov     r2, r4
 	bl      MI_SendGXCommandAsync
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20b274c
 
-.word Unknown_2101148 @ 0x20b274c
-.word RAM_21c89f4 @ 0x20b2750
-.word RAM_21c89f8 @ 0x20b2754
-.word Function_20b269c @ 0x20b2758
+.pool
 
 
 
@@ -28558,71 +28589,67 @@ branch_20b2728: @ 20b2728 :arm
 .globl Function_20b275c
 Function_20b275c: @ 20b275c :arm
 	stmfd   sp!, {r4-r6,lr}
-	ldr     r3, [pc, #0xd0] @ [0x20b2838] (=RAM_21c89f4)
+	ldr     r3, =RAM_21c89f4
 	mov     r6, r0
-	ldr     r12, [r3]
+	ldr     r12, [r3, #RAM_21c89f4_0]
 	mov     r5, r1
 	mov     r4, r2
 	cmp     r12, #0x0
 	beq     branch_20b2810
-	ldr     r0, [r3, #0x4]
+
+	ldr     r0, [r3, #RAM_21c89f4_4]
 	cmp     r0, #0x0
 	beq     branch_20b27e4
+
 	ldr     r2, [r12]
 	add     r0, r2, #0x1
 	add     r1, r0, r4
 	cmp     r1, #0xc0
 	bhi     branch_20b27e4
+
 	str     r0, [r12]
-	ldr     r0, [r3]
+	ldr     r0, [r3, #RAM_21c89f4_0]
 	cmp     r4, #0x0
 	add     r0, r0, r2, lsl #2
 	str     r6, [r0, #0x4]
 	ldmeqfd sp!, {r4-r6,pc}
-	ldr     r2, [r3]
+
+	ldr     r2, [r3, #RAM_21c89f4_0]
 	mov     r0, r5
 	ldr     r1, [r2], #0x4
 	add     r1, r2, r1, lsl #2
 	mov     r2, r4, lsl #2
 	bl      MIi_CpuCopyFast
-	ldr     r0, [pc, #0x64] @ [0x20b2838] (=RAM_21c89f4)
-	ldr     r1, [r0]
+	ldr     r0, =RAM_21c89f4
+	ldr     r1, [r0, #RAM_21c89f4_0]
 	ldr     r0, [r1]
 	add     r0, r0, r4
 	str     r0, [r1]
-.arm
-Startpoint_20b27e0: @ 20b27e0 :arm
 	ldmfd   sp!, {r4-r6,pc}
-@ 0x20b27e4
 
-.arm
 branch_20b27e4: @ 20b27e4 :arm
 	ldr     r0, [r12]
 	cmp     r0, #0x0
 	beq     branch_20b27f8
 	bl      Function_20b2628
 	b       branch_20b2820
-@ 0x20b27f8
 
-.arm
 branch_20b27f8: @ 20b27f8 :arm
-	ldr     r0, [pc, #0x38] @ [0x20b2838] (=RAM_21c89f4)
-	ldr     r0, [r0, #0x4]
+	ldr     r0, =RAM_21c89f4
+	ldr     r0, [r0, #RAM_21c89f4_4]
 	cmp     r0, #0x0
 	beq     branch_20b2820
 	bl      Function_20b2684
 	b       branch_20b2820
-@ 0x20b2810
 
-.arm
 branch_20b2810: @ 20b2810 :arm
-	ldr     r0, [r3, #0x4]
+	ldr     r0, [r3, #RAM_21c89f4_4]
 	cmp     r0, #0x0
 	beq     branch_20b2820
 	bl      Function_20b2684
-.arm
 branch_20b2820: @ 20b2820 :arm
-	ldr     r1, [pc, #0x14] @ [0x20b283c] (=GFX_FIFO)
+
+	ldr     r1, =GFX_FIFO
 	mov     r0, r5
 	mov     r2, r4, lsl #2
 	str     r6, [r1]
@@ -28630,8 +28657,7 @@ branch_20b2820: @ 20b2820 :arm
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b2838
 
-.word RAM_21c89f4 @ 0x20b2838
-.word GFX_FIFO @ 0x20b283c
+.pool
 
 
 
@@ -28642,36 +28668,37 @@ Function_20b2840: @ 20b2840 :arm
 	mov     r6, r0
 	mov     r5, r1
 	bl      Function_20b2628
-	ldr     r0, [pc, #0x68] @ [0x20b28c4] (=MATRIX_CONTROL)
+
+	ldr     r0, =MATRIX_CONTROL
 	mov     r1, #0x0
 	str     r1, [r0]
 	str     r1, [r0, #0x4]
 	str     r1, [r0, #0x14]
 	cmp     r6, #0x0
 	beq     branch_20b2890
+
 	add     r4, sp, #0x0
-.arm
 branch_20b2874: @ 20b2874 :arm
 	mov     r0, r4
 	bl      G3X_GetClipMtx
 	cmp     r0, #0x0
 	bne     branch_20b2874
+
 	add     r0, sp, #0x0
 	mov     r1, r6
 	bl      MTX_Copy44To43_
-.arm
 branch_20b2890: @ 20b2890 :arm
 	cmp     r5, #0x0
 	beq     branch_20b28a8
-.arm
+
 branch_20b2898: @ 20b2898 :arm
 	mov     r0, r5
 	bl      G3X_GetVectorMtx
 	cmp     r0, #0x0
 	bne     branch_20b2898
-.arm
+
 branch_20b28a8: @ 20b28a8 :arm
-	ldr     r1, [pc, #0x18] @ [0x20b28c8] (=MATRIX_POP)
+	ldr     r1, =MATRIX_POP
 	mov     r0, #0x1
 	str     r0, [r1]
 	mov     r0, #0x2
@@ -28680,8 +28707,7 @@ branch_20b28a8: @ 20b28a8 :arm
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b28c4
 
-.word MATRIX_CONTROL @ 0x20b28c4
-.word MATRIX_POP @ 0x20b28c8
+.pool
 
 
 
@@ -28692,7 +28718,7 @@ Function_20b28cc: @ 20b28cc :arm
 	bl      G3X_Init
 	bl      Function_20af32c
 
-	ldr     r1, [pc, #0x10] @ [0x20b28f0] (=GFX_STATUS)
+	ldr     r1, =GFX_STATUS
 	ldr     r0, [r1]
 	bic     r0, r0, #0xc0000000
 	orr     r0, r0, #0x80000000
@@ -28701,7 +28727,7 @@ Function_20b28cc: @ 20b28cc :arm
 	ldmfd   sp!, {r3,pc}
 @ 0x20b28f0
 
-.word GFX_STATUS @ 0x20b28f0
+.pool
 
 
 
@@ -28710,54 +28736,52 @@ Function_20b28f4: @ 20b28f4 :arm
 	stmfd   sp!, {r3-r11,lr}
 	mov     r10, r0
 	ldr     r2, [r10]
-	ldr     r1, [pc, #0x208] @ [0x20b2b10] (=0x30415642)
+	ldr     r1, =BVA0_MagicConstant
 	cmp     r2, r1
 	bhi     branch_20b2940
 	bhs     branch_20b2b00
-	sub     r0, r1, #9, 24 @ #0x900
+
+	sub     r0, r1, #0x900 @ BMA0_MagicConstant
 	cmp     r2, r0
 	bhi     branch_20b2930
 	bhs     branch_20b2b00
-	sub     r0, r1, #19, 24 @ #0x1300
+
+	sub     r0, r1, #0x1300 @ BEA0_MagicConstant
 	cmp     r2, r0
 	beq     branch_20b2b00
 	b       branch_20b2b08
-@ 0x20b2930
 
-.arm
 branch_20b2930: @ 20b2930 :arm
-	sub     r0, r1, #2, 24 @ #0x200
+	sub     r0, r1, #0x200 @ BTA0_MagicConstant
 	cmp     r2, r0
 	beq     branch_20b2b00
 	b       branch_20b2b08
-@ 0x20b2940
 
-.arm
 branch_20b2940: @ 20b2940 :arm
-	ldr     r0, [pc, #0x1cc] @ [0x20b2b14] (=0x30505442)
+	ldr     r0, =BTP0_MagicConstant
 	cmp     r2, r0
 	bhi     branch_20b2960
 	bhs     branch_20b2b00
-	ldr     r0, [pc, #0x1c0] @ [0x20b2b18] (=0x30444d42)
-	cmp     r2, r0
-	beq     branch_20b296c
-	b       branch_20b2b08
-@ 0x20b2960
 
-.arm
+	ldr     r0, =BMD0_MagicConstant
+	cmp     r2, r0
+	beq     branch_20b296c_bmd0
+	b       branch_20b2b08
+
 branch_20b2960: @ 20b2960 :arm
-	add     r0, r0, #2, 14 @ #0x80000
+	add     r0, r0, #0x80000
 	cmp     r2, r0
 	bne     branch_20b2b08
-.arm
-branch_20b296c: @ 20b296c :arm
+
+branch_20b296c_bmd0: @ 20b296c :arm
 	mov     r5, #0x1
 	mov     r0, r10
 	mov     r6, r5
 	mov     r7, r5
-	bl      Function_20b3c1c
+	bl      Function_20b3c1c_GetTexOffsets
 	movs    r4, r0
 	beq     branch_20b2ad0
+
 	bl      Function_20ae8c4
 	mov     r9, r0
 	mov     r0, r4
@@ -28768,27 +28792,26 @@ branch_20b296c: @ 20b296c :arm
 	str     r0, [sp]
 	cmp     r9, #0x0
 	beq     branch_20b29d4
-	ldr     r0, [pc, #0x164] @ [0x20b2b1c] (=Unknown_2100dec)
+
+	ldr     r0, =Unknown_2100dec
 	mov     r1, #0x0
-	ldr     r3, [r0]
+	ldr     r3, [r0] @ Function_20a5a2c
 	mov     r0, r9
 	mov     r2, r1
 	blx     r3
 	movs    r11, r0
 	moveq   r5, #0x0
 	b       branch_20b29d8
-@ 0x20b29d4
 
-.arm
 branch_20b29d4: @ 20b29d4 :arm
 	mov     r11, #0x0
-.arm
 branch_20b29d8: @ 20b29d8 :arm
 	cmp     r8, #0x0
 	beq     branch_20b2a04
-	ldr     r1, [pc, #0x134] @ [0x20b2b1c] (=Unknown_2100dec)
+
+	ldr     r1, =Unknown_2100dec
 	mov     r0, r8
-	ldr     r3, [r1]
+	ldr     r3, [r1] @ Function_20a5a2c
 	mov     r1, #0x1
 	mov     r2, #0x0
 	blx     r3
@@ -28802,10 +28825,11 @@ branch_20b2a08: @ 20b2a08 :arm
 	ldr     r0, [sp]
 	cmp     r0, #0x0
 	beq     branch_20b2a38
-	ldr     r1, [pc, #0x104] @ [0x20b2b20] (=Unknown_2100df4)
+
+	ldr     r1, =Unknown_2100df4
 	ldrh    r2, [r4, #0x20]
-	ldr     r3, [r1]
-	and     r1, r2, #2, 18 @ #0x8000
+	ldr     r3, [r1] @ Function_20a5a3c
+	and     r1, r2, #0x8000
 	mov     r2, #0x0
 	blx     r3
 	movs    r9, r0
@@ -28819,25 +28843,28 @@ branch_20b2a3c: @ 20b2a3c :arm
 	cmpne   r6, #0x0
 	cmpne   r7, #0x0
 	bne     branch_20b2a9c
+
 	cmp     r7, #0x0
 	beq     branch_20b2a64
-	ldr     r1, [pc, #0xc8] @ [0x20b2b24] (=Unknown_2100df8)
+	ldr     r1, =Unknown_2100df8
 	mov     r0, r9
 	ldr     r1, [r1]
 	blx     r1
 branch_20b2a64: @ 20b2a64 :arm
+
 	cmp     r6, #0x0
 	beq     branch_20b2a7c
-	ldr     r1, [pc, #0xb4] @ [0x20b2b28] (=Unknown_2100df0)
+	ldr     r1, =Unknown_2100df0
 	mov     r0, r8
-	ldr     r1, [r1]
+	ldr     r1, [r1] @ Function_20a5a34
 	blx     r1
 branch_20b2a7c: @ 20b2a7c :arm
+
 	cmp     r5, #0x0
 	beq     branch_20b2a94
-	ldr     r1, [pc, #0x9c] @ [0x20b2b28] (=Unknown_2100df0)
+	ldr     r1, =Unknown_2100df0
 	mov     r0, r11
-	ldr     r1, [r1]
+	ldr     r1, [r1] @ Function_20a5a34
 	blx     r1
 branch_20b2a94: @ 20b2a94 :arm
 	mov     r0, #0x0
@@ -28848,34 +28875,35 @@ branch_20b2a9c: @ 20b2a9c :arm
 	mov     r1, r11
 	mov     r2, r8
 	bl      Function_20ae8ec
+
 	mov     r0, r4
 	mov     r1, r9
 	bl      Function_20aea18
+
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      Function_20ae900
+
 	mov     r0, r4
 	mov     r1, #0x1
 	bl      Function_20aea20
-.arm
 branch_20b2ad0: @ 20b2ad0 :arm
 	ldr     r1, [r10]
-	ldr     r0, [pc, #0x3c] @ [0x20b2b18] (=0x30444d42)
+	ldr     r0, =BMD0_MagicConstant
 	cmp     r1, r0
 	bne     branch_20b2af8
+
 	mov     r0, r10
-	bl      Function_20b3c0c
+	bl      Function_20b3c0c_GetAdrOfDataPart
 	cmp     r4, #0x0
 	beq     branch_20b2af8
+
 	mov     r1, r4
 	bl      Function_20af1e8
-.arm
 branch_20b2af8: @ 20b2af8 :arm
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r11,pc}
-@ 0x20b2b00
 
-.arm
 branch_20b2b00: @ 20b2b00 :arm
 	mov     r0, #0x1
 	ldmfd   sp!, {r3-r11,pc}
@@ -28885,13 +28913,7 @@ branch_20b2b08: @ 20b2b08 :arm
 	ldmfd   sp!, {r3-r11,pc}
 @ 0x20b2b10
 
-.word 0x30415642 @ 0x20b2b10
-.word 0x30505442 @ 0x20b2b14
-.word 0x30444d42 @ 0x20b2b18
-.word Unknown_2100dec @ 0x20b2b1c
-.word Unknown_2100df4 @ 0x20b2b20
-.word Unknown_2100df8 @ 0x20b2b24
-.word Unknown_2100df0 @ 0x20b2b28
+.pool
 
 
 
@@ -29682,7 +29704,6 @@ branch_20b33d4: @ 20b33d4 :arm
 .arm
 branch_20b33e4: @ 20b33e4 :arm
 	mov     r1, #0x0
-.arm
 branch_20b33e8: @ 20b33e8 :arm
 	ldr     r0, [r1, #0xc]
 	cmp     r2, #0x0
@@ -29691,6 +29712,7 @@ branch_20b33e8: @ 20b33e8 :arm
 	str     r0, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
 @ 0x20b3400
+
 
 .arm
 Function_20b3400: @ 20b3400 :arm
@@ -29713,21 +29735,17 @@ Function_20b3400: @ 20b3400 :arm
 	add     r3, r3, #0x4
 	mla     r1, r0, r1, r3
 	b       branch_20b3450
-@ 0x20b344c
 
-.arm
 branch_20b344c: @ 20b344c :arm
 	mov     r1, #0x0
-.arm
 branch_20b3450: @ 20b3450 :arm
 	cmp     r1, #0x0
 	ldrne   r0, [r1]
 	addne   r1, lr, r0
 	bne     branch_20b3464
-.arm
+
 branch_20b3460: @ 20b3460 :arm
 	mov     r1, #0x0
-.arm
 branch_20b3464: @ 20b3464 :arm
 	ldr     r0, [r1, #0xc]
 	cmp     r2, #0x0
@@ -29736,6 +29754,7 @@ branch_20b3464: @ 20b3464 :arm
 	str     r0, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
 @ 0x20b347c
+
 
 .arm
 Function_20b347c: @ 20b347c :arm
@@ -29747,37 +29766,36 @@ Function_20b347c: @ 20b347c :arm
 	moveq   lr, #0x0
 	cmp     lr, #0x0
 	beq     branch_20b34dc
+
 	adds    r12, lr, #0x4
 	beq     branch_20b34c8
+
 	ldrb    r0, [lr, #0x5]
 	cmp     r1, r0
 	bhs     branch_20b34c8
+
 	ldrh    r3, [lr, #0xa]
 	ldrh    r0, [r12, r3]
 	add     r3, r12, r3
 	add     r3, r3, #0x4
 	mla     r1, r0, r1, r3
 	b       branch_20b34cc
-@ 0x20b34c8
 
-.arm
 branch_20b34c8: @ 20b34c8 :arm
 	mov     r1, #0x0
-.arm
 branch_20b34cc: @ 20b34cc :arm
 	cmp     r1, #0x0
 	ldrne   r0, [r1]
 	addne   r1, lr, r0
 	bne     branch_20b34e0
-.arm
+
 branch_20b34dc: @ 20b34dc :arm
 	mov     r1, #0x0
-.arm
 branch_20b34e0: @ 20b34e0 :arm
 	ldr     r0, [r1, #0xc]
 	cmp     r2, #0x0
-	orrne   r0, r0, #2, 22 @ #0x800
-	biceq   r0, r0, #2, 22 @ #0x800
+	orrne   r0, r0, #0x800
+	biceq   r0, r0, #0x800
 	str     r0, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
 @ 0x20b34f8
@@ -29804,21 +29822,17 @@ Function_20b34f8: @ 20b34f8 :arm
 	add     r2, r2, #0x4
 	mla     r1, r0, r1, r2
 	b       branch_20b3544
-@ 0x20b3540
 
-.arm
 branch_20b3540: @ 20b3540 :arm
 	mov     r1, #0x0
-.arm
 branch_20b3544: @ 20b3544 :arm
 	cmp     r1, #0x0
 	ldrne   r0, [r1]
 	addne   r0, r12, r0
 	bne     branch_20b3558
-.arm
+
 branch_20b3554: @ 20b3554 :arm
 	mov     r0, #0x0
-.arm
 branch_20b3558: @ 20b3558 :arm
 	ldr     r0, [r0, #0xc]
 	and     r0, r0, #0xf
@@ -29836,6 +29850,7 @@ Function_20b3564: @ 20b3564 :arm
 	mov     r4, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r4-r6,pc}
+
 branch_20b3580: @ 20b3580 :arm
 	mov     r0, r6
 	mov     r1, r4
@@ -29845,6 +29860,7 @@ branch_20b3580: @ 20b3580 :arm
 	add     r4, r4, #0x1
 	cmp     r4, r0
 	blo     branch_20b3580
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b35a4
 
@@ -29859,6 +29875,7 @@ Function_20b35a4: @ 20b35a4 :arm
 	mov     r4, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r4-r6,pc}
+
 branch_20b35c0: @ 20b35c0 :arm
 	mov     r0, r6
 	mov     r1, r4
@@ -29868,6 +29885,7 @@ branch_20b35c0: @ 20b35c0 :arm
 	add     r4, r4, #0x1
 	cmp     r4, r0
 	blo     branch_20b35c0
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b35e4
 
@@ -29882,6 +29900,7 @@ Function_20b35e4: @ 20b35e4 :arm
 	mov     r4, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r4-r6,pc}
+
 branch_20b3600: @ 20b3600 :arm
 	mov     r0, r6
 	mov     r1, r4
@@ -29891,6 +29910,7 @@ branch_20b3600: @ 20b3600 :arm
 	add     r4, r4, #0x1
 	cmp     r4, r0
 	blo     branch_20b3600
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b3624
 
@@ -29905,6 +29925,7 @@ Function_20b3624: @ 20b3624 :arm
 	mov     r4, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r4-r6,pc}
+
 branch_20b3640: @ 20b3640 :arm
 	mov     r0, r6
 	mov     r1, r4
@@ -29914,6 +29935,7 @@ branch_20b3640: @ 20b3640 :arm
 	add     r4, r4, #0x1
 	cmp     r4, r0
 	blo     branch_20b3640
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b3664
 
@@ -29928,6 +29950,7 @@ Function_20b3664: @ 20b3664 :arm
 	mov     r4, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r4-r6,pc}
+
 branch_20b3680: @ 20b3680 :arm
 	mov     r0, r6
 	mov     r1, r4
@@ -29937,6 +29960,7 @@ branch_20b3680: @ 20b3680 :arm
 	add     r4, r4, #0x1
 	cmp     r4, r0
 	blo     branch_20b3680
+
 	ldmfd   sp!, {r4-r6,pc}
 @ 0x20b36a4
 
@@ -30291,16 +30315,18 @@ Function_20b3aa4: @ 20b3aa4 :arm
 	cmp     r1, #0x0
 	mvneq   r0, #0x0
 	ldmeqfd sp!, {r3-r7,pc}
+
 	ldrb    r2, [r0, #0x1]
 	cmp     r2, #0x10
 	bhs     branch_20b3b48
+
 	cmp     r2, #0x0
 	ldmia   r1, {r2,r3,r12,lr}
 	mov     r1, #0x0
 	bls     branch_20b3c04
+
 	mov     r4, r1
 	mov     r6, r1
-.arm
 branch_20b3ad8: @ 20b3ad8 :arm
 	cmp     r0, #0x0
 	beq     branch_20b3b04
@@ -30313,12 +30339,9 @@ branch_20b3ad8: @ 20b3ad8 :arm
 	add     r5, r7, r5
 	add     r7, r5, r4
 	b       branch_20b3b08
-@ 0x20b3b04
 
-.arm
 branch_20b3b04: @ 20b3b04 :arm
 	mov     r7, r6
-.arm
 branch_20b3b08: @ 20b3b08 :arm
 	ldr     r5, [r7]
 	cmp     r5, r2
@@ -30336,9 +30359,7 @@ branch_20b3b08: @ 20b3b08 :arm
 	cmp     r1, r5
 	blo     branch_20b3ad8
 	b       branch_20b3c04
-@ 0x20b3b48
 
-.arm
 branch_20b3b48: @ 20b3b48 :arm
 	add     r5, r0, #0x8
 	ldrb    r4, [r5, #0x1]
@@ -30349,7 +30370,7 @@ branch_20b3b48: @ 20b3b48 :arm
 	add     r6, r5, r4, lsl #2
 	cmp     r3, r7
 	bls     branch_20b3b9c
-.arm
+
 branch_20b3b6c: @ 20b3b6c :arm
 	mov     r3, r7, asr #5
 	ldr     r4, [r1, r3, lsl #0x2]
@@ -30363,7 +30384,7 @@ branch_20b3b6c: @ 20b3b6c :arm
 	add     r6, r5, r4, lsl #2
 	cmp     r3, r7
 	bhi     branch_20b3b6c
-.arm
+
 branch_20b3b9c: @ 20b3b9c :arm
 	cmp     r0, #0x0
 	ldrb    r3, [r6, #0x3]
@@ -30376,12 +30397,9 @@ branch_20b3b9c: @ 20b3b9c :arm
 	add     r0, r2, r0
 	add     r4, r0, r3, lsl #4
 	b       branch_20b3bcc
-@ 0x20b3bc8
 
-.arm
 branch_20b3bc8: @ 20b3bc8 :arm
 	mov     r4, #0x0
-.arm
 branch_20b3bcc: @ 20b3bcc :arm
 	ldr     r2, [r4]
 	ldr     r0, [r1]
@@ -30397,35 +30415,43 @@ branch_20b3bcc: @ 20b3bcc :arm
 	cmpeq   r2, r0
 	moveq   r0, r3
 	ldmeqfd sp!, {r3-r7,pc}
-.arm
+
 branch_20b3c04: @ 20b3c04 :arm
 	mvn     r0, #0x0
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20b3c0c
 
 
-.arm
-.globl Function_20b3c0c
-Function_20b3c0c: @ 20b3c0c :arm
-	ldrh    r1, [r0, #0xc]
+/* Input:
+r0: Ptr to FileData
+
+Return:
+r0: Ptr to DataPart of File
+*/
+arm_func_start Function_20b3c0c_GetAdrOfDataPart
+Function_20b3c0c_GetAdrOfDataPart: @ 20b3c0c :arm
+	ldrh    r1, [r0, #FileHeader_HeaderSize]
 	ldr     r1, [r0, r1]
 	add     r0, r0, r1
 	bx      lr
-@ 0x20b3c1c
+arm_func_end Function_20b3c0c_GetAdrOfDataPart
 
 
-.arm
-.globl Function_20b3c1c
-Function_20b3c1c: @ 20b3c1c :arm
-	ldrh    r2, [r0, #0xc]
-	ldrh    r1, [r0, #0xe]
+/* Input:
+r0: Ptr to loaded data
+*/
+arm_func_start Function_20b3c1c_GetTexOffsets
+Function_20b3c1c_GetTexOffsets: @ 20b3c1c :arm
+	ldrh    r2, [r0, #FileHeader_HeaderSize]
+	ldrh    r1, [r0, #FileHeader_NumBlocks]
 	add     r3, r0, r2
 	cmp     r1, #0x1
 	bne     branch_20b3c4c
-	ldr     r2, [r0]
-	ldr     r1, [pc, #0x1c] @ [0x20b3c58] (=0x30585442)
+
+	ldr     r2, [r0, #FileHeader_Magic]
+	ldr     r1, =BTX0_MagicConstant
 	cmp     r2, r1
-	ldreq   r1, [r3]
+	ldreq   r1, [r3, #BTX0_TexOffsets]
 	addeq   r0, r0, r1
 	movne   r0, #0x0
 	bx      lr
@@ -30436,7 +30462,8 @@ branch_20b3c4c: @ 20b3c4c :arm
 	bx      lr
 @ 0x20b3c58
 
-.word 0x30585442 @ 0x20b3c58
+.pool
+arm_func_end Function_20b3c1c_GetTexOffsets
 
 
 
@@ -30459,18 +30486,15 @@ Function_20b3c5c: @ 20b3c5c :arm
 	add     r2, r2, #0x4
 	mla     r1, r0, r1, r2
 	b       branch_20b3ca0
-@ 0x20b3c9c
 
-.arm
 branch_20b3c9c: @ 20b3c9c :arm
 	mov     r1, #0x0
-.arm
 branch_20b3ca0: @ 20b3ca0 :arm
 	cmp     r1, #0x0
 	ldrne   r0, [r1]
 	addne   r0, r12, r0
 	bxne    lr
-.arm
+
 branch_20b3cb0: @ 20b3cb0 :arm
 	mov     r0, #0x0
 	bx      lr
@@ -30488,13 +30512,12 @@ Function_20b3cb8: @ 20b3cb8 :arm
 	add     r0, r0, r2
 	add     r0, r0, r1, lsl #4
 	bx      lr
-@ 0x20b3cdc
 
-.arm
 branch_20b3cdc: @ 20b3cdc :arm
 	mov     r0, #0x0
 	bx      lr
 @ 0x20b3ce4
+
 
 .arm
 Function_20b3ce4: @ 20b3ce4 :arm
@@ -30507,13 +30530,12 @@ Function_20b3ce4: @ 20b3ce4 :arm
 	add     r0, r0, r2
 	add     r0, r0, r1, lsl #4
 	bx      lr
-@ 0x20b3d08
 
-.arm
 branch_20b3d08: @ 20b3d08 :arm
 	mov     r0, #0x0
 	bx      lr
 @ 0x20b3d10
+
 
 .arm
 Function_20b3d10: @ 20b3d10 :arm
@@ -30527,12 +30549,9 @@ Function_20b3d10: @ 20b3d10 :arm
 	add     r3, r5, r3
 	mov     r2, r2, lsr #12
 	b       branch_20b3d3c
-@ 0x20b3d38
 
-.arm
 branch_20b3d38: @ 20b3d38 :arm
 	sub     r2, r2, #0x1
-.arm
 branch_20b3d3c: @ 20b3d3c :arm
 	cmp     r2, #0x0
 	beq     branch_20b3d54
@@ -30540,16 +30559,13 @@ branch_20b3d3c: @ 20b3d3c :arm
 	ldrh    r1, [r3, r1]
 	cmp     r1, r4
 	bhs     branch_20b3d38
-.arm
+
 branch_20b3d54: @ 20b3d54 :arm
 	ldrh    r1, [r0]
 	b       branch_20b3d60
-@ 0x20b3d5c
 
-.arm
 branch_20b3d5c: @ 20b3d5c :arm
 	add     r2, r2, #0x1
-.arm
 branch_20b3d60: @ 20b3d60 :arm
 	add     r0, r2, #0x1
 	cmp     r0, r1
@@ -30558,11 +30574,12 @@ branch_20b3d60: @ 20b3d60 :arm
 	ldrh    r0, [r0, #0x4]
 	cmp     r0, r4
 	bls     branch_20b3d5c
-.arm
+
 branch_20b3d7c: @ 20b3d7c :arm
 	add     r0, r3, r2, lsl #2
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20b3d84
+
 
 .arm
 Function_20b3d84: @ 20b3d84 :arm
@@ -30577,9 +30594,7 @@ Function_20b3d84: @ 20b3d84 :arm
 	add     r0, r0, #0x4
 	mla     r0, r2, r1, r0
 	bx      lr
-@ 0x20b3db0
 
-.arm
 branch_20b3db0: @ 20b3db0 :arm
 	mov     r0, #0x0
 	bx      lr
@@ -30606,7 +30621,7 @@ Function_20b3db8: @ 20b3db8 :arm
 	mov     r2, #0x0
 	cmp     r0, #0x0
 	ldmlsfd sp!, {r3-r5,pc}
-.arm
+
 branch_20b3e00: @ 20b3e00 :arm
 	mov     r0, r2, lsl #1
 	ldrh    r1, [r3, r0]
@@ -30639,13 +30654,14 @@ Function_20b3e34: @ 20b3e34 :arm
 	bge     branch_20b3e60
 	cmp     r12, #0x0
 	movlt   r12, #0x0
-.arm
 branch_20b3e60: @ 20b3e60 :arm
+
 	mov     r1, r2
 	mov     r2, r12
 	bl      Function_20b4118
 	ldmfd   sp!, {r3,pc}
 @ 0x20b3e70
+
 
 .arm
 Function_20b3e70: @ 20b3e70 :arm
@@ -30666,21 +30682,17 @@ Function_20b3e70: @ 20b3e70 :arm
 	add     r2, r2, #0x4
 	mla     r2, r1, r3, r2
 	b       branch_20b3eb8
-@ 0x20b3eb4
 
-.arm
 branch_20b3eb4: @ 20b3eb4 :arm
 	mov     r2, #0x0
-.arm
 branch_20b3eb8: @ 20b3eb8 :arm
 	cmp     r2, #0x0
 	ldrne   r1, [r2]
 	addne   r2, r12, r1
 	bne     branch_20b3ecc
-.arm
+
 branch_20b3ec8: @ 20b3ec8 :arm
 	mov     r2, #0x0
-.arm
 branch_20b3ecc: @ 20b3ecc :arm
 	ldrh    r1, [r2]
 	tst     r1, #0x1
@@ -30689,9 +30701,7 @@ branch_20b3ecc: @ 20b3ecc :arm
 	orr     r1, r1, #0x4
 	str     r1, [r0]
 	bx      lr
-@ 0x20b3ee8
 
-.arm
 branch_20b3ee8: @ 20b3ee8 :arm
 	ldr     r1, [r2, #0x4]
 	str     r1, [r0, #0x4c]
@@ -30703,6 +30713,9 @@ branch_20b3ee8: @ 20b3ee8 :arm
 @ 0x20b3f04
 
 .word RAM_21c5cf0 @ 0x20b3f04
+
+
+
 .arm
 Function_20b3f08: @ 20b3f08 :arm
 	stmfd   sp!, {r4,lr}
@@ -35348,6 +35361,7 @@ Function_20b799c: @ 20b799c :arm
 
 
 .arm
+.globl Function_20b7a24
 Function_20b7a24: @ 20b7a24 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, #0x0
@@ -35871,6 +35885,7 @@ Function_20b7f34: @ 20b7f34 :arm
 
 
 .arm
+.globl Function_20b7fc8
 Function_20b7fc8: @ 20b7fc8 :arm
 	ldr     r12, [pc, #0x4] @ [0x20b7fd4] (=Function_20b85ac)
 	ldr     r0, [r0]
@@ -36016,6 +36031,7 @@ Function_20b8108: @ 20b8108 :arm
 
 
 .arm
+.globl Function_20b8120
 Function_20b8120: @ 20b8120 :arm
 	ldr     r2, [r0]
 	cmp     r2, #0x0
@@ -36065,11 +36081,13 @@ Function_20b8174: @ 20b8174 :arm
 
 
 .arm
+.globl Function_20b8194
 Function_20b8194: @ 20b8194 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r3, [r0]
 	cmp     r3, #0x0
 	ldmeqfd sp!, {r3,pc}
+
 	ldr     r0, [r0]
 	ldrb    r0, [r0, #0x3c]
 	bl      Function_20c51a4
@@ -38140,9 +38158,12 @@ Function_20b9b0c: @ 20b9b0c :arm
 @ 0x20b9b24
 
 
+/* Input:
+r0: dimensions??
+*/
 .arm
 Function_20b9b24: @ 20b9b24 :arm
-	ldr     r1, [pc, #0x58] @ [0x20b9b84] (=RAM_21cbef0)
+	ldr     r1, =RAM_21cbef0
 	ldr     r3, [r1]
 	ldr     r2, [r3, #0x8c]
 	ldr     r1, [r2, #0x8]
@@ -38171,13 +38192,14 @@ Function_20b9b24: @ 20b9b24 :arm
 	bx      lr
 @ 0x20b9b84
 
-.word RAM_21cbef0 @ 0x20b9b84
+.align 2
+.pool
 
 
 
 .arm
 Function_20b9b88: @ 20b9b88 :arm
-	ldr     r1, [pc, #0x58] @ [0x20b9be8] (=RAM_21cbef0)
+	ldr     r1, =RAM_21cbef0
 	ldr     r3, [r1]
 	ldr     r2, [r3, #0x8c]
 	ldr     r1, [r2, #0xc]
@@ -38187,13 +38209,16 @@ Function_20b9b88: @ 20b9b88 :arm
 	cmp     r2, #0x0
 	moveq   r0, #0x0
 	bxeq    lr
+
 	cmp     r0, #0x0
 	movlt   r0, #0x0
 	bxlt    lr
+
 	ldr     r1, [r2]
 	cmp     r0, r1
 	movcs   r0, #0x0
 	bxcs    lr
+
 	add     r0, r2, r0, lsl #2
 	ldr     r1, [r0, #0x4]
 	ldr     r0, [r3, #0x8c]
@@ -38203,7 +38228,8 @@ Function_20b9b88: @ 20b9b88 :arm
 	bx      lr
 @ 0x20b9be8
 
-.word RAM_21cbef0 @ 0x20b9be8
+.align 2
+.pool
 
 
 
@@ -39674,6 +39700,10 @@ branch_20bad64: @ 20bad64 :arm
 	ldmfd   sp!, {r4-r8,pc}
 @ 0x20bad78
 
+
+/* Input:
+r1: dimensions??
+*/
 .arm
 Function_20bad78: @ 20bad78 :arm
 	stmfd   sp!, {r3-r5,lr}
@@ -39686,6 +39716,7 @@ Function_20bad78: @ 20bad78 :arm
 	addeq   sp, sp, #0x8
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r5,pc}
+
 	stmea   sp, {r0,r4}
 	ldrb    r1, [r0, #0x9]
 	ldrh    r2, [r0, #0x4]
@@ -39695,6 +39726,7 @@ Function_20bad78: @ 20bad78 :arm
 	add     sp, sp, #0x8
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20badc0
+
 
 .arm
 Function_20badc0: @ 20badc0 :arm
@@ -39710,6 +39742,7 @@ Function_20badc0: @ 20badc0 :arm
 	addeq   sp, sp, #0x8
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r7,pc}
+
 	cmp     r4, #0x0
 	ldrltb  r4, [r0, #0x8]
 	cmp     r5, #0x0
@@ -39730,6 +39763,7 @@ Function_20badc0: @ 20badc0 :arm
 
 
 .arm
+.globl Function_20bae30
 Function_20bae30: @ 20bae30 :arm
 	stmfd   sp!, {r3-r7,lr}
 	sub     sp, sp, #0x10
@@ -39742,18 +39776,21 @@ Function_20bae30: @ 20bae30 :arm
 	addeq   sp, sp, #0x10
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r7,pc}
+
 	ldr     r0, [r0]
 	bl      Function_20b9e6c
 	movs    r4, r0
 	addeq   sp, sp, #0x10
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r7,pc}
+
 	mov     r1, r5
 	bl      Function_20bb368
 	cmp     r0, #0x0
 	addeq   sp, sp, #0x10
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r7,pc}
+
 	stmea   sp, {r0,r4,r6}
 	str     r5, [sp, #0xc]
 	ldrb    r1, [r0, #0x9]
@@ -39780,6 +39817,7 @@ Function_20baeb0: @ 20baeb0 :arm
 	addeq   sp, sp, #0xc
 	moveq   r0, #0x0
 	ldmeqfd sp!, {r3-r8,pc}
+
 	mov     r0, r7
 	mov     r1, r4
 	bl      Function_20b8620
@@ -39793,14 +39831,13 @@ Function_20baeb0: @ 20baeb0 :arm
 	bl      Function_20ba4e8
 	cmp     r0, #0x0
 	beq     branch_20baf28
+
 	mov     r0, r4
 	bl      Function_20b8550
 	add     sp, sp, #0xc
 	mov     r0, #0x0
 	ldmfd   sp!, {r3-r8,pc}
-@ 0x20baf28
 
-.arm
 branch_20baf28: @ 20baf28 :arm
 	ldr     r0, [sp, #0x2c]
 	add     r12, sp, #0x8
@@ -42666,7 +42703,9 @@ branch_20d33a8: @ 20d33a8 :arm
 	ldmfd   sp!, {r4,pc}
 @ 0x20d33b4
 
+
 .arm
+.globl Function_20d33b4
 Function_20d33b4: @ 20d33b4 :arm
 	ldrsb   r1, [r0]
 	mov     r2, #0x0
@@ -42686,6 +42725,7 @@ branch_20d33d4: @ 20d33d4 :arm
 
 
 .arm
+.globl Function_20d33dc
 Function_20d33dc: @ 20d33dc :arm
 	b       branch_20d33e8
 
@@ -42706,6 +42746,7 @@ branch_20d3400: @ 20d3400 :arm
 
 
 .arm
+.globl Function_20d3408
 Function_20d3408: @ 20d3408 :arm
 	stmfd   sp!, {r3,lr}
 	cmp     r2, #0x0
@@ -42713,6 +42754,7 @@ Function_20d3408: @ 20d3408 :arm
 	cmp     r2, #0x0
 	mov     lr, #0x0
 	ble     branch_20d3440
+
 branch_20d3420: @ 20d3420 :arm
 	ldrb    r12, [r0, lr]
 	ldrb    r3, [r1, lr]

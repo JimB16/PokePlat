@@ -1,23 +1,26 @@
 
 /* Input:
 r0 = Ptr to allocated MainGameData
-r1 = Dest. of TrainerData
-r2 = AllocFlags
+r1 = VariableAreaAdresses
+r2 = TrainerNr
 */
 thumb_func_start LoadNPCTrainerData
 LoadNPCTrainerData: @ 2079170 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x48
 
-	str     r2, [sp, #0x4]
-	ldr     r2, [pc, #0xa4] @ 0x207921c, (=0x26a)
+	str     r2, [sp, #0x4] @ TrainerNameNr
+
+	ldr     r2, =PlMsg_Narc_618     @ MsgFileNr (TrainerNames)
 	str     r0, [sp, #0x0]          @ Ptr to MainGameData
+
 	mov     r4, r1
-	ldr     r3, [sp, #0x4]
+	ldr     r3, [sp, #0x4] @ TrainerNameNr
 	mov     r0, #0x1
-	mov     r1, #0x1a
-	bl      Function_200b144
+	mov     r1, #PlMsg_Narc
+	bl      LoadFromNARC_9
 	str     r0, [sp, #0x10]
+
 	mov     r0, r4
 	bl      LoadVariableAreaAdress_a_2
 	bl      Function_2027870
@@ -37,20 +40,21 @@ branch_20791a0: @ 20791a0 :thumb
 	bl      LoadFromNARC_Trdata
 	ldr     r3, [sp, #0x8]          @ Ptr to MainGameData + 0x34 * x
 	add     r6, sp, #0x14
-	add     r3, #MainGameData_28
+	add     r3, #MainGameData_NPCTrainer_Start
 	mov     r2, #0x6
 branch_20791b4: @ 20791b4 :thumb
 	ldmia   r6!, {r0,r1}            @ copy data from Trdata
 	stmia   r3!, {r0,r1}
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_20791b4
-
 	ldr     r0, [r6, #0x0]
 	str     r0, [r3, #0x0]
+
 	add     r0, sp, #0x14
-	ldrb    r0, [r0, #0x1]
+	ldrb    r0, [r0, #TrData_Class]
 	cmp     r0, #0x3f
 	bne     branch_20791d2
+
 	ldr     r1, [sp, #0xc]
 	mov     r0, r5
 	bl      Function_20021b0
@@ -59,13 +63,14 @@ branch_20791b4: @ 20791b4 :thumb
 branch_20791d2: @ 20791d2 :thumb
 	ldr     r0, [sp, #0x10]
 	ldr     r1, [r4, #MainGameData_18]
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r6, r0
 	mov     r1, r5
 	mov     r2, #0x8
 	bl      Function_2023df0
+
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 branch_20791ea: @ 20791ea :thumb
 	ldr     r0, [sp, #0x0]                      @ Ptr to MainGameData
 	ldr     r2, [sp, #0x4]
@@ -89,12 +94,13 @@ branch_20791f4: @ 20791f4 :thumb
 	str     r1, [r0, #0x0]
 	ldr     r0, [sp, #0x10]
 	bl      Function_200b190
+
 	add     sp, #0x48
 	pop     {r3-r7,pc}
 @ 0x207921a
 
 .align 2
-.word 0x26a @ 0x207921c
+.pool
 thumb_func_end LoadNPCTrainerData
 
 
@@ -135,37 +141,37 @@ Jumppoints_207923c:
 .thumb
 loadTrainerFlag: @ 2079250 :thumb
 	add     r0, sp, #0x0
-	ldrb    r4, [r0, #0x0]
+	ldrb    r4, [r0, #TrData_Flag]
 	b       branch_2079278
 
 loadTrainerClass: @ 2079256 :thumb
 	add     r0, sp, #0x0
-	ldrb    r4, [r0, #0x1]
+	ldrb    r4, [r0, #TrData_Class]
 	b       branch_2079278
 
 loadTrainerBattleType: @ 207925c :thumb
 	add     r0, sp, #0x0
-	ldrb    r4, [r0, #0x2]
+	ldrb    r4, [r0, #TrData_BattleType]
 	b       branch_2079278
 
 loadTrainerNrOfPkmn: @ 2079262 :thumb
 	add     r0, sp, #0x0
-	ldrb    r4, [r0, #0x3]
+	ldrb    r4, [r0, #TrData_NrOfPkmn]
 	b       branch_2079278
 
 loadTrainerItem: @ 2079268 :thumb
 	sub     r0, r5, #0x4
 	lsl     r1, r0, #1
-	add     r0, sp, #0x4
+	add     r0, sp, #TrData_Item1
 	ldrh    r4, [r0, r1]
 	b       branch_2079278
 
 loadTrainerAI: @ 2079272 :thumb
-	ldr     r4, [sp, #0xc]
+	ldr     r4, [sp, #TrData_AI]
 	b       branch_2079278
 
 loadTrainerBattleType2: @ 2079276 :thumb
-	ldr     r4, [sp, #0x10]
+	ldr     r4, [sp, #TrData_BattleType2]
 branch_2079278: @ 2079278 :thumb
 	mov     r0, r4
 	add     sp, #0x34
@@ -183,7 +189,7 @@ LoadNPCTrainerTbl: @ 2079280 :thumb
 	mov     r7, r1
 
 	ldr     r1, [sp, #0x4]
-	mov     r0, #0x3b               @ poketool/trmsg/trtbl.narc
+	mov     r0, #Trtbl_Narc
 	mov     r4, r2
 	bl      LoadFromNARC_7
 	mov     r6, r0
@@ -192,12 +198,12 @@ LoadNPCTrainerTbl: @ 2079280 :thumb
 	str     r0, [sp, #0x0]
 
 	add     r0, sp, #0xc
-	mov     r1, #0x89                   @ poketool/trmsg/trtblofs.narc
+	mov     r1, #Trtblofs_Narc
 	mov     r2, #0x0
 	lsl     r3, r5, #1
 	bl      LoadFromNARC_3
 
-	mov     r0, #0x3b               @ poketool/trmsg/trtbl.narc
+	mov     r0, #Trtbl_Narc
 	mov     r1, r4
 	bl      LoadFromNARC_8
 	add     r4, sp, #0xc
@@ -205,6 +211,7 @@ LoadNPCTrainerTbl: @ 2079280 :thumb
 	str     r0, [sp, #0x8]
 	cmp     r2, r6
 	beq     branch_20792ec
+
 branch_20792ba: @ 20792ba :thumb
 	add     r0, sp, #0xc
 	add     r0, #0x2
@@ -216,9 +223,11 @@ branch_20792ba: @ 20792ba :thumb
 	ldrh    r1, [r4, #0x2]
 	cmp     r1, r5
 	bne     branch_20792dc
+
 	ldrh    r0, [r4, #0x4]
 	cmp     r0, r7
 	bne     branch_20792dc
+
 	mov     r0, #0x1
 	str     r0, [sp, #0x4]
 	b       branch_20792ec
@@ -226,12 +235,14 @@ branch_20792ba: @ 20792ba :thumb
 branch_20792dc: @ 20792dc :thumb
 	cmp     r1, r5
 	bne     branch_20792ec
+
 	ldrh    r0, [r4, #0x0]
 	.hword  0x1d00 @ add r0, r0, #0x4
 	strh    r0, [r4, #0x0]
 	ldrh    r2, [r4, #0x0]
 	cmp     r2, r6
 	bne     branch_20792ba
+
 branch_20792ec: @ 20792ec :thumb
 	ldr     r0, [sp, #0x8]
 	bl      Call_FS_CloseFile
@@ -248,7 +259,7 @@ LoadNPCTrainerTbl_2: @ 20792f8 :thumb
 	mov     r6, r0
 	mov     r7, r1
 
-	mov     r0, #0x3b               @ poketool/trmsg/trtbl.narc
+	mov     r0, #Trtbl_Narc
 	mov     r1, #0x0
 	str     r2, [sp, #0x4]
 	str     r3, [sp, #0x8]
@@ -259,19 +270,20 @@ LoadNPCTrainerTbl_2: @ 20792f8 :thumb
 	str     r0, [sp, #0x0]
 
 	add     r0, sp, #0x10
-	mov     r1, #0x89               @ poketool/trmsg/trtblofs.narc
+	mov     r1, #Trtblofs_Narc
 	mov     r2, #0x0
 	lsl     r3, r6, #1
 	bl      LoadFromNARC_3
 
 	ldr     r1, [sp, #0x8]
-	mov     r0, #0x3b               @ poketool/trmsg/trtbl.narc
+	mov     r0, #Trtbl_Narc
 	bl      LoadFromNARC_8
 	add     r4, sp, #0x10
 	ldrh    r2, [r4, #0x0]
 	str     r0, [sp, #0xc]
 	cmp     r2, r5
 	beq     branch_207936e
+
 branch_2079330: @ 2079330 :thumb
 	add     r0, sp, #0x10
 	add     r0, #0x2
@@ -283,6 +295,7 @@ branch_2079330: @ 2079330 :thumb
 	ldrh    r0, [r4, #0x2]
 	cmp     r0, r6
 	bne     branch_2079362
+
 	ldrh    r0, [r4, #0x4]
 	cmp     r0, r7
 	bne     branch_2079362
@@ -304,6 +317,7 @@ branch_2079362: @ 2079362 :thumb
 	ldrh    r2, [r4, #0x0]
 	cmp     r2, r5
 	bne     branch_2079330
+
 branch_207936e: @ 207936e :thumb
 	ldr     r0, [sp, #0xc]
 	bl      Call_FS_CloseFile
@@ -311,6 +325,7 @@ branch_207936e: @ 207936e :thumb
 	ldrh    r0, [r0, #0x0]
 	cmp     r0, r5
 	bne     branch_2079382
+
 	ldr     r0, [sp, #0x4]
 	bl      Function_20237e8
 branch_2079382: @ 2079382 :thumb
@@ -329,7 +344,7 @@ LoadFromNARC_Trdata: @ 207938c :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r0
 	mov     r0, r1
-	mov     r1, #0x39               @ poketool/trainer/trdata.narc
+	mov     r1, #Trdata_Narc
 	bx      r3
 @ 0x2079396
 
@@ -344,7 +359,7 @@ LoadFromNARC_Trpoke: @ 207939c :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r0
 	mov     r0, r1
-	mov     r1, #0x3a               @ poketool/trainer/trpoke.narc
+	mov     r1, #Trpoke_Narc
 	bx      r3
 @ 0x20793a6
 
@@ -402,12 +417,12 @@ LoadNPCTrainerPokemon: @ 20793b8 :thumb
 	ldr     r1, [sp, #0x60]
 	bl      LoadFromNARC_Trpoke
 
-	mov     r0, #0x34
+	mov     r0, #MainGameData_NPCTrainer_Size
 	mov     r5, r7
 	mul     r5, r0
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]      @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]      @ MainGameData_NPCTrainer_Class + r5*0x34 MainGameData_NPCTrainer_Size
 	bl      Function_20793ac
 	cmp     r0, #0x1
 	bne     branch_207940a
@@ -422,7 +437,7 @@ branch_207940a: @ 207940a :thumb
 branch_207940e: @ 207940e :thumb
 	add     r0, r4, r5
 	add     r0, #0x28
-	ldrb    r0, [r0, #0x0]          @ MainGameData_28 + r5*0x34
+	ldrb    r0, [r0, #0x0]          @ MainGameData_NPCTrainer_Flag + r5*0x34 MainGameData_NPCTrainer_Size
 	cmp     r0, #0x3
 	bhi     branch_20794f2
 
@@ -453,18 +468,18 @@ LoadNPCTrainerPokemonStruct0: @ 207942c :thumb
 	ldr     r7, [sp, #0x60]
 	str     r0, [sp, #0x38]             @ NPCTrainerDataAdress
 branch_2079440: @ 2079440 :thumb
-	ldrh    r0, [r7, #0x4]              @ PkmnData+0x4
+	ldrh    r0, [r7, #TrPkmn0_Species]
 	mov     r1, #0x3f
 	lsl     r1, r1, #10
 	and     r1, r0
 	asr     r2, r1, #10
 	add     r1, sp, #0x64
 	strb    r2, [r1, #0x3]
-	ldr     r1, [pc, #0x290] @ 0x20796e0, (=0x3ff)
-	ldrh    r2, [r7, #0x0]              @ PkmnData+0x0
+	ldr     r1, =0x3ff
+	ldrh    r2, [r7, #TrPkmn0_0]
 	and     r0, r1
 	lsl     r0, r0, #16
-	ldrh    r1, [r7, #0x2]              @ PkmnData+0x2
+	ldrh    r1, [r7, #TrPkmn0_Lvl]
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x34]
 	ldr     r0, [sp, #0x38]             @ NPCTrainerDataAdress
@@ -477,7 +492,7 @@ branch_2079440: @ 2079440 :thumb
 	bl      SetPRNGSeed
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]          @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]          @ MainGameData_NPCTrainer_Class + r5*0x34
 	mov     r6, #0x0
 	cmp     r0, #0x0
 	ble     branch_207948c
@@ -487,7 +502,7 @@ branch_207947a: @ 207947a :thumb
 	str     r0, [sp, #0x58]
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]          @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]          @ MainGameData_NPCTrainer_Class + r5*0x34
 	.hword  0x1c76 @ add r6, r6, #0x1
 	cmp     r6, r0
 	blt     branch_207947a
@@ -497,7 +512,7 @@ branch_207948c: @ 207948c :thumb
 	lsl     r1, r0, #8
 	ldr     r0, [sp, #0x14]
 	add     r6, r1, r0
-	ldrh    r1, [r7, #0x0]              @ PkmnData+0x0
+	ldrh    r1, [r7, #TrPkmn0_0]
 	mov     r0, #0x1f
 	mul     r0, r1
 	mov     r1, #0xff
@@ -512,13 +527,13 @@ branch_207948c: @ 207948c :thumb
 	mov     r0, #0x0
 	str     r0, [sp, #0xc]
 
-	ldrh    r2, [r7, #0x2]              @ PkmnData+0x2
+	ldrh    r2, [r7, #TrPkmn0_Lvl]
 	ldr     r0, [sp, #0x50]
 	ldr     r1, [sp, #0x34]
 	lsr     r3, r3, #24
 	bl      InitPkmnData
 
-	ldrh    r0, [r7, #0x6]              @ PkmnData+0x6
+	ldrh    r0, [r7, #TrPkmn0_PokeballSeal]
 	ldr     r1, [sp, #0x50]
 	ldr     r2, [sp, #0x10]
 	bl      SetPokeballSeal
@@ -534,7 +549,7 @@ branch_207948c: @ 207948c :thumb
 	ldr     r0, [r0, #0x4]          @ PkmnPartyAdress
 	bl      CopyPkmnDataToParty
 	ldr     r0, [sp, #0x5c]
-	add     r7, #0x8
+	add     r7, #TrPkmn0_Size
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [sp, #0x5c]
 	add     r0, r4, r5
@@ -564,19 +579,19 @@ LoadNPCTrainerPokemonStruct1: @ 20794f4 :thumb
 branch_207950a: @ 207950a :thumb
 	ldr     r0, [sp, #0x40]         @ Get adress of PkmnData
 	mov     r1, #0x3f
-	ldrh    r0, [r0, #0x4]          @ PkmnData+0x4 load PkmnSpecies and AltForm
+	ldrh    r0, [r0, #TrPkmn1_Species]    @ load PkmnSpecies and AltForm
 	lsl     r1, r1, #10
 	and     r1, r0
 	asr     r2, r1, #10
 	add     r1, sp, #0x64
 	strb    r2, [r1, #0x2]          @ AlternateForrm
 
-	ldr     r1, [pc, #0x1c4] @ 0x20796e0, (=0x3ff)
+	ldr     r1, =0x3ff
 	and     r0, r1
 	ldr     r1, [sp, #0x40]
 	lsl     r0, r0, #16
-	ldrh    r2, [r1, #0x0]          @ PkmnData+0x0
-	ldrh    r1, [r1, #0x2]          @ PkmnData+0x2
+	ldrh    r2, [r1, #TrPkmn1_0]
+	ldrh    r1, [r1, #TrPkmn1_Lvl]
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x30]         @ Species
 	ldr     r0, [sp, #0x3c]
@@ -590,7 +605,7 @@ branch_207950a: @ 207950a :thumb
 
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	mov     r6, #0x0
 	cmp     r0, #0x0
 	ble     branch_207955a
@@ -600,7 +615,7 @@ branch_2079548: @ 2079548 :thumb
 	mov     r7, r0
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	.hword  0x1c76 @ add r6, r6, #0x1
 	cmp     r6, r0
 	blt     branch_2079548
@@ -610,7 +625,7 @@ branch_207955a: @ 207955a :thumb
 	lsl     r1, r7, #8
 	add     r6, r1, r0
 	ldr     r0, [sp, #0x40]
-	ldrh    r1, [r0, #0x0]          @ PkmnData+0x0  * 31 / 255
+	ldrh    r1, [r0, #TrPkmn1_0]          @ * 31 / 255
 	mov     r0, #0x1f
 	mul     r0, r1
 	mov     r1, #0xff
@@ -628,7 +643,7 @@ branch_207955a: @ 207955a :thumb
 
 	ldr     r2, [sp, #0x40]
 	ldr     r0, [sp, #0x50]
-	ldrh    r2, [r2, #0x2]          @ PkmnData+0x2
+	ldrh    r2, [r2, #TrPkmn1_Lvl]
 	ldr     r1, [sp, #0x30]
 	lsr     r3, r3, #24
 	bl      InitPkmnData
@@ -636,7 +651,7 @@ branch_207955a: @ 207955a :thumb
 	ldr     r7, [sp, #0x40]
 	mov     r6, #0x0
 branch_2079592: @ 2079592 :thumb
-	ldrh    r1, [r7, #0x6]          @ PkmnData+0x6 +0x8 +0xa +0xc
+	ldrh    r1, [r7, #TrPkmn1_Moves]          @ PkmnData+0x6 +0x8 +0xa +0xc
 	lsl     r2, r6, #24
 	ldr     r0, [sp, #0x50]
 	lsr     r2, r2, #24
@@ -648,7 +663,7 @@ branch_2079592: @ 2079592 :thumb
 
 	ldr     r0, [sp, #0x40]
 	ldr     r1, [sp, #0x50]
-	ldrh    r0, [r0, #0xe]          @PkmnData+0xe
+	ldrh    r0, [r0, #TrPkmn1_PokeballSeal]
 	ldr     r2, [sp, #0x10]
 	bl      SetPokeballSeal
 
@@ -663,7 +678,7 @@ branch_2079592: @ 2079592 :thumb
 	ldr     r0, [r0, #0x4]
 	bl      CopyPkmnDataToParty
 	ldr     r0, [sp, #0x40]
-	add     r0, #0x10               @ PkmnData+0x10
+	add     r0, #TrPkmn1_Size
 	str     r0, [sp, #0x40]
 	ldr     r0, [sp, #0x1c]
 	.hword  0x1c40 @ add r0, r0, #0x1
@@ -693,18 +708,18 @@ LoadNPCTrainerPokemonStruct2: @ 20795e2 :thumb
 	ldr     r7, [sp, #0x60]
 	str     r0, [sp, #0x44]
 branch_20795f6: @ 20795f6 :thumb
-	ldrh    r0, [r7, #0x4]              @ PkmnData+0x4
+	ldrh    r0, [r7, #TrPkmn2_Species]
 	mov     r1, #0x3f
 	lsl     r1, r1, #10
 	and     r1, r0
 	asr     r2, r1, #10
 	add     r1, sp, #0x64
 	strb    r2, [r1, #0x1]
-	ldr     r1, [pc, #0xd8] @ 0x20796e0, (=0x3ff)
-	ldrh    r2, [r7, #0x0]              @ PkmnData+0x0
+	ldr     r1, =0x3ff
+	ldrh    r2, [r7, #TrPkmn2_0]
 	and     r0, r1
 	lsl     r0, r0, #16
-	ldrh    r1, [r7, #0x2]              @ PkmnData+0x2
+	ldrh    r1, [r7, #TrPkmn2_Lvl]
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x2c]
 	ldr     r0, [sp, #0x44]
@@ -717,7 +732,7 @@ branch_20795f6: @ 20795f6 :thumb
 	bl      SetPRNGSeed
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	mov     r6, #0x0
 	cmp     r0, #0x0
 	ble     branch_2079642
@@ -726,7 +741,7 @@ branch_2079630: @ 2079630 :thumb
 	str     r0, [sp, #0x18]
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	.hword  0x1c76 @ add r6, r6, #0x1
 	cmp     r6, r0
 	blt     branch_2079630
@@ -735,7 +750,7 @@ branch_2079642: @ 2079642 :thumb
 	lsl     r1, r0, #8
 	ldr     r0, [sp, #0x14]
 	add     r6, r1, r0
-	ldrh    r1, [r7, #0x0]              @ PkmnData+0x0
+	ldrh    r1, [r7, #TrPkmn2_0]
 	mov     r0, #0x1f
 	mul     r0, r1
 	mov     r1, #0xff
@@ -749,7 +764,7 @@ branch_2079642: @ 2079642 :thumb
 	str     r0, [sp, #0x8]
 	mov     r0, #0x0
 	str     r0, [sp, #0xc]
-	ldrh    r2, [r7, #0x2]              @ PkmnData+0x2
+	ldrh    r2, [r7, #TrPkmn2_Lvl]
 
 	ldr     r0, [sp, #0x50]
 	ldr     r1, [sp, #0x2c]
@@ -758,10 +773,10 @@ branch_2079642: @ 2079642 :thumb
 
 	ldr     r0, [sp, #0x50]
 	mov     r1, #PKMNDATA_ITEM
-	add     r2, r7, #0x6                @ PkmnData+0x6
+	add     r2, r7, #TrPkmn2_Item
 	bl      SetPkmnData
 
-	ldrh    r0, [r7, #0x8]              @ PkmnData+0x8
+	ldrh    r0, [r7, #TrPkmn2_PokeballSeal]
 	ldr     r1, [sp, #0x50]
 	ldr     r2, [sp, #0x10]
 	bl      SetPokeballSeal
@@ -777,7 +792,7 @@ branch_2079642: @ 2079642 :thumb
 	ldr     r0, [r0, #0x4]
 	bl      CopyPkmnDataToParty
 	ldr     r0, [sp, #0x20]
-	add     r7, #0xa                    @ PkmnData+0xa
+	add     r7, #TrPkmn2_Size
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r0, [sp, #0x20]
 	add     r0, r4, r5
@@ -807,26 +822,26 @@ LoadNPCTrainerPokemonStruct3: @ 20796b4 :thumb
 branch_20796ca: @ 20796ca :thumb
 	ldr     r0, [sp, #0x4c]
 	mov     r1, #0x3f
-	ldrh    r0, [r0, #0x4]              @ PkmnData+0x4
+	ldrh    r0, [r0, #TrPkmn3_Species]
 	lsl     r1, r1, #10
 	and     r1, r0
 	asr     r2, r1, #10
 	add     r1, sp, #0x64
 	strb    r2, [r1, #0x0]
-	ldr     r1, [pc, #0x4] @ 0x20796e0, (=0x3ff)
+	ldr     r1, =0x3ff
 	b       branch_20796e4
 @ 0x20796de
 
 .align 2
-.word 0x3ff @ 0x20796e0
+.pool
 
 .thumb
 branch_20796e4: @ 20796e4 :thumb
 	and     r0, r1
 	ldr     r1, [sp, #0x4c]
 	lsl     r0, r0, #16
-	ldrh    r2, [r1, #0x0]              @ PkmnData+0x0
-	ldrh    r1, [r1, #0x2]              @ PkmnData+0x2
+	ldrh    r2, [r1, #TrPkmn3_0]
+	ldrh    r1, [r1, #TrPkmn3_Lvl]
 	lsr     r0, r0, #16
 	str     r0, [sp, #0x28]
 	ldr     r0, [sp, #0x48]
@@ -839,7 +854,7 @@ branch_20796e4: @ 20796e4 :thumb
 	bl      SetPRNGSeed
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	mov     r6, #0x0
 	cmp     r0, #0x0
 	ble     branch_2079722
@@ -849,7 +864,7 @@ branch_2079710: @ 2079710 :thumb
 	mov     r7, r0
 	add     r0, r4, r5
 	add     r0, #0x29
-	ldrb    r0, [r0, #0x0]              @ MainGameData_29 + r5*0x34
+	ldrb    r0, [r0, #0x0]              @ MainGameData_NPCTrainer_Class + r5*0x34
 	.hword  0x1c76 @ add r6, r6, #0x1
 	cmp     r6, r0
 	blt     branch_2079710
@@ -859,7 +874,7 @@ branch_2079722: @ 2079722 :thumb
 	lsl     r1, r7, #8
 	add     r6, r1, r0
 	ldr     r0, [sp, #0x4c]
-	ldrh    r1, [r0, #0x0]              @ PkmnData+0x0
+	ldrh    r1, [r0, #TrPkmn3_0]
 	mov     r0, #0x1f
 	mul     r0, r1
 	mov     r1, #0xff
@@ -876,7 +891,7 @@ branch_2079722: @ 2079722 :thumb
 
 	ldr     r2, [sp, #0x4c]
 	ldr     r0, [sp, #0x50]
-	ldrh    r2, [r2, #0x2]              @ PkmnData+0x2
+	ldrh    r2, [r2, #TrPkmn3_Lvl]
 	ldr     r1, [sp, #0x28]
 	lsr     r3, r3, #24
 	bl      InitPkmnData
@@ -884,13 +899,13 @@ branch_2079722: @ 2079722 :thumb
 	ldr     r2, [sp, #0x4c]
 	ldr     r0, [sp, #0x50]
 	mov     r1, #PKMNDATA_ITEM
-	.hword  0x1d92 @ add r2, r2, #0x6   @ PkmnData+0x6
+	.hword  0x1d92 @ add r2, r2, #TrPkmn3_Item
 	bl      SetPkmnData
 
 	ldr     r7, [sp, #0x4c]
 	mov     r6, #0x0
 branch_2079766: @ 2079766 :thumb
-	ldrh    r1, [r7, #0x8]              @ PkmnData+0x8 +0xa +0xc +0xe
+	ldrh    r1, [r7, #TrPkmn3_Moves]              @ PkmnData+0x8 +0xa +0xc +0xe
 	lsl     r2, r6, #24
 	ldr     r0, [sp, #0x50]
 	lsr     r2, r2, #24
@@ -902,7 +917,7 @@ branch_2079766: @ 2079766 :thumb
 
 	ldr     r0, [sp, #0x4c]
 	ldr     r1, [sp, #0x50]
-	ldrh    r0, [r0, #0x10]             @ PkmnData+0x10
+	ldrh    r0, [r0, #TrPkmn3_PokeballSeal]
 	ldr     r2, [sp, #0x10]
 	bl      SetPokeballSeal
 
@@ -916,7 +931,7 @@ branch_2079766: @ 2079766 :thumb
 	ldr     r0, [r0, #0x4]
 	bl      CopyPkmnDataToParty
 	ldr     r0, [sp, #0x4c]
-	add     r0, #0x12                   @ PkmnData+0x12
+	add     r0, #TrPkmn3_Size
 	str     r0, [sp, #0x4c]
 	ldr     r0, [sp, #0x24]
 	.hword  0x1c40 @ add r0, r0, #0x1

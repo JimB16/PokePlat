@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram93, "ax"
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_93_21d0d80
+Function_93_21d0d80: @ 21d0d80 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x18
 	mov     r2, #0x2
@@ -107,10 +111,7 @@ branch_21d0df8: @ 21d0df8 :thumb
 	pop     {r3-r7,pc}
 @ 0x21d0e62
 
-
 .align 2
-
-
 .word 0x21d14bc @ 0x21d0e64
 .word 0x29aec1 @ 0x21d0e68
 .word 0x5c1 @ 0x21d0e6c
@@ -118,7 +119,8 @@ branch_21d0df8: @ 21d0df8 :thumb
 
 
 .thumb
-Function_21d0e70: @ 21d0e70 :thumb
+.globl Function_93_21d0e70
+Function_93_21d0e70: @ 21d0e70 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x3c
 	ldr     r6, [pc, #0xd4] @ 0x21d0f4c, (=0x21d14cc)
@@ -251,7 +253,8 @@ branch_21d0f20: @ 21d0f20 :thumb
 
 
 .thumb
-Function_21d0f58: @ 21d0f58 :thumb
+.globl Function_93_21d0f58
+Function_93_21d0f58: @ 21d0f58 :thumb
 	push    {r3-r7,lr}
 	str     r0, [sp, #0x0]
 	bl      LoadOverlayData1c
@@ -259,7 +262,6 @@ Function_21d0f58: @ 21d0f58 :thumb
 	mov     r7, r6
 	mov     r4, #0x0
 	add     r7, #0x70
-.thumb
 branch_21d0f68: @ 21d0f68 :thumb
 	lsl     r0, r4, #2
 	add     r5, r6, r0
@@ -346,18 +348,22 @@ branch_21d1016: @ 21d1016 :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d1016
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x21d1028
 
 .word 0x21d14f0 @ 0x21d1028
+
+
+
 .thumb
 Function_21d102c: @ 21d102c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
-	mov     r0, #0x78
+
+	mov     r0, #ShipDemo_Narc
 	mov     r1, #0x48
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x0]
@@ -376,7 +382,7 @@ Function_21d102c: @ 21d102c :thumb
 	ldr     r1, [pc, #0xc0] @ 0x21d1118, (=0x21d15a0)
 	mov     r2, #0x48
 	ldrh    r1, [r1, r3]
-	bl      Function_2006cb8
+	bl      Function_2006cb8_LoadFileInMemory
 	mov     r1, r5
 	mov     r2, r5
 	str     r0, [r5, #0x5c]
@@ -385,7 +391,7 @@ Function_21d102c: @ 21d102c :thumb
 	add     r2, #0x5c
 	bl      Function_201ca3c
 	ldr     r0, [r5, #0x5c]
-	blx     Function_20b3c1c
+	blx     Function_20b3c1c_GetTexOffsets
 	str     r0, [sp, #0x4]
 	ldr     r0, [r5, #0x58]
 	mov     r1, #0x0
@@ -427,7 +433,7 @@ branch_21d10ae: @ 21d10ae :thumb
 	ldrh    r1, [r1, #0x2]
 	ldr     r0, [sp, #0x0]
 	mov     r2, #0x48
-	bl      Function_2006cb8
+	bl      Function_2006cb8_LoadFileInMemory
 	str     r0, [r4, #0x60]
 	mov     r1, #0x0
 	blx     Function_20b3c5c
@@ -462,8 +468,12 @@ branch_21d10ae: @ 21d10ae :thumb
 @ 0x21d1118
 
 .word 0x21d15a0 @ 0x21d1118
+
+
+
 .thumb
-Function_21d111c: @ 21d111c :thumb
+.globl Function_93_21d111c
+Function_93_21d111c: @ 21d111c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x18
 	mov     r2, #0x2
@@ -566,15 +576,16 @@ branch_21d1194: @ 21d1194 :thumb
 	pop     {r3-r7,pc}
 @ 0x21d11fe
 
-
 .align 2
-
-
 .word 0x21d1538 @ 0x21d1200
 .word 0x29aec1 @ 0x21d1204
 .word 0x5c1 @ 0x21d1208
+
+
+
 .thumb
-Function_21d120c: @ 21d120c :thumb
+.globl Function_93_21d120c
+Function_93_21d120c: @ 21d120c :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x3c
 	ldr     r6, [pc, #0xd0] @ 0x21d12e4, (=0x21d1548)
@@ -582,7 +593,6 @@ Function_21d120c: @ 21d120c :thumb
 	mov     r5, r1
 	add     r4, sp, #0x18
 	mov     r3, #0x4
-.thumb
 branch_21d121a: @ 21d121a :thumb
 	ldmia   r6!, {r0,r1}
 	stmia   r4!, {r0,r1}
@@ -698,15 +708,16 @@ branch_21d12b6: @ 21d12b6 :thumb
 	pop     {r3-r6,pc}
 @ 0x21d12e2
 
-
 .align 2
-
-
 .word 0x21d1548 @ 0x21d12e4
 .word 0x21d1518 @ 0x21d12e8
 .word 0x6dc @ 0x21d12ec
+
+
+
 .thumb
-Function_21d12f0: @ 21d12f0 :thumb
+.globl Function_93_21d12f0
+Function_93_21d12f0: @ 21d12f0 :thumb
 	push    {r3-r7,lr}
 	str     r0, [sp, #0x0]
 	bl      LoadOverlayData1c
@@ -714,7 +725,6 @@ Function_21d12f0: @ 21d12f0 :thumb
 	mov     r7, r6
 	mov     r4, #0x0
 	add     r7, #0x6c
-.thumb
 branch_21d1300: @ 21d1300 :thumb
 	lsl     r0, r4, #2
 	add     r5, r6, r0
@@ -799,18 +809,22 @@ branch_21d13aa: @ 21d13aa :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d13aa
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x21d13bc
 
 .word 0x21d156c @ 0x21d13bc
+
+
+
 .thumb
 Function_21d13c0: @ 21d13c0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
-	mov     r0, #0x9c
+
+	mov     r0, #ShipDemoPl_Narc
 	mov     r1, #0x48
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x0]
@@ -827,7 +841,7 @@ Function_21d13c0: @ 21d13c0 :thumb
 	ldr     r1, [pc, #0xb0] @ 0x21d1498, (=0x21d15c8)
 	ldrh    r1, [r1, r2]
 	mov     r2, #0x48
-	bl      Function_2006cb8
+	bl      Function_2006cb8_LoadFileInMemory
 	mov     r1, r5
 	mov     r2, r5
 	str     r0, [r5, #0x5c]
@@ -836,7 +850,7 @@ Function_21d13c0: @ 21d13c0 :thumb
 	add     r2, #0x5c
 	bl      Function_201ca3c
 	ldr     r0, [r5, #0x5c]
-	blx     Function_20b3c1c
+	blx     Function_20b3c1c_GetTexOffsets
 	str     r0, [sp, #0x4]
 	ldr     r0, [r5, #0x58]
 	mov     r1, #0x0
@@ -876,7 +890,7 @@ branch_21d143e: @ 21d143e :thumb
 	ldrh    r1, [r1, #0x2]
 	ldr     r0, [sp, #0x0]
 	mov     r2, #0x48
-	bl      Function_2006cb8
+	bl      Function_2006cb8_LoadFileInMemory
 	str     r0, [r6, #0x60]
 	mov     r1, #0x0
 	blx     Function_20b3c5c

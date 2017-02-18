@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram85, "ax"
 
 
 .thumb
-Function_2241440: @ 2241440 :thumb
+.globl Function_85_2241440
+Function_85_2241440: @ 2241440 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	mov     r0, #0x0
@@ -63,7 +67,8 @@ Function_2241440: @ 2241440 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x24
 	bl      Function_208c120
-	mov     r0, #0x35
+
+	mov     r0, #NtagGra_Narc
 	mov     r1, #0x24
 	bl      LoadFromNARC_8
 	mov     r4, r0
@@ -109,8 +114,12 @@ Function_2241440: @ 2241440 :thumb
 .word 0xffffe0ff @ 0x2241540
 .word 0x4001000 @ 0x2241544
 .word 0x22415f5 @ 0x2241548
+
+
+
 .thumb
-Function_224154c: @ 224154c :thumb
+.globl Function_85_224154c
+Function_85_224154c: @ 224154c :thumb
 	push    {r3-r5,lr}
 	mov     r4, r1
 	bl      LoadOverlayData1c
@@ -171,10 +180,9 @@ branch_2241594: @ 2241594 :thumb
 
 
 .align 2, 0
-
-
 .thumb
-Function_22415a0: @ 22415a0 :thumb
+.globl Function_85_22415a0
+Function_85_22415a0: @ 22415a0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      LoadOverlayData1c
@@ -245,7 +253,7 @@ branch_224161e: @ 224161e :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_224161e
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x2241630
@@ -264,7 +272,7 @@ Function_2241634: @ 2241634 :thumb
 	ldmia   r5!, {r0,r1}
 	stmia   r3!, {r0,r1}
 	mov     r0, r2
-	bl      Function_2018368
+	bl      SetGraphicsModes
 	bl      Function_2241f5c
 	ldr     r5, [pc, #0x88] @ 0x22416dc, (=0x2242894)
 	add     r3, sp, #0x38
@@ -442,7 +450,7 @@ branch_2241788: @ 2241788 :thumb
 	mov     r0, #0x0
 	lsl     r1, r1, #4
 	mov     r2, #0x24
-	bl      Function_2002e7c
+	bl      LoadFromNARC_PlFont1
 	add     sp, #0x10
 	pop     {r3-r5,pc}
 @ 0x22417c8
@@ -470,7 +478,7 @@ Function_22417e4: @ 22417e4 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, #0x24
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r1, r4
 	add     r1, #0xc4
 	str     r0, [r1, #0x0]
@@ -559,7 +567,7 @@ Function_2241878: @ 2241878 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, r2
 	mov     r6, r3
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0x10]
 	mov     r0, #0x0
 	ldr     r1, [sp, #0x10]
@@ -582,7 +590,7 @@ Function_2241878: @ 2241878 :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	ldr     r0, [sp, #0x10]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     r0, r5, r4
 	bl      Function_201a9a4
 	add     sp, #0x14
@@ -595,7 +603,7 @@ Function_22418cc: @ 22418cc :thumb
 	mov     r4, r0
 	add     r0, r4, #0x4
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r1, #0x0
 	ldr     r3, [pc, #0xc] @ 0x22418e8, (=0x10204)
 	mov     r0, r4
@@ -615,7 +623,7 @@ Function_22418ec: @ 22418ec :thumb
 	mov     r4, r0
 	add     r0, #0x24
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r3, [pc, #0xc] @ 0x2241908, (=0xf0200)
 	mov     r0, r4
 	mov     r1, #0x2
@@ -635,7 +643,7 @@ Function_224190c: @ 224190c :thumb
 	mov     r4, r0
 	add     r0, #0x34
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r3, [pc, #0xc] @ 0x2241928, (=0xf0200)
 	mov     r0, r4
 	mov     r1, #0x3
@@ -655,7 +663,7 @@ Function_224192c: @ 224192c :thumb
 	mov     r4, r0
 	add     r0, #0x44
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r3, [pc, #0xc] @ 0x2241948, (=0xf0200)
 	mov     r0, r4
 	mov     r1, #0x4
@@ -675,7 +683,7 @@ Function_224194c: @ 224194c :thumb
 	mov     r4, r0
 	add     r0, #0x54
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r3, [pc, #0xc] @ 0x2241968, (=0xf0200)
 	mov     r0, r4
 	mov     r1, #0x5
@@ -695,7 +703,7 @@ Function_224196c: @ 224196c :thumb
 	mov     r4, r0
 	add     r0, #0x64
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r3, [pc, #0xc] @ 0x2241988, (=0xf0200)
 	mov     r0, r4
 	mov     r1, #0x6
@@ -718,7 +726,7 @@ Function_224198c: @ 224198c :thumb
 	add     r4, #0x14
 	mov     r0, r4
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x5
 	str     r0, [sp, #0x0]
 	mov     r0, r5
@@ -732,7 +740,7 @@ Function_224198c: @ 224198c :thumb
 	add     r0, #0xc4
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x6
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r7, r0
 	mov     r0, #0x6
 	mov     r1, #0x24
@@ -770,9 +778,9 @@ Function_224198c: @ 224198c :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -792,7 +800,7 @@ Function_224198c: @ 224198c :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r5
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r4
 	bl      Function_201a9a4
 	add     sp, #0x10
@@ -813,7 +821,7 @@ Function_2241a58: @ 2241a58 :thumb
 	add     r5, #0xb4
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
@@ -833,7 +841,7 @@ Function_2241a58: @ 2241a58 :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	bl      Function_201a9a4
 	add     sp, #0x10
@@ -854,11 +862,11 @@ Function_2241aa8: @ 2241aa8 :thumb
 	add     r5, #0x94
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r4, #0xc4
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0xa
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r1, #0x0
 	mov     r4, r0
 	str     r1, [sp, #0x0]
@@ -872,7 +880,7 @@ Function_2241aa8: @ 2241aa8 :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	bl      Function_201a9a4
 	add     sp, #0x10
@@ -893,7 +901,7 @@ Function_2241af4: @ 2241af4 :thumb
 	add     r5, #0xa4
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
@@ -907,7 +915,7 @@ branch_2241b18: @ 2241b18 :thumb
 	add     r4, #0xc4
 	ldr     r0, [r4, #0x0]
 	add     r1, #0xb
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r1, #0x0
 	mov     r4, r0
 	str     r1, [sp, #0x0]
@@ -921,7 +929,7 @@ branch_2241b18: @ 2241b18 :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	bl      Function_201a9a4
 	add     sp, #0x10
@@ -938,11 +946,11 @@ Function_2241b50: @ 2241b50 :thumb
 	add     r5, #0x74
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r4, #0xc4
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x8
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r1, #0x0
 	mov     r4, r0
 	str     r1, [sp, #0x0]
@@ -956,7 +964,7 @@ Function_2241b50: @ 2241b50 :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	bl      Function_201a9a4
 	add     sp, #0x10
@@ -977,7 +985,7 @@ Function_2241b9c: @ 2241b9c :thumb
 	add     r6, #0x84
 	mov     r0, r6
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
 	ldr     r0, [r5, r0]
@@ -997,7 +1005,7 @@ Function_2241b9c: @ 2241b9c :thumb
 	add     r0, #0xc4
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x9
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0x10]
 	mov     r0, #0x20
 	mov     r1, #0x24
@@ -1046,9 +1054,9 @@ Function_2241b9c: @ 2241b9c :thumb
 	str     r1, [sp, #0xc]
 	bl      Function_201d78c
 	ldr     r0, [sp, #0x10]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
 	bl      Function_201a9a4
 	add     sp, #0x14
@@ -1388,18 +1396,18 @@ branch_2241e42: @ 2241e42 :thumb
 	sub     r1, r0, r2
 	lsl     r0, r2, #8
 	orr     r1, r0
-	ldr     r0, [pc, #0xc] @ 0x2241e5c, (=0x4000052)
+	ldr     r0, [pc, #0xc] @ 0x2241e5c, (=REG_BLDALPHA)
 	strh    r1, [r0, #0x0]
 	mov     r0, r4
 	pop     {r3-r5,pc}
 @ 0x2241e56
 
-
 .align 2
-
-
 .word 0x201 @ 0x2241e58
-.word 0x4000052 @ 0x2241e5c
+.word REG_BLDALPHA @ 0x2241e5c
+
+
+
 .thumb
 Function_2241e60: @ 2241e60 :thumb
 	push    {r3-r5,lr}
@@ -1532,7 +1540,8 @@ Function_2241f0c: @ 2241f0c :thumb
 	str     r0, [r4, r1]
 	mov     r0, r4
 	bl      Function_2241cd0
-	mov     r0, #0x35
+
+	mov     r0, #NtagGra_Narc
 	mov     r1, #0x24
 	bl      LoadFromNARC_8
 	mov     r5, r0
@@ -1592,7 +1601,7 @@ Function_2241f5c: @ 2241f5c :thumb
 	mov     r3, #0x3f
 	str     r0, [sp, #0x0]
 	blx     G3X_SetClearColor
-	ldr     r1, [pc, #0x2c] @ 0x2241fe4, (=0x4000540)
+	ldr     r1, [pc, #0x2c] @ 0x2241fe4, (=GFX_FLUSH)
 	mov     r0, #0x0
 	str     r0, [r1, #0x0]
 	ldr     r0, [pc, #0x2c] @ 0x2241fe8, (=0xbfff0000)
@@ -1613,7 +1622,7 @@ Function_2241f5c: @ 2241f5c :thumb
 .word 0xffffcffd @ 0x2241fd8
 .word 0xcffb @ 0x2241fdc
 .word 0x7fff @ 0x2241fe0
-.word 0x4000540 @ 0x2241fe4
+.word GFX_FLUSH @ 0x2241fe4
 .word 0xbfff0000 @ 0x2241fe8
 .word 0x4000008 @ 0x2241fec
 .thumb
@@ -1636,23 +1645,23 @@ Function_2241ff0: @ 2241ff0 :thumb
 	bl      Function_22420a8
 	mov     r0, r4
 	bl      Function_2242144
-	ldr     r0, [pc, #0x8] @ 0x2242028, (=0x4000540)
+	ldr     r0, [pc, #0x8] @ 0x2242028, (=GFX_FLUSH)
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
 	pop     {r4,pc}
 @ 0x2242024
 
 .word 0x4000440 @ 0x2242024
-.word 0x4000540 @ 0x2242028
+.word GFX_FLUSH @ 0x2242028
 .thumb
 Function_224202c: @ 224202c :thumb
-	ldr     r3, [pc, #0x4] @ 0x2242034, (=0x20203b9)
+	ldr     r3, [pc, #0x4] @ 0x2242034, (=Call_free5+1)
 	add     r0, #0xd0
 	ldr     r0, [r0, #0x0]
 	bx      r3
 @ 0x2242034
 
-.word 0x20203b9 @ 0x2242034
+.word Call_free5+1 @ 0x2242034
 
 
 

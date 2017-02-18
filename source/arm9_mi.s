@@ -799,8 +799,7 @@ r0 = ClearValue
 r1 = StartAdress
 r2 = Length
 */
-.arm
-.globl MIi_CpuClearFast
+arm_func_start MIi_CpuClearFast
 MIi_CpuClearFast: @ 20c4bb8 :arm
 	stmfd   sp!, {r4-r9}
 
@@ -835,11 +834,10 @@ branch_20c4c08: @ 20c4c08 :arm
 
 	ldmfd   sp!, {r4-r9}
 	bx      lr
-@ 0x20c4c14
+arm_func_end MIi_CpuClearFast
 
 
-.arm
-.globl MIi_CpuCopyFast
+arm_func_start MIi_CpuCopyFast
 MIi_CpuCopyFast: @ 20c4c14 :arm
 	stmfd   sp!, {r4-r10}
 	add     r10, r1, r2
@@ -877,7 +875,7 @@ branch_20c4c60: @ 20c4c60 :arm
 	blt     branch_20c4c44
 	ldmfd   sp!, {r4-r10}
 	bx      lr
-@ 0x20c4c6c
+arm_func_end MIi_CpuCopyFast
 
 
 .arm

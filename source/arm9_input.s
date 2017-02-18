@@ -9,7 +9,7 @@ InitInputVariables: @ 2017af4 :thumb
 	str     r2, [r0, #RAM_21bf67c_38_KeyOldPressed]
 	str     r2, [r0, #RAM_21bf67c_3c_KeyNewPressed]
 	str     r2, [r0, #RAM_21bf67c_40_KeyNewPressed]
-	str     r2, [r0, #RAM_21bf67c_44]
+	str     r2, [r0, #RAM_21bf67c_44_Key]
 	str     r2, [r0, #RAM_21bf67c_48_KeyNewPressed2]
 	str     r2, [r0, #RAM_21bf67c_4c]
 	str     r2, [r0, #RAM_21bf67c_50_InputDelayCounter]
@@ -117,7 +117,7 @@ UpdateInput: @ 2017b9c :thumb
 	ldr     r0, =RAM_21bf67c
 	mov     r1, #0x0
 	str     r1, [r0, #RAM_21bf67c_48_KeyNewPressed2]
-	str     r1, [r0, #RAM_21bf67c_44]
+	str     r1, [r0, #RAM_21bf67c_44_Key]
 	str     r1, [r0, #RAM_21bf67c_4c]
 
 	ldr     r0, =RAM_21bf6bc
@@ -173,7 +173,7 @@ branch_2017c00: @ 2017c00 :thumb
 	ldr     r2, [r1, #RAM_21bf67c_3c_KeyNewPressed]
 	str     r2, [r1, #RAM_21bf67c_48_KeyNewPressed2]
 
-	str     r0, [r1, #RAM_21bf67c_44]
+	str     r0, [r1, #RAM_21bf67c_44_Key]
 
 	ldr     r0, [r1, #RAM_21bf67c_40_KeyNewPressed]
 	str     r0, [r1, #RAM_21bf67c_4c]
@@ -293,13 +293,13 @@ branch_2017cce: @ 2017cce :thumb
 
 	ldr     r1, =RAM_21bf67c
 	mov     r0, #0x8
-	ldr     r2, [r1, #RAM_21bf67c_44]
+	ldr     r2, [r1, #RAM_21bf67c_44_Key]
 	mov     r3, r2
 	tst     r3, r0
 	beq     branch_2017ce0
 	lsl     r0, r0, #7
 	orr     r0, r2
-	str     r0, [r1, #RAM_21bf67c_44]
+	str     r0, [r1, #RAM_21bf67c_44_Key]
 branch_2017ce0: @ 2017ce0 :thumb
 
 	ldr     r1, =RAM_21bf67c
@@ -341,7 +341,7 @@ branch_2017d14: @ 2017d14 :thumb
 	and     r0, r3
 	orr     r0, r1
 	str     r0, [r2, #RAM_21bf67c_48_KeyNewPressed2]
-	ldr     r3, [r2, #RAM_21bf67c_44]
+	ldr     r3, [r2, #RAM_21bf67c_44_Key]
 	mov     r1, #0x1
 	lsl     r1, r1, #10
 	mov     r2, r3
@@ -363,10 +363,10 @@ branch_2017d40: @ 2017d40 :thumb
 
 	ldr     r2, =RAM_21bf67c
 	ldr     r1, =0xf3ff
-	ldr     r3, [r2, #RAM_21bf67c_44]
+	ldr     r3, [r2, #RAM_21bf67c_44_Key]
 	and     r1, r3
 	orr     r0, r1
-	str     r0, [r2, #RAM_21bf67c_44]
+	str     r0, [r2, #RAM_21bf67c_44_Key]
 	ldr     r3, [r2, #RAM_21bf67c_4c]
 	mov     r1, #0x1
 	lsl     r1, r1, #10
@@ -408,13 +408,13 @@ branch_2017d8a: @ 2017d8a :thumb
 
 	ldr     r1, =RAM_21bf67c
 	mov     r0, #0x2
-	ldr     r2, [r1, #RAM_21bf67c_44]
+	ldr     r2, [r1, #RAM_21bf67c_44_Key]
 	lsl     r0, r0, #8
 	tst     r0, r2
 	beq     branch_2017d9c
 	mov     r0, #0x1
 	orr     r0, r2
-	str     r0, [r1, #RAM_21bf67c_44]
+	str     r0, [r1, #RAM_21bf67c_44_Key]
 branch_2017d9c: @ 2017d9c :thumb
 
 	ldr     r1, =RAM_21bf67c
@@ -433,9 +433,9 @@ branch_2017dae: @ 2017dae :thumb
 	ldr     r2, [r1, #RAM_21bf67c_48_KeyNewPressed2]
 	and     r2, r0
 	str     r2, [r1, #RAM_21bf67c_48_KeyNewPressed2]
-	ldr     r2, [r1, #RAM_21bf67c_44]
+	ldr     r2, [r1, #RAM_21bf67c_44_Key]
 	and     r2, r0
-	str     r2, [r1, #RAM_21bf67c_44]
+	str     r2, [r1, #RAM_21bf67c_44_Key]
 	ldr     r2, [r1, #RAM_21bf67c_4c]
 	and     r0, r2
 	str     r0, [r1, #RAM_21bf67c_4c]

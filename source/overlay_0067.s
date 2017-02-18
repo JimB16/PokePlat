@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram67, "ax"
 
@@ -1034,12 +1037,12 @@ Function_225ce30: @ 225ce30 :thumb
 	ldr     r0, [pc, #0x268] @ 0x225d0a8, (=0x4001050)
 	strh    r1, [r0, #0x0]
 	ldr     r0, [pc, #0x268] @ 0x225d0ac, (=0x225d410)
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      Function_201975c
 	ldr     r0, [pc, #0x25c] @ 0x225d0b0, (=0x225d400)
-	bl      Function_2018368
+	bl      SetGraphicsModes
 	mov     r0, r6
 	bl      Function_2018340
 	ldr     r1, [sp, #0x10]
@@ -1085,12 +1088,12 @@ branch_225ce66: @ 225ce66 :thumb
 	mov     r0, #0x0
 	lsl     r1, r1, #6
 	mov     r2, r6
-	bl      Function_2002e7c
+	bl      LoadFromNARC_PlFont1
 	mov     r1, #0x16
 	mov     r0, #0x0
 	lsl     r1, r1, #4
 	mov     r2, r6
-	bl      Function_2002e98
+	bl      LoadFromNARC_PlFont2
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	ldr     r0, [sp, #0x10]
@@ -1108,24 +1111,26 @@ branch_225ce66: @ 225ce66 :thumb
 	mov     r2, r1
 	mov     r3, #0xd
 	bl      Function_200dd0c
+
 	mov     r0, #0x16
 	lsl     r0, r0, #4
 	str     r0, [sp, #0x0]
 	mov     r2, #0x0
-	mov     r0, #0x5c
+	mov     r0, #Wifip2pmatch_Narc
 	mov     r1, #0x3
 	mov     r3, r2
 	str     r6, [sp, #0x4]
-	bl      Function_2006e84
+	bl      Call_LoadFromNARC_RLCN
+
 	mov     r0, #0x16
 	lsl     r0, r0, #4
 	str     r0, [sp, #0x0]
-	mov     r0, #0x5c
+	mov     r0, #Wifip2pmatch_Narc
 	mov     r1, #0x3
 	mov     r2, #0x4
 	mov     r3, #0x0
 	str     r6, [sp, #0x4]
-	bl      Function_2006e84
+	bl      Call_LoadFromNARC_RLCN
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	str     r3, [sp, #0x4]
@@ -1135,7 +1140,7 @@ branch_225ce66: @ 225ce66 :thumb
 	ldr     r2, [r2, #0xc]
 	mov     r0, #0x5c
 	mov     r1, #0x2
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1146,7 +1151,7 @@ branch_225ce66: @ 225ce66 :thumb
 	mov     r0, #0x5c
 	mov     r1, #0xa
 	mov     r3, #0x4
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	str     r3, [sp, #0x4]
@@ -1156,7 +1161,7 @@ branch_225ce66: @ 225ce66 :thumb
 	ldr     r2, [r2, #0xc]
 	mov     r0, #0x5c
 	mov     r1, #0x5
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1167,11 +1172,12 @@ branch_225ce66: @ 225ce66 :thumb
 	mov     r0, #0x5c
 	mov     r1, #0xb
 	mov     r3, #0x4
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
-	mov     r0, #0x5c
+
+	mov     r0, #Wifip2pmatch_Narc
 	mov     r1, r6
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x2c]
@@ -1438,16 +1444,16 @@ branch_225d15c: @ 225d15c :thumb
 .word 0x225d3f4 @ 0x225d178
 .thumb
 Function_225d17c: @ 225d17c :thumb
-	ldr     r3, [pc, #0x4] @ 0x225d184, (=0x201c2b9)
+	ldr     r3, [pc, #0x4] @ 0x225d184, (=Function_201c2b8+1)
 	ldr     r0, [r0, #0xc]
 	bx      r3
 @ 0x225d182
 
-
 .align 2
+.word Function_201c2b8+1 @ 0x225d184
 
 
-.word 0x201c2b9 @ 0x225d184
+
 .thumb
 Function_225d188: @ 225d188 :thumb
 	push    {r3-r7,lr}
@@ -1464,7 +1470,7 @@ Function_225d188: @ 225d188 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, r4
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r5, #0x4]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
@@ -1528,17 +1534,17 @@ Function_225d210: @ 225d210 :thumb
 	ldr     r0, [r5, #0x2c]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_225d230: @ 225d230 :thumb
 	mov     r0, r5
 	add     r0, #0x8
 	mov     r1, #0xf
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r0, [r5, #0x4]
 	ldr     r2, [r5, #0x1c]
 	mov     r1, r4
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [r5, #0x18]
 	ldr     r2, [r5, #0x1c]
@@ -1552,7 +1558,7 @@ branch_225d230: @ 225d230 :thumb
 	ldr     r2, [r5, #0x18]
 	add     r0, #0x8
 	mov     r1, #0x1
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
 	ldr     r0, [r5, #0x20]
 	cmp     r0, #0x0
 	bne     branch_225d27a
@@ -1595,7 +1601,7 @@ Function_225d294: @ 225d294 :thumb
 	ldr     r0, [r4, #0x2c]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_225d2b0: @ 225d2b0 :thumb
 	ldr     r0, [r4, #0x20]
@@ -1696,7 +1702,7 @@ Function_225d330: @ 225d330 :thumb
 	ldr     r0, [r4, #0x2c]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_225d34c: @ 225d34c :thumb
 	ldr     r0, [r4, #0x24]
@@ -1710,9 +1716,9 @@ branch_225d358: @ 225d358 :thumb
 	add     r0, #0x8
 	bl      Function_201a8fc
 	ldr     r0, [r4, #0x1c]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	ldr     r0, [r4, #0x18]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	ldr     r0, [r4, #0x4]
 	bl      Function_200b190
 	ldr     r0, [r4, #0x0]
@@ -1732,11 +1738,11 @@ Function_225d37c: @ 225d37c :thumb
 	mov     r5, r1
 	add     r0, #0x8
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r0, [r4, #0x4]
 	ldr     r2, [r4, #0x1c]
 	mov     r1, r5
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	ldr     r0, [r4, #0x0]
 	ldr     r1, [r4, #0x18]
 	ldr     r2, [r4, #0x1c]

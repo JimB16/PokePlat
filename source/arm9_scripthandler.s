@@ -80,9 +80,13 @@ EndScripthandling: @ 203e76c :thumb
 thumb_func_end EndScripthandling
 
 
+/* Input:
+r0: ScriptHandler
+r1: UnknownStruct01
+*/
 .thumb
 Function_203e774: @ 203e774 :thumb
-	str     r1, [r0, #0x74]
+	str     r1, [r0, #ScriptHandler_74]
 	bx      lr
 @ 0x203e778
 
@@ -314,6 +318,11 @@ ScriptHandler_LoadWord: @ 203e850 :thumb
 thumb_func_end ScriptHandler_LoadWord
 
 
+/* Input:
+r0: OverWorldData
+r1: SpriteScript
+r2: Ptr to Sprite
+*/
 .thumb
 .globl Function_203e880
 Function_203e880: @ 203e880 :thumb
@@ -321,24 +330,27 @@ Function_203e880: @ 203e880 :thumb
 	mov     r5, r0
 	mov     r6, r1
 	mov     r7, r2
-	bl      Function_203ea28
+
+	bl      Function_203ea28_CallocUnknownStruct01_c
 	mov     r4, r0
+
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
-	mov     r0, r5
-	mov     r1, r4
-	mov     r2, r6
-	mov     r3, r7
-	bl      Function_203ea68
-	ldr     r1, [pc, #0xc] @ 0x203e8ac, (=Function_203e950+1)
-	mov     r0, r5
-	mov     r2, r4
-	bl      Function_2050904
+	mov     r0, r5          @ OverWorldData
+	mov     r1, r4          @ UnknownStruct01_c
+	mov     r2, r6          @ SpriteScript
+	mov     r3, r7          @ Ptr to Sprite
+	bl      Function_203ea68_InitUnknownStruct01_c
+
+	ldr     r1, =Function_203e950_HandleNPC+1
+	mov     r0, r5          @ OverWorldData
+	mov     r2, r4          @ UnknownStruct01_c
+	bl      OverWorldData_InitUnknownStruct01
 	pop     {r3-r7,pc}
 @ 0x203e8aa
 
 .align 2
-.word Function_203e950+1 @ 0x203e8ac
+.pool
 
 
 
@@ -350,7 +362,7 @@ Function_203e8b0: @ 203e8b0 :thumb
 	mov     r5, r1
 	mov     r4, r2
 	mov     r6, r3
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	ldr     r2, [sp, #0x1c]
 	mov     r1, #0x1c
 	mov     r3, r2
@@ -380,25 +392,31 @@ Function_203e8e0: @ 203e8e0 :thumb
 	mov     r7, r1
 	str     r2, [sp, #0x4]
 	mov     r5, r3
+
 	bl      LoadOverWorldDataAdress
 	str     r0, [sp, #0x8]
-	bl      Function_203ea28
+
+	bl      Function_203ea28_CallocUnknownStruct01_c
 	mov     r4, r0
+
 	ldr     r0, [sp, #0x8]
 	ldr     r3, [sp, #0x4]
 	mov     r1, r4
 	mov     r2, r7
 	str     r5, [sp, #0x0]
-	bl      Function_203ea68
-	ldr     r1, [pc, #0xc] @ 0x203e914, (=Function_203e950+1)
+	bl      Function_203ea68_InitUnknownStruct01_c
+
+	ldr     r1, =Function_203e950_HandleNPC+1
 	mov     r0, r6
 	mov     r2, r4
 	bl      Function_2050944
+
 	add     sp, #0xc
 	pop     {r4-r7,pc}
 @ 0x203e914
 
-.word Function_203e950+1 @ 0x203e914
+.align 2
+.pool
 
 
 
@@ -409,39 +427,47 @@ Function_203e918: @ 203e918 :thumb
 	mov     r5, r0
 	mov     r6, r1
 	mov     r7, r2
+
 	bl      LoadOverWorldDataAdress
 	str     r0, [sp, #0x4]
-	bl      Function_203ea28
+
+	bl      Function_203ea28_CallocUnknownStruct01_c
 	mov     r4, r0
+
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	ldr     r0, [sp, #0x4]
 	mov     r1, r4
 	mov     r2, r6
 	mov     r3, r7
-	bl      Function_203ea68
-	ldr     r1, [pc, #0xc] @ 0x203e94c, (=Function_203e950+1)
+	bl      Function_203ea68_InitUnknownStruct01_c
+
+	ldr     r1, =Function_203e950_HandleNPC+1
 	mov     r0, r5
 	mov     r2, r4
 	bl      Function_2050924
+
 	add     sp, #0x8
 	pop     {r3-r7,pc}
 @ 0x203e94c
 
-.word Function_203e950+1 @ 0x203e94c
+.align 2
+.pool
 
 
 
 .thumb
-Function_203e950: @ 203e950 :thumb
+Function_203e950_HandleNPC: @ 203e950 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
-	bl      Function_2050a64
+
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
+
 	mov     r0, r5
 	bl      LoadOverWorldDataAdress
-	ldrb    r1, [r4, #0x4]
+	ldrb    r1, [r4, #UnknownStruct01_c_4]
 	str     r0, [sp, #0x0]
 	cmp     r1, #0x0
 	beq     branch_203e970
@@ -450,37 +476,41 @@ Function_203e950: @ 203e950 :thumb
 	b       branch_203ea22
 
 branch_203e970: @ 203e970 :thumb
-	ldrh    r1, [r4, #0xa]
-	bl      Function_203eab8
-	str     r0, [r4, #0x38]
+	ldrh    r1, [r4, #UnknownStruct01_c_SpriteScript]
+	bl      AllocInitScriptHandler
+	str     r0, [r4, #UnknownStruct01_c_ScriptHandler]
 	mov     r0, #0x1
-	strb    r0, [r4, #0x9]
+	strb    r0, [r4, #UnknownStruct01_c_9]
+
 	mov     r0, #0x8
 	mov     r1, #0x40
 	mov     r2, #0xb
 	bl      Function_200b368
-	str     r0, [r4, #0x40]
+	str     r0, [r4, #UnknownStruct01_c_40]
+
 	mov     r0, #0x1
 	lsl     r0, r0, #10
 	mov     r1, #0xb
 	bl      Function_2023790
-	str     r0, [r4, #0x44]
+	str     r0, [r4, #UnknownStruct01_c_44]
+
 	mov     r0, #0x1
 	lsl     r0, r0, #10
 	mov     r1, #0xb
 	bl      Function_2023790
-	str     r0, [r4, #0x48]
-	ldrb    r0, [r4, #0x4]
+	str     r0, [r4, #UnknownStruct01_c_48]
+
+	ldrb    r0, [r4, #UnknownStruct01_c_4]
 	.hword  0x1c40 @ add r0, r0, #0x1
-	strb    r0, [r4, #0x4]
+	strb    r0, [r4, #UnknownStruct01_c_4]
 branch_203e9a6: @ 203e9a6 :thumb
 	mov     r0, #0x0
 	mov     r7, r4
 	str     r0, [sp, #0x4]
 	mov     r5, r4
-	add     r7, #0x9
+	add     r7, #UnknownStruct01_c_9
 branch_203e9b0: @ 203e9b0 :thumb
-	ldr     r6, [r5, #0x38]
+	ldr     r6, [r5, #UnknownStruct01_c_ScriptHandler]
 	cmp     r6, #0x0
 	beq     branch_203e9da
 
@@ -488,19 +518,20 @@ branch_203e9b0: @ 203e9b0 :thumb
 	bl      ScriptHandler
 	cmp     r0, #0x0
 	bne     branch_203e9da
+
 	mov     r0, r6
 	bl      Function_203ea50
-	ldrb    r0, [r4, #0x9]
+	ldrb    r0, [r4, #UnknownStruct01_c_9]
 	cmp     r0, #0x0
 	bne     branch_203e9d0
 	bl      ErrorHandling
 branch_203e9d0: @ 203e9d0 :thumb
 
 	mov     r0, #0x0
-	str     r0, [r5, #0x38]
-	ldrb    r0, [r7, #0x0]
+	str     r0, [r5, #UnknownStruct01_c_ScriptHandler]
+	ldrb    r0, [r7] @ UnknownStruct01_c_9
 	.hword  0x1e40 @ sub r0, r0, #0x1
-	strb    r0, [r7, #0x0]
+	strb    r0, [r7] @ UnknownStruct01_c_9
 branch_203e9da: @ 203e9da :thumb
 	ldr     r0, [sp, #0x4]
 	.hword  0x1d2d @ add r5, r5, #0x4
@@ -508,25 +539,31 @@ branch_203e9da: @ 203e9da :thumb
 	str     r0, [sp, #0x4]
 	cmp     r0, #0x2
 	blt     branch_203e9b0
-	ldrb    r0, [r4, #0x9]
+
+	ldrb    r0, [r4, #UnknownStruct01_c_9]
 	cmp     r0, #0x0
 	bne     branch_203ea22
+
 	mov     r0, r4
-	add     r0, #0xa4
-	ldr     r5, [r0, #0x0]
-	ldr     r0, [r4, #0x40]
+	add     r0, #UnknownStruct01_c_a4
+	ldr     r5, [r0] @ UnknownStruct01_c_a4
+	ldr     r0, [r4, #UnknownStruct01_c_40]
 	bl      Function_200b3f0
-	ldr     r0, [r4, #0x44]
-	bl      Function_20237bc
-	ldr     r0, [r4, #0x48]
-	bl      Function_20237bc
+
+	ldr     r0, [r4, #UnknownStruct01_c_44]
+	bl      Function_20237bc_FreeMsg
+
+	ldr     r0, [r4, #UnknownStruct01_c_48]
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
-	str     r0, [r4, #0x0]
+	str     r0, [r4, #UnknownStruct01_c_0]
 	mov     r0, r4
 	bl      free
+
 	cmp     r5, #0x0
 	beq     branch_203ea1c
-	ldr     r0, [sp, #0x0]
+
+	ldr     r0, [sp, #0x0] @ OverWorldData
 	blx     r5
 	add     sp, #0x8
 	mov     r0, #0x0
@@ -545,28 +582,30 @@ branch_203ea22: @ 203ea22 :thumb
 
 
 .thumb
-Function_203ea28: @ 203ea28 :thumb
+Function_203ea28_CallocUnknownStruct01_c: @ 203ea28 :thumb
 	push    {r4,lr}
 
 	mov     r0, #0xb
-	mov     r1, #0xdc
+	mov     r1, #UnknownStruct01_c_Size
 	bl      malloc
 	mov     r4, r0
 	bne     branch_203ea3a
 	bl      ErrorHandling
 branch_203ea3a: @ 203ea3a :thumb
+
 	mov     r0, r4
 	mov     r1, #0x0
-	mov     r2, #0xdc
+	mov     r2, #UnknownStruct01_c_Size
 	blx     Call_FillMemWithValue
-	ldr     r0, [pc, #0x4] @ 0x203ea4c, (=0x3643f)
-	str     r0, [r4, #0x0]
+	ldr     r0, =UnknownStruct01_c_0_3643f
+	str     r0, [r4, #UnknownStruct01_c_0]
 	mov     r0, r4
 
 	pop     {r4,pc}
 @ 0x203ea4c
 
-.word 0x3643f @ 0x203ea4c
+.align 2
+.pool
 
 
 
@@ -586,24 +625,33 @@ Function_203ea50: @ 203ea50 :thumb
 @ 0x203ea68
 
 
+/* Input:
+r0: OverWorldData
+r1: UnknownStruct01_c
+r2: SpriteScript
+r3: Ptr to Sprite
+sp+0x0:
+*/
 .thumb
-Function_203ea68: @ 203ea68 :thumb
+Function_203ea68_InitUnknownStruct01_c: @ 203ea68 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1
 	mov     r7, r0
+
 	mov     r0, r5
 	mov     r1, #0x36
 	mov     r4, r2
 	mov     r6, r3
-	bl      Function_203ef60
+	bl      Function_203ef60_GetSomeAddresses
 	str     r0, [sp, #0x0]
-	ldr     r0, [r7, #0x3c]
+
+	ldr     r0, [r7, #OverWorldData_SpriteStruct]
 	bl      GetSpriteFaceDirection
-	str     r0, [r5, #0x28]
-	str     r6, [r5, #0x2c]
+	str     r0, [r5, #UnknownStruct01_c_PlayerFaceDirection]
+	str     r6, [r5, #UnknownStruct01_c_PtrToSprite]
 	ldr     r0, [sp, #0x18]
-	strh    r4, [r5, #0xa]
-	str     r0, [r5, #0x34]
+	strh    r4, [r5, #UnknownStruct01_c_SpriteScript]
+	str     r0, [r5, #UnknownStruct01_c_34]
 	cmp     r6, #0x0
 	beq     branch_203ea9a
 	mov     r0, r6
@@ -611,31 +659,35 @@ Function_203ea68: @ 203ea68 :thumb
 	ldr     r1, [sp, #0x0]
 	strh    r0, [r1, #0x0]
 branch_203ea9a: @ 203ea9a :thumb
-	mov     r0, #0x7d
+
+	mov     r0, #Sprite_ScriptNr_8000/64
 	lsl     r0, r0, #6
 	cmp     r4, r0
 	blo     branch_203eab0
-	ldr     r0, [pc, #0x10] @ 0x203eab4, (=0x225f)
+
+	ldr     r0, =Sprite_ScriptNr_8799
 	cmp     r4, r0
 	bhi     branch_203eab0
+
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_203f404
-branch_203eab0: @ 203eab0 :thumb
 
+branch_203eab0: @ 203eab0 :thumb
 	pop     {r3-r7,pc}
 @ 0x203eab2
 
 .align 2
-.word 0x225f @ 0x203eab4
+.pool
 
 
 
 /* Input:
-r0: OverWorldDataAdress
+r0: OverWorldData
+r1: Script and Msg PairNr
 */
-.thumb
-Function_203eab8: @ 203eab8 :thumb
+thumb_func_start AllocInitScriptHandler
+AllocInitScriptHandler: @ 203eab8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r6, r1
@@ -658,7 +710,7 @@ branch_203eace: @ 203eace :thumb
 	mov     r1, r4
 	mov     r2, r6
 	mov     r3, #0x0
-	bl      Function_203eaf4
+	bl      LoadPredefinedScriptsAndMsgs
 
 	mov     r0, r4
 	pop     {r4-r6,pc}
@@ -666,23 +718,24 @@ branch_203eace: @ 203eace :thumb
 
 .align 2
 .pool
+thumb_func_end AllocInitScriptHandler
 
 
 
 /* Input:
-r0: OverWorldDataAdress
+r0: OverWorldData
 r1: ScriptHandler-Struct
 */
 .thumb
-Function_203eaf4: @ 203eaf4 :thumb
+LoadPredefinedScriptsAndMsgs: @ 203eaf4 :thumb
 	push    {r4-r6,lr}
 
 	mov     r4, r1
 	mov     r3, r4
 	mov     r5, r0
-	add     r3, #ScriptHandler_80
+	add     r3, #ScriptHandler_OverWorldData
 	str     r5, [r3]
-	bl      Function_203eb20
+	bl      LoadSomeChosenScriptsAndMsgs
 	mov     r6, r0
 
 	ldr     r1, [r4, #ScriptHandler_7c]
@@ -693,7 +746,7 @@ Function_203eaf4: @ 203eaf4 :thumb
 	mov     r1, r6
 	bl      Function_203f0e4
 
-	ldr     r1, [r5, #OverWorldData_10]
+	ldr     r1, [r5, #OverWorldData_UnknownStruct01]
 	mov     r0, r4
 	bl      Function_203e774
 
@@ -701,18 +754,23 @@ Function_203eaf4: @ 203eaf4 :thumb
 @ 0x203eb20
 
 
-.thumb
-Function_203eb20: @ 203eb20 :thumb
+/* Input:
+r0: OverWorldData
+r1: ScriptHandler-Struct
+*/
+thumb_func_start LoadSomeChosenScriptsAndMsgs
+LoadSomeChosenScriptsAndMsgs: @ 203eb20 :thumb TODO
 	push    {r3-r5,lr}
-	ldr     r3, [pc, #0x2e4] @ 0x203ee08, (=0x28fa)
+	ldr     r3, [pc, #0x2e4] @ 0x203ee08, (=0x28fa) 10490
 	mov     r4, r2
 	cmp     r4, r3
 	blo     branch_203eb3e
-	ldr     r2, [pc, #0x2e0] @ 0x203ee0c, (=0x1f3)
+
+	ldr     r2, [pc, #0x2e0] @ 0x203ee0c, (=0x1f3) 499 ScriptNr
 	mov     r3, r2
-	add     r3, #0x2a
+	add     r3, #0x2a       @ 541 MsgNr
 	bl      LoadScriptsAndMsgs
-	ldr     r0, [pc, #0x2d0] @ 0x203ee08, (=0x28fa)
+	ldr     r0, [pc, #0x2d0] @ 0x203ee08, (=0x28fa) 10490
 	sub     r0, r4, r0
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
@@ -1149,8 +1207,6 @@ branch_203edec: @ 203edec :thumb
 .word 0xbb8 @ 0x203eeb4
 .word 0x19d @ 0x203eeb8
 
-
-
 .thumb
 branch_203eebc: @ 203eebc :thumb
 	lsr     r3, r5, #1
@@ -1201,25 +1257,29 @@ branch_203ef0a: @ 203ef0a :thumb
 
 .align 2
 .word 0x192 @ 0x203ef10
+thumb_func_end LoadSomeChosenScriptsAndMsgs
 
 
-
+/* Input:
+r2: ScriptNr
+r3: MsgNr
+*/
 thumb_func_start LoadScriptsAndMsgs
 LoadScriptsAndMsgs: @ 203ef14 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	mov     r1, r2
 	mov     r4, r3
-	mov     r0, #0xa                @ fielddata/script/scr_seq.narc
+	mov     r0, #ScrSeq_Narc
 	mov     r2, #0xb
 	bl      LoadFromNARC_2
 	str     r0, [r5, #0x7c]
 
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r2, r4
 	mov     r3, #0xb
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r5, #0x78]
 
 	pop     {r3-r5,pc}
@@ -1242,17 +1302,21 @@ LoadMapLevelScriptsAndMsgs: @ 203ef38 :thumb
 	bl      Call_GetMapTexts
 	mov     r2, r0
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r3, #0xb
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r4, #0x78]
 
 	pop     {r3-r5,pc}
 thumb_func_end LoadMapLevelScriptsAndMsgs
 
 
+/* Input:
+r0: UnknownStruct01_c
+r1: VariableNr
+*/
 .thumb
-Function_203ef60: @ 203ef60 :thumb
+Function_203ef60_GetSomeAddresses: @ 203ef60 :thumb ToDo
 	push    {r3,lr}
 	cmp     r1, #0x36
 	bls     branch_203ef68
@@ -1325,172 +1389,172 @@ Jumppoints_203ef74:
 .hword branch_203f086 - Jumppoints_203ef74 - 2 @ 0x36
 
 branch_203efe2: @ 203efe2 :thumb
-	add     r0, #0x10
+	add     r0, #UnknownStruct01_c_10
 	pop     {r3,pc}
 
 branch_203efe6: @ 203efe6 :thumb
-	add     r0, #0x14
+	add     r0, #UnknownStruct01_c_14
 	pop     {r3,pc}
 
 branch_203efea: @ 203efea :thumb
-	add     r0, #0x24
+	add     r0, #UnknownStruct01_c_24
 	pop     {r3,pc}
 
 branch_203efee: @ 203efee :thumb
-	.hword  0x1d40 @ add r0, r0, #0x5
+	.hword  0x1d40 @ add r0, r0, #UnknownStruct01_c_5
 	pop     {r3,pc}
 
 branch_203eff2: @ 203eff2 :thumb
-	.hword  0x1d80 @ add r0, r0, #0x6
+	.hword  0x1d80 @ add r0, r0, #UnknownStruct01_c_6
 	pop     {r3,pc}
 
 branch_203eff6: @ 203eff6 :thumb
-	.hword  0x1dc0 @ add r0, r0, #0x7
+	.hword  0x1dc0 @ add r0, r0, #UnknownStruct01_c_7
 	pop     {r3,pc}
 
 branch_203effa: @ 203effa :thumb
-	add     r0, #0x8
+	add     r0, #UnknownStruct01_c_8
 	pop     {r3,pc}
 
 branch_203effe: @ 203effe :thumb
-	add     r0, #0x9
+	add     r0, #UnknownStruct01_c_9
 	pop     {r3,pc}
 
 branch_203f002: @ 203f002 :thumb
-	add     r0, #0xa
+	add     r0, #UnknownStruct01_c_SpriteScript
 	pop     {r3,pc}
 
 branch_203f006: @ 203f006 :thumb
-	add     r0, #0x28
+	add     r0, #UnknownStruct01_c_PlayerFaceDirection
 	pop     {r3,pc}
 
 branch_203f00a: @ 203f00a :thumb
-	add     r0, #0x2c
+	add     r0, #UnknownStruct01_c_PtrToSprite
 	pop     {r3,pc}
 
 branch_203f00e: @ 203f00e :thumb
-	add     r0, #0x30
+	add     r0, #UnknownStruct01_c_30
 	pop     {r3,pc}
 
 branch_203f012: @ 203f012 :thumb
-	add     r0, #0x34
+	add     r0, #UnknownStruct01_c_34
 	pop     {r3,pc}
 
 branch_203f016: @ 203f016 :thumb
-	add     r0, #0x38
+	add     r0, #UnknownStruct01_c_ScriptHandler
 	pop     {r3,pc}
 
 branch_203f01a: @ 203f01a :thumb
-	add     r0, #0x3c
+	add     r0, #UnknownStruct01_c_3c
 	pop     {r3,pc}
 
 branch_203f01e: @ 203f01e :thumb
-	add     r0, #0x40
+	add     r0, #UnknownStruct01_c_40
 	pop     {r3,pc}
 
 branch_203f022: @ 203f022 :thumb
-	add     r0, #0x44
+	add     r0, #UnknownStruct01_c_44
 	pop     {r3,pc}
 
 branch_203f026: @ 203f026 :thumb
-	add     r0, #0x48
+	add     r0, #UnknownStruct01_c_48
 	pop     {r3,pc}
 
 branch_203f02a: @ 203f02a :thumb
-	add     r0, #0x4c
+	add     r0, #UnknownStruct01_c_4c
 	pop     {r3,pc}
 
 branch_203f02e: @ 203f02e :thumb
-	add     r0, #0xa8
+	add     r0, #UnknownStruct01_c_a8
 	pop     {r3,pc}
 
 branch_203f032: @ 203f032 :thumb
-	add     r0, #0xac
+	add     r0, #UnknownStruct01_c_ac
 	pop     {r3,pc}
 
 branch_203f036: @ 203f036 :thumb
-	add     r0, #0xb0
+	add     r0, #UnknownStruct01_c_b0
 	pop     {r3,pc}
 
 branch_203f03a: @ 203f03a :thumb
-	add     r0, #0xb4
+	add     r0, #UnknownStruct01_c_b4
 	pop     {r3,pc}
 
 branch_203f03e: @ 203f03e :thumb
-	add     r0, #0xc
+	add     r0, #UnknownStruct01_c_c
 	pop     {r3,pc}
 
 branch_203f042: @ 203f042 :thumb
-	add     r0, #0x50
+	add     r0, #UnknownStruct01_c_50
 	pop     {r3,pc}
 
 branch_203f046: @ 203f046 :thumb
-	add     r0, #0x54
+	add     r0, #UnknownStruct01_c_54
 	pop     {r3,pc}
 
 branch_203f04a: @ 203f04a :thumb
-	add     r0, #0x58
+	add     r0, #UnknownStruct01_c_58
 	pop     {r3,pc}
 
 branch_203f04e: @ 203f04e :thumb
-	add     r0, #0x5c
+	add     r0, #UnknownStruct01_c_5c
 	pop     {r3,pc}
 
 branch_203f052: @ 203f052 :thumb
-	add     r0, #0x60
+	add     r0, #UnknownStruct01_c_60
 	pop     {r3,pc}
 
 branch_203f056: @ 203f056 :thumb
-	add     r0, #0x64
+	add     r0, #UnknownStruct01_c_64
 	pop     {r3,pc}
 
 branch_203f05a: @ 203f05a :thumb
-	add     r0, #0x68
+	add     r0, #UnknownStruct01_c_68
 	pop     {r3,pc}
 
 branch_203f05e: @ 203f05e :thumb
-	add     r0, #0x6c
+	add     r0, #UnknownStruct01_c_6c
 	pop     {r3,pc}
 
 branch_203f062: @ 203f062 :thumb
-	add     r0, #0x70
+	add     r0, #UnknownStruct01_c_70
 	pop     {r3,pc}
 
 branch_203f066: @ 203f066 :thumb
-	add     r0, #0x74
+	add     r0, #UnknownStruct01_c_74
 	pop     {r3,pc}
 
 branch_203f06a: @ 203f06a :thumb
-	add     r0, #0x78
+	add     r0, #UnknownStruct01_c_78
 	pop     {r3,pc}
 
 branch_203f06e: @ 203f06e :thumb
-	add     r0, #0x7c
+	add     r0, #UnknownStruct01_c_7c
 	pop     {r3,pc}
 
 branch_203f072: @ 203f072 :thumb
-	add     r0, #0x80
+	add     r0, #UnknownStruct01_c_80
 	pop     {r3,pc}
 
 branch_203f076: @ 203f076 :thumb
-	add     r0, #0x84
+	add     r0, #UnknownStruct01_c_84
 	pop     {r3,pc}
 
 branch_203f07a: @ 203f07a :thumb
-	add     r0, #0xb8
+	add     r0, #UnknownStruct01_c_b8
 	pop     {r3,pc}
 
 branch_203f07e: @ 203f07e :thumb
-	add     r0, #0xc8
+	add     r0, #UnknownStruct01_c_c8
 	pop     {r3,pc}
 
 branch_203f082: @ 203f082 :thumb
-	add     r0, #0xd8
+	add     r0, #UnknownStruct01_c_d8
 	pop     {r3,pc}
 
 branch_203f086: @ 203f086 :thumb
 	sub     r1, #0x29
-	add     r0, #0x88
+	add     r0, #UnknownStruct01_c_88
 	lsl     r1, r1, #1
 	add     r0, r0, r1
 	pop     {r3,pc}
@@ -1504,18 +1568,19 @@ branch_203f090: @ 203f090 :thumb
 
 /* Input:
 r0: OverWorldData
+r1: VariableNr
 */
-thumb_func_start ScriptHandler_ExitStandard
-ScriptHandler_ExitStandard: @ 203f098 :thumb
+thumb_func_start ScriptHandler_GetSomeScriptAddresses
+ScriptHandler_GetSomeScriptAddresses: @ 203f098 :thumb
 	push    {r3-r5,lr}
 
-	ldr     r0, [r0, #OverWorldData_10]
+	ldr     r0, [r0, #OverWorldData_UnknownStruct01]
 	mov     r5, r1
-	bl      Function_2050a64
-
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
-	ldr     r1, [r4, #0x0]
-	ldr     r0, [pc, #0x14] @ 0x203f0bc, (=0x3643f)
+
+	ldr     r1, [r4, #UnknownStruct01_c_0]
+	ldr     r0, =UnknownStruct01_c_0_3643f
 	cmp     r1, r0
 	beq     branch_203f0b0
 	bl      ErrorHandling
@@ -1523,14 +1588,14 @@ branch_203f0b0: @ 203f0b0 :thumb
 
 	mov     r0, r4
 	mov     r1, r5
-	bl      Function_203ef60
+	bl      Function_203ef60_GetSomeAddresses
 
 	pop     {r3-r5,pc}
 @ 0x203f0ba
 
 .align 2
-.word 0x3643f @ 0x203f0bc
-thumb_func_end ScriptHandler_ExitStandard
+.pool
+thumb_func_end ScriptHandler_GetSomeScriptAddresses
 
 
 
@@ -1539,7 +1604,7 @@ ShowMenu: @ 203f0c0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	ldr     r0, [r5, #0x10]
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 
 	mov     r0, r5
@@ -1581,7 +1646,7 @@ LoadMapLevelScripts: @ 203f0fc :thumb
 	push    {r3,lr}
 	bl      GetMapScripts
 	mov     r1, r0
-	mov     r0, #0xa            @ fielddata/script/scr_seq.narc
+	mov     r0, #ScrSeq_Narc
 	mov     r2, #0xb
 	bl      LoadFromNARC_2
 	pop     {r3,pc}
@@ -1607,7 +1672,7 @@ thumb_func_start ScriptHandler_CheckLoadParameter
 ScriptHandler_CheckLoadParameter: @ 203f118 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 	mov     r1, #0x1
@@ -1630,7 +1695,7 @@ branch_203f13e: @ 203f13e :thumb
 	ldr     r1, =0x7fd7
 	mov     r0, r5
 	sub     r1, r4, r1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	pop     {r3-r5,pc}
 @ 0x203f14a
 
@@ -1691,7 +1756,7 @@ r1 = FlagNr
 thumb_func_start LoadFlagAdressAndCheckFlag
 LoadFlagAdressAndCheckFlag: @ 203f188 :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 
@@ -1709,7 +1774,7 @@ r1 = FlagNr
 thumb_func_start LoadFlagAdressAndSetFlag
 LoadFlagAdressAndSetFlag: @ 203f19c :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 
@@ -1722,7 +1787,7 @@ thumb_func_end LoadFlagAdressAndSetFlag
 thumb_func_start LoadFlagAdressAndClearFlag
 LoadFlagAdressAndClearFlag: @ 203f1b0 :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 
@@ -1736,7 +1801,7 @@ thumb_func_end LoadFlagAdressAndClearFlag
 .thumb
 Function_203f1c4: @ 203f1c4 :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	mov     r1, #0x1
 	mov     r4, r0
@@ -1766,7 +1831,7 @@ Function_203f1c4: @ 203f1c4 :thumb
 .thumb
 Function_203f1fc: @ 203f1fc :thumb
 	push    {r3,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	mov     r1, #0xaa
 	lsl     r1, r1, #4
@@ -1791,19 +1856,19 @@ Function_203f21c: @ 203f21c :thumb
 	mov     r1, #0x29
 	mov     r6, r2
 	mov     r7, r3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	strh    r4, [r0, #0x0]
 	mov     r0, r5
 	mov     r1, #0x2a
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	strh    r6, [r0, #0x0]
 	mov     r0, r5
 	mov     r1, #0x2b
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	strh    r7, [r0, #0x0]
 	mov     r0, r5
 	mov     r1, #0x2c
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r1, sp, #0x8
 	ldrh    r1, [r1, #0x10]
 	strh    r1, [r0, #0x0]
@@ -1877,7 +1942,7 @@ branch_203f29c: @ 203f29c :thumb
 thumb_func_start CheckFlag550
 CheckFlag550: @ 203f2a0 :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 	mov     r1, #0x55
@@ -1893,7 +1958,7 @@ thumb_func_end CheckFlag550
 thumb_func_start SetFlag550
 SetFlag550: @ 203f2bc :thumb
 	push    {r4,lr}
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	bl      LoadFlagAdress
 	mov     r1, #0x55

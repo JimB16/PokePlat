@@ -4009,7 +4009,7 @@ branch_37fa96c: @ 0x37fa96c :arm
 	bl      Function_37faf14
 .arm
 branch_37fa970: @ 0x37fa970 :arm
-	ldr     r0, [pc, #0x50] @ [0x37fa9c8] (=0x4000006)
+	ldr     r0, [pc, #0x50] @ [0x37fa9c8] (=REG_VCOUNT)
 	ldrh    r9, [r0]
 	mov     r0, r9
 	bl      Function_37fad4c
@@ -4033,7 +4033,7 @@ branch_37fa970: @ 0x37fa970 :arm
 	bx      lr
 @ 0x37fa9c8
 
-.word 0x4000006 @ 0x37fa9c8
+.word REG_VCOUNT @ 0x37fa9c8
 .arm
 Function_37fa9cc: @ 0x37fa9cc :arm
 	stmfd   sp!, {r3-r9,lr}
@@ -4053,7 +4053,7 @@ branch_37fa9fc: @ 0x37fa9fc :arm
 	bl      Function_37faf14
 .arm
 branch_37faa00: @ 0x37faa00 :arm
-	ldr     r0, [pc, #0x50] @ [0x37faa58] (=0x4000006)
+	ldr     r0, [pc, #0x50] @ [0x37faa58] (=REG_VCOUNT)
 	ldrh    r9, [r0]
 	mov     r0, r9
 	bl      Function_37fad4c
@@ -4077,7 +4077,7 @@ branch_37faa00: @ 0x37faa00 :arm
 	bx      lr
 @ 0x37faa58
 
-.word 0x4000006 @ 0x37faa58
+.word REG_VCOUNT @ 0x37faa58
 .arm
 Function_37faa5c: @ 0x37faa5c :arm
 	stmfd   sp!, {r4,lr}
@@ -4213,7 +4213,7 @@ Function_37fab9c: @ 0x37fab9c :arm
 	orr     r0, r1, r0
 	sub     r0, r0, #0x1
 	bl      Function_37fad4c
-	ldr     r10, [pc, #0x154] @ [0x37fad44] (=0x4000006)
+	ldr     r10, [pc, #0x154] @ [0x37fad44] (=REG_VCOUNT)
 	mov     r6, #0x0
 	ldr     r5, [pc, #0x150] @ [0x37fad48] (=0x3806ed0)
 	sub     r7, r10, #0x2
@@ -4332,7 +4332,7 @@ branch_37fad34: @ 0x37fad34 :arm
 
 .word 0x4000004 @ 0x37fad3c
 .word 0x380fff8 @ 0x37fad40
-.word 0x4000006 @ 0x37fad44
+.word REG_VCOUNT @ 0x37fad44
 .word 0x3806ed0 @ 0x37fad48
 .arm
 Function_37fad4c: @ 0x37fad4c :arm
@@ -30453,7 +30453,7 @@ Function_6005da4: @ 0x6005da4 :arm
 	ldrh    r4, [r3]
 	cmp     r2, r4
 	ldrhih  lr, [r3, #0x2]
-	ldr     r3, [pc, #0xec] @ [0x6005eec] (=0x4000006)
+	ldr     r3, [pc, #0xec] @ [0x6005eec] (=REG_VCOUNT)
 	ldr     r2, [pc, #0xec] @ [0x6005ef0] (=0x107)
 	ldrh    r12, [r3]
 	ldr     r3, [pc, #0xe8] @ [0x6005ef4] (=0x3fffc0)
@@ -30534,7 +30534,7 @@ branch_6005ed4: @ 0x6005ed4 :arm
 .word 0x60198a0 @ 0x6005ee0
 .word 0x380fff0 @ 0x6005ee4
 .word 0x48080f8 @ 0x6005ee8
-.word 0x4000006 @ 0x6005eec
+.word REG_VCOUNT @ 0x6005eec
 .word 0x107 @ 0x6005ef0
 .word 0x3fffc0 @ 0x6005ef4
 .word 0x400e @ 0x6005ef8
@@ -30544,7 +30544,7 @@ branch_6005ed4: @ 0x6005ed4 :arm
 .arm
 Function_6005f08: @ 0x6005f08 :arm
 	stmfd   sp!, {r3,lr}
-	ldr     r1, [pc, #0xa0] @ [0x6005fb4] (=0x4000006)
+	ldr     r1, [pc, #0xa0] @ [0x6005fb4] (=REG_VCOUNT)
 	ldr     r0, [pc, #0xa0] @ [0x6005fb8] (=0x60198a0)
 	ldrh    r12, [r1]
 	ldr     r0, [r0, #0x550]
@@ -30573,7 +30573,7 @@ branch_6005f58: @ 0x6005f58 :arm
 	blt     branch_6005f40
 .arm
 branch_6005f60: @ 0x6005f60 :arm
-	ldr     r1, [pc, #0x4c] @ [0x6005fb4] (=0x4000006)
+	ldr     r1, [pc, #0x4c] @ [0x6005fb4] (=REG_VCOUNT)
 	rsb     r2, r3, #0x1
 	add     r2, r12, r2
 	strh    r2, [r1]
@@ -30598,7 +30598,7 @@ branch_6005f80: @ 0x6005f80 :arm
 	bx      lr
 @ 0x6005fb4
 
-.word 0x4000006 @ 0x6005fb4
+.word REG_VCOUNT @ 0x6005fb4
 .word 0x60198a0 @ 0x6005fb8
 .word 0x107 @ 0x6005fbc
 .word 0x380aea4 @ 0x6005fc0
@@ -30693,7 +30693,7 @@ Function_60060e0: @ 0x60060e0 :arm
 	ldrh    r1, [r0, #0xdc]
 	cmp     r1, #0x3c
 	bcc     branch_600611c
-	ldr     r2, [pc, #0x84] @ [0x6006184] (=0x4000006)
+	ldr     r2, [pc, #0x84] @ [0x6006184] (=REG_VCOUNT)
 	ldrh    r1, [r2]
 	cmp     r1, #0xcb
 	blt     branch_6006124
@@ -30710,7 +30710,7 @@ branch_600611c: @ 0x600611c :arm
 	strh    r1, [r0, #0xdc]
 .arm
 branch_6006124: @ 0x6006124 :arm
-	ldr     r1, [pc, #0x58] @ [0x6006184] (=0x4000006)
+	ldr     r1, [pc, #0x58] @ [0x6006184] (=REG_VCOUNT)
 	ldr     r2, [pc, #0x58] @ [0x6006188] (=0x48080f8)
 	ldrh    lr, [r1]
 	ldrh    r1, [r2]
@@ -30736,7 +30736,7 @@ branch_6006124: @ 0x6006124 :arm
 @ 0x6006180
 
 .word 0x60198a0 @ 0x6006180
-.word 0x4000006 @ 0x6006184
+.word REG_VCOUNT @ 0x6006184
 .word 0x48080f8 @ 0x6006188
 .word 0x380fff0 @ 0x600618c
 .word 0x380aea4 @ 0x6006190
@@ -32844,7 +32844,7 @@ Function_6007d88: @ 0x6007d88 :arm
 	mov     r0, r2
 	bl      Function_600742c
 	mul     r2, r6, r0
-	ldr     r1, [pc, #0x64] @ [0x6007e28] (=0x4000006)
+	ldr     r1, [pc, #0x64] @ [0x6007e28] (=REG_VCOUNT)
 	add     r0, r5, #0x22
 	mov     r3, r0, lsl #2
 	ldrh    r1, [r1]
@@ -32877,7 +32877,7 @@ branch_6007df0: @ 0x6007df0 :arm
 @ 0x6007e24
 
 .word 0x7fff @ 0x6007e24
-.word 0x4000006 @ 0x6007e28
+.word REG_VCOUNT @ 0x6007e28
 .word 0x66666667 @ 0x6007e2c
 .arm
 Function_6007e30: @ 0x6007e30 :arm

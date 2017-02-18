@@ -79,7 +79,7 @@ Function_225621c: @ 225621c :thumb
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a72c
+	bl      AddVariableAreaAdress_6_MapData4
 	mov     r6, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
@@ -470,7 +470,7 @@ Function_2256478: @ 2256478 :thumb
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a72c
+	bl      AddVariableAreaAdress_6_MapData4
 	mov     r7, r0
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0x0]
@@ -681,7 +681,7 @@ Function_22565a8: @ 22565a8 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x75
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r4, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -694,7 +694,7 @@ Function_22565a8: @ 22565a8 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x74
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
@@ -739,7 +739,7 @@ Function_2256650: @ 2256650 :thumb
 	mov     r0, #0x1a
 	mov     r2, #0x0
 	mov     r3, #0x8
-	bl      Function_200b010
+	bl      Function_200b010_LoadFromNARCCallMsgDecrypt
 	mov     r6, r0
 	beq     branch_22566c2
 	mov     r0, #0x14
@@ -760,7 +760,7 @@ Function_2256650: @ 2256650 :thumb
 	bl      Function_201a7e8
 	add     r0, sp, #0x14
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r1, #0x0
 	str     r1, [sp, #0x0]
 	mov     r0, #0xff
@@ -779,7 +779,7 @@ Function_2256650: @ 2256650 :thumb
 	add     r0, sp, #0x14
 	bl      Function_201a8fc
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 .thumb
 branch_22566c2: @ 22566c2 :thumb
 	add     sp, #0x24

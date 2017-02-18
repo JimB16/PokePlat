@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram38, "ax"
 
@@ -394,7 +397,7 @@ Function_22563b8: @ 22563b8 :thumb
 	ldr     r2, [r5, #0x4]
 	mov     r0, #0xc
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r2, #0x0
 	str     r2, [sp, #0x0]
 	mov     r0, #0x20
@@ -410,11 +413,12 @@ Function_22563b8: @ 22563b8 :thumb
 	str     r0, [sp, #0x0]
 	mov     r0, #0x8
 	str     r0, [sp, #0x4]
-	mov     r0, #0xc
+
+	mov     r0, #Poketch_Narc
 	mov     r1, #0x9
 	mov     r2, #0x4
 	mov     r3, #0x0
-	bl      Function_2006e84
+	bl      Call_LoadFromNARC_RLCN
 	ldr     r0, [r5, #0x4]
 	mov     r1, #0xc
 	mov     r2, #0x6

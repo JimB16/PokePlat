@@ -255,35 +255,35 @@ Function_2256310: @ 2256310 :thumb
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x3
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x5
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	mov     r1, #0x4
 	ldr     r0, [r5, #0x10]
 	mov     r2, r1
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x6
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x7
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x9
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0x8
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x10]
 	mov     r1, #0xa
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	add     sp, #0x4
 	str     r4, [r5, #0xc]
 	mov     r0, #0x1
@@ -1836,7 +1836,7 @@ Function_2256d74: @ 2256d74 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x5b
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1848,7 +1848,7 @@ Function_2256d74: @ 2256d74 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x5a
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8

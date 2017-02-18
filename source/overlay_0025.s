@@ -1,15 +1,18 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram25, "ax"
 
 
 .thumb
 Function_2253ce0: @ 2253ce0 :thumb
-	ldr     r3, [pc, #0x0] @ 0x2253ce4, (=0x203d159)
+	ldr     r3, [pc, #0x0] @ 0x2253ce4, (=Function_203d158+1)
 	bx      r3
 @ 0x2253ce4
 
-.word 0x203d159 @ 0x2253ce4
+.word Function_203d158+1 @ 0x2253ce4
 
 
 
@@ -162,11 +165,16 @@ branch_2253dce: @ 2253dce :thumb
 @ 0x2253dd0
 
 .word 0x1869f @ 0x2253dd0
+
+
+
 .thumb
-Function_2253dd4: @ 2253dd4 :thumb
+.globl Function_25_2253dd4
+Function_25_2253dd4: @ 2253dd4 :thumb
 	ldrb    r0, [r0, #0x3]
 	bx      lr
 @ 0x2253dd8
+
 
 .thumb
 Function_2253dd8: @ 2253dd8 :thumb
@@ -1468,18 +1476,19 @@ branch_2254508: @ 2254508 :thumb
 	pop     {r3-r5,pc}
 @ 0x225450c
 
+
 .thumb
 Function_225450c: @ 225450c :thumb
-	ldr     r3, [pc, #0x4] @ 0x2254514, (=0x20509a5)
+	ldr     r3, [pc, #0x4] @ 0x2254514, (=Function_20509a4+1)
 	ldr     r0, [r0, #0x5c]
 	bx      r3
 @ 0x2254512
 
-
 .align 2
+.word Function_20509a4+1 @ 0x2254514
 
 
-.word 0x20509a5 @ 0x2254514
+
 .thumb
 Function_2254518: @ 2254518 :thumb
 	push    {r3-r5,lr}
@@ -1991,6 +2000,7 @@ Function_2254820: @ 2254820 :thumb
 	mov     r1, #0x5
 	mov     r3, #0x0
 	bl      Function_20183c4
+
 	mov     r0, #0x40
 	str     r0, [sp, #0x0]
 	mov     r0, #0x0
@@ -2005,7 +2015,8 @@ Function_2254820: @ 2254820 :thumb
 	mov     r0, #0xc
 	mov     r1, #0xe
 	mov     r3, #0x4
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
+
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -2019,11 +2030,13 @@ Function_2254820: @ 2254820 :thumb
 	mov     r0, #0xc
 	mov     r1, #0xf
 	mov     r3, #0x4
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
+
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
 	bl      Function_2254548
+
 	mov     r3, r0
 	mov     r0, #0x1e
 	lsl     r0, r0, #4
@@ -2032,11 +2045,12 @@ Function_2254820: @ 2254820 :thumb
 	str     r0, [sp, #0x4]
 	mov     r0, #0x7
 	str     r0, [sp, #0x8]
-	mov     r0, #0xc
+	mov     r0, #Poketch_Narc
 	mov     r1, #0xd
 	mov     r2, #0x4
 	lsl     r3, r3, #5
-	bl      Function_2006e9c
+	bl      LoadFromNARC_RLCN
+
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	mov     r0, #0x20
@@ -2051,11 +2065,13 @@ Function_2254820: @ 2254820 :thumb
 	mov     r1, #0x5
 	mov     r2, #0xe4
 	bl      Function_2019cb8
+
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
 	ldr     r0, [r4, r0]
 	mov     r1, #0x5
 	bl      Function_2019448
+
 	ldr     r0, [pc, #0x20] @ 0x225492c, (=0x4001000)
 	ldr     r1, [pc, #0x2c] @ 0x225493c, (=0xffffe0ff)
 	ldr     r2, [r0, #0x0]
@@ -2753,15 +2769,16 @@ Function_2254de0: @ 2254de0 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x2
 	bl      Function_2006ec0
+
 	mov     r0, #0x60
 	str     r0, [sp, #0x0]
 	mov     r0, #0x7
 	mov     r1, #0x0
 	str     r0, [sp, #0x4]
-	mov     r0, #0xc
+	mov     r0, #Poketch_Narc
 	mov     r2, #0x5
 	mov     r3, r1
-	bl      Function_2006e84
+	bl      Call_LoadFromNARC_RLCN
 	mov     r0, r5
 	mov     r1, #0xf
 	bl      Function_2254e84
@@ -3621,7 +3638,8 @@ Function_22553a0: @ 22553a0 :thumb
 	bl      malloc
 	mov     r7, r0
 	beq     branch_2255434
-	mov     r0, #0x13
+
+	mov     r0, #PlPokeIcon_Narc
 	mov     r1, #0x8
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x1c]
@@ -4026,7 +4044,7 @@ branch_225568a: @ 225568a :thumb
 	add     r0, #0x90
 	ldrh    r2, [r6, #0x10]
 	ldrh    r0, [r0, #0x0]
-	ldr     r1, [pc, #0x150] @ 0x22557f4, (=0x20f983c)
+	ldr     r1, [pc, #0x150] @ 0x22557f4, (=Unknown_20f983c)
 	add     r0, r2, r0
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
@@ -4048,7 +4066,7 @@ branch_22556bc: @ 22556bc :thumb
 	beq     branch_22556da
 	asr     r0, r0, #4
 	lsl     r3, r0, #2
-	ldr     r1, [pc, #0x128] @ 0x22557f4, (=0x20f983c)
+	ldr     r1, [pc, #0x128] @ 0x22557f4, (=Unknown_20f983c)
 	ldr     r0, [r4, #0x70]
 	add     r2, r1, r3
 	ldsh    r1, [r1, r3]
@@ -4209,7 +4227,7 @@ branch_22557ee: @ 22557ee :thumb
 .align 2
 
 
-.word 0x20f983c @ 0x22557f4
+.word Unknown_20f983c @ 0x22557f4
 .word 0xdfffffff @ 0x22557f8
 .word 0xfffff3ff @ 0x22557fc
 .word 0xffff0fff @ 0x2255800
@@ -4991,8 +5009,10 @@ Function_2255c48: @ 2255c48 :thumb
 	bx      lr
 @ 0x2255c5c
 
+
 .thumb
-Function_2255c5c: @ 2255c5c :thumb
+.globl Function_25_2255c5c
+Function_25_2255c5c: @ 2255c5c :thumb
 	ldr     r3, [r0, #0x14]
 	mov     r0, #0xe
 	mul     r0, r1
@@ -5000,6 +5020,7 @@ Function_2255c5c: @ 2255c5c :thumb
 	strh    r2, [r0, #0xc]
 	bx      lr
 @ 0x2255c68
+
 
 .thumb
 Function_2255c68: @ 2255c68 :thumb

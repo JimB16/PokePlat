@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram74, "ax"
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_74_21d0d80
+Function_74_21d0d80: @ 21d0d80 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      LoadPtrToOverWorldDataIn18
@@ -99,14 +103,15 @@ Function_21d0d80: @ 21d0d80 :thumb
 	pop     {r3-r5,pc}
 @ 0x21d0e4e
 
-
 .align 2
-
-
 .word 0xfffffcff @ 0x21d0e50
 .word 0xffff83ff @ 0x21d0e54
+
+
+
 .thumb
-Function_21d0e58: @ 21d0e58 :thumb
+.globl Function_74_21d0e58
+Function_74_21d0e58: @ 21d0e58 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      LoadOverlayData1c
@@ -224,15 +229,16 @@ branch_21d0ede: @ 21d0ede :thumb
 	pop     {r3-r5,pc}
 @ 0x21d0f52
 
-
 .align 2
-
-
 .word 0x15a @ 0x21d0f54
 .word 0xfffffcff @ 0x21d0f58
 .word 0xffff83ff @ 0x21d0f5c
+
+
+
 .thumb
-Function_21d0f60: @ 21d0f60 :thumb
+.globl Function_74_21d0f60
+Function_74_21d0f60: @ 21d0f60 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0xc
 	bl      LoadOverlayData1c
@@ -439,7 +445,7 @@ branch_21d1082: @ 21d1082 :thumb
 	ldr     r0, [r4, r0]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_21d10a2: @ 21d10a2 :thumb
 	mov     r0, #0x6
@@ -514,7 +520,7 @@ branch_21d1102: @ 21d1102 :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d1102
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x21d1114
@@ -618,7 +624,7 @@ branch_21d11cc: @ 21d11cc :thumb
 	mov     r0, #0x1
 	mov     r1, #0x1a
 	mov     r2, #0xdc
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r4, #0x20]
 	mov     r0, r4
 	bl      Function_21d1720
@@ -693,7 +699,7 @@ branch_21d124a: @ 21d124a :thumb
 .thumb
 branch_21d1258: @ 21d1258 :thumb
 	ldr     r0, [r5, #0x60]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
 	add     r0, #0x5c
 	ldrh    r0, [r0, #0x0]
@@ -775,7 +781,7 @@ Function_21d12d4: @ 21d12d4 :thumb
 	ldmia   r4!, {r0,r1}
 	stmia   r3!, {r0,r1}
 	mov     r0, r2
-	bl      Function_2018368
+	bl      SetGraphicsModes
 	ldr     r4, [pc, #0x5c] @ 0x21d1354, (=0x21d1c84)
 	add     r3, sp, #0x10
 	mov     r2, #0x11
@@ -850,13 +856,14 @@ Function_21d135c: @ 21d135c :thumb
 	pop     {r4,pc}
 @ 0x21d1390
 
+
 .thumb
 Function_21d1390: @ 21d1390 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x24
 	mov     r5, r0
 	ldr     r1, [r5, #0x0]
-	mov     r0, #0x49
+	mov     r0, #ConfigGra_Narc
 	bl      LoadFromNARC_8
 	mov     r1, #0x1
 	mov     r4, r0
@@ -868,7 +875,7 @@ Function_21d1390: @ 21d1390 :thumb
 	mov     r0, r4
 	mov     r1, #0x1
 	mov     r2, r6
-	bl      Function_2006d28
+	bl      LoadFileFromNARCFileHandler
 	mov     r0, r6
 	add     r1, sp, #0x20
 	blx     Function_20a7118
@@ -899,7 +906,7 @@ Function_21d1390: @ 21d1390 :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, r6
-	bl      Function_2006d28
+	bl      LoadFileFromNARCFileHandler
 	mov     r0, r6
 	add     r1, sp, #0x1c
 	blx     Function_20a71b0
@@ -927,7 +934,7 @@ Function_21d1390: @ 21d1390 :thumb
 	ldr     r2, [r5, #0x24]
 	mov     r0, r4
 	mov     r1, #0x2
-	bl      Function_2006d28
+	bl      LoadFileFromNARCFileHandler
 	mov     r1, r5
 	ldr     r0, [r5, #0x24]
 	add     r1, #0x28
@@ -1091,34 +1098,34 @@ Function_21d14f4: @ 21d14f4 :thumb
 	ldr     r2, [r4, #0x0]
 	mov     r0, #0x0
 	lsl     r1, r1, #4
-	bl      Function_2002e7c
+	bl      LoadFromNARC_PlFont1
 	mov     r1, #0x1a
 	ldr     r2, [r4, #0x0]
 	mov     r0, #0x4
 	lsl     r1, r1, #4
-	bl      Function_2002e7c
+	bl      LoadFromNARC_PlFont1
 	mov     r1, #0x6
 	ldr     r2, [r4, #0x0]
 	mov     r0, #0x0
 	lsl     r1, r1, #6
-	bl      Function_2002e98
+	bl      LoadFromNARC_PlFont2
 	mov     r1, #0x6
 	ldr     r2, [r4, #0x0]
 	mov     r0, #0x4
 	lsl     r1, r1, #6
-	bl      Function_2002e98
+	bl      LoadFromNARC_PlFont2
 	mov     r0, r4
 	add     r0, #0x2c
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r4
 	add     r0, #0x3c
 	mov     r1, #0xff
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r4
 	add     r0, #0x4c
 	mov     r1, #0xff
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r4
 	add     r0, #0x4c
 	bl      Function_201aa3c
@@ -1172,7 +1179,7 @@ branch_21d1640: @ 21d1640 :thumb
 	bl      Function_201acf4
 	add     r0, r5, r4
 	mov     r1, r7
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r0, r5, r4
 	bl      Function_201aa3c
 	add     r0, r5, r4
@@ -1198,7 +1205,7 @@ Function_21d1668: @ 21d1668 :thumb
 	ldr     r0, [r6, #0x20]
 	mov     r1, #0x0
 	mov     r2, r5
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	mov     r3, #0x2
 	str     r3, [sp, #0x0]
 	mov     r1, #0x0
@@ -1220,7 +1227,7 @@ branch_21d16a2: @ 21d16a2 :thumb
 	ldr     r0, [r6, #0x20]
 	ldrb    r1, [r1, r4]
 	mov     r2, r5
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	lsl     r0, r4, #4
 	str     r0, [sp, #0x0]
 	mov     r0, #0xff
@@ -1261,7 +1268,7 @@ branch_21d16dc: @ 21d16dc :thumb
 	mov     r0, r6
 	bl      Function_201a954
 	mov     r0, r5
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     sp, #0x10
 	pop     {r3-r7,pc}
 @ 0x21d1712
@@ -1302,7 +1309,7 @@ branch_21d172a: @ 21d172a :thumb
 branch_21d174c: @ 21d174c :thumb
 	ldr     r0, [r5, #0x20]
 	add     r1, r6, r4
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	ldr     r1, [sp, #0x0]
 	lsl     r2, r4, #2
 	add     r1, r1, r2
@@ -1605,7 +1612,7 @@ Function_21d1968: @ 21d1968 :thumb
 	ldr     r0, [r5, r0]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_21d1988: @ 21d1988 :thumb
 	ldr     r0, [r5, #0x1c]
@@ -1614,7 +1621,7 @@ branch_21d1988: @ 21d1988 :thumb
 	mov     r0, r5
 	add     r0, #0x4c
 	mov     r1, #0xf
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x1
 	ldr     r1, [r5, #0x0]
 	lsl     r0, r0, #8
@@ -1623,7 +1630,7 @@ branch_21d1988: @ 21d1988 :thumb
 	ldr     r0, [r5, #0x20]
 	ldr     r1, [sp, #0x10]
 	mov     r2, r6
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	cmp     r4, #0x0
 	bne     branch_21d19d6
 	mov     r1, #0x0
@@ -1665,7 +1672,7 @@ branch_21d19d6: @ 21d19d6 :thumb
 .thumb
 branch_21d19fa: @ 21d19fa :thumb
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     sp, #0x14
 	pop     {r4-r7,pc}
 @ 0x21d1a04
@@ -1922,16 +1929,13 @@ Function_21d1bd0: @ 21d1bd0 :thumb
 	mov     r0, #0xaa
 	lsl     r0, r0, #2
 	ldr     r0, [r1, r0]
-	ldr     r3, [pc, #0x4] @ 0x21d1be0, (=0x2002115)
+	ldr     r3, [pc, #0x4] @ 0x21d1be0, (=Function_2002114+1)
 	ldr     r1, [r1, #0x0]
 	bx      r3
 @ 0x21d1bde
 
-
 .align 2
-
-
-.word 0x2002115 @ 0x21d1be0
+.word Function_2002114+1 @ 0x21d1be0
 
 
 

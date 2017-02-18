@@ -21,7 +21,7 @@ GX_Init: @ 20bdc08 :arm
 	strh    r0, [r2]
 
 	bl      GX_InitGXState
-	ldr     r5, =0x21ccb9c
+	ldr     r5, =RAM_21ccb9c
 	ldrh    r0, [r5, #0x2]
 	cmp     r0, #0x0
 	bne     branch_20bdc7c
@@ -60,7 +60,6 @@ branch_20bdc7c: @ 20bdc7c :arm
 	mov     r3, #0x70
 	bl      MI_DmaFill32
 	b       branch_20bdcfc
-@ 0x20bdcd4
 
 branch_20bdcd4: @ 20bdcd4 :arm
 	mov     r0, r2
@@ -93,8 +92,6 @@ branch_20bdcfc: @ 20bdcfc :arm
 
 
 
-
-
 .arm
 GX_HBlankIntr: @ 20bdd54 :arm
 	ldr     r2, =REG_DISPSTAT
@@ -116,9 +113,7 @@ GX_HBlankIntr: @ 20bdd54 :arm
 
 
 
-
-.arm
-.globl GX_VBlankIntr
+arm_func_start GX_VBlankIntr
 GX_VBlankIntr: @ 20bdd88 :arm
 	ldr     r2, =REG_DISPSTAT
 	cmp     r0, #0x0
@@ -136,12 +131,12 @@ GX_VBlankIntr: @ 20bdd88 :arm
 @ 0x20bddb8
 
 .pool
+arm_func_end GX_VBlankIntr
 
 
 
 
-.arm
-.globl GX_DispOff
+arm_func_start GX_DispOff
 GX_DispOff: @ 20bddbc :arm
 	stmfd   sp!, {r3,lr}
 
@@ -150,7 +145,7 @@ GX_DispOff: @ 20bddbc :arm
 	ldr     r1, =Unknown_2101144
 	and     r2, r12, #0x30000
 	mov     r3, #0x0
-	ldr     r0, =0x21ccb9c
+	ldr     r0, =RAM_21ccb9c
 	mov     r2, r2, lsr #16
 	strh    r3, [r1]
 	strh    r2, [r0]
@@ -161,14 +156,14 @@ GX_DispOff: @ 20bddbc :arm
 @ 0x20bddf0
 
 .pool
+arm_func_end GX_DispOff
 
 
 
 
-.arm
-.globl GX_DispOn
+arm_func_start GX_DispOn
 GX_DispOn: @ 20bddf8 :arm
-	ldr     r0, =0x21ccb9c
+	ldr     r0, =RAM_21ccb9c
 	ldr     r1, =Unknown_2101144
 	ldrh    r2, [r0]
 	mov     r0, #0x1
@@ -188,9 +183,15 @@ GX_DispOn: @ 20bddf8 :arm
 @ 0x20bde38
 
 .pool
+arm_func_end GX_DispOn
 
 
 
+/* Input:
+r0: value that is Display Mode
+r1: value that is BG Mode
+r2: value (0;1) that is ENABLE_3D
+*/
 arm_func_start GX_SetGraphicsMode
 GX_SetGraphicsMode: @ 20bde40 :arm
 	stmfd   sp!, {r3,lr}
@@ -198,17 +199,18 @@ GX_SetGraphicsMode: @ 20bde40 :arm
 	mov     lr, #REG_DISPCNT
 	ldrh    r12, [r3]
 	ldr     lr, [lr]
-	ldr     r3, =0x21ccb9c
+	ldr     r3, =RAM_21ccb9c
 	cmp     r12, #0x0
 	strh    r0, [r3]
+
 	ldr     r3, =0xfff0fff0
 	moveq   r0, #0x0
 	and     r3, lr, r3
 	orr     r0, r3, r0, lsl #16
-	orr     r0, r1, r0
-	orr     r1, r0, r2, lsl #3
+	orr     r0, r1, r0 @ BG Mode
+	orr     r1, r0, r2, lsl #3 @ ENABLE_3D
 	mov     r12, #REG_DISPCNT
-	ldr     r0, =0x21ccb9c
+	ldr     r0, =RAM_21ccb9c
 	str     r1, [r12]
 	ldrh    r0, [r0]
 	cmp     r0, #0x0
@@ -224,8 +226,7 @@ arm_func_end GX_SetGraphicsMode
 
 
 
-.arm
-.globl GXS_SetGraphicsMode
+arm_func_start GXS_SetGraphicsMode
 GXS_SetGraphicsMode: @ 20bdea8 :arm
 	ldr     r2, =REG_DISPCNT_SUB
 	ldr     r1, [r2]
@@ -236,6 +237,7 @@ GXS_SetGraphicsMode: @ 20bdea8 :arm
 @ 0x20bdec0
 
 .pool
+arm_func_end GXS_SetGraphicsMode
 
 
 
@@ -245,8 +247,7 @@ r1: 0 = disable
     + = brightness up
     - = brightness down
 */
-.arm
-.globl GXx_SetMasterBrightness_
+arm_func_start GXx_SetMasterBrightness_
 GXx_SetMasterBrightness_: @ 20bdec4 :arm
 	cmp     r1, #0x0
 	moveq   r1, #0x0
@@ -260,10 +261,10 @@ GXx_SetMasterBrightness_: @ 20bdec4 :arm
 	orrle   r1, r1, #2<<14      @ Down
 	strleh  r1, [r0]
 	bx      lr
-@ 0x20bdeec
+arm_func_end GXx_SetMasterBrightness_
 
 
-.arm
+arm_func_start GX_InitGXState
 GX_InitGXState: @ 20bdeec :arm
 	ldr     r0, =RAM_21ccba0
 	mov     r2, #0x0
@@ -290,11 +291,11 @@ GX_InitGXState: @ 20bdeec :arm
 @ 0x20bdf44
 
 .pool
+arm_func_end GX_InitGXState
 
 
 
-
-.arm
+arm_func_start GX_VRAMCNT_SetLCDC_
 GX_VRAMCNT_SetLCDC_: @ 20bdf4c :arm
 	tst     r0, #0x1
 	ldrne   r1, =VRAM_A_CR
@@ -345,11 +346,11 @@ GX_VRAMCNT_SetLCDC_: @ 20bdf4c :arm
 @ 0x20bdfe0
 
 .pool
+arm_func_end GX_VRAMCNT_SetLCDC_
 
 
 
-.arm
-.globl GX_SetBankForBG
+arm_func_start GX_SetBankForBG
 GX_SetBankForBG: @ 20be004 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, =RAM_21ccba0
@@ -551,11 +552,11 @@ branch_20be264: @ 20be264 :arm
 @ 0x20be274
 
 .pool
+arm_func_end GX_SetBankForBG
 
 
 
-.arm
-.globl GX_SetBankForOBJ
+arm_func_start GX_SetBankForOBJ
 GX_SetBankForOBJ: @ 20be294 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x12c] @ [0x20be3cc] (=RAM_21ccba0)
@@ -666,11 +667,11 @@ branch_20be3bc: @ 20be3bc :arm
 .word VRAM_A_CR @ 0x20be3d8
 .word VRAM_F_CR @ 0x20be3dc
 .word VRAM_E_CR @ 0x20be3e0
+arm_func_end GX_SetBankForOBJ
 
 
 
-.arm
-.globl GX_SetBankForBGExtPltt
+arm_func_start GX_SetBankForBGExtPltt
 GX_SetBankForBGExtPltt: @ 20be3e4 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, =RAM_21ccba0
@@ -752,12 +753,11 @@ branch_20be4c8: @ 20be4c8 :arm
 @ 0x20be4d8
 
 .pool
+arm_func_end GX_SetBankForBGExtPltt
 
 
 
-
-.arm
-.globl GX_SetBankForOBJExtPltt
+arm_func_start GX_SetBankForOBJExtPltt
 GX_SetBankForOBJExtPltt: @ 20be4e4 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, =RAM_21ccba0
@@ -809,11 +809,11 @@ branch_20be574: @ 20be574 :arm
 @ 0x20be584
 
 .pool
+arm_func_end GX_SetBankForOBJExtPltt
 
 
 
-.arm
-.globl GX_SetBankForTex
+arm_func_start GX_SetBankForTex
 GX_SetBankForTex: @ 20be590 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r1, [pc, #0x1b0] @ [0x20be74c] (=RAM_21ccba0)
@@ -867,9 +867,7 @@ branch_20be630: @ 20be630 :arm
 	mov     r1, #0x8b
 	strb    r1, [r0]
 	b       branch_20be73c
-@ 0x20be648
 
-.arm
 branch_20be648: @ 20be648 :arm
 	mov     r1, #0x83
 	ldr     r0, [pc, #0x108] @ [0x20be75c] (=VRAM_D_CR)
@@ -877,9 +875,7 @@ branch_20be648: @ 20be648 :arm
 	mov     r1, #0x8b
 	strb    r1, [r0]
 	b       branch_20be73c
-@ 0x20be660
 
-.arm
 branch_20be660: @ 20be660 :arm
 	ldr     r1, [pc, #0xf8] @ [0x20be760] (=VRAM_B_CR)
 	mov     r0, #0x83
@@ -887,9 +883,7 @@ branch_20be660: @ 20be660 :arm
 	mov     r0, #0x8b
 	strb    r0, [r1, #0x2]
 	b       branch_20be73c
-@ 0x20be678
 
-.arm
 branch_20be678: @ 20be678 :arm
 	mov     r0, #0x83
 	ldr     r1, [pc, #0xdc] @ [0x20be760] (=VRAM_B_CR)
@@ -899,9 +893,7 @@ branch_20be678: @ 20be678 :arm
 	mov     r0, #0x93
 	strb    r0, [r1, #0x2]
 	b       branch_20be73c
-@ 0x20be698
 
-.arm
 branch_20be698: @ 20be698 :arm
 	mov     r0, #0x83
 	ldr     r1, [pc, #0xb4] @ [0x20be758] (=VRAM_C_CR)
@@ -911,68 +903,53 @@ branch_20be698: @ 20be698 :arm
 	mov     r0, #0x93
 	strb    r0, [r1, #0x1]
 	b       branch_20be73c
-@ 0x20be6b8
 
-.arm
 branch_20be6b8: @ 20be6b8 :arm
 	ldr     r0, [pc, #0x9c] @ [0x20be75c] (=VRAM_D_CR)
 	mov     r1, #0x83
 	strb    r1, [r0]
 	b       branch_20be73c
-@ 0x20be6c8
 
-.arm
 branch_20be6c8: @ 20be6c8 :arm
 	ldr     r0, [pc, #0x8c] @ [0x20be75c] (=VRAM_D_CR)
 	mov     r1, #0x8b
 	strb    r1, [r0]
-.arm
 branch_20be6d4: @ 20be6d4 :arm
 	ldr     r0, [pc, #0x7c] @ [0x20be758] (=VRAM_C_CR)
 	mov     r1, #0x83
 	strb    r1, [r0]
 	b       branch_20be73c
-@ 0x20be6e4
 
-.arm
 branch_20be6e4: @ 20be6e4 :arm
 	ldr     r0, [pc, #0x70] @ [0x20be75c] (=VRAM_D_CR)
 	mov     r1, #0x93
 	strb    r1, [r0]
-.arm
 branch_20be6f0: @ 20be6f0 :arm
 	ldr     r0, [pc, #0x60] @ [0x20be758] (=VRAM_C_CR)
 	mov     r1, #0x8b
 	strb    r1, [r0]
-.arm
 branch_20be6fc: @ 20be6fc :arm
 	ldr     r0, [pc, #0x5c] @ [0x20be760] (=VRAM_B_CR)
 	mov     r1, #0x83
 	strb    r1, [r0]
 	b       branch_20be73c
-@ 0x20be70c
 
-.arm
 branch_20be70c: @ 20be70c :arm
 	ldr     r0, [pc, #0x48] @ [0x20be75c] (=VRAM_D_CR)
 	mov     r1, #0x9b
 	strb    r1, [r0]
-.arm
 branch_20be718: @ 20be718 :arm
 	ldr     r0, [pc, #0x38] @ [0x20be758] (=VRAM_C_CR)
 	mov     r1, #0x93
 	strb    r1, [r0]
-.arm
 branch_20be724: @ 20be724 :arm
 	ldr     r0, [pc, #0x34] @ [0x20be760] (=VRAM_B_CR)
 	mov     r1, #0x8b
 	strb    r1, [r0]
-.arm
 branch_20be730: @ 20be730 :arm
 	ldr     r0, [pc, #0x2c] @ [0x20be764] (=VRAM_A_CR)
 	mov     r1, #0x83
 	strb    r1, [r0]
-.arm
 branch_20be73c: @ 20be73c :arm
 	ldr     r0, [pc, #0x8] @ [0x20be74c] (=RAM_21ccba0)
 	ldrh    r0, [r0]
@@ -987,6 +964,7 @@ branch_20be73c: @ 20be73c :arm
 .word VRAM_D_CR @ 0x20be75c
 .word VRAM_B_CR @ 0x20be760
 .word VRAM_A_CR @ 0x20be764
+arm_func_end GX_SetBankForTex
 
 
 
@@ -1459,13 +1437,13 @@ resetBankForX_: @ 20bec68 :arm
 .arm
 .globl Function_20bec9c
 Function_20bec9c: @ 20bec9c :arm
-	ldr     r12, [pc, #0x4] @ [0x20beca8] (=resetBankForX_)
-	ldr     r0, [pc, #0x4] @ [0x20becac] (=RAM_21ccba2)
+	ldr     r12, =resetBankForX_
+	ldr     r0, =RAM_21ccba2
 	bx      r12
 @ 0x20beca8
 
-.word resetBankForX_ @ 0x20beca8
-.word RAM_21ccba2 @ 0x20becac
+.align 2
+.pool
 
 
 
@@ -1481,35 +1459,37 @@ Function_20becb0: @ 20becb0 :arm
 
 
 
-.arm
+arm_func_start GX_ResetBankForBGExtPltt
 GX_ResetBankForBGExtPltt: @ 20becc4 :arm
-	mov     r2, #1, 6 @ #0x4000000
+	mov     r2, #REG_DISPCNT
 	ldr     r1, [r2]
-	ldr     r12, [pc, #0xc] @ [0x20bece0] (=resetBankForX_)
-	bic     r1, r1, #1, 2 @ #0x40000000
-	ldr     r0, [pc, #0x8] @ [0x20bece4] (=RAM_21ccbae)
+	ldr     r12, =resetBankForX_
+	bic     r1, r1, #DISPLAY_BG_EXT_PALETTE
+	ldr     r0, =RAM_21ccbae
 	str     r1, [r2]
 	bx      r12
 @ 0x20bece0
 
-.word resetBankForX_ @ 0x20bece0
-.word RAM_21ccbae @ 0x20bece4
+.align 2
+.pool
+arm_func_end GX_ResetBankForBGExtPltt
 
 
 
-.arm
+arm_func_start GX_ResetBankForOBJExtPltt
 GX_ResetBankForOBJExtPltt: @ 20bece8 :arm
-	mov     r2, #1, 6 @ #0x4000000
+	mov     r2, #REG_DISPCNT
 	ldr     r1, [r2]
-	ldr     r12, [pc, #0xc] @ [0x20bed04] (=resetBankForX_)
-	bic     r1, r1, #2, 2 @ #0x80000000
-	ldr     r0, [pc, #0x8] @ [0x20bed08] (=RAM_21ccbb0)
+	ldr     r12, =resetBankForX_
+	bic     r1, r1, #0x80000000
+	ldr     r0, =RAM_21ccbb0
 	str     r1, [r2]
 	bx      r12
 @ 0x20bed04
 
-.word resetBankForX_ @ 0x20bed04
-.word RAM_21ccbb0 @ 0x20bed08
+.align 2
+.pool
+arm_func_end GX_ResetBankForOBJExtPltt
 
 
 
@@ -3166,7 +3146,7 @@ G3X_SetClearColor: @ 20bfd58 :arm
 
 
 
-.arm
+arm_func_start G3X_InitTable
 G3X_InitTable: @ 20bfd80 :arm
 	stmfd   sp!, {r3,lr}
 	sub     sp, sp, #0x8
@@ -3214,6 +3194,7 @@ branch_20bfdf8: @ 20bfdf8 :arm
 .word GFX_EDGE_TABLE @ 0x20bfe14
 .word GFX_FOG_TABLE @ 0x20bfe18
 .word GFX_SHININESS @ 0x20bfe1c
+arm_func_end G3X_InitTable
 
 
 
@@ -3750,7 +3731,7 @@ branch_20c03b4: @ 20c03b4 :arm
 
 
 
-.arm
+arm_func_start GXS_LoadBG0Scr
 GXS_LoadBG0Scr: @ 20c03cc :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -3780,6 +3761,7 @@ branch_20c0414: @ 20c0414 :arm
 @ 0x20c0428
 
 .word Unknown_2101148 @ 0x20c0428
+arm_func_end GXS_LoadBG0Scr
 
 
 
@@ -3918,7 +3900,7 @@ branch_20c0594: @ 20c0594 :arm
 
 
 
-.arm
+arm_func_start GX_LoadBG3Scr
 GX_LoadBG3Scr: @ 20c05ac :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -3948,6 +3930,7 @@ branch_20c05f4: @ 20c05f4 :arm
 @ 0x20c0608
 
 .word Unknown_2101148 @ 0x20c0608
+arm_func_end GX_LoadBG3Scr
 
 
 
@@ -4052,7 +4035,7 @@ branch_20c0714: @ 20c0714 :arm
 
 
 
-.arm
+arm_func_start GX_LoadBG1Char
 GX_LoadBG1Char: @ 20c072c :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -4082,10 +4065,11 @@ branch_20c0774: @ 20c0774 :arm
 @ 0x20c0788
 
 .word Unknown_2101148 @ 0x20c0788
+arm_func_end GX_LoadBG1Char
 
 
 
-.arm
+arm_func_start GXS_LoadBG1Char
 GXS_LoadBG1Char: @ 20c078c :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -4115,10 +4099,11 @@ branch_20c07d4: @ 20c07d4 :arm
 @ 0x20c07e8
 
 .word Unknown_2101148 @ 0x20c07e8
+arm_func_end GXS_LoadBG1Char
 
 
 
-.arm
+arm_func_start GX_LoadBG2Char
 GX_LoadBG2Char: @ 20c07ec :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -4148,6 +4133,7 @@ branch_20c0834: @ 20c0834 :arm
 @ 0x20c0848
 
 .word Unknown_2101148 @ 0x20c0848
+arm_func_end GX_LoadBG2Char
 
 
 
@@ -4184,7 +4170,7 @@ branch_20c0894: @ 20c0894 :arm
 
 
 
-.arm
+arm_func_start GX_LoadBG3Char
 GX_LoadBG3Char: @ 20c08ac :arm
 	stmfd   sp!, {r4-r6,lr}
 	mov     r6, r0
@@ -4214,6 +4200,7 @@ branch_20c08f4: @ 20c08f4 :arm
 @ 0x20c0908
 
 .word Unknown_2101148 @ 0x20c0908
+arm_func_end GX_LoadBG3Char
 
 
 
@@ -4279,21 +4266,21 @@ branch_20c09b0: @ 20c09b0 :arm
 	ldmfd   sp!, {r3,pc}
 
 branch_20c09bc: @ 20c09bc :arm
-	ldr     r2, [pc, #0x3c] @ [0x20c0a00] (=0x6880000)
+	ldr     r2, [pc, #0x3c] @ [0x20c0a00] (=VRAM_E)
 	mov     r0, #0x0
 	str     r2, [r1, #0x10]
 	str     r0, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
 
 branch_20c09d0: @ 20c09d0 :arm
-	ldr     r2, [pc, #0x2c] @ [0x20c0a04] (=0x6894000)
+	ldr     r2, [pc, #0x2c] @ [0x20c0a04] (=VRAM_G)
 	mov     r0, #0x4000
 	str     r2, [r1, #0x10]
 	str     r0, [r1, #0xc]
 	ldmfd   sp!, {r3,pc}
 
 branch_20c09e4: @ 20c09e4 :arm
-	ldr     r2, [pc, #0x1c] @ [0x20c0a08] (=0x6890000)
+	ldr     r2, [pc, #0x1c] @ [0x20c0a08] (=VRAM_F)
 	ldr     r0, [pc, #0xc] @ [0x20c09fc] (=RAM_21ccbbc)
 	mov     r1, #0x0
 	str     r2, [r0, #0x10]
@@ -4302,9 +4289,9 @@ branch_20c09e4: @ 20c09e4 :arm
 @ 0x20c09fc
 
 .word RAM_21ccbbc @ 0x20c09fc
-.word 0x6880000 @ 0x20c0a00
-.word 0x6894000 @ 0x20c0a04
-.word 0x6890000 @ 0x20c0a08
+.word VRAM_E @ 0x20c0a00
+.word VRAM_G @ 0x20c0a04
+.word VRAM_F @ 0x20c0a08
 arm_func_end GX_BeginLoadBGExtPltt
 
 
@@ -4386,19 +4373,19 @@ GX_BeginLoadOBJExtPltt: @ 20c0ac4 :arm
 	cmp     r0, #0x20
 	beq     branch_20c0af4
 	cmp     r0, #0x40
-	ldreq   r0, [pc, #0x14] @ [0x20c0b04] (=0x6894000)
+	ldreq   r0, [pc, #0x14] @ [0x20c0b04] (=VRAM_G)
 	streq   r0, [r1, #0x4]
 	ldmfd   sp!, {r3,pc}
 
 branch_20c0af4: @ 20c0af4 :arm
-	ldr     r0, [pc, #0xc] @ [0x20c0b08] (=0x6890000)
+	ldr     r0, [pc, #0xc] @ [0x20c0b08] (=VRAM_F)
 	str     r0, [r1, #0x4]
 	ldmfd   sp!, {r3,pc}
 @ 0x20c0b00
 
 .word RAM_21ccbbc @ 0x20c0b00
-.word 0x6894000 @ 0x20c0b04
-.word 0x6890000 @ 0x20c0b08
+.word VRAM_G @ 0x20c0b04
+.word VRAM_F @ 0x20c0b08
 
 
 
@@ -4609,7 +4596,7 @@ branch_20c0d10: @ 20c0d10 :arm
 
 
 
-.arm
+arm_func_start GX_BeginLoadTex
 GX_BeginLoadTex: @ 20c0d34 :arm
 	stmfd   sp!, {r3,lr}
 	bl      Function_20bed0c
@@ -4636,10 +4623,11 @@ GX_BeginLoadTex: @ 20c0d34 :arm
 .word Unknown_20fd952 @ 0x20c0d84
 .word Unknown_20fd954 @ 0x20c0d88
 .word RAM_21ccbd8 @ 0x20c0d8c
+arm_func_end GX_BeginLoadTex
 
 
 
-.arm
+arm_func_start GX_LoadTex
 GX_LoadTex: @ 20c0d90 :arm
 	stmfd   sp!, {r3-r7,lr}
 	sub     sp, sp, #0x8
@@ -4732,10 +4720,11 @@ branch_20c0eb0: @ 20c0eb0 :arm
 
 .word RAM_21ccbd8 @ 0x20c0ec8
 .word Unknown_2101148 @ 0x20c0ecc
+arm_func_end GX_LoadTex
 
 
 
-.arm
+arm_func_start GX_EndLoadTex
 GX_EndLoadTex: @ 20c0ed0 :arm
 	stmfd   sp!, {r3,lr}
 	ldr     r0, [pc, #0x38] @ [0x20c0f14] (=Unknown_2101148)
@@ -4759,6 +4748,7 @@ branch_20c0eec: @ 20c0eec :arm
 
 .word Unknown_2101148 @ 0x20c0f14
 .word RAM_21ccbd8 @ 0x20c0f18
+arm_func_end GX_EndLoadTex
 
 
 
@@ -4875,7 +4865,7 @@ branch_20c1050: @ 20c1050 :arm
 	ldmfd   sp!, {r3,pc}
 
 branch_20c105c: @ 20c105c :arm
-	ldr     r0, [pc, #0x20] @ [0x20c1084] (=0x6840000)
+	ldr     r0, [pc, #0x20] @ [0x20c1084] (=VRAM_C)
 	str     r0, [r1, #0x10]
 	ldmfd   sp!, {r3,pc}
 
@@ -4885,15 +4875,15 @@ branch_20c1068: @ 20c1068 :arm
 	ldmfd   sp!, {r3,pc}
 
 branch_20c1074: @ 20c1074 :arm
-	ldr     r0, [pc, #0x10] @ [0x20c108c] (=0x6820000)
+	ldr     r0, [pc, #0x10] @ [0x20c108c] (=VRAM_B)
 	str     r0, [r1, #0x10]
 	ldmfd   sp!, {r3,pc}
 @ 0x20c1080
 
 .word RAM_21ccbd8 @ 0x20c1080
-.word 0x6840000 @ 0x20c1084
+.word VRAM_C @ 0x20c1084
 .word 0x67e0000 @ 0x20c1088
-.word 0x6820000 @ 0x20c108c
+.word VRAM_B @ 0x20c108c
 
 
 

@@ -25,7 +25,8 @@ branch_221f810: @ 221f810 :thumb
 
 
 .thumb
-Function_221f81c: @ 221f81c :thumb
+.globl Function_11_221f81c
+Function_11_221f81c: @ 221f81c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r0, r1
@@ -46,7 +47,8 @@ Function_221f81c: @ 221f81c :thumb
 
 .align 2, 0
 .thumb
-Function_221f840: @ 221f840 :thumb
+.globl Function_11_221f840
+Function_11_221f840: @ 221f840 :thumb
 	push    {r4,lr}
 	add     sp, #-0x8
 	mov     r1, #0x12
@@ -84,7 +86,8 @@ branch_221f878: @ 221f878 :thumb
 
 
 .thumb
-Function_221f888: @ 221f888 :thumb
+.globl Function_11_221f888
+Function_11_221f888: @ 221f888 :thumb
 	push    {r4,lr}
 	add     sp, #-0x8
 	mov     r1, #0x42
@@ -140,8 +143,10 @@ Function_221f8d8: @ 221f8d8 :thumb
 	pop     {r3-r5,pc}
 @ 0x221f8f0
 
+
 .thumb
-Function_221f8f0: @ 221f8f0 :thumb
+.globl Function_11_221f8f0
+Function_11_221f8f0: @ 221f8f0 :thumb
 	push    {r3,lr}
 	bl      Call_G3X_Reset
 	bl      Function_2014680
@@ -173,11 +178,11 @@ Function_221f914: @ 221f914 :thumb
 	pop     {r4,pc}
 @ 0x221f92a
 
-
 .align 2
-
-
 .word 0x2100dec @ 0x221f92c
+
+
+
 .thumb
 Function_221f930: @ 221f930 :thumb
 	push    {r4,lr}
@@ -192,11 +197,10 @@ Function_221f930: @ 221f930 :thumb
 	pop     {r4,pc}
 @ 0x221f946
 
-
 .align 2
-
-
 .word 0x2100df4 @ 0x221f948
+
+
 @ 0x221f94c
 
 

@@ -653,46 +653,46 @@ branch_203a368: @ 203a368 :thumb
 r0: OverWorldData
 r1: Malloc-Flags
 */
-thumb_func_start Malloc_OverWorldData_14
-Malloc_OverWorldData_14: @ 203a378 :thumb
+thumb_func_start Malloc_OverWorldData_Overworlds
+Malloc_OverWorldData_Overworlds: @ 203a378 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #OverWorldData_14]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
 	mov     r4, r1
 	cmp     r0, #0x0
 	beq     branch_203a388
 	bl      ErrorHandling
 branch_203a388: @ 203a388 :thumb
 
-	ldr     r1, =OverWorldData_14_size
+	ldr     r1, =OverWorldData_Overworlds_size
 	mov     r0, r4
 	bl      malloc
-	str     r0, [r5, #OverWorldData_14]
+	str     r0, [r5, #OverWorldData_Overworlds]
 	pop     {r3-r5,pc}
 @ 0x203a394
 
 .align 2
 .pool
-thumb_func_end Malloc_OverWorldData_14
+thumb_func_end Malloc_OverWorldData_Overworlds
 
 
 /* Input:
 r0: OverWorldData
 */
-thumb_func_start Free_OverWorldData_14
-Free_OverWorldData_14: @ 203a398 :thumb
+thumb_func_start Free_OverWorldData_Overworlds
+Free_OverWorldData_Overworlds: @ 203a398 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	ldr     r0, [r4, #OverWorldData_14]
+	ldr     r0, [r4, #OverWorldData_Overworlds]
 	cmp     r0, #0x0
 	bne     branch_203a3a6
 	bl      ErrorHandling
 branch_203a3a6: @ 203a3a6 :thumb
 
-	ldr     r0, [r4, #OverWorldData_14]
+	ldr     r0, [r4, #OverWorldData_Overworlds]
 	bl      free
 	pop     {r4,pc}
-thumb_func_end Free_OverWorldData_14
+thumb_func_end Free_OverWorldData_Overworlds
 
 
 /* Input:
@@ -703,28 +703,28 @@ thumb_func_start LoadMap_EventsWildPkmnScript
 LoadMap_EventsWildPkmnScript: @ 203a3b0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #OverWorldData_14]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
 	mov     r4, r1
 	cmp     r0, #0x0
 	bne     branch_203a3c0
 	bl      ErrorHandling
 branch_203a3c0: @ 203a3c0 :thumb
 
-	ldr     r0, [r5, #OverWorldData_14]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
 	mov     r1, r4
 	bl      LoadMapEvents
 
-	ldr     r0, [r5, #OverWorldData_14]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
 	bl      ParseZoneEventsOfMap
 
 	mov     r0, #0x92
-	ldr     r1, [r5, #OverWorldData_14]
+	ldr     r1, [r5, #OverWorldData_Overworlds]
 	lsl     r0, r0, #4
-	add     r0, r1, r0 @ OverWorldData_14_PtrToEncounterData
+	add     r0, r1, r0 @ OverWorldData_Overworlds_PtrToEncounterData
 	mov     r1, r4
 	bl      LoadMapWildPkmn
 
-	ldr     r0, [r5, #OverWorldData_14]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
 	mov     r1, r4
 	bl      LoadMapLevelScript
 	pop     {r3-r5,pc}
@@ -732,7 +732,7 @@ thumb_func_end LoadMap_EventsWildPkmnScript
 
 
 /* Input:
-r0: [OverWorldData_14]
+r0: [OverWorldData_Overworlds]
 r1: MapNr
 */
 thumb_func_start LoadMapEvents
@@ -744,7 +744,7 @@ LoadMapEvents: @ 203a3e8 :thumb
 	bl      GetMapEvents
 	mov     r4, r0
 
-	mov     r0, #0x20               @ fielddata/eventdata/zone_event.narc
+	mov     r0, #ZoneEvent_Narc
 	mov     r1, r4
 	bl      LoadFromNARC_7
 	mov     r1, #0x2
@@ -754,9 +754,9 @@ LoadMapEvents: @ 203a3e8 :thumb
 	bl      ErrorHandling
 branch_203a408: @ 203a408 :thumb
 
-	add     r5, #OverWorldData_14_PtrToZoneEventData
+	add     r5, #OverWorldData_Overworlds_PtrToZoneEventData
 	mov     r0, r5
-	mov     r1, #0x20               @ fielddata/eventdata/zone_event.narc
+	mov     r1, #ZoneEvent_Narc
 	mov     r2, r4
 	bl      LoadFromNARC
 
@@ -773,8 +773,8 @@ r0: OverWorldData
 Function_203a418: @ 203a418 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #OverWorldData_14]
-	ldr     r4, [r0, #OverWorldData_14_NrOfOverworlds]
+	ldr     r0, [r5, #OverWorldData_Overworlds]
+	ldr     r4, [r0, #OverWorldData_Overworlds_NrOfOverworlds]
 	cmp     r0, #0x0
 	bne     branch_203a428
 	bl      ErrorHandling
@@ -782,11 +782,11 @@ branch_203a428: @ 203a428 :thumb
 
 	cmp     r4, #0x0
 	beq     branch_203a43c
-	ldr     r1, [r5, #OverWorldData_1c]
-	ldr     r3, [r5, #OverWorldData_14]
+	ldr     r1, [r5, #OverWorldData_MapData]
+	ldr     r3, [r5, #OverWorldData_Overworlds]
 	ldr     r0, [r5, #OverWorldData_SpriteList]
-	ldr     r1, [r1, #OverWorldData_1c_MapNr]
-	ldr     r3, [r3, #OverWorldData_14_PtrToOverworlds]
+	ldr     r1, [r1, #MapData_MapNr]
+	ldr     r3, [r3, #OverWorldData_Overworlds_PtrToOverworlds]
 	mov     r2, r4
 	bl      Function_2062068
 branch_203a43c: @ 203a43c :thumb
@@ -823,8 +823,8 @@ r0: Ptr to WarpData
 */
 thumb_func_start GetPtrToWarpData
 GetPtrToWarpData: @ 203a450 :thumb
-	ldr     r2, [r0, #OverWorldData_14]
-	ldr     r0, [r2, #OverWorldData_14_NrOfWarps]
+	ldr     r2, [r0, #OverWorldData_Overworlds]
+	ldr     r0, [r2, #OverWorldData_Overworlds_NrOfWarps]
 	cmp     r1, r0
 	blo     branch_203a45c
 
@@ -833,7 +833,7 @@ GetPtrToWarpData: @ 203a450 :thumb
 
 branch_203a45c: @ 203a45c :thumb
 	mov     r0, #12
-	ldr     r2, [r2, #OverWorldData_14_PtrToWarps]
+	ldr     r2, [r2, #OverWorldData_Overworlds_PtrToWarps]
 	mul     r0, r1
 	add     r0, r2, r0
 	bx      lr
@@ -920,9 +920,8 @@ Function_203a4bc: @ 203a4bc :thumb
 @ 0x203a4c2
 
 
-.align 2, 0
-.thumb
-Function_203a4c4: @ 203a4c4 :thumb
+thumb_func_start SetOverworldPosition
+SetOverworldPosition: @ 203a4c4 :thumb
 	push    {r3-r7,lr}
 	ldr     r0, [r0, #0x14]
 	mov     r4, r1
@@ -933,11 +932,13 @@ Function_203a4c4: @ 203a4c4 :thumb
 	ldr     r3, [r0, #0x14]
 	cmp     r5, #0x0
 	bls     branch_203a4f4
+
 	mov     r6, r3
 branch_203a4da: @ 203a4da :thumb
 	ldrh    r0, [r6, #0x0]
 	cmp     r4, r0
 	bne     branch_203a4ec
+
 	lsl     r0, r2, #5
 	add     r0, r3, r0
 	strh    r7, [r0, #0x18]
@@ -950,11 +951,12 @@ branch_203a4ec: @ 203a4ec :thumb
 	add     r6, #0x20
 	cmp     r2, r5
 	blo     branch_203a4da
+
 branch_203a4f4: @ 203a4f4 :thumb
 	bl      ErrorHandling
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
-@ 0x203a4fc
+thumb_func_end SetOverworldPosition
 
 
 .thumb
@@ -1086,76 +1088,76 @@ Function_203a594: @ 203a594 :thumb
 
 
 /* Input:
-r0: [OverWorldData_14]
+r0: [OverWorldData_Overworlds]
 */
 thumb_func_start ParseZoneEventsOfMap
 ParseZoneEventsOfMap: @ 203a5b0 :thumb
 	mov     r1, r0
-	ldr     r2, [r0, #OverWorldData_14_PtrToZoneEventData]
-	add     r1, #OverWorldData_14_PtrToZoneEventData
+	ldr     r2, [r0, #OverWorldData_Overworlds_PtrToZoneEventData]
+	add     r1, #OverWorldData_Overworlds_PtrToZoneEventData
 	.hword  0x1d09 @ add r1, r1, #0x4
-	str     r2, [r0, #OverWorldData_14_NrOfFurnitures]
+	str     r2, [r0, #OverWorldData_Overworlds_NrOfFurnitures]
 	cmp     r2, #0x0
 	beq     branch_203a5c2
-	str     r1, [r0, #OverWorldData_14_PtrToFurnitures]
+	str     r1, [r0, #OverWorldData_Overworlds_PtrToFurnitures]
 	b       branch_203a5c6
 
 branch_203a5c2: @ 203a5c2 :thumb
 	mov     r2, #0x0
-	str     r2, [r0, #OverWorldData_14_PtrToFurnitures]
+	str     r2, [r0, #OverWorldData_Overworlds_PtrToFurnitures]
 branch_203a5c6: @ 203a5c6 :thumb
-	ldr     r3, [r0, #OverWorldData_14_NrOfFurnitures]
+	ldr     r3, [r0, #OverWorldData_Overworlds_NrOfFurnitures]
 	mov     r2, #20
 	mul     r2, r3
 	add     r3, r1, r2
 	ldr     r2, [r1, r2]
 	add     r1, r3, #0x4
-	str     r2, [r0, #OverWorldData_14_NrOfOverworlds]
+	str     r2, [r0, #OverWorldData_Overworlds_NrOfOverworlds]
 	cmp     r2, #0x0
 	beq     branch_203a5dc
-	str     r1, [r0, #OverWorldData_14_PtrToOverworlds]
+	str     r1, [r0, #OverWorldData_Overworlds_PtrToOverworlds]
 	b       branch_203a5e0
 
 branch_203a5dc: @ 203a5dc :thumb
 	mov     r2, #0x0
-	str     r2, [r0, #OverWorldData_14_PtrToOverworlds]
+	str     r2, [r0, #OverWorldData_Overworlds_PtrToOverworlds]
 branch_203a5e0: @ 203a5e0 :thumb
-	ldr     r2, [r0, #OverWorldData_14_NrOfOverworlds]
+	ldr     r2, [r0, #OverWorldData_Overworlds_NrOfOverworlds]
 	lsl     r2, r2, #5          @ * 32
 	add     r3, r1, r2
 	ldr     r2, [r1, r2]
 	add     r1, r3, #0x4
-	str     r2, [r0, #OverWorldData_14_NrOfWarps]
+	str     r2, [r0, #OverWorldData_Overworlds_NrOfWarps]
 	cmp     r2, #0x0
 	beq     branch_203a5f4
-	str     r1, [r0, #OverWorldData_14_PtrToWarps]
+	str     r1, [r0, #OverWorldData_Overworlds_PtrToWarps]
 	b       branch_203a5f8
 
 branch_203a5f4: @ 203a5f4 :thumb
 	mov     r2, #0x0
-	str     r2, [r0, #OverWorldData_14_PtrToWarps]
+	str     r2, [r0, #OverWorldData_Overworlds_PtrToWarps]
 branch_203a5f8: @ 203a5f8 :thumb
-	ldr     r3, [r0, #OverWorldData_14_NrOfWarps]
+	ldr     r3, [r0, #OverWorldData_Overworlds_NrOfWarps]
 	mov     r2, #12
 	mul     r2, r3
 	add     r3, r1, r2
 	ldr     r1, [r1, r2]
-	str     r1, [r0, #OverWorldData_14_NrOfTriggers]
+	str     r1, [r0, #OverWorldData_Overworlds_NrOfTriggers]
 	cmp     r1, #0x0
 	beq     branch_203a60e
 	add     r1, r3, #0x4
-	str     r1, [r0, #OverWorldData_14_PtrToTriggers]
+	str     r1, [r0, #OverWorldData_Overworlds_PtrToTriggers]
 	bx      lr
 
 branch_203a60e: @ 203a60e :thumb
 	mov     r1, #0x0
-	str     r1, [r0, #OverWorldData_14_PtrToTriggers]
+	str     r1, [r0, #OverWorldData_Overworlds_PtrToTriggers]
 	bx      lr
 thumb_func_end ParseZoneEventsOfMap
 
 
 /* Input:
-r0: OverWorldData_14_PtrToEncounterData
+r0: OverWorldData_Overworlds_PtrToEncounterData
 r1: MapNr
 */
 thumb_func_start LoadMapWildPkmn
@@ -1177,7 +1179,7 @@ LoadMapWildPkmn: @ 203a614 :thumb
 	bl      GetMapWildPkmn
 	mov     r2, r0
 	mov     r0, r5
-	mov     r1, #0xa1           @ fielddata/encountdata/pl_enc_data.narc
+	mov     r1, #PlEncData_Narc
 	bl      LoadFromNARC
 
 branch_203a63e: @ 203a63e :thumb
@@ -1193,13 +1195,13 @@ GetMapWildPkmnAdress: @ 203a640 :thumb
 	ldr     r1, [r0, #0x14]
 	mov     r0, #0x92
 	lsl     r0, r0, #4
-	add     r0, r1, r0 @ OverWorldData_14_PtrToEncounterData
+	add     r0, r1, r0 @ OverWorldData_Overworlds_PtrToEncounterData
 	bx      lr
 thumb_func_end GetMapWildPkmnAdress
 
 
 /* Input:
-r0: [OverWorldData_14]
+r0: [OverWorldData_Overworlds]
 r1: MapNr
 */
 thumb_func_start LoadMapLevelScript
@@ -1209,7 +1211,7 @@ LoadMapLevelScript: @ 203a64c :thumb
 	mov     r0, r1
 	bl      GetMapLevelScripts
 	mov     r1, #0x82
-	lsl     r1, r1, #4 @ 0x820 OverWorldData_14_820
+	lsl     r1, r1, #4 @ 0x820 OverWorldData_Overworlds_820
 	mov     r2, #0x1
 	mov     r4, r0
 	mov     r0, #0x0
@@ -1217,7 +1219,7 @@ LoadMapLevelScript: @ 203a64c :thumb
 	lsl     r2, r2, #8
 	blx     MIi_CpuClearFast
 
-	mov     r0, #0xa            @ fielddata/script/scr_seq.narc
+	mov     r0, #ScrSeq_Narc
 	mov     r1, r4
 	bl      LoadFromNARC_7
 	mov     r1, #0x1
@@ -1228,9 +1230,9 @@ LoadMapLevelScript: @ 203a64c :thumb
 branch_203a67c: @ 203a67c :thumb
 
 	mov     r0, #0x82
-	lsl     r0, r0, #4 @ OverWorldData_14_820
+	lsl     r0, r0, #4 @ OverWorldData_Overworlds_820
 	add     r0, r5, r0
-	mov     r1, #0xa        @ fielddata/script/scr_seq.narc
+	mov     r1, #ScrSeq_Narc
 	mov     r2, r4
 	bl      LoadFromNARC
 
@@ -1297,11 +1299,11 @@ branch_203a6d6: @ 203a6d6 :thumb
 @ 0x203a6dc
 
 
-.thumb
-Function_203a6dc: @ 203a6dc :thumb
-	mov     r0, #0xa0
+thumb_func_start GetSizeOfVariableAreaAdress_6
+GetSizeOfVariableAreaAdress_6: @ 203a6dc :thumb
+	mov     r0, #VarArea6_Size
 	bx      lr
-@ 0x203a6e0
+thumb_func_end GetSizeOfVariableAreaAdress_6
 
 
 .thumb
@@ -1327,182 +1329,165 @@ Function_203a6e8: @ 203a6e8 :thumb
 
 
 
-.thumb
-Function_203a6f8: @ 203a6f8 :thumb
+thumb_func_start ClearVariableAreaAdress_6
+ClearVariableAreaAdress_6: @ 203a6f8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	mov     r1, #0x0
-	mov     r2, #0xa0
+	mov     r2, #VarArea6_Size
 	blx     Call_FillMemWithValue
+
 	mov     r0, r4
-	add     r0, #0x6c
+	add     r0, #VarArea6_6c
 	bl      Function_20556c4
+
 	mov     r0, r4
-	add     r0, #0x8c
+	add     r0, #VarArea6_8c
 	bl      Function_205ec34
 	bl      Function_203a7ec
-	add     r4, #0x68
-	strh    r0, [r4, #0x0]
+	add     r4, #VarArea6_68
+	strh    r0, [r4]
 	pop     {r4,pc}
-@ 0x203a71e
+thumb_func_end ClearVariableAreaAdress_6
 
 
-.align 2, 0
-.thumb
-.globl Function_203a720_Dummy
-Function_203a720_Dummy: @ 203a720 :thumb
+thumb_func_start AddVariableAreaAdress_6_MapData0
+AddVariableAreaAdress_6_MapData0: @ 203a720 :thumb
 	bx      lr
-@ 0x203a722
+thumb_func_end AddVariableAreaAdress_6_MapData0
 
 
-.align 2, 0
-.thumb
-.globl Function_203a724
-Function_203a724: @ 203a724 :thumb
-	add     r0, #0x14
+thumb_func_start AddVariableAreaAdress_6_MapData1
+AddVariableAreaAdress_6_MapData1: @ 203a724 :thumb
+	add     r0, #VarArea6_MapData1
 	bx      lr
-@ 0x203a728
+thumb_func_end AddVariableAreaAdress_6_MapData1
 
 
-.thumb
-Function_203a728: @ 203a728 :thumb
-	add     r0, #0x28
+thumb_func_start AddVariableAreaAdress_6_MapData2
+AddVariableAreaAdress_6_MapData2: @ 203a728 :thumb
+	add     r0, #VarArea6_MapData2
 	bx      lr
-@ 0x203a72c
+thumb_func_end AddVariableAreaAdress_6_MapData2
 
 
-.thumb
-.globl Function_203a72c
-Function_203a72c: @ 203a72c :thumb
-	add     r0, #0x50
+thumb_func_start AddVariableAreaAdress_6_MapData4
+AddVariableAreaAdress_6_MapData4: @ 203a72c :thumb
+	add     r0, #VarArea6_MapData4
 	bx      lr
-@ 0x203a730
+thumb_func_end AddVariableAreaAdress_6_MapData4
 
 
-.thumb
-.globl Function_203a730
-Function_203a730: @ 203a730 :thumb
-	add     r0, #0x3c
+thumb_func_start AddVariableAreaAdress_6_MapData3
+AddVariableAreaAdress_6_MapData3: @ 203a730 :thumb
+	add     r0, #VarArea6_MapData3
 	bx      lr
-@ 0x203a734
+thumb_func_end AddVariableAreaAdress_6_MapData3
 
 
-.thumb
-Function_203a734: @ 203a734 :thumb
+thumb_func_start CopyToVariableAreaAdress_6_3c
+CopyToVariableAreaAdress_6_3c: @ 203a734 :thumb
 	mov     r3, r1
 	mov     r2, r0
 	ldmia   r3!, {r0,r1}
-	add     r2, #0x3c
+	add     r2, #VarArea6_MapData3
 	stmia   r2!, {r0,r1}
 	ldmia   r3!, {r0,r1}
 	stmia   r2!, {r0,r1}
 	ldr     r0, [r3, #0x0]
 	str     r0, [r2, #0x0]
 	bx      lr
-@ 0x203a748
+thumb_func_end CopyToVariableAreaAdress_6_3c
 
 
-.thumb
-Function_203a748: @ 203a748 :thumb
-	add     r0, #0x64
+thumb_func_start AddVariableAreaAdress_6_64
+AddVariableAreaAdress_6_64: @ 203a748 :thumb
+	add     r0, #VarArea6_64
 	bx      lr
-@ 0x203a74c
+thumb_func_end AddVariableAreaAdress_6_64
 
 
-.thumb
-.globl Function_203a74c
-Function_203a74c: @ 203a74c :thumb
-	add     r0, #0x66
-	ldrh    r0, [r0, #0x0]
+thumb_func_start GetVariableAreaAdress_6_66
+GetVariableAreaAdress_6_66: @ 203a74c :thumb
+	add     r0, #VarArea6_66
+	ldrh    r0, [r0]
 	bx      lr
-@ 0x203a752
+thumb_func_end GetVariableAreaAdress_6_66
 
 
-.align 2, 0
-.thumb
-Function_203a754: @ 203a754 :thumb
-	add     r0, #0x66
-	strh    r1, [r0, #0x0]
+thumb_func_start SetVariableAreaAdress_6_66
+SetVariableAreaAdress_6_66: @ 203a754 :thumb
+	add     r0, #VarArea6_66
+	strh    r1, [r0]
 	bx      lr
-@ 0x203a75a
+thumb_func_end SetVariableAreaAdress_6_66
 
 
-.align 2, 0
-.thumb
-.globl Function_203a75c
-Function_203a75c: @ 203a75c :thumb
-	add     r0, #0x68
-	ldrh    r0, [r0, #0x0]
+thumb_func_start GetVariableAreaAdress_6_68
+GetVariableAreaAdress_6_68: @ 203a75c :thumb
+	add     r0, #VarArea6_68
+	ldrh    r0, [r0]
 	bx      lr
-@ 0x203a762
+thumb_func_end GetVariableAreaAdress_6_68
 
 
-.align 2, 0
-.thumb
-Function_203a764: @ 203a764 :thumb
-	add     r0, #0x68
-	strh    r1, [r0, #0x0]
+thumb_func_start SetVariableAreaAdress_6_68
+SetVariableAreaAdress_6_68: @ 203a764 :thumb
+	add     r0, #VarArea6_68
+	strh    r1, [r0]
 	bx      lr
-@ 0x203a76a
+thumb_func_end SetVariableAreaAdress_6_68
 
 
-.align 2, 0
-.thumb
-.globl Function_203a76c
-Function_203a76c: @ 203a76c :thumb
-	add     r0, #0x6c
+thumb_func_start AddVariableAreaAdress_6_6c
+AddVariableAreaAdress_6_6c: @ 203a76c :thumb
+	add     r0, #VarArea6_6c
 	bx      lr
-@ 0x203a770
+thumb_func_end AddVariableAreaAdress_6_6c
 
 
-.thumb
-.globl Function_203a770
-Function_203a770: @ 203a770 :thumb
-	add     r0, #0x6a
-	ldrb    r0, [r0, #0x0]
+thumb_func_start GetVariableAreaAdress_6_6a
+GetVariableAreaAdress_6_6a: @ 203a770 :thumb
+	add     r0, #VarArea6_6a
+	ldrb    r0, [r0]
 	bx      lr
-@ 0x203a776
+thumb_func_end GetVariableAreaAdress_6_6a
 
 
-.align 2, 0
-.thumb
-Function_203a778: @ 203a778 :thumb
-	add     r0, #0x6a
-	strb    r1, [r0, #0x0]
+thumb_func_start SetVariableAreaAdress_6_6a
+SetVariableAreaAdress_6_6a: @ 203a778 :thumb
+	add     r0, #VarArea6_6a
+	strb    r1, [r0]
 	bx      lr
-@ 0x203a77e
+thumb_func_end SetVariableAreaAdress_6_6a
 
 
-.align 2, 0
-.thumb
-Function_203a780: @ 203a780 :thumb
-	add     r0, #0x8c
+thumb_func_start AddVariableAreaAdress_6_8c
+AddVariableAreaAdress_6_8c: @ 203a780 :thumb
+	add     r0, #VarArea6_8c
 	bx      lr
-@ 0x203a784
+thumb_func_end AddVariableAreaAdress_6_8c
 
 
-.thumb
-.globl Function_203a784
-Function_203a784: @ 203a784 :thumb
-	add     r0, #0x98
+thumb_func_start AddVariableAreaAdress_6_98
+AddVariableAreaAdress_6_98: @ 203a784 :thumb
+	add     r0, #VarArea6_98
 	bx      lr
-@ 0x203a788
+thumb_func_end AddVariableAreaAdress_6_98
 
 
-.thumb
-.globl Function_203a788
-Function_203a788: @ 203a788 :thumb
-	add     r0, #0x96
+thumb_func_start AddVariableAreaAdress_6_96
+AddVariableAreaAdress_6_96: @ 203a788 :thumb
+	add     r0, #VarArea6_96
 	bx      lr
-@ 0x203a78c
+thumb_func_end AddVariableAreaAdress_6_96
 
 
-.thumb
-.globl Function_203a78c
-Function_203a78c: @ 203a78c :thumb
-	add     r0, #0x94
+thumb_func_start AddVariableAreaAdress_6_94
+AddVariableAreaAdress_6_94: @ 203a78c :thumb
+	add     r0, #VarArea6_94
 	bx      lr
-@ 0x203a790
+thumb_func_end AddVariableAreaAdress_6_94
 
 
 thumb_func_start LoadVariableAreaAdress_6
@@ -1964,7 +1949,7 @@ branch_203aa66: @ 203aa66 :thumb
 	ldr     r1, [pc, #0xc] @ 0x203aa74, (=0x203ac45)
 	mov     r0, r5
 	mov     r2, r4
-	bl      Function_2050904
+	bl      OverWorldData_InitUnknownStruct01
 	pop     {r3-r5,pc}
 @ 0x203aa72
 
@@ -2001,7 +1986,7 @@ branch_203aaac: @ 203aaac :thumb
 	ldr     r1, [pc, #0x8] @ 0x203aab8, (=0x203ac45)
 	mov     r0, r5
 	mov     r2, r4
-	bl      Function_2050904
+	bl      OverWorldData_InitUnknownStruct01
 	pop     {r3-r5,pc}
 @ 0x203aab8
 
@@ -2037,7 +2022,7 @@ branch_203aaf0: @ 203aaf0 :thumb
 	ldr     r1, [pc, #0x8] @ 0x203aafc, (=0x203ac45)
 	mov     r0, r5
 	mov     r2, r4
-	bl      Function_2050904
+	bl      OverWorldData_InitUnknownStruct01
 	pop     {r3-r5,pc}
 @ 0x203aafc
 
@@ -2161,8 +2146,8 @@ Function_203abd0: @ 203abd0 :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0xc]
 	mov     r4, #0x0
-	bl      LoadVariableAreaAdress_7
-	bl      Function_2027520
+	bl      LoadPokedexDataAdress
+	bl      CheckActPokedex
 	cmp     r0, #0x0
 	bne     branch_203abe8
 	mov     r0, #0x1
@@ -2180,7 +2165,7 @@ branch_203abfa: @ 203abfa :thumb
 
 	ldr     r0, [r5, #0xc]
 	bl      LoadFlagAdress
-	bl      Function_206a938
+	bl      CheckFlag_Flag960
 	cmp     r0, #0x0
 	bne     branch_203ac0c
 	mov     r0, #0x4
@@ -2254,7 +2239,7 @@ Function_203ac44: @ 203ac44 :thumb
 	mov     r5, r0
 
 	mov     r0, r6
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldrh    r1, [r4, #0x2a]
 	cmp     r1, #0xf
@@ -2511,13 +2496,16 @@ Function_203adfc: @ 203adfc :thumb
 	mov     r4, r0
 	bl      LoadOverWorldDataAdress
 	str     r0, [sp, #0x1c]
+
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
+
 	mov     r1, r4
 	add     r1, #0x30
 	bl      Function_203afcc
 	str     r0, [sp, #0x14]
+
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	mov     r0, #0xb
@@ -2536,27 +2524,30 @@ Function_203adfc: @ 203adfc :thumb
 	str     r0, [sp, #0x10]
 	ldr     r0, [sp, #0x1c]
 	mov     r3, #0x14
-	ldr     r0, [r0, #0x8]
+	ldr     r0, [r0, #OverWorldData_OverlayData]
 	bl      Function_201a7e8
+
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	mov     r3, #0xb
 	ldr     r0, [sp, #0x1c]
 	str     r3, [sp, #0x4]
-	ldr     r0, [r0, #0x8]
+	ldr     r0, [r0, #OverWorldData_OverlayData]
 	ldr     r2, [pc, #0x168] @ 0x203afbc, (=0x3d9)
 	mov     r1, #0x3
 	bl      Function_200daa4
+
 	ldr     r2, [pc, #0x160] @ 0x203afbc, (=0x3d9)
 	mov     r0, r4
 	mov     r1, #0x1
 	mov     r3, #0xb
 	bl      Function_200dc48
-	ldr     r2, [pc, #0x158] @ 0x203afc0, (=0x16f)
+
+	ldr     r2, [pc, #0x158] @ 0x203afc0, (=0x16f) PlMsg_Narc_367
 	mov     r0, #0x0
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r3, #0xb
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [sp, #0x18]
 	ldr     r0, [sp, #0x14]
 	mov     r1, #0xb
@@ -2567,6 +2558,7 @@ Function_203adfc: @ 203adfc :thumb
 	strh    r5, [r4, #0x28]
 	cmp     r0, #0x0
 	bls     branch_203af1c
+
 branch_203ae86: @ 203ae86 :thumb
 	add     r0, r4, r5
 	add     r0, #0x30
@@ -2587,11 +2579,11 @@ branch_203ae86: @ 203ae86 :thumb
 	lsl     r2, r1, #3
 	ldr     r1, [pc, #0x114] @ 0x203afc4, (=Unknown_20ea05c)
 	ldr     r1, [r1, r2]
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0x20]
 
 	ldr     r0, [sp, #0x1c]
-	ldr     r0, [r0, #0xc]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	mov     r2, r0
 
@@ -2609,9 +2601,9 @@ branch_203ae86: @ 203ae86 :thumb
 	mov     r1, r7
 	bl      Function_2013a6c
 	ldr     r0, [sp, #0x20]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
 	bl      Function_200b3f0
 	b       branch_203af02
@@ -2625,8 +2617,8 @@ branch_203aef4: @ 203aef4 :thumb
 	bl      Function_2013a4c
 branch_203af02: @ 203af02 :thumb
 	ldr     r0, [sp, #0x1c]
-	add     r0, #0x90
-	ldr     r1, [r0, #0x0]
+	add     r0, #OverWorldData_90
+	ldr     r1, [r0] @ OverWorldData_90
 	add     r0, r4, r5
 	add     r0, #0x30
 	ldrb    r0, [r0, #0x0]
@@ -2634,18 +2626,20 @@ branch_203af02: @ 203af02 :thumb
 	bne     branch_203af14
 	strh    r5, [r4, #0x28]
 branch_203af14: @ 203af14 :thumb
+
 	ldr     r0, [sp, #0x14]
 	.hword  0x1c6d @ add r5, r5, #0x1
 	cmp     r5, r0
 	blo     branch_203ae86
+
 branch_203af1c: @ 203af1c :thumb
 	ldrh    r0, [r4, #0x28]
 	add     r0, r4, r0
 	add     r0, #0x30
 	ldrb    r1, [r0, #0x0]
 	ldr     r0, [sp, #0x1c]
-	add     r0, #0x90
-	str     r1, [r0, #0x0]
+	add     r0, #OverWorldData_90
+	str     r1, [r0] @ OverWorldData_90
 	ldr     r0, [sp, #0x18]
 	bl      Function_200b190
 	ldr     r0, [r4, #0x24]
@@ -2691,16 +2685,18 @@ branch_203af74: @ 203af74 :thumb
 	mov     r1, #0x1c
 	str     r0, [sp, #0x4]
 	ldrh    r3, [r4, #0x28]
-	add     r0, sp, #0x24
+	add     r0, sp, #0x24               @ UnknownGraphicData
 	mov     r2, #0x4
 	lsl     r3, r3, #24
 	lsr     r3, r3, #24
 	bl      Function_2001af4
 	str     r0, [r4, #0x20]
+
 	mov     r0, r4
 	bl      Function_201a9a4
+
 	ldr     r0, [sp, #0x1c]
-	ldr     r0, [r0, #0xc]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	bl      GetGender
 	mov     r3, r0
@@ -2738,6 +2734,7 @@ Function_203afcc: @ 203afcc :thumb
 	strb    r3, [r1, #0x0]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203afe2: @ 203afe2 :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2748,6 +2745,7 @@ branch_203afe2: @ 203afe2 :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203aff4: @ 203aff4 :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2758,6 +2756,7 @@ branch_203aff4: @ 203aff4 :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b006: @ 203b006 :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2768,6 +2767,7 @@ branch_203b006: @ 203b006 :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b018: @ 203b018 :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2778,6 +2778,7 @@ branch_203b018: @ 203b018 :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b02a: @ 203b02a :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2788,6 +2789,7 @@ branch_203b02a: @ 203b02a :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b03c: @ 203b03c :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2798,6 +2800,7 @@ branch_203b03c: @ 203b03c :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b04e: @ 203b04e :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r4, [r0, r3]
@@ -2808,6 +2811,7 @@ branch_203b04e: @ 203b04e :thumb
 	strb    r3, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b060: @ 203b060 :thumb
+
 	mov     r3, #0x7
 	lsl     r3, r3, #6
 	ldr     r3, [r0, r3]
@@ -2818,6 +2822,7 @@ branch_203b060: @ 203b060 :thumb
 	strb    r0, [r1, r2]
 	.hword  0x1c52 @ add r2, r2, #0x1
 branch_203b072: @ 203b072 :thumb
+
 	mov     r0, r2
 	pop     {r3,r4}
 	bx      lr
@@ -2847,19 +2852,22 @@ Function_203b094: @ 203b094 :thumb
 	mov     r5, r0
 	bl      LoadOverWorldDataAdress
 	mov     r4, r0
+
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r5, r0
-	ldr     r0, [r4, #0xc]
+
+	ldr     r0, [r4, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	bl      Function_206ae5c
 	cmp     r0, #0x1
 	bne     branch_203b0ba
+
 	mov     r6, #0x0
 	b       branch_203b0cc
 
 branch_203b0ba: @ 203b0ba :thumb
-	ldr     r0, [r4, #0xc]
+	ldr     r0, [r4, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	bl      Function_206ae8c
 	cmp     r0, #0x1
@@ -2880,43 +2888,48 @@ branch_203b0cc: @ 203b0cc :thumb
 	ldr     r0, [pc, #0x114] @ 0x203b1f4, (=0x237)
 	mov     r1, r5
 	str     r0, [sp, #0x10]
-	ldr     r0, [r4, #0x8]
+	ldr     r0, [r4, #OverWorldData_OverlayData]
 	add     r1, #0x10
 	mov     r2, #0x3
 	bl      Function_201a7e8
+
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	mov     r3, #0xb
 	str     r3, [sp, #0x4]
-	ldr     r0, [r4, #0x8]
+	ldr     r0, [r4, #OverWorldData_OverlayData]
 	ldr     r2, [pc, #0x100] @ 0x203b1f8, (=0x3d9)
 	mov     r1, #0x3
 	bl      Function_200daa4
+
 	mov     r0, r5
 	ldr     r2, [pc, #0xf4] @ 0x203b1f8, (=0x3d9)
 	add     r0, #0x10
 	mov     r1, #0x1
 	mov     r3, #0xb
 	bl      Function_200dc48
+
 	mov     r0, r5
 	add     r0, #0x10
 	mov     r1, #0xf
-	bl      Function_201ada4
-	ldr     r2, [pc, #0xe4] @ 0x203b1fc, (=0x16f)
+	bl      Function_201ada4_ClearTextBox
+
+	ldr     r2, [pc, #0xe4] @ 0x203b1fc, (=0x16f) PlMsg_Narc_367
 	mov     r0, #0x0
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r3, #0xb
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [sp, #0x1c]
 	cmp     r6, #0x0
 	bne     branch_203b130
+
 	mov     r1, #0x9
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	b       branch_203b136
 
 branch_203b130: @ 203b130 :thumb
 	mov     r1, #0xa
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 branch_203b136: @ 203b136 :thumb
 	mov     r1, #0x0
 	mov     r7, r0
@@ -2928,25 +2941,31 @@ branch_203b136: @ 203b136 :thumb
 	mov     r2, r7
 	mov     r3, r1
 	str     r1, [sp, #0x8]
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
+
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
+
 	mov     r0, #0xb
 	bl      Function_200b358
 	mov     r7, r0
+
 	mov     r0, #0x20
 	mov     r1, #0xb
 	bl      Function_2023790
 	str     r0, [sp, #0x18]
+
 	ldr     r0, [sp, #0x1c]
 	mov     r1, #0xb
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0x14]
+
 	cmp     r6, #0x0
 	bne     branch_203b194
-	ldr     r0, [r4, #0xc]
+
+	ldr     r0, [r4, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a784
+	bl      AddVariableAreaAdress_6_98
 	mov     r1, #0x0
 	mov     r2, r0
 	str     r1, [sp, #0x0]
@@ -2984,15 +3003,20 @@ branch_203b1ac: @ 203b1ac :thumb
 	add     r0, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x8]
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
+
 	ldr     r0, [sp, #0x18]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
+
 	ldr     r0, [sp, #0x14]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
+
 	mov     r0, r7
 	bl      Function_200b3f0
+
 	ldr     r0, [sp, #0x1c]
 	bl      Function_200b190
+
 	add     r5, #0x10
 	mov     r0, r5
 	bl      Function_201a9a4
@@ -3014,10 +3038,12 @@ Function_203b200: @ 203b200 :thumb
 	mov     r5, r0
 	bl      LoadOverWorldDataAdress
 	mov     r4, r0
+
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r5, r0
-	ldr     r0, [r4, #0xc]
+
+	ldr     r0, [r4, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	bl      Function_206ae5c
 	cmp     r0, #0x0
@@ -3048,7 +3074,7 @@ Function_203b244: @ 203b244 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r7
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r5, r0
 	ldr     r0, [r5, #0x20]
 	bl      Function_2001dc4
@@ -3178,9 +3204,9 @@ Function_203b318: @ 203b318 :thumb
 	add     r0, #0x38
 	mov     r2, #0x8
 	mov     r3, #0xb
-	bl      0x21d3190
+	bl      Function_5_21d3190
 
-	mov     r0, #0x42           @ graphic/menu_gra.narc
+	mov     r0, #MenuGra_Narc
 	mov     r1, #0xb
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x1c]
@@ -3195,7 +3221,7 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x5
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d32e8
+	bl      Function_5_21d32e8
 	ldr     r0, [pc, #0x168] @ 0x203b4d4, (=0x34d8)
 	ldr     r1, [sp, #0x1c]
 	str     r0, [sp, #0x0]
@@ -3203,7 +3229,7 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x1
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d3374
+	bl      Function_5_21d3374
 	ldr     r0, [pc, #0x158] @ 0x203b4d4, (=0x34d8)
 	mov     r2, #0x0
 	str     r0, [sp, #0x0]
@@ -3211,7 +3237,7 @@ Function_203b318: @ 203b318 :thumb
 	ldr     r1, [sp, #0x1c]
 	add     r0, #0x38
 	mov     r3, r2
-	bl      0x21d339c
+	bl      Function_5_21d339c
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	ldr     r0, [pc, #0x140] @ 0x203b4d4, (=0x34d8)
@@ -3221,11 +3247,11 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x2
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d3414
+	bl      Function_5_21d3414
 	ldr     r0, [sp, #0xc]
 	ldr     r1, [pc, #0x130] @ 0x203b4d8, (=Unknown_20ea0a4)
 	add     r0, #0x38
-	bl      0x21d3584
+	bl      Function_5_21d3584
 	mov     r2, #0x67
 	ldr     r1, [sp, #0xc]
 	lsl     r2, r2, #2
@@ -3242,7 +3268,7 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x4
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d3374
+	bl      Function_5_21d3374
 	ldr     r0, [pc, #0x108] @ 0x203b4dc, (=0x34d9)
 	ldr     r1, [sp, #0x1c]
 	str     r0, [sp, #0x0]
@@ -3250,7 +3276,7 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x3
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d339c
+	bl      Function_5_21d339c
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	ldr     r0, [pc, #0xf0] @ 0x203b4dc, (=0x34d9)
@@ -3260,7 +3286,7 @@ Function_203b318: @ 203b318 :thumb
 	mov     r2, #0x6
 	add     r0, #0x38
 	mov     r3, #0x0
-	bl      0x21d3414
+	bl      Function_5_21d3414
 	ldr     r0, [sp, #0x14]
 	mov     r4, #0x0
 	cmp     r0, #0x0
@@ -3319,7 +3345,7 @@ branch_203b45c: @ 203b45c :thumb
 	ldr     r0, [sp, #0xc]
 	add     r1, sp, #0x6c
 	add     r0, #0x38
-	bl      0x21d3584
+	bl      Function_5_21d3584
 	mov     r1, #0x1a
 	lsl     r1, r1, #4
 	add     r2, sp, #0x60
@@ -3406,10 +3432,11 @@ branch_203b500: @ 203b500 :thumb
 	ldr     r0, [r5, r6]
 	cmp     r4, r0
 	blo     branch_203b500
+
 branch_203b516: @ 203b516 :thumb
 	add     r5, #0x38
 	mov     r0, r5
-	bl      0x21d375c
+	bl      Function_5_21d375c
 	pop     {r3-r7,pc}
 @ 0x203b520
 
@@ -3559,7 +3586,7 @@ Function_203b610: @ 203b610 :thumb
 	mov     r0, r5
 	bl      LoadOverWorldDataAdress
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	bl      Function_203b078
 	mov     r0, r4
@@ -3586,7 +3613,7 @@ Function_203b64c: @ 203b64c :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, r6
 	bl      Function_20509b4
@@ -3616,7 +3643,7 @@ Function_203b674: @ 203b674 :thumb
 .thumb
 Function_203b680: @ 203b680 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -3643,14 +3670,14 @@ Function_203b6a4: @ 203b6a4 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r6, r0
 	mov     r0, #0xb
 	mov     r1, #0x20
 	bl      malloc
 	mov     r4, r0
 	ldr     r0, [r5, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	str     r0, [sp, #0x0]
 	ldr     r0, [r5, #0xc]
 	bl      LoadTrainerDataAdress
@@ -3710,7 +3737,7 @@ Function_203b738: @ 203b738 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_20509d4
@@ -3732,7 +3759,7 @@ branch_203b760: @ 203b760 :thumb
 .thumb
 Function_203b768: @ 203b768 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -3758,7 +3785,7 @@ Function_203b78c: @ 203b78c :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x7a
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -3789,7 +3816,7 @@ Function_203b7c0: @ 203b7c0 :thumb
 	mov     r5, r0
 
 	mov     r0, r7
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0xb
 	mov     r1, #0x40
@@ -3852,11 +3879,11 @@ branch_203b83c: @ 203b83c :thumb
 	bl      malloc
 	mov     r7, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r7, #0x0]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r7, #0x4]
 	mov     r0, #0x1
@@ -3872,15 +3899,15 @@ branch_203b83c: @ 203b83c :thumb
 	strh    r0, [r7, #0x18]
 	strb    r0, [r7, #0x12]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_18
 	str     r0, [r7, #0x20]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_207a274
 	str     r0, [r7, #0x1c]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_208c324
 	str     r0, [r7, #0x2c]
 	mov     r0, #0x0
@@ -3889,7 +3916,7 @@ branch_203b83c: @ 203b83c :thumb
 	mov     r0, r7
 	bl      Function_208d720
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	mov     r1, r0
 	mov     r0, r7
@@ -3911,11 +3938,11 @@ branch_203b8ba: @ 203b8ba :thumb
 	bl      malloc
 	mov     r7, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r7, #0x0]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r7, #0x4]
 	mov     r1, #0x1
@@ -3930,11 +3957,11 @@ branch_203b8ba: @ 203b8ba :thumb
 	mov     r0, #0x2
 	strb    r0, [r7, #0x12]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_207a274
 	str     r0, [r7, #0x1c]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_208c324
 	str     r0, [r7, #0x2c]
 	mov     r0, #0x0
@@ -3943,7 +3970,7 @@ branch_203b8ba: @ 203b8ba :thumb
 	mov     r0, r7
 	bl      Function_208d720
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	mov     r1, r0
 	mov     r0, r7
@@ -3975,11 +4002,11 @@ branch_203b940: @ 203b940 :thumb
 	bl      malloc
 	mov     r7, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r7, #0x0]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r7, #0x4]
 	mov     r1, #0x1
@@ -3994,11 +4021,11 @@ branch_203b940: @ 203b940 :thumb
 	mov     r0, #0x2
 	strb    r0, [r7, #0x12]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_207a274
 	str     r0, [r7, #0x1c]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      Function_208c324
 	str     r0, [r7, #0x2c]
 	mov     r0, #0x0
@@ -4007,7 +4034,7 @@ branch_203b940: @ 203b940 :thumb
 	mov     r0, r7
 	bl      Function_208d720
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	mov     r1, r0
 	mov     r0, r7
@@ -4081,7 +4108,7 @@ branch_203ba0c: @ 203ba0c :thumb
 	b       branch_203bbce
 
 branch_203ba1c: @ 203ba1c :thumb
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	mov     r1, r6
 	add     r1, #0x22
@@ -4122,11 +4149,11 @@ branch_203ba5a: @ 203ba5a :thumb
 	lsl     r1, r1, #2
 	str     r0, [r4, r1]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 	mov     r7, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	ldr     r1, [pc, #0x16c] @ 0x203bbec, (=Unknown_20ea020)
 	mov     r0, r7
@@ -4138,7 +4165,7 @@ branch_203ba5a: @ 203ba5a :thumb
 	str     r0, [r4, r1]
 	add     r3, #0x98
 	ldr     r0, [r4, r1]
-	ldr     r1, [r5, #OverWorldData_c]
+	ldr     r1, [r5, #OverWorldData_VariableAreaAdress]
 	ldr     r3, [r3, #0x0]
 	mov     r2, #0x1
 	bl      Function_207cb2c
@@ -4336,7 +4363,7 @@ branch_203bbce: @ 203bbce :thumb
 .thumb
 Function_203bbf4: @ 203bbf4 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -4362,7 +4389,7 @@ Function_203bc18: @ 203bc18 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x73
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -4380,7 +4407,7 @@ Function_203bc18: @ 203bc18 :thumb
 	lsl     r0, r0, #2
 	str     r1, [r4, r0]
 	mov     r0, r5
-	bl      0x21e2064
+	bl      Function_5_21e2064
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x203bc56
@@ -4399,7 +4426,7 @@ Function_203bc5c: @ 203bc5c :thumb
 	mov     r6, r0
 
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0xb
 	bl      Function_207cb08
@@ -4485,19 +4512,19 @@ branch_203bd02: @ 203bd02 :thumb
 	mov     r2, #0x40
 	mov     r5, r0
 	blx     Call_FillMemWithValue
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r5, #0x0]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 	str     r0, [r5, #0x4]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_f
 	str     r0, [r5, #0x8]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r5, #0xc]
 
@@ -4530,7 +4557,7 @@ branch_203bd02: @ 203bd02 :thumb
 	b       branch_203be72
 
 branch_203bd70: @ 203bd70 :thumb
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [sp, #0x4]
 	mov     r0, #0x7f
@@ -4595,15 +4622,15 @@ branch_203bdee: @ 203bdee :thumb
 	ldr     r0, [sp, #0x4]
 	str     r0, [r5, #0x0]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 	str     r0, [r5, #0x4]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_f
 	str     r0, [r5, #0x8]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r5, #0xc]
 	mov     r0, #0x7a
@@ -4669,7 +4696,7 @@ branch_203be72: @ 203be72 :thumb
 .thumb
 Function_203be8c: @ 203be8c :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -4696,7 +4723,7 @@ Function_203beb0: @ 203beb0 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0xb
 	bl      Function_2071f04
@@ -4736,7 +4763,7 @@ Function_203bf00: @ 203bf00 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x7e
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -4761,7 +4788,7 @@ Function_203bf00: @ 203bf00 :thumb
 Function_203bf38: @ 203bf38 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	bl      Function_203b078
 	mov     r0, r4
@@ -4787,7 +4814,7 @@ Function_203bf38: @ 203bf38 :thumb
 Function_203bf6c: @ 203bf6c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, r5
 	bl      LoadOverWorldDataAdress
@@ -4834,7 +4861,7 @@ Function_203bfc0: @ 203bfc0 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -4868,7 +4895,7 @@ branch_203bff4: @ 203bff4 :thumb
 .thumb
 Function_203c000: @ 203c000 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -4894,7 +4921,7 @@ Function_203c024: @ 203c024 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_203d8ec
@@ -4919,7 +4946,7 @@ Function_203c050: @ 203c050 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -4938,7 +4965,7 @@ Function_203c050: @ 203c050 :thumb
 .thumb
 Function_203c07c: @ 203c07c :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x0
 	bl      0x21d1744
@@ -4965,7 +4992,7 @@ Function_203c0a0: @ 203c0a0 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldr     r2, [r5, #0xc]
 	mov     r0, #0x2
@@ -5009,7 +5036,7 @@ Function_203c0f8: @ 203c0f8 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r5, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -5061,7 +5088,7 @@ Function_203c164: @ 203c164 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r6, r0
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	bl      Function_203b078
 	mov     r0, r4
@@ -5109,7 +5136,7 @@ Function_203c1c8: @ 203c1c8 :thumb
 	mov     r6, r0
 
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0xb
 	mov     r1, #0x30
@@ -5139,19 +5166,19 @@ Function_203c1c8: @ 203c1c8 :thumb
 	mov     r5, r0
 	blx     Call_FillMemWithValue
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r5, #0x0]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 	str     r0, [r5, #0x4]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_f
 	str     r0, [r5, #0x8]
 
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r5, #0xc]
 
@@ -5246,7 +5273,7 @@ Function_203c2d8: @ 203c2d8 :thumb
 	bl      LoadOverWorldDataAdress
 	str     r0, [sp, #0x4]
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r6, r0
 	mov     r0, #0xb
 	bl      Function_20972fc
@@ -5332,7 +5359,7 @@ Function_203c390: @ 203c390 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -5381,7 +5408,7 @@ Function_203c3f4: @ 203c3f4 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x7e
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -5416,7 +5443,7 @@ Function_203c434: @ 203c434 :thumb
 	mov     r6, r0
 
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
@@ -5449,7 +5476,7 @@ Function_203c434: @ 203c434 :thumb
 	b       branch_203c4fe
 
 branch_203c48a: @ 203c48a :thumb
-	ldr     r0, [r6, #OverWorldData_c]
+	ldr     r0, [r6, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	mov     r1, r7
 	bl      GetAdrOfPkmnInParty
@@ -5518,7 +5545,7 @@ Function_203c50c: @ 203c50c :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x73
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -5562,7 +5589,7 @@ Function_203c558: @ 203c558 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7f
 	lsl     r0, r0, #2
@@ -5722,19 +5749,19 @@ Function_203c668: @ 203c668 :thumb
 	mov     r4, r0
 	blx     Call_FillMemWithValue
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	str     r0, [r4, #0x0]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 	str     r0, [r4, #0x4]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_f
 	str     r0, [r4, #0x8]
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress
 	str     r0, [r4, #0xc]
 
@@ -5795,7 +5822,7 @@ Function_203c710: @ 203c710 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -5828,7 +5855,7 @@ Function_203c750: @ 203c750 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x73
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -5856,7 +5883,7 @@ Function_203c784: @ 203c784 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r1, #0x73
 	mov     r4, r0
 	lsl     r1, r1, #2
@@ -5885,7 +5912,7 @@ Function_203c7b8: @ 203c7b8 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r4, r0
 	mov     r0, r5
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r6, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -5911,7 +5938,7 @@ Function_203c7b8: @ 203c7b8 :thumb
 	bl      Function_208c324
 	mov     r7, r0
 	ldr     r0, [r4, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	str     r0, [sp, #0x2c]
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdressItemList
@@ -5949,7 +5976,7 @@ branch_203c84e: @ 203c84e :thumb
 	bl      Function_208c324
 	mov     r7, r0
 	ldr     r0, [r4, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	str     r0, [sp, #0x3c]
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdressItemList
@@ -6008,7 +6035,7 @@ Function_203c8cc: @ 203c8cc :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	mov     r0, #0x7e
 	lsl     r0, r0, #2
@@ -6646,12 +6673,12 @@ branch_203cca8: @ 203cca8 :thumb
 
 
 
-.thumb
+thumb_func_start AfterContinueGameEnd_Init
 AfterContinueGameEnd_Init: @ 203ccb4 :thumb
 	push    {r3,lr}
 	bl      InitOverWorldData
 	ldr     r1, =RAM_21c07dc
-	str     r0, [r1, #0x0]
+	str     r0, [r1, #RAM_21c07dc_OverWorldData]
 
 	bl      Function_20535cc
 
@@ -6661,6 +6688,7 @@ AfterContinueGameEnd_Init: @ 203ccb4 :thumb
 
 .align 2
 .pool
+thumb_func_end AfterContinueGameEnd_Init
 
 
 
@@ -6811,12 +6839,15 @@ branch_203cd80: @ 203cd80 :thumb
 r0: OverWorldData
 r1: Ptr to JumpTable
 r2: Ptr to Data
+
+Return
+r0: OverlayData
 */
 thumb_func_start OverWorldData_AllocAndInitOverlayData
 OverWorldData_AllocAndInitOverlayData: @ 203cd84 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #0x0]
+	ldr     r0, [r5, #OverWorldData_0]
 	mov     r4, r1
 	ldr     r0, [r0, #0x4]
 	mov     r6, r2
@@ -6833,7 +6864,7 @@ branch_203cd98: @ 203cd98 :thumb
 	mov     r2, #0xb
 	bl      AllocAndInitOverlayData
 
-	ldr     r1, [r5, #0x0]
+	ldr     r1, [r5, #OverWorldData_0]
 	str     r0, [r1, #0x4]
 
 	pop     {r4-r6,pc}
@@ -6891,23 +6922,22 @@ InitOverWorldData: @ 203cdb0 :thumb
 	mov     r0, r5
 	bl      LoadPtrToOverWorldDataIn18
 	ldr     r0, [r0, #OverWorldData_18_8]
-	str     r0, [r4, #OverWorldData_c]
+	str     r0, [r4, #OverWorldData_VariableAreaAdress]
 
 	mov     r0, #0x0
-	str     r0, [r4, #OverWorldData_10]
+	str     r0, [r4, #OverWorldData_UnknownStruct01]
 
-	ldr     r0, [r4, #OverWorldData_c]
+	ldr     r0, [r4, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_6
-
-	bl      Function_203a720_Dummy
-	str     r0, [r4, #OverWorldData_1c]
+	bl      AddVariableAreaAdress_6_MapData0
+	str     r0, [r4, #OverWorldData_MapData]
 
 	bl      Call_Malloc11aa
 	str     r0, [r4, #OverWorldData_2c]
 
 	mov     r0, r4
 	mov     r1, #0xb
-	bl      Malloc_OverWorldData_14
+	bl      Malloc_OverWorldData_Overworlds
 
 	mov     r0, #0xb
 	bl      Calloc24
@@ -6956,7 +6986,7 @@ Function_203ce6c: @ 203ce6c :thumb
 	bl      Call_free8
 
 	mov     r0, r4
-	bl      Free_OverWorldData_14
+	bl      Free_OverWorldData_Overworlds
 
 	mov     r0, r4
 	add     r0, #OverWorldData_98
@@ -7039,8 +7069,9 @@ Function_203ceec: @ 203ceec :thumb
 	mov     r1, #0x0
 	mov     r0, r4
 	mov     r2, r1
-	bl      0x21ea714
+	bl      Function_5_21ea714
 branch_203cf0e: @ 203cf0e :thumb
+
 	ldr     r0, [r4, #OverWorldData_0]
 	ldr     r1, [r0, #OverWorldData_0_0]
 	cmp     r1, #0x0
@@ -7069,7 +7100,7 @@ branch_203cf36: @ 203cf36 :thumb
 	cmp     r0, #0x0
 	beq     branch_203cf54
 
-	ldr     r0, [r4, #OverWorldData_10]
+	ldr     r0, [r4, #OverWorldData_UnknownStruct01]
 	cmp     r0, #0x0
 	bne     branch_203cf54
 
@@ -7126,7 +7157,7 @@ branch_203cf7c: @ 203cf7c :thumb
 	ldr     r3, [pc, #0x198] @ 0x203d120, (=RAM_21bf67c)
 	add     r0, sp, #0x8
 	ldr     r2, [r3, #RAM_21bf67c_48_KeyNewPressed2]
-	ldr     r3, [r3, #RAM_21bf67c_44]
+	ldr     r3, [r3, #RAM_21bf67c_44_Key]
 	lsl     r2, r2, #16
 	lsl     r3, r3, #16
 	mov     r1, r4
@@ -7134,7 +7165,7 @@ branch_203cf7c: @ 203cf7c :thumb
 	lsr     r3, r3, #16
 	bl      0x21d1cac
 branch_203cf9c: @ 203cf9c :thumb
-	ldr     r0, [r4, #OverWorldData_1c]
+	ldr     r0, [r4, #OverWorldData_MapData]
 	ldr     r2, [r4, #OverWorldData_70]
 	ldr     r1, [r0, #0x0]
 	ldr     r0, [pc, #0x180] @ 0x203d124, (=0x146)
@@ -7252,7 +7283,7 @@ branch_203d03a: @ 203d03a :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x1
-	bl      0x21ea714
+	bl      Function_5_21ea714
 	add     sp, #0x10
 	pop     {r3-r5,pc}
 
@@ -7271,7 +7302,7 @@ branch_203d080: @ 203d080 :thumb
 	bl      Function_203d158
 	cmp     r0, #0x0
 	beq     branch_203d090
-	bl      0x2253dd4
+	bl      Function_25_2253dd4
 	mov     r5, r0
 branch_203d090: @ 203d090 :thumb
 
@@ -7315,7 +7346,7 @@ branch_203d0aa: @ 203d0aa :thumb
 	mov     r0, r4
 	mov     r1, #0x0
 	mov     r2, #0x1
-	bl      0x21ea714
+	bl      Function_5_21ea714
 	add     sp, #0x10
 	pop     {r3-r5,pc}
 
@@ -7334,7 +7365,7 @@ branch_203d0f6: @ 203d0f6 :thumb
 	bl      Function_203d158
 	cmp     r0, #0x0
 	beq     branch_203d106
-	bl      0x2253dd4
+	bl      Function_25_2253dd4
 	mov     r5, r0
 branch_203d106: @ 203d106 :thumb
 

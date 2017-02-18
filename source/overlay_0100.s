@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram100, "ax"
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_100_21d0d80
+Function_100_21d0d80: @ 21d0d80 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x14
 	mov     r5, r0
@@ -82,7 +86,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 	bl      Function_201a7e8
 	mov     r0, r5
 	mov     r1, #0xff
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r5
 	bl      Function_201a954
 	lsl     r0, r6, #24
@@ -135,8 +139,12 @@ Function_21d0d80: @ 21d0d80 :thumb
 @ 0x21d0ea4
 
 .word 0x21d13b5 @ 0x21d0ea4
+
+
+
 .thumb
-Function_21d0ea8: @ 21d0ea8 :thumb
+.globl Function_100_21d0ea8
+Function_100_21d0ea8: @ 21d0ea8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r1
 	bl      LoadOverlayData1c
@@ -238,8 +246,12 @@ branch_21d0f2e: @ 21d0f2e :thumb
 .word 0x21d5130 @ 0x21d0f38
 .word 0x21d5134 @ 0x21d0f3c
 .word 0x21d5138 @ 0x21d0f40
+
+
+
 .thumb
-Function_21d0f44: @ 21d0f44 :thumb
+.globl Function_100_21d0f44
+Function_100_21d0f44: @ 21d0f44 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      LoadOverlayData1c
@@ -261,7 +273,7 @@ Function_21d0f44: @ 21d0f44 :thumb
 	add     r5, #0xc
 	mov     r0, r5
 	bl      Function_21d111c
-	ldr     r0, [pc, #0x1c] @ 0x21d0f9c, (=0x21bf6dc)
+	ldr     r0, [pc, #0x1c] @ 0x21d0f9c, (=RAM_21bf6dc)
 	mov     r1, #0x0
 	strb    r1, [r0, #0x5]
 	bl      Function_201ffe8
@@ -275,7 +287,7 @@ Function_21d0f44: @ 21d0f44 :thumb
 	pop     {r3-r5,pc}
 @ 0x21d0f9c
 
-.word 0x21bf6dc @ 0x21d0f9c
+.word RAM_21bf6dc @ 0x21d0f9c
 .thumb
 Function_21d0fa0: @ 21d0fa0 :thumb
 	push    {r3-r6,lr}
@@ -370,10 +382,12 @@ Function_21d1034: @ 21d1034 :thumb
 	ldr     r1, [r2, #0x0]
 	and     r0, r1
 	str     r0, [r2, #0x0]
-	mov     r0, #0xac
+
+	mov     r0, #DemoTenganGra_Narc
 	mov     r1, #0x6f
 	bl      LoadFromNARC_8
 	str     r0, [r4, #0x0]
+
 	mov     r0, #0x6f
 	bl      Function_2018340
 	str     r0, [r4, #0xc]
@@ -396,7 +410,7 @@ Function_21d1034: @ 21d1034 :thumb
 	mov     r1, #0x1a
 	mov     r2, #0xea
 	mov     r3, #0x6f
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r4, #0x2c]
 	ldr     r0, [r4, #0x10]
 	mov     r1, #0x1
@@ -556,7 +570,7 @@ Function_21d1208: @ 21d1208 :thumb
 	ldmia   r5!, {r0,r1}
 	stmia   r3!, {r0,r1}
 	mov     r0, r2
-	bl      Function_2018368
+	bl      SetGraphicsModes
 	ldr     r5, [pc, #0x180] @ 0x21d13a8, (=0x21d5154)
 	add     r3, sp, #0x38
 	mov     r2, #0x5
@@ -567,7 +581,7 @@ branch_21d122c: @ 21d122c :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d122c
 	add     r0, sp, #0x38
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	mov     r1, #0x6
 	mov     r2, #0x2
 	mov     r0, #0x0
@@ -816,12 +830,12 @@ Function_21d13e4: @ 21d13e4 :thumb
 	lsl     r0, r0, #12
 	add     r0, r1, r0
 	str     r0, [r2, #0x48]
-	ldr     r0, [pc, #0x34] @ 0x21d14a0, (=0x4001050)
+	ldr     r0, [pc, #0x34] @ 0x21d14a0, (=REG_BLDCNT_SUB)
 	mov     r1, #0x0
 	strh    r1, [r0, #0x0]
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
-	ldr     r0, [pc, #0x30] @ 0x21d14a4, (=0x4000050)
+	ldr     r0, [pc, #0x30] @ 0x21d14a4, (=REG_BLDCNT)
 	mov     r1, #0x4
 	mov     r2, #0x32
 	mov     r3, #0x7
@@ -843,8 +857,8 @@ Function_21d13e4: @ 21d13e4 :thumb
 .word 0x7d8 @ 0x21d1494
 .word 0x4001014 @ 0x21d1498
 .word 0x2aa @ 0x21d149c
-.word 0x4001050 @ 0x21d14a0
-.word 0x4000050 @ 0x21d14a4
+.word REG_BLDCNT_SUB @ 0x21d14a0
+.word REG_BLDCNT @ 0x21d14a4
 .thumb
 Function_21d14a8: @ 21d14a8 :thumb
 	push    {r3,r4,lr}
@@ -1013,7 +1027,7 @@ branch_21d15b0: @ 21d15b0 :thumb
 	ldsb    r2, [r0, r1]
 	cmp     r2, #0x10
 	beq     branch_21d15d2
-	ldr     r0, [pc, #0xec] @ 0x21d16b8, (=0x4000050)
+	ldr     r0, [pc, #0xec] @ 0x21d16b8, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	b       branch_21d1686
@@ -1069,7 +1083,7 @@ branch_21d1614: @ 21d1614 :thumb
 	ldsb    r2, [r0, r1]
 	cmp     r2, #0x0
 	ble     branch_21d1636
-	ldr     r0, [pc, #0x88] @ 0x21d16b8, (=0x4000050)
+	ldr     r0, [pc, #0x88] @ 0x21d16b8, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	b       branch_21d1686
@@ -1101,7 +1115,7 @@ branch_21d163c: @ 21d163c :thumb
 	ldsb    r2, [r0, r1]
 	cmp     r2, #0x10
 	beq     branch_21d1668
-	ldr     r0, [pc, #0x5c] @ 0x21d16bc, (=0x4001050)
+	ldr     r0, [pc, #0x5c] @ 0x21d16bc, (=REG_BLDCNT_SUB)
 	mov     r1, #0x33
 	blx     G2x_SetBlendBrightness_
 	b       branch_21d1686
@@ -1149,8 +1163,8 @@ branch_21d1686: @ 21d1686 :thumb
 .word 0x21d522c @ 0x21d16ac
 .word 0x21d524c @ 0x21d16b0
 .word 0x21d5226 @ 0x21d16b4
-.word 0x4000050 @ 0x21d16b8
-.word 0x4001050 @ 0x21d16bc
+.word REG_BLDCNT @ 0x21d16b8
+.word REG_BLDCNT_SUB @ 0x21d16bc
 .word 0x7fff @ 0x21d16c0
 .thumb
 Function_21d16c4: @ 21d16c4 :thumb
@@ -2713,14 +2727,14 @@ Function_21d2340: @ 21d2340 :thumb
 	bl      Function_21d4e70
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
-	ldr     r0, [pc, #0x68] @ 0x21d2414, (=0x4000050)
+	ldr     r0, [pc, #0x68] @ 0x21d2414, (=REG_BLDCNT)
 	mov     r1, #0x4
 	mov     r2, #0x32
 	mov     r3, #0x7
 	blx     G2x_SetBlendAlpha_
 	mov     r0, #0xa
 	str     r0, [sp, #0x0]
-	ldr     r0, [pc, #0x5c] @ 0x21d2418, (=0x4001050)
+	ldr     r0, [pc, #0x5c] @ 0x21d2418, (=REG_BLDCNT_SUB)
 	mov     r1, #0x3
 	mov     r2, #0x12
 	mov     r3, #0x7
@@ -2761,8 +2775,8 @@ Function_21d2340: @ 21d2340 :thumb
 .word 0x1ec8 @ 0x21d2408
 .word 0x4001014 @ 0x21d240c
 .word 0x2aa @ 0x21d2410
-.word 0x4000050 @ 0x21d2414
-.word 0x4001050 @ 0x21d2418
+.word REG_BLDCNT @ 0x21d2414
+.word REG_BLDCNT_SUB @ 0x21d2418
 .word 0x4000060 @ 0x21d241c
 .word 0xffffcfff @ 0x21d2420
 .word 0x21d5298 @ 0x21d2424
@@ -2830,11 +2844,11 @@ branch_21d246e: @ 21d246e :thumb
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
-	ldr     r0, [pc, #0x31c] @ 0x21d27b4, (=0x4000050)
+	ldr     r0, [pc, #0x31c] @ 0x21d27b4, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	ldr     r2, [pc, #0x310] @ 0x21d27b0, (=0x1ec8)
-	ldr     r0, [pc, #0x318] @ 0x21d27b8, (=0x4001050)
+	ldr     r0, [pc, #0x318] @ 0x21d27b8, (=REG_BLDCNT_SUB)
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
@@ -3099,14 +3113,14 @@ branch_21d2648: @ 21d2648 :thumb
 .thumb
 branch_21d2670: @ 21d2670 :thumb
 	ldr     r2, [pc, #0x13c] @ 0x21d27b0, (=0x1ec8)
-	ldr     r0, [pc, #0x140] @ 0x21d27b4, (=0x4000050)
+	ldr     r0, [pc, #0x140] @ 0x21d27b4, (=REG_BLDCNT)
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	ldr     r2, [pc, #0x12c] @ 0x21d27b0, (=0x1ec8)
-	ldr     r0, [pc, #0x134] @ 0x21d27b8, (=0x4001050)
+	ldr     r0, [pc, #0x134] @ 0x21d27b8, (=REG_BLDCNT_SUB)
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
@@ -3276,8 +3290,8 @@ branch_21d2782: @ 21d2782 :thumb
 
 .word 0x7fff @ 0x21d27ac
 .word 0x1ec8 @ 0x21d27b0
-.word 0x4000050 @ 0x21d27b4
-.word 0x4001050 @ 0x21d27b8
+.word REG_BLDCNT @ 0x21d27b4
+.word REG_BLDCNT_SUB @ 0x21d27b8
 .word 0x1720 @ 0x21d27bc
 .word 0x21d54d0 @ 0x21d27c0
 .word 0x21d54e8 @ 0x21d27c4
@@ -3691,7 +3705,7 @@ branch_21d2a82: @ 21d2a82 :thumb
 	ldr     r0, [r0, #0x40]
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 .thumb
 branch_21d2aa2: @ 21d2aa2 :thumb
 	ldr     r2, [pc, #0xc4] @ 0x21d2b68, (=0x1ec8)
@@ -3703,11 +3717,11 @@ branch_21d2aa2: @ 21d2aa2 :thumb
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
-	ldr     r0, [pc, #0xd0] @ 0x21d2b88, (=0x4000050)
+	ldr     r0, [pc, #0xd0] @ 0x21d2b88, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	ldr     r2, [pc, #0xa8] @ 0x21d2b68, (=0x1ec8)
-	ldr     r0, [pc, #0xcc] @ 0x21d2b8c, (=0x4001050)
+	ldr     r0, [pc, #0xcc] @ 0x21d2b8c, (=REG_BLDCNT_SUB)
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
@@ -3755,11 +3769,11 @@ branch_21d2b06: @ 21d2b06 :thumb
 	ldr     r3, [r4, r2]
 	mov     r2, #0x53
 	ldsb    r2, [r3, r2]
-	ldr     r0, [pc, #0x68] @ 0x21d2b88, (=0x4000050)
+	ldr     r0, [pc, #0x68] @ 0x21d2b88, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	ldr     r2, [pc, #0x40] @ 0x21d2b68, (=0x1ec8)
-	ldr     r0, [pc, #0x60] @ 0x21d2b8c, (=0x4001050)
+	ldr     r0, [pc, #0x60] @ 0x21d2b8c, (=REG_BLDCNT_SUB)
 	b       branch_21d2b90
 @ 0x21d2b2c
 
@@ -3786,8 +3800,8 @@ branch_21d2b06: @ 21d2b06 :thumb
 .word 0xf78 @ 0x21d2b7c
 .word 0x4bf @ 0x21d2b80
 .word 0x1260 @ 0x21d2b84
-.word 0x4000050 @ 0x21d2b88
-.word 0x4001050 @ 0x21d2b8c
+.word REG_BLDCNT @ 0x21d2b88
+.word REG_BLDCNT_SUB @ 0x21d2b8c
 .thumb
 branch_21d2b90: @ 21d2b90 :thumb
 	ldr     r3, [r4, r2]
@@ -4218,7 +4232,7 @@ Function_21d2f0c: @ 21d2f0c :thumb
 	mov     r1, #0xa
 	mov     r2, r5
 	mov     r3, #0x4
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -4230,7 +4244,7 @@ Function_21d2f0c: @ 21d2f0c :thumb
 	mov     r1, #0xb
 	mov     r2, r5
 	mov     r3, #0x4
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	mov     r0, #0x20
@@ -5047,14 +5061,14 @@ Function_21d3620: @ 21d3620 :thumb
 	bl      Function_21d2f0c
 	mov     r0, #0x8
 	str     r0, [sp, #0x0]
-	ldr     r0, [pc, #0x58] @ 0x21d36b8, (=0x4000050)
+	ldr     r0, [pc, #0x58] @ 0x21d36b8, (=REG_BLDCNT)
 	mov     r1, #0x4
 	mov     r2, #0x32
 	mov     r3, #0x7
 	blx     G2x_SetBlendAlpha_
 	mov     r0, #0xa
 	str     r0, [sp, #0x0]
-	ldr     r0, [pc, #0x4c] @ 0x21d36bc, (=0x4001050)
+	ldr     r0, [pc, #0x4c] @ 0x21d36bc, (=REG_BLDCNT_SUB)
 	mov     r1, #0x3
 	mov     r2, #0x12
 	mov     r3, #0x7
@@ -5091,8 +5105,8 @@ Function_21d3620: @ 21d3620 :thumb
 
 .word 0x1d60 @ 0x21d36b0
 .word 0x1d28 @ 0x21d36b4
-.word 0x4000050 @ 0x21d36b8
-.word 0x4001050 @ 0x21d36bc
+.word REG_BLDCNT @ 0x21d36b8
+.word REG_BLDCNT_SUB @ 0x21d36bc
 .word 0x4000060 @ 0x21d36c0
 .word 0xffffcfff @ 0x21d36c4
 .word 0x21d52b0 @ 0x21d36c8
@@ -5963,7 +5977,7 @@ branch_21d3c70: @ 21d3c70 :thumb
 	add     r1, #0x53
 	strb    r0, [r1, #0x0]
 	ldr     r3, [r4, r3]
-	ldr     r0, [pc, #0xe4] @ 0x21d3d78, (=0x4000050)
+	ldr     r0, [pc, #0xe4] @ 0x21d3d78, (=REG_BLDCNT)
 	ldsb    r2, [r3, r2]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -5987,7 +6001,7 @@ branch_21d3ca4: @ 21d3ca4 :thumb
 	add     r1, #0x53
 	strb    r0, [r1, #0x0]
 	ldr     r3, [r4, r3]
-	ldr     r0, [pc, #0xc0] @ 0x21d3d78, (=0x4000050)
+	ldr     r0, [pc, #0xc0] @ 0x21d3d78, (=REG_BLDCNT)
 	ldsb    r2, [r3, r2]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -6019,7 +6033,7 @@ branch_21d3ccc: @ 21d3ccc :thumb
 	add     r1, #0x53
 	strb    r0, [r1, #0x0]
 	ldr     r2, [r4, r2]
-	ldr     r0, [pc, #0x90] @ 0x21d3d78, (=0x4000050)
+	ldr     r0, [pc, #0x90] @ 0x21d3d78, (=REG_BLDCNT)
 	ldsb    r2, [r2, r3]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -6044,7 +6058,7 @@ branch_21d3cf8: @ 21d3cf8 :thumb
 	add     r5, #0x53
 	strb    r0, [r5, #0x0]
 	ldr     r2, [r4, r2]
-	ldr     r0, [pc, #0x6c] @ 0x21d3d78, (=0x4000050)
+	ldr     r0, [pc, #0x6c] @ 0x21d3d78, (=REG_BLDCNT)
 	ldsb    r2, [r2, r3]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -6072,7 +6086,7 @@ branch_21d3d20: @ 21d3d20 :thumb
 	add     r5, #0x53
 	strb    r0, [r5, #0x0]
 	ldr     r2, [r4, r2]
-	ldr     r0, [pc, #0x40] @ 0x21d3d78, (=0x4000050)
+	ldr     r0, [pc, #0x40] @ 0x21d3d78, (=REG_BLDCNT)
 	ldsb    r2, [r2, r3]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -6093,7 +6107,7 @@ branch_21d3d20: @ 21d3d20 :thumb
 .word 0x6d6 @ 0x21d3d6c
 .word 0x1e3 @ 0x21d3d70
 .word 0x6d7 @ 0x21d3d74
-.word 0x4000050 @ 0x21d3d78
+.word REG_BLDCNT @ 0x21d3d78
 .thumb
 branch_21d3d7c: @ 21d3d7c :thumb
 	bl      Function_21d34c0
@@ -6117,7 +6131,7 @@ branch_21d3d8e: @ 21d3d8e :thumb
 	add     r1, #0x53
 	strb    r0, [r1, #0x0]
 	ldr     r2, [r4, r2]
-	ldr     r0, [pc, #0x1f8] @ 0x21d3f9c, (=0x4000050)
+	ldr     r0, [pc, #0x1f8] @ 0x21d3f9c, (=REG_BLDCNT)
 	ldsb    r2, [r2, r3]
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
@@ -6396,7 +6410,7 @@ branch_21d3eec: @ 21d3eec :thumb
 
 
 .word 0x1d28 @ 0x21d3f98
-.word 0x4000050 @ 0x21d3f9c
+.word REG_BLDCNT @ 0x21d3f9c
 .word 0xc28 @ 0x21d3fa0
 .word 0xccd @ 0x21d3fa4
 .word 0xc18 @ 0x21d3fa8
@@ -7368,7 +7382,7 @@ Function_21d46c8: @ 21d46c8 :thumb
 	mov     r6, r0
 	ldr     r0, [r5, #0x2c]
 	mov     r1, r7
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0xc]
 	cmp     r7, #0x16
 	bne     branch_21d4726
@@ -7392,7 +7406,7 @@ Function_21d46c8: @ 21d46c8 :thumb
 	mov     r1, r6
 	bl      Function_200c388
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	ldr     r0, [sp, #0x10]
 	bl      Function_200b3f0
 	b       branch_21d472e
@@ -7411,7 +7425,7 @@ branch_21d472e: @ 21d472e :thumb
 	mov     r0, r5
 	add     r0, #0x30
 	mov     r1, #0xff
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	mov     r0, r5
@@ -7420,7 +7434,7 @@ branch_21d472e: @ 21d472e :thumb
 	mov     r1, #0x1
 	mov     r2, r6
 	str     r3, [sp, #0x8]
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x30
@@ -7433,9 +7447,9 @@ branch_21d472e: @ 21d472e :thumb
 	mov     r3, #0xf
 	bl      Function_200e060
 	ldr     r0, [sp, #0xc]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	str     r4, [r5, #0x40]
 	mov     r0, r4
 	add     sp, #0x14
@@ -7861,7 +7875,7 @@ branch_21d4a82: @ 21d4a82 :thumb
 
 .thumb
 Function_21d4a84: @ 21d4a84 :thumb
-	ldr     r3, [pc, #0x4] @ 0x21d4a8c, (=0x2017111)
+	ldr     r3, [pc, #0x4] @ 0x21d4a8c, (=Function_2017110+1)
 	add     r0, #0x78
 	bx      r3
 @ 0x21d4a8a
@@ -7870,23 +7884,23 @@ Function_21d4a84: @ 21d4a84 :thumb
 .align 2
 
 
-.word 0x2017111 @ 0x21d4a8c
+.word Function_2017110+1 @ 0x21d4a8c
 .thumb
 Function_21d4a90: @ 21d4a90 :thumb
 	mov     r3, #0x14
 	add     r1, #0x88
 	mul     r3, r0
 	add     r0, r1, r3
-	ldr     r3, [pc, #0x4] @ 0x21d4aa0, (=0x20171a1)
+	ldr     r3, [pc, #0x4] @ 0x21d4aa0, (=Function_20171a0+1)
 	mov     r1, r2
 	bx      r3
 @ 0x21d4a9e
 
-
 .align 2
+.word Function_20171a0+1 @ 0x21d4aa0
 
 
-.word 0x20171a1 @ 0x21d4aa0
+
 .thumb
 Function_21d4aa4: @ 21d4aa4 :thumb
 	push    {r3-r7,lr}
@@ -8340,16 +8354,22 @@ branch_21d4d80: @ 21d4d80 :thumb
 .word 0x21d5448 @ 0x21d4dbc
 .word 0x21d5478 @ 0x21d4dc0
 .word 0x21d5454 @ 0x21d4dc4
+
+
+
 .thumb
 Function_21d4dc8: @ 21d4dc8 :thumb
-	ldr     r1, [pc, #0x4] @ 0x21d4dd0, (=0x21bf6dc)
-	ldr     r3, [pc, #0x8] @ 0x21d4dd4, (=0x201ffe9)
+	ldr     r1, [pc, #0x4] @ 0x21d4dd0, (=RAM_21bf6dc)
+	ldr     r3, [pc, #0x8] @ 0x21d4dd4, (=Function_201ffe8+1)
 	strb    r0, [r1, #0x5]
 	bx      r3
 @ 0x21d4dd0
 
-.word 0x21bf6dc @ 0x21d4dd0
-.word 0x201ffe9 @ 0x21d4dd4
+.word RAM_21bf6dc @ 0x21d4dd0
+.word Function_201ffe8+1 @ 0x21d4dd4
+
+
+
 .thumb
 Function_21d4dd8: @ 21d4dd8 :thumb
 	push    {r4,lr}
@@ -8358,12 +8378,12 @@ Function_21d4dd8: @ 21d4dd8 :thumb
 	strb    r1, [r0, #0x0]
 	mov     r2, #0x5f
 	ldsb    r2, [r4, r2]
-	ldr     r0, [pc, #0x14] @ 0x21d4dfc, (=0x4000050)
+	ldr     r0, [pc, #0x14] @ 0x21d4dfc, (=REG_BLDCNT)
 	mov     r1, #0x31
 	blx     G2x_SetBlendBrightness_
 	mov     r2, #0x5f
 	ldsb    r2, [r4, r2]
-	ldr     r0, [pc, #0xc] @ 0x21d4e00, (=0x4001050)
+	ldr     r0, [pc, #0xc] @ 0x21d4e00, (=REG_BLDCNT_SUB)
 	mov     r1, #0x33
 	blx     G2x_SetBlendBrightness_
 	pop     {r4,pc}
@@ -8373,8 +8393,8 @@ Function_21d4dd8: @ 21d4dd8 :thumb
 .align 2
 
 
-.word 0x4000050 @ 0x21d4dfc
-.word 0x4001050 @ 0x21d4e00
+.word REG_BLDCNT @ 0x21d4dfc
+.word REG_BLDCNT_SUB @ 0x21d4e00
 .thumb
 Function_21d4e04: @ 21d4e04 :thumb
 	ldr     r3, [pc, #0x8] @ 0x21d4e10, (=AddTaskToTaskList2+1)
@@ -8580,7 +8600,7 @@ branch_21d4f42: @ 21d4f42 :thumb
 .thumb
 branch_21d4f52: @ 21d4f52 :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x38] @ 0x21d4f90, (=0x6820000)
+	ldr     r1, [pc, #0x38] @ 0x21d4f90, (=VRAM_B)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8590,7 +8610,7 @@ branch_21d4f52: @ 21d4f52 :thumb
 .thumb
 branch_21d4f60: @ 21d4f60 :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x30] @ 0x21d4f94, (=0x6840000)
+	ldr     r1, [pc, #0x30] @ 0x21d4f94, (=VRAM_C)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8600,7 +8620,7 @@ branch_21d4f60: @ 21d4f60 :thumb
 .thumb
 branch_21d4f6e: @ 21d4f6e :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x24] @ 0x21d4f98, (=0x6860000)
+	ldr     r1, [pc, #0x24] @ 0x21d4f98, (=VRAM_D)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8621,9 +8641,9 @@ branch_21d4f82: @ 21d4f82 :thumb
 	pop     {r4,pc}
 @ 0x21d4f90
 
-.word 0x6820000 @ 0x21d4f90
-.word 0x6840000 @ 0x21d4f94
-.word 0x6860000 @ 0x21d4f98
+.word VRAM_B @ 0x21d4f90
+.word VRAM_C @ 0x21d4f94
+.word VRAM_D @ 0x21d4f98
 .thumb
 Function_21d4f9c: @ 21d4f9c :thumb
 	push    {r4-r7}
@@ -8652,7 +8672,7 @@ Function_21d4f9c: @ 21d4f9c :thumb
 	orr     r1, r6
 	orr     r1, r7
 	orr     r1, r0
-	ldr     r0, [pc, #0x4] @ 0x21d4fd8, (=0x4000064)
+	ldr     r0, [pc, #0x4] @ 0x21d4fd8, (=REG_DISPCAPCNT)
 	str     r1, [r0, #0x0]
 .thumb
 branch_21d4fd4: @ 21d4fd4 :thumb
@@ -8660,7 +8680,7 @@ branch_21d4fd4: @ 21d4fd4 :thumb
 	bx      lr
 @ 0x21d4fd8
 
-.word 0x4000064 @ 0x21d4fd8
+.word REG_DISPCAPCNT @ 0x21d4fd8
 .thumb
 Function_21d4fdc: @ 21d4fdc :thumb
 	push    {r3-r5,lr}
@@ -8772,7 +8792,7 @@ branch_21d505e: @ 21d505e :thumb
 .thumb
 branch_21d506e: @ 21d506e :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x50] @ 0x21d50c4, (=0x6820000)
+	ldr     r1, [pc, #0x50] @ 0x21d50c4, (=VRAM_B)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8782,7 +8802,7 @@ branch_21d506e: @ 21d506e :thumb
 .thumb
 branch_21d507c: @ 21d507c :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x48] @ 0x21d50c8, (=0x6840000)
+	ldr     r1, [pc, #0x48] @ 0x21d50c8, (=VRAM_C)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8792,7 +8812,7 @@ branch_21d507c: @ 21d507c :thumb
 .thumb
 branch_21d508a: @ 21d508a :thumb
 	mov     r2, #0x2
-	ldr     r1, [pc, #0x3c] @ 0x21d50cc, (=0x6860000)
+	ldr     r1, [pc, #0x3c] @ 0x21d50cc, (=VRAM_D)
 	mov     r0, #0x0
 	lsl     r2, r2, #16
 	blx     MIi_CpuClearFast
@@ -8818,15 +8838,15 @@ branch_21d5096: @ 21d5096 :thumb
 	orr     r1, r0
 	mov     r0, #0x10
 	orr     r1, r0
-	ldr     r0, [pc, #0x10] @ 0x21d50d0, (=0x4000064)
+	ldr     r0, [pc, #0x10] @ 0x21d50d0, (=REG_DISPCAPCNT)
 	str     r1, [r0, #0x0]
 	pop     {r4-r6,pc}
 @ 0x21d50c4
 
-.word 0x6820000 @ 0x21d50c4
-.word 0x6840000 @ 0x21d50c8
-.word 0x6860000 @ 0x21d50cc
-.word 0x4000064 @ 0x21d50d0
+.word VRAM_B @ 0x21d50c4
+.word VRAM_C @ 0x21d50c8
+.word VRAM_D @ 0x21d50cc
+.word REG_DISPCAPCNT @ 0x21d50d0
 
 
 

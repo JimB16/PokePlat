@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram32, "ax"
 
@@ -621,7 +624,7 @@ Function_2256588: @ 2256588 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x6a
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r3, #0x0
 	lsr     r5, r0, #5
 	str     r3, [sp, #0x0]
@@ -1093,7 +1096,8 @@ Function_225692c: @ 225692c :thumb
 	add     sp, #-0x34
 	str     r0, [sp, #0x4]
 	str     r1, [sp, #0x8]
-	mov     r0, #0x13
+
+	mov     r0, #PlPokeIcon_Narc
 	mov     r1, #0x8
 	bl      LoadFromNARC_8
 	str     r0, [sp, #0x14]

@@ -1271,7 +1271,7 @@ Function_2256914: @ 2256914 :thumb
 	blt     branch_2256976
 	ldr     r0, [r5, #0x10]
 	bl      0x2254544
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r5, r0
 	bl      Function_2027474
 	cmp     r0, #0x0
@@ -1296,7 +1296,7 @@ branch_2256958: @ 2256958 :thumb
 	bhi     branch_2256976
 	mov     r0, r5
 	mov     r1, r4
-	bl      Function_2026fe8
+	bl      WasPkmnSeen
 	cmp     r0, #0x0
 	beq     branch_2256976
 	mov     r0, r4
@@ -1439,7 +1439,7 @@ Function_2256a08: @ 2256a08 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x10
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1451,7 +1451,7 @@ Function_2256a08: @ 2256a08 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x11
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, r5
 	bl      Function_2256aa4
 	mov     r0, #0x0

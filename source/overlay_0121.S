@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram121, "ax"
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_121_21d0d80
+Function_121_21d0d80: @ 21d0d80 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -73,7 +77,7 @@ Function_21d0d80: @ 21d0d80 :thumb
 	mov     r2, r1
 	mov     r3, r0
 	bl      Function_200f174
-	ldr     r0, [pc, #0x44] @ 0x21d0e6c, (=0x21bf6dc)
+	ldr     r0, [pc, #0x44] @ 0x21d0e6c, (=RAM_21bf6dc)
 	mov     r1, #0x0
 	strb    r1, [r0, #0x5]
 	bl      Function_201ffe8
@@ -100,12 +104,16 @@ Function_21d0d80: @ 21d0d80 :thumb
 .word 0xffffe0ff @ 0x21d0e60
 .word 0x4001000 @ 0x21d0e64
 .word 0xffff1fff @ 0x21d0e68
-.word 0x21bf6dc @ 0x21d0e6c
+.word RAM_21bf6dc @ 0x21d0e6c
 .word 0x21d0f69 @ 0x21d0e70
 .word 0xea60 @ 0x21d0e74
 .word 0x21d0f7d @ 0x21d0e78
+
+
+
 .thumb
-Function_21d0e7c: @ 21d0e7c :thumb
+.globl Function_121_21d0e7c
+Function_121_21d0e7c: @ 21d0e7c :thumb
 	push    {r4,r5,lr}
 	add     sp, #-0xc
 	mov     r4, r1
@@ -200,8 +208,12 @@ branch_21d0f04: @ 21d0f04 :thumb
 @ 0x21d0f10
 
 .word 0x5d3 @ 0x21d0f10
+
+
+
 .thumb
-Function_21d0f14: @ 21d0f14 :thumb
+.globl Function_121_21d0f14
+Function_121_21d0f14: @ 21d0f14 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      LoadOverlayData1c
@@ -281,7 +293,7 @@ branch_21d0fa6: @ 21d0fa6 :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d0fa6
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	mov     r1, #0x6
 	mov     r2, #0x2
 	mov     r0, #0x0
@@ -369,7 +381,7 @@ Function_21d0ff4: @ 21d0ff4 :thumb
 
 .thumb
 Function_21d1068: @ 21d1068 :thumb
-	ldr     r3, [pc, #0x4] @ 0x21d1070, (=0x20203b9)
+	ldr     r3, [pc, #0x4] @ 0x21d1070, (=Call_free5+1)
 	ldr     r0, [r0, #0x4]
 	bx      r3
 @ 0x21d106e
@@ -378,7 +390,7 @@ Function_21d1068: @ 21d1068 :thumb
 .align 2
 
 
-.word 0x20203b9 @ 0x21d1070
+.word Call_free5+1 @ 0x21d1070
 .thumb
 Function_21d1074: @ 21d1074 :thumb
 	push    {r3-r5,lr}
@@ -388,7 +400,7 @@ Function_21d1074: @ 21d1074 :thumb
 	mov     r1, #0x1e
 	mov     r2, #0x4
 	bl      Function_20182cc
-	mov     r0, #0x30
+	mov     r0, #Titledemo_Narc
 	mov     r1, #0x1e
 	bl      LoadFromNARC_8
 	mov     r4, r0
@@ -681,11 +693,11 @@ Function_21d128c: @ 21d128c :thumb
 .word 0x4000580 @ 0x21d130c
 .thumb
 Function_21d1310: @ 21d1310 :thumb
-	ldr     r3, [pc, #0x0] @ 0x21d1314, (=0x20242c5)
+	ldr     r3, [pc, #0x0] @ 0x21d1314, (=Function_20242c4+1)
 	bx      r3
 @ 0x21d1314
 
-.word 0x20242c5 @ 0x21d1314
+.word Function_20242c4+1 @ 0x21d1314
 .thumb
 Function_21d1318: @ 21d1318 :thumb
 	push    {r3,r4,lr}

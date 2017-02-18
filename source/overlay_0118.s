@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram118, "ax"
 
@@ -125,7 +128,7 @@ branch_21d0e44: @ 21d0e44 :thumb
 	ldr     r0, [r5, r0]
 	ldr     r0, [r0, #0x1c]
 	bl      GetOverWorldData_VariableAreaAdresses
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r1, r6
 	bl      Function_202736c
 	ldr     r0, [r4, #0x0]
@@ -226,7 +229,7 @@ branch_21d0ee8: @ 21d0ee8 :thumb
 	ldr     r0, [pc, #0x7c] @ 0x21d0f68, (=0x69c)
 	mov     r1, #0xca
 	ldr     r0, [r5, r0]
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r7, r0
 	mov     r0, r6
 	bl      Function_2076b10_Dummy
@@ -244,7 +247,7 @@ branch_21d0ee8: @ 21d0ee8 :thumb
 	mov     r2, r7
 	bl      Function_200c388
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r1, #0x0
 	mov     r0, r5
 	mvn     r1, r1
@@ -380,18 +383,18 @@ Function_21d0fdc: @ 21d0fdc :thumb
 	pop     {r4,pc}
 @ 0x21d101e
 
-
 .align 2
-
-
 .word 0x21d1129 @ 0x21d1020
 .word 0x21d114d @ 0x21d1024
+
+
+
 .thumb
 Function_21d1028: @ 21d1028 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r1, [r4, #0x10]
-	mov     r0, #0xb9
+	mov     r0, #PokelistParticle_Narc
 	mov     r2, #0xc
 	bl      Call2_LoadFromNARC_2
 	mov     r1, r0

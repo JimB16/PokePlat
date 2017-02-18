@@ -23,15 +23,26 @@ RAM_2101d38:
 
 .globl RAM_2101d44
 RAM_2101d44:
-    .byte 0
+    .byte 0 @ Flags
     .byte 0
     .hword 0
 .globl RAM_2101d48
 RAM_2101d48:
-    .word 0
+    .word 0 @ =RAM_2101d4c
 .globl RAM_2101d4c
 RAM_2101d4c:
+    .zero 0x84
+    .zero 0x10
 
+/*
+speed 9 (blazingly fast!)
+94000130 FEFB0000
+62101D40 00000000
+B2101D40 00000000
+20000078 00000008
+D2000000 00000000
+[2101db8] = 0x0-0x8
+*/
 
 .org 0x2101df0 - 0x02000000
 
@@ -615,7 +626,11 @@ RAM_21cc5c0:
 RAM_21cc5cc:
 
 
-.org 0x21ccb9e - 0x02000000
+.org 0x21ccb9c - 0x02000000
+
+.globl RAM_21ccb9c
+RAM_21ccb9c:
+    .hword 0
 
 .globl RAM_21ccb9e
 RAM_21ccb9e:
@@ -1180,12 +1195,12 @@ TextInterpreter
 .equ TextInterpreter_Pointer,       0x0     @ Pointer to current position in Text/Msg
 .equ TextInterpreter_4,             0x4
 .equ TextInterpreter_9,             0x9
-.equ TextInterpreter_a,             0xa
-.equ TextInterpreter_b,             0xb
-.equ TextInterpreter_c,             0xc
-.equ TextInterpreter_e,             0xe
-.equ TextInterpreter_10,            0x10
-.equ TextInterpreter_12,            0x12
+.equ TextInterpreter_StartPosX2,             0xa
+.equ TextInterpreter_StartPosY2,             0xb
+.equ TextInterpreter_dPosX,             0xc
+.equ TextInterpreter_dPosY,             0xe
+.equ TextInterpreter_StartPosX,            0x10
+.equ TextInterpreter_StartPosY,            0x12
 .equ TextInterpreter_15,            0x15
 .equ TextInterpreter_16,            0x16
 .equ TextInterpreter_17,            0x17
@@ -1199,12 +1214,10 @@ TextInterpreter
 .equ TextInterpreter_20_2,          0x2
 .equ TextInterpreter_27,            0x27
 .equ TextInterpreter_27_0,          0x0
-.equ TextInterpreter_28,            0x28
-.equ TextInterpreter_28_0,          0x0
+.equ TextInterpreter_28_StateNr,            0x28
 .equ TextInterpreter_29,            0x29
 .equ TextInterpreter_29_0,          0x0
 .equ TextInterpreter_2a,            0x2a
-.equ TextInterpreter_2a_0,          0x0
 .equ TextInterpreter_2b,            0x2b
 .equ TextInterpreter_2b_0,          0x0
 .equ TextInterpreter_2c,            0x2c

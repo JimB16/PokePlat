@@ -107,19 +107,19 @@ Function_225621c: @ 225621c :thumb
 	ldr     r0, [r5, #0x14]
 	mov     r1, #0x2
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x14]
 	mov     r1, #0x3
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	mov     r1, #0x4
 	ldr     r0, [r5, #0x14]
 	mov     r2, r1
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	ldr     r0, [r5, #0x14]
 	mov     r1, #0x5
 	mov     r2, #0x4
-	bl      0x2255c5c
+	bl      Function_25_2255c5c
 	mov     r0, #0x0
 	str     r0, [r5, #0x2c]
 	str     r0, [r5, #0x30]
@@ -1245,7 +1245,7 @@ Function_2256968: @ 2256968 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x4c
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1257,7 +1257,7 @@ Function_2256968: @ 2256968 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x4b
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8

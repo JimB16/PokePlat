@@ -932,7 +932,7 @@ Function_2256728: @ 2256728 :thumb
 	bne     branch_2256760
 	ldr     r0, [r4, #0x70]
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 .thumb
 branch_2256760: @ 2256760 :thumb
 	mov     r0, #0x1
@@ -1092,7 +1092,7 @@ branch_2256846: @ 2256846 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x1e
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -1104,7 +1104,7 @@ branch_2256846: @ 2256846 :thumb
 	mov     r0, #0xc
 	mov     r1, #0x1f
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8

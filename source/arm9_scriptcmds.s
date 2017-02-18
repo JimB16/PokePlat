@@ -29,7 +29,7 @@ ScriptCmd_Return2: @ 203f6d8 :thumb
 	mov     r5, r0
 
 	mov     r1, r5
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r6, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r7, r0
@@ -62,7 +62,7 @@ Function_203f70c: @ 203f70c :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	ldr     r1, [r1, #ScriptHandler_64]
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	lsl     r1, r1, #16
 	ldr     r0, [r0]
 	lsr     r1, r1, #16
@@ -84,11 +84,11 @@ branch_203f72e: @ 203f72e :thumb
 
 .align 2, 0
 .thumb
-Function_203f734: @ 203f734 :thumb
+ScriptCmd_StoreFurniture: @ 203f734 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
@@ -395,7 +395,7 @@ ScriptCmd_If: @ 203f900 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	ldrh    r5, [r0, #0x0]
@@ -421,7 +421,7 @@ ScriptCmd_If2: @ 203f92c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
@@ -430,7 +430,7 @@ ScriptCmd_If2: @ 203f92c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r1, r0
@@ -449,23 +449,23 @@ thumb_func_end ScriptCmd_If2
 Function_203f964: @ 203f964 :thumb
 	push    {r3-r7,lr}
 	mov     r7, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r5, [r0]
 	mov     r1, #0x7
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, r5
 	mov     r1, #0xe
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 
 	mov     r0, r7
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	bl      Function_203eab8
+	bl      AllocInitScriptHandler
 	str     r0, [r6, #0x0]
 	ldrb    r0, [r4, #0x0]
 	.hword  0x1c40 @ add r0, r0, #0x1
@@ -479,22 +479,22 @@ thumb_func_start ScriptCmd_CallStandard
 ScriptCmd_CallStandard: @ 203f99c :thumb
 	push    {r3-r7,lr}
 	str     r0, [sp, #0x0]
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r5, [r0]
 
 	mov     r1, #0x5
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 
 	mov     r0, r5
 	mov     r1, #0x7
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, r5
 	mov     r1, #0xe
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 
 	ldr     r0, [sp, #0x0]
@@ -504,7 +504,7 @@ ScriptCmd_CallStandard: @ 203f99c :thumb
 	mov     r0, #0x1
 	strb    r0, [r6, #0x0]
 	mov     r0, r5
-	bl      Function_203eab8
+	bl      AllocInitScriptHandler
 	str     r0, [r7, #0x0]
 
 	ldrb    r0, [r4, #0x0]
@@ -527,10 +527,10 @@ thumb_func_end ScriptCmd_CallStandard
 .thumb
 Function_203f9ec: @ 203f9ec :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldrb    r0, [r0, #0x0]
 	cmp     r0, #0x0
 	bne     branch_203fa02
@@ -546,10 +546,10 @@ branch_203fa02: @ 203fa02 :thumb
 thumb_func_start ScriptCmd_ExitStandard
 ScriptCmd_ExitStandard: @ 203fa08 :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, #0x0
 	strb    r1, [r0, #0x0]
 
@@ -583,7 +583,7 @@ Function_203fa34: @ 203fa34 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -640,7 +640,7 @@ Function_203fa9c: @ 203fa9c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x9
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -764,7 +764,7 @@ branch_203fb54: @ 203fb54 :thumb
 ScriptCmd_SetFlag: @ 203fb5c :thumb
 	push    {r4,lr}
 	mov     r1, r0
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r4, [r1]
 
 	bl      ScriptHandler_LoadHWord
@@ -782,7 +782,7 @@ ScriptCmd_ClearFlag: @ 203fb74 :thumb
 	push    {r4,lr}
 
 	mov     r1, r0
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r4, [r1]
 	bl      ScriptHandler_LoadHWord
 
@@ -801,7 +801,7 @@ ScriptCmd_CheckFlag: @ 203fb8c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -819,20 +819,20 @@ Function_203fba8: @ 203fba8 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
@@ -852,10 +852,10 @@ Function_203fbe4: @ 203fbe4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r4, [r1]
 	bl      ScriptHandler_LoadHWord
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckLoadParameter
@@ -876,10 +876,10 @@ ScriptCmd_SetTrainerId: @ 203fc0c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
@@ -898,10 +898,10 @@ Function_203fc30: @ 203fc30 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
@@ -914,17 +914,17 @@ Function_203fc30: @ 203fc30 :thumb
 
 
 .thumb
-Function_203fc54: @ 203fc54 :thumb
+ScriptCmd_ClearTrainerId: @ 203fc54 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
 	mov     r1, r5
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r4, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 
@@ -946,14 +946,14 @@ ScriptCmd_AddValue: @ 203fc7c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckSaveParameter
@@ -976,7 +976,7 @@ ScriptCmd_SubValue: @ 203fcac :thumb
 
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
@@ -984,7 +984,7 @@ ScriptCmd_SubValue: @ 203fcac :thumb
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckSaveParameter
@@ -1007,7 +1007,7 @@ ScriptCmd_SetVar: @ 203fcdc :thumb
 
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
@@ -1031,14 +1031,14 @@ ScriptCmd_CopyVar: @ 203fd00 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckLoadParameter
@@ -1116,11 +1116,12 @@ Function_203fd70: @ 203fd70 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
+
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r2, r5
 	mov     r3, #0x20
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r5, r0
 	mov     r0, r4
 	mov     r1, r5
@@ -1134,7 +1135,7 @@ Function_203fd70: @ 203fd70 :thumb
 
 
 .thumb
-Function_203fdbc: @ 203fdbc :thumb
+ScriptCmd_CopyFurniture: @ 203fdbc :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r4, r0
@@ -1153,11 +1154,12 @@ Function_203fdbc: @ 203fdbc :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
+
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r2, r5
 	mov     r3, #0x20
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r5, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -1165,7 +1167,7 @@ Function_203fdbc: @ 203fdbc :thumb
 	mov     r1, r5
 	mov     r2, r6
 	mov     r3, #0x1
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	mov     r0, r5
 	bl      Function_200b190
 	ldr     r1, [pc, #0xc] @ 0x203fe1c, (=MessageLoop+1)
@@ -1252,7 +1254,7 @@ Function_203fe60: @ 203fe60 :thumb
 
 
 .thumb
-Function_203feac: @ 203feac :thumb
+ScriptCmd_SetBCastleFunctionId: @ 203feac :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -1281,11 +1283,12 @@ branch_203fece: @ 203fece :thumb
 	ldr     r2, [pc, #0x4c] @ 0x203ff28, (=0xffff)
 	cmp     r1, r2
 	bne     branch_203ff06
+
 	ldr     r2, [pc, #0x48] @ 0x203ff2c, (=0x265)
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r3, #0x20
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r6, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -1293,7 +1296,7 @@ branch_203fece: @ 203fece :thumb
 	mov     r0, r5
 	mov     r1, r6
 	mov     r3, #0x1
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	mov     r0, r6
 	bl      Function_200b190
 	b       branch_203ff18
@@ -1324,7 +1327,7 @@ branch_203ff18: @ 203ff18 :thumb
 
 
 .thumb
-Function_203ff34: @ 203ff34 :thumb
+ScriptCmd_BCastleFunctReturn: @ 203ff34 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -1383,7 +1386,7 @@ Function_203ff34: @ 203ff34 :thumb
 
 
 .thumb
-Function_203ffac: @ 203ffac :thumb
+ScriptCmd_UnownMessageBox: @ 203ffac :thumb
 	push    {r3-r5,lr}
 	add     sp, #-0x8
 
@@ -1402,7 +1405,7 @@ Function_203ffac: @ 203ffac :thumb
 	mov     r0, r5
 	mov     r2, r4
 	mov     r3, #0x0
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	ldr     r1, [pc, #0xc] @ 0x203ffe4, (=MessageLoop+1)
 	mov     r0, r5
 	bl      ScriptHandler_AddFunction
@@ -1416,7 +1419,7 @@ Function_203ffac: @ 203ffac :thumb
 
 
 
-.thumb
+thumb_func_start ScriptCmd_Message
 ScriptCmd_Message: @ 203ffe8 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x4
@@ -1432,7 +1435,7 @@ ScriptCmd_Message: @ 203ffe8 :thumb
 
 	ldrb    r2, [r2, #0x0]
 	ldr     r1, [r4, #ScriptHandler_78]
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 
 	ldr     r1, =MessageLoop+1
 	mov     r0, r4
@@ -1445,6 +1448,7 @@ ScriptCmd_Message: @ 203ffe8 :thumb
 
 .align 2
 .pool
+thumb_func_end ScriptCmd_Message
 
 
 
@@ -1452,10 +1456,10 @@ thumb_func_start MessageLoop
 MessageLoop: @ 2040014 :thumb
 	push    {r3,lr}
 
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0] @ ScriptHandler_OverWorldData
 	mov     r1, #0x3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 
 	ldrb    r0, [r0, #0x0]
 	bl      Function_205da04
@@ -1483,7 +1487,7 @@ ScriptCmd_Message3: @ 2040028 :thumb
 	mov     r0, r4
 	lsr     r2, r2, #24
 	mov     r3, #0x1
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	ldr     r1, [pc, #0xc] @ 0x2040060, (=MessageLoop+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -1520,7 +1524,7 @@ Function_2040064: @ 2040064 :thumb
 	ldr     r1, [r5, #0x78]
 	mov     r0, r5
 	lsr     r2, r2, #24
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	ldr     r1, [pc, #0xc] @ 0x20400a8, (=MessageLoop+1)
 	mov     r0, r5
 	bl      ScriptHandler_AddFunction
@@ -1551,7 +1555,7 @@ ScriptCmd_Message4: @ 20400ac :thumb
 	ldr     r1, [r4, #0x78]
 	mov     r0, r4
 	lsr     r2, r2, #24
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	ldr     r1, [pc, #0xc] @ 0x20400e4, (=MessageLoop+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -1573,7 +1577,7 @@ Function_20400e8: @ 20400e8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      GetSpriteTrainer
 	lsl     r0, r0, #24
@@ -1583,7 +1587,7 @@ Function_20400e8: @ 20400e8 :thumb
 	ldr     r1, [r4, #0x78]
 	mov     r0, r4
 	mov     r3, #0x1
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	ldr     r1, [pc, #0xc] @ 0x2040120, (=MessageLoop+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -1615,7 +1619,7 @@ ScriptCmd_Message5: @ 2040124 :thumb
 	mov     r0, r5
 	mov     r2, r4
 	mov     r3, #0x1
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 	b       branch_204016c
 
 branch_204014c: @ 204014c :thumb
@@ -1632,7 +1636,7 @@ branch_204014c: @ 204014c :thumb
 	mov     r0, r5
 	mov     r2, r4
 	mov     r3, #0x0
-	bl      Function_5_21dd444
+	bl      Function_5_21dd444_InitMsgData
 branch_204016c: @ 204016c :thumb
 	ldr     r1, [pc, #0xc] @ 0x204017c, (=MessageLoop+1)
 	mov     r0, r5
@@ -1681,7 +1685,7 @@ branch_204019e: @ 204019e :thumb
 
 
 .thumb
-Function_20401a8: @ 20401a8 :thumb
+ScriptCmd_SetSaveData: @ 20401a8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 
@@ -1880,18 +1884,18 @@ Function_20402b4: @ 20402b4 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x6
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	ldr     r0, [r4, #0x8]
 	mov     r2, #0x3
 	bl      Function_205d8f4
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r5, #0x80
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
@@ -1914,11 +1918,11 @@ ScriptCmd_CloseMsgOnKeyPress: @ 20402fc :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x1
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	mov     r1, #0x6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	mov     r1, #0x0
@@ -1938,11 +1942,11 @@ ScriptCmd_FreezeMsgBox: @ 204032c :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x1
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	mov     r1, #0x6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_201a8fc
@@ -1962,27 +1966,27 @@ Function_2040354: @ 2040354 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x31
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x2d
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	mov     r1, #0x32
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x0]
 	mov     r0, r4
 	mov     r1, #0x33
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x4]
 	mov     r0, r4
 	mov     r1, #0x2e
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x8]
 	mov     r0, r4
 	mov     r1, #0x34
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r5, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r5, #0x8]
@@ -2036,27 +2040,27 @@ Function_20403ec: @ 20403ec :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x31
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	mov     r1, #0x32
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x8]
 	mov     r0, r4
 	mov     r1, #0x33
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x4]
 	mov     r0, r4
 	mov     r1, #0x34
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x0]
 	mov     r0, r4
 	mov     r1, #0x2d
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x2e
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	ldrh    r0, [r6, #0x0]
 	cmp     r0, #0x0
@@ -2134,15 +2138,15 @@ ScriptCmd_CallMsgBox: @ 20404a4 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x11
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x18]
 	mov     r0, r4
 	mov     r1, #0x10
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x14]
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -2162,7 +2166,7 @@ ScriptCmd_CallMsgBox: @ 20404a4 :thumb
 	bne     branch_2040504
 	mov     r0, r4
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
 	bl      Function_20629d8
@@ -2177,12 +2181,12 @@ branch_2040504: @ 2040504 :thumb
 	mov     r1, #0x1
 	bl      Function_5_21e1b40
 	mov     r0, r4
-	bl      0x21e1b68
+	bl      Function_5_21e1b68
 	ldr     r2, [sp, #0x18]
 	ldr     r0, [r5, #0x78]
 	ldr     r1, [sp, #0xc]
 	ldr     r2, [r2, #0x0]
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	ldr     r0, [sp, #0x14]
 	ldr     r2, [sp, #0x18]
 	ldr     r0, [r0, #0x0]
@@ -2197,7 +2201,7 @@ branch_2040504: @ 2040504 :thumb
 	str     r3, [sp, #0x8]
 	ldr     r2, [r7, #0x0]
 	mov     r1, #0x1
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
 	mov     r0, #0x1
 	add     sp, #0x1c
 	pop     {r4-r7,pc}
@@ -2208,7 +2212,7 @@ thumb_func_start ScriptCmd_ColorMsgBox
 ScriptCmd_ColorMsgBox: @ 2040554 :thumb
 	push    {r3-r5,lr}
 	mov     r1, r0
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r2, [r0, #ScriptHandler_Pointer]
 	ldr     r4, [r1]
 	add     r1, r2, #0x1
@@ -2300,19 +2304,19 @@ ScriptCmd_CallTextMsgBox: @ 20405dc :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x3
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x4]
 	mov     r0, r4
 	mov     r1, #0x11
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x10
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	str     r0, [sp, #0x8]
 	add     r0, r1, #0x1
@@ -2327,7 +2331,7 @@ ScriptCmd_CallTextMsgBox: @ 20405dc :thumb
 	ldr     r0, [r5, #0x78]
 	ldr     r1, [sp, #0x0]
 	ldr     r2, [r6, #0x0]
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 
 	ldr     r0, [sp, #0x8]
 	ldr     r1, [r7, #0x0]
@@ -2375,7 +2379,7 @@ Function_2040670: @ 2040670 :thumb
 
 	mov     r1, #0x3
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 
 	ldr     r1, [r7, #0x64]
 	mov     r6, r0
@@ -2386,7 +2390,7 @@ Function_2040670: @ 2040670 :thumb
 	mov     r4, r0
 
 	ldr     r0, [r5, #0x64]
-	bl      0x21e1b54
+	bl      Function_5_21e1b54
 
 	ldrb    r0, [r6, #0x0]
 	ldr     r5, [pc, #0x70] @ 0x204070c, (=0xffff)
@@ -2431,7 +2435,7 @@ branch_20406d4: @ 20406d4 :thumb
 	cmp     r5, r1
 	beq     branch_20406f4
 	ldrb    r0, [r6, #0x0]
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 	add     r7, #0x80
 	ldr     r0, [r7, #0x0]
 	mov     r1, r5
@@ -2448,7 +2452,7 @@ branch_20406f4: @ 20406f4 :thumb
 	tst     r0, r1
 	beq     branch_2040708
 	ldrb    r0, [r6, #0x0]
-	bl      Function_201d730
+	bl      Call_RemoveTextInterpreterTaskFromTaskList
 	mov     r0, #0x1
 	strh    r0, [r4, #0x0]
 	pop     {r3-r7,pc}
@@ -2585,11 +2589,11 @@ ScriptCmd_YesNoBox: @ 20407c4 :thumb
 	add     sp, #-0x8
 	mov     r5, r0
 
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r4, [r0]
 	mov     r1, #0x2
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 
 	mov     r0, r5
@@ -2643,7 +2647,7 @@ Function_2040824: @ 2040824 :thumb
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0x2
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x64]
 	mov     r4, r0
 	lsl     r1, r1, #16
@@ -2677,18 +2681,18 @@ branch_2040862: @ 2040862 :thumb
 
 
 .thumb
-Function_2040868: @ 2040868 :thumb
+ScriptCmd_ShowSavingClock: @ 2040868 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r5, #0x80
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x12
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	ldr     r1, [pc, #0xc] @ 0x2040894, (=0x3e2)
 	mov     r0, r4
@@ -2704,12 +2708,12 @@ Function_2040868: @ 2040868 :thumb
 
 
 .thumb
-Function_2040898: @ 2040898 :thumb
+ScriptCmd_HideSavingClock: @ 2040898 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x12
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_200eba0
 	mov     r0, #0x0
@@ -2727,11 +2731,11 @@ ScriptCmd_Multi: @ 20408b0 :thumb
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0x0
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x1c]
 	mov     r0, r6
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x20]
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -2759,7 +2763,7 @@ ScriptCmd_Multi: @ 20408b0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [sp, #0x28]
 	str     r4, [sp, #0x0]
 	str     r1, [sp, #0x4]
@@ -2794,11 +2798,11 @@ ScriptCmd_Multi2: @ 2040938 :thumb
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0x0
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x1c]
 	mov     r0, r6
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x20]
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -2826,7 +2830,7 @@ ScriptCmd_Multi2: @ 2040938 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [sp, #0x28]
 	str     r4, [sp, #0x0]
 	str     r1, [sp, #0x4]
@@ -2853,13 +2857,13 @@ ScriptCmd_Multi2: @ 2040938 :thumb
 
 .align 2, 0
 .thumb
-Function_20409c0: @ 20409c0 :thumb
+ScriptCmd_TextScriptMulti: @ 20409c0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	add     r3, r1, #0x1
 	str     r3, [r4, #0x8]
@@ -2868,7 +2872,7 @@ Function_20409c0: @ 20409c0 :thumb
 	str     r2, [r4, #0x8]
 	ldrb    r2, [r3, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21dc1a4
+	bl      Function_5_21dc1a4
 	mov     r0, #0x0
 	pop     {r4,pc}
 @ 0x20409e6
@@ -2876,13 +2880,13 @@ Function_20409c0: @ 20409c0 :thumb
 
 .align 2, 0
 .thumb
-Function_20409e8: @ 20409e8 :thumb
+ScriptCmd_ChoiceMulti: @ 20409e8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -2901,7 +2905,7 @@ Function_20409e8: @ 20409e8 :thumb
 	mov     r2, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, r6
-	bl      0x21dc1a4
+	bl      Function_5_21dc1a4
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
 @ 0x2040a2a
@@ -2915,9 +2919,9 @@ ScriptCmd_CloseMulti: @ 2040a2c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x21dc1ac
+	bl      Function_5_21dc1ac
 	ldr     r1, [pc, #0x8] @ 0x2040a4c, (=Function_2040a50+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -2957,15 +2961,15 @@ branch_2040a6e: @ 2040a6e :thumb
 
 
 .thumb
-Function_2040a78: @ 2040a78 :thumb
+ScriptCmd_CloseMultiUnion: @ 2040a78 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x21dc1ac
+	bl      Function_5_21dc1ac
 	ldr     r1, [pc, #0x8] @ 0x2040a98, (=Function_2040a9c+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -2991,7 +2995,7 @@ Function_2040a9c: @ 2040a9c :thumb
 	mov     r4, r0
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	ldrh    r1, [r4, #0x0]
 	ldr     r0, [pc, #0x24] @ 0x2040ae4, (=0xeeee)
@@ -3004,7 +3008,7 @@ Function_2040a9c: @ 2040a9c :thumb
 	mov     r0, #0x8
 	strh    r0, [r4, #0x0]
 	ldr     r0, [r6, #0x0]
-	bl      0x21dc424
+	bl      Function_5_21dc424
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
 
@@ -3030,11 +3034,11 @@ ScriptCmd_Multi3: @ 2040ae8 :thumb
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0x0
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x1c]
 	mov     r0, r6
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x20]
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -3062,7 +3066,7 @@ ScriptCmd_Multi3: @ 2040ae8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [sp, #0x28]
 	str     r4, [sp, #0x0]
 	str     r1, [sp, #0x4]
@@ -3076,7 +3080,7 @@ ScriptCmd_Multi3: @ 2040ae8 :thumb
 	ldr     r1, [sp, #0x18]
 	ldr     r2, [sp, #0x14]
 	mov     r0, r6
-	bl      0x21dc48c
+	bl      Function_5_21dc48c
 	ldr     r1, [sp, #0x1c]
 	str     r0, [r1, #0x0]
 	ldr     r0, [sp, #0x24]
@@ -3097,11 +3101,11 @@ ScriptCmd_Multi4: @ 2040b70 :thumb
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0x0
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x1c]
 	mov     r0, r6
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x20]
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -3129,7 +3133,7 @@ ScriptCmd_Multi4: @ 2040b70 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [sp, #0x28]
 	str     r4, [sp, #0x0]
 	str     r1, [sp, #0x4]
@@ -3143,7 +3147,7 @@ ScriptCmd_Multi4: @ 2040b70 :thumb
 	ldr     r1, [sp, #0x18]
 	ldr     r2, [sp, #0x14]
 	mov     r0, r6
-	bl      0x21dc48c
+	bl      Function_5_21dc48c
 	ldr     r1, [sp, #0x1c]
 	str     r0, [r1, #0x0]
 	ldr     r0, [sp, #0x24]
@@ -3162,7 +3166,7 @@ ScriptCmd_TxtMsgScrpMulti: @ 2040bf8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -3194,10 +3198,11 @@ ScriptCmd_TxtMsgScrpMulti: @ 2040bf8 :thumb
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
 	lsr     r3, r3, #24
-	bl      0x21dc4b0
+	bl      Function_5_21dc4b0
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x2040c58
+
 
 .thumb
 ScriptCmd_CloseMulti4: @ 2040c58 :thumb
@@ -3206,9 +3211,9 @@ ScriptCmd_CloseMulti4: @ 2040c58 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x21dc4b8
+	bl      Function_5_21dc4b8
 	ldr     r1, [pc, #0x8] @ 0x2040c78, (=Function_2040a50+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -3227,7 +3232,7 @@ Function_2040c7c: @ 2040c7c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -3238,7 +3243,7 @@ Function_2040c7c: @ 2040c7c :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x21dc528
+	bl      Function_5_21dc528
 	ldr     r1, [pc, #0xc] @ 0x2040cb4, (=Function_2040a50+1)
 	mov     r0, r5
 	bl      ScriptHandler_AddFunction
@@ -3258,7 +3263,7 @@ Function_2040cb8: @ 2040cb8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -3278,7 +3283,7 @@ Function_2040cb8: @ 2040cb8 :thumb
 	mov     r2, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, r6
-	bl      0x21dc600
+	bl      Function_5_21dc600
 	ldr     r1, [pc, #0x8] @ 0x2040d04, (=Function_2040a50+1)
 	mov     r0, r5
 	bl      ScriptHandler_AddFunction
@@ -3297,13 +3302,13 @@ ScriptCmd_Multirow: @ 2040d08 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r4, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r4, #0x8]
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21dcd94
+	bl      Function_5_21dcd94
 	ldr     r1, [pc, #0x8] @ 0x2040d30, (=Function_2040a50+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -3322,16 +3327,17 @@ ScriptCmd_33a: @ 2040d34 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r4, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r4, #0x8]
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21dd3f4
+	bl      Function_5_21dd3f4
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x2040d54
+
 
 .thumb
 ScriptCmd_33b: @ 2040d54 :thumb
@@ -3340,13 +3346,13 @@ ScriptCmd_33b: @ 2040d54 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x0
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r4, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r4, #0x8]
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21dd410
+	bl      Function_5_21dd410
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x2040d74
@@ -3362,7 +3368,7 @@ ScriptCmd_ApplyMovement: @ 2040d74 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
@@ -3372,7 +3378,7 @@ ScriptCmd_ApplyMovement: @ 2040d74 :thumb
 	mov     r4, r0          @ Adr to movement code
 
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, r6
 	bl      GetAdressOfSpriteID_Extended
@@ -3390,13 +3396,13 @@ branch_2040daa: @ 2040daa :thumb
 	mov     r4, r0
 
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 
 	ldrb    r1, [r0, #0x0]
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r2, #0x0
 	.hword  0x1c49 @ add r1, r1, #0x1
 	strb    r1, [r0, #0x0]
@@ -3419,7 +3425,7 @@ ScriptCmd_ApplyMovement2: @ 2040dd8 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r4, r0
@@ -3428,7 +3434,7 @@ ScriptCmd_ApplyMovement2: @ 2040dd8 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r0, [sp, #0x0]
@@ -3438,13 +3444,13 @@ ScriptCmd_ApplyMovement2: @ 2040dd8 :thumb
 
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, r4
 	bl      GetAdressOfSpriteID_Extended
@@ -3527,13 +3533,13 @@ branch_2040e9a: @ 2040e9a :thumb
 	bl      Malloc_MovementScript
 	mov     r6, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldrb    r1, [r0]
 
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r2, r4
 	.hword  0x1c49 @ add r1, r1, #0x1
 	strb    r1, [r0, #0x0]
@@ -3565,7 +3571,7 @@ branch_2040ee4: @ 2040ee4 :thumb
 	cmp     r1, #0xf1
 	bne     branch_2040ef2
 	mov     r1, #0xb
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	pop     {r3,pc}
 
@@ -3594,10 +3600,10 @@ thumb_func_end ScriptCmd_WaitMovement
 .thumb
 WaitMovement: @ 2040f0c :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldrb    r0, [r0, #0x0]
 	cmp     r0, #0x0
 	bne     branch_2040f22
@@ -3655,7 +3661,7 @@ MovementScript_TaskHandler: @ 2040f5c :thumb
 	mov     r5, r1
 	ldr     r0, [r5, #0xc] @ Ptr to OverWorldData
 	mov     r1, #0x4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r5, #0x4]
 	bl      Function_206574c
@@ -3697,7 +3703,7 @@ ScriptCmd_LockAll: @ 2040fa4 :thumb
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xa
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	bne     branch_2040ff6
@@ -3745,7 +3751,7 @@ Function_2041004: @ 2041004 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0xa
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	ldr     r0, [r4, #0x3c]
 	bl      Function_205eb3c
@@ -3871,7 +3877,7 @@ Function_20410f4: @ 20410f4 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0xa
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	ldr     r0, [r4, #0x3c]
 	bl      Function_205eb3c
@@ -4104,7 +4110,7 @@ ScriptCmd_LockCam: @ 2041288 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xb
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -4136,7 +4142,7 @@ ScriptCmd_LockCam: @ 2041288 :thumb
 	ldr     r1, [r1, #0x0]
 	mov     r4, r0
 	ldr     r1, [r1, #0x28]
-	bl      0x21e931c
+	bl      Function_5_21e931c
 	add     r5, #0x80
 	ldr     r1, [r5, #0x0]
 	mov     r0, r4
@@ -4156,7 +4162,7 @@ ScriptCmd_ZoomCam: @ 2041320 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xb
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_2061af4
 	mov     r0, r5
@@ -4171,7 +4177,7 @@ ScriptCmd_ZoomCam: @ 2041320 :thumb
 	ldr     r1, [r1, #0x0]
 	mov     r4, r0
 	ldr     r1, [r1, #0x28]
-	bl      0x21e931c
+	bl      Function_5_21e931c
 	add     r5, #0x80
 	ldr     r1, [r5, #0x0]
 	mov     r0, r4
@@ -4206,7 +4212,7 @@ Function_2041364: @ 2041364 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xb
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, #0x2
 	add     r5, #0x80
 	mov     r4, r0
@@ -4242,7 +4248,7 @@ Function_20413d8: @ 20413d8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xb
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_2061af4
 	mov     r0, #0x0
@@ -4264,7 +4270,7 @@ ScriptCmd_FacePlayer: @ 20413f0 :thumb
 
 	mov     r0, r5
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	bne     branch_2041414
@@ -4370,7 +4376,7 @@ thumb_func_end ScriptCmd_CheckIdSpritePosition
 
 .align 2, 0
 .thumb
-Function_20414c4: @ 20414c4 :thumb
+ScriptCmd_CheckFacePosition: @ 20414c4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -4562,7 +4568,7 @@ ScriptCmd_FollowHero: @ 2041604 :thumb
 
 .align 2, 0
 .thumb
-Function_204163c: @ 204163c :thumb
+ScriptCmd_CheckFollowBattle: @ 204163c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -4616,7 +4622,7 @@ ScriptCmd_StopFollowHero: @ 2041684 :thumb
 
 
 .thumb
-Function_204169c: @ 204169c :thumb
+ScriptCmd_StoreSealNum: @ 204169c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -4723,7 +4729,7 @@ ScriptCmd_SetPokemonPartyStored: @ 204174c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
@@ -4731,13 +4737,13 @@ ScriptCmd_SetPokemonPartyStored: @ 204174c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r4, r0
 	ldr     r0, [r5]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	mov     r1, r6
 	bl      GetAdrOfPkmnInParty
@@ -4749,13 +4755,13 @@ thumb_func_end ScriptCmd_SetPokemonPartyStored
 
 
 .thumb
-Function_2041790: @ 2041790 :thumb
+ScriptCmd_ChoosePokemonMenu: @ 2041790 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r5
 	add     r1, #0x80
 	mov     r4, r0
@@ -4776,13 +4782,13 @@ Function_2041790: @ 2041790 :thumb
 
 
 .thumb
-Function_20417c0: @ 20417c0 :thumb
+ScriptCmd_ChooseTradePokemon: @ 20417c0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r5
 	add     r1, #0x80
 	mov     r4, r0
@@ -4803,13 +4809,13 @@ Function_20417c0: @ 20417c0 :thumb
 
 
 .thumb
-Function_20417f0: @ 20417f0 :thumb
+ScriptCmd_ChoosePokemonMenu2: @ 20417f0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r5, #0x80
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
@@ -4824,7 +4830,7 @@ Function_20417f0: @ 20417f0 :thumb
 
 .align 2, 0
 .thumb
-Function_2041814: @ 2041814 :thumb
+ScriptCmd_StorePokemonMenu2: @ 2041814 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -4837,7 +4843,7 @@ Function_2041814: @ 2041814 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -4884,7 +4890,7 @@ ScriptCmd_2d0: @ 2041860 :thumb
 	mov     r6, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r7, [r4, #0x0]
 	cmp     r7, #0x0
@@ -4957,7 +4963,7 @@ ScriptCmd_2d4: @ 20418e0 :thumb
 	mov     r7, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	ldr     r4, [r6, #0x0]
 	cmp     r4, #0x0
@@ -5038,7 +5044,7 @@ ScriptCmd_2db: @ 2041984 :thumb
 	mov     r7, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	ldr     r4, [r6, #0x0]
 	cmp     r4, #0x0
@@ -5089,14 +5095,14 @@ branch_2041a1c: @ 2041a1c :thumb
 @ 0x2041a28
 
 .thumb
-Function_2041a28: @ 2041a28 :thumb
+ScriptCmd_ChsPokeContest: @ 2041a28 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5152,7 +5158,7 @@ Function_2041a28: @ 2041a28 :thumb
 
 
 .thumb
-Function_2041ab0: @ 2041ab0 :thumb
+ScriptCmd_StorePokeContest: @ 2041ab0 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -5173,7 +5179,7 @@ Function_2041ab0: @ 2041ab0 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -5210,13 +5216,13 @@ branch_2041b16: @ 2041b16 :thumb
 @ 0x2041b24
 
 .thumb
-Function_2041b24: @ 2041b24 :thumb
+ScriptCmd_ShowPokeInfo: @ 2041b24 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5245,7 +5251,7 @@ Function_2041b24: @ 2041b24 :thumb
 
 
 .thumb
-Function_2041b68: @ 2041b68 :thumb
+ScriptCmd_StorePokeMove: @ 2041b68 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -5258,7 +5264,7 @@ Function_2041b68: @ 2041b68 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -5282,7 +5288,7 @@ Function_2041ba8: @ 2041ba8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5332,7 +5338,7 @@ Function_2041c00: @ 2041c00 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -5357,7 +5363,7 @@ Function_2041c40: @ 2041c40 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5379,7 +5385,7 @@ Function_2041c40: @ 2041c40 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [r4, #0x0]
 	mov     r2, r7
-	bl      0x21dbd98
+	bl      Function_5_21dbd98
 	strh    r0, [r6, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -5402,7 +5408,7 @@ Function_2041c8c: @ 2041c8c :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a74c
+	bl      GetVariableAreaAdress_6_66
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -5442,7 +5448,7 @@ Function_2041cc8: @ 2041cc8 :thumb
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0x13
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_20509b4
@@ -5468,7 +5474,7 @@ Function_2041cf4: @ 2041cf4 :thumb
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0x13
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	ldr     r6, [r4, #0x0]
@@ -5506,7 +5512,7 @@ Function_2041d3c: @ 2041d3c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	bl      Function_209c238
@@ -5553,7 +5559,7 @@ ScriptCmd_CallEnd: @ 2041d78 :thumb
 @ 0x2041d88
 
 .thumb
-Function_2041d88: @ 2041d88 :thumb
+ScriptCmd_PreWfc: @ 2041d88 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -5641,7 +5647,7 @@ Function_2041e18: @ 2041e18 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x21eaf50
+	bl      Function_5_21eaf50
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2041e26
@@ -5664,7 +5670,7 @@ Function_2041e34: @ 2041e34 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5682,7 +5688,7 @@ Function_2041e34: @ 2041e34 :thumb
 @ 0x2041e64
 
 .thumb
-Function_2041e64: @ 2041e64 :thumb
+ScriptCmd_StorePokeColosseumLost: @ 2041e64 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -5700,14 +5706,14 @@ Function_2041e64: @ 2041e64 :thumb
 
 .align 2, 0
 .thumb
-Function_2041e84: @ 2041e84 :thumb
+ScriptCmd_PokemonPicture: @ 2041e84 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5770,14 +5776,14 @@ Function_2041e84: @ 2041e84 :thumb
 
 
 .thumb
-Function_2041f14: @ 2041f14 :thumb
+ScriptCmd_PokemonPartyPicture: @ 2041f14 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x10
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -5843,12 +5849,12 @@ Function_2041f14: @ 2041f14 :thumb
 
 
 .thumb
-Function_2041fac: @ 2041fac :thumb
+ScriptCmd_HidePicture: @ 2041fac :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
 	strb    r1, [r0, #0x0]
@@ -5859,12 +5865,12 @@ Function_2041fac: @ 2041fac :thumb
 
 .align 2, 0
 .thumb
-Function_2041fc4: @ 2041fc4 :thumb
+ScriptCmd_ActLearning: @ 2041fc4 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x2
 	strb    r1, [r0, #0x0]
@@ -5875,7 +5881,7 @@ Function_2041fc4: @ 2041fc4 :thumb
 
 .align 2, 0
 .thumb
-Function_2041fdc: @ 2041fdc :thumb
+ScriptCmd_SetSoundLearning: @ 2041fdc :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -5899,7 +5905,7 @@ Function_2041ff8: @ 2041ff8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	ldr     r1, [r5, #0x64]
@@ -5931,7 +5937,7 @@ Function_2042028: @ 2042028 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -5941,7 +5947,7 @@ Function_2042028: @ 2042028 :thumb
 	mov     r2, r0
 	ldr     r0, [r5, #0x74]
 	ldr     r1, [r4, #0x0]
-	bl      0x21db888
+	bl      Function_5_21db888
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
 @ 0x204205a
@@ -5955,7 +5961,7 @@ Function_204205c: @ 204205c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -5971,14 +5977,15 @@ Function_204205c: @ 204205c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r1, [r4, #0x0]
-	bl      0x224c5dc
+	bl      Function_8_224c5dc
 	cmp     r0, #0x0
 	bne     branch_204209c
+
 branch_2042092: @ 2042092 :thumb
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
 	ldr     r1, [r4, #0x0]
-	bl      0x21dbed4
+	bl      Function_5_21dbed4
 branch_204209c: @ 204209c :thumb
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -6059,7 +6066,7 @@ ScriptCmd_DisplayDressedPokemon: @ 2042124 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -6112,7 +6119,7 @@ ScriptCmd_DisplayContestPokemon: @ 204218c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -6159,7 +6166,7 @@ branch_20421d4: @ 20421d4 :thumb
 
 
 .thumb
-Function_20421f4: @ 20421f4 :thumb
+ScriptCmd_CheckDress: @ 20421f4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -6191,7 +6198,7 @@ branch_2042228: @ 2042228 :thumb
 @ 0x2042230
 
 .thumb
-Function_2042230: @ 2042230 :thumb
+ScriptCmd_CheckContestWin: @ 2042230 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -6223,7 +6230,7 @@ branch_2042264: @ 2042264 :thumb
 @ 0x204226c
 
 .thumb
-Function_204226c: @ 204226c :thumb
+ScriptCmd_StorePhotoName: @ 204226c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -6246,7 +6253,7 @@ Function_204226c: @ 204226c :thumb
 @ 0x204229c
 
 .thumb
-Function_204229c: @ 204229c :thumb
+ScriptCmd_Geonet: @ 204229c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -6301,7 +6308,7 @@ ScriptCmd_OpenSinnohMaps: @ 20422e8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, #0x5
 	mov     r4, r0
 	mov     r0, #0xb
@@ -6332,13 +6339,13 @@ ScriptCmd_OpenSinnohMaps: @ 20422e8 :thumb
 
 
 .thumb
-Function_2042330: @ 2042330 :thumb
+ScriptCmd_BerryPoffin: @ 2042330 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -6362,7 +6369,7 @@ Function_2042330: @ 2042330 :thumb
 
 
 .thumb
-Function_2042368: @ 2042368 :thumb
+ScriptCmd_SetvarBTowerChs: @ 2042368 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -6406,7 +6413,7 @@ branch_20423b6: @ 20423b6 :thumb
 @ 0x20423bc
 
 .thumb
-Function_20423bc: @ 20423bc :thumb
+ScriptCmd_BattleRoomResult: @ 20423bc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -6428,7 +6435,7 @@ Function_20423bc: @ 20423bc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, #0xb
 	mov     r1, #0x8
@@ -6469,7 +6476,7 @@ ScriptCmd_OpenPCFunction: @ 2042434 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, #0xb
 	mov     r1, #0xc
@@ -6549,7 +6556,7 @@ ScriptCmd_RecordMixingUnion: @ 20424bc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -6582,7 +6589,7 @@ ScriptCmd_HallFameAnm: @ 20424f8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -6709,10 +6716,10 @@ ScriptCmd_ChooseStarter: @ 20425e0 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, #0xb
@@ -6722,14 +6729,14 @@ ScriptCmd_ChooseStarter: @ 20425e0 :thumb
 	mov     r6, r0
 
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadPlayerDataAdress
 	str     r0, [r6, #0x4]
 
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	ldr     r1, [r4, #0x0]
 	bl      OverWorldData_InitChooseScreen
@@ -6752,11 +6759,11 @@ thumb_func_start ScriptCmd_BattleStarter
 ScriptCmd_BattleStarter: @ 2042628 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
-	add     r5, #ScriptHandler_80
+	bl      ScriptHandler_GetSomeScriptAddresses
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r4, r0
 	ldr     r0, [r5]
 	ldr     r0, [r0, #0xc]
@@ -6777,7 +6784,7 @@ thumb_func_end ScriptCmd_BattleStarter
 
 
 .thumb
-Function_2042658: @ 2042658 :thumb
+ScriptCmd_OpenBerryPouch: @ 2042658 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	ldr     r1, [r5, #0x8]
@@ -6798,7 +6805,7 @@ branch_204266e: @ 204266e :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	ldr     r0, [r6, #0x0]
 	cmp     r0, #0x0
@@ -6839,7 +6846,7 @@ Function_20426a8: @ 20426a8 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -6858,7 +6865,7 @@ branch_20426d4: @ 20426d4 :thumb
 
 
 .thumb
-Function_20426e8: @ 20426e8 :thumb
+ScriptCmd_ChoosePlayerName: @ 20426e8 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -6884,7 +6891,7 @@ Function_20426e8: @ 20426e8 :thumb
 
 .align 2, 0
 .thumb
-Function_2042718: @ 2042718 :thumb
+ScriptCmd_ChoosePokemonName: @ 2042718 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x34
 	mov     r5, r0
@@ -6933,7 +6940,7 @@ Function_2042718: @ 2042718 :thumb
 @ 0x2042784
 
 .thumb
-Function_2042784: @ 2042784 :thumb
+ScriptCmd_ThankNameInsert: @ 2042784 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -6959,14 +6966,14 @@ Function_2042784: @ 2042784 :thumb
 
 .align 2, 0
 .thumb
-Function_20427b4: @ 20427b4 :thumb
+ScriptCmd_SpinTradeUnion: @ 20427b4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, r5
@@ -6988,7 +6995,7 @@ Function_20427b4: @ 20427b4 :thumb
 
 
 .thumb
-Function_20427e0: @ 20427e0 :thumb
+ScriptCmd_CheckVersionGame: @ 20427e0 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 
@@ -7019,7 +7026,7 @@ branch_2042808: @ 2042808 :thumb
 
 .align 2, 0
 .thumb
-Function_2042810: @ 2042810 :thumb
+ScriptCmd_PhraseBox1W: @ 2042810 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -7062,7 +7069,7 @@ Function_2042810: @ 2042810 :thumb
 
 
 .thumb
-Function_2042868: @ 2042868 :thumb
+ScriptCmd_PhraseBox2W: @ 2042868 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -7110,13 +7117,13 @@ Function_2042868: @ 2042868 :thumb
 
 .word 0xffff @ 0x20428d0
 .thumb
-Function_20428d4: @ 20428d4 :thumb
+ScriptCmd_SetvarPhraseBox1W: @ 20428d4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -7145,7 +7152,7 @@ Function_20428d4: @ 20428d4 :thumb
 
 
 .thumb
-Function_2042918: @ 2042918 :thumb
+ScriptCmd_FadeScreen: @ 2042918 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -7178,7 +7185,7 @@ Function_2042918: @ 2042918 :thumb
 @ 0x2042960
 
 .thumb
-Function_2042960: @ 2042960 :thumb
+ScriptCmd_ResetScreen: @ 2042960 :thumb
 	push    {r3,lr}
 	ldr     r1, [pc, #0x8] @ 0x204296c, (=Function_2042970+1)
 	bl      ScriptHandler_AddFunction
@@ -7214,7 +7221,7 @@ ScriptCmd_Warp: @ 2042984 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
@@ -7226,7 +7233,7 @@ ScriptCmd_Warp: @ 2042984 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
@@ -7235,7 +7242,7 @@ ScriptCmd_Warp: @ 2042984 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r4, r0
@@ -7244,7 +7251,7 @@ ScriptCmd_Warp: @ 2042984 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r4, [sp, #0x0]
@@ -7264,7 +7271,7 @@ thumb_func_start ScriptCmd_Warp
 
 
 .thumb
-Function_20429f4: @ 20429f4 :thumb
+ScriptCmd_BattlePokeColosseum: @ 20429f4 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -7306,7 +7313,7 @@ Function_20429f4: @ 20429f4 :thumb
 @ 0x2042a50
 
 .thumb
-Function_2042a50: @ 2042a50 :thumb
+ScriptCmd_WarpLastElevator: @ 2042a50 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -7324,7 +7331,7 @@ Function_2042a60: @ 2042a60 :thumb
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a728
+	bl      AddVariableAreaAdress_6_MapData2
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -7339,7 +7346,7 @@ Function_2042a60: @ 2042a60 :thumb
 @ 0x2042a8c
 
 .thumb
-Function_2042a8c: @ 2042a8c :thumb
+ScriptCmd_CheckEffectHm: @ 2042a8c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -7360,7 +7367,7 @@ Function_2042a8c: @ 2042a8c :thumb
 
 .align 2, 0
 .thumb
-Function_2042ab0: @ 2042ab0 :thumb
+ScriptCmd_RockClimbAnimation: @ 2042ab0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -7378,13 +7385,14 @@ Function_2042ab0: @ 2042ab0 :thumb
 	mov     r1, r0
 	ldr     r0, [r5, #0x74]
 	mov     r2, r4
-	bl      0x21e0734
+	bl      Function_5_21e0734
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x2042ae0
 
+
 .thumb
-Function_2042ae0: @ 2042ae0 :thumb
+ScriptCmd_SurfAnimation: @ 2042ae0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -7427,13 +7435,14 @@ branch_2042b1a: @ 2042b1a :thumb
 	mov     r2, r0
 	ldr     r0, [r5, #0x74]
 	mov     r1, r4
-	bl      0x21e00ec
+	bl      Function_5_21e00ec
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x2042b3c
 
+
 .thumb
-Function_2042b3c: @ 2042b3c :thumb
+ScriptCmd_WaterfallAnimation: @ 2042b3c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -7451,13 +7460,14 @@ Function_2042b3c: @ 2042b3c :thumb
 	mov     r1, r0
 	ldr     r0, [r5, #0x74]
 	mov     r2, r4
-	bl      0x21e0998
+	bl      Function_5_21e0998
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x2042b6c
 
+
 .thumb
-Function_2042b6c: @ 2042b6c :thumb
+ScriptCmd_FlyAnimation: @ 2042b6c :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -7493,7 +7503,7 @@ Function_2042b6c: @ 2042b6c :thumb
 @ 0x2042bb8
 
 .thumb
-Function_2042bb8: @ 2042bb8 :thumb
+ScriptCmd_FlashAnimation: @ 2042bb8 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -7502,25 +7512,23 @@ Function_2042bb8: @ 2042bb8 :thumb
 	bl      LoadVariableAreaAdress_6
 	mov     r5, r0
 	mov     r1, #0x0
-	bl      Function_203a754
+	bl      SetVariableAreaAdress_6_66
 	mov     r0, r5
-	bl      Function_203a74c
+	bl      GetVariableAreaAdress_6_66
 	add     r4, #0x80
 	mov     r1, r0
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x4]
 	ldr     r0, [r0, #0xc]
-	bl      0x21d5f7c
+	bl      Function_5_21d5f7c
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x2042be6
 
 
 .align 2, 0
-
-
 .thumb
-Function_2042be8: @ 2042be8 :thumb
+ScriptCmd_DefogAnimation: @ 2042be8 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -7529,31 +7537,29 @@ Function_2042be8: @ 2042be8 :thumb
 	bl      LoadVariableAreaAdress_6
 	mov     r5, r0
 	mov     r1, #0x0
-	bl      Function_203a754
+	bl      SetVariableAreaAdress_6_66
 	mov     r0, r5
-	bl      Function_203a74c
+	bl      GetVariableAreaAdress_6_66
 	add     r4, #0x80
 	mov     r1, r0
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x4]
 	ldr     r0, [r0, #0xc]
-	bl      0x21d5f7c
+	bl      Function_5_21d5f7c
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x2042c16
 
 
 .align 2, 0
-
-
 .thumb
-Function_2042c18: @ 2042c18 :thumb
+ScriptCmd_PrepareHMEffect: @ 2042c18 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -7602,7 +7608,7 @@ Function_2042c80: @ 2042c80 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	bl      Function_6_2243fbc
@@ -7621,10 +7627,10 @@ branch_2042ca2: @ 2042ca2 :thumb
 
 .align 2, 0
 .thumb
-Function_2042ca8: @ 2042ca8 :thumb
+ScriptCmd_Tuxedo: @ 2042ca8 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0x74]
-	bl      0x21e0dd4
+	bl      Function_5_21e0dd4
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2042cb4
@@ -7662,7 +7668,7 @@ branch_2042cde: @ 2042cde :thumb
 @ 0x2042ce4
 
 .thumb
-Function_2042ce4: @ 2042ce4 :thumb
+ScriptCmd_RideBike: @ 2042ce4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r1, [r4, #0x8]
@@ -7689,27 +7695,25 @@ Function_2042ce4: @ 2042ce4 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x2
 	ldr     r0, [r0, #0x3c]
-	bl      0x21dfb54
+	bl      Function_5_21dfb54
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x3c]
-	bl      0x21dfb5c
+	bl      Function_5_21dfb5c
 	b       branch_2042d6c
-@ 0x2042d2c
 
-.thumb
 branch_2042d2c: @ 2042d2c :thumb
 	mov     r0, r4
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1
 	ldr     r0, [r0, #0x3c]
-	bl      0x21dfb54
+	bl      Function_5_21dfb54
 	mov     r0, r4
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0x3c]
-	bl      0x21dfb5c
+	bl      Function_5_21dfb5c
 	mov     r0, r4
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -7733,7 +7737,7 @@ branch_2042d6c: @ 2042d6c :thumb
 
 
 .thumb
-Function_2042d70: @ 2042d70 :thumb
+ScriptCmd_BikeRide: @ 2042d70 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -7748,7 +7752,7 @@ Function_2042d70: @ 2042d70 :thumb
 
 
 .thumb
-Function_2042d84: @ 2042d84 :thumb
+ScriptCmd_RideBike2: @ 2042d84 :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -7764,7 +7768,7 @@ Function_2042d84: @ 2042d84 :thumb
 
 
 .thumb
-Function_2042d9c: @ 2042d9c :thumb
+ScriptCmd_CheckGivePokeHeroAnimation: @ 2042d9c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -7786,7 +7790,7 @@ Function_2042d9c: @ 2042d9c :thumb
 
 .align 2, 0
 .thumb
-Function_2042dc4: @ 2042dc4 :thumb
+ScriptCmd_GivePokeHeroAnimation: @ 2042dc4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -7801,19 +7805,19 @@ Function_2042dc4: @ 2042dc4 :thumb
 
 
 .thumb
-Function_2042ddc: @ 2042ddc :thumb
+ScriptCmd_StopGivePokeHeroAnimation: @ 2042ddc :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0x3c]
-	bl      0x21dfb5c
+	bl      Function_5_21dfb5c
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2042dec
 
 
 .thumb
-Function_2042dec: @ 2042dec :thumb
+ScriptCmd_CheckSwarmPoke: @ 2042dec :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -7841,7 +7845,7 @@ Function_2042dec: @ 2042dec :thumb
 	bl      Function_202d814
 	mov     r1, r6
 	mov     r2, r4
-	bl      0x224322c
+	bl      Function_6_224322c
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
 @ 0x2042e36
@@ -7855,13 +7859,13 @@ ScriptCmd_StoreStarter: @ 2042e38 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r4, r0
 	ldr     r0, [r5]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	bl      Function_206b054
 	strh    r0, [r4, #0x0]
@@ -7879,17 +7883,17 @@ ScriptCmd_EndTrainerBattle: @ 2042e64 :thumb
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0x8
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x10
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -7913,12 +7917,12 @@ ScriptCmd_EndTrainerBattle: @ 2042e64 :thumb
 	bl      LoadNPCTrainerTbl_2
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, #0xf
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -7943,7 +7947,7 @@ ScriptCmd_EndTrainerBattle: @ 2042e64 :thumb
 
 
 .thumb
-Function_2042f04: @ 2042f04 :thumb
+ScriptCmd_ChooseFriend: @ 2042f04 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -7980,7 +7984,7 @@ Function_2042f04: @ 2042f04 :thumb
 	ldr     r3, [sp, #0x4]
 	mov     r0, r4
 	mov     r1, r7
-	bl      0x224b414
+	bl      Function_7_224b414
 	ldr     r1, [pc, #0x10] @ 0x2042f70, (=Function_2042f74+1)
 	mov     r0, r5
 	str     r6, [r5, #0x64]
@@ -8006,7 +8010,7 @@ Function_2042f74: @ 2042f74 :thumb
 	lsr     r1, r1, #16
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
-	bl      0x224b460
+	bl      Function_7_224b460
 	cmp     r0, #0x0
 	bne     branch_2042f94
 	mov     r0, #0x0
@@ -8021,7 +8025,7 @@ branch_2042f94: @ 2042f94 :thumb
 
 .align 2, 0
 .thumb
-Function_2042f9c: @ 2042f9c :thumb
+ScriptCmd_WirelessBattleWait: @ 2042f9c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -8058,7 +8062,7 @@ Function_2042f9c: @ 2042f9c :thumb
 	ldr     r3, [sp, #0x4]
 	mov     r0, r4
 	mov     r1, r7
-	bl      0x224b47c
+	bl      Function_7_224b47c
 	ldr     r1, [pc, #0x10] @ 0x2043008, (=Function_204300c+1)
 	mov     r0, r5
 	str     r6, [r5, #0x64]
@@ -8084,7 +8088,7 @@ Function_204300c: @ 204300c :thumb
 	lsr     r1, r1, #16
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
-	bl      0x224b4c8
+	bl      Function_7_224b4c8
 	cmp     r0, #0x0
 	bne     branch_204302c
 	mov     r0, #0x0
@@ -8125,7 +8129,7 @@ Function_204304c: @ 204304c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	add     r5, #0x80
 	ldr     r4, [r6, #0x0]
@@ -8145,14 +8149,14 @@ Function_204304c: @ 204304c :thumb
 
 
 .thumb
-Function_204307c: @ 204307c :thumb
+ScriptCmd_PokemonContest: @ 204307c :thumb
 	mov     r0, #0x1
 	bx      lr
 @ 0x2043080
 
 
 .thumb
-Function_2043080: @ 2043080 :thumb
+ScriptCmd_WarpMapElevator: @ 2043080 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x14
 	mov     r4, r0
@@ -8200,7 +8204,7 @@ Function_2043080: @ 2043080 :thumb
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
 	add     r1, sp, #0x0
-	bl      Function_203a734
+	bl      CopyToVariableAreaAdress_6_3c
 	mov     r0, #0x0
 	add     sp, #0x14
 	pop     {r3,r4,pc}
@@ -8209,7 +8213,7 @@ Function_2043080: @ 2043080 :thumb
 
 .align 2, 0
 .thumb
-Function_2043100: @ 2043100 :thumb
+ScriptCmd_CheckFloor: @ 2043100 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -8223,9 +8227,9 @@ Function_2043100: @ 2043100 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a730
+	bl      AddVariableAreaAdress_6_MapData3
 	ldr     r0, [r0, #0x0]
-	bl      0x21dccc8
+	bl      Function_5_21dccc8
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -8233,7 +8237,7 @@ Function_2043100: @ 2043100 :thumb
 
 
 .thumb
-Function_2043130: @ 2043130 :thumb
+ScriptCmd_StartLift: @ 2043130 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
@@ -8241,7 +8245,7 @@ Function_2043130: @ 2043130 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
 	str     r0, [sp, #0x8]
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	ldr     r0, [r5, #0x8]
 	add     r1, r0, #0x1
@@ -8271,7 +8275,7 @@ Function_2043130: @ 2043130 :thumb
 	ldr     r0, [sp, #0x8]
 	mov     r1, r6
 	mov     r2, r4
-	bl      0x21dcb24
+	bl      Function_5_21dcb24
 	mov     r0, #0x0
 	add     sp, #0x10
 	pop     {r3-r7,pc}
@@ -8280,13 +8284,13 @@ Function_2043130: @ 2043130 :thumb
 
 .align 2, 0
 .thumb
-Function_2043190: @ 2043190 :thumb
+ScriptCmd_StoreSinPokemonSeen: @ 2043190 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
 
 	mov     r0, r5
@@ -8314,7 +8318,7 @@ Function_20431c0: @ 20431c0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8331,16 +8335,16 @@ Function_20431c0: @ 20431c0 :thumb
 @ 0x20431ee
 
 
-.align 2, 0
-.thumb
+thumb_func_start ScriptCmd_StoreTotPokemonSeen
 ScriptCmd_StoreTotPokemonSeen: @ 20431f0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	add     r5, #0x80
@@ -8348,12 +8352,14 @@ ScriptCmd_StoreTotPokemonSeen: @ 20431f0 :thumb
 	ldr     r0, [r5, #0x0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
+
 	mov     r0, r4
-	bl      Function_2026e0c
+	bl      GetNrOfPkmnSeen
 	strh    r0, [r5, #0x0]
+
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-@ 0x204321e
+thumb_func_end ScriptCmd_StoreTotPokemonSeen
 
 
 .align 2, 0
@@ -8364,7 +8370,7 @@ ScriptCmd_StoreNatPokemonSeen: @ 2043220 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8390,13 +8396,13 @@ Function_2043250: @ 2043250 :thumb
 
 
 .thumb
-Function_2043254: @ 2043254 :thumb
+ScriptCmd_SetVarTextPokedex: @ 2043254 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r7, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -8467,7 +8473,7 @@ ScriptCmd_WildBattle: @ 20432dc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8503,14 +8509,14 @@ ScriptCmd_WildBattle: @ 20432dc :thumb
 
 
 .thumb
-Function_2043330: @ 2043330 :thumb
+ScriptCmd_WildBattle2: @ 2043330 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8553,7 +8559,7 @@ Function_2043384: @ 2043384 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8596,7 +8602,7 @@ Function_20433d8: @ 20433d8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8638,7 +8644,7 @@ ScriptCmd_StarterBattle: @ 204342c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -8669,22 +8675,21 @@ ScriptCmd_ExplanationBattle: @ 2043460 :thumb
 	pop     {r3,pc}
 @ 0x204346c
 
+
 .thumb
-Function_204346c: @ 204346c :thumb
+ScriptCmd_HoneyTreeBattle: @ 204346c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x21efbdc
+	bl      Function_5_21efbdc
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204347a
 
 
 .align 2, 0
-
-
 .thumb
-Function_204347c: @ 204347c :thumb
+ScriptCmd_CheckIfHoneySlathered: @ 204347c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -8697,7 +8702,7 @@ Function_204347c: @ 204347c :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	mov     r0, r4
-	bl      0x21efb94
+	bl      Function_5_21efb94
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -8705,8 +8710,6 @@ Function_204347c: @ 204347c :thumb
 
 
 .align 2, 0
-
-
 .thumb
 ScriptCmd_RandomBattle: @ 20434a4 :thumb
 	push    {r4,lr}
@@ -8714,7 +8717,7 @@ ScriptCmd_RandomBattle: @ 20434a4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	ldr     r0, [r4, #0x74]
 	bl      Function_205120c
@@ -8726,7 +8729,7 @@ ScriptCmd_RandomBattle: @ 20434a4 :thumb
 thumb_func_start ScriptCmd_StopRandomBattle
 ScriptCmd_StopRandomBattle: @ 20434c0 :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      StopRandomBattle
 	mov     r0, #0x0
@@ -8736,7 +8739,7 @@ thumb_func_end ScriptCmd_StopRandomBattle
 
 .align 2, 0
 .thumb
-Function_20434d0: @ 20434d0 :thumb
+ScriptCmd_WriteAutograph: @ 20434d0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -8754,7 +8757,7 @@ Function_20434d0: @ 20434d0 :thumb
 
 
 .thumb
-Function_20434ec: @ 20434ec :thumb
+ScriptCmd_StoreSaveData: @ 20434ec :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -8802,7 +8805,7 @@ branch_204353c: @ 204353c :thumb
 @ 0x2043540
 
 .thumb
-Function_2043540: @ 2043540 :thumb
+ScriptCmd_CheckSaveData: @ 2043540 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -8815,7 +8818,7 @@ Function_2043540: @ 2043540 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	mov     r0, r4
-	bl      0x21e200c
+	bl      Function_5_21e200c
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -8871,7 +8874,7 @@ thumb_func_end ScriptCmd_GivePoketch
 
 
 .thumb
-Function_20435ac: @ 20435ac :thumb
+ScriptCmd_CheckPoketchApp: @ 20435ac :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -8896,7 +8899,7 @@ Function_20435ac: @ 20435ac :thumb
 
 .align 2, 0
 .thumb
-Function_20435dc: @ 20435dc :thumb
+ScriptCmd_ActivatePoketchApp: @ 20435dc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -8919,7 +8922,7 @@ Function_20435dc: @ 20435dc :thumb
 
 .align 2, 0
 .thumb
-Function_2043608: @ 2043608 :thumb
+ScriptCmd_StorePoketchApp: @ 2043608 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -8950,7 +8953,7 @@ Function_2043608: @ 2043608 :thumb
 
 
 .thumb
-Function_2043648: @ 2043648 :thumb
+ScriptCmd_FriendBT: @ 2043648 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -8995,7 +8998,7 @@ branch_2043688: @ 2043688 :thumb
 
 
 .thumb
-Function_2043694: @ 2043694 :thumb
+ScriptCmd_FriendBT2: @ 2043694 :thumb
 	push    {r3,lr}
 	bl      Function_20365f4
 	mov     r0, #0x0
@@ -9011,7 +9014,7 @@ Function_20436a0: @ 20436a0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -9044,7 +9047,7 @@ Function_20436d0: @ 20436d0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
@@ -9059,7 +9062,7 @@ Function_20436d0: @ 20436d0 :thumb
 
 .align 2, 0
 .thumb
-Function_2043708: @ 2043708 :thumb
+ScriptCmd_OpenUnionFunction2: @ 2043708 :thumb
 	push    {r4,lr}
 	bl      ScriptHandler_LoadHWord
 	mov     r4, r0
@@ -9096,20 +9099,20 @@ branch_2043744: @ 2043744 :thumb
 
 
 .thumb
-Function_2043748: @ 2043748 :thumb
+ScriptCmd_SetUnionFunctionId: @ 2043748 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -9149,7 +9152,7 @@ branch_20437a0: @ 20437a0 :thumb
 
 .align 2, 0
 .thumb
-Function_20437b4: @ 20437b4 :thumb
+ScriptCmd_CloseUnionFunction: @ 20437b4 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -9161,7 +9164,7 @@ Function_20437b4: @ 20437b4 :thumb
 
 .align 2, 0
 .thumb
-Function_20437c4: @ 20437c4 :thumb
+ScriptCmd_CloseUnionFunction2: @ 20437c4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -9198,13 +9201,13 @@ branch_20437f6: @ 20437f6 :thumb
 
 .align 2, 0
 .thumb
-Function_20437fc: @ 20437fc :thumb
+ScriptCmd_SetvarUnionMessage: @ 20437fc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -9221,7 +9224,7 @@ Function_20437fc: @ 20437fc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	ldr     r0, [r4, #0x0]
 	bl      GetSpriteID
@@ -9240,7 +9243,7 @@ Function_20437fc: @ 20437fc :thumb
 
 .align 2, 0
 .thumb
-Function_2043854: @ 2043854 :thumb
+ScriptCmd_CheckBattleUnion: @ 2043854 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -9262,7 +9265,7 @@ Function_2043854: @ 2043854 :thumb
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      free
 branch_204388e: @ 204388e :thumb
@@ -9273,14 +9276,14 @@ branch_204388e: @ 204388e :thumb
 
 .align 2, 0
 .thumb
-Function_2043894: @ 2043894 :thumb
+ScriptCmd_StoreYourDecisionUnion: @ 2043894 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xa
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -9300,14 +9303,14 @@ Function_2043894: @ 2043894 :thumb
 @ 0x20438cc
 
 .thumb
-Function_20438cc: @ 20438cc :thumb
+ScriptCmd_CheckOtherDecisionUnion2: @ 20438cc :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xa
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -9340,7 +9343,7 @@ Function_20438cc: @ 20438cc :thumb
 
 
 .thumb
-Function_204391c: @ 204391c :thumb
+ScriptCmd_StoreOtherDecisionUnion: @ 204391c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -9399,7 +9402,7 @@ Function_2043964: @ 2043964 :thumb
 
 
 .thumb
-Function_2043978: @ 2043978 :thumb
+ScriptCmd_StartUnion: @ 2043978 :thumb
 	push    {r3,lr}
 	mov     r0, #0x4
 	bl      Function_205bea8
@@ -9410,7 +9413,7 @@ Function_2043978: @ 2043978 :thumb
 
 
 .thumb
-Function_2043988: @ 2043988 :thumb
+ScriptCmd_LinkClosed: @ 2043988 :thumb
 	push    {r3,lr}
 	bl      Function_2036bd8
 	bl      Function_2036ac4
@@ -9422,7 +9425,7 @@ Function_2043988: @ 2043988 :thumb
 
 
 .thumb
-Function_204399c: @ 204399c :thumb
+ScriptCmd_CheckOtherDecisionUnion: @ 204399c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -9452,7 +9455,7 @@ Function_204399c: @ 204399c :thumb
 
 .align 2, 0
 .thumb
-Function_20439d8: @ 20439d8 :thumb
+ScriptCmd_StoreYourDecisionUnion2: @ 20439d8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -9504,7 +9507,7 @@ branch_2043a28: @ 2043a28 :thumb
 
 .align 2, 0
 .thumb
-Function_2043a30: @ 2043a30 :thumb
+ScriptCmd_StoreOtherDecisionUnion2: @ 2043a30 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -9564,7 +9567,7 @@ branch_2043a8c: @ 2043a8c :thumb
 
 
 .thumb
-Function_2043a94: @ 2043a94 :thumb
+ScriptCmd_UnionRoom: @ 2043a94 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -9576,7 +9579,7 @@ Function_2043a94: @ 2043a94 :thumb
 
 
 .thumb
-Function_2043aa4: @ 2043aa4 :thumb
+ScriptCmd_OpenWiFiSprite: @ 2043aa4 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -9587,7 +9590,7 @@ Function_2043aa4: @ 2043aa4 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      GetTrainerID
@@ -9605,7 +9608,7 @@ Function_2043aa4: @ 2043aa4 :thumb
 
 .align 2, 0
 .thumb
-Function_2043ae0: @ 2043ae0 :thumb
+ScriptCmd_StoreWiFiSprite: @ 2043ae0 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -9691,7 +9694,7 @@ Function_2043b48: @ 2043b48 :thumb
 
 .align 2, 0
 .thumb
-Function_2043ba0: @ 2043ba0 :thumb
+ScriptCmd_ActWiFiSprite: @ 2043ba0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -9742,7 +9745,7 @@ ScriptCmd_ActBike: @ 2043be0 :thumb
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
 	mov     r1, r4
-	bl      Function_203a764
+	bl      SetVariableAreaAdress_6_68
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x2043c0a
@@ -9792,14 +9795,14 @@ ScriptCmd_HealPokemon: @ 2043c3c :thumb
 
 .align 2, 0
 .thumb
-Function_2043c54: @ 2043c54 :thumb
+ScriptCmd_DeactWireless: @ 2043c54 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x2043c58
 
 
 .thumb
-Function_2043c58: @ 2043c58 :thumb
+ScriptCmd_DeleteEntry: @ 2043c58 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      Function_205987c
@@ -9862,7 +9865,7 @@ Function_2043ca4: @ 2043ca4 :thumb
 
 .align 2, 0
 .thumb
-Function_2043cb4: @ 2043cb4 :thumb
+ScriptCmd_UndergroundId: @ 2043cb4 :thumb
 	push    {r3,lr}
 	bl      ScriptHandler_LoadHWord
 	bl      Function_20593f4
@@ -9906,8 +9909,8 @@ Function_2043cc4: @ 2043cc4 :thumb
 @ 0x2043d04
 
 
-.thumb
-Function_2043d04: @ 2043d04 :thumb
+thumb_func_start ScriptCmd_ChangeOverworldPosition
+ScriptCmd_ChangeOverworldPosition: @ 2043d04 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -9917,6 +9920,7 @@ Function_2043d04: @ 2043d04 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r4, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -9925,6 +9929,7 @@ Function_2043d04: @ 2043d04 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -9937,15 +9942,16 @@ Function_2043d04: @ 2043d04 :thumb
 	ldr     r0, [r5, #0x0]
 	mov     r1, r4
 	mov     r2, r6
-	bl      Function_203a4c4
+	bl      SetOverworldPosition
+
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
-@ 0x2043d52
+thumb_func_end ScriptCmd_ChangeOverworldPosition
 
 
 .align 2, 0
 .thumb
-Function_2043d54: @ 2043d54 :thumb
+ScriptCmd_SetOwPosition: @ 2043d54 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -10009,7 +10015,7 @@ Function_2043d54: @ 2043d54 :thumb
 
 .align 2, 0
 .thumb
-Function_2043de4: @ 2043de4 :thumb
+ScriptCmd_SetOverworldMovement: @ 2043de4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10037,7 +10043,7 @@ Function_2043de4: @ 2043de4 :thumb
 
 
 .thumb
-Function_2043e1c: @ 2043e1c :thumb
+ScriptCmd_ReleaseOverworld: @ 2043e1c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10065,7 +10071,7 @@ Function_2043e1c: @ 2043e1c :thumb
 
 
 .thumb
-Function_2043e54: @ 2043e54 :thumb
+ScriptCmd_SetTilePassable: @ 2043e54 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10103,7 +10109,7 @@ Function_2043e54: @ 2043e54 :thumb
 
 .align 2, 0
 .thumb
-Function_2043ea4: @ 2043ea4 :thumb
+ScriptCmd_SetTileLocked: @ 2043ea4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10141,7 +10147,7 @@ Function_2043ea4: @ 2043ea4 :thumb
 
 .align 2, 0
 .thumb
-Function_2043ef4: @ 2043ef4 :thumb
+ScriptCmd_SetOverworldsFollow: @ 2043ef4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10184,7 +10190,7 @@ Function_2043f40: @ 2043f40 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xc
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -10203,7 +10209,7 @@ branch_2043f68: @ 2043f68 :thumb
 
 
 .thumb
-Function_2043f6c: @ 2043f6c :thumb
+ScriptCmd_PrepareDoorAnimation: @ 2043f6c :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10237,7 +10243,7 @@ Function_2043f6c: @ 2043f6c :thumb
 	ldr     r0, [r5, #0x0]
 	add     r1, r7, r1
 	add     r2, r2, r4
-	bl      0x21d4bf4
+	bl      Function_5_21d4bf4
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x2043fc2
@@ -10245,7 +10251,7 @@ Function_2043f6c: @ 2043f6c :thumb
 
 .align 2, 0
 .thumb
-Function_2043fc4: @ 2043fc4 :thumb
+ScriptCmd_WaitAction: @ 2043fc4 :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -10253,7 +10259,7 @@ Function_2043fc4: @ 2043fc4 :thumb
 	add     r0, #0x80
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21d4d48
+	bl      Function_5_21d4d48
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2043fda
@@ -10261,7 +10267,7 @@ Function_2043fc4: @ 2043fc4 :thumb
 
 .align 2, 0
 .thumb
-Function_2043fdc: @ 2043fdc :thumb
+ScriptCmd_WaitClose: @ 2043fdc :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -10269,7 +10275,7 @@ Function_2043fdc: @ 2043fdc :thumb
 	add     r0, #0x80
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21d4d68
+	bl      Function_5_21d4d68
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2043ff2
@@ -10277,7 +10283,7 @@ Function_2043fdc: @ 2043fdc :thumb
 
 .align 2, 0
 .thumb
-Function_2043ff4: @ 2043ff4 :thumb
+ScriptCmd_OpenDoor: @ 2043ff4 :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -10285,7 +10291,7 @@ Function_2043ff4: @ 2043ff4 :thumb
 	add     r0, #0x80
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21d4c88
+	bl      Function_5_21d4c88
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204400a
@@ -10293,7 +10299,7 @@ Function_2043ff4: @ 2043ff4 :thumb
 
 .align 2, 0
 .thumb
-Function_204400c: @ 204400c :thumb
+ScriptCmd_CloseDoor: @ 204400c :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -10301,7 +10307,7 @@ Function_204400c: @ 204400c :thumb
 	add     r0, #0x80
 	ldrb    r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
-	bl      0x21d4cec
+	bl      Function_5_21d4cec
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2044022
@@ -10309,7 +10315,7 @@ Function_204400c: @ 204400c :thumb
 
 .align 2, 0
 .thumb
-Function_2044024: @ 2044024 :thumb
+ScriptCmd_PastoriaCityFunction: @ 2044024 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10321,11 +10327,11 @@ Function_2044024: @ 2044024 :thumb
 
 .align 2, 0
 .thumb
-Function_2044034: @ 2044034 :thumb
+ScriptCmd_PastoriaCityFunction2: @ 2044034 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x224997c
+	bl      Function_8_224997c
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2044042
@@ -10333,7 +10339,7 @@ Function_2044034: @ 2044034 :thumb
 
 .align 2, 0
 .thumb
-Function_2044044: @ 2044044 :thumb
+ScriptCmd_HearthromeGymFunction: @ 2044044 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10345,11 +10351,11 @@ Function_2044044: @ 2044044 :thumb
 
 .align 2, 0
 .thumb
-Function_2044054: @ 2044054 :thumb
+ScriptCmd_HearthromeGymFunction2: @ 2044054 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x2249fb8
+	bl      Function_8_2249fb8
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2044062
@@ -10357,7 +10363,7 @@ Function_2044054: @ 2044054 :thumb
 
 .align 2, 0
 .thumb
-Function_2044064: @ 2044064 :thumb
+ScriptCmd_CanalaveGymFunction: @ 2044064 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10369,7 +10375,7 @@ Function_2044064: @ 2044064 :thumb
 
 .align 2, 0
 .thumb
-Function_2044074: @ 2044074 :thumb
+ScriptCmd_VeilstoneGymFunction: @ 2044074 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10381,7 +10387,7 @@ Function_2044074: @ 2044074 :thumb
 
 .align 2, 0
 .thumb
-Function_2044084: @ 2044084 :thumb
+ScriptCmd_SunishoreGymFunction: @ 2044084 :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -10399,7 +10405,7 @@ Function_2044084: @ 2044084 :thumb
 
 .align 2, 0
 .thumb
-Function_20440a0: @ 20440a0 :thumb
+ScriptCmd_SunishoreGymFunction2: @ 20440a0 :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -10409,7 +10415,7 @@ Function_20440a0: @ 20440a0 :thumb
 	str     r1, [r0, #0x8]
 	ldrb    r1, [r2, #0x0]
 	mov     r0, r3
-	bl      0x224ad34
+	bl      Function_8_224ad34
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x20440ba
@@ -10417,7 +10423,7 @@ Function_20440a0: @ 20440a0 :thumb
 
 .align 2, 0
 .thumb
-Function_20440bc: @ 20440bc :thumb
+ScriptCmd_EternaGymAnimation: @ 20440bc :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10502,7 +10508,7 @@ Function_20440ec: @ 20440ec :thumb
 
 .align 2, 0
 .thumb
-Function_2044158: @ 2044158 :thumb
+ScriptCmd_EggAnimation: @ 2044158 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -10514,19 +10520,19 @@ Function_2044158: @ 2044158 :thumb
 
 .align 2, 0
 .thumb
-Function_2044168: @ 2044168 :thumb
+ScriptCmd_UndergroundFunction: @ 2044168 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -10546,7 +10552,7 @@ Function_2044168: @ 2044168 :thumb
 	mov     r2, r0
 	ldr     r1, [r1, #0x0]
 	mov     r0, r7
-	bl      0x2252c98
+	bl      Function_23_2252c98
 	str     r0, [r4, #0x0]
 	ldr     r1, [pc, #0x8] @ 0x20441c4, (=Function_20441c8+1)
 	mov     r0, r5
@@ -10566,7 +10572,7 @@ Function_20441c8: @ 20441c8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	ldr     r1, [r5, #0x64]
@@ -10577,7 +10583,7 @@ Function_20441c8: @ 20441c8 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x2252c70
+	bl      Function_23_2252c70
 	strh    r0, [r5, #0x0]
 	ldrh    r1, [r5, #0x0]
 	ldr     r0, [pc, #0xc] @ 0x2044204, (=0xfffe)
@@ -10597,13 +10603,13 @@ branch_20441fe: @ 20441fe :thumb
 
 
 .thumb
-Function_2044208: @ 2044208 :thumb
+ScriptCmd_UndergroundFunction2: @ 2044208 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -10612,7 +10618,7 @@ Function_2044208: @ 2044208 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckSaveParameter
-	bl      0x2252c9c
+	bl      Function_23_2252c9c
 	strb    r0, [r4, #0x0]
 	ldr     r1, [pc, #0x8] @ 0x204423c, (=Function_2044240+1)
 	mov     r0, r5
@@ -10631,7 +10637,7 @@ Function_2044240: @ 2044240 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldrb    r0, [r0, #0x0]
 	bl      Function_205da04
 	pop     {r3,pc}
@@ -10639,9 +10645,9 @@ Function_2044240: @ 2044240 :thumb
 
 
 .thumb
-Function_2044254: @ 2044254 :thumb
+ScriptCmd_UndergroundStart: @ 2044254 :thumb
 	push    {r3,lr}
-	bl      0x2252cd4
+	bl      Function_23_2252cd4
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204425e
@@ -10663,7 +10669,7 @@ Function_2044260: @ 2044260 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x2252ce0
+	bl      Function_23_2252ce0
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x2044286
@@ -10685,7 +10691,7 @@ Function_2044288: @ 2044288 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x2252cf4
+	bl      Function_23_2252cf4
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x20442ae
@@ -10758,7 +10764,7 @@ branch_2044310: @ 2044310 :thumb
 
 
 .thumb
-Function_204431c: @ 204431c :thumb
+ScriptCmd_Mailbox: @ 204431c :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0x74]
 	bl      Function_20736d8
@@ -10768,7 +10774,7 @@ Function_204431c: @ 204431c :thumb
 
 
 .thumb
-Function_2044328: @ 2044328 :thumb
+ScriptCmd_CheckMail: @ 2044328 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -10791,7 +10797,7 @@ Function_2044328: @ 2044328 :thumb
 
 
 .thumb
-Function_2044354: @ 2044354 :thumb
+ScriptCmd_ShowRecordList: @ 2044354 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -10809,7 +10815,7 @@ Function_2044354: @ 2044354 :thumb
 
 
 .thumb
-Function_2044374: @ 2044374 :thumb
+ScriptCmd_CheckTime: @ 2044374 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -10829,7 +10835,7 @@ Function_2044374: @ 2044374 :thumb
 
 
 .thumb
-Function_2044398: @ 2044398 :thumb
+ScriptCmd_CheckIdPlayer: @ 2044398 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10856,7 +10862,7 @@ Function_2044398: @ 2044398 :thumb
 
 
 .thumb
-Function_20443d0: @ 20443d0 :thumb
+ScriptCmd_RandomTextStored: @ 20443d0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -10883,7 +10889,7 @@ Function_20443d0: @ 20443d0 :thumb
 
 
 .thumb
-Function_2044408: @ 2044408 :thumb
+ScriptCmd_CopyPokemonHeight: @ 2044408 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -10904,7 +10910,7 @@ Function_2044408: @ 2044408 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r4
-	bl      0x21ee920
+	bl      Function_5_21ee920
 	strh    r0, [r6, #0x0]
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
@@ -10913,7 +10919,7 @@ Function_2044408: @ 2044408 :thumb
 
 .align 2, 0
 .thumb
-Function_2044444: @ 2044444 :thumb
+ScriptCmd_SetVariablePokemonHeight: @ 2044444 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -10926,14 +10932,14 @@ Function_2044444: @ 2044444 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x21ee9bc
+	bl      Function_5_21ee9bc
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x2044468
 
 
 .thumb
-Function_2044468: @ 2044468 :thumb
+ScriptCmd_ComparePokemonHeight: @ 2044468 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -10966,14 +10972,14 @@ Function_2044468: @ 2044468 :thumb
 	mov     r0, r4
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
-	bl      0x21eea84
+	bl      Function_5_21eea84
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x20444bc
 
 
 .thumb
-Function_20444bc: @ 20444bc :thumb
+ScriptCmd_CheckPokemonHeight: @ 20444bc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -11006,14 +11012,14 @@ Function_20444bc: @ 20444bc :thumb
 	mov     r0, r4
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
-	bl      0x21eea54
+	bl      Function_5_21eea54
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x2044510
 
 
 .thumb
-Function_2044510: @ 2044510 :thumb
+ScriptCmd_ShowMoveInfo: @ 2044510 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -11052,7 +11058,7 @@ Function_2044528: @ 2044528 :thumb
 
 .align 2, 0
 .thumb
-Function_2044558: @ 2044558 :thumb
+ScriptCmd_DeActivateLeader: @ 2044558 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -11095,7 +11101,7 @@ Function_2044558: @ 2044558 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r7
 	sub     r0, #0x10
@@ -11203,7 +11209,7 @@ Function_204466c: @ 204466c :thumb
 
 
 .thumb
-Function_2044670: @ 2044670 :thumb
+ScriptCmd_GiveAccessories3: @ 2044670 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11235,7 +11241,7 @@ Function_2044670: @ 2044670 :thumb
 
 
 .thumb
-Function_20446b4: @ 20446b4 :thumb
+ScriptCmd_CheckAccessories3: @ 20446b4 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11326,7 +11332,7 @@ branch_204476c: @ 204476c :thumb
 
 .align 2, 0
 .thumb
-Function_2044774: @ 2044774 :thumb
+ScriptCmd_GiveAccessories2: @ 2044774 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11350,7 +11356,7 @@ Function_2044774: @ 2044774 :thumb
 
 .align 2, 0
 .thumb
-Function_20447a4: @ 20447a4 :thumb
+ScriptCmd_CheckAccessories2: @ 20447a4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11382,14 +11388,14 @@ Function_20447a4: @ 20447a4 :thumb
 
 
 .thumb
-ScriptCmd_CheckSinPokedex: @ 20447e8 :thumb
+ScriptCmd_CheckSinnohPokedex: @ 20447e8 :thumb
 	push    {r3-r5,lr}
 
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r5, r0
 
 	mov     r0, r4
@@ -11418,14 +11424,14 @@ branch_204481c: @ 204481c :thumb
 
 
 .thumb
-ScriptCmd_CheckNatPokedex: @ 2044820 :thumb
+ScriptCmd_CheckNationalPokedex: @ 2044820 :thumb
 	push    {r3-r5,lr}
 
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r5, r0
 
 	mov     r0, r4
@@ -11454,13 +11460,13 @@ branch_2044854: @ 2044854 :thumb
 
 
 .thumb
-Function_2044858: @ 2044858 :thumb
+ScriptCmd_ShowSinnohSheet: @ 2044858 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -11481,13 +11487,13 @@ Function_2044858: @ 2044858 :thumb
 
 
 .thumb
-Function_2044888: @ 2044888 :thumb
+ScriptCmd_ShowNationalSheet: @ 2044888 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -11513,14 +11519,14 @@ Function_20448b8: @ 20448b8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      0x22475b0
+	bl      Function_6_22475b0
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x20448c8
 
 
 .thumb
-Function_20448c8: @ 20448c8 :thumb
+ScriptCmd_StoreTrophyPokemon: @ 20448c8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11533,7 +11539,7 @@ Function_20448c8: @ 20448c8 :thumb
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      0x2247624
+	bl      Function_6_2247624
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -11557,7 +11563,7 @@ Function_20448f0: @ 20448f0 :thumb
 
 .align 2, 0
 .thumb
-Function_2044908: @ 2044908 :thumb
+ScriptCmd_RandomEvent: @ 2044908 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -11726,7 +11732,7 @@ Function_2044a28: @ 2044a28 :thumb
 
 
 .thumb
-Function_2044a50: @ 2044a50 :thumb
+ScriptCmd_GreatMarshFunction: @ 2044a50 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -11752,10 +11758,10 @@ Function_2044a50: @ 2044a50 :thumb
 	str     r0, [r5, #0x8]
 	ldrb    r4, [r1, #0x0]
 	mov     r0, r7
-	bl      Function_203a784
+	bl      AddVariableAreaAdress_6_98
 	mov     r6, r0
 	mov     r0, r7
-	bl      Function_203a788
+	bl      AddVariableAreaAdress_6_96
 	mov     r7, r0
 	cmp     r4, #0x0
 	beq     branch_2044aa0
@@ -11801,7 +11807,7 @@ branch_2044ae2: @ 2044ae2 :thumb
 
 
 .thumb
-Function_2044ae8: @ 2044ae8 :thumb
+ScriptCmd_GreatMarshBynocule: @ 2044ae8 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -11813,7 +11819,7 @@ Function_2044ae8: @ 2044ae8 :thumb
 
 .align 2, 0
 .thumb
-Function_2044af8: @ 2044af8 :thumb
+ScriptCmd_SetvarMtCoronet: @ 2044af8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	ldr     r2, [r5, #0x8]
@@ -11830,7 +11836,7 @@ Function_2044af8: @ 2044af8 :thumb
 	mov     r6, r0
 	ldr     r0, [r5, #0x0]
 	mov     r1, r4
-	bl      0x2243004
+	bl      Function_6_2243004
 	strh    r0, [r6, #0x0]
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
@@ -11851,7 +11857,7 @@ Function_2044b28: @ 2044b28 :thumb
 
 .align 2, 0
 .thumb
-Function_2044b38: @ 2044b38 :thumb
+ScriptCmd_CheckQuicTrineCoordinates: @ 2044b38 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -11876,14 +11882,14 @@ Function_2044b38: @ 2044b38 :thumb
 	ldrh    r1, [r4, #0x0]
 	ldr     r0, [r5, #0x0]
 	mov     r2, r6
-	bl      0x2242b58
+	bl      Function_6_2242b58
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
 @ 0x2044b70
 
 
 .thumb
-Function_2044b70: @ 2044b70 :thumb
+ScriptCmd_SetvarQuickTrainCoordinates: @ 2044b70 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -11902,7 +11908,7 @@ Function_2044b70: @ 2044b70 :thumb
 
 	ldr     r0, [r5, #0x0]
 	mov     r1, r6
-	bl      0x2242c3c
+	bl      Function_6_2242c3c
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
@@ -11911,7 +11917,7 @@ Function_2044b70: @ 2044b70 :thumb
 
 .align 2, 0
 .thumb
-Function_2044ba0: @ 2044ba0 :thumb
+ScriptCmd_MoveTrainAnimation: @ 2044ba0 :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -11927,7 +11933,7 @@ Function_2044ba0: @ 2044ba0 :thumb
 
 
 .thumb
-Function_2044bb8: @ 2044bb8 :thumb
+ScriptCmd_RandomHallowes: @ 2044bb8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -11956,14 +11962,14 @@ Function_2044bb8: @ 2044bb8 :thumb
 
 .align 2, 0
 .thumb
-Function_2044be8: @ 2044be8 :thumb
+ScriptCmd_ChsRSPoke: @ 2044be8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r7, r0
 
 	mov     r0, r4
@@ -11990,7 +11996,7 @@ Function_2044be8: @ 2044be8 :thumb
 branch_2044c2a: @ 2044c2a :thumb
 	mov     r0, r7
 	mov     r1, r4
-	bl      Function_2026fe8
+	bl      WasPkmnSeen
 	cmp     r0, #0x1
 	bne     branch_2044c50
 
@@ -12027,7 +12033,7 @@ branch_2044c5c: @ 2044c5c :thumb
 
 
 .thumb
-Function_2044c64: @ 2044c64 :thumb
+ScriptCmd_SetSPoke: @ 2044c64 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12050,7 +12056,7 @@ Function_2044c64: @ 2044c64 :thumb
 
 .align 2, 0
 .thumb
-Function_2044c90: @ 2044c90 :thumb
+ScriptCmd_CheckSPoke: @ 2044c90 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12085,7 +12091,7 @@ Function_2044cbc: @ 2044cbc :thumb
 
 
 .thumb
-Function_2044ccc: @ 2044ccc :thumb
+ScriptCmd_ActSwarmPoke: @ 2044ccc :thumb
 	push    {r3,lr}
 	ldr     r2, [r0, #0x8]
 	add     r1, r2, #0x1
@@ -12101,20 +12107,20 @@ Function_2044ccc: @ 2044ccc :thumb
 
 
 .thumb
-Function_2044ce4: @ 2044ce4 :thumb
+ScriptCmd_SetTradeId: @ 2044ce4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r4, r0
 	add     r0, r1, #0x1
 	str     r0, [r5, #0x8]
 	ldrb    r1, [r1, #0x0]
 	mov     r0, #0xb
-	bl      0x2246184
+	bl      Function_6_2246184
 	str     r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -12128,7 +12134,7 @@ Function_2044d08: @ 2044d08 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -12138,7 +12144,7 @@ Function_2044d08: @ 2044d08 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x2246224
+	bl      Function_6_2246224
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -12147,13 +12153,13 @@ Function_2044d08: @ 2044d08 :thumb
 
 .align 2, 0
 .thumb
-Function_2044d38: @ 2044d38 :thumb
+ScriptCmd_CheckPokemonTrade: @ 2044d38 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -12163,7 +12169,7 @@ Function_2044d38: @ 2044d38 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x224622c
+	bl      Function_6_224622c
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -12172,13 +12178,13 @@ Function_2044d38: @ 2044d38 :thumb
 
 .align 2, 0
 .thumb
-Function_2044d68: @ 2044d68 :thumb
+ScriptCmd_TradeChosenPokemon: @ 2044d68 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -12199,14 +12205,14 @@ Function_2044d68: @ 2044d68 :thumb
 
 .align 2, 0
 .thumb
-Function_2044d9c: @ 2044d9c :thumb
+ScriptCmd_StopTrade: @ 2044d9c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x2246204
+	bl      Function_6_2246204
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2044db2
@@ -12219,7 +12225,7 @@ ScriptCmd_22b: @ 2044db4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	bl      Function_2027508
 	mov     r0, #0x0
 	pop     {r3,pc}
@@ -12227,12 +12233,12 @@ ScriptCmd_22b: @ 2044db4 :thumb
 
 
 .thumb
-Function_2044dc8: @ 2044dc8 :thumb
+ScriptCmd_CloseOakAssistantEvent: @ 2044dc8 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	bl      Function_20274b0
 	mov     r0, #0x0
 	pop     {r3,pc}
@@ -12240,7 +12246,7 @@ Function_2044dc8: @ 2044dc8 :thumb
 
 
 .thumb
-Function_2044ddc: @ 2044ddc :thumb
+ScriptCmd_CheckNatPokedexStatus: @ 2044ddc :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	ldr     r2, [r5, #0x8]
@@ -12262,7 +12268,7 @@ Function_2044ddc: @ 2044ddc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	bl      Function_2027454
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
@@ -12277,7 +12283,7 @@ branch_2044e22: @ 2044e22 :thumb
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	bl      Function_2027474
 	strh    r0, [r6, #0x0]
 	b       branch_2044e3c
@@ -12291,7 +12297,7 @@ branch_2044e3c: @ 2044e3c :thumb
 
 
 .thumb
-Function_2044e40: @ 2044e40 :thumb
+ScriptCmd_CheckHappyRibbon: @ 2044e40 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -12362,7 +12368,7 @@ Function_2044e40: @ 2044e40 :thumb
 
 .align 2, 0
 .thumb
-Function_2044edc: @ 2044edc :thumb
+ScriptCmd_CheckPokemart: @ 2044edc :thumb
 	push    {r4,lr}
 	add     sp, #-0x10
 	mov     r4, r0
@@ -12384,7 +12390,7 @@ Function_2044edc: @ 2044edc :thumb
 
 .align 2, 0
 .thumb
-Function_2044f04: @ 2044f04 :thumb
+ScriptCmd_DecideRules: @ 2044f04 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -12395,14 +12401,14 @@ Function_2044f04: @ 2044f04 :thumb
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r1, r0
 	ldr     r0, [r4, #0x74]
-	bl      0x224be7c
+	bl      Function_7_224be7c
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x2044f24
 
 
 .thumb
-Function_2044f24: @ 2044f24 :thumb
+ScriptCmd_CheckFootStep: @ 2044f24 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12447,10 +12453,10 @@ Function_2044f24: @ 2044f24 :thumb
 	lsl     r0, r0, #16
 	lsr     r1, r0, #16
 	mov     r0, r5
-	bl      0x21f0e90
+	bl      Function_5_21f0e90
 	strh    r0, [r4, #0x0]
 	mov     r0, r5
-	bl      0x21f0e84
+	bl      Function_5_21f0e84
 	strh    r0, [r6, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -12459,7 +12465,7 @@ Function_2044f24: @ 2044f24 :thumb
 
 .align 2, 0
 .thumb
-Function_2044fa4: @ 2044fa4 :thumb
+ScriptCmd_HealPokemonAnimation: @ 2044fa4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -12473,7 +12479,7 @@ Function_2044fa4: @ 2044fa4 :thumb
 	lsl     r1, r1, #24
 	ldr     r0, [r4, #0x0]
 	lsr     r1, r1, #24
-	bl      0x2246c24
+	bl      Function_6_2246c24
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x2044fca
@@ -12481,7 +12487,7 @@ Function_2044fa4: @ 2044fa4 :thumb
 
 .align 2, 0
 .thumb
-Function_2044fcc: @ 2044fcc :thumb
+ScriptCmd_StoreElevatorDirection: @ 2044fcc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12505,7 +12511,7 @@ Function_2044fcc: @ 2044fcc :thumb
 	ldr     r0, [r5, #0x0]
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
-	bl      0x2246f00
+	bl      Function_6_2246f00
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x204500a
@@ -12513,7 +12519,7 @@ Function_2044fcc: @ 2044fcc :thumb
 
 .align 2, 0
 .thumb
-Function_204500c: @ 204500c :thumb
+ScriptCmd_ShipAnimation: @ 204500c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -12546,7 +12552,7 @@ Function_204500c: @ 204500c :thumb
 
 
 .thumb
-Function_204504c: @ 204504c :thumb
+ScriptCmd_StoreMtCoronet: @ 204504c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -12563,7 +12569,7 @@ Function_204504c: @ 204504c :thumb
 
 .align 2, 0
 .thumb
-Function_2045068: @ 2045068 :thumb
+ScriptCmd_CheckPhraseBoxInput2: @ 2045068 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
 	mov     r5, r0
@@ -12621,7 +12627,7 @@ Function_2045068: @ 2045068 :thumb
 	ldr     r2, [sp, #0xc]
 	ldr     r3, [sp, #0x10]
 	mov     r1, r7
-	bl      0x22479d0
+	bl      Function_6_22479d0
 	mov     r5, r0
 	mov     r0, #0x0
 	mvn     r0, r0
@@ -12660,7 +12666,7 @@ branch_204512a: @ 204512a :thumb
 
 .align 2, 0
 .thumb
-Function_2045134: @ 2045134 :thumb
+ScriptCmd_StoreUndTime: @ 2045134 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -12683,7 +12689,7 @@ Function_2045134: @ 2045134 :thumb
 
 
 .thumb
-Function_2045160: @ 2045160 :thumb
+ScriptCmd_PreparePcAnimation: @ 2045160 :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -12693,17 +12699,15 @@ Function_2045160: @ 2045160 :thumb
 	str     r1, [r0, #0x8]
 	ldrb    r1, [r2, #0x0]
 	mov     r0, r3
-	bl      0x2247078
+	bl      Function_6_2247078
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204517a
 
 
 .align 2, 0
-
-
 .thumb
-Function_204517c: @ 204517c :thumb
+ScriptCmd_OpenPcAnimation: @ 204517c :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -12713,17 +12717,15 @@ Function_204517c: @ 204517c :thumb
 	str     r1, [r0, #0x8]
 	ldrb    r1, [r2, #0x0]
 	mov     r0, r3
-	bl      0x22470e8
+	bl      Function_6_22470e8
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2045196
 
 
 .align 2, 0
-
-
 .thumb
-Function_2045198: @ 2045198 :thumb
+ScriptCmd_ClosePcAnimation: @ 2045198 :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -12733,7 +12735,7 @@ Function_2045198: @ 2045198 :thumb
 	str     r1, [r0, #0x8]
 	ldrb    r1, [r2, #0x0]
 	mov     r0, r3
-	bl      0x22470f4
+	bl      Function_6_22470f4
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x20451b2
@@ -12746,7 +12748,7 @@ Function_20451b4: @ 20451b4 :thumb
 	add     sp, #-0x10
 	ldr     r0, [r0, #0xc]
 	mov     r5, r1
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r6, r0
 	mov     r0, #0x20
 	bl      AllocPkmnData
@@ -12794,7 +12796,7 @@ Function_20451f8: @ 20451f8 :thumb
 
 .align 2, 0
 .thumb
-Function_204521c: @ 204521c :thumb
+ScriptCmd_CheckBoxesNumber: @ 204521c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12821,19 +12823,19 @@ Function_204521c: @ 204521c :thumb
 
 
 .thumb
-Function_2045250: @ 2045250 :thumb
+ScriptCmd_RetSprtSave: @ 2045250 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x16
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, #0x0
 	add     r5, #0x80
 	str     r0, [r4, #0x0]
 	ldr     r0, [r5, #0x0]
-	bl      0x21e1000
+	bl      Function_5_21e1000
 	str     r0, [r4, #0x0]
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
@@ -12842,14 +12844,14 @@ Function_2045250: @ 2045250 :thumb
 
 .align 2, 0
 .thumb
-Function_2045274: @ 2045274 :thumb
+ScriptCmd_ElevLgAnimation: @ 2045274 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x16
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x21e100c
+	bl      Function_5_21e100c
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x204528a
@@ -12857,7 +12859,7 @@ Function_2045274: @ 2045274 :thumb
 
 .align 2, 0
 .thumb
-Function_204528c: @ 204528c :thumb
+ScriptCmd_CheckElevLgAnm: @ 204528c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -12871,7 +12873,7 @@ Function_204528c: @ 204528c :thumb
 	lsl     r1, r1, #24
 	ldr     r0, [r4, #0x0]
 	lsr     r1, r1, #24
-	bl      0x2247d30
+	bl      Function_6_2247d30
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x20452b2
@@ -12879,7 +12881,7 @@ Function_204528c: @ 204528c :thumb
 
 .align 2, 0
 .thumb
-Function_20452b4: @ 20452b4 :thumb
+ScriptCmd_ElevIrAnm: @ 20452b4 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -12893,7 +12895,7 @@ Function_20452b4: @ 20452b4 :thumb
 
 
 .thumb
-Function_20452c4: @ 20452c4 :thumb
+ScriptCmd_StopElevAnm: @ 20452c4 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -12907,7 +12909,7 @@ Function_20452c4: @ 20452c4 :thumb
 
 
 .thumb
-Function_20452d4: @ 20452d4 :thumb
+ScriptCmd_CheckElevPosition: @ 20452d4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12938,28 +12940,24 @@ branch_20452fc: @ 20452fc :thumb
 
 
 .align 2, 0
-
-
 .thumb
-Function_2045304: @ 2045304 :thumb
+ScriptCmd_GalactAnimation: @ 2045304 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x2247f5c
+	bl      Function_6_2247f5c
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2045312
 
 
 .align 2, 0
-
-
 .thumb
-Function_2045314: @ 2045314 :thumb
+ScriptCmd_GalactAnimation2: @ 2045314 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x2247fbc
+	bl      Function_6_2247fbc
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2045322
@@ -12969,7 +12967,7 @@ Function_2045314: @ 2045314 :thumb
 
 
 .thumb
-Function_2045324: @ 2045324 :thumb
+ScriptCmd_MainEvent: @ 2045324 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -12987,7 +12985,7 @@ Function_2045324: @ 2045324 :thumb
 
 .align 2, 0
 .thumb
-Function_2045344: @ 2045344 :thumb
+ScriptCmd_ActDeoxisFormChange: @ 2045344 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -13004,10 +13002,10 @@ Function_2045344: @ 2045344 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	bl      ScriptHandler_CheckLoadParameter
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r4, r0
 	ldr     r0, [r5]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 	mov     r1, r6
 	bl      IsFirstPkmnInPartyWantedSpecies
@@ -13018,7 +13016,7 @@ Function_2045344: @ 2045344 :thumb
 
 
 .thumb
-Function_2045384: @ 2045384 :thumb
+ScriptCmd_ChangeFormDeoxis: @ 2045384 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -13041,7 +13039,7 @@ Function_2045384: @ 2045384 :thumb
 	mov     r6, r0
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r7, r0
 	mov     r5, #0x0
 	cmp     r6, #0x0
@@ -13081,7 +13079,7 @@ branch_20453fa: @ 20453fa :thumb
 
 .word 0x182 @ 0x2045400
 .thumb
-Function_2045404: @ 2045404 :thumb
+ScriptCmd_CheckCoombeEvent: @ 2045404 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
 	mov     r4, r0
@@ -13188,7 +13186,7 @@ branch_20454b6: @ 20454b6 :thumb
 
 .word 0x19f @ 0x20454bc
 .thumb
-Function_20454c0: @ 20454c0 :thumb
+ScriptCmd_ActContestMap: @ 20454c0 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -13212,7 +13210,7 @@ Function_20454d4: @ 20454d4 :thumb
 @ 0x20454e8
 
 .thumb
-Function_20454e8: @ 20454e8 :thumb
+ScriptCmd_Pokecasino: @ 20454e8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -13231,7 +13229,7 @@ Function_20454e8: @ 20454e8 :thumb
 @ 0x204550c
 
 .thumb
-Function_204550c: @ 204550c :thumb
+ScriptCmd_CheckTime2: @ 204550c :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -13250,7 +13248,7 @@ Function_204550c: @ 204550c :thumb
 @ 0x2045530
 
 .thumb
-Function_2045530: @ 2045530 :thumb
+ScriptCmd_RegigigasAnimation: @ 2045530 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
@@ -13317,7 +13315,7 @@ branch_20455ae: @ 20455ae :thumb
 @ 0x20455c4
 
 .thumb
-Function_20455c4: @ 20455c4 :thumb
+ScriptCmd_CresseliaAnimation: @ 20455c4 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -13364,7 +13362,7 @@ branch_2045618: @ 2045618 :thumb
 @ 0x2045628
 
 .thumb
-Function_2045628: @ 2045628 :thumb
+ScriptCmd_CheckRegi: @ 2045628 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -13388,7 +13386,7 @@ Function_2045628: @ 2045628 :thumb
 
 
 .thumb
-Function_2045650: @ 2045650 :thumb
+ScriptCmd_CheckMassage: @ 2045650 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x24
 	mov     r4, r0
@@ -13477,7 +13475,7 @@ branch_20456d6: @ 20456d6 :thumb
 
 
 .thumb
-Function_20456e8: @ 20456e8 :thumb
+ScriptCmd_CheckPCatchingShow: @ 20456e8 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -13513,7 +13511,7 @@ Function_2045708: @ 2045708 :thumb
 
 .align 2, 0
 .thumb
-Function_2045720: @ 2045720 :thumb
+ScriptCmd_ShayminAnimation: @ 2045720 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -13548,13 +13546,13 @@ branch_204575a: @ 204575a :thumb
 
 .align 2, 0
 .thumb
-Function_2045760: @ 2045760 :thumb
+ScriptCmd_SetvarAccessories2: @ 2045760 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -13577,7 +13575,7 @@ Function_2045760: @ 2045760 :thumb
 
 .align 2, 0
 .thumb
-Function_2045798: @ 2045798 :thumb
+ScriptCmd_CheckRecordCasino: @ 2045798 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -13611,7 +13609,7 @@ branch_20457ca: @ 20457ca :thumb
 @ 0x20457d0
 
 .thumb
-Function_20457d0: @ 20457d0 :thumb
+ScriptCmd_SrtRandomNum: @ 20457d0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -13667,7 +13665,7 @@ Function_20457fc: @ 20457fc :thumb
 @ 0x2045840
 
 .thumb
-Function_2045840: @ 2045840 :thumb
+ScriptCmd_LeagueCastleView: @ 2045840 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -13714,7 +13712,7 @@ Function_2045860: @ 2045860 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r5, #0x80
 	mov     r6, r0
 	ldr     r0, [r5, #0x0]
@@ -13779,7 +13777,7 @@ branch_20458fa: @ 20458fa :thumb
 @ 0x2045900
 
 .thumb
-Function_2045900: @ 2045900 :thumb
+ScriptCmd_CheckFirstTimeVShop: @ 2045900 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -13861,13 +13859,13 @@ branch_2045986: @ 2045986 :thumb
 
 
 .thumb
-Function_204598c: @ 204598c :thumb
+ScriptCmd_CheckRuinManiac: @ 204598c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -13886,7 +13884,7 @@ Function_204598c: @ 204598c :thumb
 
 .align 2, 0
 .thumb
-Function_20459bc: @ 20459bc :thumb
+ScriptCmd_CheckTurnBack: @ 20459bc :thumb
 	push    {r3-r7,lr}
 	mov     r6, r0
 
@@ -14004,7 +14002,7 @@ branch_2045a6c: @ 2045a6c :thumb
 
 
 .thumb
-Function_2045a88: @ 2045a88 :thumb
+ScriptCmd_CheckUgPeopleNum: @ 2045a88 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -14029,7 +14027,7 @@ Function_2045a88: @ 2045a88 :thumb
 
 .align 2, 0
 .thumb
-Function_2045ab8: @ 2045ab8 :thumb
+ScriptCmd_CheckUgFossilNum: @ 2045ab8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -14054,7 +14052,7 @@ Function_2045ab8: @ 2045ab8 :thumb
 
 .align 2, 0
 .thumb
-Function_2045ae8: @ 2045ae8 :thumb
+ScriptCmd_CheckUgTrapsNum: @ 2045ae8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -14079,7 +14077,7 @@ Function_2045ae8: @ 2045ae8 :thumb
 
 .align 2, 0
 .thumb
-Function_2045b18: @ 2045b18 :thumb
+ScriptCmd_CheckPoffinItem: @ 2045b18 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -14154,7 +14152,7 @@ branch_2045b9e: @ 2045b9e :thumb
 
 
 .thumb
-Function_2045ba8: @ 2045ba8 :thumb
+ScriptCmd_CheckPoffinCaseStatus: @ 2045ba8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14245,7 +14243,7 @@ branch_2045c42: @ 2045c42 :thumb
 
 
 .thumb
-Function_2045c50: @ 2045c50 :thumb
+ScriptCmd_CheckFirstTimeChampion: @ 2045c50 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -14307,7 +14305,7 @@ branch_2045cae: @ 2045cae :thumb
 
 .align 2, 0
 .thumb
-Function_2045cb8: @ 2045cb8 :thumb
+ScriptCmd_ChoosePokeDCare: @ 2045cb8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14321,7 +14319,7 @@ Function_2045cb8: @ 2045cb8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r5
 	add     r1, #0x80
 	mov     r4, r0
@@ -14342,7 +14340,7 @@ Function_2045cb8: @ 2045cb8 :thumb
 
 
 .thumb
-Function_2045cfc: @ 2045cfc :thumb
+ScriptCmd_StorePokeDCare: @ 2045cfc :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -14363,7 +14361,7 @@ Function_2045cfc: @ 2045cfc :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -14445,7 +14443,7 @@ branch_2045daa: @ 2045daa :thumb
 @ 0x2045db0
 
 .thumb
-Function_2045db0: @ 2045db0 :thumb
+ScriptCmd_HiddenMachineEffect: @ 2045db0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14478,7 +14476,7 @@ Function_2045db0: @ 2045db0 :thumb
 branch_2045dec: @ 2045dec :thumb
 	mov     r2, #0x0
 	mov     r3, #0x20
-	bl      0x224899c
+	bl      Function_6_224899c
 	b       branch_2045e0e
 @ 0x2045df6
 
@@ -14486,7 +14484,7 @@ branch_2045dec: @ 2045dec :thumb
 branch_2045df6: @ 2045df6 :thumb
 	mov     r2, #0x1
 	mov     r3, #0x20
-	bl      0x224899c
+	bl      Function_6_224899c
 	b       branch_2045e0e
 @ 0x2045e00
 
@@ -14494,7 +14492,7 @@ branch_2045df6: @ 2045df6 :thumb
 branch_2045e00: @ 2045e00 :thumb
 	mov     r2, #0x2
 	mov     r3, #0x20
-	bl      0x224899c
+	bl      Function_6_224899c
 	b       branch_2045e0e
 @ 0x2045e0a
 
@@ -14512,7 +14510,7 @@ branch_2045e0e: @ 2045e0e :thumb
 
 
 .thumb
-Function_2045e14: @ 2045e14 :thumb
+ScriptCmd_CheckMasterRank: @ 2045e14 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -14539,7 +14537,7 @@ Function_2045e14: @ 2045e14 :thumb
 
 
 .thumb
-Function_2045e44: @ 2045e44 :thumb
+ScriptCmd_CameraBumpEffect: @ 2045e44 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -14553,17 +14551,14 @@ Function_2045e44: @ 2045e44 :thumb
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x10]
-	bl      0x223e384
+	bl      Function_6_223e384
 	b       branch_2045e72
-@ 0x2045e68
 
-.thumb
 branch_2045e68: @ 2045e68 :thumb
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
 	ldr     r0, [r0, #0x10]
-	bl      0x223e4ec
-.thumb
+	bl      Function_6_223e4ec
 branch_2045e72: @ 2045e72 :thumb
 	mov     r0, #0x1
 	pop     {r4,pc}
@@ -14571,10 +14566,8 @@ branch_2045e72: @ 2045e72 :thumb
 
 
 .align 2, 0
-
-
 .thumb
-Function_2045e78: @ 2045e78 :thumb
+ScriptCmd_StoreActHeroFriendCode: @ 2045e78 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14598,7 +14591,7 @@ Function_2045e78: @ 2045e78 :thumb
 
 
 .thumb
-Function_2045ea0: @ 2045ea0 :thumb
+ScriptCmd_StoreActOtherFriendCode: @ 2045ea0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14655,7 +14648,7 @@ branch_2045efc: @ 2045efc :thumb
 
 
 .thumb
-Function_2045f04: @ 2045f04 :thumb
+ScriptCmd_CheckPlate: @ 2045f04 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14693,7 +14686,7 @@ branch_2045f3e: @ 2045f3e :thumb
 
 
 .thumb
-Function_2045f48: @ 2045f48 :thumb
+ScriptCmd_ComparePhraseBoxInput: @ 2045f48 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r4, r0
@@ -14737,13 +14730,14 @@ Function_2045f48: @ 2045f48 :thumb
 	mov     r7, r0
 	mov     r0, #0x20
 	bl      Function_200b358
+
 	mov     r2, #0x5d
 	mov     r4, r0
 	mov     r0, #0x0
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	lsl     r2, r2, #2
 	mov     r3, #0x20
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r5, r0
 	ldr     r2, [sp, #0x4]
 	mov     r0, r4
@@ -14769,7 +14763,7 @@ Function_2045f48: @ 2045f48 :thumb
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	str     r0, [sp, #0x0]
 	ldr     r1, [sp, #0x0]
 	mov     r0, r7
@@ -14787,9 +14781,9 @@ branch_2046016: @ 2046016 :thumb
 branch_2046018: @ 2046018 :thumb
 	strh    r0, [r6, #0x0]
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	ldr     r0, [sp, #0x0]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	bl      Function_200b190
 	mov     r0, r4
@@ -14800,7 +14794,7 @@ branch_2046018: @ 2046018 :thumb
 @ 0x2046038
 
 .thumb
-Function_2046038: @ 2046038 :thumb
+ScriptCmd_ActivateMysteryGift: @ 2046038 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -14829,7 +14823,7 @@ Function_2046050: @ 2046050 :thumb
 	mov     r5, r0
 	mov     r0, r4
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_205bc50
 	strh    r0, [r5, #0x0]
@@ -14874,7 +14868,7 @@ Function_2046098: @ 2046098 :thumb
 
 .align 2, 0
 .thumb
-Function_20460a8: @ 20460a8 :thumb
+ScriptCmd_DarkraiFunction: @ 20460a8 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -14904,7 +14898,7 @@ Function_20460a8: @ 20460a8 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a72c
+	bl      AddVariableAreaAdress_6_MapData4
 	str     r4, [r0, #0x0]
 	str     r6, [r0, #0x8]
 	mov     r1, #0x0
@@ -14949,7 +14943,7 @@ branch_2046138: @ 2046138 :thumb
 @ 0x2046144
 
 .thumb
-Function_2046144: @ 2046144 :thumb
+ScriptCmd_StoreTrainerCardStar: @ 2046144 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -14973,13 +14967,13 @@ Function_2046144: @ 2046144 :thumb
 
 
 .thumb
-Function_204616c: @ 204616c :thumb
+ScriptCmd_ShowSaveBox: @ 204616c :thumb
 	push    {r3-r5,lr}
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0x28
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r5, #0xc]
 	bl      Function_20247e0
@@ -14988,10 +14982,9 @@ Function_204616c: @ 204616c :thumb
 	mov     r0, r5
 	mov     r1, #0x4
 	mov     r2, #0x3
-	bl      0x21e1f98
+	bl      Function_5_21e1f98
 	str     r0, [r4, #0x0]
-	bl      0x21e1f04
-.thumb
+	bl      Function_5_21e1f04
 branch_2046196: @ 2046196 :thumb
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -14999,26 +14992,23 @@ branch_2046196: @ 2046196 :thumb
 
 
 .align 2, 0
-
-
 .thumb
-Function_204619c: @ 204619c :thumb
+ScriptCmd_HideSaveBox: @ 204619c :thumb
 	push    {r3-r5,lr}
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0x28
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r5, #0xc]
 	bl      Function_20247e0
 	cmp     r0, #0x0
 	bne     branch_20461c2
 	ldr     r0, [r4, #0x0]
-	bl      0x21e1f7c
+	bl      Function_5_21e1f7c
 	ldr     r0, [r4, #0x0]
-	bl      0x21e1ff4
-.thumb
+	bl      Function_5_21e1ff4
 branch_20461c2: @ 20461c2 :thumb
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -15026,8 +15016,6 @@ branch_20461c2: @ 20461c2 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_20461c8: @ 20461c8 :thumb
 	push    {r3,lr}
@@ -15047,13 +15035,13 @@ Function_20461c8: @ 20461c8 :thumb
 
 
 .thumb
-Function_20461e0: @ 20461e0 :thumb
+ScriptCmd_ShowBTowerSome: @ 20461e0 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -15142,23 +15130,23 @@ branch_2046226: @ 2046226 :thumb
 
 
 .thumb
-Function_2046294: @ 2046294 :thumb
+ScriptCmd_FloralClockAnimation: @ 2046294 :thumb
 	push    {r4-r6,lr}
 	mov     r6, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0x10
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	mov     r1, #0x1
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	ldr     r2, [r6, #0x78]
 	ldr     r3, [r4, #0x0]
 	mov     r0, r5
-	bl      0x224b67c
+	bl      Function_8_224b67c
 	mov     r0, #0x1
 	pop     {r4-r6,pc}
 @ 0x20462be
@@ -15174,7 +15162,7 @@ Function_20462c0: @ 20462c0 :thumb
 	cmp     r0, #0x0
 	beq     branch_20462d8
 	mov     r1, #0x1a
-	bl      0x21d5f24
+	bl      Function_5_21d5f24
 	mov     r0, r4
 	bl      Call_RemoveTaskFromTaskList
 branch_20462d8: @ 20462d8 :thumb
@@ -15184,7 +15172,7 @@ branch_20462d8: @ 20462d8 :thumb
 
 .align 2, 0
 .thumb
-Function_20462dc: @ 20462dc :thumb
+ScriptCmd_ActTeamGalacticEvents: @ 20462dc :thumb
 	push    {r3,lr}
 	mov     r1, r0
 	add     r1, #0x80
@@ -15207,19 +15195,17 @@ Function_20462f4: @ 20462f4 :thumb
 	ldr     r4, [r0, #0x0]
 	ldr     r0, [r4, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a74c
+	bl      GetVariableAreaAdress_6_66
 	mov     r1, r0
 	ldr     r0, [r4, #0x4]
 	ldr     r0, [r0, #0xc]
-	bl      0x21d5f24
+	bl      Function_5_21d5f24
 	mov     r0, #0x1
 	pop     {r4,pc}
 @ 0x2046312
 
 
 .align 2, 0
-
-
 .thumb
 ScriptCmd_2d8: @ 2046314 :thumb
 	push    {r3,lr}
@@ -15237,7 +15223,7 @@ ScriptCmd_2d8: @ 2046314 :thumb
 	ldr     r1, [r1, #0x0]
 	ldr     r2, [r2, r3]
 	mov     r3, #0x3
-	bl      0x224cda4
+	bl      Function_7_224cda4
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x204633a
@@ -15248,14 +15234,14 @@ ScriptCmd_2d8: @ 2046314 :thumb
 
 
 .thumb
-Function_2046340: @ 2046340 :thumb
+ScriptCmd_ShowBArcadeRecors: @ 2046340 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, r5
@@ -15313,7 +15299,7 @@ Function_20463b4: @ 20463b4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -15339,7 +15325,7 @@ Function_20463e4: @ 20463e4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	bl      free
@@ -15379,7 +15365,7 @@ Function_2046400: @ 2046400 :thumb
 	mov     r7, r0
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r0, #0x0]
 	lsl     r0, r4, #1
 	add     r1, r1, r0
@@ -16001,10 +15987,11 @@ Function_2046888: @ 2046888 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x224f158
+	bl      Function_9_224f158
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x20468ac
+
 
 .thumb
 Function_20468ac: @ 20468ac :thumb
@@ -16020,25 +16007,24 @@ Function_20468ac: @ 20468ac :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x224f16c
+	bl      Function_9_224f16c
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x20468d0
+
 
 .thumb
 Function_20468d0: @ 20468d0 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x2249fd0
+	bl      Function_9_2249fd0
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x20468de
 
 
 .align 2, 0
-
-
 .thumb
 Function_20468e0: @ 20468e0 :thumb
 	push    {r3-r7,lr}
@@ -16120,25 +16106,24 @@ Function_2046958: @ 2046958 :thumb
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, r0
 	mov     r0, r5
-	bl      0x224e884
+	bl      Function_9_224e884
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x204697c
+
 
 .thumb
 Function_204697c: @ 204697c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
-	bl      0x224e8a8
+	bl      Function_9_224e8a8
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204698a
 
 
 .align 2, 0
-
-
 .thumb
 Function_204698c: @ 204698c :thumb
 	push    {r3-r5,lr}
@@ -16184,7 +16169,7 @@ branch_20469c8: @ 20469c8 :thumb
 
 
 .thumb
-Function_20469d0: @ 20469d0 :thumb
+ScriptCmd_PortalEffect: @ 20469d0 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -16229,7 +16214,7 @@ branch_2046a0c: @ 2046a0c :thumb
 	cmp     r0, r1
 	bne     branch_2046a3e
 	ldr     r0, [r6, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r1, r4
 	bl      Function_202736c
 .thumb
@@ -16431,7 +16416,7 @@ branch_2046b6e: @ 2046b6e :thumb
 	ldr     r0, [r7, #0x74]
 	add     r7, #0x80
 	ldr     r1, [r7, #0x0]
-	bl      0x224cda4
+	bl      Function_7_224cda4
 	mov     r0, #0x1
 	add     sp, #0x84
 	pop     {r4-r7,pc}
@@ -16483,7 +16468,7 @@ branch_2046bd6: @ 2046bd6 :thumb
 	ldr     r2, [r2, r3]
 	ldr     r1, [r4, #0x0]
 	mov     r3, #0x0
-	bl      0x224cda4
+	bl      Function_7_224cda4
 	mov     r0, #0x1
 	add     sp, #0x4
 	pop     {r3,r4,pc}
@@ -16524,7 +16509,7 @@ branch_2046c16: @ 2046c16 :thumb
 	ldr     r2, [r2, r3]
 	ldr     r1, [r4, #0x0]
 	mov     r3, #0x1
-	bl      0x224cda4
+	bl      Function_7_224cda4
 	mov     r0, #0x1
 	add     sp, #0x4
 	pop     {r3,r4,pc}
@@ -16555,7 +16540,7 @@ ScriptCmd_Pokemart3: @ 2046c34 :thumb
 	ldr     r2, [r2, r3]
 	ldr     r1, [r4, #0x0]
 	mov     r3, #0x2
-	bl      0x224cda4
+	bl      Function_7_224cda4
 	mov     r0, #0x1
 	add     sp, #0x4
 	pop     {r3,r4,pc}
@@ -16566,7 +16551,7 @@ ScriptCmd_Pokemart3: @ 2046c34 :thumb
 
 
 .thumb
-Function_2046c6c: @ 2046c6c :thumb
+ScriptCmd_SprtSave: @ 2046c6c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -16577,13 +16562,13 @@ Function_2046c6c: @ 2046c6c :thumb
 @ 0x2046c7c
 
 .thumb
-Function_2046c7c: @ 2046c7c :thumb
+ScriptCmd_StartOvation: @ 2046c7c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16601,13 +16586,13 @@ Function_2046c7c: @ 2046c7c :thumb
 @ 0x2046cac
 
 .thumb
-Function_2046cac: @ 2046cac :thumb
+ScriptCmd_StopOvation: @ 2046cac :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
@@ -16635,7 +16620,7 @@ Function_2046ce0: @ 2046ce0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x64]
 	ldr     r0, [r0, #0x0]
 	lsl     r1, r1, #24
@@ -16653,7 +16638,7 @@ Function_2046cfc: @ 2046cfc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x0]
 	mov     r0, r5
 	add     r0, #0x80
@@ -16724,7 +16709,7 @@ Function_2046cfc: @ 2046cfc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	bl      Function_2027474
 	add     r1, sp, #0x14
 	strb    r0, [r1, #0x4]
@@ -16760,7 +16745,7 @@ Function_2046cfc: @ 2046cfc :thumb
 	ldr     r1, [sp, #0x0]
 	str     r0, [r1, #0x0]
 	mov     r0, r7
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x38
 	pop     {r3-r7,pc}
@@ -16773,7 +16758,7 @@ Function_2046e14: @ 2046e14 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16809,13 +16794,13 @@ Function_2046e60: @ 2046e60 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16845,19 +16830,19 @@ Function_2046e60: @ 2046e60 :thumb
 
 
 .thumb
-Function_2046eb4: @ 2046eb4 :thumb
+ScriptCmd_SetvarOtherEntry: @ 2046eb4 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16893,13 +16878,13 @@ Function_2046f08: @ 2046f08 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16929,19 +16914,19 @@ Function_2046f08: @ 2046f08 :thumb
 
 
 .thumb
-Function_2046f5c: @ 2046f5c :thumb
+ScriptCmd_SetvatHiroEntry: @ 2046f5c :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -16980,7 +16965,7 @@ Function_2046fb8: @ 2046fb8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 
 	ldr     r0, [r0, #0x0]
 	bl      Function_20943b0
@@ -17003,7 +16988,7 @@ Function_2046fdc: @ 2046fdc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_20944cc
 	pop     {r3,pc}
@@ -17011,13 +16996,13 @@ Function_2046fdc: @ 2046fdc :thumb
 
 
 .thumb
-Function_2046ff0: @ 2046ff0 :thumb
+ScriptCmd_BlackFlashEffect: @ 2046ff0 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	ldr     r0, [r4, #0x74]
 	ldr     r1, [r1, #0x0]
@@ -17027,19 +17012,19 @@ Function_2046ff0: @ 2046ff0 :thumb
 @ 0x204700c
 
 .thumb
-Function_204700c: @ 204700c :thumb
+ScriptCmd_SetvarTypeContest: @ 204700c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17056,19 +17041,19 @@ Function_204700c: @ 204700c :thumb
 @ 0x2047048
 
 .thumb
-Function_2047048: @ 2047048 :thumb
+ScriptCmd_SetvarRankContest: @ 2047048 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17091,13 +17076,13 @@ Function_2047084: @ 2047084 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17120,7 +17105,7 @@ Function_20470c0: @ 20470c0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17147,13 +17132,13 @@ Function_20470f0: @ 20470f0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17176,7 +17161,7 @@ Function_204712c: @ 204712c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17197,13 +17182,13 @@ Function_204712c: @ 204712c :thumb
 
 
 .thumb
-Function_204715c: @ 204715c :thumb
+ScriptCmd_StorePeopleIdContest: @ 204715c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17230,7 +17215,7 @@ Function_204718c: @ 204718c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17257,7 +17242,7 @@ Function_20471bc: @ 20471bc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -17283,13 +17268,13 @@ Function_20471bc: @ 20471bc :thumb
 @ 0x2047200
 
 .thumb
-Function_2047200: @ 2047200 :thumb
+ScriptCmd_ActPeopleContest: @ 2047200 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -17321,7 +17306,7 @@ Function_2047244: @ 2047244 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17349,7 +17334,7 @@ Function_2047274: @ 2047274 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17403,7 +17388,7 @@ Function_20472e8: @ 20472e8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17430,13 +17415,13 @@ Function_2047318: @ 2047318 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17464,7 +17449,7 @@ Function_2047358: @ 2047358 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17490,7 +17475,7 @@ Function_2047388: @ 2047388 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_2094850
 	mov     r0, #0x0
@@ -17507,7 +17492,7 @@ Function_20473a0: @ 20473a0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_2094860
 	mov     r0, #0x0
@@ -17519,13 +17504,13 @@ Function_20473a0: @ 20473a0 :thumb
 
 
 .thumb
-Function_20473b8: @ 20473b8 :thumb
+ScriptCmd_FlashContest: @ 20473b8 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -17541,13 +17526,13 @@ Function_20473b8: @ 20473b8 :thumb
 @ 0x20473e4
 
 .thumb
-Function_20473e4: @ 20473e4 :thumb
+ScriptCmd_EndFlash: @ 20473e4 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [pc, #0xc] @ 0x2047400, (=Function_2047404+1)
 	mov     r0, r4
 	bl      ScriptHandler_AddFunction
@@ -17566,7 +17551,7 @@ Function_2047404: @ 2047404 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_2094b1c
 	cmp     r0, #0x1
@@ -17582,13 +17567,13 @@ branch_204741e: @ 204741e :thumb
 
 .align 2, 0
 .thumb
-Function_2047424: @ 2047424 :thumb
+ScriptCmd_CarpetAnimation: @ 2047424 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0x4]
 	ldr     r0, [r0, #0x1c]
-	bl      0x21ef3fc
+	bl      Function_5_21ef3fc
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2047436
@@ -17602,7 +17587,7 @@ Function_2047438: @ 2047438 :thumb
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0x4]
 	ldr     r0, [r0, #0x1c]
-	bl      0x21ef3dc
+	bl      Function_5_21ef3dc
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204744a
@@ -17617,7 +17602,7 @@ Function_204744c: @ 204744c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x14
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -17665,14 +17650,16 @@ branch_20474a6: @ 20474a6 :thumb
 	pop     {r4,r5,pc}
 @ 0x20474ac
 
+
 .thumb
-Function_20474ac: @ 20474ac :thumb
+ScriptCmd_ShowLinkCountRecord: @ 20474ac :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0x74]
-	bl      0x2247a0c
+	bl      Function_6_2247a0c
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x20474b8
+
 
 .thumb
 Function_20474b8: @ 20474b8 :thumb
@@ -17681,7 +17668,7 @@ Function_20474b8: @ 20474b8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -17708,14 +17695,14 @@ Function_20474b8: @ 20474b8 :thumb
 
 
 .thumb
-Function_20474f4: @ 20474f4 :thumb
+ScriptCmd_SetVariableHero: @ 20474f4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r4, r0
 	add     r0, r1, #0x1
@@ -17737,14 +17724,14 @@ Function_20474f4: @ 20474f4 :thumb
 
 
 .thumb
-Function_2047528: @ 2047528 :thumb
+ScriptCmd_SetVariableRival: @ 2047528 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r5, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r5, #0x8]
@@ -17757,14 +17744,14 @@ Function_2047528: @ 2047528 :thumb
 @ 0x204754c
 
 .thumb
-Function_204754c: @ 204754c :thumb
+ScriptCmd_SetVariableAlter: @ 204754c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r4, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r5, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r5, #0x8]
@@ -17777,14 +17764,14 @@ Function_204754c: @ 204754c :thumb
 @ 0x2047570
 
 .thumb
-Function_2047570: @ 2047570 :thumb
+ScriptCmd_SetVariablePokemon: @ 2047570 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -17818,7 +17805,7 @@ Function_20475b8: @ 20475b8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 
@@ -17844,13 +17831,13 @@ Function_20475b8: @ 20475b8 :thumb
 
 .align 2, 0
 .thumb
-Function_20475f0: @ 20475f0 :thumb
+ScriptCmd_SetVariableItem: @ 20475f0 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -17875,13 +17862,13 @@ Function_20475f0: @ 20475f0 :thumb
 
 
 .thumb
-Function_2047628: @ 2047628 :thumb
+ScriptCmd_SetVariableItemNum: @ 2047628 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -17906,13 +17893,13 @@ Function_2047628: @ 2047628 :thumb
 
 
 .thumb
-Function_2047660: @ 2047660 :thumb
+ScriptCmd_SetVariableAttackItem: @ 2047660 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -17938,13 +17925,13 @@ Function_2047660: @ 2047660 :thumb
 
 
 .thumb
-Function_204769c: @ 204769c :thumb
+ScriptCmd_SetVariableAttack: @ 204769c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -17969,14 +17956,14 @@ Function_204769c: @ 204769c :thumb
 
 
 .thumb
-Function_20476d4: @ 20476d4 :thumb
+ScriptCmd_SetVariableNumber: @ 20476d4 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18004,14 +17991,14 @@ Function_20476d4: @ 20476d4 :thumb
 @ 0x204771c
 
 .thumb
-Function_204771c: @ 204771c :thumb
+ScriptCmd_SetvarIdNumber: @ 204771c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18062,7 +18049,7 @@ Function_204777c: @ 204777c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 
@@ -18105,14 +18092,14 @@ branch_20477b8: @ 20477b8 :thumb
 
 .align 2, 0
 .thumb
-Function_20477d0: @ 20477d0 :thumb
+ScriptCmd_SetVariableNickname: @ 20477d0 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18144,7 +18131,7 @@ Function_20477d0: @ 20477d0 :thumb
 
 .align 2, 0
 .thumb
-Function_2047818: @ 2047818 :thumb
+ScriptCmd_SetvarIdPokeBoxes: @ 2047818 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -18154,7 +18141,7 @@ Function_2047818: @ 2047818 :thumb
 	str     r0, [sp, #0x0]
 	mov     r0, r4
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18187,13 +18174,13 @@ Function_2047818: @ 2047818 :thumb
 
 
 .thumb
-Function_2047874: @ 2047874 :thumb
+ScriptCmd_SetVariableObject: @ 2047874 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18218,13 +18205,13 @@ Function_2047874: @ 2047874 :thumb
 
 
 .thumb
-Function_20478ac: @ 20478ac :thumb
+ScriptCmd_SetVariableTrainer: @ 20478ac :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18247,7 +18234,7 @@ Function_20478ac: @ 20478ac :thumb
 
 .align 2, 0
 .thumb
-Function_20478e4: @ 20478e4 :thumb
+ScriptCmd_SetvarWiFiSprite: @ 20478e4 :thumb
 	push    {r3-r7,lr}
 	mov     r7, r0
 	add     r0, #0x80
@@ -18258,7 +18245,7 @@ Function_20478e4: @ 20478e4 :thumb
 	mov     r4, r0
 	mov     r0, r5
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r7, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18282,14 +18269,14 @@ Function_20478e4: @ 20478e4 :thumb
 @ 0x2047930
 
 .thumb
-Function_2047930: @ 2047930 :thumb
+ScriptCmd_SetVarPokemonStored: @ 2047930 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18323,7 +18310,7 @@ Function_2047930: @ 2047930 :thumb
 	mov     r2, r6
 	bl      Function_200b48c
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0xc
 	pop     {r4-r7,pc}
@@ -18334,16 +18321,17 @@ Function_2047930: @ 2047930 :thumb
 .thumb
 Function_2047998: @ 2047998 :thumb
 	push    {r3-r5,lr}
+
 	mov     r2, #0x67
 	mov     r4, r0
 	mov     r3, r1
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	lsl     r2, r2, #2
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r5, r0
 	mov     r1, r4
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	mov     r4, r0
 	mov     r0, r5
 	bl      Function_200b190
@@ -18354,14 +18342,14 @@ Function_2047998: @ 2047998 :thumb
 
 .align 2, 0
 .thumb
-Function_20479c0: @ 20479c0 :thumb
+ScriptCmd_SetVarHeroStored: @ 20479c0 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18385,21 +18373,21 @@ Function_20479c0: @ 20479c0 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r4-r6,pc}
 @ 0x2047a10
 
 .thumb
-Function_2047a10: @ 2047a10 :thumb
+ScriptCmd_SetVarRivalStored: @ 2047a10 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18423,21 +18411,21 @@ Function_2047a10: @ 2047a10 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r4-r6,pc}
 @ 0x2047a60
 
 .thumb
-Function_2047a60: @ 2047a60 :thumb
+ScriptCmd_SetVarAlterStored: @ 2047a60 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x8
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18461,7 +18449,7 @@ Function_2047a60: @ 2047a60 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r4-r6,pc}
@@ -18474,7 +18462,7 @@ Function_2047ab0: @ 2047ab0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18499,13 +18487,13 @@ Function_2047ab0: @ 2047ab0 :thumb
 
 
 .thumb
-Function_2047ae8: @ 2047ae8 :thumb
+ScriptCmd_SetvarItemStored: @ 2047ae8 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18530,13 +18518,13 @@ Function_2047ae8: @ 2047ae8 :thumb
 
 
 .thumb
-Function_2047b20: @ 2047b20 :thumb
+ScriptCmd_SetvarItemStored2: @ 2047b20 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18561,7 +18549,7 @@ Function_2047b20: @ 2047b20 :thumb
 
 
 .thumb
-Function_2047b58: @ 2047b58 :thumb
+ScriptCmd_SetvarSwarmPoke: @ 2047b58 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -18573,7 +18561,7 @@ Function_2047b58: @ 2047b58 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18598,7 +18586,7 @@ Function_2047b58: @ 2047b58 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r3-r7,pc}
@@ -18615,7 +18603,7 @@ Function_2047bb8: @ 2047bb8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	mov     r7, r0
 
@@ -18666,7 +18654,7 @@ branch_2047c10: @ 2047c10 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r5
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r3-r7,pc}
@@ -18682,7 +18670,7 @@ ScriptCmd_SetNaturePokemon: @ 2047c30 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 
@@ -18709,13 +18697,13 @@ ScriptCmd_SetNaturePokemon: @ 2047c30 :thumb
 
 .align 2, 0
 .thumb
-Function_2047c68: @ 2047c68 :thumb
+ScriptCmd_CheckAccessories: @ 2047c68 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18740,14 +18728,14 @@ Function_2047c68: @ 2047c68 :thumb
 
 
 .thumb
-Function_2047ca0: @ 2047ca0 :thumb
+ScriptCmd_SetvarShaymin: @ 2047ca0 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18775,7 +18763,7 @@ Function_2047ca0: @ 2047ca0 :thumb
 	mov     r2, r4
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r3-r7,pc}
@@ -18787,14 +18775,14 @@ Function_2047ca0: @ 2047ca0 :thumb
 
 
 .thumb
-Function_2047d00: @ 2047d00 :thumb
+ScriptCmd_SetvarMoveDelete: @ 2047d00 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r6, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r6
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	mov     r7, r0
 	add     r0, r1, #0x1
@@ -18837,13 +18825,13 @@ Function_2047d00: @ 2047d00 :thumb
 
 
 .thumb
-Function_2047d68: @ 2047d68 :thumb
+ScriptCmd_SetvarRibbon: @ 2047d68 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18873,13 +18861,13 @@ Function_2047d68: @ 2047d68 :thumb
 
 
 .thumb
-Function_2047dac: @ 2047dac :thumb
+ScriptCmd_SetvarSealRandom: @ 2047dac :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18909,7 +18897,7 @@ Function_2047de8: @ 2047de8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18939,7 +18927,7 @@ ScriptCmd_33c: @ 2047e20 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -18970,7 +18958,7 @@ ScriptCmd_33d: @ 2047e58 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19001,7 +18989,7 @@ ScriptCmd_33e: @ 2047e90 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19032,7 +19020,7 @@ ScriptCmd_33f: @ 2047ec8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19063,7 +19051,7 @@ ScriptCmd_340: @ 2047f00 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19095,7 +19083,7 @@ ScriptCmd_341: @ 2047f38 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19136,7 +19124,7 @@ ScriptCmd_342: @ 2047f80 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19162,7 +19150,7 @@ ScriptCmd_343: @ 2047fb4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19191,7 +19179,7 @@ ScriptCmd_344: @ 2047fec :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19222,7 +19210,7 @@ ScriptCmd_345: @ 2048024 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r5, #0x8]
 	mov     r6, r0
 	add     r0, r1, #0x1
@@ -19252,7 +19240,7 @@ ScriptCmd_346: @ 2048060 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r2, [r4, #0x8]
 	add     r1, r2, #0x1
 	str     r1, [r4, #0x8]
@@ -19264,13 +19252,13 @@ ScriptCmd_346: @ 2048060 :thumb
 @ 0x2048080
 
 .thumb
-ScriptCmd_347: @ 2048080 :thumb
+ScriptCmd_DisplayFloor: @ 2048080 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r1, [r4, #0x8]
 	add     r3, r1, #0x1
 	str     r3, [r4, #0x8]
@@ -19285,8 +19273,8 @@ ScriptCmd_347: @ 2048080 :thumb
 @ 0x20480a6
 
 
-thumb_func_start Function_20480a8
-Function_20480a8: @ 20480a8 :thumb
+thumb_func_start ScriptCmd_CheckLottoNumber
+ScriptCmd_CheckLottoNumber: @ 20480a8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -19306,12 +19294,12 @@ Function_20480a8: @ 20480a8 :thumb
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
-thumb_func_end Function_20480a8
+thumb_func_end ScriptCmd_CheckLottoNumber
 
 
 .align 2, 0
 .thumb
-Function_20480d8: @ 20480d8 :thumb
+ScriptCmd_CompareLottoNumber: @ 20480d8 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x24
 	mov     r4, r0
@@ -19901,7 +19889,7 @@ ScriptCmd_Soundfr: @ 20484c4 :thumb
 
 .align 2, 0
 .thumb
-Function_20484d4: @ 20484d4 :thumb
+ScriptCmd_FadeDefaultMusic: @ 20484d4 :thumb
 	push    {r3,lr}
 	ldr     r1, [pc, #0x8] @ 0x20484e0, (=Function_20484e4+1)
 	bl      ScriptHandler_AddFunction
@@ -20113,7 +20101,7 @@ Function_20485f4: @ 20485f4 :thumb
 
 .align 2, 0
 .thumb
-Function_2048614: @ 2048614 :thumb
+ScriptCmd_BattleId: @ 2048614 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x1c
 	mov     r5, r0
@@ -20129,29 +20117,29 @@ Function_2048614: @ 2048614 :thumb
 	bne     branch_2048674
 	mov     r0, r4
 	mov     r1, #0x18
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x18]
 	mov     r0, r4
 	mov     r1, #0x19
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x10]
 	mov     r0, r4
 	mov     r1, #0x1a
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x1b
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x1c
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x14]
 	mov     r0, r4
 	mov     r1, #0x1d
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x1e
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	b       branch_20486b4
 @ 0x2048674
 
@@ -20159,29 +20147,29 @@ Function_2048614: @ 2048614 :thumb
 branch_2048674: @ 2048674 :thumb
 	mov     r0, r4
 	mov     r1, #0x1f
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x18]
 	mov     r0, r4
 	mov     r1, #0x20
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x10]
 	mov     r0, r4
 	mov     r1, #0x21
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x22
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r0, r4
 	mov     r1, #0x23
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x14]
 	mov     r0, r4
 	mov     r1, #0x24
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	mov     r1, #0x25
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 .thumb
 branch_20486b4: @ 20486b4 :thumb
 	mov     r7, r0
@@ -20211,7 +20199,7 @@ branch_20486b4: @ 20486b4 :thumb
 
 
 .thumb
-Function_20486e0: @ 20486e0 :thumb
+ScriptCmd_SetvarBattle: @ 20486e0 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -20236,7 +20224,7 @@ Function_20486e0: @ 20486e0 :thumb
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x1e
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	b       branch_2048728
 @ 0x204871e
 
@@ -20245,7 +20233,7 @@ branch_204871e: @ 204871e :thumb
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0x25
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 .thumb
 branch_2048728: @ 2048728 :thumb
 	mov     r5, r0
@@ -20275,13 +20263,13 @@ branch_204874c: @ 204874c :thumb
 @ 0x2048750
 
 .thumb
-Function_2048750: @ 2048750 :thumb
+ScriptCmd_CheckBattleType: @ 2048750 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1c
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -20296,19 +20284,19 @@ Function_2048750: @ 2048750 :thumb
 @ 0x2048778
 
 .thumb
-Function_2048778: @ 2048778 :thumb
+ScriptCmd_SetvarBattle2: @ 2048778 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x1b
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x22
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20342,27 +20330,27 @@ branch_20487c4: @ 20487c4 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 ScriptCmd_StartBattleAnalysis: @ 20487cc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	mov     r1, #0x8
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
+
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
-	add     r5, #0x80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r5, #0x0]
+	ldr     r0, [r5]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 	ldrh    r0, [r4, #0x0]
 	bl      NormalizeSpriteScriptNr
-	strh    r0, [r5, #0x0]
+	strh    r0, [r5]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x20487fa
@@ -20374,24 +20362,24 @@ ScriptCmd_TrainerBattle: @ 20487fc :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r5, r0
-	add     r0, #0x80
-	ldr     r4, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r4, [r0]
 
 	mov     r1, #0x8
 	mov     r0, r4
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 
 	mov     r0, r4
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r0, [sp, #0xc]
 
@@ -20399,14 +20387,14 @@ ScriptCmd_TrainerBattle: @ 20487fc :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r0, [sp, #0x8]
 
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	mov     r6, #0x0
 	ldr     r0, [r0, #0xc]
 	bl      LoadFlagAdress
@@ -20423,7 +20411,7 @@ branch_2048862: @ 2048862 :thumb
 	str     r0, [sp, #0x0]
 	str     r7, [sp, #0x4]
 
-	ldr     r0, [r5, #0x74]
+	ldr     r0, [r5, #ScriptHandler_74]
 	ldr     r1, [sp, #0xc]
 	ldr     r2, [sp, #0x8]
 	mov     r3, r6
@@ -20437,14 +20425,14 @@ branch_2048862: @ 2048862 :thumb
 
 .align 2, 0
 .thumb
-Function_204887c: @ 204887c :thumb
+ScriptCmd_DoubleBattle: @ 204887c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20484,13 +20472,13 @@ Function_204887c: @ 204887c :thumb
 
 
 .thumb
-Function_20488e0: @ 20488e0 :thumb
+ScriptCmd_TrainerBattleStored: @ 20488e0 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x8
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20557,13 +20545,13 @@ branch_204895c: @ 204895c :thumb
 
 .align 2, 0
 .thumb
-Function_2048968: @ 2048968 :thumb
+ScriptCmd_TrainerBattleStored2: @ 2048968 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x8
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20630,13 +20618,13 @@ branch_20489e4: @ 20489e4 :thumb
 
 .align 2, 0
 .thumb
-Function_20489f0: @ 20489f0 :thumb
+ScriptCmd_CheckTrainerStatus: @ 20489f0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x8
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20656,7 +20644,7 @@ Function_20489f0: @ 20489f0 :thumb
 
 .align 2, 0
 .thumb
-Function_2048a24: @ 2048a24 :thumb
+ScriptCmd_ActLeagueBattlers: @ 2048a24 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -20673,7 +20661,7 @@ Function_2048a24: @ 2048a24 :thumb
 
 .align 2, 0
 .thumb
-Function_2048a44: @ 2048a44 :thumb
+ScriptCmd_LostGoPokecenter: @ 2048a44 :thumb
 	push    {r3,lr}
 	ldr     r0, [r0, #0x74]
 	bl      Function_2052c5c
@@ -20690,7 +20678,7 @@ ScriptCmd_CheckTrainerLost: @ 2048a50 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 
 	mov     r0, r5
@@ -20713,13 +20701,13 @@ ScriptCmd_CheckTrainerLost: @ 2048a50 :thumb
 
 .align 2, 0
 .thumb
-Function_2048a80: @ 2048a80 :thumb
+ScriptCmd_CheckTrainerStatus2: @ 2048a80 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20738,13 +20726,13 @@ Function_2048a80: @ 2048a80 :thumb
 
 .align 2, 0
 .thumb
-Function_2048ab0: @ 2048ab0 :thumb
+ScriptCmd_CheckWildBattle2: @ 2048ab0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -20763,7 +20751,7 @@ Function_2048ab0: @ 2048ab0 :thumb
 
 .align 2, 0
 .thumb
-Function_2048ae0: @ 2048ae0 :thumb
+ScriptCmd_StorePokePartyDefeated: @ 2048ae0 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -20793,7 +20781,7 @@ Function_2048b0c: @ 2048b0c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, #0xb
 	str     r1, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -20814,7 +20802,7 @@ Function_2048b34: @ 2048b34 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	ldr     r0, [r5, #0x0]
 	bl      GetSpriteSpriteListFirstSprite
@@ -20838,7 +20826,7 @@ Function_2048b60: @ 2048b60 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r6
 	bl      ScriptHandler_LoadWord
@@ -20875,7 +20863,7 @@ Function_2048ba8: @ 2048ba8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x17
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -20899,7 +20887,7 @@ Function_2048bd0: @ 2048bd0 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 
 	mov     r0, r4
@@ -21120,7 +21108,7 @@ branch_2048d66: @ 2048d66 :thumb
 	mov     r1, #0x0
 	bl      Function_202b40c
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r5
 	mov     r1, #0x0
 	mov     r2, #0x1
@@ -21137,7 +21125,7 @@ branch_2048dd0: @ 2048dd0 :thumb
 
 .align 2, 0
 .thumb
-Function_2048dd8: @ 2048dd8 :thumb
+ScriptCmd_CheckFurniture: @ 2048dd8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -21175,7 +21163,7 @@ branch_2048e00: @ 2048e00 :thumb
 	add     r4, #0x80
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x224660c
+	bl      Function_6_224660c
 	strh    r0, [r5, #0x0]
 	b       branch_2048f68
 
@@ -21204,7 +21192,7 @@ branch_2048e20: @ 2048e20 :thumb
 	strh    r0, [r5, #0x0]
 	ldr     r0, [r4, #0x0]
 	mov     r1, r7
-	bl      0x2246978
+	bl      Function_6_2246978
 	strh    r0, [r6, #0x0]
 	b       branch_2048f68
 
@@ -21213,7 +21201,7 @@ branch_2048e62: @ 2048e62 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -21244,13 +21232,13 @@ branch_2048e62: @ 2048e62 :thumb
 	ldr     r1, [r5, #0x0]
 	mov     r2, r6
 	mov     r3, r7
-	bl      0x22469e0
+	bl      Function_6_22469e0
 	b       branch_2048f68
 
 branch_2048ebc: @ 2048ebc :thumb
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
-	bl      0x22465fc
+	bl      Function_6_22465fc
 	b       branch_2048f68
 
 branch_2048ec6: @ 2048ec6 :thumb
@@ -21274,7 +21262,7 @@ branch_2048ec6: @ 2048ec6 :thumb
 	add     r4, #0x80
 	strh    r0, [r5, #0x0]
 	ldr     r0, [r4, #0x0]
-	bl      0x2246b40
+	bl      Function_6_2246b40
 	strh    r0, [r6, #0x0]
 	b       branch_2048f68
 
@@ -21307,7 +21295,7 @@ branch_2048efe: @ 2048efe :thumb
 	ldr     r0, [r4, #0x0]
 	mov     r1, r6
 	mov     r2, r7
-	bl      0x22468b0
+	bl      Function_6_22468b0
 	strh    r0, [r5, #0x0]
 	b       branch_2048f68
 
@@ -21322,7 +21310,7 @@ branch_2048f4a: @ 2048f4a :thumb
 	add     r4, #0x80
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
-	bl      0x2246920
+	bl      Function_6_2246920
 	strh    r0, [r5, #0x0]
 branch_2048f68: @ 2048f68 :thumb
 	mov     r0, #0x0
@@ -21357,7 +21345,7 @@ Function_2048f74: @ 2048f74 :thumb
 
 
 .thumb
-Function_2048f98: @ 2048f98 :thumb
+ScriptCmd_StorePokeNickname: @ 2048f98 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -21433,13 +21421,13 @@ Function_2048ff0: @ 2048ff0 :thumb
 
 .align 2, 0
 .thumb
-Function_2049018: @ 2049018 :thumb
+ScriptCmd_CheckPhraseBoxInput: @ 2049018 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -21538,7 +21526,7 @@ branch_20490e6: @ 20490e6 :thumb
 
 
 .thumb
-Function_20490f0: @ 20490f0 :thumb
+ScriptCmd_CheckStatusPhraseBox: @ 20490f0 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -21570,7 +21558,7 @@ Function_20490f0: @ 20490f0 :thumb
 
 
 .thumb
-Function_204912c: @ 204912c :thumb
+ScriptCmd_SetvarAmityPokemon: @ 204912c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -21747,7 +21735,7 @@ Function_204922c: @ 204922c :thumb
 	mov     r2, r4
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     sp, #0xc
 	pop     {r4-r7,pc}
 @ 0x2049266
@@ -21865,7 +21853,7 @@ Function_2049308: @ 2049308 :thumb
 	mov     r2, r4
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     sp, #0x8
 	pop     {r4-r6,pc}
 @ 0x2049348
@@ -22118,7 +22106,7 @@ branch_20494d6: @ 20494d6 :thumb
 
 .align 2, 0
 .thumb
-Function_20494dc: @ 20494dc :thumb
+ScriptCmd_StoreBTowerData: @ 20494dc :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -22142,7 +22130,7 @@ Function_20494dc: @ 20494dc :thumb
 @ 0x204950c
 
 .thumb
-Function_204950c: @ 204950c :thumb
+ScriptCmd_ActivateBTower: @ 204950c :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -22153,7 +22141,7 @@ Function_204950c: @ 204950c :thumb
 @ 0x204951c
 
 .thumb
-Function_204951c: @ 204951c :thumb
+ScriptCmd_CloseBTower: @ 204951c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -22171,7 +22159,7 @@ Function_204951c: @ 204951c :thumb
 
 
 .thumb
-Function_2049538: @ 2049538 :thumb
+ScriptCmd_CallBTowerFunctions: @ 2049538 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r7, r0
@@ -22424,7 +22412,7 @@ branch_20496b2: @ 20496b2 :thumb
 branch_20496c4: @ 20496c4 :thumb
 	mov     r0, r2
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r2, r0
 	ldr     r1, [r7, #0x74]
 	mov     r0, r5
@@ -22438,7 +22426,7 @@ branch_20496c4: @ 20496c4 :thumb
 branch_20496dc: @ 20496dc :thumb
 	mov     r0, r2
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r7, #0x80
 	ldr     r2, [r7, #0x0]
 	mov     r1, r0
@@ -22661,7 +22649,7 @@ branch_20497f6: @ 20497f6 :thumb
 
 
 .thumb
-Function_2049800: @ 2049800 :thumb
+ScriptCmd_RandomTeamBTower: @ 2049800 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 
@@ -22728,7 +22716,7 @@ Function_2049800: @ 2049800 :thumb
 
 .align 2, 0
 .thumb
-Function_2049880: @ 2049880 :thumb
+ScriptCmd_StorePrizeNumBTower: @ 2049880 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -22752,7 +22740,7 @@ Function_2049880: @ 2049880 :thumb
 
 
 .thumb
-Function_20498a8: @ 20498a8 :thumb
+ScriptCmd_StorePeopleIdBTower: @ 20498a8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -22776,7 +22764,7 @@ Function_20498a8: @ 20498a8 :thumb
 
 
 .thumb
-Function_20498d0: @ 20498d0 :thumb
+ScriptCmd_CallBTowerWireFunction: @ 20498d0 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -22909,7 +22897,7 @@ branch_20499b0: @ 20499b0 :thumb
 
 
 .thumb
-Function_20499bc: @ 20499bc :thumb
+ScriptCmd_StorePChosenWireBTower: @ 20499bc :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -23005,7 +22993,7 @@ branch_2049a58: @ 2049a58 :thumb
 
 
 .thumb
-Function_2049a68: @ 2049a68 :thumb
+ScriptCmd_StoreRankDataWireBTower: @ 2049a68 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r5, r0
@@ -23116,7 +23104,7 @@ branch_2049b1c: @ 2049b1c :thumb
 
 
 .thumb
-Function_2049b24: @ 2049b24 :thumb
+ScriptCmd_ShowBattlePointsBox: @ 2049b24 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -23129,25 +23117,26 @@ Function_2049b24: @ 2049b24 :thumb
 	str     r1, [r5, #0x8]
 	ldrb    r4, [r2, #0x0]
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	add     r5, #0x80
 	mov     r7, r0
 	ldr     r0, [r5, #0x0]
 	mov     r1, r6
 	mov     r2, r4
-	bl      0x21dd140
+	bl      Function_5_21dd140
 	str     r0, [r7, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
 @ 0x2049b54
 
+
 .thumb
-Function_2049b54: @ 2049b54 :thumb
+ScriptCmd_HideBattlePointsBox: @ 2049b54 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_5_21dd084
 	mov     r0, #0x0
@@ -23157,26 +23146,24 @@ Function_2049b54: @ 2049b54 :thumb
 
 .align 2, 0
 .thumb
-Function_2049b6c: @ 2049b6c :thumb
+ScriptCmd_UpdateBPointsbox: @ 2049b6c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
 	ldr     r1, [r1, #0x0]
-	bl      0x21dd1a4
+	bl      Function_5_21dd1a4
 	mov     r0, #0x0
 	pop     {r4,pc}
 @ 0x2049b8a
 
 
 .align 2, 0
-
-
 .thumb
 Function_2049b8c: @ 2049b8c :thumb
 	push    {r3-r5,lr}
@@ -23237,7 +23224,7 @@ Function_2049bbc: @ 2049bbc :thumb
 
 
 .thumb
-Function_2049c00: @ 2049c00 :thumb
+ScriptCmd_TakeBPoints: @ 2049c00 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -23272,7 +23259,7 @@ Function_2049c00: @ 2049c00 :thumb
 
 
 .thumb
-Function_2049c44: @ 2049c44 :thumb
+ScriptCmd_CheckBPoints: @ 2049c44 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -23832,7 +23819,7 @@ Function_2049fa8: @ 2049fa8 :thumb
 	mov     r5, r0
 	ldr     r0, [r5, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a730
+	bl      AddVariableAreaAdress_6_MapData3
 	mov     r4, r0
 	ldr     r0, [r5, #0x3c]
 	bl      GetSpritePositionY
@@ -26094,14 +26081,15 @@ Function_204aee8: @ 204aee8 :thumb
 	bl      Function_2023790
 	str     r0, [sp, #0x1c]
 	mov     r0, r4
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r2, #0x67
 	str     r0, [sp, #0x18]
+
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	lsl     r2, r2, #2
 	mov     r3, #0x4
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [sp, #0x10]
 	mov     r0, #0x13
 	mov     r1, #0xe
@@ -26121,13 +26109,13 @@ branch_204af3e: @ 204af3e :thumb
 	mov     r7, r0
 	ldr     r0, [sp, #0x18]
 	mov     r1, r7
-	bl      Function_2026fe8
+	bl      WasPkmnSeen
 	cmp     r0, #0x0
 	beq     branch_204af78
 	ldr     r0, [sp, #0x10]
 	mov     r1, r7
 	mov     r2, r6
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	ldr     r0, [sp, #0xc]
 	mov     r2, r6
 	str     r0, [sp, #0x0]
@@ -26150,9 +26138,9 @@ branch_204af78: @ 204af78 :thumb
 	ldr     r0, [sp, #0x10]
 	bl      Function_200b190
 	ldr     r0, [sp, #0x1c]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r6
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	ldr     r0, [sp, #0x14]
 	add     sp, #0x20
 	pop     {r3-r7,pc}
@@ -26457,10 +26445,10 @@ Function_204b184: @ 204b184 :thumb
 	mov     r4, r1
 
 	mov     r0, #0x1
-	mov     r1, #0x1a
+	mov     r1, #PlMsg_Narc
 	mov     r2, #0x15
 	mov     r3, r6
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	mov     r2, #0x11
 	mov     r7, r0
 
@@ -26483,14 +26471,14 @@ Function_204b184: @ 204b184 :thumb
 	mov     r1, r4
 	strh    r0, [r5, #0x4]
 	mov     r0, r7
-	bl      Function_200b1ec
+	bl      Function_200b1ec_CallMsgDecrypt
 	add     r5, #0x8
 	mov     r4, r0
 	mov     r1, r5
 	mov     r2, #0x8
 	bl      Function_2023df0
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	mov     r0, r7
 	bl      Function_200b190
 	mov     r0, r6
@@ -27100,30 +27088,31 @@ branch_204b60c: @ 204b60c :thumb
 @ 0x204b62e
 
 
-.align 2, 0
-.thumb
+thumb_func_start LoadFromNARC_PlBtdtr
 LoadFromNARC_PlBtdtr: @ 204b630 :thumb
 	mov     r3, r0
 	mov     r2, r1
 	mov     r1, r3
 	ldr     r3, =LoadFromNARC_2+1
-	mov     r0, #0xb2                   @ battle/b_pl_tower/pl_btdtr.narc
+	mov     r0, #Pl_Btdtr_Narc
 	bx      r3
 @ 0x204b63c
 
 .pool
+thumb_func_end LoadFromNARC_PlBtdtr
 
 
 
-.thumb
+thumb_func_start LoadFromNARC_PlBtdpm
 LoadFromNARC_PlBtdpm: @ 204b640 :thumb
 	ldr     r3, =LoadFromNARC+1
 	mov     r2, r1
-	mov     r1, #0xb3                   @ battle/b_pl_tower/pl_btdpm.narc
+	mov     r1, #Pl_Btdpm_Narc
 	bx      r3
 @ 0x204b648
 
 .pool
+thumb_func_end LoadFromNARC_PlBtdpm
 
 
 
@@ -27142,7 +27131,7 @@ Function_204b64c: @ 204b64c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
@@ -27161,7 +27150,7 @@ Function_204b680: @ 204b680 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -27188,7 +27177,7 @@ Function_204b6b4: @ 204b6b4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -27215,7 +27204,7 @@ Function_204b6e8: @ 204b6e8 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -27242,7 +27231,7 @@ Function_204b71c: @ 204b71c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -27263,13 +27252,13 @@ Function_204b71c: @ 204b71c :thumb
 
 
 .thumb
-Function_204b750: @ 204b750 :thumb
+ScriptCmd_CheckDeoxis: @ 204b750 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -27296,7 +27285,7 @@ Function_204b784: @ 204b784 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	add     r0, #0x80
@@ -27369,7 +27358,7 @@ Function_204b7fc: @ 204b7fc :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xa
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	add     r5, #0x80
 	ldr     r0, [r5, #0x0]
@@ -27577,7 +27566,7 @@ branch_204b96e: @ 204b96e :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -27625,7 +27614,7 @@ branch_204b9da: @ 204b9da :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -28100,7 +28089,7 @@ branch_204bd1a: @ 204bd1a :thumb
 
 	mov     r0, r5
 	ldr     r4, [sp, #0x8]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 branch_204bd72: @ 204bd72 :thumb
 	ldr     r1, [sp, #0x4]
 	mov     r0, #0x2
@@ -28414,7 +28403,7 @@ Function_204bf60: @ 204bf60 :thumb
 	mov     r3, #0x0
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	add     sp, #0x8
 	pop     {r3-r7,pc}
 @ 0x204bfb2
@@ -29112,8 +29101,6 @@ Function_204c458: @ 204c458 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_204c474: @ 204c474 :thumb
 	push    {r3-r5,lr}
@@ -29194,7 +29181,7 @@ Function_204c4d0: @ 204c4d0 :thumb
 
 
 .thumb
-Function_204c500: @ 204c500 :thumb
+ScriptCmd_StopGreatMarsh: @ 204c500 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -29238,7 +29225,7 @@ branch_204c54e: @ 204c54e :thumb
 
 .align 2, 0
 .thumb
-Function_204c554: @ 204c554 :thumb
+ScriptCmd_CheckPokeCatchingShow: @ 204c554 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -29278,7 +29265,7 @@ branch_204c58e: @ 204c58e :thumb
 
 .align 2, 0
 .thumb
-Function_204c59c: @ 204c59c :thumb
+ScriptCmd_CloseCatchingShow: @ 204c59c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r6, r0
@@ -29311,7 +29298,7 @@ Function_204c59c: @ 204c59c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
-	bl      LoadVariableAreaAdress_7
+	bl      LoadPokedexDataAdress
 	mov     r5, #0x0
 branch_204c5e0: @ 204c5e0 :thumb
 	mov     r0, r7
@@ -29363,7 +29350,7 @@ branch_204c610: @ 204c610 :thumb
 
 .align 2, 0
 .thumb
-Function_204c638: @ 204c638 :thumb
+ScriptCmd_CheckCatchingShowRecords: @ 204c638 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -29465,7 +29452,7 @@ ScriptCmd_ShowCoins: @ 204c6c8 :thumb
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	lsl     r1, r6, #24
 	lsl     r2, r7, #24
 	add     r4, #0x80
@@ -29486,7 +29473,7 @@ ScriptCmd_HideCoins: @ 204c718 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
 	bl      Function_5_21dd084
 	mov     r0, #0x0
@@ -29498,13 +29485,13 @@ thumb_func_start ScriptCmd_UpdateCoins
 ScriptCmd_UpdateCoins: @ 204c730 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	mov     r1, #0x26
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	ldr     r0, [r4]
 	ldr     r1, [r1, #0x0]
 	bl      Function_5_21dd098
@@ -29517,15 +29504,15 @@ thumb_func_start ScriptCmd_CheckCoins
 ScriptCmd_CheckCoins: @ 204c750 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress_24
 	mov     r4, r0
 
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckLoadParameter
@@ -29543,15 +29530,15 @@ thumb_func_start ScriptCmd_GiveCoins
 ScriptCmd_GiveCoins: @ 204c780 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress_24
 	mov     r5, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
@@ -29567,14 +29554,14 @@ thumb_func_end ScriptCmd_GiveCoins
 ScriptCmd_TakeCoins: @ 204c7ac :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadPlayerDataAdress_24
 	mov     r5, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
@@ -29587,7 +29574,7 @@ ScriptCmd_TakeCoins: @ 204c7ac :thumb
 
 
 .thumb
-Function_204c7d8: @ 204c7d8 :thumb
+ScriptCmd_TakeCoinsCasino: @ 204c7d8 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -29651,7 +29638,7 @@ branch_204c84e: @ 204c84e :thumb
 
 
 .thumb
-Function_204c854: @ 204c854 :thumb
+ScriptCmd_CheckCoinsCasino: @ 204c854 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -29695,7 +29682,7 @@ branch_204c8a4: @ 204c8a4 :thumb
 
 .align 2, 0
 .thumb
-Function_204c8ac: @ 204c8ac :thumb
+ScriptCmd_CheckCoinsCasino2: @ 204c8ac :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -29730,7 +29717,7 @@ thumb_func_start ScriptCmd_GiveMoney
 ScriptCmd_GiveMoney: @ 204c8f0 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      GetOverWorldData_VariableAreaAdresses
 	bl      LoadTrainerDataAdress
@@ -29771,7 +29758,7 @@ ScriptCmd_TakeMoney: @ 204c914 :thumb
 
 
 .thumb
-Function_204c938: @ 204c938 :thumb
+ScriptCmd_TakeMoneyDCare: @ 204c938 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -29831,7 +29818,7 @@ branch_204c9a6: @ 204c9a6 :thumb
 
 
 .thumb
-Function_204c9ac: @ 204c9ac :thumb
+ScriptCmd_CheckMoneyDCare: @ 204c9ac :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -29895,7 +29882,7 @@ ScriptCmd_ShowMoney: @ 204c9fc :thumb
 	mov     r7, r0
 	mov     r0, r5
 	mov     r1, #0x27
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	lsl     r1, r6, #24
 	lsl     r2, r7, #24
 	add     r4, #0x80
@@ -29903,7 +29890,7 @@ ScriptCmd_ShowMoney: @ 204c9fc :thumb
 	ldr     r0, [r4, #0x0]
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
-	bl      0x21dceb0
+	bl      Function_5_21dceb0
 	str     r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -29916,9 +29903,9 @@ ScriptCmd_HideMoney: @ 204ca4c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x27
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r0, [r0, #0x0]
-	bl      0x21dcf58
+	bl      Function_5_21dcf58
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204ca62
@@ -29932,12 +29919,12 @@ ScriptCmd_UpdateMoney: @ 204ca64 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x27
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	add     r4, #0x80
 	ldr     r0, [r4, #0x0]
 	ldr     r1, [r1, #0x0]
-	bl      0x21dcf6c
+	bl      Function_5_21dcf6c
 	mov     r0, #0x0
 	pop     {r4,pc}
 @ 0x204ca82
@@ -29945,25 +29932,25 @@ ScriptCmd_UpdateMoney: @ 204ca64 :thumb
 
 .align 2, 0
 .thumb
-Function_204ca84: @ 204ca84 :thumb
+ScriptCmd_ActDcareFunction: @ 204ca84 :thumb
 	push    {r3-r5,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
 	ldr     r5, [r0, #0xc]
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	mov     r0, r5
 	bl      LoadVariableAreaAdress_8
 	ldr     r1, [r4, #0x0]
-	bl      0x21e72bc
+	bl      Function_5_21e72bc
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
 @ 0x204caa4
 
 
 .thumb
-Function_204caa4: @ 204caa4 :thumb
+ScriptCmd_StorePDCareNum: @ 204caa4 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -29979,7 +29966,7 @@ Function_204caa4: @ 204caa4 :thumb
 	mov     r0, r4
 	mov     r1, #0x8
 	bl      LoadVariableAreaAdress
-	bl      0x21e73c8
+	bl      Function_5_21e73c8
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -29988,14 +29975,14 @@ Function_204caa4: @ 204caa4 :thumb
 
 .align 2, 0
 .thumb
-Function_204cad4: @ 204cad4 :thumb
+ScriptCmd_ActEggDayCMan: @ 204cad4 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x8
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress
-	bl      0x21e6b40
+	bl      Function_5_21e6b40
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204caea
@@ -30003,7 +29990,7 @@ Function_204cad4: @ 204cad4 :thumb
 
 .align 2, 0
 .thumb
-Function_204caec: @ 204caec :thumb
+ScriptCmd_DeactEggDayCMan: @ 204caec :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -30022,21 +30009,21 @@ Function_204caec: @ 204caec :thumb
 	mov     r2, r0
 	mov     r0, r6
 	mov     r1, r5
-	bl      0x21e6ea8
+	bl      Function_5_21e6ea8
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
 @ 0x204cb20
 
 
 .thumb
-Function_204cb20: @ 204cb20 :thumb
+ScriptCmd_TakePokemonDCare: @ 204cb20 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	ldr     r6, [r5, #0xc]
@@ -30064,7 +30051,7 @@ Function_204cb20: @ 204cb20 :thumb
 	ldr     r1, [r7, #0x0]
 	mov     r2, r6
 	lsr     r3, r3, #24
-	bl      0x21e64f8
+	bl      Function_5_21e64f8
 	ldr     r1, [sp, #0x0]
 	strh    r0, [r1, #0x0]
 	mov     r0, #0x0
@@ -30074,14 +30061,14 @@ Function_204cb20: @ 204cb20 :thumb
 
 .align 2, 0
 .thumb
-Function_204cb80: @ 204cb80 :thumb
+ScriptCmd_SetVarPokeAndMoneyDCare: @ 204cb80 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r7, r0
 	mov     r0, r4
 	ldr     r5, [r5, #0xc]
@@ -30105,7 +30092,7 @@ Function_204cb80: @ 204cb80 :thumb
 	lsl     r1, r4, #24
 	ldr     r2, [r7, #0x0]
 	lsr     r1, r1, #24
-	bl      0x21e6630
+	bl      Function_5_21e6630
 	strh    r0, [r6, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -30114,14 +30101,14 @@ Function_204cb80: @ 204cb80 :thumb
 
 .align 2, 0
 .thumb
-Function_204cbd4: @ 204cbd4 :thumb
+ScriptCmd_SetVarPokeAndLevelDCare: @ 204cbd4 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
 	ldr     r4, [r0, #0xc]
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
@@ -30143,7 +30130,7 @@ Function_204cbd4: @ 204cbd4 :thumb
 	bl      LoadVariableAreaAdress
 	ldr     r2, [r6, #0x0]
 	mov     r1, r5
-	bl      0x21e6640
+	bl      Function_5_21e6640
 	strh    r0, [r7, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -30152,14 +30139,14 @@ Function_204cbd4: @ 204cbd4 :thumb
 
 .align 2, 0
 .thumb
-Function_204cc24: @ 204cc24 :thumb
+ScriptCmd_SetVarPokeChosenDCare: @ 204cc24 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
 	ldr     r5, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r5
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -30182,7 +30169,7 @@ Function_204cc24: @ 204cc24 :thumb
 	bl      LoadPokePartyAdress
 	ldr     r2, [r6, #0x0]
 	mov     r1, r7
-	bl      0x21e73a0
+	bl      Function_5_21e73a0
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
@@ -30191,7 +30178,7 @@ Function_204cc24: @ 204cc24 :thumb
 
 .align 2, 0
 .thumb
-Function_204cc78: @ 204cc78 :thumb
+ScriptCmd_GivePokeDCare: @ 204cc78 :thumb
 	push    {r4-r6,lr}
 	mov     r6, r0
 	mov     r1, r6
@@ -30215,7 +30202,7 @@ Function_204cc78: @ 204cc78 :thumb
 	mov     r0, r4
 	lsr     r1, r1, #24
 	mov     r3, r5
-	bl      0x21e6358
+	bl      Function_5_21e6358
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
 @ 0x204ccb6
@@ -30223,7 +30210,7 @@ Function_204cc78: @ 204cc78 :thumb
 
 .align 2, 0
 .thumb
-Function_204ccb8: @ 204ccb8 :thumb
+ScriptCmd_SetVarDataDayCare: @ 204ccb8 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r4, r0
@@ -30231,7 +30218,7 @@ Function_204ccb8: @ 204ccb8 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0xf
 	ldr     r5, [r0, #0xc]
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
@@ -30279,7 +30266,7 @@ Function_204ccb8: @ 204ccb8 :thumb
 	lsr     r1, r1, #24
 	lsr     r2, r2, #24
 	lsr     r3, r3, #24
-	bl      0x21e7308
+	bl      Function_5_21e7308
 	mov     r0, #0x0
 	add     sp, #0x10
 	pop     {r3-r7,pc}
@@ -30287,7 +30274,7 @@ Function_204ccb8: @ 204ccb8 :thumb
 
 
 .thumb
-Function_204cd44: @ 204cd44 :thumb
+ScriptCmd_StorePokeDCareLove: @ 204cd44 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -30303,7 +30290,7 @@ Function_204cd44: @ 204cd44 :thumb
 	mov     r0, r4
 	mov     r1, #0x8
 	bl      LoadVariableAreaAdress
-	bl      0x21e7420
+	bl      Function_5_21e7420
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -30312,7 +30299,7 @@ Function_204cd44: @ 204cd44 :thumb
 
 .align 2, 0
 .thumb
-Function_204cd74: @ 204cd74 :thumb
+ScriptCmd_CheckStatusSolaceonEvent: @ 204cd74 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	mov     r1, r5
@@ -30381,7 +30368,7 @@ Function_204cdc4: @ 204cdc4 :thumb
 
 .align 2, 0
 .thumb
-Function_204cddc: @ 204cddc :thumb
+ScriptCmd_StartAmity: @ 204cddc :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -30725,22 +30712,22 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	add     sp, #-0x14
 
 	mov     r4, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_1c]
+	ldr     r0, [r0, #OverWorldData_MapData]
 	ldr     r0, [r0, #0x0]
 	bl      GetMapName
 	mov     r6, r0
 
 	@ Load 1. Parameter (Pokemon Species)
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r5, [r0]
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r0, [sp, #0xc]
@@ -30750,7 +30737,7 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
@@ -30760,7 +30747,7 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	str     r0, [sp, #0x10]         @ Item
@@ -30768,13 +30755,13 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	@ Load 4. Parameter (ResultVariable)
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadPokePartyAdress
 
 	ldr     r0, [sp, #0x10]         @ Item
@@ -30785,7 +30772,7 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 	mov     r0, #0x18
 	str     r0, [sp, #0x8]
 
-	ldr     r1, [r5, #OverWorldData_c]
+	ldr     r1, [r5, #OverWorldData_VariableAreaAdress]
 	ldr     r2, [sp, #0xc]
 	mov     r0, #0xb
 	lsr     r3, r3, #24
@@ -30798,8 +30785,8 @@ ScriptCmd_GivePokemon: @ 204cffc :thumb
 thumb_func_end ScriptCmd_GivePokemon
 
 
-thumb_func_start ScriptCmd_198
-ScriptCmd_198: @ 204d08c :thumb
+thumb_func_start ScriptCmd_CheckPokeEgg
+ScriptCmd_CheckPokeEgg: @ 204d08c :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 
@@ -30848,11 +30835,11 @@ branch_204d0e2: @ 204d0e2 :thumb
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
-thumb_func_end ScriptCmd_198
+thumb_func_end ScriptCmd_CheckPokeEgg
 
 
 .thumb
-ScriptCmd_199: @ 204d0e8 :thumb
+ScriptCmd_ComparePokeNick: @ 204d0e8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	add     r0, #0x80
@@ -31257,7 +31244,7 @@ ScriptCmd_CheckIsPokemonPoisoned: @ 204d398 :thumb
 
 
 .thumb
-ScriptCmd_1f6: @ 204d3dc :thumb
+ScriptCmd_CheckPokemonLevel: @ 204d3dc :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -31337,7 +31324,7 @@ branch_204d466: @ 204d466 :thumb
 
 
 .thumb
-Function_204d470: @ 204d470 :thumb
+ScriptCmd_CheckPokeLevel: @ 204d470 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -31387,7 +31374,7 @@ branch_204d4c6: @ 204d4c6 :thumb
 
 .align 2, 0
 .thumb
-Function_204d4cc: @ 204d4cc :thumb
+ScriptCmd_StorePokeNature: @ 204d4cc :thumb
 	push    {r4-r6,lr}
 	mov     r6, r0
 
@@ -31450,7 +31437,7 @@ branch_204d532: @ 204d532 :thumb
 
 .align 2, 0
 .thumb
-Function_204d540: @ 204d540 :thumb
+ScriptCmd_CheckPokeNature: @ 204d540 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -31526,7 +31513,7 @@ branch_204d5be: @ 204d5be :thumb
 
 
 .thumb
-Function_204d5cc: @ 204d5cc :thumb
+ScriptCmd_StoreHappyPoke: @ 204d5cc :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -31566,7 +31553,7 @@ Function_204d5cc: @ 204d5cc :thumb
 
 
 .thumb
-Function_204d614: @ 204d614 :thumb
+ScriptCmd_StoreHappyStatus: @ 204d614 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
@@ -31776,7 +31763,7 @@ Function_204d74c: @ 204d74c :thumb
 
 .align 2, 0
 .thumb
-Function_204d7ac: @ 204d7ac :thumb
+ScriptCmd_CheckFirstPokeParty: @ 204d7ac :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -31800,7 +31787,7 @@ Function_204d7ac: @ 204d7ac :thumb
 
 .align 2, 0
 .thumb
-Function_204d7d4: @ 204d7d4 :thumb
+ScriptCmd_CheckPokeType: @ 204d7d4 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 
@@ -31883,7 +31870,7 @@ ScriptCmd_CheckPartyNumber: @ 204d840 :thumb
 
 .align 2, 0
 .thumb
-Function_204d86c: @ 204d86c :thumb
+ScriptCmd_CheckPartyNumberUnion: @ 204d86c :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
@@ -31930,7 +31917,7 @@ branch_204d8ba: @ 204d8ba :thumb
 
 .align 2, 0
 .thumb
-Function_204d8c4: @ 204d8c4 :thumb
+ScriptCmd_CheckPokePartyHealth: @ 204d8c4 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -32001,7 +31988,7 @@ branch_204d940: @ 204d940 :thumb
 
 .align 2, 0
 .thumb
-Function_204d94c: @ 204d94c :thumb
+ScriptCmd_CheckPokePartyNumDCare: @ 204d94c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -32065,7 +32052,7 @@ branch_204d9b6: @ 204d9b6 :thumb
 
 
 .thumb
-Function_204d9c8: @ 204d9c8 :thumb
+ScriptCmd_CheckEggUnion: @ 204d9c8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
@@ -32113,7 +32100,7 @@ branch_204da16: @ 204da16 :thumb
 
 .align 2, 0
 .thumb
-Function_204da20: @ 204da20 :thumb
+ScriptCmd_StorePokerus: @ 204da20 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
@@ -32202,7 +32189,7 @@ Function_204da84: @ 204da84 :thumb
 
 
 .thumb
-Function_204dacc: @ 204dacc :thumb
+ScriptCmd_CheckMoveNumDelete: @ 204dacc :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 
@@ -32289,7 +32276,7 @@ branch_204db6c: @ 204db6c :thumb
 
 .align 2, 0
 .thumb
-Function_204db74: @ 204db74 :thumb
+ScriptCmd_StoreDeleteMove: @ 204db74 :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
 
@@ -32324,7 +32311,7 @@ Function_204db74: @ 204db74 :thumb
 
 
 .thumb
-Function_204dbb8: @ 204dbb8 :thumb
+ScriptCmd_CheckDeleteMove: @ 204dbb8 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 
@@ -32439,7 +32426,7 @@ ScriptCmd_1f0: @ 204dc60 :thumb
 
 
 .thumb
-Function_204dc98: @ 204dc98 :thumb
+ScriptCmd_CheckPokemonParty2: @ 204dc98 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -32516,7 +32503,7 @@ branch_204dd1e: @ 204dd1e :thumb
 
 
 .thumb
-Function_204dd28: @ 204dd28 :thumb
+ScriptCmd_CheckPokeParty2: @ 204dd28 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x18
 	mov     r4, r0
@@ -32771,7 +32758,7 @@ branch_204def4: @ 204def4 :thumb
 
 
 .thumb
-Function_204df08: @ 204df08 :thumb
+ScriptCmd_CheckRiboonNumber: @ 204df08 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x10
 	mov     r4, r0
@@ -32863,7 +32850,7 @@ branch_204df94: @ 204df94 :thumb
 
 
 .thumb
-Function_204dfb0: @ 204dfb0 :thumb
+ScriptCmd_CheckRibbon: @ 204dfb0 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -32914,7 +32901,7 @@ Function_204dfb0: @ 204dfb0 :thumb
 
 
 .thumb
-ScriptCmd_231: @ 204e01c :thumb
+ScriptCmd_GiveRibbon: @ 204e01c :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r5, r0
@@ -32968,7 +32955,7 @@ ScriptCmd_231: @ 204e01c :thumb
 @ 0x204e094
 
 .thumb
-ScriptCmd_2b7: @ 204e094 :thumb
+ScriptCmd_StorePokeNumParty: @ 204e094 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -33199,7 +33186,7 @@ branch_204e23a: @ 204e23a :thumb
 
 
 .thumb
-ScriptCmd_1f1: @ 204e240 :thumb
+ScriptCmd_CheckFossil: @ 204e240 :thumb
 	push    {r3-r7,lr}
 	mov     r4, r0
 	mov     r1, r4
@@ -33240,7 +33227,7 @@ branch_204e260: @ 204e260 :thumb
 
 
 .thumb
-ScriptCmd_1f4: @ 204e28c :thumb
+ScriptCmd_CheckItemChosen: @ 204e28c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33287,7 +33274,7 @@ branch_204e2d2: @ 204e2d2 :thumb
 
 
 .thumb
-ScriptCmd_1f5: @ 204e2e0 :thumb
+ScriptCmd_CompareItemPokeFossil: @ 204e2e0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
@@ -33377,7 +33364,7 @@ ScriptCmd_1f3: @ 204e374 :thumb
 
 
 .thumb
-ScriptCmd_2a6: @ 204e378 :thumb
+ScriptCmd_ChoosePrizeCasino: @ 204e378 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33421,22 +33408,22 @@ ScriptCmd_2a6: @ 204e378 :thumb
 ScriptCmd_157: @ 204e3cc :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
-	bl      LoadVariableAreaAdress_7
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
+	bl      LoadPokedexDataAdress
 	mov     r4, r0
 
 	mov     r0, r5
 	bl      ScriptHandler_LoadHWord
-	add     r5, #ScriptHandler_80
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r5]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r5, r0
 
 	mov     r0, r4
-	bl      Function_2027520
+	bl      CheckActPokedex
 	strh    r0, [r5, #0x0]
 	mov     r0, #0x0
 	pop     {r3-r5,pc}
@@ -33446,10 +33433,10 @@ ScriptCmd_157: @ 204e3cc :thumb
 thumb_func_start ScriptCmd_ActivatePokedex
 ScriptCmd_ActivatePokedex: @ 204e3fc :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
-	bl      LoadVariableAreaAdress_7
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
+	bl      LoadPokedexDataAdress
 	bl      ActivatePokedex
 	mov     r0, #0x0
 	pop     {r3,pc}
@@ -33471,7 +33458,7 @@ ScriptCmd_159: @ 204e410 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadVariableAreaAdress_6
-	bl      Function_203a780
+	bl      AddVariableAreaAdress_6_8c
 	bl      Function_205ec40
 	strh    r0, [r4, #0x0]
 	mov     r0, #0x0
@@ -33482,12 +33469,11 @@ ScriptCmd_159: @ 204e410 :thumb
 thumb_func_start ScriptCmd_GiveRunningShoes
 ScriptCmd_GiveRunningShoes: @ 204e440 :thumb
 	push    {r3,lr}
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
-	ldr     r0, [r0, #OverWorldData_c]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_6
-
-	bl      Function_203a780
+	bl      AddVariableAreaAdress_6_8c
 
 	mov     r1, #0x1
 	bl      SetRunningShoes
@@ -33583,7 +33569,7 @@ ScriptCmd_15e: @ 204e4d8 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadFlagAdress
-	bl      Function_206a938
+	bl      CheckFlag_Flag960
 	strh    r0, [r4, #0x0]
 
 	mov     r0, #0x0
@@ -33621,11 +33607,13 @@ branch_204e520: @ 204e520 :thumb
 	lsl     r0, r0, #16
 	lsr     r5, r0, #16
 branch_204e53c: @ 204e53c :thumb
+
 	add     r0, r4, #0x1
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
 	cmp     r4, #0x8
 	blo     branch_204e520
+
 	ldr     r0, [sp, #0x0]
 	strh    r5, [r0, #0x0]
 	mov     r0, #0x0
@@ -33644,14 +33632,14 @@ ScriptCmd_15f: @ 204e554 :thumb
 	ldr     r0, [r0, #0x0]
 	ldr     r0, [r0, #0xc]
 	bl      LoadFlagAdress
-	bl      Function_206a92c
+	bl      SetFlag_Flag960
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x204e568
 
 
 .thumb
-ScriptCmd_160: @ 204e568 :thumb
+ScriptCmd_CheckFollow: @ 204e568 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -33674,7 +33662,7 @@ ScriptCmd_160: @ 204e568 :thumb
 
 .align 2, 0
 .thumb
-ScriptCmd_161: @ 204e594 :thumb
+ScriptCmd_StartFollow: @ 204e594 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33687,7 +33675,7 @@ ScriptCmd_161: @ 204e594 :thumb
 
 
 .thumb
-ScriptCmd_162: @ 204e5a8 :thumb
+ScriptCmd_StopFollow2: @ 204e5a8 :thumb
 	push    {r3,lr}
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
@@ -33785,7 +33773,7 @@ ScriptCmd_167: @ 204e63c :thumb
 
 
 .thumb
-ScriptCmd_1cf: @ 204e650 :thumb
+ScriptCmd_HmFunctions: @ 204e650 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -33840,7 +33828,7 @@ branch_204e6a8: @ 204e6a8 :thumb
 
 
 .thumb
-ScriptCmd_1d0: @ 204e6ac :thumb
+ScriptCmd_FlashDuration: @ 204e6ac :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -33891,7 +33879,7 @@ branch_204e6fe: @ 204e6fe :thumb
 
 .align 2, 0
 .thumb
-ScriptCmd_1d1: @ 204e704 :thumb
+ScriptCmd_DefogDuration: @ 204e704 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	add     r0, #0x80
@@ -33946,13 +33934,13 @@ ScriptCmd_TakeItem: @ 204e75c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
-	ldr     r5, [r1, #ScriptHandler_80_0]
+	add     r1, #ScriptHandler_OverWorldData
+	ldr     r5, [r1, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
 
@@ -33960,16 +33948,16 @@ ScriptCmd_TakeItem: @ 204e75c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #ScriptHandler_80_0]
+	ldr     r0, [r4, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
@@ -33996,12 +33984,12 @@ ScriptCmd_GiveItem: @ 204e7b4 :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0              @ ItemID
@@ -34010,21 +33998,21 @@ ScriptCmd_GiveItem: @ 204e7b4 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0              @ quantity
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0              @ return
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 
 	mov     r1, r6      @ ItemID
@@ -34044,12 +34032,12 @@ ScriptCmd_CheckStoreItem: @ 204e80c :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
+	add     r1, #ScriptHandler_OverWorldData
 	ldr     r5, [r1]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
@@ -34058,20 +34046,20 @@ ScriptCmd_CheckStoreItem: @ 204e80c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
+	add     r0, #ScriptHandler_OverWorldData
 	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
 	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
-	ldr     r0, [r5, #OverWorldData_c]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdressItemList
 
 	mov     r1, r6
@@ -34091,13 +34079,13 @@ ScriptCmd_CheckItem: @ 204e864 :thumb
 	mov     r4, r0
 
 	mov     r1, r4
-	add     r1, #ScriptHandler_80
-	ldr     r5, [r1, #ScriptHandler_80_0]
+	add     r1, #ScriptHandler_OverWorldData
+	ldr     r5, [r1, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r6, r0
 
@@ -34105,16 +34093,16 @@ ScriptCmd_CheckItem: @ 204e864 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #ScriptHandler_80
-	ldr     r0, [r0, #ScriptHandler_80_0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
 
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #ScriptHandler_80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #ScriptHandler_80_0]
+	ldr     r0, [r4, #ScriptHandler_OverWorldData_0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
 
@@ -34759,7 +34747,7 @@ ScriptCmd_92: @ 204ed68 :thumb
 
 .align 2, 0
 .thumb
-ScriptCmd_1c6: @ 204eda4 :thumb
+ScriptCmd_StorePokeDelete: @ 204eda4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -34773,7 +34761,7 @@ ScriptCmd_1c6: @ 204eda4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r5
 	add     r1, #0x80
 	lsl     r2, r4, #24
@@ -34796,7 +34784,7 @@ ScriptCmd_1c6: @ 204eda4 :thumb
 
 
 .thumb
-ScriptCmd_1c7: @ 204edec :thumb
+ScriptCmd_StoreMoveDelete: @ 204edec :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -34809,7 +34797,7 @@ ScriptCmd_1c7: @ 204edec :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r4, r0
 	ldr     r0, [r4, #0x0]
 	cmp     r0, #0x0
@@ -34844,7 +34832,7 @@ ScriptCmd_21e: @ 204ee38 :thumb
 
 
 .thumb
-ScriptCmd_21f: @ 204ee3c :thumb
+ScriptCmd_CheckMoveRemember: @ 204ee3c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 
@@ -34902,7 +34890,7 @@ Function_204ee90: @ 204ee90 :thumb
 	mov     r1, #0x13
 	str     r2, [sp, #0x0]
 	mov     r6, r3
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x4]
 	mov     r0, #0x20
 	bl      Function_20997b8
@@ -34951,7 +34939,7 @@ ScriptCmd_220: @ 204eefc :thumb
 
 
 .thumb
-ScriptCmd_221: @ 204ef00 :thumb
+ScriptCmd_RememberMove: @ 204ef00 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 
@@ -34989,7 +34977,7 @@ ScriptCmd_221: @ 204ef00 :thumb
 
 
 .thumb
-ScriptCmd_224: @ 204ef40 :thumb
+ScriptCmd_TeachMove: @ 204ef40 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -35038,7 +35026,7 @@ ScriptCmd_222: @ 204efa0 :thumb
 @ 0x204efa4
 
 .thumb
-ScriptCmd_223: @ 204efa4 :thumb
+ScriptCmd_StoreRememberMove: @ 204efa4 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -35051,7 +35039,7 @@ ScriptCmd_223: @ 204efa4 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r4, [r0, #0x0]
 	cmp     r4, #0x0
 	bne     branch_204efce
@@ -35082,7 +35070,7 @@ branch_204efda: @ 204efda :thumb
 
 
 .thumb
-ScriptCmd_225: @ 204efe8 :thumb
+ScriptCmd_CheckTeachMove: @ 204efe8 :thumb
 	push    {r3-r5,lr}
 	mov     r4, r0
 	bl      ScriptHandler_LoadHWord
@@ -35095,7 +35083,7 @@ ScriptCmd_225: @ 204efe8 :thumb
 	mov     r5, r0
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	ldr     r4, [r0, #0x0]
 	cmp     r4, #0x0
 	bne     branch_204f012
@@ -35162,7 +35150,7 @@ ScriptCmd_242: @ 204f048 :thumb
 @ 0x204f04c
 
 .thumb
-ScriptCmd_2c5: @ 204f04c :thumb
+ScriptCmd_DeleteSavesBFactory: @ 204f04c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r6, r0
@@ -35275,7 +35263,7 @@ branch_204f0c8: @ 204f0c8 :thumb
 @ 0x204f13c
 
 .thumb
-ScriptCmd_2cc: @ 204f13c :thumb
+ScriptCmd_CheckPokeCastle: @ 204f13c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r4, r0
@@ -35312,7 +35300,7 @@ ScriptCmd_2cc: @ 204f13c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	cmp     r7, #0x4
 	bhi     branch_204f25a
@@ -35635,7 +35623,7 @@ ScriptCmd_2d1: @ 204f360 :thumb
 
 .align 2, 0
 .thumb
-ScriptCmd_2cf: @ 204f398 :thumb
+ScriptCmd_ChooseWirePokeBCastle: @ 204f398 :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
 	bl      ScriptHandler_LoadHWord
@@ -35703,7 +35691,7 @@ Function_204f3d0: @ 204f3d0 :thumb
 .thumb
 Function_204f414: @ 204f414 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldrb    r1, [r4, #0x0]
 	cmp     r1, #0x0
@@ -35794,7 +35782,7 @@ Function_204f4a4: @ 204f4a4 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldr     r1, [r4, #0x0]
 	cmp     r1, #0x4
@@ -36100,7 +36088,7 @@ ScriptCmd_324: @ 204f6d8 :thumb
 	ldr     r7, [r0, #0x0]
 	mov     r1, #0xf
 	mov     r0, r7
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	str     r0, [sp, #0x24]
 	ldr     r0, [sp, #0x8]
 	ldr     r1, [r0, #0x8]
@@ -36638,7 +36626,7 @@ ScriptCmd_2d2: @ 204fab4 :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	cmp     r7, #0x4
 	bhi     branch_204fba4
@@ -36944,7 +36932,7 @@ branch_204fd12: @ 204fd12 :thumb
 .thumb
 Function_204fd38: @ 204fd38 :thumb
 	push    {r4,lr}
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldrb    r1, [r4, #0x0]
 	cmp     r1, #0x0
@@ -37052,7 +37040,7 @@ Function_204fde8: @ 204fde8 :thumb
 	bl      LoadOverWorldDataAdress
 	mov     r5, r0
 	mov     r0, r4
-	bl      Function_2050a64
+	bl      GetUnknownStruct01_c
 	mov     r4, r0
 	ldr     r1, [r4, #0x0]
 	cmp     r1, #0x4
@@ -37411,7 +37399,7 @@ ScriptCmd_2d9: @ 205003c :thumb
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]
 	mov     r1, #0x13
-	bl      ScriptHandler_ExitStandard
+	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r1, r0
 	cmp     r7, #0x4
 	bhi     branch_205012c

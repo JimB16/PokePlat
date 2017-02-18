@@ -1,10 +1,14 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram101, "ax"
 
 
 .thumb
-Function_21d0d80: @ 21d0d80 :thumb
+.globl Function_101_21d0d80
+Function_101_21d0d80: @ 21d0d80 :thumb
 	push    {r4,r5,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -83,7 +87,8 @@ Function_21d0d80: @ 21d0d80 :thumb
 
 .align 2, 0
 .thumb
-Function_21d0e40: @ 21d0e40 :thumb
+.globl Function_101_21d0e40
+Function_101_21d0e40: @ 21d0e40 :thumb
 	push    {r4,r5,lr}
 	add     sp, #-0xc
 	mov     r4, r1
@@ -174,7 +179,8 @@ branch_21d0ec6: @ 21d0ec6 :thumb
 
 
 .thumb
-Function_21d0ee4: @ 21d0ee4 :thumb
+.globl Function_101_21d0ee4
+Function_101_21d0ee4: @ 21d0ee4 :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	bl      LoadOverlayData1c
@@ -397,7 +403,7 @@ branch_21d10a2: @ 21d10a2 :thumb
 	.hword  0x1e52 @ sub r2, r2, #0x1
 	bne     branch_21d10a2
 	add     r0, sp, #0x0
-	bl      Function_201fe94
+	bl      GX_SetBanks
 	add     sp, #0x28
 	pop     {r4,pc}
 @ 0x21d10b4
@@ -421,7 +427,7 @@ Function_21d10b8: @ 21d10b8 :thumb
 	ldmia   r5!, {r0,r1}
 	stmia   r3!, {r0,r1}
 	mov     r0, r2
-	bl      Function_2018368
+	bl      SetGraphicsModes
 	ldr     r5, [pc, #0xb4] @ 0x21d1194, (=0x21d85cc)
 	add     r3, sp, #0x54
 	ldmia   r5!, {r0,r1}
@@ -787,13 +793,13 @@ Function_21d13c8: @ 21d13c8 :thumb
 	mov     r0, #0x0
 	lsl     r1, r1, #4
 	mov     r2, #0x4f
-	bl      Function_2002e98
+	bl      LoadFromNARC_PlFont2
 	mov     r2, #0x22
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	lsl     r2, r2, #4
 	mov     r3, #0x4f
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	ldr     r1, [pc, #0x28] @ 0x21d1448, (=0x408)
 	str     r0, [r5, r1]
 	mov     r0, #0x4f
@@ -840,7 +846,7 @@ Function_21d1458: @ 21d1458 :thumb
 	ldr     r0, [r4, #0x4]
 	bl      Function_200b3f0
 	ldr     r0, [r4, #0x18]
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 	pop     {r4-r6,pc}
 @ 0x21d1486
 
@@ -866,12 +872,12 @@ Function_21d148c: @ 21d148c :thumb
 	mov     r0, r4
 	add     r0, #0x8
 	mov     r1, #0xf
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	ldr     r0, [pc, #0x2c] @ 0x21d14e0, (=0x408)
 	ldr     r2, [r4, #0x18]
 	ldr     r0, [r5, r0]
 	mov     r1, r6
-	bl      Function_200b1b8
+	bl      Function_200b1b8_CallMsgDecrypt
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	mov     r0, #0xff
@@ -881,7 +887,7 @@ Function_21d148c: @ 21d148c :thumb
 	ldr     r2, [r4, #0x18]
 	add     r0, #0x8
 	mov     r1, #0x1
-	bl      Function_201d738
+	bl      Function_201d738_CallInitTextInterpreter
 	add     r4, #0x8
 	mov     r0, r4
 	bl      Function_201a9a4
@@ -906,7 +912,7 @@ Function_21d14e4: @ 21d14e4 :thumb
 	add     r0, r5, r4
 	add     r0, #0x8
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r0, r5, r4
 	add     r0, #0x8
 	bl      Function_201a9a4
@@ -1339,16 +1345,22 @@ Function_21d186c: @ 21d186c :thumb
 
 
 .word 0x44c @ 0x21d1880
+
+
+
 .thumb
 Function_21d1884: @ 21d1884 :thumb
 	ldr     r1, [pc, #0x4] @ 0x21d188c, (=0x44c)
-	ldr     r3, [pc, #0x8] @ 0x21d1890, (=0x207121d)
+	ldr     r3, [pc, #0x8] @ 0x21d1890, (=Function_207121c+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x21d188c
 
 .word 0x44c @ 0x21d188c
-.word 0x207121d @ 0x21d1890
+.word Function_207121c+1 @ 0x21d1890
+
+
+
 .thumb
 Function_21d1894: @ 21d1894 :thumb
 	ldr     r2, [pc, #0x18] @ 0x21d18b0, (=0x424)
@@ -1407,13 +1419,13 @@ Function_21d18c0: @ 21d18c0 :thumb
 .thumb
 Function_21d18e4: @ 21d18e4 :thumb
 	ldr     r1, [pc, #0x4] @ 0x21d18ec, (=0x434)
-	ldr     r3, [pc, #0x8] @ 0x21d18f0, (=0x200da59)
+	ldr     r3, [pc, #0x8] @ 0x21d18f0, (=Call_RemoveTaskFromTaskList+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x21d18ec
 
 .word 0x434 @ 0x21d18ec
-.word 0x200da59 @ 0x21d18f0
+.word Call_RemoveTaskFromTaskList+1 @ 0x21d18f0
 .thumb
 Function_21d18f4: @ 21d18f4 :thumb
 	push    {r4,lr}
@@ -1563,7 +1575,8 @@ branch_21d19ac: @ 21d19ac :thumb
 Function_21d19bc: @ 21d19bc :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	mov     r0, #0x85
+
+	mov     r0, #Slot_Narc
 	mov     r1, #0x4f
 	bl      LoadFromNARC_8
 	ldr     r1, [pc, #0x4] @ 0x21d19d0, (=0x438)
@@ -1571,21 +1584,21 @@ Function_21d19bc: @ 21d19bc :thumb
 	pop     {r4,pc}
 @ 0x21d19ce
 
-
 .align 2
-
-
 .word 0x438 @ 0x21d19d0
+
+
+
 .thumb
 Function_21d19d4: @ 21d19d4 :thumb
 	ldr     r1, [pc, #0x4] @ 0x21d19dc, (=0x438)
-	ldr     r3, [pc, #0x8] @ 0x21d19e0, (=0x2006ca9)
+	ldr     r3, [pc, #0x8] @ 0x21d19e0, (=Call_FS_CloseFile+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x21d19dc
 
 .word 0x438 @ 0x21d19dc
-.word 0x2006ca9 @ 0x21d19e0
+.word Call_FS_CloseFile+1 @ 0x21d19e0
 .thumb
 Function_21d19e4: @ 21d19e4 :thumb
 	push    {r4-r6,lr}
@@ -1619,7 +1632,7 @@ branch_21d1a12: @ 21d1a12 :thumb
 	mov     r1, r6
 	ldr     r0, [r4, r0]
 	mov     r2, r5
-	bl      Function_2006d28
+	bl      LoadFileFromNARCFileHandler
 	mov     r0, r5
 	pop     {r4-r6,pc}
 @ 0x21d1a22
@@ -8599,7 +8612,7 @@ Function_21d45c4: @ 21d45c4 :thumb
 Function_21d45e8: @ 21d45e8 :thumb
 	mov     r1, #0x13
 	lsl     r1, r1, #4
-	ldr     r3, [pc, #0x4] @ 0x21d45f4, (=0x200da59)
+	ldr     r3, [pc, #0x4] @ 0x21d45f4, (=Call_RemoveTaskFromTaskList+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x21d45f2
@@ -8608,7 +8621,7 @@ Function_21d45e8: @ 21d45e8 :thumb
 .align 2
 
 
-.word 0x200da59 @ 0x21d45f4
+.word Call_RemoveTaskFromTaskList+1 @ 0x21d45f4
 .thumb
 Function_21d45f8: @ 21d45f8 :thumb
 	mov     r1, #0x49
@@ -8870,7 +8883,7 @@ Function_21d4764: @ 21d4764 :thumb
 Function_21d4788: @ 21d4788 :thumb
 	mov     r1, #0x16
 	lsl     r1, r1, #4
-	ldr     r3, [pc, #0x4] @ 0x21d4794, (=0x200da59)
+	ldr     r3, [pc, #0x4] @ 0x21d4794, (=Call_RemoveTaskFromTaskList+1)
 	ldr     r0, [r0, r1]
 	bx      r3
 @ 0x21d4792
@@ -8879,7 +8892,7 @@ Function_21d4788: @ 21d4788 :thumb
 .align 2
 
 
-.word 0x200da59 @ 0x21d4794
+.word Call_RemoveTaskFromTaskList+1 @ 0x21d4794
 .thumb
 Function_21d4798: @ 21d4798 :thumb
 	mov     r2, #0x4f
@@ -15264,11 +15277,11 @@ Function_21d72b8: @ 21d72b8 :thumb
 branch_21d72c8: @ 21d72c8 :thumb
 	ldr     r0, [r1, #0x8]
 	mov     r1, r3
-	ldr     r3, [pc, #0x0] @ 0x21d72d0, (=0x2021cad)
+	ldr     r3, [pc, #0x0] @ 0x21d72d0, (=Function_2021cac+1)
 	bx      r3
 @ 0x21d72d0
 
-.word 0x2021cad @ 0x21d72d0
+.word Function_2021cac+1 @ 0x21d72d0
 .thumb
 Function_21d72d4: @ 21d72d4 :thumb
 	push    {lr}
@@ -15485,11 +15498,11 @@ Function_21d7444: @ 21d7444 :thumb
 branch_21d7454: @ 21d7454 :thumb
 	ldr     r0, [r1, #0x8]
 	mov     r1, r3
-	ldr     r3, [pc, #0x0] @ 0x21d745c, (=0x2021cad)
+	ldr     r3, [pc, #0x0] @ 0x21d745c, (=Function_2021cac+1)
 	bx      r3
 @ 0x21d745c
 
-.word 0x2021cad @ 0x21d745c
+.word Function_2021cac+1 @ 0x21d745c
 .thumb
 Function_21d7460: @ 21d7460 :thumb
 	push    {r4,r5,lr}
@@ -18094,7 +18107,7 @@ Unknown_21d8588: @ 0x21d8588
 .word Function_21d5068+1 @ =0x21d5069, 0x21d86b4
 .word Function_21d508c+1 @ =0x21d508d, 0x21d86b8
 .word Function_21d5098+1 @ =0x21d5099, 0x21d86bc
-.word 0x20715fd @ 0x21d86c0
+.word Function_20715fc+1 @ 0x21d86c0
 .word Function_21d2c30+1 @ =0x21d2c31, 0x21d86c4
 .word Function_21d2c34+1 @ =0x21d2c35, 0x21d86c8
 .word Function_21d2c4c+1 @ =0x21d2c4d, 0x21d86cc
@@ -18114,7 +18127,7 @@ Unknown_21d8588: @ 0x21d8588
 .word Function_21d5388+1 @ =0x21d5389, 0x21d8704
 .word Function_21d53a0+1 @ =0x21d53a1, 0x21d8708
 .word Function_21d53a4+1 @ =0x21d53a5, 0x21d870c
-.word 0x20715fd @ 0x21d8710
+.word Function_20715fc+1 @ 0x21d8710
 .word Function_21d48e8+1 @ =0x21d48e9, 0x21d8714
 .word Function_21d4900+1 @ =0x21d4901, 0x21d8718
 .word Function_21d492c+1 @ =0x21d492d, 0x21d871c
@@ -18281,7 +18294,7 @@ Unknown_21d8588: @ 0x21d8588
 .word Function_21d7588+1 @ =0x21d7589, 0x21d9140
 .word Function_21d75f0+1 @ =0x21d75f1, 0x21d9144
 .word Function_21d7604+1 @ =0x21d7605, 0x21d9148
-.word 0x20715fd @ 0x21d914c
+.word Function_20715fc+1 @ 0x21d914c
 .word 0x20 @ 0x21d9150
 .word Function_21d64bc+1 @ =0x21d64bd, 0x21d9154
 .word Function_21d64d0+1 @ =0x21d64d1, 0x21d9158
@@ -18301,22 +18314,22 @@ Unknown_21d8588: @ 0x21d8588
 .word Function_21d7260+1 @ =0x21d7261, 0x21d9190
 .word Function_21d72ac+1 @ =0x21d72ad, 0x21d9194
 .word Function_21d72b8+1 @ =0x21d72b9, 0x21d9198
-.word 0x20715fd @ 0x21d919c
+.word Function_20715fc+1 @ 0x21d919c
 .word 0x40 @ 0x21d91a0
 .word Function_21d76ec+1 @ =0x21d76ed, 0x21d91a4
 .word Function_21d7754+1 @ =0x21d7755, 0x21d91a8
 .word Function_21d776c+1 @ =0x21d776d, 0x21d91ac
-.word 0x20715fd @ 0x21d91b0
+.word Function_20715fc+1 @ 0x21d91b0
 .word 0x48 @ 0x21d91b4
 .word Function_21d7b34+1 @ =0x21d7b35, 0x21d91b8
 .word Function_21d7b74+1 @ =0x21d7b75, 0x21d91bc
 .word Function_21d7bb4+1 @ =0x21d7bb5, 0x21d91c0
-.word 0x20715fd @ 0x21d91c4
+.word Function_20715fc+1 @ 0x21d91c4
 .word 0x14 @ 0x21d91c8
 .word Function_21d7304+1 @ =0x21d7305, 0x21d91cc
 .word Function_21d7394+1 @ =0x21d7395, 0x21d91d0
 .word Function_21d73a0+1 @ =0x21d73a1, 0x21d91d4
-.word 0x20715fd @ 0x21d91d8
+.word Function_20715fc+1 @ 0x21d91d8
 .word 0x18 @ 0x21d91dc
 .word Function_21d5a0c+1 @ =0x21d5a0d, 0x21d91e0
 .word Function_21d5a64+1 @ =0x21d5a65, 0x21d91e4
@@ -18341,22 +18354,22 @@ Unknown_21d8588: @ 0x21d8588
 .word Function_21d73ec+1 @ =0x21d73ed, 0x21d9230
 .word Function_21d7438+1 @ =0x21d7439, 0x21d9234
 .word Function_21d7444+1 @ =0x21d7445, 0x21d9238
-.word 0x20715fd @ 0x21d923c
+.word Function_20715fc+1 @ 0x21d923c
 .word 0x54 @ 0x21d9240
 .word Function_21d7810+1 @ =0x21d7811, 0x21d9244
 .word Function_21d7984+1 @ =0x21d7985, 0x21d9248
 .word Function_21d79a8+1 @ =0x21d79a9, 0x21d924c
-.word 0x20715fd @ 0x21d9250
+.word Function_20715fc+1 @ 0x21d9250
 .word 0x14 @ 0x21d9254
 .word Function_21d74a0+1 @ =0x21d74a1, 0x21d9258
 .word Function_21d7530+1 @ =0x21d7531, 0x21d925c
 .word Function_21d753c+1 @ =0x21d753d, 0x21d9260
-.word 0x20715fd @ 0x21d9264
+.word Function_20715fc+1 @ 0x21d9264
 .word 0x30 @ 0x21d9268
 .word Function_21d7a00+1 @ =0x21d7a01, 0x21d926c
 .word Function_21d7ad0+1 @ =0x21d7ad1, 0x21d9270
 .word Function_21d7af4+1 @ =0x21d7af5, 0x21d9274
-.word 0x20715fd @ 0x21d9278
+.word Function_20715fc+1 @ 0x21d9278
 @ 0x21d927c
 
 

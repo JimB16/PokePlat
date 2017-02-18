@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram56, "ax"
 
@@ -133,7 +136,7 @@ Function_2256294: @ 2256294 :thumb
 	mov     r0, #0x0
 	mov     r1, #0x1a
 	mov     r3, #0x4
-	bl      Function_200b144
+	bl      LoadFromNARC_9
 	str     r0, [r4, #0x1c]
 	mov     r0, #0x4
 	mov     r3, r4
@@ -193,7 +196,7 @@ branch_2256308: @ 2256308 :thumb
 	bl      Function_201a7e8
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r5
 	bl      Function_201a954
 	ldr     r0, [sp, #0x18]
@@ -221,7 +224,7 @@ branch_2256308: @ 2256308 :thumb
 	mov     r0, r5
 	add     r0, #0x10
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r5
 	add     r0, #0x10
 	bl      Function_201a954
@@ -249,7 +252,7 @@ branch_2256308: @ 2256308 :thumb
 	mov     r0, r5
 	add     r0, #0x20
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, r5
 	add     r0, #0x20
 	bl      Function_201a954
@@ -516,10 +519,10 @@ Function_2256508: @ 2256508 :thumb
 	mov     r1, #0x0
 	str     r0, [sp, #0x0]
 	mov     r2, #0x4
-	mov     r0, #0x4a
+	mov     r0, #Unionroom_Narc
 	mov     r3, r1
 	str     r2, [sp, #0x4]
-	bl      Function_2006e84
+	bl      Call_LoadFromNARC_RLCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	mov     r0, #0x5
@@ -533,7 +536,7 @@ Function_2256508: @ 2256508 :thumb
 	mov     r1, #0x2
 	mov     r2, r4
 	mov     r3, #0x7
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	mov     r0, #0x6
@@ -546,7 +549,7 @@ Function_2256508: @ 2256508 :thumb
 	mov     r2, r4
 	mov     r3, #0x7
 	str     r1, [sp, #0xc]
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x4
 	mov     r1, #0x0
 	bl      Function_205d8cc
@@ -849,20 +852,20 @@ Function_22567fc: @ 22567fc :thumb
 	add     r7, r5, r0
 	add     r0, r7, r4
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x76
 	lsl     r0, r0, #2
 	add     r0, r5, r0
 	str     r0, [sp, #0x1c]
 	add     r0, r0, r4
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r0, #0x7a
 	lsl     r0, r0, #2
 	add     r5, r5, r0
 	add     r0, r5, r4
 	mov     r1, #0x0
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	mov     r1, #0x1
 	str     r1, [sp, #0x0]
 	mov     r0, #0xff
@@ -1755,7 +1758,7 @@ branch_2256e94: @ 2256e94 :thumb
 	mov     r3, r1
 	bl      Function_200b48c
 	mov     r0, r4
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 .thumb
 branch_2256ed2: @ 2256ed2 :thumb
 	ldr     r1, [sp, #0x8]
@@ -1812,7 +1815,7 @@ branch_2256f12: @ 2256f12 :thumb
 	ldr     r0, [r0, #0x4]
 	cmp     r0, #0x0
 	beq     branch_2256f26
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 .thumb
 branch_2256f26: @ 2256f26 :thumb
 	ldr     r1, [r5, #0x0]
@@ -1822,7 +1825,7 @@ branch_2256f26: @ 2256f26 :thumb
 	ldr     r0, [r0, #0x8]
 	cmp     r0, #0x0
 	beq     branch_2256f38
-	bl      Function_20237bc
+	bl      Function_20237bc_FreeMsg
 .thumb
 branch_2256f38: @ 2256f38 :thumb
 	ldr     r0, [sp, #0x8]

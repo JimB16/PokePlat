@@ -767,7 +767,7 @@ Function_225664c: @ 225664c :thumb
 	mov     r0, #0xc
 	mov     r1, #0x6f
 	mov     r3, #0x7
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
@@ -879,7 +879,7 @@ Function_225675c: @ 225675c :thumb
 	mov     r0, #0xc
 	mov     r1, #0x6e
 	mov     r3, #0x7
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	ldr     r0, [r6, #0x4]
 	mov     r4, #0x0
 	cmp     r0, #0x0

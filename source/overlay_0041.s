@@ -1210,7 +1210,7 @@ branch_225691e: @ 225691e :thumb
 	mov     r0, #0xc
 	mov     r1, #0x56
 	mov     r3, #0x6
-	bl      Function_2006e3c
+	bl      LoadFromNARC_RGCN
 	mov     r6, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -1223,7 +1223,7 @@ branch_225691e: @ 225691e :thumb
 	mov     r0, #0xc
 	mov     r1, #0x55
 	mov     r3, #0x6
-	bl      Function_2006e60
+	bl      LoadFromNARC_RCSN
 	mov     r0, #0x0
 	mov     r1, r0
 	bl      0x22546b8
@@ -1303,7 +1303,7 @@ Function_22569bc: @ 22569bc :thumb
 	mov     r0, r4
 	add     r0, #0x48
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 branch_2256a02: @ 2256a02 :thumb
 
 	mov     r0, r4
@@ -1516,7 +1516,7 @@ Function_2256b60: @ 2256b60 :thumb
 	mov     r0, r4
 	add     r0, #0x48
 	mov     r1, #0x4
-	bl      Function_201ada4
+	bl      Function_201ada4_ClearTextBox
 	add     r4, #0x48
 	mov     r0, r4
 	bl      Function_201accc

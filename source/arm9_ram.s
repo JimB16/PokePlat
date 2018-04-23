@@ -1092,8 +1092,8 @@ BattleData: @ 0x22c29c8
 .equ BattleData_Move1Score,         0x358
 .equ BattleData_TempVariable,       0x35c
 .equ BattleData_2120,               0x2120
-.equ BattleData_AIScriptPtr,        0x2134
-.equ BattleData_2138,               0x2138
+.equ BattleData_AIScriptStartPtr,        0x2134
+.equ BattleData_AIScriptRelativePtr,               0x2138
 .equ BattleData_2158,               0x2158
 .equ BattleData_219c,               0x219c
 

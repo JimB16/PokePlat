@@ -166,7 +166,7 @@ branch_21d0e4e: @ 21d0e4e :thumb
 	ldr     r0, [pc, #0xd0] @ 0x21d0f78, (=Function_21d0ff0+1)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x1
 	str     r0, [r5, #0x0]
 	b       branch_21d0f68
@@ -350,7 +350,7 @@ Function_21d0ff0: @ 21d0ff0 :thumb
 .thumb
 Function_21d0ffc: @ 21d0ffc :thumb
 	push    {r3,r4}
-	ldr     r2, [pc, #0x54] @ 0x21d1054, (=0x21bf6bc)
+	ldr     r2, [pc, #0x54] @ 0x21d1054, (=RAM_21bf6bc)
 	mov     r0, #0x0
 	ldrh    r1, [r2, #0x20]
 	cmp     r1, #0x0
@@ -409,7 +409,7 @@ branch_21d1050: @ 21d1050 :thumb
 	bx      lr
 @ 0x21d1054
 
-.word 0x21bf6bc @ 0x21d1054
+.word RAM_21bf6bc @ 0x21d1054
 .thumb
 Function_21d1058: @ 21d1058 :thumb
 	push    {r3-r5,lr}
@@ -1188,7 +1188,7 @@ branch_21d15e8: @ 21d15e8 :thumb
 branch_21d1602: @ 21d1602 :thumb
 	cmp     r2, #0x0
 	bne     branch_21d1612
-	ldr     r0, [pc, #0x28] @ 0x21d1630, (=0x21bf67c)
+	ldr     r0, [pc, #0x28] @ 0x21d1630, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	and     r0, r1
@@ -1215,7 +1215,7 @@ branch_21d1620: @ 21d1620 :thumb
 
 .word 0x21d37ec @ 0x21d1628
 .word 0x3e2 @ 0x21d162c
-.word 0x21bf67c @ 0x21d1630
+.word RAM_21bf67c @ 0x21d1630
 .thumb
 Function_21d1634: @ 21d1634 :thumb
 	push    {r3,lr}
@@ -1585,7 +1585,7 @@ branch_21d18bc: @ 21d18bc :thumb
 
 .thumb
 branch_21d18ce: @ 21d18ce :thumb
-	ldr     r0, [pc, #0x58] @ 0x21d1928, (=0x21bf67c)
+	ldr     r0, [pc, #0x58] @ 0x21d1928, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	and     r0, r1
@@ -1637,7 +1637,7 @@ branch_21d1914: @ 21d1914 :thumb
 .word Unknown_21d37c4 @ 0x21d191c
 .word 0x10200 @ 0x21d1920
 .word 0xf0200 @ 0x21d1924
-.word 0x21bf67c @ 0x21d1928
+.word RAM_21bf67c @ 0x21d1928
 .word 0x5dc @ 0x21d192c
 
 
@@ -1975,7 +1975,7 @@ Function_21d1b80: @ 21d1b80 :thumb
 	str     r2, [sp, #0x8]
 	add     r0, sp, #0x10
 	mov     r3, #0x2
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r5, #0x0]
 	mov     r1, #0xc8
 	bl      malloc
@@ -3527,7 +3527,7 @@ branch_21d26b4: @ 21d26b4 :thumb
 	bl      branch_21d3240
 .thumb
 branch_21d26f0: @ 21d26f0 :thumb
-	ldr     r0, [pc, #0x4c] @ 0x21d2740, (=0x21bf67c)
+	ldr     r0, [pc, #0x4c] @ 0x21d2740, (=RAM_21bf67c)
 	ldr     r0, [r0, #0x48]
 	cmp     r0, #0x0
 	beq     branch_21d2700
@@ -3567,7 +3567,7 @@ branch_21d272e: @ 21d272e :thumb
 
 .word 0x405 @ 0x21d2738
 .word 0x21d3864 @ 0x21d273c
-.word 0x21bf67c @ 0x21d2740
+.word RAM_21bf67c @ 0x21d2740
 
 
 .thumb
@@ -3952,7 +3952,7 @@ branch_21d2a2a: @ 21d2a2a :thumb
 
 .thumb
 branch_21d2a4c: @ 21d2a4c :thumb
-	ldr     r0, [pc, #0x304] @ 0x21d2d54, (=0x21bf67c)
+	ldr     r0, [pc, #0x304] @ 0x21d2d54, (=RAM_21bf67c)
 	ldr     r0, [r0, #0x48]
 	cmp     r0, #0x0
 	beq     branch_21d2ad2
@@ -4365,7 +4365,7 @@ branch_21d2cf4: @ 21d2cf4 :thumb
 
 .thumb
 branch_21d2d02: @ 21d2d02 :thumb
-	ldr     r0, [pc, #0x50] @ 0x21d2d54, (=0x21bf67c)
+	ldr     r0, [pc, #0x50] @ 0x21d2d54, (=RAM_21bf67c)
 	mov     r1, #0x1
 	ldr     r0, [r0, #0x48]
 	and     r1, r0
@@ -4421,7 +4421,7 @@ branch_21d2d44: @ 21d2d44 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d2d54
+.word RAM_21bf67c @ 0x21d2d54
 .word 0x21d37f4 @ 0x21d2d58
 .word 0xffff @ 0x21d2d5c
 .word 0x706 @ 0x21d2d60
@@ -5346,7 +5346,7 @@ branch_21d32ae: @ 21d32ae :thumb
 	ldr     r0, [pc, #0xf8] @ 0x21d33f8, (=0x21d3421)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	bl      GetBGPaletteAdress
 	mov     r1, r6
 	mov     r7, r0
@@ -5916,7 +5916,7 @@ branch_21d3762: @ 21d3762 :thumb
 
 .thumb
 branch_21d3768: @ 21d3768 :thumb
-	ldr     r0, [pc, #0x3c] @ 0x21d37a8, (=0x21bf67c)
+	ldr     r0, [pc, #0x3c] @ 0x21d37a8, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	and     r0, r1
@@ -5957,7 +5957,7 @@ branch_21d3798: @ 21d3798 :thumb
 
 .word 0x21d3a38 @ 0x21d37a0
 .word 0xf0200 @ 0x21d37a4
-.word 0x21bf67c @ 0x21d37a8
+.word RAM_21bf67c @ 0x21d37a8
 .thumb
 Function_21d37ac: @ 21d37ac :thumb
 	push    {r3,lr}

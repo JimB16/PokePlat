@@ -107,6 +107,13 @@ branch_2006994: @ 2006994 :thumb
 thumb_func_end ReadNARCFile
 
 
+/* Input:
+r0: NARCStringPointer
+r1: file_id
+
+Return:
+r0: Ptr to loaded File
+*/
 thumb_func_start LoadFileIntoMemory
 LoadFileIntoMemory: @ 20069a8 :thumb
 	push    {r3-r7,lr}
@@ -150,10 +157,11 @@ LoadFileIntoMemory: @ 20069a8 :thumb
 	blx     FS_ReadFile
 	add     r0, sp, #0x8
 	ldrh    r0, [r0, #0x0]
-	cmp     r0, r5
+	cmp     r0, r5              @ file_id
 	bgt     branch_2006a0e
 	bl      ErrorHandling
 branch_2006a0e: @ 2006a0e :thumb
+
 	ldr     r0, [sp, #0x14]
 	mov     r2, #0x0
 	add     r6, r4, r0
@@ -164,8 +172,9 @@ branch_2006a0e: @ 2006a0e :thumb
 	add     r1, sp, #0x14
 	mov     r2, #0x4
 	blx     FS_ReadFile
+
 	add     r4, #0xc
-	lsl     r1, r5, #3
+	lsl     r1, r5, #3          @ file_id
 	add     r0, sp, #0x18
 	add     r1, r4, r1
 	mov     r2, #0x0
@@ -179,6 +188,7 @@ branch_2006a0e: @ 2006a0e :thumb
 	add     r1, sp, #0xc
 	mov     r2, #0x4
 	blx     FS_ReadFile
+
 	add     r2, r6, r7
 	ldr     r1, [sp, #0x10]
 	add     r2, #0x8
@@ -195,14 +205,17 @@ branch_2006a0e: @ 2006a0e :thumb
 	ldr     r0, [sp, #0x10]
 	sub     r0, r1, r0
 branch_2006a6a: @ 2006a6a :thumb
+
 	str     r0, [sp, #0x14]
 	cmp     r0, #0x0
 	bne     branch_2006a74
 	bl      ErrorHandling
 branch_2006a74: @ 2006a74 :thumb
+
 	ldr     r0, [sp, #0x7c]
 	cmp     r0, #0x0
 	bne     branch_2006a84
+
 	ldr     r0, [sp, #0x0]
 	ldr     r1, [sp, #0x14]
 	bl      malloc
@@ -218,6 +231,7 @@ branch_2006a8c: @ 2006a8c :thumb
 	add     r0, sp, #0x18
 	mov     r1, r4
 	blx     FS_ReadFile
+
 	add     r0, sp, #0x18
 	blx     FS_CloseFile
 	mov     r0, r4
@@ -253,6 +267,10 @@ thumb_func_end LoadFromNARC
 
 
 
+/* Input:
+r0 = archive_id
+r1 = file_id
+*/
 thumb_func_start LoadFromNARC_2
 LoadFromNARC_2: @ 2006ac0 :thumb
 	push    {r4,lr}

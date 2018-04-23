@@ -77,7 +77,7 @@
 .equ RAM_21bf67c_40_KeyNewPressed,          0x40
 .equ RAM_21bf67c_44_Key,                    0x44 @ keys that are hold?
 .equ RAM_21bf67c_48_KeyNewPressed2,         0x48
-.equ RAM_21bf67c_4c,        0x4c
+.equ RAM_21bf67c_4c_Key,                    0x4c @ keys?
 .equ RAM_21bf67c_50_InputDelayCounter,      0x50 @ Init with # of Frames in Input Delay, if =0 calculate new Input
 .equ RAM_21bf67c_54,        0x54
 .equ RAM_21bf67c_58_InputDelay,             0x58 @ # of Frames that Input is collected
@@ -167,6 +167,158 @@
 .equ VariableAreaAdresses_20024_Next,       0x10
 .equ VariableAreaAdresses_20284,    0x20284
 .equ VariableAreaAdresses_2029c,    0x2029c
+
+
+.equ RAM_21c0760_0,                         0x0 @ LoadGraphicDataList
+
+.equ InitLoadGraphicDataList_NrOfGraphicData4Chunks,        0x0 @ Nr of GraphicData4-Chunks
+.equ InitLoadGraphicDataList_4,             0x4
+.equ InitLoadGraphicDataList_8,             0x8
+.equ InitLoadGraphicDataList_c,             0xc @ Malloc-Flags
+
+@ InitInitLoadGraphicDataList-Data
+.equ InitInitLoadGraphicDataList_NrOfGraphicData4Chunks,    0x0
+.equ InitInitLoadGraphicDataList_4,         0x4
+.equ InitInitLoadGraphicDataList_8,         0x8
+.equ InitInitLoadGraphicDataList_c,         0xc
+.equ InitInitLoadGraphicDataList_10,        0x10
+
+.equ LoadGraphicDataList_Size,              0x3c
+.equ LoadGraphicDataList_StartPtr,          0x0
+.equ LoadGraphicDataList_MaxNrOfParts,      0x4 @ Nr of GraphicData4-Chunks
+.equ LoadGraphicDataList_8,                 0x8
+.equ LoadGraphicDataList_UsedSizeMain,      0xc
+.equ LoadGraphicDataList_UsedSizeSub,       0x10
+.equ LoadGraphicDataList_MainMemSizeBytes,  0x14
+.equ LoadGraphicDataList_SubMemSizeBytes,   0x18
+.equ LoadGraphicDataList_MaxSizeMain,       0x1c
+.equ LoadGraphicDataList_MaxSizeSub,        0x20
+.equ LoadGraphicDataList_24,                0x24
+.equ LoadGraphicDataList_28,                0x28
+.equ LoadGraphicDataList_PartSizesMain,     0x2c
+.equ LoadGraphicDataList_PartSizesSub,      0x30
+.equ LoadGraphicDataList_MemoryPoolMain,    0x34
+.equ LoadGraphicDataList_MemoryPoolSub,     0x38
+
+.equ GraphicData4_Size,             0x54
+.equ GraphicData4_GraphicData2,     0x0     @ GraphicData2
+.equ GraphicData4_4,                0x4
+.equ GraphicData4_4_1,                  1<<0 @ Main
+.equ GraphicData4_4_2,                  1<<1 @ Sub
+.equ GraphicData4_8,                0x8
+.equ GraphicData4_c,                0xc
+.equ GraphicData4_10,               0x10
+.equ GraphicData4_DestinationMain,  0x34    @ Destination
+.equ GraphicData4_DestinationSub,   0x38    @ Destination
+.equ GraphicData4_3c,               0x3c
+.equ GraphicData4_40,               0x40
+.equ GraphicData4_44,               0x44
+.equ GraphicData4_48,               0x48
+.equ GraphicData4_4c,               0x4c
+.equ GraphicData4_50,               0x50
+
+.equ GraphicData5_GraphicData2,     0x0
+.equ GraphicData5_4,                0x4
+.equ GraphicData5_8,                0x8
+.equ GraphicData5_c,                0xc
+
+.equ GraphicData6List_0,            0x0
+.equ GraphicData6List_4,            0x4
+.equ GraphicData6List_8,            0x8
+
+.equ GraphicData6_Size,             0xc
+.equ GraphicData6_0,                0x0
+.equ GraphicData6_4,                0x4
+.equ GraphicData6_8,                0x8
+
+.equ NARCPokeGra_Size,              0x338 @ 0xce*4
+.equ NARCPokeGra_0,                 0x0
+.equ NARCPokeGra_4,                 0x4 @ archive_id
+.equ NARCPokeGra_6,                 0x6 @ file_id
+.equ NARCPokeGra_8,                 0x8
+.equ NARCPokeGra_a,                 0xa
+.equ NARCPokeGra_10,                0x10
+.equ NARCPokeGra_24,                0x24
+.equ NARCPokeGra_26,                0x26
+.equ NARCPokeGra_28,                0x28
+.equ NARCPokeGra_2c,                0x2c
+.equ NARCPokeGra_2e,                0x2e
+.equ NARCPokeGra_30,                0x30
+.equ NARCPokeGra_34,                0x34
+.equ NARCPokeGra_36,                0x36
+.equ NARCPokeGra_38,                0x38
+.equ NARCPokeGra_3a,                0x3a
+.equ NARCPokeGra_3c,                0x3c
+.equ NARCPokeGra_40,                0x40
+.equ NARCPokeGra_42,                0x42
+.equ NARCPokeGra_44,                0x44
+.equ NARCPokeGra_45,                0x45
+.equ NARCPokeGra_46,                0x46
+.equ NARCPokeGra_47,                0x47
+.equ NARCPokeGra_48,                0x48
+.equ NARCPokeGra_49,                0x49
+.equ NARCPokeGra_4a,                0x4a
+.equ NARCPokeGra_4b,                0x4b
+.equ NARCPokeGra_4c,                0x4c
+.equ NARCPokeGra_50,                0x50
+.equ NARCPokeGra_54,                0x54
+.equ NARCPokeGra_58,                0x58
+.equ NARCPokeGra_59,                0x59
+.equ NARCPokeGra_5a,                0x5a
+.equ NARCPokeGra_5b,                0x5b
+.equ NARCPokeGra_68,                0x68 @ Function-Ptr
+.equ NARCPokeGra_6c,                0x6c
+.equ NARCPokeGra_6e,                0x6e
+.equ NARCPokeGra_70,                0x70
+.equ NARCPokeGra_72,                0x72
+.equ NARCPokeGra_74,                0x74
+.equ NARCPokeGra_76,                0x76
+.equ NARCPokeGra_ac,                0xac @ Size of struct (4x)
+.equ NARCPokeGra_TexSSize,          0x2bc
+.equ NARCPokeGra_TexTSize,          0x2c0
+.equ NARCPokeGra_TexFormat,         0x2c4 @ 0xb1*4
+.equ NARCPokeGra_TexColor0,         0x2cc
+.equ NARCPokeGra_2e8,               0x2e8 @ 0xba*4
+.equ NARCPokeGra_TexVRAMOffset,     0x2ec @ 0xbb*4
+.equ NARCPokeGra_2f0,               0x2f0 @ 0xbc*4
+.equ NARCPokeGra_2f4,               0x2f4 @ 0xbd*4
+.equ NARCPokeGra_2f8,               0x2f8 @ 0xbe*4
+.equ NARCPokeGra_2fc,               0x2fc @ 0xbf*4
+.equ NARCPokeGra_300,               0x300
+.equ NARCPokeGra_304,               0x304 @ 0xc1*4
+.equ NARCPokeGra_30c,               0x30c @ 0xc3*4
+.equ NARCPokeGra_310,               0x310 @ 0xc4*4
+.equ NARCPokeGra_314,               0x314 @ 0xc5*4
+.equ NARCPokeGra_320,               0x320
+.equ NARCPokeGra_330,               0x330
+.equ NARCPokeGra_331,               0x331
+.equ NARCPokeGra_332,               0x332
+.equ NARCPokeGra_333,               0x333
+.equ NARCPokeGra_334,               0x334 @ 0xcd*4
+
+.equ NARCPokeGra2_0,                0x0 @ archive_id
+.equ NARCPokeGra2_2,                0x2 @ file_id graphic
+.equ NARCPokeGra2_4,                0x4 @ file_id palette
+.equ NARCPokeGra2_6,                0x6
+.equ NARCPokeGra2_8,                0x8
+.equ NARCPokeGra2_c,                0xc
+
+.equ PokedexGra_0,                  0x0
+.equ PokedexGra_13c,                0x13c @ 0x4f*4
+.equ PokedexGra_NARCPokeGra,        0x154 @ 0x55*4
+.equ PokedexGra_158,                0x158 @ 0x56*4
+.equ PokedexGra_168,                0x168 @ 0x5a*4
+
+.equ RAM_21c07b8_0,                         0x0
+.equ RAM_21c07b8_4,                         0x4
+.equ RAM_21c07b8_8,                         0x8
+
+.equ RAM_21c07c4_0,                         0x0
+.equ RAM_21c07c4_1,                         0x1
+.equ RAM_21c07c4_4,                         0x4
+.equ RAM_21c07c4_8,                         0x8 @ todo
+
+.equ RAM_21c07d0_0,                         0x0
 
 .equ RAM_21c07dc_OverWorldData,             0x0
 
@@ -317,6 +469,7 @@
 .equ MainBattleData_2c_4,           1<<2
 .equ MainBattleData_2c_8,           1<<3
 .equ MainBattleData_2c_10,          1<<4
+.equ MainBattleData_2c_100,         1<<8
 .equ MainBattleData_2c_200,         1<<9
 .equ MainBattleData_2c_400,         1<<10
 .equ MainBattleData_BattleData,     0x30
@@ -331,10 +484,11 @@
 .equ MainBattleData_PkmnParty1,     0x6c
 .equ MainBattleData_PkmnParty2,     0x70
 .equ MainBattleData_78,             0x78
-.equ MainBattleData_88,             0x88
+.equ MainBattleData_NARCPokeGra,    0x88
 .equ MainBattleData_8c,             0x8c
 .equ MainBattleData_90,             0x90
 .equ MainBattleData_94,             0x94
+.equ MainBattleData_b8,             0xb8 @ MainBattleData_b8+0x34*x
 .equ MainBattleData_19c,            0x19c @ 0x67*4
 .equ MainBattleData_1a8,            0x1a8
 .equ MainBattleData_1ac,            0x1ac
@@ -348,6 +502,7 @@
 .equ MainBattleData_2228,           0x2228 @ size=0xe0
 .equ MainBattleData_2308,           0x2308 @ size=0xe0
 .equ MainBattleData_23fc,           0x23fc
+.equ MainBattleData_23fd,           0x23fd
 .equ MainBattleData_23fe,           0x23fe
 .equ MainBattleData_BattleEnvironment, 0x2400 @ 0x9*1024 0-0x18
 .equ BattleEnvironment_Cave,        0x5
@@ -472,22 +627,31 @@
 .equ BattleData_Move4Score,         0x35b
 .equ BattleData_TempVariable,       0x35c
 .equ BattleData_360,                0x360
-.equ BattleData_364,                0x364
+.equ BattleData_360_1,                  0x1
+.equ BattleData_360_80,                 0x80
+.equ BattleData_364,                0x364 @ 0xd9*4
+.equ BattleData_364_1,                  0x1
+.equ BattleData_364_2,                  0x2
+.equ BattleData_364_4,                  0x4
+.equ BattleData_364_8,                  0x8
+.equ BattleData_364_10,                 0x10
 .equ BattleData_TrainerAIType,      0x365
 .equ BattleData_36c,                0x36c
 .equ BattleData_390,                0x390
+.equ BattleData_3ac,                0x3ac
 .equ BattleData_3cc,                0x3cc
 .equ BattleData_3cd,                0x3cd
 .equ BattleData_3ce,                0x3ce
-.equ BattleData_3cf,                0x3cf
+.equ BattleData_3cf,                0x3cf @ PokemonNr 0-3
 .equ BattleData_3d0,                0x3d0
+.equ BattleData_3da,                0x3da
 .equ BattleData_3de,                0x3de
 .equ BattleData_3e0,                0x3e0
 .equ BattleData_3e1,                0x3e1
 .equ BattleData_3e2,                0x3e2
 .equ BattleData_2120,               0x2120
-.equ BattleData_AIScriptPtr,        0x2134
-.equ BattleData_2138,               0x2138
+.equ BattleData_AIScriptStartPtr,   0x2134
+.equ BattleData_AIScriptRelativePtr, 0x2138
 .equ BattleData_213c,               0x213c
 .equ BattleData_213c_1,             1<<0
 .equ BattleData_213c_100,           1<<8
@@ -967,6 +1131,22 @@ TextInterpreter
 .equ UnknownGraphicData_b,          0xb
 
 
+.equ GraphicData2_0,                0x0
+.equ GraphicData2_2,                0x2
+.equ GraphicData2_4,                0x4
+.equ GraphicData2_8,                0x8
+.equ GraphicData2_c,                0xc
+.equ GraphicData2_Size,             0x10 @ Size
+.equ GraphicData2_Source,           0x14 @ Source
+
+.equ GraphicData3_c,                0xc
+.equ GraphicData3_10,               0x10
+.equ GraphicData3_14,               0x14
+.equ GraphicData3_18,               0x18
+.equ GraphicData3_1c,               0x1c
+.equ GraphicData3_20,               0x20
+
+
 /*****************
 MainGameData
 *****************/
@@ -1210,6 +1390,81 @@ OverWorldData
 .equ MapData_FaceDirection,                 0x10
 
 
+.equ MapNr_0,                               0x0
+.equ MapNr_D02,                              0xc8
+.equ MapNr_D03R0101,                         0xcb
+.equ MapNr_TrophyGarden,                     0x11f @ D23R0101
+.equ MapNr_R201,                             0x156
+.equ MapNr_R202,                             0x157
+.equ MapNr_R203,                             0x158
+.equ MapNr_R206,                             0x15e
+.equ MapNr_R207,                             0x161
+.equ MapNr_R208,                             0x162
+.equ MapNr_R209,                             0x164
+.equ MapNr_R214,                             0x17c
+.equ MapNr_R215,                             0x17e
+.equ MapNr_R217,                             0x181
+.equ MapNr_R218,                             0x184
+.equ MapNr_R221,                             0x188
+.equ MapNr_R222,                             0x18b
+.equ MapNr_R224,                             0x18f
+.equ MapNr_R225,                             0x190
+.equ MapNr_R227,                             0x193
+.equ MapNr_R228,                             0x196
+.equ MapNr_R229,                             0x197
+.equ MapNr_W226,                             0x1d5
+.equ MapNr_W230,                             0x1d7
+.equ MapNr_GreatMarsh,                       0x1f8
+
+.equ VarArea11_Size,                        0x108 @ 6*0x2c
+.equ VarArea11_0,                           0x0
+.equ VarArea11_10,                          0x10
+.equ VarArea11_20,                          0x20
+.equ VarArea11_21,                          0x21
+.equ VarArea11_24,                          0x24
+.equ VarArea11_28,                          0x28
+.equ VarArea11_StructSize,                  0x2c
+.equ VarArea11_Field0,                      0x0
+.equ VarArea11_Field1,                      0x1
+.equ VarArea11_Field2,                      0x2
+.equ VarArea11_Field3,                      0x3
+.equ VarArea11_Field4,                      0x4
+.equ VarArea11_Field5,                      0x5
+
+.equ VarArea19_Size,                        0x154
+.equ VarArea19_0,                           0x0 @ SwarmNr GreatMarsh
+.equ VarArea19_4,                           0x4 @ SwarmNr
+.equ VarArea19_8,                           0x8
+.equ VarArea19_c,                           0xc
+.equ VarArea19_e,                           0xe
+.equ VarArea19_10,                          0x10
+.equ VarArea19_52,                          0x52
+.equ VarArea19_bc,                          0xbc
+.equ VarArea19_c8,                          0xc8
+.equ VarArea19_cc,                          0xcc
+.equ VarArea19_d0,                          0xd0 @ +0x14 (UnkSwarmStruct_Size) * (0..5)
+.equ VarArea19_e2,                          0xe2 @ +0x14 * (0..5)
+.equ VarArea19_14e,                         0x14e
+.equ VarArea19_14f,                         0x14f
+.equ VarArea19_150,                         0x150
+.equ VarArea19_151,                         0x151
+
+
+/*****************
+UnkSwarmStruct
+*****************/
+.equ UnkSwarmStruct_Size,           0x14
+.equ UnkSwarmStruct_0,              0
+.equ UnkSwarmStruct_1,              1
+.equ UnkSwarmStruct_2,              2
+.equ UnkSwarmStruct_3,              3
+.equ UnkSwarmStruct_4,              4
+.equ UnkSwarmStruct_5,              5
+.equ UnkSwarmStruct_6,              6
+.equ UnkSwarmStruct_7,              7
+.equ UnkSwarmStruct_8,              8
+
+
 /*****************
 Pokedex - VariableAreaAdress_7
 *****************/
@@ -1416,6 +1671,8 @@ Generic FileHeader
 .equ BMA0_MagicConstant,            0x30414d42 @ BVA0_MagicConstant-0x900
 .equ BEA0_MagicConstant,            0x30414542 @ BVA0_MagicConstant-0x1300
 .equ BTA0_MagicConstant,            0x30415442 @ BVA0_MagicConstant-0x200
+.equ CHAR_MagicConstant,            0x43484152
+.equ SCRN_MagicConstant,            0x5343524e
 .equ FileHeader_Magic,              0x0
 .equ FileHeader_HeaderSize,         0xc
 .equ FileHeader_NumBlocks,          0xe
@@ -1489,4 +1746,5 @@ FlagMem
 .equ FlagMem_240,                   0x240
 .equ FlagMem_16c,                   0x16c @ Memory for Flags<0x4000
 .equ Flag_960,                      0x960
+
 

@@ -794,7 +794,7 @@ Function_21d13b8: @ 21d13b8 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r0, r1
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	mov     r1, #0x2
 	lsl     r1, r1, #8
 	str     r0, [r5, r1]
@@ -821,7 +821,7 @@ Function_21d13b8: @ 21d13b8 :thumb
 	ldr     r0, [r5, r0]
 	lsr     r1, r1, #13
 	lsl     r2, r2, #4
-	bl      Function_2008a78
+	bl      Function_2008a78_SetNARCPokeGra_TexVRAMOffset
 	ldr     r2, [pc, #0x68] @ 0x21d1464, (=0xffff0000)
 	mov     r0, #0x2
 	lsl     r0, r0, #8
@@ -896,7 +896,7 @@ Function_21d1468: @ 21d1468 :thumb
 	lsr     r1, r1, #16
 	lsr     r2, r2, #24
 	mov     r3, #0x2
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [pc, #0x20] @ 0x21d14b8, (=0x3ff)
 	add     r1, sp, #0x10
 	str     r0, [sp, #0x0]
@@ -1619,7 +1619,7 @@ Jumppoints_21d199a:
 branch_21d19a6: @ 21d19a6 :thumb
 	mov     r0, r4
 	bl      Function_21d1c58
-	ldr     r0, [pc, #0x1c] @ 0x21d19cc, (=0x21bf67c)
+	ldr     r0, [pc, #0x1c] @ 0x21d19cc, (=RAM_21bf67c)
 	mov     r1, #0x1
 	ldr     r0, [r0, #0x48]
 	tst     r0, r1
@@ -1639,7 +1639,7 @@ branch_21d19c8: @ 21d19c8 :thumb
 	pop     {r4,pc}
 @ 0x21d19cc
 
-.word 0x21bf67c @ 0x21d19cc
+.word RAM_21bf67c @ 0x21d19cc
 .word 0x5dc @ 0x21d19d0
 
 
@@ -1773,7 +1773,7 @@ Function_21d1aac: @ 21d1aac :thumb
 	mov     r0, #0x2
 	lsl     r0, r0, #8
 	ldr     r0, [r4, r0]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	ldr     r0, [pc, #0x48] @ 0x21d1b1c, (=0x64c)
 	ldr     r0, [r4, r0]
 	bl      Function_20150ec
@@ -2006,7 +2006,7 @@ branch_21d1c36: @ 21d1c36 :thumb
 Function_21d1c58: @ 21d1c58 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	ldr     r0, [pc, #0x30] @ 0x21d1c90, (=0x21bf67c)
+	ldr     r0, [pc, #0x30] @ 0x21d1c90, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x20
 	tst     r0, r1
@@ -2018,7 +2018,7 @@ Function_21d1c58: @ 21d1c58 :thumb
 	ldr     r0, [pc, #0x24] @ 0x21d1c94, (=0x5dc)
 	bl      Function_2005748
 branch_21d1c74: @ 21d1c74 :thumb
-	ldr     r0, [pc, #0x18] @ 0x21d1c90, (=0x21bf67c)
+	ldr     r0, [pc, #0x18] @ 0x21d1c90, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x10
 	tst     r0, r1
@@ -2034,7 +2034,7 @@ branch_21d1c8e: @ 21d1c8e :thumb
 	pop     {r4,pc}
 @ 0x21d1c90
 
-.word 0x21bf67c @ 0x21d1c90
+.word RAM_21bf67c @ 0x21d1c90
 .word 0x5dc @ 0x21d1c94
 
 

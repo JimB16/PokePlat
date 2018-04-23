@@ -1,4 +1,7 @@
 
+.include "source/macros_asm.s"
+.include "source/arm9_ram_2.s"
+
 
 .section .iwram47, "ax"
 
@@ -127,6 +130,7 @@ branch_225628e: @ 225628e :thumb
 	.hword  0x1d36 @ add r6, r6, #0x4
 	cmp     r4, #0x4
 	blt     branch_225628e
+
 	ldr     r0, [sp, #0x0]
 	bl      0x2254544
 	bl      LoadVariableAreaAdress_19
@@ -138,11 +142,12 @@ branch_22562b2: @ 22562b2 :thumb
 	lsl     r1, r4, #24
 	ldr     r0, [sp, #0xc]
 	lsr     r1, r1, #24
-	bl      Function_202d924
-	mov     r1, #0x8
+	bl      Function_202d924_GetPtrToUnkSwarmStruct
+	mov     r1, #UnkSwarmStruct_8
 	str     r0, [r7, #0x7c]
-	bl      Function_202d93c
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [r6, #0x40]
+
 	mov     r1, r5
 	add     r1, #0x9a
 	mov     r0, #0x0
@@ -152,6 +157,7 @@ branch_22562b2: @ 22562b2 :thumb
 	add     r6, #0x8
 	cmp     r4, #0x6
 	blt     branch_22562b2
+
 	ldr     r0, [sp, #0x0]
 	bl      0x225453c
 	mov     r4, r0
@@ -170,14 +176,11 @@ branch_22562b2: @ 22562b2 :thumb
 	ldr     r0, [r4, #0x1c]
 	ldr     r0, [r0, #0xc]
 	b       branch_225630a
-@ 0x2256304
 
-.thumb
 branch_2256304: @ 2256304 :thumb
 	ldr     r0, [r6, #0x8]
 	str     r0, [r5, #0x4]
 	ldr     r0, [r6, #0xc]
-.thumb
 branch_225630a: @ 225630a :thumb
 	str     r0, [r5, #0x8]
 	ldr     r1, [r5, #0x4]
@@ -674,29 +677,29 @@ branch_22565fe: @ 22565fe :thumb
 	cmp     r0, #0x0
 	bne     branch_2256614
 	ldr     r0, [r4, #0x7c]
-	mov     r1, #0x8
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_8
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [r5, #0x40]
 	cmp     r0, #0x0
 	beq     branch_2256614
 	mov     r7, #0x1
-.thumb
 branch_2256614: @ 2256614 :thumb
+
 	cmp     r0, #0x0
 	beq     branch_2256624
 	ldr     r0, [r4, #0x7c]
-	mov     r1, #0x1
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_1
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [r5, #0x44]
 	mov     r7, #0x1
-.thumb
 branch_2256624: @ 2256624 :thumb
+
 	.hword  0x1c76 @ add r6, r6, #0x1
 	add     r5, #0x8
 	.hword  0x1d24 @ add r4, r4, #0x4
 	cmp     r6, #0x6
 	blt     branch_22565fe
-.thumb
+
 branch_225662e: @ 225662e :thumb
 	mov     r0, r7
 	pop     {r3-r7,pc}

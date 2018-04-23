@@ -2353,7 +2353,7 @@ Function_21d1d68: @ 21d1d68 :thumb
 	bl      Function_21d2e8c
 	mov     r0, r5
 	bl      Function_21d2eb4
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r7, #0x0
 	mov     r6, #0x1a
 	mov     r4, r5
@@ -2673,7 +2673,7 @@ Function_21d2090: @ 21d2090 :thumb
 	ldr     r0, [r4, r0]
 	cmp     r0, #0x0
 	beq     branch_21d20a8
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 .thumb
 branch_21d20a8: @ 21d20a8 :thumb
 	ldr     r0, [r4, #0x58]

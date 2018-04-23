@@ -1853,7 +1853,7 @@ branch_21d1be6: @ 21d1be6 :thumb
 	bl      Function_203608c
 	lsl     r1, r0, #2
 	ldr     r0, [sp, #0x0]
-	ldr     r2, [pc, #0x88] @ 0x21d1ca0, (=0x21bf6bc)
+	ldr     r2, [pc, #0x88] @ 0x21d1ca0, (=RAM_21bf6bc)
 	add     r1, r0, r1
 	mov     r0, #0x76
 	lsl     r0, r0, #2
@@ -1918,7 +1918,7 @@ branch_21d1c76: @ 21d1c76 :thumb
 .word 0x4377 @ 0x21d1c94
 .word 0x5e5 @ 0x21d1c98
 .word 0x21d2ddc @ 0x21d1c9c
-.word 0x21bf6bc @ 0x21d1ca0
+.word RAM_21bf6bc @ 0x21d1ca0
 .word 0x4378 @ 0x21d1ca4
 .word 0x4380 @ 0x21d1ca8
 .thumb

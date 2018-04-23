@@ -1,10 +1,13 @@
 
+/* Input:
+r0: VariableAreaAdress
+*/
 .thumb
 .globl Function_202440c
 Function_202440c: @ 202440c :thumb
 	push    {r4,lr}
-
 	mov     r4, r0
+
 	mov     r0, #0x1b
 	bl      Function_2025c48
 

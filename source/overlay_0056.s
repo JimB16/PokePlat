@@ -1229,7 +1229,7 @@ branch_2256afa: @ 2256afa :thumb
 
 .thumb
 branch_2256b04: @ 2256b04 :thumb
-	ldr     r0, [pc, #0xb0] @ 0x2256bb8, (=0x21bf6bc)
+	ldr     r0, [pc, #0xb0] @ 0x2256bb8, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	beq     branch_2256bac
@@ -1325,7 +1325,7 @@ branch_2256bac: @ 2256bac :thumb
 
 .word 0x2257264 @ 0x2256bb0
 .word 0x5e5 @ 0x2256bb4
-.word 0x21bf6bc @ 0x2256bb8
+.word RAM_21bf6bc @ 0x2256bb8
 .word 0x4bf @ 0x2256bbc
 .thumb
 Function_2256bc0: @ 2256bc0 :thumb
@@ -1444,7 +1444,7 @@ branch_2256c78: @ 2256c78 :thumb
 .thumb
 Function_2256c84: @ 2256c84 :thumb
 	push    {r4,lr}
-	ldr     r1, [pc, #0x74] @ 0x2256cfc, (=0x21bf67c)
+	ldr     r1, [pc, #0x74] @ 0x2256cfc, (=RAM_21bf67c)
 	mov     r4, r0
 	ldr     r3, [r1, #0x44]
 	mov     r1, #0x2
@@ -1454,7 +1454,7 @@ Function_2256c84: @ 2256c84 :thumb
 	beq     branch_2256cc6
 	mov     r1, #0x0
 	bl      Function_225718c
-	ldr     r0, [pc, #0x5c] @ 0x2256cfc, (=0x21bf67c)
+	ldr     r0, [pc, #0x5c] @ 0x2256cfc, (=RAM_21bf67c)
 	mov     r1, #0x2
 	ldr     r0, [r0, #0x4c]
 	lsl     r1, r1, #8
@@ -1483,7 +1483,7 @@ branch_2256cc6: @ 2256cc6 :thumb
 	beq     branch_2256cf8
 	mov     r1, #0x1
 	bl      Function_225718c
-	ldr     r0, [pc, #0x28] @ 0x2256cfc, (=0x21bf67c)
+	ldr     r0, [pc, #0x28] @ 0x2256cfc, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x4c]
 	mov     r0, #0x1
 	lsl     r0, r0, #8
@@ -1510,7 +1510,7 @@ branch_2256cf8: @ 2256cf8 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x2256cfc
+.word RAM_21bf67c @ 0x2256cfc
 .word 0x5e5 @ 0x2256d00
 .thumb
 Function_2256d04: @ 2256d04 :thumb
@@ -2129,7 +2129,7 @@ Function_225712c: @ 225712c :thumb
 	mov     r1, #0x0
 	lsl     r2, r2, #2
 	strb    r1, [r0, r2]
-	ldr     r1, [pc, #0x38] @ 0x2257170, (=0x21bf6bc)
+	ldr     r1, [pc, #0x38] @ 0x2257170, (=RAM_21bf6bc)
 	ldrh    r3, [r1, #0x20]
 	cmp     r3, #0x0
 	beq     branch_2257142
@@ -2171,7 +2171,7 @@ branch_225716e: @ 225716e :thumb
 	bx      lr
 @ 0x2257170
 
-.word 0x21bf6bc @ 0x2257170
+.word RAM_21bf6bc @ 0x2257170
 .thumb
 Function_2257174: @ 2257174 :thumb
 	mov     r1, #0xa2

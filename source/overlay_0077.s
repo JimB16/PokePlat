@@ -80,7 +80,7 @@ TitleScreenInit: @ 21d0d80 :thumb
 	ldr     r0, [pc, #0x28] @ 0x21d0e38, (=TitleScreenInitMainFunction+1)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 
 	mov     r0, #0x1
 	pop     {r4,pc}
@@ -4636,7 +4636,7 @@ Function_21d2f38: @ 21d2f38 :thumb
 	bl      Function_200f338
 	mov     r0, #0x1
 	bl      Function_200f338
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	add     sp, #0x10
 	pop     {r4,pc}
 @ 0x21d30c6
@@ -12622,7 +12622,7 @@ branch_21d6d56: @ 21d6d56 :thumb
 	cmp     r1, #0x3
 	bcc     branch_21d6d32
 	mov     r0, #0x4c
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	ldr     r7, [pc, #0xb0] @ 0x21d6e18, (=0x21d7958)
 	str     r0, [r5, #0x0]
 	mov     r4, #0x0
@@ -12640,7 +12640,7 @@ branch_21d6d6c: @ 21d6d6c :thumb
 	lsr     r1, r1, #16
 	mov     r2, #0x0
 	mov     r3, #0x2
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	add     r6, r5, r6
 	ldr     r0, [r6, #0x1c]
 	add     r1, sp, #0x34
@@ -12723,6 +12723,7 @@ Function_21d6e28: @ 21d6e28 :thumb
 	pop     {r4,pc}
 @ 0x21d6e40
 
+
 .thumb
 Function_21d6e40: @ 21d6e40 :thumb
 	push    {r3,lr}
@@ -12730,38 +12731,36 @@ Function_21d6e40: @ 21d6e40 :thumb
 	beq     branch_21d6e4c
 	ldr     r0, [r0, #0x0]
 	bl      Function_2008a94
-.thumb
 branch_21d6e4c: @ 21d6e4c :thumb
 	pop     {r3,pc}
 @ 0x21d6e4e
 
 
 .align 2, 0
-
-
 .thumb
 Function_21d6e50: @ 21d6e50 :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	beq     branch_21d6e74
+
 	blx     Function_20b2628
 	bl      Call_G3X_Reset
 	blx     Function_20a73c0
+
 	ldr     r0, [r4, #0x0]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	bl      Function_21d725c
+
 	mov     r0, #0x1
 	mov     r1, #0x0
 	bl      Function_20241bc
-.thumb
+
 branch_21d6e74: @ 21d6e74 :thumb
 	pop     {r4,pc}
 @ 0x21d6e76
 
 
 .align 2, 0
-
-
 .thumb
 Function_21d6e78: @ 21d6e78 :thumb
 	push    {r3-r7,lr}
@@ -12776,9 +12775,7 @@ Function_21d6e78: @ 21d6e78 :thumb
 	cmp     r2, #0x5
 	bls     branch_21d6e90
 	b       branch_21d6fe2
-@ 0x21d6e90
 
-.thumb
 branch_21d6e90: @ 21d6e90 :thumb
 	add     r2, r2, r2
 	add     r2, pc

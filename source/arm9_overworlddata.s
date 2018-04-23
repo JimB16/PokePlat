@@ -546,9 +546,9 @@ branch_203a2f8: @ 203a2f8 :thumb
 
 
 .thumb
-.globl Function_203a2fc
-Function_203a2fc: @ 203a2fc :thumb
-	ldr     r1, [pc, #0xc] @ 0x203a30c, (=0x11f)
+.globl TestIfMapIsTrophyGarden
+TestIfMapIsTrophyGarden: @ 203a2fc :thumb
+	ldr     r1, =MapNr_TrophyGarden
 	cmp     r0, r1
 	bne     branch_203a306
 	mov     r0, #0x1
@@ -560,7 +560,7 @@ branch_203a306: @ 203a306 :thumb
 @ 0x203a30a
 
 .align 2
-.word 0x11f @ 0x203a30c
+.pool
 
 
 

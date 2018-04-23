@@ -369,7 +369,7 @@ branch_22563e2: @ 22563e2 :thumb
 	bl      InitEncryptPkmnData
 	mov     r7, r0
 	mov     r0, r4
-	bl      Function_2079d40
+	bl      Function_2079d40_GetPokeIconGraphicNr
 	str     r0, [r5, #0x4]
 	mov     r0, r4
 	mov     r1, #0x5
@@ -1201,7 +1201,7 @@ branch_2256a00: @ 2256a00 :thumb
 	ldrh    r0, [r4, #0x8]
 	ldrb    r1, [r4, #0x13]
 	ldrb    r2, [r4, #0x12]
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	mov     r0, r5
 	add     r0, #0x9c

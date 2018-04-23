@@ -113,7 +113,7 @@ branch_2256256: @ 2256256 :thumb
 	bl      GetPkmnData
 	strh    r0, [r4, #0x10]
 	mov     r0, r5
-	bl      Function_2079d40
+	bl      Function_2079d40_GetPokeIconGraphicNr
 	str     r0, [r4, #0x8]
 	mov     r0, r5
 	mov     r1, #0x9
@@ -835,7 +835,7 @@ branch_22566a4: @ 22566a4 :thumb
 	ldrh    r0, [r4, #0x8]
 	ldrh    r1, [r4, #0xc]
 	mov     r2, #0x0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	mov     r0, #0x4d
 	lsl     r0, r0, #2

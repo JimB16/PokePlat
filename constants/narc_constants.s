@@ -24,6 +24,7 @@ Call_LoadFromNARC_AddNewSeqScript: r1 (r2:filenr?)
 .equ SubSeq_Narc,      0x1      @ battle/skill/sub_seq.narc
 .equ PlPersonal_Narc,  0x2      @ poketool/personal/pl_personal.narc
 .equ PlGrowTbl_Narc,   0x3      @ poketool/personal/pl_growtbl.narc
+.equ PlPokegra_Narc,   0x4      @ poketool/pokegra/pl_pokegra.narc
 .equ PlBattBg_Narc,    0x7      @ battle/graphic/pl_batt_bg.narc
 .equ PlWazaTbl_Narc,   0x9      @ poketool/waza/pl_waza_tbl.narc
 .equ ScrSeq_Narc,      0xa      @ fielddata/script/scr_seq.narc
@@ -67,6 +68,8 @@ Call_LoadFromNARC_AddNewSeqScript: r1 (r2:filenr?)
 .equ PlMsg_Narc_392,        392
 .equ PlMsg_Narc_412,        412 @ PokemonNames
 .equ PlMsg_Narc_421,        421 @ MysteryGift-Options
+.equ PlMsg_Narc_422,        422
+.equ PlMsg_Narc_427,        427
 .equ PlMsg_Narc_433,        433 @ PlaceNames
 .equ PlMsg_Narc_436,        436
 .equ PlMsg_Narc_437,        437
@@ -200,6 +203,8 @@ Call_LoadFromNARC_AddNewSeqScript: r1 (r2:filenr?)
 .equ BattRecGra_Narc,  0xa2     @ resource/eng/batt_rec/batt_rec_gra.narc
 .equ Worldtimer_Narc,  0xa3     @ graphic/worldtimer.narc
 .equ Manene_Narc,      0xa4     @ arc/manene.narc
+.equ Pokegra_Narc,     0xa5     @ poketool/pokegra/pokegra.narc
+.equ Otherpoke_Narc,   0xa6     @ poketool/pokegra/otherpoke.narc
 .equ DpHeight_Narc,    0xa7     @ poketool/pokegra/dp_height.narc
 .equ DpHeightO_Narc,   0xa8     @ poketool/pokegra/dp_height_o.narc
 .equ LobbyNews_Narc,   0xa9     @ graphic/lobby_news.narc

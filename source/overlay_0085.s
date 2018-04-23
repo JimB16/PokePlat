@@ -1193,7 +1193,7 @@ branch_2241d06: @ 2241d06 :thumb
 .thumb
 Function_2241d10: @ 2241d10 :thumb
 	push    {r4,lr}
-	ldr     r1, [pc, #0xd0] @ 0x2241de4, (=0x21bf67c)
+	ldr     r1, [pc, #0xd0] @ 0x2241de4, (=RAM_21bf67c)
 	mov     r4, r0
 	ldr     r3, [r1, #0x44]
 	mov     r2, #0x40
@@ -1312,7 +1312,7 @@ branch_2241dc4: @ 2241dc4 :thumb
 	mov     r0, #0x2
 	tst     r0, r1
 	bne     branch_2241dd4
-	ldr     r0, [pc, #0x18] @ 0x2241de8, (=0x21bf6bc)
+	ldr     r0, [pc, #0x18] @ 0x2241de8, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	beq     branch_2241de0
@@ -1331,8 +1331,8 @@ branch_2241de0: @ 2241de0 :thumb
 	pop     {r4,pc}
 @ 0x2241de4
 
-.word 0x21bf67c @ 0x2241de4
-.word 0x21bf6bc @ 0x2241de8
+.word RAM_21bf67c @ 0x2241de4
+.word RAM_21bf6bc @ 0x2241de8
 .thumb
 Function_2241dec: @ 2241dec :thumb
 	push    {r3,lr}

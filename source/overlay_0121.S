@@ -81,7 +81,7 @@ Function_121_21d0d80: @ 21d0d80 :thumb
 	mov     r1, #0x0
 	strb    r1, [r0, #0x5]
 	bl      Function_201ffe8
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x1
 	bl      Function_2002ac8
 	mov     r0, #0x0

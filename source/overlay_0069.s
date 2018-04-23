@@ -647,7 +647,7 @@ Function_225cb6c: @ 225cb6c :thumb
 Function_225cbe4: @ 225cbe4 :thumb
 	push    {r3-r7,lr}
 	mov     lr, r0
-	ldr     r0, [pc, #0x60] @ 0x225cc4c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x60] @ 0x225cc4c, (=RAM_21bf6bc)
 	mov     r12, r1
 	ldrh    r5, [r0, #0x1c]
 	mov     r1, #0x0
@@ -680,7 +680,7 @@ branch_225cc14: @ 225cc14 :thumb
 	mov     r0, r3
 	and     r0, r1
 	str     r0, [r6, #0x0]
-	ldr     r0, [pc, #0x2c] @ 0x225cc4c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x2c] @ 0x225cc4c, (=RAM_21bf6bc)
 	ldrh    r3, [r0, #0x1e]
 	ldr     r0, [pc, #0x2c] @ 0x225cc50, (=0xffff)
 	cmp     r3, r0
@@ -711,7 +711,7 @@ branch_225cc3c: @ 225cc3c :thumb
 	pop     {r3-r7,pc}
 @ 0x225cc4c
 
-.word 0x21bf6bc @ 0x225cc4c
+.word RAM_21bf6bc @ 0x225cc4c
 .word 0xffff @ 0x225cc50
 .thumb
 Function_225cc54: @ 225cc54 :thumb
@@ -1264,7 +1264,7 @@ Function_225cf9c: @ 225cf9c :thumb
 
 .thumb
 branch_225cfc0: @ 225cfc0 :thumb
-	ldr     r2, [pc, #0x60] @ 0x225d024, (=0x21bf67c)
+	ldr     r2, [pc, #0x60] @ 0x225d024, (=RAM_21bf67c)
 	lsl     r0, r0, #9
 	ldr     r1, [r2, #0x48]
 	tst     r0, r1
@@ -1314,7 +1314,7 @@ branch_225d016: @ 225d016 :thumb
 
 .word 0xc3e0 @ 0x225d01c
 .word 0x5dd @ 0x225d020
-.word 0x21bf67c @ 0x225d024
+.word RAM_21bf67c @ 0x225d024
 .word 0xc40c @ 0x225d028
 .word 0x5bf @ 0x225d02c
 .thumb
@@ -3093,7 +3093,7 @@ Function_225dc54: @ 225dc54 :thumb
 	mov     r4, r0
 	mov     r0, #0x0
 	str     r0, [r4, #0x0]
-	ldr     r0, [pc, #0xac] @ 0x225dd0c, (=0x21bf6bc)
+	ldr     r0, [pc, #0xac] @ 0x225dd0c, (=RAM_21bf6bc)
 	ldrh    r1, [r0, #0x20]
 	cmp     r1, #0x0
 	beq     branch_225dc9c
@@ -3121,7 +3121,7 @@ branch_225dc82: @ 225dc82 :thumb
 	str     r0, [r4, #0x14]
 	str     r0, [r4, #0x18]
 	str     r0, [r4, #0x0]
-	ldr     r0, [pc, #0x7c] @ 0x225dd0c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x7c] @ 0x225dd0c, (=RAM_21bf6bc)
 	ldrh    r1, [r0, #0x1c]
 	str     r1, [r4, #0x8]
 	ldrh    r0, [r0, #0x1e]
@@ -3130,7 +3130,7 @@ branch_225dc82: @ 225dc82 :thumb
 	str     r0, [r4, #0x18]
 .thumb
 branch_225dc9c: @ 225dc9c :thumb
-	ldr     r0, [pc, #0x6c] @ 0x225dd0c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x6c] @ 0x225dd0c, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x22]
 	cmp     r0, #0x0
 	beq     branch_225dcf4
@@ -3177,7 +3177,7 @@ branch_225dcc2: @ 225dcc2 :thumb
 	ldr     r0, [sp, #0x8]
 	add     sp, #0x18
 	str     r0, [r4, #0x14]
-	ldr     r0, [pc, #0x20] @ 0x225dd0c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x20] @ 0x225dd0c, (=RAM_21bf6bc)
 	ldrh    r1, [r0, #0x1c]
 	str     r1, [r4, #0x8]
 	ldrh    r0, [r0, #0x1e]
@@ -3203,7 +3203,7 @@ branch_225dcfe: @ 225dcfe :thumb
 	pop     {r4,pc}
 @ 0x225dd0c
 
-.word 0x21bf6bc @ 0x225dd0c
+.word RAM_21bf6bc @ 0x225dd0c
 .thumb
 Function_225dd10: @ 225dd10 :thumb
 	cmp     r1, #0x0

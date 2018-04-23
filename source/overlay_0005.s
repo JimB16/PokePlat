@@ -1670,7 +1670,7 @@ Function_21d1968: @ 21d1968 :thumb
 	mov     r0, #0x1
 	mov     r1, r0
 	bl      Function_201ff0c
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	bl      Function_21d5878
 	str     r0, [r4, #OverWorldData_44]
 	bl      Function_21d1578
@@ -51852,7 +51852,7 @@ Function_21e6de8: @ 21e6de8 :thumb
 	mov     r5, #0x0
 branch_21e6e20: @ 21e6e20 :thumb
 	mov     r0, r4
-	bl      Function_201d30c
+	bl      ARNG_Step
 	mov     r4, r0
 
 	mov     r0, r6
@@ -52824,6 +52824,7 @@ branch_21e7490: @ 21e7490 :thumb
 	ldr     r0, [sp, #0x14]
 	cmp     r0, r1
 	bne     branch_21e7564
+
 	mov     r0, r4
 	mov     r1, #0x98
 	mov     r2, #0x0
@@ -52834,20 +52835,23 @@ branch_21e7490: @ 21e7490 :thumb
 	bl      Function_2017070
 	cmp     r5, r0
 	bne     branch_21e7564
+
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
 	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	beq     branch_21e7564
+
 branch_21e7550: @ 21e7550 :thumb
 	mov     r0, r7
-	bl      Function_201d30c
+	bl      ARNG_Step
 	mov     r7, r0
 	ldr     r0, [sp, #0x2c]
 	mov     r1, r7
 	bl      CheckIfShinyPkmn
 	cmp     r0, #0x0
 	bne     branch_21e7550
+
 branch_21e7564: @ 21e7564 :thumb
 	mov     r2, #0x1
 	str     r2, [sp, #0x0]

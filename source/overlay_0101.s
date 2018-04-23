@@ -2025,7 +2025,7 @@ branch_21d1cb8: @ 21d1cb8 :thumb
 .thumb
 Function_21d1cbc: @ 21d1cbc :thumb
 	push    {r4,lr}
-	ldr     r1, [pc, #0xec] @ 0x21d1dac, (=0x21bf67c)
+	ldr     r1, [pc, #0xec] @ 0x21d1dac, (=RAM_21bf67c)
 	mov     r4, r0
 	ldr     r2, [r1, #0x48]
 	ldr     r1, [r4, #0x7c]
@@ -2149,7 +2149,7 @@ branch_21d1da8: @ 21d1da8 :thumb
 	pop     {r4,pc}
 @ 0x21d1dac
 
-.word 0x21bf67c @ 0x21d1dac
+.word RAM_21bf67c @ 0x21d1dac
 .word 0x626 @ 0x21d1db0
 .thumb
 Function_21d1db4: @ 21d1db4 :thumb
@@ -2985,7 +2985,7 @@ branch_21d22ec: @ 21d22ec :thumb
 .thumb
 Function_21d22f0: @ 21d22f0 :thumb
 	push    {r4,lr}
-	ldr     r1, [pc, #0xec] @ 0x21d23e0, (=0x21bf67c)
+	ldr     r1, [pc, #0xec] @ 0x21d23e0, (=RAM_21bf67c)
 	mov     r4, r0
 	ldr     r2, [r1, #0x48]
 	ldr     r1, [r4, #0x7c]
@@ -3109,7 +3109,7 @@ branch_21d23dc: @ 21d23dc :thumb
 	pop     {r4,pc}
 @ 0x21d23e0
 
-.word 0x21bf67c @ 0x21d23e0
+.word RAM_21bf67c @ 0x21d23e0
 .word 0x626 @ 0x21d23e4
 .thumb
 Function_21d23e8: @ 21d23e8 :thumb
@@ -3767,7 +3767,7 @@ branch_21d284c: @ 21d284c :thumb
 .thumb
 Function_21d2850: @ 21d2850 :thumb
 	push    {r4,lr}
-	ldr     r1, [pc, #0xf4] @ 0x21d2948, (=0x21bf67c)
+	ldr     r1, [pc, #0xf4] @ 0x21d2948, (=RAM_21bf67c)
 	mov     r4, r0
 	ldr     r2, [r1, #0x48]
 	ldr     r1, [r4, #0x7c]
@@ -3898,7 +3898,7 @@ branch_21d2942: @ 21d2942 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d2948
+.word RAM_21bf67c @ 0x21d2948
 .word 0x5f5 @ 0x21d294c
 .thumb
 Function_21d2950: @ 21d2950 :thumb
@@ -8756,7 +8756,7 @@ branch_21d46ba: @ 21d46ba :thumb
 
 .thumb
 branch_21d46c4: @ 21d46c4 :thumb
-	ldr     r1, [pc, #0x44] @ 0x21d470c, (=0x21bf67c)
+	ldr     r1, [pc, #0x44] @ 0x21d470c, (=RAM_21bf67c)
 	mov     r0, #0x3
 	ldr     r2, [r1, #0x44]
 	ldr     r1, [pc, #0x44] @ 0x21d4710, (=0xc03)
@@ -8797,7 +8797,7 @@ branch_21d4702: @ 21d4702 :thumb
 
 .word 0x62d @ 0x21d4704
 .word 0xc350 @ 0x21d4708
-.word 0x21bf67c @ 0x21d470c
+.word RAM_21bf67c @ 0x21d470c
 .word 0xc03 @ 0x21d4710
 .thumb
 Function_21d4714: @ 21d4714 :thumb
@@ -11116,7 +11116,7 @@ branch_21d55f0: @ 21d55f0 :thumb
 
 .thumb
 Function_21d55f8: @ 21d55f8 :thumb
-	ldr     r1, [pc, #0x18] @ 0x21d5614, (=0x21bf67c)
+	ldr     r1, [pc, #0x18] @ 0x21d5614, (=RAM_21bf67c)
 	ldr     r1, [r1, #0x48]
 	and     r1, r0
 	cmp     r1, r0
@@ -11143,7 +11143,7 @@ branch_21d560e: @ 21d560e :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d5614
+.word RAM_21bf67c @ 0x21d5614
 .thumb
 Function_21d5618: @ 21d5618 :thumb
 	mov     r2, #0x3

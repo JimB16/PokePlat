@@ -262,7 +262,7 @@ branch_21d0f28: @ 21d0f28 :thumb
 	strh    r2, [r1, #0x0]
 	mov     r1, r0
 	bl      Function_201ff0c
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -305,7 +305,7 @@ Function_21d0fd0: @ 21d0fd0 :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0x8]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x4]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x21d0ffc, (=0x27e0000)
@@ -319,8 +319,12 @@ Function_21d0fd0: @ 21d0fd0 :thumb
 
 .word 0x27e0000 @ 0x21d0ffc
 .word 0x3ff8 @ 0x21d1000
+
+
+
 .thumb
-Function_21d1004: @ 21d1004 :thumb
+.globl Function_119_21d1004
+Function_119_21d1004: @ 21d1004 :thumb
 	push    {r3,lr}
 	bl      Call_G3X_Reset
 	bl      Function_201469c
@@ -328,8 +332,8 @@ Function_21d1004: @ 21d1004 :thumb
 	ble     branch_21d101a
 	bl      Call_G3X_Reset
 	blx     Function_20a73c0
-.thumb
 branch_21d101a: @ 21d101a :thumb
+
 	bl      Function_20146c0
 	mov     r0, #0x1
 	mov     r1, #0x0
@@ -1475,7 +1479,7 @@ Function_21d1858: @ 21d1858 :thumb
 	add     r0, sp, #0x3c
 	mov     r1, r4
 	mov     r2, #0x2
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	lsl     r2, r6, #16
 	ldr     r0, [r5, #0x40]
 	add     r1, sp, #0x14
@@ -1556,13 +1560,14 @@ Function_21d190c: @ 21d190c :thumb
 	bx      r3
 @ 0x21d1916
 
-
 .align 2
-
-
 .word Function_2007dec+1 @ 0x21d1918
+
+
+
 .thumb
-Function_21d191c: @ 21d191c :thumb
+.globl Function_119_21d191c
+Function_119_21d191c: @ 21d191c :thumb
 	push    {r3,lr}
 	ldr     r1, [r0, #0x5c]
 	lsl     r2, r1, #2
@@ -1572,11 +1577,11 @@ Function_21d191c: @ 21d191c :thumb
 	pop     {r3,pc}
 @ 0x21d192a
 
-
 .align 2
-
-
 .word 0x21d26ac @ 0x21d192c
+
+
+
 .thumb
 Function_21d1930: @ 21d1930 :thumb
 	push    {r4-r6,lr}

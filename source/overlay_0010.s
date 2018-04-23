@@ -2819,7 +2819,7 @@ Function_2220c64: @ 2220c64 :thumb
 	ldr     r0, [r4, #0xc]
 	bl      Function_201c2b8
 	ldr     r0, [r4, #0x8]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r3, [pc, #0xc] @ 0x2220c8c, (=0x27e0000)
@@ -5067,7 +5067,7 @@ branch_2221d56: @ 2221d56 :thumb
 	ldr     r1, [sp, #0x4]
 	mov     r4, r0
 	add     r7, r1, r2
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r1, #0x85
 	lsl     r1, r1, #2
 	str     r0, [r7, r1]
@@ -5376,7 +5376,7 @@ branch_2221f78: @ 2221f78 :thumb
 	add     r2, #0xb
 	ldrb    r1, [r3, r1]
 	ldrb    r2, [r3, r2]
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r7, r4]
 	bl      Function_200d41c

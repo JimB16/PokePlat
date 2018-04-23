@@ -13740,7 +13740,7 @@ branch_2231192: @ 2231192 :thumb
 	mov     r1, #0x0
 	ldr     r0, [sp, #0x8]
 	mov     r2, r1
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [pc, #0x28] @ 0x2231218, (=0x2dcc)
 	.hword  0x1cc9 @ add r1, r1, #0x3
@@ -21042,7 +21042,7 @@ Function_2234278: @ 2234278 :thumb
 	mov     r2, r7
 	bl      Function_2079d8c
 	mov     r1, r0
-	mov     r0, #0x13           @ poketool/icongra/pl_poke_icon.narc
+	mov     r0, #PlPokeIcon_Narc           @ poketool/icongra/pl_poke_icon.narc
 	add     r2, sp, #0x0
 	mov     r3, #0x4e
 	bl      Function_22341b4
@@ -21064,7 +21064,7 @@ Function_2234278: @ 2234278 :thumb
 	mov     r0, r4
 	mov     r1, r7
 	mov     r2, r5
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [sp, #0x1c]
 	add     r1, #0x8
@@ -21129,7 +21129,7 @@ branch_2234316: @ 2234316 :thumb
 	str     r0, [r4, #0x8]
 	mov     r0, r6
 	mov     r2, r7
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	add     r0, #0x8
 	add     sp, #0x8
 	str     r0, [r4, #0x4]
@@ -23365,20 +23365,16 @@ Function_2235408: @ 2235408 :thumb
 	add     sp, #0xc
 	mov     r0, #0x3
 	pop     {r4-r7,pc}
-@ 0x223542e
 
-.thumb
 branch_223542e: @ 223542e :thumb
 	ldr     r0, [sp, #0x8]
-	bl      Function_202f0bc
+	bl      Function_202f0bc_CheckRTCTime
 	cmp     r0, #0x0
 	bne     branch_223543e
 	add     sp, #0xc
 	mov     r0, #0x4
 	pop     {r4-r7,pc}
-@ 0x223543e
 
-.thumb
 branch_223543e: @ 223543e :thumb
 	bl      Function_223635c
 	mov     r1, r0
@@ -23462,6 +23458,9 @@ branch_22354b2: @ 22354b2 :thumb
 .word 0x2a300 @ 0x22354b8
 .word 0x15180 @ 0x22354bc
 .word 0xe880 @ 0x22354c0
+
+
+
 .thumb
 Function_22354c4: @ 22354c4 :thumb
 	push    {r3-r5,lr}
@@ -23626,7 +23625,7 @@ branch_22355d2: @ 22355d2 :thumb
 	pop     {r3-r5,pc}
 
 branch_22355f0: @ 22355f0 :thumb
-	ldr     r0, [pc, #0x28] @ 0x223561c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x28] @ 0x223561c, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	bne     branch_2235600
@@ -23651,7 +23650,7 @@ branch_2235610: @ 2235610 :thumb
 
 .word 0x5dc @ 0x2235614
 .word 0x474 @ 0x2235618
-.word 0x21bf6bc @ 0x223561c
+.word RAM_21bf6bc @ 0x223561c
 .word RAM_21bf67c @ 0x2235620
 
 
@@ -24024,7 +24023,7 @@ branch_22358b0: @ 22358b0 :thumb
 	b       branch_2235c8a
 
 branch_22358c2: @ 22358c2 :thumb
-	ldr     r0, [pc, #0x164] @ 0x2235a28, (=0x21bf6bc)
+	ldr     r0, [pc, #0x164] @ 0x2235a28, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	bne     branch_22358d2
@@ -24216,7 +24215,7 @@ branch_22359bc: @ 22359bc :thumb
 .word 0xe880 @ 0x2235a1c
 .word Function_22353cc+1 @ 0x2235a20
 .word 0xe88c @ 0x2235a24
-.word 0x21bf6bc @ 0x2235a28
+.word RAM_21bf6bc @ 0x2235a28
 .word RAM_21bf67c @ 0x2235a2c
 .word 0x498 @ 0x2235a30
 .word 0xe898 @ 0x2235a34
@@ -24560,7 +24559,7 @@ branch_2235c30: @ 2235c30 :thumb
 	b       branch_2235c8a
 
 branch_2235c4e: @ 2235c4e :thumb
-	ldr     r0, [pc, #0x70] @ 0x2235cc0, (=0x21bf6bc)
+	ldr     r0, [pc, #0x70] @ 0x2235cc0, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	bne     branch_2235c5e
@@ -24620,7 +24619,7 @@ branch_2235c94: @ 2235c94 :thumb
 .word 0xe898 @ 0x2235cb4
 .word 0x61b @ 0x2235cb8
 .word 0x42c @ 0x2235cbc
-.word 0x21bf6bc @ 0x2235cc0
+.word RAM_21bf6bc @ 0x2235cc0
 .word RAM_21bf67c @ 0x2235cc4
 
 
@@ -30299,7 +30298,7 @@ Function_2237ef8: @ 2237ef8 :thumb
 	lsr     r1, r1, #16
 	lsr     r2, r2, #24
 	mov     r3, #0x2
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	mov     r1, #0x0
 	mov     r0, r6
 	mov     r2, r1

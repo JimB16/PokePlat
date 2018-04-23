@@ -75,6 +75,7 @@ ContinueGameLoop: @ 21d0de0 :thumb
 	push    {r4,lr}
 	bl      LoadPtrToOverWorldDataIn18
 	ldr     r4, [r0, #0x8]
+
 	mov     r0, #0x4d
 	mov     r1, r4
 	mov     r2, #0x1
@@ -149,7 +150,7 @@ ContinueGameDiaryLoop: @ 21d0e34 :thumb
 	beq     branch_21d0e68
 
 	mov     r0, r5
-	bl      Function_2025d40
+	bl      Function_2025d40_CheckRTCTime
 	cmp     r0, #0x0
 	bne     branch_21d0e82
 
@@ -199,6 +200,7 @@ Function_21d0eac: @ 21d0eac :thumb
 	push    {r3-r7,lr}
 	mov     r5, r1
 	str     r0, [sp, #0x0]
+
 	mov     r0, r5
 	mov     r6, r2
 	bl      LoadVariableAreaAdress_0
@@ -216,7 +218,7 @@ Function_21d0eac: @ 21d0eac :thumb
 	mov     r2, r0
 	mov     r0, r4
 	mov     r1, #0x1
-	bl      Function_202b40c
+	bl      VarArea11_OneAdvanceRNG
 
 	mov     r0, r5
 	bl      Function_206c008

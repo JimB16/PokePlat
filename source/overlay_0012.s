@@ -56396,7 +56396,7 @@ branch_2238144: @ 2238144 :thumb
 	lsr     r1, r1, #16
 	lsr     r2, r2, #24
 	lsr     r3, r3, #24
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r5, #0x0]
 	lsl     r0, r0, #2
 	add     r0, r5, r0

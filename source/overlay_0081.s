@@ -84,7 +84,7 @@ Function_81_21d0d80: @ 21d0d80 :thumb
 	ldr     r0, [pc, #0x30] @ 0x21d0e6c, (=0x21d0f01)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	bl      Function_2039734
 	mov     r0, #0x10
 	mov     r1, #0x1
@@ -537,7 +537,7 @@ branch_21d1182: @ 21d1182 :thumb
 .thumb
 Function_21d1188: @ 21d1188 :thumb
 	push    {r3,lr}
-	ldr     r1, [pc, #0x78] @ 0x21d1204, (=0x21bf67c)
+	ldr     r1, [pc, #0x78] @ 0x21d1204, (=RAM_21bf67c)
 	ldr     r3, [r1, #0x48]
 	mov     r1, #0x20
 	mov     r2, r3
@@ -601,7 +601,7 @@ branch_21d11de: @ 21d11de :thumb
 	pop     {r3,pc}
 
 branch_21d11ea: @ 21d11ea :thumb
-	ldr     r0, [pc, #0x18] @ 0x21d1204, (=0x21bf67c)
+	ldr     r0, [pc, #0x18] @ 0x21d1204, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x8
 	tst     r0, r1
@@ -619,7 +619,7 @@ branch_21d1200: @ 21d1200 :thumb
 	pop     {r3,pc}
 @ 0x21d1204
 
-.word 0x21bf67c @ 0x21d1204
+.word RAM_21bf67c @ 0x21d1204
 .word 0x105c @ 0x21d1208
 .thumb
 Function_21d120c: @ 21d120c :thumb

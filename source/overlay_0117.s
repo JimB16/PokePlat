@@ -621,7 +621,7 @@ Function_2260668: @ 2260668 :thumb
 	mov     r1, #0x1
 	strb    r1, [r0, #0x5]
 	bl      Function_201ffe8
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -1233,7 +1233,7 @@ Function_2260da0: @ 2260da0 :thumb
 	mov     r0, r4
 	add     r0, #0x8c
 	ldr     r0, [r0, #0x0]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [pc, #0x40] @ 0x2260e04, (=0x1454)
 	ldrb    r1, [r4, r0]
 	cmp     r1, #0x1
@@ -4940,7 +4940,7 @@ branch_22627e8: @ 22627e8 :thumb
 
 .thumb
 branch_2262800: @ 2262800 :thumb
-	ldr     r2, [pc, #0x13c] @ 0x2262940, (=0x21bf6bc)
+	ldr     r2, [pc, #0x13c] @ 0x2262940, (=RAM_21bf6bc)
 	mov     r0, r1
 	ldrh    r3, [r2, #0x1c]
 	sub     r0, #0x38
@@ -5102,7 +5102,7 @@ branch_2262934: @ 2262934 :thumb
 
 .word 0x1758 @ 0x2262938
 .word 0x2fb8 @ 0x226293c
-.word 0x21bf6bc @ 0x2262940
+.word RAM_21bf6bc @ 0x2262940
 .word 0x2fbc @ 0x2262944
 .word 0x576 @ 0x2262948
 .word 0x2fc8 @ 0x226294c

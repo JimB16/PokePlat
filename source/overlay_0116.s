@@ -2511,7 +2511,7 @@ Function_2261794: @ 2261794 :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0x5c]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x58]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x22617bc, (=0x27e0000)

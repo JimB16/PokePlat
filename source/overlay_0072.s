@@ -2505,7 +2505,7 @@ branch_223ea0a: @ 223ea0a :thumb
 .thumb
 Function_223ea18: @ 223ea18 :thumb
 	push    {r3-r5,lr}
-	ldr     r1, [pc, #0xa8] @ 0x223eac4, (=0x21bf6bc)
+	ldr     r1, [pc, #0xa8] @ 0x223eac4, (=RAM_21bf6bc)
 	mov     r4, r0
 	ldrh    r0, [r1, #0x1c]
 	ldr     r3, [pc, #0xa4] @ 0x223eac8, (=0xffff)
@@ -2542,7 +2542,7 @@ branch_223ea4c: @ 223ea4c :thumb
 	blt     branch_223ea82
 	cmp     r3, #0x28
 	bgt     branch_223ea82
-	ldr     r0, [pc, #0x68] @ 0x223eac4, (=0x21bf6bc)
+	ldr     r0, [pc, #0x68] @ 0x223eac4, (=RAM_21bf6bc)
 	ldrh    r2, [r0, #0x1e]
 	ldr     r0, [pc, #0x70] @ 0x223ead0, (=0x5cac)
 	ldr     r1, [r4, r0]
@@ -2574,7 +2574,7 @@ branch_223ea70: @ 223ea70 :thumb
 branch_223ea82: @ 223ea82 :thumb
 	cmp     r3, #0x28
 	bgt     branch_223eab2
-	ldr     r0, [pc, #0x3c] @ 0x223eac4, (=0x21bf6bc)
+	ldr     r0, [pc, #0x3c] @ 0x223eac4, (=RAM_21bf6bc)
 	ldrh    r2, [r0, #0x1e]
 	ldr     r0, [pc, #0x44] @ 0x223ead0, (=0x5cac)
 	ldr     r1, [r4, r0]
@@ -2603,7 +2603,7 @@ branch_223ea9e: @ 223ea9e :thumb
 	bl      Function_223ead8
 .thumb
 branch_223eab2: @ 223eab2 :thumb
-	ldr     r1, [pc, #0x10] @ 0x223eac4, (=0x21bf6bc)
+	ldr     r1, [pc, #0x10] @ 0x223eac4, (=RAM_21bf6bc)
 	ldr     r0, [pc, #0x14] @ 0x223eacc, (=0x5ca8)
 	ldrh    r2, [r1, #0x1c]
 	str     r2, [r4, r0]
@@ -2617,7 +2617,7 @@ branch_223eab2: @ 223eab2 :thumb
 .align 2
 
 
-.word 0x21bf6bc @ 0x223eac4
+.word RAM_21bf6bc @ 0x223eac4
 .word 0xffff @ 0x223eac8
 .word 0x5ca8 @ 0x223eacc
 .word 0x5cac @ 0x223ead0

@@ -1378,7 +1378,7 @@ Function_21d1864: @ 21d1864 :thumb
 	push    {r3,r4,lr}
 	add     sp, #-0x4
 	mov     r4, r0
-	ldr     r0, [pc, #0x114] @ 0x21d1980, (=0x21bf67c)
+	ldr     r0, [pc, #0x114] @ 0x21d1980, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	tst     r0, r1
@@ -1528,7 +1528,7 @@ branch_21d197a: @ 21d197a :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d1980
+.word RAM_21bf67c @ 0x21d1980
 .word 0x4a48 @ 0x21d1984
 .word 0x5f2 @ 0x21d1988
 .word 0x4a3c @ 0x21d198c
@@ -1667,7 +1667,7 @@ Function_21d1a44: @ 21d1a44 :thumb
 	ldr     r0, [r5, r0]
 	cmp     r0, #0x0
 	beq     branch_21d1a9c
-	ldr     r0, [pc, #0x104] @ 0x21d1b64, (=0x21bf67c)
+	ldr     r0, [pc, #0x104] @ 0x21d1b64, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0xc3
 	tst     r0, r1
@@ -1689,7 +1689,7 @@ branch_21d1a78: @ 21d1a78 :thumb
 	ldr     r0, [r5, r0]
 	cmp     r0, #0x0
 	beq     branch_21d1a9c
-	ldr     r0, [pc, #0xe0] @ 0x21d1b64, (=0x21bf67c)
+	ldr     r0, [pc, #0xe0] @ 0x21d1b64, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0xc3
 	tst     r0, r1
@@ -1814,7 +1814,7 @@ branch_21d1b52: @ 21d1b52 :thumb
 
 
 .word 0x4a3c @ 0x21d1b60
-.word 0x21bf67c @ 0x21d1b64
+.word RAM_21bf67c @ 0x21d1b64
 .word 0x5f2 @ 0x21d1b68
 .word 0x4a50 @ 0x21d1b6c
 .word 0x4a54 @ 0x21d1b70
@@ -1973,7 +1973,7 @@ Function_21d1c64: @ 21d1c64 :thumb
 	beq     branch_21d1c98
 .thumb
 branch_21d1c7e: @ 21d1c7e :thumb
-	ldr     r0, [pc, #0x88] @ 0x21d1d08, (=0x21bf67c)
+	ldr     r0, [pc, #0x88] @ 0x21d1d08, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0xc3
 	tst     r0, r1
@@ -2054,7 +2054,7 @@ branch_21d1cf8: @ 21d1cf8 :thumb
 
 
 .word 0x4a48 @ 0x21d1d04
-.word 0x21bf67c @ 0x21d1d08
+.word RAM_21bf67c @ 0x21d1d08
 .word 0x5f2 @ 0x21d1d0c
 .word 0x4a56 @ 0x21d1d10
 .thumb
@@ -2377,7 +2377,7 @@ Function_21d1f24: @ 21d1f24 :thumb
 	beq     branch_21d1f58
 .thumb
 branch_21d1f3e: @ 21d1f3e :thumb
-	ldr     r0, [pc, #0x88] @ 0x21d1fc8, (=0x21bf67c)
+	ldr     r0, [pc, #0x88] @ 0x21d1fc8, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0xc3
 	tst     r0, r1
@@ -2452,7 +2452,7 @@ branch_21d1fba: @ 21d1fba :thumb
 @ 0x21d1fc4
 
 .word 0x4a48 @ 0x21d1fc4
-.word 0x21bf67c @ 0x21d1fc8
+.word RAM_21bf67c @ 0x21d1fc8
 .word 0x5f2 @ 0x21d1fcc
 .thumb
 Function_21d1fd0: @ 21d1fd0 :thumb

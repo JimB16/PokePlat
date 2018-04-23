@@ -307,13 +307,12 @@ Block B
 .equ PKMNDATA_SEALCOORDINATES,  0xab
 .equ PKMNDATA_ISPKMNOREGG,  0xac
 .equ PKMNDATA_ad,  0xad
-.equ PKMNDATA_ae,  0xae
+.equ PKMNDATA_SPECIESOREGG,  0xae
 .equ PKMNDATA_af,  0xaf
 .equ PKMNDATA_b1,  0xb1
 .equ PKMNDATA_b2,  0xb2
 .equ PKMNDATA_b3,  0xb3
 @ a0, ac
-@ ? = 0xae
 
 
 @ Constants for LoadPkmnBaseData-function (arm9_pkmndata.s) r1
@@ -601,20 +600,20 @@ pixw pix10_2,10,2 ; variable pixo is macro as parameters
 .equ DMA0_CR,               0x040000B8
 
 @ nds/input.h
-.equ KEY_A,                 (1<<0)  @ Keypad A button.
-.equ KEY_B,                 (1<<1)  @ Keypad B button.
-.equ KEY_SELECT,            (1<<2)  @ Keypad SELECT button.
-.equ KEY_START,             (1<<3)  @ Keypad START button.
-.equ KEY_RIGHT,             (1<<4)  @ Keypad RIGHT button.
-.equ KEY_LEFT,              (1<<5)  @ Keypad LEFT button.
-.equ KEY_UP,                (1<<6)  @ Keypad UP button.
-.equ KEY_DOWN,              (1<<7)  @ Keypad DOWN button.
-.equ KEY_R,                 (1<<8)  @ Right shoulder button.
-.equ KEY_L,                 (1<<9)  @ Left shoulder button.
-.equ KEY_X,                 (1<<10) @ Keypad X button.
-.equ KEY_Y,                 (1<<11) @ Keypad Y button.
-.equ KEY_TOUCH,             (1<<12) @ Touchscreen pendown.
-.equ KEY_LID,               (1<<13) @ Lid state.
+.equ KEY_A,                 (1<<0)  @ 0x1 Keypad A button.
+.equ KEY_B,                 (1<<1)  @ 0x2 Keypad B button.
+.equ KEY_SELECT,            (1<<2)  @ 0x4 Keypad SELECT button.
+.equ KEY_START,             (1<<3)  @ 0x8 Keypad START button.
+.equ KEY_RIGHT,             (1<<4)  @ 0x10 Keypad RIGHT button.
+.equ KEY_LEFT,              (1<<5)  @ 0x20 Keypad LEFT button.
+.equ KEY_UP,                (1<<6)  @ 0x40 Keypad UP button.
+.equ KEY_DOWN,              (1<<7)  @ 0x80 Keypad DOWN button.
+.equ KEY_R,                 (1<<8)  @ 0x100 Right shoulder button.
+.equ KEY_L,                 (1<<9)  @ 0x200 Left shoulder button.
+.equ KEY_X,                 (1<<10) @ 0x400 Keypad X button.
+.equ KEY_Y,                 (1<<11) @ 0x800 Keypad Y button.
+.equ KEY_TOUCH,             (1<<12) @ 0x1000 Touchscreen pendown.
+.equ KEY_LID,               (1<<13) @ 0x2000 Lid state.
 .equ REG_KEYINPUT,          0x04000130
 .equ REG_KEYCNT,            0x04000132
 

@@ -831,7 +831,7 @@ branch_2242050: @ 2242050 :thumb
 
 .thumb
 branch_224207c: @ 224207c :thumb
-	ldr     r1, [pc, #0x80] @ 0x2242100, (=0x21bf67c)
+	ldr     r1, [pc, #0x80] @ 0x2242100, (=RAM_21bf67c)
 	ldr     r1, [r1, #0x48]
 	bl      Function_2242964
 	bl      Function_203608c
@@ -914,7 +914,7 @@ branch_22420f2: @ 22420f2 :thumb
 
 .word 0x609 @ 0x22420f8
 .word 0x624 @ 0x22420fc
-.word 0x21bf67c @ 0x2242100
+.word RAM_21bf67c @ 0x2242100
 .thumb
 Function_2242104: @ 2242104 :thumb
 	push    {r4,lr}
@@ -1749,7 +1749,7 @@ Function_2242708: @ 2242708 :thumb
 	ldr     r0, [r0, #0x0]
 	cmp     r0, #0x0
 	beq     branch_2242718
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 .thumb
 branch_2242718: @ 2242718 :thumb
 	add     r4, #0x90
@@ -3755,7 +3755,7 @@ branch_224341c: @ 224341c :thumb
 .thumb
 branch_2243430: @ 2243430 :thumb
 	ldr     r0, [sp, #0x20]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r2, r0
 	add     r0, r4, #0x3
 	str     r0, [sp, #0x0]
@@ -3772,7 +3772,7 @@ branch_2243430: @ 2243430 :thumb
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
 	ldr     r0, [sp, #0x1c]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r2, r0
 	add     r0, r4, #0x7
 	str     r0, [sp, #0x0]

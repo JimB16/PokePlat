@@ -209,7 +209,7 @@ Function_223b2f0: @ 223b2f0 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, r6
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [sp, #0x14]
 	add     r1, #0xa
@@ -2931,7 +2931,7 @@ Function_223c800: @ 223c800 :thumb
 	mov     r2, #0x2
 	mov     r6, r1
 	str     r3, [sp, #0x20]
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	mov     r1, #0x0
 	mov     r0, r6
 	mov     r2, r1
@@ -3701,7 +3701,7 @@ branch_223cdd4: @ 223cdd4 :thumb
 .thumb
 Function_223ce34: @ 223ce34 :thumb
 	push    {r3,r4}
-	ldr     r3, [pc, #0x38] @ 0x223ce70, (=0x21bf67c)
+	ldr     r3, [pc, #0x38] @ 0x223ce70, (=RAM_21bf67c)
 	mov     r1, #0x0
 	ldr     r3, [r3, #0x4c]
 	mov     r4, #0x40
@@ -3742,7 +3742,7 @@ branch_223ce6c: @ 223ce6c :thumb
 	bx      lr
 @ 0x223ce70
 
-.word 0x21bf67c @ 0x223ce70
+.word RAM_21bf67c @ 0x223ce70
 
 
 
@@ -4188,7 +4188,7 @@ Function_223d140: @ 223d140 :thumb
 Function_223d150: @ 223d150 :thumb
 	push    {r4,lr}
 	mov     r4, r0
-	ldr     r0, [pc, #0x7c] @ 0x223d1d4, (=0x21bf67c)
+	ldr     r0, [pc, #0x7c] @ 0x223d1d4, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x2
 	tst     r0, r1
@@ -4218,7 +4218,7 @@ branch_223d186: @ 223d186 :thumb
 	lsl     r0, r0, #2
 	add     r0, r4, r0
 	bl      Function_223ce34
-	ldr     r0, [pc, #0x40] @ 0x223d1d4, (=0x21bf67c)
+	ldr     r0, [pc, #0x40] @ 0x223d1d4, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	tst     r0, r1
@@ -4267,7 +4267,7 @@ branch_223d1ce: @ 223d1ce :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x223d1d4
+.word RAM_21bf67c @ 0x223d1d4
 .word 0x5dc @ 0x223d1d8
 .word 0x223d2c5 @ 0x223d1dc
 .word 0x2214 @ 0x223d1e0
@@ -4567,7 +4567,7 @@ Function_223d434: @ 223d434 :thumb
 	push    {r4,lr}
 	add     sp, #-0x10
 	mov     r4, r0
-	ldr     r0, [pc, #0x50] @ 0x223d48c, (=0x21bf67c)
+	ldr     r0, [pc, #0x50] @ 0x223d48c, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	tst     r0, r1
@@ -4612,7 +4612,7 @@ branch_223d484: @ 223d484 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x223d48c
+.word RAM_21bf67c @ 0x223d48c
 .word 0x588 @ 0x223d490
 .word Function_223d150+1 @ =0x223d151, 0x223d494
 .word 0x2214 @ 0x223d498

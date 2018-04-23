@@ -13502,6 +13502,8 @@ Function_20a6d4c: @ 20a6d4c :arm
 
 .word 0x41424e4b @ 0x20a6d84
 
+
+
 .arm
 Function_20a6d88: @ 20a6d88 :arm
 	ldr     r12, [pc, #0x0] @ [0x20a6d90] (=Function_20a6d4c)
@@ -13835,12 +13837,13 @@ Function_20a7100: @ 20a7100 :arm
 Function_20a7118: @ 20a7118 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r1
-	ldr     r1, [pc, #0x28] @ [0x20a7150] (=0x43484152)
+	ldr     r1, =CHAR_MagicConstant
 	bl      Function_20a727c
 	movs    r4, r0
 	moveq   r0, #0x0
 	streq   r0, [r5]
 	ldmeqfd sp!, {r3-r5,pc}
+
 	add     r0, r4, #0x8
 	bl      Function_20a7154
 	add     r0, r4, #0x8
@@ -13849,7 +13852,8 @@ Function_20a7118: @ 20a7118 :arm
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20a7150
 
-.word 0x43484152 @ 0x20a7150
+.align 2
+.pool
 
 
 
@@ -13869,7 +13873,7 @@ Function_20a7154: @ 20a7154 :arm
 Function_20a7164: @ 20a7164 :arm
 	stmfd   sp!, {r3-r5,lr}
 	mov     r5, r1
-	ldr     r1, [pc, #0x28] @ [0x20a719c] (=0x43484152)
+	ldr     r1, =CHAR_MagicConstant
 	bl      Function_20a727c
 	movs    r4, r0
 	moveq   r0, #0x0
@@ -13884,7 +13888,8 @@ Function_20a7164: @ 20a7164 :arm
 	ldmfd   sp!, {r3-r5,pc}
 @ 0x20a719c
 
-.word 0x43484152 @ 0x20a719c
+.align 2
+.pool
 
 
 
@@ -13960,24 +13965,27 @@ Function_20a7238: @ 20a7238 :arm
 	bx      lr
 @ 0x20a7248
 
+
 .arm
 .globl Function_20a7248
 Function_20a7248: @ 20a7248 :arm
 	stmfd   sp!, {r4,lr}
 	mov     r4, r1
-	ldr     r1, [pc, #0x20] @ [0x20a7278] (=0x5343524e)
+	ldr     r1, =SCRN_MagicConstant
 	bl      Function_20a727c
 	cmp     r0, #0x0
 	moveq   r0, #0x0
 	streq   r0, [r4]
 	ldmeqfd sp!, {r4,pc}
+
 	add     r0, r0, #0x8
 	str     r0, [r4]
 	mov     r0, #0x1
 	ldmfd   sp!, {r4,pc}
 @ 0x20a7278
 
-.word 0x5343524e @ 0x20a7278
+.align 2
+.pool
 
 
 
@@ -13989,10 +13997,12 @@ Function_20a727c: @ 20a727c :arm
 	add     r0, r0, r2
 	cmp     r12, #0x0
 	bls     branch_20a72bc
+
 branch_20a7294: @ 20a7294 :arm
 	ldr     r2, [r0]
 	cmp     r2, r1
 	bxeq    lr
+
 	add     r2, r3, #0x1
 	mov     r2, r2, lsl #16
 	ldr     r3, [r0, #0x4]
@@ -14000,6 +14010,7 @@ branch_20a7294: @ 20a7294 :arm
 	add     r0, r0, r3
 	mov     r3, r2, lsr #16
 	bhi     branch_20a7294
+
 branch_20a72bc: @ 20a72bc :arm
 	mov     r0, #0x0
 	bx      lr
@@ -14026,16 +14037,18 @@ branch_20a72e0: @ 20a72e0 :arm
 	mov     r12, r1, lsr #16
 	cmp     r2, r1, lsr #16
 	bhi     branch_20a72e0
+
 	bx      lr
 @ 0x20a730c
 
 
-.arm
-Function_20a730c: @ 20a730c :arm
+arm_func_start DrawTexturedQuad
+DrawTexturedQuad: @ 20a730c :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r12, r3, lsl #8
+
 	mov     r0, r0, lsl #8
-	ldr     r3, [pc, #0x9c] @ [0x20a73bc] (=GFX_BEGIN)
+	ldr     r3, =GFX_BEGIN
 	mov     r4, r12, asr #16
 	mov     r0, r0, asr #16
 	mov     lr, r4, lsl #16
@@ -14044,7 +14057,7 @@ Function_20a730c: @ 20a730c :arm
 	mov     r12, #0x1
 	mov     r0, r0, asr #16
 	mov     r5, r0, lsl #16
-	mov     r0, #1, 4 @ #0x10000000
+	mov     r0, #0x10000000
 	mov     r1, r2, lsl #8
 	mov     r1, r1, asr #16
 	mov     r2, r1, lsl #16
@@ -14052,33 +14065,40 @@ Function_20a730c: @ 20a730c :arm
 	mov     r1, r4, lsr #16
 	mov     r5, r5, lsr #16
 	mov     r2, r2, lsr #16
-	str     r12, [r3]
+	str     r12, [r3] @ GFX_BEGIN
+
 	orr     r4, r1, r7, lsl #16
-	sub     r6, r3, #0x78
-	str     r4, [r6]
-	sub     lr, r3, #0x74
-	str     r0, [lr]
+	sub     r6, r3, #GFX_BEGIN - GFX_TEX_COORD
+	str     r4, [r6] @ GFX_TEX_COORD
+	sub     lr, r3, #GFX_BEGIN - GFX_VERTEX16
+	str     r0, [lr] @ GFX_VERTEX16
 	mov     r12, #0x0
-	str     r12, [lr]
+	str     r12, [lr] @ GFX_VERTEX16
+
 	orr     r4, r5, r7, lsl #16
-	str     r4, [r6]
-	add     r0, r0, #1, 20 @ #0x1000
-	str     r0, [lr]
-	str     r12, [lr]
+	str     r4, [r6] @ GFX_TEX_COORD
+	add     r0, r0, #0x1000
+	str     r0, [lr] @ GFX_VERTEX16
+	str     r12, [lr] @ GFX_VERTEX16
+
 	orr     r0, r5, r2, lsl #16
-	str     r0, [r6]
-	mov     r0, #1, 20 @ #0x1000
-	str     r0, [lr]
-	str     r12, [lr]
+	str     r0, [r6] @ GFX_TEX_COORD
+	mov     r0, #0x1000
+	str     r0, [lr] @ GFX_VERTEX16
+	str     r12, [lr] @ GFX_VERTEX16
+
 	orr     r0, r1, r2, lsl #16
-	str     r0, [r6]
-	str     r12, [lr]
-	str     r12, [lr]
-	str     r12, [r3, #0x4]
+	str     r0, [r6] @ GFX_TEX_COORD
+	str     r12, [lr] @ GFX_VERTEX16
+	str     r12, [lr] @ GFX_VERTEX16
+	str     r12, [r3, #(GFX_END - GFX_BEGIN)]
+
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20a73bc
 
-.word GFX_BEGIN @ 0x20a73bc
+.align 2
+.pool
+arm_func_end DrawTexturedQuad
 
 
 
@@ -14140,36 +14160,41 @@ Function_20a73c0: @ 20a73c0 :arm
 
 
 
-.arm
-Function_20a7488: @ 20a7488 :arm
+arm_func_start DrawTranslatedScaledTexturedQuad
+DrawTranslatedScaledTexturedQuad: @ 20a7488 :arm
 	stmfd   sp!, {r4,lr}
-	ldr     lr, [pc, #0x58] @ [0x20a74ec] (=MATRIX_TRANSLATE)
+
+	ldr     lr, =MATRIX_TRANSLATE
 	mov     r0, r0, lsl #12
-	str     r0, [lr]
+	str     r0, [lr] @ MATRIX_TRANSLATE
 	mov     r4, r1, lsl #12
 	ldr     r12, [sp, #0x8]
-	str     r4, [lr]
+	str     r4, [lr] @ MATRIX_TRANSLATE
 	mov     r4, r2, lsl #12
 	ldr     r0, [sp, #0xc]
 	ldr     r1, [sp, #0x14]
 	ldr     r2, [sp, #0x10]
-	str     r4, [lr]
+	str     r4, [lr] @ MATRIX_TRANSLATE
+
 	mov     r4, r3, lsl #12
 	ldr     r3, [sp, #0x18]
 	mov     r12, r12, lsl #12
-	str     r4, [lr, #-0x4]!
-	str     r12, [lr]
-	mov     r12, #1, 20 @ #0x1000
+	str     r4, [lr, #-0x4]! @ MATRIX_SCALE - MATRIX_TRANSLATE
+	str     r12, [lr] @ MATRIX_SCALE
+	mov     r12, #0x1000
 	mov     r0, r0, lsl #12
 	mov     r1, r1, lsl #12
 	mov     r2, r2, lsl #12
 	mov     r3, r3, lsl #12
-	str     r12, [lr]
-	bl      Function_20a730c
+	str     r12, [lr] @ MATRIX_SCALE
+	bl      DrawTexturedQuad
+
 	ldmfd   sp!, {r4,pc}
 @ 0x20a74ec
 
-.word MATRIX_TRANSLATE @ 0x20a74ec
+.align 2
+.pool
+arm_func_end DrawTranslatedScaledTexturedQuad
 
 
 
@@ -15219,10 +15244,16 @@ branch_20a8194: @ 20a8194 :arm
 	add     r2, r2, #0x1
 	cmp     r2, #0x3
 	blt     branch_20a8194
+
 	bx      lr
 @ 0x20a81a8
 
 
+/* Input:
+r0: GraphicData3
+r1: 0: Tex, 1: OBJMain, 2: OBJSub
+r2: Destination
+*/
 .arm
 .globl Function_20a81a8
 Function_20a81a8: @ 20a81a8 :arm
@@ -15261,6 +15292,7 @@ branch_20a81d8: @ 20a81d8 :arm
 	str     r2, [r1, #0x8]
 	cmp     r3, #0x3
 	blt     branch_20a81d8
+
 	bx      lr
 @ 0x20a81f0
 
@@ -15294,15 +15326,23 @@ Function_20a8208: @ 20a8208 :arm
 @ 0x20a8224
 
 
+/* Input:
+r0: Ptr to GraphicData2
+r1: Destination
+r2: 0: Tex, 1: OBJMain, 2: OBJSub
+r2: GraphicData4_4_1 and GraphicData4_4_2
+r3: Ptr to GraphicData3
+*/
 .arm
-.globl Function_20a8224
-Function_20a8224: @ 20a8224 :arm
+.globl Function_20a8224_LoadTexOBJ
+Function_20a8224_LoadTexOBJ: @ 20a8224 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
 	movs    r5, r2
 	mov     r6, r1
 	mov     r4, r3
-	ldr     r0, [r7, #0x8]
+
+	ldr     r0, [r7, #GraphicData2_8]
 	beq     branch_20a8288
 	cmp     r5, #0x1
 	beq     branch_20a8254
@@ -15311,25 +15351,27 @@ Function_20a8224: @ 20a8224 :arm
 	b       branch_20a8288
 
 branch_20a8254: @ 20a8254 :arm
-	mov     r3, #1, 6 @ #0x4000000
+	mov     r3, #REG_DISPCNT
 	ldr     r2, [r3]
-	ldr     r1, [pc, #0x1e4] @ [0x20a8448] (=0xffcfffef)
+	ldr     r1, =0xffcfffef
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
 	b       branch_20a8288
 
 branch_20a8270: @ 20a8270 :arm
-	ldr     r3, [pc, #0x1d4] @ [0x20a844c] (=REG_DISPCNT_SUB)
-	ldr     r1, [pc, #0x1cc] @ [0x20a8448] (=0xffcfffef)
+	ldr     r3, =REG_DISPCNT_SUB
+	ldr     r1, =0xffcfffef
 	ldr     r2, [r3]
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
+
 branch_20a8288: @ 20a8288 :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r1, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r1, [r7, #GraphicData2_Size]
 	bl      DC_FlushRange
+
 	cmp     r5, #0x0
 	beq     branch_20a82b0
 	cmp     r5, #0x1
@@ -15340,29 +15382,30 @@ branch_20a8288: @ 20a8288 :arm
 
 branch_20a82b0: @ 20a82b0 :arm
 	bl      GX_BeginLoadTex
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
 	mov     r1, r6
 	bl      GX_LoadTex
 	bl      GX_EndLoadTex
 	b       branch_20a82f0
 
 branch_20a82cc: @ 20a82cc :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
 	mov     r1, r6
 	bl      GX_LoadOBJ
 	b       branch_20a82f0
 
 branch_20a82e0: @ 20a82e0 :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
 	mov     r1, r6
 	bl      GXS_LoadOBJ
+
 branch_20a82f0: @ 20a82f0 :arm
-	ldr     r0, [r7, #0x8]
+	ldr     r0, [r7, #GraphicData2_8]
 	cmp     r0, #0x0
-	ldrh    r0, [r7, #0x2]
+	ldrh    r0, [r7, #GraphicData2_2]
 	bne     branch_20a8408
 	cmp     r0, #0x10
 	bgt     branch_20a833c
@@ -15412,11 +15455,12 @@ branch_20a8370: @ 20a8370 :arm
 branch_20a8378: @ 20a8378 :arm
 	mov     r0, #0x0
 branch_20a837c: @ 20a837c :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
 	cmp     r0, #0x10
 	bgt     branch_20a83c0
 	bge     branch_20a83ec
+
 	cmp     r0, #0x8
 	addls   pc, pc, r0, lsl #2
 	b       branch_20a83fc
@@ -15462,106 +15506,119 @@ branch_20a83f4: @ 20a83f4 :arm
 branch_20a83fc: @ 20a83fc :arm
 	mov     r0, #0x0
 branch_20a8400: @ 20a8400 :arm
-	str     r0, [r4, #0x10]
+	str     r0, [r4, #GraphicData3_10]
 	b       branch_20a8414
 
 branch_20a8408: @ 20a8408 :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
-	str     r0, [r4, #0x10]
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
+	str     r0, [r4, #GraphicData3_10]
 branch_20a8414: @ 20a8414 :arm
-	ldr     r1, [r7, #0x4]
+	ldr     r1, [r7, #GraphicData2_4]
 	mov     r0, #0x0
-	str     r1, [r4, #0x14]
-	str     r0, [r4, #0x18]
+	str     r1, [r4, #GraphicData3_14]
+	str     r0, [r4, #GraphicData3_18]
 	mov     r0, #0x1
-	str     r0, [r4, #0x1c]
-	ldr     r3, [r7, #0x8]
+	str     r0, [r4, #GraphicData3_1c]
+	ldr     r3, [r7, #GraphicData2_8]
 	mov     r0, r4
 	mov     r1, r5
 	mov     r2, r6
-	str     r3, [r4, #0x20]
+	str     r3, [r4, #GraphicData3_20]
 	bl      Function_20a81a8
+
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20a8448
 
-.word 0xffcfffef @ 0x20a8448
-.word REG_DISPCNT_SUB @ 0x20a844c
+.align 2
+.pool
 
 
 
+/* Input:
+r0: Ptr to GraphicData2
+r1: Destination
+r2: 0: Tex, 1: OBJMain, 2: OBJSub
+r3: Ptr to GraphicData3
+*/
 .arm
-Function_20a8450: @ 20a8450 :arm
+Function_20a8450_LoadTexOBJ: @ 20a8450 :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
 	movs    r5, r2
 	mov     r6, r1
 	mov     r4, r3
-	ldr     r0, [r7, #0x8]
+	ldr     r0, [r7, #GraphicData2_8]
 	beq     branch_20a84b4
+
 	cmp     r5, #0x1
-	beq     branch_20a8480
+	beq     branch_20a8480_dispcnt
 	cmp     r5, #0x2
-	beq     branch_20a849c
+	beq     branch_20a849c_dispcnt_sub
 	b       branch_20a84b4
 
-branch_20a8480: @ 20a8480 :arm
+branch_20a8480_dispcnt: @ 20a8480 :arm
 	mov     r3, #REG_DISPCNT
 	ldr     r2, [r3]
-	ldr     r1, [pc, #0x1e4] @ [0x20a8674] (=0xffcfffef)
+	ldr     r1, =0xffcfffef
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
 	b       branch_20a84b4
 
-branch_20a849c: @ 20a849c :arm
-	ldr     r3, [pc, #0x1d4] @ [0x20a8678] (=REG_DISPCNT_SUB)
-	ldr     r1, [pc, #0x1cc] @ [0x20a8674] (=0xffcfffef)
+branch_20a849c_dispcnt_sub: @ 20a849c :arm
+	ldr     r3, =REG_DISPCNT_SUB
+	ldr     r1, =0xffcfffef
 	ldr     r2, [r3]
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
+
 branch_20a84b4: @ 20a84b4 :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r1, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r1, [r7, #GraphicData2_Size]
 	bl      DC_FlushRange
+
 	cmp     r5, #0x0
-	beq     branch_20a84dc
+	beq     branch_20a84dc_loadtex
 	cmp     r5, #0x1
-	beq     branch_20a84f8
+	beq     branch_20a84f8_loadobj
 	cmp     r5, #0x2
-	beq     branch_20a850c
+	beq     branch_20a850c_loadobjsub
 	b       branch_20a851c
 
-branch_20a84dc: @ 20a84dc :arm
+branch_20a84dc_loadtex: @ 20a84dc :arm
 	bl      GX_BeginLoadTex
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
 	mov     r1, r6
 	bl      GX_LoadTex
 	bl      GX_EndLoadTex
 	b       branch_20a851c
 
-branch_20a84f8: @ 20a84f8 :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
+branch_20a84f8_loadobj: @ 20a84f8 :arm todo
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
 	mov     r1, r6
 	bl      GX_LoadOBJ
 	b       branch_20a851c
 
-branch_20a850c: @ 20a850c :arm
-	ldr     r0, [r7, #0x14]
-	ldr     r2, [r7, #0x10]
-	mov     r1, r6
+branch_20a850c_loadobjsub: @ 20a850c :arm
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r2, [r7, #GraphicData2_Size]
+	mov     r1, r6                  @ Destination
 	bl      GXS_LoadOBJ
+
 branch_20a851c: @ 20a851c :arm
-	ldr     r0, [r7, #0x8]
+	ldr     r0, [r7, #GraphicData2_8]
 	cmp     r0, #0x0
-	ldrh    r0, [r7, #0x2]
+	ldrh    r0, [r7, #GraphicData2_2]
 	bne     branch_20a8634
+
 	cmp     r0, #0x10
 	bgt     branch_20a8568
 	bge     branch_20a8594
+
 	cmp     r0, #0x8
 	addls   pc, pc, r0, lsl #2
 	b       branch_20a85a4
@@ -15574,61 +15631,45 @@ branch_20a851c: @ 20a851c :arm
 	b       branch_20a85a4
 	b       branch_20a85a4
 	b       branch_20a858c
-@ 0x20a8568
 
-.arm
 branch_20a8568: @ 20a8568 :arm
 	cmp     r0, #0x20
 	beq     branch_20a859c
 	b       branch_20a85a4
-@ 0x20a8574
 
-.arm
 branch_20a8574: @ 20a8574 :arm
 	mov     r0, #0x0
 	b       branch_20a85a8
-@ 0x20a857c
 
-.arm
 branch_20a857c: @ 20a857c :arm
 	mov     r0, #0x1
 	b       branch_20a85a8
-@ 0x20a8584
 
-.arm
 branch_20a8584: @ 20a8584 :arm
 	mov     r0, #0x2
 	b       branch_20a85a8
-@ 0x20a858c
 
-.arm
 branch_20a858c: @ 20a858c :arm
 	mov     r0, #0x3
 	b       branch_20a85a8
-@ 0x20a8594
 
-.arm
 branch_20a8594: @ 20a8594 :arm
 	mov     r0, #0x4
 	b       branch_20a85a8
-@ 0x20a859c
 
-.arm
 branch_20a859c: @ 20a859c :arm
 	mov     r0, #0x5
 	b       branch_20a85a8
-@ 0x20a85a4
 
-.arm
 branch_20a85a4: @ 20a85a4 :arm
 	mov     r0, #0x0
-.arm
 branch_20a85a8: @ 20a85a8 :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
 	cmp     r0, #0x10
 	bgt     branch_20a85ec
 	bge     branch_20a8618
+
 	cmp     r0, #0x8
 	addls   pc, pc, r0, lsl #2
 	b       branch_20a8628
@@ -15641,131 +15682,114 @@ branch_20a85a8: @ 20a85a8 :arm
 	b       branch_20a8628
 	b       branch_20a8628
 	b       branch_20a8610
-@ 0x20a85ec
 
-.arm
 branch_20a85ec: @ 20a85ec :arm
 	cmp     r0, #0x20
 	beq     branch_20a8620
 	b       branch_20a8628
-@ 0x20a85f8
 
-.arm
 branch_20a85f8: @ 20a85f8 :arm
 	mov     r0, #0x0
 	b       branch_20a862c
-@ 0x20a8600
 
-.arm
 branch_20a8600: @ 20a8600 :arm
 	mov     r0, #0x1
 	b       branch_20a862c
-@ 0x20a8608
 
-.arm
 branch_20a8608: @ 20a8608 :arm
 	mov     r0, #0x2
 	b       branch_20a862c
-@ 0x20a8610
 
-.arm
 branch_20a8610: @ 20a8610 :arm
 	mov     r0, #0x3
 	b       branch_20a862c
-@ 0x20a8618
 
-.arm
 branch_20a8618: @ 20a8618 :arm
 	mov     r0, #0x4
 	b       branch_20a862c
-@ 0x20a8620
 
-.arm
 branch_20a8620: @ 20a8620 :arm
 	mov     r0, #0x5
 	b       branch_20a862c
-@ 0x20a8628
 
-.arm
 branch_20a8628: @ 20a8628 :arm
 	mov     r0, #0x0
-.arm
 branch_20a862c: @ 20a862c :arm
-	str     r0, [r4, #0x10]
+	str     r0, [r4, #GraphicData3_10]
 	b       branch_20a8640
-@ 0x20a8634
 
-.arm
 branch_20a8634: @ 20a8634 :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
-	str     r0, [r4, #0x10]
-.arm
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
+	str     r0, [r4, #GraphicData3_10]
 branch_20a8640: @ 20a8640 :arm
-	ldr     r1, [r7, #0x4]
+	ldr     r1, [r7, #GraphicData2_4]
 	mov     r0, #0x0
-	str     r1, [r4, #0x14]
-	str     r0, [r4, #0x18]
+	str     r1, [r4, #GraphicData3_14]
+	str     r0, [r4, #GraphicData3_18]
 	mov     r0, #0x1
-	str     r0, [r4, #0x1c]
-	ldr     r3, [r7, #0x8]
+	str     r0, [r4, #GraphicData3_1c]
+	ldr     r3, [r7, #GraphicData2_8]
 	mov     r0, r4
 	mov     r1, r5
 	mov     r2, r6
-	str     r3, [r4, #0x20]
+	str     r3, [r4, #GraphicData3_20]
 	bl      Function_20a81a8
+
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20a8674
 
-.word 0xffcfffef @ 0x20a8674
-.word REG_DISPCNT_SUB @ 0x20a8678
+.align 2
+.pool
 
 
 
+/* Input:
+r0: Ptr to GraphicData2
+r1: Destination
+r2: 0: Tex, 1: OBJMain, 2: OBJSub
+r3: Ptr to GraphicData3
+*/
 .arm
 Function_20a867c: @ 20a867c :arm
 	stmfd   sp!, {r3-r7,lr}
 	mov     r7, r0
 	mov     r6, r1
-	ldr     r0, [r7, #0x14]
-	ldr     r1, [r7, #0x10]
+	ldr     r0, [r7, #GraphicData2_Source]
+	ldr     r1, [r7, #GraphicData2_Size]
 	mov     r5, r2
 	mov     r4, r3
 	bl      DC_FlushRange
+
 	cmp     r5, #0x0
-	ldr     r0, [r7, #0x8]
+	ldr     r0, [r7, #GraphicData2_8]
 	beq     branch_20a86f0
 	cmp     r5, #0x1
 	beq     branch_20a86bc
 	cmp     r5, #0x2
 	beq     branch_20a86d8
 	b       branch_20a86f0
-@ 0x20a86bc
 
-.arm
 branch_20a86bc: @ 20a86bc :arm
-	mov     r3, #1, 6 @ #0x4000000
+	mov     r3, #REG_DISPCNT
 	ldr     r2, [r3]
-	ldr     r1, [pc, #0x17c] @ [0x20a8848] (=0xffcfffef)
+	ldr     r1, =0xffcfffef
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
 	b       branch_20a86f0
-@ 0x20a86d8
 
-.arm
 branch_20a86d8: @ 20a86d8 :arm
-	ldr     r3, [pc, #0x16c] @ [0x20a884c] (=REG_DISPCNT_SUB)
-	ldr     r1, [pc, #0x164] @ [0x20a8848] (=0xffcfffef)
+	ldr     r3, =REG_DISPCNT_SUB
+	ldr     r1, =0xffcfffef
 	ldr     r2, [r3]
 	and     r1, r2, r1
 	orr     r0, r1, r0
 	str     r0, [r3]
-.arm
 branch_20a86f0: @ 20a86f0 :arm
-	ldr     r0, [r7, #0x8]
+	ldr     r0, [r7, #GraphicData2_8]
 	cmp     r0, #0x0
-	ldrh    r0, [r7, #0x2]
+	ldrh    r0, [r7, #GraphicData2_2]
 	bne     branch_20a8808
 	cmp     r0, #0x10
 	bgt     branch_20a873c
@@ -15782,58 +15806,41 @@ branch_20a86f0: @ 20a86f0 :arm
 	b       branch_20a8778
 	b       branch_20a8778
 	b       branch_20a8760
-@ 0x20a873c
 
-.arm
 branch_20a873c: @ 20a873c :arm
 	cmp     r0, #0x20
 	beq     branch_20a8770
 	b       branch_20a8778
-@ 0x20a8748
 
-.arm
 branch_20a8748: @ 20a8748 :arm
 	mov     r0, #0x0
 	b       branch_20a877c
-@ 0x20a8750
 
-.arm
 branch_20a8750: @ 20a8750 :arm
 	mov     r0, #0x1
 	b       branch_20a877c
-@ 0x20a8758
 
-.arm
 branch_20a8758: @ 20a8758 :arm
 	mov     r0, #0x2
 	b       branch_20a877c
-@ 0x20a8760
 
-.arm
 branch_20a8760: @ 20a8760 :arm
 	mov     r0, #0x3
 	b       branch_20a877c
-@ 0x20a8768
 
-.arm
 branch_20a8768: @ 20a8768 :arm
 	mov     r0, #0x4
 	b       branch_20a877c
-@ 0x20a8770
 
-.arm
 branch_20a8770: @ 20a8770 :arm
 	mov     r0, #0x5
 	b       branch_20a877c
-@ 0x20a8778
 
-.arm
 branch_20a8778: @ 20a8778 :arm
 	mov     r0, #0x0
-.arm
 branch_20a877c: @ 20a877c :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
 	cmp     r0, #0x10
 	bgt     branch_20a87c0
 	bge     branch_20a87ec
@@ -15849,84 +15856,65 @@ branch_20a877c: @ 20a877c :arm
 	b       branch_20a87fc
 	b       branch_20a87fc
 	b       branch_20a87e4
-@ 0x20a87c0
 
-.arm
 branch_20a87c0: @ 20a87c0 :arm
 	cmp     r0, #0x20
 	beq     branch_20a87f4
 	b       branch_20a87fc
-@ 0x20a87cc
 
-.arm
 branch_20a87cc: @ 20a87cc :arm
 	mov     r0, #0x0
 	b       branch_20a8800
-@ 0x20a87d4
 
-.arm
 branch_20a87d4: @ 20a87d4 :arm
 	mov     r0, #0x1
 	b       branch_20a8800
-@ 0x20a87dc
 
-.arm
 branch_20a87dc: @ 20a87dc :arm
 	mov     r0, #0x2
 	b       branch_20a8800
-@ 0x20a87e4
 
-.arm
 branch_20a87e4: @ 20a87e4 :arm
 	mov     r0, #0x3
 	b       branch_20a8800
-@ 0x20a87ec
 
-.arm
 branch_20a87ec: @ 20a87ec :arm
 	mov     r0, #0x4
 	b       branch_20a8800
-@ 0x20a87f4
 
-.arm
 branch_20a87f4: @ 20a87f4 :arm
 	mov     r0, #0x5
 	b       branch_20a8800
-@ 0x20a87fc
 
-.arm
 branch_20a87fc: @ 20a87fc :arm
 	mov     r0, #0x0
-.arm
 branch_20a8800: @ 20a8800 :arm
-	str     r0, [r4, #0x10]
+	str     r0, [r4, #GraphicData3_10]
 	b       branch_20a8814
-@ 0x20a8808
 
-.arm
 branch_20a8808: @ 20a8808 :arm
-	str     r0, [r4, #0xc]
-	ldrh    r0, [r7]
-	str     r0, [r4, #0x10]
-.arm
+	str     r0, [r4, #GraphicData3_c]
+	ldrh    r0, [r7, #GraphicData2_0]
+	str     r0, [r4, #GraphicData3_10]
 branch_20a8814: @ 20a8814 :arm
-	ldr     r1, [r7, #0x4]
+	ldr     r1, [r7, #GraphicData2_4]
 	mov     r0, #0x0
-	str     r1, [r4, #0x14]
-	str     r0, [r4, #0x18]
+	str     r1, [r4, #GraphicData3_14]
+	str     r0, [r4, #GraphicData3_18]
 	mov     r0, #0x1
-	str     r0, [r4, #0x1c]
-	ldr     r3, [r7, #0x8]
+	str     r0, [r4, #GraphicData3_1c]
+	ldr     r3, [r7, #GraphicData2_8]
 	mov     r0, r4
 	mov     r1, r5
 	mov     r2, r6
-	str     r3, [r4, #0x20]
+	str     r3, [r4, #GraphicData3_20]
 	bl      Function_20a81a8
+
 	ldmfd   sp!, {r3-r7,pc}
 @ 0x20a8848
 
-.word 0xffcfffef @ 0x20a8848
-.word REG_DISPCNT_SUB @ 0x20a884c
+.align 2
+.pool
 
 
 

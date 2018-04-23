@@ -97,7 +97,7 @@ branch_2256250: @ 2256250 :thumb
 	cmp     r0, #0x0
 	bne     branch_2256292
 	mov     r0, r4
-	bl      Function_2079d40
+	bl      Function_2079d40_GetPokeIconGraphicNr
 	str     r0, [r6, #0x4]
 	mov     r0, r4
 	mov     r1, #0x5
@@ -1192,7 +1192,7 @@ branch_2256980: @ 2256980 :thumb
 	ldrh    r1, [r1, #0x10]
 	mov     r0, r7
 	mov     r2, #0x0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	mov     r0, r4
 	.hword  0x1c49 @ add r1, r1, #0x1

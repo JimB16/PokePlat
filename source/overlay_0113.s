@@ -271,7 +271,7 @@ branch_225c94a: @ 225c94a :thumb
 	mov     r1, #0x1
 	strb    r1, [r0, #0x5]
 	bl      Function_201ffe8
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -397,7 +397,7 @@ branch_225ca7a: @ 225ca7a :thumb
 
 .thumb
 branch_225ca88: @ 225ca88 :thumb
-	ldr     r0, [pc, #0x2d0] @ 0x225cd5c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x2d0] @ 0x225cd5c, (=RAM_21bf6bc)
 	ldrh    r1, [r0, #0x20]
 	cmp     r1, #0x0
 	beq     branch_225caf4
@@ -412,7 +412,7 @@ branch_225ca88: @ 225ca88 :thumb
 	mov     r2, #0x92
 	lsl     r2, r2, #4
 	ldrb    r1, [r4, r2]
-	ldr     r7, [pc, #0x2b0] @ 0x225cd5c, (=0x21bf6bc)
+	ldr     r7, [pc, #0x2b0] @ 0x225cd5c, (=RAM_21bf6bc)
 	mov     r3, #0xc
 	mov     r6, r1
 	mul     r6, r3
@@ -783,7 +783,7 @@ branch_225cd46: @ 225cd46 :thumb
 
 
 .word 0x9bc @ 0x225cd58
-.word 0x21bf6bc @ 0x225cd5c
+.word RAM_21bf6bc @ 0x225cd5c
 .word 0x555 @ 0x225cd60
 .word 0x8d8 @ 0x225cd64
 .word 0x5e5 @ 0x225cd68
@@ -986,7 +986,7 @@ Function_225cf18: @ 225cf18 :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0xc]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x8]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0x10] @ 0x225cf50, (=0x27e0000)

@@ -9776,7 +9776,7 @@ branch_2224604: @ 2224604 :thumb
 	cmp     r0, #0x0
 	beq     branch_222462e
 	ldr     r0, [r5, #0x4]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r3, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -10265,7 +10265,7 @@ branch_22249d8: @ 22249d8 :thumb
 	ldrb    r1, [r1, #0x0]
 	lsl     r2, r2, #24
 	lsr     r2, r2, #31
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [pc, #0x14] @ 0x2224a08, (=0x1fd4)
 	ldr     r0, [r6, r0]

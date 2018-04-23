@@ -162,7 +162,7 @@ branch_225c81e: @ 225c81e :thumb
 
 .thumb
 branch_225c82e: @ 225c82e :thumb
-	ldr     r0, [pc, #0xc8] @ 0x225c8f8, (=0x21bf67c)
+	ldr     r0, [pc, #0xc8] @ 0x225c8f8, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x2
 	tst     r0, r1
@@ -276,7 +276,7 @@ branch_225c8ea: @ 225c8ea :thumb
 	pop     {r3-r6,pc}
 @ 0x225c8f8
 
-.word 0x21bf67c @ 0x225c8f8
+.word RAM_21bf67c @ 0x225c8f8
 .thumb
 Function_225c8fc: @ 225c8fc :thumb
 	push    {r3-r5,lr}

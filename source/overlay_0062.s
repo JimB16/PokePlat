@@ -52,7 +52,7 @@ Function_62_222f2c0: @ 222f2c0 :thumb
 	bl      Function_2024220
 	str     r0, [r4, #0x60]
 	mov     r0, #0x66
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r4, #0x64]
 	blx     Function_20a73c0
 	ldr     r0, [r4, #0x28]
@@ -689,7 +689,7 @@ Function_222f8e4: @ 222f8e4 :thumb
 	mov     r4, r0
 	bl      Function_201dcac
 	ldr     r0, [r4, #0x28]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x24]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x222f908, (=0x27e0000)
@@ -1019,7 +1019,7 @@ branch_222faea: @ 222faea :thumb
 branch_222faee: @ 222faee :thumb
 	bl      Call_G3X_Reset
 	ldr     r0, [r4, #0x64]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	mov     r0, #0x1
 	mov     r1, #0x0
 	bl      Function_20241bc
@@ -6278,7 +6278,7 @@ Function_22320ec: @ 22320ec :thumb
 	ldr     r1, [sp, #0x20]
 	ldr     r2, [sp, #0x24]
 	mov     r0, r7
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r2, r0
 	ldr     r1, [sp, #0x1c]
 	ldr     r0, [r5, #0x4]
@@ -9799,7 +9799,7 @@ branch_2233a92: @ 2233a92 :thumb
 	ldr     r1, [sp, #0x10]
 	ldr     r2, [sp, #0x14]
 	mov     r0, r4
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	mov     r0, r5
 	.hword  0x1d09 @ add r1, r1, #0x4
@@ -10666,7 +10666,7 @@ branch_2234134: @ 2234134 :thumb
 	ldr     r0, [sp, #0x20]
 	ldr     r1, [sp, #0x24]
 	mov     r2, #0x0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r5, #0xc]
 	.hword  0x1d09 @ add r1, r1, #0x4
@@ -22367,7 +22367,7 @@ Function_22394d8: @ 22394d8 :thumb
 branch_22394f0: @ 22394f0 :thumb
 	bl      Function_201dcac
 	ldr     r0, [r4, #0x28]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x24]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x2239510, (=0x27e0000)
@@ -25980,7 +25980,7 @@ branch_223aed2: @ 223aed2 :thumb
 	ldr     r1, [sp, #0x18]
 	ldr     r2, [sp, #0x28]
 	mov     r0, r6
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	mov     r0, #0xad
 	lsl     r0, r0, #2
@@ -26182,7 +26182,7 @@ branch_223b0ac: @ 223b0ac :thumb
 	mov     r1, r5
 	mov     r3, #0x2
 	str     r6, [sp, #0x8]
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]

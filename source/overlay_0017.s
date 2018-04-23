@@ -157,7 +157,7 @@ Function_17_223b140: @ 223b140 :thumb
 	lsl     r2, r2, #16
 	bl      Function_200964c
 	mov     r0, #0x15
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r4, #0x10]
 	bl      Function_223b884
 	mov     r0, #0x15
@@ -287,7 +287,7 @@ branch_223b364: @ 223b364 :thumb
 	ldr     r0, [pc, #0x6c] @ 0x223b434, (=0x824)
 	mov     r1, #0x1
 	strb    r1, [r4, r0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -632,7 +632,7 @@ Function_223b6bc: @ 223b6bc :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0x5c]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x30]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x223b6e8, (=0x27e0000)
@@ -658,7 +658,7 @@ Function_223b6f0: @ 223b6f0 :thumb
 	cmp     r0, #0x1
 	bne     branch_223b716
 	ldr     r0, [r4, #0x10]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	bl      Function_11_221f8f0
 	ldr     r0, [r4, #0x28]
 	bl      Function_200c7ec
@@ -3834,7 +3834,7 @@ Function_17_223cb1c: @ 223cb1c :thumb
 	lsl     r2, r2, #20
 	bl      Function_200964c
 	mov     r0, #0x16
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r5, #0x10]
 	bl      Function_223d350
 
@@ -3935,7 +3935,7 @@ Function_17_223cb1c: @ 223cb1c :thumb
 	ldr     r0, [pc, #0x74] @ 0x223cdc8, (=0x4f8)
 	mov     r1, #0x1
 	strb    r1, [r5, r0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -4403,7 +4403,7 @@ branch_223d12a: @ 223d12a :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r6, #0x50]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r6, #0x30]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0x14] @ 0x223d15c, (=0x27e0000)
@@ -4428,7 +4428,7 @@ Function_223d164: @ 223d164 :thumb
 	cmp     r0, #0x1
 	bne     branch_223d1a4
 	ldr     r0, [r6, #0x10]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	mov     r7, #0xf2
 	mov     r4, #0x0
 	mov     r5, r6
@@ -5988,7 +5988,7 @@ Function_17_223dad0: @ 223dad0 :thumb
 	lsl     r2, r2, #20
 	bl      Function_200964c
 	mov     r0, #0x17
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r5, #0x58]
 	bl      Function_223e450
 
@@ -6083,7 +6083,7 @@ Function_17_223dad0: @ 223dad0 :thumb
 	ldr     r0, [pc, #0x7c] @ 0x223ddbc, (=0x1170)
 	mov     r1, #0x1
 	strb    r1, [r5, r0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -6570,7 +6570,7 @@ branch_223e140: @ 223e140 :thumb
 	mov     r0, r4
 	add     r0, #0xa4
 	ldr     r0, [r0, #0x0]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x74]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0x20] @ 0x223e184, (=0x27e0000)
@@ -6675,7 +6675,7 @@ Function_223e1fc: @ 223e1fc :thumb
 	cmp     r0, #0x1
 	bne     branch_223e23e
 	ldr     r0, [r6, #0x58]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	mov     r4, #0x0
 	mov     r5, r6
 .thumb
@@ -32944,7 +32944,7 @@ branch_2249030: @ 2249030 :thumb
 	tst     r0, r1
 	bne     branch_2249058
 
-	ldr     r0, [pc, #0x1dc] @ 0x2249230, (=0x21bf6bc)
+	ldr     r0, [pc, #0x1dc] @ 0x2249230, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	beq     branch_224906a
@@ -33238,7 +33238,7 @@ branch_2249224: @ 2249224 :thumb
 
 .word 0x171 @ 0x2249228
 .word RAM_21bf67c @ 0x224922c
-.word 0x21bf6bc @ 0x2249230
+.word RAM_21bf6bc @ 0x2249230
 .word 0x6ed @ 0x2249234
 .word 0x2254468 @ 0x2249238
 .word 0x2254470 @ 0x224923c
@@ -46302,7 +46302,7 @@ branch_224ea22: @ 224ea22 :thumb
 branch_224ea36: @ 224ea36 :thumb
 	ldr     r0, [r4, #0x30]
 	ldr     r1, [sp, #0x18]
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	ldr     r1, [sp, #0x14]
 	blx     _s32_div_f
 	mov     r5, r1
@@ -46339,7 +46339,7 @@ branch_224ea66: @ 224ea66 :thumb
 	beq     branch_224ea90
 	ldr     r0, [r4, #0x30]
 	ldr     r1, [sp, #0x18]
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	cmp     r0, #0x80
@@ -46414,7 +46414,7 @@ branch_224ead0: @ 224ead0 :thumb
 branch_224eb00: @ 224eb00 :thumb
 	ldr     r0, [r4, #0x30]
 	ldr     r1, [sp, #0x24]
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	add     r1, r6, #0x2
 	blx     _s32_div_f
 	lsl     r0, r5, #2
@@ -46459,7 +46459,7 @@ branch_224eb3a: @ 224eb3a :thumb
 	add     r1, #0x30
 	str     r0, [sp, #0x4]
 	ldr     r0, [r4, #0x30]
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	mov     r6, r4
 	lsr     r2, r0, #31
 	lsl     r1, r0, #30
@@ -46484,7 +46484,7 @@ branch_224eb74: @ 224eb74 :thumb
 	bge     branch_224eba2
 	ldr     r0, [r4, #0x30]
 	mov     r1, r6
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	mov     r1, #0x64
 	blx     _s32_div_f
 	ldr     r0, [sp, #0x4]
@@ -46504,7 +46504,7 @@ branch_224eb74: @ 224eb74 :thumb
 branch_224eba2: @ 224eba2 :thumb
 	ldr     r0, [r4, #0x30]
 	mov     r1, r6
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	lsr     r1, r0, #31
 	lsl     r2, r0, #30
 	sub     r2, r2, r1
@@ -47159,7 +47159,7 @@ branch_224ef18: @ 224ef18 :thumb
 	mov     r1, r5
 	ldr     r0, [r5, #0x30]
 	add     r1, #0x30
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	ldr     r1, [sp, #0x2c]
 	.hword  0x1c89 @ add r1, r1, #0x2
 	blx     _s32_div_f
@@ -47179,7 +47179,7 @@ branch_224efa4: @ 224efa4 :thumb
 	mov     r1, r5
 	ldr     r0, [r5, #0x30]
 	add     r1, #0x30
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	mov     r1, #0x64
 	blx     _s32_div_f
 	ldr     r2, [sp, #0x2c]
@@ -47193,7 +47193,7 @@ branch_224efa4: @ 224efa4 :thumb
 branch_224efc2: @ 224efc2 :thumb
 	ldr     r0, [r5, #0x30]
 	mov     r1, r7
-	bl      Function_2094ea0
+	bl      ARNG_Step_16Bit
 	lsr     r1, r0, #31
 	lsl     r2, r0, #30
 	sub     r2, r2, r1
@@ -48151,7 +48151,7 @@ Function_17_224f4d4: @ 224f4d4 :thumb
 	ldr     r2, [pc, #0x100] @ 0x224f734, (=0x2254ad8)
 	bl      Function_200cb30
 	mov     r0, #0x18
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r5, #0x14]
 	bl      Function_224fddc
 
@@ -48213,7 +48213,7 @@ Function_17_224f4d4: @ 224f4d4 :thumb
 	mov     r1, #0x1
 	lsl     r0, r0, #4
 	strb    r1, [r5, r0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -48639,7 +48639,7 @@ Function_224fa24: @ 224fa24 :thumb
 	mov     r0, r4
 	add     r0, #0xd0
 	ldr     r0, [r0, #0x0]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x30]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0x14] @ 0x224faa4, (=0x27e0000)
@@ -48722,7 +48722,7 @@ Function_224fafc: @ 224fafc :thumb
 	cmp     r0, #0x1
 	bne     branch_224fb24
 	ldr     r0, [r4, #0x14]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	bl      Function_11_221f8f0
 	ldr     r0, [r4, #0x2c]
 	bl      Function_200c7ec
@@ -51484,7 +51484,7 @@ branch_2250e20: @ 2250e20 :thumb
 branch_2250e32: @ 2250e32 :thumb
 	ldr     r0, [r5, #0x0]
 	ldr     r0, [r0, r6]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r3, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]

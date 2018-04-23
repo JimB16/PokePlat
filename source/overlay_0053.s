@@ -624,7 +624,7 @@ Function_2256568: @ 2256568 :thumb
 	mov     r1, #0x0
 	ldr     r0, [r4, #0x0]
 	mov     r2, r1
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r5, #0x24]
 	.hword  0x1c49 @ add r1, r1, #0x1
@@ -929,7 +929,7 @@ branch_22567c8: @ 22567c8 :thumb
 branch_22567de: @ 22567de :thumb
 	mov     r1, #0x0
 	mov     r2, r1
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [sp, #0x20]
 	.hword  0x1c49 @ add r1, r1, #0x1

@@ -687,7 +687,7 @@ branch_2256628: @ 2256628 :thumb
 	ldr     r0, [r6, #0x0]
 	ldr     r1, [r6, #0x8]
 	mov     r2, #0x0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r5, #0x24]
 	bl      0x2255938

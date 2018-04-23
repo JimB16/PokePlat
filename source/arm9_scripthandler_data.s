@@ -541,7 +541,7 @@ JumpTable_ScriptHandler: @ 0x20eac58
 .word ScriptCmd_CheckSPoke+1 @ =0x2044c91, 0x20eb4c0, 0x21a
 .word Function_2044cbc+1 @ =0x2044cbd, 0x20eb4c4, 0x21b
 .word ScriptCmd_ActSwarmPoke+1 @ =0x2044ccd, 0x20eb4c8, 0x21c
-.word Function_2048bd0+1 @ =0x2048bd1, 0x20eb4cc, 0x21d @@
+.word ScriptCmd_21d+1 @ =0x2048bd1, 0x20eb4cc, 0x21d @@
 .word ScriptCmd_21e+1 @ =0x204ee39, 0x20eb4d0, 0x21e
 .word ScriptCmd_CheckMoveRemember+1 @ =0x204ee3d, 0x20eb4d4, 0x21f
 .word ScriptCmd_220+1 @ =0x204eefd, 0x20eb4d8, 0x220

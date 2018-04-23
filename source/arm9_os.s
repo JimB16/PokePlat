@@ -4372,8 +4372,8 @@ OS_GetOwnerInfo: @ 20c3fbc :arm
 .arm
 OS_GetOwnerRtcOffset: @ 20c4040 :arm
 	ldr     r1, =RAM_27ffc80
-	ldr     r0, [r1, #0x68]
-	ldr     r1, [r1, #0x6c]
+	ldr     r0, [r1, #0x68] @ 068h  4   RTC Offset (difference in seconds when RTC time/date was changed)
+	ldr     r1, [r1, #0x6c] @ 06Ch  4   Not used (FFh-filled, sometimes 00h-filled) (=MSBs of above?)
 	bx      lr
 @ 0x20c4050
 

@@ -1145,7 +1145,7 @@ branch_2247428: @ 2247428 :thumb
 	mov     r1, r4
 	mov     r2, #0x2
 	mov     r3, #0x0
-	bl      Function_2075f0c
+	bl      LoadPkmnDataForGraphic
 	mov     r1, #0x0
 	mov     r0, r4
 	mov     r2, r1
@@ -2311,7 +2311,7 @@ Function_2247b6c: @ 2247b6c :thumb
 	bl      Function_2247628
 	str     r0, [r4, #0x54]
 	mov     r0, #0x3a
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r4, #0xc]
 	mov     r0, #0x0
 	str     r0, [r4, #0x10]
@@ -2449,7 +2449,7 @@ Function_2247c6c: @ 2247c6c :thumb
 	ldr     r0, [r4, #0xc]
 	bl      Function_2008a94
 	ldr     r0, [r4, #0xc]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	mov     r2, #0x1
 	str     r2, [sp, #0x0]
 	mov     r0, #0x12
@@ -3163,7 +3163,7 @@ Function_2248174: @ 2248174 :thumb
 	ldr     r0, [r5, #0xc]
 	lsr     r1, r1, #13
 	lsl     r2, r2, #4
-	bl      Function_2008a78
+	bl      Function_2008a78_SetNARCPokeGra_TexVRAMOffset
 	ldr     r2, [pc, #0x34] @ 0x224823c, (=0xffff0000)
 	lsl     r1, r6, #16
 	and     r2, r6
@@ -3197,7 +3197,7 @@ Function_2248240: @ 2248240 :thumb
 	mov     r1, r4
 	mov     r2, #0x2
 	mov     r3, #0x0
-	bl      Function_2075f0c
+	bl      LoadPkmnDataForGraphic
 	ldr     r0, [r5, #0x0]
 	bl      Function_224764c
 	mov     r2, r0
@@ -10055,7 +10055,7 @@ Function_224b3d8: @ 224b3d8 :thumb
 	bl      Function_2247628
 	str     r0, [r4, #0x58]
 	mov     r0, #0x3a
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r4, #0x10]
 	mov     r0, #0x0
 	str     r0, [r4, #0x14]
@@ -10193,7 +10193,7 @@ Function_224b4d4: @ 224b4d4 :thumb
 	ldr     r0, [r4, #0x10]
 	bl      Function_2008a94
 	ldr     r0, [r4, #0x10]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	mov     r2, #0x1
 	str     r2, [sp, #0x0]
 	mov     r0, #0x12
@@ -10909,7 +10909,7 @@ Function_224b9c0: @ 224b9c0 :thumb
 	ldr     r0, [r5, #0x10]
 	lsr     r1, r1, #13
 	lsl     r2, r2, #4
-	bl      Function_2008a78
+	bl      Function_2008a78_SetNARCPokeGra_TexVRAMOffset
 	ldr     r2, [pc, #0x34] @ 0x224ba88, (=0xffff0000)
 	lsl     r1, r6, #16
 	and     r2, r6
@@ -10943,7 +10943,7 @@ Function_224ba8c: @ 224ba8c :thumb
 	mov     r1, r4
 	mov     r2, #0x2
 	mov     r3, #0x0
-	bl      Function_2075f0c
+	bl      LoadPkmnDataForGraphic
 	ldr     r0, [r5, #0x0]
 	bl      Function_2247660
 	mov     r2, r0

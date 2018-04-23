@@ -462,6 +462,12 @@ PreITCM_MIi_DmaSetParams: @ 1ff8480 :arm
 arm_func_end PreITCM_MIi_DmaSetParams
 
 
+/* Input:
+r0: NrOfDMAChannel
+r1: Source
+r2: Destination
+r3: Word Count
+*/
 arm_func_start PreITCM_MIi_DmaSetParams_wait
 PreITCM_MIi_DmaSetParams_wait: @ 1ff84c0 :arm
 	stmfd   sp!, {r3-r7,lr}
@@ -476,11 +482,11 @@ PreITCM_MIi_DmaSetParams_wait: @ 1ff84c0 :arm
 	mul     r2, r7, r1
 	add     r1, r2, #0xb0
 	add     r2, r2, #0x4000000
-	str     r6, [r2, #0xb0]
+	str     r6, [r2, #0xb0]         @ Source Address
 	add     r3, r1, #0x4000000
-	str     r5, [r3, #0x4]
+	str     r5, [r3, #0x4]          @ Destination Address
 	ldr     r2, =DMA0_SRC
-	str     r4, [r3, #0x8]
+	str     r4, [r3, #0x8]          @ Word Count + Control
 	ldr     r1, [r2]
 	cmp     r7, #0x0
 	ldr     r1, [r2]

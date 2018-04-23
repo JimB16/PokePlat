@@ -50,6 +50,13 @@ branch_20c4344: @ 20c4344 :arm
 @ 0x20c4354
 
 
+/* Input:
+r0: NrOfDMAChannel
+r1: Source
+r2: Destination
+r3: Size
+*/
+arm_func_start MI_DmaCopy32
 MI_DmaCopy32: @ 20c4354 :arm
 	stmfd   sp!, {r4-r8,lr}
 	mov     r5, r3
@@ -61,6 +68,7 @@ MI_DmaCopy32: @ 20c4354 :arm
 	bl      MIi_CheckDma0SourceAddress
 	cmp     r5, #0x0
 	ldmeqfd sp!, {r4-r8,pc}
+
 	add     r0, r8, r8, lsl #1
 	add     r0, r0, #0x2
 	mov     r0, r0, lsl #2
@@ -70,18 +78,20 @@ branch_20c4390: @ 20c4390 :arm
 	ldr     r0, [r4]
 	tst     r0, #0x80000000
 	bne     branch_20c4390
-	mov     r3, r5, lsr #2
-	mov     r0, r8
-	mov     r1, r7
-	mov     r2, r6
+
+	mov     r3, r5, lsr #2              @ Word Count
+	mov     r0, r8                      @ NrOfDMAChannel
+	mov     r1, r7                      @ Source
+	mov     r2, r6                      @ Destination
 	orr     r3, r3, #0x84000000
 	bl      PreITCM_MIi_DmaSetParams_wait
 branch_20c43b4: @ 20c43b4 :arm
 	ldr     r0, [r4]
 	tst     r0, #0x80000000
 	bne     branch_20c43b4
+
 	ldmfd   sp!, {r4-r8,pc}
-@ 0x20c43c4
+arm_func_end MI_DmaCopy32
 
 
 .globl MI_DmaCopy16
@@ -350,25 +360,31 @@ MIi_CheckDma0SourceAddress: @ 20c46f4 :arm
 	stmfd   sp!, {r3,lr}
 	cmp     r0, #0x0
 	ldmnefd sp!, {r3,pc}
+
 	cmp     r3, #0x0
-	and     r12, r1, #255, 8 @ #0xff000000
+	and     r12, r1, #0xff000000
 	beq     branch_20c4718
-	cmp     r3, #2, 10 @ #0x800000
+
+	cmp     r3, #0x800000
 	subeq   r1, r1, r2
 	b       branch_20c471c
 
 branch_20c4718: @ 20c4718 :arm
 	add     r1, r1, r2
 branch_20c471c: @ 20c471c :arm
-	cmp     r12, #1, 6 @ #0x4000000
-	and     r0, r1, #255, 8 @ #0xff000000
+	cmp     r12, #0x4000000
+	and     r0, r1, #0xff000000
 	beq     branch_20c4740
-	cmp     r12, #2, 6 @ #0x8000000
+
+	cmp     r12, #0x8000000
 	bcs     branch_20c4740
-	cmp     r0, #1, 6 @ #0x4000000
+
+	cmp     r0, #0x4000000
 	beq     branch_20c4740
-	cmp     r0, #2, 6 @ #0x8000000
+
+	cmp     r0, #0x8000000
 	ldmccfd sp!, {r3,pc}
+
 branch_20c4740: @ 20c4740 :arm
 	bl      OS_Panic
 	ldmfd   sp!, {r3,pc}

@@ -739,7 +739,7 @@ branch_223b654: @ 223b654 :thumb
 
 .thumb
 branch_223b664: @ 223b664 :thumb
-	ldr     r0, [pc, #0x18] @ 0x223b680, (=0x21bf67c)
+	ldr     r0, [pc, #0x18] @ 0x223b680, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x3
 	tst     r0, r1
@@ -761,7 +761,7 @@ branch_223b674: @ 223b674 :thumb
 
 
 .word 0x1bcc @ 0x223b67c
-.word 0x21bf67c @ 0x223b680
+.word RAM_21bf67c @ 0x223b680
 .thumb
 Function_223b684: @ 223b684 :thumb
 	push    {r4,lr}
@@ -1383,7 +1383,7 @@ branch_223bb52: @ 223bb52 :thumb
 	ldr     r1, [sp, #0x20]
 	mov     r2, #0x1
 	add     r3, sp, #0x5c
-	blx     Function_20a8224
+	blx     Function_20a8224_LoadTexOBJ
 	ldr     r0, [sp, #0x40]
 	ldr     r1, [sp, #0x1c]
 	mov     r2, #0x1
@@ -1411,7 +1411,7 @@ branch_223bb52: @ 223bb52 :thumb
 	add     r0, sp, #0xdc
 	mov     r1, r7
 	mov     r2, #0x2
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	mov     r0, r7
 	mov     r1, #0x5
 	mov     r2, #0x0
@@ -1542,7 +1542,7 @@ branch_223bcaa: @ 223bcaa :thumb
 	lsl     r1, r1, #8
 	mov     r2, #0x1
 	add     r3, sp, #0x5c
-	blx     Function_20a8224
+	blx     Function_20a8224_LoadTexOBJ
 	ldr     r0, [sp, #0x40]
 	mov     r1, #0xc0
 	mov     r2, #0x1

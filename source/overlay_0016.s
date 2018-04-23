@@ -750,7 +750,7 @@ branch_223b592: @ 223b592 :thumb
 	ldrh    r2, [r0, #0x0]
 	bic     r2, r1
 	strh    r2, [r0, #0x0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -1116,14 +1116,14 @@ branch_223b850: @ 223b850 :thumb
 	bl      Call_FS_CloseFile
 
 	mov     r0, #0x5
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	mov     r1, r4
-	add     r1, #MainBattleData_88
-	str     r0, [r1, #0x0] @ MainBattleData_88
+	add     r1, #MainBattleData_NARCPokeGra
+	str     r0, [r1] @ MainBattleData_NARCPokeGra
 
 	mov     r0, r4
-	add     r0, #MainBattleData_88
-	ldr     r0, [r0, #0x0] @ MainBattleData_88
+	add     r0, #MainBattleData_NARCPokeGra
+	ldr     r0, [r0] @ MainBattleData_NARCPokeGra
 	mov     r1, #0x0
 	mov     r2, #0xc0
 	bl      Function_2008a84
@@ -1288,20 +1288,20 @@ branch_223b850: @ 223b850 :thumb
 	ldr     r0, [r4, r1] @ MainBattleData_1b0
 	mov     r1, #0x1
 	bl      Function_2015738
-	ldr     r0, [pc, #0xa4] @ 0x223bbb4, (=0x223cf49)
+	ldr     r0, [pc, #0xa4] @ 0x223bbb4, (=Function_223cf48+1)
 	ldr     r2, [pc, #0xa8] @ 0x223bbb8, (=0xea60)
 	mov     r1, r4
 	bl      AddTaskToTaskList1
 	str     r0, [r4, #MainBattleData_1c]
 
-	ldr     r0, [pc, #0xa0] @ 0x223bbbc, (=0x223cf8d)
+	ldr     r0, [pc, #0xa0] @ 0x223bbbc, (=Function_223cf8c+1)
 	ldr     r2, [pc, #0xa4] @ 0x223bbc0, (=0xc350)
 	mov     r1, r4
 	bl      AddTaskToTaskList1
 	str     r0, [r4, #MainBattleData_20]
 
 	mov     r2, #0x4b
-	ldr     r0, [pc, #0x9c] @ 0x223bbc4, (=0x223d0c5)
+	ldr     r0, [pc, #0x9c] @ 0x223bbc4, (=Function_223d0c4+1)
 	mov     r1, r4
 	lsl     r2, r2, #4
 	bl      AddTaskToTaskList2
@@ -2092,7 +2092,7 @@ branch_223c090: @ 223c090 :thumb
 	ldrh    r2, [r0, #0x0]
 	bic     r2, r1
 	strh    r2, [r0, #0x0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -3904,7 +3904,7 @@ branch_223ced0: @ 223ced0 :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0x28]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x4]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0x24] @ 0x223cf14, (=0x27e0000)
@@ -3933,7 +3933,7 @@ Function_223cf1c: @ 223cf1c :thumb
 	push    {r4,lr}
 	mov     r4, r0
 	ldr     r0, [r4, #0xc]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	bl      Function_201dcac
 	ldr     r0, [r4, #0x4]
 	bl      Function_201c2b8
@@ -3952,32 +3952,41 @@ Function_223cf1c: @ 223cf1c :thumb
 
 
 
+/* Input:
+r1: MainBattleData
+*/
 .thumb
 Function_223cf48: @ 223cf48 :thumb
 	push    {r4,lr}
 	mov     r4, r1
-	ldr     r1, [r4, #0x4]
+	ldr     r1, [r4, #MainBattleData_4]
 	mov     r0, #0x5
 	bl      Function_2038a1c
-	ldr     r0, [pc, #0x30] @ 0x223cf88, (=0x23fd)
-	ldrb    r0, [r4, r0]
+
+	ldr     r0, =MainBattleData_23fd
+	ldrb    r0, [r4, r0] @ MainBattleData_23fd
 	cmp     r0, #0x0
 	beq     branch_223cf60
+
 	cmp     r0, #0x3
 	bne     branch_223cf86
+
 branch_223cf60: @ 223cf60 :thumb
 	cmp     r0, #0x0
 	bne     branch_223cf68
 	bl      Function_11_221f8f0
+
 branch_223cf68: @ 223cf68 :thumb
 	mov     r0, r4
-	add     r0, #0x88
-	ldr     r0, [r0, #0x0]
-	bl      Function_2007768
-	add     r4, #0x94
-	ldr     r0, [r4, #0x0]
+	add     r0, #MainBattleData_NARCPokeGra
+	ldr     r0, [r0] @ MainBattleData_NARCPokeGra
+	bl      DrawNARCPokeGra
+
+	add     r4, #MainBattleData_94
+	ldr     r0, [r4] @ MainBattleData_94
 	bl      Function_200c7ec
 	bl      Function_200c808
+
 	mov     r0, #0x1
 	mov     r1, #0x0
 	bl      Function_20241bc
@@ -3985,7 +3994,8 @@ branch_223cf86: @ 223cf86 :thumb
 	pop     {r4,pc}
 @ 0x223cf88
 
-.word 0x23fd @ 0x223cf88
+.align 2
+.pool
 
 
 
@@ -4369,7 +4379,7 @@ branch_223d17e: @ 223d17e :thumb
 	mov     r2, r1
 	mov     r3, r1
 	bl      Function_20038b0
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 
 	mov     r0, #0x10
 	mov     r1, #0x1
@@ -6306,12 +6316,12 @@ thumb_func_end GetMainBattleData_GetAdrOfPkmnInParty
 /* Input:
 r0: MainBattleData
 */
-.thumb
-LoadMainBattleData_88: @ 223e000 :thumb
-	add     r0, #MainBattleData_88
-	ldr     r0, [r0] @ MainBattleData_88
+thumb_func_start LoadMainBattleData_NARCPokeGra
+LoadMainBattleData_NARCPokeGra: @ 223e000 :thumb
+	add     r0, #MainBattleData_NARCPokeGra
+	ldr     r0, [r0] @ MainBattleData_NARCPokeGra
 	bx      lr
-@ 0x223e006
+thumb_func_end LoadMainBattleData_NARCPokeGra
 
 
 .align 2, 0
@@ -9712,21 +9722,24 @@ Function_223f4b0: @ 223f4b0 :thumb
 
 
 
+/* Input:
+r0: MainBattleData
+*/
 .thumb
 .globl Function_16_GetRandomNr
 Function_16_GetRandomNr: @ 223f4bc :thumb
 	push    {r3,r4}
 
-	ldr     r2, =0x2448
+	ldr     r2, =MainBattleData_2448
 	ldr     r1, =0x41c64e6d
-	ldr     r3, [r0, r2]
+	ldr     r3, [r0, r2] @ MainBattleData_2448
 	mov     r4, r3
 	mul     r4, r1
 	ldr     r1, =0x6073
 	add     r1, r4, r1
-	str     r1, [r0, r2]
+	str     r1, [r0, r2] @ MainBattleData_2448
 
-	ldr     r0, [r0, r2]
+	ldr     r0, [r0, r2] @ MainBattleData_2448
 	lsr     r0, r0, #16
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
@@ -14077,9 +14090,9 @@ TryToCatchPkmn: @ 2249b80 :thumb
 	mov     r5, r0
 
 	ldr     r0, [r4, #CatchStruct_MainBattleData]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r7, #0x1
-	str     r0, [sp, #0x24]
+	str     r0, [sp, #0x24] @ NARCPokeGra
 
 	mov     r0, r7
 	ldr     r6, [r4, #CatchStruct_BattleData]
@@ -14545,7 +14558,7 @@ branch_2249f00: @ 2249f00 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r2, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x0]
@@ -14580,7 +14593,7 @@ branch_2249f20: @ 2249f20 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r2, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x0]
@@ -14639,7 +14652,7 @@ branch_2249fa0: @ 2249fa0 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	str     r1, [sp, #0x0]
 	mov     r2, #0x10
 	mov     r3, r1
@@ -14663,7 +14676,7 @@ branch_2249ff8: @ 2249ff8 :thumb
 branch_2249ffa: @ 2249ffa :thumb
 	ldr     r0, [r4, #0x8]
 	bl      Function_12_223783c
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	bl      Function_2007dd4
 	ldr     r0, [r4, #0x0]
 	bl      Function_223b53c
@@ -14688,9 +14701,10 @@ branch_2249ffa: @ 2249ffa :thumb
 	ldr     r0, [r4, #0x0]
 	bl      LoadMainBattleData_28
 	str     r0, [sp, #0xd4]
-	ldr     r0, [sp, #0x24]
+
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r1, r7
-	str     r0, [sp, #0xd8]
+	str     r0, [sp, #0xd8] @ NARCPokeGra
 	mov     r0, #0x5
 	str     r0, [sp, #0xdc]
 	ldr     r2, [r4, #0x4]
@@ -14700,11 +14714,12 @@ branch_2249ffa: @ 2249ffa :thumb
 	ldrb    r2, [r3, r2]
 	bl      GetMainBattleData_GetAdrOfPkmnInParty
 	str     r0, [sp, #0xe0]
+
 	ldr     r0, [r4, #0x0]
 	bl      Function_223e068
 	bl      Function_207a280
 	str     r0, [sp, #0xe4]
-	bl      Function_201ee9c
+	bl      Function_201ee9c_UnsetLoadGraphicDataList
 	str     r0, [r4, #0x54]
 	add     r0, sp, #0xd0
 	bl      Function_21_21e8d48
@@ -14782,7 +14797,7 @@ branch_224a104: @ 224a104 :thumb
 	ldr     r0, [r4, #0x50]
 	bl      Function_21_21e8dd0
 	ldr     r0, [r4, #0x54]
-	bl      Function_201eeb8
+	bl      Function_201eeb8_SetLoadGraphicDataList
 	ldr     r0, [r4, #0x0]
 	bl      Function_223b578
 	mov     r0, #0x10
@@ -14820,7 +14835,7 @@ branch_224a140: @ 224a140 :thumb
 	mov     r6, r0
 	ldr     r0, [r4, #0x8]
 	bl      Function_12_223783c
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	bl      Function_2007dd4
 	ldr     r0, [r4, #0x0]
 	mov     r1, #0x0
@@ -14834,13 +14849,14 @@ branch_224a140: @ 224a140 :thumb
 	add     r0, sp, #0xc0
 	mov     r1, r6
 	mov     r2, #0x2
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
 	str     r0, [sp, #0x8]
 	str     r0, [sp, #0xc]
-	ldr     r0, [sp, #0x24]
+
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	add     r1, sp, #0xc0
 	mov     r2, #0x80
 	mov     r3, #0x48
@@ -14856,7 +14872,7 @@ branch_224a140: @ 224a140 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r2, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r1, #0x10
 	mov     r3, r2
 	str     r2, [sp, #0x0]
@@ -14938,7 +14954,7 @@ branch_224a232: @ 224a232 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r2, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x0]
@@ -15170,7 +15186,7 @@ branch_224a3be: @ 224a3be :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r2, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x0]
@@ -15306,7 +15322,7 @@ branch_224a522: @ 224a522 :thumb
 	mov     r3, #0x1
 	bl      Function_2003178
 	mov     r1, #0x0
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	mov     r2, #0x10
 	mov     r3, r1
 	str     r1, [sp, #0x0]
@@ -15511,7 +15527,7 @@ branch_224a6d4: @ 224a6d4 :thumb
 	beq     branch_224a6f8
 	ldr     r0, [r4, #0x8]
 	bl      Function_12_223783c
-	ldr     r0, [sp, #0x24]
+	ldr     r0, [sp, #0x24] @ NARCPokeGra
 	bl      Function_2007dd4
 branch_224a6f8: @ 224a6f8 :thumb
 	ldr     r1, [r4, #0x0]
@@ -17770,7 +17786,7 @@ Function_224b520: @ 224b520 :thumb
 	str     r0, [r5, #0xc]
 	bl      Function_200d330
 	ldr     r0, [sp, #0x18]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r3, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -44965,6 +44981,11 @@ branch_2257012: @ 2257012 :thumb
 
 
 
+/* Input:
+r0: MainBattleData
+r1: BattleData
+r2: [BattleData_3cf] PkmnNr 0-3
+*/
 .thumb
 .globl Function_16_2257028
 Function_16_2257028: @ 2257028 :thumb
@@ -44973,20 +44994,24 @@ Function_16_2257028: @ 2257028 :thumb
 	mov     r5, r0
 	mov     r6, r1
 	mov     r4, r2
+
 	bl      LoadMainBattleData_2c
-	mov     r1, #0x2
+	mov     r1, #MainBattleData_2c_2
 	tst     r0, r1
 	beq     branch_2257080
+
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, #0x0
 	bl      Function_223e2a4
 	str     r0, [sp, #0x0]
+
 	mov     r0, r5
 	mov     r1, r4
 	mov     r2, #0x2
 	bl      Function_223e2a4
 	str     r0, [sp, #0x4]
+
 	mov     r0, r5
 	bl      Function_16_GetRandomNr
 	mov     r3, #0x1
@@ -44995,32 +45020,31 @@ Function_16_2257028: @ 2257028 :thumb
 	lsl     r0, r2, #2
 	add     r1, sp, #0x0
 	ldr     r0, [r1, r0]
-	mov     r4, #0xc0
+	mov     r4, #PkmnBattleData_Size
 	mul     r4, r0
 	add     r5, r6, r4
-	ldr     r4, [pc, #0x18] @ 0x2257088, (=BattleData_CurHP)
-	ldr     r4, [r5, r4]
+	ldr     r4, =BattleData_CurHP
+	ldr     r4, [r5, r4] @ BattleData_CurHP
 	cmp     r4, #0x0
 	bne     branch_2257084
+
 	mov     r0, r2
 	eor     r0, r3
 	lsl     r0, r0, #2
 	add     sp, #0x8
 	ldr     r0, [r1, r0]
 	pop     {r4-r6,pc}
-@ 0x2257080
 
-.thumb
 branch_2257080: @ 2257080 :thumb
 	mov     r0, #0x1
 	eor     r0, r4
-.thumb
 branch_2257084: @ 2257084 :thumb
 	add     sp, #0x8
 	pop     {r4-r6,pc}
 @ 0x2257088
 
-.word BattleData_CurHP @ 0x2257088
+.align 2
+.pool
 
 
 
@@ -57926,7 +57950,7 @@ branch_225c6a0: @ 225c6a0 :thumb
 	ldrh    r1, [r4, #0x2]
 	ldrb    r2, [r4, #0x4]
 	add     r0, sp, #0x14
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r5, #0x20]
 	bl      Function_2008a90
 	mov     r7, r0
@@ -58652,7 +58676,7 @@ Function_225cbdc: @ 225cbdc :thumb
 	str     r0, [sp, #0x24]
 	mov     r6, r1
 	mov     r5, r2
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	str     r0, [sp, #0x28]
 	ldr     r0, [sp, #0x24]
 	bl      LoadMainBattleData_2c
@@ -58736,7 +58760,7 @@ branch_225cc66: @ 225cc66 :thumb
 	lsl     r2, r2, #30
 	add     r0, sp, #0x5c
 	lsr     r2, r2, #30
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r5, #0x4]
 	str     r0, [sp, #0x0]
 	ldrb    r3, [r5, #0x1]
@@ -58991,7 +59015,7 @@ branch_225ce58: @ 225ce58 :thumb
 	ldrb    r3, [r3, #0x0]
 	add     r0, #0x14
 	lsr     r2, r2, #30
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r5, #0x4]
 	mov     r2, r4
 	str     r0, [sp, #0x0]
@@ -59181,7 +59205,7 @@ branch_225cfb8: @ 225cfb8 :thumb
 	ldrb    r3, [r3, #0x0]
 	add     r0, #0x14
 	lsr     r2, r2, #30
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	ldr     r0, [r4, #0x4]
 	mov     r2, r5
 	str     r0, [sp, #0x0]
@@ -59755,7 +59779,7 @@ Function_225d414: @ 225d414 :thumb
 	mov     r7, r0
 	mov     r5, r1
 	mov     r6, r2
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r0, #0x5
 	mov     r1, #0x10
 	bl      malloc
@@ -63095,7 +63119,7 @@ branch_225ebc4: @ 225ebc4 :thumb
 .thumb
 branch_225ebcc: @ 225ebcc :thumb
 	ldr     r0, [r4, #0x0]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r2, r4
 	mov     r3, r4
 	mov     r5, r0
@@ -63807,7 +63831,7 @@ branch_225f148: @ 225f148 :thumb
 	bl      Function_12_2237728
 	str     r0, [r4, #0xc]
 	ldr     r0, [r4, #0x0]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r2, r4
 	mov     r3, r4
 	mov     r5, r0
@@ -67705,19 +67729,22 @@ Function_2260db0: @ 2260db0 :thumb
 	ldr     r0, [pc, #0xa8] @ 0x2260e74, (=0x101)
 	tst     r0, r4
 	bne     branch_2260de6
+
 	ldr     r0, [r6, #0x0]
 	bl      LoadMainBattleData_240c
 	mov     r1, #0x1
 	tst     r0, r1
 	bne     branch_2260de6
+
 	ldrb    r1, [r6, #0x1d]
 	ldr     r0, [r6, #0x0]
 	bl      Function_16_223e208
 	cmp     r0, #0x0
 	bne     branch_2260df6
+
 branch_2260de6: @ 2260de6 :thumb
 	ldrb    r1, [r6, #0x1d]
-	ldr     r0, [r6, #0x0]
+	ldr     r0, [r6, #0x0] @ MainBattleData
 	bl      Function_14_221fcf4
 	cmp     r0, #0xff
 	beq     branch_2260e6e
@@ -71268,7 +71295,7 @@ branch_22627c6: @ 22627c6 :thumb
 	cmp     r0, #0x0
 	beq     branch_22627dc
 	ldr     r0, [r4, #0x0]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r1, #0x1
 	bl      Function_2008b54
 .thumb
@@ -71310,7 +71337,7 @@ branch_2262814: @ 2262814 :thumb
 	cmp     r0, #0x0
 	beq     branch_226282a
 	ldr     r0, [r4, #0x0]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r1, #0x1
 	bl      Function_2008b60
 .thumb
@@ -72067,7 +72094,7 @@ Function_2262d28: @ 2262d28 :thumb
 	bl      LoadMainBattleData_28
 	mov     r4, r0
 	ldr     r0, [r5, #0x0]
-	bl      LoadMainBattleData_88
+	bl      LoadMainBattleData_NARCPokeGra
 	mov     r7, r0
 	ldrb    r0, [r5, #0x6]
 	cmp     r0, #0x0
@@ -89433,7 +89460,7 @@ branch_226a80c: @ 226a80c :thumb
 	bl      Function_16_223e018
 	str     r0, [sp, #0x14]
 	ldr     r0, [sp, #0xc]
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r3, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -92552,7 +92579,7 @@ Function_226bd74: @ 226bd74 :thumb
 	mov     r1, #0x1
 	bl      Function_200316c
 	mov     r4, r0
-	ldr     r0, [pc, #0x9c] @ 0x226be44, (=0x21bf6bc)
+	ldr     r0, [pc, #0x9c] @ 0x226be44, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x22]
 	cmp     r0, #0x0
 	beq     branch_226bdfc
@@ -92639,7 +92666,7 @@ branch_226be40: @ 226be40 :thumb
 @ 0x226be42
 
 .align 2
-.word 0x21bf6bc @ 0x226be44
+.word RAM_21bf6bc @ 0x226be44
 
 
 

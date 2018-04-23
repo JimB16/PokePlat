@@ -6522,7 +6522,6 @@ Function_2240c7c: @ 2240c7c :thumb
 	mov     r5, r0
 	mov     r4, #0x0
 	add     r5, #0x88
-.thumb
 branch_2240c84: @ 2240c84 :thumb
 	mov     r0, r5
 	bl      Function_223fd98
@@ -6533,34 +6532,34 @@ branch_2240c84: @ 2240c84 :thumb
 	pop     {r3-r5,pc}
 @ 0x2240c94
 
+
 .thumb
 Function_2240c94: @ 2240c94 :thumb
-	ldr     r3, [pc, #0x0] @ 0x2240c98, (=Function_223fdbc+1)
+	ldr     r3, =Function_223fdbc+1
 	bx      r3
 @ 0x2240c98
 
-.word Function_223fdbc+1 @ 0x2240c98
+.pool
 
 
 
 .thumb
-Function_2240c9c: @ 2240c9c :thumb
+Function_2240c9c_Get10PercentEncounter: @ 2240c9c :thumb
 	push    {r4-r6,lr}
 	mov     r5, r0
 	mov     r4, r1
 	mov     r6, r2
 	bl      Function_2013960
-	.hword  0x1e41 @ sub r1, r0, #0x1
+	sub     r1, r0, #0x1
 	cmp     r1, #0x1
 	bhi     branch_2240cb8
+
 	ldr     r0, [r5, #0x6c]
 	str     r0, [r4, #0x0]
 	ldr     r0, [r5, #0x70]
 	str     r0, [r6, #0x0]
 	pop     {r4-r6,pc}
-@ 0x2240cb8
 
-.thumb
 branch_2240cb8: @ 2240cb8 :thumb
 	.hword  0x1ec0 @ sub r0, r0, #0x3
 	cmp     r0, #0x1
@@ -6569,60 +6568,68 @@ branch_2240cb8: @ 2240cb8 :thumb
 	str     r0, [r4, #0x0]
 	ldr     r0, [r5, #0x78]
 	str     r0, [r6, #0x0]
-.thumb
 branch_2240cc6: @ 2240cc6 :thumb
+
 	pop     {r4-r6,pc}
 @ 0x2240cc8
 
+
 .thumb
-Function_2240cc8: @ 2240cc8 :thumb
+Function_2240cc8_GetSwarmPkmnOnMap: @ 2240cc8 :thumb
 	push    {r3-r7,lr}
-	mov     r5, r0
-	ldr     r0, [r5, #0xc]
+	mov     r5, r0              @ OverWorldData
+
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	mov     r4, r1
 	mov     r6, r2
 	mov     r7, r3
 	bl      LoadVariableAreaAdress_19
 	str     r0, [sp, #0x0]
-	bl      Function_202d898
+	bl      Function_202d898            @ Check for NationalDex?
 	cmp     r0, #0x0
 	beq     branch_2240cfe
+
 	ldr     r0, [sp, #0x0]
 	mov     r1, #0x2
-	bl      Function_202d814
-	bl      Function_2243218
-	ldr     r1, [r5, #0x1c]
-	ldr     r1, [r1, #0x0]
+	bl      Function_202d814_GetSwarmRNGNrs
+	bl      Function_2243218_GetSwarmMap
+
+	ldr     r1, [r5, #OverWorldData_MapData]
+	ldr     r1, [r1, #MapData_MapNr]
 	cmp     r1, r0
-	bne     branch_2240cfe
+	bne     branch_2240cfe @ If SwarmMap != CurMap
 	ldr     r0, [r4, #0x64]
 	str     r0, [r6, #0x0]
 	ldr     r0, [r4, #0x68]
 	str     r0, [r7, #0x0]
-.thumb
+
 branch_2240cfe: @ 2240cfe :thumb
+
 	pop     {r3-r7,pc}
 @ 0x2240d00
 
+
 .thumb
-Function_2240d00: @ 2240d00 :thumb
+Function_2240d00_Get5PercentEncounter: @ 2240d00 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
-	ldr     r0, [r5, #0x1c]
+	ldr     r0, [r5, #0x1c] @ OverWorldData_MapData
 	mov     r4, r1
-	ldr     r0, [r0, #0x0]
+	ldr     r0, [r0, #0x0] @ MapData_MapNr
 	mov     r6, r2
 	mov     r7, r3
-	bl      Function_203a2fc
+	bl      TestIfMapIsTrophyGarden
 	cmp     r0, #0x0
 	beq     branch_2240d54
+
 	add     r1, sp, #0x0
 	ldr     r0, [r5, #0xc]
 	add     r1, #0x2
 	add     r2, sp, #0x0
-	bl      Function_202da10
+	bl      Function_202da10_GetMarshEncounterRNG
 	cmp     r4, #0x0
 	beq     branch_2240d54
+
 	mov     r0, #EncdataEx_Narc
 	mov     r1, #0x8
 	mov     r2, #0x4
@@ -6636,18 +6643,20 @@ Function_2240d00: @ 2240d00 :thumb
 	ldr     r1, [r0, r1]
 	str     r1, [r6, #0x0]
 branch_2240d40: @ 2240d40 :thumb
+
 	add     r1, sp, #0x0
 	ldrh    r2, [r1, #0x0]
 	ldr     r1, [pc, #0x10] @ 0x2240d58, (=0xffff)
 	cmp     r2, r1
 	beq     branch_2240d50
+
 	lsl     r1, r2, #2
 	ldr     r1, [r0, r1]
 	str     r1, [r7, #0x0]
-.thumb
+
 branch_2240d50: @ 2240d50 :thumb
 	bl      free
-.thumb
+
 branch_2240d54: @ 2240d54 :thumb
 	pop     {r3-r7,pc}
 @ 0x2240d56
@@ -6701,14 +6710,14 @@ branch_2240d9a: @ 2240d9a :thumb
 	mov     r7, r0
 	mov     r0, r5
 	bl      GetMapWildPkmnAdress
-	mov     r4, r0
+	mov     r4, r0                  @ MapWildPkmnAdress
 	mov     r0, r7
 	mov     r1, #0x0
 	bl      GetAdrOfPkmnInParty
 	str     r0, [sp, #0x20]
 	ldr     r1, [sp, #0x20]
 	mov     r0, r5
-	mov     r2, r4
+	mov     r2, r4                  @ MapWildPkmnAdress
 	add     r3, sp, #0x30
 	bl      Function_2242634
 	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
@@ -6830,12 +6839,12 @@ branch_2240e88: @ 2240e88 :thumb
 	beq     branch_2240ef0
 
 	ldr     r0, [sp, #0x28]
-	mov     r1, #0x6
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_6
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	add     r1, sp, #0x30
-	bl      Function_2242388
+	bl      Function_2242388_CmpUnkSwarmValue
 	cmp     r0, #0x0
 	bne     branch_2240eea
 
@@ -6897,10 +6906,10 @@ branch_2240f18: @ 2240f18 :thumb
 
 	mov     r7, #0x4
 	mov     r0, #0x0
-	mov     r1, r4
+	mov     r1, r4                      @ MapWildPkmnAdress
 	add     r2, sp, #0x54
 	mov     r3, r7
-branch_2240f32: @ 2240f32 :thumb
+branch_2240f32: @ 2240f32 :thumb        @ Copy the normal encounters
 	ldr     r6, [r1, #0x8]
 	.hword  0x1c40 @ add r0, r0, #0x1
 	str     r6, [r2, #0x0]
@@ -6910,32 +6919,37 @@ branch_2240f32: @ 2240f32 :thumb
 	add     r1, #0x8
 	strh    r6, [r2, #0x6]
 	add     r2, #0x8
-	cmp     r0, #0xc
+	cmp     r0, #12
 	blt     branch_2240f32
+
 	mov     r0, r5
 	bl      GetOverWorldData_VariableAreaAdresses
 	bl      LoadPokedexDataAdress
 	bl      Function_2027474
 	mov     r6, r0
-	mov     r0, r4
+	mov     r0, r4                  @ MapWildPkmnAdress
 	add     r1, sp, #0x64
 	add     r2, sp, #0x6c
-	bl      Function_2240c9c
+	bl      Function_2240c9c_Get10PercentEncounter
+
 	mov     r0, r5
-	mov     r1, r4
+	mov     r1, r4                  @ MapWildPkmnAdress
 	add     r2, sp, #0x54
 	add     r3, sp, #0x5c
-	bl      Function_2240cc8
-	mov     r0, r5
+	bl      Function_2240cc8_GetSwarmPkmnOnMap
+
+	mov     r0, r5                  @ OverWorldData
 	mov     r1, r6
 	add     r2, sp, #0x84
 	add     r3, sp, #0x8c
-	bl      Function_2240d00
-	mov     r0, r4
+	bl      Function_2240d00_Get5PercentEncounter
+
+	mov     r0, r4                  @ MapWildPkmnAdress
 	mov     r1, r6
 	add     r2, sp, #0x94
 	add     r3, sp, #0x9c
-	bl      Function_22477b8
+	bl      Function_22477b8_Get4PercentEncounter
+
 	ldr     r0, [sp, #0xc]
 	cmp     r0, #0x0
 	bne     branch_2240fb2
@@ -6943,7 +6957,7 @@ branch_2240f32: @ 2240f32 :thumb
 	mov     r0, r5
 	mov     r2, r6
 	add     r3, sp, #0x54
-	bl      Function_2242354
+	bl      Function_2242354_Get20PercentEncounter
 	add     r0, sp, #0x54
 	str     r0, [sp, #0x0]
 	add     r0, sp, #0x30
@@ -7110,8 +7124,10 @@ branch_2241086: @ 2241086 :thumb
 	blo     branch_22410d8
 	bl      ErrorHandling
 branch_22410d8: @ 22410d8 :thumb
+
 	cmp     r5, r6
 	blt     branch_22410e2
+
 	add     sp, #0x94
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
@@ -7138,6 +7154,7 @@ branch_22410e2: @ 22410e2 :thumb
 	bl      Function_203a2f0
 	cmp     r0, #0x0
 	beq     branch_2241154
+
 	ldr     r0, [sp, #0x8]
 	bl      Function_2247660
 	cmp     r0, #0x0
@@ -7155,6 +7172,7 @@ branch_22410e2: @ 22410e2 :thumb
 	mov     r1, #0x0
 	add     r0, sp, #0x34
 branch_224113e: @ 224113e :thumb
+
 	lsl     r5, r1, #3
 	.hword  0x1c49 @ add r1, r1, #0x1
 	lsl     r1, r1, #24
@@ -7214,6 +7232,7 @@ branch_2241186: @ 2241186 :thumb
 	lsr     r6, r0, #24
 	cmp     r6, #0x5
 	blo     branch_2241186
+
 branch_22411a2: @ 22411a2 :thumb
 	add     r0, sp, #0x20
 	str     r0, [sp, #0x0]
@@ -7227,6 +7246,7 @@ branch_22411a2: @ 22411a2 :thumb
 	bl      Function_22417ac
 	cmp     r0, #0x0
 	bne     branch_22411c2
+
 	add     sp, #0x94
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
@@ -7263,9 +7283,7 @@ Function_6_22411c8: @ 22411c8 :thumb
 	add     sp, #0xac
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x22411fc
 
-.thumb
 branch_22411fc: @ 22411fc :thumb
 	ldr     r0, [r5, #0xc]
 	bl      LoadPokePartyAdress
@@ -7375,7 +7393,6 @@ branch_22412bc: @ 22412bc :thumb
 	mov     r1, r4
 	add     r2, sp, #0x4c
 	mov     r3, r7
-.thumb
 branch_22412d6: @ 22412d6 :thumb
 	ldr     r6, [r1, #0x8]
 	.hword  0x1c40 @ add r0, r0, #0x1
@@ -7393,33 +7410,39 @@ branch_22412d6: @ 22412d6 :thumb
 	bl      LoadPokedexDataAdress
 	bl      Function_2027474
 	mov     r6, r0
+
 	mov     r0, r4
 	add     r1, sp, #0x5c
 	add     r2, sp, #0x64
-	bl      Function_2240c9c
+	bl      Function_2240c9c_Get10PercentEncounter
+
 	mov     r0, r5
 	mov     r1, r4
 	add     r2, sp, #0x4c
 	add     r3, sp, #0x54
-	bl      Function_2240cc8
+	bl      Function_2240cc8_GetSwarmPkmnOnMap
+
 	mov     r0, r5
 	mov     r1, r6
 	add     r2, sp, #0x7c
 	add     r3, sp, #0x84
-	bl      Function_2240d00
+	bl      Function_2240d00_Get5PercentEncounter
+
 	mov     r0, r4
 	mov     r1, r6
 	add     r2, sp, #0x8c
 	add     r3, sp, #0x94
-	bl      Function_22477b8
+	bl      Function_22477b8_Get4PercentEncounter
+
 	ldr     r0, [sp, #0x10]
 	cmp     r0, #0x0
 	bne     branch_2241356
+
 	ldr     r1, [sp, #0x14]
 	mov     r0, r5
 	mov     r2, r6
 	add     r3, sp, #0x4c
-	bl      Function_2242354
+	bl      Function_2242354_Get20PercentEncounter
 	add     r0, sp, #0x4c
 	str     r0, [sp, #0x0]
 	add     r0, sp, #0x28
@@ -7432,9 +7455,7 @@ branch_22412d6: @ 22412d6 :thumb
 	mov     r3, r4
 	bl      Function_2241674
 	b       branch_22413c2
-@ 0x2241356
 
-.thumb
 branch_2241356: @ 2241356 :thumb
 	ldr     r0, [r5, #0xc]
 	bl      LoadFlagAdress
@@ -7453,9 +7474,7 @@ branch_2241356: @ 2241356 :thumb
 	add     r3, sp, #0x4c
 	bl      Function_224174c
 	b       branch_22413c2
-@ 0x2241380
 
-.thumb
 branch_2241380: @ 2241380 :thumb
 	cmp     r0, #0x1
 	bne     branch_22413b8
@@ -7463,7 +7482,6 @@ branch_2241380: @ 2241380 :thumb
 	add     r1, sp, #0x4c
 	mov     r3, #0xd0
 	mov     r6, #0xd1
-.thumb
 branch_224138c: @ 224138c :thumb
 	mov     r2, r4
 	add     r2, #0xd4
@@ -7478,6 +7496,7 @@ branch_224138c: @ 224138c :thumb
 	add     r1, #0x8
 	cmp     r0, #0x5
 	blt     branch_224138c
+
 	add     r0, sp, #0x28
 	str     r0, [sp, #0x0]
 	ldr     r1, [sp, #0x18]
@@ -7486,17 +7505,13 @@ branch_224138c: @ 224138c :thumb
 	add     r3, sp, #0x4c
 	bl      Function_2241790
 	b       branch_22413c2
-@ 0x22413b8
 
-.thumb
 branch_22413b8: @ 22413b8 :thumb
 	bl      ErrorHandling
 	add     sp, #0xac
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x22413c2
 
-.thumb
 branch_22413c2: @ 22413c2 :thumb
 	cmp     r0, #0x0
 	beq     branch_22413d2
@@ -7505,12 +7520,9 @@ branch_22413c2: @ 22413c2 :thumb
 	mov     r0, r5
 	bl      Function_2050e78
 	b       branch_22413d6
-@ 0x22413d2
 
-.thumb
 branch_22413d2: @ 22413d2 :thumb
 	bl      ErrorHandling
-.thumb
 branch_22413d6: @ 22413d6 :thumb
 	mov     r0, #0x0
 	add     r5, #0x78
@@ -7652,15 +7664,17 @@ branch_22414e0: @ 22414e0 :thumb
 	bl      Function_2242440
 	cmp     r0, #0x0
 	beq     branch_2241538
+
 	ldr     r0, [sp, #0x24]
-	mov     r1, #0x6
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_6
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	add     r1, sp, #0x28
-	bl      Function_2242388
+	bl      Function_2242388_CmpUnkSwarmValue
 	cmp     r0, #0x0
 	bne     branch_2241532
+
 	mov     r0, #0xb
 	mov     r1, r0
 	add     r1, #0xf5
@@ -7728,6 +7742,7 @@ branch_224157a: @ 224157a :thumb
 	add     r2, #0x8
 	cmp     r0, #0xc
 	blt     branch_224157a
+
 	mov     r0, r5
 	bl      GetOverWorldData_VariableAreaAdresses
 	bl      LoadPokedexDataAdress
@@ -7736,30 +7751,35 @@ branch_224157a: @ 224157a :thumb
 	ldr     r0, [sp, #0x14]
 	add     r1, sp, #0x5c
 	add     r2, sp, #0x64
-	bl      Function_2240c9c
+	bl      Function_2240c9c_Get10PercentEncounter
+
 	ldr     r1, [sp, #0x14]
 	mov     r0, r5
 	add     r2, sp, #0x4c
 	add     r3, sp, #0x54
-	bl      Function_2240cc8
+	bl      Function_2240cc8_GetSwarmPkmnOnMap
+
 	mov     r0, r5
 	mov     r1, r6
 	add     r2, sp, #0x7c
 	add     r3, sp, #0x84
-	bl      Function_2240d00
+	bl      Function_2240d00_Get5PercentEncounter
+
 	ldr     r0, [sp, #0x14]
 	mov     r1, r6
 	add     r2, sp, #0x8c
 	add     r3, sp, #0x94
-	bl      Function_22477b8
+	bl      Function_22477b8_Get4PercentEncounter
+
 	ldr     r0, [sp, #0xc]
 	cmp     r0, #0x0
 	bne     branch_22415fa
+
 	ldr     r1, [sp, #0x18]
 	mov     r0, r5
 	mov     r2, r6
 	add     r3, sp, #0x4c
-	bl      Function_2242354
+	bl      Function_2242354_Get20PercentEncounter
 	add     r0, sp, #0x4c
 	str     r0, [sp, #0x0]
 	add     r0, sp, #0x28
@@ -7777,6 +7797,7 @@ branch_22415fa: @ 22415fa :thumb
 	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadFlagAdress
 	bl      Function_206b034
+
 	ldr     r1, [r4, #0x0]
 	mov     r2, #0xb
 	str     r0, [r1, #0x20]
@@ -7851,9 +7872,11 @@ Function_2241674: @ 2241674 :thumb
 	ldr     r4, [sp, #0x30]
 	cmp     r0, #0x0
 	beq     branch_2241722
+
 	ldr     r0, [r6, #0x0]
 	cmp     r0, #0x1
 	bne     branch_22416a8
+
 	ldr     r0, [r3, #0x7c]
 	str     r0, [r4, #0x20]
 	mov     r0, r3
@@ -7867,7 +7890,7 @@ Function_2241674: @ 2241674 :thumb
 	str     r0, [r4, #0x50]
 	ldr     r0, [r3, #0x0]
 	str     r0, [r4, #0x58]
-.thumb
+
 branch_22416a8: @ 22416a8 :thumb
 	mov     r0, r5
 	add     r0, #0x94
@@ -9019,19 +9042,19 @@ branch_2241d80: @ 2241d80 :thumb
 	cmp     r0, #0x0
 	bne     branch_2241db4
 	bl      ErrorHandling
-.thumb
 branch_2241db4: @ 2241db4 :thumb
+
 	mov     r0, r4
 	bl      free
 	add     sp, #0x14
 	pop     {r4-r7,pc}
 @ 0x2241dbe
 
-
 .align 2
-
-
 .word 0x5556 @ 0x2241dc0
+
+
+
 .thumb
 Function_2241dc4: @ 2241dc4 :thumb
 	push    {r4-r7,lr}
@@ -9052,9 +9075,7 @@ Function_2241dc4: @ 2241dc4 :thumb
 	cmp     r1, #0x2
 	beq     branch_2241e90
 	b       branch_2241ede
-@ 0x2241de8
 
-.thumb
 branch_2241de8: @ 2241de8 :thumb
 	mov     r1, #0x8
 	str     r1, [sp, #0x0]
@@ -9084,7 +9105,6 @@ branch_2241de8: @ 2241de8 :thumb
 	bl      Function_2241904
 	add     r1, sp, #0x10
 	strb    r0, [r1, #0x0]
-.thumb
 branch_2241e26: @ 2241e26 :thumb
 	add     r2, sp, #0x10
 	ldrb    r2, [r2, #0x0]
@@ -9100,9 +9120,7 @@ branch_2241e26: @ 2241e26 :thumb
 	lsl     r0, r0, #24
 	lsr     r7, r0, #24
 	b       branch_2241ee2
-@ 0x2241e44
 
-.thumb
 branch_2241e44: @ 2241e44 :thumb
 	mov     r1, #0x8
 	str     r1, [sp, #0x0]
@@ -9130,8 +9148,8 @@ branch_2241e44: @ 2241e44 :thumb
 	bl      Function_22419a0
 	add     r1, sp, #0x10
 	strb    r0, [r1, #0x0]
-.thumb
 branch_2241e7e: @ 2241e7e :thumb
+
 	add     r0, sp, #0x10
 	ldrb    r0, [r0, #0x0]
 	mov     r1, r5
@@ -9140,9 +9158,7 @@ branch_2241e7e: @ 2241e7e :thumb
 	bl      Function_2241b40
 	mov     r7, r0
 	b       branch_2241ee2
-@ 0x2241e90
 
-.thumb
 branch_2241e90: @ 2241e90 :thumb
 	mov     r1, #0x8
 	str     r1, [sp, #0x0]
@@ -9171,8 +9187,8 @@ branch_2241e90: @ 2241e90 :thumb
 	bl      Function_22419ec
 	add     r1, sp, #0x10
 	strb    r0, [r1, #0x0]
-.thumb
 branch_2241ecc: @ 2241ecc :thumb
+
 	add     r0, sp, #0x10
 	ldrb    r0, [r0, #0x0]
 	mov     r1, r5
@@ -9181,12 +9197,10 @@ branch_2241ecc: @ 2241ecc :thumb
 	bl      Function_2241b40
 	mov     r7, r0
 	b       branch_2241ee2
-@ 0x2241ede
 
-.thumb
 branch_2241ede: @ 2241ede :thumb
 	bl      ErrorHandling
-.thumb
+
 branch_2241ee2: @ 2241ee2 :thumb
 	mov     r0, r5
 	mov     r1, r6
@@ -9194,24 +9208,22 @@ branch_2241ee2: @ 2241ee2 :thumb
 	bl      Function_22422d0
 	cmp     r0, #0x0
 	beq     branch_2241ef6
+
 	add     sp, #0x14
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x2241ef6
 
-.thumb
 branch_2241ef6: @ 2241ef6 :thumb
 	mov     r0, r7
 	mov     r1, r5
-	bl      Function_2242388
+	bl      Function_2242388_CmpUnkSwarmValue
 	cmp     r0, #0x1
 	bne     branch_2241f08
+
 	add     sp, #0x14
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
-@ 0x2241f08
 
-.thumb
 branch_2241f08: @ 2241f08 :thumb
 	ldr     r0, [sp, #0x30]
 	str     r6, [sp, #0x0]
@@ -9914,8 +9926,9 @@ branch_224233c: @ 224233c :thumb
 	pop     {r4,pc}
 @ 0x2242354
 
+
 .thumb
-Function_2242354: @ 2242354 :thumb
+Function_2242354_Get20PercentEncounter: @ 2242354 :thumb
 	push    {r3-r6,lr}
 	add     sp, #-0x4
 	mov     r5, r0
@@ -9923,20 +9936,21 @@ Function_2242354: @ 2242354 :thumb
 	mov     r4, r3
 	cmp     r1, #0x0
 	beq     branch_2242382
-	ldr     r0, [r5, #0xc]
+
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_19
 	mov     r1, #0x1
-	bl      Function_202d814
+	bl      Function_202d814_GetSwarmRNGNrs
 	mov     r1, r4
 	add     r1, #0x38
 	str     r1, [sp, #0x0]
-	ldr     r2, [r5, #0x1c]
+	ldr     r2, [r5, #OverWorldData_MapData]
 	add     r4, #0x30
-	ldr     r2, [r2, #0x0]
+	ldr     r2, [r2, #MapData_MapNr]
 	mov     r1, r6
 	mov     r3, r4
-	bl      Function_2242f74
-.thumb
+	bl      Function_2242f74_LoadGreatMarshEncounter
+
 branch_2242382: @ 2242382 :thumb
 	add     sp, #0x4
 	pop     {r3-r6,pc}
@@ -9944,10 +9958,8 @@ branch_2242382: @ 2242382 :thumb
 
 
 .align 2, 0
-
-
 .thumb
-Function_2242388: @ 2242388 :thumb
+Function_2242388_CmpUnkSwarmValue: @ 2242388 :thumb
 	ldr     r2, [r1, #0x4]
 	cmp     r2, #0x0
 	beq     branch_2242398
@@ -9956,13 +9968,12 @@ Function_2242388: @ 2242388 :thumb
 	bls     branch_2242398
 	mov     r0, #0x1
 	bx      lr
-@ 0x2242398
 
-.thumb
 branch_2242398: @ 2242398 :thumb
 	mov     r0, #0x0
 	bx      lr
 @ 0x224239c
+
 
 .thumb
 Function_224239c: @ 224239c :thumb
@@ -9974,30 +9985,36 @@ Function_224239c: @ 224239c :thumb
 	mov     r6, r2
 	bl      AllocPkmnData
 	mov     r4, r0
+
 	mov     r0, r5
-	mov     r1, #0x4
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_4
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [sp, #0x4]
+
 	mov     r0, r5
-	mov     r1, #0x6
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_6
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	lsl     r0, r0, #24
 	lsr     r7, r0, #24
+
 	mov     r0, r5
-	mov     r1, #0x2
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_2
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [sp, #0x8]
+
 	mov     r0, r5
-	mov     r1, #0x3
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_3
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [sp, #0xc]
+
 	mov     r0, r5
-	mov     r1, #0x7
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_7
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	str     r0, [sp, #0x14]
+
 	mov     r0, r5
-	mov     r1, #0x5
-	bl      Function_202d93c
+	mov     r1, #UnkSwarmStruct_5
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	add     r1, sp, #0x10
 	strh    r0, [r1, #0x0]
 	ldr     r1, [sp, #0x4]
@@ -10027,8 +10044,8 @@ Function_224239c: @ 224239c :thumb
 	cmp     r0, #0x0
 	bne     branch_2242430
 	bl      ErrorHandling
-.thumb
 branch_2242430: @ 2242430 :thumb
+
 	mov     r0, r4
 	bl      free
 	add     sp, #0x18
@@ -10037,6 +10054,7 @@ branch_2242430: @ 2242430 :thumb
 	add     sp, #0x10
 	bx      r3
 @ 0x2242440
+
 
 .thumb
 Function_2242440: @ 2242440 :thumb
@@ -10049,7 +10067,7 @@ Function_2242440: @ 2242440 :thumb
 	bl      LoadVariableAreaAdress_19
 	mov     r6, r0
 	mov     r4, r5
-.thumb
+
 branch_2242454: @ 2242454 :thumb
 	mov     r0, r6
 	mov     r1, r4
@@ -10061,35 +10079,37 @@ branch_2242454: @ 2242454 :thumb
 	bl      Function_202d8f8
 	cmp     r0, #0x0
 	beq     branch_224248c
+
 	ldr     r0, [sp, #0x0]
 	ldr     r0, [r0, #0x1c]
 	ldr     r0, [r0, #0x0]
 	cmp     r7, r0
 	bne     branch_224248c
+
 	mov     r0, r6
 	mov     r1, r4
-	bl      Function_202d924
+	bl      Function_202d924_GetPtrToUnkSwarmStruct
 	lsl     r2, r5, #2
 	add     r1, sp, #0x8
 	str     r0, [r1, r2]
 	add     r0, r5, #0x1
 	lsl     r0, r0, #24
 	lsr     r5, r0, #24
-.thumb
+
 branch_224248c: @ 224248c :thumb
 	add     r0, r4, #0x1
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 	cmp     r4, #0x6
 	blo     branch_2242454
+
 	cmp     r5, #0x0
 	bne     branch_22424a0
+
 	add     sp, #0x20
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
-@ 0x22424a0
 
-.thumb
 branch_22424a0: @ 22424a0 :thumb
 	bl      PRNG
 	lsl     r0, r0, #1
@@ -10097,31 +10117,27 @@ branch_22424a0: @ 22424a0 :thumb
 	cmp     r4, #0x2
 	blo     branch_22424b0
 	bl      ErrorHandling
-.thumb
 branch_22424b0: @ 22424b0 :thumb
+
 	cmp     r4, #0x0
 	bne     branch_22424ba
 	add     sp, #0x20
 	mov     r0, #0x0
 	pop     {r3-r7,pc}
-@ 0x22424ba
 
-.thumb
 branch_22424ba: @ 22424ba :thumb
 	cmp     r5, #0x1
 	bls     branch_2242502
 	cmp     r5, #0x0
 	bne     branch_22424c6
 	bl      ErrorHandling
-.thumb
 branch_22424c6: @ 22424c6 :thumb
+
 	cmp     r5, #0x1
 	bhi     branch_22424ce
 	mov     r4, #0x0
 	b       branch_22424f6
-@ 0x22424ce
 
-.thumb
 branch_22424ce: @ 22424ce :thumb
 	bl      PRNG
 	mov     r4, r0
@@ -10139,33 +10155,30 @@ branch_22424ce: @ 22424ce :thumb
 	cmp     r4, r5
 	blo     branch_22424f6
 	bl      ErrorHandling
-.thumb
 branch_22424f6: @ 22424f6 :thumb
+
 	lsl     r1, r4, #2
 	add     r0, sp, #0x8
 	ldr     r1, [r0, r1]
 	ldr     r0, [sp, #0x4]
 	str     r1, [r0, #0x0]
 	b       branch_2242508
-@ 0x2242502
 
-.thumb
 branch_2242502: @ 2242502 :thumb
 	ldr     r1, [sp, #0x8]
 	ldr     r0, [sp, #0x4]
 	str     r1, [r0, #0x0]
-.thumb
 branch_2242508: @ 2242508 :thumb
 	mov     r0, #0x1
 	add     sp, #0x20
 	pop     {r3-r7,pc}
 @ 0x224250e
 
-
 .align 2
-
-
 .word 0xffff @ 0x2242510
+
+
+
 .thumb
 Function_2242514: @ 2242514 :thumb
 	push    {r4-r7,lr}
@@ -10400,19 +10413,15 @@ branch_2242660: @ 2242660 :thumb
 	cmp     r1, #0x8
 	ble     branch_2242690
 	bl      ErrorHandling
-.thumb
 branch_2242690: @ 2242690 :thumb
 	add     r5, #0xa0
 	ldr     r0, [r5, #0x0]
 	.hword  0x1e40 @ sub r0, r0, #0x1
 	strb    r0, [r4, #0x11]
 	b       branch_224269c
-@ 0x224269a
 
-.thumb
 branch_224269a: @ 224269a :thumb
 	strb    r0, [r4, #0x11]
-.thumb
 branch_224269c: @ 224269c :thumb
 	ldr     r0, [r6, #0xc]
 	bl      LoadTrainerDataAdress
@@ -10424,15 +10433,15 @@ branch_224269c: @ 224269c :thumb
 
 .align 2, 0
 .thumb
-.globl Function_6_22426ac
-Function_6_22426ac: @ 22426ac :thumb
-	ldr     r3, [pc, #0x4] @ 0x22426b4, (=malloc2+1)
+.globl Function_6_22426ac_malloc2_170
+Function_6_22426ac_malloc2_170: @ 22426ac :thumb
+	ldr     r3, =malloc2+1
 	mov     r1, #0x17
 	lsl     r1, r1, #4
 	bx      r3
 @ 0x22426b4
 
-.word malloc2+1 @ 0x22426b4
+.pool
 
 
 
@@ -10519,7 +10528,7 @@ branch_224270c: @ 224270c :thumb
 	lsr     r1, r1, #16
 	lsr     r2, r2, #24
 	mov     r3, #0x2
-	bl      Function_2075fb4
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
 	mov     r1, r7
 	mov     r0, #0x1
 	add     r1, #0x3c
@@ -10856,31 +10865,34 @@ branch_2242994: @ 2242994 :thumb
 	str     r3, [r1, r2]
 	cmp     r0, #0xc
 	blo     branch_2242994
+
 	mov     r0, r5
 	bl      GetOverWorldData_VariableAreaAdresses
 	bl      LoadPokedexDataAdress
 	bl      Function_2027474
 	mov     r6, r0
-	ldr     r0, [r5, #0xc]
+	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_19
 	mov     r1, #0x1
-	bl      Function_202d814
+	bl      Function_202d814_GetSwarmRNGNrs
 	add     r1, sp, #0x20
 	str     r1, [sp, #0x0]
-	ldr     r2, [r5, #0x1c]
+	ldr     r2, [r5, #OverWorldData_MapData]
 	mov     r1, r6
-	ldr     r2, [r2, #0x0]
+	ldr     r2, [r2, #MapData_MapNr]
 	add     r3, sp, #0x1c
-	bl      Function_2242f74
+	bl      Function_2242f74_LoadGreatMarshEncounter
+
 	mov     r0, r4
 	add     r1, sp, #0xc
 	add     r2, sp, #0x10
-	bl      Function_2240c9c
+	bl      Function_2240c9c_Get10PercentEncounter
+
 	mov     r0, r4
 	mov     r1, r6
 	add     r2, sp, #0x24
 	add     r3, sp, #0x28
-	bl      Function_22477b8
+	bl      Function_22477b8_Get4PercentEncounter
 	bl      PRNG
 	ldr     r1, [pc, #0x1c] @ 0x2242a0c, (=0x1556)
 	blx     _s32_div_f
@@ -10889,8 +10901,8 @@ branch_2242994: @ 2242994 :thumb
 	cmp     r4, #0xc
 	blo     branch_2242a00
 	bl      ErrorHandling
-.thumb
 branch_2242a00: @ 2242a00 :thumb
+
 	lsl     r1, r4, #2
 	add     r0, sp, #0x4
 	ldr     r0, [r0, r1]
@@ -10903,21 +10915,27 @@ branch_2242a00: @ 2242a00 :thumb
 
 
 
+/* Input:
+r1: Ptr to OverWorldData
+*/
 .thumb
-.globl Function_6_2242a10
-Function_6_2242a10: @ 2242a10 :thumb
+.globl Function_6_2242a10_LoadEncdataEx
+Function_6_2242a10_LoadEncdataEx: @ 2242a10 :thumb
 	push    {r3-r7,lr}
-	str     r1, [sp, #0x0]
+	str     r1, [sp, #0x0]          @ Ptr to OverWorldData
+
 	mov     r1, #0x34
 	bl      malloc2
 	mov     r5, r0
-	ldr     r0, [sp, #0x0]
+
+	ldr     r0, [sp, #0x0]          @ Ptr to OverWorldData
 	mov     r1, #0xb
 	str     r0, [r5, #0x2c]
 	mov     r0, #EncdataEx_Narc
 	mov     r2, #0x4
 	bl      LoadFromNARC_4
 	mov     r7, r0
+
 	mov     r4, #0x0
 branch_2242a2e: @ 2242a2e :thumb
 	bl      PRNG
@@ -10925,11 +10943,11 @@ branch_2242a2e: @ 2242a2e :thumb
 	blx     _s32_div_f
 	lsl     r0, r0, #16
 	lsr     r6, r0, #16
-	cmp     r6, #0x24
+	cmp     r6, #0x24 @ 36
 	blo     branch_2242a44
 	bl      ErrorHandling
-.thumb
 branch_2242a44: @ 2242a44 :thumb
+
 	lsl     r0, r6, #24
 	lsr     r2, r0, #22
 	add     r1, r7, r2
@@ -10944,18 +10962,22 @@ branch_2242a44: @ 2242a44 :thumb
 	lsr     r4, r0, #24
 	cmp     r4, #0x5
 	blo     branch_2242a2e
+
 	ldr     r0, [sp, #0x0]
-	ldr     r0, [r0, #0x3c]
+	ldr     r0, [r0, #OverWorldData_SpriteStruct]
 	bl      GetSpritePositionX
 	strh    r0, [r5, #0x14]
+
 	ldr     r0, [sp, #0x0]
-	ldr     r0, [r0, #0x3c]
+	ldr     r0, [r0, #OverWorldData_SpriteStruct]
 	bl      GetSpritePositionY
 	strh    r0, [r5, #0x16]
+
 	ldr     r0, [sp, #0x0]
-	ldr     r0, [r0, #0x1c]
+	ldr     r0, [r0, #OverWorldData_MapData]
 	ldr     r0, [r0, #0x0]
 	str     r0, [r5, #0x30]
+
 	mov     r0, r7
 	bl      free
 	mov     r0, r5
@@ -11722,23 +11744,28 @@ branch_2242f5c: @ 2242f5c :thumb
 	pop     {r3-r7,pc}
 @ 0x2242f62
 
-
 .align 2
-
-
 .word 0x2249058 @ 0x2242f64
 .word 0x6d9 @ 0x2242f68
 .word 0x6da @ 0x2242f6c
 .word 0x224903c @ 0x2242f70
+
+
+
+/* Input:
+r0: random SwarmNr
+r2: MapNr
+*/
 .thumb
-Function_2242f74: @ 2242f74 :thumb
+Function_2242f74_LoadGreatMarshEncounter: @ 2242f74 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r0, r2
 	mov     r4, r1
 	mov     r6, r3
-	bl      Function_2242fc0
+	bl      Function_2242fc0_GetGreatMarshAreaNr
 	mov     r7, r0
+
 	cmp     r4, #0x0
 	beq     branch_2242f8c
 	mov     r1, #0x9
@@ -11750,7 +11777,7 @@ branch_2242f8e: @ 2242f8e :thumb
 	mov     r0, #EncdataEx_Narc
 	mov     r2, #0x4
 	bl      LoadFromNARC_4
-	lsl     r1, r7, #2
+	lsl     r1, r7, #2          @ GreatMarshAreaNr*4
 	add     r1, r7, r1
 	mov     r3, r5
 	asr     r3, r1
@@ -11767,18 +11794,20 @@ branch_2242f8e: @ 2242f8e :thumb
 	ldr     r2, [r0, r2]
 	ldr     r1, [sp, #0x18]
 	str     r2, [r1, #0x0]
+
 	bl      free
 	pop     {r3-r7,pc}
 @ 0x2242fbe
 
 
+/* Input:
+r0: MapNr
+*/
 .align 2, 0
-
-
 .thumb
-Function_2242fc0: @ 2242fc0 :thumb
+Function_2242fc0_GetGreatMarshAreaNr: @ 2242fc0 :thumb
 	push    {r4,lr}
-	mov     r1, #0x7e
+	mov     r1, #0x7e           @ MapNr_GreatMarsh/4
 	lsl     r1, r1, #2
 	sub     r0, r0, r1
 	mov     r4, #0x0
@@ -11799,42 +11828,30 @@ Jumppoints_2242fda:
 .hword branch_2242ff0 - Jumppoints_2242fda - 2
 .hword branch_2242ff4 - Jumppoints_2242fda - 2
 .hword branch_2242ff8 - Jumppoints_2242fda - 2
-.thumb
+
 branch_2242fe6: @ 2242fe6 :thumb
 	b       branch_2243000
-@ 0x2242fe8
 
-.thumb
 branch_2242fe8: @ 2242fe8 :thumb
 	mov     r4, #0x1
 	b       branch_2243000
-@ 0x2242fec
 
-.thumb
 branch_2242fec: @ 2242fec :thumb
 	mov     r4, #0x2
 	b       branch_2243000
-@ 0x2242ff0
 
-.thumb
 branch_2242ff0: @ 2242ff0 :thumb
 	mov     r4, #0x3
 	b       branch_2243000
-@ 0x2242ff4
 
-.thumb
 branch_2242ff4: @ 2242ff4 :thumb
 	mov     r4, #0x4
 	b       branch_2243000
-@ 0x2242ff8
 
-.thumb
 branch_2242ff8: @ 2242ff8 :thumb
 	mov     r4, #0x5
 	b       branch_2243000
-@ 0x2242ffc
 
-.thumb
 branch_2242ffc: @ 2242ffc :thumb
 	bl      ErrorHandling
 branch_2243000: @ 2243000 :thumb
@@ -12210,48 +12227,52 @@ branch_224320a: @ 224320a :thumb
 @ 0x2243216
 
 
+/* Input
+r0: random SwarmNr
+*/
 .align 2, 0
-
-
 .thumb
-Function_2243218: @ 2243218 :thumb
+Function_2243218_GetSwarmMap: @ 2243218 :thumb
 	push    {r3,lr}
 	mov     r1, #0x16
 	blx     _u32_div_f
-	ldr     r0, [pc, #0x4] @ 0x2243228, (=0x2249090)
+	ldr     r0, =Unknown_2249090_SwarmMaps
 	lsl     r1, r1, #2
 	ldr     r0, [r0, r1]
 	pop     {r3,pc}
 @ 0x2243228
 
-.word 0x2249090 @ 0x2243228
+.pool
 
 
 
 .thumb
-.globl Function_6_224322c
-Function_6_224322c: @ 224322c :thumb
+.globl Function_6_224322c_CheckSwarmPoke
+Function_6_224322c_CheckSwarmPoke: @ 224322c :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x1a8
+
 	mov     r5, r1
 	mov     r1, #0x16
 	mov     r4, r2
 	blx     _u32_div_f
-	ldr     r0, [pc, #0x18] @ 0x2243254, (=0x2249090)
+	ldr     r0, =Unknown_2249090_SwarmMaps
 	lsl     r1, r1, #2
 	ldr     r6, [r0, r1]
-	add     r0, sp, #0x0
-	mov     r1, r6
+
+	add     r0, sp, #0x0            @ OverWorldData_Overworlds_PtrToEncounterData
+	mov     r1, r6                  @ MapNr
 	bl      LoadMapWildPkmn
 	ldr     r0, [sp, #0x64]
 	strh    r0, [r4, #0x0]
 	strh    r6, [r5, #0x0]
+
 	add     sp, #0x1a8
 	pop     {r4-r6,pc}
 @ 0x2243252
 
 .align 2
-.word 0x2249090 @ 0x2243254
+.pool
 
 
 
@@ -15651,23 +15672,27 @@ Function_2244928: @ 2244928 :thumb
 	push    {r4-r6,lr}
 	add     sp, #-0x10
 	mov     r4, r1
+
 	mov     r1, #0x7d
 	mov     r5, r0
 	lsl     r1, r1, #2
-	add     r1, r5, r1
+	add     r1, r5, r1          @ NARCPokeGra2
 	bl      Function_224508c
+
 	mov     r1, r5
 	mov     r0, #0x20
 	add     r1, #0x74
 	mov     r2, #0x4
 	bl      Function_20095c4
 	str     r0, [r5, #0x70]
+
 	mov     r0, r5
 	mov     r2, #0x2
 	add     r0, #0x74
 	mov     r1, #0x0
 	lsl     r2, r2, #20
 	bl      Function_200964c
+
 	mov     r0, #0x4
 	mov     r1, #0x0
 	mov     r2, r0
@@ -15675,6 +15700,7 @@ Function_2244928: @ 2244928 :thumb
 	mov     r1, #0x67
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
+
 	mov     r0, #0x3
 	mov     r1, #0x1
 	mov     r2, #0x4
@@ -15682,6 +15708,7 @@ Function_2244928: @ 2244928 :thumb
 	mov     r1, #0x1a
 	lsl     r1, r1, #4
 	str     r0, [r5, r1]
+
 	mov     r0, #0x4
 	mov     r1, #0x2
 	mov     r2, r0
@@ -15689,6 +15716,7 @@ Function_2244928: @ 2244928 :thumb
 	mov     r1, #0x69
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
+
 	mov     r0, #0x2
 	mov     r1, #0x3
 	mov     r2, #0x4
@@ -15696,6 +15724,7 @@ Function_2244928: @ 2244928 :thumb
 	mov     r1, #0x6a
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
+
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]
@@ -15710,9 +15739,11 @@ Function_2244928: @ 2244928 :thumb
 	mov     r1, #0x6b
 	lsl     r1, r1, #2
 	str     r0, [r5, r1]
+
 	ldr     r0, [r5, #0xc]
 	cmp     r0, #0x0
 	bne     branch_22449d6
+
 	mov     r0, #0x2
 	str     r0, [sp, #0x0]
 	mov     r0, #0x1
@@ -15726,9 +15757,7 @@ Function_2244928: @ 2244928 :thumb
 	mov     r3, #0x0
 	bl      Function_2009a4c
 	b       branch_22449f0
-@ 0x22449d6
 
-.thumb
 branch_22449d6: @ 22449d6 :thumb
 	mov     r0, #0x2
 	str     r0, [sp, #0x0]
@@ -15742,7 +15771,6 @@ branch_22449d6: @ 22449d6 :thumb
 	mov     r2, #0x10
 	mov     r3, #0x0
 	bl      Function_2009a4c
-.thumb
 branch_22449f0: @ 22449f0 :thumb
 	mov     r1, #0x1b
 	lsl     r1, r1, #4
@@ -15790,7 +15818,6 @@ branch_22449f0: @ 22449f0 :thumb
 	lsl     r1, r1, #2
 	str     r0, [r2, r1]
 	.hword  0x1c76 @ add r6, r6, #0x1
-.thumb
 branch_2244a52: @ 2244a52 :thumb
 	mov     r0, r5
 	mov     r1, r4
@@ -15830,9 +15857,7 @@ branch_2244a52: @ 2244a52 :thumb
 	mov     r3, #0x0
 	bl      Function_2009bc4
 	b       branch_2244abc
-@ 0x2244aa4
 
-.thumb
 branch_2244aa4: @ 2244aa4 :thumb
 	mov     r0, #0x2
 	str     r0, [sp, #0x0]
@@ -15845,7 +15870,6 @@ branch_2244aa4: @ 2244aa4 :thumb
 	mov     r2, #0x11
 	mov     r3, #0x0
 	bl      Function_2009bc4
-.thumb
 branch_2244abc: @ 2244abc :thumb
 	mov     r1, #0x73
 	lsl     r1, r1, #2
@@ -15896,9 +15920,7 @@ branch_2244abc: @ 2244abc :thumb
 	mov     r3, #0x0
 	bl      Function_2009bc4
 	b       branch_2244b3e
-@ 0x2244b24
 
-.thumb
 branch_2244b24: @ 2244b24 :thumb
 	mov     r0, #0x1
 	str     r0, [sp, #0x0]
@@ -15912,7 +15934,6 @@ branch_2244b24: @ 2244b24 :thumb
 	mov     r2, #0x12
 	mov     r3, #0x0
 	bl      Function_2009bc4
-.thumb
 branch_2244b3e: @ 2244b3e :thumb
 	mov     r1, #0x77
 	lsl     r1, r1, #2
@@ -15935,9 +15956,7 @@ branch_2244b3e: @ 2244b3e :thumb
 	str     r0, [r5, r1]
 	add     sp, #0x10
 	pop     {r4-r6,pc}
-@ 0x2244b6c
 
-.thumb
 Function_2244b6c: @ 2244b6c :thumb
 	push    {r3-r7,lr}
 	mov     r6, r0
@@ -15945,66 +15964,66 @@ Function_2244b6c: @ 2244b6c :thumb
 	mov     r4, #0x0
 	mov     r5, r6
 	lsl     r7, r7, #2
-.thumb
 branch_2244b78: @ 2244b78 :thumb
 	ldr     r0, [r5, r7]
 	cmp     r0, #0x0
 	beq     branch_2244b82
 	bl      Function_200a4e4
-.thumb
 branch_2244b82: @ 2244b82 :thumb
+
 	.hword  0x1c64 @ add r4, r4, #0x1
 	.hword  0x1d2d @ add r5, r5, #0x4
 	cmp     r4, #0x4
 	blt     branch_2244b78
+
 	mov     r7, #0x6f
 	mov     r5, #0x0
 	mov     r4, r6
 	lsl     r7, r7, #2
-.thumb
 branch_2244b92: @ 2244b92 :thumb
 	ldr     r0, [r4, r7]
 	cmp     r0, #0x0
 	beq     branch_2244b9c
 	bl      Function_200a6dc
-.thumb
 branch_2244b9c: @ 2244b9c :thumb
+
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1d24 @ add r4, r4, #0x4
 	cmp     r5, #0x3
 	blt     branch_2244b92
+
 	mov     r7, #0x72
 	mov     r5, #0x0
 	mov     r4, r6
 	lsl     r7, r7, #2
-.thumb
 branch_2244bac: @ 2244bac :thumb
 	ldr     r0, [r4, r7]
 	cmp     r0, #0x0
 	beq     branch_2244bb6
 	bl      Function_2009d4c
-.thumb
 branch_2244bb6: @ 2244bb6 :thumb
+
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1d24 @ add r4, r4, #0x4
 	cmp     r5, #0x4
 	blt     branch_2244bac
+
 	mov     r7, #0x76
 	mov     r5, #0x0
 	mov     r4, r6
 	lsl     r7, r7, #2
-.thumb
 branch_2244bc6: @ 2244bc6 :thumb
 	ldr     r0, [r4, r7]
 	cmp     r0, #0x0
 	beq     branch_2244bd0
 	bl      Function_2009d4c
-.thumb
 branch_2244bd0: @ 2244bd0 :thumb
+
 	.hword  0x1c6d @ add r5, r5, #0x1
 	.hword  0x1d24 @ add r4, r4, #0x4
 	cmp     r5, #0x2
 	blt     branch_2244bc6
+
 	mov     r0, #0x67
 	lsl     r0, r0, #2
 	ldr     r0, [r6, r0]
@@ -16038,6 +16057,7 @@ Function_2244c10: @ 2244c10 :thumb
 	beq     branch_2244c1c
 	bl      Function_20219f8
 branch_2244c1c: @ 2244c1c :thumb
+
 	pop     {r3,pc}
 @ 0x2244c1e
 
@@ -16709,17 +16729,21 @@ branch_224507a: @ 224507a :thumb
 
 
 
+/* Input:
+r1: NARCPokeGra2
+*/
 .thumb
 Function_224508c: @ 224508c :thumb
-	ldr     r3, [pc, #0x8] @ 0x2245098, (=Function_2075ef4+1)
+	ldr     r3, =LoadPkmnDataForPlatGraphic+1
 	mov     r2, r0
-	mov     r0, r1
+	mov     r0, r1              @ NARCPokeGra2
 	ldr     r1, [r2, #0x5c]
 	mov     r2, #0x2
 	bx      r3
 @ 0x2245098
 
-.word Function_2075ef4+1 @ 0x2245098
+.align 2
+.pool
 
 
 
@@ -18966,23 +18990,27 @@ Function_6_2246034: @ 2246034 :thumb
 	ldr     r0, [r5, #0xc]
 	bl      LoadVariableAreaAdress_19
 	str     r0, [sp, #0x4]
+
 	mov     r0, r7
 	mov     r1, #0x5
 	mov     r2, #0x0
 	bl      GetPkmnData
 	mov     r6, r0
+
 	ldr     r0, [sp, #0x4]
 	mov     r1, r6
 	bl      Function_2246148
 	str     r0, [sp, #0x8]
 	cmp     r0, #0x0
 	beq     branch_22460e6
+
 	mov     r0, r7
 	mov     r1, #0xa3
 	mov     r2, #0x0
 	bl      GetPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
+
 	mov     r0, r7
 	mov     r1, #0xa0
 	mov     r2, #0x0
@@ -19004,9 +19032,7 @@ Function_6_2246034: @ 2246034 :thumb
 	mov     r2, #0x2
 	bl      Function_206b688
 	b       branch_22460d8
-@ 0x22460a8
 
-.thumb
 branch_22460a8: @ 22460a8 :thumb
 	cmp     r0, #0x4
 	bne     branch_22460c4
@@ -19019,19 +19045,18 @@ branch_22460a8: @ 22460a8 :thumb
 	mov     r2, #0x1
 	bl      Function_206b688
 	b       branch_22460d8
-@ 0x22460c4
 
-.thumb
 branch_22460c4: @ 22460c4 :thumb
 	ldr     r0, [sp, #0x8]
-	mov     r1, #0x5
+	mov     r1, #UnkSwarmStruct_5
 	mov     r2, r4
-	bl      Function_202d980
+	bl      Function_202d980_SaveValueInUnkSwarmStruct
+
 	ldr     r0, [sp, #0x8]
-	mov     r1, #0x7
+	mov     r1, #UnkSwarmStruct_7
 	mov     r2, r7
-	bl      Function_202d980
-.thumb
+	bl      Function_202d980_SaveValueInUnkSwarmStruct
+
 branch_22460d8: @ 22460d8 :thumb
 	ldr     r1, [r5, #0x1c]
 	ldr     r0, [sp, #0x4]
@@ -19039,9 +19064,7 @@ branch_22460d8: @ 22460d8 :thumb
 	bl      Function_2246110
 	add     sp, #0xc
 	pop     {r4-r7,pc}
-@ 0x22460e6
 
-.thumb
 branch_22460e6: @ 22460e6 :thumb
 	bl      PRNG
 	mov     r1, #0x29
@@ -19052,19 +19075,19 @@ branch_22460e6: @ 22460e6 :thumb
 	cmp     r4, #0x64
 	blo     branch_22460fe
 	bl      ErrorHandling
-.thumb
 branch_22460fe: @ 22460fe :thumb
+
 	cmp     r4, #0x1e
 	bhs     branch_224610c
 	ldr     r1, [r5, #0x1c]
 	ldr     r0, [sp, #0x4]
 	ldr     r1, [r1, #0x0]
 	bl      Function_2246110
-.thumb
 branch_224610c: @ 224610c :thumb
 	add     sp, #0xc
 	pop     {r4-r7,pc}
 @ 0x2246110
+
 
 .thumb
 Function_2246110: @ 2246110 :thumb
@@ -19072,23 +19095,24 @@ Function_2246110: @ 2246110 :thumb
 	mov     r5, r0
 	mov     r6, r1
 	mov     r4, #0x0
-.thumb
 branch_2246118: @ 2246118 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_202d8f8
 	cmp     r0, #0x0
 	beq     branch_224613c
+
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_202d8c4
 	bl      Function_206c3c8
 	cmp     r6, r0
 	bne     branch_224613c
+
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_206c33c
-.thumb
+
 branch_224613c: @ 224613c :thumb
 	add     r0, r4, #0x1
 	lsl     r0, r0, #24
@@ -19098,32 +19122,31 @@ branch_224613c: @ 224613c :thumb
 	pop     {r4-r6,pc}
 @ 0x2246148
 
+
 .thumb
 Function_2246148: @ 2246148 :thumb
 	push    {r3-r7,lr}
 	mov     r5, r0
 	mov     r6, r1
 	mov     r4, #0x0
-.thumb
 branch_2246150: @ 2246150 :thumb
 	mov     r0, r5
 	mov     r1, r4
 	bl      Function_202d8f8
 	cmp     r0, #0x0
 	beq     branch_2246174
+
 	mov     r0, r5
 	mov     r1, r4
-	bl      Function_202d924
-	mov     r1, #0x4
+	bl      Function_202d924_GetPtrToUnkSwarmStruct
+	mov     r1, #UnkSwarmStruct_4
 	mov     r7, r0
-	bl      Function_202d93c
+	bl      Function_202d93c_LoadValueFromUnkSwarmStruct
 	cmp     r6, r0
 	bne     branch_2246174
 	mov     r0, r7
 	pop     {r3-r7,pc}
-@ 0x2246174
 
-.thumb
 branch_2246174: @ 2246174 :thumb
 	add     r0, r4, #0x1
 	lsl     r0, r0, #24
@@ -22248,21 +22271,19 @@ Function_6_22475b0: @ 22475b0 :thumb
 	ldr     r0, [sp, #0x0]
 	add     r1, #0x2
 	add     r2, sp, #0x4
-	bl      Function_202da10
+	bl      Function_202da10_GetMarshEncounterRNG
 	add     r0, sp, #0x4
 	ldrh    r1, [r0, #0x2]
 	ldr     r0, [pc, #0x4c] @ 0x2247620, (=0xffff)
 	cmp     r1, r0
 	beq     branch_22475de
+
 	lsl     r0, r1, #2
 	ldr     r6, [r4, r0]
 	b       branch_22475e0
-@ 0x22475de
 
-.thumb
 branch_22475de: @ 22475de :thumb
 	mov     r6, #0x0
-.thumb
 branch_22475e0: @ 22475e0 :thumb
 	add     r0, sp, #0x4
 	ldrh    r1, [r0, #0x0]
@@ -22272,12 +22293,9 @@ branch_22475e0: @ 22475e0 :thumb
 	lsl     r0, r1, #2
 	ldr     r7, [r4, r0]
 	b       branch_22475f2
-@ 0x22475f0
 
-.thumb
 branch_22475f0: @ 22475f0 :thumb
 	mov     r7, #0x0
-.thumb
 branch_22475f2: @ 22475f2 :thumb
 	bl      PRNG
 	lsl     r0, r0, #4
@@ -22285,8 +22303,8 @@ branch_22475f2: @ 22475f2 :thumb
 	cmp     r5, #0x10
 	blo     branch_2247602
 	bl      ErrorHandling
-.thumb
 branch_2247602: @ 2247602 :thumb
+
 	lsl     r0, r5, #2
 	ldr     r0, [r4, r0]
 	cmp     r6, r0
@@ -22314,7 +22332,7 @@ Function_6_2247624: @ 2247624 :thumb
 	add     r1, sp, #0x0
 	add     r1, #0x2
 	add     r2, sp, #0x0
-	bl      Function_202da10
+	bl      Function_202da10_GetMarshEncounterRNG
 	add     r0, sp, #0x0
 	ldrh    r1, [r0, #0x2]
 	ldr     r0, [pc, #0x24] @ 0x224765c, (=0xffff)
@@ -22366,7 +22384,7 @@ branch_2247676: @ 2247676 :thumb
 branch_2247680: @ 2247680 :thumb
 	ldr     r0, [r5, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_11
-	bl      Function_202b428
+	bl      Function_202b428_GetSwarmSeed
 	mov     r4, r0
 
 	ldr     r0, [r5, #OverWorldData_SpriteStruct]
@@ -22376,8 +22394,10 @@ branch_2247680: @ 2247680 :thumb
 	ldr     r0, [r5, #OverWorldData_2c]
 	bl      Function_2039e10
 	str     r0, [sp, #0x0]
+
 	mov     r0, #0x0
 	str     r0, [sp, #0x4]
+
 	lsr     r0, r4, #24
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
@@ -22393,6 +22413,7 @@ branch_2247680: @ 2247680 :thumb
 	lsl     r0, r4, #24
 	lsr     r0, r0, #24
 	str     r0, [sp, #0x48]
+
 	mov     r0, #EncdataEx_Narc
 	mov     r1, #0x1
 	mov     r2, #0x4
@@ -22539,9 +22560,10 @@ Function_22477a0: @ 22477a0 :thumb
 
 
 .thumb
-Function_22477b8: @ 22477b8 :thumb
+Function_22477b8_Get4PercentEncounter: @ 22477b8 :thumb
 	cmp     r1, #0x0
 	beq     branch_224782a
+
 	ldr     r1, [pc, #0x6c] @ 0x224782c, (=RAM_21bf6dc)
 	ldrb    r1, [r1, #0x6]
 	cmp     r1, #0x5
@@ -22561,7 +22583,7 @@ Jumppoints_22477d0:
 .hword branch_22477fc - Jumppoints_22477d0 - 2
 .hword branch_224780c - Jumppoints_22477d0 - 2
 .hword branch_224781c - Jumppoints_22477d0 - 2
-.thumb
+
 branch_22477dc: @ 22477dc :thumb
 	mov     r1, r0
 	add     r1, #0xac
@@ -22571,9 +22593,7 @@ branch_22477dc: @ 22477dc :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [r3, #0x0]
 	bx      lr
-@ 0x22477ec
 
-.thumb
 branch_22477ec: @ 22477ec :thumb
 	mov     r1, r0
 	add     r1, #0xa4
@@ -22583,9 +22603,7 @@ branch_22477ec: @ 22477ec :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [r3, #0x0]
 	bx      lr
-@ 0x22477fc
 
-.thumb
 branch_22477fc: @ 22477fc :thumb
 	mov     r1, r0
 	add     r1, #0xb4
@@ -22595,9 +22613,7 @@ branch_22477fc: @ 22477fc :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [r3, #0x0]
 	bx      lr
-@ 0x224780c
 
-.thumb
 branch_224780c: @ 224780c :thumb
 	mov     r1, r0
 	add     r1, #0xbc
@@ -22607,9 +22623,7 @@ branch_224780c: @ 224780c :thumb
 	ldr     r0, [r0, #0x0]
 	str     r0, [r3, #0x0]
 	bx      lr
-@ 0x224781c
 
-.thumb
 branch_224781c: @ 224781c :thumb
 	mov     r1, r0
 	add     r1, #0xc4
@@ -22618,12 +22632,15 @@ branch_224781c: @ 224781c :thumb
 	str     r1, [r2, #0x0]
 	ldr     r0, [r0, #0x0]
 	str     r0, [r3, #0x0]
-.thumb
+
 branch_224782a: @ 224782a :thumb
 	bx      lr
 @ 0x224782c
 
 .word RAM_21bf6dc @ 0x224782c
+
+
+
 .thumb
 Function_2247830: @ 2247830 :thumb
 	push    {r4-r7}
@@ -25977,7 +25994,18 @@ Unknown_2248ec0: @ 0x2248ec0
 
 .align 2, 0
 Unknown_2248edc: @ 0x2248edc
-.incbin "./baserom/overlay/overlay_0006.bin", 0xad9c, 0x22491ec - 0x2248edc
+.incbin "./baserom/overlay/overlay_0006.bin", 0xad9c, 0x2249090 - 0x2248edc
+
+
+.align 2, 0
+Unknown_2249090_SwarmMaps: @ 0x2249090
+@.word 0x156, 0x157, 0x158, 0x15E, 0x161, 0x162, 0x164, 0x17C, 0x17E, 0x181, 0x184, 0x188, 0x18B, 0x18F, 0x190, 0x1D5, 0x193, 0x196, 0x197, 0x1D7, 0xC8, 0xCB
+.word MapNr_R201, MapNr_R202, MapNr_R203, MapNr_R206, MapNr_R207, MapNr_R208, MapNr_R209, MapNr_R214, MapNr_R215, MapNr_R217, MapNr_R218, MapNr_R221, MapNr_R222, MapNr_R224, MapNr_R225, MapNr_W226, MapNr_R227, MapNr_R228, MapNr_R229, MapNr_W230, MapNr_D02, MapNr_D03R0101
+
+
+Unknown_22490e8: @ 0x22490e8
+.incbin "./baserom/overlay/overlay_0006.bin", 0xafa8, 0x22491ec - 0x22490e8
+
 
 
 Unknown_22491ec: @ 0x22491ec

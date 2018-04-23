@@ -109,10 +109,12 @@ TableForVariableAreas: @ 0x20e5894
 .word 0x0 @ 0x20e5998
 .word Function_202ab34+1 @ 0x20e599c
 .word Function_202ab3c+1 @ 0x20e59a0
+
 .word 0x11 @ 0x20e59a4
 .word 0x0 @ 0x20e59a8
-.word Function_202b37c+1 @ 0x20e59ac
-.word Function_202b3a8+1 @ 0x20e59b0
+.word GetSizeOfVarArea11+1 @ 0x20e59ac
+.word ClearVarArea11Memory+1 @ 0x20e59b0
+
 .word 0x12 @ 0x20e59b4
 .word 0x0 @ 0x20e59b8
 .word Function_202b604+1 @ 0x20e59bc
@@ -141,10 +143,12 @@ TableForVariableAreas: @ 0x20e5894
 .word 0x0 @ 0x20e5a18
 .word Function_202d778+1 @ 0x20e5a1c
 .word Function_202d77c+1 @ 0x20e5a20
+
 .word 0x19 @ 0x20e5a24
 .word 0x0 @ 0x20e5a28
-.word Function_202d7a8+1 @ 0x20e5a2c
-.word Function_202d7b0+1 @ 0x20e5a30
+.word GetSizeOfVarArea19+1 @ 0x20e5a2c
+.word ClearVarArea19Memory+1 @ 0x20e5a30
+
 .word 0x1a @ 0x20e5a34
 .word 0x0 @ 0x20e5a38
 .word Function_202da4c+1 @ 0x20e5a3c

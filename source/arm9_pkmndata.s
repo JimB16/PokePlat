@@ -1664,7 +1664,7 @@ Jumppoints_2074626:
 .hword readPkmnDataUnused - Jumppoints_2074626 - 2 @ 0xab
 .hword readPkmnDataIsPkmnOrEgg - Jumppoints_2074626 - 2 @ 0xac
 .hword branch_20747c6 - Jumppoints_2074626 - 2 @ 0xad
-.hword branch_20747d8 - Jumppoints_2074626 - 2 @ 0xae
+.hword readPkmnDataSpeciesOrEgg - Jumppoints_2074626 - 2 @ 0xae
 .hword branch_2074a88 - Jumppoints_2074626 - 2 @ 0xaf
 .hword branch_2074aba - Jumppoints_2074626 - 2 @ 0xb0
 .hword branch_2074ae4 - Jumppoints_2074626 - 2 @ 0xb1
@@ -1724,19 +1724,22 @@ branch_20747c6: @ 20747c6 :thumb
 	lsr     r4, r0, #31
 	b       end_ReadBoxPkmnData
 
-branch_20747d8: @ 20747d8 :thumb
+readPkmnDataSpeciesOrEgg: @ 20747d8 :thumb
 	ldrh    r4, [r5, #0x0]          @ BlockA + 0x0 = National Pokédex ID
 	cmp     r4, #0x0
 	beq     branch_20747f0
+
 	ldr     r0, [r6, #0x10]         @ BlockB + 0x10 = IsEgg
 	lsl     r0, r0, #1
 	lsr     r0, r0, #31
 	bne     branch_20747f2          @ IsEgg
+
 	ldr     r0, [sp, #0x0]          @ source address
 	ldrh    r0, [r0, #0x4]          @ Temporary Variable
 	lsl     r0, r0, #29
 	lsr     r0, r0, #31
 	bne     branch_20747f2
+
 branch_20747f0: @ 20747f0 :thumb
 	b       end_ReadBoxPkmnData
 
@@ -5040,12 +5043,13 @@ Function_2075c74: @ 2075c74 :thumb
 
 branch_2075c8c: @ 2075c8c :thumb
 	mov     r0, r5
-	mov     r1, #PKMNDATA_ae
+	mov     r1, #PKMNDATA_SPECIESOREGG
 	mov     r2, #0x0
 	bl      GetPkmnData
 	lsl     r0, r0, #16
 	lsr     r1, r0, #16
 	beq     branch_2075d60
+
 	ldr     r0, =0x1ee
 	cmp     r1, r0
 	beq     branch_2075d60
@@ -5079,12 +5083,14 @@ branch_2075c8c: @ 2075c8c :thumb
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 branch_2075cda: @ 2075cda :thumb
+
 	cmp     r1, #0xc8
 	blt     branch_2075ce4
 	add     r0, r4, #0x1
 	lsl     r0, r0, #24
 	lsr     r4, r0, #24
 branch_2075ce4: @ 2075ce4 :thumb
+
 	lsl     r0, r6, #1
 	add     r1, r6, r0
 	ldr     r0, =Unknown_20f05a0
@@ -5104,6 +5110,7 @@ branch_2075ce4: @ 2075ce4 :thumb
 	lsl     r0, r0, #24
 	asr     r4, r0, #24
 branch_2075d06: @ 2075d06 :thumb
+
 	cmp     r4, #0x0
 	ble     branch_2075d20
 
@@ -5119,16 +5126,20 @@ branch_2075d06: @ 2075d06 :thumb
 	lsl     r0, r0, #24
 	asr     r4, r0, #24
 branch_2075d20: @ 2075d20 :thumb
+
 	cmp     r4, #0x0
 	ble     branch_2075d36
+
 	cmp     r7, #0x35
 	bne     branch_2075d36
+
 	mov     r0, #0x96
 	mul     r0, r4
 	mov     r1, #100
 	blx     _s32_div_f
 	lsl     r0, r0, #24
 	asr     r4, r0, #24
+
 branch_2075d36: @ 2075d36 :thumb
 	add     r0, sp, #0x4
 	mov     r1, #0x0
@@ -5139,8 +5150,8 @@ branch_2075d36: @ 2075d36 :thumb
 	cmp     r2, #0x0
 	bge     branch_2075d48
 	strh    r1, [r0, #0x0]
-
 branch_2075d48: @ 2075d48 :thumb
+
 	add     r1, sp, #0x4
 	mov     r0, #0x0
 	ldsh    r0, [r1, r0]
@@ -5148,8 +5159,8 @@ branch_2075d48: @ 2075d48 :thumb
 	ble     branch_2075d56
 	mov     r0, #0xff
 	strh    r0, [r1, #0x0]
-
 branch_2075d56: @ 2075d56 :thumb
+
 	mov     r0, r5
 	mov     r1, #PKMNDATA_FRIENDSHIP
 	add     r2, sp, #0x4
@@ -5432,31 +5443,37 @@ branch_2075ee2: @ 2075ee2 :thumb
 
 
 
-.thumb
-.globl Function_2075ef4
-Function_2075ef4: @ 2075ef4 :thumb
+/* Input:
+r0: NARCPokeGra2
+*/
+thumb_func_start LoadPkmnDataForPlatGraphic
+LoadPkmnDataForPlatGraphic: @ 2075ef4 :thumb
 	push    {r3,lr}
 	mov     r3, #0x0
-	bl      Function_2075f0c
+	bl      LoadPkmnDataForGraphic
 	pop     {r3,pc}
-@ 0x2075efe
+thumb_func_end LoadPkmnDataForPlatGraphic
 
 
+/* Input:
+r0: NARCPokeGra2
+*/
 .align 2, 0
-.thumb
-.globl Function_2075f00
-Function_2075f00: @ 2075f00 :thumb
+thumb_func_start LoadPkmnDataForDPGraphic
+LoadPkmnDataForDPGraphic: @ 2075f00 :thumb
 	push    {r3,lr}
 	mov     r3, #0x1
-	bl      Function_2075f0c
+	bl      LoadPkmnDataForGraphic
 	pop     {r3,pc}
-@ 0x2075f0a
+thumb_func_end LoadPkmnDataForDPGraphic
 
 
-.align 2, 0
-.thumb
-.globl Function_2075f0c
-Function_2075f0c: @ 2075f0c :thumb
+/* Input:
+r0: NARCPokeGra2
+r3: 0: PlatGraphic, 1: DPGraphic
+*/
+thumb_func_start LoadPkmnDataForGraphic
+LoadPkmnDataForGraphic: @ 2075f0c :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x20
 	mov     r5, r1
@@ -5468,11 +5485,12 @@ Function_2075f0c: @ 2075f0c :thumb
 	str     r0, [sp, #0x1c]
 
 	mov     r0, r5
-	mov     r1, #PKMNDATA_ae
+	mov     r1, #PKMNDATA_SPECIESOREGG
 	mov     r2, #0x0
 	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
+
 	mov     r0, r5
 	bl      DecidePkmnGender
 	str     r0, [sp, #0x18]
@@ -5480,11 +5498,11 @@ Function_2075f0c: @ 2075f0c :thumb
 	bl      CheckIfShinyPkmn_2
 
 	mov     r1, #PKMNDATA_PERSONALITYVALUE
-	mov     r7, r0
+	mov     r7, r0              @ PaletteNr (Normal/Shiny)
 	mov     r0, r5
 	mov     r2, r1
 	bl      GetBoxPkmnData
-	mov     r6, r0
+	mov     r6, r0              @ PersonalityValue
 
 	ldr     r0, =UnknownPkmnID
 	cmp     r4, r0
@@ -5511,28 +5529,31 @@ branch_2075f68: @ 2075f68 :thumb
 	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r1, r0, #24
+
 branch_2075f76: @ 2075f76 :thumb
 	ldr     r0, [sp, #0x14]
-	str     r7, [sp, #0x0]
+	str     r7, [sp, #0x0]      @ PaletteNr (Normal/Shiny)
 	cmp     r0, #0x1
-	bne     branch_2075f90
-	str     r1, [sp, #0x4]
-	str     r6, [sp, #0x8]
-	ldr     r0, [sp, #0xc]
-	ldr     r2, [sp, #0x18]
-	ldr     r3, [sp, #0x10]
-	mov     r1, r4
-	bl      Function_2076300
+	bne     branch_2075f90_Plat
+
+	str     r1, [sp, #0x4]      @ AlternateForm
+	str     r6, [sp, #0x8]      @ PersonalityValue
+	ldr     r0, [sp, #0xc]      @ NARCPokeGra2
+	ldr     r2, [sp, #0x18]     @ Gender
+	ldr     r3, [sp, #0x10]     @ FrontBack
+	mov     r1, r4              @ Species
+	bl      GetArchiveFileIDsForPkmnDPGraphics
 	b       branch_2075fa0
 
-branch_2075f90: @ 2075f90 :thumb
-	str     r1, [sp, #0x4]
-	str     r6, [sp, #0x8]
-	ldr     r0, [sp, #0xc]
-	ldr     r2, [sp, #0x18]
-	ldr     r3, [sp, #0x10]
-	mov     r1, r4
-	bl      Function_2075fb4
+branch_2075f90_Plat: @ 2075f90 :thumb
+	str     r1, [sp, #0x4]      @ AlternateForm
+	str     r6, [sp, #0x8]      @ PersonalityValue
+	ldr     r0, [sp, #0xc]      @ NARCPokeGra2
+	ldr     r2, [sp, #0x18]     @ Gender
+	ldr     r3, [sp, #0x10]     @ FrontBack
+	mov     r1, r4              @ Species
+	bl      GetArchiveFileIDsForPkmnPlatGraphics
+
 branch_2075fa0: @ 2075fa0 :thumb
 	ldr     r1, [sp, #0x1c]
 	mov     r0, r5
@@ -5544,326 +5565,354 @@ branch_2075fa0: @ 2075fa0 :thumb
 
 .align 2
 .pool
+thumb_func_end LoadPkmnDataForGraphic
 
 
 
+/* Input:
+r0: NARCPokeGra2
+r1: Species
+r2: Gender
+r3: FrontBack
+sp+0x0: PaletteNr (Normal/Shiny)
+sp+0x4: AlternateForm
+sp+0x8: PersonalityValue
+*/
 .thumb
-.globl Function_2075fb4
-Function_2075fb4: @ 2075fb4 :thumb
+.globl GetArchiveFileIDsForPkmnPlatGraphics
+GetArchiveFileIDsForPkmnPlatGraphics: @ 2075fb4 :thumb
 	push    {r3-r7,lr}
-	str     r2, [sp, #0x0]
+	str     r2, [sp, #0x0]          @ Gender
 	mov     r4, r1
 	mov     r5, r0
 	ldr     r6, [sp, #0x18]
 	ldr     r1, [sp, #0x1c]
 	mov     r0, #0x0
-	strh    r0, [r5, #0x6]
-	strb    r0, [r5, #0x8]
-	str     r0, [r5, #0xc]
+	strh    r0, [r5, #NARCPokeGra2_6]
+	strb    r0, [r5, #NARCPokeGra2_8]
+	str     r0, [r5, #NARCPokeGra2_c]
 	mov     r0, r4
-	mov     r7, r3
+	mov     r7, r3                  @ FrontBack
 	bl      Function_20761e8
-	ldr     r1, =0x1a5
+
+	ldr     r1, =CHERRIM @  0x1a5
 	cmp     r4, r1
 	bgt     branch_2076024
 	blt     branch_2075fda
-	b       branch_20760e4
+	b       branch_20760e4_CHERRIM
 
 branch_2075fda: @ 2075fda :thumb
 	mov     r2, r1
-	sub     r2, #0x46
+	sub     r2, #CHERRIM - CASTFORM
 	cmp     r4, r2
 	bgt     branch_2075ff2
-	sub     r1, #0x46
+
+	sub     r1, #CHERRIM - CASTFORM @ 0x15f
 	cmp     r4, r1
 	blt     branch_2075fea
-	b       branch_207610e
+	b       branch_207610e_CASTFORM
 
 branch_2075fea: @ 2075fea :thumb
-	cmp     r4, #0xc9
+	cmp     r4, #UNOWN
 	bne     branch_2075ff0
-	b       branch_2076136
+	b       branch_2076136_UNOWN
 
 branch_2075ff0: @ 2075ff0 :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_2075ff2: @ 2075ff2 :thumb
 	mov     r2, r1
-	sub     r2, #0x23
+	sub     r2, #CHERRIM - DEOXYS
 	cmp     r4, r2
 	bgt     branch_2076004
-	sub     r1, #0x23
+
+	sub     r1, #CHERRIM - DEOXYS
 	cmp     r4, r1
 	bne     branch_2076002
-	b       branch_2076124
+	b       branch_2076124_DEOXYS
 
 branch_2076002: @ 2076002 :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_2076004: @ 2076004 :thumb
 	mov     r2, r1
-	sub     r2, #0x8
+	sub     r2, #CHERRIM - WORMADAM
 	cmp     r4, r2
 	bgt     branch_2076022
+
 	mov     r2, r1
-	sub     r2, #0x9
+	sub     r2, #CHERRIM - BURMY
 	cmp     r4, r2
 	blt     branch_2076022
+
 	mov     r2, r1
-	sub     r2, #0x9
+	sub     r2, #CHERRIM - BURMY
 	cmp     r4, r2
-	beq     branch_2076090
-	sub     r1, #0x8
+	beq     branch_2076090_BURMY
+
+	sub     r1, #CHERRIM - WORMADAM
 	cmp     r4, r1
-	beq     branch_20760a6
+	beq     branch_20760a6_WORMADAM
+
 branch_2076022: @ 2076022 :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_2076024: @ 2076024 :thumb
 	mov     r2, r1
-	add     r2, #0x42
+	add     r2, #GIRATINA - CHERRIM
 	cmp     r4, r2
 	bgt     branch_2076056
+
 	mov     r2, r1
-	add     r2, #0x42
+	add     r2, #GIRATINA - CHERRIM
 	cmp     r4, r2
 	blt     branch_2076036
-	b       branch_2076194
+	b       branch_2076194_GIRATINA
 
 branch_2076036: @ 2076036 :thumb
-	add     r2, r1, #0x2
+	add     r2, r1, #GASTRODON - CHERRIM
 	cmp     r4, r2
 	bgt     branch_207604c
-	add     r2, r1, #0x1
+
+	add     r2, r1, #SHELLOS - CHERRIM
 	cmp     r4, r2
 	blt     branch_207604a
-	beq     branch_20760bc
-	.hword  0x1c89 @ add r1, r1, #0x2
+	beq     branch_20760bc_SHELLOS
+
+	.hword  0x1c89 @ add r1, r1, #GASTRODON - CHERRIM
 	cmp     r4, r1
-	beq     branch_20760d0
+	beq     branch_20760d0_GASTRODON
+
 branch_207604a: @ 207604a :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_207604c: @ 207604c :thumb
-	add     r1, #0x3a
+	add     r1, #ROTOM - CHERRIM
 	cmp     r4, r1
 	bne     branch_2076054
-	b       branch_207617e
+	b       branch_207617e_ROTOM
 
 branch_2076054: @ 2076054 :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_2076056: @ 2076056 :thumb
 	mov     r2, r1
-	add     r2, #0x47
+	add     r2, #SHAYMIN - CHERRIM
 	cmp     r4, r2
 	bgt     branch_2076068
-	add     r1, #0x47
+
+	add     r1, #SHAYMIN - CHERRIM
 	cmp     r4, r1
 	bne     branch_2076066
-	b       branch_2076168
+	b       branch_2076168_SHAYMIN
 
 branch_2076066: @ 2076066 :thumb
-	b       branch_20761aa
+	b       branch_20761aa_NoAlternateForm
 
 branch_2076068: @ 2076068 :thumb
 	mov     r2, r1
-	add     r2, #0x4a
+	add     r2, #495 - CHERRIM
 	cmp     r4, r2
 	bgt     branch_207608e
+
 	mov     r2, r1
-	add     r2, #0x48
+	add     r2, #ARCEUS - CHERRIM
 	cmp     r4, r2
 	blt     branch_207608e
+
 	mov     r2, r1
-	add     r2, #0x48
+	add     r2, #ARCEUS - CHERRIM
 	cmp     r4, r2
-	beq     branch_20760f8
+	beq     branch_20760f8_ARCEUS
+
 	mov     r2, r1
-	add     r2, #0x49
+	add     r2, #494 - CHERRIM
 	cmp     r4, r2
 	beq     branch_207614a
-	add     r1, #0x4a
+
+	add     r1, #495 - CHERRIM
 	cmp     r4, r1
 	beq     branch_207615a
-branch_207608e: @ 207608e :thumb
-	b       branch_20761aa
 
-branch_2076090: @ 2076090 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_207608e: @ 207608e :thumb
+	b       branch_20761aa_NoAlternateForm
+
+branch_2076090_BURMY: @ 2076090 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x48
 	add     r0, r0, r1
 	add     r6, #0xa6
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20760a6: @ 20760a6 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_20760a6_WORMADAM: @ 20760a6 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x4e
 	add     r0, r0, r1
 	add     r6, #0xac
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20760bc: @ 20760bc :thumb
-	mov     r1, #0x75
+branch_20760bc_SHELLOS: @ 20760bc :thumb
+	mov     r1, #PlOtherpoke_Narc
 	add     r7, #0x54
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
 	add     r6, #0xb2
 	lsl     r0, r0, #1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20760d0: @ 20760d0 :thumb
-	mov     r1, #0x75
+branch_20760d0_GASTRODON: @ 20760d0 :thumb
+	mov     r1, #PlOtherpoke_Narc
 	add     r7, #0x58
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
 	add     r6, #0xb6
 	lsl     r0, r0, #1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20760e4: @ 20760e4 :thumb
-	mov     r1, #0x75
+branch_20760e4_CHERRIM: @ 20760e4 :thumb
+	mov     r1, #PlOtherpoke_Narc
 	add     r7, #0x5c
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	lsl     r1, r6, #1
 	add     r1, #0xba
 	add     r0, r0, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20760f8: @ 20760f8 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_20760f8_ARCEUS: @ 20760f8 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x60
 	add     r0, r0, r1
 	add     r6, #0xbe
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_207610e: @ 207610e :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_207610e_CASTFORM: @ 207610e :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r7, #1
 	add     r1, #0x40
 	add     r1, r0, r1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	lsl     r1, r6, #2
 	add     r1, #0x9e
 	add     r0, r0, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_2076124: @ 2076124 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_2076124_DEOXYS: @ 2076124 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsr     r1, r7, #1
 	lsl     r0, r0, #1
 	add     r0, r1, r0
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r6, #0x9a
-	strh    r6, [r5, #0x4]
+	strh    r6, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_2076136: @ 2076136 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_2076136_UNOWN: @ 2076136 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsr     r1, r7, #1
 	add     r1, #0x8
 	lsl     r0, r0, #1
 	add     r0, r1, r0
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r6, #0x9c
-	strh    r6, [r5, #0x4]
+	strh    r6, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207614a: @ 207614a :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	mov     r1, r0
 	add     r1, #0x84
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, #0xe2
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207615a: @ 207615a :thumb
-	mov     r0, #0x75
-	strh    r0, [r5, #0x0]
+	mov     r0, #PlOtherpoke_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	mov     r0, #0x84
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	mov     r0, #0xe2
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_2076168: @ 2076168 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_2076168_SHAYMIN: @ 2076168 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x86
 	add     r0, r0, r1
 	add     r6, #0xe4
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_207617e: @ 207617e :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_207617e_ROTOM: @ 207617e :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x8a
 	add     r0, r0, r1
 	add     r6, #0xe8
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_2076194: @ 2076194 :thumb
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+branch_2076194_GIRATINA: @ 2076194 :thumb
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x96
 	add     r0, r0, r1
 	add     r6, #0xf4
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
-branch_20761aa: @ 20761aa :thumb
-	mov     r0, #0x4
-	strh    r0, [r5, #0x0]
-	ldr     r0, [sp, #0x0]
+branch_20761aa_NoAlternateForm: @ 20761aa :thumb
+	mov     r0, #PlPokegra_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
+	ldr     r0, [sp, #0x0]          @ Gender
 	cmp     r0, #0x1
 	beq     branch_20761b8
+
 	mov     r1, #0x1
 	b       branch_20761ba
 
@@ -5875,19 +5924,22 @@ branch_20761ba: @ 20761ba :thumb
 	add     r2, r7, r0
 	add     r1, r2, r1
 	.hword  0x1d00 @ add r0, r0, #0x4
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
-	ldr     r0, =0x147
+	strh    r0, [r5, #NARCPokeGra2_4]
+	ldr     r0, =SPINDA
 	cmp     r4, r0
 	bne     branch_20761de
-	cmp     r7, #0x2
+
+	cmp     r7, #0x2                @ FrontBack
 	bne     branch_20761de
-	strh    r0, [r5, #0x6]
+
+	strh    r0, [r5, #NARCPokeGra2_6]
 	mov     r0, #0x0
-	strb    r0, [r5, #0x8]
+	strb    r0, [r5, #NARCPokeGra2_8]
 	ldr     r0, [sp, #0x20]
-	str     r0, [r5, #0xc]
+	str     r0, [r5, #NARCPokeGra2_c]
+
 branch_20761de: @ 20761de :thumb
 	pop     {r3-r7,pc}
 @ 0x20761e0
@@ -6083,8 +6135,17 @@ branch_20762f8: @ 20762f8 :thumb
 
 
 
+/* Input:
+r0: NARCPokeGra2
+r1: Species
+r2: Gender
+r3: FrontBack
+sp+0x0: PaletteNr (Normal/Shiny)
+sp+0x4: AlternateForm
+sp+0x8: PersonalityValue
+*/
 .thumb
-Function_2076300: @ 2076300 :thumb
+GetArchiveFileIDsForPkmnDPGraphics: @ 2076300 :thumb
 	push    {r3-r7,lr}
 	str     r2, [sp, #0x0]
 	mov     r4, r1
@@ -6092,9 +6153,9 @@ Function_2076300: @ 2076300 :thumb
 	ldr     r6, [sp, #0x18]
 	ldr     r1, [sp, #0x1c]
 	mov     r0, #0x0
-	strh    r0, [r5, #0x6]
-	strb    r0, [r5, #0x8]
-	str     r0, [r5, #0xc]
+	strh    r0, [r5, #NARCPokeGra2_6]
+	strb    r0, [r5, #NARCPokeGra2_8]
+	str     r0, [r5, #NARCPokeGra2_c]
 	mov     r0, r4
 	mov     r7, r3
 	bl      Function_20761e8
@@ -6221,156 +6282,158 @@ branch_20763b4: @ 20763b4 :thumb
 	add     r1, #0x4a
 	cmp     r4, r1
 	beq     branch_20764a6
+
 branch_20763da: @ 20763da :thumb
 	b       branch_207656c
 
 branch_20763dc: @ 20763dc :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x48
 	add     r0, r0, r1
 	add     r6, #0x92
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_20763f2: @ 20763f2 :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x4e
 	add     r0, r0, r1
 	add     r6, #0x98
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076408: @ 2076408 :thumb
-	mov     r1, #0xa6
+	mov     r1, #Otherpoke_Narc
 	add     r7, #0x54
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
 	add     r6, #0x9e
 	lsl     r0, r0, #1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207641c: @ 207641c :thumb
-	mov     r1, #0xa6
+	mov     r1, #Otherpoke_Narc
 	add     r7, #0x58
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
 	add     r6, #0xa2
 	lsl     r0, r0, #1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076430: @ 2076430 :thumb
-	mov     r1, #0xa6
+	mov     r1, #Otherpoke_Narc
 	add     r7, #0x5c
-	strh    r1, [r5, #0x0]
+	strh    r1, [r5, #NARCPokeGra2_0]
 	add     r1, r7, r0
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	lsl     r1, r6, #1
 	add     r1, #0xa6
 	add     r0, r0, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076444: @ 2076444 :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x60
 	add     r0, r0, r1
 	add     r6, #0xaa
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207645a: @ 207645a :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r7, #1
 	add     r1, #0x40
 	add     r1, r0, r1
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	lsl     r1, r6, #2
 	add     r1, #0x8a
 	add     r0, r0, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076470: @ 2076470 :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsr     r1, r7, #1
 	lsl     r0, r0, #1
 	add     r0, r1, r0
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r6, #0x86
-	strh    r6, [r5, #0x4]
+	strh    r6, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076482: @ 2076482 :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsr     r1, r7, #1
 	add     r1, #0x8
 	lsl     r0, r0, #1
 	add     r0, r1, r0
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r6, #0x88
-	strh    r6, [r5, #0x4]
+	strh    r6, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076496: @ 2076496 :thumb
-	mov     r1, #0xa6
-	strh    r1, [r5, #0x0]
+	mov     r1, #Otherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	mov     r1, r0
 	add     r1, #0x84
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, #0xce
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_20764a6: @ 20764a6 :thumb
-	mov     r0, #0xa6
-	strh    r0, [r5, #0x0]
+	mov     r0, #Otherpoke_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	mov     r0, #0x84
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	mov     r0, #0xce
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_20764b4: @ 20764b4 :thumb
 	cmp     r0, #0x0
 	beq     branch_20764cc
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsr     r1, r7, #1
 	add     r1, #0x86
 	lsl     r0, r0, #1
 	add     r0, r1, r0
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r6, #0xe6
-	strh    r6, [r5, #0x4]
+	strh    r6, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_20764cc: @ 20764cc :thumb
-	mov     r0, #0xa5
-	strh    r0, [r5, #0x0]
+	mov     r0, #Pokegra_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	ldr     r0, [sp, #0x0]
 	cmp     r0, #0x1
 	beq     branch_20764da
@@ -6385,30 +6448,31 @@ branch_20764dc: @ 20764dc :thumb
 	mul     r1, r0
 	add     r0, r7, r1
 	add     r0, r0, r2
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r1, #0x4
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_20764f0: @ 20764f0 :thumb
 	cmp     r0, #0x0
 	beq     branch_207650a
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x8a
 	add     r0, r0, r1
 	add     r6, #0xe8
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207650a: @ 207650a :thumb
-	mov     r0, #0xa5
-	strh    r0, [r5, #0x0]
+	mov     r0, #Pokegra_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	ldr     r0, [sp, #0x0]
 	cmp     r0, #0x1
 	beq     branch_2076518
@@ -6423,30 +6487,31 @@ branch_207651a: @ 207651a :thumb
 	mul     r1, r0
 	add     r0, r7, r1
 	add     r0, r0, r2
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r1, #0x4
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207652e: @ 207652e :thumb
 	cmp     r0, #0x0
 	beq     branch_2076548
-	mov     r1, #0x75
-	strh    r1, [r5, #0x0]
+
+	mov     r1, #PlOtherpoke_Narc
+	strh    r1, [r5, #NARCPokeGra2_0]
 	lsl     r1, r0, #1
 	lsr     r0, r7, #1
 	add     r0, #0x96
 	add     r0, r0, r1
 	add     r6, #0xf4
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r1
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_2076548: @ 2076548 :thumb
-	mov     r0, #0xa5
-	strh    r0, [r5, #0x0]
+	mov     r0, #Pokegra_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	ldr     r0, [sp, #0x0]
 	cmp     r0, #0x1
 	beq     branch_2076556
@@ -6461,15 +6526,15 @@ branch_2076558: @ 2076558 :thumb
 	mul     r1, r0
 	add     r0, r7, r1
 	add     r0, r0, r2
-	strh    r0, [r5, #0x2]
+	strh    r0, [r5, #NARCPokeGra2_2]
 	add     r0, r1, #0x4
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	pop     {r3-r7,pc}
 
 branch_207656c: @ 207656c :thumb
-	mov     r0, #0xa5
-	strh    r0, [r5, #0x0]
+	mov     r0, #Pokegra_Narc
+	strh    r0, [r5, #NARCPokeGra2_0]
 	ldr     r0, [sp, #0x0]
 	cmp     r0, #0x1
 	beq     branch_207657a
@@ -6484,19 +6549,19 @@ branch_207657c: @ 207657c :thumb
 	add     r2, r7, r0
 	add     r1, r2, r1
 	.hword  0x1d00 @ add r0, r0, #0x4
-	strh    r1, [r5, #0x2]
+	strh    r1, [r5, #NARCPokeGra2_2]
 	add     r0, r6, r0
-	strh    r0, [r5, #0x4]
+	strh    r0, [r5, #NARCPokeGra2_4]
 	ldr     r0, =0x147
 	cmp     r4, r0
 	bne     branch_20765a0
 	cmp     r7, #0x2
 	bne     branch_20765a0
-	strh    r0, [r5, #0x6]
+	strh    r0, [r5, #NARCPokeGra2_6]
 	mov     r0, #0x0
-	strb    r0, [r5, #0x8]
+	strb    r0, [r5, #NARCPokeGra2_8]
 	ldr     r0, [sp, #0x20]
-	str     r0, [r5, #0xc]
+	str     r0, [r5, #NARCPokeGra2_c]
 branch_20765a0: @ 20765a0 :thumb
 	pop     {r3-r7,pc}
 @ 0x20765a2
@@ -6540,12 +6605,13 @@ Function_20765c4: @ 20765c4 :thumb
 	mov     r7, r1
 	str     r2, [sp, #0x4]
 
-	mov     r1, #PKMNDATA_ae
+	mov     r1, #PKMNDATA_SPECIESOREGG
 	mov     r2, #0x0
 	mov     r5, r0
 	bl      GetBoxPkmnData
 	lsl     r0, r0, #16
 	lsr     r4, r0, #16
+
 	mov     r0, r5
 	bl      DecidePkmnGender
 
@@ -6563,9 +6629,10 @@ Function_20765c4: @ 20765c4 :thumb
 	mov     r1, #PKMNDATA_SPECIES
 	mov     r2, #0x0
 	bl      GetBoxPkmnData
-	ldr     r1, =0x1ea
+	ldr     r1, =MANAPHY
 	cmp     r0, r1
 	bne     branch_2076608
+
 	mov     r3, #0x1
 	b       branch_207661a
 
@@ -6580,11 +6647,13 @@ branch_207660c: @ 207660c :thumb
 	bl      GetBoxPkmnData
 	lsl     r0, r0, #24
 	lsr     r3, r0, #24
+
 branch_207661a: @ 207661a :thumb
 	ldr     r0, [sp, #0x4]
 	str     r6, [sp, #0x0]
 	cmp     r0, #0x1
 	bne     branch_2076630
+
 	ldr     r1, [sp, #0x8]
 	mov     r0, r4
 	mov     r2, r7

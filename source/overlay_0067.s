@@ -419,7 +419,7 @@ branch_225c9cc: @ 225c9cc :thumb
 
 .thumb
 branch_225c9fe: @ 225c9fe :thumb
-	ldr     r0, [pc, #0x118] @ 0x225cb18, (=0x21bf67c)
+	ldr     r0, [pc, #0x118] @ 0x225cb18, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	tst     r0, r1
@@ -592,7 +592,7 @@ branch_225cb0a: @ 225cb0a :thumb
 
 .word 0xffff @ 0x225cb10
 .word Unknown_225d3ec @ 0x225cb14
-.word 0x21bf67c @ 0x225cb18
+.word RAM_21bf67c @ 0x225cb18
 
 
 

@@ -69,7 +69,7 @@ Function_102_21d0d80: @ 21d0d80 :thumb
 	ldr     r0, [pc, #0x18] @ 0x21d0e28, (=0x21d0f81)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x1
 	pop     {r3-r5,pc}
 @ 0x21d0e1e
@@ -203,7 +203,7 @@ branch_21d0eee: @ 21d0eee :thumb
 
 .thumb
 branch_21d0efc: @ 21d0efc :thumb
-	ldr     r0, [pc, #0x48] @ 0x21d0f48, (=0x21bf67c)
+	ldr     r0, [pc, #0x48] @ 0x21d0f48, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x1
 	and     r0, r1
@@ -213,7 +213,7 @@ branch_21d0efc: @ 21d0efc :thumb
 	and     r0, r1
 	cmp     r0, #0x2
 	beq     branch_21d0f18
-	ldr     r0, [pc, #0x38] @ 0x21d0f4c, (=0x21bf6bc)
+	ldr     r0, [pc, #0x38] @ 0x21d0f4c, (=RAM_21bf6bc)
 	ldrh    r0, [r0, #0x20]
 	cmp     r0, #0x0
 	beq     branch_21d0f40
@@ -249,8 +249,8 @@ branch_21d0f40: @ 21d0f40 :thumb
 @ 0x21d0f46
 
 .align 2
-.word 0x21bf67c @ 0x21d0f48
-.word 0x21bf6bc @ 0x21d0f4c
+.word RAM_21bf67c @ 0x21d0f48
+.word RAM_21bf6bc @ 0x21d0f4c
 
 
 

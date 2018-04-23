@@ -7820,32 +7820,36 @@ ScriptCmd_StopGivePokeHeroAnimation: @ 2042ddc :thumb
 ScriptCmd_CheckSwarmPoke: @ 2042dec :thumb
 	push    {r4-r6,lr}
 	mov     r4, r0
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
-	ldr     r0, [r0, #0xc]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_19
 	mov     r5, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r6, r0
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
+
 	mov     r0, r5
 	mov     r1, #0x2
-	bl      Function_202d814
+	bl      Function_202d814_GetSwarmRNGNrs
 	mov     r1, r6
 	mov     r2, r4
-	bl      Function_6_224322c
+	bl      Function_6_224322c_CheckSwarmPoke
+
 	mov     r0, #0x0
 	pop     {r4-r6,pc}
 @ 0x2042e36
@@ -11809,9 +11813,11 @@ branch_2044ae2: @ 2044ae2 :thumb
 .thumb
 ScriptCmd_GreatMarshBynocule: @ 2044ae8 :thumb
 	push    {r3,lr}
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
-	bl      Function_206c0e8
+
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
+	bl      GreatMarshBynocule
+
 	mov     r0, #0x1
 	pop     {r3,pc}
 @ 0x2044af6
@@ -12093,14 +12099,16 @@ Function_2044cbc: @ 2044cbc :thumb
 .thumb
 ScriptCmd_ActSwarmPoke: @ 2044ccc :thumb
 	push    {r3,lr}
-	ldr     r2, [r0, #0x8]
+	ldr     r2, [r0, #ScriptHandler_Pointer]
 	add     r1, r2, #0x1
-	str     r1, [r0, #0x8]
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	str     r1, [r0, #ScriptHandler_Pointer]
+
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	ldrb    r1, [r2, #0x0]
-	ldr     r0, [r0, #0xc]
-	bl      Function_206c41c
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
+	bl      ActSwarmPoke
+
 	mov     r0, #0x0
 	pop     {r3,pc}
 @ 0x2044ce4
@@ -18546,32 +18554,34 @@ ScriptCmd_SetvarItemStored2: @ 2047b20 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 ScriptCmd_SetvarSwarmPoke: @ 2047b58 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x8
 	mov     r5, r0
+
 	mov     r0, #0x16
 	mov     r1, #0x4
 	bl      Function_2023790
 	mov     r4, r0
+
 	mov     r0, r5
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	mov     r1, #0xf
 	bl      ScriptHandler_GetSomeScriptAddresses
-	ldr     r1, [r5, #0x8]
+	ldr     r1, [r5, #ScriptHandler_Pointer]
 	mov     r7, r0
 	add     r0, r1, #0x1
-	str     r0, [r5, #0x8]
+	str     r0, [r5, #ScriptHandler_Pointer]
+
 	mov     r0, r5
 	ldrb    r6, [r1, #0x0]
 	bl      ScriptHandler_LoadHWord
-	add     r5, #0x80
+
+	add     r5, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r5, #0x0]
+	ldr     r0, [r5]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r1, #0x4
 	mov     r2, r4
@@ -18585,8 +18595,10 @@ ScriptCmd_SetvarSwarmPoke: @ 2047b58 :thumb
 	mov     r2, r4
 	mov     r3, #0x0
 	bl      Function_200b48c
+
 	mov     r0, r4
 	bl      Function_20237bc_FreeMsg
+
 	mov     r0, #0x0
 	add     sp, #0x8
 	pop     {r3-r7,pc}
@@ -20878,29 +20890,32 @@ Function_2048ba8: @ 2048ba8 :thumb
 @ 0x2048bd0
 
 
+/* Input:
+r0: Ptr to ScriptHandler-Struct
+*/
 .thumb
-Function_2048bd0: @ 2048bd0 :thumb
+ScriptCmd_21d: @ 2048bd0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r4, r0
 
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	mov     r1, #0xf
 	bl      ScriptHandler_GetSomeScriptAddresses
 	mov     r6, r0
 
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
-	ldr     r0, [r0, #0xc]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadVariableAreaAdress_11
 	mov     r5, r0
 
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
-	ldr     r7, [r0, #0xc]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
+	ldr     r7, [r0, #OverWorldData_VariableAreaAdress]
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	cmp     r0, #0x6
@@ -20931,21 +20946,24 @@ branch_2048c1e: @ 2048c1e :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
-	mov     r6, r0
+	mov     r6, r0          @ VarArea11_FieldNr
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
+
 	mov     r0, r5
-	mov     r1, r6
+	mov     r1, r6          @ VarArea11_FieldNr
 	bl      Function_202b4ac
 	strh    r0, [r4, #0x0]
+
 	add     sp, #0xc
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
@@ -20955,21 +20973,24 @@ branch_2048c54: @ 2048c54 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
-	mov     r6, r0
+	mov     r6, r0              @ VarArea11_FieldNr
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r4, r0
+
 	mov     r0, r5
-	mov     r1, r6
+	mov     r1, r6              @ VarArea11_FieldNr
 	bl      Function_202b4c4
 	strh    r0, [r4, #0x0]
+
 	add     sp, #0xc
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
@@ -20979,15 +21000,16 @@ branch_2048c8a: @ 2048c8a :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r5, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r3, r0
 	mov     r0, #0x0
@@ -21003,15 +21025,16 @@ branch_2048cc0: @ 2048cc0 :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r5, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
-	add     r4, #0x80
+	add     r4, #ScriptHandler_OverWorldData
 	mov     r1, r0
-	ldr     r0, [r4, #0x0]
+	ldr     r0, [r4]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r3, r0
 	mov     r0, #0x1
@@ -21023,26 +21046,28 @@ branch_2048cc0: @ 2048cc0 :thumb
 	b       branch_2048dd0
 
 branch_2048cf6: @ 2048cf6 :thumb
-	mov     r1, #0x0
+	mov     r1, #VarArea11_Field0
 	mov     r0, r5
 	mov     r2, r1
 	bl      Function_202b42c
 	mov     r5, r0
+
 	mov     r0, r4
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckLoadParameter
 	mov     r2, #0x0
 	str     r2, [sp, #0x0]
 	str     r5, [sp, #0x4]
 	str     r0, [sp, #0x8]
-	ldr     r0, [r4, #0x74]
+	ldr     r0, [r4, #ScriptHandler_74]
 	mov     r1, #0x5
 	mov     r3, #0x7
 	bl      Function_203dfe8
+
 	add     sp, #0xc
 	mov     r0, #0x1
 	pop     {r4-r7,pc}
@@ -21052,24 +21077,28 @@ branch_2048d2c: @ 2048d2c :thumb
 	bl      ScriptHandler_LoadHWord
 	mov     r1, r0
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
 	bl      ScriptHandler_CheckSaveParameter
 	mov     r7, r0
+
 	mov     r0, r5
-	mov     r1, #0x1
+	mov     r1, #VarArea11_Field1
 	bl      Function_202b4ac
 	mov     r6, r0
+
 	mov     r0, r5
 	mov     r1, r7
-	mov     r2, #0x1
-	bl      Function_202b384
+	mov     r2, #VarArea11_Field1
+	bl      VarArea11_CopyStruct
+
 	cmp     r6, #0x0
 	beq     branch_2048d60
-	add     r4, #0x80
-	ldr     r0, [r4, #0x0]
+	add     r4, #ScriptHandler_OverWorldData
+	ldr     r0, [r4]
 	bl      Function_206d430
 branch_2048d60: @ 2048d60 :thumb
+
 	add     sp, #0xc
 	mov     r0, #0x0
 	pop     {r4-r7,pc}
@@ -21079,42 +21108,49 @@ branch_2048d66: @ 2048d66 :thumb
 	mov     r1, #0x20
 	bl      Function_2023790
 	mov     r6, r0
+
 	mov     r0, r4
-	add     r0, #0x80
-	ldr     r0, [r0, #0x0]
-	ldr     r0, [r0, #0xc]
+	add     r0, #ScriptHandler_OverWorldData
+	ldr     r0, [r0]
+	ldr     r0, [r0, #OverWorldData_VariableAreaAdress]
 	bl      LoadTrainerDataAdress
 	mov     r1, r6
 	mov     r7, r0
 	bl      Function_2025ef4
+
 	mov     r0, r5
-	mov     r1, #0x0
+	mov     r1, #VarArea11_Field0
 	mov     r2, #0x1
 	mov     r3, r6
 	bl      Function_202b444
+
 	mov     r0, r7
 	bl      GetGender
 	mov     r2, r0
 	mov     r0, r5
-	mov     r1, #0x0
-	bl      Function_202b470
+	mov     r1, #VarArea11_Field0
+	bl      VarArea11_Set20
+
 	mov     r0, r5
-	mov     r1, #0x0
+	mov     r1, #VarArea11_Field0
 	mov     r2, #0x2
-	bl      Function_202b494
+	bl      VarArea11_Set21
 	bl      Function_201d35c
 	mov     r2, r0
 	mov     r0, r5
 	mov     r1, #0x0
-	bl      Function_202b40c
+	bl      VarArea11_OneAdvanceRNG
+
 	mov     r0, r6
 	bl      Function_20237bc_FreeMsg
+
 	mov     r0, r5
-	mov     r1, #0x0
-	mov     r2, #0x1
-	bl      Function_202b384
-	add     r4, #0x80
-	ldr     r0, [r4, #0x0]
+	mov     r1, #VarArea11_Field0
+	mov     r2, #VarArea11_Field1
+	bl      VarArea11_CopyStruct
+
+	add     r4, #ScriptHandler_OverWorldData
+	ldr     r0, [r4]
 	bl      Function_206d424
 branch_2048dd0: @ 2048dd0 :thumb
 	mov     r0, #0x0
@@ -27766,7 +27802,7 @@ Function_204baac: @ 204baac :thumb
 	mov     r6, r0
 
 	blx     OS_GetTick
-	bl      Function_201d30c
+	bl      ARNG_Step
 	mov     r1, r0
 	ldr     r0, [sp, #0x18]
 	str     r1, [sp, #0x38]
@@ -27780,7 +27816,7 @@ Function_204baac: @ 204baac :thumb
 	beq     branch_204bb30
 branch_204bb18: @ 204bb18 :thumb
 	ldr     r0, [sp, #0x38]
-	bl      Function_201d30c
+	bl      ARNG_Step
 	mov     r1, r0
 	mov     r0, r6
 	str     r1, [sp, #0x38]
@@ -29119,8 +29155,6 @@ Function_204c474: @ 204c474 :thumb
 
 
 .align 2, 0
-
-
 .thumb
 Function_204c494: @ 204c494 :thumb
 	push    {r3-r7,lr}

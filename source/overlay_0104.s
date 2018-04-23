@@ -8081,7 +8081,7 @@ Function_2231068: @ 2231068 :thumb
 .word Function_2231078+1 @ =0x2231079, 0x2231074
 .thumb
 Function_2231078: @ 2231078 :thumb
-	ldr     r0, [pc, #0x10] @ 0x223108c, (=0x21bf67c)
+	ldr     r0, [pc, #0x10] @ 0x223108c, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x3
 	tst     r0, r1
@@ -8100,7 +8100,7 @@ branch_2231086: @ 2231086 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x223108c
+.word RAM_21bf67c @ 0x223108c
 .thumb
 Function_2231090: @ 2231090 :thumb
 	push    {r4,lr}
@@ -8123,7 +8123,7 @@ Function_2231090: @ 2231090 :thumb
 .word Function_22310b0+1 @ =0x22310b1, 0x22310ac
 .thumb
 Function_22310b0: @ 22310b0 :thumb
-	ldr     r1, [pc, #0x28] @ 0x22310dc, (=0x21bf67c)
+	ldr     r1, [pc, #0x28] @ 0x22310dc, (=RAM_21bf67c)
 	ldr     r2, [r1, #0x48]
 	mov     r1, #0x3
 	tst     r1, r2
@@ -8155,7 +8155,7 @@ branch_22310d8: @ 22310d8 :thumb
 	bx      lr
 @ 0x22310dc
 
-.word 0x21bf67c @ 0x22310dc
+.word RAM_21bf67c @ 0x22310dc
 .thumb
 Function_22310e0: @ 22310e0 :thumb
 	push    {r3,lr}
@@ -11038,7 +11038,7 @@ branch_22324e4: @ 22324e4 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      Function_2001be0
 	mov     r4, r0
-	ldr     r0, [pc, #0x68] @ 0x2232564, (=0x21bf67c)
+	ldr     r0, [pc, #0x68] @ 0x2232564, (=RAM_21bf67c)
 	mov     r1, #0x40
 	ldr     r0, [r0, #0x4c]
 	tst     r1, r0
@@ -11108,7 +11108,7 @@ branch_2232562: @ 2232562 :thumb
 	pop     {r3-r5,pc}
 @ 0x2232564
 
-.word 0x21bf67c @ 0x2232564
+.word RAM_21bf67c @ 0x2232564
 .word 0xeedd @ 0x2232568
 .word 0xfffe @ 0x223256c
 .thumb
@@ -11714,7 +11714,7 @@ branch_2232988: @ 2232988 :thumb
 	ldr     r0, [pc, #0x8c] @ 0x2232a48, (=0x5dc)
 	bl      Function_2005748
 branch_22329be: @ 22329be :thumb
-	ldr     r0, [pc, #0x8c] @ 0x2232a4c, (=0x21bf67c)
+	ldr     r0, [pc, #0x8c] @ 0x2232a4c, (=RAM_21bf67c)
 	mov     r1, #0x40
 	ldr     r0, [r0, #0x4c]
 	tst     r1, r0
@@ -11789,7 +11789,7 @@ branch_2232a46: @ 2232a46 :thumb
 @ 0x2232a48
 
 .word 0x5dc @ 0x2232a48
-.word 0x21bf67c @ 0x2232a4c
+.word RAM_21bf67c @ 0x2232a4c
 .word 0xeedd @ 0x2232a50
 .word 0xfffe @ 0x2232a54
 
@@ -12276,7 +12276,7 @@ branch_2232d8a: @ 2232d8a :thumb
 	ldr     r1, [sp, #0x20]
 	add     r0, sp, #0x6c
 	mov     r2, #0x2
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	mov     r3, #0x0
 	str     r3, [sp, #0x0]
 	mov     r0, #0xa
@@ -12475,7 +12475,7 @@ Function_2232f4c: @ 2232f4c :thumb
 	bl      ErrorHandling
 branch_2232f60: @ 2232f60 :thumb
 	mov     r0, r7
-	bl      Function_2079d80
+	bl      Function_2079d80_CallGetPokeIconGraphicNr
 	mov     r3, r0
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
@@ -34291,7 +34291,7 @@ branch_223c356: @ 223c356 :thumb
 	mov     r1, r4
 	add     r1, #0x9c
 	str     r0, [r1, #0x0]
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, #0x10
 	mov     r1, #0x1
 	bl      Function_201ff0c
@@ -34605,7 +34605,7 @@ Function_223c6ec: @ 223c6ec :thumb
 	bl      Function_201dcac
 	bl      Function_200c800
 	ldr     r0, [r4, #0x4]
-	bl      Function_2003694
+	bl      Function_2003694_LoadSomePalettes
 	ldr     r0, [r4, #0x0]
 	bl      Function_201c2b8
 	ldr     r3, [pc, #0xc] @ 0x223c714, (=0x27e0000)

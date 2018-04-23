@@ -656,7 +656,7 @@ branch_21d1228: @ 21d1228 :thumb
 Function_21d122c: @ 21d122c :thumb
 	push    {r3-r5,lr}
 	mov     r5, r0
-	ldr     r0, [pc, #0x10c] @ 0x21d1340, (=0x21bf67c)
+	ldr     r0, [pc, #0x10c] @ 0x21d1340, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x30
 	tst     r1, r0
@@ -803,7 +803,7 @@ branch_21d133a: @ 21d133a :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d1340
+.word RAM_21bf67c @ 0x21d1340
 .word 0x5dd @ 0x21d1344
 .word 0x186 @ 0x21d1348
 .thumb

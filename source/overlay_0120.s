@@ -101,7 +101,7 @@ branch_21d0dde: @ 21d0dde :thumb
 	ldr     r0, [pc, #0xc8] @ 0x21d0ef8, (=0x21d0f19)
 	mov     r1, r4
 	bl      SetMainLoopFunctionCall
-	bl      Function_201ffd0
+	bl      Function_201ffd0_SetDISPCNT_SUB_MODE1
 	mov     r0, r6
 	str     r0, [r4, #0x24]
 	mov     r0, #0x1

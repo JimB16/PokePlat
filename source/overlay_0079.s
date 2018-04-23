@@ -384,7 +384,7 @@ Function_21d0fec: @ 21d0fec :thumb
 branch_21d1002: @ 21d1002 :thumb
 	bl      Function_21d0fb0
 	mov     r1, r0
-	ldr     r0, [pc, #0x8c] @ 0x21d1098, (=0x21bf67c)
+	ldr     r0, [pc, #0x8c] @ 0x21d1098, (=RAM_21bf67c)
 	ldr     r0, [r0, #0x44]
 	cmp     r0, #0x0
 	beq     branch_21d1024
@@ -425,7 +425,7 @@ branch_21d1036: @ 21d1036 :thumb
 
 .thumb
 branch_21d1042: @ 21d1042 :thumb
-	ldr     r0, [pc, #0x54] @ 0x21d1098, (=0x21bf67c)
+	ldr     r0, [pc, #0x54] @ 0x21d1098, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x2
 	tst     r0, r1
@@ -485,7 +485,7 @@ branch_21d1092: @ 21d1092 :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d1098
+.word RAM_21bf67c @ 0x21d1098
 .word 0x5dc @ 0x21d109c
 .thumb
 Function_21d10a0: @ 21d10a0 :thumb
@@ -509,7 +509,7 @@ Function_21d10b8: @ 21d10b8 :thumb
 	ldr     r0, [r0, #0x0]
 	bl      Function_2001288
 	mov     r4, r0
-	ldr     r0, [pc, #0x7c] @ 0x21d1144, (=0x21bf67c)
+	ldr     r0, [pc, #0x7c] @ 0x21d1144, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x2
 	tst     r0, r1
@@ -591,7 +591,7 @@ branch_21d113e: @ 21d113e :thumb
 .align 2
 
 
-.word 0x21bf67c @ 0x21d1144
+.word RAM_21bf67c @ 0x21d1144
 .word 0x5dc @ 0x21d1148
 .thumb
 Function_21d114c: @ 21d114c :thumb
@@ -684,7 +684,7 @@ Function_21d11c0: @ 21d11c0 :thumb
 
 .thumb
 branch_21d11d2: @ 21d11d2 :thumb
-	ldr     r0, [pc, #0x54] @ 0x21d1228, (=0x21bf67c)
+	ldr     r0, [pc, #0x54] @ 0x21d1228, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x3
 	tst     r0, r1
@@ -728,7 +728,7 @@ branch_21d11e0: @ 21d11e0 :thumb
 	pop     {r4,pc}
 @ 0x21d1228
 
-.word 0x21bf67c @ 0x21d1228
+.word RAM_21bf67c @ 0x21d1228
 .thumb
 Function_21d122c: @ 21d122c :thumb
 	push    {r4,lr}
@@ -4389,7 +4389,7 @@ Function_21d2c08: @ 21d2c08 :thumb
 
 .thumb
 branch_21d2c1e: @ 21d2c1e :thumb
-	ldr     r0, [pc, #0x2c] @ 0x21d2c4c, (=0x21bf67c)
+	ldr     r0, [pc, #0x2c] @ 0x21d2c4c, (=RAM_21bf67c)
 	ldr     r1, [r0, #0x48]
 	mov     r0, #0x3
 	tst     r0, r1
@@ -4416,7 +4416,7 @@ branch_21d2c36: @ 21d2c36 :thumb
 	pop     {r4,pc}
 @ 0x21d2c4c
 
-.word 0x21bf67c @ 0x21d2c4c
+.word RAM_21bf67c @ 0x21d2c4c
 .thumb
 Function_21d2c50: @ 21d2c50 :thumb
 	push    {r3-r7,lr}
@@ -5972,7 +5972,7 @@ Function_21d3820: @ 21d3820 :thumb
 	blx     Function_20af480
 	blx     Function_20a73c0
 	ldr     r0, [r4, #0x4]
-	bl      Function_2007768
+	bl      DrawNARCPokeGra
 	ldr     r0, [pc, #0x8] @ 0x21d3858, (=GFX_FLUSH)
 	mov     r1, #0x1
 	str     r1, [r0, #0x0]
@@ -6048,12 +6048,12 @@ Function_21d38d0: @ 21d38d0 :thumb
 	mov     r5, r0
 	mov     r0, r2
 	mov     r4, r1
-	bl      Function_200762c
+	bl      AllocInitNARCPokeGra
 	str     r0, [r5, #0x4]
 	ldr     r1, [r4, #0x0]
 	add     r0, sp, #0x10
 	mov     r2, #0x2
-	bl      Function_2075ef4
+	bl      LoadPkmnDataForPlatGraphic
 	mov     r0, #0x0
 	str     r0, [sp, #0x0]
 	str     r0, [sp, #0x4]

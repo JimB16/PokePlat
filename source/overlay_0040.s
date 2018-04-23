@@ -409,7 +409,7 @@ branch_22563fa: @ 22563fa :thumb
 	bl      InitEncryptPkmnData_Part1
 	str     r0, [sp, #0xc]
 	mov     r0, r4
-	bl      Function_2079d40
+	bl      Function_2079d40_GetPokeIconGraphicNr
 	str     r0, [r5, #0x4]
 	mov     r0, r4
 	mov     r1, #0x5
@@ -1051,7 +1051,7 @@ branch_225685c: @ 225685c :thumb
 	ldrh    r0, [r4, #0x1c]
 	ldrh    r1, [r4, #0x20]
 	mov     r2, #0x0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r5, #0x24]
 	.hword  0x1c49 @ add r1, r1, #0x1
@@ -1069,7 +1069,7 @@ branch_2256880: @ 2256880 :thumb
 	mov     r0, #0x1
 	mov     r1, #0x0
 	mov     r2, r0
-	bl      Function_2079edc
+	bl      GetPokeIconPaletteNr
 	mov     r1, r0
 	ldr     r0, [r7, #0x2c]
 	.hword  0x1c49 @ add r1, r1, #0x1

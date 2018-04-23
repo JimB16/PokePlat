@@ -89,7 +89,7 @@ Function_20_21d0df8: @ 21d0df8 :thumb
 	strh    r1, [r4, #0x30]
 	ldr     r1, [r0, #RAM_21bf67c_44_Key]
 	strh    r1, [r4, #0x32]
-	ldr     r0, [r0, #RAM_21bf67c_4c]
+	ldr     r0, [r0, #RAM_21bf67c_4c_Key]
 	strh    r0, [r4, #0x34]
 
 	ldr     r0, [r4, #0x40]

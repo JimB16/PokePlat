@@ -3634,23 +3634,29 @@ arm_func_end GXS_LoadOAM
 
 
 
-.arm
-.globl GX_LoadOBJ
+/* Input:
+r0: Source
+r1: Destination
+r2: Size
+*/
+arm_func_start GX_LoadOBJ
 GX_LoadOBJ: @ 20c02bc :arm
 	stmfd   sp!, {r4,lr}
-	ldr     r3, [pc, #0x48] @ [0x20c0310] (=Unknown_2101148)
+	ldr     r3, =Unknown_2101148
 	mov     r4, r0
-	ldr     r0, [r3]
+	ldr     r0, [r3]                @ NrOfDMAChannel
 	mvn     r12, #0x0
 	mov     lr, r1
-	mov     r3, r2
+	mov     r3, r2                  @ Size
 	cmp     r0, r12
-	mov     r12, #0x6400000
+	mov     r12, #SPRITE_GFX
 	beq     branch_20c02fc
+
 	cmp     r3, #0x30
 	bls     branch_20c02fc
-	mov     r1, r4
-	add     r2, r12, lr
+
+	mov     r1, r4                  @ Source
+	add     r2, r12, lr             @ Destination + SPRITE_GFX
 	bl      MI_DmaCopy32
 	ldmfd   sp!, {r4,pc}
 
@@ -3662,7 +3668,9 @@ branch_20c02fc: @ 20c02fc :arm
 	ldmfd   sp!, {r4,pc}
 @ 0x20c0310
 
-.word Unknown_2101148 @ 0x20c0310
+.align 2
+.pool
+arm_func_end GX_LoadOBJ
 
 
 

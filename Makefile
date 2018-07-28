@@ -305,7 +305,7 @@ all_icons_png := $(all_icons_rgcn:.rgcn=.png)
 all:
 
 clean:
-	rm -f build/*
+	rm -rf build/*
 #	rm -r -f newrom/data/fielddata/script/*
 #	rm -rf baserom
 
@@ -823,7 +823,7 @@ build/%.o: source/%.s build/%.d
 #	$(DEVKITARM)/bin/arm-none-eabi-gcc -x assembler-with-cpp -MMD -MP -MF $(subst .s,.d,build/$(notdir $<)) -march=armv5te -mthumb-interwork $< -c -o $@
 
 newrom/arm9_full.bin: $(OBJS) $(DEPS)
-	$(DEVKITARM)/bin/arm-none-eabi-ld --use-blx -T "source/ds_arm9.ld" -Map "build/arm9.map" $(OBJS) $(LIBPATHS) -o "build/arm9.elf"
+	$(DEVKITARM)/bin/arm-none-eabi-ld -N --use-blx -T "source/ds_arm9.ld" -Map "build/arm9.map" $(OBJS) $(LIBPATHS) -o "build/arm9.elf"
 	$(DEVKITARM)/bin/arm-none-eabi-objcopy --gap-fill=0xff -v -O binary "build/arm9.elf" $@
 	hexdump -C $(subst newrom,baserom,$@) > $(subst .bin,.txt,$(subst newrom,baserom,$@))
 	hexdump -C $@ > $(subst newrom,build,$(subst .bin,.txt,$@))

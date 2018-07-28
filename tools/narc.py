@@ -122,6 +122,32 @@ class NARCHandler(object):
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_pal" + "{:01}".format(PokeOffset%2) + ".rlcn"
                 else:
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_" + "{:08}".format(PokeOffset)
+                
+            elif (filename.find("pl_otherpoke.narc") != -1) or (filename.find("otherpoke.narc") != -1):
+                if (i >= 0) and (i <= 7):
+                    filename_temp = "./" + folder + "/data_g_0_" + "{:02}".format(i) + ".rgcn"
+                elif (i >= 8) and (i <= 63):
+                    filename_temp = "./" + folder + "/data_g_1_" + "{:02}".format(i-8) + ".rgcn"
+                elif (i >= 64) and (i <= 71):
+                    filename_temp = "./" + folder + "/data_g_2_" + "{:01}".format((i-64)/4) + "_{:01}".format((i-64)%4) + ".rgcn"
+                elif (i >= 72) and (i <= 83):
+                    filename_temp = "./" + folder + "/data_g_" + str((i-72)/2+3) + "_{:01}".format((i-72)%2) + ".rgcn"
+                elif (i >= 84) and (i <= 87):
+                    filename_temp = "./" + folder + "/data_g_9_" + "{:02}".format(i-84) + ".rgcn"
+                elif (i >= 88) and (i <= 91):
+                    filename_temp = "./" + folder + "/data_g_10_" + "{:02}".format(i-88) + ".rgcn"
+                elif (i >= 92) and (i <= 95):
+                    filename_temp = "./" + folder + "/data_g_13_" + "{:02}".format(i-92) + ".rgcn"
+                elif (i >= 96) and (i <= 153):
+                    filename_temp = "./" + folder + "/data_g_" + str((i-96)/2+15) + "_{:01}".format(i%2) + ".rgcn"
+                elif (i >= 154) and (i <= 157):
+                    filename_temp = "./" + folder + "/data_p_" + str((i-154)/2) + "_" + "{:01}".format(i%2) + ".rlcn"
+                elif (i >= 158) and (i <= 165):
+                    filename_temp = "./" + folder + "/data_p_2_" + str((i-158)%4) + "_" + "{:01}".format((i-158)/4) + ".rlcn"
+                elif (i >= 166) and (i <= 247):
+                    filename_temp = "./" + folder + "/data_p_" + str((i-166)/2+3) + "_" + "{:01}".format(i%2) + ".rlcn"
+                else:
+                    filename_temp = "./" + folder + "/data_" + "{:08}".format(i)
             elif size >= 4:            
                 #self.write_section_in_file_wfilename(self.get_word_from_rom(FATStart+8*i) + IMGStart+8, self.get_word_from_rom(FATStart+8*i+4)-self.get_word_from_rom(FATStart+8*i), "./" + folder + "/data_" + "{:08x}".format(self.get_word_from_rom(FATStart+8*i) + IMGStart+8) + ".bin")
                 FileType = chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+1)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+2)) + chr(self.get_byte_from_rom(self.get_word_from_rom(FATStart+8*i) + IMGStart+8+3))
@@ -150,6 +176,12 @@ class NARCHandler(object):
                     filename_temp += ".btx0"
                 elif FileType == "BMD0":
                     filename_temp += ".bmd0"
+                elif FileType == "BTA0":
+                    filename_temp += ".bta0"
+                elif FileType == "BCA0":
+                    filename_temp += ".bca0"
+                elif FileType == "BMA0":
+                    filename_temp += ".bma0"
                 else:
                     filename_temp += ".bin"
             else:

@@ -1,29 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-key = 0xf622
-key * mult + carry = key
-
-0xf622 * mult + carry = 0xb30b
-0xb30b * mult + carry = 0x1df8
-0x1df8 * mult + carry = 0xdc79
-
-mult = (0xb30b - carry) / 0xf622
-mult = (0x1df8 - carry) / 0xb30b
-(0xb30b - carry) / 0xf622 = (0x1df8 - carry) / 0xb30b
-(0xb30b / 0xf622) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (carry / 0xb30b)
-(carry / 0xb30b) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (0xb30b / 0xf622)
-(carry / 0xb30b) - (carry / 0xf622) = (0x1df8 / 0xb30b) - (0xb30b / 0xf622)
-(x / 45835) - (x / 63010) = (7672 / 45835) - (45835 / 63010)
-x = -94173 = FFFFFFFFFFFE9023
-mult = (0xb30b - 0x9023) / 0xf622
-mult = (45835 - 36899) / 63010
-
-0xf622 * mult + carry - 0xb30b = 0
-0xb30b * mult + carry - 0x1df8 = 0
-0x1df8 * mult + carry - 0xdc79 = 0
-"""
-
 import os
 import sys
 from ctypes import c_int8
@@ -39,14 +15,11 @@ ENCRYPTION_NONE = 0
 ENCRYPTION_REVERSE = 1
 ENCRYPTION_FORWARDS = 2
 
+# RAHC_Format
 FORMAT_16BIT = 3
 FORMAT_256BIT = 4
 
-# pokegra #Pkmn=0 mult: 0xeb65 carry: 0x89c3
-# pl_pokegra #Pkmn=0 mult: 0x4e6d carry: 0xedf9
-#ENCRYPT_MULT = 0x41c64e6d # pl_pokegra
 ENCRYPT_MULT = 0xeb65 # pokegra
-#ENCRYPT_CARRY = 0x6073 # pl_pokegra
 ENCRYPT_CARRY = 0x61a1 # pokegra
 
 TYPE_TILE = 0
@@ -125,11 +98,6 @@ class Graphic(object):
         if key == 0:
             key = 0
             for val in data:
-                #key += ((val>>0) & 0xf)
-                #key += ((val>>4) & 0xf)
-                #key += ((val>>8) & 0xf)
-                #key += ((val>>12) & 0xf)
-                #val = val ^ 0xffff
                 key += (val & 0xff)
                 key += ((val>>8) & 0xff)
                 key &= 0xffff
@@ -168,7 +136,7 @@ class Graphic(object):
         RAHC_Size_ = self.file.ReadByte(0x14)
         RAHC_Height = self.file.ReadHWord(0x18)
         RAHC_Width = self.file.ReadHWord(0x1A)
-        RAHC_Format = self.file.ReadWord(0x1C)
+        RAHC_Format = self.file.ReadWord(0x1C) # FORMAT_16BIT
         RAHC_Depth = self.file.ReadWord(0x20)
         RAHC_Type = self.file.ReadWord(0x24)
         RAHC_DataSize = self.file.ReadWord(0x28)
@@ -217,7 +185,7 @@ class Graphic(object):
         i = 0
         for val in dec_data:
             for n in range(4):
-                data_line.append((val>>(4*n))&0xf)
+                data_line.append((val>>(4*n))&0xf) # FORMAT_16BIT
             i += 4
             if (RAHC_Type == TYPE_LINEAR or RAHC_Type == TYPE_LINEAR2) and ((i % (width*8)) == 0):
                 data.append(data_line)
@@ -227,7 +195,7 @@ class Graphic(object):
                 data_line = []
         
         
-        if RAHC_Type != TYPE_LINEAR:
+        if RAHC_Type == TYPE_LINEAR2:#!= TYPE_LINEAR:
             data_temp = data
             data = []
             data_line = []
@@ -236,90 +204,11 @@ class Graphic(object):
                     data_line = []
                     for j in range(width):
                         for i in range(8):
-                            data_line.append(data_temp[l*4*8+j*8+k][i])
+                            data_line.append(data_temp[l*2*4*8+j*8+k][i])
                     data.append(data_line)
         
         
-        #Tiles = []
         bmp = [[0 for j in range(9)] for i in range(9)]
-        #TileX = 0
-        #TileY = 0
-        #i = 0
-        #j = 0
-        #line = []
-        #y = 0
-        #while i < 4*8:#RAHC_TileDataSize:
-        #    byte = self.file.ReadByte(0x30+i)
-        #    b = byte >> 4
-        #    a = byte & 0xf
-        #    bmp[y][j] = a
-        #    bmp[y][j+1] = b
-            #line.append(a)
-            #line.append(b)
-        #    i += 1
-        #    j += 2
-        #    if j == 8:
-        #        y += 1
-        #        j = 0
-                #Tiles.append(line)
-                #line = []
-
-        #tiled = False
-        #height = 20
-        #width = 10
-        #depth = 3
-        #i = 0
-        #tiles = []
-        #if tiled:
-        #    for l in range(height):
-        #        row = []
-        #        for m in range(width):
-        #            col = []
-        #            for n in range(8):
-        #                tilerow = []
-        #                for p in range(4):
-        #                    if depth == 0x3:
-                                #tmp = unpack("B", rawdata[:1])[0]
-        #                        tmp = self.file.ReadByte(0x30+i)
-        #                        i += 1
-                                #rawdata = rawdata[1:]
-        #                        tilerow.append(tmp&0xf)
-        #                        tilerow.append(tmp>>4)
-        #                col.append(tilerow)
-        #            row.append(col)
-        #        tiles.append(row)
-        #else:
-        #    for l in range(height*8):
-        #        row = []
-        #        for m in range(width*4):
-        #            if depth == 0x3:
-        #                #tmp = unpack("B", rawdata[:1])[0]
-        #                tmp = self.file.ReadByte(0x30+i)
-        #                i += 1
-                        #rawdata = rawdata[1:]
-        #                row.append(tmp&0xf)
-        #                row.append(tmp>>4)
-                
-        #data = []
-        #lenL = len(tiles)
-        #for l in range(lenL):
-        #    lenM = len(tiles[l])
-        #    if tiled:
-        #        for n in range(8):
-        #            data_line = []
-        #            for m in range(lenM):
-        #                for p in range(8):
-        #                    data_line.append(tiles[l][m][n][p])
-        #            data.append(data_line)
-        #    else:
-        #        for m in range(lenM):
-                    #data_line.append(tiles[l][m])
-                    #data_line = []
-                    #for n in range(8):
-                    #    for p in range(8):
-                    #        data_line.append(tiles[l][m][n][p])
-        #            data.append([0])
-                    #data_line = []
         return data
 
 
@@ -532,24 +421,6 @@ def write_rlcn(outfilename, palette=[], emptypal=0, debug=False):
 
 
 if __name__ == "__main__":
-    """
-    #values = [0xf622, 0xb30b, 0x1df8, 0xdc79, 0x705e, 0x00b7, 0xa6d4, 0xcf45] # pokegra mult: 0xeb65 carry: 0x61a1
-    #values = [0x18ff, 0x448c, 0xc595, 0x746a, 0xcb1b, 0xa278, 0xab11, 0xf236] # pl_pokegra #Pkmn=0 mult: 0x4e6d carry: 0xedf9
-    values = [0x54de, 0xcf59, 0x0ae0, 0x7423, 0x7c92, 0xb55d, 0x7674, 0xc187] # pokegra #Pkmn=0 mult: 0xeb65 carry: 0x89c3
-
-    mult = 0
-    while mult < 0x10000:
-        carry = 0
-        while carry < 0x10000:
-            if ((values[0] * mult + carry)&0xffff) == values[1]:
-                if ((values[1] * mult + carry)&0xffff) == values[2]:
-                    if ((values[2] * mult + carry)&0xffff) == values[3]:
-                        print ("mult: " + hex(mult))
-                        print ("carry: " + hex(carry))
-            carry += 1
-        mult += 1
-    """
-    
     conf = configuration.Config()
     
     filename = ""

@@ -493,7 +493,7 @@ if __name__ == "__main__":
         else:
             i += 1
     
-    print(cmd + ': ' + filename)
+    #print(cmd + ': ' + filename)
     if cmd == "unpack":
         gra = Graphic(conf)
         pal = Palette(conf)

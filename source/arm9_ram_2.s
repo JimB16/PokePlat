@@ -1349,7 +1349,7 @@ OverWorldData
 .equ OverWorldData_7a,                      0x7a
 .equ OverWorldData_7c,                      0x7c
 .equ OverWorldData_90,                      0x90
-.equ OverWorldData_94,                      0x94
+.equ OverWorldData_PtrToPokeRadarChain,     0x94
 .equ OverWorldData_98,                      0x98
 .equ OverWorldData_9c,                      0x9c
 .equ OverWorldData_a4,                      0xa4

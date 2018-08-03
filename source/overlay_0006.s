@@ -6862,7 +6862,7 @@ branch_2240e88: @ 2240e88 :thumb
 	mov     r0, r5
 	add     r0, #0x94
 	ldr     r0, [r0, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 	ldr     r1, [sp, #0x2c]
 	mov     r0, r5
 	bl      Function_2050e10
@@ -7347,7 +7347,7 @@ branch_224124c: @ 224124c :thumb
 	mov     r0, r5
 	add     r0, #0x94
 	ldr     r0, [r0, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 	ldr     r1, [sp, #0xc]
 	ldr     r2, [sp, #0x24]
 	mov     r0, r5
@@ -7686,9 +7686,9 @@ branch_22414e0: @ 22414e0 :thumb
 	ldr     r1, [sp, #0x24]
 	ldr     r2, [r4, #0x0]
 	bl      Function_224239c
-	add     r5, #OverWorldData_94
+	add     r5, #OverWorldData_PtrToPokeRadarChain
 	ldr     r0, [r5]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 	add     sp, #0xac
 	mov     r0, #0x1
 	pop     {r4-r7,pc}
@@ -7915,7 +7915,7 @@ branch_22416a8: @ 22416a8 :thumb
 	ldr     r0, [sp, #0x18]
 	ldr     r1, [sp, #0x14]
 	ldr     r3, [r6, #0x8]
-	bl      Function_2241f2c
+	bl      ForcePokeRadarWildMon
 	b       branch_22416fe
 @ 0x22416e4
 
@@ -7932,7 +7932,7 @@ branch_22416e4: @ 22416e4 :thumb
 	str     r0, [sp, #0xc]
 	mov     r0, r5
 	mov     r3, r4
-	bl      Function_2241f7c
+	bl      GeneratePokeRadarWildMon
 .thumb
 branch_22416fe: @ 22416fe :thumb
 	mov     r4, r0
@@ -7948,7 +7948,7 @@ branch_22416fe: @ 22416fe :thumb
 	add     r5, #0x94
 	ldr     r3, [r5, #0x0]
 	mov     r1, r6
-	bl      Function_2069474
+	bl      PokeRadar_ChoosePatchCoords
 	b       branch_2241744
 @ 0x2241722
 
@@ -7968,7 +7968,7 @@ branch_2241722: @ 2241722 :thumb
 	beq     branch_2241744
 	add     r5, #0x94
 	ldr     r0, [r5, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 .thumb
 branch_2241744: @ 2241744 :thumb
 	mov     r0, r4
@@ -8257,7 +8257,7 @@ branch_2241900: @ 2241900 :thumb
 
 
 .thumb
-Function_2241904: @ 2241904 :thumb
+PickWildMonSlot: @ 2241904 :thumb
 	push    {r4,lr}
 	bl      PRNG
 	mov     r1, #0x29
@@ -8773,7 +8773,7 @@ branch_2241ba4: @ 2241ba4 :thumb
 @ 0x2241bac
 
 .thumb
-Function_2241bac: @ 2241bac :thumb
+SetShinyWildPokemon: @ 2241bac :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x28
 	str     r0, [sp, #0x10]
@@ -8917,7 +8917,7 @@ branch_2241cb2: @ 2241cb2 :thumb
 
 .word 0x5556 @ 0x2241cbc
 .thumb
-Function_2241cc0: @ 2241cc0 :thumb
+SetWildPokemon: @ 2241cc0 :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
 	mov     r7, r0
@@ -9102,7 +9102,7 @@ branch_2241de8: @ 2241de8 :thumb
 	bl      Function_224222c
 	cmp     r0, #0x0
 	bne     branch_2241e26
-	bl      Function_2241904
+	bl      PickWildMonSlot
 	add     r1, sp, #0x10
 	strb    r0, [r1, #0x0]
 branch_2241e26: @ 2241e26 :thumb
@@ -9237,7 +9237,7 @@ branch_2241f08: @ 2241f08 :thumb
 	mov     r3, r5
 	lsl     r0, r0, #16
 	lsr     r0, r0, #16
-	bl      Function_2241cc0
+	bl      SetWildPokemon
 	mov     r0, #0x1
 	add     sp, #0x14
 	pop     {r4-r7,pc}
@@ -9247,8 +9247,15 @@ branch_2241f08: @ 2241f08 :thumb
 .align 2, 0
 
 
+/*
+Input:
+r0: species
+r1: level
+r2: ?
+r3: isShiny
+*/
 .thumb
-Function_2241f2c: @ 2241f2c :thumb
+ForcePokeRadarWildMon: @ 2241f2c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0xc
 	mov     r5, r0
@@ -9274,7 +9281,7 @@ branch_2241f40: @ 2241f40 :thumb
 	str     r0, [sp, #0x8]
 	lsl     r0, r5, #16
 	lsr     r0, r0, #16
-	bl      Function_2241bac
+	bl      SetShinyWildPokemon
 	b       branch_2241f76
 @ 0x2241f62
 
@@ -9288,7 +9295,7 @@ branch_2241f62: @ 2241f62 :thumb
 	str     r0, [sp, #0x4]
 	lsl     r0, r5, #16
 	lsr     r0, r0, #16
-	bl      Function_2241cc0
+	bl      SetWildPokemon
 .thumb
 branch_2241f76: @ 2241f76 :thumb
 	mov     r0, #0x1
@@ -9297,7 +9304,7 @@ branch_2241f76: @ 2241f76 :thumb
 @ 0x2241f7c
 
 .thumb
-Function_2241f7c: @ 2241f7c :thumb
+GeneratePokeRadarWildMon: @ 2241f7c :thumb
 	push    {r4-r7,lr}
 	add     sp, #-0x14
 	mov     r4, r0
@@ -9335,7 +9342,7 @@ Function_2241f7c: @ 2241f7c :thumb
 	lsl     r0, r0, #24
 	lsr     r0, r0, #24
 	bne     branch_2241fd2
-	bl      Function_2241904
+	bl      PickWildMonSlot
 	add     r1, sp, #0x10
 	strb    r0, [r1, #0x0]
 .thumb
@@ -9356,9 +9363,9 @@ branch_2241fd2: @ 2241fd2 :thumb
 	ldr     r0, [r0, #0x0]
 	mov     r1, r5
 	mov     r2, r7
-	bl      Function_2069774
+	bl      PokeRadar_InitSpeciesAndLevel
 	mov     r0, r4
-	bl      Function_2069b74
+	bl      PokeRadar_IncrementChainAndUpdateStreak
 	b       branch_224201a
 @ 0x2241ffe
 
@@ -9371,7 +9378,7 @@ branch_2241ffe: @ 2241ffe :thumb
 	lsl     r0, r0, #24
 	lsr     r7, r0, #24
 	mov     r0, r4
-	bl      Function_2069b74
+	bl      PokeRadar_IncrementChainAndUpdateStreak
 	b       branch_224201a
 @ 0x2242012
 
@@ -9379,7 +9386,7 @@ branch_2241ffe: @ 2241ffe :thumb
 branch_2242012: @ 2242012 :thumb
 	add     r4, #0x94
 	ldr     r0, [r4, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 .thumb
 branch_224201a: @ 224201a :thumb
 	ldr     r0, [sp, #0x2c]
@@ -9390,7 +9397,7 @@ branch_224201a: @ 224201a :thumb
 	ldr     r3, [sp, #0xc]
 	lsr     r0, r0, #16
 	mov     r1, r7
-	bl      Function_2241cc0
+	bl      SetWildPokemon
 	mov     r0, #0x1
 	add     sp, #0x14
 	pop     {r4-r7,pc}
@@ -9472,7 +9479,7 @@ branch_22420a4: @ 22420a4 :thumb
 	lsr     r0, r0, #16
 	add     r3, sp, #0x10
 	str     r4, [sp, #0x4]
-	bl      Function_2241cc0
+	bl      SetWildPokemon
 
 	add     sp, #0x24
 	pop     {r4-r7,pc}
@@ -9507,7 +9514,7 @@ Function_6_22420d4: @ 22420d4 :thumb
 	mov     r0, r7
 	mov     r2, #0x1
 	add     r3, sp, #0xc
-	bl      Function_2241cc0
+	bl      SetWildPokemon
 	add     sp, #0x20
 	pop     {r3-r7,pc}
 @ 0x224210e

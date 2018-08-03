@@ -6949,13 +6949,13 @@ InitOverWorldData: @ 203cdb0 :thumb
 	bl      Function_206940c
 
 	mov     r1, r4
-	add     r1, #OverWorldData_94
+	add     r1, #OverWorldData_PtrToPokeRadarChain
 	str     r0, [r1]
 
 	mov     r0, r4
-	add     r0, #OverWorldData_94
+	add     r0, #OverWorldData_PtrToPokeRadarChain
 	ldr     r0, [r0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 
 	mov     r0, #0xb
 	bl      Function_209acbc
@@ -6994,7 +6994,7 @@ Function_203ce6c: @ 203ce6c :thumb
 	bl      free
 
 	mov     r0, r4
-	add     r0, #OverWorldData_94
+	add     r0, #OverWorldData_PtrToPokeRadarChain
 	ldr     r0, [r0]
 	bl      Call_free10
 

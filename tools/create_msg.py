@@ -192,7 +192,7 @@ if __name__ == "__main__":
         for line in fin:
             words = line.split()
             if((len(words) == 2) and (words[0] == u"num:" or num == 0)):
-                print(words[0] + " " + words[1])
+                #print(words[0] + " " + words[1])
                 c = array.array("H")
                 c.append(int(words[1], 0))
                 num = int(words[1], 0)

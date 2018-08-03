@@ -10,7 +10,6 @@ endif
 
 
 PYTHON := python
-MKDIR_P = mkdir -p
 
 .PHONY: pokeplat asm all clean clean_code init narc pics ex_script build_script ex_frscript ex_text ex_trainerteams ex_landdata ex_encdata ex_font ex_event build_event ex_moves ex_beseq ex_wazaeffect test
 
@@ -18,10 +17,6 @@ unpack_rom     := $(PYTHON) tools/unpack_rom.py
 unpack_narc    := $(PYTHON) tools/narc.py -x
 create_narc    := $(PYTHON) tools/narc.py -p
 create_narc2   := $(PYTHON) tools/narc.py -p2
-unpack_sdat    := $(PYTHON) tools/sdat.py -x
-unpack_sseq    := $(PYTHON) tools/sdat.py -sseq
-unpack_it      := $(PYTHON) tools/it.py -x
-create_it      := $(PYTHON) tools/it.py -p
 armdisassem    := $(PYTHON) tools/armdisassem.py
 gfx            := $(PYTHON) tools/gfx.py
 gfx_btx        := $(PYTHON) tools/gfx_btx.py
@@ -175,20 +170,6 @@ $(wildcard ./baserom_3942K/data/graphic/*.narc) \
 "./baserom_3942K/data/poketool/trainer/trdata.narc" \
 "./baserom_3942K/data/poketool/trainer/trpoke.narc"
 
-sdat_files := \
-"./baserom/data/data/sound/pl_sound_data.sdat" \
-"./baserom/data/data/sound/sound_data.sdat"
-
-sseq_files := \
-$(wildcard ./baserom/data/data/sound/pl_sound_data_sdat/data_0000000*.sseq) \
-$(wildcard ./baserom/data/data/sound/pl_sound_data_sdat/data_0000001*.sseq) \
-"./baserom/data/data/sound/pl_sound_data_sdat/data_00000098.sseq"
-
-it_files := \
-"./trackerfiles/Module1.it"
-it_folders := \
-"./trackerfiles/Module1_it/"
-
 
 trainer_files := $(wildcard ./data/poketool/trainer/trdata/*.s)
 
@@ -306,8 +287,6 @@ all:
 
 clean:
 	rm -rf build/*
-#	rm -r -f newrom/data/fielddata/script/*
-#	rm -rf baserom
 
 clean_code:
 	rm -f build/arm9*.*
@@ -355,18 +334,6 @@ narc2:
 narck:
 	$(foreach f,$(narc_filesk),$(unpack_narc) $(f);)
 
-sdat:
-	$(foreach f,$(sdat_files),$(unpack_sdat) $(f) -debug;)
-
-sseq:
-	$(foreach f,$(sseq_files),$(unpack_sseq) $(f) -debug;)
-
-it:
-	$(foreach f,$(it_files),$(unpack_it) $(f) -debug;)
-
-build_it:
-	$(create_it) "./trackerfiles/Module1_it/" -o "./trackerfiles/Module1_it/a.it" -debug
-
 
 ex_script_scenario:
 	$(foreach f,$(script_scenario_files_bin),$(ex_script_scenario) $(f) "./data/msgdata/scenario/scr_msg/";)
@@ -406,7 +373,7 @@ PLMSGS := $(addprefix build/, $(pltext_files:.msg=.bin))
 MSGS := $(addprefix build/, $(text_files:.msg=.bin))
 
 build/data/msgdata/%.bin: data/msgdata/%.msg
-	${MKDIR_P} $(dir $@)
+	@mkdir -p $(dir $@)
 	$(create_msg) $< $(dir $@)
 
 newrom/data/msgdata/pl_msg.narc: $(PLMSGS)
@@ -506,26 +473,11 @@ ex_moves:
 	$(foreach f,$(wildcard ./baserom/data/poketool/waza/waza_tbl_narc/*.bin),$(ex_moves) $(f) "./data/poketool/waza/waza_tbl/";)
 
 
-
-build/data/battle/skill/sub_seq/%.bin: data/battle/skill/sub_seq/%.s
-	${MKDIR_P} $(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
-	rm -f $(subst .s,.o,$<)
-	rm -f $(subst .s,.elf,$<)
-	#hexdump -C $(subst build,baserom,$(subst sub_seq,sub_seq_narc,$@)) > $(subst build,baserom,$(subst .bin,.txt,$(subst sub_seq,sub_seq_narc,$@)))
-	#hexdump -C $@ > $(subst .bin,.txt,$@)
-	#diff -u $(subst build,baserom,$(subst .bin,.txt,$(subst sub_seq,sub_seq_narc,$@))) $(subst .bin,.txt,$@) | less > build/diff_$(notdir $(subst .bin,.txt,$@))
-
-
 build/data/%.bin: data/%.s
-	${MKDIR_P} $(dir $@)
-	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst .s,.o,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-ld -Ttext 0 $(subst .s,.o,$<) -o $(subst .s,.elf,$<)
-	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst .s,.elf,$<) $@
-	rm -f $(subst .s,.o,$<)
-	rm -f $(subst .s,.elf,$<)
+	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $(subst build/data/,build/data_temp/,$@))
+	$(DEVKITARM)/bin/arm-none-eabi-as -mcpu=arm7tdmi -X -mthumb-interwork $< -o $(subst build/data/,build/data_temp/,$(subst .bin,.o,$@))
+	$(DEVKITARM)/bin/arm-none-eabi-objcopy -v -O binary $(subst build/data/,build/data_temp/,$(subst .bin,.o,$@)) $@
 
 
 define NARC_RULE_TEMPLATE
@@ -624,13 +576,13 @@ data/poketool/pokegra/pl_pokegra/data_00000000_%.png: baserom/data/poketool/poke
 	$(eval Y = $(subst _back1.png,_pal1.rlcn,$(Y)))
 	$(eval Y = $(subst _front0.png,_pal0.rlcn,$(Y)))
 	$(eval Y = $(subst _front1.png,_pal0.rlcn,$(Y)))
-	$(gfx) -x "$<" "$(Y)" -debug -o "$@" -e forwards -mult 0x4e6d -carry 0xedf9 -key 0x18ff
+	$(gfx) -x "$<" "$(Y)" -o "$@" -e forwards -mult 0x4e6d -carry 0xedf9 -key 0x18ff
 	$(eval Y = $(subst _back0.png,_pal1.rlcn,$(X)))
 	$(eval Y = $(subst _back1.png,_pal1.rlcn,$(Y)))
 	$(eval Y = $(subst _front0.png,_pal0.rlcn,$(Y)))
 	$(eval Y = $(subst _front1.png,_pal0.rlcn,$(Y)))
 	$(eval P = $(subst _front1.png,_normal.pal, $(subst _front0.png,_normal.pal, $(subst _back1.png,_shiny.pal, $(subst _back0.png,_shiny.pal, $(@))))))
-	$(gfx) -xpal "$(Y)" -debug -o $(P)
+	$(gfx) -xpal "$(Y)" -o $(P)
 
 data/poketool/pokegra/pl_pokegra/%.png: baserom/data/poketool/pokegra/pl_pokegra_narc/%.rgcn
 	$(eval X = $(addprefix baserom/, $(subst pl_pokegra,pl_pokegra_narc,$(@))))
@@ -638,55 +590,55 @@ data/poketool/pokegra/pl_pokegra/%.png: baserom/data/poketool/pokegra/pl_pokegra
 	$(eval Y = $(subst _back1.png,,$(Y)))
 	$(eval Y = $(subst _front0.png,,$(Y)))
 	$(eval Y = $(subst _front1.png,,$(Y)))
-	$(gfx) -x $< $(Y)_pal0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< $(Y)_pal0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 	$(eval P = $(subst _front1.png,, $(subst _front0.png,, $(subst _back1.png,, $(subst _back0.png,, $(@))))))
-	$(gfx) -xpal $(Y)_pal0.rlcn -debug -o $(P)_normal.pal
-	$(gfx) -xpal $(Y)_pal1.rlcn -debug -o $(P)_shiny.pal
+	$(gfx) -xpal $(Y)_pal0.rlcn -o $(P)_normal.pal
+	$(gfx) -xpal $(Y)_pal1.rlcn -o $(P)_shiny.pal
 
 data/poketool/pokegra/pokegra/data_00000000_%.png: baserom/data/poketool/pokegra/pokegra_narc/data_00000000_%.rgcn
 	$(eval Y = $(subst _back0.rgcn,,$(<)))
 	$(eval Y = $(subst _back1.rgcn,,$(Y)))
 	$(eval Y = $(subst _front0.rgcn,,$(Y)))
 	$(eval Y = $(subst _front1.rgcn,,$(Y)))
-	$(gfx) -x $< $(Y)_pal0.rlcn -debug -o $@ -e forwards -mult 0xeb65 -carry 0x89c3
+	$(gfx) -x $< $(Y)_pal0.rlcn -o $@ -e forwards -mult 0xeb65 -carry 0x89c3
 	$(eval P = $(subst pokegra_narc,pokegra, $(subst baserom/,, $(Y))))
-	$(gfx) -xpal $(Y)_pal0.rlcn -debug -o $(P)_normal.pal
-	$(gfx) -xpal $(Y)_pal1.rlcn -debug -o $(P)_shiny.pal
+	$(gfx) -xpal $(Y)_pal0.rlcn -o $(P)_normal.pal
+	$(gfx) -xpal $(Y)_pal1.rlcn -o $(P)_shiny.pal
 
 data/poketool/pokegra/pokegra/%.png: baserom/data/poketool/pokegra/pokegra_narc/%.rgcn
 	$(eval Y = $(subst _back0.rgcn,,$(<)))
 	$(eval Y = $(subst _back1.rgcn,,$(Y)))
 	$(eval Y = $(subst _front0.rgcn,,$(Y)))
 	$(eval Y = $(subst _front1.rgcn,,$(Y)))
-	$(gfx) -x $< $(Y)_pal0.rlcn -debug -o $@ -e reverse -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< $(Y)_pal0.rlcn -o $@ -e reverse -mult 0x41c64e6d -carry 0x6073
 	$(eval P = $(subst pokegra_narc,pokegra, $(subst baserom/,, $(Y))))
-	$(gfx) -xpal $(Y)_pal0.rlcn -debug -o $(P)_normal.pal
-	$(gfx) -xpal $(Y)_pal1.rlcn -debug -o $(P)_shiny.pal
+	$(gfx) -xpal $(Y)_pal0.rlcn -o $(P)_normal.pal
+	$(gfx) -xpal $(Y)_pal1.rlcn -o $(P)_shiny.pal
     
 data/poketool/pokegra/pl_otherpoke/data_g_0_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_0_%.rgcn
-	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_0_0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_0_0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 	#$(eval P = $(subst _front1.png,, $(subst _front0.png,, $(subst _back1.png,, $(subst _back0.png,, $(@))))))
-	#$(gfx) -xpal $(Y)_pal0.rlcn -debug -o $(P)_normal.pal
-	#$(gfx) -xpal $(Y)_pal1.rlcn -debug -o $(P)_shiny.pal
+	#$(gfx) -xpal $(Y)_pal0.rlcn -o $(P)_normal.pal
+	#$(gfx) -xpal $(Y)_pal1.rlcn -o $(P)_shiny.pal
 
 data/poketool/pokegra/pl_otherpoke/data_g_1_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_1_%.rgcn
-	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_1_0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_1_0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 data/poketool/pokegra/pl_otherpoke/data_g_2_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_2_%.rgcn
-	$(gfx) -x $< $(subst .rgcn,_0.rlcn,$(subst _g_2_1_,_p_2_,$(subst _g_2_0_,_p_2_,$<))) -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< $(subst .rgcn,_0.rlcn,$(subst _g_2_1_,_p_2_,$(subst _g_2_0_,_p_2_,$<))) -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 data/poketool/pokegra/pl_otherpoke/data_g_9_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_9_%.rgcn
-	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_9_0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_9_0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 data/poketool/pokegra/pl_otherpoke/data_g_10_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_10_%.rgcn
-	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_10_0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_10_0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 data/poketool/pokegra/pl_otherpoke/data_g_13_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_13_%.rgcn
-	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_13_0.rlcn -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< baserom/data/poketool/pokegra/pl_otherpoke_narc/data_p_13_0.rlcn -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 # 3-8, 15 - 43
 data/poketool/pokegra/pl_otherpoke/data_g_%.png: baserom/data/poketool/pokegra/pl_otherpoke_narc/data_g_%.rgcn
-	$(gfx) -x $< $(subst _0.rgcn,_0.rlcn,$(subst _1.rgcn,_0.rlcn,$(subst _g_,_p_,$<))) -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
+	$(gfx) -x $< $(subst _0.rgcn,_0.rlcn,$(subst _1.rgcn,_0.rlcn,$(subst _g_,_p_,$<))) -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 newrom/data/poketool/pokegra/pl_pokegra.narc: $(POKEGRAS)
 	$(create_narc) "./build/data/poketool/pokegra/pl_pokegra/" -o $@
@@ -712,13 +664,13 @@ pics4: $(all_sprites2_png)
 pics5: $(all_maptex_png)
 
 data/data/mmodel/mmodel/data_%.png: baserom/data/data/mmodel/mmodel_narc/data_%.btx0
-	$(gfx_btx) -x $< -debug -o $@
+	$(gfx_btx) -x $< -o $@
 
 data/data/mmodel/fldeff/data_%.png: baserom/data/data/mmodel/fldeff_narc/data_%.btx0
-	$(gfx_btx) -x $< -debug -o $@
+	$(gfx_btx) -x $< -o $@
 
 data/fielddata/areadata/area_map_tex/map_tex_set/data_%.png: baserom/data/fielddata/areadata/area_map_tex/map_tex_set_narc/data_%.btx0
-	$(gfx_btx) -x $< -debug -o $@
+	$(gfx_btx) -x $< -o $@
 
 all_pokemon_rgcn := $(wildcard ./baserom/data/poketool/pokegra/pl_pokegra_narc/data_00000*.rgcn)
 all_pokemon_png := $(subst _narc,,$(subst ./baserom/,,$(all_pokemon_rgcn:.rgcn=.png)))
@@ -730,56 +682,44 @@ all_pokemon2_png := $(subst _narc,,$(subst ./baserom/,,$(all_pokemon2_rgcn:.rgcn
 pics: $(all_pokemon_png) $(all_pokemon2_png) $(all_otherpokemon_png)
 
 build/data/poketool/pokegra/pl_pokegra/data_00000000_%.rgcn: data/poketool/pokegra/pl_pokegra/data_00000000_%.png
-	$(gfx) -p $< -debug -o $@ -e forwards -mult 0x4e6d -carry 0xedf9 -key 0x18ff
-	#hexdump -C $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)) > $(subst .rgcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rgcn,.txt,$@)
-	#diff -u $(subst .rgcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@))) $(subst .rgcn,.txt,$@) | less > build/diff_$(notdir $(subst .rgcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p $< -o $@ -e forwards -mult 0x4e6d -carry 0xedf9 -key 0x18ff
 
 build/data/poketool/pokegra/pokegra/data_00000000_%.rgcn: data/poketool/pokegra/pokegra/data_00000000_%.png
-	$(gfx) -p $< -debug -o $@ -e reverse -mult 0x4e6d -carry 0xedf9 -key 0x18ff
-	#hexdump -C $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@)) > $(subst .rgcn,.txt, $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rgcn,.txt,$@)
-	#diff -u $(subst .rgcn,.txt, $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@))) $(subst .rgcn,.txt,$@) | less > build/diff_$(notdir $(subst .rgcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p $< -o $@ -e reverse -mult 0x4e6d -carry 0xedf9 -key 0x18ff
 
 build/data/poketool/pokegra/pl_pokegra/%.rgcn: data/poketool/pokegra/pl_pokegra/%.png
-	$(gfx) -p $< -debug -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
-	#hexdump -C $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)) > $(subst .rgcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rgcn,.txt,$@)
-	#diff -u $(subst .rgcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@))) $(subst .rgcn,.txt,$@) | less > build/diff_$(notdir $(subst .rgcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p $< -o $@ -e forwards -mult 0x41c64e6d -carry 0x6073
 
 build/data/poketool/pokegra/pokegra/%.rgcn: data/poketool/pokegra/pokegra/%.png
-	$(gfx) -p $< -debug -o $@ -e reverse -mult 0x41c64e6d -carry 0x6073
-	#hexdump -C $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@)) > $(subst .rgcn,.txt, $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rgcn,.txt,$@)
-	#diff -u $(subst .rgcn,.txt, $(subst pokegra/pokegra,pokegra/pokegra_narc, $(subst build,baserom,$@))) $(subst .rgcn,.txt,$@) | less > build/diff_$(notdir $(subst .rgcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p $< -o $@ -e reverse -mult 0x41c64e6d -carry 0x6073
 
 build/data/poketool/pokegra/pl_pokegra/data_00000000_pal1.rlcn: data/poketool/pokegra/pl_pokegra/data_00000000_back0.png data/poketool/pokegra/pl_pokegra/data_00000000_back1.png
-	$(gfx) -p2 $< -debug -o $@ -e forwards -emptypal
-	$(gfx) -p2 $(word 2,$^) -debug -o $@ -e forwards -emptypal
+	$(gfx) -p2 $< -o $@ -e forwards -emptypal
+	$(gfx) -p2 $(word 2,$^) -o $@ -e forwards -emptypal
 
 build/data/poketool/pokegra/pl_pokegra/data_00000000_pal0.rlcn: data/poketool/pokegra/pokegra/data_00000000_front0.png data/poketool/pokegra/pokegra/data_00000000_front1.png
-	$(gfx) -p2 $< -debug -o $@ -e forwards -emptypal
-	$(gfx) -p2 $(word 2,$^) -debug -o $@ -e forwards -emptypal
+	$(gfx) -p2 $< -o $@ -e forwards -emptypal
+	$(gfx) -p2 $(word 2,$^) -o $@ -e forwards -emptypal
 
 build/data/poketool/pokegra/pokegra/data_00000000_pal1.rlcn: data/poketool/pokegra/pokegra/data_00000000_back0.png data/poketool/pokegra/pokegra/data_00000000_back1.png
-	$(gfx) -p2 $< -debug -o $@ -e forwards -emptypal
-	$(gfx) -p2 $(word 2,$^) -debug -o $@ -e forwards -emptypal
+	$(gfx) -p2 $< -o $@ -e forwards -emptypal
+	$(gfx) -p2 $(word 2,$^) -o $@ -e forwards -emptypal
 
 build/data/poketool/pokegra/pokegra/data_00000000_pal0.rlcn: data/poketool/pokegra/pokegra/data_00000000_front0.png data/poketool/pokegra/pokegra/data_00000000_front1.png
-	$(gfx) -p2 $< -debug -o $@ -e forwards -emptypal
-	$(gfx) -p2 $(word 2,$^) -debug -o $@ -e forwards -emptypal
+	$(gfx) -p2 $< -o $@ -e forwards -emptypal
+	$(gfx) -p2 $(word 2,$^) -o $@ -e forwards -emptypal
 
 build/data/poketool/pokegra/%_pal1.rlcn: data/poketool/pokegra/%_shiny.pal
-	$(gfx) -p3 $< -debug -o $@ -e forwards
-	#hexdump -C $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)) > $(subst .rlcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rlcn,.txt,$@)
-	#diff -u $(subst .rlcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@))) $(subst .rlcn,.txt,$@) | less > build/diff_$(notdir $(subst .rlcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p3 $< -o $@ -e forwards
 
 build/data/poketool/pokegra/%_pal0.rlcn: data/poketool/pokegra/%_normal.pal
-	$(gfx) -p3 $< -debug -o $@ -e forwards
-	#hexdump -C $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)) > $(subst .rlcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@)))
-	#hexdump -C $@ > $(subst .rlcn,.txt,$@)
-	#diff -u $(subst .rlcn,.txt, $(subst pl_pokegra,pl_pokegra_narc, $(subst build,baserom,$@))) $(subst .rlcn,.txt,$@) | less > build/diff_$(notdir $(subst .rlcn,.txt,$@))
+	@mkdir -p $(dir $@)
+	$(gfx) -p3 $< -o $@ -e forwards
 
 
 
@@ -806,21 +746,15 @@ disassem:
 
 
 
+build:
+	mkdir -p $@
+
 -include $(DEPS)
 
-build/%.d: source/%.s
-	$(MKDIR_P) build/
-#	$(DEVKITARM)/bin/arm-none-eabi-as -MT $(subst .s,.o,build/$(notdir $<)) --MD $@ -march=armv5te -mthumb-interwork $<
-#	$(DEVKITARM)/bin/arm-none-eabi-gcc -M -MF $@ -march=armv5te -mthumb-interwork $<
+build/%.d: ;
 
-build/%.d: source/%.S
-	$(MKDIR_P) build/
-
-build/%.o: source/%.s build/%.d
-	$(MKDIR_P) build/
+build/%.o: source/%.s build/%.d | build
 	$(DEVKITARM)/bin/arm-none-eabi-as --MD $(subst .s,.d,build/$(notdir $<)) -march=armv5te $< -o $@
-#	$(DEVKITARM)/bin/arm-none-eabi-gcc -x assembler-with-cpp -march=armv5te -mthumb-interwork $< -c -o $@
-#	$(DEVKITARM)/bin/arm-none-eabi-gcc -x assembler-with-cpp -MMD -MP -MF $(subst .s,.d,build/$(notdir $<)) -march=armv5te -mthumb-interwork $< -c -o $@
 
 newrom/arm9_full.bin: $(OBJS) $(DEPS)
 	$(DEVKITARM)/bin/arm-none-eabi-ld -N --use-blx -T "source/ds_arm9.ld" -Map "build/arm9.map" $(OBJS) $(LIBPATHS) -o "build/arm9.elf"
@@ -840,7 +774,7 @@ newrom/arm7.bin: $(OBJS7) $(DEPS7)
 
 pokeplat.nds: newrom/arm9_full.bin newrom/arm7.bin $(NARCS) $(build_font_files_bin)
 	$(create_rom) -dir "./newrom" -fat "./newrom/fat.bin" -a9map "build/arm9.map" -o $@
-	md5sum ./pokeplat.nds
+	md5sum $@
 	hexdump -C baserom/fat.bin > baserom/fat.txt
 	hexdump -C newrom/fat.bin > build/fat.txt
 	diff -u baserom/fat.txt build/fat.txt | less > build/diff_fat.txt

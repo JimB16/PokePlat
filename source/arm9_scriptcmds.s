@@ -7399,7 +7399,7 @@ ScriptCmd_SurfAnimation: @ 2042ae0 :thumb
 	ldr     r0, [r0, #0x0]
 	add     r0, #0x94
 	ldr     r0, [r0, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 	mov     r0, r5
 	add     r0, #0x80
 	ldr     r0, [r0, #0x0]

@@ -643,9 +643,9 @@ branch_21d1228: @ 21d1228 :thumb
 	bl      Function_206184c
 
 	mov     r0, r5
-	add     r0, #OverWorldData_94
+	add     r0, #OverWorldData_PtrToPokeRadarChain
 	ldr     r0, [r0, #0x0]
-	bl      Function_2069434
+	bl      PokeRadar_ClearChain
 	ldr     r1, [r5, #OverWorldData_MapData]
 	mov     r0, r5
 	ldr     r1, [r1, #MapData_MapNr]
@@ -81416,9 +81416,14 @@ Function_21f313c: @ 21f313c :thumb
 @ 0x21f3154
 
 
+/*
+Gets the animation for the specified PokeRadar grass patch type.
+Input:
+int grassAnimType (0 = rustle, 1 = short and sparkly, 2 = shiny)
+*/
 .thumb
-.globl Function_5_21f3154
-Function_5_21f3154: @ 21f3154 :thumb
+.globl PokeRadar_GetGrassPatchAnimPointer
+PokeRadar_GetGrassPatchAnimPointer: @ 21f3154 :thumb
 	push    {r3-r7,lr}
 	add     sp, #-0x28
 	ldr     r6, [r0, #0x40]

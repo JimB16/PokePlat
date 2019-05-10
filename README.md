@@ -4,7 +4,9 @@ This project is disassembling the code and data of Pokemon Platinum.
 
 The baserom that is disassembled and that is needed to compile a playable rom is the following:
 
-* 3541 - Pokemon Platinum Version (US)(XenoPhobia) `md5: f8905424f7d8aea299c51ec7580b33d8`
+* 4997 - Pokemon - Platinum Version (USA) (Rev 1) `md5: ab828b0d13f09469a71460a34d0de51b`
+
+Code of the other Revision is part of the repo, but not part of the compiling process right now.
 
 To work with this repository you need DevKitARM, Python and the baserom.
 Instructions to set up the repository are described in [**INSTALL.md**](INSTALL.md).

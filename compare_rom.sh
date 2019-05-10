@@ -3,7 +3,7 @@
 
 # create baserom.txt if necessary
 if [ ! -f "baserom.txt" ]; then
-    hexdump -C "baserom.nds" > "baserom.nds"
+    hexdump -C "baserom.nds" > "baserom.txt"
 fi
 
 hexdump -C "pokeplat.nds" > "pokeplat.txt"

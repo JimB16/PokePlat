@@ -4,7 +4,9 @@ This project is disassembling the code and data of Pokemon Platinum.
 
 The baserom that is disassembled and that is needed to compile a playable rom is the following:
 
-* 4997 - Pokemon - Platinum Version (USA) (Rev 1) `md5: ab828b0d13f09469a71460a34d0de51b`
+* 4997 - Pokemon - Platinum Version (USA) (Rev 1)
+  * `md5: ab828b0d13f09469a71460a34d0de51b`
+  * `sha1: 0862ec35b24de5c7e2dcb88c9eea0873110d755c`
 
 Code of the other Revision is part of the repo, but not part of the compiling process right now.
 

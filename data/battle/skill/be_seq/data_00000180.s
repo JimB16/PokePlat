@@ -5,15 +5,14 @@ Script_1: @ 0
 	Cmd_81 Script_branch_24
 	Cmd_11
 	Cmd_e
-@ 10
-
-
-.incbin "./baserom/data/battle/skill/be_seq_narc/data_00000180.bin", 0x10, 0x24 - 0x10
-
+	Cmd_17 0x1
+	Cmd_e
+	Cmd_25 0x0
+@ 24
 
 Script_branch_24: @ 24
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x38
 @ 38
 
-@ end_0x38

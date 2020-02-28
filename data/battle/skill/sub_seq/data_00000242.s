@@ -4,10 +4,9 @@
 Script_1: @ 0
 	Cmd_12 0x40f, 0x2, 0xff
 	Cmd_e
-@ 14
+	Cmd_1e 0x1e
+	ChangePkmnBattleData 0xb, 0xff, 0x3b, 0x8000000
+	end
+@ 0x34
+@ 34
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000242.bin", 0x14, 0x34 - 0x14
-
-
-@ end_0x34

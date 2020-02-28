@@ -2,23 +2,33 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData TstEq, 0xff, PkmnBattleData_35, 0x1000000, Script_branch_44
+	JumpIfPkmnBattleData TstEq, 0xff, 0x35, 0x1000000, Script_branch_44
 	Cmd_45 0xff, 0xf
 	Cmd_e
-@ 28
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000262.bin", 0x28, 0x44 - 0x28
-
-
+	Cmd_c4 0xff
+	Cmd_e
+	Cmd_45 0xff, 0x10
+	Cmd_e
 Script_branch_44: @ 44
 	Cmd_1f 0xff, 0x7bc
 	Cmd_b8 0xff, 0x8, 0x1
 	Cmd_e
-@ 64
+	Cmd_b9 0xff
+	Cmd_1f 0xff, 0x7c0
+	Cmd_b8 0xff, 0x0, 0x1
+	Cmd_e
+	Cmd_12 0x2d1, 0x2, 0xff
+	Cmd_e
+	Cmd_1e 0x1e
+	JumpIfPkmnBattleData TstEq, 0xff, 0x35, 0x1000000, Script_branch_ec
+	Cmd_45 0xff, 0xf
+	Cmd_e
+	Cmd_d6 0xff
+	Cmd_e
+	Cmd_45 0xff, 0x10
+	Cmd_e
+Script_branch_ec: @ ec
+	end
+@ 0xf0
+@ f0
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000262.bin", 0x64, 0xf0 - 0x64
-
-
-@ end_0xf0

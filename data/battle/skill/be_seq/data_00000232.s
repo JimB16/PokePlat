@@ -8,8 +8,8 @@ Script_1: @ 0
 @ 20
 
 Script_branch_20: @ 20
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x34
 @ 34
 
-@ end_0x34

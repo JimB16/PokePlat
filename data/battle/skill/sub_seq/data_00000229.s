@@ -4,10 +4,8 @@
 Script_1: @ 0
 	Cmd_13 0x351, 0x2, 0x2
 	Cmd_e
-@ 14
+	Cmd_1e 0x1e
+	end
+@ 0x20
+@ 20
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000229.bin", 0x14, 0x20 - 0x14
-
-
-@ end_0x20

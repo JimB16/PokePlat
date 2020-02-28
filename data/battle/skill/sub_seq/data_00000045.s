@@ -3,18 +3,16 @@
 
 Script_1: @ 0
 	Cmd_4d Script_branch_34
-	Cmd_3c_AddNewScript 0x4c
+	AddNewScript 76
 	Cmd_12 0xb2, 0xd, 0x1, 0xff
 	Cmd_e
-@ 28
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000045.bin", 0x28, 0x34 - 0x28
-
+	Cmd_1e 0x1e
+	end
+@ 34
 
 Script_branch_34: @ 34
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x48
 @ 48
 
-@ end_0x48

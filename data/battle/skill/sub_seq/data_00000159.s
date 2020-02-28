@@ -2,29 +2,44 @@
 
 
 Script_1: @ 0
-	ChangePkmnBattleData Store, Target_1, PkmnBattleData_CurHP, 0x0
+	ChangePkmnBattleData 0x7, 0x1, 0x2f, 0x0
 	Cmd_32 Store, Var_StatusEffectDamage, 0x7fff
-	Cmd_1b 0x1
-	Cmd_3c_AddNewScript 0x4c
+	WhoGetsHPBarCleared 0x1
+	AddNewScript 76
 	Cmd_1c 0x1
-	Cmd_32 Bic, Var_6, 0xf000000
-	Cmd_3c_AddNewScript 0x6
-	Cmd_32 Bic, Var_0x3c, 0xf0000000
-	Cmd_3c_AddNewScript 0x114
+	Cmd_32 Bic, 0x6, 0xf000000
+	AddNewScript 6
+	Cmd_32 Bic, 0x3c, 0xf0000000
+	AddNewScript 276
+Script_branch_6c: @ 6c
 	Cmd_74 0x1, 0x1, Script_branch_160
 	Cmd_2b
 	Cmd_2c
 	Cmd_2d 0x6
 	Cmd_49 0x6
 	Cmd_e
-@ 98
+	Cmd_3 0x6
+	Cmd_da 0x48
+	Cmd_b 0x6
+	Cmd_e
+	AddNewScript 99
+	JumpIf TstEq, 0x6, 0xf000000, Script_branch_108
+	AddNewScript 6
+	Cmd_32 Bic, 0x3c, 0xf0000000
+	AddNewScript 276
+	Cmd_74 0x1, 0x1, Script_branch_160
+	Jump Script_branch_6c
+@ 108
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000159.bin", 0x98, 0x160 - 0x98
-
-
+Script_branch_108: @ 108
+	ChangePkmnBattleData 0x7, 0x1, 0x34, 0x0
+	Cmd_42 0x1, 0x0
+	Cmd_3a 0x11, 0x1, 0x30, 0x20
+	Cmd_39 0x7, 0x14, 0xf
+	Cmd_15 0x3ed, 0x0
+	AddNewScript 136
 Script_branch_160: @ 160
 	end
+@ 0x164
 @ 164
 
-@ end_0x164

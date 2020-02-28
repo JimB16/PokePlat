@@ -9,8 +9,8 @@ Script_1: @ 0
 @ 2c
 
 Script_branch_2c: @ 2c
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x40
 @ 40
 
-@ end_0x40

@@ -21,4 +21,4 @@ Script_branch_5c: @ 5c
 .incbin "./baserom/data/battle/skill/be_seq_narc/data_00000259.bin", 0x74, 0x88 - 0x74
 
 
-@ end_0x88
+@ 0x88

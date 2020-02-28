@@ -2,15 +2,60 @@
 
 
 Script_1: @ 0
-	Cmd_1e
-	Cmd_f
+	Cmd_1e 0xf
 	Cmd_1f 0x1, 0x5ec
 	Cmd_12 0x35a, 0x33, 0x1, 0x1, 0xff
 	Cmd_e
-@ 30
+	Cmd_1e 0x1e
+	Cmd_bb 0x1
+	JumpIf Eq, 0x16, 0x0, Script_branch_d4
+	JumpIf Eq, 0x16, 0x1, Script_branch_104
+	JumpIf Eq, 0x16, 0x2, Script_branch_120
+	JumpIf Eq, 0x16, 0x3, Script_branch_13c
+	JumpIf Eq, 0x16, 0x4, Script_branch_158
+	JumpIf Eq, 0x16, 0x5, Script_branch_174
+	Cmd_12 0x380, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ d4
 
+Script_branch_d4: @ d4
+	ChangePkmnBattleData 0xb, 0x1, 0x35, 0x7
+	Cmd_12 0x37a, 0xf, 0x1, 0xff
+	Jump Script_branch_1a4
+@ 104
 
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000268.bin", 0x30, 0x1c0 - 0x30
+Script_branch_104: @ 104
+	Cmd_12 0x36b, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ 120
 
+Script_branch_120: @ 120
+	Cmd_12 0x374, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ 13c
 
-@ end_0x1c0
+Script_branch_13c: @ 13c
+	Cmd_12 0x371, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ 158
+
+Script_branch_158: @ 158
+	Cmd_12 0x36e, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ 174
+
+Script_branch_174: @ 174
+	Cmd_12 0x377, 0xf, 0x1, 0xff
+	Jump Script_branch_190
+@ 190
+
+Script_branch_190: @ 190
+	ChangePkmnBattleData 0x7, 0x1, 0x34, 0x0
+Script_branch_1a4: @ 1a4
+	Cmd_e
+	Cmd_42 0x1, 0x0
+	Cmd_1e 0x1e
+	end
+@ 0x1c0
+@ 1c0
+

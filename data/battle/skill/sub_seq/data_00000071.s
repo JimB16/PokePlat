@@ -2,14 +2,13 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData TstNe, Target_1, PkmnBattleData_35, 0x1000, Script_branch_18
+	JumpIfPkmnBattleData TstNe, 0x1, 0x35, 0x1000, Script_branch_18
 Script_branch_18: @ 18
 	Cmd_12 0x261, 0xa, 0x1, 0x1
 	Cmd_e
-@ 30
+	Cmd_1e 0x1e
+	Cmd_41 0x1
+	end
+@ 0x44
+@ 44
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000071.bin", 0x30, 0x44 - 0x30
-
-
-@ end_0x44

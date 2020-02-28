@@ -3,6 +3,6 @@
 
 Script_1: @ 0
 	Cmd_24
+@ 0x4
 @ 4
 
-@ end_0x4

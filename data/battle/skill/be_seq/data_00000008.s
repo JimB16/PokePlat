@@ -3,20 +3,22 @@
 
 Script_1: @ 0
 	Cmd_d2 0x2, Script_branch_40
-	JumpIfPkmnBattleData TstEq, Target_2, PkmnBattleData_StatusEffect, 0x0|7, Script_branch_40
+	JumpIfPkmnBattleData TstEq, 0x2, 0x34, 0x7, Script_branch_40
 	Cmd_32 Store, Var_3, 0x2000003d
 	Cmd_26
-	Cmd_f
+	Cmd_f_CalcDamage
 	end
 @ 40
 
 Script_branch_40: @ 40
 	Cmd_11
 	Cmd_e
-@ 48
+	Cmd_1e 0x1e
+	Cmd_12 0x3c, 0x2, 0x2
+	Cmd_e
+	Cmd_1e 0x1e
+	Cmd_32 Orr, 0xa, 0x80000000
+	end
+@ 0x80
+@ 80
 
-
-.incbin "./baserom/data/battle/skill/be_seq_narc/data_00000008.bin", 0x48, 0x80 - 0x48
-
-
-@ end_0x80

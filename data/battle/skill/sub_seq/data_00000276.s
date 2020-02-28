@@ -8,6 +8,6 @@ Script_1: @ 0
 	Cmd_2a_dummy 0xfffffffc
 Script_branch_18: @ 18
 	end
+@ 0x1c
 @ 1c
 
-@ end_0x1c

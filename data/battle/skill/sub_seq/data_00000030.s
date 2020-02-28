@@ -2,13 +2,12 @@
 
 
 Script_1: @ 0
-	ChangePkmnBattleData Bic, Target_1, PkmnBattleData_StatusEffect, 0x0|Frozen
+	ChangePkmnBattleData 0xb, 0x1, 0x34, 0x20
 	Cmd_12 0x75, 0xa, 0x1, 0x1
 	Cmd_e
-@ 2c
+	Cmd_42 0x1, 0x0
+	Cmd_1e 0x1e
+	end
+@ 0x44
+@ 44
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000030.bin", 0x2c, 0x44 - 0x2c
-
-
-@ end_0x44

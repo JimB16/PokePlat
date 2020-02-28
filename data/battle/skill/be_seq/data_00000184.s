@@ -2,7 +2,7 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData Ne, Target_1, PkmnBattleData_Item, NO_ITEM, Script_branch_5c
+	JumpIfPkmnBattleData Ne, 0x1, 0x37, 0x0, Script_branch_5c
 	Cmd_cb 0xf
 	Cmd_3a 0x7, 0x1, 0x37, 0x24
 	Cmd_15 0x24d, 0xf, 0x1, 0xff
@@ -11,8 +11,8 @@ Script_1: @ 0
 @ 5c
 
 Script_branch_5c: @ 5c
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x70
 @ 70
 
-@ end_0x70

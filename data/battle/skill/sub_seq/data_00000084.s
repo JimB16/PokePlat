@@ -2,20 +2,18 @@
 
 
 Script_1: @ 0
-	JumpIf TstNe, Var_0xa, 0x10001, Script_branch_4c
+	JumpIf TstNe, 0xa, 0x10001, Script_branch_4c
 	Cmd_61 Script_branch_4c
-	Cmd_3c_AddNewScript 0x4c
+	AddNewScript 76
 	Cmd_12 0x18e, 0x23, 0x2, 0xff, 0xff
 	Cmd_e
-@ 40
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000084.bin", 0x40, 0x4c - 0x40
-
+	Cmd_1e 0x1e
+	end
+@ 4c
 
 Script_branch_4c: @ 4c
-	Cmd_32 Orr, Var_0xa, 0x40
+	Cmd_32 Orr, 0xa, 0x40
 	end
+@ 0x60
 @ 60
 
-@ end_0x60

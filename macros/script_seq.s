@@ -177,8 +177,20 @@
 .word   0x6, \a
 .endm
 
+.macro	Cmd_7, a, b
+.word   0x7, \a, \b
+.endm
+
+.macro	Cmd_8, a
+.word   0x8, \a
+.endm
+
 .macro	Cmd_9, a, b
 .word   0x9, \a, \b
+.endm
+
+.macro	Cmd_a
+.word   0xa
 .endm
 
 .macro	Cmd_b, a
@@ -197,11 +209,11 @@
 .word   0xe
 .endm
 
-.macro	Cmd_f
+.macro	Cmd_f_CalcDamage
 .word   0xf
 .endm
 
-.macro	Cmd_10
+.macro	Cmd_10_CalcDamage
 .word   0x10
 .endm
 
@@ -270,8 +282,8 @@
 .endif
 .endm
 
-.macro	Cmd_16, a, b, c=-1, d=-1, e=-1, f=-1, g=-1, h=-1
-.word   0x16, \a, \b
+.macro	Cmd_16, i, a, b, c=-1, d=-1, e=-1, f=-1, g=-1, h=-1
+.word   0x16, \i, \a, \b
 .ifge \c
 .word   \c
 .endif
@@ -305,7 +317,7 @@
 .word   0x1a, \a
 .endm
 
-.macro	Cmd_1b, a
+.macro	WhoGetsHPBarCleared, a
 .word   0x1b, \a
 .endm
 
@@ -317,8 +329,12 @@
 .word   0x1d
 .endm
 
-.macro	Cmd_1e@, a
-.word   0x1e@, \a
+/*.macro	Cmd_1e
+.word   0x1e
+.endm*/
+
+.macro	Cmd_1e, a
+.word   0x1e, \a
 .endm
 
 .macro	Cmd_1f, a, b
@@ -341,8 +357,8 @@
 .word   0x22
 .endm
 
-.macro	Cmd_23_LoadSubSeq
-.word   0x23
+.macro	Cmd_23_LoadSubSeq, a
+.word   0x23, \a
 .endm
 
 .macro	Cmd_24
@@ -387,6 +403,20 @@
 .word   0x2d, \a
 .endm
 
+.macro	Cmd_2e, adr
+.word   0x2e
+.word   (\adr - 1f)>>2
+1:
+.endm
+
+.macro	Cmd_2f_TryToCatchPkmn, a
+.word   0x2f, \a
+.endm
+
+.macro	Cmd_30_WaitFor
+.word   0x30
+.endm
+
 .macro	Cmd_31, a, b
 .word   0x31, \a, \b
 .endm
@@ -398,9 +428,7 @@
 .macro	Cmd_33, adr, adr2, adr3
 .word   0x33
 .word   (\adr - 1f)>>2
-1:
 .word   (\adr2 - 1f)>>2
-1:
 .word   (\adr3 - 1f)>>2
 1:
 .endm
@@ -419,9 +447,13 @@
 1:
 .endm
 
-.macro	Cmd_38, a, b
-.word   0x38, \a, \b
+.macro	Cmd_38
+.word   0x38
 .endm
+
+/*.macro	Cmd_38, a, b
+.word   0x38, \a, \b
+.endm*/
 
 .macro	Cmd_39, changevalue, variable, variable2
 .word   0x39, \changevalue, \variable, \variable2
@@ -437,12 +469,16 @@
 1:
 .endm
 
-.macro	Cmd_3c_AddNewScript, a
+.macro	AddNewScript, a
 .word   0x3c, \a
 .endm
 
 .macro	Cmd_3d, variable
 .word   0x3d, \variable
+.endm
+
+.macro	Cmd_3e
+.word   0x3e
 .endm
 
 .macro	Cmd_3f
@@ -463,6 +499,10 @@
 
 .macro	Cmd_43, a, b
 .word   0x43, \a, \b
+.endm
+
+.macro	Cmd_44
+.word   0x44
 .endm
 
 .macro	Cmd_45, a, b
@@ -609,9 +649,10 @@
 .word   0x62
 .endm
 
-.macro	Cmd_63, a, adr
-.word   0x63, \a
+.macro	Cmd_63, adr, adr2
+.word   0x63
 .word   (\adr - 1f)>>2
+.word   (\adr2 - 1f)>>2
 1:
 .endm
 
@@ -663,6 +704,10 @@
 .word   0x6c, \variable
 .word   (\adr - 1f)>>2
 1:
+.endm
+
+.macro	Cmd_6d, a
+.word   0x6d, \a
 .endm
 
 .macro	Cmd_6e
@@ -723,6 +768,12 @@
 1:
 .endm
 
+.macro	Cmd_7a, a, b, c, adr
+.word   0x7a, \a, \b, \c
+.word   (\adr - 1f)>>2
+1:
+.endm
+
 .macro	Cmd_7b, adr
 .word   0x7b
 .word   (\adr - 1f)>>2
@@ -746,7 +797,6 @@
 .macro	Cmd_7f, adr, adr2
 .word   0x7f
 .word   (\adr - 1f)>>2
-1:
 .word   (\adr2 - 1f)>>2
 1:
 .endm
@@ -767,6 +817,10 @@
 .word   0x82
 .word   (\adr - 1f)>>2
 1:
+.endm
+
+.macro	Cmd_83
+.word   0x83
 .endm
 
 .macro	Cmd_84
@@ -965,6 +1019,10 @@
 1:
 .endm
 
+.macro	Cmd_aa
+.word   0xaa
+.endm
+
 .macro	Cmd_ab
 .word   0xab
 .endm
@@ -978,7 +1036,6 @@
 .macro	Cmd_ad, adr, adr2
 .word   0xad
 .word   (\adr - 1f)>>2
-1:
 .word   (\adr2 - 1f)>>2
 1:
 .endm
@@ -989,12 +1046,19 @@
 1:
 .endm
 
+.macro	Cmd_af, a
+.word   0xaf, \a
+.endm
+
 .macro	Cmd_b0, adr, adr2
 .word   0xb0
 .word   (\adr - 1f)>>2
-1:
 .word   (\adr2 - 1f)>>2
 1:
+.endm
+
+.macro	Cmd_b1
+.word   0xb1
 .endm
 
 .macro	Cmd_b2, adr
@@ -1037,6 +1101,20 @@
 .word   0xb9, \a
 .endm
 
+.macro	Cmd_ba
+.word   0xba
+.endm
+
+.macro	Cmd_bb, a
+.word   0xbb, \a
+.endm
+
+.macro	Cmd_bc, a, adr
+.word   0xbc, \a
+.word   (\adr - 1f)>>2
+1:
+.endm
+
 .macro	Cmd_bd, a
 .word   0xbd, \a
 .endm
@@ -1065,10 +1143,22 @@
 .word   0xc3, \a, \b, \c
 .endm
 
+.macro	Cmd_c4, a
+.word   0xc4, \a
+.endm
+
 .macro	Cmd_c5, adr
 .word   0xc5
 .word   (\adr - 1f)>>2
 1:
+.endm
+
+.macro	Cmd_c6, a
+.word   0xc6, \a
+.endm
+
+.macro	Cmd_c7, a
+.word   0xc7, \a
 .endm
 
 .macro	Cmd_c8, a, adr
@@ -1091,6 +1181,12 @@
 .word   0xcb, \a
 .endm
 
+.macro	Cmd_cc, adr
+.word   0xcc
+.word   (\adr - 1f)>>2
+1:
+.endm
+
 .macro	Cmd_cd
 .word   0xcd
 .endm
@@ -1101,6 +1197,10 @@
 
 .macro	Cmd_cf
 .word   0xcf
+.endm
+
+.macro	Cmd_d0, a
+.word   0xd0, \a
 .endm
 
 .macro	Cmd_d1, a, b

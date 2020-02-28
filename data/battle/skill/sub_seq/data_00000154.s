@@ -4,13 +4,14 @@
 Script_1: @ 0
 	Cmd_3a 0x11, 0x1, 0x30, 0x20
 	Cmd_55 0x20, 0x2
-	Cmd_39 Store, Var_0x14, Var_NrOfPkmn
+	Cmd_39 0x7, 0x14, 0xf
 	Cmd_11
 	Cmd_e
-@ 38
+	AddNewScript 111
+	JumpIf TstNe, 0xa, 0x80000000, Script_branch_64
+	Cmd_91 0x1, 0x6, 0x1
+Script_branch_64: @ 64
+	end
+@ 0x68
+@ 68
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000154.bin", 0x38, 0x68 - 0x38
-
-
-@ end_0x68

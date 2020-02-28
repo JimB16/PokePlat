@@ -2,15 +2,15 @@
 
 
 Script_1: @ 0
-	Cmd_32 Store, Var_0x9, 0x10000000
-	Cmd_39 0xe, Var_0x9, Var_NrOfPkmn
-	Cmd_39 Orr, Var_6, Var_0x9
-	ChangePkmnBattleData Store, Target_1, PkmnBattleData_CurHP, 0x0
+	Cmd_32 Store, 0x9, 0x10000000
+	Cmd_39 0xe, 0x9, 0xf
+	Cmd_39 0xa, 0x6, 0x9
+	ChangePkmnBattleData 0x7, 0x1, 0x2f, 0x0
 	Cmd_32 Store, Var_StatusEffectDamage, 0x7fff
-	Cmd_1b 0x1
-	Cmd_32 Orr, Var_6, 0x8001c
+	WhoGetsHPBarCleared 0x1
+	Cmd_32 Orr, 0x6, 0x8001c
 	Cmd_32 Store, Var_MoveEffect_SubSeq, 0xa000006b
 	end
+@ 0x80
 @ 80
 
-@ end_0x80

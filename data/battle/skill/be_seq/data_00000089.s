@@ -2,9 +2,9 @@
 
 
 Script_1: @ 0
-	Cmd_32 Orr, Var_6, 0x800
+	Cmd_32 Orr, 0x6, 0x800
 	Cmd_5a
 	end
+@ 0x18
 @ 18
 
-@ end_0x18

@@ -7,8 +7,8 @@ Script_1: @ 0
 @ c
 
 Script_branch_c: @ c
-	Cmd_32 Store, Var_0xa, 0x40
+	Cmd_32 Store, 0xa, 0x40
 	end
+@ 0x20
 @ 20
 
-@ end_0x20

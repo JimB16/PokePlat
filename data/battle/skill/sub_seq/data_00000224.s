@@ -2,14 +2,14 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData Eq, Target_1, 0x5f, 0x0, Script_branch_68
+	JumpIfPkmnBattleData Eq, 0x1, 0x5f, 0x0, Script_branch_68
 	Cmd_3a 0x11, 0x1, 0x5f, 0x20
-	ChangePkmnBattleData Store, Target_1, 0x5f, 0x0
-	Cmd_39 Store, Var_0x14, Var_NrOfPkmn
-	Cmd_32 Orr, Var_6, 0x40
-	Cmd_3c_AddNewScript 0x2
+	ChangePkmnBattleData 0x7, 0x1, 0x5f, 0x0
+	Cmd_39 0x7, 0x14, 0xf
+	Cmd_32 Orr, 0x6, 0x40
+	AddNewScript 2
 Script_branch_68: @ 68
 	end
+@ 0x6c
 @ 6c
 
-@ end_0x6c

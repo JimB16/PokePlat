@@ -2,11 +2,11 @@
 
 
 Script_1: @ 0
-	Cmd_3c_AddNewScript 0x93
-	JumpIf TstEq, Var_6, 0x400000, Script_branch_24
-	Cmd_3c_AddNewScript 0x1f
+	AddNewScript 147
+	JumpIf TstEq, 0x6, 0x400000, Script_branch_24
+	AddNewScript 31
 Script_branch_24: @ 24
 	end
+@ 0x28
 @ 28
 
-@ end_0x28

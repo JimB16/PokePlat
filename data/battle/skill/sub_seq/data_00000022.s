@@ -2,69 +2,76 @@
 
 
 Script_1: @ 0
-	JumpIf Ne, Var_5, 0x6, Script_branch_60
-	Cmd_37 0x0, Target_7, IMMUNITY, Script_branch_2c8
+	JumpIf Ne, 0x5, 0x6, Script_branch_60
+	Cmd_37 0x0, 0x7, 0x11, Script_branch_2c8
 	Cmd_d3 0x27
-	JumpIf TstEq, Var_Weather, 0x0|Sunny_Day|Drought, Script_branch_cc
-	Cmd_37 0x0, Target_7, LEAF_GUARD, Script_branch_2c8
+	JumpIf TstEq, Var_Weather, 0x30, Script_branch_cc
+	Cmd_37 0x0, 0x7, 0x66, Script_branch_2c8
 	Jump Script_branch_cc
 @ 60
 
 Script_branch_60: @ 60
-	Cmd_a1 0x0, Target_7, IMMUNITY, Script_branch_2c8
+	Cmd_a1 0x0, 0x7, 0x11, Script_branch_2c8
 	Cmd_d3 0xa
-	JumpIf TstEq, Var_Weather, 0x0|Sunny_Day|Drought, Script_branch_a4
-	Cmd_a1 0x0, Target_7, LEAF_GUARD, Script_branch_2c8
+	JumpIf TstEq, Var_Weather, 0x30, Script_branch_a4
+	Cmd_a1 0x0, 0x7, 0x66, Script_branch_2c8
 Script_branch_a4: @ a4
-	JumpIf Ne, Var_5, 0x2, Script_branch_cc
-	Cmd_a1 0x0, Target_7, SHIELD_DUST, Script_branch_368
+	JumpIf Ne, 0x5, 0x2, Script_branch_cc
+	Cmd_a1 0x0, 0x7, 0x13, Script_branch_368
 Script_branch_cc: @ cc
-	JumpIf Ne, Var_5, 0x1, Script_branch_e8
+	JumpIf Ne, 0x5, 0x1, Script_branch_e8
 	Cmd_11
 	Cmd_e
-@ e8
-
 Script_branch_e8: @ e8
-	JumpIf Eq, Var_5, 0x3, Script_branch_108
+	JumpIf Eq, 0x5, 0x3, Script_branch_108
 	Cmd_d2 0x7, Script_branch_368
 Script_branch_108: @ 108
-	JumpIfPkmnBattleData TstNe, Target_7, PkmnBattleData_StatusEffect, 0x0|Poisond, Script_branch_3d0
-	JumpIfPkmnBattleData TstNe, Target_7, PkmnBattleData_StatusEffect, 0x0|Toxic, Script_branch_3d0
-	JumpIfPkmnBattleData Eq, Target_7, PkmnBattleData_Type1, POISON, Script_branch_42c
-	JumpIfPkmnBattleData Eq, Target_7, PkmnBattleData_Type2, POISON, Script_branch_42c
-	JumpIfPkmnBattleData Eq, Target_7, PkmnBattleData_Type1, STEEL, Script_branch_42c
-	JumpIfPkmnBattleData Eq, Target_7, PkmnBattleData_Type2, STEEL, Script_branch_42c
-	JumpIfPkmnBattleData Ne, Target_7, PkmnBattleData_StatusEffect, 0x0, Script_branch_368
-	JumpIf Eq, Var_5, 0x3, Script_branch_20c
-	JumpIf TstNe, Var_0xa, 0x10001, Script_branch_368
-	JumpIf TstNe, Var_0xd, 0x8, Script_branch_49c
-	JumpIf Ne, Var_5, 0x1, Script_branch_20c
+	JumpIfPkmnBattleData TstNe, 0x7, 0x34, 0x8, Script_branch_3d0
+	JumpIfPkmnBattleData TstNe, 0x7, 0x34, 0x80, Script_branch_3d0
+	JumpIfPkmnBattleData Eq, 0x7, 0x1b, 0x3, Script_branch_42c
+	JumpIfPkmnBattleData Eq, 0x7, 0x1c, 0x3, Script_branch_42c
+	JumpIfPkmnBattleData Eq, 0x7, 0x1b, 0x8, Script_branch_42c
+	JumpIfPkmnBattleData Eq, 0x7, 0x1c, 0x8, Script_branch_42c
+	JumpIfPkmnBattleData Ne, 0x7, 0x34, 0x0, Script_branch_368
+	JumpIf Eq, 0x5, 0x3, Script_branch_20c
+	JumpIf TstNe, 0xa, 0x10001, Script_branch_368
+	JumpIf TstNe, 0xd, 0x8, Script_branch_49c
+	JumpIf Ne, 0x5, 0x1, Script_branch_20c
 	Cmd_17 0x1
 	Cmd_e
-@ 20c
-
 Script_branch_20c: @ 20c
 	Cmd_45 0x7, 0x2
 	Cmd_e
-@ 21c
+	ChangePkmnBattleData 0xa, 0x7, 0x34, 0x8
+	JumpIf Eq, 0x5, 0x3, Script_branch_25c
+	Cmd_12 0x3f, 0x2, 0x7
+	Jump Script_branch_274
+@ 25c
 
+Script_branch_25c: @ 25c
+	Cmd_12 0x42, 0x24, 0xff, 0x15, 0x7
+Script_branch_274: @ 274
+	Cmd_e
+	Cmd_42 0x7, 0x2
+	Cmd_1e 0x1e
+	JumpIf TstNe, 0x6, 0x80, Script_branch_2b4
+	Cmd_32 Orr, 0x6, 0x80
+	end
+@ 2b4
 
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000022.bin", 0x21c, 0x2c8 - 0x21c
-
+Script_branch_2b4: @ 2b4
+	Cmd_32 Bic, 0x6, 0x80
+	end
+@ 2c8
 
 Script_branch_2c8: @ 2c8
-	JumpIf Eq, Var_5, 0x2, Script_branch_50c
-	JumpIf Eq, Var_5, 0x3, Script_branch_50c
-	JumpIf Eq, Var_5, 0x4, Script_branch_328
-	JumpIf Eq, Var_5, 0x6, Script_branch_328
+	JumpIf Eq, 0x5, 0x2, Script_branch_50c
+	JumpIf Eq, 0x5, 0x3, Script_branch_50c
+	JumpIf Eq, 0x5, 0x4, Script_branch_328
+	JumpIf Eq, 0x5, 0x6, Script_branch_328
 	Cmd_11
 	Cmd_e
-@ 320
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000022.bin", 0x320, 0x328 - 0x320
-
-
+	Cmd_1e 0x1e
 Script_branch_328: @ 328
 	Cmd_12 0x28a, 0xb, 0x7, 0x7
 	Jump Script_branch_4f0
@@ -75,54 +82,46 @@ Script_branch_328: @ 328
 
 
 Script_branch_368: @ 368
-	JumpIf Eq, Var_5, 0x2, Script_branch_50c
-	JumpIf Eq, Var_5, 0x3, Script_branch_50c
-	JumpIf Eq, Var_5, 0x4, Script_branch_50c
-	JumpIf Eq, Var_5, 0x6, Script_branch_50c
-	Cmd_1e
-	Cmd_1e
-	Cmd_3c_AddNewScript 0x4b
+	JumpIf Eq, 0x5, 0x2, Script_branch_50c
+	JumpIf Eq, 0x5, 0x3, Script_branch_50c
+	JumpIf Eq, 0x5, 0x4, Script_branch_50c
+	JumpIf Eq, 0x5, 0x6, Script_branch_50c
+	Cmd_1e 0x1e
+	AddNewScript 75
 	Jump Script_branch_50c
 @ 3d0
 
 Script_branch_3d0: @ 3d0
-	JumpIf Eq, Var_5, 0x2, Script_branch_50c
-	JumpIf Eq, Var_5, 0x3, Script_branch_50c
-	JumpIf Eq, Var_5, 0x6, Script_branch_50c
-	Cmd_1e
-	Cmd_1e
+	JumpIf Eq, 0x5, 0x2, Script_branch_50c
+	JumpIf Eq, 0x5, 0x3, Script_branch_50c
+	JumpIf Eq, 0x5, 0x6, Script_branch_50c
+	Cmd_1e 0x1e
 	Cmd_12 0x4c, 0x2, 0x7
 	Jump Script_branch_4f0
 @ 42c
 
 Script_branch_42c: @ 42c
-	JumpIf Eq, Var_5, 0x2, Script_branch_50c
-	JumpIf Eq, Var_5, 0x4, Script_branch_50c
-	JumpIf Eq, Var_5, 0x6, Script_branch_50c
-	JumpIf Eq, Var_5, 0x3, Script_branch_50c
-	Cmd_1e
-	Cmd_1e
+	JumpIf Eq, 0x5, 0x2, Script_branch_50c
+	JumpIf Eq, 0x5, 0x4, Script_branch_50c
+	JumpIf Eq, 0x5, 0x6, Script_branch_50c
+	JumpIf Eq, 0x5, 0x3, Script_branch_50c
+	Cmd_1e 0x1e
 	Cmd_12 0x1b, 0x2, 0x7
 	Jump Script_branch_4f0
 @ 49c
 
 Script_branch_49c: @ 49c
-	JumpIf Eq, Var_5, 0x2, Script_branch_50c
-	JumpIf Eq, Var_5, 0x4, Script_branch_50c
-	JumpIf Eq, Var_5, 0x6, Script_branch_50c
-	Cmd_1e
-	Cmd_1e
+	JumpIf Eq, 0x5, 0x2, Script_branch_50c
+	JumpIf Eq, 0x5, 0x4, Script_branch_50c
+	JumpIf Eq, 0x5, 0x6, Script_branch_50c
+	Cmd_1e 0x1e
 	Cmd_12 0xc8, 0x2, 0x7
 Script_branch_4f0: @ 4f0
 	Cmd_e
-@ 4f4
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000022.bin", 0x4f4, 0x50c - 0x4f4
-
-
+	Cmd_1e 0x1e
+	Cmd_32 Orr, 0xa, 0x80000000
 Script_branch_50c: @ 50c
 	end
+@ 0x510
 @ 510
 
-@ end_0x510

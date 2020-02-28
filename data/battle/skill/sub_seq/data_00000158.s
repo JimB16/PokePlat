@@ -2,13 +2,11 @@
 
 
 Script_1: @ 0
-	ChangePkmnBattleData Orr, Target_2, PkmnBattleData_3b, 0x400000
+	ChangePkmnBattleData 0xa, 0x2, 0x3b, 0x400000
 	Cmd_12 0x1b0, 0x9, 0x1, 0x2
 	Cmd_e
-@ 2c
+	Cmd_1e 0x1e
+	end
+@ 0x38
+@ 38
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000158.bin", 0x2c, 0x38 - 0x2c
-
-
-@ end_0x38

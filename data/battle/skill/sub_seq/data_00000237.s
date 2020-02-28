@@ -2,13 +2,11 @@
 
 
 Script_1: @ 0
-	Cmd_32 Bic, Var_Weather, 0x0|Hail
+	Cmd_32 Bic, Var_Weather, 0x40
 	Cmd_12 0x32c, 0x0
 	Cmd_e
-@ 20
+	Cmd_1e 0x1e
+	end
+@ 0x2c
+@ 2c
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000237.bin", 0x20, 0x2c - 0x20
-
-
-@ end_0x2c

@@ -4,6 +4,6 @@
 Script_1: @ 0
 	Cmd_32 Store, Var_MoveEffect_SubSeq, 0x80000001
 	end
+@ 0x14
 @ 14
 
-@ end_0x14

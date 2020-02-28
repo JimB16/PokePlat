@@ -2,15 +2,15 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData TstNe, Target_1, PkmnBattleData_35, 0x1000, Script_branch_40
-	JumpIf TstNe, Var_6, 0x200, Script_branch_40
+	JumpIfPkmnBattleData TstNe, 0x1, 0x35, 0x1000, Script_branch_40
+	JumpIf TstNe, 0x6, 0x200, Script_branch_40
 	Cmd_32 Store, Var_MoveEffect_SubSeq, 0x4000003f
 	end
 @ 40
 
 Script_branch_40: @ 40
-	Cmd_32 Orr, Var_6, 0x1
+	Cmd_32 Orr, 0x6, 0x1
 	end
+@ 0x54
 @ 54
 
-@ end_0x54

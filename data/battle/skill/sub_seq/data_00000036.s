@@ -2,22 +2,28 @@
 
 
 Script_1: @ 0
-	JumpIfPkmnBattleData TstNe, Target_1, PkmnBattleData_35, 0x300, Script_branch_9c
+	JumpIfPkmnBattleData TstNe, 0x1, 0x35, 0x300, Script_branch_9c
 	Cmd_12 0x14f, 0x2, 0x1
 	Cmd_e
-@ 2c
+	Cmd_1e 0x1e
+	Cmd_32 Store, 0x3a, 0x1
+	ChangePkmnBattleData 0xb, 0x1, 0x35, 0x1000
+	Cmd_32 Orr, 0x6, 0x200
+	JumpIf Eq, Var_Damage, 0x0, Script_branch_80
+	end
+@ 80
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000036.bin", 0x2c, 0x9c - 0x2c
-
+Script_branch_80: @ 80
+	AddNewScript 75
+	Cmd_32 Orr, 0xa, 0x80000000
+	end
+@ 9c
 
 Script_branch_9c: @ 9c
 	Cmd_12 0x14c, 0x2, 0x1
 	Cmd_e
-@ b0
+	Cmd_1e 0x1e
+	end
+@ 0xbc
+@ bc
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000036.bin", 0xb0, 0xbc - 0xb0
-
-
-@ end_0xbc

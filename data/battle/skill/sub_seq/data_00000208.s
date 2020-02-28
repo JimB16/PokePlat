@@ -4,10 +4,13 @@
 Script_1: @ 0
 	Cmd_45 0xff, 0xa
 	Cmd_e
-@ 10
+	Cmd_32 Store, Var_MoveEffectNr, 0xe
+	Cmd_39 0x8, 0x22, 0x16
+	Cmd_32 Store, 0x5, 0x5
+	Cmd_39 0x7, 0x11, 0x14
+	AddNewScript 12
+	AddNewScript 290
+	end
+@ 0x64
+@ 64
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000208.bin", 0x10, 0x64 - 0x10
-
-
-@ end_0x64

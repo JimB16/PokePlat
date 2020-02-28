@@ -5,56 +5,64 @@ Script_1: @ 0
 	Cmd_c8 0x2, Script_branch_2b4
 	Cmd_74 0x1, 0x1, Script_branch_2b4
 	Cmd_c5 Script_branch_2c
-	Cmd_3d Var_0x2b
+	Cmd_3d 0x2b
 Script_branch_2c: @ 2c
 	Cmd_d5 Script_branch_3c
-	Cmd_3d Var_0x2b
+	Cmd_3d 0x2b
 Script_branch_3c: @ 3c
-	JumpIfPkmnBattleData Ne, Target_2, PkmnBattleData_CurHP, 0x0, Script_branch_140
-	JumpIfPkmnBattleData TstEq, Target_2, PkmnBattleData_35, 0x2000000, Script_branch_140
+	JumpIfPkmnBattleData Ne, 0x2, 0x2f, 0x0, Script_branch_140
+	JumpIfPkmnBattleData TstEq, 0x2, 0x35, 0x2000000, Script_branch_140
 	Cmd_a2 0x1, 0x2, Script_branch_140
-	JumpIfPkmnBattleData Eq, Target_1, PkmnBattleData_CurHP, 0x0, Script_branch_140
+	JumpIfPkmnBattleData Eq, 0x1, 0x2f, 0x0, Script_branch_140
 	Cmd_12 0x187, 0x9, 0x2, 0x1
 	Cmd_3a 0x11, 0x1, 0x2f, 0x20
 	Cmd_32 0xc, Var_StatusEffectDamage, 0xffffffff
-	Cmd_39 Store, Var_0x14, Var_NrOfPkmn
-	Cmd_32 Orr, Var_6, 0x40
-	Cmd_3c_AddNewScript 0x2
+	Cmd_39 0x7, 0x14, 0xf
+	Cmd_32 Orr, 0x6, 0x40
+	AddNewScript 2
 	Cmd_1d
 	Cmd_e
-@ fc
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000175.bin", 0xfc, 0x140 - 0xfc
-
-
+	Cmd_d 0x5
+	Cmd_12 0x1e, 0x2, 0x5
+	Cmd_e
+	Cmd_1e 0x1e
+	Cmd_c3 0x5, 0x1, 0x29
+	Cmd_c3 0x5, 0x0, 0x60
 Script_branch_140: @ 140
-	Cmd_39 0x11, Var_0x12, Var_0x1d
-	Cmd_39 Store, Var_0x12, Var_TargetPkmn
-	JumpIfPkmnBattleData Ne, Target_2, PkmnBattleData_CurHP, 0x0, Script_branch_1a0
+	Cmd_39 0x11, 0x12, 0x1d
+	Cmd_39 0x7, 0x12, 0x10
+	JumpIfPkmnBattleData Ne, 0x2, 0x2f, 0x0, Script_branch_1a0
 	Cmd_8a Script_branch_1a0
 	Cmd_12 0x238, 0xa, 0x1, 0xff
 	Cmd_e
-@ 198
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000175.bin", 0x198, 0x1a0 - 0x198
-
-
+	Cmd_1e 0x1e
 Script_branch_1a0: @ 1a0
-	Cmd_39 Store, Var_0x12, Var_0x1d
-	JumpIfPkmnBattleData Eq, Target_1, PkmnBattleData_CurHP, 0x0, Script_branch_2b4
-	Cmd_39 Store, Var_0x13, Var_NrOfPkmn
+	Cmd_39 0x7, 0x12, 0x1d
+	JumpIfPkmnBattleData Eq, 0x1, 0x2f, 0x0, Script_branch_2b4
+	Cmd_39 0x7, 0x13, 0xf
 	Cmd_12 0x42b, 0x12, 0x6, 0x6
 	Cmd_e
-@ 1f0
-
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000175.bin", 0x1f0, 0x2b4 - 0x1f0
-
+	Cmd_1e 0x1e
+	AddNewScript 153
+	JumpIfPkmnBattleData Eq, 0x1, 0x2f, 0x0, Script_branch_2b4
+	Cmd_d1 0x1, 0x5
+	ChangePkmnBattleData 0x7, 0x1, 0x34, 0x0
+	Cmd_32 Bic, 0x6, 0x4000
+	Cmd_32 Store, 0x3a, 0x1
+	Cmd_17 0x1
+	Cmd_e
+	Cmd_5 0x1
+	Cmd_e
+	Cmd_d 0x1
+	Cmd_e
+	Cmd_32 Orr, 0x3c, 0x10
+	Cmd_32 Bic, 0x6, 0x80
+	Cmd_32 Store, 0x2f, 0x0
+	Cmd_23_LoadSubSeq 0xa
+@ 2b4
 
 Script_branch_2b4: @ 2b4
 	end
+@ 0x2b8
 @ 2b8
 
-@ end_0x2b8

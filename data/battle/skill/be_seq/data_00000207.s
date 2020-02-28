@@ -2,10 +2,10 @@
 
 
 Script_1: @ 0
-	Cmd_32 Orr, Var_6, 0x4
+	Cmd_32 Orr, 0x6, 0x4
 	Cmd_26
-	Cmd_f
+	Cmd_f_CalcDamage
 	end
+@ 0x1c
 @ 1c
 
-@ end_0x1c

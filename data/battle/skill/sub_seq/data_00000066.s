@@ -2,8 +2,8 @@
 
 
 Script_1: @ 0
-	ChangePkmnBattleData Orr, Target_1, PkmnBattleData_35, 0x800000
+	ChangePkmnBattleData 0xa, 0x1, 0x35, 0x800000
 	end
+@ 0x18
 @ 18
 
-@ end_0x18

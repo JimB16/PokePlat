@@ -2,14 +2,15 @@
 
 
 Script_1: @ 0
-	ChangePkmnBattleData Orr, Target_1, PkmnBattleData_3b, 0x200
-	ChangePkmnBattleData Store, Target_1, 0x3f, 0x2
+	ChangePkmnBattleData 0xa, 0x1, 0x3b, 0x200
+	ChangePkmnBattleData 0x7, 0x1, 0x3f, 0x2
 	Cmd_12 0x1e7, 0x2, 0x1
 	Cmd_e
-@ 3c
+	Cmd_1e 0x1e
+	Cmd_39 0x7, 0x11, 0xf
+	Cmd_32 Store, Var_MoveEffectNr, 0x13
+	AddNewScript 12
+	end
+@ 0x70
+@ 70
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000131.bin", 0x3c, 0x70 - 0x3c
-
-
-@ end_0x70

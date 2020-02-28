@@ -3,7 +3,7 @@
 
 Script_1: @ 0
 	Cmd_62
-	JumpIf Eq, Var_0x18, 0x138, Script_branch_2c
+	JumpIf Eq, 0x18, 0x138, Script_branch_2c
 	Cmd_12 0x335, 0x0
 	Jump Script_branch_38
 @ 2c
@@ -12,10 +12,25 @@ Script_branch_2c: @ 2c
 	Cmd_12 0x250, 0x0
 Script_branch_38: @ 38
 	Cmd_e
-@ 3c
+	Cmd_1e 0x1e
+	JumpIf Eq, 0x18, 0x138, Script_branch_c8
+	JumpIf TstEq, 0x9, 0x1, Script_branch_90
+	Cmd_12 0x2b1, 0x25, 0x1, 0x1, 0xff
+	Cmd_e
+	Cmd_1e 0x1e
+Script_branch_90: @ 90
+	JumpIf TstEq, 0x9, 0x2, Script_branch_c8
+	Cmd_12 0x2b1, 0x25, 0x10, 0x10, 0xff
+	Cmd_e
+	Cmd_1e 0x1e
+Script_branch_c8: @ c8
+	JumpIf TstNe, 0x9, 0x4, Script_branch_e8
+	Cmd_42 0x1, 0x0
+Script_branch_e8: @ e8
+	JumpIf TstNe, 0x9, 0x8, Script_branch_108
+	Cmd_42 0x10, 0x0
+Script_branch_108: @ 108
+	end
+@ 0x10c
+@ 10c
 
-
-.incbin "./baserom/data/battle/skill/sub_seq_narc/data_00000088.bin", 0x3c, 0x10c - 0x3c
-
-
-@ end_0x10c

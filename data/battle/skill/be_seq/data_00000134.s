@@ -3,8 +3,8 @@
 
 Script_1: @ 0
 	Cmd_26
-	Cmd_f
+	Cmd_f_CalcDamage
 	end
+@ 0xc
 @ c
 
-@ end_0xc

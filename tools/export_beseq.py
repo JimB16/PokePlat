@@ -5,11 +5,6 @@
 
 import os
 import sys
-from copy import copy, deepcopy
-from ctypes import c_int8
-import random
-import json
-import operator
 from new import classobj
 
 import configuration
@@ -19,32 +14,7 @@ import labels
 from labels import line_has_label
 import interval_map
 
-from lists.pokemonnamelist import PokemonNameList
-from lists.movenamelist import MoveNameList
-from lists.itemnamelist import ItemNameList
 from lists.abilitynamelist import AbilityNameList
-from lists.typelist import TypeList
-
-
-def GetPokemonName(species):
-    if species <= 493:
-        return PokemonNameList[species].upper()
-    else:
-        return PokemonNameList[0].upper()
-
-
-def GetMoveName(move):
-    if move <= 467:
-        return MoveNameList[move]
-    else:
-        return MoveNameList[0]
-
-
-def GetItemName(item):
-    if item <= 536:
-        return ItemNameList[item]
-    else:
-        return ItemNameList[0]
 
 
 def GetAbilityName(ability):
@@ -52,37 +22,6 @@ def GetAbilityName(ability):
         return AbilityNameList[ability]
     else:
         return AbilityNameList[0]
-
-
-def GetTypeName(type):
-    if type <= 17:
-        return TypeList[type]
-    else:
-        return TypeList[0]
-
-
-def GetTrainerName(item):
-    if item == 0:
-        return "Defender" #"PlayerPkmn"
-    elif item == 1:
-        return "Attacker" # "AIPkmn"
-    elif item == 2:
-        return "Defender2nd" # "Player2ndPkmn"
-    elif item == 3:
-        return "Attacker2nd" # "AI2ndPkmn"
-    else:
-        return str(item)
-
-
-def GetStatusLevelName(item):
-    #if item == 0:
-    #    return "0"
-    #elif item == 5:
-    #    return "ATK_LEVEL"
-    #else:
-    #    return str(item)
-    return hex(item)
-
 
 
 # all_new_labels is a temporary replacement for all_labels,
@@ -109,13 +48,6 @@ class Label:
         # label might not be in the file yet
         self.line_number = line_number
 
-        # -- These were some old attempts to check whether the label
-        # -- was already in use. They work, but the other method is
-        # -- better.
-        #
-        # check if the label is in the file already
-        # check if the address of this label is already in use
-
         self.is_in_file = is_in_file
 
         self.address_is_in_file = address_is_in_file
@@ -133,7 +65,6 @@ class Label:
         This method checks if the label appears in the file based on the
         entries to the Asm.parts list.
         """
-        # assert new_asm != None, "new_asm should be an instance of Asm"
         new_asm = load_asm2()
         is_in_file = new_asm.is_label_name_in_file(self.name)
         self.is_in_file = is_in_file
@@ -189,9 +120,6 @@ def insert_asm_incbins(asms):
 		new_asms += [asm]
 		if i + 1 < len(asms):
 			last_address, next_address = asm[2], asms[i + 1][0]
-			#last_address -= input_file.GetBaseAddress()
-			#if i == 0:
-			#	next_address -= input_file.GetBaseAddress()
 			if last_address < next_address:
 				new_asms += [generate_incbin_asm(last_address, next_address)]
 	return new_asms
@@ -205,22 +133,14 @@ def generate_incbin_asm(start_address, end_address):
 	if start_address == 0:
 		incbin = (
 			start_address,
-			#'\n.incbin "' + filename + baserom/arm9.bin", 0x%x, 0x%x - 0x%x\n\n' % (
 			'\n.incbin "' + filename + '", 0x%x, 0x%x - 0x%x\n\n' % (
 				start_address, end_address, start_address
 			),
 			end_address
 		)
-	#elif (end_address-start_address) == 2 and (start_address & 1) == 0:
-	#	incbin = (
-	#		start_address,
-	#		'\n.align 2, 0\n',
-	#		end_address
-	#	)
 	else:
 		incbin = (
 			start_address,
-			#'\n.incbin "baserom/arm9.bin", 0x%x, 0x%x - 0x%x\n\n' % (
 			'\n.incbin "' + filename + '", 0x%x, 0x%x - 0x%x\n\n' % (
 				start_address, end_address, start_address
 			),
@@ -273,69 +193,13 @@ def get_label_for(address):
     return None
 
 
-Value35c = 0
-Ability35c = 1
-
-class MultiByteParam():
-    """or MultiByte(CommandParam)"""
+class PointerLabelParam():
     size = 4
-    should_be_decimal = False
-    byte_type = "dw"
 
     def __init__(self, fin, *args, **kwargs):
-        self.prefix = "$" # default.. feel free to set 0x in kwargs
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address") or self.address == None:
-            raise Exception("an address is a requirement")
-        #elif not is_valid_address(self.address):
-        #    raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("don't know how many bytes to read (size)")
-        self.parse(fin)
-
-    def parse(self, fin, address):
-        self.bytes = address
-        self.parsed_number = address
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    # you won't actually use this to_asm because it's too generic
-    #def to_asm(self): return ", ".join([(self.prefix+"%.2x")%x for x in self.bytes])
-    def to_asm(self):
-        if not self.should_be_decimal:
-            return self.prefix+"".join([("%.2x")%x for x in reversed(self.bytes)])
-        elif self.should_be_decimal:
-            decimal = int("0x"+"".join([("%.2x")%x for x in reversed(self.bytes)]), 16)
-            return str(decimal)
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-
-class PointerLabelParam(MultiByteParam):
-    # default size is 4 bytes
-    default_size = 4
-    size = 4
-    force = False
-    debug = False
-
-    def __init__(self, fin, *args, **kwargs):
-        self.dependencies = None
-        if self.size > 5:
-            raise Exception("param size is too large")
-        # continue instantiation.. self.bank will be set down the road
-        MultiByteParam.__init__(self, fin, *args, **kwargs)
-
-    def parse(self, fin):
         self.parsed_address = fin.readUInt32() * 4
         self.parsed_address += fin.tell()
         self.parsed_address &= 0xffffffff
-        MultiByteParam.parse(self, fin, self.parsed_address)
         label_address = self.parsed_address
         self.base_label = 'Script'
         label = '%s_branch_%x' % (
@@ -345,66 +209,60 @@ class PointerLabelParam(MultiByteParam):
         l = {'address':label_address, 'label':label}
         all_labels.append(l)
 
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        dependencies = []
-        if self.parsed_address == self.address:
-            return dependencies
-        if self.dependencies != None and not recompute:
-            global_dependencies.update(self.dependencies)
-            return self.dependencies
-        thing = script_parse_table[self.parsed_address]
-        if thing and thing.address == self.parsed_address and not (thing is self):
-            #if self.debug:
-            #    print "parsed address is: " + hex(self.parsed_address) + " with label: " + thing.label.name + " of type: " + str(thing.__class__)
-            dependencies.append(thing)
-            if not thing in global_dependencies:
-                global_dependencies.add(thing)
-                more = thing.get_dependencies(recompute=recompute, global_dependencies=global_dependencies)
-                dependencies.extend(more)
-        self.dependencies = dependencies
-        return dependencies
-
     def to_asm(self):
-        # we pass bank= for whether or not to include a bank byte when reading
-        #.. it's not related to caddress
-        caddress = None
-        if not (hasattr(self, "parsed_address") and self.parsed_address != None):
-            caddress = self.parsed_address
-        else:
-            caddress = self.parsed_address
-        label = get_label_for(caddress)
-        pointer_part = label # use the label, if it is found
-        #print("label " + str(pointer_part) + " " + str(label))
-
-        # setup output bytes if the label was not found
-        if not label:
-            lo = self.bytes
-            hi = 0x0
-            pointer_part = "{0}{1:02x}{2:02x}".format(self.prefix, hi, lo)
-        if label: return label
-
-        return pointer_part # this could be the same as label
+        label = get_label_for(self.parsed_address)
+        return label # this could be the same as label
 
 
-class CallPointerLabelParam(MultiByteParam):
-    # default size is 4 bytes
-    default_size = 4
+class PointerLabelParam4():
     size = 4
-    force = False
-    debug = False
 
     def __init__(self, fin, *args, **kwargs):
-        self.dependencies = None
-        if self.size > 5:
-            raise Exception("param size is too large")
-        # continue instantiation.. self.bank will be set down the road
-        MultiByteParam.__init__(self, fin, *args, **kwargs)
+        self.parsed_address = fin.readUInt32() * 4
+        self.parsed_address += fin.tell() + 4
+        self.parsed_address &= 0xffffffff
+        label_address = self.parsed_address
+        self.base_label = 'Script'
+        label = '%s_branch_%x' % (
+            self.base_label,
+            label_address
+            )
+        l = {'address':label_address, 'label':label}
+        all_labels.append(l)
 
-    def parse(self, fin):
+    def to_asm(self):
+        label = get_label_for(self.parsed_address)
+        return label # this could be the same as label
+
+
+class PointerLabelParam8():
+    size = 4
+
+    def __init__(self, fin, *args, **kwargs):
+        self.parsed_address = fin.readUInt32() * 4
+        self.parsed_address += fin.tell() + 8
+        self.parsed_address &= 0xffffffff
+        label_address = self.parsed_address
+        self.base_label = 'Script'
+        label = '%s_branch_%x' % (
+            self.base_label,
+            label_address
+            )
+        l = {'address':label_address, 'label':label}
+        all_labels.append(l)
+
+    def to_asm(self):
+        label = get_label_for(self.parsed_address)
+        return label # this could be the same as label
+
+
+class CallPointerLabelParam():
+    size = 4
+
+    def __init__(self, fin, *args, **kwargs):
         self.parsed_address = fin.readUInt32() * 4
         self.parsed_address += fin.tell()
         self.parsed_address &= 0xffffffff
-        MultiByteParam.parse(self, fin, self.parsed_address)
         label_address = self.parsed_address
         label = 'Function_%x' % (
             label_address
@@ -412,45 +270,9 @@ class CallPointerLabelParam(MultiByteParam):
         l = {'address':label_address, 'label':label}
         all_labels.append(l)
 
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        dependencies = []
-        if self.parsed_address == self.address:
-            return dependencies
-        if self.dependencies != None and not recompute:
-            global_dependencies.update(self.dependencies)
-            return self.dependencies
-        thing = script_parse_table[self.parsed_address]
-        if thing and thing.address == self.parsed_address and not (thing is self):
-            #if self.debug:
-            #    print "parsed address is: " + hex(self.parsed_address) + " with label: " + thing.label.name + " of type: " + str(thing.__class__)
-            dependencies.append(thing)
-            if not thing in global_dependencies:
-                global_dependencies.add(thing)
-                more = thing.get_dependencies(recompute=recompute, global_dependencies=global_dependencies)
-                dependencies.extend(more)
-        self.dependencies = dependencies
-        return dependencies
-
     def to_asm(self):
-        # we pass bank= for whether or not to include a bank byte when reading
-        #.. it's not related to caddress
-        caddress = None
-        if not (hasattr(self, "parsed_address") and self.parsed_address != None):
-            caddress = self.parsed_address
-        else:
-            caddress = self.parsed_address
-        label = get_label_for(caddress)
-        pointer_part = label # use the label, if it is found
-        #print("label " + str(pointer_part) + " " + str(label))
-
-        # setup output bytes if the label was not found
-        if not label:
-            lo = self.bytes
-            hi = 0x0
-            pointer_part = "{0}{1:02x}{2:02x}".format(self.prefix, hi, lo)
-        if label: return label
-
-        return pointer_part # this could be the same as label
+        label = get_label_for(self.parsed_address)
+        return label
 
         
 
@@ -479,7 +301,6 @@ def asm_sort(asm_def):
 		address,
 		last_address,
 		not is_comment(asm),
-		#not line_has_label(asm),
 		asm
 	)
 
@@ -500,27 +321,12 @@ def sort_asms(asms):
 	return trimmed
 
 class Command:
-    """
-    Note: when dumping to asm, anything in script_parse_table that directly
-    inherits Command should not be .to_asm()'d.
-    """
-    # use this when the "byte id" doesn't matter
-    # .. for example, a non-script command doesn't use the "byte id"
-    override_byte_check = True
-    is_rgbasm_macro = False
     base_label = "UnseenLabel_"
 
     def __init__(self, fin, address=None, *pargs, **kwargs):
         """params:
         address     - where the command starts
-        force       - whether or not to force the script to be parsed (default False)
-        debug       - are we in debug mode? default False
-        map_group
-        map_id
         """
-        defaults = {"force": False, "debug": False, "map_group": None, "map_id": None}
-        #if not is_valid_address(address):
-        #    raise Exception("address is invalid")
         # set up some variables
         self.address = address
         self.last_address = None
@@ -529,38 +335,14 @@ class Command:
         self.label = Label(name=label, address=address, object=self)
         # params are where this command's byte parameters are stored
         self.params = {}
-        self.dependencies = None
-        # override default settings
-        defaults.update(kwargs)
-        # set everything
-        for (key, value) in defaults.items():
-            setattr(self, key, value)
         # but also store these kwargs
-        self.args = defaults
+        self.args = {}
         # start parsing this command's parameter bytes
         self.parse(fin)
 
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        dependencies = []
-        #if self.dependencies != None and not recompute:
-        #    global_dependencies.update(self.dependencies)
-        #    return self.dependencies
-        for (key, param) in self.params.items():
-            if hasattr(param, "get_dependencies") and param != self:
-                deps = param.get_dependencies(recompute=recompute, global_dependencies=global_dependencies)
-                if deps != None and not self in deps:
-                    dependencies.extend(deps)
-        self.dependencies = dependencies
-        return dependencies
-
     def to_asm(self):
-        global Value35c
-        global Ability35c
-    
         # start with the rgbasm macro name for this command
         output = ""
-        #if len(self.macro_name) > 0 and self.macro_name[0].isdigit():
-        #    output += "_"
         output += self.macro_name
         # return if there are no params
         if len(self.param_types.keys()) == 0:
@@ -568,24 +350,10 @@ class Command:
         # first one will have no prefixing comma
         first = True
         # start reading the bytes after the command byte
-        if not self.override_byte_check:
-            current_address = self.address+1
-        else:
-            current_address = self.address
-        #output = self.macro_name + ", ".join([param.to_asm() for (key, param) in self.params.items()])
-        
-        if self.macro_name == "AI_GetAbility":
-            Value35c = Ability35c
-        elif ((self.macro_name == "AI_If35cEq") or (self.macro_name == "AI_If35cNe")):
-            Value35c = Value35c
-        elif (self.macro_name == "AI_GetRoundNr"):
-            Value35c = 0
-        else:
-            Value35c = 0
+        current_address = self.address
         
         # add each param
         for (key, param) in self.params.items():
-            name = param.name
             # the first param shouldn't have ", " prefixed
             if first:
                 output += " "
@@ -596,39 +364,20 @@ class Command:
             output += param.to_asm()
             current_address += param.size
         
-        #for param_type in self.param_types:
-        #    name = param_type["name"]
-        #    klass = param_type["klass"]
-        #    # create an instance of this type
-        #    # tell it to begin parsing at this latest byte
-        #    obj = klass(address=current_address)
-        #    # the first param shouldn't have ", " prefixed
-        #    if first: first = False
-        #    # but all other params should
-        #    else: output += ", "
-        #    # now add the asm-compatible param string
-        #    output += obj.to_asm()
-        #    current_address += obj.size
         return output
 
     def parse(self, fin):
         # id, size (inclusive), param_types
         #param_type = {"name": each[1], "class": each[0]}
-        if not self.override_byte_check:
-            current_address = self.address+1
-        else:
-            current_address = self.address
+        current_address = self.address
         fin.seek(self.address)
         byte = fin.readUInt32() #ord(rom[self.address])
-        if not self.override_byte_check and (not byte == self.id):
-            raise Exception("byte ("+hex(byte)+") != self.id ("+hex(self.id)+")")
         i = 0
         for (key, param_type) in self.param_types.items():
-            name = param_type["name"]
             klass = param_type["class"]
             # make an instance of this class, like SingleByteParam()
             # or ItemLabelByte.. by making an instance, obj.parse() is called
-            obj = klass(fin, address=current_address, name=name, parent=self, **dict([(k,v) for (k, v) in self.args.items() if k not in ["parent"]]))
+            obj = klass(fin, address=current_address, parent=self, **dict([(k,v) for (k, v) in self.args.items() if k not in ["parent"]]))
             # save this for later
             self.params[i] = obj
             # increment our counters
@@ -638,254 +387,91 @@ class Command:
         return True
 
 
-class SingleByteParam():
-    """or SingleByte(CommandParam)"""
-    size = 1
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt8() #ord(rom[self.address])
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        if not self.should_be_decimal:
-            return hex(self.byte)
-        else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
-		
-		
-class SingleHWordParam():
-    size = 2
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt16() #ord(rom[self.address])
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        if not self.should_be_decimal:
-            return hex(self.byte)
-        else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-
-		
 class SingleWordParam():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readUInt32()
 
     def to_asm(self):
-        global Value35c
-        global Ability35c
-
-        if Value35c == Ability35c:
-            return GetAbilityName(self.byte)
-        elif not self.should_be_decimal:
-            return hex(self.byte)
-        else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+        return hex(self.byte)
 
 
-		
 class SingleWordDecimalParam():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		self.byte = fin.readInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readInt32()
 
     def to_asm(self):
         return str(self.byte)
 
-    @staticmethod
-    def from_asm(value):
-        return value
 
-
-		
 class Function_224abec_Param():
     size = 8
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
+		#print("Multibytesize_0: " + str(self.size))
 		self.byte = fin.readUInt32()
 		self.byte2 = fin.readUInt32()
 		self.byte3 = 0
+		self.byte4 = 0
+		self.byte5 = 0
+		self.byte6 = 0
+		self.byte7 = 0
 		if (self.byte2 >= 1) and (self.byte2 < 9):
 			self.byte3 = fin.readUInt32()
 			self.size += 4
 		elif (self.byte2 >= 9) and (self.byte2 < 0x1f):
 			self.byte3 = fin.readUInt32()
+			self.byte4 = fin.readUInt32()
 			self.size += 8
 		elif (self.byte2 >= 0x1f) and (self.byte2 < 0x34):
 			self.byte3 = fin.readUInt32()
+			self.byte4 = fin.readUInt32()
+			self.byte5 = fin.readUInt32()
 			self.size += 12
 		elif (self.byte2 >= 0x34) and (self.byte2 < 0x3c):
 			self.byte3 = fin.readUInt32()
+			self.byte4 = fin.readUInt32()
+			self.byte5 = fin.readUInt32()
+			self.byte6 = fin.readUInt32()
 			self.size += 16
 		elif (self.byte2 == 0x3c):
 			self.byte3 = fin.readUInt32()
+			self.byte4 = fin.readUInt32()
+			self.byte5 = fin.readUInt32()
+			self.byte6 = fin.readUInt32()
+			self.byte7 = fin.readUInt32()
+			self.byte8 = fin.readUInt32()
 			self.size += 24
-		print("size: " + str(self.size))
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+		#print("Multibytesize: " + str(self.size))
+		#else:
+		#	self.size += 8
 
     def to_asm(self):
-        if not self.should_be_decimal:
-            if self.byte2 <= 0:
-                return hex(self.byte) + ", " + hex(self.byte2)
-            else:
-                return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
+        if self.byte2 <= 0:
+            return hex(self.byte) + ", " + hex(self.byte2)
+        elif (self.byte2 >= 1) and (self.byte2 < 9):
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
+        elif (self.byte2 >= 9) and (self.byte2 < 0x1f):
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3) + ", " + hex(self.byte4)
+        elif (self.byte2 >= 0x1f) and (self.byte2 < 0x34):
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3) + ", " + hex(self.byte4) + ", " + hex(self.byte5)
+        elif (self.byte2 >= 0x34) and (self.byte2 < 0x3c):
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3) + ", " + hex(self.byte4) + ", " + hex(self.byte5) + ", " + hex(self.byte6)
+        elif (self.byte2 == 0x3c):
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3) + ", " + hex(self.byte4) + ", " + hex(self.byte5) + ", " + hex(self.byte6) + ", " + hex(self.byte7) + ", " + hex(self.byte8)
         else:
-            return str(self.byte) + ", " + str(self.byte2)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+            return hex(self.byte) + ", " + hex(self.byte2)
+            #return "new_Function_224abec_Param_" + hex(self.byte2)
 
 
 class VariableParam():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readUInt32()
 
     def to_asm(self):
         if self.byte == 0x0:
@@ -893,97 +479,57 @@ class VariableParam():
         elif self.byte == 0x1:
             return "Var_1"
         elif self.byte == 0x2:
-            return "Var_2"
+            return "Var_MoveEffect_SubSeq"
         elif self.byte == 0x3:
             return "Var_3"
         elif self.byte == 0x7:
             return "Var_Weather"
+        elif self.byte == 0xe:
+            return "Var_Damage"
+        elif self.byte == 0xf:
+            return "Var_NrOfPkmn"
+        elif self.byte == 0x10:
+            return "Var_TargetPkmn"
         elif self.byte == 0x19:
             return "Var_RoundNr"
+        elif self.byte == 0x20:
+            return "Var_StatusEffectDamage"
+        elif self.byte == 0x22:
+            return "Var_MoveEffectNr"
+        elif self.byte == 0x24:
+            return "Var_UsedItem"
         elif self.byte == 0x26:
             return "Var_WeatherCounter"
-        elif not self.should_be_decimal:
-            return hex(self.byte)
+        elif self.byte == 0x2c:
+            return "Var_DamageMultiplier"
+        elif self.byte == 0x3e:
+            return "Var_NrOfBattleTextPtrs"
         else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+            return hex(self.byte)
 
 
 class Cmd5Param():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		self.byte = fin.readUInt32()
-		if self.byte == 0xa:
-			self.byte2 = fin.readUInt32()
-			self.byte3 = fin.readUInt32()
-			self.size += 8
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readUInt32()
+        if self.byte == 0xa:
+            self.byte2 = fin.readUInt32()
+            self.byte3 = fin.readUInt32()
+            self.size += 8
 
     def to_asm(self):
-        if not self.should_be_decimal:
-            if self.byte == 0xa:
-                return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
-            else:
-                return hex(self.byte)
+        if self.byte == 0xa:
+            return hex(self.byte) + ", " + hex(self.byte2) + ", " + hex(self.byte3)
         else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+            return hex(self.byte)
 
 
 class Cmd20Param():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readUInt32()
 
     def to_asm(self):
         if self.byte == 0x0:
@@ -1000,441 +546,275 @@ class Cmd20Param():
             return "TstEq"
         elif self.byte == 0x6:
             return "AndEq"
-        elif not self.should_be_decimal:
-            return hex(self.byte)
         else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+            return hex(self.byte)
 
 
 class Cmd32Param():
     size = 4
-    should_be_decimal = False
-    byte_type = "db"
 
     def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
+        self.byte = fin.readUInt32()
 
     def to_asm(self):
         if self.byte == 0x7:
-            return "Cmd32_Store"
+            return "Store"
         elif self.byte == 0x8:
-            return "Cmd32_Add"
+            return "Add"
         elif self.byte == 0x9:
-            return "Cmd32_Sub"
+            return "Sub"
         elif self.byte == 0xa:
-            return "Cmd32_Orr"
+            return "Orr"
         elif self.byte == 0xb:
-            return "Cmd32_Bic"
-        elif not self.should_be_decimal:
-            return hex(self.byte)
+            return "Bic"
         else:
-            return str(self.byte)
-
-    @staticmethod
-    def from_asm(value):
-        return value
+            return hex(self.byte)
 
 
-class MoveParam():
-    size = 4
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32() #ord(rom[self.address])
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        return GetMoveName(self.byte).upper()
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-
-class TypeParam():
-    size = 4
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		#fin.seek(self.address)
-		self.byte = fin.readUInt32() #ord(rom[self.address])
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        return GetTypeName(self.byte).upper()
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-
-class TrainerParam():
-    size = 4
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        return GetTrainerName(self.byte).upper()
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-
-class StatusLevelParam():
-    size = 4
-    should_be_decimal = False
-    byte_type = "db"
-
-    def __init__(self, fin, *args, **kwargs):
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-        # check address
-        if not hasattr(self, "address"):
-            raise Exception("an address is a requirement")
-        elif self.address == None:
-            raise Exception("address must not be None")
-       # elif not is_valid_address(self.address):
-       #     raise Exception("address must be valid")
-        # check size
-        if not hasattr(self, "size") or self.size == None:
-            raise Exception("size is probably 1?")
-        # parse bytes from ROM
-        self.parse(fin)
-
-    def parse(self, fin):
-		self.byte = fin.readUInt32()
-
-    def get_dependencies(self, recompute=False, global_dependencies=set()):
-        return []
-
-    def to_asm(self):
-        return GetStatusLevelName(self.byte).upper()
-
-    @staticmethod
-    def from_asm(value):
-        return value
-
-		
 music_commands = {
     0x0: ["Cmd_0"],
-    0x1: ["Cmd_1", ["unknown", SingleWordParam]],
-    0x2: ["Cmd_2", ["unknown", SingleWordParam]],
-    0x3: ["Cmd_3", ["unknown", SingleWordParam]],
-    0x4: ["Cmd_4", ["unknown", SingleWordParam]],
-    0x5: ["Cmd_5", ["unknown", Cmd5Param]],
-    0x6: ["Cmd_6", ["unknown", SingleWordParam]],
-    0x7: ["Cmd_7", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x8: ["Cmd_8", ["unknown", SingleWordParam]],
-    0x9: ["Cmd_9", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x1: ["Cmd_1", [SingleWordParam]],
+    0x2: ["Cmd_2", [SingleWordParam]],
+    0x3: ["Cmd_3", [SingleWordParam]],
+    0x4: ["Cmd_4", [SingleWordParam]],
+    0x5: ["Cmd_5", [Cmd5Param]],
+    0x6: ["Cmd_6", [SingleWordParam]],
+    #0x7: ["Cmd_7", [SingleWordParam], [SingleWordParam]],
+    0x7: ["Cmd_7", [SingleWordParam], [SingleWordParam]],
+    0x8: ["Cmd_8", [SingleWordParam]],
+    0x9: ["Cmd_9", [SingleWordParam], [SingleWordParam]],
     0xa: ["Cmd_a"],
-    0xb: ["Cmd_b", ["unknown", SingleWordParam]],
-    0xc: ["Cmd_c", ["unknown", SingleWordParam]],
-    0xd: ["Cmd_d", ["unknown", SingleWordParam]],
+    0xb: ["Cmd_b", [SingleWordParam]],
+    0xc: ["Cmd_c", [SingleWordParam]],
+    0xd: ["Cmd_d", [SingleWordParam]],
     0xe: ["Cmd_e"],
-    0xf: ["Cmd_f"],
-    0x10: ["Cmd_10"],
+    0xf: ["Cmd_f_CalcDamage"],
+    0x10: ["Cmd_10_CalcDamage"],
     0x11: ["Cmd_11"],
-    0x12: ["Cmd_12", ["unknown", Function_224abec_Param]],
-    0x13: ["Cmd_13", ["unknown", Function_224abec_Param]],
+    0x12: ["Cmd_12", [Function_224abec_Param]],
+    0x13: ["Cmd_13", [Function_224abec_Param]],
     0x14: ["Cmd_14"],
-    0x15: ["Cmd_15", ["unknown", Function_224abec_Param]],
-    0x16: ["Cmd_16", ["unknown", Function_224abec_Param]],
-    0x17: ["Cmd_17", ["unknown", SingleWordParam]],
-    0x18: ["Cmd_18", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x19: ["Cmd_19", ["unknown", SingleWordParam]],
-    0x1a: ["Cmd_1a", ["unknown", SingleWordParam]],
-    0x1b: ["Cmd_1b", ["unknown", SingleWordParam]],
-    0x1c: ["Cmd_1c", ["unknown", SingleWordParam]],
+    0x15: ["Cmd_15", [Function_224abec_Param]],
+    0x16: ["Cmd_16", [SingleWordParam], [Function_224abec_Param]],
+    0x17: ["Cmd_17", [SingleWordParam]],
+    0x18: ["Cmd_18", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0x19: ["Cmd_19", [SingleWordParam]],
+    0x1a: ["Cmd_1a", [SingleWordParam]],
+    0x1b: ["WhoGetsHPBarCleared", [SingleWordParam]],
+    0x1c: ["Cmd_1c", [SingleWordParam]],
     0x1d: ["Cmd_1d"],
-    0x1e: ["Cmd_1e", ["unknown", SingleWordParam]],
-    0x1f: ["Cmd_1f", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x20: ["JumpIf", ["unknown", Cmd20Param], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x21: ["JumpIfPkmnBattleData", ["unknown", Cmd20Param], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x1e: ["Cmd_1e", [SingleWordParam]],
+    #0x1e: ["Cmd_1e"],
+    0x1f: ["Cmd_1f", [SingleWordParam], [SingleWordParam]],
+    0x20: ["JumpIf", [Cmd20Param], [VariableParam], [SingleWordParam], [PointerLabelParam]],
+    0x21: ["JumpIfPkmnBattleData", [Cmd20Param], [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
     0x22: ["Cmd_22"],
-    0x23: ["Cmd_23_LoadSubSeq"],
+    0x23: ["Cmd_23_LoadSubSeq", [SingleWordParam]],
     0x24: ["Cmd_24"],
-    0x25: ["Cmd_25", ["unknown", SingleWordParam]],
+    0x25: ["Cmd_25", [SingleWordParam]],
+    #0x25: ["Cmd_25"],
     0x26: ["Cmd_26"],
-    0x27: ["Cmd_27", ["unknown", PointerLabelParam]],
-    0x28: ["Cmd_28"],
+    0x27: ["Cmd_27", [PointerLabelParam]],
+    0x28: ["PkmnGainsExpPts"],
     0x29: ["Cmd_29"],
-    0x2a: ["Cmd_2a_dummy", ["unknown", SingleWordParam]],
+    0x2a: ["Cmd_2a_dummy", [SingleWordParam]],
     0x2b: ["Cmd_2b"],
     0x2c: ["Cmd_2c"],
-    0x2d: ["Cmd_2d", ["unknown", SingleWordParam]],
-    0x2e: ["Cmd_2e", ["unknown", PointerLabelParam]],
-    0x2f: ["Cmd_2f", ["unknown", SingleWordParam]],
+    0x2d: ["Cmd_2d", [SingleWordParam]],
+    0x2e: ["Cmd_2e", [PointerLabelParam]],
+    0x2f: ["Cmd_2f_TryToCatchPkmn", [SingleWordParam]],
     0x30: ["Cmd_30_WaitFor"],
-    0x31: ["Cmd_31", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x32: ["Cmd_32", ["unknown", Cmd32Param], ["unknown", VariableParam], ["unknown", SingleWordParam]],
-    0x33: ["Cmd_33", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
-    0x34: ["Cmd_34", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x36: ["Cmd_36", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x37: ["Cmd_37", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x38: ["Cmd_38", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x39: ["Cmd_39", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x3a: ["Cmd_3a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x3b: ["Jump", ["unknown", PointerLabelParam]],
-    0x3c: ["Cmd_3c", ["unknown", SingleWordParam]],
-    0x3d: ["Cmd_3d", ["unknown", VariableParam]],
+    0x31: ["Cmd_31", [SingleWordParam], [SingleWordParam]],
+    0x32: ["Cmd_32", [Cmd32Param], [VariableParam], [SingleWordParam]],
+    0x33: ["Cmd_33", [PointerLabelParam8], [PointerLabelParam4], [PointerLabelParam]],
+    0x34: ["ChangePkmnBattleData", [SingleWordParam], [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0x36: ["Cmd_36", [SingleWordParam], [SingleWordParam]],
+    0x37: ["Cmd_37", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    #0x38: ["Cmd_38", [SingleWordParam], [SingleWordParam]],
+    0x38: ["Cmd_38"],
+    0x39: ["Cmd_39", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0x3a: ["Cmd_3a", [SingleWordParam], [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0x3b: ["Jump", [PointerLabelParam]],
+    0x3c: ["AddNewScript", [SingleWordDecimalParam]],
+    #0x3c: ["AddNewScript"],
+    0x3d: ["Cmd_3d", [VariableParam]],
     0x3e: ["Cmd_3e"],
     0x3f: ["Cmd_3f"],
-    0x40: ["Cmd_40", ["unknown", SingleWordParam]],
-    0x41: ["Cmd_41", ["unknown", SingleWordParam]],
-    0x42: ["Cmd_42", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x43: ["Cmd_43", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x40: ["Cmd_40", [SingleWordParam]],
+    0x41: ["Cmd_41", [SingleWordParam]],
+    0x42: ["Cmd_42", [SingleWordParam], [SingleWordParam]],
+    0x43: ["Cmd_43", [SingleWordParam], [SingleWordParam]],
     0x44: ["Cmd_44"],
-    0x45: ["Cmd_45", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x46: ["Cmd_46", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x47: ["Cmd_47", ["unknown", SingleWordParam], ["unknown", VariableParam]],
-    0x48: ["Cmd_48", ["unknown", SingleWordParam]],
-    0x49: ["Cmd_49", ["unknown", SingleWordParam]],
-    0x4a: ["Cmd_4a", ["unknown", SingleWordParam]],
-    0x4b: ["Cmd_4b", ["unknown", SingleWordParam]],
-    0x4c: ["Cmd_4c", ["unknown", SingleWordParam]],
-    0x4d: ["Cmd_4d", ["unknown", PointerLabelParam]],
-    0x4e: ["Cmd_4e", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x4f: ["Cmd_4f", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x45: ["Cmd_45", [SingleWordParam], [SingleWordParam]],
+    0x46: ["Cmd_46", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0x47: ["Cmd_47", [SingleWordParam], [VariableParam]],
+    0x48: ["Cmd_48", [SingleWordParam]],
+    0x49: ["Cmd_49", [SingleWordParam]],
+    0x4a: ["Cmd_4a", [SingleWordParam]],
+    0x4b: ["Cmd_4b", [SingleWordParam]],
+    0x4c: ["Cmd_4c", [SingleWordParam]],
+    0x4d: ["Cmd_4d", [PointerLabelParam]],
+    0x4e: ["Cmd_4e", [SingleWordParam], [VariableParam], [SingleWordParam], [PointerLabelParam]],
+    0x4f: ["Cmd_4f", [SingleWordParam], [VariableParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
     0x50: ["Cmd_50"],
-    0x51: ["Cmd_51", ["unknown", PointerLabelParam]],
-    0x52: ["Cmd_52", ["unknown", PointerLabelParam]],
-    0x53: ["Cmd_53", ["unknown", PointerLabelParam]],
+    0x51: ["Cmd_51", [PointerLabelParam]],
+    0x52: ["Cmd_52", [PointerLabelParam]],
+    0x53: ["Cmd_53", [PointerLabelParam]],
     0x54: ["Cmd_54"],
-    0x55: ["Cmd_55", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0x56: ["Cmd_56", ["unknown", VariableParam], ["unknown", SingleWordParam]],
-    0x57: ["Cmd_57", ["unknown", PointerLabelParam]],
+    0x55: ["Cmd_55", [SingleWordParam], [SingleWordParam]],
+    0x56: ["Cmd_56", [VariableParam], [SingleWordParam]],
+    0x57: ["Cmd_57", [PointerLabelParam]],
     0x58: ["Cmd_58"],
-    0x59: ["Cmd_59", ["unknown", PointerLabelParam]],
+    0x59: ["Cmd_59", [PointerLabelParam]],
     0x5a: ["Cmd_5a"],
     0x5b: ["Cmd_5b"],
-    0x5c: ["Cmd_5c", ["unknown", PointerLabelParam]],
-    0x5d: ["Cmd_5d", ["unknown", PointerLabelParam]],
-    0x5e: ["Cmd_5e", ["unknown", PointerLabelParam]],
-    0x5f: ["Cmd_5f", ["unknown", SingleWordParam]],
+    0x5c: ["Cmd_5c", [PointerLabelParam]],
+    0x5d: ["Cmd_5d", [PointerLabelParam]],
+    0x5e: ["Cmd_5e", [PointerLabelParam]],
+    0x5f: ["Cmd_5f", [SingleWordParam]],
     0x60: ["Cmd_60"],
-    0x61: ["Cmd_61", ["unknown", PointerLabelParam]],
+    0x61: ["Cmd_61", [PointerLabelParam]],
     0x62: ["Cmd_62"],
-    0x63: ["Cmd_63", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]], # both should be pointers
-    0x64: ["Cmd_64", ["unknown", PointerLabelParam]],
-    0x65: ["Cmd_65", ["unknown", PointerLabelParam]],
-    0x66: ["Cmd_66", ["unknown", PointerLabelParam]],
+    0x63: ["Cmd_63", [PointerLabelParam4], [PointerLabelParam]], # both should be pointers
+    0x64: ["Cmd_64", [PointerLabelParam]],
+    0x65: ["Cmd_65", [PointerLabelParam]],
+    0x66: ["Cmd_66", [PointerLabelParam]],
     0x67: ["Cmd_67"],
-    0x68: ["Cmd_68", ["unknown", PointerLabelParam]],
-    0x69: ["Cmd_69", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x6a: ["Cmd_6a", ["unknown", PointerLabelParam]],
-    0x6b: ["Cmd_6b", ["unknown", VariableParam]],
-    0x6c: ["Cmd_6c", ["unknown", VariableParam], ["unknown", PointerLabelParam]],
-    0x6d: ["Cmd_6d", ["unknown", SingleWordParam]],
+    0x68: ["Cmd_68", [PointerLabelParam]],
+    0x69: ["Cmd_69", [SingleWordParam], [PointerLabelParam]],
+    0x6a: ["Cmd_6a", [PointerLabelParam]],
+    0x6b: ["Cmd_6b", [VariableParam]],
+    0x6c: ["Cmd_6c", [VariableParam], [PointerLabelParam]],
+    0x6d: ["Cmd_6d", [SingleWordParam]],
     0x6e: ["Cmd_6e"],
     0x6f: ["Cmd_6f"],
-    0x70: ["Cmd_70", ["unknown", PointerLabelParam]],
-    0x71: ["Cmd_71", ["unknown", PointerLabelParam]],
-    0x72: ["Cmd_72", ["unknown", PointerLabelParam]],
+    0x70: ["Cmd_70", [PointerLabelParam]],
+    0x71: ["Cmd_71", [PointerLabelParam]],
+    0x72: ["Cmd_72", [PointerLabelParam]],
     0x73: ["Cmd_73"],
-    0x74: ["Cmd_74", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x74: ["Cmd_74", [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
     0x75: ["Cmd_75"],
     0x76: ["Cmd_76"],
     0x77: ["Cmd_77"],
     0x78: ["Cmd_78"],
-    0x79: ["Cmd_79", ["unknown", PointerLabelParam]],
-    0x7a: ["Cmd_7a", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x7b: ["Cmd_7b", ["unknown", PointerLabelParam]],
+    0x79: ["Cmd_79", [PointerLabelParam]],
+    0x7a: ["Cmd_7a", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    0x7b: ["Cmd_7b", [PointerLabelParam]],
     0x7c: ["Cmd_7c"],
     0x7d: ["Cmd_7d"],
-    0x7e: ["Cmd_7e", ["unknown", PointerLabelParam]],
-    0x7f: ["Cmd_7f", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
-    0x80: ["Cmd_80", ["unknown", PointerLabelParam]],
-    0x81: ["Cmd_81", ["unknown", PointerLabelParam]],
-    0x82: ["Cmd_82", ["unknown", PointerLabelParam]],
+    0x7e: ["Cmd_7e", [PointerLabelParam]],
+    0x7f: ["Cmd_7f", [PointerLabelParam4], [PointerLabelParam]],
+    0x80: ["Cmd_80", [PointerLabelParam]],
+    0x81: ["Cmd_81", [PointerLabelParam]],
+    0x82: ["Cmd_82", [PointerLabelParam]],
     0x83: ["Cmd_83"],
     0x84: ["Cmd_84"],
-    0x85: ["Cmd_85", ["unknown", PointerLabelParam]],
-    0x86: ["Cmd_86", ["unknown", PointerLabelParam]],
-    0x87: ["Cmd_87", ["unknown", PointerLabelParam]],
+    0x85: ["Cmd_85", [PointerLabelParam]],
+    0x86: ["Cmd_86", [PointerLabelParam]],
+    0x87: ["Cmd_87", [PointerLabelParam]],
     0x88: ["Cmd_88"],
-    0x89: ["Cmd_89", ["unknown", PointerLabelParam]],
-    0x8a: ["Cmd_8a", ["unknown", PointerLabelParam]],
-    0x8b: ["Cmd_8b", ["unknown", PointerLabelParam]],
+    0x89: ["Cmd_89", [PointerLabelParam]],
+    0x8a: ["Cmd_8a", [PointerLabelParam]],
+    0x8b: ["Cmd_8b", [PointerLabelParam]],
     0x8c: ["Cmd_8c"],
     0x8d: ["Cmd_8d"],
-    0x8e: ["Cmd_8e", ["unknown", PointerLabelParam]],
+    0x8e: ["Cmd_8e", [PointerLabelParam]],
     0x8f: ["Cmd_8f"],
-    0x90: ["Cmd_90", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x91: ["Cmd_91", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
+    0x90: ["Cmd_90", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    0x91: ["Cmd_91", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
     0x92: ["Cmd_92"],
-    0x93: ["Cmd_93", ["unknown", PointerLabelParam]],
+    0x93: ["Cmd_93", [PointerLabelParam]],
     0x94: ["Cmd_94"],
     0x95: ["Cmd_95"],
-    0x96: ["Cmd_96", ["unknown", SingleWordParam]],
-    0x97: ["Cmd_97", ["unknown", PointerLabelParam]],
-    0x98: ["Cmd_98", ["unknown", PointerLabelParam]],
+    0x96: ["Cmd_96", [SingleWordParam]],
+    0x97: ["Cmd_97", [PointerLabelParam]],
+    0x98: ["Cmd_98", [PointerLabelParam]],
     0x99: ["Cmd_99"],
-    0x9a: ["Cmd_9a", ["unknown", PointerLabelParam]],
-    0x9b: ["Cmd_9b", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0x9c: ["Cmd_9c", ["unknown", PointerLabelParam]],
-    0x9d: ["Cmd_9d", ["unknown", PointerLabelParam]],
-    0x9e: ["Cmd_9e", ["unknown", PointerLabelParam]],
-    0x9f: ["Cmd_9f", ["unknown", PointerLabelParam]],
-    0xa0: ["Cmd_a0", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xa1: ["Cmd_a1", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xa2: ["Cmd_a2", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
+    0x9a: ["Cmd_9a", [PointerLabelParam]],
+    0x9b: ["Cmd_9b", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    0x9c: ["Cmd_9c", [PointerLabelParam]],
+    0x9d: ["Cmd_9d", [PointerLabelParam]],
+    0x9e: ["Cmd_9e", [PointerLabelParam]],
+    0x9f: ["Cmd_9f", [PointerLabelParam]],
+    0xa0: ["Cmd_a0", [SingleWordParam], [SingleWordParam]],
+    0xa1: ["Cmd_a1", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    0xa2: ["Cmd_a2", [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
     0xa3: ["Cmd_a3"],
     0xa4: ["Cmd_a4"],
-    0xa5: ["Cmd_a5", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xa6: ["Cmd_a6", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xa7: ["Cmd_a7", ["unknown", SingleWordParam], ["unknown", VariableParam]],
-    0xa8: ["Cmd_a8", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xa9: ["Cmd_a9", ["unknown", PointerLabelParam]],
+    0xa5: ["Cmd_a5", [SingleWordParam], [PointerLabelParam]],
+    0xa6: ["Cmd_a6", [SingleWordParam], [SingleWordParam], [SingleWordParam], [PointerLabelParam]],
+    0xa7: ["Cmd_a7", [SingleWordParam], [VariableParam]],
+    0xa8: ["Cmd_a8", [SingleWordParam], [SingleWordParam]],
+    0xa9: ["Cmd_a9", [PointerLabelParam]],
     0xaa: ["Cmd_aa"],
     0xab: ["Cmd_ab"],
-    0xac: ["Cmd_ac", ["unknown", PointerLabelParam]],
-    0xad: ["Cmd_ad", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
-    0xae: ["Cmd_ae", ["unknown", PointerLabelParam]],
-    0xaf: ["Cmd_af", ["unknown", SingleWordParam]],
-    0xb0: ["Cmd_b0", ["unknown", PointerLabelParam], ["unknown", PointerLabelParam]],
+    0xac: ["Cmd_ac", [PointerLabelParam]],
+    0xad: ["Cmd_ad", [PointerLabelParam4], [PointerLabelParam]],
+    0xae: ["Cmd_ae", [PointerLabelParam]],
+    0xaf: ["Cmd_af", [SingleWordParam]],
+    0xb0: ["Cmd_b0", [PointerLabelParam4], [PointerLabelParam]],
     0xb1: ["Cmd_b1"],
-    0xb2: ["Cmd_b2", ["unknown", PointerLabelParam]],
+    0xb2: ["Cmd_b2", [PointerLabelParam]],
     0xb3: ["Cmd_b3"],
-    0xb4: ["Cmd_b4", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xb5: ["Cmd_b5", ["unknown", PointerLabelParam]],
-    0xb6: ["Cmd_b6", ["unknown", PointerLabelParam]],
-    0xb7: ["LoadMoveData", ["unknown", SingleWordParam]],
-    0xb8: ["Cmd_b8", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xb9: ["Cmd_b9", ["unknown", SingleWordParam]],
+    0xb4: ["Cmd_b4", [SingleWordParam], [PointerLabelParam]],
+    0xb5: ["Cmd_b5", [PointerLabelParam]],
+    0xb6: ["Cmd_b6", [PointerLabelParam]],
+    0xb7: ["LoadMoveData", [SingleWordParam]],
+    0xb8: ["Cmd_b8", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0xb9: ["Cmd_b9", [SingleWordParam]],
     0xba: ["Cmd_ba"],
-    0xbb: ["Cmd_bb", ["unknown", SingleWordParam]],
-    0xbc: ["Cmd_bc", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xbd: ["Cmd_bd", ["unknown", SingleWordParam]],
-    0xbe: ["Cmd_be", ["unknown", SingleWordParam]],
-    0xbf: ["Cmd_bf", ["unknown", SingleWordParam]],
-    0xc0: ["Cmd_c0", ["unknown", SingleWordParam]],
+    0xbb: ["Cmd_bb", [SingleWordParam]],
+    0xbc: ["Cmd_bc", [SingleWordParam], [PointerLabelParam]],
+    0xbd: ["Cmd_bd", [SingleWordParam]],
+    0xbe: ["Cmd_be", [SingleWordParam]],
+    0xbf: ["Cmd_bf", [SingleWordParam]],
+    0xc0: ["Cmd_c0", [SingleWordParam]],
     0xc1: ["Cmd_c1"],
     0xc2: ["Cmd_c2"],
-    0xc3: ["Cmd_c3", ["unknown", SingleWordParam], ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xc4: ["Cmd_c4", ["unknown", SingleWordParam]],
-    0xc5: ["Cmd_c5", ["unknown", PointerLabelParam]],
-    0xc6: ["Cmd_c6", ["unknown", SingleWordParam]],
-    0xc7: ["Cmd_c7", ["unknown", SingleWordParam]],
-    0xc8: ["Cmd_c8", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xc9: ["Cmd_c9", ["unknown", PointerLabelParam]],
-    0xca: ["Cmd_ca", ["unknown", SingleWordParam]],
-    0xcb: ["Cmd_cb", ["unknown", SingleWordParam]],
-    0xcc: ["Cmd_cc", ["unknown", PointerLabelParam]],
+    0xc3: ["Cmd_c3", [SingleWordParam], [SingleWordParam], [SingleWordParam]],
+    0xc4: ["Cmd_c4", [SingleWordParam]],
+    0xc5: ["Cmd_c5", [PointerLabelParam]],
+    0xc6: ["Cmd_c6", [SingleWordParam]],
+    0xc7: ["Cmd_c7", [SingleWordParam]],
+    0xc8: ["Cmd_c8", [SingleWordParam], [PointerLabelParam]],
+    0xc9: ["Cmd_c9", [PointerLabelParam]],
+    0xca: ["Cmd_ca", [SingleWordParam]],
+    0xcb: ["Cmd_cb", [SingleWordParam]],
+    0xcc: ["Cmd_cc", [PointerLabelParam]],
     0xcd: ["Cmd_cd"],
     0xce: ["Cmd_ce"],
     0xcf: ["Cmd_cf"],
-    0xd0: ["Cmd_d0", ["unknown", SingleWordParam]],
-    0xd1: ["Cmd_d1", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xd2: ["Cmd_d2", ["unknown", SingleWordParam], ["unknown", PointerLabelParam]],
-    0xd3: ["Cmd_d3", ["unknown", SingleWordParam]],
-    0xd4: ["Cmd_d4", ["unknown", SingleWordParam]],
-    0xd5: ["Cmd_d5", ["unknown", PointerLabelParam]],
-    0xd6: ["Cmd_d6", ["unknown", SingleWordParam]],
-    0xd7: ["Cmd_d7", ["unknown", SingleWordParam]],
-    0xd8: ["Cmd_d8", ["unknown", SingleWordParam], ["unknown", SingleWordParam]],
-    0xda: ["Cmd_da", ["unknown", SingleWordParam]],
-    0xdc: ["Cmd_dc", ["unknown", SingleWordParam], ["unknown", VariableParam], ["unknown", SingleWordParam]],
-    0xdd: ["Cmd_dd", ["unknown", SingleWordParam]],
+    0xd0: ["Cmd_d0", [SingleWordParam]],
+    0xd1: ["Cmd_d1", [SingleWordParam], [SingleWordParam]],
+    0xd2: ["Cmd_d2", [SingleWordParam], [PointerLabelParam]],
+    0xd3: ["Cmd_d3", [SingleWordParam]],
+    0xd4: ["Cmd_d4", [SingleWordParam]],
+    0xd5: ["Cmd_d5", [PointerLabelParam]],
+    0xd6: ["Cmd_d6", [SingleWordParam]],
+    0xd7: ["Cmd_d7", [SingleWordParam]],
+    0xd8: ["Cmd_d8", [SingleWordParam], [SingleWordParam]],
+    0xd9: ["Cmd_d9", [SingleWordParam]],
+    0xda: ["Cmd_da", [SingleWordParam]],
+    0xdb: ["Cmd_db", [SingleWordParam], [SingleWordParam]],
+    0xdc: ["Cmd_dc", [SingleWordParam], [VariableParam], [SingleWordParam]],
+    0xdd: ["Cmd_dd", [SingleWordParam]],
     0xde: ["end"],
 }
 
 music_command_enders = [
 #	"Cmd_5",
+#	"Cmd_7",
+#	"Cmd_e",
+#	"Cmd_1e",
 	"Cmd_23_LoadSubSeq",
 	"Cmd_24", # jump to "be_seq"
 	"Cmd_25", # jump to "sub_seq" or "waza_seq"
-	"Cmd_63",
+#	"Cmd_63",
 	"Jump",
 	"end",
 ]
 
-def create_music_command_classes(debug=False):
+def create_music_command_classes():
     klasses = []
     for (byte, cmd) in music_commands.items():
         cmd_name = cmd[0].replace(" ", "_")
@@ -1448,18 +828,12 @@ def create_music_command_classes(debug=False):
         if len(cmd) > 1:
             param_types = cmd[1:]
             for (i, each) in enumerate(param_types):
-                thing = {"name": each[0], "class": each[1]}
+                thing = {"class": each[0]}
                 params["param_types"][i] = thing
-                if debug:
-                    logging.debug("each is {0} and thing[class] is {1}".format(each, thing["class"]))
                 params["size"] += thing["class"].size
         klass_name = cmd_name+"Command"
         klass = classobj(klass_name, (Command,), params)
         globals()[klass_name] = klass
-        if klass.macro_name == "notetype":
-            klass.allowed_lengths = [1, 2]
-        elif klass.macro_name in ["togglenoise", "sfxtogglenoise"]:
-            klass.allowed_lengths = [0, 1]
         klasses.append(klass)
     # later an individual klass will be instantiated to handle something
     return klasses
@@ -1468,12 +842,10 @@ music_classes = create_music_command_classes()
 
 
 class Channel:
-	"""A sound channel data parser."""
-
-	def __init__(self, fin, address, channel=1, base_label=None, sfx=False, label=None, used_labels=[]):
+	def __init__(self, fin, address, base_label=None, label=None, used_labels=[]):
 		self.start_address = address
 		self.address = address
-		self.channel = channel
+		self.channel = 0
 
 		self.base_label = base_label
 		if self.base_label == None:
@@ -1482,8 +854,6 @@ class Channel:
 		self.label = label
 		if self.label == None:
 			self.label = self.base_label
-
-		self.sfx = sfx
 
 		self.used_labels = used_labels
 		self.labels = []
@@ -1508,7 +878,7 @@ class Channel:
 
 			# label any jumps or calls
 			for key, param in class_.param_types.items():
-				if (param['class'] == PointerLabelParam):
+				if ((param['class'] == PointerLabelParam) or (param['class'] == PointerLabelParam4) or (param['class'] == PointerLabelParam8)):
 					label_address = class_.params[key].parsed_address
 					label = '%s_branch_%x' % (
 						self.base_label,
@@ -1535,14 +905,15 @@ class Channel:
 						label
 					)
 				elif (param['class'] == Function_224abec_Param):
-					print("Function_224abec_Param.size: " + hex(class_.params[key].size))
+					#print(hex(self.address) + ": Function_224abec_Param.size: " + hex(class_.params[key].size))
 					adress_offset = class_.params[key].size - 8
 				elif (param['class'] == Cmd5Param):
-					print("Cmd5Param.size: " + hex(class_.params[key].size))
+					#print("Cmd5Param.size: " + hex(class_.params[key].size))
 					adress_offset = class_.params[key].size - 4
 
 			self.output += [(self.address, '\t' + asm, self.address + class_.size + adress_offset)]
 			self.address += class_.size + adress_offset
+			#print(hex(self.address))
 
 			done = class_.end
 			# infinite loops are enders
@@ -1561,11 +932,9 @@ class Channel:
 				sub = Channel(
 					fin,
 					address=address,
-					channel=self.channel,
 					base_label=self.base_label,
 					label=asm.split(':')[0],
-					used_labels=self.used_labels,
-					sfx=self.sfx,
+					used_labels=self.used_labels
 				)
 				self.output += sub.output
 				self.labels += sub.labels
@@ -1591,65 +960,35 @@ class Channel:
 				return class_
 		raise NameError('Unknown Cmd: ' + hex(i) + ' at ' + hex(self.address))
         
-		return class_# Note
+		return class_
 
 
-        
 class Sound:
-	"""
-	Interprets a sound data header and its channel data.
-	"""
-
-	def __init__(self, fin, address, name='', sfx=False):
-		self.start_address = address
-		self.address = address
-		self.sfx = sfx
-
-		self.name = name
-		self.base_label = 'Sound_%x' % self.start_address
-		if self.name != '':
-			self.base_label = self.name
-
-		self.output = []
+	def __init__(self, fin, name):
+		self.base_label = name
 		self.labels = []
 		self.asms = []
 		self.parse(fin)
 
-
 	def parse_header(self, fin):
-		self.address = 0 # TODO
 		self.channels = []
-		self.num_channels = 0
-		current_channel = 0
         
-		address = 0
-		channel = Channel(fin, address, current_channel, self.base_label, self.sfx, label='%s_%d' % (self.base_label, current_channel+1))
-		self.channels += [(current_channel, channel)]
+		channel = Channel(fin, 0, self.base_label, label='%s_%d' % (self.base_label, 1))
+		self.channels += [channel]
 		self.labels += channel.labels
-		current_channel += 1
-
 
 	def make_header(self):
-		asms = []
-        
-		text = ".include \"source/macros_asm_.s\""
-		text += '\n\n'
-		asms += [(-2, text, 0)]
-
-		#comment_text = '@ %x\n' % self.address
-		#asms += [(self.address, comment_text, self.address)]
+		text = ".include \"macros/script_seq.s\"\n\n"
+		asms = [(-2, text, 0)]
 		return asms
-
 
 	def parse(self, fin):
 		self.parse_header(fin)
 
 		asms = []
-
-		#asms += [generate_label_asm(self.base_label, self.start_address)]
 		asms += self.make_header()
 
-		for num, channel in self.channels:
+		for channel in self.channels:
 			asms += channel.output
 
 		asms = sort_asms(asms)
@@ -1657,7 +996,6 @@ class Sound:
 		asms += [(self.last_address,'@ %x\n' % self.last_address, self.last_address)]
 
 		self.asms += asms
-
 
 	def to_asm(self, labels=[]):
 		"""insert outside labels here"""
@@ -1667,109 +1005,51 @@ class Sound:
 		asms = insert_asm_incbins(asms)
 
 		for label in self.labels + labels:
-			#if self.start_address <= label[0] < self.last_address:
-			#	asms += [label]
 			asms += [label]
 
 		return '\n'.join(asm for address, asm, last_address in sort_asms(asms))
-        
-        
-def dump_sounds(fin, origin, names, base_label='Sound_'):
-	"""
-	Dump sound data from a pointer table.
-	"""
 
-	# Some songs share labels.
-	# Do an extra pass to grab shared labels before writing output.
 
-	sounds = []
+def dumb_scripts(fin, base_label):
 	labels = []
-	addresses = []
-	for i, name in enumerate(names):
-		sound_at = 0
-		sound = Sound(fin, sound_at, base_label + name)
-		sounds += [sound]
-		labels += sound.labels
-		addresses += [sound_at]
-	addresses.sort()
+	sound = Sound(fin, base_label)
+	labels += sound.labels
+	addresses = [0]
 
-	outputs = []
-	for i, name in enumerate(names):
-		sound = sounds[i]
+	# Place a dummy asm at the end to catch end-of-file incbins.
+	index = addresses.index(0)
+	if index < len(addresses):
+		next_address = addresses[index]
+		max_command_length = 4*10
+		if next_address - sound.last_address <= max_command_length:
+			size = os.path.getsize(filename)
+			sound.asms += [(size, '@ ' + hex(size), size)]
 
-		# Place a dummy asm at the end to catch end-of-file incbins.
-		index = addresses.index(sound.start_address)
-		if index < len(addresses):
-			next_address = addresses[index]
-			max_command_length = 20
-			if next_address - sound.last_address <= max_command_length:
-				size = os.path.getsize(filename)
-				sound.asms += [(size, '@ end_' + hex(size), size)]
+	output = sound.to_asm(labels) + '\n'
 
-		output = sound.to_asm(labels) + '\n'
-		outputs += [('.s', output)]
-	size = os.path.getsize(filename)
-
-	return outputs
-        
-        
-
-def export_sounds(fin, origin, names, path, output_folder, base_label='Sound_'):
-	for filename, output in dump_sounds(fin, origin, names, base_label):
-		head, tail = os.path.split(path)
-		with open(os.path.join(output_folder + tail.replace(".bin", ".s")), 'w') as out:
-			out.write(output)
+	return output
 
 
-class PkmnAI(object):
-    """
-    "Pkmn Gen4 AI"-disassembler
-    """
-
-    def __init__(self, config):
-        """
-        Setup the class instance.
-        """
-        self.config = config
-        
-        self.offsets = []
-        self.scripts = []
-
-
-    def extract_scripts(self, filename, output_folder, debug=False):
-        self.offsets = []
-        self.scripts = []
-        self.functions = []
-        self.func_map = {}  # {offset: [func, count]}
-        output = ""
-        
-        print(filename)
-        
-        fin = open(os.path.join(self.config.path, filename), "rb+")
-        fin = (BinaryIO.reader(fin.read())).adapter(fin)
-        fin.seek(0)
-
-        fin.seek(0, os.SEEK_END)
-        filesize = fin.tell()
-        
-        
-        offset = 0
-        num = 0
-        
-        song_names = ['']
-        
-        export_sounds(fin, 0x0, song_names, filename, output_folder, 'Script')
-        
-        return (output, offset)
+def extract_scripts(filename, output_folder):
+    output = ""
+    
+    print(filename)
+    
+    fin = open(os.path.join(configuration.Config().path, filename), "rb+")
+    fin = (BinaryIO.reader(fin.read())).adapter(fin)
+    
+    output = dumb_scripts(fin, 'Script')
+    head, tail = os.path.split(filename)
+    with open(os.path.join(output_folder + tail.replace(".bin", ".s")), 'w') as out:
+        out.write(output)
+    
+    return output
 
 
 if __name__ == "__main__":
-    conf = configuration.Config()
-    script = PkmnAI(conf)
-    
     filename = sys.argv[1]
     output_folder = sys.argv[2]
     if not os.path.exists(os.path.dirname(output_folder)):
         os.makedirs(os.path.dirname(output_folder))
 
-    script.extract_scripts(filename, output_folder)[0]
+    extract_scripts(filename, output_folder)

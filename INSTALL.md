@@ -1,8 +1,7 @@
 The source files are assembled with the help of [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 Just follow the instructions in the manual or use the Installer on Windows.
 
-Then we need a Terminal and Python 2.7 to execute the tools. Since this project is based on [**pokecrystal**](https://github.com/pret/pokecrystal) you can follow the
-[**INSTALL.md**](https://github.com/pret/pokecrystal/blob/master/INSTALL.md) on that project.
+Then we need a Terminal and Python 3 to execute the tools.
 
 In the **Terminal** run:
 
@@ -13,14 +12,14 @@ cd PokePlat
 
 You need a rom of Platinum to be able to build your own (hacked) rom. This project uses:
 
-* 3541 - Pokemon Platinum Version (US)(XenoPhobia) `md5: f8905424f7d8aea299c51ec7580b33d8`
-  * without filler at the end `md5: 233c66e52b3555f422566f758d6055bf`
+* 4998 - Pokemon - Platinum Version (v01)(U) `md5: ab828b0d13f09469a71460a34d0de51b`
+  * without filler at the end `md5: 7efdcc09f9d10cb9a01b5d08cf7e2382`
 
 It isn't necessary to have the exact same rom in the current state of the project, since it isn't possible to change code yet.
 This file needs to be renamed to 'baserom.nds'.
 
 
-There isn't one command to initialise the project and build a new rom, because I'm still not sure how to arrange the different steps. If you follow the commands listed here you get some extracted data-files and Pokemon-pics.
+There isn't one command to initialise the project and build a new rom, because I'm still not sure how to arrange the different steps. If you follow the commands listed here you get some extracted data-files and Pokemon-pics. If you have a multicore machine you can speed up the process with the "-j" option, i.e. "make pics -j 8".
 
 Extract the files in the 'baserom.nds'-file to 'baserom'-folder:
 

@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*-
 
 import os
 import sys
-from ctypes import c_int8
-import operator
-from new import classobj
-import configuration
 import png
 import array
-from filehandler import FileHandler
+import struct
 
 
 ENCRYPTION_NONE = 0
@@ -28,20 +23,16 @@ TYPE_LINEAR2 = 256
 
 
 
-class Graphic(object):
-    file = FileHandler()
+class Graphic():
     data = []
     filename = ""
     filesize = 0
 
-    def __init__(self, config):
-        self.config = config
+    #def __init__(self):
     
     def init(self, filename):
-        self.file.init(os.path.join(self.config.path, filename), 0)
         self.filename = filename
         self.filesize = os.path.getsize(filename)
-    
     
     def encrypt(self, data, encryption=ENCRYPTION_NONE, key=0, mult=0, carry=0, debug=False):
         dec_data = array.array('H')
@@ -68,7 +59,6 @@ class Graphic(object):
         if encryption == ENCRYPTION_REVERSE:
             dec_data = dec_data[::-1]
         return dec_data
-
     
     def read_png(self, filename, encryption=ENCRYPTION_NONE, output_filename="", mult=0, carry=0, key=0, debug=False):
         if os.path.getsize(filename) == 0:
@@ -78,7 +68,7 @@ class Graphic(object):
             f.close()
             return
         
-        f = open(filename, 'r')
+        f = open(filename, 'rb')
         img = png.Reader(f)
         w, h, pixels, metadata = img.read_flat()
         f.close()
@@ -115,24 +105,26 @@ class Graphic(object):
         if self.filesize == 0:
             return []
         
+        file_ = open(self.filename, "rb+")
         
         # RGCN-Header
         # PPRE/ntr/g2d/ncgr.py
-        RGCN_MagicID = chr(self.file.ReadByte(0)) + chr(self.file.ReadByte(1)) + chr(self.file.ReadByte(2)) + chr(self.file.ReadByte(3))
+        """RGCN_MagicID = chr(self.file.ReadByte(0)) + chr(self.file.ReadByte(1)) + chr(self.file.ReadByte(2)) + chr(self.file.ReadByte(3))
         RGCN_Endian = self.file.ReadHWord(4)
         RGCN_Version = self.file.ReadHWord(6)
         RGCN_Size_ = self.file.ReadWord(8)
         RGCN_HeaderSize = self.file.ReadHWord(0xC)
-        RGCN_NumBlocks = self.file.ReadHWord(0xE)
+        RGCN_NumBlocks = self.file.ReadHWord(0xE)"""
+        file_.seek(0x0)
+        RGCN_MagicID, RGCN_Endian, RGCN_Version, RGCN_Size_, RGCN_HeaderSize, RGCN_NumBlocks = struct.unpack('4sHHIHH', file_.read(0x10))
+        RGCN_MagicID = str(RGCN_MagicID, "ascii")
         if (RGCN_MagicID != "RGCN"):
             print(RGCN_MagicID + " " + hex(RGCN_Constant))
             return
         
         # RAHC-Header
         # PPRE/ntr/g2d/ncgr.py
-        RAHC_MagicID = chr(self.file.ReadByte(0x10)) + chr(self.file.ReadByte(0x11)) + chr(self.file.ReadByte(0x12)) + chr(self.file.ReadByte(0x13))
-        if (RAHC_MagicID != "RAHC"):
-            return
+        """RAHC_MagicID = chr(self.file.ReadByte(0x10)) + chr(self.file.ReadByte(0x11)) + chr(self.file.ReadByte(0x12)) + chr(self.file.ReadByte(0x13))
         RAHC_Size_ = self.file.ReadByte(0x14)
         RAHC_Height = self.file.ReadHWord(0x18)
         RAHC_Width = self.file.ReadHWord(0x1A)
@@ -140,7 +132,12 @@ class Graphic(object):
         RAHC_Depth = self.file.ReadWord(0x20)
         RAHC_Type = self.file.ReadWord(0x24)
         RAHC_DataSize = self.file.ReadWord(0x28)
-        RAHC_Offset = self.file.ReadWord(0x2C)
+        RAHC_Offset = self.file.ReadWord(0x2C)"""
+        file_.seek(0x10)
+        RAHC_MagicID, RAHC_Size_, _, _, _, RAHC_Height, RAHC_Width, RAHC_Format, RAHC_Depth, RAHC_Type, RAHC_DataSize, RAHC_Offset = struct.unpack('4sBBBBHHIIIII', file_.read(0x20))
+        RAHC_MagicID = str(RAHC_MagicID, "ascii")
+        if (RAHC_MagicID != "RAHC"):
+            return
         
         if RAHC_Width != 0xffff:
             width = RAHC_Width
@@ -160,12 +157,15 @@ class Graphic(object):
             elif encryption == ENCRYPTION_FORWARDS:
                 print("- Encryption: forwards")
         
-        data = []
+        """data = []
         i = 0
         while i < RAHC_DataSize:
             data.append(self.file.ReadHWord(0x30+i))
-            i += 2
-        
+            i += 2"""
+        file_.seek(0x30)
+        data = struct.unpack('' + str(int(RAHC_DataSize/2)) + 'H', file_.read(RAHC_DataSize)) # '>16H'
+        data = list(data)
+
         
         key = 0
         dec_data = self.encrypt(data, encryption, key, mult, carry, debug)
@@ -212,24 +212,20 @@ class Graphic(object):
         return data
 
 
-class Palette(object):
-    file = FileHandler()
+class Palette():
     data = []
     filename = ""
 
-    def __init__(self, config):
-        self.config = config
+    #def __init__(self):
     
     def init(self, filename):
-        self.file.init(os.path.join(self.config.path, filename), 0)
         self.filename = filename
-        
         
     def read_png(self, filename, output_filename="", emptypal=0, debug=False):
         if os.path.getsize(filename) == 0:
             return
         
-        f = open(filename, 'r')
+        f = open(filename, 'rb')
         img = png.Reader(f)
         w, h, pixels, metadata = img.read_flat()
         palette = img.palette()
@@ -237,7 +233,6 @@ class Palette(object):
         f.close()
         
         write_rlcn(output_filename, palette, emptypal, debug)
-        
         
     def read_pal(self, filename, output_filename="", emptypal=0, debug=False):
         if os.path.getsize(filename) == 0:
@@ -255,31 +250,38 @@ class Palette(object):
         
         write_rlcn(output_filename, palette, emptypal, debug)
 
-
     def read_rlcn(self, debug=False):
+        file_ = open(self.filename, "rb+")
+
         # RLCN-Header
         # PPRE/ntr/g2d/nclr.py
-        RLCN_MagicID = chr(self.file.ReadByte(0x0)) + chr(self.file.ReadByte(0x1)) + chr(self.file.ReadByte(0x2)) + chr(self.file.ReadByte(0x3))
-        if (RLCN_MagicID != "RLCN"):
-            print("Expected RLCN, got " + RLCN_MagicID)
-            return
+        """RLCN_MagicID = chr(self.file.ReadByte(0x0)) + chr(self.file.ReadByte(0x1)) + chr(self.file.ReadByte(0x2)) + chr(self.file.ReadByte(0x3))
         RLCN_Endian = self.file.ReadHWord(0x4)
         RLCN_Version = self.file.ReadHWord(0x6)
         RLCN_Size_ = self.file.ReadWord(0x8)
         RLCN_HeaderSize = self.file.ReadHWord(0xc)
-        RLCN_NumBlocks = self.file.ReadHWord(0xe)
+        RLCN_NumBlocks = self.file.ReadHWord(0xe)"""
+        file_.seek(0x0)
+        RLCN_MagicID, RLCN_Endian, RLCN_Version, RLCN_Size_, RLCN_HeaderSize, RLCN_NumBlocks = struct.unpack('4sHHIHH', file_.read(0x10))
+        RLCN_MagicID = str(RLCN_MagicID, "ascii")
+        if (RLCN_MagicID != "RLCN"):
+            print("Expected RLCN, got " + RLCN_MagicID)
+            return
         
         # PLTT-Header
         # PPRE/ntr/g2d/nclr.py
-        PLTT_MagicID = chr(self.file.ReadByte(0x10)) + chr(self.file.ReadByte(0x11)) + chr(self.file.ReadByte(0x12)) + chr(self.file.ReadByte(0x13))
-        if (PLTT_MagicID != "TTLP"):
-            print("Expected TTLP, got " + PLTT_MagicID)
-            return
+        """PLTT_MagicID = chr(self.file.ReadByte(0x10)) + chr(self.file.ReadByte(0x11)) + chr(self.file.ReadByte(0x12)) + chr(self.file.ReadByte(0x13))
         PLTT_Size_ = self.file.ReadWord(0x14)
         PLTT_Format = self.file.ReadWord(0x18)
         PLTT_Extended = self.file.ReadWord(0x1c)
         PLTT_Datasize = self.file.ReadWord(0x20)
-        PLTT_Offset = self.file.ReadWord(0x24)
+        PLTT_Offset = self.file.ReadWord(0x24)"""
+        file_.seek(0x10)
+        PLTT_MagicID, PLTT_Size_, PLTT_Format, PLTT_Extended, PLTT_Datasize, PLTT_Offset = struct.unpack('4sIIIII', file_.read(0x18))
+        PLTT_MagicID = str(PLTT_MagicID, "ascii")
+        if (PLTT_MagicID != "TTLP"):
+            print("Expected TTLP, got " + PLTT_MagicID)
+            return
         
         if debug:
             print("RLCN-Data:")
@@ -287,15 +289,15 @@ class Palette(object):
             print("- Extended: " + str(PLTT_Extended))
         
         palette=[]
-        i = 0
-        while i < 16:
-            col = (self.file.ReadHWord(0x28+i*2))
-            colr = col&0x1f
-            colg = (col>>5)&0x1f
-            colb = (col>>10)&0x1f
+        file_.seek(0x28)
+        col = struct.unpack('16H', file_.read(16*2))
+        col = list(col)
+        for i in range(16):
+            colr = col[i]&0x1f
+            colg = (col[i]>>5)&0x1f
+            colb = (col[i]>>10)&0x1f
             palette.append((colr*8, colg*8, colb*8))
-            i += 1
-         
+
         return palette
 
 
@@ -315,11 +317,11 @@ def write_pal(outfilename, palette=[], debug=False):
         os.makedirs(os.path.dirname(outfilename))
     
     f = open(outfilename, 'wb')
-    f.write("JASC-PAL\n")
-    f.write("0100\n")
-    f.write(str(len(palette)))
+    f.write(bytes("JASC-PAL\n", 'ascii'))
+    f.write(bytes("0100\n", 'ascii'))
+    f.write(bytes(str(len(palette)), 'ascii'))
     for val in palette:
-        f.write("\n" + str(val[0]) + " " + str(val[1]) + " " + str(val[2]))
+        f.write(bytes("\n" + str(val[0]) + " " + str(val[1]) + " " + str(val[2]), 'ascii'))
     f.close()
 
 
@@ -327,26 +329,26 @@ def write_rgcn(outfilename, data=[], w=0, h=0, debug=False):
         if not os.path.exists(os.path.dirname(outfilename)):
             os.makedirs(os.path.dirname(outfilename))
         f = open(outfilename, 'wb')
-        f.write(bytearray("RGCN")) # RGCN_MagicID 0x0
+        f.write(bytes("RGCN", 'ascii')) # RGCN_MagicID 0x0
         f.write(bytearray([0xff, 0xfe])) # RGCN_Endian
         f.write(bytearray([0x00, 0x01])) # RGCN_Version
-        f.write(bytearray([0, 0, 0, 0])) # RGCN_Size_ filesize
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # RGCN_Size_ filesize
         f.write(bytearray([0x10, 0x00])) # RGCN_HeaderSize
         f.write(bytearray([0x01, 0x00])) # RGCN_NumBlocks
         
-        f.write(bytearray("RAHC")) # RAHC_MagicID 0x10
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_Size_ filesize-0x10
+        f.write(bytes("RAHC", 'ascii')) # RAHC_MagicID 0x10
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # RAHC_Size_ filesize-0x10
         c = array.array("h")
-        c.append(h/8)
+        c.append(int(h/8))
         c.tofile(f) # RAHC_Height
         c = array.array("h")
-        c.append(w/8)
+        c.append(int(w/8))
         c.tofile(f) # RAHC_Width
-        f.write(bytearray([3, 0, 0, 0])) # RAHC_Format
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_Depth 0x20
-        f.write(bytearray([1, 0, 0, 0])) # RAHC_Type
-        f.write(bytearray([0, 0, 0, 0])) # RAHC_DataSize filesize-0x30
-        f.write(bytearray([0x18, 0, 0, 0])) # RAHC_Offset
+        f.write(bytearray([0x03, 0x00, 0x00, 0x00])) # RAHC_Format
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # RAHC_Depth 0x20
+        f.write(bytearray([0x01, 0x00, 0x00, 0x00])) # RAHC_Type
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # RAHC_DataSize filesize-0x30
+        f.write(bytearray([0x18, 0x00, 0x00, 0x00])) # RAHC_Offset
 
         data.tofile(f)
         
@@ -371,28 +373,28 @@ def write_rlcn(outfilename, palette=[], emptypal=0, debug=False):
         os.makedirs(os.path.dirname(outfilename))
     
     f = open(outfilename, 'wb')
-    f.write(bytearray("RLCN")) # RLCN_MagicID 0x0
+    f.write(bytes("RLCN", 'ascii')) # RLCN_MagicID 0x0
     f.write(bytearray([0xff, 0xfe])) # RLCN_Endian
     f.write(bytearray([0x00, 0x01])) # RLCN_Version
-    f.write(bytearray([0, 0, 0, 0])) # RLCN_Size_ filesize
+    f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # RLCN_Size_ filesize
     f.write(bytearray([0x10, 0x00])) # RLCN_HeaderSize
     f.write(bytearray([0x01, 0x00])) # RLCN_NumBlocks
     
-    f.write(bytearray("TTLP")) # PLTT_MagicID 0x10
-    f.write(bytearray([0, 0, 0, 0])) # PLTT_Size_ filesize-0x10
-    f.write(bytearray([0x4, 0, 0xa, 0])) # PLTT_Format
-    f.write(bytearray([0, 0, 0, 0])) # PLTT_Extended
-    f.write(bytearray([0, 0, 0, 0])) # PLTT_Datasize 0x20 filesize-0x28
-    f.write(bytearray([0x10, 0, 0, 0])) # PLTT_Offset
+    f.write(bytes("TTLP", 'ascii')) # PLTT_MagicID 0x10
+    f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # PLTT_Size_ filesize-0x10
+    f.write(bytearray([0x4, 0x00, 0xa, 0x00])) # PLTT_Format
+    f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # PLTT_Extended
+    f.write(bytearray([0x00, 0x00, 0x00, 0x00])) # PLTT_Datasize 0x20 filesize-0x28
+    f.write(bytearray([0x10, 0x00, 0x00, 0x00])) # PLTT_Offset
     
     
     data = []
     hword = 0
     n = 0
     for col in palette:
-        colr = col[0]/8
-        colg = col[1]/8
-        colb = col[2]/8
+        colr = int(col[0]/8)
+        colg = int(col[1]/8)
+        colb = int(col[2]/8)
         hword = colr|(colg<<5)|(colb<<10)
         if emptypal == 1:
             hword = 0xffff
@@ -421,8 +423,6 @@ def write_rlcn(outfilename, palette=[], emptypal=0, debug=False):
 
 
 if __name__ == "__main__":
-    conf = configuration.Config()
-    
     filename = ""
     palfilename = ""
     outfilename = ""
@@ -492,28 +492,27 @@ if __name__ == "__main__":
             i += 1
         else:
             i += 1
-    
-    #print(cmd + ': ' + filename)
+
     if cmd == "unpack":
-        gra = Graphic(conf)
-        pal = Palette(conf)
+        gra = Graphic()
+        pal = Palette()
         gra.init(filename)
         pal.init(palfilename)
         write_png(outfilename, gra.read_rgcn(encryption, width, height, mult, carry, debugFlag), pal.read_rlcn(debugFlag), debugFlag)
     elif cmd == "unpack palette":
-        pal = Palette(conf)
+        pal = Palette()
         pal.init(palfilename)
         write_pal(outfilename, pal.read_rlcn(debugFlag))
     elif cmd == "pack":
-        gra = Graphic(conf)
+        gra = Graphic()
         gra.init(filename)
         gra.read_png(filename, encryption, outfilename, mult, carry, key, debugFlag)
     elif cmd == "pack2":
-        pal = Palette(conf)
+        pal = Palette()
         pal.init(filename)
         pal.read_png(filename, outfilename, emptypal, debugFlag)
     elif cmd == "pack3":
-        pal = Palette(conf)
+        pal = Palette()
         pal.init(filename)
         pal.read_pal(filename, outfilename, emptypal, debugFlag)
     

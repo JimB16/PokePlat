@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
----
-"""
 
 import os
 import sys
 import struct
-from copy import copy, deepcopy
-from ctypes import c_int8
-
 import configuration
-
 
 
 def words(fileobj):
@@ -18,11 +10,8 @@ def words(fileobj):
         for word in line.split():
             yield word
 
-class Disassembler(object):
+class RomCreator():
     def __init__(self, config):
-        """
-        Setup the class instance.
-        """
         self.config = config
 
     def fill_rom(self, filepath, file, align, filler):
@@ -46,9 +35,6 @@ class Disassembler(object):
             for line in fin:
                 words = line.split()
                 filenames.append((words[1], 0x200, '\x00', words[0], words[2])) # filenames.append(("data/header.bin", 0x4000, '\x00'))
-                #filenames.append((words[1], words[0], '\x00')) # filenames.append(("data/header.bin", 0x4000, '\x00'))
-        
-        
         
         if os.path.dirname(fat_filename) != "":
             if not os.path.exists(os.path.dirname(fat_filename)):
@@ -78,8 +64,6 @@ class Disassembler(object):
             output_fat.write(struct.pack('I', FileEnd))
 
             i += 1
-        
-        
 
         if os.path.dirname(filename) != "":
             if not os.path.exists(os.path.dirname(filename)):
@@ -93,13 +77,13 @@ class Disassembler(object):
 
             output_rom.write(filepart)
             i += 1
-            disasm.fill_rom(filepath, output_rom, 0x200, '\xff')
+            self.fill_rom(filepath, output_rom, 0x200, bytearray(b'\xff'))
         
         return (output, offset)
 
 if __name__ == "__main__":
     conf = configuration.Config()
-    disasm = Disassembler(conf)
+    romcreator = RomCreator(conf)
 
     filename = './pokeplat.nds'
     fat_file = ''
@@ -124,5 +108,5 @@ if __name__ == "__main__":
         else:
             i += 1
 
-    output = disasm.create_rom(dir, filename, fat_file)[0]
-    print output
+    output = romcreator.create_rom(dir, filename, fat_file)[0]
+    print(output)

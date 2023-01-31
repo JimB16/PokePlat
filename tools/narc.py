@@ -1,14 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
----
-"""
 
 import os
 import sys
-from copy import copy, deepcopy
-from ctypes import c_int8
-import random
-import operator
 import array
 
 import configuration
@@ -69,7 +61,6 @@ class NARCHandler(object):
         f.write(fByteArray)
         f.close()
         return None
-        
 
 
     def unpack_narc_file(self, filename, original_offset=0, debug=False):
@@ -112,7 +103,7 @@ class NARCHandler(object):
             filename_temp = "./" + folder + "/data_" + "{:08}".format(i)
                 
             if (filename.find("pl_pokegra.narc") != -1) or (filename.find("pokegra.narc") != -1):
-                PokeNr = i / 6
+                PokeNr = int(i / 6)
                 PokeOffset = i % 6
                 if PokeOffset == 0 or PokeOffset == 1:
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(PokeNr) + "_back" + "{:01}".format(PokeOffset%2) + ".rgcn"
@@ -129,9 +120,9 @@ class NARCHandler(object):
                 elif (i >= 8) and (i <= 63):
                     filename_temp = "./" + folder + "/data_g_1_" + "{:02}".format(i-8) + ".rgcn"
                 elif (i >= 64) and (i <= 71):
-                    filename_temp = "./" + folder + "/data_g_2_" + "{:01}".format((i-64)/4) + "_{:01}".format((i-64)%4) + ".rgcn"
+                    filename_temp = "./" + folder + "/data_g_2_" + "{:01}".format(int((i-64)/4)) + "_{:01}".format((i-64)%4) + ".rgcn"
                 elif (i >= 72) and (i <= 83):
-                    filename_temp = "./" + folder + "/data_g_" + str((i-72)/2+3) + "_{:01}".format((i-72)%2) + ".rgcn"
+                    filename_temp = "./" + folder + "/data_g_" + str(int((i-72)/2)+3) + "_{:01}".format((i-72)%2) + ".rgcn"
                 elif (i >= 84) and (i <= 87):
                     filename_temp = "./" + folder + "/data_g_9_" + "{:02}".format(i-84) + ".rgcn"
                 elif (i >= 88) and (i <= 91):
@@ -139,13 +130,13 @@ class NARCHandler(object):
                 elif (i >= 92) and (i <= 95):
                     filename_temp = "./" + folder + "/data_g_13_" + "{:02}".format(i-92) + ".rgcn"
                 elif (i >= 96) and (i <= 153):
-                    filename_temp = "./" + folder + "/data_g_" + str((i-96)/2+15) + "_{:01}".format(i%2) + ".rgcn"
+                    filename_temp = "./" + folder + "/data_g_" + str(int((i-96)/2)+15) + "_{:01}".format(i%2) + ".rgcn"
                 elif (i >= 154) and (i <= 157):
-                    filename_temp = "./" + folder + "/data_p_" + str((i-154)/2) + "_" + "{:01}".format(i%2) + ".rlcn"
+                    filename_temp = "./" + folder + "/data_p_" + str(int((i-154)/2)) + "_" + "{:01}".format(i%2) + ".rlcn"
                 elif (i >= 158) and (i <= 165):
-                    filename_temp = "./" + folder + "/data_p_2_" + str((i-158)%4) + "_" + "{:01}".format((i-158)/4) + ".rlcn"
+                    filename_temp = "./" + folder + "/data_p_2_" + str((i-158)%4) + "_" + "{:01}".format(int((i-158)/4)) + ".rlcn"
                 elif (i >= 166) and (i <= 247):
-                    filename_temp = "./" + folder + "/data_p_" + str((i-166)/2+3) + "_" + "{:01}".format(i%2) + ".rlcn"
+                    filename_temp = "./" + folder + "/data_p_" + str(int((i-166)/2)+3) + "_" + "{:01}".format(i%2) + ".rlcn"
                 else:
                     filename_temp = "./" + folder + "/data_" + "{:08}".format(i)
             elif size >= 4:            
@@ -214,20 +205,20 @@ class NARCHandler(object):
             os.makedirs(os.path.dirname(filename))
         f = open(filename, 'wb')
         
-        f.write(bytearray("NARC"))
+        f.write(bytes("NARC", 'ascii')) # (bytearray("NARC"))
         filepart = bytearray([0xfe, 0xff])
         f.write(filepart)
-        filepart = bytearray([00, 01]) # version
+        filepart = bytearray([0x00, 0x01]) # version
         f.write(filepart)
-        f.write(bytearray([00, 00, 00, 00]))
-        f.write(bytearray([0x10, 00])) # chunk size
-        f.write(bytearray([03, 00])) # nr of chunks
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00]))
+        f.write(bytearray([0x10, 0x00])) # chunk size
+        f.write(bytearray([0x03, 0x00])) # nr of chunks
         
         BTAF_Begin = f.tell()
-        f.write(bytearray("BTAF"))
-        f.write(bytearray([00, 00, 00, 00]))
-        f.write(bytearray([00, 00]))
-        f.write(bytearray([00, 00]))
+        f.write(bytes("BTAF", 'ascii')) # (bytearray("BTAF"))
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00]))
+        f.write(bytearray([0x00, 0x00]))
+        f.write(bytearray([0x00, 0x00]))
         # FAT
         
         a = array.array("I")
@@ -271,14 +262,14 @@ class NARCHandler(object):
         BTAF_End = f.tell()
         BTAF_Size = BTAF_End - BTAF_Begin
         
-        f.write(bytearray("BTNF"))
-        f.write(bytearray([0x10, 00, 00, 00]))
-        f.write(bytearray([04, 00, 00, 00]))
-        f.write(bytearray([00, 00, 01, 00]))
+        f.write(bytes("BTNF", 'ascii')) # (bytearray("BTNF"))
+        f.write(bytearray([0x10, 0x00, 0x00, 0x00]))
+        f.write(bytearray([0x04, 0x00, 0x00, 0x00]))
+        f.write(bytearray([0x00, 0x00, 0x01, 0x00]))
         
         GMIF_Begin = f.tell()
-        f.write(bytearray("GMIF"))
-        f.write(bytearray([00, 00, 00, 00]))
+        f.write(bytes("GMIF", 'ascii')) # (bytearray("GMIF"))
+        f.write(bytearray([0x00, 0x00, 0x00, 0x00]))
         
         i = 0
         if len(filelist) == 0:
@@ -369,10 +360,10 @@ if __name__ == "__main__":
 
     print(cmd + ': ' + filename)
     filelist.sort()
-    print("filelist: " + str(filelist))
+    #print("filelist: " + str(filelist))
     if cmd == "unpack":
         narchand.initialize(filename)
         output = narchand.unpack_narc_file(filename, debug=debugFlag)[0]
     elif cmd == "pack":
         output = narchand.create_narc_file(path, filelist, filename, debug=debugFlag)[0]
-    print output
+    print(output)

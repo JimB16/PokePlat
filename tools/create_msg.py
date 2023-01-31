@@ -1,19 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
----
-"""
 
 import os
 import sys
-from copy import copy, deepcopy
-from ctypes import c_int8
-import random
-import json
-import operator
 import array
 import codecs
-
-import configuration
 
 
 def words(fileobj):
@@ -63,11 +52,9 @@ def decryptMsg(seed, text):
 def parseMsg(text):
     ret = []
     line = []
-    
     SYMBOLS = {}
 
-    
-    with open("tools/lists/poketext.tbl") as f:
+    with open("tools/lists/poketext.tbl", 'rb') as f:
         content = f.readlines()
 
     for l in content:
@@ -76,7 +63,6 @@ def parseMsg(text):
         l2 = [l[0:4]]
         l2 += [l[5:-2]]
         if len(l2[1]) == 1:
-            #print(l2[1])
             SYMBOLS[ord(l2[1])] = int(l2[0].encode('ascii','ignore'), 16)
 
     #print("SYMBOLS")
@@ -163,7 +149,6 @@ def parseMsg(text):
                 line.append(nr)
             s += 1
     
-    
     line.append(0xffff)
     ret.append(line)
 
@@ -171,8 +156,6 @@ def parseMsg(text):
 
 
 if __name__ == "__main__":
-    conf = configuration.Config()
-
     filename = sys.argv[1]
     dir = sys.argv[2]
     
@@ -182,7 +165,7 @@ if __name__ == "__main__":
     if not os.path.exists(os.path.dirname(dir)):
         os.makedirs(os.path.dirname(dir))        
     head, tail = os.path.split(filename)
-    out = open(os.path.join(dir + tail.replace(".msg", ".bin")), 'w')
+    out = open(os.path.join(dir + tail.replace(".msg", ".bin")), 'wb')
         
     text = ""
     num = 0
@@ -205,23 +188,10 @@ if __name__ == "__main__":
                 c.tofile(out)
             else:
                 text += line
-            #print(words[0])
-    text.encode('utf8')
-    #print(text)
-    parsedtext = parseMsg(text)
-    #print(parsedtext)
 
-    #a = array.array('L')
-    #for c in decryptOffsetSize(num, seed, parsedtext):
-        #print(hex(c))
-        #a.append(int(c))
-    #a.tofile(out)
+    text.encode('utf8')
+    parsedtext = parseMsg(text)
+
     decryptOffsetSize(seed, parsedtext).tofile(out)
     
-    #for c in decryptMsg(seed, parsedtext):
-    #    print(hex(c))
     decryptMsg(seed, parsedtext).tofile(out)
-            #for word in line.split():
-            #   print(word)
-            #filenames.append((words[1], words[0], '\x00'))
-    #filenames.append(("data/header.bin", 0x4000, '\x00'))
